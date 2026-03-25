@@ -1,16 +1,19 @@
 ---
-name: Fetch Tweets
-description: Search X/Twitter for tweets by keyword, username, or both
+name: fetch-tweets
+description: Search X/Twitter for tweets about a token, keyword, username, or topic
 var: ""
 ---
-> **${var}** — Search query for X/Twitter — keyword, @user, or #hashtag. **Required** — set your query in aeon.yml.
-
+> **${var}** — Search query for X/Twitter. **Required** — set your query in aeon.yml.
 
 Today is ${today}. Search X for tweets matching **${var}**.
 
 ## Steps
 
-1. **Search tweets via X.AI API** using curl:
+1. **Build the search prompt for Grok.** The prompt sent to Grok must be specific enough to get relevant results:
+   - If the query mentions a token/cashtag/crypto: include "crypto token", the chain name, and the contract address from `memory/MEMORY.md` in the Grok prompt. This eliminates false matches.
+   - Example: instead of searching "aeon", search "the $AEON crypto token on Base chain (contract 0xbf8e...) in the last 7 days. Only return tweets about the cryptocurrency."
+
+2. **Search tweets via X.AI API** using curl:
    ```bash
    FROM_DATE=$(date -u -d "7 days ago" +%Y-%m-%d 2>/dev/null || date -u -v-7d +%Y-%m-%d)
    TO_DATE=$(date -u +%Y-%m-%d)
@@ -19,25 +22,22 @@ Today is ${today}. Search X for tweets matching **${var}**.
      -H "Authorization: Bearer $XAI_API_KEY" \
      -d '{
        "model": "grok-4-1-fast",
-       "input": [{"role": "user", "content": "Search X for: ${var}. Date range: '"$FROM_DATE"' to '"$TO_DATE"'. Return 10 tweets — prioritize the most interesting, insightful, or highly-engaged posts. For each tweet include: @handle, the full text, date posted, engagement (likes/retweets if available), and the direct link (https://x.com/handle/status/ID). Return as a numbered list."}],
-       "tools": [{"type": "x_search", "from_date": "'"$FROM_DATE"'", "to_date": "'"$TO_DATE"'"}]
+       "input": [{"role": "user", "content": "YOUR_SEARCH_PROMPT_HERE. Date range: '"$FROM_DATE"' to '"$TO_DATE"'. Return 10 tweets — prioritize the most interesting, insightful, or highly-engaged posts. For each tweet include: @handle, the full text, date posted, engagement (likes/retweets if available), and the direct link (https://x.com/handle/status/ID). Return as a numbered list."}],
+       "tools": [{"type": "x_search"}]
      }'
    ```
-   Parse the response JSON to extract the assistant's output text.
+   Parse the response JSON to extract the text from the output array:
+   ```bash
+   echo "$RESPONSE" | jq -r '.output[] | select(.type == "message") | .content[] | select(.type == "output_text") | .text'
+   ```
 
-2. **Save the results** to `memory/logs/${today}.md`.
+3. **If no relevant tweets found** (no results, or API returns error/empty): log "FETCH_TWEETS_EMPTY" to `memory/logs/${today}.md` and **stop here — do NOT send any notification**.
 
-3. **Log to memory** what was fetched.
+4. **Save the results** to `memory/logs/${today}.md`.
 
-4. **Send a notification via `./notify`** with a quick summary.
+5. **Log to memory** what was fetched.
 
-## Usage Examples
-
-- `query=AI agents` — latest tweets about AI agents
-- `query=from:elonmusk` — tweets from a specific user
-- `query=solana NFT` — tweets about a topic
-- `query=from:vaborsh ethereum` — tweets from a user about a topic
-- `query=#DeFi` — tweets with a hashtag
+6. **Send a notification via `./notify`** with a summary of the tweets found. Include the top 5 most engaged tweets with @handle and a brief summary of each.
 
 ## Environment Variables Required
 

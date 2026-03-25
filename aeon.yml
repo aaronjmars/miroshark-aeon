@@ -1,10 +1,30 @@
-# Aeon configuration
+# Aeon configuration — miroshark-aeon
 #
 # Enable skills by setting enabled: true. Multiple skills at the same time run in parallel.
 # Set var: "value" to pass a default parameter to the skill.
 
 skills:
-  # --- Morning aggregation (7 AM UTC) ---
+  # === DAILY ACTIVE SKILLS ===
+
+  # --- Morning: Token + Social (8 AM UTC) ---
+  token-report: { enabled: true, schedule: "0 8 * * *" }
+  fetch-tweets: { enabled: true, schedule: "30 8 * * *", var: "MIROSHARK crypto token on Base chain" }
+
+  # --- Midday: Repo state + Content (12 PM UTC) ---
+  push-recap: { enabled: true, schedule: "0 12 * * *" }
+  repo-article: { enabled: true, schedule: "0 13 * * *" }
+
+  # --- Afternoon: Social + Ideas (3 PM UTC) ---
+  repo-actions: { enabled: true, schedule: "0 15 * * *" }
+
+  # --- Late afternoon: Build (4:30 PM UTC) ---
+  feature: { enabled: true, schedule: "30 16 * * *" }
+
+  # === HOUSEKEEPING ===
+  heartbeat: { enabled: true, schedule: "0 6 * * *" }
+  memory-flush: { enabled: true, schedule: "0 20 * * 0" }  # Sundays only
+
+  # === DISABLED (available on demand) ===
   morning-brief: { enabled: false, schedule: "0 7 * * *" }
   daily-routine: { enabled: false, schedule: "0 7 * * *" }
   rss-digest: { enabled: false, schedule: "0 7 * * *" }
@@ -13,15 +33,11 @@ skills:
   paper-digest: { enabled: false, schedule: "0 7 * * *" }
   tweet-digest: { enabled: false, schedule: "0 7 * * *" }
   reddit-digest: { enabled: false, schedule: "0 7 * * *" }
-
-  # --- Mid-morning (9 AM UTC) ---
   issue-triage: { enabled: false, schedule: "0 9 * * *" }
   pr-review: { enabled: false, schedule: "0 9 * * *" }
   github-monitor: { enabled: false, schedule: "0 9 * * *" }
   github-issues: { enabled: false, schedule: "0 9 * * *" }
   github-trending: { enabled: false, schedule: "0 9 * * *" }
-
-  # --- Midday (12 PM UTC) ---
   token-alert: { enabled: false, schedule: "0 12 * * *" }
   token-movers: { enabled: false, schedule: "0 12 * * *" }
   trending-coins: { enabled: false, schedule: "0 12 * * *" }
@@ -33,8 +49,6 @@ skills:
   polymarket-comments: { enabled: false, schedule: "0 12 * * *" }
   monitor-runners: { enabled: false, schedule: "0 12 * * *" }
   token-pick: { enabled: false, schedule: "0 12 * * *" }
-
-  # --- Afternoon (2 PM UTC) ---
   article: { enabled: false, schedule: "0 14 * * *" }
   digest: { enabled: false, schedule: "0 14 * * *" }
   research-brief: { enabled: false, schedule: "0 14 * * *" }
@@ -43,37 +57,19 @@ skills:
   search-skill: { enabled: false, schedule: "0 14 * * *" }
   security-digest: { enabled: false, schedule: "0 14 * * *" }
   idea-capture: { enabled: false, schedule: "0 14 * * *" }
-
-  # --- Late afternoon (4 PM UTC) ---
   code-health: { enabled: false, schedule: "0 16 * * *" }
   changelog: { enabled: false, schedule: "0 16 * * *" }
-  feature: { enabled: false, schedule: "0 16 * * *" }
   build-skill: { enabled: false, schedule: "0 16 * * *" }
-
-  # --- Push recap (5:30 PM UTC) ---
-  push-recap: { enabled: true, schedule: "30 17 * * *" }
-
-  # --- X / social (5 PM UTC) ---
-  fetch-tweets: { enabled: false, schedule: "0 17 * * *" }
   refresh-x: { enabled: false, schedule: "0 17 * * *" }
   list-digest: { enabled: false, schedule: "0 17 * * *" }
-  write-tweet: { enabled: false, schedule: "0 17 * * *" }
   reply-maker: { enabled: false, schedule: "0 17 * * *" }
-
-  # --- Evening / meta (6 PM UTC) ---
   goal-tracker: { enabled: false, schedule: "0 18 * * *" }
   skill-health: { enabled: false, schedule: "0 18 * * *" }
   self-review: { enabled: false, schedule: "0 18 * * *" }
   reflect: { enabled: false, schedule: "0 18 * * *" }
-  memory-flush: { enabled: false, schedule: "0 18 * * *" }
   action-converter: { enabled: false, schedule: "0 18 * * *" }
   startup-idea: { enabled: false, schedule: "0 18 * * *" }
-
-  # --- Weekly (Monday only) ---
   weekly-review: { enabled: false, schedule: "0 19 * * 1" }
-
-  # --- Fallback (must be last) ---
-  heartbeat: { enabled: true, schedule: "0 12 * * *" }
 
 # Default model for all skills. Override per-run via workflow_dispatch.
 # Options: claude-opus-4-6, claude-sonnet-4-6, claude-haiku-4-5-20251001
