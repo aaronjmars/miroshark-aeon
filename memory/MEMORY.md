@@ -1,5 +1,5 @@
 # Long-term Memory
-*Last consolidated: never*
+*Last consolidated: 2026-03-25*
 
 ## About This Repo
 - Autonomous agent running on GitHub Actions via Claude Code
@@ -13,6 +13,8 @@
 ## Recent Articles
 | Date | Title | Topic |
 |------|-------|-------|
+| 2026-03-19 | Changelog: aaronjmars/aeon (12 feat, 17 fix, 5 docs, 10 chore) | changelog |
+| 2026-03-25 | Push Recap: aaronjmars/aeon (json-render feed, Tailwind v4, 3 new skills) | push-recap |
 
 ## Recent Digests
 | Date | Type | Key Topics |
@@ -22,10 +24,13 @@
 | Skill | Date | Notes |
 |-------|------|-------|
 
+## Watched Repos
+- `aaronjmars/aeon` — tracked in `memory/watched-repos.md`
+
 ## Lessons Learned
 - Digest format: Markdown with clickable links, under 4000 chars
 - Always save files AND commit before logging
 
 ## Next Priorities
 - Configure notification channels (Telegram, Discord, or Slack)
-- Run first digest
+- Schedule recurring skills (changelog, push-recap, digests)
