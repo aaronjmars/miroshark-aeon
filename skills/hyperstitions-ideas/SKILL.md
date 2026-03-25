@@ -1,81 +1,97 @@
 ---
 name: hyperstitions-ideas
-description: Generate a hyperstition-style prediction market idea — a fiction designed to make itself real through belief and circulation
+description: Generate a prediction market idea rooted in the current project — a coordination tool to rally people toward a goal the agent can't achieve alone
 var: ""
 ---
-> **${var}** — Theme or domain override (e.g. "AI regulation", "crypto adoption", "autonomous agents"). If empty, scans broadly across current signals.
+> **${var}** — Theme or angle override. If empty, derives from the current repo state and community signals.
 
 Today is ${today}.
 
-Read memory/MEMORY.md and the last 7 days of memory/logs/ for context on what's been happening — recent articles, tweets, token activity, and repo developments.
+Read memory/MEMORY.md and the last 3 days of memory/logs/ for context — recent articles, tweets, token activity, repo developments, and community discussions.
+Read memory/watched-repos.md and check recent repo activity in `articles/` (push-recaps, repo-articles, repo-actions).
 
-## What is a hyperstition?
+## What is this skill?
 
-A hyperstition is a fiction that makes itself real. In prediction markets, this means: the act of creating the market and people trading on it **changes the probability of the outcome**. The market's existence influences the real world.
+This skill generates ONE prediction market idea per day that is **rooted in the current project** and designed as a **coordination mechanism**. The market question should rally the community toward a concrete goal that an AI agent can't do alone — things that require human action, social momentum, capital, governance, partnerships, or collective belief.
 
-## The 5 qualities of a great hyperstition market idea
+The concept is hyperstition: a fiction that makes itself real through belief and circulation. The market's existence changes behavior, which changes the outcome.
 
-1. **Reflexivity** — trading on the market plausibly changes real-world behavior (e.g. a CEO sees the market, feels pressure to act)
-2. **Engagement bait** — people want to trade AND share the question (it's provocative, contrarian, or touches identity)
-3. **Real-world connection** — tied to something happening right now, not hypothetical future speculation
-4. **Memetic potential** — the question itself is viral-worthy, screenshot-able, argument-starting
-5. **Ambiguity in resolution** — interesting edge cases but still resolvable YES/NO with clear criteria
+## The idea MUST be about the project
+
+Every market idea must connect directly to the watched repos, the token, or the project's ecosystem. Generic crypto/AI/tech prediction markets are NOT acceptable. The question should be something the project's community would care about and could influence.
+
+Good examples (project-specific, requires human coordination):
+- "Will $AEON reach 100 holders by April 15, 2026?" — rallies buying/sharing
+- "Will MiroShark get a contributor outside the core team by May 2026?" — incentivizes open-source contribution
+- "Will the Aeon agent framework get forked by 5+ projects by June 2026?" — incentivizes awareness/marketing
+- "Will $MIROSHARK get listed on a DEX aggregator (1inch, Paraswap) by May 2026?" — coordinates community submissions
+- "Will someone build a skill for Aeon that gets merged and used by 3+ forks?" — drives ecosystem growth
+
+Bad examples (too generic, not project-specific):
+- "Will a Fortune 500 CEO credit AI agents for headcount reduction?"
+- "Will Coinbase launch a prediction market product?"
+
+## The 5 qualities to optimize for
+
+1. **Reflexivity** — the market's existence plausibly changes behavior. People seeing the question think "I could make this happen" and act.
+2. **Community coordination** — it requires humans doing things an AI agent CAN'T: buying tokens, sharing on social, submitting PRs, making introductions, listing on platforms, creating content, forming partnerships.
+3. **Real-world connection** — tied to something happening in the project RIGHT NOW (a recent ship, a milestone approached, a community discussion).
+4. **Memetic potential** — the question itself is shareable and makes people want to weigh in.
+5. **Clear resolution** — unambiguous YES/NO with a specific deadline and criteria.
 
 ## Steps
 
-1. **Gather live signals** from the current project and ecosystem:
+1. **Understand the current project state**:
+   - What was shipped recently? (push-recaps)
+   - What's the token doing? (token-reports)
+   - What's the community saying? (fetch-tweets logs)
+   - What milestones are approaching? (star count, fork count, holder count, listing status)
+   - What are the project's current gaps that need human action?
 
-   a. Read recent repo activity — what's been built, shipped, or discussed in the watched repos (check `articles/` for recent push-recaps, repo-articles, repo-actions).
-
-   b. Read recent tweet data from `memory/logs/` — what's the community talking about? What's trending around the project's domain?
-
-   c. Read recent token data from `memory/logs/` — any price movements, volume spikes, or market shifts?
-
-2. **Fetch live Polymarket data** to understand what markets already exist:
+2. **Fetch live Polymarket data** for inspiration on format and trending themes:
    ```bash
-   # Top markets by volume
-   curl -s "https://gamma-api.polymarket.com/markets?limit=20&order=volume24hr&ascending=false&active=true" | jq '[.[] | {question, volume24hr: .volume24hr, outcomePrices: .outcomePrices}]'
-
-   # Newest markets
-   curl -s "https://gamma-api.polymarket.com/markets?limit=20&order=startDate&ascending=false&active=true" | jq '[.[] | {question, startDate: .startDate, outcomePrices: .outcomePrices}]'
+   curl -s "https://gamma-api.polymarket.com/markets?limit=20&order=volume24hr&ascending=false&active=true" | jq '[.[] | {question, volume24hr: .volume24hr}]'
    ```
 
-3. **Identify gaps** — what questions *should* exist on Polymarket but don't? Look for:
-   - Topics that are trending in crypto/AI/tech but have no prediction market
-   - Events that are being debated online but nobody has put money on it yet
-   - Outcomes that would become more likely if people started betting on them (reflexivity)
+3. **Identify the highest-leverage coordination gap** — what's the one thing that, if the community rallied around it, would most accelerate the project? Think about:
+   - Growth: holders, stars, forks, contributors
+   - Visibility: listings, features, media mentions, influencer attention
+   - Ecosystem: integrations, partnerships, forks building on top
+   - Product: features that need user testing, feedback, or adoption
+   - Community: governance decisions, treasury actions, collective commitments
 
-4. **Use WebSearch** to go deeper on the most promising intersection between your project's ecosystem and current events. Find the specific trigger — a tweet, an announcement, a policy proposal, a product launch — that makes this timely.
+4. **Generate ONE market idea** that would coordinate people toward that goal.
 
-5. **Generate ONE market idea** that scores highly across all 5 qualities. Do not generate multiple — pick the single strongest one.
+5. **Score it**:
+   - Reflexivity: X/5
+   - Viral potential: X/5
 
-6. **Score it**:
-   - Reflexivity: X/5 (how much does the market's existence change the outcome?)
-   - Viral potential: X/5 (how shareable is the question?)
+6. **If no compelling idea emerges** (both scores below 3/5), log "HYPERSTITIONS_SKIP" and **do NOT send any notification**.
 
-7. **If no compelling idea emerges** (both scores below 3/5), log "HYPERSTITIONS_SKIP: no strong idea today" and **do NOT send any notification**.
-
-8. **Send notification** via `./notify`:
+7. **Send notification** via `./notify`:
    ```
-   *Hyperstition Idea — ${today}*
+   *Hyperstitions Idea — ${today}*
 
    "[Market question]?"
 
-   Reflexivity: [1-2 sentences on how the market's existence changes real-world behavior — who sees it, who feels pressure, what feedback loop does it create?]
+   The coordination play: [2-3 sentences on what humans need to do to make this happen — and why the market's existence motivates them to do it. What actions does this unlock that an AI agent can't do?]
 
-   Why now: [What specific signal triggered this idea — a tweet, a repo update, a price move, a news event? Be specific with names, dates, links.]
+   Why now: [What specific project signal triggered this — a repo milestone, a token move, a community discussion, a shipping streak?]
 
-   Resolution: [Exact YES/NO criteria — what has to happen, by when, and who judges it]
+   Resolution: [Exact YES/NO criteria — what has to happen, by when, how it's verified]
 
    Scores: Reflexivity X/5 | Viral X/5
+
+   Soon on https://www.hyperstitions.com/ ?
    ```
 
-9. **Log** to `memory/logs/${today}.md`:
+8. **Log** to `memory/logs/${today}.md`:
    ```
    ## Hyperstitions Ideas
    - **Question:** [the market question]
+   - **Coordination target:** [what human action it incentivizes]
    - **Reflexivity:** X/5
    - **Viral:** X/5
-   - **Trigger:** [what signal inspired it]
+   - **Trigger:** [what project signal inspired it]
    - **Notification sent:** yes/no
    ```
