@@ -7,12 +7,12 @@ var: ""
 
 ## Config
 
-This skill reads repos from `memory/watched-repos.md`.
+This skill reads repos from `memory/watched-repos.md` but **skips agent/monitoring repos** (repos that contain "aeon-agent" or "miroshark-aeon" in their name). Only track the actual project repos — not the agent repos that run the skills.
 
 ---
 
 Read memory/MEMORY.md and the last 3 days of memory/logs/ for previous star/fork counts to calculate deltas.
-Read memory/watched-repos.md for the list of repos to track.
+Read memory/watched-repos.md for the list of repos to track. Skip any repo whose name ends with "-aeon" or contains "aeon-agent" — those are agent repos, not project repos.
 
 ## Steps
 
@@ -21,20 +21,25 @@ Read memory/watched-repos.md for the list of repos to track.
    gh api repos/owner/repo --jq '{stargazers_count, forks_count, watchers_count, open_issues_count, subscribers_count}'
    ```
 
-2. **Fetch the most recent stargazers** — use `--paginate` and grab the last page to get the newest stars:
+2. **Compute the 24h cutoff timestamp** FIRST — this is critical:
    ```bash
-   # Get the last 20 stargazers (most recent) with timestamps
-   gh api repos/owner/repo/stargazers -H "Accept: application/vnd.github.star+json" --paginate --jq '.[] | {user: .user.login, starred_at: .starred_at}' | tail -20
+   CUTOFF=$(date -u -d '24 hours ago' +%Y-%m-%dT%H:%M:%SZ 2>/dev/null || date -u -v-24H +%Y-%m-%dT%H:%M:%SZ)
    ```
-   Filter these to only show stargazers from the last 24 hours.
+   Use this `$CUTOFF` for ALL time filtering below. Do NOT use "today's date" — use exactly 24 hours ago from now.
 
-3. **Fetch recent forks** (sorted by newest):
+3. **Fetch the most recent stargazers** — use `--paginate` and filter by the 24h cutoff:
+   ```bash
+   gh api repos/owner/repo/stargazers -H "Accept: application/vnd.github.star+json" --paginate --jq '.[] | {user: .user.login, starred_at: .starred_at}' | tail -30
+   ```
+   From this list, keep only entries where `starred_at` >= `$CUTOFF` (24 hours ago). NOT "since midnight today" — since exactly 24 hours ago.
+
+4. **Fetch recent forks** (sorted by newest):
    ```bash
    gh api "repos/owner/repo/forks?sort=newest&per_page=10" --jq '.[] | {owner: .owner.login, created_at: .created_at, full_name: .full_name}'
    ```
-   Filter to only show forks from the last 24 hours.
+   Keep only forks where `created_at` >= `$CUTOFF`.
 
-4. **Fetch traffic data** (requires push access to the repo):
+5. **Fetch traffic data** (requires push access to the repo):
    ```bash
    gh api repos/owner/repo/traffic/views --jq '{count, uniques}'
    gh api repos/owner/repo/traffic/clones --jq '{count, uniques}'
@@ -42,16 +47,16 @@ Read memory/watched-repos.md for the list of repos to track.
    ```
    If traffic endpoints return 403, skip traffic data and note it.
 
-5. **Determine if there's activity to report.** There are TWO signals — check BOTH:
-   - **New stargazers from step 2**: filter the list to only those with `starred_at` in the last 24 hours. If there are ANY, that counts as activity.
-   - **New forks from step 3**: filter to forks with `created_at` in the last 24 hours.
+6. **Determine if there's activity to report.** There are TWO signals — check BOTH:
+   - **New stargazers from step 3**: any entries with `starred_at` >= the 24h cutoff. If there are ANY, that counts as activity.
+   - **New forks from step 4**: any entries with `created_at` >= the 24h cutoff.
 
    **Send a notification if ANY of these are true:**
    - There is at least 1 new stargazer in the last 24h (regardless of net total change — unstars don't cancel this out)
    - There is at least 1 new fork in the last 24h
    - This is the first run (no previous data in logs)
 
-   Only log "REPO_PULSE_QUIET" and skip notification if there are truly ZERO new stargazers AND ZERO new forks in the last 24h.
+   Only log "REPO_PULSE_QUIET" and skip notification if there are truly ZERO new stargazers AND ZERO new forks since the 24h cutoff.
 
 7. **Send notification** via `./notify`:
    ```
