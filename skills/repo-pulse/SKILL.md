@@ -42,13 +42,16 @@ Read memory/watched-repos.md for the list of repos to track.
    ```
    If traffic endpoints return 403, skip traffic data and note it.
 
-5. **Calculate deltas** — compare the current `stargazers_count` and `forks_count` against the values logged in previous days' `memory/logs/`. Look for lines like "Stars: 100" or "stargazers_count: 100" in recent logs.
-   - If previous count found: delta = current - previous
-   - If no previous count found (first run): delta is unknown, report current totals as baseline
+5. **Determine if there's activity to report.** There are TWO signals — check BOTH:
+   - **New stargazers from step 2**: filter the list to only those with `starred_at` in the last 24 hours. If there are ANY, that counts as activity.
+   - **New forks from step 3**: filter to forks with `created_at` in the last 24 hours.
 
-6. **Always send a notification** unless the delta is exactly 0 on both stars and forks AND this is not the first run. On the first run (no previous data), always send.
+   **Send a notification if ANY of these are true:**
+   - There is at least 1 new stargazer in the last 24h (regardless of net total change — unstars don't cancel this out)
+   - There is at least 1 new fork in the last 24h
+   - This is the first run (no previous data in logs)
 
-   If delta is 0 and not first run: log "REPO_PULSE_QUIET" and stop — no notification.
+   Only log "REPO_PULSE_QUIET" and skip notification if there are truly ZERO new stargazers AND ZERO new forks in the last 24h.
 
 7. **Send notification** via `./notify`:
    ```
