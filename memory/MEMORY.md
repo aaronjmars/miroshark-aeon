@@ -27,6 +27,7 @@
 |-------|------|-------|
 | Simulation Export | 2026-03-25 | JSON/CSV export endpoint + download buttons for MiroShark (PR #1) |
 | Preset Templates | 2026-03-27 | 6 one-click simulation templates for new user onboarding (PR #2) |
+| Heartbeat Scheduler Diagnostics | 2026-03-27 | Added messages.yml scheduler checks to heartbeat for accurate root cause analysis (PR #2 on miroshark-aeon) |
 
 ## Watched Repos
 - `aaronjmars/aeon` — tracked in `memory/watched-repos.md`
