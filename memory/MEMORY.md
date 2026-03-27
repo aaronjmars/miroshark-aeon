@@ -26,6 +26,7 @@
 | Skill | Date | Notes |
 |-------|------|-------|
 | Simulation Export | 2026-03-25 | JSON/CSV export endpoint + download buttons for MiroShark (PR #1) |
+| Preset Templates | 2026-03-27 | 6 one-click simulation templates for new user onboarding (PR #2) |
 
 ## Watched Repos
 - `aaronjmars/aeon` — tracked in `memory/watched-repos.md`
