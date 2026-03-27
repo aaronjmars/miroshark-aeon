@@ -14,13 +14,25 @@ Check the following:
 - [ ] Any open PRs stalled > 24h? (use `gh pr list` to check)
 - [ ] Anything flagged in memory that needs follow-up?
 - [ ] Check recent GitHub issues for anything labeled urgent (use `gh issue list`)
-- [ ] Scan aeon.yml for scheduled skills — cross-reference with recent logs to find any that haven't run when expected. **Important:** GitHub Actions cron has ±10 minute jitter and skills may take 5-15 minutes to complete and commit logs. Only flag a skill as missing if it was expected to run **more than 2 hours ago** and has no log entry for today. Also check `gh run list --workflow=aeon.yml --created=$(date -u +%Y-%m-%d) --json displayTitle,status` to see if the skill is currently running or queued before flagging it as missing.
-  **Log header aliases:** Some skills log under a different header than their aeon.yml name. Known aliases:
-  - `monitor-polymarket` → may log as `## Polymarket Comments`
-  - `hacker-news-digest` / `hn-digest` → may log as `## HN Digest`
-  When checking if a skill ran, match against both the skill name AND its known aliases.
+- [ ] Scan aeon.yml for enabled scheduled skills — cross-reference with today's log (`memory/logs/${today}.md`) to find any that haven't run when expected.
 
-Before sending any notification, grep memory/logs/ for the same item. If it appears in the last 48h of logs, skip it. Never notify about the same item twice. Batch missing-skill alerts into a single notification — don't send one per skill.
+  **Matching skill names to log entries:**
+  Skills log under human-readable `## Headers`, not their aeon.yml kebab-case names. To check if a skill ran, do a **case-insensitive search** of the log file for the skill name with hyphens replaced by spaces. Examples:
+  - `token-report` → search for "token report" (matches `## Token Report`, `## Token Report (Update)`)
+  - `push-recap` → search for "push recap" (matches `## Push Recap`, `## Push Recap (MiroShark)`)
+  - `fetch-tweets` → search for "fetch tweets" (matches `## Fetch Tweets — MIROSHARK`)
+  - `feature` → search for "feature" (matches `## Feature Build — ...`)
+  - `hyperstitions-ideas` → search for "hyperstitions" (matches `## Hyperstitions Ideas`)
+  - `memory-flush` → search for "memory flush"
+  - `self-improve` → search for "self-improve" or "self improve" or "agent self-improvement"
+
+  **Timing rules (avoid false positives):**
+  - GitHub Actions cron has ±10 min jitter and skills take 5-15 min to complete.
+  - Only flag a skill as missing if its scheduled time was **more than 2 hours ago**.
+  - Also check `gh run list --workflow=aeon.yml --created=$(date -u +%Y-%m-%d) --json displayTitle,status` — if the skill is currently `in_progress` or `queued`, don't flag it.
+  - For day-of-week schedules (e.g. `0 20 * * 0` for Sundays), only check on the matching day.
+
+Before sending any notification, grep the last 48h of logs for the same issue. If the same missing-skill or stalled-PR was already reported, skip it. Batch all findings into a single notification.
 
 If nothing needs attention, log "HEARTBEAT_OK" and end your response.
 
