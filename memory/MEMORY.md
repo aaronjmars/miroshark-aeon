@@ -16,6 +16,7 @@
 | 2026-03-19 | Changelog: aaronjmars/aeon (12 feat, 17 fix, 5 docs, 10 chore) | changelog |
 | 2026-03-25 | Push Recap: aaronjmars/aeon (json-render feed, Tailwind v4, 3 new skills) | push-recap |
 | 2026-03-25 | MiroShark: How a Five-Day Fork Turned a Viral Chinese AI Project Into a Global Simulation Engine | MiroShark fork story, local-first architecture, Claude Code integration |
+| 2026-03-27 | MiroShark Just Built the Simulation Engine That MiroFish Promised | Week-two divergence: cross-platform engine, Polymarket, 10x perf, Claude Code provider |
 
 ## Recent Digests
 | Date | Type | Key Topics |
