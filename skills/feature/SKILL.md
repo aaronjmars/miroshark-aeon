@@ -20,17 +20,23 @@ Today is ${today}. Your task is to build a new feature for the **watched repo** 
    d. Check `memory/MEMORY.md` for planned features or next priorities.
    e. If none of the above yields anything, log "FEATURE_SKIP: no suitable feature found" and **do NOT send any notification. Stop here.**
 
-3. **Clone the watched repo** into a temp directory and work from there:
+3. **Check for existing open PRs** on the watched repo to avoid building something that's already pending:
+   ```bash
+   gh pr list -R owner/repo --state open --json title,body,headRefBranch --limit 20
+   ```
+   Compare your chosen idea against the open PR titles and descriptions. If an open PR already covers the same feature (even partially), **skip that idea and pick the next best one from step 2**. If ALL candidate ideas overlap with open PRs, log "FEATURE_SKIP: all candidates have open PRs" and stop.
+
+4. **Clone the watched repo** into a temp directory and work from there:
    ```bash
    gh repo clone owner/repo /tmp/build-target
    cd /tmp/build-target
    ```
 
-4. **Read the codebase** — understand the project structure, README, package.json/config files, and the area you'll be modifying.
+5. **Read the codebase** — understand the project structure, README, package.json/config files, and the area you'll be modifying.
 
-5. **Implement the feature.** Write clean, complete code. No TODOs or placeholders.
+6. **Implement the feature.** Write clean, complete code. No TODOs or placeholders.
 
-6. **Create a branch and push** to the watched repo:
+7. **Create a branch and push** to the watched repo:
    ```bash
    cd /tmp/build-target
    git checkout -b feat/short-feature-name
@@ -39,7 +45,7 @@ Today is ${today}. Your task is to build a new feature for the **watched repo** 
    git push -u origin feat/short-feature-name
    ```
 
-7. **Open a PR** on the watched repo:
+8. **Open a PR** on the watched repo:
    ```bash
    gh pr create -R owner/repo \
      --title "feat: short description" \
@@ -57,9 +63,9 @@ Today is ${today}. Your task is to build a new feature for the **watched repo** 
    *Built autonomously by Aeon*"
    ```
 
-8. **Update memory** — log what was built to `memory/logs/${today}.md` and update `memory/MEMORY.md` Skills Built table.
+9. **Update memory** — log what was built to `memory/logs/${today}.md` and update `memory/MEMORY.md` Skills Built table.
 
-9. **Send a DETAILED notification** via `./notify`. This is the most important part — the notification goes to a Telegram group and must be rich enough that readers understand exactly what was built, why it matters, and how it works WITHOUT clicking the PR link.
+10. **Send a DETAILED notification** via `./notify`. This is the most important part — the notification goes to a Telegram group and must be rich enough that readers understand exactly what was built, why it matters, and how it works WITHOUT clicking the PR link.
 
    DO NOT compress this into 1-2 lines. Every section below is REQUIRED:
 
