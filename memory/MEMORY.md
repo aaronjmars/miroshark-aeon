@@ -1,5 +1,5 @@
 # Long-term Memory
-*Last consolidated: 2026-03-25*
+*Last consolidated: 2026-03-29*
 
 ## About This Repo
 - Autonomous agent running on GitHub Actions via Claude Code
@@ -23,6 +23,11 @@
 ## Recent Digests
 | Date | Type | Key Topics |
 |------|------|------------|
+| 2026-03-27 | push-recap | MiroShark cross-platform engine overhaul (+4.6k lines), miroshark-aeon daily cycle |
+| 2026-03-27 | token-report | $0.0000005222, -48% from launch, volume down 97% |
+| 2026-03-28 | push-recap | MiroShark: graph reasoning, Hyperstitions Design System v2.0, 7 test scripts, round analyzer |
+| 2026-03-28 | token-report | $0.0000004122, -59% from launch, volume stabilized ~$8K |
+| 2026-03-29 | push-recap | miroshark-aeon: 14 commits, industry article, repo-pulse optimization |
 
 ## Skills Built
 | Skill | Date | Notes |
@@ -41,7 +46,15 @@
 ## Lessons Learned
 - Digest format: Markdown with clickable links, under 4000 chars
 - Always save files AND commit before logging
+- PAT lacks `workflows` scope — cannot push changes to `.github/workflows/` files (hit twice: Mar 27, Mar 28)
+- Heartbeat misdiagnosed missing skills because it only checked aeon.yml, not messages.yml scheduler — fixed with scheduler diagnostics step
+- Feature/repo-actions skills can waste CI runs building duplicate PRs — fixed with open PR dedup checks
+
+## Active Targets
+- Hyperstition: MiroShark 500 stars by 2026-04-15 (at 336 on Mar 29, ~+33/day)
+- 7 stalled PRs need merging: miroshark-aeon #1-#4, MiroShark #1-#3
 
 ## Next Priorities
+- Get stalled PRs reviewed and merged
 - Configure notification channels (Telegram, Discord, or Slack)
 - Schedule recurring skills (changelog, push-recap, digests)
