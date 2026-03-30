@@ -20,6 +20,7 @@
 | 2026-03-28 | Four Ways In: How MiroShark Made Multi-Agent Social Simulation Actually Accessible | Developer accessibility: 4 setup paths, Claude Code provider, ecosystem positioning |
 | 2026-03-29 | 329 Stars in Nine Days: MiroShark and the Multi-Agent Simulation Moment | Industry positioning: Gartner MAS surge, simulation-as-decision-layer vision, Aeon integration |
 | 2026-03-30 | The Knowledge Graph Inside MiroShark | Technical deep-dive: Neo4j graph architecture, five-layer persona context, belief states, graph memory loop |
+| 2026-03-30 | When Simulated Agents Start Trading | Prediction market angle: Wonderwall AMM, three-platform feedback loop, simulation vs. trading bots (Polystrat), open-source positioning |
 
 ## Recent Digests
 | Date | Type | Key Topics |
