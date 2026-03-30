@@ -4,29 +4,25 @@
 # Set var: "value" to pass a default parameter to the skill.
 
 skills:
-  # === DAILY ACTIVE SKILLS ===
+  # === 3-DAY ROTATION (Mon / Wed / Fri) ===
 
-  # --- Morning: Token + Social (8 AM UTC) ---
-  token-report: { enabled: true, schedule: "0 8 * * *" }
-  fetch-tweets: { enabled: true, schedule: "30 8 * * *", var: "MIROSHARK crypto token on Base chain" }
+  # --- Monday: Market & Social ---
+  token-report: { enabled: true, schedule: "0 8 * * 1" }
+  fetch-tweets: { enabled: true, schedule: "30 8 * * 1", var: "MIROSHARK crypto token on Base chain" }
+  repo-pulse: { enabled: true, schedule: "0 12 * * 1" }
 
-  # --- Late morning: Repo growth (10 AM UTC) ---
-  repo-pulse: { enabled: true, schedule: "0 20 * * *" }
+  # --- Wednesday: Content & Analysis ---
+  push-recap: { enabled: true, schedule: "0 12 * * 3" }
+  repo-article: { enabled: true, schedule: "0 13 * * 3" }
+  repo-actions: { enabled: true, schedule: "0 15 * * 3" }
 
-  # --- Midday: Repo state + Content (12 PM UTC) ---
-  push-recap: { enabled: true, schedule: "0 12 * * *" }
-  repo-article: { enabled: true, schedule: "0 13 * * *" }
-
-  # --- Afternoon: Ideas (3 PM UTC) ---
-  repo-actions: { enabled: true, schedule: "0 15 * * *" }
-  hyperstitions-ideas: { enabled: true, schedule: "30 15 * * *" }
-
-  # --- Late afternoon: Build (4:30 PM UTC) ---
-  feature: { enabled: true, schedule: "30 16 * * *" }
-  self-improve: { enabled: true, schedule: "0 17 * * *" }
+  # --- Friday: Build & Meta ---
+  hyperstitions-ideas: { enabled: true, schedule: "0 12 * * 5" }
+  feature: { enabled: true, schedule: "0 13 * * 5" }
+  self-improve: { enabled: true, schedule: "0 15 * * 5" }
 
   # === HOUSEKEEPING ===
-  heartbeat: { enabled: true, schedule: "0 6 * * *" }
+  heartbeat: { enabled: true, schedule: "0 21 * * 1,3,5" }
   memory-flush: { enabled: true, schedule: "0 20 * * 0" }  # Sundays only
 
   # === DISABLED (available on demand) ===
