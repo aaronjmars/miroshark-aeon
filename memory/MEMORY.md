@@ -57,10 +57,8 @@
 - Feature/repo-actions skills can waste CI runs building duplicate PRs — fixed with open PR dedup checks
 
 ## Active Targets
-- Hyperstition: MiroShark 500 stars by 2026-04-15 (at 336 on Mar 29, ~+33/day)
-- 8 stalled PRs need merging: miroshark-aeon #1-#4, MiroShark #1-#4 + new MCP server PR #5
+- Hyperstition: MiroShark 500 stars by 2026-04-15 (at 362 on Mar 31, ~+33/day)
 
 ## Next Priorities
-- Get stalled PRs reviewed and merged
 - Configure notification channels (Telegram, Discord, or Slack)
-- Schedule recurring skills (changelog, push-recap, digests)
+- MiroShark PRs all merged/closed as of 2026-03-31 — clean slate, focus on new features
