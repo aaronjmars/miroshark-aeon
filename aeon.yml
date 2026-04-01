@@ -17,8 +17,8 @@ skills:
   repo-actions: { enabled: true, schedule: "0 15 * * 2,5", model: "claude-sonnet-4-6" }
 
   # --- Day 3 (Wed+Sat): Build & Meta ---
-  hyperstitions-ideas: { enabled: true, schedule: "0 12 * * 3,6" }
-  feature: { enabled: true, schedule: "0 13 * * 3,6" }
+  hyperstitions-ideas: { enabled: true, schedule: "0 12 * * 6" }
+  feature: { enabled: true, schedule: "0 13 * * *" }
   self-improve: { enabled: true, schedule: "0 15 * * 3,6" }
 
   # === HOUSEKEEPING ===
