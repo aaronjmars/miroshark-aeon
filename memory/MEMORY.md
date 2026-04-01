@@ -45,6 +45,7 @@
 | Agent Network Visualization | 2026-03-29 | D3 force-directed graph of agent interactions with round playback (PR #4 on MiroShark) |
 | Feature PR Deduplication | 2026-03-29 | Added open PR checks to feature + repo-actions skills to prevent duplicate builds (PR #5 on miroshark-aeon) |
 | MCP Server | 2026-03-30 | MCP server exposing 4 simulation tools for agent ecosystem interop (PR #5 on MiroShark) |
+| Schedule Comment Fix | 2026-04-01 | Fixed stale 3-day-cycle comments in aeon.yml — now matches actual schedule after feature→daily + hyperstitions→Sat-only (PR #6 on miroshark-aeon) |
 
 ## Watched Repos
 - `aaronjmars/aeon` — tracked in `memory/watched-repos.md`
