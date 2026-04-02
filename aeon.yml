@@ -4,22 +4,26 @@
 # Set var: "value" to pass a default parameter to the skill.
 
 skills:
-  # === 3-DAY CYCLE (repeats Mon-Wed, Thu-Sat, Sun-Tue, ...) ===
+  # === RECURRING SCHEDULE ===
 
-  # --- Day 1 (Mon+Thu+Sun): Market & Social ---
+  # --- Market & Social (Mon+Thu+Sun) ---
   token-report: { enabled: true, schedule: "0 8 * * 0,1,4", model: "claude-sonnet-4-6" }
   fetch-tweets: { enabled: true, schedule: "30 8 * * 0,1,4", var: "MIROSHARK crypto token on Base chain", model: "claude-sonnet-4-6" }
   repo-pulse: { enabled: true, schedule: "0 12 * * 0,1,4", model: "claude-sonnet-4-6" }
 
-  # --- Day 2 (Tue+Fri): Content & Analysis ---
+  # --- Content & Analysis (Tue+Fri) ---
   push-recap: { enabled: true, schedule: "0 12 * * 2,5" }
   repo-article: { enabled: true, schedule: "0 13 * * 2,5" }
   repo-actions: { enabled: true, schedule: "0 15 * * 2,5", model: "claude-sonnet-4-6" }
 
-  # --- Day 3 (Wed+Sat): Build & Meta ---
-  hyperstitions-ideas: { enabled: true, schedule: "0 12 * * 6" }
+  # --- Build (Daily) ---
   feature: { enabled: true, schedule: "0 13 * * *" }
+
+  # --- Meta (Wed+Sat) ---
   self-improve: { enabled: true, schedule: "0 15 * * 3,6" }
+
+  # --- Weekly (Sat only) ---
+  hyperstitions-ideas: { enabled: true, schedule: "0 12 * * 6" }
 
   # === HOUSEKEEPING ===
   heartbeat: { enabled: true, schedule: "0 21 * * *", model: "claude-sonnet-4-6" }
