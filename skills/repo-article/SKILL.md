@@ -72,7 +72,9 @@ Read memory/watched-repos.md for the repo to cover.
 
 6. **Save** to `articles/repo-article-${today}.md`
 
-7. **Send notification** via `./notify`:
+7. **Log** to `memory/logs/${today}.md` (title, angle chosen, word count) and update `memory/MEMORY.md` Recent Articles table. **Do this before sending the notification.**
+
+8. **Send notification** via `./notify`:
    ```
    *New Article: [title]*
 
@@ -80,5 +82,3 @@ Read memory/watched-repos.md for the repo to cover.
 
    Read: [link to articles/repo-article-${today}.md in THIS repo — get the repo name from `git remote get-url origin`, not the watched repo]
    ```
-
-8. **Log** to `memory/logs/${today}.md` and update `memory/MEMORY.md` Recent Articles table.
