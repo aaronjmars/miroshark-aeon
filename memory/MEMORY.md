@@ -48,6 +48,7 @@
 | Schedule Comment Fix | 2026-04-01 | Fixed stale 3-day-cycle comments in aeon.yml — now matches actual schedule after feature→daily + hyperstitions→Sat-only (PR #6 on miroshark-aeon) |
 | One-Click Cloud Deploy | 2026-04-03 | railway.json + render.yaml + README section with deploy badges and Neo4j Aura guide (PR #9 on MiroShark) |
 | Config Generation Timeout & Error Recovery | 2026-04-04 | 90s client-side timeout, backend error surfacing, Retry Config button (PR #10 on MiroShark) |
+| Log-Before-Notify Fix | 2026-04-04 | Moved log step before notification in push-recap and repo-article to fix consistent logging gaps (PR #7 on miroshark-aeon) |
 
 ## Watched Repos
 - `aaronjmars/aeon` — tracked in `memory/watched-repos.md`
