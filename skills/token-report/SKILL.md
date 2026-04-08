@@ -100,7 +100,9 @@ Read the last 7 days of memory/logs/ for previous price data to show trends.
 
 7. **Save** to `articles/token-report-${today}.md`
 
-8. **Send notification** via `./notify`:
+8. **Log** to `memory/logs/${today}.md` including the current price (for trend comparison in future runs). **Do this before sending the notification.**
+
+9. **Send notification** via `./notify`:
    ```
    *$TOKEN Daily — ${today}*
 
@@ -113,7 +115,5 @@ Read the last 7 days of memory/logs/ for previous price data to show trends.
 
    Chart: https://www.geckoterminal.com/base/pools/POOL_ADDRESS
    ```
-
-9. **Log** to `memory/logs/${today}.md` including the current price (for trend comparison in future runs).
 
 **Important:** If the GeckoTerminal API returns no data (token not found, API error, empty response), log "TOKEN_REPORT_NO_DATA" to memory and **do NOT send any notification**. Do not notify about failures or empty results.
