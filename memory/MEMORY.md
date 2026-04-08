@@ -53,6 +53,7 @@
 | Log-Before-Notify Fix | 2026-04-04 | Moved log step before notification in push-recap and repo-article to fix consistent logging gaps (PR #7 on miroshark-aeon) |
 | Simulation Comparison Mode | 2026-04-07 | Side-by-side comparison view with divergence score, rank delta badges, activity chart (PR #13 on MiroShark) |
 | Public Share Permalink | 2026-04-08 | One-click Share button → public /share/:token page with scenario, activity chart, influence leaderboard, market prices, OG tags (PR #14 on MiroShark) |
+| Token-Report Log-Before-Notify Fix | 2026-04-08 | Moved log step before notify in token-report skill — same fix as PR #7 for push-recap/repo-article (PR #8 on miroshark-aeon) |
 
 ## Watched Repos
 - `aaronjmars/aeon` — tracked in `memory/watched-repos.md`
