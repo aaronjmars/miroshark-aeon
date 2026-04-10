@@ -21,9 +21,13 @@ Steps:
    - Goals completed or progress milestones
 2. Check each candidate against existing MEMORY.md content — skip if already recorded.
 3. Update memory:
-   - Add brief entries to MEMORY.md (keep it under ~50 lines as an index)
+   - Add brief entries to MEMORY.md
    - If a topic needs more detail, write to `memory/topics/<topic>.md` instead
-   - Update tables (recent articles, recent digests) with new rows
-4. Do NOT rewrite the whole file — make targeted additions and removals.
-5. Log what you promoted to memory/logs/${today}.md.
-If nothing worth promoting, log "MEMORY_FLUSH_OK" and end.
+   - Update the Recent Digests table with any new token-report or push-recap entries from logs
+4. **Rotate old entries to keep MEMORY.md under ~50 lines:**
+   - Skills Built table: keep the **10 most recent rows** — remove older rows from the top
+   - Recent Articles table: keep the **8 most recent rows** — remove older rows from the top
+   - Recent Digests table: keep the **6 most recent rows** — remove older rows from the top
+5. **Update the "Last consolidated" date** at the top of MEMORY.md to today (`${today}`). Do this even if nothing else was promoted.
+6. Do NOT rewrite the whole file — make targeted additions, removals, and date updates.
+7. Log what you promoted (or "MEMORY_FLUSH_OK: no new entries, date updated") to memory/logs/${today}.md.
