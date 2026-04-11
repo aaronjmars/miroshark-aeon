@@ -57,6 +57,7 @@
 | Token-Report Log-Before-Notify Fix | 2026-04-08 | Moved log step before notify in token-report skill — same fix as PR #7 for push-recap/repo-article (PR #8 on miroshark-aeon) |
 | Simulation Fork / Branch | 2026-04-09 | Fork any simulation from history modal — copies profiles instantly, allows scenario override, ⑂ badge on forked cards (PR #17 on MiroShark) |
 | Simulation History Search & Filter | 2026-04-10 | Client-side search, status/date/sort filters, forks-only toggle, localStorage persistence, no-results state (PR #20 on MiroShark) |
+| Article Generator | 2026-04-11 | One-click Substack-style article brief from simulation results — LLM-generated, cached, slide-out drawer with copy/download (PR #21 on MiroShark) |
 
 ## Watched Repos
 - `aaronjmars/aeon` — tracked in `memory/watched-repos.md`
