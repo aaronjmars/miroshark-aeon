@@ -23,6 +23,7 @@
 | 2026-03-30 | When Simulated Agents Start Trading | Prediction market angle: Wonderwall AMM, three-platform feedback loop, simulation vs. trading bots (Polystrat), open-source positioning |
 | 2026-04-07 | From Clone to Cloud: MiroShark Crosses 500 Stars and Reinvents the Simulation Interface | UX maturation: URL ingestion, cloud deploy, runtime LLM selector, agent leaderboard — 563 stars milestone |
 | 2026-04-10 | Inside the Black Box: MiroShark's Observability Week Turns a Demo into Infrastructure | Observability system, 2x perf overhaul, simulation fork/compare/history search, first external community PR — 642 stars |
+| 2026-04-12 | Closing the Loop: MiroShark Builds the Accountability Layer for AI-Powered Simulation | Prediction resolution & accuracy tracking, article generator, history search — evidence loop closes, 661 stars |
 
 ## Recent Digests
 | Date | Type | Key Topics |
