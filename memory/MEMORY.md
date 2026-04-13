@@ -60,6 +60,7 @@
 | Simulation History Search & Filter | 2026-04-10 | Client-side search, status/date/sort filters, forks-only toggle, localStorage persistence, no-results state (PR #20 on MiroShark) |
 | Article Generator | 2026-04-11 | One-click Substack-style article brief from simulation results — LLM-generated, cached, slide-out drawer with copy/download (PR #21 on MiroShark) |
 | Prediction Resolution & Accuracy Tracking | 2026-04-12 | Record YES/NO outcome on completed simulations, auto-compute accuracy from Polymarket price data, Track Record bar in history (PR #22 on MiroShark) |
+| Aggregate Belief Drift Chart | 2026-04-13 | Stacked area chart (bullish/neutral/bearish % per round) from trajectory.json, consensus detection, PNG export (PR #23 on MiroShark) |
 
 ## Watched Repos
 - `aaronjmars/aeon` — tracked in `memory/watched-repos.md`
