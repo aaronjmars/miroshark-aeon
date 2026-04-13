@@ -61,6 +61,7 @@
 | Memory Flush Date & Rotation Fix | 2026-04-10 | memory-flush now always updates "Last consolidated" date and trims tables to ≤10/8/6 rows (PR #9 on miroshark-aeon) |
 | Article Generator | 2026-04-11 | One-click Substack-style article brief from simulation results — LLM-generated, cached, slide-out drawer with copy/download (PR #21 on MiroShark) |
 | Prediction Resolution & Accuracy Tracking | 2026-04-12 | Record YES/NO outcome on completed simulations, auto-compute accuracy from Polymarket price data, Track Record bar in history (PR #22 on MiroShark) |
+| Fetch-Tweets Deduplication | 2026-04-12 | Suppress already-reported tweet URLs; skip notification when no new tweets found (PR #10 on miroshark-aeon) |
 | Aggregate Belief Drift Chart | 2026-04-13 | Stacked area chart (bullish/neutral/bearish % per round) from trajectory.json, consensus detection, PNG export (PR #23 on MiroShark) |
 
 ## Watched Repos
