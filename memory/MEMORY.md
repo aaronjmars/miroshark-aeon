@@ -24,6 +24,7 @@
 | 2026-04-07 | From Clone to Cloud: MiroShark Crosses 500 Stars and Reinvents the Simulation Interface | UX maturation: URL ingestion, cloud deploy, runtime LLM selector, agent leaderboard — 563 stars milestone |
 | 2026-04-10 | Inside the Black Box: MiroShark's Observability Week Turns a Demo into Infrastructure | Observability system, 2x perf overhaul, simulation fork/compare/history search, first external community PR — 642 stars |
 | 2026-04-12 | Closing the Loop: MiroShark Builds the Accountability Layer for AI-Powered Simulation | Prediction resolution & accuracy tracking, article generator, history search — evidence loop closes, 661 stars |
+| 2026-04-14 | When Simulated Agents Can Testify: MiroShark's Interrogatable Intelligence | Trace interview (PR #26), Apr 13 four-PR wave, belief drift chart, 681 stars, simulation-as-research-instrument |
 
 ## Recent Digests
 | Date | Type | Key Topics |
