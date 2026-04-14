@@ -37,5 +37,11 @@ Before sending any notification, grep the last 48h of logs for the same issue. I
 If nothing needs attention, log "HEARTBEAT_OK" and end your response.
 
 If something needs attention:
-1. Send a concise notification via `./notify`
-2. Log the finding and action taken to memory/logs/${today}.md
+1. **Auto-trigger missing skills** — for each skill confirmed missing (not just stalled PRs or issues), dispatch it immediately:
+   ```bash
+   gh workflow run aeon.yml -f skill="SKILL_NAME"
+   ```
+   Skip auto-trigger for: `heartbeat` itself, `memory-flush`, `self-improve`, `reflect`, `self-review` (meta/housekeeping skills). For all other confirmed-missing daily or weekly skills, dispatch them.
+
+2. Send a concise notification via `./notify` listing what was flagged AND what was auto-triggered.
+3. Log the finding and action taken to memory/logs/${today}.md.
