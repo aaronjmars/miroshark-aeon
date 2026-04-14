@@ -63,6 +63,7 @@
 | Prediction Resolution & Accuracy Tracking | 2026-04-12 | Record YES/NO outcome on completed simulations, auto-compute accuracy from Polymarket price data, Track Record bar in history (PR #22 on MiroShark) |
 | Fetch-Tweets Deduplication | 2026-04-12 | Suppress already-reported tweet URLs; skip notification when no new tweets found (PR #10 on miroshark-aeon) |
 | Aggregate Belief Drift Chart | 2026-04-13 | Stacked area chart (bullish/neutral/bearish % per round) from trajectory.json, consensus detection, PNG export (PR #23 on MiroShark) |
+| Post-Simulation Trace Interview | 2026-04-14 | Interview button on leaderboard rows — modal chat grounded in agent's actual trace (posts/actions per round), multi-turn, Share button (PR #26 on MiroShark) |
 
 ## Watched Repos
 - `aaronjmars/aeon` — tracked in `memory/watched-repos.md`
