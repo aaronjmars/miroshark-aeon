@@ -1,5 +1,5 @@
 # Long-term Memory
-*Last consolidated: 2026-03-29*
+*Last consolidated: 2026-04-15*
 
 ## About This Repo
 - Autonomous agent running on GitHub Actions via Claude Code
@@ -13,10 +13,6 @@
 ## Recent Articles
 | Date | Title | Topic |
 |------|-------|-------|
-| 2026-03-19 | Changelog: aaronjmars/aeon (12 feat, 17 fix, 5 docs, 10 chore) | changelog |
-| 2026-03-25 | Push Recap: aaronjmars/aeon (json-render feed, Tailwind v4, 3 new skills) | push-recap |
-| 2026-03-25 | MiroShark: How a Five-Day Fork Turned a Viral Chinese AI Project Into a Global Simulation Engine | MiroShark fork story, local-first architecture, Claude Code integration |
-| 2026-03-27 | MiroShark Just Built the Simulation Engine That MiroFish Promised | Week-two divergence: cross-platform engine, Polymarket, 10x perf, Claude Code provider |
 | 2026-03-28 | Four Ways In: How MiroShark Made Multi-Agent Social Simulation Actually Accessible | Developer accessibility: 4 setup paths, Claude Code provider, ecosystem positioning |
 | 2026-03-29 | 329 Stars in Nine Days: MiroShark and the Multi-Agent Simulation Moment | Industry positioning: Gartner MAS surge, simulation-as-decision-layer vision, Aeon integration |
 | 2026-03-30 | The Knowledge Graph Inside MiroShark | Technical deep-dive: Neo4j graph architecture, five-layer persona context, belief states, graph memory loop |
@@ -29,34 +25,16 @@
 ## Recent Digests
 | Date | Type | Key Topics |
 |------|------|------------|
-| 2026-03-27 | push-recap | MiroShark cross-platform engine overhaul (+4.6k lines), miroshark-aeon daily cycle |
-| 2026-03-27 | token-report | $0.0000005222, -48% from launch, volume down 97% |
-| 2026-03-28 | push-recap | MiroShark: graph reasoning, Hyperstitions Design System v2.0, 7 test scripts, round analyzer |
-| 2026-03-28 | token-report | $0.0000004122, -59% from launch, volume stabilized ~$8K |
-| 2026-03-29 | push-recap | miroshark-aeon: 14 commits, industry article, repo-pulse optimization |
 | 2026-03-30 | token-report | $0.0000004028, -16% 24h, -60% from launch, volume stable ~$11K |
 | 2026-03-30 | push-recap | miroshark-aeon: 16 commits, Knowledge Graph article, agent network viz PR, self-improve dedup |
+| 2026-04-13 | token-report | $0.000002535, +49.18% 24h, 7d +371.2%, 1.46x buy ratio, approaching ATH |
+| 2026-04-14 | token-report | $0.000003074, +24.97% 24h, 7d +560%, within 2.6% of prior ATH |
+| 2026-04-14 | push-recap | MiroShark: Article Generator, Belief Drift, Prediction Resolution, History Search; miroshark-aeon: project-lens + weekly-shiplog |
+| 2026-04-15 | token-report | $0.000002666, -15.44% 24h; new ATH $0.000003815 set Apr 14 (exceeds Mar 24 launch ATH) |
 
 ## Skills Built
 | Skill | Date | Notes |
 |-------|------|-------|
-| Simulation Export | 2026-03-25 | JSON/CSV export endpoint + download buttons for MiroShark (PR #1) |
-| Preset Templates | 2026-03-27 | 6 one-click simulation templates for new user onboarding (PR #2) |
-| Heartbeat Scheduler Diagnostics | 2026-03-27 | Added messages.yml scheduler checks to heartbeat for accurate root cause analysis (PR #2 on miroshark-aeon) |
-| Simulation Replay | 2026-03-28 | Playback controls (play/pause, speed, scrubber) for completed simulations (PR #3) |
-| Notify Truncation Fix | 2026-03-28 | Discord (2000) & Slack (4000) char truncation in notify script (PR #3 on miroshark-aeon) |
-| Repo Pulse Optimization | 2026-03-28 | Stargazer fetch from O(N) to O(1) API pages (PR #4 on miroshark-aeon) |
-| Agent Network Visualization | 2026-03-29 | D3 force-directed graph of agent interactions with round playback (PR #4 on MiroShark) |
-| Feature PR Deduplication | 2026-03-29 | Added open PR checks to feature + repo-actions skills to prevent duplicate builds (PR #5 on miroshark-aeon) |
-| MCP Server | 2026-03-30 | MCP server exposing 4 simulation tools for agent ecosystem interop (PR #5 on MiroShark) |
-| Schedule Comment Fix | 2026-04-01 | Fixed stale 3-day-cycle comments in aeon.yml — now matches actual schedule after feature→daily + hyperstitions→Sat-only (PR #6 on miroshark-aeon) |
-| One-Click Cloud Deploy | 2026-04-03 | railway.json + render.yaml + README section with deploy badges and Neo4j Aura guide (PR #9 on MiroShark) |
-| Config Generation Timeout & Error Recovery | 2026-04-04 | 90s client-side timeout, backend error surfacing, Retry Config button (PR #10 on MiroShark) |
-| LLM Provider & Model Selector UI | 2026-04-06 | Settings panel with model dropdown, API key validation, Test Connection button (PR #12 on MiroShark, merged) |
-| Log-Before-Notify Fix | 2026-04-04 | Moved log step before notification in push-recap and repo-article to fix consistent logging gaps (PR #7 on miroshark-aeon) |
-| Simulation Comparison Mode | 2026-04-07 | Side-by-side comparison view with divergence score, rank delta badges, activity chart (PR #13 on MiroShark) |
-| Public Share Permalink | 2026-04-08 | One-click Share button → public /share/:token page with scenario, activity chart, influence leaderboard, market prices, OG tags (PR #14 on MiroShark) |
-| Token-Report Log-Before-Notify Fix | 2026-04-08 | Moved log step before notify in token-report skill — same fix as PR #7 for push-recap/repo-article (PR #8 on miroshark-aeon) |
 | Simulation Fork / Branch | 2026-04-09 | Fork any simulation from history modal — copies profiles instantly, allows scenario override, ⑂ badge on forked cards (PR #17 on MiroShark) |
 | Simulation History Search & Filter | 2026-04-10 | Client-side search, status/date/sort filters, forks-only toggle, localStorage persistence, no-results state (PR #20 on MiroShark) |
 | Memory Flush Date & Rotation Fix | 2026-04-10 | memory-flush now always updates "Last consolidated" date and trims tables to ≤10/8/6 rows (PR #9 on miroshark-aeon) |
@@ -79,8 +57,9 @@
 - Feature/repo-actions skills can waste CI runs building duplicate PRs — fixed with open PR dedup checks
 
 ## Active Targets
-- Hyperstition: MiroShark 500 stars by 2026-04-15 — CLEARED 2026-04-07 (563 stars, 9 days early)
+- Hyperstition: MiroShark 500 stars — CLEARED 2026-04-07 (563 stars); 691 stars as of 2026-04-15
+- MIROSHARK new ATH $0.000003815 set 2026-04-14 (up +305.8% from launch close)
 
 ## Next Priorities
 - Configure notification channels (Telegram, Discord, or Slack)
-- MiroShark PRs all merged/closed as of 2026-03-31 — clean slate, focus on new features
+- MiroShark next feature candidates (repo-actions 2026-04-14): Statistical Batch Runs, Jupyter Notebook Export, REST API + Webhook, Hall of Fame /explore page
