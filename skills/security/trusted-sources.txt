@@ -1,0 +1,11 @@
+# Trusted skill sources — one per line (GitHub owner/repo or owner)
+# Skills from these sources skip deep content analysis (still get format validation).
+# Add sources you trust after manual review.
+#
+# Format:
+#   owner           — trusts all repos from this owner
+#   owner/repo      — trusts only this specific repo
+
+aaronjmars
+aaronjmars/aeon
+aaronjmars/aeon-agent

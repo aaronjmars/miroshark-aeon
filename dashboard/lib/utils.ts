@@ -1,0 +1,60 @@
+import { DAYS } from './constants'
+import type { Run } from './types'
+
+export function displayName(slug: string): string {
+  const special: Record<string, string> = { pr: 'PR', hn: 'HN', rss: 'RSS', defi: 'DeFi', ai: 'AI', x: 'X' }
+  return slug.split('-').map(w => special[w] || (w[0]?.toUpperCase() + w.slice(1))).join(' ')
+}
+
+export function initials(slug: string): string {
+  const words = slug.split('-')
+  return words.length === 1 ? words[0].slice(0, 2).toUpperCase() : (words[0][0] + words[1][0]).toUpperCase()
+}
+
+function getUtcOffsetHours(): number { return -(new Date().getTimezoneOffset() / 60) }
+function utcToLocal24(utcH: number): number { return ((utcH + getUtcOffsetHours()) % 24 + 24) % 24 }
+export function localToUtc24(localH: number): number { return ((localH - getUtcOffsetHours()) % 24 + 24) % 24 }
+
+export function parseCron(cron: string) {
+  const [m, h, , , dow] = cron.split(' ')
+  if (m.includes('/')) return { mode: 'interval' as const, value: parseInt(m.split('/')[1]) || 5, unit: 'm' as const }
+  if (h === '*' || h.includes('/')) return { mode: 'interval' as const, value: h === '*' ? 1 : parseInt(h.split('/')[1]) || 1, unit: 'h' as const }
+  const localH = utcToLocal24(parseInt(h))
+  return { mode: 'time' as const, hour12: localH > 12 ? localH - 12 : localH === 0 ? 12 : localH, minute: parseInt(m) || 0, ampm: (localH >= 12 ? 'PM' : 'AM') as 'AM' | 'PM', days: dow === '*' ? [-1] : dow.split(',').map(d => parseInt(d)).filter(d => !isNaN(d)) }
+}
+
+export function cronLabel(cron: string): string {
+  if (cron === 'workflow_dispatch') return 'On demand'
+  const p = parseCron(cron)
+  if (p.mode === 'interval') return `Every ${p.value}${p.unit}`
+  const time = `${p.hour12}:${String(p.minute).padStart(2, '0')} ${p.ampm}`
+  if (p.days.includes(-1)) return `${time} daily`
+  return `${time} ${p.days.map(d => DAYS.find(x => x.value === d)?.label || '').filter(Boolean).join(', ')}`
+}
+
+export function buildCron(mode: 'interval' | 'time', iv: number, iu: 'm' | 'h', h12: number, min: number, ap: 'AM' | 'PM', days: number[]): string {
+  if (mode === 'interval') return iu === 'm' ? `*/${iv} * * * *` : `0 */${iv} * * *`
+  let lh = h12; if (ap === 'PM' && lh !== 12) lh += 12; if (ap === 'AM' && lh === 12) lh = 0
+  return `${min} ${localToUtc24(lh)} * * ${days.includes(-1) ? '*' : days.sort((a, b) => a - b).join(',')}`
+}
+
+export function timeAgo(date: string): string {
+  const s = Math.floor((Date.now() - new Date(date).getTime()) / 1000)
+  if (s < 60) return 'just now'; if (s < 3600) return `${Math.floor(s / 60)}m ago`
+  if (s < 86400) return `${Math.floor(s / 3600)}h ago`; return `${Math.floor(s / 86400)}d ago`
+}
+
+export function getSkillStatus(name: string, enabled: boolean, runs: Run[]) {
+  const sr = runs.filter(r => r.workflow.toLowerCase().includes(name))
+  if (sr.length > 0) {
+    if (sr[0].status === 'in_progress') return { label: 'Working', color: 'orange' }
+    if (sr[0].conclusion === 'failure') return { label: 'Error', color: 'red' }
+  }
+  return enabled ? { label: 'On duty', color: 'green' } : { label: 'Off duty', color: 'gray' }
+}
+
+export function statusDot(color: string) {
+  return `w-2 h-2 rounded-full shrink-0 ${color === 'green' ? 'bg-eva-green' : color === 'orange' ? 'bg-eva-orange animate-pulse' : color === 'red' ? 'bg-eva-red' : 'bg-[rgba(10,10,10,0.2)]'}`
+}
+
+export const inputCls = "w-full bg-white text-eva-black text-xs px-3 py-2 border-2 border-[rgba(10,10,10,0.08)] outline-none font-mono focus:border-eva-orange transition-colors"

@@ -3,22 +3,211 @@
 @source "../app/**/*.{ts,tsx}";
 @source "../lib/**/*.{ts,tsx}";
 
-@theme {
-  --font-sans: var(--font-geist-sans), system-ui, sans-serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+/* ==========================================================================
+   AEON HQ — Hyperstitions Design System v2.0
+   Evangelion-inspired aesthetic — Orange + Green bicolor accent system
+   1.4x modular scale — Young Serif display + Space Mono functional
+   ========================================================================== */
+
+:root {
+  --color-orange: #FF6B1A;
+  --color-green: #43C165;
+  --color-white: #FAFAFA;
+  --color-black: #0A0A0A;
+  --color-gray: #F5F5F5;
+  --color-amber: #FFB347;
+  --color-red: #FF4444;
+
+  --background: #FAFAFA;
+  --foreground: #0A0A0A;
+
+  --space-xs: 6px;
+  --space-sm: 11px;
+  --space-md: 22px;
+  --space-lg: 34px;
+  --space-xl: 56px;
+  --space-2xl: 84px;
+
+  --border-light: 2px solid rgba(10,10,10,0.08);
+  --border-medium: 2px solid rgba(10,10,10,0.12);
+  --border-orange: 3px solid var(--color-orange);
+  --border-green: 3px solid var(--color-green);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-eva-orange: var(--color-orange);
+  --color-eva-green: var(--color-green);
+  --color-eva-white: var(--color-white);
+  --color-eva-black: var(--color-black);
+  --color-eva-gray: var(--color-gray);
+  --color-eva-red: var(--color-red);
+  --color-eva-amber: var(--color-amber);
+  --font-sans: var(--font-display);
+  --font-mono: var(--font-mono);
 }
 
 body {
-  @apply bg-zinc-950 text-zinc-50;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-mono), 'Space Mono', monospace;
 }
 
-@keyframes pulse-ring {
-  0% { transform: scale(0.8); opacity: 0; }
-  50% { opacity: 0.15; }
-  100% { transform: scale(2.4); opacity: 0; }
+.font-display {
+  font-family: var(--font-display), 'Young Serif', serif;
+}
+.font-mono {
+  font-family: var(--font-mono), 'Space Mono', monospace;
 }
 
-@keyframes fade-in-up {
-  from { opacity: 0; transform: translateY(8px); }
+::selection {
+  background: var(--color-orange);
+  color: var(--color-white);
+}
+::-moz-selection {
+  background: var(--color-orange);
+  color: var(--color-white);
+}
+
+/* Scrollbar — 1.4x scale */
+::-webkit-scrollbar { width: 11px; height: 11px; }
+::-webkit-scrollbar-track { background: var(--color-gray); }
+::-webkit-scrollbar-thumb { background: rgba(10,10,10,0.2); }
+::-webkit-scrollbar-thumb:hover { background: rgba(10,10,10,0.3); }
+
+/* Corner markers — Orange top, Green bottom */
+.corner-markers { position: relative; }
+.corner-marker { position: absolute; pointer-events: none; }
+.corner-marker-sm { width: 20px; height: 20px; }
+.corner-marker-sm.top-left { top: 12px; left: 12px; border-top: 2px solid var(--color-orange); border-left: 2px solid var(--color-orange); }
+.corner-marker-sm.top-right { top: 12px; right: 12px; border-top: 2px solid var(--color-orange); border-right: 2px solid var(--color-orange); }
+.corner-marker-sm.bottom-left { bottom: 12px; left: 12px; border-bottom: 2px solid var(--color-green); border-left: 2px solid var(--color-green); }
+.corner-marker-sm.bottom-right { bottom: 12px; right: 12px; border-bottom: 2px solid var(--color-green); border-right: 2px solid var(--color-green); }
+
+/* Warning stripes — 1.4x scale diagonal divider */
+.warning-stripes {
+  height: 7px;
+  background: repeating-linear-gradient(-45deg, var(--color-orange), var(--color-orange) 11px, var(--color-white) 11px, var(--color-white) 22px);
+}
+
+/* Background grid — subtle green overlay */
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(67, 193, 101, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(67, 193, 101, 0.04) 1px, transparent 1px);
+  background-size: 70px 70px;
+}
+
+/* Typography — Space Mono functional labels */
+.text-label {
+  font-family: var(--font-mono), 'Space Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: rgba(10,10,10,0.4);
+}
+.text-micro {
+  font-family: var(--font-mono), 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* Text opacity scale */
+.text-primary-100 { color: rgba(10,10,10,1); }
+.text-primary-70  { color: rgba(10,10,10,0.7); }
+.text-primary-50  { color: rgba(10,10,10,0.5); }
+.text-primary-40  { color: rgba(10,10,10,0.4); }
+.text-primary-35  { color: rgba(10,10,10,0.35); }
+
+/* Card — sharp corners, no border-radius */
+.card-hst {
+  background-color: var(--color-white);
+  border: 2px solid rgba(10,10,10,0.08);
+  transition: border-color 0.15s ease;
+}
+.card-hst:hover { border-color: rgba(10,10,10,0.15); }
+.card-hst-orange:hover { border-color: var(--color-orange); }
+.card-hst-green:hover { border-color: var(--color-green); }
+
+/* Selected indicator */
+.selected-indicator { border-left: 3px solid var(--color-orange); }
+
+/* Logo mark */
+.logo-mark {
+  width: 40px; height: 40px;
+  border: 2px solid var(--color-orange);
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+}
+.logo-mark-inner {
+  position: absolute; inset: 4px;
+  border: 1.5px solid var(--color-green);
+}
+.logo-mark-letter {
+  font-family: var(--font-display), 'Young Serif', serif;
+  font-size: 22px;
+  color: var(--color-black);
+  position: relative; z-index: 1;
+}
+
+/* Progress bar — sharp */
+.progress-bar {
+  height: 4px;
+  background: rgba(10,10,10,0.06);
+  overflow: hidden;
+}
+.progress-bar-fill {
+  height: 100%;
+  background: var(--color-green);
+  transition: width 0.3s ease;
+}
+
+/* ==========================================================================
+   ANIMATIONS & KEYFRAMES
+   ========================================================================== */
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(14px); }
   to { opacity: 1; transform: translateY(0); }
 }
+.animate-fade-in { animation: fade-in 0.5s ease-out forwards; }
+
+@keyframes pulse-border {
+  0%, 100% { border-color: var(--color-orange); }
+  50% { border-color: var(--color-green); }
+}
+.animate-pulse-border { animation: pulse-border 2s ease-in-out infinite; }
+
+@keyframes shimmer {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+.animate-shimmer { animation: shimmer 2s ease-in-out infinite; }
+
+@keyframes loading-bar {
+  0%, 100% { transform: scaleY(0.4); opacity: 0.4; }
+  50% { transform: scaleY(1); opacity: 1; }
+}
+.animate-loading-bar { animation: loading-bar 1s ease-in-out infinite; }
+
+@keyframes scan {
+  0%, 100% { transform: translateY(-50px); opacity: 0; }
+  10% { opacity: 0.6; }
+  50% { transform: translateY(50px); opacity: 0.6; }
+  90% { opacity: 0.6; }
+}
+.animate-scan { animation: scan 2s ease-in-out infinite; }
+
+@keyframes shimmer-gradient {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+.animate-shimmer-gradient { animation: shimmer-gradient 1.5s linear infinite; }
+
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }

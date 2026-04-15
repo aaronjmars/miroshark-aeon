@@ -33,6 +33,7 @@ Options:
   --list              List available skills in the repo
   --all               Install all skills from the repo
   --branch <branch>   Use a specific branch (default: main)
+  --force             Install even if security scan finds issues
   --help              Show this help
 
 Examples:
@@ -63,6 +64,7 @@ while [[ $# -gt 0 ]]; do
     --list) LIST_ONLY=true; shift ;;
     --all) INSTALL_ALL=true; shift ;;
     --branch) BRANCH="$2"; shift 2 ;;
+    --force) SKILL_NAMES+=("--force"); shift ;;
     --help|-h) usage ;;
     -*) echo "Unknown option: $1" >&2; exit 1 ;;
     *) SKILL_NAMES+=("$1"); shift ;;
@@ -150,18 +152,72 @@ if [[ ${#SKILL_NAMES[@]} -eq 0 ]]; then
   exit 1
 fi
 
+# Security scanning
+SCANNER="$(cd "$(dirname "$0")" && pwd)/skills/skill-security-scan/scan.sh"
+TRUSTED_FILE="$(cd "$(dirname "$0")" && pwd)/skills/security/trusted-sources.txt"
+FORCE_INSTALL=false
+
+# Check for --force flag (already parsed, but check env)
+for arg in "${SKILL_NAMES[@]}"; do
+  if [[ "$arg" == "--force" ]]; then
+    FORCE_INSTALL=true
+  fi
+done
+
+# Check if source repo is trusted
+is_trusted() {
+  local repo="$1"
+  local owner="${repo%%/*}"
+  if [[ -f "$TRUSTED_FILE" ]]; then
+    while IFS= read -r line; do
+      line="${line%%#*}"
+      line="${line// /}"
+      [[ -z "$line" ]] && continue
+      if [[ "$line" == "$repo" ]] || [[ "$line" == "$owner" ]]; then
+        return 0
+      fi
+    done < "$TRUSTED_FILE"
+  fi
+  return 1
+}
+
+TRUSTED_SOURCE=false
+if is_trusted "$REPO"; then
+  TRUSTED_SOURCE=true
+  echo "Source $REPO is trusted — skipping deep security scan."
+fi
+
 # Install each skill
 INSTALLED=0
 SKIPPED=0
 FAILED=0
 
 for skill in "${SKILL_NAMES[@]}"; do
+  [[ "$skill" == "--force" ]] && continue
+
   src="$REPO_DIR/$skill"
 
   if [[ ! -d "$src" ]] || [[ ! -f "$src/SKILL.md" ]]; then
     echo "  skip: '$skill' not found in repo"
     FAILED=$((FAILED + 1))
     continue
+  fi
+
+  # Run security scan on untrusted sources
+  if [[ "$TRUSTED_SOURCE" == "false" ]] && [[ -x "$SCANNER" ]]; then
+    echo "  scanning: $skill ..."
+    if ! "$SCANNER" "$src/SKILL.md" 2>/dev/null; then
+      if [[ "$FORCE_INSTALL" == "true" ]]; then
+        echo "  ⚠ SECURITY ISSUES DETECTED — installing anyway (--force)"
+        echo "  $(date -u '+%Y-%m-%dT%H:%M:%SZ') FORCE_INSTALL: $skill from $REPO" >> "$(cd "$(dirname "$0")" && pwd)/memory/logs/security.log"
+      else
+        echo "  ✗ BLOCKED: $skill has security issues. Use --force to override."
+        FAILED=$((FAILED + 1))
+        continue
+      fi
+    else
+      echo "  ✓ security scan passed"
+    fi
   fi
 
   dest="$SKILLS_DIR/$skill"
@@ -175,6 +231,33 @@ for skill in "${SKILL_NAMES[@]}"; do
 
   cp -r "$src" "$dest"
   INSTALLED=$((INSTALLED + 1))
+
+  # Record provenance in skills.lock
+  LOCK_FILE="$(cd "$(dirname "$0")" && pwd)/skills.lock"
+  SKILL_REMOTE_PATH="skills/$skill/SKILL.md"
+  COMMIT_SHA=$(gh api "repos/$REPO/commits" -f path="$SKILL_REMOTE_PATH" --jq '.[0].sha' 2>/dev/null || echo "unknown")
+  IMPORTED_AT=$(date -u '+%Y-%m-%dT%H:%M:%SZ')
+
+  # Initialize lock file if missing or empty
+  if [[ ! -f "$LOCK_FILE" ]] || [[ ! -s "$LOCK_FILE" ]]; then
+    echo "[]" > "$LOCK_FILE"
+  fi
+
+  # Build new entry and upsert into lock file (replace existing entry for this skill)
+  NEW_ENTRY=$(jq -n \
+    --arg name "$skill" \
+    --arg repo "$REPO" \
+    --arg path "$SKILL_REMOTE_PATH" \
+    --arg branch "$BRANCH" \
+    --arg sha "$COMMIT_SHA" \
+    --arg at "$IMPORTED_AT" \
+    '{skill_name: $name, source_repo: $repo, source_path: $path, branch: $branch, commit_sha: $sha, imported_at: $at}')
+
+  jq --argjson entry "$NEW_ENTRY" \
+    '[.[] | select(.skill_name != $entry.skill_name)] + [$entry]' \
+    "$LOCK_FILE" > "${LOCK_FILE}.tmp" && mv "${LOCK_FILE}.tmp" "$LOCK_FILE"
+
+  echo "    -> provenance recorded in skills.lock (sha: ${COMMIT_SHA:0:7})"
 
   # Add to aeon.yml if not already present
   if ! grep -q "^  $skill:" "$AEON_YML" 2>/dev/null; then

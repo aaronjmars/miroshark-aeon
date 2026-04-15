@@ -4,6 +4,7 @@ import { execSync } from 'child_process'
 const BUILTIN_SECRETS = [
   { name: 'CLAUDE_CODE_OAUTH_TOKEN', group: 'Core', description: 'Claude Code OAuth token (set via Authenticate button)', either: 'auth' },
   { name: 'ANTHROPIC_API_KEY', group: 'Core', description: 'Anthropic API key for Claude Code', either: 'auth' },
+  { name: 'BANKR_LLM_KEY', group: 'Core', description: 'Bankr Gateway API key (bk_...) — enable at bankr.bot/api' },
   { name: 'TELEGRAM_BOT_TOKEN', group: 'Telegram', description: 'Bot token from @BotFather' },
   { name: 'TELEGRAM_CHAT_ID', group: 'Telegram', description: 'Your chat ID' },
   { name: 'DISCORD_BOT_TOKEN', group: 'Discord', description: 'Discord bot token' },
@@ -12,6 +13,8 @@ const BUILTIN_SECRETS = [
   { name: 'SLACK_BOT_TOKEN', group: 'Slack', description: 'Slack bot OAuth token' },
   { name: 'SLACK_CHANNEL_ID', group: 'Slack', description: 'Channel ID for messages' },
   { name: 'SLACK_WEBHOOK_URL', group: 'Slack', description: 'Webhook URL for notifications' },
+  { name: 'SENDGRID_API_KEY', group: 'Email', description: 'SendGrid API key — create at sendgrid.com/settings/api_keys' },
+  { name: 'NOTIFY_EMAIL_TO', group: 'Email', description: 'Recipient email address for skill notifications' },
   { name: 'XAI_API_KEY', group: 'Skill Keys', description: 'xAI/Grok API key (for tweet skills)' },
   { name: 'COINGECKO_API_KEY', group: 'Skill Keys', description: 'CoinGecko API key (for crypto skills)' },
   { name: 'ALCHEMY_API_KEY', group: 'Skill Keys', description: 'Alchemy API key (for on-chain skills)' },

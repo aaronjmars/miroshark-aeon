@@ -7,6 +7,7 @@ import {
   updateFile,
   getDirectory,
 } from '@/lib/github'
+import { addSkillToConfig } from '@/lib/config'
 
 function extractDescription(content: string): string {
   const fm = content.match(/^---\s*\n([\s\S]*?)\n---/)
@@ -90,30 +91,12 @@ export async function POST(request: Request) {
         // Add to aeon.yml
         try {
           const config = await getFileContent('aeon.yml')
-          if (!config.content.includes(`  ${name}:`)) {
-            const updated = config.content.replace(
-              '  # --- Fallback',
-              `  ${name}:\n    enabled: false\n    schedule: "0 12 * * *"\n\n  # --- Fallback`,
-            )
+          const updated = addSkillToConfig(config.content, name)
+          if (updated !== config.content) {
             await updateFile('aeon.yml', updated, config.sha, `chore: add ${name} to config`)
           }
         } catch {
           // Config update failed — skill file was still created
-        }
-
-        // Add to workflow dispatch choices
-        try {
-          const wf = await getFileContent('.github/workflows/aeon.yml')
-          if (!wf.content.includes(`          - ${name}`)) {
-            const marker = '      model:'
-            const idx = wf.content.indexOf(marker)
-            if (idx > -1) {
-              const updated = wf.content.slice(0, idx) + `          - ${name}\n` + wf.content.slice(idx)
-              await updateFile('.github/workflows/aeon.yml', updated, wf.sha, `chore: add ${name} to workflow choices`)
-            }
-          }
-        } catch {
-          // Non-critical
         }
 
         installed.push(name)

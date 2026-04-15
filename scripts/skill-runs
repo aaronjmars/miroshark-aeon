@@ -1,0 +1,170 @@
+#!/usr/bin/env bash
+# skill-runs — audit recent GitHub Actions skill runs
+#
+# Usage:
+#   ./scripts/skill-runs              # last 24h, brief summary
+#   ./scripts/skill-runs --hours 48   # last 48h
+#   ./scripts/skill-runs --full       # detailed per-skill breakdown
+#   ./scripts/skill-runs --json       # machine-readable JSON output
+#   ./scripts/skill-runs --failures   # only show failed runs
+#
+# Output: skill run statistics — counts, pass/fail rates, duplicates, anomalies.
+# Used by: heartbeat, skill-health, cost-report, weekly-review, self-review.
+# Dependencies: gh (GitHub CLI), jq, date
+
+set -euo pipefail
+
+HOURS=24
+FORMAT="brief"
+FAILURES_ONLY=false
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --hours) HOURS="$2"; shift 2 ;;
+    --full) FORMAT="full"; shift ;;
+    --json) FORMAT="json"; shift ;;
+    --failures) FAILURES_ONLY=true; shift ;;
+    -h|--help)
+      sed -n '2,8p' "$0" | sed 's/^# \?//'
+      exit 0
+      ;;
+    *) echo "Unknown arg: $1"; exit 1 ;;
+  esac
+done
+
+# Calculate date cutoff
+if date -u -d "now" +%Y 2>/dev/null | grep -q '^20'; then
+  # GNU date
+  SINCE=$(date -u -d "${HOURS} hours ago" +%Y-%m-%dT%H:%M:%SZ)
+  SINCE_DATE=$(date -u -d "${HOURS} hours ago" +%Y-%m-%d)
+else
+  # BSD date
+  SINCE=$(date -u -v-${HOURS}H +%Y-%m-%dT%H:%M:%SZ)
+  SINCE_DATE=$(date -u -v-${HOURS}H +%Y-%m-%d)
+fi
+
+NOW=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+
+# Fetch all runs since cutoff (paginated, max 300)
+RUNS=$(gh api "repos/{owner}/{repo}/actions/runs?created=>=${SINCE_DATE}&per_page=100" --paginate \
+  -q "[.workflow_runs[] | select(.created_at >= \"${SINCE}\") | select(.name | startswith(\"skill:\"))] | .[]" 2>/dev/null) || {
+  echo "ERROR: gh api failed — check auth" >&2
+  exit 1
+}
+
+if [ -z "$RUNS" ]; then
+  echo "No skill runs found in the last ${HOURS}h"
+  exit 0
+fi
+
+# Parse into a compact JSON array
+DATA=$(echo "$RUNS" | jq -s '[.[] | {
+  skill: (.name | ltrimstr("skill: ")),
+  status: .status,
+  conclusion: (.conclusion // "pending"),
+  created: .created_at,
+  updated: .updated_at,
+  started: .run_started_at,
+  id: .id,
+  attempt: .run_attempt
+}]')
+
+TOTAL=$(echo "$DATA" | jq 'length')
+COMPLETED=$(echo "$DATA" | jq '[.[] | select(.status == "completed")] | length')
+IN_PROGRESS=$(echo "$DATA" | jq '[.[] | select(.status == "in_progress")] | length')
+SUCCEEDED=$(echo "$DATA" | jq '[.[] | select(.conclusion == "success")] | length')
+FAILED=$(echo "$DATA" | jq '[.[] | select(.conclusion == "failure")] | length')
+CANCELLED=$(echo "$DATA" | jq '[.[] | select(.conclusion == "cancelled")] | length')
+
+# Per-skill breakdown
+SKILL_STATS=$(echo "$DATA" | jq '
+  group_by(.skill) | map({
+    skill: .[0].skill,
+    total: length,
+    success: [.[] | select(.conclusion == "success")] | length,
+    failure: [.[] | select(.conclusion == "failure")] | length,
+    cancelled: [.[] | select(.conclusion == "cancelled")] | length,
+    in_progress: [.[] | select(.status == "in_progress")] | length,
+    last_run: (sort_by(.created) | last | .created),
+    last_conclusion: (sort_by(.created) | last | .conclusion)
+  }) | sort_by(.skill)')
+
+# Detect anomalies
+DUPLICATES=$(echo "$SKILL_STATS" | jq '[.[] | select(.total > 2)] | sort_by(-.total)')
+FAILING=$(echo "$SKILL_STATS" | jq '[.[] | select(.failure > 0 and (.failure / .total > 0.5))]')
+ALL_FAIL=$(echo "$SKILL_STATS" | jq '[.[] | select(.total == .failure)]')
+
+# JSON output
+if [ "$FORMAT" = "json" ]; then
+  jq -n \
+    --arg since "$SINCE" \
+    --arg now "$NOW" \
+    --argjson hours "$HOURS" \
+    --argjson total "$TOTAL" \
+    --argjson succeeded "$SUCCEEDED" \
+    --argjson failed "$FAILED" \
+    --argjson cancelled "$CANCELLED" \
+    --argjson in_progress "$IN_PROGRESS" \
+    --argjson skills "$SKILL_STATS" \
+    --argjson duplicates "$DUPLICATES" \
+    --argjson failing "$FAILING" \
+    '{
+      period: {since: $since, until: $now, hours: $hours},
+      summary: {total: $total, succeeded: $succeeded, failed: $failed, cancelled: $cancelled, in_progress: $in_progress},
+      skills: $skills,
+      anomalies: {duplicates: $duplicates, failing: $failing}
+    }'
+  exit 0
+fi
+
+# Failures-only filter
+if [ "$FAILURES_ONLY" = "true" ]; then
+  FAIL_RUNS=$(echo "$DATA" | jq '[.[] | select(.conclusion == "failure")]')
+  FAIL_COUNT=$(echo "$FAIL_RUNS" | jq 'length')
+  if [ "$FAIL_COUNT" = "0" ]; then
+    echo "No failures in the last ${HOURS}h"
+    exit 0
+  fi
+  echo "=== Failures (last ${HOURS}h) ==="
+  echo "$FAIL_RUNS" | jq -r '.[] | "  \(.skill) — \(.created) (run \(.id))"'
+  exit 0
+fi
+
+# Brief output
+echo "=== Skill Runs (last ${HOURS}h) ==="
+echo "Total: ${TOTAL} | OK: ${SUCCEEDED} | Fail: ${FAILED} | Running: ${IN_PROGRESS} | Cancelled: ${CANCELLED}"
+echo ""
+
+if [ "$FORMAT" = "full" ]; then
+  echo "--- Per-skill breakdown ---"
+  echo "$SKILL_STATS" | jq -r '.[] |
+    "\(.skill): \(.total) runs (\(.success) ok, \(.failure) fail, \(.in_progress) running) — last: \(.last_run | split("T") | .[1] | split("Z") | .[0]) UTC [\(.last_conclusion)]"'
+  echo ""
+fi
+
+# Always show anomalies
+DUP_COUNT=$(echo "$DUPLICATES" | jq 'length')
+FAIL_SKILL_COUNT=$(echo "$ALL_FAIL" | jq 'length')
+FAILING_COUNT=$(echo "$FAILING" | jq 'length')
+
+if [ "$DUP_COUNT" -gt 0 ] || [ "$FAILING_COUNT" -gt 0 ]; then
+  echo "--- Anomalies ---"
+  if [ "$DUP_COUNT" -gt 0 ]; then
+    echo "Duplicate runs (>2x in ${HOURS}h):"
+    echo "$DUPLICATES" | jq -r '.[] | "  \(.skill): \(.total) runs"'
+  fi
+  if [ "$FAIL_SKILL_COUNT" -gt 0 ]; then
+    echo "Always failing:"
+    echo "$ALL_FAIL" | jq -r '.[] | "  \(.skill): \(.failure)/\(.total) failed"'
+  elif [ "$FAILING_COUNT" -gt 0 ]; then
+    echo "Mostly failing (>50%):"
+    echo "$FAILING" | jq -r '.[] | "  \(.skill): \(.failure)/\(.total) failed"'
+  fi
+fi
+
+# Success rate
+if [ "$COMPLETED" -gt 0 ]; then
+  RATE=$(echo "scale=0; $SUCCEEDED * 100 / $COMPLETED" | bc)
+  echo ""
+  echo "Success rate: ${RATE}% (${SUCCEEDED}/${COMPLETED} completed)"
+fi

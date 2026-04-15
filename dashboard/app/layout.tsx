@@ -1,11 +1,22 @@
 import type { Metadata } from 'next'
-import { GeistSans } from 'geist/font/sans'
-import { GeistMono } from 'geist/font/mono'
+import { Young_Serif, Space_Mono } from 'next/font/google'
 import './globals.css'
 
+const youngSerif = Young_Serif({
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--font-display',
+})
+
+const spaceMono = Space_Mono({
+  weight: ['400', '700'],
+  subsets: ['latin'],
+  variable: '--font-mono',
+})
+
 export const metadata: Metadata = {
-  title: 'AEON DASHBOARD',
-  description: 'Manage your Aeon agent skills',
+  title: 'AEON HQ',
+  description: 'Agent operations headquarters',
   icons: {
     icon: [
       { url: '/favicon.ico' },
@@ -19,8 +30,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
-      <body className="font-sans antialiased">{children}</body>
+    <html lang="en">
+      <body className={`${youngSerif.variable} ${spaceMono.variable} antialiased`}>
+        {children}
+      </body>
     </html>
   )
 }

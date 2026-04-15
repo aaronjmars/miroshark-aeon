@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { createFile, getFileContent, updateFile } from '@/lib/github'
+import { addSkillToConfig } from '@/lib/config'
 
 function detectSecretsFromContent(content: string): string[] {
   const matches = new Set<string>()
@@ -142,11 +143,8 @@ export async function POST(request: Request) {
     // Add to aeon.yml if not already present
     try {
       const config = await getFileContent('aeon.yml')
-      if (!config.content.includes(`  ${skillName}:`)) {
-        const updated = config.content.replace(
-          '  # --- Fallback',
-          `  ${skillName}:\n    enabled: false\n    schedule: "0 12 * * *"\n\n  # --- Fallback`,
-        )
+      const updated = addSkillToConfig(config.content, skillName)
+      if (updated !== config.content) {
         await updateFile('aeon.yml', updated, config.sha, `chore: add ${skillName} to config`)
       }
     } catch {

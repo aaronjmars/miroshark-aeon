@@ -1,6 +1,4 @@
 .env
 .claude/
 .DS_Store
-fetch_grok.mjs
-fetch_tweets.sh
-grok_payload.json
+skills.lock
