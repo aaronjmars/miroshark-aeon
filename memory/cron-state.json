@@ -1,7 +1,13 @@
 {
   "heartbeat": {
     "last_dispatch": "2026-04-15T19:07:29Z",
-    "last_status": "dispatched"
+    "last_status": "success",
+    "last_success": "2026-04-15T19:10:09Z",
+    "total_runs": 1,
+    "total_successes": 1,
+    "total_failures": 0,
+    "consecutive_failures": 0,
+    "success_rate": 1
   },
   "memory-flush": {
     "last_dispatch": "2026-04-15T19:07:29Z",
