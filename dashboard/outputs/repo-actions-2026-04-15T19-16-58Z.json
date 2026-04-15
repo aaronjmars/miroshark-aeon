@@ -1,0 +1,368 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Repo Action Ideas"
+      },
+      "children": [
+        "meta_section",
+        "sep_1",
+        "ideas_stack",
+        "sep_2",
+        "footer"
+      ]
+    },
+    "meta_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "date_text",
+        "context_text",
+        "repo_info"
+      ]
+    },
+    "date_text": {
+      "type": "Text",
+      "props": {
+        "text": "Generated 2026-04-15",
+        "variant": "muted"
+      }
+    },
+    "context_text": {
+      "type": "Text",
+      "props": {
+        "text": "Fresh ideas for autonomous feature build:",
+        "variant": "body"
+      }
+    },
+    "repo_info": {
+      "type": "Text",
+      "props": {
+        "text": "aaronjmars/MiroShark — 692 stars, 0 open PRs",
+        "variant": "caption"
+      }
+    },
+    "sep_1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "ideas_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "lg"
+      },
+      "children": [
+        "idea_1",
+        "idea_1_sep",
+        "idea_2",
+        "idea_2_sep",
+        "idea_3",
+        "idea_3_sep",
+        "idea_4",
+        "idea_4_sep",
+        "idea_5"
+      ]
+    },
+    "idea_1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "idea_1_title",
+        "idea_1_badges",
+        "idea_1_desc"
+      ]
+    },
+    "idea_1_title": {
+      "type": "Heading",
+      "props": {
+        "text": "1. Mid-Simulation Event Injection — Director Mode",
+        "level": "h3"
+      }
+    },
+    "idea_1_badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "idea_1_badge_type",
+        "idea_1_badge_complexity"
+      ]
+    },
+    "idea_1_badge_type": {
+      "type": "Badge",
+      "props": {
+        "text": "Feature",
+        "variant": "secondary"
+      }
+    },
+    "idea_1_badge_complexity": {
+      "type": "Badge",
+      "props": {
+        "text": "Medium",
+        "variant": "outline"
+      }
+    },
+    "idea_1_desc": {
+      "type": "Text",
+      "props": {
+        "text": "Inject a breaking event mid-run; agents incorporate it next round. Unlocks exogenous shock modeling and makes MiroShark's experimental design credible for research.",
+        "variant": "body"
+      }
+    },
+    "idea_1_sep": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "idea_2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "idea_2_title",
+        "idea_2_badges",
+        "idea_2_desc"
+      ]
+    },
+    "idea_2_title": {
+      "type": "Heading",
+      "props": {
+        "text": "2. HuggingFace Inference API as LLM Provider",
+        "level": "h3"
+      }
+    },
+    "idea_2_badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "idea_2_badge_type",
+        "idea_2_badge_complexity"
+      ]
+    },
+    "idea_2_badge_type": {
+      "type": "Badge",
+      "props": {
+        "text": "Integration",
+        "variant": "secondary"
+      }
+    },
+    "idea_2_badge_complexity": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "outline"
+      }
+    },
+    "idea_2_desc": {
+      "type": "Text",
+      "props": {
+        "text": "Add HuggingFace as a 4th provider option in the existing LLM selector — Llama 3.3 70B, Mistral, Qwen at ~10x lower cost than GPT-4o. Removes API spend as the adoption barrier for academic users.",
+        "variant": "body"
+      }
+    },
+    "idea_2_sep": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "idea_3": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "idea_3_title",
+        "idea_3_badges",
+        "idea_3_desc"
+      ]
+    },
+    "idea_3_title": {
+      "type": "Heading",
+      "props": {
+        "text": "3. Simulation Checkpoint & Resume",
+        "level": "h3"
+      }
+    },
+    "idea_3_badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "idea_3_badge_type",
+        "idea_3_badge_complexity"
+      ]
+    },
+    "idea_3_badge_type": {
+      "type": "Badge",
+      "props": {
+        "text": "DX",
+        "variant": "secondary"
+      }
+    },
+    "idea_3_badge_complexity": {
+      "type": "Badge",
+      "props": {
+        "text": "Medium",
+        "variant": "outline"
+      }
+    },
+    "idea_3_desc": {
+      "type": "Text",
+      "props": {
+        "text": "Write a checkpoint JSON after each round; resume from round N+1 after crashes or container restarts. Prevents losing 8–15 min of API spend on interrupted cloud simulations.",
+        "variant": "body"
+      }
+    },
+    "idea_3_sep": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "idea_4": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "idea_4_title",
+        "idea_4_badges",
+        "idea_4_desc"
+      ]
+    },
+    "idea_4_title": {
+      "type": "Heading",
+      "props": {
+        "text": "4. Agent Demographic Breakdown Panel",
+        "level": "h3"
+      }
+    },
+    "idea_4_badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "idea_4_badge_type",
+        "idea_4_badge_complexity"
+      ]
+    },
+    "idea_4_badge_type": {
+      "type": "Badge",
+      "props": {
+        "text": "Feature",
+        "variant": "secondary"
+      }
+    },
+    "idea_4_badge_complexity": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "outline"
+      }
+    },
+    "idea_4_desc": {
+      "type": "Text",
+      "props": {
+        "text": "Cross-tab agent stance vs. demographics (age, region, platform, archetype type). Data already exists in persona JSON — no new collection. Adds a publishable subgroup figure to every simulation result.",
+        "variant": "body"
+      }
+    },
+    "idea_4_sep": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "idea_5": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "idea_5_title",
+        "idea_5_badges",
+        "idea_5_desc"
+      ]
+    },
+    "idea_5_title": {
+      "type": "Heading",
+      "props": {
+        "text": "5. RSS/Atom Feed for Completed Simulations",
+        "level": "h3"
+      }
+    },
+    "idea_5_badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "idea_5_badge_type",
+        "idea_5_badge_complexity"
+      ]
+    },
+    "idea_5_badge_type": {
+      "type": "Badge",
+      "props": {
+        "text": "Integration/Growth",
+        "variant": "secondary"
+      }
+    },
+    "idea_5_badge_complexity": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "outline"
+      }
+    },
+    "idea_5_desc": {
+      "type": "Text",
+      "props": {
+        "text": "/feed.xml publishes completed simulations for Feedly, n8n, Slack RSS, and Zapier. Universal no-auth integration layer; teams subscribe and get notified without opening a browser tab.",
+        "variant": "body"
+      }
+    },
+    "sep_2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "footer": {
+      "type": "Link",
+      "props": {
+        "label": "Full details",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-actions-2026-04-15.md"
+      }
+    }
+  }
+}
