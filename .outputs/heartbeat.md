@@ -1,2 +1,8 @@
-Heartbeat — Apr 15: 2 skills dispatched. Missing: repo-actions (14:00 UTC, no run found) → dispatched. project-lens (16:00 UTC, no run found) → dispatched. Skipped auto-trigger: self-improve (meta skill). All other daily skills confirmed: token-report ✓ fetch-tweets ✓ repo-pulse ✓ feature ✓ push-recap ✓ memory-flush (in_progress). No stalled PRs, no urgent issues.
-Heartbeat (Apr 15): push-recap failed at 15:00 UTC — 401 auth error (transient). Auto-triggered retry: https://github.com/aaronjmars/miroshark-aeon/actions/runs/24473282769. All other daily skills confirmed: token-report ✓, fetch-tweets ✓, repo-pulse ✓, feature ✓. In-progress: project-lens, memory-flush (auto-triggered by prior heartbeat run). No open PRs. No urgent issues.
+## Summary
+
+- Read `memory/MEMORY.md` and last 2 days of logs for context
+- Audited all enabled scheduled skills against today's GH Actions runs (Wed Apr 15, DOM=15, DOW=3)
+- **All 8 schedulable skills ran successfully** — token-report, fetch-tweets, repo-pulse, feature, repo-actions, push-recap (failed/retried), project-lens, memory-flush
+- `self-improve` (only gap) is a meta skill excluded from auto-trigger; already flagged in two prior heartbeats today — no duplicate notification sent
+- 0 open PRs, 0 urgent issues on either repo
+- **HEARTBEAT_OK** — logged to `memory/logs/2026-04-15.md`
