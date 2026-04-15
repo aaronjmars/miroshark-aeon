@@ -1,0 +1,96 @@
+{
+  "root": "card-root",
+  "state": {},
+  "elements": {
+    "card-root": {
+      "type": "Card",
+      "props": {
+        "title": "Project Lens"
+      },
+      "children": [
+        "stack-main"
+      ]
+    },
+    "stack-main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading-article",
+        "text-body",
+        "separator-1",
+        "stats-grid",
+        "separator-2",
+        "link-article"
+      ]
+    },
+    "heading-article": {
+      "type": "Heading",
+      "props": {
+        "text": "Everyone Is Building AI Agents That Act. The Smarter Bet Might Be Agents That Don't.",
+        "level": "h2"
+      },
+      "children": []
+    },
+    "text-body": {
+      "type": "Text",
+      "props": {
+        "text": "The agentic AI market is racing toward $139B by building agents that execute tasks autonomously. But cascading failure research, LLM scheming incidents, and calls from Bengio and Russell to ban long-term planning agents suggest the industry may be solving the wrong problem first. MiroShark — 692 stars in 25 days — represents a different thesis: agents that simulate rather than act, with prediction tracking, trace interviews, and belief drift charts that make simulated reasoning auditable.",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "separator-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "stats-grid": {
+      "type": "Grid",
+      "props": {
+        "columns": 2,
+        "gap": "md"
+      },
+      "children": [
+        "stat-market",
+        "stat-miroshark"
+      ]
+    },
+    "stat-market": {
+      "type": "Stat",
+      "props": {
+        "label": "Agentic AI Market",
+        "value": "$139B"
+      },
+      "children": []
+    },
+    "stat-miroshark": {
+      "type": "Stat",
+      "props": {
+        "label": "MiroShark Stars",
+        "value": "692 in 25 days"
+      },
+      "children": []
+    },
+    "separator-2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "link-article": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Read Full Article",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-04-15.md",
+        "source": "GitHub"
+      },
+      "children": []
+    }
+  }
+}
