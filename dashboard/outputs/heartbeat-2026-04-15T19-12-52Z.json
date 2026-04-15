@@ -1,0 +1,196 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "Heartbeat (Apr 15)"
+      },
+      "children": [
+        "main-stack"
+      ]
+    },
+    "main-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "failed-alert",
+        "sep1",
+        "retry-info",
+        "sep2",
+        "daily-skills-section",
+        "sep3",
+        "progress-section",
+        "sep4",
+        "summary-section"
+      ]
+    },
+    "failed-alert": {
+      "type": "Alert",
+      "props": {
+        "title": "push-recap failed",
+        "message": "401 auth error (transient) at 15:00 UTC",
+        "type": "warning"
+      }
+    },
+    "sep1": {
+      "type": "Separator"
+    },
+    "retry-info": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "retry-text",
+        "retry-link"
+      ]
+    },
+    "retry-text": {
+      "type": "Text",
+      "props": {
+        "text": "Auto-triggered retry:"
+      }
+    },
+    "retry-link": {
+      "type": "Link",
+      "props": {
+        "label": "Run #24473282769",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/actions/runs/24473282769"
+      }
+    },
+    "sep2": {
+      "type": "Separator"
+    },
+    "daily-skills-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "daily-heading",
+        "skills-list"
+      ]
+    },
+    "daily-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Daily Skills",
+        "level": "h3"
+      }
+    },
+    "skills-list": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "skill-token",
+        "skill-tweets",
+        "skill-pulse",
+        "skill-feature"
+      ]
+    },
+    "skill-token": {
+      "type": "Text",
+      "props": {
+        "text": "token-report ✓"
+      }
+    },
+    "skill-tweets": {
+      "type": "Text",
+      "props": {
+        "text": "fetch-tweets ✓"
+      }
+    },
+    "skill-pulse": {
+      "type": "Text",
+      "props": {
+        "text": "repo-pulse ✓"
+      }
+    },
+    "skill-feature": {
+      "type": "Text",
+      "props": {
+        "text": "feature ✓"
+      }
+    },
+    "sep3": {
+      "type": "Separator"
+    },
+    "progress-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "progress-heading",
+        "progress-items"
+      ]
+    },
+    "progress-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "In Progress",
+        "level": "h3"
+      }
+    },
+    "progress-items": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "progress-lens",
+        "progress-flush"
+      ]
+    },
+    "progress-lens": {
+      "type": "Text",
+      "props": {
+        "text": "project-lens"
+      }
+    },
+    "progress-flush": {
+      "type": "Text",
+      "props": {
+        "text": "memory-flush (auto-triggered by prior heartbeat run)"
+      }
+    },
+    "sep4": {
+      "type": "Separator"
+    },
+    "summary-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "summary-prs",
+        "summary-issues"
+      ]
+    },
+    "summary-prs": {
+      "type": "Text",
+      "props": {
+        "text": "No open PRs"
+      }
+    },
+    "summary-issues": {
+      "type": "Text",
+      "props": {
+        "text": "No urgent issues"
+      }
+    }
+  }
+}
