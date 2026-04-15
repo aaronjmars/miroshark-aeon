@@ -1,0 +1,205 @@
+{
+  "root": "card_root",
+  "state": {},
+  "elements": {
+    "card_root": {
+      "type": "Card",
+      "props": {
+        "title": "Heartbeat"
+      },
+      "children": [
+        "heading_date",
+        "text_summary",
+        "sep1",
+        "heading_dispatched",
+        "stack_dispatched",
+        "sep2",
+        "heading_skipped",
+        "text_skipped",
+        "sep3",
+        "heading_daily",
+        "grid_skills",
+        "sep4",
+        "heading_status",
+        "text_status"
+      ]
+    },
+    "heading_date": {
+      "type": "Heading",
+      "props": {
+        "text": "Apr 15",
+        "level": "h2"
+      },
+      "children": []
+    },
+    "text_summary": {
+      "type": "Text",
+      "props": {
+        "text": "2 skills dispatched"
+      },
+      "children": []
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "heading_dispatched": {
+      "type": "Heading",
+      "props": {
+        "text": "Dispatched",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "stack_dispatched": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "item_repo_actions",
+        "item_project_lens"
+      ]
+    },
+    "item_repo_actions": {
+      "type": "Text",
+      "props": {
+        "text": "repo-actions (14:00 UTC, no run found) → dispatched"
+      },
+      "children": []
+    },
+    "item_project_lens": {
+      "type": "Text",
+      "props": {
+        "text": "project-lens (16:00 UTC, no run found) → dispatched"
+      },
+      "children": []
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "heading_skipped": {
+      "type": "Heading",
+      "props": {
+        "text": "Skipped",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "text_skipped": {
+      "type": "Text",
+      "props": {
+        "text": "self-improve (meta skill)"
+      },
+      "children": []
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "heading_daily": {
+      "type": "Heading",
+      "props": {
+        "text": "Daily Skills",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "grid_skills": {
+      "type": "Grid",
+      "props": {
+        "columns": 3,
+        "gap": "md"
+      },
+      "children": [
+        "badge_token",
+        "badge_tweets",
+        "badge_pulse",
+        "badge_feature",
+        "badge_push",
+        "badge_memory"
+      ]
+    },
+    "badge_token": {
+      "type": "Badge",
+      "props": {
+        "text": "token-report ✓",
+        "variant": "default"
+      },
+      "children": []
+    },
+    "badge_tweets": {
+      "type": "Badge",
+      "props": {
+        "text": "fetch-tweets ✓",
+        "variant": "default"
+      },
+      "children": []
+    },
+    "badge_pulse": {
+      "type": "Badge",
+      "props": {
+        "text": "repo-pulse ✓",
+        "variant": "default"
+      },
+      "children": []
+    },
+    "badge_feature": {
+      "type": "Badge",
+      "props": {
+        "text": "feature ✓",
+        "variant": "default"
+      },
+      "children": []
+    },
+    "badge_push": {
+      "type": "Badge",
+      "props": {
+        "text": "push-recap ✓",
+        "variant": "default"
+      },
+      "children": []
+    },
+    "badge_memory": {
+      "type": "Badge",
+      "props": {
+        "text": "memory-flush (in_progress)",
+        "variant": "secondary"
+      },
+      "children": []
+    },
+    "sep4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "heading_status": {
+      "type": "Heading",
+      "props": {
+        "text": "Status",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "text_status": {
+      "type": "Text",
+      "props": {
+        "text": "No stalled PRs, no urgent issues"
+      },
+      "children": []
+    }
+  }
+}
