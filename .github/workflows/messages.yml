@@ -329,7 +329,7 @@ jobs:
               IN_REACTIVE=true
               continue
             fi
-            $IN_REACTIVE && [[ "$line" =~ ^[a-z] ]] && ! [[ "$line" =~ ^\ ]] && IN_REACTIVE=false
+            $IN_REACTIVE && [[ "$line" =~ ^[a-z] ]] && ! [[ "$line" =~ ^[[:space:]] ]] && IN_REACTIVE=false
             $IN_REACTIVE || continue
             [[ "$line" =~ ^\ *# ]] && continue
             if [[ "$line" =~ ^\ \ ([a-zA-Z0-9_-]+): ]]; then
