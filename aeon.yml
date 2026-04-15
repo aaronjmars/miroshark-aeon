@@ -28,7 +28,7 @@ skills:
   feature: { enabled: true, schedule: "0 11 * * *" }
 
   # === HOUSEKEEPING ===
-  heartbeat: { enabled: true, schedule: "20 19 * * *", model: "claude-sonnet-4-6" }  # TEMP: test scheduled dispatch at 19:20 UTC
+  heartbeat: { enabled: true, schedule: "0 19 * * *", model: "claude-sonnet-4-6" }
   memory-flush: { enabled: true, schedule: "0 18 * * 0,3", model: "claude-sonnet-4-6" }  # Sun + Wed
 
   # === DISABLED (available on demand) ===
