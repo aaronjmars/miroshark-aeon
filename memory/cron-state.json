@@ -75,5 +75,9 @@
     "total_failures": 0,
     "consecutive_failures": 0,
     "success_rate": 1
+  },
+  "feature": {
+    "last_dispatch": "2026-04-16T11:15:46Z",
+    "last_status": "dispatched"
   }
 }
