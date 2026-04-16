@@ -1,19 +1,19 @@
-*Repo Action Ideas — 2026-04-15*
-Generated from analysis of aaronjmars/MiroShark (692 stars, 0 open PRs). Fresh ideas for autonomous feature build:
+*Repo Action Ideas — 2026-04-16*
+Generated from analysis of aaronjmars/MiroShark (698 stars, 0 open PRs).
 
-1. Mid-Simulation Event Injection — Director Mode (Feature, Medium)
-   Inject a breaking event mid-run; agents incorporate it next round. Unlocks exogenous shock modeling and makes MiroShark's experimental design credible for research.
+1. Simulation Replay / Playback Mode (Feature, Small)
+   Timeline scrubber for completed simulations — step through trajectory data round-by-round with Play/Pause controls; no backend changes needed.
 
-2. HuggingFace Inference API as LLM Provider (Integration, Small)
-   Add HuggingFace as a 4th provider option in the existing LLM selector — Llama 3.3 70B, Mistral, Qwen at ~10x lower cost than GPT-4o. Removes API spend as the adoption barrier for academic users.
+2. Agent Interaction Network Graph (Feature, Medium)
+   D3.js force-directed graph of agent-to-agent interactions — hub detection, echo chamber scoring, bridge agents; new Network tab in results.
 
-3. Simulation Checkpoint & Resume (DX, Medium)
-   Write a checkpoint JSON after each round; resume from round N+1 after crashes or container restarts. Prevents losing 8–15 min of API spend on interrupted cloud simulations.
+3. Multi-Document Comparative Mode (Feature, Medium)
+   Run the same agent pool on two documents and auto-compare — the controlled experiment primitive for bull/bear analysis and before/after studies.
 
-4. Agent Demographic Breakdown Panel (Feature, Small)
-   Cross-tab agent stance vs. demographics (age, region, platform, archetype type). Data already exists in persona JSON — no new collection. Adds a publishable subgroup figure to every simulation result.
+4. Embeddable Simulation Widget (Integration, Small)
+   Generate iframe embed code from any share permalink — renders belief drift chart inline in Notion, Substack, READMEs; oEmbed autodiscovery included.
 
-5. RSS/Atom Feed for Completed Simulations (Integration/Growth, Small)
-   /feed.xml publishes completed simulations for Feedly, n8n, Slack RSS, and Zapier. Universal no-auth integration layer; teams subscribe and get notified without opening a browser tab.
+5. Simulation Quality Diagnostics (Feature, Small)
+   Health badge (Excellent/Good/Low) computed post-completion from participation rate, stance entropy, convergence speed, and cross-platform interaction rate.
 
-Full details: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-actions-2026-04-15.md
+Full details: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-actions-2026-04-16.md

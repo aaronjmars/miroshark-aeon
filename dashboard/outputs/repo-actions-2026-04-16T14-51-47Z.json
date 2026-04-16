@@ -1,0 +1,301 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "Repo Action Ideas",
+        "description": "aaronjmars/MiroShark (698 stars, 0 open PRs) — 2026-04-16"
+      },
+      "children": [
+        "stack-main"
+      ]
+    },
+    "stack-main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "feature-1",
+        "feature-2",
+        "feature-3",
+        "feature-4",
+        "feature-5",
+        "separator-1",
+        "link-details"
+      ]
+    },
+    "feature-1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "heading-1",
+        "badges-1",
+        "text-1"
+      ]
+    },
+    "heading-1": {
+      "type": "Heading",
+      "props": {
+        "text": "1. Simulation Replay / Playback Mode",
+        "level": "h3"
+      }
+    },
+    "badges-1": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "badge-1-type",
+        "badge-1-size"
+      ]
+    },
+    "badge-1-type": {
+      "type": "Badge",
+      "props": {
+        "text": "Feature",
+        "variant": "default"
+      }
+    },
+    "badge-1-size": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "secondary"
+      }
+    },
+    "text-1": {
+      "type": "Text",
+      "props": {
+        "text": "Timeline scrubber for completed simulations — step through trajectory data round-by-round with Play/Pause controls; no backend changes needed.",
+        "variant": "body"
+      }
+    },
+    "feature-2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "heading-2",
+        "badges-2",
+        "text-2"
+      ]
+    },
+    "heading-2": {
+      "type": "Heading",
+      "props": {
+        "text": "2. Agent Interaction Network Graph",
+        "level": "h3"
+      }
+    },
+    "badges-2": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "badge-2-type",
+        "badge-2-size"
+      ]
+    },
+    "badge-2-type": {
+      "type": "Badge",
+      "props": {
+        "text": "Feature",
+        "variant": "default"
+      }
+    },
+    "badge-2-size": {
+      "type": "Badge",
+      "props": {
+        "text": "Medium",
+        "variant": "secondary"
+      }
+    },
+    "text-2": {
+      "type": "Text",
+      "props": {
+        "text": "D3.js force-directed graph of agent-to-agent interactions — hub detection, echo chamber scoring, bridge agents; new Network tab in results.",
+        "variant": "body"
+      }
+    },
+    "feature-3": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "heading-3",
+        "badges-3",
+        "text-3"
+      ]
+    },
+    "heading-3": {
+      "type": "Heading",
+      "props": {
+        "text": "3. Multi-Document Comparative Mode",
+        "level": "h3"
+      }
+    },
+    "badges-3": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "badge-3-type",
+        "badge-3-size"
+      ]
+    },
+    "badge-3-type": {
+      "type": "Badge",
+      "props": {
+        "text": "Feature",
+        "variant": "default"
+      }
+    },
+    "badge-3-size": {
+      "type": "Badge",
+      "props": {
+        "text": "Medium",
+        "variant": "secondary"
+      }
+    },
+    "text-3": {
+      "type": "Text",
+      "props": {
+        "text": "Run the same agent pool on two documents and auto-compare — the controlled experiment primitive for bull/bear analysis and before/after studies.",
+        "variant": "body"
+      }
+    },
+    "feature-4": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "heading-4",
+        "badges-4",
+        "text-4"
+      ]
+    },
+    "heading-4": {
+      "type": "Heading",
+      "props": {
+        "text": "4. Embeddable Simulation Widget",
+        "level": "h3"
+      }
+    },
+    "badges-4": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "badge-4-type",
+        "badge-4-size"
+      ]
+    },
+    "badge-4-type": {
+      "type": "Badge",
+      "props": {
+        "text": "Integration",
+        "variant": "secondary"
+      }
+    },
+    "badge-4-size": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "secondary"
+      }
+    },
+    "text-4": {
+      "type": "Text",
+      "props": {
+        "text": "Generate iframe embed code from any share permalink — renders belief drift chart inline in Notion, Substack, READMEs; oEmbed autodiscovery included.",
+        "variant": "body"
+      }
+    },
+    "feature-5": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "heading-5",
+        "badges-5",
+        "text-5"
+      ]
+    },
+    "heading-5": {
+      "type": "Heading",
+      "props": {
+        "text": "5. Simulation Quality Diagnostics",
+        "level": "h3"
+      }
+    },
+    "badges-5": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "badge-5-type",
+        "badge-5-size"
+      ]
+    },
+    "badge-5-type": {
+      "type": "Badge",
+      "props": {
+        "text": "Feature",
+        "variant": "default"
+      }
+    },
+    "badge-5-size": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "secondary"
+      }
+    },
+    "text-5": {
+      "type": "Text",
+      "props": {
+        "text": "Health badge (Excellent/Good/Low) computed post-completion from participation rate, stance entropy, convergence speed, and cross-platform interaction rate.",
+        "variant": "body"
+      }
+    },
+    "separator-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "link-details": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full details",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-actions-2026-04-16.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}
