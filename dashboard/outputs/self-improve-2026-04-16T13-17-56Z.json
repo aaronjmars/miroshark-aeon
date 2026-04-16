@@ -1,0 +1,111 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Agent Self-Improvement — 2026-04-16"
+      },
+      "children": [
+        "heading_main",
+        "text_previous",
+        "separator_1",
+        "heading_why",
+        "text_why",
+        "separator_2",
+        "heading_changed",
+        "text_changed",
+        "separator_3",
+        "heading_impact",
+        "text_impact",
+        "separator_4",
+        "pr_link"
+      ]
+    },
+    "heading_main": {
+      "type": "Heading",
+      "props": {
+        "text": "Heartbeat now detects stuck GitHub Actions runs and auto-recovers.",
+        "level": "h2"
+      }
+    },
+    "text_previous": {
+      "type": "Text",
+      "props": {
+        "text": "Previously, if a skill run hung indefinitely (stayed in_progress without exiting), heartbeat treated it as \"still running\" and never retried. A hung run could silently block a skill from ever being dispatched again until manual intervention."
+      }
+    },
+    "separator_1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading_why": {
+      "type": "Heading",
+      "props": {
+        "text": "Why",
+        "level": "h3"
+      }
+    },
+    "text_why": {
+      "type": "Text",
+      "props": {
+        "text": "Apr 15 logs showed heartbeat correctly handling a push-recap failure (401 auth → auto-retry). But a hang (no exit code) would have been invisible — heartbeat's dedup guard would see the stuck run as active and skip it forever. This was a latent resilience gap."
+      }
+    },
+    "separator_2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading_changed": {
+      "type": "Heading",
+      "props": {
+        "text": "What Changed",
+        "level": "h3"
+      }
+    },
+    "text_changed": {
+      "type": "Text",
+      "props": {
+        "text": "skills/heartbeat/SKILL.md: Added createdAt to gh run list queries and a 2-hour elapsed-time check. Runs in_progress for >2h are flagged as \"stuck\" and excluded from the dedup guard, allowing fresh dispatch. Stuck runs are not cancelled (non-destructive approach)."
+      }
+    },
+    "separator_3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading_impact": {
+      "type": "Heading",
+      "props": {
+        "text": "Impact",
+        "level": "h3"
+      }
+    },
+    "text_impact": {
+      "type": "Text",
+      "props": {
+        "text": "Heartbeat can now self-heal from hung runs — no skill will silently go missing due to a stuck GitHub Actions job. Also fixed duplicate \"Next Priorities\" section in MEMORY.md."
+      }
+    },
+    "separator_4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "pr_link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #14: Heartbeat hung run detection improvements",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/pull/14",
+        "source": "GitHub"
+      }
+    }
+  }
+}
