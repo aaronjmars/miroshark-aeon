@@ -1,0 +1,82 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Top Tweets — MIROSHARK / MiroShark (2026-04-16)"
+      },
+      "children": [
+        "text_subtitle",
+        "stack_tweets"
+      ]
+    },
+    "text_subtitle": {
+      "type": "Text",
+      "props": {
+        "text": "10 new tweets found via Grok X search (Apr 15-16). Top 5:",
+        "variant": "muted"
+      }
+    },
+    "stack_tweets": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "tweet_1",
+        "tweet_2",
+        "tweet_3",
+        "tweet_4",
+        "tweet_5"
+      ]
+    },
+    "tweet_1": {
+      "type": "TweetCard",
+      "props": {
+        "author": "btcbabycow",
+        "handle": "btcbabycow",
+        "text": "700 stars on GitHub already. $MiroShark top-tier, innovative — pairs with $AEON, bullish on both",
+        "likes": 14,
+        "retweets": 6
+      }
+    },
+    "tweet_2": {
+      "type": "TweetCard",
+      "props": {
+        "author": "BioStone_chad",
+        "handle": "BioStone_chad",
+        "text": "$MIROSHARK 70K → 330K+; people FUDed dev running two AI tokens, now regretting it",
+        "likes": 7,
+        "retweets": 2
+      }
+    },
+    "tweet_3": {
+      "type": "TweetCard",
+      "props": {
+        "author": "unborninfinite",
+        "handle": "unborninfinite",
+        "text": "Garry Tan nodded aaronjmars — GitHub stars stacking. $Miroshark at 250K MC",
+        "likes": 4
+      }
+    },
+    "tweet_4": {
+      "type": "TweetCard",
+      "props": {
+        "author": "DaWachu80608",
+        "handle": "DaWachu80608",
+        "text": "Pitched garrytan: \"MiroShark is open-source Universal Swarm Intelligence Engine — any doc, hundreds of AI agents debating across Twitter/Reddit/Polymarket\""
+      }
+    },
+    "tweet_5": {
+      "type": "TweetCard",
+      "props": {
+        "author": "joraweb3",
+        "handle": "joraweb3",
+        "text": "I'm cooking a miroshark_ fork (reply to 'What are you building today?')"
+      }
+    }
+  }
+}
