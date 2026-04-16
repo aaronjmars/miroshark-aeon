@@ -1,0 +1,50 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "Top Tweets — MIROSHARK (2026-04-16)"
+      },
+      "children": [
+        "stack"
+      ]
+    },
+    "stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "tweet",
+        "replies_badge",
+        "link"
+      ]
+    },
+    "tweet": {
+      "type": "TweetCard",
+      "props": {
+        "author": "aaronjmars",
+        "handle": "aaronjmars",
+        "text": "if you've shared/shilled $aeon/$miroshark in the past few days make sure you've linked your X account to your @bankrbot account enabling a new skill (experimental) for @aeonframework tomorrow",
+        "likes": 41,
+        "retweets": 5
+      }
+    },
+    "replies_badge": {
+      "type": "Badge",
+      "props": {
+        "text": "Replies: 13"
+      }
+    },
+    "link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/aaronjmars/status/2044541594502639751"
+      }
+    }
+  }
+}
