@@ -9,6 +9,20 @@ set -euo pipefail
 
 SKILL="${1:-}"
 VAR="${2:-}"
+
+# If var not passed as argument, try reading it from aeon.yml
+if [ -z "$VAR" ] && [ -f "aeon.yml" ]; then
+  VAR=$(python3 -c "
+import re, sys
+skill = sys.argv[1]
+with open('aeon.yml') as f:
+    for line in f:
+        if line.strip().startswith(skill + ':'):
+            m = re.search(r'var:\s*\"([^\"]+)\"', line)
+            if m: print(m.group(1)); break
+" "$SKILL" 2>/dev/null || true)
+  [ -n "$VAR" ] && echo "xai-prefetch: read var from aeon.yml: ${VAR:0:60}..."
+fi
 TODAY=$(date -u +%Y-%m-%d)
 YESTERDAY=$(date -u -d "yesterday" +%Y-%m-%d 2>/dev/null || date -u -v-1d +%Y-%m-%d)
 THREE_DAYS_AGO=$(date -u -d "3 days ago" +%Y-%m-%d 2>/dev/null || date -u -v-3d +%Y-%m-%d)

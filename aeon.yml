@@ -8,8 +8,11 @@ skills:
 
   # --- Daily: Market & Social ---
   token-report: { enabled: true, schedule: "0 6 * * *", model: "claude-sonnet-4-6" }
-  fetch-tweets: { enabled: true, schedule: "30 6 * * *", var: "MIROSHARK crypto token on Base chain AND https://github.com/aaronjmars/MiroShark", model: "claude-sonnet-4-6" }
+  fetch-tweets: { enabled: true, schedule: "30 6 * * *", var: "MIROSHARK crypto token on Base chain AND https://github.com/aaronjmars/MiroShark AND @miroshark_", model: "claude-sonnet-4-6" }
   repo-pulse: { enabled: true, schedule: "0 10 * * *", model: "claude-sonnet-4-6" }
+
+  # --- Daily: Rewards ---
+  tweet-allocator: { enabled: true, schedule: "0 8 * * *", model: "claude-sonnet-4-6" }
 
   # --- Daily: Shipping & Content ---
   push-recap: { enabled: true, schedule: "0 15 * * *" }
