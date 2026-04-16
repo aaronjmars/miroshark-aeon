@@ -1,0 +1,119 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "$MIROSHARK Daily — 2026-04-16"
+      },
+      "children": [
+        "stack_main"
+      ]
+    },
+    "stack_main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stat_price",
+        "stack_liquidity_volume",
+        "stat_buys_sells",
+        "stack_7d_ath",
+        "separator1",
+        "text_description",
+        "link_chart"
+      ]
+    },
+    "stat_price": {
+      "type": "Stat",
+      "props": {
+        "label": "Price",
+        "value": "$0.000002342",
+        "delta": "-12.14%",
+        "trend": "down"
+      }
+    },
+    "stack_liquidity_volume": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "stat_liquidity",
+        "stat_volume"
+      ]
+    },
+    "stat_liquidity": {
+      "type": "Stat",
+      "props": {
+        "label": "Liquidity",
+        "value": "$165.7K"
+      }
+    },
+    "stat_volume": {
+      "type": "Stat",
+      "props": {
+        "label": "24h Vol",
+        "value": "$96.9K"
+      }
+    },
+    "stat_buys_sells": {
+      "type": "Stat",
+      "props": {
+        "label": "Buys/Sells",
+        "value": "171/151 (1.13x)"
+      }
+    },
+    "stack_7d_ath": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "stat_7d",
+        "stat_ath"
+      ]
+    },
+    "stat_7d": {
+      "type": "Stat",
+      "props": {
+        "label": "7d Change",
+        "value": "+106.9%",
+        "trend": "up"
+      }
+    },
+    "stat_ath": {
+      "type": "Stat",
+      "props": {
+        "label": "From ATH",
+        "value": "-38.6%",
+        "trend": "down"
+      }
+    },
+    "separator1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "text_description": {
+      "type": "Text",
+      "props": {
+        "text": "Day 3 post-ATH consolidation — volume cooling, buyers still marginally in control.",
+        "variant": "body"
+      }
+    },
+    "link_chart": {
+      "type": "Link",
+      "props": {
+        "label": "View Chart",
+        "href": "https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209"
+      }
+    }
+  }
+}
