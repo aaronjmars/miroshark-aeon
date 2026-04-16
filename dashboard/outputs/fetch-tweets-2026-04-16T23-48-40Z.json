@@ -1,0 +1,314 @@
+{
+  "root": "card-root",
+  "state": {},
+  "elements": {
+    "card-root": {
+      "type": "Card",
+      "props": {
+        "title": "Top Tweets — $MIROSHARK OR @miroshark_ OR aaronjmars/MiroShark (2026-04-16)"
+      },
+      "children": [
+        "tweets-stack"
+      ]
+    },
+    "tweets-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "tweet-1-stack",
+        "tweet-2-stack",
+        "tweet-3-stack",
+        "tweet-4-stack",
+        "tweet-5-stack",
+        "tweet-6-stack",
+        "tweet-7-stack",
+        "tweet-8-stack",
+        "tweet-9-stack",
+        "tweet-10-stack"
+      ]
+    },
+    "tweet-1-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-1-card",
+        "tweet-1-link"
+      ]
+    },
+    "tweet-1-card": {
+      "type": "TweetCard",
+      "props": {
+        "author": "aaronjmars",
+        "handle": "@aaronjmars",
+        "text": "turns out AI simulation swarms are a good business miroshark coded",
+        "likes": 63,
+        "retweets": 8
+      }
+    },
+    "tweet-1-link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/aaronjmars/status/2044498162929328173"
+      }
+    },
+    "tweet-2-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-2-card",
+        "tweet-2-link"
+      ]
+    },
+    "tweet-2-card": {
+      "type": "TweetCard",
+      "props": {
+        "author": "aaronjmars",
+        "handle": "@aaronjmars",
+        "text": "linked X accounts to @bankrbot for a new aeon skill dropping tomorrow — shillers get early access",
+        "likes": 41,
+        "retweets": 5
+      }
+    },
+    "tweet-2-link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/aaronjmars/status/2044541594502639751"
+      }
+    },
+    "tweet-3-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-3-card",
+        "tweet-3-link"
+      ]
+    },
+    "tweet-3-card": {
+      "type": "TweetCard",
+      "props": {
+        "author": "Chainriffs",
+        "handle": "@Chainriffs",
+        "text": "deep review: \"feels like running a parallel universe 24/7\" — 100-300 agents, ReACT report, Polymarket trades, calls it addictive",
+        "likes": 28,
+        "retweets": 7
+      }
+    },
+    "tweet-3-link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/Chainriffs/status/2043931761466376271"
+      }
+    },
+    "tweet-4-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-4-card",
+        "tweet-4-link"
+      ]
+    },
+    "tweet-4-card": {
+      "type": "TweetCard",
+      "props": {
+        "author": "LemonSyncro",
+        "handle": "@LemonSyncro",
+        "text": "Paradigm CEO @gakonst starred the MiroShark GitHub repo — \"Are we paying attention yet?\"",
+        "likes": 19,
+        "retweets": 6
+      }
+    },
+    "tweet-4-link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/LemonSyncro/status/2043910792991350879"
+      }
+    },
+    "tweet-5-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-5-card",
+        "tweet-5-link"
+      ]
+    },
+    "tweet-5-card": {
+      "type": "TweetCard",
+      "props": {
+        "author": "aaronjmars",
+        "handle": "@aaronjmars",
+        "text": "we've got Hayek betting on Polymarket before GTA 6 miroshark coded",
+        "likes": 20,
+        "retweets": 4
+      }
+    },
+    "tweet-5-link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/aaronjmars/status/2044531354830819372"
+      }
+    },
+    "tweet-6-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-6-card",
+        "tweet-6-link"
+      ]
+    },
+    "tweet-6-card": {
+      "type": "TweetCard",
+      "props": {
+        "author": "aaronjmars",
+        "handle": "@aaronjmars",
+        "text": "here is everything that my aeon agent shipped for miroshark during the weekend — what's your excuse?",
+        "likes": 23,
+        "retweets": 1
+      }
+    },
+    "tweet-6-link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/aaronjmars/status/2043696965502865424"
+      }
+    },
+    "tweet-7-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-7-card",
+        "tweet-7-link"
+      ]
+    },
+    "tweet-7-card": {
+      "type": "TweetCard",
+      "props": {
+        "author": "Whale_AI_net",
+        "handle": "@Whale_AI_net",
+        "text": "Keep an eye on $MiroShark - Universal Swarm Intelligence Engine",
+        "likes": 18,
+        "retweets": 4
+      }
+    },
+    "tweet-7-link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/Whale_AI_net/status/2043916251026559205"
+      }
+    },
+    "tweet-8-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-8-card",
+        "tweet-8-link"
+      ]
+    },
+    "tweet-8-card": {
+      "type": "TweetCard",
+      "props": {
+        "author": "Chainriffs",
+        "handle": "@Chainriffs",
+        "text": "$MiroShark is criminally undervalued\" — AIXBT called it \"legal insider trading\" for Polymarket, open-source, rapid dev velocity",
+        "likes": 14,
+        "retweets": 4
+      }
+    },
+    "tweet-8-link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/Chainriffs/status/2043952784521724264"
+      }
+    },
+    "tweet-9-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-9-card",
+        "tweet-9-link"
+      ]
+    },
+    "tweet-9-card": {
+      "type": "TweetCard",
+      "props": {
+        "author": "aaronjmars",
+        "handle": "@aaronjmars",
+        "text": "article post",
+        "likes": 14,
+        "retweets": 2
+      }
+    },
+    "tweet-9-link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/aaronjmars/status/2044116409110933972"
+      }
+    },
+    "tweet-10-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-10-card",
+        "tweet-10-link"
+      ]
+    },
+    "tweet-10-card": {
+      "type": "TweetCard",
+      "props": {
+        "author": "BioStone_chad",
+        "handle": "@BioStone_chad",
+        "text": "$MIROSHARK up 5x from 70k MC, $AEON up 10x — both pumped despite sharing the same dev",
+        "likes": 7,
+        "retweets": 1
+      }
+    },
+    "tweet-10-link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/BioStone_chad/status/2044069547477798983"
+      }
+    }
+  }
+}
