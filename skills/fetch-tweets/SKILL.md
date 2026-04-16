@@ -67,7 +67,7 @@ Today is ${today}. Search X for tweets matching **${var}**.
    Likes: X | RTs: Y
    [View tweet](https://x.com/handle/status/ID)
 
-   ... (up to 5 tweets)
+   ... (up to 10 tweets)
    ```
 
    IMPORTANT: Do NOT use @handle format — it tags/pings users on Telegram. Use x.com/handle instead (shows the profile URL without tagging anyone). The `[View tweet](URL)` link is required so users can tap to open each tweet.
