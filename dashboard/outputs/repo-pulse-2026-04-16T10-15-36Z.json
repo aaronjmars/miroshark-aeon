@@ -1,0 +1,199 @@
+{
+  "root": "card-root",
+  "state": {},
+  "elements": {
+    "card-root": {
+      "type": "Card",
+      "props": {
+        "title": "Repo Pulse"
+      },
+      "children": [
+        "stack-main"
+      ]
+    },
+    "stack-main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading-repo",
+        "separator-1",
+        "stack-stats",
+        "separator-2",
+        "heading-stargazers",
+        "stack-stargazers",
+        "separator-3",
+        "heading-forks",
+        "stack-forks"
+      ]
+    },
+    "heading-repo": {
+      "type": "Heading",
+      "props": {
+        "text": "aaronjmars/MiroShark",
+        "level": "h2"
+      },
+      "children": []
+    },
+    "separator-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "stack-stats": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "stat-stars",
+        "stat-forks"
+      ]
+    },
+    "stat-stars": {
+      "type": "Stat",
+      "props": {
+        "label": "Stars",
+        "value": "696",
+        "delta": "+6",
+        "trend": "up"
+      },
+      "children": []
+    },
+    "stat-forks": {
+      "type": "Stat",
+      "props": {
+        "label": "Forks",
+        "value": "132",
+        "delta": "+2",
+        "trend": "up"
+      },
+      "children": []
+    },
+    "separator-2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "heading-stargazers": {
+      "type": "Heading",
+      "props": {
+        "text": "New stargazers",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "stack-stargazers": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "link-gmorso",
+        "link-ranjith2120",
+        "link-ismailneqrouz",
+        "link-boralp",
+        "link-1halibote",
+        "link-BJ5-byte"
+      ]
+    },
+    "link-gmorso": {
+      "type": "Link",
+      "props": {
+        "label": "gmorso",
+        "href": "https://github.com/gmorso"
+      },
+      "children": []
+    },
+    "link-ranjith2120": {
+      "type": "Link",
+      "props": {
+        "label": "ranjith2120",
+        "href": "https://github.com/ranjith2120"
+      },
+      "children": []
+    },
+    "link-ismailneqrouz": {
+      "type": "Link",
+      "props": {
+        "label": "ismailneqrouz",
+        "href": "https://github.com/ismailneqrouz"
+      },
+      "children": []
+    },
+    "link-boralp": {
+      "type": "Link",
+      "props": {
+        "label": "boralp",
+        "href": "https://github.com/boralp"
+      },
+      "children": []
+    },
+    "link-1halibote": {
+      "type": "Link",
+      "props": {
+        "label": "1halibote",
+        "href": "https://github.com/1halibote"
+      },
+      "children": []
+    },
+    "link-BJ5-byte": {
+      "type": "Link",
+      "props": {
+        "label": "BJ5-byte",
+        "href": "https://github.com/BJ5-byte"
+      },
+      "children": []
+    },
+    "separator-3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "heading-forks": {
+      "type": "Heading",
+      "props": {
+        "text": "New forks",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "stack-forks": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "link-fork-1",
+        "link-fork-2"
+      ]
+    },
+    "link-fork-1": {
+      "type": "Link",
+      "props": {
+        "label": "Decentralised-AI/MiroShark",
+        "href": "https://github.com/Decentralised-AI/MiroShark"
+      },
+      "children": []
+    },
+    "link-fork-2": {
+      "type": "Link",
+      "props": {
+        "label": "underpressure98/MiroShark",
+        "href": "https://github.com/underpressure98/MiroShark"
+      },
+      "children": []
+    }
+  }
+}
