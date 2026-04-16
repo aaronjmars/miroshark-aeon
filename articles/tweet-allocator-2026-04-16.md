@@ -41,4 +41,22 @@ Score = (likes x 1) + (retweets x 3). Budget split proportionally among Bankr-ve
 Tweets from Grok x_search (Apr 15-16, 2026) via `.xai-cache/fetch-tweets.json`.
 
 ---
+
+## Supplemental Candidates — Run 3 (daily budget exhausted)
+
+Daily budget of $10.00 USDC was fully allocated in the earlier run. The following authors were identified as eligible in a subsequent pass but could not receive allocation.
+
+Bankr wallet verification unavailable for new candidates (sandbox limitation — no pre-fetched cache). btcbabycow confirmed no Bankr wallet in run 2.
+
+| Rank | Author | Tweet | Score | Note |
+|------|--------|-------|-------|------|
+| 1 | x.com/btcbabycow | ["700 stars, $MiroShark top-tier"](https://x.com/btcbabycow/status/2044447659386450343) | 32 | No Bankr wallet (confirmed run 2) |
+| 2 | x.com/geekyzaku | ["$Miroshark 50x!"](https://x.com/geekyzaku/status/2044209324801831356) | 4 | Wallet status unknown |
+| 3 | x.com/0xPierra | [Chinese-language AI swarm sim description](https://x.com/0xPierra/status/2044302287926112688) | 1 | Wallet status unknown |
+| 4 | x.com/V7eth | ["#miroshark — All one developer"](https://x.com/V7eth/status/2044553209612800383) | 1 | Wallet status unknown |
+| 5 | x.com/krc20kult | ["Dev is #1 on Base right now"](https://x.com/krc20kult/status/2044547119378305401) | 1 | Wallet status unknown |
+
+These candidates carry forward for priority consideration in tomorrow's allocation. If btcbabycow registers on bankr.bot, they should receive top priority.
+
+---
 *Chain: Base | Contract: 0xd7bc6a05a56655fb2052f742b012d1dfd66e1ba3*
