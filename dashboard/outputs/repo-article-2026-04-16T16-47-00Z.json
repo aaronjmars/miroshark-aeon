@@ -1,0 +1,70 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Break It Mid-Run: MiroShark's Director Mode Turns Simulation Into Controlled Experiment"
+      },
+      "children": [
+        "stack_content"
+      ]
+    },
+    "stack_content": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "text_description",
+        "stack_stats",
+        "story_link"
+      ]
+    },
+    "text_description": {
+      "type": "Text",
+      "props": {
+        "text": "Director Mode (PR #31) lets users inject breaking events mid-simulation — every agent reacts at the next round boundary, and belief drift charts mark the exact injection point. Combined with fork, belief drift, prediction resolution, and trace interview, MiroShark now has a full perturbation analysis pipeline."
+      },
+      "children": []
+    },
+    "stack_stats": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "badge_stars",
+        "badge_prs"
+      ]
+    },
+    "badge_stars": {
+      "type": "Badge",
+      "props": {
+        "text": "698 stars",
+        "variant": "default"
+      },
+      "children": []
+    },
+    "badge_prs": {
+      "type": "Badge",
+      "props": {
+        "text": "12 PRs merged in 7 days",
+        "variant": "secondary"
+      },
+      "children": []
+    },
+    "story_link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Read full article",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-04-16.md",
+        "source": "GitHub"
+      },
+      "children": []
+    }
+  }
+}
