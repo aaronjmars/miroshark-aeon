@@ -85,5 +85,9 @@
     "total_failures": 0,
     "consecutive_failures": 0,
     "success_rate": 1
+  },
+  "self-improve": {
+    "last_dispatch": "2026-04-16T13:12:23Z",
+    "last_status": "dispatched"
   }
 }
