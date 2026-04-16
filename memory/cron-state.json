@@ -39,13 +39,14 @@
     "last_dispatch": "2026-04-16T14:45:57Z"
   },
   "push-recap": {
-    "last_status": "success",
+    "last_status": "dispatched",
     "last_success": "2026-04-15T19:19:23Z",
     "total_runs": 1,
     "total_successes": 1,
     "total_failures": 0,
     "consecutive_failures": 0,
-    "success_rate": 1
+    "success_rate": 1,
+    "last_dispatch": "2026-04-16T15:20:46Z"
   },
   "token-report": {
     "last_dispatch": "2026-04-16T06:20:59Z",
