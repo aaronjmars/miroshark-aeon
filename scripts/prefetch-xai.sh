@@ -137,7 +137,8 @@ case "$SKILL" in
   fetch-tweets)
     if [ -n "$VAR" ]; then
       xai_search "fetch-tweets.json" \
-        "Search X for the latest tweets about: ${VAR} from ${YESTERDAY} to ${TODAY}. Return the 10 most interesting tweets. For each: @handle, full tweet text, date, engagement stats (likes, retweets, replies), and the direct link (https://x.com/username/status/ID)."
+        "Search X for ALL tweets about: ${VAR} from ${THREE_DAYS_AGO} to ${TODAY}. Return at least 10 tweets (more if available) — prioritize the most interesting, insightful, or highly-engaged posts but also include smaller accounts. For each tweet include: @handle, full tweet text, date posted, engagement stats (likes, retweets, replies), and the direct link (https://x.com/handle/status/ID). Return as a numbered list." \
+        "$THREE_DAYS_AGO"
     else
       echo "xai-prefetch: fetch-tweets has no var, skipping"
     fi
