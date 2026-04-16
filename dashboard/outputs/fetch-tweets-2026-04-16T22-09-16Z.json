@@ -1,0 +1,148 @@
+{
+  "root": "card-root",
+  "state": {},
+  "elements": {
+    "card-root": {
+      "type": "Card",
+      "props": {
+        "title": "Top Tweets — MIROSHARK / MiroShark",
+        "description": "2026-04-16"
+      },
+      "children": [
+        "alert-note",
+        "separator-1",
+        "tweets-stack"
+      ]
+    },
+    "alert-note": {
+      "type": "Alert",
+      "props": {
+        "type": "info",
+        "message": "XAI_API_KEY not available; results via WebSearch."
+      }
+    },
+    "separator-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "tweets-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "tweet-1-wrapper",
+        "tweet-2-wrapper",
+        "tweet-3-wrapper",
+        "tweet-4-wrapper"
+      ]
+    },
+    "tweet-1-wrapper": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-1",
+        "link-1"
+      ]
+    },
+    "tweet-1": {
+      "type": "TweetCard",
+      "props": {
+        "author": "aaronjmars",
+        "handle": "aaronjmars",
+        "text": "Building the craziest simulation framework: Reddit, X & Polymarket agents posting and trading in real time"
+      }
+    },
+    "link-1": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/aaronjmars/status/2036175623622660114"
+      }
+    },
+    "tweet-2-wrapper": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-2",
+        "link-2"
+      ]
+    },
+    "tweet-2": {
+      "type": "TweetCard",
+      "props": {
+        "author": "aaronjmars",
+        "handle": "aaronjmars",
+        "text": "MiroShark & Aeon roadmap: tokenized repos via bankrbot, miroshark = universal swarm intelligence engine, aeon = autonomous framework on GitHub"
+      }
+    },
+    "link-2": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/aaronjmars/status/2036818584937095581"
+      }
+    },
+    "tweet-3-wrapper": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-3",
+        "link-3"
+      ]
+    },
+    "tweet-3": {
+      "type": "TweetCard",
+      "props": {
+        "author": "JMania402",
+        "handle": "JMania402",
+        "text": "$MIROSHARK 0xd7bc6a05a56655fb2052f742b012d1dfd66e1ba3 This one pump so hard"
+      }
+    },
+    "link-3": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/JMania402/status/2036486940313493591"
+      }
+    },
+    "tweet-4-wrapper": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-4",
+        "link-4"
+      ]
+    },
+    "tweet-4": {
+      "type": "TweetCard",
+      "props": {
+        "author": "BrianRoemmele",
+        "handle": "BrianRoemmele",
+        "text": "23 MiroFish simulations and counting — broad adoption of the simulation approach MiroShark builds on"
+      }
+    },
+    "link-4": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/BrianRoemmele/status/2032266428876013924"
+      }
+    }
+  }
+}
