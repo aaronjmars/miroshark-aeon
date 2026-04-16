@@ -1,0 +1,248 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "Agent Self-Improvement",
+        "description": "2026-04-16"
+      },
+      "children": [
+        "heading-main",
+        "achievement-stack",
+        "separator-1",
+        "problem-section",
+        "separator-2",
+        "changes-section",
+        "separator-3",
+        "impact-section",
+        "separator-4",
+        "pr-section"
+      ]
+    },
+    "heading-main": {
+      "type": "Heading",
+      "props": {
+        "text": "Persistent Tweet Dedup for fetch-tweets",
+        "level": "h2"
+      }
+    },
+    "achievement-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "achievement-text"
+      ]
+    },
+    "achievement-text": {
+      "type": "Text",
+      "props": {
+        "text": "Stale tweets no longer cycle back into notifications.",
+        "variant": "lead"
+      }
+    },
+    "separator-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "problem-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "problem-heading",
+        "problem-description",
+        "why-section",
+        "evidence-alert"
+      ]
+    },
+    "problem-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Problem",
+        "level": "h3"
+      }
+    },
+    "problem-description": {
+      "type": "Text",
+      "props": {
+        "text": "The fetch-tweets skill was using a 3-day log window for deduplication, but WebSearch (the fallback when XAI_API_KEY is unavailable) favors high-engagement older tweets. Once a log entry aged past 3 days, the same launch-era tweets would resurface."
+      }
+    },
+    "why-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "why-heading",
+        "why-text"
+      ]
+    },
+    "why-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Why",
+        "level": "h4"
+      }
+    },
+    "why-text": {
+      "type": "Text",
+      "props": {
+        "text": "Apr 16 fetch-tweets log showed 7+ stale tweet URLs being re-evaluated because they fell outside the 3-day dedup window despite being reported in Apr 11-12 logs."
+      }
+    },
+    "evidence-alert": {
+      "type": "Alert",
+      "props": {
+        "type": "warning",
+        "title": "Evidence",
+        "message": "The Apr 16 run showed this clearly: all but one surfaced URL were stale content already reported weeks ago."
+      }
+    },
+    "separator-2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "changes-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "changes-heading",
+        "change-1-stack",
+        "change-2-stack"
+      ]
+    },
+    "changes-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "What Changed",
+        "level": "h3"
+      }
+    },
+    "change-1-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "change-1-badge",
+        "change-1-detail"
+      ]
+    },
+    "change-1-badge": {
+      "type": "Badge",
+      "props": {
+        "text": "skills/fetch-tweets/SKILL.md",
+        "variant": "outline"
+      }
+    },
+    "change-1-detail": {
+      "type": "Text",
+      "props": {
+        "text": "Added persistent seen-file (memory/fetch-tweets-seen.txt) as primary dedup source. New step 6b appends URLs after each run. 3-day log scan kept as fallback."
+      }
+    },
+    "change-2-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "change-2-badge",
+        "change-2-detail"
+      ]
+    },
+    "change-2-badge": {
+      "type": "Badge",
+      "props": {
+        "text": "memory/fetch-tweets-seen.txt (new)",
+        "variant": "outline"
+      }
+    },
+    "change-2-detail": {
+      "type": "Text",
+      "props": {
+        "text": "Seeded with all 24 unique tweet URLs from existing logs — takes effect immediately."
+      }
+    },
+    "separator-3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "impact-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "impact-heading",
+        "impact-text-1",
+        "impact-text-2"
+      ]
+    },
+    "impact-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Impact",
+        "level": "h3"
+      }
+    },
+    "impact-text-1": {
+      "type": "Text",
+      "props": {
+        "text": "Eliminates redundant stale-tweet notifications entirely. The skill will only report genuinely new tweets, improving signal quality especially in WebSearch-fallback mode."
+      }
+    },
+    "impact-text-2": {
+      "type": "Badge",
+      "props": {
+        "text": "Signal Quality Improved",
+        "variant": "success"
+      }
+    },
+    "separator-4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "pr-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "pr-link"
+      ]
+    },
+    "pr-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "GitHub PR #15: Persistent tweet dedup for fetch-tweets",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/pull/15",
+        "source": "GitHub"
+      }
+    }
+  }
+}

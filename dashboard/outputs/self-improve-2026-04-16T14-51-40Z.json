@@ -1,0 +1,146 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "Agent Self-Improvement"
+      },
+      "children": [
+        "main_stack"
+      ]
+    },
+    "main_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "date_text",
+        "summary_heading",
+        "summary_text",
+        "sep1",
+        "problem_heading",
+        "problem_text",
+        "why_heading",
+        "why_text",
+        "changes_heading",
+        "changes_stack",
+        "impact_heading",
+        "impact_text",
+        "sep2",
+        "pr_link"
+      ]
+    },
+    "date_text": {
+      "type": "Text",
+      "props": {
+        "text": "2026-04-16",
+        "variant": "muted"
+      }
+    },
+    "summary_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Persistent tweet dedup for fetch-tweets",
+        "level": "h2"
+      }
+    },
+    "summary_text": {
+      "type": "Text",
+      "props": {
+        "text": "Stale tweets no longer cycle back into notifications."
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "problem_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "The Problem",
+        "level": "h3"
+      }
+    },
+    "problem_text": {
+      "type": "Text",
+      "props": {
+        "text": "The fetch-tweets skill was using a 3-day log window for deduplication, but WebSearch (the fallback when XAI_API_KEY is unavailable) favors high-engagement older tweets. Once a log entry aged past 3 days, the same launch-era tweets would resurface."
+      }
+    },
+    "why_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Why",
+        "level": "h3"
+      }
+    },
+    "why_text": {
+      "type": "Text",
+      "props": {
+        "text": "Apr 16 fetch-tweets log showed stale tweet URLs being re-evaluated because they fell outside the 3-day dedup window despite being reported weeks ago."
+      }
+    },
+    "changes_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "What Changed",
+        "level": "h3"
+      }
+    },
+    "changes_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "change1",
+        "change2"
+      ]
+    },
+    "change1": {
+      "type": "Text",
+      "props": {
+        "text": "skills/fetch-tweets/SKILL.md: Added persistent seen-file as primary dedup source"
+      }
+    },
+    "change2": {
+      "type": "Text",
+      "props": {
+        "text": "memory/fetch-tweets-seen.txt: Seeded with 24 unique URLs from existing logs"
+      }
+    },
+    "impact_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Impact",
+        "level": "h3"
+      }
+    },
+    "impact_text": {
+      "type": "Text",
+      "props": {
+        "text": "Eliminates redundant stale-tweet notifications. Only genuinely new tweets get reported."
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "pr_link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #15: Persistent tweet dedup for fetch-tweets",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/pull/15"
+      }
+    }
+  }
+}

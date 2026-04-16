@@ -51,6 +51,7 @@
 | Browser Push Notifications | 2026-04-15 | 🔕/🔔 toggle during simulation runs; Service Worker + VAPID + pywebpush; browser notified when simulation completes even if tab is hidden (PR #30 on MiroShark) |
 | Director Mode (Event Injection) | 2026-04-16 | Inject breaking events mid-simulation; file-based queue, marker-replace injection, Director panel UI, belief drift markers (PR #31 on MiroShark) |
 | Heartbeat Stuck-Run Timeout | 2026-04-16 | Heartbeat detects runs in_progress >2h as stuck, allows fresh dispatch bypassing dedup guard (PR #14 on miroshark-aeon) |
+| Fetch-Tweets Persistent Dedup | 2026-04-16 | Persistent seen-file replaces 3-day log window for tweet URL dedup — stops stale tweets cycling back into notifications (PR #15 on miroshark-aeon) |
 
 ## Watched Repos
 - `aaronjmars/aeon` — tracked in `memory/watched-repos.md`
