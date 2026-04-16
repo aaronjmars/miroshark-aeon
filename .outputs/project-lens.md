@@ -1,5 +1,5 @@
-*New Article: Everyone Is Building AI Agents That Act. The Smarter Bet Might Be Agents That Don't.*
+*New Article: Every Simulation Needs Someone Willing to Break It*
 
-The agentic AI market is racing toward $139B by building agents that execute tasks autonomously. But cascading failure research, LLM scheming incidents, and calls from Bengio and Russell to ban long-term planning agents suggest the industry may be solving the wrong problem first. MiroShark — 692 stars in 25 days — represents a different thesis: agents that simulate rather than act, with prediction tracking, trace interviews, and belief drift charts that make simulated reasoning auditable.
+From Prussian Kriegsspiel umpires in 1824 to Reagan-era nuclear war games to modern tabletop exercises, the most important person in any simulation has always been the one who injects the unexpected. MiroShark's new Director Mode (PR #31) puts that two-century-old technique into a software interface — letting users inject breaking events mid-simulation and watch how hundreds of AI agents respond. The feature converts MiroShark from a single-track simulator into a perturbation-research instrument.
 
-Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-04-15.md
+Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-04-16.md

@@ -1,0 +1,39 @@
+{
+  "root": "card_project_lens",
+  "state": {},
+  "elements": {
+    "card_project_lens": {
+      "type": "Card",
+      "props": {
+        "title": "project-lens"
+      },
+      "children": [
+        "text_headline",
+        "text_description",
+        "storylink_article"
+      ]
+    },
+    "text_headline": {
+      "type": "Text",
+      "props": {
+        "text": "New Article: Every Simulation Needs Someone Willing to Break It",
+        "variant": "lead"
+      }
+    },
+    "text_description": {
+      "type": "Text",
+      "props": {
+        "text": "From Prussian Kriegsspiel umpires in 1824 to Reagan-era nuclear war games to modern tabletop exercises, the most important person in any simulation has always been the one who injects the unexpected. MiroShark's new Director Mode (PR #31) puts that two-century-old technique into a software interface — letting users inject breaking events mid-simulation and watch how hundreds of AI agents respond. The feature converts MiroShark from a single-track simulator into a perturbation-research instrument.",
+        "variant": "body"
+      }
+    },
+    "storylink_article": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Every Simulation Needs Someone Willing to Break It",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-04-16.md",
+        "source": "MiroShark"
+      }
+    }
+  }
+}
