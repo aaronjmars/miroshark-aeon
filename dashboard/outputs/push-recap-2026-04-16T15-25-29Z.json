@@ -1,0 +1,237 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "Push Recap — 2026-04-16"
+      },
+      "children": [
+        "summary",
+        "separator1",
+        "director",
+        "separator2",
+        "routing",
+        "separator3",
+        "ner",
+        "separator4",
+        "aeon",
+        "separator5",
+        "changes",
+        "separator6",
+        "stats",
+        "separator7",
+        "link"
+      ]
+    },
+    "summary": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "summary_text"
+      ]
+    },
+    "summary_text": {
+      "type": "Text",
+      "props": {
+        "text": "MiroShark — 6 commits, miroshark-aeon — 28 commits (2 authors)",
+        "variant": "lead"
+      }
+    },
+    "separator1": {
+      "type": "Separator",
+      "props": {}
+    },
+    "director": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "director_heading",
+        "director_text"
+      ]
+    },
+    "director_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Director Mode (Event Injection)",
+        "level": "h3"
+      }
+    },
+    "director_text": {
+      "type": "Text",
+      "props": {
+        "text": "Users can now inject breaking events into running simulations — agents receive them at the next round boundary, shifting posts, trades, and stances. File-based event queue, REST API (max 3 per sim), full UI panel with timeline banners and belief drift markers. PR #31 merged."
+      }
+    },
+    "separator2": {
+      "type": "Separator",
+      "props": {}
+    },
+    "routing": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "routing_heading",
+        "routing_text"
+      ]
+    },
+    "routing_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Multi-Model Routing & Cost Optimization",
+        "level": "h3"
+      }
+    },
+    "routing_text": {
+      "type": "Text",
+      "props": {
+        "text": "New OASIS_MODEL_NAME decouples the sim loop model from the default LLM. GraphToolsService gains a fast_llm path routing mechanical work to cheap models. Report context capped at 6K chars (was unbounded at 112K tokens). Auto-generated run_summary.md tracks cost/performance per simulation. Gemini empty-message crash fixed."
+      }
+    },
+    "separator3": {
+      "type": "Separator",
+      "props": {}
+    },
+    "ner": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "ner_heading",
+        "ner_text"
+      ]
+    },
+    "ner_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "NER Quality & Integration Fixes",
+        "level": "h3"
+      }
+    },
+    "ner_text": {
+      "type": "Text",
+      "props": {
+        "text": "Larger NER chunks (1500/100), nonspeaking-entity filter (rejects dates, concepts, countries from becoming agents), PDF citation artifact stripping, ontology type validation. OpenRouter headers updated from deprecated X-Title to X-OpenRouter-Title."
+      }
+    },
+    "separator4": {
+      "type": "Separator",
+      "props": {}
+    },
+    "aeon": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "aeon_heading",
+        "aeon_text"
+      ]
+    },
+    "aeon_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Aeon Infra Hardening",
+        "level": "h3"
+      }
+    },
+    "aeon_text": {
+      "type": "Text",
+      "props": {
+        "text": "Heartbeat detects stuck runs (>2h in_progress) and bypasses dedup guard for fresh dispatch (PR #14). Notification system tracks delivery to prevent double-send. project-lens and repo-article promoted to daily schedules."
+      }
+    },
+    "separator5": {
+      "type": "Separator",
+      "props": {}
+    },
+    "changes": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "changes_heading",
+        "change1",
+        "change2",
+        "change3",
+        "change4",
+        "change5"
+      ]
+    },
+    "changes_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Key changes",
+        "level": "h3"
+      }
+    },
+    "change1": {
+      "type": "Text",
+      "props": {
+        "text": "backend/scripts/director_events.py: new file-based event queue for mid-sim injection (+187 lines)"
+      }
+    },
+    "change2": {
+      "type": "Text",
+      "props": {
+        "text": "backend/app/utils/run_summary.py: auto-generated cost/perf reports (+335 lines)"
+      }
+    },
+    "change3": {
+      "type": "Text",
+      "props": {
+        "text": "backend/app/services/graph_tools.py: three-tier model routing (fast/default/smart)"
+      }
+    },
+    "change4": {
+      "type": "Text",
+      "props": {
+        "text": "backend/app/services/entity_reader.py: nonspeaking entity filter (+60 lines)"
+      }
+    },
+    "change5": {
+      "type": "Text",
+      "props": {
+        "text": "skills/heartbeat/SKILL.md: stuck-run timeout detection"
+      }
+    },
+    "separator6": {
+      "type": "Separator",
+      "props": {}
+    },
+    "stats": {
+      "type": "Text",
+      "props": {
+        "text": "Stats: ~40 files changed, +1,700/-320 lines",
+        "variant": "body"
+      }
+    },
+    "separator7": {
+      "type": "Separator",
+      "props": {}
+    },
+    "link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full recap",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-04-16.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}
