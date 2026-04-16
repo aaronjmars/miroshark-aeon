@@ -1,0 +1,71 @@
+{
+  "root": "card-root",
+  "state": {},
+  "elements": {
+    "card-root": {
+      "type": "Card",
+      "props": {
+        "title": "Top Tweets",
+        "description": "MIROSHARK crypto token on Base chain (2026-04-16)"
+      },
+      "children": [
+        "github-link",
+        "alert-apikey",
+        "separator-1",
+        "tweet-container"
+      ]
+    },
+    "github-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "MiroShark",
+        "href": "https://github.com/aaronjmars/MiroShark",
+        "source": "GitHub"
+      },
+      "children": []
+    },
+    "alert-apikey": {
+      "type": "Alert",
+      "props": {
+        "type": "info",
+        "message": "XAI_API_KEY not set — results via WebSearch (older high-engagement tweets; no fresh Apr 14-16 content found)."
+      },
+      "children": []
+    },
+    "separator-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "tweet-container": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "tweet-card-1",
+        "link-tweet-1"
+      ]
+    },
+    "tweet-card-1": {
+      "type": "TweetCard",
+      "props": {
+        "author": "aaronjmars",
+        "handle": "@aaronjmars",
+        "text": "Original launch announcement: built a sanitized version of MiroFish called MiroShark — everything translated to English, improved simulation flow, recommended models, runs locally + any OpenAI-compatible API key"
+      },
+      "children": []
+    },
+    "link-tweet-1": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/aaronjmars/status/2035881020302430571"
+      },
+      "children": []
+    }
+  }
+}
