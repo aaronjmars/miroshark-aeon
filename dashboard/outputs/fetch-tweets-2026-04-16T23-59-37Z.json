@@ -1,0 +1,124 @@
+{
+  "root": "card-tweets",
+  "state": {},
+  "elements": {
+    "card-tweets": {
+      "type": "Card",
+      "props": {
+        "title": "Top Tweets — $MIROSHARK OR @miroshark_ OR github.com/aaronjmars/miroshark (2026-04-16)"
+      },
+      "children": [
+        "stack-all-tweets"
+      ]
+    },
+    "stack-all-tweets": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "tweet-1",
+        "tweet-2",
+        "tweet-3",
+        "tweet-4",
+        "tweet-5",
+        "tweet-6",
+        "tweet-7",
+        "tweet-8",
+        "tweet-9",
+        "tweet-10"
+      ]
+    },
+    "tweet-1": {
+      "type": "TweetCard",
+      "props": {
+        "author": "aaronjmars",
+        "text": "turns out AI simulation swarms are a good business miroshark coded",
+        "likes": 64,
+        "retweets": 8
+      }
+    },
+    "tweet-2": {
+      "type": "TweetCard",
+      "props": {
+        "author": "aaronjmars",
+        "text": "link your X to @bankrbot if you've shilled $aeon/$miroshark — new skill for @aeonframework tomorrow",
+        "likes": 41,
+        "retweets": 5
+      }
+    },
+    "tweet-3": {
+      "type": "TweetCard",
+      "props": {
+        "author": "me8_x1782",
+        "text": "MiroClaw evolving its own codebase via signed commits on GitLawb — agent-native infrastructure in action",
+        "likes": 24,
+        "retweets": 1
+      }
+    },
+    "tweet-4": {
+      "type": "TweetCard",
+      "props": {
+        "author": "aaronjmars",
+        "text": "we've got Hayek betting on Polymarket before GTA 6 miroshark coded",
+        "likes": 20,
+        "retweets": 4
+      }
+    },
+    "tweet-5": {
+      "type": "TweetCard",
+      "props": {
+        "author": "btcbabycow",
+        "text": "$AEON + $MiroShark both will fly — innovative, top-tier, already 700 stars on GitHub",
+        "likes": 14,
+        "retweets": 6
+      }
+    },
+    "tweet-6": {
+      "type": "TweetCard",
+      "props": {
+        "author": "BioStone_chad",
+        "text": "$MIROSHARK 70K → 330K+; FUDers regretting one dev can manage two AI tokens",
+        "likes": 7,
+        "retweets": 2
+      }
+    },
+    "tweet-7": {
+      "type": "TweetCard",
+      "props": {
+        "author": "unborninfinite",
+        "text": "Garry Tan nodded aaronjmars — consistently stacking GitHub stars on MiroShark. At 250K MC.",
+        "likes": 4,
+        "retweets": 0
+      }
+    },
+    "tweet-8": {
+      "type": "TweetCard",
+      "props": {
+        "author": "LemonSyncro",
+        "text": "Both will do extremely well. Potential blue chips. Keep your eye out for $Miroshark first public product release this week",
+        "likes": 1,
+        "retweets": 1
+      }
+    },
+    "tweet-9": {
+      "type": "TweetCard",
+      "props": {
+        "author": "krc20kult",
+        "text": "$miroshark millions",
+        "likes": 1,
+        "retweets": 0
+      }
+    },
+    "tweet-10": {
+      "type": "TweetCard",
+      "props": {
+        "author": "DaWachu80608",
+        "text": "Pitched garrytan: MiroShark = open-source Universal Swarm Intelligence Engine — hundreds of AI agents debating across Twitter/Reddit/Polymarket",
+        "likes": 0,
+        "retweets": 0
+      }
+    }
+  }
+}
