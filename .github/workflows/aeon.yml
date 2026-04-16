@@ -255,6 +255,7 @@ jobs:
           echo "$MSG" > ".pending-notify/${TS}.md"
 
           # Attempt immediate delivery (may fail in sandbox — post-run step retries)
+          DELIVERED=false
 
           # Telegram: 4096 char limit, strict Markdown parsing
           if [ -n "${TELEGRAM_BOT_TOKEN:-}" ] && [ -n "${TELEGRAM_CHAT_ID:-}" ]; then
@@ -269,22 +270,24 @@ jobs:
               -d "$(jq -n --arg chat "$TELEGRAM_CHAT_ID" --arg text "$TG_MSG" '{chat_id: $chat, text: $text, parse_mode: "Markdown"}')" 2>/dev/null) || true
             TG_HTTP=$(echo "$TG_RESULT" | tail -1)
             TG_OK=$(echo "$TG_RESULT" | sed '$d' | jq -r '.ok // false' 2>/dev/null || echo "false")
-            if [ "$TG_HTTP" != "200" ] || [ "$TG_OK" != "true" ]; then
+            if [ "$TG_HTTP" = "200" ] && [ "$TG_OK" = "true" ]; then
+              DELIVERED=true
+            else
               curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
                 -H "Content-Type: application/json" \
-                -d "$(jq -n --arg chat "$TELEGRAM_CHAT_ID" --arg text "$TG_MSG" '{chat_id: $chat, text: $text}')" > /dev/null 2>&1 || true
+                -d "$(jq -n --arg chat "$TELEGRAM_CHAT_ID" --arg text "$TG_MSG" '{chat_id: $chat, text: $text}')" > /dev/null 2>&1 && DELIVERED=true || true
             fi
           fi
 
           if [ -n "${DISCORD_WEBHOOK_URL:-}" ]; then
             curl -sf -X POST "$DISCORD_WEBHOOK_URL" \
               -H "Content-Type: application/json" \
-              -d "$(jq -n --arg text "$MSG" '{content: $text}')" > /dev/null || true
+              -d "$(jq -n --arg text "$MSG" '{content: $text}')" > /dev/null && DELIVERED=true || true
           fi
           if [ -n "${SLACK_WEBHOOK_URL:-}" ]; then
             curl -sf -X POST "$SLACK_WEBHOOK_URL" \
               -H "Content-Type: application/json" \
-              -d "$(jq -n --arg text "$MSG" '{text: $text}')" > /dev/null || true
+              -d "$(jq -n --arg text "$MSG" '{text: $text}')" > /dev/null && DELIVERED=true || true
           fi
           # Email via SendGrid
           if [ -n "${SENDGRID_API_KEY:-}" ] && [ -n "${NOTIFY_EMAIL_TO:-}" ]; then
@@ -308,6 +311,11 @@ jobs:
           if [ "${JSONRENDER_ENABLED:-false}" = "true" ] && [ -n "${SKILL_NAME:-}" ]; then
             mkdir -p dashboard/outputs
             echo "$MSG" > "dashboard/outputs/.pending-${SKILL_NAME}.md"
+          fi
+
+          # Remove pending file if immediate delivery succeeded (prevents double-send)
+          if [ "$DELIVERED" = "true" ]; then
+            rm -f ".pending-notify/${TS}.md"
           fi
           NOTIFY_SCRIPT
           chmod +x ./notify
