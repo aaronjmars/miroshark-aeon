@@ -13,11 +13,11 @@ skills:
 
   # --- Daily: Shipping & Content ---
   push-recap: { enabled: true, schedule: "0 15 * * *" }
-  project-lens: { enabled: true, schedule: "0 16 * * 1,3,5" }  # Mon, Wed, Fri
+  project-lens: { enabled: true, schedule: "0 16 * * *" }
 
   # --- Every 2 days: Content & Meta ---
   repo-actions: { enabled: true, schedule: "0 14 */2 * *", model: "claude-sonnet-4-6" }
-  repo-article: { enabled: true, schedule: "0 16 */2 * 0,2,4,6" }  # Off-days from project-lens
+  repo-article: { enabled: true, schedule: "0 16 * * *" }
   self-improve: { enabled: true, schedule: "0 13 */2 * *" }
 
   # --- Weekly ---
