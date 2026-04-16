@@ -7,15 +7,13 @@ var: ""
 
 Today is ${today}. Search X for tweets matching **${var}**.
 
-## Important — no deduplication
-
-**Do NOT deduplicate against `memory/logs/`.** Do not read prior `## Fetch Tweets` entries to filter out "already reported" tweets. Do not compute any SEEN_TWEETS set. If Grok returns a tweet URL that was reported yesterday, include it again today. Every run emits whatever Grok returns, unfiltered. Previous runs of this skill may show dedup language in the logs — that was an earlier behavior and has been removed. Ignore that pattern.
-
 ## Steps
 
-1. **Build the search prompt for Grok.** Pass `${var}` to Grok **verbatim** as the search query. Do NOT narrow it to a single angle (e.g. don't force "crypto token only", don't inject a contract address, don't filter by chain). Let Grok interpret OR/AND operators in the var as-is. The goal is broad coverage — token mentions, repo mentions, handle mentions, general chatter, all of it.
+1. **Load previously-reported tweet URLs** from the last 3 days of `memory/logs/`. Grep each log file for lines that match `https://x.com/` — collect all tweet URLs already reported. Keep this list as `SEEN_TWEETS` — you'll use it in step 5 to filter duplicates.
 
-2. **Search tweets.** Use whichever path is available:
+2. **Build the search prompt for Grok.** Pass `${var}` to Grok **verbatim** as the search query. Do NOT narrow it to a single angle (e.g. don't force "crypto token only", don't inject a contract address, don't filter by chain). Let Grok interpret OR/AND operators in the var as-is. The goal is broad coverage — token mentions, repo mentions, handle mentions, general chatter, all of it.
+
+3. **Search tweets.** Use whichever path is available:
 
    **Path A — pre-fetched cache** (preferred, when the workflow ran `scripts/prefetch-xai.sh`):
    ```bash
@@ -45,11 +43,13 @@ Today is ${today}. Search X for tweets matching **${var}**.
    `site:x.com "${query_terms}" after:${FROM_DATE}`
    Note at the top of the log entry: "XAI_API_KEY not available; results compiled via WebSearch". WebSearch rankings favour high-engagement older tweets — **prioritise results that mention a date within the last 48 hours** when possible.
 
-3. **If no relevant tweets found** (no results, API error, or empty): log "FETCH_TWEETS_EMPTY" to `memory/logs/${today}.md` and **stop here — do NOT send any notification**.
+4. **If no relevant tweets found** (no results, API error, or empty): log "FETCH_TWEETS_EMPTY" to `memory/logs/${today}.md` and **stop here — do NOT send any notification**.
 
-4. **Save the results** to `memory/logs/${today}.md`. Include tweet URLs, handles, and engagement so downstream skills (like `tweet-allocator`) can consume them. Do **NOT** add a "Deduplicated" or "already reported" field. Log every tweet Grok returned.
+5. **Deduplicate against `SEEN_TWEETS` from step 1.** Compare each candidate tweet URL against the collected set of already-reported URLs. Remove any tweet that was already reported in the last 3 days. If ALL tweets found are already in the recent logs: log "FETCH_TWEETS_NO_NEW: all results already reported" to `memory/logs/${today}.md` and **stop here — do NOT send any notification**.
 
-5. **Send a notification via `./notify`** with up to 10 tweets (all of them — never "new since last report", always just "top tweets"). Each tweet MUST include a clickable link. Use Telegram Markdown link format: `[link text](url)`.
+6. **Save the results** (new tweets only) to `memory/logs/${today}.md`. Include the tweet URLs, handles, and engagement so future runs can deduplicate and so downstream skills (like `tweet-allocator`) can consume them.
+
+7. **Send a notification via `./notify`** with up to 10 NEW tweets (those that survived dedup). Each tweet MUST include a clickable link. Use Telegram Markdown link format: `[link text](url)`.
 
    Format the notification like this:
    ```
