@@ -49,6 +49,7 @@
 | Post-Simulation Trace Interview | 2026-04-14 | Interview button on leaderboard rows — modal chat grounded in agent's actual trace (posts/actions per round), multi-turn, Share button (PR #26 on MiroShark) |
 | Heartbeat Auto-Trigger | 2026-04-14 | Heartbeat now auto-dispatches confirmed-missing skills via gh workflow run instead of just notifying (PR #11 on miroshark-aeon) |
 | Browser Push Notifications | 2026-04-15 | 🔕/🔔 toggle during simulation runs; Service Worker + VAPID + pywebpush; browser notified when simulation completes even if tab is hidden (PR #30 on MiroShark) |
+| Director Mode (Event Injection) | 2026-04-16 | Inject breaking events mid-simulation; file-based queue, marker-replace injection, Director panel UI, belief drift markers (PR #31 on MiroShark) |
 
 ## Watched Repos
 - `aaronjmars/aeon` — tracked in `memory/watched-repos.md`
