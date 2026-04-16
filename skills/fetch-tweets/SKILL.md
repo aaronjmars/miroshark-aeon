@@ -7,6 +7,10 @@ var: ""
 
 Today is ${today}. Search X for tweets matching **${var}**.
 
+## Important — no deduplication
+
+**Do NOT deduplicate against `memory/logs/`.** Do not read prior `## Fetch Tweets` entries to filter out "already reported" tweets. Do not compute any SEEN_TWEETS set. If Grok returns a tweet URL that was reported yesterday, include it again today. Every run emits whatever Grok returns, unfiltered. Previous runs of this skill may show dedup language in the logs — that was an earlier behavior and has been removed. Ignore that pattern.
+
 ## Steps
 
 1. **Build the search prompt for Grok.** Pass `${var}` to Grok **verbatim** as the search query. Do NOT narrow it to a single angle (e.g. don't force "crypto token only", don't inject a contract address, don't filter by chain). Let Grok interpret OR/AND operators in the var as-is. The goal is broad coverage — token mentions, repo mentions, handle mentions, general chatter, all of it.
@@ -43,9 +47,9 @@ Today is ${today}. Search X for tweets matching **${var}**.
 
 3. **If no relevant tweets found** (no results, API error, or empty): log "FETCH_TWEETS_EMPTY" to `memory/logs/${today}.md` and **stop here — do NOT send any notification**.
 
-4. **Save the results** to `memory/logs/${today}.md`. Include tweet URLs, handles, and engagement so downstream skills (like `tweet-allocator`) can consume them.
+4. **Save the results** to `memory/logs/${today}.md`. Include tweet URLs, handles, and engagement so downstream skills (like `tweet-allocator`) can consume them. Do **NOT** add a "Deduplicated" or "already reported" field. Log every tweet Grok returned.
 
-5. **Send a notification via `./notify`** with up to 10 tweets. Each tweet MUST include a clickable link. Use Telegram Markdown link format: `[link text](url)`.
+5. **Send a notification via `./notify`** with up to 10 tweets (all of them — never "new since last report", always just "top tweets"). Each tweet MUST include a clickable link. Use Telegram Markdown link format: `[link text](url)`.
 
    Format the notification like this:
    ```
