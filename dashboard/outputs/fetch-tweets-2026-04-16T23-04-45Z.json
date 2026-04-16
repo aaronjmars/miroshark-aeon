@@ -1,0 +1,45 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "Top Tweets — MIROSHARK (2026-04-16)"
+      },
+      "children": [
+        "stack"
+      ]
+    },
+    "stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "tweet",
+        "link"
+      ]
+    },
+    "tweet": {
+      "type": "TweetCard",
+      "props": {
+        "author": "aaronjmars",
+        "handle": "@aaronjmars",
+        "text": "MiroShark officially lands on X: launched the @miroshark_ account and $miroshark token handle",
+        "likes": 28,
+        "retweets": 6
+      },
+      "children": []
+    },
+    "link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/aaronjmars/status/2044164002280882528"
+      },
+      "children": []
+    }
+  }
+}
