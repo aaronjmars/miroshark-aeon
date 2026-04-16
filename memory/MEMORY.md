@@ -50,6 +50,7 @@
 | Heartbeat Auto-Trigger | 2026-04-14 | Heartbeat now auto-dispatches confirmed-missing skills via gh workflow run instead of just notifying (PR #11 on miroshark-aeon) |
 | Browser Push Notifications | 2026-04-15 | 🔕/🔔 toggle during simulation runs; Service Worker + VAPID + pywebpush; browser notified when simulation completes even if tab is hidden (PR #30 on MiroShark) |
 | Director Mode (Event Injection) | 2026-04-16 | Inject breaking events mid-simulation; file-based queue, marker-replace injection, Director panel UI, belief drift markers (PR #31 on MiroShark) |
+| Heartbeat Stuck-Run Timeout | 2026-04-16 | Heartbeat detects runs in_progress >2h as stuck, allows fresh dispatch bypassing dedup guard (PR #14 on miroshark-aeon) |
 
 ## Watched Repos
 - `aaronjmars/aeon` — tracked in `memory/watched-repos.md`
@@ -67,11 +68,7 @@
 
 ## Next Priorities
 - Configure notification channels (Telegram, Discord, or Slack)
-- MiroShark next feature candidates (repo-actions 2026-04-14): Statistical Batch Runs, Jupyter Notebook Export, REST API + Webhook, Hall of Fame /explore page
-- Hyperstition: MiroShark 500 stars — CLEARED 2026-04-07 (563 stars, 9 days early); now at 691 stars as of Apr 15
-- MIROSHARK new ATH: $0.000003815 set Apr 14 (+305% from launch close); post-ATH consolidation phase
-
-## Next Priorities
-- Configure notification channels (Telegram, Discord, or Slack)
 - XAI_API_KEY not set — tweet fetching falls back to WebSearch (limited freshness for recent tweets)
-- Next feature candidates from repo-actions Apr 14: Statistical Batch Runs (#1), Jupyter Notebook Export (#3), REST API + Webhooks (#4), Hall of Fame Page (#5)
+- Next feature candidates from repo-actions Apr 15: HuggingFace Inference API, Checkpoint & Resume, Agent Demographic Breakdown, RSS/Atom Feed
+- MIROSHARK new ATH: $0.000003815 set Apr 14 (+305% from launch close); post-ATH consolidation phase
+- MiroShark at 696 stars as of Apr 16
