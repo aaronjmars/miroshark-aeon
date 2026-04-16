@@ -65,5 +65,9 @@
     "total_failures": 0,
     "consecutive_failures": 0,
     "success_rate": 1
+  },
+  "repo-pulse": {
+    "last_dispatch": "2026-04-16T10:13:50Z",
+    "last_status": "dispatched"
   }
 }
