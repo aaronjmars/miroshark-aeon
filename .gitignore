@@ -2,3 +2,7 @@
 .claude/
 .DS_Store
 skills.lock
+.xai-cache/
+.bankr-cache/
+.pending-notify/
+.outputs/
