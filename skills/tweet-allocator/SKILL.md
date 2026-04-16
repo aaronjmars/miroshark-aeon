@@ -65,7 +65,17 @@ Read the last 3 days of memory/logs/ for any previous tweet-allocator entries (t
 
    Sort by score descending. Take the top 5 tweets (or fewer if less than 5 unpaid tweets exist).
 
-4. **Verify Bankr accounts.** For each top-scored tweet author, check if they have a Bankr wallet linked to their X handle. Use the Agent API:
+4. **Verify Bankr accounts — always check the pre-fetched cache first.** The workflow runs `scripts/prefetch-bankr.sh` before Claude starts, which queries the Bankr Agent API with full env access (`BANKR_API_KEY` in curl headers is blocked inside the sandbox — the cache is the authoritative source).
+
+   ```bash
+   cat .bankr-cache/verified-handles.json 2>/dev/null
+   ```
+
+   The cache is a JSON object mapping `{ "handle": "0xwallet" }` — or `null` if the handle has no Bankr wallet. Use it like this:
+   - If `.bankr-cache/verified-handles.json` exists: look up each candidate handle in the cache.
+     - Value is a `0x...` address → **verified**, include in allocation.
+     - Value is `null` or missing → **unverified**, exclude from allocation. List separately in the report with the note: "Sign up at bankr.bot to claim future rewards."
+   - If the cache file is missing or empty **and** `BANKR_API_KEY` is set, attempt the direct Agent API call as a fallback (likely to fail inside the sandbox, but worth trying):
 
    ```bash
    JOB_ID=$(curl -s -X POST "https://api.bankr.bot/agent/prompt" \
@@ -86,15 +96,11 @@ Read the last 3 days of memory/logs/ for any previous tweet-allocator entries (t
    done
    ```
 
-   Parse the response:
-   - If it returns a `0x...` address → **verified** — include in allocation
-   - If it says "no wallet" / "not found" / fails → **unverified** — exclude from allocation, list separately in the report with a note: "Sign up at bankr.bot to claim future rewards"
-
-   If `BANKR_API_KEY` is not set, skip verification and mark all handles as "unverified (no API key to check)".
+   - If both the cache and the direct API are unavailable, mark all handles as "unverified (no Bankr data available — check that `BANKR_API_KEY` is set as a GitHub secret and that `scripts/prefetch-bankr.sh` ran successfully in the workflow)".
 
    Only verified handles proceed to the allocation step.
 
-5. **Allocate the budget.** The daily budget is `${var}` if set, otherwise `10` (USD, paid in $MIROSHARK on Base).
+5. **Allocate the budget.** The daily budget is `${var}` if set, otherwise `10` **USD-equivalent, paid in $MIROSHARK on Base**. Always phrase the amount as "$X in $MIROSHARK" in every output (notification, report, log) so the reader understands the $-sign refers to USD value, not a cashtag for $MIROSHARK.
    - Distribute proportionally by score: each tweet's share = `(tweet_score / total_score) * budget`
    - Round to 2 decimal places ($MIROSHARK has 6 decimals, but keep amounts human-readable)
    - Minimum allocation: $0.50 per tweet. If proportional share is less, set to $0.50 and redistribute remainder.
@@ -127,17 +133,17 @@ Read the last 3 days of memory/logs/ for any previous tweet-allocator entries (t
    ```markdown
    # Tweet Allocation — ${today}
 
-   **Token:** $TOKEN | **Budget:** $X.XX $MIROSHARK | **Chain:** Base
+   **Token:** $MIROSHARK | **Budget:** $X.XX in $MIROSHARK | **Chain:** Base
 
    ## Rewards
 
    | Rank | Author | Tweet | Score | Reward | Status |
    |------|--------|-------|-------|--------|--------|
-   | 1 | x.com/handle | [summary](tweet_url) | XX | $X.XX | pending |
-   | 2 | x.com/handle | [summary](tweet_url) | XX | $X.XX | pending |
+   | 1 | x.com/handle | [summary](tweet_url) | XX | $X.XX in $MIROSHARK | pending |
+   | 2 | x.com/handle | [summary](tweet_url) | XX | $X.XX in $MIROSHARK | pending |
    | ... | | | | | |
 
-   **Total allocated:** $X.XX $MIROSHARK (manual send required)
+   **Total allocated:** $X.XX in $MIROSHARK (manual send required)
    **Recipients:** N authors
 
    ## Scoring Method
@@ -151,33 +157,34 @@ Read the last 3 days of memory/logs/ for any previous tweet-allocator entries (t
    ```
    *Tweet Rewards — ${today}*
 
-   Budget: $X.XX $MIROSHARK on Base
+   Budget: $X.XX in $MIROSHARK on Base
 
-   1. x.com/handle — $X.XX $MIROSHARK (score: XX)
+   1. x.com/handle — $X.XX in $MIROSHARK (score: XX)
       [brief summary]
       [View tweet](tweet_url)
 
-   2. x.com/handle — $X.XX $MIROSHARK (score: XX)
+   2. x.com/handle — $X.XX in $MIROSHARK (score: XX)
       [brief summary]
       [View tweet](tweet_url)
 
    ...
 
-   Total: $X.XX allocated to N authors (manual send)
+   Total: $X.XX in $MIROSHARK allocated to N authors (manual send)
    ```
 
-   IMPORTANT: Do NOT use @handle format in the notification — it pings users on Telegram. Use x.com/handle instead.
+   IMPORTANT: Do NOT use @handle format in the notification — it pings users on Telegram. Use x.com/handle instead. Always write "$X.XX in $MIROSHARK" (not just "$X.XX $MIROSHARK") so the USD-vs-cashtag distinction is unambiguous.
 
 9. **Log** to `memory/logs/${today}.md`:
    ```markdown
    ## Tweet Allocator — ${today}
    - **Status**: TWEET_ALLOCATOR_OK (or _EMPTY / _SKIPPED / _ERROR)
-   - **Budget**: $X.XX $MIROSHARK
+   - **Budget**: $X.XX in $MIROSHARK
+   - **Bankr cache**: yes / no (source: `.bankr-cache/verified-handles.json` — if no, note whether BANKR_API_KEY was missing or prefetch failed)
    - **Tweets scored**: N total, M unpaid, K rewarded
    - **Paid tweets**:
-     - x.com/handle — $X.XX $MIROSHARK — tweet_url — PENDING (manual send)
-     - x.com/handle — $X.XX $MIROSHARK — tweet_url — PENDING (manual send)
-   - **Total distributed**: $X.XX / $X.XX
+     - x.com/handle — $X.XX in $MIROSHARK — tweet_url — PENDING (manual send)
+     - x.com/handle — $X.XX in $MIROSHARK — tweet_url — PENDING (manual send)
+   - **Total distributed**: $X.XX / $X.XX in $MIROSHARK
    - **Notification sent**: yes / no (reason)
    ```
 
@@ -188,7 +195,7 @@ Read the last 3 days of memory/logs/ for any previous tweet-allocator entries (t
 
 ## Sandbox note
 
-The Bankr Agent API requires `BANKR_API_KEY` in the header — sandbox may block env var expansion in curl. If curl fails, use the pre-fetch pattern: add a `tweet-allocator` case to `scripts/prefetch-xai.sh` (or a new `scripts/prefetch-bankr.sh`) that runs handle lookups before Claude starts and caches results to `.bankr-cache/verified-handles.json`.
+The Bankr Agent API requires `BANKR_API_KEY` in the header — **the sandbox blocks env var expansion in curl**, which makes direct calls from this skill fail reliably. The fix is the pre-fetch pattern: `scripts/prefetch-bankr.sh` runs **before** Claude starts with full env access, queries Bankr for each candidate handle, and caches the wallet mappings to `.bankr-cache/verified-handles.json`. Always read that cache first (step 4). If the cache is missing, it means either `BANKR_API_KEY` is not set as a GitHub secret or the prefetch script failed — check the workflow log.
 
 ## Logging
 

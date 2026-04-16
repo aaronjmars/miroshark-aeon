@@ -9,15 +9,16 @@ Today is ${today}. Search X for tweets matching **${var}**.
 
 ## Steps
 
-1. **Build the search prompt for Grok.** The prompt sent to Grok must be specific enough to get relevant results:
-   - If the query mentions a token/cashtag/crypto: include "crypto token", the chain name, and the contract address from `memory/MEMORY.md` in the Grok prompt. This eliminates false matches.
-   - Example: instead of searching "aeon", search "the $AEON crypto token on Base chain (contract 0xbf8e...) in the last 7 days. Only return tweets about the cryptocurrency."
+1. **Build the search prompt for Grok.** Pass `${var}` to Grok **verbatim** as the search query. Do NOT narrow it to a single angle (e.g. don't force "crypto token only", don't inject a contract address, don't filter by chain). Let Grok interpret OR/AND operators in the var as-is. The goal is broad coverage — token mentions, repo mentions, handle mentions, general chatter, all of it.
 
-2. **Load previously-reported tweet URLs** from the last 3 days of `memory/logs/`. Grep each log file for lines that match `https://x.com/` — collect all tweet URLs already reported. You'll use these to filter duplicates in step 4.
+2. **Search tweets.** Use whichever path is available:
 
-3. **Search tweets.** Use whichever path is available:
+   **Path A — pre-fetched cache** (preferred, when the workflow ran `scripts/prefetch-xai.sh`):
+   ```bash
+   cat .xai-cache/fetch-tweets.json 2>/dev/null | jq -r '.output[] | select(.type == "message") | .content[] | select(.type == "output_text") | .text'
+   ```
 
-   **Path A — X.AI API** (preferred, use when `XAI_API_KEY` is set):
+   **Path B — X.AI API** (fallback, use when `XAI_API_KEY` is set and cache is empty):
    ```bash
    FROM_DATE=$(date -u -d "7 days ago" +%Y-%m-%d 2>/dev/null || date -u -v-7d +%Y-%m-%d)
    TO_DATE=$(date -u +%Y-%m-%d)
@@ -26,7 +27,7 @@ Today is ${today}. Search X for tweets matching **${var}**.
      -H "Authorization: Bearer $XAI_API_KEY" \
      -d '{
        "model": "grok-4-1-fast",
-       "input": [{"role": "user", "content": "YOUR_SEARCH_PROMPT_HERE. Date range: '"$FROM_DATE"' to '"$TO_DATE"'. Return 10 tweets — prioritize the most interesting, insightful, or highly-engaged posts. For each tweet include: @handle, the full text, date posted, engagement (likes/retweets if available), and the direct link (https://x.com/handle/status/ID). Return as a numbered list."}],
+       "input": [{"role": "user", "content": "Search X for ALL tweets about: ${var}. Date range: '"$FROM_DATE"' to '"$TO_DATE"'. Return at least 10 tweets (more if available) — prioritize the most interesting, insightful, or highly-engaged posts but also include smaller accounts. For each tweet include: @handle, the full text, date posted, engagement (likes/retweets if available), and the direct link (https://x.com/handle/status/ID). Return as a numbered list."}],
        "tools": [{"type": "x_search"}]
      }'
    ```
@@ -35,21 +36,16 @@ Today is ${today}. Search X for tweets matching **${var}**.
    echo "$RESPONSE" | jq -r '.output[] | select(.type == "message") | .content[] | select(.type == "output_text") | .text'
    ```
 
-   **Path B — WebSearch fallback** (use when `XAI_API_KEY` is NOT set):
+   **Path C — WebSearch fallback** (use when both cache and XAI_API_KEY are unavailable):
    Use the built-in WebSearch tool to search for recent tweets. Construct a query like:
    `site:x.com "${query_terms}" after:${FROM_DATE}`
    Note at the top of the log entry: "XAI_API_KEY not available; results compiled via WebSearch". WebSearch rankings favour high-engagement older tweets — **prioritise results that mention a date within the last 48 hours** when possible.
 
-4. **Deduplicate against previously-reported tweets** (from step 2):
-   - Compare each candidate tweet URL against the collected set of already-reported URLs.
-   - Remove any tweet that was already reported in the last 3 days.
-   - If ALL tweets found are already in the recent logs: log "FETCH_TWEETS_NO_NEW: all results already reported" to `memory/logs/${today}.md` and **stop here — do NOT send any notification**.
+3. **If no relevant tweets found** (no results, API error, or empty): log "FETCH_TWEETS_EMPTY" to `memory/logs/${today}.md` and **stop here — do NOT send any notification**.
 
-5. **If no relevant tweets found** (no results, API error, or empty after dedup): log "FETCH_TWEETS_EMPTY" to `memory/logs/${today}.md` and **stop here — do NOT send any notification**.
+4. **Save the results** to `memory/logs/${today}.md`. Include tweet URLs, handles, and engagement so downstream skills (like `tweet-allocator`) can consume them.
 
-6. **Save the results** (new tweets only) to `memory/logs/${today}.md`.
-
-7. **Send a notification via `./notify`** with the top NEW tweets. Each tweet MUST include a clickable link. Use Telegram Markdown link format: `[link text](url)`.
+5. **Send a notification via `./notify`** with up to 10 tweets. Each tweet MUST include a clickable link. Use Telegram Markdown link format: `[link text](url)`.
 
    Format the notification like this:
    ```
@@ -60,10 +56,6 @@ Today is ${today}. Search X for tweets matching **${var}**.
    [View tweet](https://x.com/handle/status/ID)
 
    2. x.com/handle — [brief summary]
-   Likes: X | RTs: Y
-   [View tweet](https://x.com/handle/status/ID)
-
-   3. x.com/handle — [brief summary]
    Likes: X | RTs: Y
    [View tweet](https://x.com/handle/status/ID)
 
