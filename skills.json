@@ -2,7 +2,7 @@
   "version": "1.0",
   "generated": "2026-04-04T00:00:00Z",
   "repo": "aaronjmars/aeon",
-  "total": 54,
+  "total": 55,
   "categories": {
     "research": "Research & Content",
     "dev": "Dev & Code",
@@ -114,7 +114,7 @@
     {
       "slug": "deep-research",
       "name": "Deep Research",
-      "description": "Exhaustive multi-source synthesis on any topic — 30-50 sources, 3000-5000 word analyst-grade report",
+      "description": "Exhaustive multi-source synthesis on any topic \u2014 30-50 sources, 3000-5000 word analyst-grade report",
       "category": "research",
       "schedule": "on-demand",
       "var": "",
@@ -324,7 +324,7 @@
     {
       "slug": "defi-overview",
       "name": "DeFi Overview",
-      "description": "Daily overview of DeFi activity from DeFiLlama — TVL changes, top chains, top protocols",
+      "description": "Daily overview of DeFi activity from DeFiLlama \u2014 TVL changes, top chains, top protocols",
       "category": "crypto",
       "schedule": "0 12 * * *",
       "var": "",
@@ -334,7 +334,7 @@
     {
       "slug": "polymarket",
       "name": "Polymarket",
-      "description": "Trending and top markets on Polymarket — volume, new markets, biggest movers",
+      "description": "Trending and top markets on Polymarket \u2014 volume, new markets, biggest movers",
       "category": "crypto",
       "schedule": "0 12 * * *",
       "var": "",
@@ -404,7 +404,7 @@
     {
       "slug": "morning-brief",
       "name": "Morning Brief",
-      "description": "Aggregated daily briefing — digests, priorities, and what's ahead",
+      "description": "Aggregated daily briefing \u2014 digests, priorities, and what's ahead",
       "category": "productivity",
       "schedule": "0 7 * * *",
       "var": "",
@@ -424,7 +424,7 @@
     {
       "slug": "heartbeat",
       "name": "Heartbeat",
-      "description": "Proactive ambient check — surface anything worth attention",
+      "description": "Proactive ambient check \u2014 surface anything worth attention",
       "category": "productivity",
       "schedule": "0 12 * * *",
       "var": "",
@@ -504,7 +504,7 @@
     {
       "slug": "idea-capture",
       "name": "Idea Capture",
-      "description": "Quick note capture triggered via Telegram — stores to memory",
+      "description": "Quick note capture triggered via Telegram \u2014 stores to memory",
       "category": "productivity",
       "schedule": "0 14 * * *",
       "var": "",
@@ -534,7 +534,7 @@
     {
       "slug": "distribute-tokens",
       "name": "Distribute Tokens",
-      "description": "Send tokens to contributors via Bankr Agent API — supports Twitter handles and EVM addresses",
+      "description": "Send tokens to contributors via Bankr Agent API \u2014 supports Twitter handles and EVM addresses",
       "category": "crypto",
       "schedule": "on-demand",
       "var": "",
@@ -550,6 +550,16 @@
       "var": "",
       "files": 1,
       "install": "./add-skill aaronjmars/aeon fork-fleet"
+    },
+    {
+      "slug": "tweet-allocator",
+      "name": "Tweet Allocator",
+      "description": "Allocate daily rewards to top tweeters about the project token",
+      "category": "crypto",
+      "schedule": "0 8 * * *",
+      "var": "",
+      "files": 1,
+      "install": "./add-skill aaronjmars/aeon tweet-allocator"
     }
   ],
   "install_all": "./add-skill aaronjmars/aeon --all",

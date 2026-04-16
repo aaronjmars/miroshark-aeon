@@ -1,12 +1,12 @@
 ---
 name: tweet-allocator
-description: Allocate $10/day in USDC to top tweeters about the project — rewards organic engagement
+description: Allocate $10/day worth of $MIROSHARK to top tweeters about the project — rewards organic engagement
 var: ""
 tags: [crypto, social]
 ---
 > **${var}** — Override daily budget (e.g. "20" for $20/day). If empty, defaults to $10/day.
 
-Today is ${today}. Distribute USDC rewards to the authors of the best tweets about this project's token.
+Today is ${today}. Distribute $MIROSHARK rewards to the authors of the best tweets about this project's token.
 
 ## Config
 
@@ -94,9 +94,9 @@ Read the last 3 days of memory/logs/ for any previous tweet-allocator entries (t
 
    Only verified handles proceed to the allocation step.
 
-5. **Allocate the budget.** The daily budget is `${var}` if set, otherwise `10` (USD, paid in USDC on Base).
+5. **Allocate the budget.** The daily budget is `${var}` if set, otherwise `10` (USD, paid in $MIROSHARK on Base).
    - Distribute proportionally by score: each tweet's share = `(tweet_score / total_score) * budget`
-   - Round to 2 decimal places (USDC has 6 decimals, but keep amounts human-readable)
+   - Round to 2 decimal places ($MIROSHARK has 6 decimals, but keep amounts human-readable)
    - Minimum allocation: $0.50 per tweet. If proportional share is less, set to $0.50 and redistribute remainder.
    - If the budget can't cover all selected tweets at $0.50 minimum, reduce the number of tweets until it fits.
 
@@ -105,19 +105,19 @@ Read the last 3 days of memory/logs/ for any previous tweet-allocator entries (t
    **If `BANKR_SEND_KEY` is NOT set (default — manual mode):**
    Do NOT send any tokens. Output the allocation plan so the operator can execute transfers manually. For each allocated tweet, list:
    - The X handle (as `@handle` — the format needed for Bankr)
-   - The USDC amount
+   - The $MIROSHARK amount
    - The tweet URL (for reference)
    - The verified wallet address (from step 4)
 
    Save as a ready-to-execute list. The operator will use `distribute-tokens` or the Bankr dashboard to send.
 
    **If `BANKR_SEND_KEY` IS set (auto-send mode):**
-   Send USDC to each verified handle using the read-write key:
+   Send $MIROSHARK to each verified handle using the read-write key:
    ```bash
    JOB_ID=$(curl -s -X POST "https://api.bankr.bot/agent/prompt" \
      -H "X-API-Key: ${BANKR_SEND_KEY}" \
      -H "Content-Type: application/json" \
-     -d '{"prompt":"send '"${amount}"' USDC to @'"${handle}"' on base"}' \
+     -d '{"prompt":"send '"${amount}"' $MIROSHARK to @'"${handle}"' on base"}' \
      | jq -r '.jobId')
    ```
    Poll for completion (max 60s, 8s intervals). Record each result: handle, amount, status, tx hash or error.
@@ -127,7 +127,7 @@ Read the last 3 days of memory/logs/ for any previous tweet-allocator entries (t
    ```markdown
    # Tweet Allocation — ${today}
 
-   **Token:** $TOKEN | **Budget:** $X.XX USDC | **Chain:** Base
+   **Token:** $TOKEN | **Budget:** $X.XX $MIROSHARK | **Chain:** Base
 
    ## Rewards
 
@@ -137,7 +137,7 @@ Read the last 3 days of memory/logs/ for any previous tweet-allocator entries (t
    | 2 | x.com/handle | [summary](tweet_url) | XX | $X.XX | pending |
    | ... | | | | | |
 
-   **Total allocated:** $X.XX USDC (manual send required)
+   **Total allocated:** $X.XX $MIROSHARK (manual send required)
    **Recipients:** N authors
 
    ## Scoring Method
@@ -151,13 +151,13 @@ Read the last 3 days of memory/logs/ for any previous tweet-allocator entries (t
    ```
    *Tweet Rewards — ${today}*
 
-   Budget: $X.XX USDC on Base
+   Budget: $X.XX $MIROSHARK on Base
 
-   1. x.com/handle — $X.XX USDC (score: XX)
+   1. x.com/handle — $X.XX $MIROSHARK (score: XX)
       [brief summary]
       [View tweet](tweet_url)
 
-   2. x.com/handle — $X.XX USDC (score: XX)
+   2. x.com/handle — $X.XX $MIROSHARK (score: XX)
       [brief summary]
       [View tweet](tweet_url)
 
@@ -172,11 +172,11 @@ Read the last 3 days of memory/logs/ for any previous tweet-allocator entries (t
    ```markdown
    ## Tweet Allocator — ${today}
    - **Status**: TWEET_ALLOCATOR_OK (or _EMPTY / _SKIPPED / _ERROR)
-   - **Budget**: $X.XX USDC
+   - **Budget**: $X.XX $MIROSHARK
    - **Tweets scored**: N total, M unpaid, K rewarded
    - **Paid tweets**:
-     - x.com/handle — $X.XX USDC — tweet_url — PENDING (manual send)
-     - x.com/handle — $X.XX USDC — tweet_url — PENDING (manual send)
+     - x.com/handle — $X.XX $MIROSHARK — tweet_url — PENDING (manual send)
+     - x.com/handle — $X.XX $MIROSHARK — tweet_url — PENDING (manual send)
    - **Total distributed**: $X.XX / $X.XX
    - **Notification sent**: yes / no (reason)
    ```
