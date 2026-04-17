@@ -47,6 +47,7 @@ These Apr 17 tweets arrived after today's budget was committed. Eligible for tom
 | x.com/ToCryp84 | [$miroshark $base CEX/DEX soon](https://x.com/ToCryp84/status/2044818710389502204) | 1 | 0x53e07a6eab521c1470d639606b32e0f84a344420 |
 | x.com/Soupforalphabet | [LFG $miroshark](https://x.com/Soupforalphabet/status/2044742290652926339) | 1 | 0xbe7e2034deb0b62d78f341e6ed0a552bcb91904a |
 | x.com/joraweb3 | [$miroshark repo share](https://x.com/joraweb3/status/2044919185663271124) | 1 | 0x3877907b11850f183fb7df9b1942b4e56c87b0f0 |
+| x.com/LemonSyncro | [testing $Miroshark x @bankrbot rewards today](https://x.com/LemonSyncro/status/2044686209880904102) | 1 | 0x7ca1dea72b79cf413d5a4c55ada3c9cfe543ee2c | paid today via run 1 (different tweet) — this tweet eligible for a future date |
 
 ## Not Eligible
 - x.com/btcbabycow — confirmed NO Bankr wallet (from 2026-04-16 run 2). Sign up at bankr.bot to claim future rewards.
