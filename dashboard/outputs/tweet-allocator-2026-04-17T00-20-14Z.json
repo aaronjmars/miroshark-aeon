@@ -1,0 +1,426 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Tweet Rewards Verified — 2026-04-17",
+        "description": "Budget allocation for verified tweets on Base network"
+      },
+      "children": [
+        "budget_section",
+        "sep1",
+        "rewards_list",
+        "sep2",
+        "total_section"
+      ]
+    },
+    "budget_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "budget_label",
+        "budget_stat"
+      ]
+    },
+    "budget_label": {
+      "type": "Text",
+      "props": {
+        "text": "Budget:",
+        "variant": "body"
+      }
+    },
+    "budget_stat": {
+      "type": "Stat",
+      "props": {
+        "label": "$MIROSHARK on Base",
+        "value": "$10.00"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "rewards_list": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "lg"
+      },
+      "children": [
+        "reward_1",
+        "reward_2",
+        "reward_3",
+        "reward_4",
+        "reward_5"
+      ]
+    },
+    "reward_1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "reward_1_header",
+        "reward_1_amount",
+        "reward_1_tweet",
+        "reward_1_wallet",
+        "reward_1_link"
+      ]
+    },
+    "reward_1_header": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "reward_1_handle",
+        "reward_1_score"
+      ]
+    },
+    "reward_1_handle": {
+      "type": "Heading",
+      "props": {
+        "text": "x.com/Chainriffs",
+        "level": "h3"
+      }
+    },
+    "reward_1_score": {
+      "type": "Badge",
+      "props": {
+        "text": "score: 49",
+        "variant": "secondary"
+      }
+    },
+    "reward_1_amount": {
+      "type": "Stat",
+      "props": {
+        "value": "$3.66 in $MIROSHARK"
+      }
+    },
+    "reward_1_tweet": {
+      "type": "Text",
+      "props": {
+        "text": "feels like running a parallel universe 24/7",
+        "variant": "body"
+      }
+    },
+    "reward_1_wallet": {
+      "type": "Text",
+      "props": {
+        "text": "0xe90ee9cb1a922ff24e6d8a4baa73542d54a9d521",
+        "variant": "caption"
+      }
+    },
+    "reward_1_link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/Chainriffs/status/2043931761466376271"
+      }
+    },
+    "reward_2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "reward_2_header",
+        "reward_2_amount",
+        "reward_2_tweet",
+        "reward_2_wallet",
+        "reward_2_link"
+      ]
+    },
+    "reward_2_header": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "reward_2_handle",
+        "reward_2_score"
+      ]
+    },
+    "reward_2_handle": {
+      "type": "Heading",
+      "props": {
+        "text": "x.com/LemonSyncro",
+        "level": "h3"
+      }
+    },
+    "reward_2_score": {
+      "type": "Badge",
+      "props": {
+        "text": "score: 37",
+        "variant": "secondary"
+      }
+    },
+    "reward_2_amount": {
+      "type": "Stat",
+      "props": {
+        "value": "$2.76 in $MIROSHARK"
+      }
+    },
+    "reward_2_tweet": {
+      "type": "Text",
+      "props": {
+        "text": "Paradigm CEO gave MiroShark a star rating",
+        "variant": "body"
+      }
+    },
+    "reward_2_wallet": {
+      "type": "Text",
+      "props": {
+        "text": "0x7ca1dea72b79cf413d5a4c55ada3c9cfe543ee2c",
+        "variant": "caption"
+      }
+    },
+    "reward_2_link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/LemonSyncro/status/2043910792991350879"
+      }
+    },
+    "reward_3": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "reward_3_header",
+        "reward_3_amount",
+        "reward_3_tweet",
+        "reward_3_wallet",
+        "reward_3_link"
+      ]
+    },
+    "reward_3_header": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "reward_3_handle",
+        "reward_3_score"
+      ]
+    },
+    "reward_3_handle": {
+      "type": "Heading",
+      "props": {
+        "text": "x.com/Whale_AI_net",
+        "level": "h3"
+      }
+    },
+    "reward_3_score": {
+      "type": "Badge",
+      "props": {
+        "text": "score: 30",
+        "variant": "secondary"
+      }
+    },
+    "reward_3_amount": {
+      "type": "Stat",
+      "props": {
+        "value": "$2.24 in $MIROSHARK"
+      }
+    },
+    "reward_3_tweet": {
+      "type": "Text",
+      "props": {
+        "text": "Keep an eye on $MiroShark — Universal Swarm Intelligence Engine",
+        "variant": "body"
+      }
+    },
+    "reward_3_wallet": {
+      "type": "Text",
+      "props": {
+        "text": "0x2fc6679ce253a9bce121fa2a37310170d3deaa21",
+        "variant": "caption"
+      }
+    },
+    "reward_3_link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/Whale_AI_net/status/2043916251026559205"
+      }
+    },
+    "reward_4": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "reward_4_header",
+        "reward_4_amount",
+        "reward_4_tweet",
+        "reward_4_wallet",
+        "reward_4_link"
+      ]
+    },
+    "reward_4_header": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "reward_4_handle",
+        "reward_4_score"
+      ]
+    },
+    "reward_4_handle": {
+      "type": "Heading",
+      "props": {
+        "text": "x.com/BioStone_chad",
+        "level": "h3"
+      }
+    },
+    "reward_4_score": {
+      "type": "Badge",
+      "props": {
+        "text": "score: 10",
+        "variant": "secondary"
+      }
+    },
+    "reward_4_amount": {
+      "type": "Stat",
+      "props": {
+        "value": "$0.75 in $MIROSHARK"
+      }
+    },
+    "reward_4_tweet": {
+      "type": "Text",
+      "props": {
+        "text": "$MIROSHARK up 5x from 70K MC alongside $AEON",
+        "variant": "body"
+      }
+    },
+    "reward_4_wallet": {
+      "type": "Text",
+      "props": {
+        "text": "0x44a7c052665e6023b58f89e567a99951de6786d7",
+        "variant": "caption"
+      }
+    },
+    "reward_4_link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/BioStone_chad/status/2044069547477798983"
+      }
+    },
+    "reward_5": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "reward_5_header",
+        "reward_5_amount",
+        "reward_5_tweet",
+        "reward_5_wallet",
+        "reward_5_link"
+      ]
+    },
+    "reward_5_header": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "reward_5_handle",
+        "reward_5_score"
+      ]
+    },
+    "reward_5_handle": {
+      "type": "Heading",
+      "props": {
+        "text": "x.com/PremierBase",
+        "level": "h3"
+      }
+    },
+    "reward_5_score": {
+      "type": "Badge",
+      "props": {
+        "text": "score: 8",
+        "variant": "secondary"
+      }
+    },
+    "reward_5_amount": {
+      "type": "Stat",
+      "props": {
+        "value": "$0.59 in $MIROSHARK"
+      }
+    },
+    "reward_5_tweet": {
+      "type": "Text",
+      "props": {
+        "text": "Trending Base tokens: Miro Shark +36.60%, AEON +99.67%",
+        "variant": "body"
+      }
+    },
+    "reward_5_wallet": {
+      "type": "Text",
+      "props": {
+        "text": "0xb126f0665f8323d6edf07222437d4ef13ecf4990",
+        "variant": "caption"
+      }
+    },
+    "reward_5_link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/PremierBase/status/2043965038189551812"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "total_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "total_text",
+        "total_stat"
+      ]
+    },
+    "total_text": {
+      "type": "Text",
+      "props": {
+        "text": "Total allocation:",
+        "variant": "body"
+      }
+    },
+    "total_stat": {
+      "type": "Stat",
+      "props": {
+        "value": "$10.00 in $MIROSHARK",
+        "label": "to 5 authors (manual send)"
+      }
+    }
+  }
+}
