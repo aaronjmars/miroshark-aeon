@@ -1,0 +1,116 @@
+{
+  "root": "card-root",
+  "state": {},
+  "elements": {
+    "card-root": {
+      "type": "Card",
+      "props": {
+        "title": "repo-article"
+      },
+      "children": [
+        "heading-main",
+        "text-intro",
+        "text-repo-desc",
+        "stack-stats",
+        "text-all-merged",
+        "sep-1",
+        "text-technical",
+        "sep-2",
+        "link-article"
+      ]
+    },
+    "heading-main": {
+      "type": "Heading",
+      "props": {
+        "text": "The Agent That Ships the Simulator: A Week Inside miroshark-aeon",
+        "level": "h2"
+      }
+    },
+    "text-intro": {
+      "type": "Text",
+      "props": {
+        "text": "Second repo-article today — this one turns the lens on the watched agent itself."
+      }
+    },
+    "text-repo-desc": {
+      "type": "Text",
+      "props": {
+        "text": "miroshark-aeon is the 7-star TypeScript repo running MiroShark's whole daily loop:"
+      }
+    },
+    "stack-stats": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stat-skills",
+        "stat-commits",
+        "stat-prs",
+        "stat-patch"
+      ]
+    },
+    "stat-skills": {
+      "type": "Stat",
+      "props": {
+        "label": "Scheduled skills",
+        "value": "15"
+      }
+    },
+    "stat-commits": {
+      "type": "Stat",
+      "props": {
+        "label": "Commits today",
+        "value": "85"
+      }
+    },
+    "stat-prs": {
+      "type": "Stat",
+      "props": {
+        "label": "Feature PRs (#32, #33)",
+        "value": "2"
+      }
+    },
+    "stat-patch": {
+      "type": "Stat",
+      "props": {
+        "label": "Self-patch merged (#16)",
+        "value": "1"
+      }
+    },
+    "text-all-merged": {
+      "type": "Text",
+      "props": {
+        "text": "All merged in a single day."
+      }
+    },
+    "sep-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "text-technical": {
+      "type": "Text",
+      "props": {
+        "text": "The technical angle: self-modifying scaffolding plus a prefetch/postprocess sandbox handoff that keeps credentials out of Claude's shell.",
+        "variant": "lead"
+      }
+    },
+    "sep-2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "link-article": {
+      "type": "StoryLink",
+      "props": {
+        "title": "The Agent That Ships the Simulator: A Week Inside miroshark-aeon",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-04-17-miroshark-aeon.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}
