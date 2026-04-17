@@ -203,6 +203,9 @@ jobs:
           BANKR_API_KEY: ${{ secrets.BANKR_API_KEY }}
           COINGECKO_API_KEY: ${{ secrets.COINGECKO_API_KEY }}
           ALCHEMY_API_KEY: ${{ secrets.ALCHEMY_API_KEY }}
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          DEVTO_API_KEY: ${{ secrets.DEVTO_API_KEY }}
+          NEYNAR_API_KEY: ${{ secrets.NEYNAR_API_KEY }}
           JSONRENDER_ENABLED: ${{ vars.JSONRENDER_ENABLED || 'true' }}
           SKILL_VAR: ${{ inputs.var }}
         run: |
