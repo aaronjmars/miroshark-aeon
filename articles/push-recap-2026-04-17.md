@@ -1,9 +1,9 @@
 # Push Recap — 2026-04-17
 
 ## Overview
-88 commits across two repos by 2 authors (aaronjmars, Aeon). The day's main thrust: MiroShark gained a full post-simulation analytics suite — quality diagnostics and an agent interaction network graph — while the Aeon agent framework got a hardened tweet pipeline and a new $MIROSHARK-denominated reward allocator. A large OpenRouter observability commit on MiroShark also overhauled model configuration, agent tracking, and UI polish across 24 files.
+96 commits across two repos by 2 authors (aaronjmars, Aeon). The day's main thrust: MiroShark gained a full post-simulation analytics suite — quality diagnostics and an agent interaction network graph — while the Aeon agent framework got a hardened tweet pipeline, a new $MIROSHARK-denominated reward allocator, a late-afternoon upstream sync + Opus 4.7 upgrade, and a missing-secret forwarding fix. A large OpenRouter observability commit on MiroShark also overhauled model configuration, agent tracking, and UI polish across 24 files.
 
-**Stats:** ~55 files changed, +3,050/-630 lines across 88 commits
+**Stats:** ~110 files changed, +3,230/-830 lines across 96 commits
 
 ---
 
@@ -125,16 +125,55 @@
 
 ---
 
+### Late-Afternoon Upstream Sync, Opus 4.7 Upgrade & Secret Forwarding
+**Summary:** Between 15:20 and 16:42 UTC Aaron landed eight follow-up commits that reconcile the fork with upstream Aeon, bump the default model to Opus 4.7, and fix a silent-failure class where skills referenced env secrets the workflow never forwarded. Nearly every skill file was touched — mostly to inject the `tags:` frontmatter line that upstream now expects.
+
+**Commits:**
+- `468e62b` — harden: XAI 429 retry + GH_GLOBAL token fallback on checkouts
+  - Changed `scripts/prefetch-xai.sh`: single 30s-backoff retry on HTTP 429 responses; 401/403/curl failures still fail fast (+25/-13 lines)
+  - Changed `.github/workflows/aeon.yml` and `messages.yml`: checkout tokens now fall through `GH_GLOBAL || GITHUB_TOKEN`, unblocking cross-repo pushes when GH_GLOBAL is the configured secret (+3/-3 lines)
+
+- `a924cff` — sync(skills): backport upstream polish + normalize fetch-tweets frontmatter
+  - Changed 16 skills (changelog, code-health, defi-overview, fetch-tweets, github-issues, github-trending, issue-triage, pr-review, reddit-digest, reflect, research-brief, rss-digest, search-skill, security-digest, token-movers, weekly-review): tags frontmatter added; `reflect` now runs a skill-health trend check; fetch-tweets frontmatter normalized (capitalized name, `tags: [social]`) — body unchanged since upstream just adopted the hardened pipeline (+46/-1 lines)
+
+- `5c21220` — chore(skills): inject tags frontmatter from upstream aeon
+  - Changed 32 skills: added missing `tags:` lines to every skill shared with upstream that was behind on frontmatter metadata. 100% of shared skills now tagged (+32 lines)
+
+- `dab7e2c` — chore(skills): tag fork-only skills + fix stale output/ paths + images/
+  - Changed 11 fork-specific skills (build-skill, feature, hn-digest, hyperstitions-ideas, memory-flush, polymarket, search-papers, self-review, trending-coins, tweet-digest, wallet-digest): tags frontmatter added
+  - Changed `channel-recap`, `tool-builder`, `vuln-scanner`: replaced stale `output/articles/` → `articles/` and `output/skills/` → `.outputs/` path references
+  - New `images/.gitkeep`: reserved folder for hero-image post-process writes (+18/-7 lines)
+
+- `cf30c98` — chore: standardize .gitignore, remove tracked scratch + dead gitlinks
+  - Changed `.gitignore`: aligned with upstream aeon format, explicit patterns (+44/-2 lines)
+  - Removed 2 stale gitlink submodules (`.build-target`, `build-target`) pointing at abandoned repos
+  - Removed 11 tracked scratch files (`.ghtoken`, 6× `tmp_*` notify/grok files, `fetch_tweets.sh`, `fetch_tweets_run.sh`, `grok_search.py`) — one-off scripts superseded by `scripts/prefetch-xai.sh` and `skills/fetch-tweets/` (-154 lines)
+
+- `debd724` — chore: remove stale memory/extract_patches.py
+  - Removed `memory/extract_patches.py`: 34-line scratch Python script left behind by a push-recap run on 2026-03-27, unreferenced by any current skill. `memory/` should only hold logs, topics, issues, skill-health, and core state files (-34 lines)
+
+- `654c98d` — feat: upgrade default opus model 4.6 → 4.7
+  - Changed `aeon.yml`, `.github/workflows/aeon.yml`, `.github/workflows/messages.yml`, `README.md`, `dashboard/lib/constants.ts`, `skills/cost-report/SKILL.md`: runtime default model switched from claude-opus-4-6 to claude-opus-4-7 across runtime config, workflow dropdowns, UI picker, and pricing table. Pilot run on aeon-aaron/memory-flush verified 4.7 runs cleanly in 2m49s with correct token accounting. Historical references in `memory/token-usage.csv`, `memory/logs/`, `articles/` intentionally left untouched — they record what actually ran at the time (+10/-10 lines)
+
+- `898c51e` — fix: forward DEVTO/NEYNAR/VERCEL (+BANKR in aeon/aaron) to skill runtime
+  - Changed `.github/workflows/aeon.yml`: added `BANKR_API_KEY`, `VERCEL_TOKEN`, `DEVTO_API_KEY`, `NEYNAR_API_KEY` to the Run env block. Audit against the new architecture showed 100+ skills reference these secrets at runtime (WebFetch Bearer auth, curl, env checks) but the workflow was silently dropping them — tweet-allocator, vercel-projects, deploy-prototype, syndicate-article, and farcaster-digest would have silently failed at first auth call (+3 lines)
+
+**Impact:** The fork is now in frontmatter parity with upstream Aeon — `tags:` metadata exists on every skill, enabling skill-filter/skill-discovery features that depend on it. The Opus 4.7 upgrade pulls in the latest model across every entry point in one commit, avoiding the split-state problem of some workflows running 4.6 and others running 4.7. The secret-forwarding fix prevents a whole class of silent auth failures — without it, the tweet-allocator would have worked in the prefetch step but failed the moment any skill tried to hit Bankr directly from inside Claude. Housekeeping removes 13 tracked scratch files and 2 dead gitlink submodules that had accumulated across prior Aeon runs.
+
+---
+
 ## Developer Notes
 - **New dependencies:** None (all features built with existing stack)
-- **Breaking changes:** Director Mode event limit raised from 3 to 10 per simulation — existing simulations with events are unaffected
-- **Architecture shifts:** Wonderwall agent subprocess now emits structured JSONL events that merge with Flask events; this is a prerequisite for per-agent cost attribution. The Bankr prefetch pattern (`scripts/prefetch-bankr.sh`) establishes a reusable sandbox workaround for any auth-required API.
+- **Breaking changes:** Director Mode event limit raised from 3 to 10 per simulation — existing simulations with events are unaffected. Default runtime model changed from Opus 4.6 → 4.7 (all workflow dispatch defaults and UI pickers moved together; no split state)
+- **Architecture shifts:** Wonderwall agent subprocess now emits structured JSONL events that merge with Flask events; this is a prerequisite for per-agent cost attribution. The Bankr prefetch pattern (`scripts/prefetch-bankr.sh`) establishes a reusable sandbox workaround for any auth-required API. Workflow env block now forwards DEVTO/NEYNAR/VERCEL/BANKR secrets, closing a silent-failure gap for auth-requiring skills
 - **New scripts:** `scripts/prefetch-bankr.sh` (wallet verification), `scripts/filter-xai-tweets.py` (Grok post-filter)
-- **Tech debt:** fetch-tweets went through 5 rapid-fire config changes (dedup on → off → on, window 7d → 3d → 1d) — the skill definition is stable now but the log has churn
+- **Frontmatter parity:** All 59+ skills shared with upstream Aeon now carry `tags:` frontmatter; all 11 fork-specific skills also tagged — enables tag-based skill filtering/discovery
+- **Tech debt:** fetch-tweets went through 5 rapid-fire config changes (dedup on → off → on, window 7d → 3d → 1d) — the skill definition is stable now but the log has churn. Cleaned up 13 stale scratch files and 2 dead gitlink submodules accumulated from prior runs
 
 ## What's Next
 - MiroShark at 706 stars (+10 today) — continued organic growth
 - The tweet-allocator is operational with 5 verified Bankr wallets and 6 unallocated tweets carrying to Apr 18
 - Quality Diagnostics and Interaction Network are merged — next likely step is surfacing these in the history search filters or using quality scores to auto-flag low-quality runs
 - OpenRouter observability opens the door to cost-per-simulation dashboards and model comparison analytics
+- Opus 4.7 is now the baseline — monitoring token-usage.csv for cost/perf deltas vs 4.6 baseline
 - 2 new forks today (ghostbyte0x, growth88) suggest growing developer interest

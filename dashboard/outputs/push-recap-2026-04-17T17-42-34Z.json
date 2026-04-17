@@ -1,0 +1,215 @@
+{
+  "root": "card-root",
+  "state": {},
+  "elements": {
+    "card-root": {
+      "type": "Card",
+      "props": {
+        "title": "Push Recap",
+        "description": "2026-04-17 — aaronjmars/MiroShark + aaronjmars/miroshark-aeon — 96 commits, 2 authors"
+      },
+      "children": [
+        "main-stack"
+      ]
+    },
+    "main-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "simulation-section",
+        "openrouter-section",
+        "tweet-allocator-section",
+        "sync-section",
+        "separator-1",
+        "key-changes-section",
+        "stats-section",
+        "link-section"
+      ]
+    },
+    "simulation-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "sim-heading",
+        "sim-text"
+      ]
+    },
+    "sim-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Simulation Analytics Suite (MiroShark PRs #32, #33)",
+        "level": "h3"
+      }
+    },
+    "sim-text": {
+      "type": "Text",
+      "props": {
+        "text": "Quality Diagnostics adds a health badge (Excellent/Good/Low) from participation rate, stance entropy, convergence speed, and cross-platform rate. Interaction Network ships a 644-line force-directed SVG graph with echo chamber scoring — MiroShark moves from \"run simulation, read output\" to \"run simulation, understand its dynamics.\""
+      }
+    },
+    "openrouter-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "openrouter-heading",
+        "openrouter-text"
+      ]
+    },
+    "openrouter-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "OpenRouter Observability (MiroShark, 24-file commit)",
+        "level": "h3"
+      }
+    },
+    "openrouter-text": {
+      "type": "Text",
+      "props": {
+        "text": "Wonderwall agent subprocess now emits structured JSONL events that merge with Flask events, closing the per-agent cost attribution gap. OpenRouter attribution headers, FAST_LLM_MODEL slot, and dynamic browser tab titles landed together."
+      }
+    },
+    "tweet-allocator-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-heading",
+        "tweet-text"
+      ]
+    },
+    "tweet-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Tweet Allocator (miroshark-aeon)",
+        "level": "h3"
+      }
+    },
+    "tweet-text": {
+      "type": "Text",
+      "props": {
+        "text": "New skill pays top 5 tweets/day in $MIROSHARK, with a Bankr-prefetch script that works around the sandbox auth limitation. Fetch-tweets hardened with persistent seen-file dedup (PR #16) and a Python post-filter that drops false positives."
+      }
+    },
+    "sync-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "sync-heading",
+        "sync-text"
+      ]
+    },
+    "sync-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Late-afternoon sync (miroshark-aeon)",
+        "level": "h3"
+      }
+    },
+    "sync-text": {
+      "type": "Text",
+      "props": {
+        "text": "Fork pulled into frontmatter parity with upstream Aeon (tags: on every skill), default runtime model bumped Opus 4.6 → 4.7 across all entry points, and DEVTO/NEYNAR/VERCEL/BANKR secrets now forwarded to the skill runtime — a silent-failure fix for tweet-allocator and 4 other auth-requiring skills."
+      }
+    },
+    "separator-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "key-changes-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "key-heading",
+        "change-1",
+        "change-2",
+        "change-3"
+      ]
+    },
+    "key-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Key changes:",
+        "level": "h4"
+      }
+    },
+    "change-1": {
+      "type": "Text",
+      "props": {
+        "text": "+950 line InteractionNetwork.vue with platform filters, hover highlighting, PNG export"
+      }
+    },
+    "change-2": {
+      "type": "Text",
+      "props": {
+        "text": "prefetch-bankr.sh: reusable sandbox workaround for any auth-required API"
+      }
+    },
+    "change-3": {
+      "type": "Text",
+      "props": {
+        "text": "Opus 4.7 default across aeon.yml, both workflow files, README, dashboard UI, cost-report"
+      }
+    },
+    "stats-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "stats-heading",
+        "stats-text"
+      ]
+    },
+    "stats-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Stats:",
+        "level": "h4"
+      }
+    },
+    "stats-text": {
+      "type": "Text",
+      "props": {
+        "text": "~110 files changed, +3,230/-830 lines"
+      }
+    },
+    "link-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "full-recap-link"
+      ]
+    },
+    "full-recap-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full recap",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-04-17.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}
