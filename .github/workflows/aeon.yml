@@ -260,7 +260,8 @@ jobs:
           # Attempt immediate delivery (may fail in sandbox — post-run step retries)
           DELIVERED=false
 
-          # Telegram: 4096 char limit, strict Markdown parsing
+          # Telegram: 4096 char limit. Use HTML parse mode so single underscores
+          # in handles (e.g. miroshark_) don't get eaten by legacy Markdown.
           if [ -n "${TELEGRAM_BOT_TOKEN:-}" ] && [ -n "${TELEGRAM_CHAT_ID:-}" ]; then
             TG_MSG="$MSG"
             if [ ${#TG_MSG} -gt 4000 ]; then
@@ -268,14 +269,31 @@ jobs:
 
           ...(truncated)"
             fi
+            # Convert Markdown-ish (*bold*, [label](url)) to HTML. Escape &<> first.
+            TG_HTML=$(printf '%s' "$TG_MSG" | python3 -c '
+          import html, re, sys
+          t = sys.stdin.read()
+          links=[]; bolds=[]
+          t = re.sub(r"\[([^\]\n]+)\]\(([^)\n]+)\)",
+                     lambda m: (links.append((m.group(1), m.group(2))) or f"\x00L{len(links)-1}\x00"), t)
+          t = re.sub(r"\*([^*\n]+)\*",
+                     lambda m: (bolds.append(m.group(1)) or f"\x00B{len(bolds)-1}\x00"), t)
+          t = html.escape(t, quote=False)
+          for i, b in enumerate(bolds):
+              t = t.replace(f"\x00B{i}\x00", f"<b>{html.escape(b, quote=False)}</b>")
+          for i, (lbl, url) in enumerate(links):
+              t = t.replace(f"\x00L{i}\x00", f"<a href=\"{html.escape(url, quote=True)}\">{html.escape(lbl, quote=False)}</a>")
+          sys.stdout.write(t)
+          ')
             TG_RESULT=$(curl -s -w "\n%{http_code}" -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
               -H "Content-Type: application/json" \
-              -d "$(jq -n --arg chat "$TELEGRAM_CHAT_ID" --arg text "$TG_MSG" '{chat_id: $chat, text: $text, parse_mode: "Markdown"}')" 2>/dev/null) || true
+              -d "$(jq -n --arg chat "$TELEGRAM_CHAT_ID" --arg text "$TG_HTML" '{chat_id: $chat, text: $text, parse_mode: "HTML"}')" 2>/dev/null) || true
             TG_HTTP=$(echo "$TG_RESULT" | tail -1)
             TG_OK=$(echo "$TG_RESULT" | sed '$d' | jq -r '.ok // false' 2>/dev/null || echo "false")
             if [ "$TG_HTTP" = "200" ] && [ "$TG_OK" = "true" ]; then
               DELIVERED=true
             else
+              # Fallback: raw text, no parse mode. Telegram will auto-link URLs.
               curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
                 -H "Content-Type: application/json" \
                 -d "$(jq -n --arg chat "$TELEGRAM_CHAT_ID" --arg text "$TG_MSG" '{chat_id: $chat, text: $text}')" > /dev/null 2>&1 && DELIVERED=true || true
