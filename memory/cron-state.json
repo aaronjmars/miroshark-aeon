@@ -50,8 +50,8 @@
     "last_dispatch": "2026-04-16T15:20:46Z"
   },
   "token-report": {
-    "last_dispatch": "2026-04-16T06:20:59Z",
-    "last_status": "success",
+    "last_dispatch": "2026-04-17T06:49:08Z",
+    "last_status": "dispatched",
     "last_success": "2026-04-16T06:24:53Z",
     "total_runs": 1,
     "total_successes": 1,
@@ -60,8 +60,8 @@
     "success_rate": 1
   },
   "fetch-tweets": {
-    "last_dispatch": "2026-04-16T07:03:59Z",
-    "last_status": "success",
+    "last_dispatch": "2026-04-17T06:49:08Z",
+    "last_status": "dispatched",
     "last_success": "2026-04-17T00:08:23Z",
     "total_runs": 9,
     "total_successes": 9,
