@@ -2,6 +2,7 @@
 name: Code Health
 description: Weekly report on TODOs, dead code, and test coverage gaps
 var: ""
+tags: [dev]
 ---
 > **${var}** — Repo (owner/repo) to audit. If empty, audits all watched repos.
 

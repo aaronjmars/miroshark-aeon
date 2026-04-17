@@ -2,6 +2,7 @@
 name: Search Skills
 description: Search the open agent skills ecosystem for useful skills to install
 var: ""
+tags: [meta]
 ---
 > **${var}** — Capability to search for. If empty, searches based on current gaps.
 

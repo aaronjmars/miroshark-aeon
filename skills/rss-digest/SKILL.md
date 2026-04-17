@@ -2,6 +2,7 @@
 name: RSS Digest
 description: Fetch, summarize, and deliver RSS feed highlights
 var: ""
+tags: [news]
 ---
 > **${var}** — Topic filter for items. If empty, includes all relevant items.
 
@@ -53,3 +54,7 @@ Format and send via `./notify` (under 4000 chars):
 
 Log the digest to memory/logs/${today}.md.
 If no new items across all feeds, log "RSS_DIGEST_OK" and end.
+
+## Sandbox note
+
+The sandbox may block outbound curl. Use **WebFetch** as a fallback for any URL fetch. For auth-required APIs, use the pre-fetch/post-process pattern (see CLAUDE.md).

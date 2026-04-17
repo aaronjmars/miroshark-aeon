@@ -2,6 +2,7 @@
 name: GitHub Trending
 description: Top 10 trending repos on GitHub right now
 var: ""
+tags: [dev]
 ---
 > **${var}** — Language filter (e.g. "python", "typescript", "rust"). If empty, shows all languages.
 
@@ -42,3 +43,7 @@ Read the last 2 days of memory/logs/ to avoid repeating repos.
 
 4. Log to memory/logs/${today}.md.
    If the page returns empty or errors, log "GITHUB_TRENDING_OK" and end.
+
+## Sandbox note
+
+The sandbox may block outbound curl. Use **WebFetch** as a fallback for any URL fetch. For auth-required APIs, use the pre-fetch/post-process pattern (see CLAUDE.md).

@@ -2,6 +2,7 @@
 name: Weekly Review
 description: Synthesize the week's logs into a structured retrospective
 var: ""
+tags: [meta]
 ---
 > **${var}** — Area to focus on. If empty, covers the full week.
 

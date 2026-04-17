@@ -2,6 +2,7 @@
 name: GitHub Issues
 description: Check all your repos for new open issues in the last 24 hours
 var: ""
+tags: [dev]
 ---
 > **${var}** — Specific repo (owner/repo) to check. If empty, checks all repos.
 

@@ -2,6 +2,7 @@
 name: Token Movers
 description: Top movers, losers, and trending coins from CoinGecko
 var: ""
+tags: [crypto]
 ---
 > **${var}** — Token symbol or category to highlight (e.g. "SOL", "layer-2", "meme coins"). If empty, shows top movers, losers, and trending coins.
 
@@ -52,3 +53,7 @@ Read the last 2 days of memory/logs/ to avoid repeating items.
    ```
 
 6. Log to memory/logs/${today}.md.
+
+## Sandbox note
+
+The sandbox may block outbound curl. Use **WebFetch** as a fallback for any URL fetch. For auth-required APIs, use the pre-fetch/post-process pattern (see CLAUDE.md).

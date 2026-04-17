@@ -2,6 +2,7 @@
 name: Security Digest
 description: Monitor recent security advisories from the GitHub Advisory Database for tracked ecosystems
 var: ""
+tags: [news, dev]
 ---
 > **${var}** — Ecosystem to focus on (npm, pip, Go). If empty, checks all.
 
@@ -65,6 +66,10 @@ Read the last 2 days of memory/logs/ to avoid repeating advisories.
 5. **Log to memory/logs/${today}.md.** Record which GHSA IDs were included and a count summary (e.g. "3 critical, 5 high").
 
 If no relevant advisories are found, log "SECURITY_DIGEST_OK" and end.
+
+## Sandbox note
+
+The sandbox may block outbound curl. Use **WebFetch** as a fallback for any URL fetch. For auth-required APIs, use the pre-fetch/post-process pattern (see CLAUDE.md).
 
 ## Environment Variables
 

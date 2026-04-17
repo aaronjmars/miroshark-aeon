@@ -2,6 +2,7 @@
 name: DeFi Overview
 description: Daily overview of DeFi activity from DeFiLlama — TVL changes, top chains, top protocols
 var: ""
+tags: [crypto]
 ---
 > **${var}** — Chain or protocol to focus on (e.g. "solana", "aave", "arbitrum"). If empty, shows the full overview.
 
@@ -75,5 +76,9 @@ If `${var}` is set, focus the overview on that chain or protocol — show its TV
    *Top Yields (>$10M TVL)*
    Pool — X.X% APY ($XM TVL)
    ```
+
+## Sandbox note
+
+The sandbox may block outbound curl. Use **WebFetch** as a fallback for any URL fetch. For auth-required APIs, use the pre-fetch/post-process pattern (see CLAUDE.md).
 
 6. Log to memory/logs/${today}.md.

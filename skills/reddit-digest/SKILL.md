@@ -2,6 +2,7 @@
 name: Reddit Digest
 description: Fetch and summarize top Reddit posts from tracked subreddits
 var: ""
+tags: [news]
 ---
 > **${var}** — Topic filter or subreddit name. If empty, checks all tracked subreddits.
 
@@ -69,6 +70,10 @@ Read the last 2 days of memory/logs/ to avoid repeating posts.
 5. **Log to memory/logs/${today}.md.** Record which posts were included.
 
 If no relevant posts are found across all subreddits, log "REDDIT_DIGEST_OK" and end.
+
+## Sandbox note
+
+The sandbox may block outbound curl. Use **WebFetch** as a fallback for any URL fetch. For auth-required APIs, use the pre-fetch/post-process pattern (see CLAUDE.md).
 
 ## Environment Variables
 

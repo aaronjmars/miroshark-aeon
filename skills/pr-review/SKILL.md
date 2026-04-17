@@ -2,6 +2,7 @@
 name: PR Review
 description: Auto-review open PRs on watched repos and post summary comments
 var: ""
+tags: [dev]
 ---
 > **${var}** — Repo (owner/repo) to review. If empty, reviews all watched repos.
 

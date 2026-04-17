@@ -2,6 +2,7 @@
 name: Changelog
 description: Generate a changelog from recent commits across watched repos
 var: ""
+tags: [dev]
 ---
 > **${var}** — Repo (owner/repo) to scan. If empty, scans all watched repos.
 

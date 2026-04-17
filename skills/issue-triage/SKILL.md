@@ -2,6 +2,7 @@
 name: Issue Triage
 description: Label and prioritize new GitHub issues on watched repos
 var: ""
+tags: [dev]
 ---
 > **${var}** — Repo (owner/repo) to triage. If empty, triages all watched repos.
 
