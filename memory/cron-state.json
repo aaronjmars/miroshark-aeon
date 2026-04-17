@@ -80,8 +80,8 @@
     "success_rate": 1
   },
   "feature": {
-    "last_dispatch": "2026-04-16T11:15:46Z",
-    "last_status": "success",
+    "last_dispatch": "2026-04-17T11:01:34Z",
+    "last_status": "dispatched",
     "last_success": "2026-04-16T11:32:41Z",
     "total_runs": 1,
     "total_successes": 1,
