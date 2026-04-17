@@ -2,6 +2,7 @@
 name: repo-pulse
 description: Daily report on new stars, forks, and traffic for watched repos
 var: ""
+tags: [dev]
 ---
 > **${var}** — Repo (owner/repo) to check. If empty, checks all watched repos.
 

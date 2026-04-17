@@ -2,6 +2,7 @@
 name: Token Alert
 description: Notify on price or volume anomalies for tracked tokens
 var: ""
+tags: [crypto]
 ---
 > **${var}** — Token symbol or CoinGecko ID. If empty, checks all tracked tokens.
 

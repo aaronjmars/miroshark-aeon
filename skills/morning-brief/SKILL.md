@@ -2,6 +2,7 @@
 name: Morning Brief
 description: Aggregated daily briefing — digests, priorities, and what's ahead
 var: ""
+tags: [meta]
 ---
 > **${var}** — Area to emphasize. If empty, covers all areas.
 

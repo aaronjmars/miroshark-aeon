@@ -2,6 +2,7 @@
 name: Action Converter
 description: 5 concrete real-life actions for today based on recent signals and memory
 var: ""
+tags: [meta]
 ---
 > **${var}** — Focus area (e.g. "health", "networking", "learning", "shipping"). If empty, covers all areas.
 

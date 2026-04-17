@@ -2,6 +2,7 @@
 name: Idea Capture
 description: Quick note capture triggered via Telegram — stores to memory
 var: ""
+tags: [creative]
 ---
 > **${var}** — The idea or note to capture.
 

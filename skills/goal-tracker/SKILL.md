@@ -2,6 +2,7 @@
 name: Goal Tracker
 description: Compare current progress against goals stored in MEMORY.md
 var: ""
+tags: [meta]
 ---
 > **${var}** — Specific goal to track. If empty, tracks all goals in MEMORY.md.
 

@@ -2,6 +2,7 @@
 name: GitHub Monitor
 description: Watch repos for stale PRs, new issues, and new releases
 var: ""
+tags: [dev]
 ---
 > **${var}** — Repo (owner/repo) to monitor. If empty, monitors all watched repos.
 

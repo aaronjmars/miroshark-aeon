@@ -2,6 +2,7 @@
 name: Heartbeat
 description: Proactive ambient check — surface anything worth attention
 var: ""
+tags: [meta]
 ---
 > **${var}** — Area to focus on. If empty, runs all checks.
 

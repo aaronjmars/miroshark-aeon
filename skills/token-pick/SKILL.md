@@ -2,6 +2,7 @@
 name: Token Pick
 description: One token recommendation and one prediction market pick based on live data
 var: ""
+tags: [crypto]
 ---
 > **${var}** — Focus area or thesis (e.g. "AI tokens", "election markets", "contrarian bets"). If empty, scans broadly.
 

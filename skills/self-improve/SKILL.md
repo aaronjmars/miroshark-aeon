@@ -2,6 +2,7 @@
 name: self-improve
 description: Improve the agent itself — better skills, prompts, workflows, and config based on recent performance
 var: ""
+tags: [meta]
 ---
 > **${var}** — Specific area to improve (e.g. "push-recap notification", "token-report formatting", "add error handling to notify"). If empty, analyzes recent logs to find what needs fixing.
 

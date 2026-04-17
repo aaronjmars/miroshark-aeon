@@ -2,6 +2,7 @@
 name: token-report
 description: Daily price performance report for the project's token — price, volume, liquidity, and context
 var: ""
+tags: [crypto]
 ---
 > **${var}** — Token contract address. If empty, uses tracked token from MEMORY.md.
 

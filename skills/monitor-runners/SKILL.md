@@ -2,6 +2,7 @@
 name: Monitor Runners
 description: Find the top 5 tokens that ran hardest in the past 24h across major chains using GeckoTerminal
 var: ""
+tags: [crypto]
 ---
 > **${var}** — Filter by chain (e.g. "solana", "eth", "base", "bsc"). If empty, scans all major networks.
 

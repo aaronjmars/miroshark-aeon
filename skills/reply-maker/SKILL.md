@@ -2,6 +2,7 @@
 name: Reply Maker
 description: Generate two reply options for 5 tweets from tracked X accounts or topics
 var: ""
+tags: [social]
 ---
 > **${var}** — Focus on a specific topic, @handle, or X list ID. If empty, searches for reply-worthy tweets across your areas of interest using recent logs and memory.
 

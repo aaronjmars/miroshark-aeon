@@ -2,6 +2,7 @@
 name: project-lens
 description: Write an article about the project through a surprising lens — connecting it to current events, trends, philosophy, or comparable projects
 var: ""
+tags: [content, dev]
 ---
 > **${var}** — Specific angle or lens to use (e.g. "unix philosophy", "regulation wave", "open source funding"). If empty, auto-selects based on what's trending and what hasn't been covered recently.
 

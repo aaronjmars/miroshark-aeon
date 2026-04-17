@@ -2,6 +2,7 @@
 name: Skill Health
 description: Check which scheduled skills haven't run recently
 var: ""
+tags: [meta]
 ---
 > **${var}** — Skill name to check. If empty, checks all scheduled skills.
 

@@ -2,6 +2,7 @@
 name: weekly-shiplog
 description: Weekly narrative of everything shipped — features, fixes, and momentum, written as a compelling update
 var: ""
+tags: [content]
 ---
 > **${var}** — Focus area or theme override. If empty, covers everything shipped this week.
 

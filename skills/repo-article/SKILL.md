@@ -2,6 +2,7 @@
 name: repo-article
 description: Write an article about the current state, progress, and vision of the watched repo
 var: ""
+tags: [dev, content]
 ---
 > **${var}** — Angle or topic to focus on (e.g. "architecture", "recent progress", "roadmap"). If empty, auto-selects the most compelling angle.
 

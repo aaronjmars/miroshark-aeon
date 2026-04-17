@@ -2,6 +2,7 @@
 name: List Digest
 description: Top tweets from tracked X lists in the past 24 hours
 var: ""
+tags: [social]
 ---
 > **${var}** — Comma-separated X list IDs to track (e.g. "1953536336675365173,1937207796270829766"). Optionally append a topic filter after a pipe: "LIST_ID1,LIST_ID2|AI agents". **Required** — set your list IDs in aeon.yml.
 

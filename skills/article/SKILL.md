@@ -2,6 +2,7 @@
 name: Daily Article
 description: Research trending topics and write a publication-ready article
 var: ""
+tags: [content]
 ---
 > **${var}** — Topic to write about. If empty, auto-selects a trending topic.
 

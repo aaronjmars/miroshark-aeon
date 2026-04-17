@@ -2,6 +2,7 @@
 name: DeFi Monitor
 description: Check pool health, positions, and yield rates for tracked protocols
 var: ""
+tags: [crypto]
 ---
 > **${var}** — Position label to check. If empty, checks all watched positions.
 

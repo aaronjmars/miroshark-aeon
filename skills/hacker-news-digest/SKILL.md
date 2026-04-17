@@ -2,6 +2,7 @@
 name: Hacker News Digest
 description: Top HN stories filtered by keywords relevant to your interests
 var: ""
+tags: [research]
 ---
 > **${var}** — Topic filter for stories. If empty, uses interests from MEMORY.md.
 

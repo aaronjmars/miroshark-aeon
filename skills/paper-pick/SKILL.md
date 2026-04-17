@@ -2,6 +2,7 @@
 name: Paper Pick
 description: Find the one paper you should read today from arXiv and Semantic Scholar
 var: ""
+tags: [research]
 ---
 > **${var}** — Research topic to search for (e.g. "transformer architectures", "memory consolidation", "RL agents"). If empty, searches broadly across AI and related fields.
 

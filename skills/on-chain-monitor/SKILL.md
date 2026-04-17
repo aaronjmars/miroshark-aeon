@@ -2,6 +2,7 @@
 name: On-Chain Monitor
 description: Monitor blockchain addresses and contracts for notable activity
 var: ""
+tags: [crypto]
 ---
 > **${var}** — Address label or chain to check. If empty, checks all watched addresses.
 

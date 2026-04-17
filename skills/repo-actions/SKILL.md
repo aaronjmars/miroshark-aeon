@@ -2,6 +2,7 @@
 name: repo-actions
 description: Generate actionable ideas to improve the repo — features, integrations, community, and growth
 var: ""
+tags: [dev]
 ---
 > **${var}** — Focus area (e.g. "features", "community", "integrations", "security"). If empty, covers all areas.
 

@@ -2,6 +2,7 @@
 name: Startup Idea
 description: 2 startup ideas tailored to the user's skills, interests, and context
 var: ""
+tags: [creative]
 ---
 > **${var}** — Constraint or theme (e.g. "solo founder", "crypto infra", "B2B SaaS", "under $10k to launch"). If empty, generates freely.
 

@@ -2,6 +2,7 @@
 name: push-recap
 description: Daily deep-dive recap of all pushes — reads diffs, explains what changed and why
 var: ""
+tags: [dev]
 ---
 > **${var}** — Repo (owner/repo) to recap. If empty, recaps all watched repos.
 

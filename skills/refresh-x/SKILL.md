@@ -2,6 +2,7 @@
 name: Refresh X
 description: Fetch a tracked X/Twitter account's latest tweets and save the gist to memory
 var: ""
+tags: [social]
 ---
 > **${var}** — The @handle to check (e.g. "@elonmusk", "vitalikbuterin"). **Required** — set this in aeon.yml or pass it when triggering the skill.
 

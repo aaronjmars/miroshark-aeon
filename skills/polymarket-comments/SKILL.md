@@ -2,6 +2,7 @@
 name: Polymarket Comments
 description: Top trending Polymarket markets and the most interesting comments from them
 var: ""
+tags: [crypto]
 ---
 > **${var}** — Market topic to focus on (e.g. "crypto", "elections", "AI"). If empty, checks top trending markets across all categories.
 
