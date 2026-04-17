@@ -1,0 +1,306 @@
+{
+  "root": "card_feature",
+  "state": {},
+  "elements": {
+    "card_feature": {
+      "type": "Card",
+      "props": {
+        "title": "Feature Built — 2026-04-17"
+      },
+      "children": [
+        "heading_feature",
+        "desc_main",
+        "sep1",
+        "section_why",
+        "sep2",
+        "section_built",
+        "sep3",
+        "section_how",
+        "sep4",
+        "section_next",
+        "sep5",
+        "pr_link"
+      ]
+    },
+    "heading_feature": {
+      "type": "Heading",
+      "props": {
+        "text": "Agent Interaction Network Graph",
+        "level": "h2"
+      }
+    },
+    "desc_main": {
+      "type": "Text",
+      "props": {
+        "text": "MiroShark simulations now include a network visualization tab that maps how agents interact with each other. Users can see the social structure of a simulation — who responds to whom, which agents act as information hubs, and where echo chambers form — rendered as an interactive force-directed graph directly in the simulation results view.",
+        "variant": "body"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "section_why": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading_why",
+        "text_why1",
+        "text_why2",
+        "text_why3"
+      ]
+    },
+    "heading_why": {
+      "type": "Heading",
+      "props": {
+        "text": "Why this matters",
+        "level": "h3"
+      }
+    },
+    "text_why1": {
+      "type": "Text",
+      "props": {
+        "text": "MiroShark already records every agent-to-agent interaction — replies, reposts, likes, follows, cross-platform amplifications — but this data was never visualized as a network. The belief drift chart shows temporal dynamics and the leaderboard shows individual rankings, but neither answers structural questions like \"are there two clusters of agents that never interact?\" or \"which agent bridges the Twitter and Reddit communities?\"",
+        "variant": "body"
+      }
+    },
+    "text_why2": {
+      "type": "Text",
+      "props": {
+        "text": "For social simulation researchers, the interaction network is a standard analytical figure.",
+        "variant": "body"
+      }
+    },
+    "text_why3": {
+      "type": "Text",
+      "props": {
+        "text": "This fills a gap identified by repo-actions as the #2 highest-impact feature for MiroShark's analytical layer.",
+        "variant": "body"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "section_built": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading_built",
+        "file1",
+        "file2",
+        "file3",
+        "file4"
+      ]
+    },
+    "heading_built": {
+      "type": "Heading",
+      "props": {
+        "text": "What was built",
+        "level": "h3"
+      }
+    },
+    "file1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "badge_file1",
+        "text_file1"
+      ]
+    },
+    "badge_file1": {
+      "type": "Badge",
+      "props": {
+        "text": "backend/app/api/simulation.py",
+        "variant": "outline"
+      }
+    },
+    "text_file1": {
+      "type": "Text",
+      "props": {
+        "text": "New GET endpoint that reads platform JSONL action logs, extracts pairwise agent-to-agent edges from engagement actions, builds a weighted directed graph with stance data from trajectory.json, computes degree centrality and echo chamber metrics, and caches results in network.json for instant subsequent loads.",
+        "variant": "body"
+      }
+    },
+    "file2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "badge_file2",
+        "text_file2"
+      ]
+    },
+    "badge_file2": {
+      "type": "Badge",
+      "props": {
+        "text": "frontend/src/components/InteractionNetwork.vue",
+        "variant": "outline"
+      }
+    },
+    "text_file2": {
+      "type": "Text",
+      "props": {
+        "text": "644-line Vue component rendering a force-directed SVG graph. Node color encodes stance (teal=bullish, slate=neutral, coral=bearish), node size scales by total interactions, edge color indicates platform (blue=Twitter, orange=Reddit, purple=cross-platform), edge thickness shows interaction weight. Includes hover highlighting, tooltip with agent details, platform filter checkboxes, insights panel, and PNG export.",
+        "variant": "body"
+      }
+    },
+    "file3": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "badge_file3",
+        "text_file3"
+      ]
+    },
+    "badge_file3": {
+      "type": "Badge",
+      "props": {
+        "text": "frontend/src/api/simulation.js",
+        "variant": "outline"
+      }
+    },
+    "text_file3": {
+      "type": "Text",
+      "props": {
+        "text": "New getInteractionNetwork() API function.",
+        "variant": "body"
+      }
+    },
+    "file4": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "badge_file4",
+        "text_file4"
+      ]
+    },
+    "badge_file4": {
+      "type": "Badge",
+      "props": {
+        "text": "frontend/src/components/Step3Simulation.vue",
+        "variant": "outline"
+      }
+    },
+    "text_file4": {
+      "type": "Text",
+      "props": {
+        "text": "New \"⬡ Network\" toggle button in the actions bar alongside Influence and Drift, with mutual-exclusion overlay behavior.",
+        "variant": "body"
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "section_how": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading_how",
+        "text_how1",
+        "text_how2",
+        "text_how3"
+      ]
+    },
+    "heading_how": {
+      "type": "Heading",
+      "props": {
+        "text": "How it works",
+        "level": "h3"
+      }
+    },
+    "text_how1": {
+      "type": "Text",
+      "props": {
+        "text": "The backend reads the same actions.jsonl files used by the influence leaderboard but extracts directed edges instead of per-agent scores — each LIKE_POST, REPOST, QUOTE_POST, CREATE_COMMENT, or FOLLOW creates an edge from the acting agent to the target author. Edges are weighted by interaction count and tagged with platform(s). Graph metrics are computed in pure Python with no external dependencies: degree centrality, a bridge score based on cross-platform edge count, and an echo chamber score measuring the ratio of same-platform to total edges.",
+        "variant": "body"
+      }
+    },
+    "text_how2": {
+      "type": "Text",
+      "props": {
+        "text": "The frontend implements a 200-iteration force simulation entirely in JavaScript — repulsion between all nodes, attraction along edges, gravity toward center — producing a clean layout without any graph library dependency.",
+        "variant": "body"
+      }
+    },
+    "text_how3": {
+      "type": "Text",
+      "props": {
+        "text": "Hover-based highlighting dims non-neighbors to 15% opacity, making local structure instantly visible.",
+        "variant": "body"
+      }
+    },
+    "sep4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "section_next": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading_next",
+        "text_next"
+      ]
+    },
+    "heading_next": {
+      "type": "Heading",
+      "props": {
+        "text": "What's next",
+        "level": "h3"
+      }
+    },
+    "text_next": {
+      "type": "Text",
+      "props": {
+        "text": "Could extend with community detection (Louvain clustering), edge bundling for dense graphs, or time-slider filtering to show how the network evolves across rounds.",
+        "variant": "body"
+      }
+    },
+    "sep5": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "pr_link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #33: Agent Interaction Network Graph",
+        "href": "https://github.com/aaronjmars/MiroShark/pull/33",
+        "source": "GitHub"
+      }
+    }
+  }
+}
