@@ -1,0 +1,303 @@
+{
+  "root": "card-root",
+  "state": {},
+  "elements": {
+    "card-root": {
+      "type": "Card",
+      "props": {
+        "title": "$MIROSHARK Daily — 2026-04-17"
+      },
+      "children": [
+        "price-section",
+        "divider1",
+        "liquidity-section",
+        "divider2",
+        "trading-section",
+        "divider3",
+        "performance-section",
+        "divider4",
+        "ath-section",
+        "divider5",
+        "commentary-section",
+        "divider6",
+        "chart-section"
+      ]
+    },
+    "price-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "price-heading",
+        "price-stat"
+      ]
+    },
+    "price-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Price",
+        "level": "h3"
+      }
+    },
+    "price-stat": {
+      "type": "Stat",
+      "props": {
+        "value": "$0.000002115",
+        "delta": "-12.64%",
+        "trend": "down"
+      }
+    },
+    "divider1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "liquidity-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "liquidity-heading",
+        "liquidity-grid"
+      ]
+    },
+    "liquidity-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Liquidity & Volume",
+        "level": "h3"
+      }
+    },
+    "liquidity-grid": {
+      "type": "Grid",
+      "props": {
+        "columns": 2,
+        "gap": "md"
+      },
+      "children": [
+        "liquidity-stat",
+        "volume-stat"
+      ]
+    },
+    "liquidity-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Liquidity",
+        "value": "$157.0K"
+      }
+    },
+    "volume-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "24h Volume",
+        "value": "$157.7K"
+      }
+    },
+    "divider2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "trading-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "trading-heading",
+        "trading-stack"
+      ]
+    },
+    "trading-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Trading",
+        "level": "h3"
+      }
+    },
+    "trading-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "buys-sells-text",
+        "ratio-badge"
+      ]
+    },
+    "buys-sells-text": {
+      "type": "Text",
+      "props": {
+        "text": "Buys/Sells: 267/167"
+      }
+    },
+    "ratio-badge": {
+      "type": "Badge",
+      "props": {
+        "text": "1.60x buy ratio",
+        "variant": "secondary"
+      }
+    },
+    "divider3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "performance-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "performance-heading",
+        "perf-grid"
+      ]
+    },
+    "performance-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Performance",
+        "level": "h3"
+      }
+    },
+    "perf-grid": {
+      "type": "Grid",
+      "props": {
+        "columns": 2,
+        "gap": "md"
+      },
+      "children": [
+        "perf-7d",
+        "perf-launch"
+      ]
+    },
+    "perf-7d": {
+      "type": "Stat",
+      "props": {
+        "label": "7d",
+        "value": "+77.7%",
+        "trend": "up"
+      }
+    },
+    "perf-launch": {
+      "type": "Stat",
+      "props": {
+        "label": "Since launch",
+        "value": "+221.9%",
+        "trend": "up"
+      }
+    },
+    "divider4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "ath-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "ath-heading",
+        "ath-price",
+        "ath-change"
+      ]
+    },
+    "ath-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "From ATH",
+        "level": "h3"
+      }
+    },
+    "ath-price": {
+      "type": "Text",
+      "props": {
+        "text": "$0.000003815 (Apr 14)",
+        "variant": "muted"
+      }
+    },
+    "ath-change": {
+      "type": "Stat",
+      "props": {
+        "value": "-44.6%",
+        "trend": "down"
+      }
+    },
+    "divider5": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "commentary-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "commentary-heading",
+        "commentary-text"
+      ]
+    },
+    "commentary-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Analysis",
+        "level": "h3"
+      }
+    },
+    "commentary-text": {
+      "type": "Text",
+      "props": {
+        "text": "Day 3-4 post-ATH consolidation — buyers outpacing sellers 1.60x despite the drawdown. Bankrbot reward integration driving fresh community engagement.",
+        "variant": "body"
+      }
+    },
+    "divider6": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "chart-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "chart-heading",
+        "chart-link"
+      ]
+    },
+    "chart-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Chart",
+        "level": "h4"
+      }
+    },
+    "chart-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "GeckoTerminal Pool",
+        "href": "https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209",
+        "source": "GeckoTerminal"
+      }
+    }
+  }
+}
