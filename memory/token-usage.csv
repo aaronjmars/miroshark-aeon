@@ -24,3 +24,4 @@ date,skill,model,input_tokens,output_tokens,cache_read,cache_creation
 2026-04-17,tweet-allocator,claude-sonnet-4-6,12,22676,546123,58016
 2026-04-17,tweet-allocator,claude-sonnet-4-6,13,11554,380464,30797
 2026-04-17,fetch-tweets,claude-sonnet-4-6,4033,11168,756125,45389
+2026-04-17,tweet-allocator,claude-sonnet-4-6,8,5115,188919,25195

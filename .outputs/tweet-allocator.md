@@ -1,19 +1,7 @@
 ## Summary
 
-**Status:** TWEET_ALLOCATOR_SKIPPED (run 3)
+**TWEET_ALLOCATOR_SKIPPED (run 4)**
 
-Today's $10.00 daily budget was already fully allocated in run 1 and verified in run 2. This run confirmed:
+Today's $10.00 daily budget was fully committed in run 1 to 5 authors (Chainriffs $3.66, LemonSyncro $2.76, Whale_AI_net $2.24, BioStone_chad $0.75, PremierBase $0.59). Runs 2 and 3 already confirmed budget exhaustion.
 
-- **8 tweets** in today's log → 6 eligible after excluding `miroshark_` (project) and `LemonSyncro` (already paid today)
-- **Bankr cache:** all 6 verified with wallets
-- **Budget remaining:** $0.00 — no allocation possible
-
-The 6 fresh Apr 17 tweets (`_THOR_ASGARD`, `internetracer`, `krc20kult`, `ToCryp84`, `Soupforalphabet`, `joraweb3`) remain documented in the article as candidates for tomorrow's run.
-**TWEET_ALLOCATOR_SKIPPED** — daily budget already exhausted by Run 1.
-
-- **Today's tweets processed:** 8 (7 after excluding `miroshark_`, 6 after excluding `LemonSyncro` — already paid today)
-- **Bankr cache:** present, all 6 remaining authors wallet-verified
-- **Top 5 ranked:** `_THOR_ASGARD` (4), `internetracer` (4), `krc20kult` (4), `ToCryp84` (1), `Soupforalphabet` (1)
-- **Budget remaining:** $0.00 — full $10.00 allocated in Run 1 to `Chainriffs`, `LemonSyncro`, `Whale_AI_net`, `BioStone_chad`, `PremierBase`
-- **New:** Added `LemonSyncro`'s fresh Apr 17 tweet to the article's unallocated section — eligible for a future date
-- All 6 today's tweets remain queued for tomorrow's allocation run
+Today's 8 fresh tweets were re-evaluated: miroshark_ excluded (project account), LemonSyncro excluded (already paid), 6 eligible authors (_THOR_ASGARD, internetracer, krc20kult, ToCryp84, Soupforalphabet, joraweb3) all have verified Bankr wallets — they carry forward to 2026-04-18. No notification sent.
