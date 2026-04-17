@@ -17,7 +17,7 @@ Use these rates to calculate costs. First check `aeon.yml` for the `gateway.prov
 
 | Model | Input | Output | Cache Read | Cache Write |
 |-------|-------|--------|------------|-------------|
-| claude-opus-4-6 | $15.00 | $75.00 | $1.50 | $3.75 |
+| claude-opus-4-7 | $15.00 | $75.00 | $1.50 | $3.75 |
 | claude-sonnet-4-6 | $3.00 | $15.00 | $0.30 | $3.75 |
 | claude-haiku-4-5-20251001 | $0.80 | $4.00 | $0.08 | $3.75 |
 
@@ -25,7 +25,7 @@ Use these rates to calculate costs. First check `aeon.yml` for the `gateway.prov
 
 | Model | Input | Output |
 |-------|-------|--------|
-| claude-opus-4-6 | $5.00 | $25.00 |
+| claude-opus-4-7 | $5.00 | $25.00 |
 | claude-sonnet-4-6 | $3.00 | $15.00 |
 | claude-haiku-4-5-20251001 | $0.80 | $4.00 |
 | gemini-3-pro | $1.25 | $10.00 |
