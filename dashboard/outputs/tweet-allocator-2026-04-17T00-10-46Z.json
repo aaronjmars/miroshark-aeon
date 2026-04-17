@@ -1,0 +1,352 @@
+{
+  "root": "card_root",
+  "state": {},
+  "elements": {
+    "card_root": {
+      "type": "Card",
+      "props": {
+        "title": "Tweet Rewards — 2026-04-17",
+        "description": "$10.00 in $MIROSHARK allocation"
+      },
+      "children": [
+        "budget_alert",
+        "separator1",
+        "tweet_stack",
+        "separator2",
+        "total_alert"
+      ]
+    },
+    "budget_alert": {
+      "type": "Alert",
+      "props": {
+        "type": "info",
+        "title": "Budget",
+        "message": "$10.00 in $MIROSHARK on Base — Bankr verification pending (wallets need manual lookup before sending)"
+      }
+    },
+    "separator1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "tweet_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "lg"
+      },
+      "children": [
+        "tweet1",
+        "tweet2",
+        "tweet3",
+        "tweet4",
+        "tweet5"
+      ]
+    },
+    "tweet1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet1_header",
+        "tweet1_text",
+        "tweet1_link"
+      ]
+    },
+    "tweet1_header": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet1_author",
+        "tweet1_amount",
+        "tweet1_score"
+      ]
+    },
+    "tweet1_author": {
+      "type": "Text",
+      "props": {
+        "text": "x.com/Chainriffs",
+        "variant": "muted"
+      }
+    },
+    "tweet1_amount": {
+      "type": "Badge",
+      "props": {
+        "text": "$3.66 MIROSHARK",
+        "variant": "secondary"
+      }
+    },
+    "tweet1_score": {
+      "type": "Badge",
+      "props": {
+        "text": "Score: 49",
+        "variant": "default"
+      }
+    },
+    "tweet1_text": {
+      "type": "Text",
+      "props": {
+        "text": "\"feels like running a parallel universe 24/7\" — 100-300 agents, full workbench, ReACT report"
+      }
+    },
+    "tweet1_link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/Chainriffs/status/2043931761466376271"
+      }
+    },
+    "tweet2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet2_header",
+        "tweet2_text",
+        "tweet2_link"
+      ]
+    },
+    "tweet2_header": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet2_author",
+        "tweet2_amount",
+        "tweet2_score"
+      ]
+    },
+    "tweet2_author": {
+      "type": "Text",
+      "props": {
+        "text": "x.com/LemonSyncro",
+        "variant": "muted"
+      }
+    },
+    "tweet2_amount": {
+      "type": "Badge",
+      "props": {
+        "text": "$2.76 MIROSHARK",
+        "variant": "secondary"
+      }
+    },
+    "tweet2_score": {
+      "type": "Badge",
+      "props": {
+        "text": "Score: 37",
+        "variant": "default"
+      }
+    },
+    "tweet2_text": {
+      "type": "Text",
+      "props": {
+        "text": "Paradigm CEO gave MiroShark a star rating on GitHub"
+      }
+    },
+    "tweet2_link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/LemonSyncro/status/2043910792991350879"
+      }
+    },
+    "tweet3": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet3_header",
+        "tweet3_text",
+        "tweet3_link"
+      ]
+    },
+    "tweet3_header": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet3_author",
+        "tweet3_amount",
+        "tweet3_score"
+      ]
+    },
+    "tweet3_author": {
+      "type": "Text",
+      "props": {
+        "text": "x.com/Whale_AI_net",
+        "variant": "muted"
+      }
+    },
+    "tweet3_amount": {
+      "type": "Badge",
+      "props": {
+        "text": "$2.24 MIROSHARK",
+        "variant": "secondary"
+      }
+    },
+    "tweet3_score": {
+      "type": "Badge",
+      "props": {
+        "text": "Score: 30",
+        "variant": "default"
+      }
+    },
+    "tweet3_text": {
+      "type": "Text",
+      "props": {
+        "text": "\"Keep an eye on $MiroShark — Universal Swarm Intelligence Engine (dev aaronjmars)\""
+      }
+    },
+    "tweet3_link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/Whale_AI_net/status/2043916251026559205"
+      }
+    },
+    "tweet4": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet4_header",
+        "tweet4_text",
+        "tweet4_link"
+      ]
+    },
+    "tweet4_header": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet4_author",
+        "tweet4_amount",
+        "tweet4_score"
+      ]
+    },
+    "tweet4_author": {
+      "type": "Text",
+      "props": {
+        "text": "x.com/BioStone_chad",
+        "variant": "muted"
+      }
+    },
+    "tweet4_amount": {
+      "type": "Badge",
+      "props": {
+        "text": "$0.75 MIROSHARK",
+        "variant": "secondary"
+      }
+    },
+    "tweet4_score": {
+      "type": "Badge",
+      "props": {
+        "text": "Score: 10",
+        "variant": "default"
+      }
+    },
+    "tweet4_text": {
+      "type": "Text",
+      "props": {
+        "text": "$MIROSHARK up 5x from 70K MC — pumped alongside $AEON"
+      }
+    },
+    "tweet4_link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/BioStone_chad/status/2044069547477798983"
+      }
+    },
+    "tweet5": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet5_header",
+        "tweet5_text",
+        "tweet5_link"
+      ]
+    },
+    "tweet5_header": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet5_author",
+        "tweet5_amount",
+        "tweet5_score"
+      ]
+    },
+    "tweet5_author": {
+      "type": "Text",
+      "props": {
+        "text": "x.com/PremierBase",
+        "variant": "muted"
+      }
+    },
+    "tweet5_amount": {
+      "type": "Badge",
+      "props": {
+        "text": "$0.59 MIROSHARK",
+        "variant": "secondary"
+      }
+    },
+    "tweet5_score": {
+      "type": "Badge",
+      "props": {
+        "text": "Score: 8",
+        "variant": "default"
+      }
+    },
+    "tweet5_text": {
+      "type": "Text",
+      "props": {
+        "text": "Trending Base tokens: Miro Shark +36.60%, AEON +99.67%"
+      }
+    },
+    "tweet5_link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/PremierBase/status/2043965038189551812"
+      }
+    },
+    "separator2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "total_alert": {
+      "type": "Alert",
+      "props": {
+        "type": "info",
+        "title": "Allocation Summary",
+        "message": "Total: $10.00 in $MIROSHARK allocated to 5 authors (manual send after Bankr verification)\n\nNot eligible: x.com/btcbabycow (score 32 — no Bankr wallet; sign up at bankr.bot)"
+      }
+    }
+  }
+}
