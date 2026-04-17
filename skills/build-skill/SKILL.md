@@ -2,6 +2,7 @@
 name: Build Skill
 description: Design and build a new reusable skill
 var: ""
+tags: [meta, dev]
 ---
 > **${var}** — What skill to build. If empty, picks from issues or capability gaps.
 

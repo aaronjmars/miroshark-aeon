@@ -2,6 +2,7 @@
 name: Trending Coins
 description: Top trending and most searched coins on CoinGecko in the last 24 hours
 var: ""
+tags: [crypto]
 ---
 > **${var}** — Specific coin to highlight or category to filter (e.g. "PEPE", "AI tokens", "DePIN"). If empty, shows all trending coins.
 

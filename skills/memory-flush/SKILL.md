@@ -2,6 +2,7 @@
 name: Memory Flush
 description: Promote important recent log entries into MEMORY.md
 var: ""
+tags: [meta]
 ---
 > **${var}** — Topic to focus on. If empty, flushes all recent activity.
 

@@ -2,6 +2,7 @@
 name: HN Digest
 description: Top Hacker News stories filtered by interests
 var: ""
+tags: [news]
 ---
 > **${var}** — Topic filter for stories (e.g. "rust", "LLMs", "biotech"). If empty, uses default interest areas.
 

@@ -2,6 +2,7 @@
 name: feature
 description: Build a feature for the watched repo — picks from yesterday's repo-actions ideas first
 var: ""
+tags: [dev]
 ---
 > **${var}** — Feature to build. If empty, picks from repo-actions output or GitHub issues.
 

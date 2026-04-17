@@ -82,7 +82,7 @@ Rules:
 
 ### 5. Save the article
 
-Write to `output/articles/channel-recap-${var}-${today}.md`.
+Write to `articles/channel-recap-${var}-${today}.md`.
 
 ### 6. Notify
 
@@ -97,7 +97,7 @@ top posts:
 - [one-liner] (link)
 - [one-liner] (link)
 
-full article: output/articles/channel-recap-${var}-${today}.md
+full article: articles/channel-recap-${var}-${today}.md
 ```
 
 ## Sandbox note
@@ -112,6 +112,6 @@ Append to `memory/logs/${today}.md`:
 - **Posts scanned:** N (7-day window)
 - **Posts featured:** N
 - **Themes:** [list]
-- **Article:** output/articles/channel-recap-${var}-${today}.md
+- **Article:** articles/channel-recap-${var}-${today}.md
 - **Notification sent:** yes
 ```

@@ -2,6 +2,7 @@
 name: Search Academic Papers
 description: Search for recent academic papers on topics of interest and save a summary
 var: ""
+tags: [research]
 ---
 > **${var}** — Search query for papers. If empty, picks topics from MEMORY.md.
 

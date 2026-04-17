@@ -15,9 +15,9 @@ Today is ${today}. Your task is to identify a recurring manual task and build a 
 
 1. **Find automation opportunities.** If `${var}` is empty:
    - Read last 7 days of `memory/logs/` — look for action-converter outputs
-   - Read recent articles matching `output/articles/prototype-*` or action-converter patterns
+   - Read recent articles matching `articles/prototype-*` or action-converter patterns
    - Read `memory/MEMORY.md` for tracked goals or recurring tasks
-   - Read `output/skills/action-converter.md` if it exists (chain context)
+   - Read `.outputs/action-converter.md` if it exists (chain context)
    - Look for patterns:
      - Actions suggested more than once across different days
      - Actions that involve repetitive commands or API calls

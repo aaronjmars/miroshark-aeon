@@ -18,7 +18,7 @@ Today is ${today}. Your task is to find a trending GitHub repo, audit it for sec
    If `${var}` is set, use that repo directly.
 
    If empty:
-   - Read `output/skills/github-trending.md` if it exists (chain context from github-trending skill)
+   - Read `.outputs/github-trending.md` if it exists (chain context from github-trending skill)
    - Otherwise fetch trending repos using `gh api` (handles auth automatically, works in sandbox):
      ```bash
      gh api "search/repositories?q=created:>$(date -u -d '7 days ago' +%Y-%m-%d 2>/dev/null || date -u -v-7d +%Y-%m-%d)&sort=stars&order=desc&per_page=20" \
@@ -136,7 +136,7 @@ Today is ${today}. Your task is to find a trending GitHub repo, audit it for sec
    Found by [Aeon](https://github.com/aeonframework/aeon) — automated security scanner"
    ```
 
-8. **Write a report.** Save to `output/articles/vuln-scan-${today}.md`:
+8. **Write a report.** Save to `articles/vuln-scan-${today}.md`:
    ```markdown
    # Vulnerability Scan — ${today}
 

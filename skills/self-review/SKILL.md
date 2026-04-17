@@ -2,6 +2,7 @@
 name: Self Review
 description: Weekly audit of what Aeon did, what failed, and what to improve
 var: ""
+tags: [meta]
 ---
 > **${var}** — Area to focus on. If empty, reviews everything.
 

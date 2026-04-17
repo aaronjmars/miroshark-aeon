@@ -2,6 +2,7 @@
 name: hyperstitions-ideas
 description: Generate a prediction market idea rooted in the current project — a coordination tool to rally people toward a goal the agent can't achieve alone
 var: ""
+tags: [content, crypto]
 ---
 > **${var}** — Theme or angle override. If empty, derives from the current repo state and community signals.
 

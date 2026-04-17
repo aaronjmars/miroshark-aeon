@@ -2,6 +2,7 @@
 name: Tweet Digest
 description: Aggregate and summarize tweets from tracked accounts
 var: ""
+tags: [social]
 ---
 > **${var}** — Account or topic to filter by. If empty, checks all tracked accounts.
 

@@ -2,6 +2,7 @@
 name: Polymarket
 description: Trending and top markets on Polymarket — volume, new markets, biggest movers
 var: ""
+tags: [crypto]
 ---
 > **${var}** — Market category or search term to focus on (e.g. "crypto", "elections", "AI", "sports"). If empty, shows top markets across all categories.
 
