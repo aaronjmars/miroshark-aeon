@@ -53,6 +53,7 @@
 | Director Mode (Event Injection) | 2026-04-16 | Inject breaking events mid-simulation; file-based queue, marker-replace injection, Director panel UI, belief drift markers (PR #31 on MiroShark) |
 | Heartbeat Stuck-Run Timeout | 2026-04-16 | Heartbeat detects runs in_progress >2h as stuck, allows fresh dispatch bypassing dedup guard (PR #14 on miroshark-aeon) |
 | Simulation Quality Diagnostics | 2026-04-17 | Post-completion quality analysis: participation rate, stance entropy, convergence speed, cross-platform rate; health badge (Excellent/Good/Low) on cards + run view; expandable diagnostics panel with metric bars + suggestions (PR #32 on MiroShark) |
+| Agent Interaction Network Graph | 2026-04-17 | Force-directed SVG network visualization of agent-to-agent interactions; node color by stance, size by degree, edge color by platform; hover highlighting, platform filters, insights panel (top hub, bridge, echo chamber score), PNG export (PR #33 on MiroShark) |
 
 ## Watched Repos
 - `aaronjmars/aeon` — tracked in `memory/watched-repos.md`
