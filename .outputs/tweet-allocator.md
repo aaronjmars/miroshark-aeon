@@ -1,7 +1,7 @@
 ## Summary
 
-**TWEET_ALLOCATOR_SKIPPED (run 4)**
+**TWEET_ALLOCATOR_SKIPPED (run 5)** — today's $10.00 in $MIROSHARK was fully committed by run 1 earlier today.
 
-Today's $10.00 daily budget was fully committed in run 1 to 5 authors (Chainriffs $3.66, LemonSyncro $2.76, Whale_AI_net $2.24, BioStone_chad $0.75, PremierBase $0.59). Runs 2 and 3 already confirmed budget exhaustion.
+Run 1 allocated to 5 verified authors: Chainriffs ($3.66), LemonSyncro ($2.76), Whale_AI_net ($2.24), BioStone_chad ($0.75), PremierBase ($0.59). All wallets confirmed in the Bankr cache.
 
-Today's 8 fresh tweets were re-evaluated: miroshark_ excluded (project account), LemonSyncro excluded (already paid), 6 eligible authors (_THOR_ASGARD, internetracer, krc20kult, ToCryp84, Soupforalphabet, joraweb3) all have verified Bankr wallets — they carry forward to 2026-04-18. No notification sent.
+Six eligible Apr 17 tweets (_THOR_ASGARD, internetracer, krc20kult, ToCryp84, Soupforalphabet, joraweb3) remain unallocated and carry forward to 2026-04-18. The article at `articles/tweet-allocator-2026-04-17.md` is complete and unchanged.
