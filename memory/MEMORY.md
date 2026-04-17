@@ -22,6 +22,7 @@
 | 2026-04-12 | Closing the Loop: MiroShark Builds the Accountability Layer for AI-Powered Simulation | Prediction resolution & accuracy tracking, article generator, history search — evidence loop closes, 661 stars |
 | 2026-04-14 | When Simulated Agents Can Testify: MiroShark's Interrogatable Intelligence | Trace interview (PR #26), Apr 13 four-PR wave, belief drift chart, 681 stars, simulation-as-research-instrument |
 | 2026-04-16 | Break It Mid-Run: MiroShark's Director Mode Turns Simulation Into Controlled Experiment | Director Mode (PR #31), experimental control stack, perturbation analysis, MABS 2026 context, 698 stars |
+| 2026-04-17 | From Running Simulations to Reading Them: MiroShark Ships the Analytics Layer | Quality Diagnostics (PR #32) + Interaction Network (PR #33), analytics suite, echo chamber scoring, 708 stars |
 
 ## Recent Digests
 | Date | Type | Key Topics |

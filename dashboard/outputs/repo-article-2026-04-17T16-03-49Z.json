@@ -1,0 +1,121 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "repo-article"
+      },
+      "children": [
+        "mainLink",
+        "starCount",
+        "sep1",
+        "feature32Section",
+        "sep2",
+        "feature33Section",
+        "sep3",
+        "summarySection"
+      ]
+    },
+    "mainLink": {
+      "type": "StoryLink",
+      "props": {
+        "title": "From Running Simulations to Reading Them: MiroShark Ships the Analytics Layer",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-04-17.md",
+        "source": "GitHub"
+      }
+    },
+    "starCount": {
+      "type": "Stat",
+      "props": {
+        "label": "MiroShark Repository",
+        "value": "708 stars"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {}
+    },
+    "feature32Section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "feature32Heading",
+        "feature32Text"
+      ]
+    },
+    "feature32Heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Simulation Quality Diagnostics (PR #32)",
+        "level": "h3"
+      }
+    },
+    "feature32Text": {
+      "type": "Text",
+      "props": {
+        "text": "Scores every run on participation, stance entropy, convergence speed, and cross-platform interaction. Includes health badge and actionable suggestions."
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {}
+    },
+    "feature33Section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "feature33Heading",
+        "feature33Text"
+      ]
+    },
+    "feature33Heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Agent Interaction Network Graph (PR #33)",
+        "level": "h3"
+      }
+    },
+    "feature33Text": {
+      "type": "Text",
+      "props": {
+        "text": "Maps who talked to whom via force-directed visualization with echo chamber scoring and bridge detection."
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {}
+    },
+    "summarySection": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "summaryHeading",
+        "summaryText"
+      ]
+    },
+    "summaryHeading": {
+      "type": "Heading",
+      "props": {
+        "text": "Analytics Stack Complete",
+        "level": "h3"
+      }
+    },
+    "summaryText": {
+      "type": "Text",
+      "props": {
+        "text": "Together these features complete a six-feature analytics stack built in ten days."
+      }
+    }
+  }
+}
