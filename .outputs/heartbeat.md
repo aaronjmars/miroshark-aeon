@@ -1,8 +1,1 @@
-HEARTBEAT_OK. All 9 enabled skills for today completed successfully, no stuck runs, no stalled PRs, no urgent issues. Nothing to action.
-
-## Summary
-
-- Checked all enabled scheduled skills for Thursday Apr 16 — all 9 confirmed completed
-- PR #15 open ~6h, not stalled (threshold: 24h)
-- No stuck runs, no urgent issues
-- Appended second heartbeat entry to `memory/logs/2026-04-16.md`
+Heartbeat Apr 17 — HEARTBEAT_OK. All 8 daily skills ran on schedule (token-report, fetch-tweets, tweet-allocator, repo-pulse, feature ×2, push-recap ×3, project-lens ×2, repo-article ×2). 0 open PRs. 0 stuck runs. Nothing needs attention.

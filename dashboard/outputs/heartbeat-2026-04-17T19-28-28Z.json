@@ -1,0 +1,173 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "Heartbeat Apr 17"
+      },
+      "children": [
+        "badge",
+        "separator1",
+        "summary",
+        "separator2",
+        "skills_heading",
+        "skills_grid",
+        "separator3",
+        "stats",
+        "separator4",
+        "final"
+      ]
+    },
+    "badge": {
+      "type": "Badge",
+      "props": {
+        "text": "HEARTBEAT_OK",
+        "variant": "default"
+      }
+    },
+    "separator1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "summary": {
+      "type": "Text",
+      "props": {
+        "text": "All 8 daily skills ran on schedule"
+      }
+    },
+    "separator2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "skills_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Skills",
+        "level": "h3"
+      }
+    },
+    "skills_grid": {
+      "type": "Grid",
+      "props": {
+        "columns": 4,
+        "gap": "sm"
+      },
+      "children": [
+        "skill1",
+        "skill2",
+        "skill3",
+        "skill4",
+        "skill5",
+        "skill6",
+        "skill7",
+        "skill8"
+      ]
+    },
+    "skill1": {
+      "type": "Badge",
+      "props": {
+        "text": "token-report",
+        "variant": "secondary"
+      }
+    },
+    "skill2": {
+      "type": "Badge",
+      "props": {
+        "text": "fetch-tweets",
+        "variant": "secondary"
+      }
+    },
+    "skill3": {
+      "type": "Badge",
+      "props": {
+        "text": "tweet-allocator",
+        "variant": "secondary"
+      }
+    },
+    "skill4": {
+      "type": "Badge",
+      "props": {
+        "text": "repo-pulse",
+        "variant": "secondary"
+      }
+    },
+    "skill5": {
+      "type": "Badge",
+      "props": {
+        "text": "feature ×2",
+        "variant": "secondary"
+      }
+    },
+    "skill6": {
+      "type": "Badge",
+      "props": {
+        "text": "push-recap ×3",
+        "variant": "secondary"
+      }
+    },
+    "skill7": {
+      "type": "Badge",
+      "props": {
+        "text": "project-lens ×2",
+        "variant": "secondary"
+      }
+    },
+    "skill8": {
+      "type": "Badge",
+      "props": {
+        "text": "repo-article ×2",
+        "variant": "secondary"
+      }
+    },
+    "separator3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stats": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "stat1",
+        "stat2"
+      ]
+    },
+    "stat1": {
+      "type": "Stat",
+      "props": {
+        "label": "Open PRs",
+        "value": "0"
+      }
+    },
+    "stat2": {
+      "type": "Stat",
+      "props": {
+        "label": "Stuck runs",
+        "value": "0"
+      }
+    },
+    "separator4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "final": {
+      "type": "Text",
+      "props": {
+        "text": "Nothing needs attention",
+        "variant": "muted"
+      }
+    }
+  }
+}
