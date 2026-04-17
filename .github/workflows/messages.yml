@@ -589,7 +589,7 @@ jobs:
         if: steps.msg.outputs.source != ''
         uses: actions/checkout@v5
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GH_GLOBAL || secrets.GITHUB_TOKEN }}
 
       - name: Configure git identity
         if: steps.msg.outputs.source != ''

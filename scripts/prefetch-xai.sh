@@ -55,19 +55,31 @@ xai_search() {
   echo "xai-prefetch: fetching $outfile ..."
   local response
   local http_code
-  response=$(curl -s --max-time 60 -w "\n__HTTP_CODE__%{http_code}" -X POST "https://api.x.ai/v1/responses" \
-    -H "Content-Type: application/json" \
-    -H "Authorization: Bearer $XAI_API_KEY" \
-    -d "$(jq -n \
-      --arg model "grok-4-1-fast" \
-      --arg prompt "$prompt" \
-      --argjson tools "$tools" \
-      '{model: $model, input: [{role: "user", content: $prompt}], tools: $tools}')" 2>&1) || {
-    echo "::warning::xai-prefetch: FAILED $outfile (curl error: $?)"
-    return 1
-  }
-  http_code=$(echo "$response" | grep '__HTTP_CODE__' | sed 's/__HTTP_CODE__//')
-  response=$(echo "$response" | grep -v '__HTTP_CODE__')
+  local body
+  body=$(jq -n \
+    --arg model "grok-4-1-fast" \
+    --arg prompt "$prompt" \
+    --argjson tools "$tools" \
+    '{model: $model, input: [{role: "user", content: $prompt}], tools: $tools}')
+  local attempt=1
+  while : ; do
+    response=$(curl -s --max-time 60 -w "\n__HTTP_CODE__%{http_code}" -X POST "https://api.x.ai/v1/responses" \
+      -H "Content-Type: application/json" \
+      -H "Authorization: Bearer $XAI_API_KEY" \
+      -d "$body" 2>&1) || {
+      echo "::warning::xai-prefetch: FAILED $outfile (curl error: $?)"
+      return 1
+    }
+    http_code=$(echo "$response" | grep '__HTTP_CODE__' | sed 's/__HTTP_CODE__//')
+    response=$(echo "$response" | grep -v '__HTTP_CODE__')
+    if [ "$http_code" = "429" ] && [ "$attempt" -lt 2 ]; then
+      echo "xai-prefetch: HTTP 429 on $outfile, backing off 30s then retrying"
+      sleep 30
+      attempt=$((attempt + 1))
+      continue
+    fi
+    break
+  done
   if [ "$http_code" != "200" ]; then
     echo "::warning::xai-prefetch: FAILED $outfile (HTTP $http_code)"
     echo "::warning::xai-prefetch: response: $(echo "$response" | head -c 300)"

@@ -77,7 +77,7 @@ jobs:
         if: github.event_name == 'issues'
         uses: actions/checkout@v5
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GH_GLOBAL || secrets.GITHUB_TOKEN }}
 
       - name: Determine skill
         id: skill
@@ -102,7 +102,7 @@ jobs:
         if: steps.work.outputs.mode != ''
         uses: actions/checkout@v5
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GH_GLOBAL || secrets.GITHUB_TOKEN }}
 
       - name: Configure git identity
         if: steps.work.outputs.mode != ''
