@@ -1,0 +1,256 @@
+{
+  "root": "card-root",
+  "state": {},
+  "elements": {
+    "card-root": {
+      "type": "Card",
+      "props": {
+        "title": "Top Tweets — $MIROSHARK OR @miroshark_ OR github.com/aaronjmars/miroshark (2026-04-17)"
+      },
+      "children": [
+        "stack-main"
+      ]
+    },
+    "stack-main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "tweet-1",
+        "tweet-2",
+        "tweet-3",
+        "tweet-4",
+        "tweet-5",
+        "tweet-6",
+        "tweet-7",
+        "tweet-8"
+      ]
+    },
+    "tweet-1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweetcard-1",
+        "link-1"
+      ]
+    },
+    "tweetcard-1": {
+      "type": "TweetCard",
+      "props": {
+        "author": "LemonSyncro",
+        "handle": "LemonSyncro",
+        "text": "Testing $Miroshark x bankrbot rewards today; product release this week 👀",
+        "likes": 1,
+        "retweets": 0
+      }
+    },
+    "link-1": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/LemonSyncro/status/2044686209880904102"
+      }
+    },
+    "tweet-2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweetcard-2",
+        "link-2"
+      ]
+    },
+    "tweetcard-2": {
+      "type": "TweetCard",
+      "props": {
+        "author": "_THOR_ASGARD",
+        "handle": "_THOR_ASGARD",
+        "text": "Im in $GITLAWB $VOLM $MIROSHARK 🔥🔥",
+        "likes": 4,
+        "retweets": 0
+      }
+    },
+    "link-2": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/_THOR_ASGARD/status/2044750425761681800"
+      }
+    },
+    "tweet-3": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweetcard-3",
+        "link-3"
+      ]
+    },
+    "tweetcard-3": {
+      "type": "TweetCard",
+      "props": {
+        "author": "ToCryp84",
+        "handle": "ToCryp84",
+        "text": "$AEON bull run vibes; waiting on CEX/DEX listings for $miroshark $base",
+        "likes": 1,
+        "retweets": 0
+      }
+    },
+    "link-3": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/ToCryp84/status/2044818710389502204"
+      }
+    },
+    "tweet-4": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweetcard-4",
+        "link-4"
+      ]
+    },
+    "tweetcard-4": {
+      "type": "TweetCard",
+      "props": {
+        "author": "miroshark_",
+        "handle": "miroshark_",
+        "text": "Shared the MiroShark GitHub repo link",
+        "likes": 3,
+        "retweets": 0
+      }
+    },
+    "link-4": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/miroshark_/status/2044905361463755037"
+      }
+    },
+    "tweet-5": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweetcard-5",
+        "link-5"
+      ]
+    },
+    "tweetcard-5": {
+      "type": "TweetCard",
+      "props": {
+        "author": "internetracer",
+        "handle": "internetracer",
+        "text": "$miroshark undervalued fr",
+        "likes": 1,
+        "retweets": 1
+      }
+    },
+    "link-5": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/internetracer/status/2044859117467017606"
+      }
+    },
+    "tweet-6": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweetcard-6",
+        "link-6"
+      ]
+    },
+    "tweetcard-6": {
+      "type": "TweetCard",
+      "props": {
+        "author": "krc20kult",
+        "handle": "krc20kult",
+        "text": "github is way bigger 700 stars, 130 forks for $MIROSHARK",
+        "likes": 1,
+        "retweets": 1
+      }
+    },
+    "link-6": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/krc20kult/status/2044854618220282111"
+      }
+    },
+    "tweet-7": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweetcard-7",
+        "link-7"
+      ]
+    },
+    "tweetcard-7": {
+      "type": "TweetCard",
+      "props": {
+        "author": "Soupforalphabet",
+        "handle": "Soupforalphabet",
+        "text": "LFG $miroshark",
+        "likes": 1,
+        "retweets": 0
+      }
+    },
+    "link-7": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/Soupforalphabet/status/2044742290652926339"
+      }
+    },
+    "tweet-8": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweetcard-8",
+        "link-8"
+      ]
+    },
+    "tweetcard-8": {
+      "type": "TweetCard",
+      "props": {
+        "author": "joraweb3",
+        "handle": "joraweb3",
+        "text": "$miroshark repo link share",
+        "likes": 0,
+        "retweets": 0
+      }
+    },
+    "link-8": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/joraweb3/status/2044919185663271124"
+      }
+    }
+  }
+}
