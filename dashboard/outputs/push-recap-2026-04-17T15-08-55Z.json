@@ -1,0 +1,370 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Push Recap — 2026-04-17"
+      },
+      "children": [
+        "repo_stats",
+        "sep1",
+        "analytics_section",
+        "sep2",
+        "openrouter_section",
+        "sep3",
+        "tweet_allocator_section",
+        "sep4",
+        "fetch_tweets_section",
+        "sep5",
+        "key_changes_section",
+        "sep6",
+        "final_stats",
+        "full_recap_link"
+      ]
+    },
+    "repo_stats": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "stat_miroshark",
+        "stat_aeon",
+        "stat_authors"
+      ]
+    },
+    "stat_miroshark": {
+      "type": "Stat",
+      "props": {
+        "label": "MiroShark",
+        "value": "3 commits"
+      }
+    },
+    "stat_aeon": {
+      "type": "Stat",
+      "props": {
+        "label": "miroshark-aeon",
+        "value": "85 commits"
+      }
+    },
+    "stat_authors": {
+      "type": "Stat",
+      "props": {
+        "label": "Authors",
+        "value": "2"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "analytics_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "analytics_heading",
+        "analytics_text"
+      ]
+    },
+    "analytics_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Simulation Analytics Suite",
+        "level": "h2"
+      }
+    },
+    "analytics_text": {
+      "type": "Text",
+      "props": {
+        "text": "Two new post-completion analysis tools merged. Quality Diagnostics (PR #32) computes participation rate, stance entropy, convergence speed, and cross-platform rate — assigns Excellent/Good/Low health badges with actionable suggestions. Agent Interaction Network (PR #33) renders a force-directed SVG graph of who-interacted-with-whom — nodes by stance, edges by platform, with hub detection, echo chamber scoring, and PNG export.",
+        "variant": "body"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "openrouter_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "openrouter_heading",
+        "openrouter_text"
+      ]
+    },
+    "openrouter_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "OpenRouter Observability & UI Polish",
+        "level": "h2"
+      }
+    },
+    "openrouter_text": {
+      "type": "Text",
+      "props": {
+        "text": "24-file overhaul adds proper attribution headers for OpenRouter cost tracking, unifies Flask + Wonderwall subprocess event logs into one run summary (previously agent-level token usage was invisible), dynamic browser tab titles across 5 views, collapsed profile previews, and Director Mode limit raised to 10 events.",
+        "variant": "body"
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "tweet_allocator_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "tweet_allocator_heading",
+        "tweet_allocator_text"
+      ]
+    },
+    "tweet_allocator_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Tweet Allocator in $MIROSHARK",
+        "level": "h2"
+      }
+    },
+    "tweet_allocator_text": {
+      "type": "Text",
+      "props": {
+        "text": "New skill distributes $10/day in $MIROSHARK to top tweeters — engagement-scored, Bankr-wallet-verified, with a prefetch script that works around sandbox auth restrictions. 5 wallets verified, 6 tweets carrying to tomorrow.",
+        "variant": "body"
+      }
+    },
+    "sep4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "fetch_tweets_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "fetch_tweets_heading",
+        "fetch_tweets_text"
+      ]
+    },
+    "fetch_tweets_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Fetch-Tweets Hardening",
+        "level": "h2"
+      }
+    },
+    "fetch_tweets_text": {
+      "type": "Text",
+      "props": {
+        "text": "Persistent dedup via seen-file (PR #16) eliminates cross-conversation re-reports. New Python post-filter catches Grok false positives (spam tagging $MIROSHARK without context). Search window narrowed to 1 day for freshness.",
+        "variant": "body"
+      }
+    },
+    "sep5": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "key_changes_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "key_changes_heading",
+        "file_1",
+        "file_2",
+        "file_3",
+        "file_4"
+      ]
+    },
+    "key_changes_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Key changes",
+        "level": "h2"
+      }
+    },
+    "file_1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "file_1_name",
+        "file_1_desc"
+      ]
+    },
+    "file_1_name": {
+      "type": "Badge",
+      "props": {
+        "text": "InteractionNetwork.vue",
+        "variant": "outline"
+      }
+    },
+    "file_1_desc": {
+      "type": "Text",
+      "props": {
+        "text": "644-line force-directed graph with centrality metrics and echo chamber scoring",
+        "variant": "caption"
+      }
+    },
+    "file_2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "file_2_name",
+        "file_2_desc"
+      ]
+    },
+    "file_2_name": {
+      "type": "Badge",
+      "props": {
+        "text": "Wonderwall agent.py",
+        "variant": "outline"
+      }
+    },
+    "file_2_desc": {
+      "type": "Text",
+      "props": {
+        "text": "Per-agent structured event tracking for cost attribution",
+        "variant": "caption"
+      }
+    },
+    "file_3": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "file_3_name",
+        "file_3_desc"
+      ]
+    },
+    "file_3_name": {
+      "type": "Badge",
+      "props": {
+        "text": "prefetch-bankr.sh",
+        "variant": "outline"
+      }
+    },
+    "file_3_desc": {
+      "type": "Text",
+      "props": {
+        "text": "Reusable sandbox workaround for auth-required APIs",
+        "variant": "caption"
+      }
+    },
+    "file_4": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "file_4_name",
+        "file_4_desc"
+      ]
+    },
+    "file_4_name": {
+      "type": "Badge",
+      "props": {
+        "text": "filter-xai-tweets.py",
+        "variant": "outline"
+      }
+    },
+    "file_4_desc": {
+      "type": "Text",
+      "props": {
+        "text": "Post-filter pipeline drops irrelevant Grok results",
+        "variant": "caption"
+      }
+    },
+    "sep6": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "final_stats": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stat_files",
+        "stat_lines"
+      ]
+    },
+    "stat_files": {
+      "type": "Stat",
+      "props": {
+        "label": "Files changed",
+        "value": "~55"
+      }
+    },
+    "stat_lines": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "stat_additions",
+        "stat_deletions"
+      ]
+    },
+    "stat_additions": {
+      "type": "Stat",
+      "props": {
+        "label": "Lines added",
+        "value": "3,050",
+        "trend": "up"
+      }
+    },
+    "stat_deletions": {
+      "type": "Stat",
+      "props": {
+        "label": "Lines deleted",
+        "value": "630",
+        "trend": "down"
+      }
+    },
+    "full_recap_link": {
+      "type": "Link",
+      "props": {
+        "label": "Full recap",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-04-17.md"
+      }
+    }
+  }
+}

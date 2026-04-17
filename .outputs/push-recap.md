@@ -1,20 +1,19 @@
-*Push Recap — 2026-04-16*
-MiroShark — 6 commits, miroshark-aeon — 28 commits (2 authors)
+*Push Recap — 2026-04-17*
+MiroShark — 3 commits | miroshark-aeon — 85 commits | 2 authors
 
-Director Mode (Event Injection): Users can now inject breaking events into running simulations — agents receive them at the next round boundary, shifting posts, trades, and stances. File-based event queue, REST API (max 3 per sim), full UI panel with timeline banners and belief drift markers. PR #31 merged.
+Simulation Analytics Suite: Two new post-completion analysis tools merged. Quality Diagnostics (PR #32) computes participation rate, stance entropy, convergence speed, and cross-platform rate — assigns Excellent/Good/Low health badges with actionable suggestions. Agent Interaction Network (PR #33) renders a force-directed SVG graph of who-interacted-with-whom — nodes by stance, edges by platform, with hub detection, echo chamber scoring, and PNG export.
 
-Multi-Model Routing & Cost Optimization: New OASIS_MODEL_NAME decouples the sim loop model from the default LLM. GraphToolsService gains a fast_llm path routing mechanical work to cheap models. Report context capped at 6K chars (was unbounded at 112K tokens). Auto-generated run_summary.md tracks cost/performance per simulation. Gemini empty-message crash fixed.
+OpenRouter Observability & UI Polish: 24-file overhaul adds proper attribution headers for OpenRouter cost tracking, unifies Flask + Wonderwall subprocess event logs into one run summary (previously agent-level token usage was invisible), dynamic browser tab titles across 5 views, collapsed profile previews, and Director Mode limit raised to 10 events.
 
-NER Quality & Integration Fixes: Larger NER chunks (1500/100), nonspeaking-entity filter (rejects dates, concepts, countries from becoming agents), PDF citation artifact stripping, ontology type validation. OpenRouter headers updated from deprecated X-Title to X-OpenRouter-Title.
+Tweet Allocator in $MIROSHARK: New skill distributes $10/day in $MIROSHARK to top tweeters — engagement-scored, Bankr-wallet-verified, with a prefetch script that works around sandbox auth restrictions. 5 wallets verified, 6 tweets carrying to tomorrow.
 
-Aeon Infra Hardening: Heartbeat detects stuck runs (>2h in_progress) and bypasses dedup guard for fresh dispatch (PR #14). Notification system tracks delivery to prevent double-send. project-lens and repo-article promoted to daily schedules.
+Fetch-Tweets Hardening: Persistent dedup via seen-file (PR #16) eliminates cross-conversation re-reports. New Python post-filter catches Grok false positives (spam tagging $MIROSHARK without context). Search window narrowed to 1 day for freshness.
 
 Key changes:
-- backend/scripts/director_events.py: new file-based event queue for mid-sim injection (+187 lines)
-- backend/app/utils/run_summary.py: auto-generated cost/perf reports (+335 lines)
-- backend/app/services/graph_tools.py: three-tier model routing (fast/default/smart)
-- backend/app/services/entity_reader.py: nonspeaking entity filter (+60 lines)
-- skills/heartbeat/SKILL.md: stuck-run timeout detection
+- InteractionNetwork.vue: 644-line force-directed graph with centrality metrics and echo chamber scoring
+- Wonderwall agent.py: Per-agent structured event tracking for cost attribution
+- prefetch-bankr.sh: Reusable sandbox workaround for auth-required APIs
+- filter-xai-tweets.py: Post-filter pipeline drops irrelevant Grok results
 
-Stats: ~40 files changed, +1,700/-320 lines
-Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-04-16.md
+Stats: ~55 files changed, +3,050/-630 lines
+Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-04-17.md
