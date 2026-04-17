@@ -1,5 +1,0 @@
-{
-  "model": "grok-4-1-fast",
-  "input": [{"role": "user", "content": "Search X/Twitter for tweets about the $MIROSHARK crypto token on Base chain (contract address 0xd7bc6a05a56655fb2052f742b012d1dfd66e1ba3) in the last 7 days. Only return tweets about the MIROSHARK cryptocurrency. Date range: 2026-03-18 to 2026-03-25. Return 10 tweets — prioritize the most interesting, insightful, or highly-engaged posts. For each tweet include: @handle, the full text, date posted, engagement (likes/retweets if available), and the direct link (https://x.com/handle/status/ID). Return as a numbered list."}],
-  "tools": [{"type": "x_search"}]
-}

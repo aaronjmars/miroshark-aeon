@@ -1,7 +1,49 @@
-.env
-.claude/
+# macOS
 .DS_Store
-skills.lock
+
+# Secrets & local env
+.env
+.env.local
+.env.*.local
+
+# Claude Code local state
+.claude/
+
+# Caches (regenerated per run)
 .xai-cache/
 .bankr-cache/
 .pending-notify/
+.pending-replicate/
+.pending-supernotes/
+.pending-deploy/
+.tg_cache/
+
+# Skill provenance lock (per-repo, not committed)
+skills.lock
+
+# Scratch / temp files
+tmp_*
+*.tmp
+.tmp-*
+.pending-*.sh
+.run-*.sh
+.*-tmp.md
+.*-draft.md
+.*-msg.txt
+*_msg.txt
+*_raw.txt
+
+# Leaked creds scratch
+.xai_key
+.ghtoken
+
+# Python bytecode
+__pycache__/
+*.pyc
+
+# Node
+node_modules/
+
+# Stale artifacts
+.external-work
+.vuln-scan/
