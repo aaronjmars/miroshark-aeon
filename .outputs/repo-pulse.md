@@ -1,11 +1,11 @@
-*Repo Pulse — 2026-04-16*
+*Repo Pulse — 2026-04-17*
 aaronjmars/MiroShark
 
-Stars: 696 total (+6 new)
-Forks: 132 total (+2 new)
+Stars: 706 total (+10 new)
+Forks: 134 total (+2 new)
 
 New stargazers:
-github.com/gmorso | github.com/ranjith2120 | github.com/ismailneqrouz | github.com/boralp | github.com/1halibote | github.com/BJ5-byte
+github.com/munibleads | github.com/felipegcarrillo | github.com/QuantumriderAGI | github.com/v124rd | github.com/prapanch | github.com/colibriz | github.com/ghostbyte0x | github.com/YabDab137 | github.com/fakrij | github.com/jrl1989
 
 New forks:
-github.com/Decentralised-AI/MiroShark | github.com/underpressure98/MiroShark
+github.com/ghostbyte0x/MiroShark | github.com/growth88/MiroShark

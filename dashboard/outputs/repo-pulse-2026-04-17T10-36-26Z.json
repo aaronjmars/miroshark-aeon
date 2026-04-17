@@ -1,0 +1,199 @@
+{
+  "root": "card_root",
+  "state": {},
+  "elements": {
+    "card_root": {
+      "type": "Card",
+      "props": {
+        "title": "Repo Pulse",
+        "description": "2026-04-17"
+      },
+      "children": [
+        "heading_repo",
+        "stats_stack",
+        "separator1",
+        "heading_stargazers",
+        "stargazers_stack",
+        "separator2",
+        "heading_forks",
+        "forks_stack"
+      ]
+    },
+    "heading_repo": {
+      "type": "Heading",
+      "props": {
+        "text": "aaronjmars/MiroShark",
+        "level": "h2"
+      }
+    },
+    "stats_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "lg"
+      },
+      "children": [
+        "stat_stars",
+        "stat_forks"
+      ]
+    },
+    "stat_stars": {
+      "type": "Stat",
+      "props": {
+        "label": "Stars",
+        "value": "706",
+        "delta": "+10",
+        "trend": "up"
+      }
+    },
+    "stat_forks": {
+      "type": "Stat",
+      "props": {
+        "label": "Forks",
+        "value": "134",
+        "delta": "+2",
+        "trend": "up"
+      }
+    },
+    "separator1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading_stargazers": {
+      "type": "Heading",
+      "props": {
+        "text": "New stargazers",
+        "level": "h3"
+      }
+    },
+    "stargazers_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "link_munibleads",
+        "link_felipegcarrillo",
+        "link_QuantumriderAGI",
+        "link_v124rd",
+        "link_prapanch",
+        "link_colibriz",
+        "link_ghostbyte0x",
+        "link_YabDab137",
+        "link_fakrij",
+        "link_jrl1989"
+      ]
+    },
+    "link_munibleads": {
+      "type": "Link",
+      "props": {
+        "label": "munibleads",
+        "href": "https://github.com/munibleads"
+      }
+    },
+    "link_felipegcarrillo": {
+      "type": "Link",
+      "props": {
+        "label": "felipegcarrillo",
+        "href": "https://github.com/felipegcarrillo"
+      }
+    },
+    "link_QuantumriderAGI": {
+      "type": "Link",
+      "props": {
+        "label": "QuantumriderAGI",
+        "href": "https://github.com/QuantumriderAGI"
+      }
+    },
+    "link_v124rd": {
+      "type": "Link",
+      "props": {
+        "label": "v124rd",
+        "href": "https://github.com/v124rd"
+      }
+    },
+    "link_prapanch": {
+      "type": "Link",
+      "props": {
+        "label": "prapanch",
+        "href": "https://github.com/prapanch"
+      }
+    },
+    "link_colibriz": {
+      "type": "Link",
+      "props": {
+        "label": "colibriz",
+        "href": "https://github.com/colibriz"
+      }
+    },
+    "link_ghostbyte0x": {
+      "type": "Link",
+      "props": {
+        "label": "ghostbyte0x",
+        "href": "https://github.com/ghostbyte0x"
+      }
+    },
+    "link_YabDab137": {
+      "type": "Link",
+      "props": {
+        "label": "YabDab137",
+        "href": "https://github.com/YabDab137"
+      }
+    },
+    "link_fakrij": {
+      "type": "Link",
+      "props": {
+        "label": "fakrij",
+        "href": "https://github.com/fakrij"
+      }
+    },
+    "link_jrl1989": {
+      "type": "Link",
+      "props": {
+        "label": "jrl1989",
+        "href": "https://github.com/jrl1989"
+      }
+    },
+    "separator2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading_forks": {
+      "type": "Heading",
+      "props": {
+        "text": "New forks",
+        "level": "h3"
+      }
+    },
+    "forks_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "story_ghostbyte0x_fork",
+        "story_growth88_fork"
+      ]
+    },
+    "story_ghostbyte0x_fork": {
+      "type": "StoryLink",
+      "props": {
+        "title": "ghostbyte0x/MiroShark",
+        "href": "https://github.com/ghostbyte0x/MiroShark"
+      }
+    },
+    "story_growth88_fork": {
+      "type": "StoryLink",
+      "props": {
+        "title": "growth88/MiroShark",
+        "href": "https://github.com/growth88/MiroShark"
+      }
+    }
+  }
+}
