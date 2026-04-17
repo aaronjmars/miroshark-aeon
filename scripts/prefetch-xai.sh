@@ -137,8 +137,15 @@ case "$SKILL" in
   fetch-tweets)
     if [ -n "$VAR" ]; then
       xai_search "fetch-tweets.json" \
-        "Search X for ALL tweets about: ${VAR} from ${YESTERDAY} to ${TODAY}. Return at least 10 tweets (more if available) — prioritize the most interesting, insightful, or highly-engaged posts but also include smaller accounts. For each tweet include: @handle, full tweet text, date posted, engagement stats (likes, retweets, replies), and the direct link (https://x.com/handle/status/ID). Return as a numbered list." \
+        "Search X for tweets matching this query: ${VAR} — strictly interpret OR operators. Date range: ${YESTERDAY} to ${TODAY}. IMPORTANT: only return tweets whose text actually contains at least one of the exact tokens from the query (the cashtag with the \$ prefix, the @ handle, or the URL). Do NOT return tweets that merely use the bare word 'aeon' or 'miroshark' without the \$ prefix — those are false positives about unrelated things (people named aeon, the word used casually, etc.). Return at least 10 matching tweets (more if available) — prioritize the most interesting, insightful, or highly-engaged posts but also include smaller accounts. For each tweet include: @handle, full tweet text, date posted, engagement stats (likes, retweets, replies), and the direct link (https://x.com/handle/status/ID). Return as a numbered list." \
         "$YESTERDAY"
+
+      # Post-filter: drop tweets whose text doesn't contain any required token.
+      # Guards against Grok returning bare-word matches despite the strict prompt.
+      if [ -f ".xai-cache/fetch-tweets.json" ] && [ -f "scripts/filter-xai-tweets.py" ]; then
+        python3 scripts/filter-xai-tweets.py .xai-cache/fetch-tweets.json "$VAR" \
+          || echo "::warning::xai-prefetch: post-filter failed (keeping raw output)"
+      fi
     else
       echo "xai-prefetch: fetch-tweets has no var, skipping"
     fi
