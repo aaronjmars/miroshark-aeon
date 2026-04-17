@@ -47,6 +47,8 @@ Read the last 3 days of memory/logs/ for any previous tweet-allocator entries (t
 
    If NO tweets found from the last 24h, log "TWEET_ALLOCATOR_EMPTY — no tweets found today" to `memory/logs/${today}.md` and **stop — do NOT send any notification**.
 
+   **Required-token filter (defensive).** Read the `fetch-tweets` entry in `aeon.yml` — its `var` lists the OR-separated tokens that define a valid tweet (e.g. `$MIROSHARK OR @miroshark_ OR github.com/aaronjmars/miroshark`). For each candidate tweet, check whether its `summary` / `text` / URL contains **at least one** of those tokens (case-insensitive substring match). Drop any tweet that contains **none** of them — those are stale pre-filter false positives (e.g. a tweet using the bare word "miroshark" without the $ cashtag). Log the drops in the run entry under `**Dropped (no required token):**`. This mirrors the `scripts/filter-xai-tweets.py` guard that `fetch-tweets` applies to the Grok cache, protecting against older log entries written before the filter existed.
+
 2. **Deduplicate — no double-paying tweets OR authors.** Scan the last 30 days of `memory/logs/` for previous `## Tweet Allocator` entries. Build two lists:
    - `PAID_TWEETS` — tweet URLs that were already rewarded
    - `PAID_AUTHORS` — X handles that have already received a reward in the last 24h (same-day dedup)
