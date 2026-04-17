@@ -1,0 +1,111 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "project-lens"
+      },
+      "children": [
+        "stack-content"
+      ]
+    },
+    "stack-content": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading-article",
+        "text-pnas-experiment",
+        "text-seeley-research",
+        "text-miroshark-analysis",
+        "separator-1",
+        "stat-github-stars",
+        "badges-topics",
+        "storylink-fulltext"
+      ]
+    },
+    "heading-article": {
+      "type": "Heading",
+      "props": {
+        "text": "A Crowd Is Not a Swarm — What Honeybees Knew Before the Wisdom of Crowds Got Famous",
+        "level": "h3"
+      }
+    },
+    "text-pnas-experiment": {
+      "type": "Text",
+      "props": {
+        "text": "A 2011 PNAS experiment showed that the wisdom of crowds breaks the moment people see each other's answers — diversity collapses, confidence rises, accuracy doesn't."
+      }
+    },
+    "text-seeley-research": {
+      "type": "Text",
+      "props": {
+        "text": "Tom Seeley's honeybee research describes the architecture that prevents this."
+      }
+    },
+    "text-miroshark-analysis": {
+      "type": "Text",
+      "props": {
+        "text": "MiroShark's new analytics layer (Quality Diagnostics + Interaction Network) instruments exactly that distinction — stance entropy, echo chamber score, convergence speed — turning premature consensus into a measurable defect rather than a virtue."
+      }
+    },
+    "separator-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stat-github-stars": {
+      "type": "Stat",
+      "props": {
+        "label": "MiroShark Repository",
+        "value": "709"
+      }
+    },
+    "badges-topics": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "badge-crowdsourcing",
+        "badge-diversity",
+        "badge-diagnostics"
+      ]
+    },
+    "badge-crowdsourcing": {
+      "type": "Badge",
+      "props": {
+        "text": "Crowdsourcing",
+        "variant": "outline"
+      }
+    },
+    "badge-diversity": {
+      "type": "Badge",
+      "props": {
+        "text": "Diversity & Consensus",
+        "variant": "outline"
+      }
+    },
+    "badge-diagnostics": {
+      "type": "Badge",
+      "props": {
+        "text": "Quality Diagnostics",
+        "variant": "outline"
+      }
+    },
+    "storylink-fulltext": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Read full article",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-04-17-v2.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}
