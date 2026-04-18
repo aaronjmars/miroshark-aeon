@@ -28,7 +28,7 @@ Project-owned accounts. Valuable signal, but self-dealing:
 
 ## Steps
 
-1. **Read today's tweets.** Extract every tweet from `## Fetch Tweets` sections in `memory/logs/${today}.md`. For each capture: `handle`, `tweet_url`, `summary`, `likes`, `retweets`. If the log has no `## Fetch Tweets` sections, log `TWEET_ALLOCATOR_EMPTY — no tweets in today's log` and **stop**.
+1. **Read today's tweets.** Extract every tweet from `## Fetch Tweets` sections in `memory/logs/${today}.md`. For each capture: `handle`, `tweet_url`, `summary`, `likes`, `retweets`. If the log has no `## Fetch Tweets` sections, log `TWEET_ALLOCATOR_EMPTY — no tweets in today's log`, send a one-line notification via `./notify` (e.g. `Tweet Allocator — ${today}: no tweets in today's log to allocate from.`), and stop.
 
 2. **Exclude project accounts** (`aaronjmars`, `miroshark_`).
 
@@ -38,9 +38,9 @@ Project-owned accounts. Valuable signal, but self-dealing:
    - Value is a `0x...` address → **eligible**, keep for allocation.
    - Value is `null`, or handle missing from the cache → **not eligible**, drop silently.
 
-   **Hard stop if the cache is missing or empty.** Log `TWEET_ALLOCATOR_ERROR — .bankr-cache/verified-handles.json missing; check BANKR_API_KEY secret and prefetch-bankr.sh workflow output` and **stop**. No "unverified" fallback — no wallet, no payment.
+   **Hard stop if the cache is missing or empty.** Log `TWEET_ALLOCATOR_ERROR — .bankr-cache/verified-handles.json missing; check BANKR_API_KEY secret and prefetch-bankr.sh workflow output`, send an alert notification via `./notify` (e.g. `Tweet Allocator — ${today}: ERROR — Bankr cache missing, check BANKR_API_KEY secret.`), and stop. No "unverified" fallback — no wallet, no payment.
 
-   If zero candidates remain after this step, log `TWEET_ALLOCATOR_EMPTY — no eligible tweets (nobody in today's log has a Bankr wallet)` and stop.
+   If zero candidates remain after this step, log `TWEET_ALLOCATOR_EMPTY — no eligible tweets (nobody in today's log has a Bankr wallet)`, send a one-line notification via `./notify` (e.g. `Tweet Allocator — ${today}: no eligible tweeters (none had a verified Bankr wallet today).`), and stop.
 
 5. **Score and rank.** `score = likes + 3 * retweets`. If both are zero/missing, score = 1. Sort descending. Take top 5.
 

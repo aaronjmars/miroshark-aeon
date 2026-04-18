@@ -172,9 +172,16 @@ jobs:
                 SHOULD_RUN=true
               fi
             fi
-            # Catch-up: schedule matched previous hour but was missed
+            # Catch-up: schedule matched previous hour but was missed.
+            # Only catch up when last dispatch predates the scheduled fire time —
+            # prevents the same skill from firing twice when a tick also lands in PREV_HOUR+1.
             if [ "$SHOULD_RUN" = "false" ] && cron_match "$C_HOUR" "$PREV_HOUR"; then
-              SHOULD_RUN=true
+              if [[ "$C_MIN" =~ ^[0-9]+$ ]]; then
+                SCHED_EPOCH=$(date -u -d "$(date -u +%Y-%m-%d) ${PREV_HOUR}:$(printf '%02d' "$C_MIN"):00 UTC" +%s 2>/dev/null || echo 0)
+                [ "$LAST_DISPATCH_EPOCH" -lt "$SCHED_EPOCH" ] && SHOULD_RUN=true
+              else
+                SHOULD_RUN=true
+              fi
             fi
 
             [ "$SHOULD_RUN" = "false" ] && continue
@@ -267,21 +274,28 @@ jobs:
             cron_match "$C_MONTH" "$MONTH" || continue
             cron_match "$C_DOW" "$DOW" || continue
 
+            CHAIN_KEY="chain:$CH"
+            LAST_DISPATCH=$(echo "$STATE" | jq -r --arg s "$CHAIN_KEY" '.[$s].last_dispatch // "1970-01-01T00:00:00Z"')
+            LAST_DISPATCH_EPOCH=$(date -u -d "$LAST_DISPATCH" +%s 2>/dev/null || echo 0)
+            MINUTES_SINCE=$(( (NOW_EPOCH - LAST_DISPATCH_EPOCH) / 60 ))
+
             SHOULD_RUN=false
             if cron_match "$C_HOUR" "$HOUR"; then
               if [ "$C_MIN" = "*" ] || [ "$C_MIN" -le "$MINUTE" ]; then
                 SHOULD_RUN=true
               fi
             fi
+            # Catch-up: only if last dispatch predates today's scheduled fire time
             if [ "$SHOULD_RUN" = "false" ] && cron_match "$C_HOUR" "$PREV_HOUR"; then
-              SHOULD_RUN=true
+              if [[ "$C_MIN" =~ ^[0-9]+$ ]]; then
+                SCHED_EPOCH=$(date -u -d "$(date -u +%Y-%m-%d) ${PREV_HOUR}:$(printf '%02d' "$C_MIN"):00 UTC" +%s 2>/dev/null || echo 0)
+                [ "$LAST_DISPATCH_EPOCH" -lt "$SCHED_EPOCH" ] && SHOULD_RUN=true
+              else
+                SHOULD_RUN=true
+              fi
             fi
             [ "$SHOULD_RUN" = "false" ] && continue
 
-            CHAIN_KEY="chain:$CH"
-            LAST_DISPATCH=$(echo "$STATE" | jq -r --arg s "$CHAIN_KEY" '.[$s].last_dispatch // "1970-01-01T00:00:00Z"')
-            LAST_DISPATCH_EPOCH=$(date -u -d "$LAST_DISPATCH" +%s 2>/dev/null || echo 0)
-            MINUTES_SINCE=$(( (NOW_EPOCH - LAST_DISPATCH_EPOCH) / 60 ))
             if [ "$MINUTES_SINCE" -lt 90 ]; then
               echo "Skipping chain $CH (dispatched ${MINUTES_SINCE}m ago)"
               continue
