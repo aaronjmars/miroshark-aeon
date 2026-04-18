@@ -1,0 +1,85 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "repo-article"
+      },
+      "children": [
+        "storylink",
+        "sep",
+        "content"
+      ]
+    },
+    "storylink": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Simulations That Leave the App: MiroShark's Distribution-and-Dissection Day",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-04-18.md",
+        "source": "repo-article"
+      }
+    },
+    "sep": {
+      "type": "Separator"
+    },
+    "content": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "narrative",
+        "prs",
+        "stats",
+        "conclusion"
+      ]
+    },
+    "narrative": {
+      "type": "Text",
+      "props": {
+        "text": "MiroShark shipped two PRs today that together pivot the project from running simulations to publishing and dissecting them.",
+        "variant": "body"
+      }
+    },
+    "prs": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "pr34",
+        "pr35"
+      ]
+    },
+    "pr34": {
+      "type": "Badge",
+      "props": {
+        "text": "Embeddable Simulation Widget (#34)"
+      }
+    },
+    "pr35": {
+      "type": "Badge",
+      "props": {
+        "text": "Agent Demographic Breakdown (#35)"
+      }
+    },
+    "stats": {
+      "type": "Stat",
+      "props": {
+        "value": "720",
+        "label": "stars after 9-day analytics run"
+      }
+    },
+    "conclusion": {
+      "type": "Text",
+      "props": {
+        "text": "The repo is becoming a citeable artifact, not just a tool.",
+        "variant": "lead"
+      }
+    }
+  }
+}

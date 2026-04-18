@@ -1,5 +1,5 @@
-*New Article: Simulations That Leave the App — MiroShark's Distribution-and-Dissection Day*
+*New Article: Simulations That Leave the App: MiroShark's Distribution-and-Dissection Day*
 
-Two PRs opened against aaronjmars/MiroShark today (PR #34 Embeddable Simulation Widget + PR #35 Agent Demographic Breakdown) mark a paired pivot: the project is no longer just a tool for running simulations but for publishing and dissecting them. Together they cap a nine-day analytics sprint that's pushed the repo to 720 stars.
+MiroShark shipped two PRs today — an Embeddable Simulation Widget (#34) and an Agent Demographic Breakdown (#35) — that together pivot the project from running simulations to publishing and dissecting them. At 720 stars after a nine-day analytics run, the repo is becoming a citeable artifact, not just a tool.
 
 Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-04-18.md
