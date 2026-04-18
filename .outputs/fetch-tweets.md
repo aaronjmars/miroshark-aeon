@@ -1,9 +1,11 @@
-**FETCH_TWEETS_NO_NEW** — no notification sent.
-
-All tweets returned by WebSearch were already in SEEN_TWEETS from today's earlier fetch-tweets run (which used the XAI cache and found 8 new tweets). WebSearch also surfaced a few March 2026 tweets not in the 3-day window, but these are old project-launch content, not fresh activity. No new tweets from the last 48h are discoverable without `XAI_API_KEY`.
-
 ## Summary
-- Searched X for `$MIROSHARK OR @miroshark_ OR github.com/aaronjmars/miroshark` via WebSearch fallback
-- All results already reported in today's earlier fetch-tweets run
-- Logged `FETCH_TWEETS_NO_NEW` to `memory/logs/2026-04-17.md`, no notification sent
-- Next run will benefit from the XAI pre-fetch cache if `XAI_API_KEY` is configured
+
+Ran `fetch-tweets` for `$MIROSHARK OR @miroshark_ OR github.com/aaronjmars/miroshark` on 2026-04-18.
+
+**Result: FETCH_TWEETS_NO_NEW** — no notification sent.
+
+- Used Path C (WebSearch fallback; XAI_API_KEY not set)
+- Ran 10+ searches across token, repo, handle, and community angles
+- Every tweet URL surfaced by WebSearch was already in `memory/fetch-tweets-seen.txt` or the Apr 16–17 log window
+- MiroShark sits at **716 stars / 137 forks** as of today's early-morning commit; latest merges were Apr 17 (Quality Diagnostics #32, Interaction Network #33)
+- Logged `FETCH_TWEETS_NO_NEW` to `memory/logs/2026-04-18.md`
