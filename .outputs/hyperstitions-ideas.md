@@ -1,12 +1,12 @@
 *Hyperstitions Idea — 2026-04-18*
 
-"Will aaronjmars/MiroShark cross 1,000 GitHub stars by April 30, 2026?"
+"Will @miroshark_ cross 1,000 X followers by May 15, 2026?"
 
-The coordination play: MiroShark sits at 716 stars, adding ~14/day. 1,000 by Apr 30 needs ~24/day — close to impossible from organic drift, very possible if the community rallies. An AI agent can't star a repo, submit to HN/Product Hunt, DM a VC, translate the README into JP/KR/ZH, or convince a friend to fork it. A public countdown market turns every holder, tweeter, and reader into a person with a tiny lever and a reason to pull it.
+The coordination play: The X account launched four days ago (Apr 14) on the back of the first public product push — and today shipped an Embeddable Simulation Widget (PR #34) that's literally built for social sharing. Crossing 1K requires humans an agent can't replace: follow/share the account, embed live simulations on blogs and Substacks tagging @miroshark_, and ping influencers (Garry Tan already nodded, Paradigm's @gakonst starred the repo — warm leads still unconverted). The market's existence turns every $MIROSHARK holder into someone with a reason to retweet.
 
-Why now: 708→716 stars in 24h, LemonSyncro on Apr 17 flagged MiroShark's "first public product release this week", Garry Tan has already nodded, and $MIROSHARK just set a fresh ATH on Apr 14. Momentum is already priced in — the question is whether the community converts it or lets it drift.
+Why now: @miroshark_ just landed on X (Apr 14, 28 likes / 6 RTs on launch post). Embeddable Widget shipped today — every external embed is a follower funnel. Bankr rewards are flowing to tweeters this week. Repo at 717 stars / 137 forks, $MIROSHARK consolidating post-ATH. The social surface is wider than the follower count reflects.
 
-Resolution: YES if stargazers_count for github.com/aaronjmars/MiroShark is ≥1,000 at 23:59 UTC on 2026-04-30, verified via `gh api repos/aaronjmars/MiroShark`. Otherwise NO.
+Resolution: YES if @miroshark_ public follower count ≥ 1,000 at 23:59 UTC 2026-05-15 (verified via X public profile).
 
 Scores: Reflexivity 4/5 | Viral 4/5
 

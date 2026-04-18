@@ -1,0 +1,268 @@
+{
+  "root": "main_card",
+  "state": {},
+  "elements": {
+    "main_card": {
+      "type": "Card",
+      "props": {
+        "title": "Hyperstitions Idea — 2026-04-18"
+      },
+      "children": [
+        "question",
+        "sep0",
+        "coordination_section",
+        "sep1",
+        "why_now_section",
+        "sep2",
+        "resolution_section",
+        "sep3",
+        "scores_section",
+        "sep4",
+        "link_section"
+      ]
+    },
+    "question": {
+      "type": "Heading",
+      "props": {
+        "text": "Will @miroshark_ cross 1,000 X followers by May 15, 2026?",
+        "level": "h2"
+      },
+      "children": []
+    },
+    "sep0": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "coordination_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "coord_heading",
+        "coord_para1",
+        "coord_para2"
+      ]
+    },
+    "coord_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "The coordination play",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "coord_para1": {
+      "type": "Text",
+      "props": {
+        "text": "The X account launched four days ago (Apr 14) on the back of the first public product push — and today shipped an Embeddable Simulation Widget (PR #34) that's literally built for social sharing.",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "coord_para2": {
+      "type": "Text",
+      "props": {
+        "text": "Crossing 1K requires humans an agent can't replace: follow/share the account, embed live simulations on blogs and Substacks tagging @miroshark_, and ping influencers (Garry Tan already nodded, Paradigm's @gakonst starred the repo — warm leads still unconverted). The market's existence turns every $MIROSHARK holder into someone with a reason to retweet.",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "why_now_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "why_heading",
+        "metrics_grid",
+        "why_text"
+      ]
+    },
+    "why_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Why now",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "metrics_grid": {
+      "type": "Grid",
+      "props": {
+        "columns": 4,
+        "gap": "md"
+      },
+      "children": [
+        "stat_launch_likes",
+        "stat_launch_rts",
+        "stat_stars",
+        "stat_forks"
+      ]
+    },
+    "stat_launch_likes": {
+      "type": "Stat",
+      "props": {
+        "label": "Launch post likes",
+        "value": "28"
+      },
+      "children": []
+    },
+    "stat_launch_rts": {
+      "type": "Stat",
+      "props": {
+        "label": "Launch post RTs",
+        "value": "6"
+      },
+      "children": []
+    },
+    "stat_stars": {
+      "type": "Stat",
+      "props": {
+        "label": "Repo stars",
+        "value": "717"
+      },
+      "children": []
+    },
+    "stat_forks": {
+      "type": "Stat",
+      "props": {
+        "label": "Repo forks",
+        "value": "137"
+      },
+      "children": []
+    },
+    "why_text": {
+      "type": "Text",
+      "props": {
+        "text": "@miroshark_ just landed on X (Apr 14). Embeddable Widget shipped today — every external embed is a follower funnel. Bankr rewards are flowing to tweeters this week. $MIROSHARK consolidating post-ATH. The social surface is wider than the follower count reflects.",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "resolution_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "resolution_heading",
+        "resolution_text"
+      ]
+    },
+    "resolution_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Resolution",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "resolution_text": {
+      "type": "Text",
+      "props": {
+        "text": "YES if @miroshark_ public follower count ≥ 1,000 at 23:59 UTC 2026-05-15 (verified via X public profile).",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "scores_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "scores_heading",
+        "badges_row"
+      ]
+    },
+    "scores_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Scores",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "badges_row": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "badge_reflexivity",
+        "badge_viral"
+      ]
+    },
+    "badge_reflexivity": {
+      "type": "Badge",
+      "props": {
+        "text": "Reflexivity 4/5",
+        "variant": "default"
+      },
+      "children": []
+    },
+    "badge_viral": {
+      "type": "Badge",
+      "props": {
+        "text": "Viral 4/5",
+        "variant": "default"
+      },
+      "children": []
+    },
+    "sep4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "link_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "link_hyperstitions"
+      ]
+    },
+    "link_hyperstitions": {
+      "type": "Link",
+      "props": {
+        "label": "Soon on hyperstitions.com",
+        "href": "https://www.hyperstitions.com/"
+      },
+      "children": []
+    }
+  }
+}
