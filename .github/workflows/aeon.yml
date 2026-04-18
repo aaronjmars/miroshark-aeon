@@ -250,13 +250,39 @@ jobs:
           # Generate notify script in workspace (Claude calls: ./notify "message")
           # Messages are saved to .pending-notify/ for reliable post-run delivery
           # (sandbox may block outbound curl during Claude's run)
+          # Pre-create .pending-notify/ so the sandbox doesn't block Claude's first write into it
+          mkdir -p .pending-notify
+          : > .notify-sent-hashes
+
           cat > ./notify << 'NOTIFY_SCRIPT'
           #!/usr/bin/env bash
           set -euo pipefail
           MSG="$1"
 
+          # Suppress obvious diagnostic probes (short messages containing test/trace/ping/debug/hello).
+          # Claude sometimes issues these to verify the notify script works — they should not reach channels.
+          MSG_LEN=${#MSG}
+          if [ "$MSG_LEN" -lt 120 ]; then
+            MSG_LOWER=$(printf '%s' "$MSG" | tr '[:upper:]' '[:lower:]')
+            case "$MSG_LOWER" in
+              *test*|*trace*|*ping*|*debug*|hello|hi)
+                echo "notify: suppressing trace/test message ($MSG_LEN chars): $MSG" >&2
+                exit 0
+                ;;
+            esac
+          fi
+
+          # Dedup within this workflow run — same message never sent twice even if ./notify is called again
+          HASH=$(printf '%s' "$MSG" | sha256sum | awk '{print $1}')
+          HASH_FILE=".notify-sent-hashes"
+          touch "$HASH_FILE" 2>/dev/null || true
+          if [ -f "$HASH_FILE" ] && grep -qxF "$HASH" "$HASH_FILE" 2>/dev/null; then
+            echo "notify: duplicate message (hash ${HASH:0:8}), skipping" >&2
+            exit 0
+          fi
+          printf '%s\n' "$HASH" >> "$HASH_FILE" 2>/dev/null || true
+
           # Always save to .pending-notify/ for post-run delivery (sandbox fallback)
-          mkdir -p .pending-notify
           TS=$(date -u +%s)
           echo "$MSG" > ".pending-notify/${TS}.md"
 
@@ -583,14 +609,39 @@ jobs:
           NOTIFY_EMAIL_SUBJECT_PREFIX: ${{ vars.NOTIFY_EMAIL_SUBJECT_PREFIX || '[Aeon]' }}
           SKILL_NAME: ${{ steps.skill.outputs.name }}
         run: |
-          # Re-deliver any .pending-notify/ messages that failed during sandbox
+          # Re-deliver any .pending-notify/ messages that failed during sandbox.
+          # Skip messages whose hash was already sent by ./notify inline,
+          # and skip short test/trace probes that shouldn't reach channels.
           if [ ! -d .pending-notify ] || [ -z "$(ls -A .pending-notify/*.md 2>/dev/null)" ]; then
             echo "No pending notifications"
             exit 0
           fi
+          HASH_FILE=".notify-sent-hashes"
+          touch "$HASH_FILE"
           for pending in .pending-notify/*.md; do
             [ -f "$pending" ] || continue
             MSG=$(cat "$pending")
+
+            # Suppress trivial probes
+            MSG_LEN=${#MSG}
+            if [ "$MSG_LEN" -lt 120 ]; then
+              MSG_LOWER=$(printf '%s' "$MSG" | tr '[:upper:]' '[:lower:]')
+              case "$MSG_LOWER" in
+                *test*|*trace*|*ping*|*debug*|hello|hi)
+                  echo "Skipping pending trace/test message: $MSG"
+                  continue
+                  ;;
+              esac
+            fi
+
+            # Dedup against messages already sent by ./notify inline
+            HASH=$(printf '%s' "$MSG" | sha256sum | awk '{print $1}')
+            if grep -qxF "$HASH" "$HASH_FILE" 2>/dev/null; then
+              echo "Skipping pending duplicate (${HASH:0:8}): $(basename "$pending")"
+              continue
+            fi
+            printf '%s\n' "$HASH" >> "$HASH_FILE"
+
             echo "Delivering pending notification: $(basename "$pending")"
             # Telegram
             if [ -n "${TELEGRAM_BOT_TOKEN:-}" ] && [ -n "${TELEGRAM_CHAT_ID:-}" ]; then
@@ -638,7 +689,7 @@ jobs:
         run: |
           git config user.name "aeonframework"
           git config user.email "aeonframework@proton.me"
-          rm -f ./notify  # Remove generated script before committing
+          rm -f ./notify .notify-sent-hashes  # Remove generated notify script + dedup log before committing
 
           CURRENT_BRANCH=$(git branch --show-current)
           LABEL="${{ steps.work.outputs.label }}"
