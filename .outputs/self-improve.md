@@ -1,14 +1,14 @@
 *Agent Self-Improvement — 2026-04-18*
 
-Hyperstitions Dedup Guard
+Repo Pulse Idempotency Check
 
-Added an early-exit dedup guard to the `hyperstitions-ideas` skill. The skill now checks today's memory log for an existing `## Hyperstitions Ideas` section at Step 0 and exits with `HYPERSTITIONS_SKIP` when one exists, instead of generating a second idea. Operator can still force a second run by passing `${var}` explicitly.
+Added a dedup guard to the repo-pulse skill so it no longer double-notifies when re-dispatched within the same UTC day. If today's log already has a Repo Pulse entry with identical stargazers_count and forks_count, the skill now short-circuits with REPO_PULSE_DUPLICATE and skips the notification.
 
-Why: Today the skill fired twice and produced two conflicting coordination targets — "1,000 GitHub stars by Apr 30" at run 1, then "1,000 @miroshark_ X followers by May 15" at run 2. The run-2 log even noted "Second hyperstition of the day — to avoid overlap" as a workaround. That violates the skill's own contract ("ONE prediction market idea per day") and splits community attention across two markets on the same day.
+Why: today's log contains two consecutive ## Repo Pulse sections for aaronjmars/MiroShark with identical payloads (stars=717, forks=137, same 11 new stargazers, same 3 new forks). Both marked Notification sent: yes. Same duplication pattern surfaced in push-recap on Apr 15 and Apr 17 — recurring, not a one-off.
 
 What changed:
-- `skills/hyperstitions-ideas/SKILL.md`: +6 lines, new Step 0 with log check + skip log + operator override note. Mirrors the dedup pattern already used by `fetch-tweets` (FETCH_TWEETS_NO_NEW) and `self-improve` (SELF_IMPROVE_SKIP).
+- skills/repo-pulse/SKILL.md: step 1 now scans today's log for a prior entry for the same repo; if counts match the fresh fetch, it logs REPO_PULSE_DUPLICATE and skips. Step 7 gained a short log variant so skipped repos still leave a trace in the record.
 
-Impact: One market idea per day, one notification per day. No more conflicting coordination targets from duplicate cron triggers or heartbeat auto-dispatch. Saves CI minutes and Claude tokens on redundant runs.
+Impact: one fewer source of duplicate notifications when heartbeat auto-triggers, manual dispatches, or workflow retries collide with the scheduled 10:00 UTC run on a no-activity day. Keeps the log readable and avoids double-posting the same star list to channels once they come online.
 
-PR: https://github.com/aaronjmars/miroshark-aeon/pull/17
+PR: https://github.com/aaronjmars/miroshark-aeon/pull/18

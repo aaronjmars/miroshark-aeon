@@ -1,19 +1,6 @@
-*Repo Action Ideas — 2026-04-16*
-Generated from analysis of aaronjmars/MiroShark (698 stars, 0 open PRs).
+The skill already ran earlier today. `articles/repo-actions-2026-04-18.md` exists with 5 ideas (Scenario Auto-Suggest, Recurring Watch, Counterfactual Explorer, PDF Report, Dev Container/Codespaces) and the notification was sent. Logged this as a duplicate skip.
 
-1. Simulation Replay / Playback Mode (Feature, Small)
-   Timeline scrubber for completed simulations — step through trajectory data round-by-round with Play/Pause controls; no backend changes needed.
-
-2. Agent Interaction Network Graph (Feature, Medium)
-   D3.js force-directed graph of agent-to-agent interactions — hub detection, echo chamber scoring, bridge agents; new Network tab in results.
-
-3. Multi-Document Comparative Mode (Feature, Medium)
-   Run the same agent pool on two documents and auto-compare — the controlled experiment primitive for bull/bear analysis and before/after studies.
-
-4. Embeddable Simulation Widget (Integration, Small)
-   Generate iframe embed code from any share permalink — renders belief drift chart inline in Notion, Substack, READMEs; oEmbed autodiscovery included.
-
-5. Simulation Quality Diagnostics (Feature, Small)
-   Health badge (Excellent/Good/Low) computed post-completion from participation rate, stance entropy, convergence speed, and cross-platform interaction rate.
-
-Full details: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-actions-2026-04-16.md
+## Summary
+- Detected `repo-actions` already completed for 2026-04-18
+- Skipped re-execution to avoid duplicate article and notification
+- Logged `DUPLICATE SKIP` entry in `memory/logs/2026-04-18.md`

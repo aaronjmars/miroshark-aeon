@@ -41,3 +41,9 @@ date,skill,model,input_tokens,output_tokens,cache_read,cache_creation
 2026-04-18,hyperstitions-ideas,claude-opus-4-7,90,6384,423942,50247
 2026-04-18,feature,claude-opus-4-7,97,44164,9260453,232361
 2026-04-18,self-improve,claude-opus-4-7,27,9615,1440919,60531
+2026-04-18,repo-actions,claude-sonnet-4-6,14,17467,626682,58786
+2026-04-18,self-improve,claude-opus-4-7,32,14985,1882245,70804
+2026-04-18,push-recap,claude-opus-4-7,48,19637,2485091,122060
+2026-04-18,repo-actions,claude-sonnet-4-6,168,2341,220654,25117
+2026-04-18,project-lens,claude-opus-4-7,18,14808,663646,51929
+2026-04-18,push-recap,claude-opus-4-7,13,2465,293345,26108

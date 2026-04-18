@@ -24,6 +24,7 @@
 | 2026-04-16 | Break It Mid-Run: MiroShark's Director Mode Turns Simulation Into Controlled Experiment | Director Mode (PR #31), experimental control stack, perturbation analysis, MABS 2026 context, 698 stars |
 | 2026-04-17 | From Running Simulations to Reading Them: MiroShark Ships the Analytics Layer | Quality Diagnostics (PR #32) + Interaction Network (PR #33), analytics suite, echo chamber scoring, 708 stars |
 | 2026-04-17 | The Agent That Ships the Simulator: A Week Inside miroshark-aeon | Watched repo focus on miroshark-aeon itself — self-modifying scaffolding, prefetch/postprocess sandbox pattern, 85 commits/day, agent-authored PRs |
+| 2026-04-18 | Simulations That Leave the App: MiroShark's Distribution-and-Dissection Day | PR #34 Embeddable Widget + PR #35 Demographic Breakdown as a paired pivot from running simulations to publishing+dissecting them; 720 stars, nine-day analytics run context |
 
 ## Recent Digests
 | Date | Type | Key Topics |
@@ -58,6 +59,7 @@
 | Agent Interaction Network Graph | 2026-04-17 | Force-directed SVG network visualization of agent-to-agent interactions; node color by stance, size by degree, edge color by platform; hover highlighting, platform filters, insights panel (top hub, bridge, echo chamber score), PNG export (PR #33 on MiroShark) |
 | Embeddable Simulation Widget | 2026-04-18 | `/embed/:simulationId` read-only route + minimal `/embed-summary` API; stacked belief-drift sparkline, consensus marker, quality/resolution badges; history-modal Embed dialog with iframe/Markdown/URL copy + Compact/Standard/Wide presets + light/dark theme (PR #34 on MiroShark) |
 | Agent Demographic Breakdown | 2026-04-18 | `GET /<sim_id>/demographics` cross-tabs age range / gender / country / actor type (individual vs institutional) / primary platform against final stance, stance volatility (|final-initial|), and influence score; Demographics overlay (tab bar + stacked stance bars + metric columns); top-divergence headline; cached demographics.json (PR #35 on MiroShark) |
+| Repo Pulse Idempotency | 2026-04-18 | Idempotency check in `skills/repo-pulse/SKILL.md` — skips notification + logs `REPO_PULSE_DUPLICATE` when today's log already has a prior `## Repo Pulse` entry with the same stargazers_count/forks_count (PR #18 on miroshark-aeon) |
 | Hyperstitions Dedup Guard | 2026-04-18 | Step 0 in hyperstitions-ideas now checks today's log for an existing `## Hyperstitions Ideas` section and exits with HYPERSTITIONS_SKIP when one exists; enforces the "ONE idea per day" contract violated today (1K stars Apr 30 + 1K X followers May 15 in a single day). Operator can still force with `${var}` (PR #17 on miroshark-aeon) |
 
 ## Watched Repos
