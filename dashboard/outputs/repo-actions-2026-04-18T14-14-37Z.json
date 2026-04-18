@@ -1,0 +1,302 @@
+{
+  "root": "card_root",
+  "state": {},
+  "elements": {
+    "card_root": {
+      "type": "Card",
+      "props": {
+        "title": "Repo Action Ideas"
+      },
+      "children": [
+        "header_text",
+        "stack_ideas",
+        "separator_1",
+        "link_details"
+      ]
+    },
+    "header_text": {
+      "type": "Text",
+      "props": {
+        "text": "Generated from analysis of aaronjmars/MiroShark (720 stars, 138 forks) — five ideas scoped for autonomous implementation by the feature skill tomorrow."
+      }
+    },
+    "stack_ideas": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "idea_1",
+        "idea_2",
+        "idea_3",
+        "idea_4",
+        "idea_5"
+      ]
+    },
+    "idea_1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "heading_1",
+        "desc_1",
+        "badges_1"
+      ]
+    },
+    "heading_1": {
+      "type": "Heading",
+      "props": {
+        "text": "Scenario Auto-Suggest from Document",
+        "level": "h3"
+      }
+    },
+    "desc_1": {
+      "type": "Text",
+      "props": {
+        "text": "LLM generates 3 scenario framings from the uploaded doc the moment it's pasted — turns a blank field into a one-click choice for new users."
+      }
+    },
+    "badges_1": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "badge_1_cat",
+        "badge_1_size"
+      ]
+    },
+    "badge_1_cat": {
+      "type": "Badge",
+      "props": {
+        "text": "Feature/DX",
+        "variant": "outline"
+      }
+    },
+    "badge_1_size": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "secondary"
+      }
+    },
+    "idea_2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "heading_2",
+        "desc_2",
+        "badges_2"
+      ]
+    },
+    "heading_2": {
+      "type": "Heading",
+      "props": {
+        "text": "Recurring Simulation Watch",
+        "level": "h3"
+      }
+    },
+    "desc_2": {
+      "type": "Text",
+      "props": {
+        "text": "Schedule a simulation config to auto-run daily/weekly, grouping results as a watch series in history — the primitive for longitudinal research over a news cycle."
+      }
+    },
+    "badges_2": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "badge_2_cat",
+        "badge_2_size"
+      ]
+    },
+    "badge_2_cat": {
+      "type": "Badge",
+      "props": {
+        "text": "Feature",
+        "variant": "outline"
+      }
+    },
+    "badge_2_size": {
+      "type": "Badge",
+      "props": {
+        "text": "Medium",
+        "variant": "secondary"
+      }
+    },
+    "idea_3": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "heading_3",
+        "desc_3",
+        "badges_3"
+      ]
+    },
+    "heading_3": {
+      "type": "Heading",
+      "props": {
+        "text": "Agent Counterfactual Explorer / \"What If?\"",
+        "level": "h3"
+      }
+    },
+    "desc_3": {
+      "type": "Text",
+      "props": {
+        "text": "Toggle agents off and instantly recompute belief drift from cached trajectory data — no rerun needed. Quantifies hub-agent influence as a publishable delta."
+      }
+    },
+    "badges_3": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "badge_3_cat",
+        "badge_3_size"
+      ]
+    },
+    "badge_3_cat": {
+      "type": "Badge",
+      "props": {
+        "text": "Feature",
+        "variant": "outline"
+      }
+    },
+    "badge_3_size": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "secondary"
+      }
+    },
+    "idea_4": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "heading_4",
+        "desc_4",
+        "badges_4"
+      ]
+    },
+    "heading_4": {
+      "type": "Heading",
+      "props": {
+        "text": "Downloadable PDF Simulation Report",
+        "level": "h3"
+      }
+    },
+    "desc_4": {
+      "type": "Text",
+      "props": {
+        "text": "Server-side PDF of the full simulation result: scenario, quality badge, belief drift chart, top agents, echo chamber score, demographic callout. Replaces screenshot-and-paste for researchers."
+      }
+    },
+    "badges_4": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "badge_4_cat",
+        "badge_4_size"
+      ]
+    },
+    "badge_4_cat": {
+      "type": "Badge",
+      "props": {
+        "text": "Feature/Integration",
+        "variant": "outline"
+      }
+    },
+    "badge_4_size": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "secondary"
+      }
+    },
+    "idea_5": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "heading_5",
+        "desc_5",
+        "badges_5"
+      ]
+    },
+    "heading_5": {
+      "type": "Heading",
+      "props": {
+        "text": "Dev Container / GitHub Codespaces Setup",
+        "level": "h3"
+      }
+    },
+    "desc_5": {
+      "type": "Text",
+      "props": {
+        "text": ".devcontainer.json + docker-compose Neo4j service + Open in Codespaces badge — reduces contributor onboarding from 15 minutes to one click."
+      }
+    },
+    "badges_5": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "badge_5_cat",
+        "badge_5_size"
+      ]
+    },
+    "badge_5_cat": {
+      "type": "Badge",
+      "props": {
+        "text": "DX/Community",
+        "variant": "outline"
+      }
+    },
+    "badge_5_size": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "secondary"
+      }
+    },
+    "separator_1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "link_details": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full details",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-actions-2026-04-18.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}
