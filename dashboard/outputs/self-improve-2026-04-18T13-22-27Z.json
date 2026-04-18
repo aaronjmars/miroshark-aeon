@@ -1,0 +1,265 @@
+{
+  "root": "card_root",
+  "state": {},
+  "elements": {
+    "card_root": {
+      "type": "Card",
+      "props": {
+        "title": "self-improve — Hyperstitions Dedup Guard",
+        "description": "2026-04-18"
+      },
+      "children": [
+        "main_stack"
+      ]
+    },
+    "main_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "what_section",
+        "sep1",
+        "why_section",
+        "sep2",
+        "changes_section",
+        "sep3",
+        "impact_section",
+        "sep4",
+        "pr_section"
+      ]
+    },
+    "what_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "what_heading",
+        "what_text1",
+        "what_text2"
+      ]
+    },
+    "what_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "What was added",
+        "level": "h3"
+      }
+    },
+    "what_text1": {
+      "type": "Text",
+      "props": {
+        "text": "Added an early-exit dedup guard to the `hyperstitions-ideas` skill. The skill now checks today's memory log for an existing `## Hyperstitions Ideas` section at Step 0 and exits with `HYPERSTITIONS_SKIP` when one exists, instead of generating a second idea."
+      }
+    },
+    "what_text2": {
+      "type": "Text",
+      "props": {
+        "text": "Operator can still force a second run by passing ${var} explicitly."
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "why_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "why_heading",
+        "why_text1",
+        "why_targets_stack",
+        "why_problem"
+      ]
+    },
+    "why_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Why",
+        "level": "h3"
+      }
+    },
+    "why_text1": {
+      "type": "Text",
+      "props": {
+        "text": "Today the skill fired twice and produced two conflicting coordination targets:"
+      }
+    },
+    "why_targets_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "why_badge1",
+        "why_badge2"
+      ]
+    },
+    "why_badge1": {
+      "type": "Badge",
+      "props": {
+        "text": "Run 1: 1,000 GitHub stars by Apr 30",
+        "variant": "outline"
+      }
+    },
+    "why_badge2": {
+      "type": "Badge",
+      "props": {
+        "text": "Run 2: 1,000 @miroshark_ X followers by May 15",
+        "variant": "outline"
+      }
+    },
+    "why_problem": {
+      "type": "Alert",
+      "props": {
+        "title": "Problem",
+        "message": "Violates the skill's own contract ('ONE prediction market idea per day') and splits community attention across two markets on the same day. The run-2 log even noted 'Second hyperstition of the day — to avoid overlap' as a workaround.",
+        "type": "warning"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "changes_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "changes_heading",
+        "file_change",
+        "pattern_note"
+      ]
+    },
+    "changes_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "What changed",
+        "level": "h3"
+      }
+    },
+    "file_change": {
+      "type": "Text",
+      "props": {
+        "text": "`skills/hyperstitions-ideas/SKILL.md`: +6 lines — New Step 0 with log check + skip log + operator override note."
+      }
+    },
+    "pattern_note": {
+      "type": "Text",
+      "props": {
+        "text": "Mirrors the dedup pattern already used by `fetch-tweets` (FETCH_TWEETS_NO_NEW) and `self-improve` (SELF_IMPROVE_SKIP).",
+        "variant": "muted"
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "impact_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "impact_heading",
+        "impact_badges_stack",
+        "impact_savings"
+      ]
+    },
+    "impact_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Impact",
+        "level": "h3"
+      }
+    },
+    "impact_badges_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "impact1",
+        "impact2",
+        "impact3"
+      ]
+    },
+    "impact1": {
+      "type": "Badge",
+      "props": {
+        "text": "One market idea per day",
+        "variant": "default"
+      }
+    },
+    "impact2": {
+      "type": "Badge",
+      "props": {
+        "text": "One notification per day",
+        "variant": "default"
+      }
+    },
+    "impact3": {
+      "type": "Badge",
+      "props": {
+        "text": "No more conflicting coordination targets from duplicate cron triggers or heartbeat auto-dispatch",
+        "variant": "default"
+      }
+    },
+    "impact_savings": {
+      "type": "Text",
+      "props": {
+        "text": "Saves CI minutes and Claude tokens on redundant runs.",
+        "variant": "muted"
+      }
+    },
+    "sep4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "pr_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "pr_heading",
+        "pr_link"
+      ]
+    },
+    "pr_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "PR",
+        "level": "h3"
+      }
+    },
+    "pr_link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "aaronjmars/miroshark-aeon #17",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/pull/17",
+        "source": "GitHub"
+      }
+    }
+  }
+}

@@ -40,3 +40,4 @@ date,skill,model,input_tokens,output_tokens,cache_read,cache_creation
 2026-04-18,feature,claude-opus-4-7,112,47913,10878205,217749
 2026-04-18,hyperstitions-ideas,claude-opus-4-7,90,6384,423942,50247
 2026-04-18,feature,claude-opus-4-7,97,44164,9260453,232361
+2026-04-18,self-improve,claude-opus-4-7,27,9615,1440919,60531
