@@ -1,0 +1,195 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Feature Built — 2026-04-18",
+        "description": "Agent Demographic Breakdown Panel"
+      },
+      "children": [
+        "text_overview",
+        "separator_1",
+        "section_why",
+        "separator_2",
+        "section_built",
+        "separator_3",
+        "section_how",
+        "separator_4",
+        "section_next",
+        "separator_5",
+        "link_pr"
+      ]
+    },
+    "text_overview": {
+      "type": "Text",
+      "props": {
+        "text": "MiroShark now shows a Demographics tab next to Influence, Drift, and Network. It slices every simulation's agent pool by age range, gender, country, actor type (real people vs institutional accounts), and primary platform, then shows how each subgroup actually behaved — what their average final stance was, how much their opinions swung from round 1 to the final round, and how influential they became. The panel surfaces the most striking cross-group difference as a single KEY SUBGROUP DYNAMIC headline so the finding is visible without reading every row.",
+        "variant": "body"
+      }
+    },
+    "separator_1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "section_why": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading_why",
+        "text_why_1"
+      ]
+    },
+    "heading_why": {
+      "type": "Heading",
+      "props": {
+        "text": "Why this matters:",
+        "level": "h3"
+      }
+    },
+    "text_why_1": {
+      "type": "Text",
+      "props": {
+        "text": "The influence leaderboard tells you who was loudest; the belief drift chart tells you when the crowd shifted. Neither answered the subgroup question researchers keep asking — \"did institutional accounts land in a different place from individuals?\", \"did Twitter-primary agents flip earlier than Reddit ones?\", \"was one age cohort more volatile?\". Persona data already carried every demographic field needed (age, gender, country, source entity type), it just had no analytical lens. This closes that gap without any new data collection and complements Quality Diagnostics (PR #32) and Interaction Network (PR #33) that shipped yesterday, rounding out MiroShark's post-completion analytics suite. Picks up idea #4 from the Apr 15 repo-actions batch because the Apr 16 batch had only Multi-Document Mode left, which was explicitly deferred earlier today as a larger standalone PR.",
+        "variant": "body"
+      }
+    },
+    "separator_2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "section_built": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading_built",
+        "item_backend",
+        "item_frontend_breakdown",
+        "item_frontend_step3",
+        "item_api"
+      ]
+    },
+    "heading_built": {
+      "type": "Heading",
+      "props": {
+        "text": "What was built:",
+        "level": "h3"
+      }
+    },
+    "item_backend": {
+      "type": "Text",
+      "props": {
+        "text": "backend/app/api/simulation.py: new GET /<sim_id>/demographics endpoint + five helpers. Loads reddit_profiles.json (falls back to twitter_profiles.csv), classifies each agent's source_entity_type as individual vs institutional using the OasisProfileGenerator taxonomy, buckets age into <18 / 18-24 / 25-34 / 35-44 / 45-54 / 55+, and joins against the first and final belief-position snapshots in trajectory.json so stance volatility is the actual round-0 → final delta. Caches the result in demographics.json; ?refresh=1 forces a recompute. Top-divergence helper sweeps all five dimensions and returns the largest cross-segment stance gap as a plain-English headline.",
+        "variant": "body"
+      }
+    },
+    "item_frontend_breakdown": {
+      "type": "Text",
+      "props": {
+        "text": "frontend/src/components/DemographicBreakdown.vue: new overlay (~500 lines). Tab bar across the five dimensions with per-tab segment counts, one card per segment showing label + agent count, a stacked bullish/neutral/bearish distribution bar, and four metric columns (mean / σ / volatility / influence). KEY SUBGROUP DYNAMIC callout for the top divergence; muted variant when a run has no belief trajectory.",
+        "variant": "body"
+      }
+    },
+    "item_frontend_step3": {
+      "type": "Text",
+      "props": {
+        "text": "frontend/src/components/Step3Simulation.vue: registers the component, adds a ◇ Demographics toggle alongside Influence / Drift / Network / Director with matching mutual-exclusion behavior, hides the timeline feed when the panel is visible.",
+        "variant": "body"
+      }
+    },
+    "item_api": {
+      "type": "Text",
+      "props": {
+        "text": "frontend/src/api/simulation.js: getDemographicBreakdown(simulationId, { refresh }) helper.",
+        "variant": "body"
+      }
+    },
+    "separator_3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "section_how": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading_how",
+        "text_how"
+      ]
+    },
+    "heading_how": {
+      "type": "Heading",
+      "props": {
+        "text": "How it works:",
+        "level": "h3"
+      }
+    },
+    "text_how": {
+      "type": "Text",
+      "props": {
+        "text": "The endpoint walks every agent in the persona file, extracts five demographic dimensions, and then joins by user_id into the trajectory snapshots to recover each agent's initial and final stance (averaged across all tracked topics). Per-segment aggregates are computed server-side as plain Python — no pandas, no NumPy — so the endpoint works in the same lightweight backend environment as Quality Diagnostics and Interaction Network. The classifier mirrors the OasisProfileGenerator's INDIVIDUAL_ENTITY_TYPES / GROUP_ENTITY_TYPES / INDIVIDUAL_TYPE_KEYWORDS lists so a \"ceo\" or \"founder\" maps to individual and \"mediaoutlet\" maps to institutional. Top divergence applies a ≥ 0.05 stance-gap and ≥ 2 agents-per-segment threshold to avoid noisy pairs on tiny pools. The frontend stacks the three stance percentages into a single horizontal bar so a \"73% bullish / 18% neutral / 9% bearish\" segment reads at a glance.",
+        "variant": "body"
+      }
+    },
+    "separator_4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "section_next": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading_next",
+        "text_next"
+      ]
+    },
+    "heading_next": {
+      "type": "Heading",
+      "props": {
+        "text": "What's next:",
+        "level": "h3"
+      }
+    },
+    "text_next": {
+      "type": "Text",
+      "props": {
+        "text": "Wire the top_divergence headline into the article generator prompt so generated articles cite the strongest subgroup finding automatically, and add a CSV export of the full demographics table for researchers who want to drop subgroup stats into a paper.",
+        "variant": "body"
+      }
+    },
+    "separator_5": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "link_pr": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #35: Agent Demographic Breakdown Panel",
+        "href": "https://github.com/aaronjmars/MiroShark/pull/35",
+        "source": "GitHub"
+      }
+    }
+  }
+}
