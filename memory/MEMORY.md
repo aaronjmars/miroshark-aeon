@@ -24,6 +24,7 @@
 | 2026-04-16 | Break It Mid-Run: MiroShark's Director Mode Turns Simulation Into Controlled Experiment | Director Mode (PR #31), experimental control stack, perturbation analysis, MABS 2026 context, 698 stars |
 | 2026-04-17 | From Running Simulations to Reading Them: MiroShark Ships the Analytics Layer | Quality Diagnostics (PR #32) + Interaction Network (PR #33), analytics suite, echo chamber scoring, 708 stars |
 | 2026-04-17 | The Agent That Ships the Simulator: A Week Inside miroshark-aeon | Watched repo focus on miroshark-aeon itself — self-modifying scaffolding, prefetch/postprocess sandbox pattern, 85 commits/day, agent-authored PRs |
+| 2026-04-18 | Simulations That Leave the App: MiroShark's Distribution-and-Dissection Day | PR #34 Embeddable Widget + PR #35 Demographic Breakdown as a paired pivot from running simulations to publishing+dissecting them; 720 stars, nine-day analytics run context |
 
 ## Recent Digests
 | Date | Type | Key Topics |

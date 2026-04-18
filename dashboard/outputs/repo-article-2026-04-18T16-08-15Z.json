@@ -1,0 +1,79 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "repo-article"
+      },
+      "children": [
+        "story-main",
+        "desc-text",
+        "prs-stack",
+        "stats-stack"
+      ]
+    },
+    "story-main": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Simulations That Leave the App — MiroShark's Distribution-and-Dissection Day",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-04-18.md"
+      }
+    },
+    "desc-text": {
+      "type": "Text",
+      "props": {
+        "text": "Two PRs opened against aaronjmars/MiroShark today mark a paired pivot: the project is no longer just a tool for running simulations but for publishing and dissecting them. Together they cap a nine-day analytics sprint that's pushed the repo to 720 stars."
+      }
+    },
+    "prs-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "pr-34",
+        "pr-35"
+      ]
+    },
+    "pr-34": {
+      "type": "Badge",
+      "props": {
+        "text": "PR #34: Embeddable Simulation Widget"
+      }
+    },
+    "pr-35": {
+      "type": "Badge",
+      "props": {
+        "text": "PR #35: Agent Demographic Breakdown"
+      }
+    },
+    "stats-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "sprint-stat",
+        "stars-stat"
+      ]
+    },
+    "sprint-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Analytics Sprint",
+        "value": "9 days"
+      }
+    },
+    "stars-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "GitHub Stars",
+        "value": "720"
+      }
+    }
+  }
+}
