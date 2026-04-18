@@ -1,0 +1,228 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "Repo Pulse"
+      },
+      "children": [
+        "repo-header",
+        "stats-section",
+        "sep1",
+        "stargazers-section",
+        "sep2",
+        "forks-section"
+      ]
+    },
+    "repo-header": {
+      "type": "Text",
+      "props": {
+        "text": "aaronjmars/MiroShark",
+        "variant": "lead"
+      }
+    },
+    "stats-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "lg"
+      },
+      "children": [
+        "stat-stars",
+        "stat-forks"
+      ]
+    },
+    "stat-stars": {
+      "type": "Stat",
+      "props": {
+        "label": "Stars",
+        "value": "717",
+        "delta": "+11",
+        "trend": "up"
+      }
+    },
+    "stat-forks": {
+      "type": "Stat",
+      "props": {
+        "label": "Forks",
+        "value": "137",
+        "delta": "+3",
+        "trend": "up"
+      }
+    },
+    "sep1": {
+      "type": "Separator"
+    },
+    "stargazers-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stargazers-heading",
+        "stargazers-list"
+      ]
+    },
+    "stargazers-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "New stargazers",
+        "level": "h3"
+      }
+    },
+    "stargazers-list": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "link-yashp0617",
+        "link-TPiatek360",
+        "link-dbuvc",
+        "link-d4timegit",
+        "link-gestas666",
+        "link-michaelguzzi",
+        "link-connex123",
+        "link-molmohsen",
+        "link-ccie48715",
+        "link-sessionmint",
+        "link-YapengJia"
+      ]
+    },
+    "link-yashp0617": {
+      "type": "Link",
+      "props": {
+        "label": "yashp0617",
+        "href": "https://github.com/yashp0617"
+      }
+    },
+    "link-TPiatek360": {
+      "type": "Link",
+      "props": {
+        "label": "TPiatek360",
+        "href": "https://github.com/TPiatek360"
+      }
+    },
+    "link-dbuvc": {
+      "type": "Link",
+      "props": {
+        "label": "dbuvc",
+        "href": "https://github.com/dbuvc"
+      }
+    },
+    "link-d4timegit": {
+      "type": "Link",
+      "props": {
+        "label": "d4timegit",
+        "href": "https://github.com/d4timegit"
+      }
+    },
+    "link-gestas666": {
+      "type": "Link",
+      "props": {
+        "label": "gestas666",
+        "href": "https://github.com/gestas666"
+      }
+    },
+    "link-michaelguzzi": {
+      "type": "Link",
+      "props": {
+        "label": "michaelguzzi",
+        "href": "https://github.com/michaelguzzi"
+      }
+    },
+    "link-connex123": {
+      "type": "Link",
+      "props": {
+        "label": "connex123",
+        "href": "https://github.com/connex123"
+      }
+    },
+    "link-molmohsen": {
+      "type": "Link",
+      "props": {
+        "label": "molmohsen",
+        "href": "https://github.com/molmohsen"
+      }
+    },
+    "link-ccie48715": {
+      "type": "Link",
+      "props": {
+        "label": "ccie48715",
+        "href": "https://github.com/ccie48715"
+      }
+    },
+    "link-sessionmint": {
+      "type": "Link",
+      "props": {
+        "label": "sessionmint",
+        "href": "https://github.com/sessionmint"
+      }
+    },
+    "link-YapengJia": {
+      "type": "Link",
+      "props": {
+        "label": "YapengJia",
+        "href": "https://github.com/YapengJia"
+      }
+    },
+    "sep2": {
+      "type": "Separator"
+    },
+    "forks-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "forks-heading",
+        "forks-list"
+      ]
+    },
+    "forks-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "New forks",
+        "level": "h3"
+      }
+    },
+    "forks-list": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "story-linu",
+        "story-shad0w",
+        "story-connex"
+      ]
+    },
+    "story-linu": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Linu-ChatGPT/MiroShark",
+        "href": "https://github.com/Linu-ChatGPT/MiroShark"
+      }
+    },
+    "story-shad0w": {
+      "type": "StoryLink",
+      "props": {
+        "title": "SHAD0WSLA3YR/MiroShark",
+        "href": "https://github.com/SHAD0WSLA3YR/MiroShark"
+      }
+    },
+    "story-connex": {
+      "type": "StoryLink",
+      "props": {
+        "title": "connex123/MiroShark",
+        "href": "https://github.com/connex123/MiroShark"
+      }
+    }
+  }
+}
