@@ -1,0 +1,174 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Hyperstitions Idea",
+        "description": "2026-04-18"
+      },
+      "children": [
+        "heading_main",
+        "text_coordination",
+        "sep1",
+        "heading_status",
+        "text_status",
+        "stats_stars",
+        "stats_growth",
+        "sep2",
+        "heading_why",
+        "text_why",
+        "sep3",
+        "heading_resolution",
+        "text_resolution",
+        "sep4",
+        "heading_scores",
+        "stack_scores",
+        "sep5",
+        "link_hyperstitions"
+      ]
+    },
+    "heading_main": {
+      "type": "Heading",
+      "props": {
+        "text": "Will aaronjmars/MiroShark cross 1,000 GitHub stars by April 30, 2026?",
+        "level": "h1"
+      }
+    },
+    "text_coordination": {
+      "type": "Text",
+      "props": {
+        "text": "The coordination play: MiroShark sits at 716 stars, adding ~14/day. 1,000 by Apr 30 needs ~24/day — close to impossible from organic drift, very possible if the community rallies. An AI agent can't star a repo, submit to HN/Product Hunt, DM a VC, translate the README into JP/KR/ZH, or convince a friend to fork it. A public countdown market turns every holder, tweeter, and reader into a person with a tiny lever and a reason to pull it.",
+        "variant": "body"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading_status": {
+      "type": "Heading",
+      "props": {
+        "text": "Current Status",
+        "level": "h2"
+      }
+    },
+    "text_status": {
+      "type": "Text",
+      "props": {
+        "text": "MiroShark currently sits at 716 stars with organic growth of ~14 stars per day.",
+        "variant": "body"
+      }
+    },
+    "stats_stars": {
+      "type": "Stat",
+      "props": {
+        "label": "Current Stars",
+        "value": "716"
+      }
+    },
+    "stats_growth": {
+      "type": "Stat",
+      "props": {
+        "label": "Required Daily Growth",
+        "value": "~24 stars/day",
+        "delta": "+71%",
+        "trend": "up"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading_why": {
+      "type": "Heading",
+      "props": {
+        "text": "Why Now",
+        "level": "h2"
+      }
+    },
+    "text_why": {
+      "type": "Text",
+      "props": {
+        "text": "708→716 stars in 24h, LemonSyncro on Apr 17 flagged MiroShark's \"first public product release this week\", Garry Tan has already nodded, and $MIROSHARK just set a fresh ATH on Apr 14. Momentum is already priced in — the question is whether the community converts it or lets it drift.",
+        "variant": "body"
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading_resolution": {
+      "type": "Heading",
+      "props": {
+        "text": "Resolution",
+        "level": "h2"
+      }
+    },
+    "text_resolution": {
+      "type": "Text",
+      "props": {
+        "text": "YES if stargazers_count for github.com/aaronjmars/MiroShark is ≥1,000 at 23:59 UTC on 2026-04-30, verified via `gh api repos/aaronjmars/MiroShark`. Otherwise NO.",
+        "variant": "body"
+      }
+    },
+    "sep4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading_scores": {
+      "type": "Heading",
+      "props": {
+        "text": "Scores",
+        "level": "h2"
+      }
+    },
+    "stack_scores": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "stat_reflexivity",
+        "stat_viral"
+      ]
+    },
+    "stat_reflexivity": {
+      "type": "Stat",
+      "props": {
+        "label": "Reflexivity",
+        "value": "4/5"
+      }
+    },
+    "stat_viral": {
+      "type": "Stat",
+      "props": {
+        "label": "Viral",
+        "value": "4/5"
+      }
+    },
+    "sep5": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "link_hyperstitions": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Soon on hyperstitions.com",
+        "href": "https://www.hyperstitions.com/"
+      }
+    }
+  }
+}
