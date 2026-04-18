@@ -1,5 +1,5 @@
-*New Article: The 72-Hour Message Test: What Replaces the Focus Group*
+*New Article: The Folder Won: Why 2026's Most Interesting Tools Keep Choosing Files Over Databases*
 
-A user-story lens on MiroShark: a communications director has 72 hours to test how a policy brief will land across demographics — the traditional focus-group option costs $30K and takes 2–4 weeks. 2024 polling accuracy dropped to its lowest since 1998, response rates are collapsing, and 71% of researchers (Qualtrics 2025) now expect synthetic respondents to dominate within 3 years. The new Agent Demographic Breakdown panel (PR #35, shipped Apr 18) cross-tabs age / gender / country / actor type / platform against stance volatility and influence — surfacing the largest subgroup divergence as a headline before a message ever leaves the building.
+A technical deep-dive that frames MiroShark's file-based persistence (one folder per simulation, every analytics layer cached as its own JSON) inside the larger 2026 local-first revival — Ink & Switch, DuckDB-over-Parquet, the unwinding of the cloud-as-source-of-truth assumption. Argues the choice to keep the folder is what made simulation forking trivial (PR #17), embedding free (PR #34), and the nine-day analytics sprint (PRs #32/#33/#35) possible.
 
-Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-04-18.md
+Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-04-18-v2.md
