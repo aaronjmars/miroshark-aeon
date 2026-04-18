@@ -42,6 +42,12 @@ Bad examples (too generic, not project-specific):
 
 ## Steps
 
+0. **Dedup guard — skip if already ran today**:
+   If `${var}` is empty, check `memory/logs/${today}.md`. If a `## Hyperstitions Ideas` section already exists (with or without a `(run N)` suffix), this skill has already produced today's market idea.
+   - Log `HYPERSTITIONS_SKIP: already ran today — {existing question}` and **do NOT send any notification. Stop here.**
+   - Only proceed when `${var}` is explicitly set (operator override for a second idea on the same day) or when today's log contains no prior Hyperstitions section.
+   - Rationale: this skill contracts "ONE prediction market idea per day" — duplicate runs (heartbeat auto-dispatch, manual re-trigger, cron retry) otherwise dilute the coordination signal and spam notification channels with conflicting targets.
+
 1. **Understand the current project state**:
    - What was shipped recently? (push-recaps)
    - What's the token doing? (token-reports)
