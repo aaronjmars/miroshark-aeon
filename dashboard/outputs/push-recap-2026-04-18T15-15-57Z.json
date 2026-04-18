@@ -1,0 +1,212 @@
+{
+  "root": "card_root",
+  "state": {},
+  "elements": {
+    "card_root": {
+      "type": "Card",
+      "props": {
+        "title": "Push Recap"
+      },
+      "children": [
+        "stack_main"
+      ]
+    },
+    "stack_main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading_date",
+        "sep1",
+        "heading_activity",
+        "overview_p1",
+        "overview_p2",
+        "sep2",
+        "feature1_heading",
+        "feature1_text",
+        "sep3",
+        "feature2_heading",
+        "feature2_text",
+        "sep4",
+        "selfhealing_heading",
+        "pr17_text",
+        "pr18_text",
+        "selfhealing_conclusion",
+        "sep5",
+        "license_heading",
+        "license_text",
+        "sep6",
+        "keychanges_heading",
+        "keychange1",
+        "keychange2",
+        "keychange3",
+        "sep7",
+        "stats_text",
+        "sep8",
+        "recap_link"
+      ]
+    },
+    "heading_date": {
+      "type": "Heading",
+      "props": {
+        "text": "2026-04-18",
+        "level": "h2"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {}
+    },
+    "heading_activity": {
+      "type": "Heading",
+      "props": {
+        "text": "Activity Overview",
+        "level": "h3"
+      }
+    },
+    "overview_p1": {
+      "type": "Text",
+      "props": {
+        "text": "MiroShark — 2 open PRs (+2,345 lines, author: Aeon) + license flip/revert on main (net zero)"
+      }
+    },
+    "overview_p2": {
+      "type": "Text",
+      "props": {
+        "text": "miroshark-aeon — 2 self-improve PRs (+15 lines) triggered by today's own duplicate-run incidents, plus 35 routine chore auto-commits from daily skill runs."
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {}
+    },
+    "feature1_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Feature Drop: PR #34 — Embeddable Simulation Widget",
+        "level": "h3"
+      }
+    },
+    "feature1_text": {
+      "type": "Text",
+      "props": {
+        "text": "read-only /embed/:simulationId route + embed-summary API + history-modal Embed dialog with iframe/Markdown/URL snippets, Compact/Standard/Wide presets, light/dark themes. Purpose-built for distributing simulations on Substack, Notion, READMEs."
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {}
+    },
+    "feature2_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Feature Drop: PR #35 — Agent Demographic Breakdown",
+        "level": "h3"
+      }
+    },
+    "feature2_text": {
+      "type": "Text",
+      "props": {
+        "text": "/<sim_id>/demographics cross-tabs age/gender/country/actor type/platform against final stance, volatility, influence; 'KEY SUBGROUP DYNAMIC' headline picks largest divergence. Slots alongside Quality + Network as the population-level explainer."
+      }
+    },
+    "sep4": {
+      "type": "Separator",
+      "props": {}
+    },
+    "selfhealing_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Self-Healing Improvements",
+        "level": "h3"
+      }
+    },
+    "pr17_text": {
+      "type": "Text",
+      "props": {
+        "text": "PR #17 hyperstitions-ideas dedup (+6 lines) — skill fired twice today (stars target, then X-followers target)"
+      }
+    },
+    "pr18_text": {
+      "type": "Text",
+      "props": {
+        "text": "PR #18 repo-pulse idempotency (+9 lines) — stars=717/forks=137 notified twice"
+      }
+    },
+    "selfhealing_conclusion": {
+      "type": "Text",
+      "props": {
+        "text": "Both converge on the 'scan today's log before acting' idiom now used across 3 skills."
+      }
+    },
+    "sep5": {
+      "type": "Separator",
+      "props": {}
+    },
+    "license_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "License Note",
+        "level": "h3"
+      }
+    },
+    "license_text": {
+      "type": "Text",
+      "props": {
+        "text": "AGPL-3.0 → MIT at 21:00 UTC Apr 17, reverted 2 minutes later. MiroShark remains AGPL-3.0."
+      }
+    },
+    "sep6": {
+      "type": "Separator",
+      "props": {}
+    },
+    "keychanges_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Key Changes",
+        "level": "h3"
+      }
+    },
+    "keychange1": {
+      "type": "Text",
+      "props": {
+        "text": "frontend/src/views/EmbedView.vue NEW (+539 lines): iframe-safe embed page with stacked drift sparkline, consensus marker, quality badge"
+      }
+    },
+    "keychange2": {
+      "type": "Text",
+      "props": {
+        "text": "frontend/src/components/DemographicBreakdown.vue NEW (+582 lines): five-tab overlay with per-segment stance bars + metric columns"
+      }
+    },
+    "keychange3": {
+      "type": "Text",
+      "props": {
+        "text": "backend/app/api/simulation.py (+169 / +429): two new GET endpoints, OasisProfileGenerator-style archetype classifier"
+      }
+    },
+    "sep7": {
+      "type": "Separator",
+      "props": {}
+    },
+    "stats_text": {
+      "type": "Text",
+      "props": {
+        "text": "Stats: ~18 files, +2,360 / -5 lines across 6 substantive commits"
+      }
+    },
+    "sep8": {
+      "type": "Separator",
+      "props": {}
+    },
+    "recap_link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full recap",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-04-18.md"
+      }
+    }
+  }
+}

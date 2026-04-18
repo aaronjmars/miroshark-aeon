@@ -1,18 +1,18 @@
-*Push Recap — 2026-04-17*
-aaronjmars/MiroShark + aaronjmars/miroshark-aeon — 96 commits, 2 authors
+*Push Recap — 2026-04-18*
+MiroShark — 2 open PRs (+2,345 lines, author: Aeon) + license flip/revert on main (net zero); miroshark-aeon — 2 self-improve PRs (+15 lines) triggered by today's own duplicate-run incidents, plus 35 routine chore auto-commits from daily skill runs.
 
-Simulation Analytics Suite (MiroShark PRs #32, #33): Quality Diagnostics adds a health badge (Excellent/Good/Low) from participation rate, stance entropy, convergence speed, and cross-platform rate. Interaction Network ships a 644-line force-directed SVG graph with echo chamber scoring — MiroShark moves from "run simulation, read output" to "run simulation, understand its dynamics."
+Feature drop: PR #34 Embeddable Simulation Widget — read-only /embed/:simulationId route + embed-summary API + history-modal Embed dialog with iframe/Markdown/URL snippets, Compact/Standard/Wide presets, light/dark themes. Purpose-built for distributing simulations on Substack, Notion, READMEs.
 
-OpenRouter Observability (MiroShark, 24-file commit): Wonderwall agent subprocess now emits structured JSONL events that merge with Flask events, closing the per-agent cost attribution gap. OpenRouter attribution headers, FAST_LLM_MODEL slot, and dynamic browser tab titles landed together.
+Feature drop: PR #35 Agent Demographic Breakdown — /<sim_id>/demographics cross-tabs age/gender/country/actor type/platform against final stance, volatility, influence; 'KEY SUBGROUP DYNAMIC' headline picks largest divergence. Slots alongside Quality + Network as the population-level explainer.
 
-Tweet Allocator (miroshark-aeon): New skill pays top 5 tweets/day in $MIROSHARK, with a Bankr-prefetch script that works around the sandbox auth limitation. Fetch-tweets hardened with persistent seen-file dedup (PR #16) and a Python post-filter that drops false positives.
+Self-healing: PR #17 hyperstitions-ideas dedup (+6 lines) — skill fired twice today (stars target, then X-followers target); PR #18 repo-pulse idempotency (+9 lines) — stars=717/forks=137 notified twice. Both converge on the 'scan today's log before acting' idiom now used across 3 skills.
 
-Late-afternoon sync (miroshark-aeon): Fork pulled into frontmatter parity with upstream Aeon (tags: on every skill), default runtime model bumped Opus 4.6 → 4.7 across all entry points, and DEVTO/NEYNAR/VERCEL/BANKR secrets now forwarded to the skill runtime — a silent-failure fix for tweet-allocator and 4 other auth-requiring skills.
+License note: AGPL-3.0 → MIT at 21:00 UTC Apr 17, reverted 2 minutes later. MiroShark remains AGPL-3.0.
 
 Key changes:
-- +950 line InteractionNetwork.vue with platform filters, hover highlighting, PNG export
-- prefetch-bankr.sh: reusable sandbox workaround for any auth-required API
-- Opus 4.7 default across aeon.yml, both workflow files, README, dashboard UI, cost-report
+- frontend/src/views/EmbedView.vue NEW (+539 lines): iframe-safe embed page with stacked drift sparkline, consensus marker, quality badge
+- frontend/src/components/DemographicBreakdown.vue NEW (+582 lines): five-tab overlay with per-segment stance bars + metric columns
+- backend/app/api/simulation.py (+169 / +429): two new GET endpoints, OasisProfileGenerator-style archetype classifier
 
-Stats: ~110 files changed, +3,230/-830 lines
-Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-04-17.md
+Stats: ~18 files, +2,360 / -5 lines across 6 substantive commits
+Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-04-18.md
