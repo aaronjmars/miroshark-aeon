@@ -56,6 +56,7 @@
 | Heartbeat Stuck-Run Timeout | 2026-04-16 | Heartbeat detects runs in_progress >2h as stuck, allows fresh dispatch bypassing dedup guard (PR #14 on miroshark-aeon) |
 | Simulation Quality Diagnostics | 2026-04-17 | Post-completion quality analysis: participation rate, stance entropy, convergence speed, cross-platform rate; health badge (Excellent/Good/Low) on cards + run view; expandable diagnostics panel with metric bars + suggestions (PR #32 on MiroShark) |
 | Agent Interaction Network Graph | 2026-04-17 | Force-directed SVG network visualization of agent-to-agent interactions; node color by stance, size by degree, edge color by platform; hover highlighting, platform filters, insights panel (top hub, bridge, echo chamber score), PNG export (PR #33 on MiroShark) |
+| Embeddable Simulation Widget | 2026-04-18 | `/embed/:simulationId` read-only route + minimal `/embed-summary` API; stacked belief-drift sparkline, consensus marker, quality/resolution badges; history-modal Embed dialog with iframe/Markdown/URL copy + Compact/Standard/Wide presets + light/dark theme (PR #34 on MiroShark) |
 
 ## Watched Repos
 - `aaronjmars/aeon` — tracked in `memory/watched-repos.md`
