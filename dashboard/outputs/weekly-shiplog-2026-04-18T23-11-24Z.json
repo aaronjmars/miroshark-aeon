@@ -1,0 +1,290 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Weekly Shiplog"
+      },
+      "children": [
+        "heading_date",
+        "text_description",
+        "sep1",
+        "heading_shipped",
+        "stack_shipped",
+        "sep2",
+        "heading_stats",
+        "table_stats",
+        "sep3",
+        "story_full_update"
+      ]
+    },
+    "heading_date": {
+      "type": "Heading",
+      "props": {
+        "text": "2026-04-18",
+        "level": "h2"
+      },
+      "children": []
+    },
+    "text_description": {
+      "type": "Text",
+      "props": {
+        "text": "The analytics stack got built and the simulations learned how to leave the app.",
+        "variant": "lead"
+      },
+      "children": []
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "heading_shipped": {
+      "type": "Heading",
+      "props": {
+        "text": "Shipped",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "stack_shipped": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "item_analytics",
+        "item_distribution",
+        "item_director",
+        "item_healing"
+      ]
+    },
+    "item_analytics": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "text_analytics_header",
+        "badge_belief_drift",
+        "badge_trace_interview",
+        "badge_quality_diag",
+        "badge_interaction_net",
+        "badge_demo_breakdown",
+        "text_analytics_note"
+      ]
+    },
+    "text_analytics_header": {
+      "type": "Text",
+      "props": {
+        "text": "Analytics suite:",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "badge_belief_drift": {
+      "type": "Badge",
+      "props": {
+        "text": "Belief Drift (#23)"
+      },
+      "children": []
+    },
+    "badge_trace_interview": {
+      "type": "Badge",
+      "props": {
+        "text": "Trace Interview (#26)"
+      },
+      "children": []
+    },
+    "badge_quality_diag": {
+      "type": "Badge",
+      "props": {
+        "text": "Quality Diagnostics (#32)"
+      },
+      "children": []
+    },
+    "badge_interaction_net": {
+      "type": "Badge",
+      "props": {
+        "text": "Interaction Network (#33)"
+      },
+      "children": []
+    },
+    "badge_demo_breakdown": {
+      "type": "Badge",
+      "props": {
+        "text": "Demographic Breakdown (#35)"
+      },
+      "children": []
+    },
+    "text_analytics_note": {
+      "type": "Text",
+      "props": {
+        "text": "five overlays in seven days",
+        "variant": "caption"
+      },
+      "children": []
+    },
+    "item_distribution": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "text_distribution_header",
+        "badge_article_gen",
+        "badge_embeddable",
+        "badge_push_notif"
+      ]
+    },
+    "text_distribution_header": {
+      "type": "Text",
+      "props": {
+        "text": "Distribution layer:",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "badge_article_gen": {
+      "type": "Badge",
+      "props": {
+        "text": "Article Generator (#25)"
+      },
+      "children": []
+    },
+    "badge_embeddable": {
+      "type": "Badge",
+      "props": {
+        "text": "Embeddable Widget (#34)"
+      },
+      "children": []
+    },
+    "badge_push_notif": {
+      "type": "Badge",
+      "props": {
+        "text": "Browser Push Notifications (#30)"
+      },
+      "children": []
+    },
+    "item_director": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "text_director_title",
+        "text_director_details"
+      ]
+    },
+    "text_director_title": {
+      "type": "Text",
+      "props": {
+        "text": "Director Mode (#31)",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "text_director_details": {
+      "type": "Text",
+      "props": {
+        "text": "mid-run event injection + multi-model routing + OpenRouter observability",
+        "variant": "caption"
+      },
+      "children": []
+    },
+    "item_healing": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "text_healing_title",
+        "text_healing_details"
+      ]
+    },
+    "text_healing_title": {
+      "type": "Text",
+      "props": {
+        "text": "Agent self-healing:",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "text_healing_details": {
+      "type": "Text",
+      "props": {
+        "text": "8 miroshark-aeon PRs (heartbeat hardening, dedup guards, Opus 4.7, tweet-allocator)",
+        "variant": "caption"
+      },
+      "children": []
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "heading_stats": {
+      "type": "Heading",
+      "props": {
+        "text": "Stats",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "table_stats": {
+      "type": "Table",
+      "props": {
+        "columns": [
+          "Metric",
+          "Value"
+        ],
+        "rows": [
+          [
+            "Commits",
+            "32+40"
+          ],
+          [
+            "PRs merged",
+            "21"
+          ],
+          [
+            "Code changes",
+            "+8,819/-517 MiroShark lines"
+          ],
+          [
+            "Stars",
+            "661 → 723"
+          ]
+        ]
+      },
+      "children": []
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "story_full_update": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full weekly shiplog",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/weekly-shiplog-2026-04-18.md",
+        "source": "GitHub"
+      },
+      "children": []
+    }
+  }
+}
