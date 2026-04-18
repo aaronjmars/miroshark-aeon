@@ -12,6 +12,14 @@ If `${var}` is set, only recap that repo (owner/repo format).
 
 This skill reads repos from `memory/watched-repos.md`. If the file doesn't exist yet, create it or skip this skill.
 
+## Sandbox note
+
+The sandbox only permits Bash commands whose leading word is allowlisted (`gh`, `git`, `jq`, `curl`, etc.). Shell keywords like `for`, `while`, `if` are NOT allowlisted and will be denied.
+
+- Call `gh api ...` **once per commit**. Do NOT batch with `for sha in ...; do gh api ...; done` — this is denied and wastes the whole skill budget.
+- Do NOT chain commands with `&&`, `||`, or `;` unless every piece is a single allowlisted command. No compound statements.
+- If you need to iterate, issue separate Bash tool calls (one per commit) instead of one loop.
+
 ---
 
 Read memory/MEMORY.md and the last 2 days of memory/logs/ for context.
