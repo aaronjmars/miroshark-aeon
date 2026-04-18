@@ -22,6 +22,8 @@ Read memory/watched-repos.md for the list of repos to track. Skip any repo whose
    gh api repos/owner/repo --jq '{stargazers_count, forks_count, watchers_count, open_issues_count, subscribers_count}'
    ```
 
+   **Idempotency check:** After fetching, scan `memory/logs/${today}.md` for any prior `## Repo Pulse` section. If a prior section for this same repo already recorded identical `stargazers_count` AND identical `forks_count`, log `REPO_PULSE_DUPLICATE — same counts (stars=X, forks=Y) already reported earlier today` and **skip this repo** (do NOT send a notification). This prevents duplicate notifications when repo-pulse is re-triggered (by heartbeat, manual dispatch, or workflow retry) within the same UTC day with no new activity. If counts differ from any prior run today, continue normally — the delta from the true 24h cutoff is still the right thing to report.
+
 2. **Compute the 24h cutoff timestamp** FIRST — this is critical:
    ```bash
    CUTOFF=$(date -u -d '24 hours ago' +%Y-%m-%dT%H:%M:%SZ 2>/dev/null || date -u -v-24H +%Y-%m-%dT%H:%M:%SZ)
@@ -88,4 +90,11 @@ Read memory/watched-repos.md for the list of repos to track. Skip any repo whose
    - **New stars (24h):** N
    - **New forks (24h):** N
    - **Notification sent:** yes/no
+   ```
+
+   If step 1's idempotency check skipped the repo, still log a short entry so the skip is visible in the record:
+   ```
+   ## Repo Pulse
+   - **aaronjmars/repo**: stargazers_count=X, forks_count=Y
+   - **Status:** REPO_PULSE_DUPLICATE (same counts as earlier run today — skipped notification)
    ```
