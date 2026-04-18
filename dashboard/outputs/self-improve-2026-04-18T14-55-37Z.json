@@ -1,0 +1,164 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "Agent Self-Improvement — 2026-04-18"
+      },
+      "children": [
+        "main-stack"
+      ]
+    },
+    "main-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading",
+        "description",
+        "separator1",
+        "why-section",
+        "separator2",
+        "what-changed-section",
+        "separator3",
+        "impact-section",
+        "separator4",
+        "pr-link"
+      ]
+    },
+    "heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Repo Pulse Idempotency Check",
+        "level": "h2"
+      },
+      "children": []
+    },
+    "description": {
+      "type": "Text",
+      "props": {
+        "text": "Added a dedup guard to the repo-pulse skill so it no longer double-notifies when re-dispatched within the same UTC day. If today's log already has a Repo Pulse entry with identical stargazers_count and forks_count, the skill now short-circuits with REPO_PULSE_DUPLICATE and skips the notification."
+      },
+      "children": []
+    },
+    "separator1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "why-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "why-heading",
+        "why-text"
+      ]
+    },
+    "why-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Why",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "why-text": {
+      "type": "Text",
+      "props": {
+        "text": "Today's log contains two consecutive ## Repo Pulse sections for aaronjmars/MiroShark with identical payloads (stars=717, forks=137, same 11 new stargazers, same 3 new forks). Both marked Notification sent: yes. Same duplication pattern surfaced in push-recap on Apr 15 and Apr 17 — recurring, not a one-off."
+      },
+      "children": []
+    },
+    "separator2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "what-changed-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "what-changed-heading",
+        "what-changed-text"
+      ]
+    },
+    "what-changed-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "What changed",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "what-changed-text": {
+      "type": "Text",
+      "props": {
+        "text": "skills/repo-pulse/SKILL.md: step 1 now scans today's log for a prior entry for the same repo; if counts match the fresh fetch, it logs REPO_PULSE_DUPLICATE and skips. Step 7 gained a short log variant so skipped repos still leave a trace in the record."
+      },
+      "children": []
+    },
+    "separator3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "impact-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "impact-heading",
+        "impact-text"
+      ]
+    },
+    "impact-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Impact",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "impact-text": {
+      "type": "Text",
+      "props": {
+        "text": "One fewer source of duplicate notifications when heartbeat auto-triggers, manual dispatches, or workflow retries collide with the scheduled 10:00 UTC run on a no-activity day. Keeps the log readable and avoids double-posting the same star list to channels once they come online."
+      },
+      "children": []
+    },
+    "separator4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "pr-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #18",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/pull/18",
+        "source": "GitHub"
+      },
+      "children": []
+    }
+  }
+}

@@ -1,14 +1,14 @@
-*Agent Self-Improvement — 2026-04-16*
+*Agent Self-Improvement — 2026-04-18*
 
-Heartbeat now detects stuck GitHub Actions runs and auto-recovers.
+Repo Pulse Idempotency Check
 
-Previously, if a skill run hung indefinitely (stayed in_progress without exiting), heartbeat treated it as "still running" and never retried. A hung run could silently block a skill from ever being dispatched again until manual intervention.
+Added a dedup guard to the repo-pulse skill so it no longer double-notifies when re-dispatched within the same UTC day. If today's log already has a Repo Pulse entry with identical stargazers_count and forks_count, the skill now short-circuits with REPO_PULSE_DUPLICATE and skips the notification.
 
-Why: Apr 15 logs showed heartbeat correctly handling a push-recap *failure* (401 auth → auto-retry). But a *hang* (no exit code) would have been invisible — heartbeat's dedup guard would see the stuck run as active and skip it forever. This was a latent resilience gap.
+Why: today's log contains two consecutive ## Repo Pulse sections for aaronjmars/MiroShark with identical payloads (stars=717, forks=137, same 11 new stargazers, same 3 new forks). Both marked Notification sent: yes. Same duplication pattern surfaced in push-recap on Apr 15 and Apr 17 — recurring, not a one-off.
 
 What changed:
-- skills/heartbeat/SKILL.md: Added createdAt to gh run list queries and a 2-hour elapsed-time check. Runs in_progress for >2h are flagged as "stuck" and excluded from the dedup guard, allowing fresh dispatch. Stuck runs are not cancelled (non-destructive approach).
+- skills/repo-pulse/SKILL.md: step 1 now scans today's log for a prior entry for the same repo; if counts match the fresh fetch, it logs REPO_PULSE_DUPLICATE and skips. Step 7 gained a short log variant so skipped repos still leave a trace in the record.
 
-Impact: Heartbeat can now self-heal from hung runs — no skill will silently go missing due to a stuck GitHub Actions job. Also fixed duplicate "Next Priorities" section in MEMORY.md.
+Impact: one fewer source of duplicate notifications when heartbeat auto-triggers, manual dispatches, or workflow retries collide with the scheduled 10:00 UTC run on a no-activity day. Keeps the log readable and avoids double-posting the same star list to channels once they come online.
 
-PR: https://github.com/aaronjmars/miroshark-aeon/pull/14
+PR: https://github.com/aaronjmars/miroshark-aeon/pull/18

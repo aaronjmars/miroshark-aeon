@@ -58,6 +58,7 @@
 | Agent Interaction Network Graph | 2026-04-17 | Force-directed SVG network visualization of agent-to-agent interactions; node color by stance, size by degree, edge color by platform; hover highlighting, platform filters, insights panel (top hub, bridge, echo chamber score), PNG export (PR #33 on MiroShark) |
 | Embeddable Simulation Widget | 2026-04-18 | `/embed/:simulationId` read-only route + minimal `/embed-summary` API; stacked belief-drift sparkline, consensus marker, quality/resolution badges; history-modal Embed dialog with iframe/Markdown/URL copy + Compact/Standard/Wide presets + light/dark theme (PR #34 on MiroShark) |
 | Agent Demographic Breakdown | 2026-04-18 | `GET /<sim_id>/demographics` cross-tabs age range / gender / country / actor type (individual vs institutional) / primary platform against final stance, stance volatility (|final-initial|), and influence score; Demographics overlay (tab bar + stacked stance bars + metric columns); top-divergence headline; cached demographics.json (PR #35 on MiroShark) |
+| Repo Pulse Idempotency | 2026-04-18 | Idempotency check in `skills/repo-pulse/SKILL.md` — skips notification + logs `REPO_PULSE_DUPLICATE` when today's log already has a prior `## Repo Pulse` entry with the same stargazers_count/forks_count (PR #18 on miroshark-aeon) |
 
 ## Watched Repos
 - `aaronjmars/aeon` — tracked in `memory/watched-repos.md`
