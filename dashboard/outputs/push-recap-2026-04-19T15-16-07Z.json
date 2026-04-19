@@ -1,0 +1,198 @@
+{
+  "root": "root",
+  "state": {},
+  "elements": {
+    "root": {
+      "type": "Card",
+      "props": {
+        "title": "Push Recap — 2026-04-19",
+        "description": "MiroShark + miroshark-aeon"
+      },
+      "children": [
+        "summary-stat",
+        "separator1",
+        "pr36-section",
+        "separator2",
+        "pr37-section",
+        "separator3",
+        "infra-section",
+        "separator4",
+        "key-changes-section",
+        "separator5",
+        "stats-section"
+      ]
+    },
+    "summary-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Push Summary",
+        "value": "5 commits, 3 authors, 11 files, +1,207/-81"
+      }
+    },
+    "separator1": {
+      "type": "Separator",
+      "props": {}
+    },
+    "pr36-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "pr36-title",
+        "pr36-details"
+      ]
+    },
+    "pr36-title": {
+      "type": "Heading",
+      "props": {
+        "text": "Community perf PR (MiroShark #36, open)",
+        "level": "h2"
+      }
+    },
+    "pr36-details": {
+      "type": "Text",
+      "props": {
+        "text": "builtbydesigninc parallelized report-section generation with a ThreadPoolExecutor, dropped MAX_REFLECTION_ROUNDS 3→1, and cut previous_sections context — measured 5x speedup (20.8→4 min) and 55% cost reduction on a 5-section report. First real external code contribution to the report engine."
+      }
+    },
+    "separator2": {
+      "type": "Separator",
+      "props": {}
+    },
+    "pr37-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "pr37-title",
+        "pr37-details"
+      ]
+    },
+    "pr37-title": {
+      "type": "Heading",
+      "props": {
+        "text": "Next analytics feature in flight (MiroShark #37, open)",
+        "level": "h2"
+      }
+    },
+    "pr37-details": {
+      "type": "Text",
+      "props": {
+        "text": "Aeon opened the 'What If?' Counterfactual Explorer — new /counterfactual endpoint + WhatIfPanel.vue (+761) that recomputes belief drift with up to 3 selected agents excluded. Pure data transform over trajectory.json, no re-simulation. Turns the network graph's 'dominant hub' finding into a quantifiable counterfactual."
+      }
+    },
+    "separator3": {
+      "type": "Separator",
+      "props": {}
+    },
+    "infra-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "infra-title",
+        "infra-details"
+      ]
+    },
+    "infra-title": {
+      "type": "Heading",
+      "props": {
+        "text": "Infra hardening on miroshark-aeon",
+        "level": "h2"
+      }
+    },
+    "infra-details": {
+      "type": "Text",
+      "props": {
+        "text": "Aaron shipped three tightly scoped workflow fixes — (1) chain-runner jq filter unbreak (chain dispatch was silently failing), (2) scheduler catch-up now compares LAST_DISPATCH_EPOCH vs scheduled fire time so skills don't double-fire, (3) ./notify hashes messages with sha256 and suppresses test/trace probes — stops duplicate notifications at the right layer."
+      }
+    },
+    "separator4": {
+      "type": "Separator",
+      "props": {}
+    },
+    "key-changes-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "key-changes-title",
+        "changes-list"
+      ]
+    },
+    "key-changes-title": {
+      "type": "Heading",
+      "props": {
+        "text": "Key changes",
+        "level": "h3"
+      }
+    },
+    "changes-list": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "change1",
+        "change2",
+        "change3"
+      ]
+    },
+    "change1": {
+      "type": "Text",
+      "props": {
+        "text": "MiroShark d6afe00: ThreadPoolExecutor in report_agent.py (+87/-60) — 80% fewer input tokens, 50% fewer LLM calls"
+      }
+    },
+    "change2": {
+      "type": "Text",
+      "props": {
+        "text": "MiroShark 347eda6: WhatIfPanel.vue new (+761), split-line SVG chart with dashed original / solid counterfactual curves"
+      }
+    },
+    "change3": {
+      "type": "Text",
+      "props": {
+        "text": "miroshark-aeon 2417bf8: aeon.yml notify dedup (+54/-3) — hashes in .notify-sent-hashes, probes matching test/trace/ping/debug suppressed under 120 chars"
+      }
+    },
+    "separator5": {
+      "type": "Separator",
+      "props": {}
+    },
+    "stats-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stats-text",
+        "full-recap-link"
+      ]
+    },
+    "stats-text": {
+      "type": "Text",
+      "props": {
+        "text": "Stats: 11 files, +1,207/-81 (excl ~35 automation chores)"
+      }
+    },
+    "full-recap-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full recap",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-04-19.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}
