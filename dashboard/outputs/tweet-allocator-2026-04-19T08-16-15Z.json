@@ -1,0 +1,22 @@
+{
+  "root": "card_root",
+  "state": {},
+  "elements": {
+    "card_root": {
+      "type": "Card",
+      "props": {
+        "title": "tweet-allocator",
+        "description": "2026-04-19"
+      },
+      "children": [
+        "text_message"
+      ]
+    },
+    "text_message": {
+      "type": "Text",
+      "props": {
+        "text": "no tweets in today's log to allocate from"
+      }
+    }
+  }
+}
