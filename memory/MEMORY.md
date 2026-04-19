@@ -61,6 +61,7 @@
 | Agent Demographic Breakdown | 2026-04-18 | `GET /<sim_id>/demographics` cross-tabs age range / gender / country / actor type (individual vs institutional) / primary platform against final stance, stance volatility (|final-initial|), and influence score; Demographics overlay (tab bar + stacked stance bars + metric columns); top-divergence headline; cached demographics.json (PR #35 on MiroShark) |
 | Repo Pulse Idempotency | 2026-04-18 | Idempotency check in `skills/repo-pulse/SKILL.md` — skips notification + logs `REPO_PULSE_DUPLICATE` when today's log already has a prior `## Repo Pulse` entry with the same stargazers_count/forks_count (PR #18 on miroshark-aeon) |
 | Hyperstitions Dedup Guard | 2026-04-18 | Step 0 in hyperstitions-ideas now checks today's log for an existing `## Hyperstitions Ideas` section and exits with HYPERSTITIONS_SKIP when one exists; enforces the "ONE idea per day" contract violated today (1K stars Apr 30 + 1K X followers May 15 in a single day). Operator can still force with `${var}` (PR #17 on miroshark-aeon) |
+| Agent Counterfactual Explorer | 2026-04-19 | `GET /<sim_id>/counterfactual?exclude_agents=...` recomputes belief-drift with selected agents removed (pure data transform over `trajectory.json`, no re-sim). "◐ What If?" panel: top-12 influence picker (max 3), split-line chart (original dashed / counterfactual solid), impact summary with `delta_final_bullish`, Strong/Moderate/Minimal badge, PNG export (PR #37 on MiroShark) |
 
 ## Watched Repos
 - `aaronjmars/aeon` — tracked in `memory/watched-repos.md`
