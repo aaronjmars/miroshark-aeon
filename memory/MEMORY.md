@@ -25,6 +25,7 @@
 | 2026-04-17 | From Running Simulations to Reading Them: MiroShark Ships the Analytics Layer | Quality Diagnostics (PR #32) + Interaction Network (PR #33), analytics suite, echo chamber scoring, 708 stars |
 | 2026-04-17 | The Agent That Ships the Simulator: A Week Inside miroshark-aeon | Watched repo focus on miroshark-aeon itself — self-modifying scaffolding, prefetch/postprocess sandbox pattern, 85 commits/day, agent-authored PRs |
 | 2026-04-18 | Simulations That Leave the App: MiroShark's Distribution-and-Dissection Day | PR #34 Embeddable Widget + PR #35 Demographic Breakdown as a paired pivot from running simulations to publishing+dissecting them; 720 stars, nine-day analytics run context |
+| 2026-04-19 | First Outside Hand on the Throttle: MiroShark's Report Engine Gets a 5x Community Perf PR | Community milestone — PR #36 (mbs5) first external perf PR on report engine (5x/55% cost cut) paired with PR #37 Aeon Counterfactual Explorer; 733 stars / 143 forks |
 
 ## Recent Digests
 | Date | Type | Key Topics |

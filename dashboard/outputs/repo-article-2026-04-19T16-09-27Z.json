@@ -1,0 +1,74 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "New Article: First Outside Hand on the Throttle: MiroShark's Report Engine Gets a 5x Community Perf PR"
+      },
+      "children": [
+        "main_stack"
+      ]
+    },
+    "main_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "main_text",
+        "stats_section",
+        "article_link"
+      ]
+    },
+    "main_text": {
+      "type": "Text",
+      "props": {
+        "text": "Today was the day MiroShark stopped being a one-agent workshop: external dev mbs5 opened PR #36 rewriting the report pipeline for a 5x speedup / 55% cost cut (ThreadPoolExecutor + trimmed context + reflection 3→1), while Aeon shipped PR #37 Agent Counterfactual Explorer — a pure data transform over trajectory.json that answers \"what if this top hub hadn't been in the simulation?\" in milliseconds. 733 stars, 143 forks, nine-day analytics run still compounding."
+      }
+    },
+    "stats_section": {
+      "type": "Grid",
+      "props": {
+        "columns": 3,
+        "gap": "md"
+      },
+      "children": [
+        "stat_stars",
+        "stat_forks",
+        "stat_analytics"
+      ]
+    },
+    "stat_stars": {
+      "type": "Stat",
+      "props": {
+        "label": "Stars",
+        "value": "733"
+      }
+    },
+    "stat_forks": {
+      "type": "Stat",
+      "props": {
+        "label": "Forks",
+        "value": "143"
+      }
+    },
+    "stat_analytics": {
+      "type": "Text",
+      "props": {
+        "text": "Nine-day analytics run still compounding",
+        "variant": "caption"
+      }
+    },
+    "article_link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Read full article",
+        "href": "https://github.com/aeonframework/miroshark-aeon/blob/main/articles/repo-article-2026-04-19.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}
