@@ -58,3 +58,4 @@ date,skill,model,input_tokens,output_tokens,cache_read,cache_creation
 2026-04-19,push-recap,claude-opus-4-7,39,22547,2060158,110192
 2026-04-19,project-lens,claude-opus-4-7,33,18214,1312254,88509
 2026-04-19,skill-leaderboard,claude-sonnet-4-6,16,8280,441738,30411
+2026-04-19,memory-flush,claude-sonnet-4-6,14,13050,565182,45004
