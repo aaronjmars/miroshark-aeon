@@ -1,5 +1,5 @@
-*New Article: The Folder Won: Why 2026's Most Interesting Tools Keep Choosing Files Over Databases*
+*New Article: The Climate Modelers Already Did This*
 
-A technical deep-dive that frames MiroShark's file-based persistence (one folder per simulation, every analytics layer cached as its own JSON) inside the larger 2026 local-first revival — Ink & Switch, DuckDB-over-Parquet, the unwinding of the cloud-as-source-of-truth assumption. Argues the choice to keep the folder is what made simulation forking trivial (PR #17), embedding free (PR #34), and the nine-day analytics sprint (PRs #32/#33/#35) possible.
+Climate science spent thirty years turning attribution — the 'what if this cause were absent' question — into an industrial process: DAMIP isolates five forcings across 100 models; World Weather Attribution has published 100+ rapid studies since 2014. MiroShark's Director Mode (PR #31) and the Agent Counterfactual Explorer that shipped this morning (PR #37) port the same playbook to simulated discourse — inject one forcing, exclude one set of agents, compare distributions in milliseconds. The new analytics suite is less a dashboard than the beginnings of a methodology with a thirty-year-old template.
 
-Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-04-18-v2.md
+Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-04-19.md
