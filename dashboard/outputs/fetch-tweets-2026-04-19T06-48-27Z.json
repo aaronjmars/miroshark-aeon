@@ -1,0 +1,115 @@
+{
+  "root": "card_root",
+  "state": {},
+  "elements": {
+    "card_root": {
+      "type": "Card",
+      "props": {
+        "title": "Fetch Tweets"
+      },
+      "children": [
+        "content_stack"
+      ]
+    },
+    "content_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "date_heading",
+        "results_section",
+        "status_alert"
+      ]
+    },
+    "date_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "2026-04-19",
+        "level": "h4"
+      },
+      "children": []
+    },
+    "results_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "results_label",
+        "queries_stack"
+      ]
+    },
+    "results_label": {
+      "type": "Text",
+      "props": {
+        "text": "Multiple results found for:"
+      },
+      "children": []
+    },
+    "queries_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "query1",
+        "or1",
+        "query2",
+        "or2",
+        "query3"
+      ]
+    },
+    "query1": {
+      "type": "Badge",
+      "props": {
+        "text": "$MIROSHARK",
+        "variant": "outline"
+      },
+      "children": []
+    },
+    "or1": {
+      "type": "Text",
+      "props": {
+        "text": "OR",
+        "variant": "muted"
+      },
+      "children": []
+    },
+    "query2": {
+      "type": "Badge",
+      "props": {
+        "text": "@miroshark_",
+        "variant": "outline"
+      },
+      "children": []
+    },
+    "or2": {
+      "type": "Text",
+      "props": {
+        "text": "OR",
+        "variant": "muted"
+      },
+      "children": []
+    },
+    "query3": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/aaronjmars/miroshark",
+        "href": "https://github.com/aaronjmars/miroshark"
+      },
+      "children": []
+    },
+    "status_alert": {
+      "type": "Alert",
+      "props": {
+        "message": "All results already reported in recent runs",
+        "type": "info"
+      },
+      "children": []
+    }
+  }
+}
