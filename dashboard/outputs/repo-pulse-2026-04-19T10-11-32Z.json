@@ -1,0 +1,245 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Repo Pulse"
+      },
+      "children": [
+        "repo_link",
+        "separator_1",
+        "stats_stack",
+        "separator_2",
+        "stargazers_heading",
+        "stargazers_stack",
+        "separator_3",
+        "forks_heading",
+        "forks_stack"
+      ]
+    },
+    "repo_link": {
+      "type": "Link",
+      "props": {
+        "label": "aaronjmars/MiroShark",
+        "href": "https://github.com/aaronjmars/MiroShark"
+      }
+    },
+    "separator_1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stats_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "lg"
+      },
+      "children": [
+        "stat_stars",
+        "stat_forks"
+      ]
+    },
+    "stat_stars": {
+      "type": "Stat",
+      "props": {
+        "label": "Stars",
+        "value": "729",
+        "delta": "+12",
+        "trend": "up"
+      }
+    },
+    "stat_forks": {
+      "type": "Stat",
+      "props": {
+        "label": "Forks",
+        "value": "142",
+        "delta": "+5",
+        "trend": "up"
+      }
+    },
+    "separator_2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stargazers_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "New stargazers",
+        "level": "h3"
+      }
+    },
+    "stargazers_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "star_1",
+        "star_2",
+        "star_3",
+        "star_4",
+        "star_5",
+        "star_6",
+        "star_7",
+        "star_8",
+        "star_9",
+        "star_10",
+        "star_11",
+        "star_12"
+      ]
+    },
+    "star_1": {
+      "type": "Link",
+      "props": {
+        "label": "RaffyTheLegend",
+        "href": "https://github.com/RaffyTheLegend"
+      }
+    },
+    "star_2": {
+      "type": "Link",
+      "props": {
+        "label": "Inspirator7",
+        "href": "https://github.com/Inspirator7"
+      }
+    },
+    "star_3": {
+      "type": "Link",
+      "props": {
+        "label": "jetsworries",
+        "href": "https://github.com/jetsworries"
+      }
+    },
+    "star_4": {
+      "type": "Link",
+      "props": {
+        "label": "mbs5",
+        "href": "https://github.com/mbs5"
+      }
+    },
+    "star_5": {
+      "type": "Link",
+      "props": {
+        "label": "cokdy2513",
+        "href": "https://github.com/cokdy2513"
+      }
+    },
+    "star_6": {
+      "type": "Link",
+      "props": {
+        "label": "Gowtham-su",
+        "href": "https://github.com/Gowtham-su"
+      }
+    },
+    "star_7": {
+      "type": "Link",
+      "props": {
+        "label": "ericlbrault",
+        "href": "https://github.com/ericlbrault"
+      }
+    },
+    "star_8": {
+      "type": "Link",
+      "props": {
+        "label": "Yukik4ze",
+        "href": "https://github.com/Yukik4ze"
+      }
+    },
+    "star_9": {
+      "type": "Link",
+      "props": {
+        "label": "RyazDev",
+        "href": "https://github.com/RyazDev"
+      }
+    },
+    "star_10": {
+      "type": "Link",
+      "props": {
+        "label": "KrishDabhi",
+        "href": "https://github.com/KrishDabhi"
+      }
+    },
+    "star_11": {
+      "type": "Link",
+      "props": {
+        "label": "ronakr14",
+        "href": "https://github.com/ronakr14"
+      }
+    },
+    "star_12": {
+      "type": "Link",
+      "props": {
+        "label": "fredzrk-glitch",
+        "href": "https://github.com/fredzrk-glitch"
+      }
+    },
+    "separator_3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "forks_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "New forks",
+        "level": "h3"
+      }
+    },
+    "forks_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "fork_1",
+        "fork_2",
+        "fork_3",
+        "fork_4",
+        "fork_5"
+      ]
+    },
+    "fork_1": {
+      "type": "Link",
+      "props": {
+        "label": "RaffyTheLegend/MiroShark",
+        "href": "https://github.com/RaffyTheLegend/MiroShark"
+      }
+    },
+    "fork_2": {
+      "type": "Link",
+      "props": {
+        "label": "Gowtham-su/MiroShark",
+        "href": "https://github.com/Gowtham-su/MiroShark"
+      }
+    },
+    "fork_3": {
+      "type": "Link",
+      "props": {
+        "label": "mbs5/MiroShark",
+        "href": "https://github.com/mbs5/MiroShark"
+      }
+    },
+    "fork_4": {
+      "type": "Link",
+      "props": {
+        "label": "smolboon/MiroShark",
+        "href": "https://github.com/smolboon/MiroShark"
+      }
+    },
+    "fork_5": {
+      "type": "Link",
+      "props": {
+        "label": "thenexgenai/MiroShark",
+        "href": "https://github.com/thenexgenai/MiroShark"
+      }
+    }
+  }
+}
