@@ -1,0 +1,150 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "MiroShark Daily — 2026-04-19"
+      },
+      "children": [
+        "price_stat",
+        "sep1",
+        "market_section",
+        "sep2",
+        "performance_section",
+        "sep3",
+        "analysis_section",
+        "sep4",
+        "chart_link"
+      ]
+    },
+    "price_stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Price",
+        "value": "$0.000001607",
+        "delta": "-23.5%",
+        "trend": "down"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "market_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "liquidity_stat",
+        "volume_stat",
+        "ratio_stat"
+      ]
+    },
+    "liquidity_stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Liquidity",
+        "value": "$137.6K"
+      }
+    },
+    "volume_stat": {
+      "type": "Stat",
+      "props": {
+        "label": "24h Volume",
+        "value": "$59.9K"
+      }
+    },
+    "ratio_stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Buys/Sells",
+        "value": "96/112 (0.86x)"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "performance_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "perf_7d",
+        "perf_launch",
+        "ath_stat"
+      ]
+    },
+    "perf_7d": {
+      "type": "Stat",
+      "props": {
+        "label": "7d Change",
+        "value": "-15.6%",
+        "trend": "down"
+      }
+    },
+    "perf_launch": {
+      "type": "Stat",
+      "props": {
+        "label": "Since Launch",
+        "value": "+144.6%",
+        "trend": "up"
+      }
+    },
+    "ath_stat": {
+      "type": "Stat",
+      "props": {
+        "label": "ATH (Apr 14)",
+        "value": "-57.9%",
+        "delta": "$0.000003815",
+        "trend": "down"
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "analysis_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "analysis_text"
+      ]
+    },
+    "analysis_text": {
+      "type": "Text",
+      "props": {
+        "text": "Day 5 post-ATH correction. Intraday spike to $0.000001922 rejected — flushed to $0.000001504 before recovering. Volume declining (5th consecutive day). $0.0000015 is key support."
+      }
+    },
+    "sep4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "chart_link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Chart",
+        "href": "https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209",
+        "source": "GeckoTerminal"
+      }
+    }
+  }
+}
