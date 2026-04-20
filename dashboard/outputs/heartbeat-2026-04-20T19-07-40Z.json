@@ -1,0 +1,185 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "🫀 Heartbeat"
+      },
+      "children": [
+        "timestamp",
+        "sep1",
+        "missed-heading",
+        "missed-section",
+        "sep2",
+        "prs-heading",
+        "pr-link",
+        "sep3",
+        "issues-heading",
+        "issues-stat",
+        "sep4",
+        "flags-heading",
+        "flags-section"
+      ]
+    },
+    "timestamp": {
+      "type": "Text",
+      "props": {
+        "text": "Sun Apr 20 @ 19:05 UTC",
+        "variant": "muted"
+      }
+    },
+    "sep1": {
+      "type": "Separator"
+    },
+    "missed-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Missed skills",
+        "level": "h3"
+      }
+    },
+    "missed-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "missed-item-1",
+        "missed-item-2"
+      ]
+    },
+    "missed-item-1": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "missed-lb-text",
+        "missed-lb-badge"
+      ]
+    },
+    "missed-lb-text": {
+      "type": "Text",
+      "props": {
+        "text": "skill-leaderboard (due 17:00 UTC)"
+      }
+    },
+    "missed-lb-badge": {
+      "type": "Badge",
+      "props": {
+        "text": "auto-triggered ✓",
+        "variant": "default"
+      }
+    },
+    "missed-item-2": {
+      "type": "Alert",
+      "props": {
+        "title": "memory-flush",
+        "message": "Due 18:00 UTC — overdue, not auto-triggered (housekeeping policy)",
+        "type": "warning"
+      }
+    },
+    "sep2": {
+      "type": "Separator"
+    },
+    "prs-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Open PRs",
+        "level": "h3"
+      }
+    },
+    "pr-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "miroshark-aeon #19",
+        "href": "https://github.com/xai-org/miroshark-aeon/pull/19",
+        "source": "XAI cache query validation",
+        "score": "5.8h old — not stalled yet"
+      }
+    },
+    "sep3": {
+      "type": "Separator"
+    },
+    "issues-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Urgent Issues",
+        "level": "h3"
+      }
+    },
+    "issues-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Count",
+        "value": "0"
+      }
+    },
+    "sep4": {
+      "type": "Separator"
+    },
+    "flags-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Ongoing flags",
+        "level": "h3"
+      }
+    },
+    "flags-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "flag-1",
+        "flag-2",
+        "flag-3-wrapper"
+      ]
+    },
+    "flag-1": {
+      "type": "Badge",
+      "props": {
+        "text": "notification channels unconfigured",
+        "variant": "outline"
+      }
+    },
+    "flag-2": {
+      "type": "Badge",
+      "props": {
+        "text": "XAI_API_KEY absent",
+        "variant": "destructive"
+      }
+    },
+    "flag-3-wrapper": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "progress-stars",
+        "text-stars-detail"
+      ]
+    },
+    "progress-stars": {
+      "type": "Progress",
+      "props": {
+        "label": "MiroShark 1K stars pace",
+        "value": 743,
+        "max": 1000
+      }
+    },
+    "text-stars-detail": {
+      "type": "Text",
+      "props": {
+        "text": "~19/day needed for Apr 30 target",
+        "variant": "caption"
+      }
+    }
+  }
+}
