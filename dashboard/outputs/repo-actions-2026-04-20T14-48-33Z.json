@@ -1,0 +1,347 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "Repo Action Ideas — 2026-04-20",
+        "description": "Generated from analysis of MiroShark (744 stars, 0 open PRs — clean slate after today's 4-PR merge wave). These are ideas the feature skill can autonomously build tomorrow."
+      },
+      "children": [
+        "ideas-stack",
+        "details-link"
+      ]
+    },
+    "ideas-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "idea-1",
+        "sep-1",
+        "idea-2",
+        "sep-2",
+        "idea-3",
+        "sep-3",
+        "idea-4",
+        "sep-4",
+        "idea-5"
+      ]
+    },
+    "idea-1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "idea-1-title",
+        "idea-1-badges",
+        "idea-1-desc"
+      ]
+    },
+    "idea-1-title": {
+      "type": "Heading",
+      "props": {
+        "text": "1. Round Scrubber / Temporal Explorer",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "idea-1-badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "badge-1-1",
+        "badge-1-2"
+      ]
+    },
+    "badge-1-1": {
+      "type": "Badge",
+      "props": {
+        "text": "Feature",
+        "variant": "default"
+      },
+      "children": []
+    },
+    "badge-1-2": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "secondary"
+      },
+      "children": []
+    },
+    "idea-1-desc": {
+      "type": "Text",
+      "props": {
+        "text": "Interactive time-slider syncs network graph, demographics, and stances to any simulation round — the turning-point moment is now explorable, not just the final state.",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "sep-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "idea-2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "idea-2-title",
+        "idea-2-badges",
+        "idea-2-desc"
+      ]
+    },
+    "idea-2-title": {
+      "type": "Heading",
+      "props": {
+        "text": "2. Social Share Card Generator",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "idea-2-badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "badge-2-1",
+        "badge-2-2"
+      ]
+    },
+    "badge-2-1": {
+      "type": "Badge",
+      "props": {
+        "text": "Growth",
+        "variant": "default"
+      },
+      "children": []
+    },
+    "badge-2-2": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "secondary"
+      },
+      "children": []
+    },
+    "idea-2-desc": {
+      "type": "Text",
+      "props": {
+        "text": "Server-generated 1200×630px PNG (scenario headline, consensus gauge, quality badge, top 3 agents) for Twitter/X/LinkedIn unfurling — every shared result becomes a visual hook at the moment organic Kelp/Aave attention is peaking.",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "sep-2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "idea-3": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "idea-3-title",
+        "idea-3-badges",
+        "idea-3-desc"
+      ]
+    },
+    "idea-3-title": {
+      "type": "Heading",
+      "props": {
+        "text": "3. Trending Topics Auto-Discovery",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "idea-3-badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "badge-3-1",
+        "badge-3-2"
+      ]
+    },
+    "badge-3-1": {
+      "type": "Badge",
+      "props": {
+        "text": "Feature/Integration",
+        "variant": "default"
+      },
+      "children": []
+    },
+    "badge-3-2": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "secondary"
+      },
+      "children": []
+    },
+    "idea-3-desc": {
+      "type": "Text",
+      "props": {
+        "text": "\"What's Trending\" panel on home page pulls 5 current headlines from configurable RSS feeds; one click pre-fills the URL and fires Scenario Auto-Suggest — closes the blank-canvas gap for users who arrive without a document.",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "sep-3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "idea-4": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "idea-4-title",
+        "idea-4-badges",
+        "idea-4-desc"
+      ]
+    },
+    "idea-4-title": {
+      "type": "Heading",
+      "props": {
+        "text": "4. Collaborative Review Comments",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "idea-4-badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "badge-4-1",
+        "badge-4-2"
+      ]
+    },
+    "badge-4-1": {
+      "type": "Badge",
+      "props": {
+        "text": "Community",
+        "variant": "default"
+      },
+      "children": []
+    },
+    "badge-4-2": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "secondary"
+      },
+      "children": []
+    },
+    "idea-4-desc": {
+      "type": "Text",
+      "props": {
+        "text": "Threaded comment section on simulation result pages (no auth needed, display name only); optional chart markers at the round each note was left — replaces the screenshot-plus-Slack-thread workflow for research teams.",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "sep-4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "idea-5": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "idea-5-title",
+        "idea-5-badges",
+        "idea-5-desc"
+      ]
+    },
+    "idea-5-title": {
+      "type": "Heading",
+      "props": {
+        "text": "5. Simulation Config Export / Import",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "idea-5-badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "badge-5-1",
+        "badge-5-2"
+      ]
+    },
+    "badge-5-1": {
+      "type": "Badge",
+      "props": {
+        "text": "DX/Research",
+        "variant": "default"
+      },
+      "children": []
+    },
+    "badge-5-2": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "secondary"
+      },
+      "children": []
+    },
+    "idea-5-desc": {
+      "type": "Text",
+      "props": {
+        "text": "\"Export Config\" downloads a versioned JSON of all simulation parameters; \"Import Config\" restores it in one drop — enables reproducible research sharing and a community templates/directory in the repo.",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "details-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full details",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-actions-2026-04-20.md",
+        "source": "GitHub"
+      },
+      "children": []
+    }
+  }
+}
