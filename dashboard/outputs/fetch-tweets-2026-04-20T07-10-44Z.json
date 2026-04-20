@@ -1,0 +1,58 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "Fetch Tweets",
+        "description": "2026-04-20"
+      },
+      "children": [
+        "main-stack"
+      ]
+    },
+    "main-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "results-stat",
+        "status-alert",
+        "search-info",
+        "fallback-alert"
+      ]
+    },
+    "results-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Results Found",
+        "value": "12"
+      }
+    },
+    "status-alert": {
+      "type": "Alert",
+      "props": {
+        "type": "info",
+        "message": "All already reported (persistent seen-file). No new tweets."
+      }
+    },
+    "search-info": {
+      "type": "Text",
+      "props": {
+        "text": "Searched for: $MIROSHARK, @miroshark_, github.com/aaronjmars/miroshark",
+        "variant": "caption"
+      }
+    },
+    "fallback-alert": {
+      "type": "Alert",
+      "props": {
+        "type": "info",
+        "title": "WebSearch Fallback",
+        "message": "XAI_API_KEY not set"
+      }
+    }
+  }
+}
