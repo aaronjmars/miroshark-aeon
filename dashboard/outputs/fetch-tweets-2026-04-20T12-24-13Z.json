@@ -1,0 +1,247 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "fetch-tweets",
+        "description": "Top Tweets — $MIROSHARK OR @miroshark_ OR github.com/aaronjmars/miroshark (2026-04-20)"
+      },
+      "children": [
+        "tweet_stack_1",
+        "tweet_stack_2",
+        "tweet_stack_3",
+        "tweet_stack_4",
+        "tweet_stack_5",
+        "tweet_stack_6",
+        "tweet_stack_7",
+        "tweet_stack_8"
+      ]
+    },
+    "tweet_stack_1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet_card_1",
+        "tweet_link_1"
+      ]
+    },
+    "tweet_card_1": {
+      "type": "TweetCard",
+      "props": {
+        "author": "Whale_AI_net",
+        "handle": "whale_ai_net",
+        "text": "MiroShark Director demo ran an Aave hack + Justin Sun bailout scenario on Friday; Saturday Kelp DAO rsETH exploit triggered the exact Aave cascade ($292M, $5.4B ETH outflows, Sun pulled $154M). \"Not prediction. Simulation of collective behavior under stress.\"",
+        "likes": 30,
+        "retweets": 9
+      }
+    },
+    "tweet_link_1": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/Whale_AI_net/status/2045818613840457751"
+      }
+    },
+    "tweet_stack_2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet_card_2",
+        "tweet_link_2"
+      ]
+    },
+    "tweet_card_2": {
+      "type": "TweetCard",
+      "props": {
+        "author": "btcbabycow",
+        "handle": "btcbabycow",
+        "text": "MiroShark simulated Aave hack + Sun bailout Friday; Kelp DAO exploit caused the same cascade Saturday. Asks if the prediction coincidence will bring social virality.",
+        "likes": 8,
+        "retweets": 1
+      }
+    },
+    "tweet_link_2": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/btcbabycow/status/2045826011288527031"
+      }
+    },
+    "tweet_stack_3": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet_card_3",
+        "tweet_link_3"
+      ]
+    },
+    "tweet_card_3": {
+      "type": "TweetCard",
+      "props": {
+        "author": "DaWachu80608",
+        "handle": "DaWachu80608",
+        "text": "\"top G dev\" — first $MiroShark prediction with AAVE, now $AEON fixing Vercel. \"Truly amazing tech.\"",
+        "likes": 4,
+        "retweets": 3
+      }
+    },
+    "tweet_link_3": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/DaWachu80608/status/2045919875227394418"
+      }
+    },
+    "tweet_stack_4": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet_card_4",
+        "tweet_link_4"
+      ]
+    },
+    "tweet_card_4": {
+      "type": "TweetCard",
+      "props": {
+        "author": "bluenami866",
+        "handle": "bluenami866",
+        "text": "$MiroShark mention",
+        "likes": 1,
+        "retweets": 0
+      }
+    },
+    "tweet_link_4": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/bluenami866/status/2045722036320805312"
+      }
+    },
+    "tweet_stack_5": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet_card_5",
+        "tweet_link_5"
+      ]
+    },
+    "tweet_card_5": {
+      "type": "TweetCard",
+      "props": {
+        "author": "LemonSyncro",
+        "handle": "LemonSyncro",
+        "text": "\"From research tool to critical infrastructure for DeFi risk management. Every protocol treasury, every risk team, every hedge fund with DeFi exposure becomes a potential customer.\"",
+        "likes": 0,
+        "retweets": 0
+      }
+    },
+    "tweet_link_5": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/LemonSyncro/status/2045931142658855344"
+      }
+    },
+    "tweet_stack_6": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet_card_6",
+        "tweet_link_6"
+      ]
+    },
+    "tweet_card_6": {
+      "type": "TweetCard",
+      "props": {
+        "author": "dr_osse",
+        "handle": "dr_osse",
+        "text": "Suggests an app where spending $MIROSHARK tokens gives one-click access to simulate/predict scenarios.",
+        "likes": 0,
+        "retweets": 0
+      }
+    },
+    "tweet_link_6": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/dr_osse/status/2046006767650320720"
+      }
+    },
+    "tweet_stack_7": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet_card_7",
+        "tweet_link_7"
+      ]
+    },
+    "tweet_card_7": {
+      "type": "TweetCard",
+      "props": {
+        "author": "btcbabycow",
+        "handle": "btcbabycow",
+        "text": "Asks if MiroShark supports multi-user/community deployment for automated simulation management.",
+        "likes": 0,
+        "retweets": 0
+      }
+    },
+    "tweet_link_7": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/btcbabycow/status/2045841788544667903"
+      }
+    },
+    "tweet_stack_8": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet_card_8",
+        "tweet_link_8"
+      ]
+    },
+    "tweet_card_8": {
+      "type": "TweetCard",
+      "props": {
+        "author": "DaWachu80608",
+        "handle": "DaWachu80608",
+        "text": "\"This was posted day before exploit — crazy how powerful and accurate $MiroShark is.\"",
+        "likes": 0,
+        "retweets": 0
+      }
+    },
+    "tweet_link_8": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/DaWachu80608/status/2045873580387262848"
+      }
+    }
+  }
+}
