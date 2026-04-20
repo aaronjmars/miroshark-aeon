@@ -60,3 +60,4 @@ date,skill,model,input_tokens,output_tokens,cache_read,cache_creation
 2026-04-19,skill-leaderboard,claude-sonnet-4-6,16,8280,441738,30411
 2026-04-19,memory-flush,claude-sonnet-4-6,14,13050,565182,45004
 2026-04-19,heartbeat,claude-sonnet-4-6,12,8168,393955,39247
+2026-04-20,token-report,claude-sonnet-4-6,12,9354,422203,47323
