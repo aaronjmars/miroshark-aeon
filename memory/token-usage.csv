@@ -72,4 +72,4 @@ date,skill,model,input_tokens,output_tokens,cache_read,cache_creation
 2026-04-20,repo-actions,claude-sonnet-4-6,15,15555,490678,39083
 2026-04-20,push-recap,claude-opus-4-7,36,17604,1722455,123789
 2026-04-20,project-lens,claude-opus-4-7,8921,13768,952916,64648
-2026-04-20,heartbeat,claude-sonnet-4-6,10,5638,297360,31186
+2026-04-20,skill-leaderboard,claude-sonnet-4-6,5719,5788,279068,29167
