@@ -1,0 +1,528 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "Push Recap — 2026-04-20"
+      },
+      "children": [
+        "main_stack"
+      ]
+    },
+    "main_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "summary_stack",
+        "sep1",
+        "analytics_section",
+        "sep2",
+        "contributions_section",
+        "sep3",
+        "infra_section",
+        "sep4",
+        "key_changes_section",
+        "sep5",
+        "stats_section",
+        "sep6",
+        "recap_link"
+      ]
+    },
+    "summary_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "lg"
+      },
+      "children": [
+        "stat_prs",
+        "stat_commits"
+      ]
+    },
+    "stat_prs": {
+      "type": "Stat",
+      "props": {
+        "label": "MiroShark",
+        "value": "4 PRs merged in 9 minutes",
+        "delta": "12:04–12:13 UTC"
+      }
+    },
+    "stat_commits": {
+      "type": "Stat",
+      "props": {
+        "label": "miroshark-aeon",
+        "value": "5 fix commits"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {}
+    },
+    "analytics_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "analytics_heading",
+        "analytics_prs",
+        "analytics_items"
+      ]
+    },
+    "analytics_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Two Aeon Analytics Panels Shipped",
+        "level": "h2"
+      }
+    },
+    "analytics_prs": {
+      "type": "Badge",
+      "props": {
+        "text": "PRs #37 + #39",
+        "variant": "secondary"
+      }
+    },
+    "analytics_items": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "counterfactual_item",
+        "scenario_item"
+      ]
+    },
+    "counterfactual_item": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "counterfactual_title",
+        "counterfactual_text"
+      ]
+    },
+    "counterfactual_title": {
+      "type": "Text",
+      "props": {
+        "text": "Counterfactual Explorer (What If?)",
+        "variant": "lead"
+      }
+    },
+    "counterfactual_text": {
+      "type": "Text",
+      "props": {
+        "text": "Lets researchers remove up to 3 top-influence agents and see the recomputed belief drift with a Strong/Moderate/Minimal impact badge — pure transform over trajectory.json, no re-sim.",
+        "variant": "body"
+      }
+    },
+    "scenario_item": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "scenario_title",
+        "scenario_text"
+      ]
+    },
+    "scenario_title": {
+      "type": "Text",
+      "props": {
+        "text": "Scenario Auto-Suggest",
+        "variant": "lead"
+      }
+    },
+    "scenario_text": {
+      "type": "Text",
+      "props": {
+        "text": "Kills the blank-page problem at setup: drop a .md/.txt/URL, get three LLM-grounded Bull/Bear/Neutral prediction-market cards (SHA-256 LRU-cached, non-blocking, soft-fails hide the panel).",
+        "variant": "body"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {}
+    },
+    "contributions_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "contributions_heading",
+        "contributions_prs",
+        "contributors",
+        "contributions_items"
+      ]
+    },
+    "contributions_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "First Sustained External Backend Contributions Merged",
+        "level": "h2"
+      }
+    },
+    "contributions_prs": {
+      "type": "Badge",
+      "props": {
+        "text": "PRs #36 + #38",
+        "variant": "secondary"
+      }
+    },
+    "contributors": {
+      "type": "Text",
+      "props": {
+        "text": "mbs5 / builtbydesigninc",
+        "variant": "lead"
+      }
+    },
+    "contributions_items": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "perf_item",
+        "config_item"
+      ]
+    },
+    "perf_item": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "perf_title",
+        "perf_text"
+      ]
+    },
+    "perf_title": {
+      "type": "Text",
+      "props": {
+        "text": "5x Report Speedup",
+        "variant": "lead"
+      }
+    },
+    "perf_text": {
+      "type": "Text",
+      "props": {
+        "text": "ThreadPoolExecutor + previous_sections=[] + MAX_REFLECTION_ROUNDS 3→1: 20.8min → 4min, cost $2.16 → $0.95",
+        "variant": "body"
+      }
+    },
+    "config_item": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "config_title",
+        "config_text"
+      ]
+    },
+    "config_title": {
+      "type": "Text",
+      "props": {
+        "text": "Config Read Fix",
+        "variant": "lead"
+      }
+    },
+    "config_text": {
+      "type": "Text",
+      "props": {
+        "text": "Lazy Config read on EmbeddingService fixes Railway-redeploy staleness where POST /api/settings was silently ignored.",
+        "variant": "body"
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {}
+    },
+    "infra_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "infra_heading",
+        "infra_items"
+      ]
+    },
+    "infra_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Aeon Infra Hardening",
+        "level": "h2"
+      }
+    },
+    "infra_items": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "infra_telegram",
+        "infra_urls",
+        "infra_timeout",
+        "infra_var"
+      ]
+    },
+    "infra_telegram": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "infra_telegram_title",
+        "infra_telegram_text"
+      ]
+    },
+    "infra_telegram_title": {
+      "type": "Text",
+      "props": {
+        "text": "Telegram Notify Chunking",
+        "variant": "lead"
+      }
+    },
+    "infra_telegram_text": {
+      "type": "Text",
+      "props": {
+        "text": "Now chunks at paragraph/line boundaries with [i/N] suffixes instead of slicing at 3990 chars (the Scenario Auto-Suggest notification this morning lost its PR link mid-paragraph — concrete trigger).",
+        "variant": "body"
+      }
+    },
+    "infra_urls": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "infra_urls_title",
+        "infra_urls_text"
+      ]
+    },
+    "infra_urls_title": {
+      "type": "Text",
+      "props": {
+        "text": "GitHub URLs",
+        "variant": "lead"
+      }
+    },
+    "infra_urls_text": {
+      "type": "Text",
+      "props": {
+        "text": "Article + skill-leaderboard skills now emit https://github.com/$GITHUB_REPOSITORY/blob/main/... URLs so links are clickable and resolve to the running repo, not the watched one.",
+        "variant": "body"
+      }
+    },
+    "infra_timeout": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "infra_timeout_title",
+        "infra_timeout_text"
+      ]
+    },
+    "infra_timeout_title": {
+      "type": "Text",
+      "props": {
+        "text": "Curl Timeout",
+        "variant": "lead"
+      }
+    },
+    "infra_timeout_text": {
+      "type": "Text",
+      "props": {
+        "text": "prefetch-xai curl timeout bumped 60s → 180s with one retry.",
+        "variant": "body"
+      }
+    },
+    "infra_var": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "infra_var_title",
+        "infra_var_text"
+      ]
+    },
+    "infra_var_title": {
+      "type": "Text",
+      "props": {
+        "text": "Environment Variable Passing",
+        "variant": "lead"
+      }
+    },
+    "infra_var_text": {
+      "type": "Text",
+      "props": {
+        "text": "inputs.var now passes via SKILL_VAR env so cashtag $MIROSHARK doesn't get shell-expanded to empty — fetch-tweets XAI path is finally reliable.",
+        "variant": "body"
+      }
+    },
+    "sep4": {
+      "type": "Separator",
+      "props": {}
+    },
+    "key_changes_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "key_changes_heading",
+        "changes_table"
+      ]
+    },
+    "key_changes_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Key Changes",
+        "level": "h2"
+      }
+    },
+    "changes_table": {
+      "type": "Table",
+      "props": {
+        "columns": [
+          "Components",
+          "Changes",
+          "Description"
+        ],
+        "rows": [
+          [
+            "WhatIfPanel.vue + /counterfactual endpoint",
+            "+761 new, +229",
+            "Agent Counterfactual Explorer, merged"
+          ],
+          [
+            "ScenarioSuggestions.vue + /suggest-scenarios endpoint",
+            "+366 new, +271",
+            "First-value at setup time, merged"
+          ],
+          [
+            "report_agent.py",
+            "+87/-60",
+            "5x speedup / 55% cost cut, first external backend perf PR merged"
+          ]
+        ]
+      }
+    },
+    "sep5": {
+      "type": "Separator",
+      "props": {}
+    },
+    "stats_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stats_heading",
+        "stats_grid"
+      ]
+    },
+    "stats_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Stats",
+        "level": "h2"
+      }
+    },
+    "stats_grid": {
+      "type": "Grid",
+      "props": {
+        "columns": 2,
+        "gap": "md"
+      },
+      "children": [
+        "stat_files",
+        "stat_additions",
+        "stat_deletions",
+        "stat_substantive",
+        "stat_authors",
+        "stat_chore"
+      ]
+    },
+    "stat_files": {
+      "type": "Stat",
+      "props": {
+        "label": "Files changed",
+        "value": "14"
+      }
+    },
+    "stat_additions": {
+      "type": "Stat",
+      "props": {
+        "label": "Lines added",
+        "value": "+1,961"
+      }
+    },
+    "stat_deletions": {
+      "type": "Stat",
+      "props": {
+        "label": "Lines deleted",
+        "value": "-97"
+      }
+    },
+    "stat_substantive": {
+      "type": "Stat",
+      "props": {
+        "label": "Substantive commits",
+        "value": "9"
+      }
+    },
+    "stat_authors": {
+      "type": "Stat",
+      "props": {
+        "label": "Authors",
+        "value": "3 (Aeon, Aaron Mars, mbs5)"
+      }
+    },
+    "stat_chore": {
+      "type": "Stat",
+      "props": {
+        "label": "Auto chore commits",
+        "value": "~35"
+      }
+    },
+    "sep6": {
+      "type": "Separator",
+      "props": {}
+    },
+    "recap_link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full recap",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-04-20.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}
