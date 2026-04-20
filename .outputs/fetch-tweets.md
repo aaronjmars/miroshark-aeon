@@ -1,1 +1,1 @@
-Fetch Tweets — 2026-04-20: 12 results found, all already reported (persistent seen-file). No new tweets for $MIROSHARK OR @miroshark_ OR github.com/aaronjmars/miroshark. (WebSearch fallback — XAI_API_KEY not set)
+Fetch Tweets — 2026-04-20 (re-run): no new tweets found for $MIROSHARK OR @miroshark_ OR github.com/aaronjmars/miroshark. XAI cache present but empty text; WebSearch confirms 0 new results after dedup.

@@ -1,0 +1,49 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "fetch-tweets",
+        "description": "2026-04-20 (re-run)"
+      },
+      "children": [
+        "stack-content"
+      ]
+    },
+    "stack-content": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "alert-no-tweets",
+        "search-terms",
+        "cache-details"
+      ]
+    },
+    "alert-no-tweets": {
+      "type": "Alert",
+      "props": {
+        "message": "No new tweets found",
+        "type": "info"
+      }
+    },
+    "search-terms": {
+      "type": "Text",
+      "props": {
+        "text": "Search terms: $MIROSHARK OR @miroshark_ OR github.com/aaronjmars/miroshark",
+        "variant": "body"
+      }
+    },
+    "cache-details": {
+      "type": "Text",
+      "props": {
+        "text": "XAI cache present but empty text; WebSearch confirms 0 new results after dedup",
+        "variant": "caption"
+      }
+    }
+  }
+}
