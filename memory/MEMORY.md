@@ -45,6 +45,7 @@
 | Repo Pulse Idempotency | 2026-04-18 | Idempotency check in `skills/repo-pulse/SKILL.md` — skips notification + logs `REPO_PULSE_DUPLICATE` when today's log already has a prior `## Repo Pulse` entry with the same stargazers_count/forks_count (PR #18 on miroshark-aeon) |
 | Hyperstitions Dedup Guard | 2026-04-18 | Step 0 in hyperstitions-ideas now checks today's log for an existing `## Hyperstitions Ideas` section and exits with HYPERSTITIONS_SKIP when one exists; enforces the "ONE idea per day" contract violated today (1K stars Apr 30 + 1K X followers May 15 in a single day). Operator can still force with `${var}` (PR #17 on miroshark-aeon) |
 | Agent Counterfactual Explorer | 2026-04-19 | `GET /<sim_id>/counterfactual?exclude_agents=...` recomputes belief-drift with selected agents removed (pure data transform over `trajectory.json`, no re-sim). "◐ What If?" panel: top-12 influence picker (max 3), split-line chart (original dashed / counterfactual solid), impact summary with `delta_final_bullish`, Strong/Moderate/Minimal badge, PNG export (PR #37 on MiroShark) |
+| Scenario Auto-Suggest from Document | 2026-04-20 | `POST /api/simulation/suggest-scenarios` — normalizes + SHA-256 + LRU-caches (cap 64) a 2KB preview, returns 3 Bull/Bear/Neutral scenario cards via `create_llm_client().chat_json()` (20s timeout). Non-blocking: LLM-fail → 200 + `suggestions:[]` + reason code → panel hides silently. Frontend `ScenarioSuggestions.vue` debounced 800ms above Simulation Prompt; Home.vue reads .md/.txt client-side and combines with urlDocs[].text. Eliminates the blank-page problem at setup (PR #39 on MiroShark) |
 
 ## Watched Repos
 - `aaronjmars/aeon` — tracked in `memory/watched-repos.md`
@@ -64,6 +65,6 @@
 ## Next Priorities
 - Configure notification channels (Telegram, Discord, or Slack)
 - XAI_API_KEY not set — tweet fetching falls back to WebSearch (limited freshness for recent tweets)
-- Next feature candidates from repo-actions Apr 18: Scenario Auto-Suggest, Recurring Simulation Watch, PDF Report, Dev Container/Codespaces (Counterfactual Explorer shipped as PR #37)
-- Open PRs pending merge: PR #36 (mbs5/builtbydesigninc — first external code contribution, 5x report speedup) + PR #37 (Counterfactual Explorer) on MiroShark
+- Next feature candidates from repo-actions Apr 18: Recurring Simulation Watch, PDF Report, Dev Container/Codespaces (Counterfactual Explorer shipped as PR #37, Scenario Auto-Suggest shipped as PR #39)
+- Open PRs pending merge: PR #36 (mbs5/builtbydesigninc — first external code contribution, 5x report speedup) + PR #37 (Counterfactual Explorer) + PR #38 (mbs5 embedding-config fix) + PR #39 (Scenario Auto-Suggest) on MiroShark
 - MiroShark at 733 stars / 143 forks as of Apr 19; community contribution milestone (first external backend perf PR)
