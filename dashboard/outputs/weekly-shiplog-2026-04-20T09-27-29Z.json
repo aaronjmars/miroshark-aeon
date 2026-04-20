@@ -1,0 +1,143 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "Weekly Shiplog — 2026-04-20"
+      },
+      "children": [
+        "intro",
+        "separator1",
+        "shipped-heading",
+        "shipped-stack",
+        "separator2",
+        "stats-heading",
+        "stats-stack",
+        "separator3",
+        "full-update"
+      ]
+    },
+    "intro": {
+      "type": "Text",
+      "props": {
+        "text": "The analytics run hands the wheel to strangers: first external backend PRs land, six analytics overlays now ship."
+      }
+    },
+    "separator1": {
+      "type": "Separator",
+      "props": {}
+    },
+    "shipped-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Shipped",
+        "level": "h3"
+      }
+    },
+    "shipped-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "shipped-1",
+        "shipped-2",
+        "shipped-3"
+      ]
+    },
+    "shipped-1": {
+      "type": "Text",
+      "props": {
+        "text": "Counterfactual Explorer (PR #37, in flight) — recompute belief drift after excluding agents, pure transform over trajectory.json"
+      }
+    },
+    "shipped-2": {
+      "type": "Text",
+      "props": {
+        "text": "mbs5 / builtbydesigninc opens first external backend PRs — 5x report speedup (PR #36) + same-day embedding-config fix (PR #38)"
+      }
+    },
+    "shipped-3": {
+      "type": "Text",
+      "props": {
+        "text": "Apr 18 workflow sweep on miroshark-aeon — chain dispatch unblocked, scheduler catch-up dedup, notify SHA-256 dedup, silent-skip kills"
+      }
+    },
+    "separator2": {
+      "type": "Separator",
+      "props": {}
+    },
+    "stats-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Stats",
+        "level": "h3"
+      }
+    },
+    "stats-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stat-1",
+        "stat-2",
+        "stat-3",
+        "stat-4",
+        "stat-5"
+      ]
+    },
+    "stat-1": {
+      "type": "Stat",
+      "props": {
+        "label": "PRs merged on MiroShark",
+        "value": "13"
+      }
+    },
+    "stat-2": {
+      "type": "Stat",
+      "props": {
+        "label": "PRs merged on miroshark-aeon",
+        "value": "8"
+      }
+    },
+    "stat-3": {
+      "type": "Text",
+      "props": {
+        "text": "Code changes: +9,725 / -768 substantive lines"
+      }
+    },
+    "stat-4": {
+      "type": "Stat",
+      "props": {
+        "label": "Stars",
+        "value": "743",
+        "delta": "+62",
+        "trend": "up"
+      }
+    },
+    "stat-5": {
+      "type": "Stat",
+      "props": {
+        "label": "New forks",
+        "value": "18"
+      }
+    },
+    "separator3": {
+      "type": "Separator",
+      "props": {}
+    },
+    "full-update": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full weekly update",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/weekly-shiplog-2026-04-20.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}

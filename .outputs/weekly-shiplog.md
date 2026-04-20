@@ -1,12 +1,11 @@
-*Weekly Shiplog — 2026-04-18*
+*Weekly Shiplog — 2026-04-20*
 
-The analytics stack got built and the simulations learned how to leave the app.
+The analytics run hands the wheel to strangers: first external backend PRs land, six analytics overlays now ship.
 
 Shipped:
-- Analytics suite: Belief Drift (#23), Trace Interview (#26), Quality Diagnostics (#32), Interaction Network (#33), Demographic Breakdown (#35) — five overlays in seven days
-- Distribution layer: Article Generator (#25), Embeddable Widget (#34), Browser Push Notifications (#30)
-- Director Mode (#31) mid-run event injection + multi-model routing + OpenRouter observability
-- Agent self-healing: 8 miroshark-aeon PRs (heartbeat hardening, dedup guards, Opus 4.7, tweet-allocator)
+- Counterfactual Explorer (PR #37, in flight) — recompute belief drift after excluding agents, pure transform over trajectory.json
+- mbs5 / builtbydesigninc opens first external backend PRs — 5x report speedup (PR #36) + same-day embedding-config fix (PR #38)
+- Apr 18 workflow sweep on miroshark-aeon — chain dispatch unblocked, scheduler catch-up dedup, notify SHA-256 dedup, silent-skip kills
 
-Stats: 32+40 commits, 21 PRs merged, +8,819/-517 MiroShark lines, 661 → 723 stars
-Full update: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/weekly-shiplog-2026-04-18.md
+Stats: 13 PRs merged on MiroShark, 8 on miroshark-aeon, +9,725/-768 substantive lines, 681→743 stars, +18 forks
+Full update: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/weekly-shiplog-2026-04-20.md

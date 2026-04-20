@@ -63,3 +63,4 @@ date,skill,model,input_tokens,output_tokens,cache_read,cache_creation
 2026-04-20,token-report,claude-sonnet-4-6,12,9354,422203,47323
 2026-04-20,fetch-tweets,claude-sonnet-4-6,887,14663,1034210,44019
 2026-04-20,tweet-allocator,claude-sonnet-4-6,9,2440,187421,16161
+2026-04-20,weekly-shiplog,claude-opus-4-7,37,16650,1571654,87873
