@@ -1,0 +1,238 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "Repo Pulse",
+        "description": "2026-04-20"
+      },
+      "children": [
+        "repo-link",
+        "separator1",
+        "stats-stack",
+        "separator2",
+        "stargazers-heading",
+        "stargazers-stack",
+        "separator3",
+        "forks-heading",
+        "forks-stack"
+      ]
+    },
+    "repo-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "aaronjmars/MiroShark",
+        "href": "https://github.com/aaronjmars/MiroShark"
+      }
+    },
+    "separator1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stats-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "stars-stat",
+        "forks-stat"
+      ]
+    },
+    "stars-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Stars",
+        "value": "743",
+        "delta": "+14",
+        "trend": "up"
+      }
+    },
+    "forks-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Forks",
+        "value": "143",
+        "delta": "+2",
+        "trend": "up"
+      }
+    },
+    "separator2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stargazers-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "New stargazers",
+        "level": "h3"
+      }
+    },
+    "stargazers-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "stargazer-1",
+        "stargazer-2",
+        "stargazer-3",
+        "stargazer-4",
+        "stargazer-5",
+        "stargazer-6",
+        "stargazer-7",
+        "stargazer-8",
+        "stargazer-9",
+        "stargazer-10",
+        "stargazer-11",
+        "stargazer-12",
+        "stargazer-13",
+        "stargazer-14"
+      ]
+    },
+    "stargazer-1": {
+      "type": "Link",
+      "props": {
+        "label": "omikamiandme-lab",
+        "href": "https://github.com/omikamiandme-lab"
+      }
+    },
+    "stargazer-2": {
+      "type": "Link",
+      "props": {
+        "label": "fortytwowill",
+        "href": "https://github.com/fortytwowill"
+      }
+    },
+    "stargazer-3": {
+      "type": "Link",
+      "props": {
+        "label": "LORD-ZYTHOZ",
+        "href": "https://github.com/LORD-ZYTHOZ"
+      }
+    },
+    "stargazer-4": {
+      "type": "Link",
+      "props": {
+        "label": "PavelLiu11",
+        "href": "https://github.com/PavelLiu11"
+      }
+    },
+    "stargazer-5": {
+      "type": "Link",
+      "props": {
+        "label": "aralyekta",
+        "href": "https://github.com/aralyekta"
+      }
+    },
+    "stargazer-6": {
+      "type": "Link",
+      "props": {
+        "label": "StuntmanDaver",
+        "href": "https://github.com/StuntmanDaver"
+      }
+    },
+    "stargazer-7": {
+      "type": "Link",
+      "props": {
+        "label": "electroendjneer",
+        "href": "https://github.com/electroendjneer"
+      }
+    },
+    "stargazer-8": {
+      "type": "Link",
+      "props": {
+        "label": "np1-lab",
+        "href": "https://github.com/np1-lab"
+      }
+    },
+    "stargazer-9": {
+      "type": "Link",
+      "props": {
+        "label": "boss2256",
+        "href": "https://github.com/boss2256"
+      }
+    },
+    "stargazer-10": {
+      "type": "Link",
+      "props": {
+        "label": "xformlessx",
+        "href": "https://github.com/xformlessx"
+      }
+    },
+    "stargazer-11": {
+      "type": "Link",
+      "props": {
+        "label": "jagadeeshjagu29",
+        "href": "https://github.com/jagadeeshjagu29"
+      }
+    },
+    "stargazer-12": {
+      "type": "Link",
+      "props": {
+        "label": "cosqq",
+        "href": "https://github.com/cosqq"
+      }
+    },
+    "stargazer-13": {
+      "type": "Link",
+      "props": {
+        "label": "tk-ymhk-rabbitexjp",
+        "href": "https://github.com/tk-ymhk-rabbitexjp"
+      }
+    },
+    "stargazer-14": {
+      "type": "Link",
+      "props": {
+        "label": "theali2x",
+        "href": "https://github.com/theali2x"
+      }
+    },
+    "separator3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "forks-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "New forks",
+        "level": "h3"
+      }
+    },
+    "forks-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "fork-1",
+        "fork-2"
+      ]
+    },
+    "fork-1": {
+      "type": "StoryLink",
+      "props": {
+        "title": "LORD-ZYTHOZ/MiroShark",
+        "href": "https://github.com/LORD-ZYTHOZ/MiroShark"
+      }
+    },
+    "fork-2": {
+      "type": "StoryLink",
+      "props": {
+        "title": "thenexgenai/MiroShark",
+        "href": "https://github.com/thenexgenai/MiroShark"
+      }
+    }
+  }
+}
