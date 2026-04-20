@@ -1,5 +1,5 @@
-*New Article: The Climate Modelers Already Did This*
+*New Article: Ethena Didn't Hold rsETH. It Fell 13% Anyway. That Gap Is What Agent-Based Simulators Are Built For.*
 
-Climate science spent thirty years turning attribution — the 'what if this cause were absent' question — into an industrial process: DAMIP isolates five forcings across 100 models; World Weather Attribution has published 100+ rapid studies since 2014. MiroShark's Director Mode (PR #31) and the Agent Counterfactual Explorer that shipped this morning (PR #37) port the same playbook to simulated discourse — inject one forcing, exclude one set of agents, compare distributions in milliseconds. The new analytics suite is less a dashboard than the beginnings of a methodology with a thirty-year-old template.
+The Kelp DAO / Aave weekend is a natural experiment for a specific claim: traditional DeFi risk models see counterparty graphs, not belief cascades. Stani said Aave's protocol wasn't compromised — $6B walked out anyway, and Ethena fell 13% with zero rsETH exposure. The article threads that gap through MiroShark's Director Mode (event injection) and today's merged Counterfactual Explorer (remove top influencers, recompute drift) — open-source attribution science for the exact postmortem Aave governance is now writing.
 
-Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-04-19.md
+Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-04-20.md
