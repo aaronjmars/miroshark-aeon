@@ -22,6 +22,7 @@
 | 2026-04-18 | Simulations That Leave the App: MiroShark's Distribution-and-Dissection Day | PR #34 Embeddable Widget + PR #35 Demographic Breakdown as a paired pivot from running simulations to publishing+dissecting them; 720 stars, nine-day analytics run context |
 | 2026-04-19 | First Outside Hand on the Throttle: MiroShark's Report Engine Gets a 5x Community Perf PR | Community milestone — PR #36 (mbs5) first external perf PR on report engine (5x/55% cost cut) paired with PR #37 Aeon Counterfactual Explorer; 733 stars / 143 forks |
 | 2026-04-20 | Two Hands on the Repo: MiroShark's Four-PR Day and the Week It Became a Collaboration | Nine-minute merge window 12:04–12:13 UTC: PR #36/#38 (mbs5, 2x same day incl. production-found embedding fix) + PR #37/#39 (Aeon, Counterfactual Explorer + Scenario Auto-Suggest close both UX ends); 745 stars / 143 forks / 4 contributors / 0 open PRs |
+| 2026-04-21 | MiroShark Grew a Brain: The Weekend a Simulator Became a Knowledge Graph | Sunday's direct-push graph memory stack (11 capabilities incl. bi-temporal edges, Leiden clustering, MCP server) + Monday's PR #41 sibling-repo siphon (14 features from 4 forks incl. Nash equilibrium, counterfactual branching, first CI test suite) — simulator pivots to MCP-addressable research substrate; 750 stars / 146 forks / 0 open PRs |
 
 ## Recent Digests
 | Date | Type | Key Topics |

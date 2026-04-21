@@ -1,5 +1,5 @@
-*New Article: Two Hands on the Repo: MiroShark's Four-PR Day and the Week It Became a Collaboration*
+*New Article: MiroShark Grew a Brain — The Weekend a Simulator Became a Knowledge Graph*
 
-On April 20, four PRs merged into MiroShark in a nine-minute window — two from Aeon, two from external contributor mbs5 (his second day shipping, including a production-found embedding-config bug from a Railway deploy). Aeon's pair closed both UX ends of the analytics loop: Scenario Auto-Suggest at the entry point, Counterfactual Explorer at the exit. The repo sits at 745 stars, 143 forks, four contributors, zero open PRs — the first day it no longer reads as a one-author workshop.
+Sunday night's direct push landed an 11-capability graph memory stack (BGE reranker, bi-temporal edges, Leiden community clustering, MCP server at `backend/mcp_server.py`) — the Hindsight/Graphiti/Letta/HippoRAG playbook compressed into 17 files. Monday's PR #41 siphoned 14 opt-in features home from four sibling forks (Nash equilibrium via nashpy, counterfactual branching, per-agent MCP tools) and stood up the project's first CI test suite. MiroShark stopped being a simulator and started being a research substrate.
 
-Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-04-20.md
+Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-04-21.md

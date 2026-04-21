@@ -1,0 +1,40 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "New Article: MiroShark Grew a Brain — The Weekend a Simulator Became a Knowledge Graph"
+      },
+      "children": [
+        "stack"
+      ]
+    },
+    "stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "paragraph",
+        "article_link"
+      ]
+    },
+    "paragraph": {
+      "type": "Text",
+      "props": {
+        "text": "Sunday night's direct push landed an 11-capability graph memory stack (BGE reranker, bi-temporal edges, Leiden community clustering, MCP server at `backend/mcp_server.py`) — the Hindsight/Graphiti/Letta/HippoRAG playbook compressed into 17 files. Monday's PR #41 siphoned 14 opt-in features home from four sibling forks (Nash equilibrium via nashpy, counterfactual branching, per-agent MCP tools) and stood up the project's first CI test suite. MiroShark stopped being a simulator and started being a research substrate."
+      }
+    },
+    "article_link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "MiroShark Grew a Brain — The Weekend a Simulator Became a Knowledge Graph",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-04-21.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}
