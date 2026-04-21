@@ -1,0 +1,48 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Everyone's Chasing Smarter Agents. The Quiet Money Is Chasing Agents You Can Read."
+      },
+      "children": [
+        "stack_content"
+      ]
+    },
+    "stack_content": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "text_main",
+        "separator_1",
+        "storylink_article"
+      ]
+    },
+    "text_main": {
+      "type": "Text",
+      "props": {
+        "text": "The AI observability market is compounding at 36% a year (Gartner, The Business Research Company) while the keynotes still frame the race as capability. MiroShark's last two weeks read like a refutation — Quality Diagnostics, Interaction Network, Demographic Breakdown, Counterfactual Explorer, and a bi-temporal graph memory that treats contradiction as invalidation-not-deletion. None of it makes the agents smarter. All of it makes the runs readable. That's the quieter, harder bet.",
+        "variant": "body"
+      }
+    },
+    "separator_1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "storylink_article": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Read full article",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-04-21.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}
