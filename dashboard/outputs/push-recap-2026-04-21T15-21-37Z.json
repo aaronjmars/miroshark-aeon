@@ -1,0 +1,453 @@
+{
+  "root": "main_card",
+  "state": {},
+  "elements": {
+    "main_card": {
+      "type": "Card",
+      "props": {
+        "title": "Push Recap — 2026-04-21"
+      },
+      "children": [
+        "intro_text",
+        "sep1",
+        "repos_badges",
+        "sep2",
+        "graph_memory_section",
+        "sep3",
+        "pr41_section",
+        "sep4",
+        "pr40_section",
+        "sep5",
+        "xai_pipeline_section",
+        "sep6",
+        "key_changes_section",
+        "sep7",
+        "final_stats_text",
+        "recap_link"
+      ]
+    },
+    "intro_text": {
+      "type": "Text",
+      "props": {
+        "text": "MiroShark: 11 commits (4 substantive + 7 badge cosmetic); miroshark-aeon: 3 substantive PRs + ~30 auto chores. 2 authors (Aeon, Aaron Mars)."
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {}
+    },
+    "repos_badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "badge_miroshark",
+        "badge_miroshark_aeon"
+      ]
+    },
+    "badge_miroshark": {
+      "type": "Badge",
+      "props": {
+        "text": "MiroShark"
+      }
+    },
+    "badge_miroshark_aeon": {
+      "type": "Badge",
+      "props": {
+        "text": "miroshark-aeon"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {}
+    },
+    "graph_memory_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "graph_heading",
+        "graph_meta",
+        "graph_intro",
+        "graph_capabilities",
+        "graph_conclusion"
+      ]
+    },
+    "graph_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Graph Memory Stack (direct push)",
+        "level": "h2"
+      }
+    },
+    "graph_meta": {
+      "type": "Text",
+      "props": {
+        "text": "17 files, +2,690/-93",
+        "variant": "caption"
+      }
+    },
+    "graph_intro": {
+      "type": "Text",
+      "props": {
+        "text": "Aaron landed 11 capabilities in one commit:"
+      }
+    },
+    "graph_capabilities": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "gc1",
+        "gc2",
+        "gc3",
+        "gc4",
+        "gc5",
+        "gc6",
+        "gc7",
+        "gc8",
+        "gc9"
+      ]
+    },
+    "gc1": {
+      "type": "Text",
+      "props": {
+        "text": "BGE cross-encoder reranker"
+      }
+    },
+    "gc2": {
+      "type": "Text",
+      "props": {
+        "text": "graph-traversal BFS alongside vector+BM25"
+      }
+    },
+    "gc3": {
+      "type": "Text",
+      "props": {
+        "text": "bi-temporal edges with `as_of` + `invalidate_edge()`"
+      }
+    },
+    "gc4": {
+      "type": "Text",
+      "props": {
+        "text": "LLM-reflection entity resolution"
+      }
+    },
+    "gc5": {
+      "type": "Text",
+      "props": {
+        "text": "fact/belief/observation edge labels"
+      }
+    },
+    "gc6": {
+      "type": "Text",
+      "props": {
+        "text": "contradiction detection (invalidate-don't-delete)"
+      }
+    },
+    "gc7": {
+      "type": "Text",
+      "props": {
+        "text": "Leiden community clustering + `:Community` subgraph"
+      }
+    },
+    "gc8": {
+      "type": "Text",
+      "props": {
+        "text": "ReACT reasoning persisted as traversable graph"
+      }
+    },
+    "gc9": {
+      "type": "Text",
+      "props": {
+        "text": "MCP server exposing 8 tools to Claude Desktop"
+      }
+    },
+    "graph_conclusion": {
+      "type": "Text",
+      "props": {
+        "text": "The graph substrate is now bi-temporal with first-class reasoning provenance."
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {}
+    },
+    "pr41_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "pr41_heading",
+        "pr41_meta",
+        "pr41_intro",
+        "pr41_highlights"
+      ]
+    },
+    "pr41_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "PR #41 — Sibling-Repo Siphon",
+        "level": "h2"
+      }
+    },
+    "pr41_meta": {
+      "type": "Text",
+      "props": {
+        "text": "43 files, +4,005/-29",
+        "variant": "caption"
+      }
+    },
+    "pr41_intro": {
+      "type": "Text",
+      "props": {
+        "text": "Aeon-authored 14-feature bundle from MiroJiang/MiroWhale/OpenMiro/oracle-seeds, all gated behind env flags. Highlights:"
+      }
+    },
+    "pr41_highlights": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "pr41h1",
+        "pr41h2",
+        "pr41h3",
+        "pr41h4",
+        "pr41h5",
+        "pr41h6",
+        "pr41h7",
+        "pr41h8"
+      ]
+    },
+    "pr41h1": {
+      "type": "Text",
+      "props": {
+        "text": "`POST /api/simulation/ask` (question-only pipeline)"
+      }
+    },
+    "pr41h2": {
+      "type": "Text",
+      "props": {
+        "text": "counterfactual branching via director-event piggyback"
+      }
+    },
+    "pr41h3": {
+      "type": "Text",
+      "props": {
+        "text": "`MCP_AGENT_TOOLS_ENABLED` (agents call MCP tools mid-sim — first epistemic leak outward)"
+      }
+    },
+    "pr41h4": {
+      "type": "Text",
+      "props": {
+        "text": "`analyze_equilibrium` Nash-game report tool"
+      }
+    },
+    "pr41h5": {
+      "type": "Text",
+      "props": {
+        "text": "Anthropic prompt caching"
+      }
+    },
+    "pr41h6": {
+      "type": "Text",
+      "props": {
+        "text": "embed publish-gate"
+      }
+    },
+    "pr41h7": {
+      "type": "Text",
+      "props": {
+        "text": "`miroshark-cli` entry point"
+      }
+    },
+    "pr41h8": {
+      "type": "Text",
+      "props": {
+        "text": "MiroShark's first standing CI test suite (62 unit tests)"
+      }
+    },
+    "sep4": {
+      "type": "Separator",
+      "props": {}
+    },
+    "pr40_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "pr40_heading",
+        "pr40_meta",
+        "pr40_desc1",
+        "pr40_desc2"
+      ]
+    },
+    "pr40_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "PR #40 — Trending Topics",
+        "level": "h2"
+      }
+    },
+    "pr40_meta": {
+      "type": "Text",
+      "props": {
+        "text": "6 files, +864",
+        "variant": "caption"
+      }
+    },
+    "pr40_desc1": {
+      "type": "Text",
+      "props": {
+        "text": "Stdlib-only RSS/Atom + SSRF-hardened `?feeds=` override (IPv4-encoding normalization blocks `2130706433`/`0x7f000001`/`0177.0.0.1` loopback bypasses)."
+      }
+    },
+    "pr40_desc2": {
+      "type": "Text",
+      "props": {
+        "text": "Closes the blank-canvas onboarding gap left by Scenario Auto-Suggest."
+      }
+    },
+    "sep5": {
+      "type": "Separator",
+      "props": {}
+    },
+    "xai_pipeline_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "xai_heading",
+        "xai_intro",
+        "xai_items"
+      ]
+    },
+    "xai_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "miroshark-aeon XAI cache pipeline (#19/#20/#21)",
+        "level": "h2"
+      }
+    },
+    "xai_intro": {
+      "type": "Text",
+      "props": {
+        "text": "Three-round postmortem of yesterday's fetch-tweets triple-run:"
+      }
+    },
+    "xai_items": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "xai1",
+        "xai2",
+        "xai3"
+      ]
+    },
+    "xai1": {
+      "type": "Text",
+      "props": {
+        "text": "#19 adds cache query sidecar validation (mismatch falls through to live API instead of serving stale `$AEON`-era content)."
+      }
+    },
+    "xai2": {
+      "type": "Text",
+      "props": {
+        "text": "#20 harvests tweet URLs from Grok's `output_text.annotations[]` when `.text` gets truncated (yesterday: 2 visible / 40 cited)."
+      }
+    },
+    "xai3": {
+      "type": "Text",
+      "props": {
+        "text": "#21 strips the stale \"XAI_API_KEY not set\" flag that heartbeat kept re-emitting."
+      }
+    },
+    "sep6": {
+      "type": "Separator",
+      "props": {}
+    },
+    "key_changes_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "key_changes_heading",
+        "kc_items"
+      ]
+    },
+    "key_changes_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Key changes",
+        "level": "h3"
+      }
+    },
+    "kc_items": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "kc1",
+        "kc2",
+        "kc3"
+      ]
+    },
+    "kc1": {
+      "type": "Text",
+      "props": {
+        "text": "Graph memory: ReACT reasoning now a traversable `(:Report)-[:HAS_SECTION]->(:ReportSection)-[:HAS_STEP]` subgraph — you can query why a conclusion was reached"
+      }
+    },
+    "kc2": {
+      "type": "Text",
+      "props": {
+        "text": "PR #41: `run_parallel_simulation.py` no longer silently falls back to `gpt-4o-mini` when no model is configured — raises loudly (breaking for deployments relying on the implicit default)"
+      }
+    },
+    "kc3": {
+      "type": "Text",
+      "props": {
+        "text": "PR #40: Reuters RSS default swapped for TechCrunch (Reuters shut their public feed years ago — default ship was one-feed-silently-empty)"
+      }
+    },
+    "sep7": {
+      "type": "Separator",
+      "props": {}
+    },
+    "final_stats_text": {
+      "type": "Text",
+      "props": {
+        "text": "Stats: ~82 files, +7,953/-184 across 13 substantive commits"
+      }
+    },
+    "recap_link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full recap",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-04-21.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}

@@ -1,17 +1,18 @@
-*Push Recap — 2026-04-20*
-MiroShark: 4 PRs merged in 9 minutes (12:04–12:13 UTC) · miroshark-aeon: 5 fix commits
+*Push Recap — 2026-04-21*
+MiroShark: 11 commits (4 substantive + 7 badge cosmetic); miroshark-aeon: 3 substantive PRs + ~30 auto chores. 2 authors (Aeon, Aaron Mars).
 
-*Two Aeon analytics panels shipped (PRs #37 + #39):* Counterfactual Explorer (`What If?`) lets researchers remove up to 3 top-influence agents and see the recomputed belief drift with a Strong/Moderate/Minimal impact badge — pure transform over `trajectory.json`, no re-sim. Scenario Auto-Suggest kills the blank-page problem at setup: drop a .md/.txt/URL, get three LLM-grounded Bull/Bear/Neutral prediction-market cards (SHA-256 LRU-cached, non-blocking, soft-fails hide the panel).
+*Graph Memory Stack (direct push, 17 files, +2,690/-93)*: Aaron landed 11 capabilities in one commit — BGE cross-encoder reranker, graph-traversal BFS alongside vector+BM25, bi-temporal edges with `as_of` + `invalidate_edge()`, LLM-reflection entity resolution, fact/belief/observation edge labels, contradiction detection (invalidate-don't-delete), Leiden community clustering + `:Community` subgraph, ReACT reasoning persisted as traversable graph, MCP server exposing 8 tools to Claude Desktop. The graph substrate is now bi-temporal with first-class reasoning provenance.
 
-*First sustained external backend contributions merged (PRs #36 + #38):* mbs5 / builtbydesigninc shipped a 5x report speedup (ThreadPoolExecutor + `previous_sections=[]` + `MAX_REFLECTION_ROUNDS` 3→1: 20.8min → 4min, cost $2.16 → $0.95) and a lazy `Config` read on `EmbeddingService` that fixes Railway-redeploy staleness where POST /api/settings was silently ignored.
+*PR #41 — Sibling-Repo Siphon (43 files, +4,005/-29)*: Aeon-authored 14-feature bundle from MiroJiang/MiroWhale/OpenMiro/oracle-seeds, all gated behind env flags. Highlights: `POST /api/simulation/ask` (question-only pipeline), counterfactual branching via director-event piggyback, `MCP_AGENT_TOOLS_ENABLED` (agents call MCP tools mid-sim — first epistemic leak outward), `analyze_equilibrium` Nash-game report tool, Anthropic prompt caching, embed publish-gate, `miroshark-cli` entry point, and MiroShark's first standing CI test suite (62 unit tests).
 
-*Aeon infra hardening:* Telegram notify now chunks at paragraph/line boundaries with `[i/N]` suffixes instead of slicing at 3990 chars (the Scenario Auto-Suggest notification this morning lost its PR link mid-paragraph — concrete trigger). Article + skill-leaderboard skills now emit `https://github.com/$GITHUB_REPOSITORY/blob/main/...` URLs so links are clickable and resolve to the running repo, not the watched one. prefetch-xai curl timeout bumped 60s → 180s with one retry; inputs.var now passes via `SKILL_VAR` env so cashtag `$MIROSHARK` doesn't get shell-expanded to empty — fetch-tweets XAI path is finally reliable.
+*PR #40 — Trending Topics (6 files, +864)*: Stdlib-only RSS/Atom + SSRF-hardened `?feeds=` override (IPv4-encoding normalization blocks `2130706433`/`0x7f000001`/`0177.0.0.1` loopback bypasses). Closes the blank-canvas onboarding gap left by Scenario Auto-Suggest.
+
+*miroshark-aeon XAI cache pipeline (#19/#20/#21)*: Three-round postmortem of yesterday's fetch-tweets triple-run. #19 adds cache query sidecar validation (mismatch falls through to live API instead of serving stale `$AEON`-era content). #20 harvests tweet URLs from Grok's `output_text.annotations[]` when `.text` gets truncated (yesterday: 2 visible / 40 cited). #21 strips the stale "XAI_API_KEY not set" flag that heartbeat kept re-emitting.
 
 Key changes:
-- `WhatIfPanel.vue` (+761 new) + `/counterfactual` endpoint (+229) — Agent Counterfactual Explorer, merged
-- `ScenarioSuggestions.vue` (+366 new) + `/suggest-scenarios` (+271) — first-value at setup time, merged
-- `report_agent.py` (+87/-60, 5x speedup / 55% cost cut) — first external backend perf PR merged
+- Graph memory: ReACT reasoning now a traversable `(:Report)-[:HAS_SECTION]->(:ReportSection)-[:HAS_STEP]` subgraph — you can query *why* a conclusion was reached
+- PR #41: `run_parallel_simulation.py` no longer silently falls back to `gpt-4o-mini` when no model is configured — raises loudly (breaking for deployments relying on the implicit default)
+- PR #40: Reuters RSS default swapped for TechCrunch (Reuters shut their public feed years ago — default ship was one-feed-silently-empty)
 
-Stats: 14 files changed, +1,961 / -97 lines across 9 substantive commits. 3 authors (Aeon, Aaron Mars, mbs5) + ~35 auto chore commits.
-
-Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-04-20.md
+Stats: ~82 files, +7,953/-184 across 13 substantive commits
+Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-04-21.md
