@@ -1,0 +1,150 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Weekly Shiplog — 2026-04-21"
+      },
+      "children": [
+        "text_intro",
+        "separator_1",
+        "heading_shipped",
+        "shipped_stack",
+        "separator_2",
+        "heading_stats",
+        "stats_stack",
+        "separator_3",
+        "link_full"
+      ]
+    },
+    "text_intro": {
+      "type": "Text",
+      "props": {
+        "text": "The week MiroShark stopped being a simulator. Went from \"simulation engine with five analytics overlays\" to \"MCP-addressable research substrate with 62 unit tests\" in seven days. 12 PRs merged on MiroShark, 7 on miroshark-aeon, 0 open at close. Stars 698 → 751 (+53). First sustained external backend contributor landed two PRs.",
+        "variant": "lead"
+      }
+    },
+    "separator_1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading_shipped": {
+      "type": "Heading",
+      "props": {
+        "text": "Shipped",
+        "level": "h2"
+      }
+    },
+    "shipped_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "shipped_1",
+        "shipped_2",
+        "shipped_3"
+      ]
+    },
+    "shipped_1": {
+      "type": "Text",
+      "props": {
+        "text": "Blank-canvas trilogy closed — Scenario Auto-Suggest (#39) + Counterfactual Explorer (#37) + Trending Topics (#40): two clicks from landing page to three prediction-market scenario cards"
+      }
+    },
+    "shipped_2": {
+      "type": "Text",
+      "props": {
+        "text": "Graph memory stack (direct push) + PR #41 sibling-repo siphon — bi-temporal edges, Leiden clustering, MCP server, Nash equilibrium, per-agent mid-sim tools, 62 unit tests as first CI gate"
+      }
+    },
+    "shipped_3": {
+      "type": "Text",
+      "props": {
+        "text": "First external backend PRs from mbs5 (builtbydesigninc): 5x report speedup (#36) + lazy embedding-config fix (#38) caught from their own Railway deploy"
+      }
+    },
+    "separator_2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading_stats": {
+      "type": "Heading",
+      "props": {
+        "text": "Stats",
+        "level": "h2"
+      }
+    },
+    "stats_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stat_prs",
+        "stat_lines",
+        "stat_stars",
+        "stat_forks",
+        "stat_open_prs"
+      ]
+    },
+    "stat_prs": {
+      "type": "Stat",
+      "props": {
+        "label": "PRs Merged",
+        "value": "12+7"
+      }
+    },
+    "stat_lines": {
+      "type": "Text",
+      "props": {
+        "text": "Lines changed: +~15,000 / −~1,100"
+      }
+    },
+    "stat_stars": {
+      "type": "Stat",
+      "props": {
+        "label": "Stars",
+        "value": "751",
+        "delta": "+53",
+        "trend": "up"
+      }
+    },
+    "stat_forks": {
+      "type": "Stat",
+      "props": {
+        "label": "Forks",
+        "value": "+9"
+      }
+    },
+    "stat_open_prs": {
+      "type": "Stat",
+      "props": {
+        "label": "Open PRs",
+        "value": "0"
+      }
+    },
+    "separator_3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "link_full": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full update",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/weekly-shiplog-2026-04-21.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}
