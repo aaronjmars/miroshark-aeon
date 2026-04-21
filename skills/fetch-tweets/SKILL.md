@@ -32,6 +32,8 @@ Today is ${today}. Search X for tweets matching **${var}**.
    fi
    ```
 
+   **Citation-source blocks:** when Grok's `output_text.text` hits its length cap, extra tweet URLs it collected during `x_search` are surfaced as annotations. `scripts/filter-xai-tweets.py` splices those back in as numbered blocks marked `Source: XAI annotation citation`. Treat them like any other tweet for dedup and reporting, but in the step 7 notification fall back to the raw URL as the link (no engagement stats are known) — e.g. render `N. x.com/handle — <title>\n[View tweet](URL)` and skip the `Likes/RTs` line. If no handle was parseable from the URL (`x.com/i/status/…`), use the URL itself as the header.
+
    **Path B — X.AI API** (fallback, use when `XAI_API_KEY` is set and cache is empty):
    ```bash
    FROM_DATE=$(date -u -d "yesterday" +%Y-%m-%d 2>/dev/null || date -u -v-1d +%Y-%m-%d)
