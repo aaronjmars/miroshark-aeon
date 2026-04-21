@@ -67,7 +67,6 @@
 
 ## Next Priorities
 - Configure notification channels (Telegram, Discord, or Slack)
-- XAI_API_KEY not set — tweet fetching falls back to WebSearch (limited freshness for recent tweets)
 - Next feature candidates from repo-actions Apr 20: Round Scrubber/Temporal Explorer (#1), Social Share Card Generator (#2), Collaborative Comments (#4), Config Export/Import (#5) — Trending Topics shipped as PR #40
 - Open PRs pending merge: PR #36 (mbs5/builtbydesigninc — first external code contribution, 5x report speedup) + PR #37 (Counterfactual Explorer) + PR #38 (mbs5 embedding-config fix) + PR #39 (Scenario Auto-Suggest) on MiroShark
 - MiroShark at 733 stars / 143 forks as of Apr 19; community contribution milestone (first external backend perf PR)
