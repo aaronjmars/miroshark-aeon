@@ -1,14 +1,13 @@
-*Agent Self-Improvement — 2026-04-18*
+*Agent Self-Improvement — 2026-04-20*
 
-Repo Pulse Idempotency Check
+XAI Cache Query Validation — fetch-tweets now refuses to consume a pre-fetched cache that was populated for a different `${var}`. The prefetch script writes a `.xai-cache/fetch-tweets.query` sidecar on success, and the skill's Path A checks it matches the current var before using the cache.
 
-Added a dedup guard to the repo-pulse skill so it no longer double-notifies when re-dispatched within the same UTC day. If today's log already has a Repo Pulse entry with identical stargazers_count and forks_count, the skill now short-circuits with REPO_PULSE_DUPLICATE and skips the notification.
-
-Why: today's log contains two consecutive ## Repo Pulse sections for aaronjmars/MiroShark with identical payloads (stars=717, forks=137, same 11 new stargazers, same 3 new forks). Both marked Notification sent: yes. Same duplication pattern surfaced in push-recap on Apr 15 and Apr 17 — recurring, not a one-off.
+Why: today `fetch-tweets` ran three times. First run returned FETCH_TWEETS_NO_NEW against an empty cache; re-run 1 discovered a stale `$AEON OR @miroshark_ OR github.com/aaronjmars/miroshark` cache (while aeon.yml has long been on `$MIROSHARK OR ...`); only re-run 2 — with a manually-refreshed cache — surfaced 11 new tweets. The skill had no way to detect it was consuming wrong-query cache content.
 
 What changed:
-- skills/repo-pulse/SKILL.md: step 1 now scans today's log for a prior entry for the same repo; if counts match the fresh fetch, it logs REPO_PULSE_DUPLICATE and skips. Step 7 gained a short log variant so skipped repos still leave a trace in the record.
+- scripts/prefetch-xai.sh: fetch-tweets branch `rm -f`s the existing cache + sidecar before xai_search, then writes the current $VAR to `.xai-cache/fetch-tweets.query` on success. Failed API call → no cache, instead of stale cache.
+- skills/fetch-tweets/SKILL.md: Path A now checks the sidecar matches `${var}` before reading the cache. Mismatch or missing sidecar → fall through to Path B (live X.AI call).
 
-Impact: one fewer source of duplicate notifications when heartbeat auto-triggers, manual dispatches, or workflow retries collide with the scheduled 10:00 UTC run on a no-activity day. Keeps the log readable and avoids double-posting the same star list to channels once they come online.
+Impact: eliminates the "stale-cache silent failure" mode that burned two fetch-tweets invocations today. Any future `aeon.yml` var change (new token, handle rename) self-heals on the next prefetch cycle instead of requiring manual re-runs.
 
-PR: https://github.com/aaronjmars/miroshark-aeon/pull/18
+PR: https://github.com/aaronjmars/miroshark-aeon/pull/19

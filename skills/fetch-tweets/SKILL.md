@@ -21,8 +21,15 @@ Today is ${today}. Search X for tweets matching **${var}**.
 3. **Search tweets.** Use whichever path is available:
 
    **Path A — pre-fetched cache** (preferred, when the workflow ran `scripts/prefetch-xai.sh`):
+
+   Before reading the cache, verify it was fetched for the **current** `${var}`. The prefetch script writes a sidecar `.xai-cache/fetch-tweets.query` containing the exact var it used. If the sidecar is missing or doesn't match `${var}`, the cache is stale (e.g. from a previous run after `${var}` changed in `aeon.yml`) — skip Path A and try Path B instead. Observed 2026-04-20: a stale `$AEON OR ...` cache served empty results and triggered redundant re-runs.
+
    ```bash
-   cat .xai-cache/fetch-tweets.json 2>/dev/null | jq -r '.output[] | select(.type == "message") | .content[] | select(.type == "output_text") | .text'
+   if [ -f .xai-cache/fetch-tweets.query ] && [ "$(cat .xai-cache/fetch-tweets.query)" = "${var}" ]; then
+     cat .xai-cache/fetch-tweets.json 2>/dev/null | jq -r '.output[] | select(.type == "message") | .content[] | select(.type == "output_text") | .text'
+   else
+     echo "xai-cache: miss or query mismatch, falling through to Path B"
+   fi
    ```
 
    **Path B — X.AI API** (fallback, use when `XAI_API_KEY` is set and cache is empty):

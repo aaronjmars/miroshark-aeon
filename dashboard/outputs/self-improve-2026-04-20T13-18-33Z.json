@@ -1,0 +1,122 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "Agent Self-Improvement",
+        "description": "2026-04-20"
+      },
+      "children": [
+        "heading-validation",
+        "text-intro",
+        "sep1",
+        "heading-why",
+        "text-why",
+        "sep2",
+        "heading-changes",
+        "stack-changes",
+        "sep3",
+        "heading-impact",
+        "text-impact",
+        "sep4",
+        "link-pr"
+      ]
+    },
+    "heading-validation": {
+      "type": "Heading",
+      "props": {
+        "text": "XAI Cache Query Validation",
+        "level": "h2"
+      }
+    },
+    "text-intro": {
+      "type": "Text",
+      "props": {
+        "text": "fetch-tweets now refuses to consume a pre-fetched cache that was populated for a different ${var}. The prefetch script writes a .xai-cache/fetch-tweets.query sidecar on success, and the skill's Path A checks it matches the current var before using the cache.",
+        "variant": "lead"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {}
+    },
+    "heading-why": {
+      "type": "Heading",
+      "props": {
+        "text": "Why",
+        "level": "h3"
+      }
+    },
+    "text-why": {
+      "type": "Text",
+      "props": {
+        "text": "Today fetch-tweets ran three times. First run returned FETCH_TWEETS_NO_NEW against an empty cache; re-run 1 discovered a stale $AEON OR @miroshark_ OR github.com/aaronjmars/miroshark cache (while aeon.yml has long been on $MIROSHARK OR ...); only re-run 2 — with a manually-refreshed cache — surfaced 11 new tweets. The skill had no way to detect it was consuming wrong-query cache content."
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {}
+    },
+    "heading-changes": {
+      "type": "Heading",
+      "props": {
+        "text": "What changed",
+        "level": "h3"
+      }
+    },
+    "stack-changes": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "text-changes-1",
+        "text-changes-2"
+      ]
+    },
+    "text-changes-1": {
+      "type": "Text",
+      "props": {
+        "text": "scripts/prefetch-xai.sh: fetch-tweets branch rm -f's the existing cache + sidecar before xai_search, then writes the current $VAR to .xai-cache/fetch-tweets.query on success. Failed API call → no cache, instead of stale cache."
+      }
+    },
+    "text-changes-2": {
+      "type": "Text",
+      "props": {
+        "text": "skills/fetch-tweets/SKILL.md: Path A now checks the sidecar matches ${var} before reading the cache. Mismatch or missing sidecar → fall through to Path B (live X.AI call)."
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {}
+    },
+    "heading-impact": {
+      "type": "Heading",
+      "props": {
+        "text": "Impact",
+        "level": "h3"
+      }
+    },
+    "text-impact": {
+      "type": "Text",
+      "props": {
+        "text": "Eliminates the \"stale-cache silent failure\" mode that burned two fetch-tweets invocations today. Any future aeon.yml var change (new token, handle rename) self-heals on the next prefetch cycle instead of requiring manual re-runs."
+      }
+    },
+    "sep4": {
+      "type": "Separator",
+      "props": {}
+    },
+    "link-pr": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Pull Request #19",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/pull/19",
+        "source": "GitHub"
+      }
+    }
+  }
+}
