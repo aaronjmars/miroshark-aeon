@@ -1,10 +1,7 @@
-🫀 Heartbeat — Sun Apr 20 @ 19:05 UTC
+Heartbeat — Mon Apr 21, 19:07 UTC
 
-Two skills missed their scheduled window:
-- skill-leaderboard (due 17:00 UTC) — auto-triggered ✓
-- memory-flush (due 18:00 UTC) — overdue, not auto-triggered (housekeeping policy)
+✅ All daily skills ran: token-report, fetch-tweets, tweet-allocator, repo-pulse, feature, push-recap, project-lens, repo-article
+⚠️ weekly-shiplog (Mon 09:00 UTC) — missing, 10h+ overdue → auto-triggered (https://github.com/aaronjmars/miroshark-aeon/actions/runs/24741319403)
 
-Open PRs: miroshark-aeon #19 (XAI cache query validation, 5.8h old — not stalled yet)
-Urgent issues: 0
-
-Ongoing flags: notification channels unconfigured · XAI_API_KEY absent · MiroShark 1K stars pace (743/1000, ~19/day needed for Apr 30 target)
+0 open PRs (MiroShark + miroshark-aeon) | 0 urgent issues
+Note: weekly-shiplog also ran manually on Sun Apr 20 (covering Apr 13–20); today's run will cover Apr 14–21.

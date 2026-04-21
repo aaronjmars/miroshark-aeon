@@ -1,0 +1,191 @@
+{
+  "root": "card-root",
+  "state": {},
+  "elements": {
+    "card-root": {
+      "type": "Card",
+      "props": {
+        "title": "Heartbeat",
+        "description": "Mon Apr 21, 19:07 UTC"
+      },
+      "children": [
+        "main-stack"
+      ]
+    },
+    "main-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "daily-section",
+        "separator1",
+        "weekly-section",
+        "separator2",
+        "stats-section",
+        "separator3",
+        "note"
+      ]
+    },
+    "daily-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "daily-heading",
+        "daily-skills"
+      ]
+    },
+    "daily-heading": {
+      "type": "Text",
+      "props": {
+        "text": "✅ All daily skills ran",
+        "variant": "body"
+      }
+    },
+    "daily-skills": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "badge-token-report",
+        "badge-fetch-tweets",
+        "badge-tweet-allocator",
+        "badge-repo-pulse",
+        "badge-feature",
+        "badge-push-recap",
+        "badge-project-lens",
+        "badge-repo-article"
+      ]
+    },
+    "badge-token-report": {
+      "type": "Badge",
+      "props": {
+        "text": "token-report"
+      }
+    },
+    "badge-fetch-tweets": {
+      "type": "Badge",
+      "props": {
+        "text": "fetch-tweets"
+      }
+    },
+    "badge-tweet-allocator": {
+      "type": "Badge",
+      "props": {
+        "text": "tweet-allocator"
+      }
+    },
+    "badge-repo-pulse": {
+      "type": "Badge",
+      "props": {
+        "text": "repo-pulse"
+      }
+    },
+    "badge-feature": {
+      "type": "Badge",
+      "props": {
+        "text": "feature"
+      }
+    },
+    "badge-push-recap": {
+      "type": "Badge",
+      "props": {
+        "text": "push-recap"
+      }
+    },
+    "badge-project-lens": {
+      "type": "Badge",
+      "props": {
+        "text": "project-lens"
+      }
+    },
+    "badge-repo-article": {
+      "type": "Badge",
+      "props": {
+        "text": "repo-article"
+      }
+    },
+    "separator1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "weekly-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "weekly-alert",
+        "weekly-link"
+      ]
+    },
+    "weekly-alert": {
+      "type": "Alert",
+      "props": {
+        "title": "⚠️ weekly-shiplog",
+        "message": "Mon 09:00 UTC — missing, 10h+ overdue",
+        "type": "warning"
+      }
+    },
+    "weekly-link": {
+      "type": "Link",
+      "props": {
+        "label": "auto-triggered",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/actions/runs/24741319403"
+      }
+    },
+    "separator2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stats-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "lg"
+      },
+      "children": [
+        "stat-prs",
+        "stat-issues"
+      ]
+    },
+    "stat-prs": {
+      "type": "Stat",
+      "props": {
+        "label": "Open PRs (MiroShark + miroshark-aeon)",
+        "value": "0"
+      }
+    },
+    "stat-issues": {
+      "type": "Stat",
+      "props": {
+        "label": "Urgent issues",
+        "value": "0"
+      }
+    },
+    "separator3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "note": {
+      "type": "Text",
+      "props": {
+        "text": "Note: weekly-shiplog also ran manually on Sun Apr 20 (covering Apr 13–20); today's run will cover Apr 14–21.",
+        "variant": "caption"
+      }
+    }
+  }
+}
