@@ -47,6 +47,7 @@
 | Hyperstitions Dedup Guard | 2026-04-18 | Step 0 in hyperstitions-ideas now checks today's log for an existing `## Hyperstitions Ideas` section and exits with HYPERSTITIONS_SKIP when one exists; enforces the "ONE idea per day" contract violated today (1K stars Apr 30 + 1K X followers May 15 in a single day). Operator can still force with `${var}` (PR #17 on miroshark-aeon) |
 | Agent Counterfactual Explorer | 2026-04-19 | `GET /<sim_id>/counterfactual?exclude_agents=...` recomputes belief-drift with selected agents removed (pure data transform over `trajectory.json`, no re-sim). "◐ What If?" panel: top-12 influence picker (max 3), split-line chart (original dashed / counterfactual solid), impact summary with `delta_final_bullish`, Strong/Moderate/Minimal badge, PNG export (PR #37 on MiroShark) |
 | Scenario Auto-Suggest from Document | 2026-04-20 | `POST /api/simulation/suggest-scenarios` — normalizes + SHA-256 + LRU-caches (cap 64) a 2KB preview, returns 3 Bull/Bear/Neutral scenario cards via `create_llm_client().chat_json()` (20s timeout). Non-blocking: LLM-fail → 200 + `suggestions:[]` + reason code → panel hides silently. Frontend `ScenarioSuggestions.vue` debounced 800ms above Simulation Prompt; Home.vue reads .md/.txt client-side and combines with urlDocs[].text. Eliminates the blank-page problem at setup (PR #39 on MiroShark) |
+| Trending Topics Auto-Discovery | 2026-04-21 | `GET /api/simulation/trending` — stdlib RSS/Atom parser (`xml.etree.ElementTree` + `urllib.request`, no new deps), parallel fetch via ThreadPoolExecutor (5s per-feed timeout, 1MB cap), URL-dedup + newest-first, in-memory cache (15min on success / 60s on empty), per-IP rate limit (30/min). Never 5xxes — empty `items` + `reason` on failure. Frontend `TrendingTopics.vue` 5-card grid below URL Import; clicking a card pushes URL into existing `fetchUrlDoc()` so ScenarioSuggestions auto-fires on the resulting text. Defaults: Reuters tech / The Verge / HN / CoinDesk; override via `TRENDING_FEEDS` env. Closes the no-document onboarding gap left by PR #39 (PR #40 on MiroShark) |
 
 ## Watched Repos
 - `aaronjmars/aeon` — tracked in `memory/watched-repos.md`
@@ -66,6 +67,6 @@
 ## Next Priorities
 - Configure notification channels (Telegram, Discord, or Slack)
 - XAI_API_KEY not set — tweet fetching falls back to WebSearch (limited freshness for recent tweets)
-- Next feature candidates from repo-actions Apr 18: Recurring Simulation Watch, PDF Report, Dev Container/Codespaces (Counterfactual Explorer shipped as PR #37, Scenario Auto-Suggest shipped as PR #39)
+- Next feature candidates from repo-actions Apr 20: Round Scrubber/Temporal Explorer (#1), Social Share Card Generator (#2), Collaborative Comments (#4), Config Export/Import (#5) — Trending Topics shipped as PR #40
 - Open PRs pending merge: PR #36 (mbs5/builtbydesigninc — first external code contribution, 5x report speedup) + PR #37 (Counterfactual Explorer) + PR #38 (mbs5 embedding-config fix) + PR #39 (Scenario Auto-Suggest) on MiroShark
 - MiroShark at 733 stars / 143 forks as of Apr 19; community contribution milestone (first external backend perf PR)
