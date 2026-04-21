@@ -1,0 +1,71 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Top Tweets — $MIROSHARK OR @miroshark_ OR github.com/aaronjmars/miroshark (2026-04-21)"
+      },
+      "children": [
+        "stack_main"
+      ]
+    },
+    "stack_main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "tweet_1",
+        "link_tweet_1",
+        "separator_1",
+        "text_cache_note",
+        "text_additional_tweets"
+      ]
+    },
+    "tweet_1": {
+      "type": "TweetCard",
+      "props": {
+        "author": "aaronjmars",
+        "handle": "aaronjmars",
+        "text": "Aeon shipped THREE new features for @miroshark_ in a single weekend: an interaction network, a demographic breakdown, and a what-if simulation recomputer. Calling it out as impressive autonomous feature delivery.",
+        "likes": 15,
+        "retweets": 5
+      },
+      "children": []
+    },
+    "link_tweet_1": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/aaronjmars/status/2046339494580740415"
+      },
+      "children": []
+    },
+    "separator_1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "text_cache_note": {
+      "type": "Text",
+      "props": {
+        "text": "Cache text truncated after 2 tweets; 38 additional tweet URLs captured as annotation citations — all marked seen.",
+        "variant": "caption"
+      },
+      "children": []
+    },
+    "text_additional_tweets": {
+      "type": "Text",
+      "props": {
+        "text": "Full detail unavailable from this cache run.",
+        "variant": "muted"
+      },
+      "children": []
+    }
+  }
+}
