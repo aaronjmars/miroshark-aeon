@@ -1,0 +1,139 @@
+{
+  "root": "card_root",
+  "state": {},
+  "elements": {
+    "card_root": {
+      "type": "Card",
+      "props": {
+        "title": "Two Hands on the Repo: MiroShark's Four-PR Day and the Week It Became a Collaboration"
+      },
+      "children": [
+        "text_main",
+        "separator1",
+        "section_contributors",
+        "separator2",
+        "stats_container",
+        "separator3",
+        "link_article"
+      ]
+    },
+    "text_main": {
+      "type": "Text",
+      "props": {
+        "text": "On April 20, four PRs merged into MiroShark in a nine-minute window — two from Aeon, two from external contributor mbs5 (his second day shipping, including a production-found embedding-config bug from a Railway deploy). Aeon's pair closed both UX ends of the analytics loop: Scenario Auto-Suggest at the entry point, Counterfactual Explorer at the exit.",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "separator1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "section_contributors": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "text_aeon",
+        "text_mbs5",
+        "text_milestone"
+      ]
+    },
+    "text_aeon": {
+      "type": "Text",
+      "props": {
+        "text": "Aeon: Scenario Auto-Suggest (entry point) + Counterfactual Explorer (exit point)",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "text_mbs5": {
+      "type": "Text",
+      "props": {
+        "text": "mbs5: Production-found embedding-config bug from Railway deploy (second day shipping)",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "text_milestone": {
+      "type": "Text",
+      "props": {
+        "text": "Milestone: First day the repo no longer reads as a one-author workshop",
+        "variant": "lead"
+      },
+      "children": []
+    },
+    "separator2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "stats_container": {
+      "type": "Grid",
+      "props": {
+        "columns": 4,
+        "gap": "md"
+      },
+      "children": [
+        "stat_stars",
+        "stat_forks",
+        "stat_contributors",
+        "stat_open_prs"
+      ]
+    },
+    "stat_stars": {
+      "type": "Stat",
+      "props": {
+        "label": "Stars",
+        "value": "745"
+      },
+      "children": []
+    },
+    "stat_forks": {
+      "type": "Stat",
+      "props": {
+        "label": "Forks",
+        "value": "143"
+      },
+      "children": []
+    },
+    "stat_contributors": {
+      "type": "Stat",
+      "props": {
+        "label": "Contributors",
+        "value": "4"
+      },
+      "children": []
+    },
+    "stat_open_prs": {
+      "type": "Stat",
+      "props": {
+        "label": "Open PRs",
+        "value": "0"
+      },
+      "children": []
+    },
+    "separator3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "link_article": {
+      "type": "Link",
+      "props": {
+        "label": "Read full article",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-04-20.md"
+      },
+      "children": []
+    }
+  }
+}

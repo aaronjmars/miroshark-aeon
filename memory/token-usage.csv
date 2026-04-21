@@ -70,3 +70,11 @@ date,skill,model,input_tokens,output_tokens,cache_read,cache_creation
 2026-04-20,fetch-tweets,claude-sonnet-4-6,12,7063,309697,27555
 2026-04-20,heartbeat,claude-sonnet-4-6,9,6650,240394,29469
 2026-04-20,self-improve,claude-opus-4-7,61,27226,4318946,152475
+2026-04-20,repo-actions,claude-sonnet-4-6,15,15555,490678,39083
+2026-04-20,push-recap,claude-opus-4-7,36,17604,1722455,123789
+2026-04-20,project-lens,claude-opus-4-7,8921,13768,952916,64648
+2026-04-20,skill-leaderboard,claude-sonnet-4-6,5719,5788,279068,29167
+2026-04-21,fetch-tweets,claude-sonnet-4-6,218,18690,819503,51980
+2026-04-21,tweet-allocator,claude-sonnet-4-6,11,4557,266912,21811
+2026-04-21,repo-pulse,claude-sonnet-4-6,13,4142,376563,29975
+2026-04-21,feature,claude-opus-4-7,76,39710,7587517,219183

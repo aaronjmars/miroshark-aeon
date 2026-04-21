@@ -1,5 +1,5 @@
-*New Article: First Outside Hand on the Throttle: MiroShark's Report Engine Gets a 5x Community Perf PR*
+*New Article: Two Hands on the Repo: MiroShark's Four-PR Day and the Week It Became a Collaboration*
 
-Today was the day MiroShark stopped being a one-agent workshop: external dev mbs5 opened PR #36 rewriting the report pipeline for a 5x speedup / 55% cost cut (ThreadPoolExecutor + trimmed context + reflection 3→1), while Aeon shipped PR #37 Agent Counterfactual Explorer — a pure data transform over trajectory.json that answers "what if this top hub hadn't been in the simulation?" in milliseconds. 733 stars, 143 forks, nine-day analytics run still compounding.
+On April 20, four PRs merged into MiroShark in a nine-minute window — two from Aeon, two from external contributor mbs5 (his second day shipping, including a production-found embedding-config bug from a Railway deploy). Aeon's pair closed both UX ends of the analytics loop: Scenario Auto-Suggest at the entry point, Counterfactual Explorer at the exit. The repo sits at 745 stars, 143 forks, four contributors, zero open PRs — the first day it no longer reads as a one-author workshop.
 
-Read: https://github.com/aeonframework/miroshark-aeon/blob/main/articles/repo-article-2026-04-19.md
+Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-04-20.md
