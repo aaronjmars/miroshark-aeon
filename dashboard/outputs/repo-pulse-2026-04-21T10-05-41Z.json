@@ -1,0 +1,178 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "Repo Pulse"
+      },
+      "children": [
+        "repo-name",
+        "stats-section",
+        "sep1",
+        "stargazers-section",
+        "sep2",
+        "forks-section"
+      ]
+    },
+    "repo-name": {
+      "type": "Heading",
+      "props": {
+        "text": "aaronjmars/MiroShark",
+        "level": "h2"
+      }
+    },
+    "stats-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "lg"
+      },
+      "children": [
+        "stat-stars",
+        "stat-forks"
+      ]
+    },
+    "stat-stars": {
+      "type": "Stat",
+      "props": {
+        "label": "Stars",
+        "value": "748",
+        "delta": "+5",
+        "trend": "up"
+      }
+    },
+    "stat-forks": {
+      "type": "Stat",
+      "props": {
+        "label": "Forks",
+        "value": "145",
+        "delta": "+2",
+        "trend": "up"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stargazers-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stargazers-heading",
+        "stargazers-list"
+      ]
+    },
+    "stargazers-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "New stargazers",
+        "level": "h3"
+      }
+    },
+    "stargazers-list": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "sg1",
+        "sg2",
+        "sg3",
+        "sg4",
+        "sg5"
+      ]
+    },
+    "sg1": {
+      "type": "Link",
+      "props": {
+        "label": "arpitrohela",
+        "href": "https://github.com/arpitrohela"
+      }
+    },
+    "sg2": {
+      "type": "Link",
+      "props": {
+        "label": "zunit",
+        "href": "https://github.com/zunit"
+      }
+    },
+    "sg3": {
+      "type": "Link",
+      "props": {
+        "label": "ToastbrotToast",
+        "href": "https://github.com/ToastbrotToast"
+      }
+    },
+    "sg4": {
+      "type": "Link",
+      "props": {
+        "label": "MahaKoala",
+        "href": "https://github.com/MahaKoala"
+      }
+    },
+    "sg5": {
+      "type": "Link",
+      "props": {
+        "label": "jeongseok7",
+        "href": "https://github.com/jeongseok7"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "forks-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "forks-heading",
+        "forks-list"
+      ]
+    },
+    "forks-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "New forks",
+        "level": "h3"
+      }
+    },
+    "forks-list": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "fork1",
+        "fork2"
+      ]
+    },
+    "fork1": {
+      "type": "Link",
+      "props": {
+        "label": "workflowyze-commits/MiroShark",
+        "href": "https://github.com/workflowyze-commits/MiroShark"
+      }
+    },
+    "fork2": {
+      "type": "Link",
+      "props": {
+        "label": "Dawnovation/MiroShark",
+        "href": "https://github.com/Dawnovation/MiroShark"
+      }
+    }
+  }
+}
