@@ -1,0 +1,78 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "repo-article"
+      },
+      "children": [
+        "heading_title",
+        "stack_content"
+      ]
+    },
+    "heading_title": {
+      "type": "Heading",
+      "props": {
+        "text": "New Article: $1 in Under 10 Minutes: The Day MiroShark Wrote Its Pitch Into the Code",
+        "level": "h2"
+      },
+      "children": []
+    },
+    "stack_content": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "text_p1",
+        "text_p2",
+        "text_p3",
+        "sep_1",
+        "link_read"
+      ]
+    },
+    "text_p1": {
+      "type": "Text",
+      "props": {
+        "text": "After two weeks of research-substrate commits (graph memory, Nash equilibrium, first CI suite), MiroShark turned outward today: the GitHub description now reads \"Simulate anything, for $1 & less than 10 min\", grounded in a new `Cheap` preset (Qwen/DeepSeek/Grok with CoT off-by-default) shipped the same hour.",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "text_p2": {
+      "type": "Text",
+      "props": {
+        "text": "PR #42 added a Pillow Open Graph share card + `/share/<id>` landing page so links unfurl with real previews; 12 commits slimmed the README 698→243 lines and split the rest into nine docs/ files.",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "text_p3": {
+      "type": "Text",
+      "props": {
+        "text": "Eight days from the 1K-stars target, this is the first release sized to actually get there.",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "sep_1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "link_read": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Read full article",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-04-22.md",
+        "source": "GitHub"
+      },
+      "children": []
+    }
+  }
+}

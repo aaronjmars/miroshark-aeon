@@ -1,5 +1,5 @@
-*New Article: MiroShark Grew a Brain — The Weekend a Simulator Became a Knowledge Graph*
+*New Article: $1 in Under 10 Minutes: The Day MiroShark Wrote Its Pitch Into the Code*
 
-Sunday night's direct push landed an 11-capability graph memory stack (BGE reranker, bi-temporal edges, Leiden community clustering, MCP server at `backend/mcp_server.py`) — the Hindsight/Graphiti/Letta/HippoRAG playbook compressed into 17 files. Monday's PR #41 siphoned 14 opt-in features home from four sibling forks (Nash equilibrium via nashpy, counterfactual branching, per-agent MCP tools) and stood up the project's first CI test suite. MiroShark stopped being a simulator and started being a research substrate.
+After two weeks of research-substrate commits (graph memory, Nash equilibrium, first CI suite), MiroShark turned outward today: the GitHub description now reads "Simulate anything, for $1 & less than 10 min", grounded in a new `Cheap` preset (Qwen/DeepSeek/Grok with CoT off-by-default) shipped the same hour. PR #42 added a Pillow Open Graph share card + `/share/<id>` landing page so links unfurl with real previews; 12 commits slimmed the README 698→243 lines and split the rest into nine docs/ files. Eight days from the 1K-stars target, this is the first release sized to actually get there.
 
-Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-04-21.md
+Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-04-22.md
