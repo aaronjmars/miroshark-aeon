@@ -1,0 +1,173 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "Agent Self-Improvement — 2026-04-22"
+      },
+      "children": [
+        "main-stack"
+      ]
+    },
+    "main-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "summary-text",
+        "sep1",
+        "root-cause-heading",
+        "root-cause-text",
+        "root-cause-details",
+        "sep2",
+        "changes-heading",
+        "changes-stack",
+        "sep3",
+        "impact-heading",
+        "impact-text",
+        "sep4",
+        "pr-link"
+      ]
+    },
+    "summary-text": {
+      "type": "Text",
+      "props": {
+        "text": "Migrated token-report's Social Pulse X/Grok call from inline sandbox-blocked curl to the existing prefetch pattern. The skill was silently failing and falsely reporting \"XAI_API_KEY not set\" for 3 days straight despite the secret being configured."
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {}
+    },
+    "root-cause-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Root Cause",
+        "level": "h3"
+      }
+    },
+    "root-cause-text": {
+      "type": "Text",
+      "props": {
+        "text": "articles/token-report-2026-04-20.md, -21.md, and -22.md all carry \"XAI_API_KEY not set — social data unavailable\" in Social Pulse, but fetch-tweets' prefetch consumes the same key without issue every day."
+      }
+    },
+    "root-cause-details": {
+      "type": "Text",
+      "props": {
+        "text": "Step 5 was running `curl -H \"Authorization: Bearer $XAI_API_KEY\"` inline inside Claude's sandbox, which blocks env var expansion in headers. This was flagged in PR #21 body as \"separate scope\" — self-improve picked it up today.",
+        "variant": "body"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {}
+    },
+    "changes-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Changes Made",
+        "level": "h3"
+      }
+    },
+    "changes-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "lg"
+      },
+      "children": [
+        "file1-section",
+        "file2-section"
+      ]
+    },
+    "file1-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "file1-heading",
+        "file1-text"
+      ]
+    },
+    "file1-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "scripts/prefetch-xai.sh",
+        "level": "h4"
+      }
+    },
+    "file1-text": {
+      "type": "Text",
+      "props": {
+        "text": "New token-report case. Reads the tracked token symbol from memory/MEMORY.md (regex over the ## Tracked Token table), drops any stale cache + sidecar, runs one xai_search with a $SYMBOL cashtag query, writes the symbol verbatim to .xai-cache/token-report-social.symbol for the skill to verify against."
+      }
+    },
+    "file2-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "file2-heading",
+        "file2-pathA",
+        "file2-pathB"
+      ]
+    },
+    "file2-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "skills/token-report/SKILL.md",
+        "level": "h4"
+      }
+    },
+    "file2-pathA": {
+      "type": "Text",
+      "props": {
+        "text": "Path A — Cache hit + sidecar match: parse output_text, cite handles/permalinks"
+      }
+    },
+    "file2-pathB": {
+      "type": "Text",
+      "props": {
+        "text": "Path B — No cache or symbol mismatch or empty: accurate one-line \"X/Grok data unavailable this run\" note instead of falsely blaming a missing secret"
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {}
+    },
+    "impact-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Impact",
+        "level": "h3"
+      }
+    },
+    "impact-text": {
+      "type": "Text",
+      "props": {
+        "text": "Restores real Social Pulse content to the daily token report. 3 days of silent fall-through fixed. Inherits the same self-heal property as fetch-tweets' PR #19 — changing the tracked token in MEMORY.md invalidates the old cache on the next prefetch. Zero new dependencies."
+      }
+    },
+    "sep4": {
+      "type": "Separator",
+      "props": {}
+    },
+    "pr-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #22: Token Report X/Grok Sandbox Fix",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/pull/22",
+        "source": "GitHub"
+      }
+    }
+  }
+}

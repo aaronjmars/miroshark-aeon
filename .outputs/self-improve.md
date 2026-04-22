@@ -1,13 +1,13 @@
-*Agent Self-Improvement — 2026-04-20*
+*Agent Self-Improvement — 2026-04-22*
 
-XAI Cache Query Validation — fetch-tweets now refuses to consume a pre-fetched cache that was populated for a different `${var}`. The prefetch script writes a `.xai-cache/fetch-tweets.query` sidecar on success, and the skill's Path A checks it matches the current var before using the cache.
+Migrated token-report's Social Pulse X/Grok call from inline sandbox-blocked curl to the existing prefetch pattern. The skill was silently failing and falsely reporting "XAI_API_KEY not set" for 3 days straight despite the secret being configured.
 
-Why: today `fetch-tweets` ran three times. First run returned FETCH_TWEETS_NO_NEW against an empty cache; re-run 1 discovered a stale `$AEON OR @miroshark_ OR github.com/aaronjmars/miroshark` cache (while aeon.yml has long been on `$MIROSHARK OR ...`); only re-run 2 — with a manually-refreshed cache — surfaced 11 new tweets. The skill had no way to detect it was consuming wrong-query cache content.
+Why: `articles/token-report-2026-04-20.md`, `-21.md`, and `-22.md` all carry "XAI_API_KEY not set — social data unavailable" in Social Pulse, but fetch-tweets' prefetch consumes the same key without issue every day. Root cause: step 5 was running `curl -H "Authorization: Bearer $XAI_API_KEY"` inline inside Claude's sandbox, which blocks env var expansion in headers. Flagged in PR #21 body as "separate scope" — self-improve picked it up today.
 
 What changed:
-- scripts/prefetch-xai.sh: fetch-tweets branch `rm -f`s the existing cache + sidecar before xai_search, then writes the current $VAR to `.xai-cache/fetch-tweets.query` on success. Failed API call → no cache, instead of stale cache.
-- skills/fetch-tweets/SKILL.md: Path A now checks the sidecar matches `${var}` before reading the cache. Mismatch or missing sidecar → fall through to Path B (live X.AI call).
+- `scripts/prefetch-xai.sh`: new `token-report)` case. Reads the tracked token symbol from `memory/MEMORY.md` (regex over the `## Tracked Token` table), drops any stale cache + sidecar, runs one `xai_search` with a `$SYMBOL` cashtag query, writes the symbol verbatim to `.xai-cache/token-report-social.symbol` for the skill to verify against.
+- `skills/token-report/SKILL.md` step 5: replaced the inline curl with Path A (cache hit + sidecar match → parse `output_text`, cite handles/permalinks) / Path B (no cache or symbol mismatch or empty → accurate one-line "X/Grok data unavailable this run" note instead of falsely blaming a missing secret).
 
-Impact: eliminates the "stale-cache silent failure" mode that burned two fetch-tweets invocations today. Any future `aeon.yml` var change (new token, handle rename) self-heals on the next prefetch cycle instead of requiring manual re-runs.
+Impact: Restores real Social Pulse content to the daily token report (3 days of silent fall-through fixed). Inherits the same self-heal property as fetch-tweets' PR #19 — changing the tracked token in MEMORY.md invalidates the old cache on the next prefetch. Zero new deps.
 
-PR: https://github.com/aaronjmars/miroshark-aeon/pull/19
+PR: https://github.com/aaronjmars/miroshark-aeon/pull/22
