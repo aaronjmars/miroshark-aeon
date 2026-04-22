@@ -1,0 +1,272 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "Repo Pulse"
+      },
+      "children": [
+        "heading-repo",
+        "stats-stack",
+        "sep1",
+        "heading-stargazers",
+        "stargazers-grid",
+        "sep2",
+        "heading-forks",
+        "forks-stack"
+      ]
+    },
+    "heading-repo": {
+      "type": "Heading",
+      "props": {
+        "text": "aaronjmars/MiroShark",
+        "level": "h2"
+      }
+    },
+    "stats-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "stat-stars",
+        "stat-forks"
+      ]
+    },
+    "stat-stars": {
+      "type": "Stat",
+      "props": {
+        "label": "Stars",
+        "value": "767",
+        "delta": "+19",
+        "trend": "up"
+      }
+    },
+    "stat-forks": {
+      "type": "Stat",
+      "props": {
+        "label": "Forks",
+        "value": "146",
+        "delta": "+2",
+        "trend": "up"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading-stargazers": {
+      "type": "Heading",
+      "props": {
+        "text": "New Stargazers",
+        "level": "h3"
+      }
+    },
+    "stargazers-grid": {
+      "type": "Grid",
+      "props": {
+        "columns": 5,
+        "gap": "sm"
+      },
+      "children": [
+        "link-vaporif",
+        "link-ZunbaRan",
+        "link-dmayo1999",
+        "link-PowerWeb5",
+        "link-skenan",
+        "link-Maxgoods62",
+        "link-kmackowick",
+        "link-mitchell-reynolds",
+        "link-tamarpinder",
+        "link-doumin9383",
+        "link-ninjure",
+        "link-HouIP",
+        "link-anan-eventchi",
+        "link-lamenting-hawthorn",
+        "link-cortesimone",
+        "link-parsaghaffari",
+        "link-Fato07",
+        "link-void0x14",
+        "link-vistik"
+      ]
+    },
+    "link-vaporif": {
+      "type": "Link",
+      "props": {
+        "label": "vaporif",
+        "href": "https://github.com/vaporif"
+      }
+    },
+    "link-ZunbaRan": {
+      "type": "Link",
+      "props": {
+        "label": "ZunbaRan",
+        "href": "https://github.com/ZunbaRan"
+      }
+    },
+    "link-dmayo1999": {
+      "type": "Link",
+      "props": {
+        "label": "dmayo1999",
+        "href": "https://github.com/dmayo1999"
+      }
+    },
+    "link-PowerWeb5": {
+      "type": "Link",
+      "props": {
+        "label": "PowerWeb5",
+        "href": "https://github.com/PowerWeb5"
+      }
+    },
+    "link-skenan": {
+      "type": "Link",
+      "props": {
+        "label": "skenan",
+        "href": "https://github.com/skenan"
+      }
+    },
+    "link-Maxgoods62": {
+      "type": "Link",
+      "props": {
+        "label": "Maxgoods62",
+        "href": "https://github.com/Maxgoods62"
+      }
+    },
+    "link-kmackowick": {
+      "type": "Link",
+      "props": {
+        "label": "kmackowick",
+        "href": "https://github.com/kmackowick"
+      }
+    },
+    "link-mitchell-reynolds": {
+      "type": "Link",
+      "props": {
+        "label": "mitchell-reynolds",
+        "href": "https://github.com/mitchell-reynolds"
+      }
+    },
+    "link-tamarpinder": {
+      "type": "Link",
+      "props": {
+        "label": "tamarpinder",
+        "href": "https://github.com/tamarpinder"
+      }
+    },
+    "link-doumin9383": {
+      "type": "Link",
+      "props": {
+        "label": "doumin9383",
+        "href": "https://github.com/doumin9383"
+      }
+    },
+    "link-ninjure": {
+      "type": "Link",
+      "props": {
+        "label": "ninjure",
+        "href": "https://github.com/ninjure"
+      }
+    },
+    "link-HouIP": {
+      "type": "Link",
+      "props": {
+        "label": "HouIP",
+        "href": "https://github.com/HouIP"
+      }
+    },
+    "link-anan-eventchi": {
+      "type": "Link",
+      "props": {
+        "label": "anan-eventchi",
+        "href": "https://github.com/anan-eventchi"
+      }
+    },
+    "link-lamenting-hawthorn": {
+      "type": "Link",
+      "props": {
+        "label": "lamenting-hawthorn",
+        "href": "https://github.com/lamenting-hawthorn"
+      }
+    },
+    "link-cortesimone": {
+      "type": "Link",
+      "props": {
+        "label": "cortesimone",
+        "href": "https://github.com/cortesimone"
+      }
+    },
+    "link-parsaghaffari": {
+      "type": "Link",
+      "props": {
+        "label": "parsaghaffari",
+        "href": "https://github.com/parsaghaffari"
+      }
+    },
+    "link-Fato07": {
+      "type": "Link",
+      "props": {
+        "label": "Fato07",
+        "href": "https://github.com/Fato07"
+      }
+    },
+    "link-void0x14": {
+      "type": "Link",
+      "props": {
+        "label": "void0x14",
+        "href": "https://github.com/void0x14"
+      }
+    },
+    "link-vistik": {
+      "type": "Link",
+      "props": {
+        "label": "vistik",
+        "href": "https://github.com/vistik"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading-forks": {
+      "type": "Heading",
+      "props": {
+        "text": "New Forks",
+        "level": "h3"
+      }
+    },
+    "forks-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "fork-xlad",
+        "fork-moseslua"
+      ]
+    },
+    "fork-xlad": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Mr-Xlad-Sacramento/miroshark",
+        "href": "https://github.com/Mr-Xlad-Sacramento/miroshark",
+        "source": "GitHub"
+      }
+    },
+    "fork-moseslua": {
+      "type": "StoryLink",
+      "props": {
+        "title": "moseslua/miroalligator",
+        "href": "https://github.com/moseslua/miroalligator",
+        "source": "GitHub"
+      }
+    }
+  }
+}
