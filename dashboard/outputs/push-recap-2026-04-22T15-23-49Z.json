@@ -1,0 +1,231 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "Push Recap",
+        "description": "2026-04-22"
+      },
+      "children": [
+        "header-stats",
+        "sep-1",
+        "overview-text",
+        "sep-2",
+        "themes-heading",
+        "themes-stack",
+        "sep-3",
+        "keychanges-heading",
+        "keychanges-stack",
+        "sep-4",
+        "stats-footer",
+        "recap-link"
+      ]
+    },
+    "header-stats": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "lg"
+      },
+      "children": [
+        "stat-ms",
+        "stat-aeon",
+        "stat-authors"
+      ]
+    },
+    "stat-ms": {
+      "type": "Stat",
+      "props": {
+        "label": "MiroShark Commits",
+        "value": "23"
+      }
+    },
+    "stat-aeon": {
+      "type": "Stat",
+      "props": {
+        "label": "miroshark-aeon (PR #22)",
+        "value": "1"
+      }
+    },
+    "stat-authors": {
+      "type": "Stat",
+      "props": {
+        "label": "Authors",
+        "value": "2"
+      }
+    },
+    "sep-1": {
+      "type": "Separator",
+      "props": {}
+    },
+    "overview-text": {
+      "type": "Text",
+      "props": {
+        "text": "Heavy 21:07–22:52 UTC cluster yesterday + PR #42 today: project-grade tightening pass, not a single feature drop. Settings/onboarding rebuilt model-list-down + simulation runner finally hardened end-to-end + 8-branch cleanup sweep merges into main on the same day docs split into docs/ reference.",
+        "variant": "body"
+      }
+    },
+    "sep-2": {
+      "type": "Separator",
+      "props": {}
+    },
+    "themes-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Themes",
+        "level": "h3"
+      }
+    },
+    "themes-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "theme-1",
+        "theme-2",
+        "theme-3",
+        "theme-4",
+        "theme-5",
+        "theme-6",
+        "theme-7",
+        "theme-8"
+      ]
+    },
+    "theme-1": {
+      "type": "Text",
+      "props": {
+        "text": "• Social Share Card lands (PR #42, +1,392/-139): 1200×630 OG card + /share/<id> landing + EmbedDialog preview/download. Zero new deps, 11 unit tests. Direct lever on 1K-stars target."
+      }
+    },
+    "theme-2": {
+      "type": "Text",
+      "props": {
+        "text": "• Onboarding rebuild: Cheap preset → Qwen3.5-flash/DeepSeek-v3.2/Grok-4.1-fast (CoT-off → ~3× lower latency, ~$0.50/run measured); Settings modal preset dropdown + per-slot overrides; LLM-based URL fetcher replaces brittle HTML parser; prediction-market titles routed through Smart slot."
+      }
+    },
+    "theme-3": {
+      "type": "Text",
+      "props": {
+        "text": "• Simulation runner hardened: counterfactual injection finally wired into all 4 loops (was imported nowhere, branches silently ran as plain forks); per-round error isolation + 600s ROUND_TIMEOUT watchdog; BeliefTracker persists state across pause/resume; What If? agent_id=0 falsy-trap + display-name vs handle namespace mismatch fixed in /counterfactual + /demographics."
+      }
+    },
+    "theme-4": {
+      "type": "Text",
+      "props": {
+        "text": "• README & docs rewrite (12 commits): 698→243-line slim landing + 9 docs/ files split + OpenAI/Anthropic install paths + native Neo4j default + Windows path + \"$1 & under 10 min\" tagline."
+      }
+    },
+    "theme-5": {
+      "type": "Text",
+      "props": {
+        "text": "• OASIS → Wonderwall rename across 35 files; neo4j added to CI test deps."
+      }
+    },
+    "theme-6": {
+      "type": "Text",
+      "props": {
+        "text": "• 7 cleanup-branch merges (DRY/defensive/weak-types/types/AI-slop/legacy/unused) in a 39-second window 15:38 UTC + 8 CLEANUP_ASSESSMENT_*.md artifacts deleted (-911 lines)."
+      }
+    },
+    "theme-7": {
+      "type": "Text",
+      "props": {
+        "text": "• Simulation page UI/UX overhaul (+2,364/-344): new inline PolymarketChart, one toggleOverlay() dispatcher, design-system color alignment, chartExport.js with HiDPI Copy/Download + MiroShark footer on every chart, multi-market settings 1–5."
+      }
+    },
+    "theme-8": {
+      "type": "Text",
+      "props": {
+        "text": "• miroshark-aeon PR #22: token-report XAI prefetch migration closes 3-day silent-fail on daily Social Pulse."
+      }
+    },
+    "sep-3": {
+      "type": "Separator",
+      "props": {}
+    },
+    "keychanges-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Key Changes",
+        "level": "h3"
+      }
+    },
+    "keychanges-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "commit-1",
+        "commit-2",
+        "commit-3",
+        "commit-4a",
+        "commit-4b"
+      ]
+    },
+    "commit-1": {
+      "type": "StoryLink",
+      "props": {
+        "title": "6fb30bd — UI overhaul (12 files, 985-line new PolymarketChart + 280-line chartExport.js with font preload + sim-id'd footer)",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/commit/6fb30bd",
+        "source": "GitHub"
+      }
+    },
+    "commit-2": {
+      "type": "StoryLink",
+      "props": {
+        "title": "9d71291 — Social Share Card (Pillow renderer + share blueprint + EmbedDialog dialog + 11 tests)",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/commit/9d71291",
+        "source": "GitHub"
+      }
+    },
+    "commit-3": {
+      "type": "StoryLink",
+      "props": {
+        "title": "2fd2532 — Simulation runner hardening (counterfactual_loader actually called for the first time + persisted belief state across pause/resume)",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/commit/2fd2532",
+        "source": "GitHub"
+      }
+    },
+    "commit-4a": {
+      "type": "StoryLink",
+      "props": {
+        "title": "ea1e799 — README compressed 698→243 lines, split into 9 docs/ files",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/commit/ea1e799",
+        "source": "GitHub"
+      }
+    },
+    "commit-4b": {
+      "type": "StoryLink",
+      "props": {
+        "title": "cbbf155 — README compressed 698→243 lines, split into 9 docs/ files",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/commit/cbbf155",
+        "source": "GitHub"
+      }
+    },
+    "sep-4": {
+      "type": "Separator",
+      "props": {}
+    },
+    "stats-footer": {
+      "type": "Text",
+      "props": {
+        "text": "Stats: ~150 files / +8,645 / -3,726 across 24 substantive commits",
+        "variant": "lead"
+      }
+    },
+    "recap-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full Recap",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-04-22.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}
