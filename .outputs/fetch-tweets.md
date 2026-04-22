@@ -1,7 +1,13 @@
-*Top Tweets — $MIROSHARK OR @miroshark_ OR github.com/aaronjmars/miroshark (2026-04-21)*
+*Top Tweets — $MIROSHARK OR @miroshark_ OR github.com/aaronjmars/miroshark (2026-04-22)*
 
-1. x.com/aaronjmars — Aeon shipped THREE new features for @miroshark_ in a single weekend: an interaction network, a demographic breakdown, and a what-if simulation recomputer. Calling it out as impressive autonomous feature delivery.
-Likes: 15 | RTs: 5
-[View tweet](https://x.com/aaronjmars/status/2046339494580740415)
+1. x.com/MrDegenWolf — $AEON & $MIROSHARK called out as huge; dev praised as a genius
+Likes: 22 | RTs: 2
+[View tweet](https://x.com/MrDegenWolf/status/2046573003635298393)
 
-_(Cache text truncated after 2 tweets; 38 additional tweet URLs captured as annotation citations — all marked seen. Full detail unavailable from this cache run.)_
+2. x.com/Jsxontop — $MIROSHARK $AEON dev providing relentless output.
+Likes: 2 | RTs: 0
+[View tweet](https://x.com/Jsxontop/status/2046623409757425831)
+
+3. x.com/MrDegenWolf — check @aeonframework & @miroshark_
+Likes: 1 | RTs: 0
+[View tweet](https://x.com/MrDegenWolf/status/2046638365039079753)
