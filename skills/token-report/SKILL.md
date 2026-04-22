@@ -52,18 +52,11 @@ Read the last 7 days of memory/logs/ for previous price data to show trends.
    ```
 
 5. **Search for social sentiment** (optional — requires XAI_API_KEY):
-   If `XAI_API_KEY` is set, search X for mentions of $TOKEN in the last 24h:
-   ```bash
-   curl -s -X POST "https://api.x.ai/v1/responses" \
-     -H "Content-Type: application/json" \
-     -H "Authorization: Bearer $XAI_API_KEY" \
-     -d '{
-       "model": "grok-4-1-fast",
-       "input": [{"role": "user", "content": "Search X for $TOKEN_SYMBOL in the last 24 hours. Return the 5 most notable tweets with @handle and summary."}],
-       "tools": [{"type": "x_search"}]
-     }'
-   ```
-   If `XAI_API_KEY` is not set, skip social sentiment and note it in the report.
+   The sandbox blocks `$XAI_API_KEY` expansion in curl headers, so this skill consumes results that `scripts/prefetch-xai.sh` fetched before Claude started.
+
+   **Path A (cache present):** If `.xai-cache/token-report-social.json` exists AND `.xai-cache/token-report-social.symbol` matches the token symbol you just read from MEMORY.md (strip any leading `$`), parse `output[].content[].text` / `output_text` from the JSON and use those tweets + sentiment for the Social Pulse section. Cite @handles and paste permalinks verbatim.
+
+   **Path B (no cache / symbol mismatch / empty results):** Write one line in the Social Pulse section stating that X/Grok data wasn't available for this run (do NOT claim "XAI_API_KEY not set" — the key may well be set; the prefetch may simply have been skipped, rate-limited, or returned nothing). You may optionally use WebSearch for a loose secondary signal but keep it brief.
 
 6. **Compile the daily report**:
    ```markdown
@@ -89,7 +82,7 @@ Read the last 7 days of memory/logs/ for previous price data to show trends.
    [Is volume increasing/decreasing? Any notable large trades? Buy/sell ratio?]
 
    ## Social Pulse
-   [Key mentions, sentiment, notable tweets — or "XAI_API_KEY not set, social data unavailable"]
+   [Key mentions, sentiment, notable tweets from the `.xai-cache/token-report-social.json` Path A cache — or a short "X/Grok data unavailable this run" note when the cache is missing or the symbol sidecar doesn't match]
 
    ## Context
    [1-2 sentences connecting price action to any known events — repo updates, market conditions]

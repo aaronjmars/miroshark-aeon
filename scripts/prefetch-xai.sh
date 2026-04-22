@@ -153,6 +153,44 @@ case "$SKILL" in
     fi
     ;;
 
+  token-report)
+    # Pre-fetch social sentiment for the tracked token. Inline curl with
+    # `$XAI_API_KEY` in headers fails in the sandbox, so the skill has been
+    # reporting "XAI_API_KEY not set — social data unavailable" every day
+    # despite the secret being configured. Prefetch writes cached results
+    # to `.xai-cache/token-report-social.json` + a `.token-report-social.symbol`
+    # sidecar so the skill can verify the cache matches the currently tracked
+    # token before consuming it.
+    #
+    # Token symbol is read from `memory/MEMORY.md` Tracked Token table; VAR is
+    # not used by token-report (contract override is rare; skill reads MEMORY.md).
+    rm -f .xai-cache/token-report-social.json .xai-cache/token-report-social.symbol
+
+    TOKEN_SYMBOL=""
+    if [ -f "memory/MEMORY.md" ]; then
+      TOKEN_SYMBOL=$(python3 -c "
+import re, sys
+try:
+    with open('memory/MEMORY.md') as f:
+        text = f.read()
+    # Match the first data row under '## Tracked Token' — skip the header/separator rows.
+    m = re.search(r'##\s+Tracked Token\s*\n(?:\|[^\n]*\n){2}\|\s*([A-Za-z0-9_\$]+)\s*\|', text)
+    if m: print(m.group(1).lstrip('\$'))
+except Exception: pass
+" 2>/dev/null || true)
+    fi
+
+    if [ -z "$TOKEN_SYMBOL" ]; then
+      echo "xai-prefetch: token-report — no token symbol found in memory/MEMORY.md, skipping social fetch"
+    else
+      xai_search "token-report-social.json" \
+        "Search X for tweets mentioning \$${TOKEN_SYMBOL} (the cashtag, with the \$ prefix) from ${YESTERDAY} to ${TODAY}. Return the 5 most notable tweets — prioritize those with the highest engagement or most substantive commentary. For each: @handle, a one-line summary of the point being made, likes/retweets, and the direct link. Also note overall sentiment (bullish/bearish/mixed) in 1–2 sentences. If there are zero on-topic results, say so explicitly."
+      if [ -f ".xai-cache/token-report-social.json" ]; then
+        printf '%s' "$TOKEN_SYMBOL" > .xai-cache/token-report-social.symbol
+      fi
+    fi
+    ;;
+
   fetch-tweets)
     if [ -n "$VAR" ]; then
       # Drop any prior cache + query sidecar up front so a failed xai_search
