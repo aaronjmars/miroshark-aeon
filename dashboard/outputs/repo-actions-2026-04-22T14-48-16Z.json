@@ -1,0 +1,406 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "Repo Action Ideas — 2026-04-22",
+        "description": "Generated from analysis of aaronjmars/MiroShark"
+      },
+      "children": [
+        "repo-header",
+        "separator-1",
+        "ideas-stack",
+        "separator-2",
+        "details-section"
+      ]
+    },
+    "repo-header": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stats-title",
+        "metrics-stack"
+      ]
+    },
+    "stats-title": {
+      "type": "Text",
+      "props": {
+        "text": "Repository metrics:",
+        "variant": "lead"
+      }
+    },
+    "metrics-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "lg"
+      },
+      "children": [
+        "stars-stat",
+        "forks-stat",
+        "prs-stat"
+      ]
+    },
+    "stars-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Stars",
+        "value": "770"
+      }
+    },
+    "forks-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Forks",
+        "value": "147"
+      }
+    },
+    "prs-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Open PRs",
+        "value": "0"
+      }
+    },
+    "separator-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "ideas-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "idea-1",
+        "idea-1-sep",
+        "idea-2",
+        "idea-2-sep",
+        "idea-3",
+        "idea-3-sep",
+        "idea-4",
+        "idea-4-sep",
+        "idea-5"
+      ]
+    },
+    "idea-1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "idea-1-title",
+        "idea-1-badges",
+        "idea-1-desc"
+      ]
+    },
+    "idea-1-title": {
+      "type": "Heading",
+      "props": {
+        "text": "1. Public Simulation Gallery",
+        "level": "h3"
+      }
+    },
+    "idea-1-badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "idea-1-type",
+        "idea-1-size"
+      ]
+    },
+    "idea-1-type": {
+      "type": "Badge",
+      "props": {
+        "text": "Growth",
+        "variant": "default"
+      }
+    },
+    "idea-1-size": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "secondary"
+      }
+    },
+    "idea-1-desc": {
+      "type": "Text",
+      "props": {
+        "text": "A /explore page surfacing is_public simulations as visual cards — the is_public + share-card infrastructure is complete, the discovery layer is the only missing piece. Direct growth lever for 1K-star sprint.",
+        "variant": "body"
+      }
+    },
+    "idea-1-sep": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "idea-2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "idea-2-title",
+        "idea-2-badges",
+        "idea-2-desc"
+      ]
+    },
+    "idea-2-title": {
+      "type": "Heading",
+      "props": {
+        "text": "2. Simulation Clone / One-Click Fork",
+        "level": "h3"
+      }
+    },
+    "idea-2-badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "idea-2-type",
+        "idea-2-size"
+      ]
+    },
+    "idea-2-type": {
+      "type": "Badge",
+      "props": {
+        "text": "Feature/DX",
+        "variant": "default"
+      }
+    },
+    "idea-2-size": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "secondary"
+      }
+    },
+    "idea-2-desc": {
+      "type": "Text",
+      "props": {
+        "text": "A Re-run button on result pages and history cards pre-fills the setup form with all params from that run — in-app forking with no file system required. Also powers the gallery's Fork this → action.",
+        "variant": "body"
+      }
+    },
+    "idea-2-sep": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "idea-3": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "idea-3-title",
+        "idea-3-badges",
+        "idea-3-desc"
+      ]
+    },
+    "idea-3-title": {
+      "type": "Heading",
+      "props": {
+        "text": "3. Claude Desktop / AI IDE MCP Onboarding",
+        "level": "h3"
+      }
+    },
+    "idea-3-badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "idea-3-type",
+        "idea-3-size"
+      ]
+    },
+    "idea-3-type": {
+      "type": "Badge",
+      "props": {
+        "text": "DX/Integration",
+        "variant": "default"
+      }
+    },
+    "idea-3-size": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "secondary"
+      }
+    },
+    "idea-3-desc": {
+      "type": "Text",
+      "props": {
+        "text": "A Settings AI Integration tab with a copy-pasteable claude_desktop_config.json snippet and Test connection button — turns the graph memory MCP server (8 tools, invisible today) into a discoverable power-user capability.",
+        "variant": "body"
+      }
+    },
+    "idea-3-sep": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "idea-4": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "idea-4-title",
+        "idea-4-badges",
+        "idea-4-desc"
+      ]
+    },
+    "idea-4-title": {
+      "type": "Heading",
+      "props": {
+        "text": "4. Simulation History Search & Tags",
+        "level": "h3"
+      }
+    },
+    "idea-4-badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "idea-4-type",
+        "idea-4-size"
+      ]
+    },
+    "idea-4-type": {
+      "type": "Badge",
+      "props": {
+        "text": "DX",
+        "variant": "default"
+      }
+    },
+    "idea-4-size": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "secondary"
+      }
+    },
+    "idea-4-desc": {
+      "type": "Text",
+      "props": {
+        "text": "Chip-style tags at setup time + a search/filter bar on the history page — turns a chronological scroll into a research library. Tags span personal history and the public gallery (/explore?tag=defi).",
+        "variant": "body"
+      }
+    },
+    "idea-4-sep": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "idea-5": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "idea-5-title",
+        "idea-5-badges",
+        "idea-5-desc"
+      ]
+    },
+    "idea-5-title": {
+      "type": "Heading",
+      "props": {
+        "text": "5. Multi-Scenario Comparison View",
+        "level": "h3"
+      }
+    },
+    "idea-5-badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "idea-5-type",
+        "idea-5-size"
+      ]
+    },
+    "idea-5-type": {
+      "type": "Badge",
+      "props": {
+        "text": "Feature/Research",
+        "variant": "default"
+      }
+    },
+    "idea-5-size": {
+      "type": "Badge",
+      "props": {
+        "text": "Medium",
+        "variant": "secondary"
+      }
+    },
+    "idea-5-desc": {
+      "type": "Text",
+      "props": {
+        "text": "Select 2-3 simulations from history, view side-by-side: unified belief-drift chart, consensus comparison bars, quality diagnostic alignment, export PNG. Closes the Scenario Auto-Suggest → Compare → Export research loop.",
+        "variant": "body"
+      }
+    },
+    "separator-2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "details-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "details-label",
+        "details-link"
+      ]
+    },
+    "details-label": {
+      "type": "Text",
+      "props": {
+        "text": "Full details:",
+        "variant": "caption"
+      }
+    },
+    "details-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Repo Actions Analysis",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-actions-2026-04-22.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}

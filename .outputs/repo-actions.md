@@ -1,19 +1,19 @@
-*Repo Action Ideas — 2026-04-20*
-Generated from analysis of MiroShark (744 stars, 0 open PRs — clean slate after today's 4-PR merge wave). These are ideas the feature skill can autonomously build tomorrow.
+*Repo Action Ideas — 2026-04-22*
+Generated from analysis of aaronjmars/MiroShark (770 stars, 147 forks, 0 open PRs). Five net-new ideas scoped for autonomous implementation.
 
-1. Round Scrubber / Temporal Explorer (Feature, Small)
-   Interactive time-slider syncs network graph, demographics, and stances to any simulation round — the turning-point moment is now explorable, not just the final state.
+1. Public Simulation Gallery (Growth, Small)
+   A /explore page surfacing is_public simulations as visual cards — the is_public + share-card infrastructure is complete, the discovery layer is the only missing piece. Direct growth lever for 1K-star sprint.
 
-2. Social Share Card Generator (Growth, Small)
-   Server-generated 1200×630px PNG (scenario headline, consensus gauge, quality badge, top 3 agents) for Twitter/X/LinkedIn unfurling — every shared result becomes a visual hook at the moment organic Kelp/Aave attention is peaking.
+2. Simulation Clone / One-Click Fork (Feature/DX, Small)
+   A Re-run button on result pages and history cards pre-fills the setup form with all params from that run — in-app forking with no file system required. Also powers the gallery's Fork this → action.
 
-3. Trending Topics Auto-Discovery (Feature/Integration, Small)
-   "What's Trending" panel on home page pulls 5 current headlines from configurable RSS feeds; one click pre-fills the URL and fires Scenario Auto-Suggest — closes the blank-canvas gap for users who arrive without a document.
+3. Claude Desktop / AI IDE MCP Onboarding (DX/Integration, Small)
+   A Settings AI Integration tab with a copy-pasteable claude_desktop_config.json snippet and Test connection button — turns the graph memory MCP server (8 tools, invisible today) into a discoverable power-user capability.
 
-4. Collaborative Review Comments (Community, Small)
-   Threaded comment section on simulation result pages (no auth needed, display name only); optional chart markers at the round each note was left — replaces the screenshot-plus-Slack-thread workflow for research teams.
+4. Simulation History Search & Tags (DX, Small)
+   Chip-style tags at setup time + a search/filter bar on the history page — turns a chronological scroll into a research library. Tags span personal history and the public gallery (/explore?tag=defi).
 
-5. Simulation Config Export / Import (DX/Research, Small)
-   "Export Config" downloads a versioned JSON of all simulation parameters; "Import Config" restores it in one drop — enables reproducible research sharing and a community templates/directory in the repo.
+5. Multi-Scenario Comparison View (Feature/Research, Medium)
+   Select 2-3 simulations from history, view side-by-side: unified belief-drift chart, consensus comparison bars, quality diagnostic alignment, export PNG. Closes the Scenario Auto-Suggest → Compare → Export research loop.
 
-Full details: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-actions-2026-04-20.md
+Full details: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-actions-2026-04-22.md
