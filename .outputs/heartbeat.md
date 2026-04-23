@@ -1,9 +1,11 @@
-HEARTBEAT_OK
+HEARTBEAT_OK.
 
-All 12 enabled skills ran and completed on schedule today. No stalled PRs, no urgent issues, no stuck runs, no missing skills. Nothing needs attention.
+All systems nominal for 2026-04-23:
+- **0 open PRs** on both repos (PR #43 merged earlier today)
+- **0 urgent issues** on both repos
+- **All 8 daily skills ran** as scheduled: token-report, fetch-tweets, tweet-allocator, repo-pulse, feature, push-recap, project-lens, repo-article
+- **Every-2-day skills** (`repo-actions`, `self-improve`) not due — schedule `*/2` fires on even days, Apr 23 is odd
+- **Weekly/housekeeping skills** not due today (Thursday)
+- **No stuck runs**
 
-## Summary
-- Checked all enabled skills against `aeon.yml` — every daily, every-2-day, and Wednesday `memory-flush` confirmed completed
-- 0 open PRs across both repos, 0 urgent issues
-- No auto-triggers needed
-- Logged `HEARTBEAT_OK` to `memory/logs/2026-04-22.md`
+Nothing needs attention. Log updated.
