@@ -1,0 +1,299 @@
+{
+  "root": "card_repo_pulse",
+  "state": {},
+  "elements": {
+    "card_repo_pulse": {
+      "type": "Card",
+      "props": {
+        "title": "Repo Pulse — 2026-04-23",
+        "description": "aaronjmars/MiroShark"
+      },
+      "children": [
+        "stats_section",
+        "separator_1",
+        "stargazers_section",
+        "separator_2",
+        "forks_section"
+      ]
+    },
+    "stats_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "lg"
+      },
+      "children": [
+        "stat_stars",
+        "stat_forks"
+      ]
+    },
+    "stat_stars": {
+      "type": "Stat",
+      "props": {
+        "label": "Stars",
+        "value": "788",
+        "delta": "+22",
+        "trend": "up"
+      }
+    },
+    "stat_forks": {
+      "type": "Stat",
+      "props": {
+        "label": "Forks",
+        "value": "147",
+        "delta": "+1",
+        "trend": "up"
+      }
+    },
+    "separator_1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stargazers_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stargazers_heading",
+        "stargazers_list"
+      ]
+    },
+    "stargazers_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "New stargazers",
+        "level": "h3"
+      }
+    },
+    "stargazers_list": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "link_sinanbinay",
+        "link_geovanyferreira",
+        "link_mequelussi",
+        "link_mattroyer",
+        "link_autolyticus",
+        "link_codesnakers",
+        "link_knowsuchagency",
+        "link_nixpt",
+        "link_herrhaase",
+        "link_geoffreyporto",
+        "link_s2mr",
+        "link_buffdeveloper",
+        "link_luccomo",
+        "link_fevra_dev",
+        "link_Kimenzo",
+        "link_XXBlackMartinXX",
+        "link_Ryu0118",
+        "link_CarAuto34",
+        "link_Rosedalla",
+        "link_awebisam",
+        "link_Panandika",
+        "link_Keitaro0226"
+      ]
+    },
+    "link_sinanbinay": {
+      "type": "Link",
+      "props": {
+        "label": "sinanbinay",
+        "href": "https://github.com/sinanbinay"
+      }
+    },
+    "link_geovanyferreira": {
+      "type": "Link",
+      "props": {
+        "label": "geovanyferreira",
+        "href": "https://github.com/geovanyferreira"
+      }
+    },
+    "link_mequelussi": {
+      "type": "Link",
+      "props": {
+        "label": "mequelussi",
+        "href": "https://github.com/mequelussi"
+      }
+    },
+    "link_mattroyer": {
+      "type": "Link",
+      "props": {
+        "label": "mattroyer",
+        "href": "https://github.com/mattroyer"
+      }
+    },
+    "link_autolyticus": {
+      "type": "Link",
+      "props": {
+        "label": "autolyticus",
+        "href": "https://github.com/autolyticus"
+      }
+    },
+    "link_codesnakers": {
+      "type": "Link",
+      "props": {
+        "label": "codesnakers",
+        "href": "https://github.com/codesnakers"
+      }
+    },
+    "link_knowsuchagency": {
+      "type": "Link",
+      "props": {
+        "label": "knowsuchagency",
+        "href": "https://github.com/knowsuchagency"
+      }
+    },
+    "link_nixpt": {
+      "type": "Link",
+      "props": {
+        "label": "nixpt",
+        "href": "https://github.com/nixpt"
+      }
+    },
+    "link_herrhaase": {
+      "type": "Link",
+      "props": {
+        "label": "herrhaase",
+        "href": "https://github.com/herrhaase"
+      }
+    },
+    "link_geoffreyporto": {
+      "type": "Link",
+      "props": {
+        "label": "geoffreyporto",
+        "href": "https://github.com/geoffreyporto"
+      }
+    },
+    "link_s2mr": {
+      "type": "Link",
+      "props": {
+        "label": "s2mr",
+        "href": "https://github.com/s2mr"
+      }
+    },
+    "link_buffdeveloper": {
+      "type": "Link",
+      "props": {
+        "label": "buffdeveloper",
+        "href": "https://github.com/buffdeveloper"
+      }
+    },
+    "link_luccomo": {
+      "type": "Link",
+      "props": {
+        "label": "luccomo",
+        "href": "https://github.com/luccomo"
+      }
+    },
+    "link_fevra_dev": {
+      "type": "Link",
+      "props": {
+        "label": "fevra-dev",
+        "href": "https://github.com/fevra-dev"
+      }
+    },
+    "link_Kimenzo": {
+      "type": "Link",
+      "props": {
+        "label": "Kimenzo",
+        "href": "https://github.com/Kimenzo"
+      }
+    },
+    "link_XXBlackMartinXX": {
+      "type": "Link",
+      "props": {
+        "label": "XXBlackMartinXX",
+        "href": "https://github.com/XXBlackMartinXX"
+      }
+    },
+    "link_Ryu0118": {
+      "type": "Link",
+      "props": {
+        "label": "Ryu0118",
+        "href": "https://github.com/Ryu0118"
+      }
+    },
+    "link_CarAuto34": {
+      "type": "Link",
+      "props": {
+        "label": "CarAuto34",
+        "href": "https://github.com/CarAuto34"
+      }
+    },
+    "link_Rosedalla": {
+      "type": "Link",
+      "props": {
+        "label": "Rosedalla",
+        "href": "https://github.com/Rosedalla"
+      }
+    },
+    "link_awebisam": {
+      "type": "Link",
+      "props": {
+        "label": "awebisam",
+        "href": "https://github.com/awebisam"
+      }
+    },
+    "link_Panandika": {
+      "type": "Link",
+      "props": {
+        "label": "Panandika",
+        "href": "https://github.com/Panandika"
+      }
+    },
+    "link_Keitaro0226": {
+      "type": "Link",
+      "props": {
+        "label": "Keitaro0226",
+        "href": "https://github.com/Keitaro0226"
+      }
+    },
+    "separator_2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "forks_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "forks_heading",
+        "forks_list"
+      ]
+    },
+    "forks_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "New forks",
+        "level": "h3"
+      }
+    },
+    "forks_list": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "link_TobyYang7"
+      ]
+    },
+    "link_TobyYang7": {
+      "type": "Link",
+      "props": {
+        "label": "TobyYang7",
+        "href": "https://github.com/TobyYang7"
+      }
+    }
+  }
+}
