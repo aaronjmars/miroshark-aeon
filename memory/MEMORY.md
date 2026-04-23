@@ -45,6 +45,7 @@
 | Graph Memory Stack | 2026-04-21 | Direct push `b20f955` on MiroShark: production-grade bi-temporal graph (BGE reranker, Leiden clustering, `as_of`/`invalidate_edge()`, LLM entity-resolution, contradiction detection with invalidation-not-deletion, persisted ReACT reasoning trace subgraph, MCP server with 8 tools over stdio); 17 files +2,690/-93 |
 | PR #41 Sibling-Repo Siphon | 2026-04-21 | 14 opt-in features consolidated from MiroJiang/MiroWhale/OpenMiro/oracle-seeds behind env flags: Nash equilibrium (nashpy), counterfactual branching via director-event piggyback, per-agent mid-sim MCP dispatch, Anthropic prompt caching flag, first CI test suite (62 unit tests, `.github/workflows/tests.yml`); 43 files +4,005/-29 |
 | Cheap Preset + Onboarding Overhaul | 2026-04-22 | `db6af41` Qwen/DeepSeek/Grok Cheap preset (CoT off-by-default, ~3× latency drop) + `13dbce2` Settings modal preset dropdown + per-slot overrides + LLM-based URL fetcher replacing brittle HTML parser; grounds the "$1 & under 10 min" GitHub description; direct lever on the 1K-stars-by-Apr-30 target |
+| Public Simulation Gallery | 2026-04-23 | `GET /api/simulation/public` — paginated list of `is_public=true` sims (limit 1–100, sort `created_at` desc) with card-friendly payload built from `_build_gallery_card_payload()` reading state/config/quality/trajectory/resolution on disk; scenario truncated to 180 chars; `Cache-Control: public, max-age=30`; per-sim graceful degradation. `/explore` Vue route + `ExploreView.vue` responsive grid — share-card PNG thumbs, quality + dominant-stance pills, belief-split mini-bar, agent/round/date meta, `Open →` + `Fork this →` paired actions (fork hits existing `POST /fork` → `SimulationRun`), loading skeleton, empty/error states, Load more pagination. Explore nav link (◎) in `Home.vue`. "Submit to the public gallery" callout in `EmbedDialog.vue` flipping to "Live on the public gallery" + Open gallery ↗ on public toggle. `getPublicSimulations()` helper. 5 offline unit tests over the helper. Closes the discovery gap left by PR #41 (`is_public` + `/publish`) and PR #42 (share card) — turns every published sim into a distribution node for the 1K-stars-by-Apr-30 sprint (PR #43 on MiroShark) |
 
 ## Watched Repos
 - `aaronjmars/aeon` — tracked in `memory/watched-repos.md`
@@ -63,7 +64,7 @@
 
 ## Next Priorities
 - Configure notification channels (Telegram, Discord, or Slack)
-- Next feature candidates from repo-actions Apr 22: Public Simulation Gallery (#1), Simulation Clone (#2), Claude Desktop MCP Onboarding (#3), History Search & Tags (#4), Multi-Scenario Comparison View (#5)
+- Next feature candidates from repo-actions Apr 22: Simulation Clone (#2), Claude Desktop MCP Onboarding (#3), History Search & Tags (#4), Multi-Scenario Comparison View (#5) — #1 Public Simulation Gallery shipped 2026-04-23 (PR #43)
 - From repo-actions Apr 20 (still unbuilt): Collaborative Comments (#4), Config Export/Import (#5); Round Scrubber (#1) partly exists in `ReplayView`
-- Open PRs: 0 on MiroShark (PR #42 merged Apr 22), 0 on miroshark-aeon
-- MiroShark at 773 stars / 147 forks as of Apr 22; 1K-stars-by-Apr-30 needs ~28/day with 8 days left (pacing ~19/day)
+- Open PRs: 1 on MiroShark (#43 Public Gallery, filed Apr 23), 0 on miroshark-aeon
+- MiroShark at 788 stars / 147 forks as of Apr 23 (repo-pulse); 1K-stars-by-Apr-30 needs ~30/day with 7 days left (22 stars/day pace yesterday)
