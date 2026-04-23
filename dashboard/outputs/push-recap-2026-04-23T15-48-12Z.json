@@ -1,0 +1,214 @@
+{
+  "root": "card-root",
+  "state": {},
+  "elements": {
+    "card-root": {
+      "type": "Card",
+      "props": {
+        "title": "Push Recap — 2026-04-23"
+      },
+      "children": [
+        "repos-heading",
+        "repo-stack",
+        "sep-1",
+        "feature-heading",
+        "feature-text",
+        "sep-2",
+        "backend-heading",
+        "backend-text",
+        "sep-3",
+        "changes-heading",
+        "changes-stack",
+        "sep-4",
+        "dist-heading",
+        "dist-text",
+        "sep-5",
+        "stats-heading",
+        "stats-stack",
+        "sep-6",
+        "link-recap"
+      ]
+    },
+    "repos-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Repository Summary",
+        "level": "h2"
+      }
+    },
+    "repo-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "repo-1",
+        "repo-2"
+      ]
+    },
+    "repo-1": {
+      "type": "Text",
+      "props": {
+        "text": "aaronjmars/MiroShark — 1 commit by 2 authors (Aaron + Aeon co-author)"
+      }
+    },
+    "repo-2": {
+      "type": "Text",
+      "props": {
+        "text": "aaronjmars/miroshark-aeon — 0 substantive, ~28 auto-chore commits"
+      }
+    },
+    "sep-1": {
+      "type": "Separator"
+    },
+    "feature-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Public Simulation Gallery (PR #43)",
+        "level": "h2"
+      }
+    },
+    "feature-text": {
+      "type": "Text",
+      "props": {
+        "text": "/explore is live. Every simulation toggled public via /publish now has a discoverable home — a card grid pulling the share-card PNG as thumbnail, quality + stance pills, belief-split mini-bar, and paired \"Open →\" + \"Fork this →\" actions. Closes the discovery gap left by PR #41 (is_public) and PR #42 (share card).",
+        "variant": "body"
+      }
+    },
+    "sep-2": {
+      "type": "Separator"
+    },
+    "backend-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Backend Pattern",
+        "level": "h3"
+      }
+    },
+    "backend-text": {
+      "type": "Text",
+      "props": {
+        "text": "Backend pattern compounds: new `_build_gallery_card_payload()` is the sibling of PR #42's `_build_embed_summary_payload()` — cheap reads over the per-simulation on-disk layout (state/config/quality/trajectory/resolution JSON), graceful per-sim degradation, no DB joins. GET /api/simulation/public is paginated, sorted created_at desc, with a 30s public cache.",
+        "variant": "body"
+      }
+    },
+    "sep-3": {
+      "type": "Separator"
+    },
+    "changes-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Key Changes",
+        "level": "h2"
+      }
+    },
+    "changes-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "change-1",
+        "change-2",
+        "change-3",
+        "change-4",
+        "change-5"
+      ]
+    },
+    "change-1": {
+      "type": "Text",
+      "props": {
+        "text": "New ExploreView.vue (+957 lines) — responsive card grid, loading skeleton, empty + error states, Load more pagination"
+      }
+    },
+    "change-2": {
+      "type": "Text",
+      "props": {
+        "text": "New /api/simulation/public endpoint (+215 lines in simulation.py) with scenario truncation to 180 chars"
+      }
+    },
+    "change-3": {
+      "type": "Text",
+      "props": {
+        "text": "EmbedDialog callout flips to \"Live on the public gallery\" + Open gallery ↗ once operator toggles public"
+      }
+    },
+    "change-4": {
+      "type": "Text",
+      "props": {
+        "text": "5 offline unit tests in test_unit_public_gallery.py"
+      }
+    },
+    "change-5": {
+      "type": "Text",
+      "props": {
+        "text": "◎ Explore nav link added to Home.vue"
+      }
+    },
+    "sep-4": {
+      "type": "Separator"
+    },
+    "dist-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Distribution Lever",
+        "level": "h2"
+      }
+    },
+    "dist-text": {
+      "type": "Text",
+      "props": {
+        "text": "Distribution lever for the 1K-stars-by-Apr-30 target (773 → 1,000, 7 days left, ~30/day pace). Zero new deps, zero DB schema change.",
+        "variant": "body"
+      }
+    },
+    "sep-5": {
+      "type": "Separator"
+    },
+    "stats-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Stats",
+        "level": "h2"
+      }
+    },
+    "stats-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "lg"
+      },
+      "children": [
+        "stat-files",
+        "stat-lines"
+      ]
+    },
+    "stat-files": {
+      "type": "Stat",
+      "props": {
+        "label": "Files Changed",
+        "value": "8"
+      }
+    },
+    "stat-lines": {
+      "type": "Stat",
+      "props": {
+        "label": "Lines Added",
+        "value": "+1,536"
+      }
+    },
+    "sep-6": {
+      "type": "Separator"
+    },
+    "link-recap": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full Push Recap",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-04-23.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}

@@ -1,23 +1,16 @@
-*Push Recap — 2026-04-22*
-MiroShark — 23 substantive commits + miroshark-aeon — 1 (PR #22), 2 authors
+*Push Recap — 2026-04-23*
+aaronjmars/MiroShark — 1 commit by 2 authors (Aaron + Aeon co-author); aaronjmars/miroshark-aeon — 0 substantive, ~28 auto-chore commits.
 
-Heavy 21:07–22:52 UTC cluster yesterday + PR #42 today: project-grade tightening pass, not a single feature drop. Settings/onboarding rebuilt model-list-down + simulation runner finally hardened end-to-end + 8-branch cleanup sweep merges into main on the same day docs split into docs/ reference.
+Public Simulation Gallery (PR #43): /explore is live. Every simulation toggled public via /publish now has a discoverable home — a card grid pulling the share-card PNG as thumbnail, quality + stance pills, belief-split mini-bar, and paired "Open →" + "Fork this →" actions. Closes the discovery gap left by PR #41 (is_public) and PR #42 (share card).
 
-Themes:
-• Social Share Card lands (PR #42, +1,392/-139): 1200×630 OG card + /share/<id> landing + EmbedDialog preview/download. Zero new deps, 11 unit tests. Direct lever on 1K-stars target.
-• Onboarding rebuild: Cheap preset → Qwen3.5-flash/DeepSeek-v3.2/Grok-4.1-fast (CoT-off → ~3× lower latency, ~$0.50/run measured); Settings modal preset dropdown + per-slot overrides; LLM-based URL fetcher replaces brittle HTML parser; prediction-market titles routed through Smart slot.
-• Simulation runner hardened: counterfactual injection finally wired into all 4 loops (was imported nowhere, branches silently ran as plain forks); per-round error isolation + 600s ROUND_TIMEOUT watchdog; BeliefTracker persists state across pause/resume; What If? agent_id=0 falsy-trap + display-name vs handle namespace mismatch fixed in /counterfactual + /demographics.
-• README & docs rewrite (12 commits): 698→243-line slim landing + 9 docs/ files split + OpenAI/Anthropic install paths + native Neo4j default + Windows path + "$1 & under 10 min" tagline.
-• OASIS → Wonderwall rename across 35 files; neo4j added to CI test deps.
-• 7 cleanup-branch merges (DRY/defensive/weak-types/types/AI-slop/legacy/unused) in a 39-second window 15:38 UTC + 8 CLEANUP_ASSESSMENT_*.md artifacts deleted (-911 lines).
-• Simulation page UI/UX overhaul (+2,364/-344): new inline PolymarketChart, one toggleOverlay() dispatcher, design-system color alignment, chartExport.js with HiDPI Copy/Download + MiroShark footer on every chart, multi-market settings 1–5.
-• miroshark-aeon PR #22: token-report XAI prefetch migration closes 3-day silent-fail on daily Social Pulse.
+Backend pattern compounds: new `_build_gallery_card_payload()` is the sibling of PR #42's `_build_embed_summary_payload()` — cheap reads over the per-simulation on-disk layout (state/config/quality/trajectory/resolution JSON), graceful per-sim degradation, no DB joins. GET /api/simulation/public is paginated, sorted created_at desc, with a 30s public cache.
 
 Key changes:
-- 6fb30bd UI overhaul (12 files, 985-line new PolymarketChart + 280-line chartExport.js with font preload + sim-id'd footer)
-- 9d71291 Social Share Card (Pillow renderer + share blueprint + EmbedDialog dialog + 11 tests)
-- 2fd2532 simulation runner hardening (counterfactual_loader actually called for the first time + persisted belief state across pause/resume)
-- ea1e799 + cbbf155 README compressed 698→243 lines, split into 9 docs/ files
+- New ExploreView.vue (+957 lines) — responsive card grid, loading skeleton, empty + error states, Load more pagination
+- New /api/simulation/public endpoint (+215 lines in simulation.py) with scenario truncation to 180 chars
+- EmbedDialog callout flips to "Live on the public gallery" + Open gallery ↗ once operator toggles public; 5 offline unit tests in test_unit_public_gallery.py; ◎ Explore nav link added to Home.vue
 
-Stats: ~150 files / +8,645 / -3,726 across 24 substantive commits
-Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-04-22.md
+Distribution lever for the 1K-stars-by-Apr-30 target (773 → 1,000, 7 days left, ~30/day pace). Zero new deps, zero DB schema change.
+
+Stats: 8 files changed, +1,536 / -0 lines
+Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-04-23.md
