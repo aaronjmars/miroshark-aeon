@@ -1,0 +1,285 @@
+{
+  "root": "root_card",
+  "state": {},
+  "elements": {
+    "root_card": {
+      "type": "Card",
+      "props": {
+        "title": "Top Tweets — $MIROSHARK OR @miroshark_ OR github.com/aaronjmars/miroshark (2026-04-23)"
+      },
+      "children": [
+        "tweets_stack"
+      ]
+    },
+    "tweets_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "t1g",
+        "t2g",
+        "t3g",
+        "t4g",
+        "t5g",
+        "t6g",
+        "t7g",
+        "t8g",
+        "t9g"
+      ]
+    },
+    "t1g": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "t1c",
+        "t1l"
+      ]
+    },
+    "t1c": {
+      "type": "TweetCard",
+      "props": {
+        "author": "MrDegenWolf",
+        "handle": "MrDegenWolf",
+        "text": "chart solid like aaronjmars gems — two sleeping giants: $miroshark (simulate hundreds of agents in minutes) & $aeon (autonomous AI). higher.",
+        "likes": 19,
+        "retweets": 7
+      }
+    },
+    "t1l": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/MrDegenWolf/status/2046961929504051272"
+      }
+    },
+    "t2g": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "t2c",
+        "t2l"
+      ]
+    },
+    "t2c": {
+      "type": "TweetCard",
+      "props": {
+        "author": "TheGodfath13541",
+        "handle": "TheGodfath13541",
+        "text": "Thesis: 681 stars, 127 forks, 25 days, 4+ daily commits; Aeon found Vercel HIGH SEVERITY vuln same week as their breach; WSJ called the tech a $1B company; sub-penny, 608 holders, production infra",
+        "likes": 15,
+        "retweets": 5
+      }
+    },
+    "t2l": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/TheGodfath13541/status/2046920649948430818"
+      }
+    },
+    "t3g": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "t3c",
+        "t3l"
+      ]
+    },
+    "t3c": {
+      "type": "TweetCard",
+      "props": {
+        "author": "miroshark_",
+        "handle": "miroshark_",
+        "text": "It's still going btw. Just mention $MiroShark & receive tokens on bankrbot based on your engagement.",
+        "likes": 6,
+        "retweets": 2
+      }
+    },
+    "t3l": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/miroshark_/status/2046945533739028771"
+      }
+    },
+    "t4g": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "t4c",
+        "t4l"
+      ]
+    },
+    "t4c": {
+      "type": "TweetCard",
+      "props": {
+        "author": "Naomivana_",
+        "handle": "Naomivana_",
+        "text": "$MIROSHARK 0xd7bc6a05a56655FB2052F742B012d1DFD66e1BA3",
+        "likes": 3,
+        "retweets": 0
+      }
+    },
+    "t4l": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/Naomivana_/status/2047086202344632660"
+      }
+    },
+    "t5g": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "t5c",
+        "t5l"
+      ]
+    },
+    "t5c": {
+      "type": "TweetCard",
+      "props": {
+        "author": "TheGodfath13541",
+        "handle": "TheGodfath13541",
+        "text": "probably nothing at all tbh. It's not like $Miroshark is a small cap on base with insane potential or anything.",
+        "likes": 3,
+        "retweets": 0
+      }
+    },
+    "t5l": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/TheGodfath13541/status/2047042666962047314"
+      }
+    },
+    "t6g": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "t6c",
+        "t6l"
+      ]
+    },
+    "t6c": {
+      "type": "TweetCard",
+      "props": {
+        "author": "Jsxontop",
+        "handle": "Jsxontop",
+        "text": "$MIROSHARK",
+        "likes": 2,
+        "retweets": 0
+      }
+    },
+    "t6l": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/Jsxontop/status/2047029397731823750"
+      }
+    },
+    "t7g": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "t7c",
+        "t7l"
+      ]
+    },
+    "t7c": {
+      "type": "TweetCard",
+      "props": {
+        "author": "cybercelos",
+        "handle": "cybercelos",
+        "text": "Two hot picks: $DARKSOL up 60% near 250k / $Miroshark near 225k — Miro getting ready for takeoff",
+        "likes": 1,
+        "retweets": 0
+      }
+    },
+    "t7l": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/cybercelos/status/2047048754847694954"
+      }
+    },
+    "t8g": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "t8c",
+        "t8l"
+      ]
+    },
+    "t8c": {
+      "type": "TweetCard",
+      "props": {
+        "author": "aaronjmars",
+        "handle": "aaronjmars",
+        "text": "Simulate anything, for $1 & less than 10 min — Universal Swarm Intelligence Engine github.com/aaronjmars/MiroShark",
+        "likes": 1,
+        "retweets": 0
+      }
+    },
+    "t8l": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/aaronjmars/status/2046941194911965674"
+      }
+    },
+    "t9g": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "t9c",
+        "t9l"
+      ]
+    },
+    "t9c": {
+      "type": "TweetCard",
+      "props": {
+        "author": "aaronjmars",
+        "handle": "aaronjmars",
+        "text": "it's hundreds of simulated agents based on real humans — github.com/aaronjmars/MiroShark",
+        "likes": 0,
+        "retweets": 0
+      }
+    },
+    "t9l": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/aaronjmars/status/2046940073350865129"
+      }
+    }
+  }
+}
