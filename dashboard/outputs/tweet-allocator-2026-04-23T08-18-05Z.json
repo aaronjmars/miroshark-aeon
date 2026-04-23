@@ -1,0 +1,318 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "Tweet Rewards — 2026-04-23",
+        "description": "Budget: $10.00 in $MIROSHARK on Base"
+      },
+      "children": [
+        "sep-1",
+        "tweet-1",
+        "tweet-2",
+        "tweet-3",
+        "tweet-4",
+        "tweet-5",
+        "sep-2",
+        "total"
+      ]
+    },
+    "sep-1": {
+      "type": "Separator",
+      "props": {}
+    },
+    "tweet-1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "t1-header",
+        "t1-text",
+        "t1-link"
+      ]
+    },
+    "t1-header": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "t1-author",
+        "t1-amount",
+        "t1-score"
+      ]
+    },
+    "t1-author": {
+      "type": "Text",
+      "props": {
+        "text": "x.com/MrDegenWolf"
+      }
+    },
+    "t1-amount": {
+      "type": "Badge",
+      "props": {
+        "text": "$4.45 in $MIROSHARK"
+      }
+    },
+    "t1-score": {
+      "type": "Badge",
+      "props": {
+        "text": "score: 40"
+      }
+    },
+    "t1-text": {
+      "type": "Text",
+      "props": {
+        "text": "chart solid like @aaronjmars gems — two sleeping giants $miroshark & $aeon. higher.",
+        "variant": "body"
+      }
+    },
+    "t1-link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/MrDegenWolf/status/2046961929504051272"
+      }
+    },
+    "tweet-2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "t2-header",
+        "t2-text",
+        "t2-link"
+      ]
+    },
+    "t2-header": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "t2-author",
+        "t2-amount",
+        "t2-score"
+      ]
+    },
+    "t2-author": {
+      "type": "Text",
+      "props": {
+        "text": "x.com/TheGodfath13541"
+      }
+    },
+    "t2-amount": {
+      "type": "Badge",
+      "props": {
+        "text": "$3.46 in $MIROSHARK"
+      }
+    },
+    "t2-score": {
+      "type": "Badge",
+      "props": {
+        "text": "score: 30"
+      }
+    },
+    "t2-text": {
+      "type": "Text",
+      "props": {
+        "text": "Long thesis: 681 stars, 127 forks, 25 days old, HIGH SEVERITY vuln find, WSJ-cited tech — sub-penny with production infra.",
+        "variant": "body"
+      }
+    },
+    "t2-link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/TheGodfath13541/status/2046920649948430818"
+      }
+    },
+    "tweet-3": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "t3-header",
+        "t3-text",
+        "t3-link"
+      ]
+    },
+    "t3-header": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "t3-author",
+        "t3-amount",
+        "t3-score"
+      ]
+    },
+    "t3-author": {
+      "type": "Text",
+      "props": {
+        "text": "x.com/Naomivana_"
+      }
+    },
+    "t3-amount": {
+      "type": "Badge",
+      "props": {
+        "text": "$0.80 in $MIROSHARK"
+      }
+    },
+    "t3-score": {
+      "type": "Badge",
+      "props": {
+        "text": "score: 3"
+      }
+    },
+    "t3-text": {
+      "type": "Text",
+      "props": {
+        "text": "$MIROSHARK contract drop post.",
+        "variant": "body"
+      }
+    },
+    "t3-link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/Naomivana_/status/2047086202344632660"
+      }
+    },
+    "tweet-4": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "t4-header",
+        "t4-text",
+        "t4-link"
+      ]
+    },
+    "t4-header": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "t4-author",
+        "t4-amount",
+        "t4-score"
+      ]
+    },
+    "t4-author": {
+      "type": "Text",
+      "props": {
+        "text": "x.com/Jsxontop"
+      }
+    },
+    "t4-amount": {
+      "type": "Badge",
+      "props": {
+        "text": "$0.70 in $MIROSHARK"
+      }
+    },
+    "t4-score": {
+      "type": "Badge",
+      "props": {
+        "text": "score: 2"
+      }
+    },
+    "t4-text": {
+      "type": "Text",
+      "props": {
+        "text": "$MIROSHARK in reply to bags list.",
+        "variant": "body"
+      }
+    },
+    "t4-link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/Jsxontop/status/2047029397731823750"
+      }
+    },
+    "tweet-5": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "t5-header",
+        "t5-text",
+        "t5-link"
+      ]
+    },
+    "t5-header": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "t5-author",
+        "t5-amount",
+        "t5-score"
+      ]
+    },
+    "t5-author": {
+      "type": "Text",
+      "props": {
+        "text": "x.com/cybercelos"
+      }
+    },
+    "t5-amount": {
+      "type": "Badge",
+      "props": {
+        "text": "$0.59 in $MIROSHARK"
+      }
+    },
+    "t5-score": {
+      "type": "Badge",
+      "props": {
+        "text": "score: 1"
+      }
+    },
+    "t5-text": {
+      "type": "Text",
+      "props": {
+        "text": "Two hot picks: $DARKSOL 60% / $Miroshark near 225k — getting for takeoff.",
+        "variant": "body"
+      }
+    },
+    "t5-link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/cybercelos/status/2047048754847694954"
+      }
+    },
+    "sep-2": {
+      "type": "Separator",
+      "props": {}
+    },
+    "total": {
+      "type": "Stat",
+      "props": {
+        "label": "Total",
+        "value": "$10.00 in $MIROSHARK allocated to 5 authors"
+      }
+    }
+  }
+}
