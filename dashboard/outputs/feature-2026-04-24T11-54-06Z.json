@@ -1,0 +1,186 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Feature Built"
+      },
+      "children": [
+        "stack_main"
+      ]
+    },
+    "stack_main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "text_metadata",
+        "sep_1",
+        "heading_built",
+        "stack_items",
+        "sep_2",
+        "heading_how",
+        "text_how",
+        "sep_3",
+        "heading_next",
+        "stack_next"
+      ]
+    },
+    "text_metadata": {
+      "type": "Text",
+      "props": {
+        "text": "2026-04-24 (2/2)",
+        "variant": "caption"
+      }
+    },
+    "sep_1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading_built": {
+      "type": "Heading",
+      "props": {
+        "text": "What was built",
+        "level": "h2"
+      }
+    },
+    "stack_items": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading_item1",
+        "text_item1",
+        "heading_item2",
+        "text_item2",
+        "heading_item3",
+        "text_item3",
+        "heading_item4",
+        "text_item4"
+      ]
+    },
+    "heading_item1": {
+      "type": "Heading",
+      "props": {
+        "text": "backend/app/api/mcp.py",
+        "level": "h3"
+      }
+    },
+    "text_item1": {
+      "type": "Text",
+      "props": {
+        "text": "New GET /api/mcp/status endpoint returning the 8-tool catalog, resolved absolute paths (backend_dir, mcp_script, python_executable), pre-rendered config snippets for every supported client, and a Neo4j liveness probe (graph + entity count). The probe never raises — the panel renders guidance even when Neo4j is down.",
+        "variant": "body"
+      }
+    },
+    "heading_item2": {
+      "type": "Heading",
+      "props": {
+        "text": "frontend/src/components/SettingsPanel.vue",
+        "level": "h3"
+      }
+    },
+    "text_item2": {
+      "type": "Text",
+      "props": {
+        "text": "New AI Integration · MCP section with a health badge (Ready / Neo4j down / Server file missing), a summary grid, tabbed client picker (Claude Desktop / Cursor / Windsurf / Continue / fallback-direct), a dark code block + copy-snippet button (with execCommand fallback for non-secure-context browsers), per-client config-file path hints, a collapsed tool catalog, and a docs link.",
+        "variant": "body"
+      }
+    },
+    "heading_item3": {
+      "type": "Heading",
+      "props": {
+        "text": "docs/MCP.md",
+        "level": "h3"
+      }
+    },
+    "text_item3": {
+      "type": "Text",
+      "props": {
+        "text": "Expanded from Claude-Desktop-only to cover all four MCP clients with config snippets, a verification checklist, and a 5-row troubleshooting matrix.",
+        "variant": "body"
+      }
+    },
+    "heading_item4": {
+      "type": "Heading",
+      "props": {
+        "text": "backend/tests/test_unit_mcp_api.py",
+        "level": "h3"
+      }
+    },
+    "text_item4": {
+      "type": "Text",
+      "props": {
+        "text": "9 offline unit tests including a regex-based tool-catalog drift detector that scans mcp_server.py and fails CI if the API tool list goes stale.",
+        "variant": "body"
+      }
+    },
+    "sep_2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading_how": {
+      "type": "Heading",
+      "props": {
+        "text": "How it works",
+        "level": "h2"
+      }
+    },
+    "text_how": {
+      "type": "Text",
+      "props": {
+        "text": "The endpoint resolves its own on-disk location with Path(__file__).resolve().parent.parent.parent so the snippets it returns reference the user's actual backend/ directory and the same Python interpreter currently serving the API — paste-and-go, no manual editing. The MCP server itself runs over stdio (no port to open, no daemon) and is launched by the MCP client on demand, inheriting the backend's .env for Neo4j + LLM credentials. The frontend uses the modern Clipboard API with a textarea+execCommand fallback for HTTP/older browsers. The Continue snippet uses experimental.modelContextProtocolServers (a different shape than mcpServers) so Continue users don't end up with an empty tool list.",
+        "variant": "body"
+      }
+    },
+    "sep_3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading_next": {
+      "type": "Heading",
+      "props": {
+        "text": "What's next",
+        "level": "h2"
+      }
+    },
+    "stack_next": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "text_next",
+        "link_pr"
+      ]
+    },
+    "text_next": {
+      "type": "Text",
+      "props": {
+        "text": "History Search & Tags (#4 from repo-actions Apr 22) is the next unbuilt candidate — power-user organization for the simulation library, with tags also bridging to the public gallery as a clickable filter taxonomy.",
+        "variant": "body"
+      }
+    },
+    "link_pr": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #44",
+        "href": "https://github.com/aaronjmars/MiroShark/pull/44",
+        "source": "GitHub"
+      }
+    }
+  }
+}
