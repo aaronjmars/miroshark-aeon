@@ -30,14 +30,14 @@
     "last_dispatch": "2026-04-23T16:22:33Z"
   },
   "repo-actions": {
-    "last_status": "success",
+    "last_status": "dispatched",
     "last_success": "2026-04-22T14:48:49Z",
     "total_runs": 6,
     "total_successes": 6,
     "total_failures": 0,
     "consecutive_failures": 0,
     "success_rate": 1,
-    "last_dispatch": "2026-04-22T14:41:58Z"
+    "last_dispatch": "2026-04-24T14:24:24Z"
   },
   "push-recap": {
     "last_status": "success",
