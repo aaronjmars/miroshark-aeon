@@ -20,14 +20,14 @@
     "success_rate": 1
   },
   "project-lens": {
-    "last_status": "success",
+    "last_status": "dispatched",
     "last_success": "2026-04-23T16:28:55Z",
     "total_runs": 11,
     "total_successes": 11,
     "total_failures": 0,
     "consecutive_failures": 0,
     "success_rate": 1,
-    "last_dispatch": "2026-04-23T16:22:33Z"
+    "last_dispatch": "2026-04-24T16:02:40Z"
   },
   "repo-actions": {
     "last_status": "success",
@@ -102,8 +102,8 @@
     "success_rate": 1
   },
   "repo-article": {
-    "last_dispatch": "2026-04-23T16:22:33Z",
-    "last_status": "success",
+    "last_dispatch": "2026-04-24T16:02:40Z",
+    "last_status": "dispatched",
     "last_success": "2026-04-23T16:25:45Z",
     "total_runs": 10,
     "total_successes": 10,
