@@ -1,0 +1,266 @@
+{
+  "root": "card-root",
+  "state": {},
+  "elements": {
+    "card-root": {
+      "type": "Card",
+      "props": {
+        "title": "Push Recap — 2026-04-24",
+        "description": "MiroShark + miroshark-aeon — 2 substantive commits, both merged 13:20 UTC (8 min apart) by Aaron Mars with Aeon co-author. Plus ~31 automation-bookkeeping commits on aeon."
+      },
+      "children": [
+        "stack-main"
+      ]
+    },
+    "stack-main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "pr44-section",
+        "sep1",
+        "pr23-section",
+        "sep2",
+        "key-changes-section",
+        "sep3",
+        "stats-section",
+        "sep4",
+        "recap-section"
+      ]
+    },
+    "pr44-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "pr44-title",
+        "pr44-text1",
+        "pr44-text2",
+        "pr44-text3"
+      ]
+    },
+    "pr44-title": {
+      "type": "Heading",
+      "props": {
+        "text": "AI Integration · MCP Onboarding (MiroShark PR #44)",
+        "level": "h3"
+      }
+    },
+    "pr44-text1": {
+      "type": "Text",
+      "props": {
+        "text": "The bundled mcp_server.py is now discoverable from inside the app. New /api/mcp/status endpoint ships an 8-tool catalog, resolved absolute paths, and copy-paste config snippets for Claude Desktop / Cursor / Windsurf / Continue plus a fallback direct-interpreter form.",
+        "variant": "body"
+      }
+    },
+    "pr44-text2": {
+      "type": "Text",
+      "props": {
+        "text": "SettingsPanel.vue gains an AI Integration section with health badge (Ready / Neo4j down / Server file missing), client tabs, dark snippet block + copy button (with execCommand fallback for non-secure contexts), and a collapsed tool catalog.",
+        "variant": "body"
+      }
+    },
+    "pr44-text3": {
+      "type": "Text",
+      "props": {
+        "text": "The Apr-21 direct-push graph-memory stack was invisible to users — this PR exposes it.",
+        "variant": "body"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "pr23-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "pr23-title",
+        "pr23-text1",
+        "pr23-text2",
+        "pr23-text3"
+      ]
+    },
+    "pr23-title": {
+      "type": "Heading",
+      "props": {
+        "text": "Fetch-tweets dedup hardening (miroshark-aeon PR #23)",
+        "level": "h3"
+      }
+    },
+    "pr23-text1": {
+      "type": "Text",
+      "props": {
+        "text": "self-improve caught a latent re-notify bug before it fired. Grok returns the same tweet under two URL shapes — x.com/<handle>/status/<id> when it has the text and x.com/i/status/<id> when harvested via content.annotations[] (PR #20).",
+        "variant": "body"
+      }
+    },
+    "pr23-text2": {
+      "type": "Text",
+      "props": {
+        "text": "47% of the 115 historical seen URLs are in the i/status form.",
+        "variant": "body"
+      }
+    },
+    "pr23-text3": {
+      "type": "Text",
+      "props": {
+        "text": "Step 1 + step 5 of fetch-tweets/SKILL.md now dedup on numeric tweet ID (regex /status/(\\d+)) instead of full URL. Seen-file write path unchanged.",
+        "variant": "body"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "key-changes-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "key-changes-title",
+        "change1",
+        "change2",
+        "change3"
+      ]
+    },
+    "key-changes-title": {
+      "type": "Heading",
+      "props": {
+        "text": "Key changes:",
+        "level": "h3"
+      }
+    },
+    "change1": {
+      "type": "Text",
+      "props": {
+        "text": "backend/app/api/mcp.py — new Flask blueprint, 291 lines, per-client pre-rendered JSON snippets; tool-catalog drift caught by regex-based unit test against mcp_server.py",
+        "variant": "body"
+      }
+    },
+    "change2": {
+      "type": "Text",
+      "props": {
+        "text": "SettingsPanel.vue — +445 lines, clipboard API + execCommand fallback so the copy button works in non-secure contexts too",
+        "variant": "body"
+      }
+    },
+    "change3": {
+      "type": "Text",
+      "props": {
+        "text": "skills/fetch-tweets/SKILL.md — SEEN_IDS set extracted via regex from persistent seen-file + last 3 days of logs; reconciles with filter-xai-tweets.py's existing in-run ID dedup",
+        "variant": "body"
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stats-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stats-header",
+        "stats-grid",
+        "stats-automation"
+      ]
+    },
+    "stats-header": {
+      "type": "Heading",
+      "props": {
+        "text": "Stats:",
+        "level": "h3"
+      }
+    },
+    "stats-grid": {
+      "type": "Grid",
+      "props": {
+        "columns": 3,
+        "gap": "md"
+      },
+      "children": [
+        "stat-files",
+        "stat-added",
+        "stat-removed"
+      ]
+    },
+    "stat-files": {
+      "type": "Stat",
+      "props": {
+        "label": "Substantive files",
+        "value": "15"
+      }
+    },
+    "stat-added": {
+      "type": "Stat",
+      "props": {
+        "label": "Lines added",
+        "value": "+1,382"
+      }
+    },
+    "stat-removed": {
+      "type": "Stat",
+      "props": {
+        "label": "Lines removed",
+        "value": "−32"
+      }
+    },
+    "stats-automation": {
+      "type": "Text",
+      "props": {
+        "text": "~31 automation chores on aeon",
+        "variant": "caption"
+      }
+    },
+    "sep4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "recap-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "recap-label",
+        "recap-url"
+      ]
+    },
+    "recap-label": {
+      "type": "Text",
+      "props": {
+        "text": "Full recap:",
+        "variant": "lead"
+      }
+    },
+    "recap-url": {
+      "type": "StoryLink",
+      "props": {
+        "title": "articles/push-recap-2026-04-24.md",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-04-24.md",
+        "source": "github.com/aaronjmars/miroshark-aeon"
+      }
+    }
+  }
+}
