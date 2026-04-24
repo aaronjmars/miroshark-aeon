@@ -1,0 +1,337 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "Repo Action Ideas — 2026-04-24",
+        "description": "Generated from analysis of aaronjmars/MiroShark (799 stars · 149 forks · 0 open PRs)"
+      },
+      "children": [
+        "main-stack"
+      ]
+    },
+    "main-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "lg"
+      },
+      "children": [
+        "context-alert",
+        "action-1",
+        "sep-1",
+        "action-2",
+        "sep-2",
+        "action-3",
+        "sep-3",
+        "action-4",
+        "sep-4",
+        "action-5",
+        "sep-final",
+        "link-section"
+      ]
+    },
+    "context-alert": {
+      "type": "Alert",
+      "props": {
+        "type": "info",
+        "message": "PR #44 MCP Onboarding merged today; 6 days left on the 1K-star sprint."
+      }
+    },
+    "action-1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "action-1-title",
+        "action-1-badges",
+        "action-1-desc"
+      ]
+    },
+    "action-1-title": {
+      "type": "Heading",
+      "props": {
+        "text": "1. Live Simulation Streaming / SSE",
+        "level": "h3"
+      }
+    },
+    "action-1-badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "badge-1-feature",
+        "badge-1-small"
+      ]
+    },
+    "badge-1-feature": {
+      "type": "Badge",
+      "props": {
+        "text": "Feature",
+        "variant": "default"
+      }
+    },
+    "badge-1-small": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "secondary"
+      }
+    },
+    "action-1-desc": {
+      "type": "Text",
+      "props": {
+        "text": "Stream round-by-round belief updates in real time — creates a GIF-able \"watch the minds change\" moment that's shareable mid-run, not just post-completion.",
+        "variant": "body"
+      }
+    },
+    "sep-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "action-2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "action-2-title",
+        "action-2-badges",
+        "action-2-desc"
+      ]
+    },
+    "action-2-title": {
+      "type": "Heading",
+      "props": {
+        "text": "2. Simulation Engagement Leaderboard",
+        "level": "h3"
+      }
+    },
+    "action-2-badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "badge-2-community",
+        "badge-2-small"
+      ]
+    },
+    "badge-2-community": {
+      "type": "Badge",
+      "props": {
+        "text": "Community/Growth",
+        "variant": "default"
+      }
+    },
+    "badge-2-small": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "secondary"
+      }
+    },
+    "action-2-desc": {
+      "type": "Text",
+      "props": {
+        "text": "Top-20 public simulations ranked by fork × quality × share-views — curated social proof for new visitors, separate from the chronological gallery.",
+        "variant": "body"
+      }
+    },
+    "sep-2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "action-3": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "action-3-title",
+        "action-3-badges",
+        "action-3-desc"
+      ]
+    },
+    "action-3-title": {
+      "type": "Heading",
+      "props": {
+        "text": "3. Webhook Notification on Completion",
+        "level": "h3"
+      }
+    },
+    "action-3-badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "badge-3-integration",
+        "badge-3-small"
+      ]
+    },
+    "badge-3-integration": {
+      "type": "Badge",
+      "props": {
+        "text": "Integration/DX",
+        "variant": "default"
+      }
+    },
+    "badge-3-small": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "secondary"
+      }
+    },
+    "action-3-desc": {
+      "type": "Text",
+      "props": {
+        "text": "User-registered webhook fires on simulation complete with full result payload + share URL; enables Zapier/Make/n8n integrations with zero code.",
+        "variant": "body"
+      }
+    },
+    "sep-3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "action-4": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "action-4-title",
+        "action-4-badges",
+        "action-4-desc"
+      ]
+    },
+    "action-4-title": {
+      "type": "Heading",
+      "props": {
+        "text": "4. \"Post to Discord / Slack\" Share Button",
+        "level": "h3"
+      }
+    },
+    "action-4-badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "badge-4-integration",
+        "badge-4-small"
+      ]
+    },
+    "badge-4-integration": {
+      "type": "Badge",
+      "props": {
+        "text": "Integration/Growth",
+        "variant": "default"
+      }
+    },
+    "badge-4-small": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "secondary"
+      }
+    },
+    "action-4-desc": {
+      "type": "Text",
+      "props": {
+        "text": "One-click share to any Discord or Slack channel via Incoming Webhook URL — collapses copy-link-open-app-paste to a single button for crypto communities.",
+        "variant": "body"
+      }
+    },
+    "sep-4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "action-5": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "action-5-title",
+        "action-5-badges",
+        "action-5-desc"
+      ]
+    },
+    "action-5-title": {
+      "type": "Heading",
+      "props": {
+        "text": "5. OpenAPI / Swagger Documentation",
+        "level": "h3"
+      }
+    },
+    "action-5-badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "badge-5-dx",
+        "badge-5-small"
+      ]
+    },
+    "badge-5-dx": {
+      "type": "Badge",
+      "props": {
+        "text": "DX/Community",
+        "variant": "default"
+      }
+    },
+    "badge-5-small": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "secondary"
+      }
+    },
+    "action-5-desc": {
+      "type": "Text",
+      "props": {
+        "text": "Handwritten openapi.yaml served as Swagger UI at /api/docs; enables API directory listings, community SDKs, and signals production-quality to the Paradigm/quant audience.",
+        "variant": "body"
+      }
+    },
+    "sep-final": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "link-section": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full details: repo-actions-2026-04-24.md",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-actions-2026-04-24.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}

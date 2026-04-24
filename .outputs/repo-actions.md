@@ -1,19 +1,19 @@
-*Repo Action Ideas — 2026-04-22*
-Generated from analysis of aaronjmars/MiroShark (770 stars, 147 forks, 0 open PRs). Five net-new ideas scoped for autonomous implementation.
+*Repo Action Ideas — 2026-04-24*
+Generated from analysis of aaronjmars/MiroShark (799 stars · 149 forks · 0 open PRs). PR #44 MCP Onboarding merged today; 6 days left on the 1K-star sprint.
 
-1. Public Simulation Gallery (Growth, Small)
-   A /explore page surfacing is_public simulations as visual cards — the is_public + share-card infrastructure is complete, the discovery layer is the only missing piece. Direct growth lever for 1K-star sprint.
+1. Live Simulation Streaming / SSE (Feature, Small)
+   Stream round-by-round belief updates in real time — creates a GIF-able "watch the minds change" moment that's shareable mid-run, not just post-completion.
 
-2. Simulation Clone / One-Click Fork (Feature/DX, Small)
-   A Re-run button on result pages and history cards pre-fills the setup form with all params from that run — in-app forking with no file system required. Also powers the gallery's Fork this → action.
+2. Simulation Engagement Leaderboard (Community/Growth, Small)
+   Top-20 public simulations ranked by fork × quality × share-views — curated social proof for new visitors, separate from the chronological gallery.
 
-3. Claude Desktop / AI IDE MCP Onboarding (DX/Integration, Small)
-   A Settings AI Integration tab with a copy-pasteable claude_desktop_config.json snippet and Test connection button — turns the graph memory MCP server (8 tools, invisible today) into a discoverable power-user capability.
+3. Webhook Notification on Completion (Integration/DX, Small)
+   User-registered webhook fires on simulation complete with full result payload + share URL; enables Zapier/Make/n8n integrations with zero code.
 
-4. Simulation History Search & Tags (DX, Small)
-   Chip-style tags at setup time + a search/filter bar on the history page — turns a chronological scroll into a research library. Tags span personal history and the public gallery (/explore?tag=defi).
+4. "Post to Discord / Slack" Share Button (Integration/Growth, Small)
+   One-click share to any Discord or Slack channel via Incoming Webhook URL — collapses copy-link-open-app-paste to a single button for crypto communities.
 
-5. Multi-Scenario Comparison View (Feature/Research, Medium)
-   Select 2-3 simulations from history, view side-by-side: unified belief-drift chart, consensus comparison bars, quality diagnostic alignment, export PNG. Closes the Scenario Auto-Suggest → Compare → Export research loop.
+5. OpenAPI / Swagger Documentation (DX/Community, Small)
+   Handwritten openapi.yaml served as Swagger UI at /api/docs; enables API directory listings, community SDKs, and signals production-quality to the Paradigm/quant audience.
 
-Full details: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-actions-2026-04-22.md
+Full details: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-actions-2026-04-24.md
