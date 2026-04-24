@@ -10,11 +10,13 @@ Today is ${today}. Search X for tweets matching **${var}**.
 
 ## Steps
 
-1. **Load previously-reported tweet URLs** from two sources, then union them into `SEEN_TWEETS`:
-   - **Persistent seen-file** (`memory/fetch-tweets-seen.txt`) — if it exists, read all URLs. This file contains every tweet URL ever reported, preventing stale tweets from cycling back into notifications once log entries age out of the 3-day window.
-   - **Last 3 days of `memory/logs/`** — grep each log file for lines matching `https://x.com/` (catches URLs not yet in the seen-file).
+1. **Load previously-reported tweet IDs** from two sources, then union them into `SEEN_IDS` (a set of numeric tweet IDs — NOT full URLs):
+   - **Persistent seen-file** (`memory/fetch-tweets-seen.txt`) — if it exists, extract the `/status/<id>` ID from every line (regex `/status/(\d+)`). This file contains every tweet URL ever reported, preventing stale tweets from cycling back into notifications once log entries age out of the 3-day window.
+   - **Last 3 days of `memory/logs/`** — grep each log file for `https://x.com/.../status/<id>` occurrences and extract the numeric IDs (catches URLs not yet in the seen-file).
+
+   **Why ID-based not URL-based?** Grok returns the same tweet under two different URL shapes: `x.com/<handle>/status/<id>` when it has the full text, and `x.com/i/status/<id>` when the tweet is only cited via `content.annotations[]` (see `scripts/filter-xai-tweets.py`). Across runs, those two forms refer to the same tweet but naively URL-matching treats them as different. 47% of historical seen URLs are in the `i/status` form, so ID-based dedup is the only form that's safe.
    
-   You'll use `SEEN_TWEETS` in step 5 to filter duplicates.
+   You'll use `SEEN_IDS` in step 5 to filter duplicates.
 
 2. **Build the search prompt for Grok.** Pass `${var}` to Grok **verbatim** as the search query. Do NOT narrow it to a single angle (e.g. don't force "crypto token only", don't inject a contract address, don't filter by chain). Let Grok interpret OR/AND operators in the var as-is. The goal is broad coverage — token mentions, repo mentions, handle mentions, general chatter, all of it.
 
@@ -59,7 +61,7 @@ Today is ${today}. Search X for tweets matching **${var}**.
 
 4. **If no relevant tweets found** (no results, API error, or empty): log "FETCH_TWEETS_EMPTY" to `memory/logs/${today}.md`, send a one-line notification via `./notify` (e.g. `Fetch Tweets — ${today}: no new tweets found for ${var}.`), and stop.
 
-5. **Deduplicate against `SEEN_TWEETS` from step 1.** Compare each candidate tweet URL against the collected set of already-reported URLs. Remove any tweet that was already reported in the last 3 days. If ALL tweets found are already in the recent logs: log "FETCH_TWEETS_NO_NEW: all results already reported" to `memory/logs/${today}.md`, send a one-line notification via `./notify` (e.g. `Fetch Tweets — ${today}: N results found, all already reported in last 3 days.`), and stop.
+5. **Deduplicate against `SEEN_IDS` from step 1.** For each candidate tweet URL, extract the numeric tweet ID (regex `/status/(\d+)`) and check membership in `SEEN_IDS`. Drop any candidate whose ID is already in the set — this catches the same tweet even when Grok returns it under a different URL shape (`x.com/handle/...` vs `x.com/i/...`). If ALL tweets found are already in `SEEN_IDS`: log "FETCH_TWEETS_NO_NEW: all results already reported" to `memory/logs/${today}.md`, send a one-line notification via `./notify` (e.g. `Fetch Tweets — ${today}: N results found, all already reported in last 3 days.`), and stop.
 
 6. **Save the results** (new tweets only) to `memory/logs/${today}.md`. Include the tweet URLs, handles, and engagement so future runs can deduplicate and so downstream skills (like `tweet-allocator`) can consume them.
 
