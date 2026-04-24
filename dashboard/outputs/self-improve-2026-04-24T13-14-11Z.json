@@ -1,0 +1,245 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "Agent Self-Improvement — 2026-04-24"
+      },
+      "children": [
+        "summary",
+        "separator1",
+        "context_section",
+        "separator2",
+        "why_section",
+        "separator3",
+        "changes_section",
+        "separator4",
+        "impact_section",
+        "separator5",
+        "pr_link"
+      ]
+    },
+    "summary": {
+      "type": "Text",
+      "props": {
+        "text": "Dedup fetch-tweets by tweet ID instead of URL.",
+        "variant": "lead"
+      }
+    },
+    "separator1": {
+      "type": "Separator",
+      "props": {}
+    },
+    "context_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "context_title",
+        "context_text",
+        "context_stats"
+      ]
+    },
+    "context_title": {
+      "type": "Heading",
+      "props": {
+        "text": "Current State",
+        "level": "h3"
+      }
+    },
+    "context_text": {
+      "type": "Text",
+      "props": {
+        "text": "Today's log has 13 named + 11 annotation-only tweet URLs, and 47% of the 115 historical seen URLs are in the annotation `x.com/i/status/<id>` form — the URL-matching dedup was one crossover away from re-notifying the same tweet under two different shapes."
+      }
+    },
+    "context_stats": {
+      "type": "Grid",
+      "props": {
+        "columns": 3,
+        "gap": "md"
+      },
+      "children": [
+        "stat_named",
+        "stat_annotation",
+        "stat_historical"
+      ]
+    },
+    "stat_named": {
+      "type": "Stat",
+      "props": {
+        "label": "Named tweet URLs",
+        "value": "13"
+      }
+    },
+    "stat_annotation": {
+      "type": "Stat",
+      "props": {
+        "label": "Annotation-only URLs",
+        "value": "11"
+      }
+    },
+    "stat_historical": {
+      "type": "Stat",
+      "props": {
+        "label": "Historical seen URLs in annotation form",
+        "value": "47%",
+        "delta": "of 115 total"
+      }
+    },
+    "separator2": {
+      "type": "Separator",
+      "props": {}
+    },
+    "why_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "why_title",
+        "why_text"
+      ]
+    },
+    "why_title": {
+      "type": "Heading",
+      "props": {
+        "text": "Why",
+        "level": "h3"
+      }
+    },
+    "why_text": {
+      "type": "Text",
+      "props": {
+        "text": "Grok surfaces the same tweet as `x.com/<handle>/status/<id>` when it has the text, and as `x.com/i/status/<id>` when harvested from `content.annotations[]` (PR #20). Across runs those are the same tweet — URL dedup saw them as different. No active duplicate yet, but the invariant was fragile by construction."
+      }
+    },
+    "separator3": {
+      "type": "Separator",
+      "props": {}
+    },
+    "changes_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "changes_title",
+        "changes_list"
+      ]
+    },
+    "changes_title": {
+      "type": "Heading",
+      "props": {
+        "text": "What Changed",
+        "level": "h3"
+      }
+    },
+    "changes_list": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "change1",
+        "change2",
+        "change3"
+      ]
+    },
+    "change1": {
+      "type": "Text",
+      "props": {
+        "text": "• skills/fetch-tweets/SKILL.md step 1: load `SEEN_IDS` via `/status/(\\d+)` regex over the persistent seen-file + last 3 days of logs",
+        "variant": "body"
+      }
+    },
+    "change2": {
+      "type": "Text",
+      "props": {
+        "text": "• skills/fetch-tweets/SKILL.md step 5: match candidates by tweet ID, not URL",
+        "variant": "body"
+      }
+    },
+    "change3": {
+      "type": "Text",
+      "props": {
+        "text": "• Seen-file write path unchanged — ID extraction happens on read",
+        "variant": "body"
+      }
+    },
+    "separator4": {
+      "type": "Separator",
+      "props": {}
+    },
+    "impact_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "impact_title",
+        "impact_list"
+      ]
+    },
+    "impact_title": {
+      "type": "Heading",
+      "props": {
+        "text": "Impact",
+        "level": "h3"
+      }
+    },
+    "impact_list": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "impact1",
+        "impact2",
+        "impact3"
+      ]
+    },
+    "impact1": {
+      "type": "Text",
+      "props": {
+        "text": "Stops a future duplicate-notification regression before it lands.",
+        "variant": "body"
+      }
+    },
+    "impact2": {
+      "type": "Text",
+      "props": {
+        "text": "Matches the in-run ID dedup already in `scripts/filter-xai-tweets.py`.",
+        "variant": "body"
+      }
+    },
+    "impact3": {
+      "type": "Text",
+      "props": {
+        "text": "Zero new deps.",
+        "variant": "body"
+      }
+    },
+    "separator5": {
+      "type": "Separator",
+      "props": {}
+    },
+    "pr_link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Pull Request #23",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/pull/23",
+        "source": "GitHub"
+      }
+    }
+  }
+}
