@@ -1,0 +1,385 @@
+{
+  "root": "card-root",
+  "state": {},
+  "elements": {
+    "card-root": {
+      "type": "Card",
+      "props": {
+        "title": "Tweet Rewards — 2026-04-24",
+        "description": "Budget allocation for MiroShark mentions"
+      },
+      "children": [
+        "main-stack"
+      ]
+    },
+    "main-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "budget-stat",
+        "sep-1",
+        "tweet-1-container",
+        "sep-2",
+        "tweet-2-container",
+        "sep-3",
+        "tweet-3-container",
+        "sep-4",
+        "tweet-4-container",
+        "sep-5",
+        "tweet-5-container",
+        "sep-6",
+        "total-stat"
+      ]
+    },
+    "budget-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Budget Available",
+        "value": "$10.00",
+        "delta": "$MIROSHARK on Base"
+      }
+    },
+    "sep-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "tweet-1-container": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-1-header",
+        "tweet-1-desc",
+        "tweet-1-link"
+      ]
+    },
+    "tweet-1-header": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "tweet-1-author",
+        "tweet-1-amount",
+        "tweet-1-score"
+      ]
+    },
+    "tweet-1-author": {
+      "type": "Text",
+      "props": {
+        "text": "x.com/TheGodfath13541",
+        "variant": "lead"
+      }
+    },
+    "tweet-1-amount": {
+      "type": "Badge",
+      "props": {
+        "text": "$8.00 $MIROSHARK",
+        "variant": "default"
+      }
+    },
+    "tweet-1-score": {
+      "type": "Badge",
+      "props": {
+        "text": "score: 29",
+        "variant": "secondary"
+      }
+    },
+    "tweet-1-desc": {
+      "type": "Text",
+      "props": {
+        "text": "Paradigm CTO (@gakonst) starred MiroShark; Director Mode framed as Reagan war game analogy; 14 likes, 5 RTs",
+        "variant": "body"
+      }
+    },
+    "tweet-1-link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/TheGodfath13541/status/2047375217715032115"
+      }
+    },
+    "sep-2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "tweet-2-container": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-2-header",
+        "tweet-2-desc",
+        "tweet-2-link"
+      ]
+    },
+    "tweet-2-header": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "tweet-2-author",
+        "tweet-2-amount",
+        "tweet-2-score"
+      ]
+    },
+    "tweet-2-author": {
+      "type": "Text",
+      "props": {
+        "text": "x.com/MikeOnBase1",
+        "variant": "lead"
+      }
+    },
+    "tweet-2-amount": {
+      "type": "Badge",
+      "props": {
+        "text": "$0.50 $MIROSHARK",
+        "variant": "default"
+      }
+    },
+    "tweet-2-score": {
+      "type": "Badge",
+      "props": {
+        "text": "score: 1",
+        "variant": "secondary"
+      }
+    },
+    "tweet-2-desc": {
+      "type": "Text",
+      "props": {
+        "text": "Community post about $MIROSHARK on Base",
+        "variant": "body"
+      }
+    },
+    "tweet-2-link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/MikeOnBase1/status/2047381188399210588"
+      }
+    },
+    "sep-3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "tweet-3-container": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-3-header",
+        "tweet-3-desc",
+        "tweet-3-link"
+      ]
+    },
+    "tweet-3-header": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "tweet-3-author",
+        "tweet-3-amount",
+        "tweet-3-score"
+      ]
+    },
+    "tweet-3-author": {
+      "type": "Text",
+      "props": {
+        "text": "x.com/10xgemhunter",
+        "variant": "lead"
+      }
+    },
+    "tweet-3-amount": {
+      "type": "Badge",
+      "props": {
+        "text": "$0.50 $MIROSHARK",
+        "variant": "default"
+      }
+    },
+    "tweet-3-score": {
+      "type": "Badge",
+      "props": {
+        "text": "score: 1",
+        "variant": "secondary"
+      }
+    },
+    "tweet-3-desc": {
+      "type": "Text",
+      "props": {
+        "text": "Community post about $MIROSHARK",
+        "variant": "body"
+      }
+    },
+    "tweet-3-link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/10xgemhunter/status/2047230590047641620"
+      }
+    },
+    "sep-4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "tweet-4-container": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-4-header",
+        "tweet-4-desc",
+        "tweet-4-link"
+      ]
+    },
+    "tweet-4-header": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "tweet-4-author",
+        "tweet-4-amount",
+        "tweet-4-score"
+      ]
+    },
+    "tweet-4-author": {
+      "type": "Text",
+      "props": {
+        "text": "x.com/BasedCult33",
+        "variant": "lead"
+      }
+    },
+    "tweet-4-amount": {
+      "type": "Badge",
+      "props": {
+        "text": "$0.50 $MIROSHARK",
+        "variant": "default"
+      }
+    },
+    "tweet-4-score": {
+      "type": "Badge",
+      "props": {
+        "text": "score: 1",
+        "variant": "secondary"
+      }
+    },
+    "tweet-4-desc": {
+      "type": "Text",
+      "props": {
+        "text": "Community post about $MIROSHARK",
+        "variant": "body"
+      }
+    },
+    "tweet-4-link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/BasedCult33/status/2047410108137717765"
+      }
+    },
+    "sep-5": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "tweet-5-container": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-5-header",
+        "tweet-5-desc",
+        "tweet-5-link"
+      ]
+    },
+    "tweet-5-header": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "tweet-5-author",
+        "tweet-5-amount",
+        "tweet-5-score"
+      ]
+    },
+    "tweet-5-author": {
+      "type": "Text",
+      "props": {
+        "text": "x.com/cybercelos",
+        "variant": "lead"
+      }
+    },
+    "tweet-5-amount": {
+      "type": "Badge",
+      "props": {
+        "text": "$0.50 $MIROSHARK",
+        "variant": "default"
+      }
+    },
+    "tweet-5-score": {
+      "type": "Badge",
+      "props": {
+        "text": "score: 1",
+        "variant": "secondary"
+      }
+    },
+    "tweet-5-desc": {
+      "type": "Text",
+      "props": {
+        "text": "Community post about $MIROSHARK",
+        "variant": "body"
+      }
+    },
+    "tweet-5-link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/cybercelos/status/2047417481116148038"
+      }
+    },
+    "sep-6": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "total-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Total Allocated",
+        "value": "$10.00",
+        "delta": "5 authors"
+      }
+    }
+  }
+}

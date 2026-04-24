@@ -1,25 +1,25 @@
-*Tweet Rewards — 2026-04-23*
+*Tweet Rewards — 2026-04-24*
 
 Budget: $10.00 in $MIROSHARK on Base
 
-1. x.com/MrDegenWolf — $4.45 in $MIROSHARK (score: 40)
-   chart solid like @aaronjmars gems — two sleeping giants $miroshark & $aeon. higher.
-   [View tweet](https://x.com/MrDegenWolf/status/2046961929504051272)
+1. x.com/TheGodfath13541 — $8.00 in $MIROSHARK (score: 29)
+   Paradigm CTO (@gakonst) starred MiroShark; Director Mode framed as Reagan war game analogy; 14 likes, 5 RTs
+   [View tweet](https://x.com/TheGodfath13541/status/2047375217715032115)
 
-2. x.com/TheGodfath13541 — $3.46 in $MIROSHARK (score: 30)
-   Long thesis: 681 stars, 127 forks, 25 days old, HIGH SEVERITY vuln find, WSJ-cited tech — sub-penny with production infra.
-   [View tweet](https://x.com/TheGodfath13541/status/2046920649948430818)
+2. x.com/MikeOnBase1 — $0.50 in $MIROSHARK (score: 1)
+   Community post about $MIROSHARK on Base
+   [View tweet](https://x.com/MikeOnBase1/status/2047381188399210588)
 
-3. x.com/Naomivana_ — $0.80 in $MIROSHARK (score: 3)
-   $MIROSHARK contract drop post.
-   [View tweet](https://x.com/Naomivana_/status/2047086202344632660)
+3. x.com/10xgemhunter — $0.50 in $MIROSHARK (score: 1)
+   Community post about $MIROSHARK
+   [View tweet](https://x.com/10xgemhunter/status/2047230590047641620)
 
-4. x.com/Jsxontop — $0.70 in $MIROSHARK (score: 2)
-   $MIROSHARK in reply to bags list.
-   [View tweet](https://x.com/Jsxontop/status/2047029397731823750)
+4. x.com/BasedCult33 — $0.50 in $MIROSHARK (score: 1)
+   Community post about $MIROSHARK
+   [View tweet](https://x.com/BasedCult33/status/2047410108137717765)
 
-5. x.com/cybercelos — $0.59 in $MIROSHARK (score: 1)
-   Two hot picks: $DARKSOL 60% / $Miroshark near 225k — getting for takeoff.
-   [View tweet](https://x.com/cybercelos/status/2047048754847694954)
+5. x.com/cybercelos — $0.50 in $MIROSHARK (score: 1)
+   Community post about $MIROSHARK
+   [View tweet](https://x.com/cybercelos/status/2047417481116148038)
 
 Total: $10.00 in $MIROSHARK allocated to 5 authors
