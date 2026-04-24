@@ -1,0 +1,229 @@
+{
+  "root": "card-repo-pulse",
+  "state": {},
+  "elements": {
+    "card-repo-pulse": {
+      "type": "Card",
+      "props": {
+        "title": "Repo Pulse"
+      },
+      "children": [
+        "main-stack"
+      ]
+    },
+    "main-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "repo-link",
+        "stats-stack",
+        "sep1",
+        "stargazers-section",
+        "sep2",
+        "forks-section"
+      ]
+    },
+    "repo-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "aaronjmars/MiroShark",
+        "href": "https://github.com/aaronjmars/MiroShark",
+        "source": "GitHub"
+      }
+    },
+    "stats-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "stat-stars",
+        "stat-forks"
+      ]
+    },
+    "stat-stars": {
+      "type": "Stat",
+      "props": {
+        "label": "Stars",
+        "value": "798",
+        "delta": "+10",
+        "trend": "up"
+      }
+    },
+    "stat-forks": {
+      "type": "Stat",
+      "props": {
+        "label": "Forks",
+        "value": "149",
+        "delta": "+2",
+        "trend": "up"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stargazers-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading-stargazers",
+        "stargazers-grid"
+      ]
+    },
+    "heading-stargazers": {
+      "type": "Heading",
+      "props": {
+        "text": "New Stargazers",
+        "level": "h3"
+      }
+    },
+    "stargazers-grid": {
+      "type": "Grid",
+      "props": {
+        "columns": 5,
+        "gap": "sm"
+      },
+      "children": [
+        "link-fred-terzi",
+        "link-maczzzzzzz",
+        "link-tarun-lathiya",
+        "link-amorfatii",
+        "link-danyslicer",
+        "link-allazov",
+        "link-jneration",
+        "link-nexusalien",
+        "link-ramtinhoss",
+        "link-agclawbot"
+      ]
+    },
+    "link-fred-terzi": {
+      "type": "Link",
+      "props": {
+        "label": "fred-terzi",
+        "href": "https://github.com/fred-terzi"
+      }
+    },
+    "link-maczzzzzzz": {
+      "type": "Link",
+      "props": {
+        "label": "maczzzzzzz",
+        "href": "https://github.com/maczzzzzzz"
+      }
+    },
+    "link-tarun-lathiya": {
+      "type": "Link",
+      "props": {
+        "label": "tarun-lathiya",
+        "href": "https://github.com/tarun-lathiya"
+      }
+    },
+    "link-amorfatii": {
+      "type": "Link",
+      "props": {
+        "label": "amorfatii",
+        "href": "https://github.com/amorfatii"
+      }
+    },
+    "link-danyslicer": {
+      "type": "Link",
+      "props": {
+        "label": "DanySlicer",
+        "href": "https://github.com/DanySlicer"
+      }
+    },
+    "link-allazov": {
+      "type": "Link",
+      "props": {
+        "label": "allazov",
+        "href": "https://github.com/allazov"
+      }
+    },
+    "link-jneration": {
+      "type": "Link",
+      "props": {
+        "label": "jneration",
+        "href": "https://github.com/jneration"
+      }
+    },
+    "link-nexusalien": {
+      "type": "Link",
+      "props": {
+        "label": "NexusAlien",
+        "href": "https://github.com/NexusAlien"
+      }
+    },
+    "link-ramtinhoss": {
+      "type": "Link",
+      "props": {
+        "label": "Ramtinhoss",
+        "href": "https://github.com/Ramtinhoss"
+      }
+    },
+    "link-agclawbot": {
+      "type": "Link",
+      "props": {
+        "label": "agclawbot",
+        "href": "https://github.com/agclawbot"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "forks-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading-forks",
+        "forks-list"
+      ]
+    },
+    "heading-forks": {
+      "type": "Heading",
+      "props": {
+        "text": "New Forks",
+        "level": "h3"
+      }
+    },
+    "forks-list": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "link-fork-nexusalien",
+        "link-fork-k933167h"
+      ]
+    },
+    "link-fork-nexusalien": {
+      "type": "Link",
+      "props": {
+        "label": "NexusAlien/MiroShark",
+        "href": "https://github.com/NexusAlien/MiroShark"
+      }
+    },
+    "link-fork-k933167h": {
+      "type": "Link",
+      "props": {
+        "label": "k933167h/miroshark",
+        "href": "https://github.com/k933167h/miroshark"
+      }
+    }
+  }
+}
