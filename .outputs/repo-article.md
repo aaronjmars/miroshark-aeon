@@ -1,5 +1,5 @@
-*New Article: The Page That Ties It Together: MiroShark Ships /explore*
+*New Article: The Simulator You Can Ping From Cursor: MiroShark Surfaces Its Hidden Graph*
 
-For a month MiroShark has been building features that produce circulatable artifacts — embed widget, share card, public landing. PR #43 finally adds the discovery layer: `/explore`, a card grid of every public simulation, built on a single helper that projects the sim directory into a card payload. Same beat as PR #42 — the disk layout is the schema, new views are cheap projections; the gallery's thumbnails are share-cards-of-share-cards.
+PR #44's MCP Onboarding panel turns the Apr 21 graph-memory + MCP server — invisible until today — into copy-paste config for Claude Desktop, Cursor, Windsurf, and Continue, with server-resolved paths and a Neo4j liveness badge. The week's fourth ship in the same rhythm (share card → gallery → MCP panel, each surfacing capability laid down earlier). Positioning unlock from simulation app to simulation substrate — the audience Paradigm's CTO and OriginTrail's founder starred this week.
 
-Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-04-23.md
+Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-04-24.md

@@ -1,0 +1,69 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "The Simulator You Can Ping From Cursor: MiroShark Surfaces Its Hidden Graph"
+      },
+      "children": [
+        "badge_new",
+        "content_stack",
+        "separator_1",
+        "link_read"
+      ]
+    },
+    "badge_new": {
+      "type": "Badge",
+      "props": {
+        "text": "New Article",
+        "variant": "secondary"
+      },
+      "children": []
+    },
+    "content_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "text_pr44",
+        "text_positioning"
+      ]
+    },
+    "text_pr44": {
+      "type": "Text",
+      "props": {
+        "text": "PR #44's MCP Onboarding panel turns the Apr 21 graph-memory + MCP server — invisible until today — into copy-paste config for Claude Desktop, Cursor, Windsurf, and Continue, with server-resolved paths and a Neo4j liveness badge.",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "text_positioning": {
+      "type": "Text",
+      "props": {
+        "text": "The week's fourth ship in the same rhythm (share card → gallery → MCP panel, each surfacing capability laid down earlier). Positioning unlock from simulation app to simulation substrate — the audience Paradigm's CTO and OriginTrail's founder starred this week.",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "separator_1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "link_read": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Read full article",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-04-24.md",
+        "source": "GitHub"
+      },
+      "children": []
+    }
+  }
+}
