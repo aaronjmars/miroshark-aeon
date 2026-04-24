@@ -1,0 +1,305 @@
+{
+  "root": "card-root",
+  "state": {},
+  "elements": {
+    "card-root": {
+      "type": "Card",
+      "props": {
+        "title": "Top Tweets — $MIROSHARK",
+        "description": "2026-04-24"
+      },
+      "children": [
+        "stack-main"
+      ]
+    },
+    "stack-main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "tweet-stack-1",
+        "tweet-stack-2",
+        "tweet-stack-3",
+        "tweet-stack-4",
+        "tweet-stack-5",
+        "tweet-stack-6",
+        "tweet-stack-7",
+        "tweet-stack-8",
+        "tweet-stack-9",
+        "tweet-stack-10"
+      ]
+    },
+    "tweet-stack-1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-1",
+        "link-1"
+      ]
+    },
+    "tweet-1": {
+      "type": "TweetCard",
+      "props": {
+        "author": "TheGodfath13541",
+        "text": "Paradigm CTO (@gakonst) just starred the repo at sub-$300K mcap. Ties Director Mode to Reagan's 1983 Proud Prophet war game (half a billion simulated dead, rewrote US nuclear strategy). \"tokenized and open source.\"",
+        "likes": 14,
+        "retweets": 5
+      }
+    },
+    "link-1": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/TheGodfath13541/status/2047375217715032115"
+      }
+    },
+    "tweet-stack-2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-2",
+        "link-2"
+      ]
+    },
+    "tweet-2": {
+      "type": "TweetCard",
+      "props": {
+        "author": "TheGodfath13541",
+        "text": "OriginTrail founder posted on LinkedIn about using MiroShark to simulate the AI future of 1B+ Europeans and Americans in under an hour. \"MiroShark is precisely the kind of engine that will excel on the DKG V10 mainnet.\"",
+        "likes": 7,
+        "retweets": 3
+      }
+    },
+    "link-2": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/TheGodfath13541/status/2047447892919504914"
+      }
+    },
+    "tweet-stack-3": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-3",
+        "link-3"
+      ]
+    },
+    "tweet-3": {
+      "type": "TweetCard",
+      "props": {
+        "author": "TheGodfath13541",
+        "text": "The dots will continue to connect. Your job is to ape and sit on your hands. WAGMI.",
+        "likes": 6,
+        "retweets": 0
+      }
+    },
+    "link-3": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/TheGodfath13541/status/2047418913726644433"
+      }
+    },
+    "tweet-stack-4": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-4",
+        "link-4"
+      ]
+    },
+    "tweet-4": {
+      "type": "TweetCard",
+      "props": {
+        "author": "MikeOnBase1",
+        "text": "AGREE $MIROSHARK can be very big, chart looks ready to explode. DYOR",
+        "likes": 5,
+        "retweets": 1
+      }
+    },
+    "link-4": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/MikeOnBase1/status/2047381188399210588"
+      }
+    },
+    "tweet-stack-5": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-5",
+        "link-5"
+      ]
+    },
+    "tweet-5": {
+      "type": "TweetCard",
+      "props": {
+        "author": "10xgemhunter",
+        "text": "Paid group call list includes $Miroshark 3x target alongside BTC, ETH, and a dozen other picks.",
+        "likes": 4,
+        "retweets": 1
+      }
+    },
+    "link-5": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/10xgemhunter/status/2047230590047641620"
+      }
+    },
+    "tweet-stack-6": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-6",
+        "link-6"
+      ]
+    },
+    "tweet-6": {
+      "type": "TweetCard",
+      "props": {
+        "author": "aaronjmars",
+        "text": "\"nah what the f*ck are these quants in china doing.\" — dev reacting to Chinese quant forks of the repo.",
+        "likes": 4,
+        "retweets": 0
+      }
+    },
+    "link-6": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/aaronjmars/status/2047400975397200311"
+      }
+    },
+    "tweet-stack-7": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-7",
+        "link-7"
+      ]
+    },
+    "tweet-7": {
+      "type": "TweetCard",
+      "props": {
+        "author": "TheGodfath13541",
+        "text": "Pretty cool stuff for $Miroshark. Definitely a pathway to start landing some partnerships. Tech is there now just adoption slowly.",
+        "likes": 3,
+        "retweets": 0
+      }
+    },
+    "link-7": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/TheGodfath13541/status/2047400840395145296"
+      }
+    },
+    "tweet-stack-8": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-8",
+        "link-8"
+      ]
+    },
+    "tweet-8": {
+      "type": "TweetCard",
+      "props": {
+        "author": "BasedCult33",
+        "text": "$MIROSHARK to the moon!",
+        "likes": 2,
+        "retweets": 0
+      }
+    },
+    "link-8": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/BasedCult33/status/2047410108137717765"
+      }
+    },
+    "tweet-stack-9": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-9",
+        "link-9"
+      ]
+    },
+    "tweet-9": {
+      "type": "TweetCard",
+      "props": {
+        "author": "cybercelos",
+        "text": "$miroshark + rocket emojis",
+        "likes": 2,
+        "retweets": 0
+      }
+    },
+    "link-9": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/cybercelos/status/2047417481116148038"
+      }
+    },
+    "tweet-stack-10": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-10",
+        "link-10"
+      ]
+    },
+    "tweet-10": {
+      "type": "TweetCard",
+      "props": {
+        "author": "TheGodfath13541",
+        "text": "Notes dev has strong marketing skills, contrasts with projects that ship good tech but can't communicate it.",
+        "likes": 2,
+        "retweets": 0
+      }
+    },
+    "link-10": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/TheGodfath13541/status/2047376186368520691"
+      }
+    }
+  }
+}
