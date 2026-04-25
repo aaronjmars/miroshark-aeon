@@ -63,10 +63,10 @@
   },
   "fetch-tweets": {
     "last_dispatch": "2026-04-25T06:45:27Z",
-    "last_status": "dispatched",
-    "last_success": "2026-04-24T06:58:50Z",
-    "total_runs": 19,
-    "total_successes": 19,
+    "last_status": "success",
+    "last_success": "2026-04-25T06:50:28Z",
+    "total_runs": 20,
+    "total_successes": 20,
     "total_failures": 0,
     "consecutive_failures": 0,
     "success_rate": 1
