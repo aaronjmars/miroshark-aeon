@@ -1,0 +1,178 @@
+{
+  "root": "main-card",
+  "state": {},
+  "elements": {
+    "main-card": {
+      "type": "Card",
+      "props": {
+        "title": "Hyperstitions Idea — 2026-04-25"
+      },
+      "children": [
+        "question",
+        "sep1",
+        "narrative-section",
+        "sep2",
+        "resolution-section",
+        "sep3",
+        "scores-header",
+        "scores-section",
+        "sep4",
+        "link-section"
+      ]
+    },
+    "question": {
+      "type": "Heading",
+      "props": {
+        "text": "Will MiroShark be listed in at least 3 public MCP server directories by May 31, 2026?",
+        "level": "h2"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "narrative-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "coord-title",
+        "coord-text",
+        "why-now-title",
+        "why-now-text"
+      ]
+    },
+    "coord-title": {
+      "type": "Heading",
+      "props": {
+        "text": "The coordination play",
+        "level": "h3"
+      }
+    },
+    "coord-text": {
+      "type": "Text",
+      "props": {
+        "text": "PR #44 (AI Integration · MCP Onboarding, merged Apr 24) packaged the whole stdio integration — 8-tool catalog, Claude Desktop / Cursor / Windsurf / Continue snippets, Neo4j liveness probe — but discovery still happens in registries that require human submissions. Holders, contributors, and MCP-curious devs need to file the entries themselves: a markdown PR to punkpeye/awesome-mcp-servers, the submission form on mcp.so, the listing flow on glama.ai/mcp, the community list under modelcontextprotocol.io. One person per directory flips the bit. The market converts \"someone should do this\" into \"I'll do this\" because the deadline is now public and three is in arm's reach.",
+        "variant": "body"
+      }
+    },
+    "why-now-title": {
+      "type": "Heading",
+      "props": {
+        "text": "Why now",
+        "level": "h3"
+      }
+    },
+    "why-now-text": {
+      "type": "Text",
+      "props": {
+        "text": "PR #44 surfaced the Apr-21 direct-push graph-memory substrate (bi-temporal edges, Leiden clusters, ReACT reasoning traces) to any MCP client; same week, Paradigm CTO @gakonst starred the repo and OriginTrail's founder co-signed for DKG V10 — the research-substrate audience is suddenly real. MCP is at 97M monthly SDK downloads with 67% enterprise eval; directories are the discovery layer of that funnel and MiroShark is currently absent from every one of them.",
+        "variant": "body"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "resolution-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "resolution-title",
+        "resolution-text"
+      ]
+    },
+    "resolution-title": {
+      "type": "Heading",
+      "props": {
+        "text": "Resolution",
+        "level": "h3"
+      }
+    },
+    "resolution-text": {
+      "type": "Text",
+      "props": {
+        "text": "YES if, at 23:59 UTC 2026-05-31, at least 3 distinct public MCP server registries (verified via direct URL check against mcp.so, glama.ai/mcp, punkpeye/awesome-mcp-servers, modelcontextprotocol.io community list, pulsemcp.com, or a recognized equivalent) list MiroShark with a working link to github.com/aaronjmars/MiroShark. Otherwise NO.",
+        "variant": "body"
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "scores-header": {
+      "type": "Heading",
+      "props": {
+        "text": "Scores",
+        "level": "h3"
+      }
+    },
+    "scores-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "lg"
+      },
+      "children": [
+        "reflexivity-stat",
+        "viral-stat"
+      ]
+    },
+    "reflexivity-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Reflexivity",
+        "value": "4/5"
+      }
+    },
+    "viral-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Viral",
+        "value": "3/5"
+      }
+    },
+    "sep4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "link-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "link-text",
+        "hyperstitions-link"
+      ]
+    },
+    "link-text": {
+      "type": "Text",
+      "props": {
+        "text": "Soon on:",
+        "variant": "muted"
+      }
+    },
+    "hyperstitions-link": {
+      "type": "Link",
+      "props": {
+        "label": "https://www.hyperstitions.com/",
+        "href": "https://www.hyperstitions.com/"
+      }
+    }
+  }
+}

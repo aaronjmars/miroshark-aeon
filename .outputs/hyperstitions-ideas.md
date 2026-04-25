@@ -1,13 +1,13 @@
-*Hyperstitions Idea — 2026-04-18*
+*Hyperstitions Idea — 2026-04-25*
 
-"Will @miroshark_ cross 1,000 X followers by May 15, 2026?"
+"Will MiroShark be listed in at least 3 public MCP server directories by May 31, 2026?"
 
-The coordination play: The X account launched four days ago (Apr 14) on the back of the first public product push — and today shipped an Embeddable Simulation Widget (PR #34) that's literally built for social sharing. Crossing 1K requires humans an agent can't replace: follow/share the account, embed live simulations on blogs and Substacks tagging @miroshark_, and ping influencers (Garry Tan already nodded, Paradigm's @gakonst starred the repo — warm leads still unconverted). The market's existence turns every $MIROSHARK holder into someone with a reason to retweet.
+The coordination play: PR #44 (AI Integration · MCP Onboarding, merged Apr 24) packaged the whole stdio integration — 8-tool catalog, Claude Desktop / Cursor / Windsurf / Continue snippets, Neo4j liveness probe — but discovery still happens in registries that require human submissions. Holders, contributors, and MCP-curious devs need to file the entries themselves: a markdown PR to punkpeye/awesome-mcp-servers, the submission form on mcp.so, the listing flow on glama.ai/mcp, the community list under modelcontextprotocol.io. One person per directory flips the bit. The market converts "someone should do this" into "I'll do this" because the deadline is now public and three is in arm's reach.
 
-Why now: @miroshark_ just landed on X (Apr 14, 28 likes / 6 RTs on launch post). Embeddable Widget shipped today — every external embed is a follower funnel. Bankr rewards are flowing to tweeters this week. Repo at 717 stars / 137 forks, $MIROSHARK consolidating post-ATH. The social surface is wider than the follower count reflects.
+Why now: PR #44 surfaced the Apr-21 direct-push graph-memory substrate (bi-temporal edges, Leiden clusters, ReACT reasoning traces) to any MCP client; same week, Paradigm CTO @gakonst starred the repo and OriginTrail's founder co-signed for DKG V10 — the research-substrate audience is suddenly real. MCP is at 97M monthly SDK downloads with 67% enterprise eval; directories are the discovery layer of that funnel and MiroShark is currently absent from every one of them.
 
-Resolution: YES if @miroshark_ public follower count ≥ 1,000 at 23:59 UTC 2026-05-15 (verified via X public profile).
+Resolution: YES if, at 23:59 UTC 2026-05-31, at least 3 distinct public MCP server registries (verified via direct URL check against mcp.so, glama.ai/mcp, punkpeye/awesome-mcp-servers, modelcontextprotocol.io community list, pulsemcp.com, or a recognized equivalent) list MiroShark with a working link to github.com/aaronjmars/MiroShark. Otherwise NO.
 
-Scores: Reflexivity 4/5 | Viral 4/5
+Scores: Reflexivity 4/5 | Viral 3/5
 
 Soon on https://www.hyperstitions.com/ ?
