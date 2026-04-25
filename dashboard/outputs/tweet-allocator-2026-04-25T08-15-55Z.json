@@ -1,0 +1,24 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "tweet-allocator"
+      },
+      "children": [
+        "alert_error"
+      ]
+    },
+    "alert_error": {
+      "type": "Alert",
+      "props": {
+        "type": "error",
+        "title": "2026-04-25: ERROR",
+        "message": "Bankr cache is empty, check BANKR_API_KEY secret and prefetch-bankr.sh workflow output."
+      },
+      "children": []
+    }
+  }
+}
