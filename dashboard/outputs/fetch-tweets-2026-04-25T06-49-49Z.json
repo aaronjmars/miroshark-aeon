@@ -1,0 +1,334 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "Top Tweets — $MIROSHARK OR @miroshark_ OR github.com/aaronjmars/miroshark (2026-04-25)"
+      },
+      "children": [
+        "stack-tweets"
+      ]
+    },
+    "stack-tweets": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "item-1",
+        "item-2",
+        "item-3",
+        "item-4",
+        "item-5",
+        "item-6",
+        "item-7",
+        "item-8",
+        "item-9",
+        "item-10"
+      ]
+    },
+    "item-1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-1",
+        "link-1"
+      ]
+    },
+    "tweet-1": {
+      "type": "TweetCard",
+      "props": {
+        "author": "miroshark_",
+        "handle": "miroshark_",
+        "text": "Official pin: simulate anything for $1 & under 10 min, Universal Swarm Intelligence Engine",
+        "likes": 68,
+        "retweets": 6
+      },
+      "children": []
+    },
+    "link-1": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/miroshark_/status/2047688722519396728"
+      },
+      "children": []
+    },
+    "item-2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-2",
+        "link-2"
+      ]
+    },
+    "tweet-2": {
+      "type": "TweetCard",
+      "props": {
+        "author": "MrDegenWolf",
+        "handle": "MrDegenWolf",
+        "text": "still pushing higher for $AEON & $MIROSHARK; @aaronjmars live on Agent Hours by Bankr; way higher conviction",
+        "likes": 27,
+        "retweets": 9
+      },
+      "children": []
+    },
+    "link-2": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/MrDegenWolf/status/2047610150551171474"
+      },
+      "children": []
+    },
+    "item-3": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-3",
+        "link-3"
+      ]
+    },
+    "tweet-3": {
+      "type": "TweetCard",
+      "props": {
+        "author": "me8_x1782",
+        "handle": "me8_x1782",
+        "text": "$MiroShark top tier base AI meta alongside $WBC/$Doppel — extremely detailed report incoming; moat and uniqueness real, still undiscovered",
+        "likes": 16,
+        "retweets": 2
+      },
+      "children": []
+    },
+    "link-3": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/me8_x1782/status/2047603893886984365"
+      },
+      "children": []
+    },
+    "item-4": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-4",
+        "link-4"
+      ]
+    },
+    "tweet-4": {
+      "type": "TweetCard",
+      "props": {
+        "author": "Karma_Nfa",
+        "handle": "Karma_Nfa",
+        "text": "morning market update request to @bankrbot listing $MIROSHARK among 10 tracked tokens",
+        "likes": 17,
+        "retweets": 1
+      },
+      "children": []
+    },
+    "link-4": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/Karma_Nfa/status/2047646664580571270"
+      },
+      "children": []
+    },
+    "item-5": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-5",
+        "link-5"
+      ]
+    },
+    "tweet-5": {
+      "type": "TweetCard",
+      "props": {
+        "author": "miroshark_",
+        "handle": "miroshark_",
+        "text": "WE'RE LIVE $MIROSHARK (Agent Hours announcement)",
+        "likes": 16,
+        "retweets": 1
+      },
+      "children": []
+    },
+    "link-5": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/miroshark_/status/2047723553785622893"
+      },
+      "children": []
+    },
+    "item-6": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-6",
+        "link-6"
+      ]
+    },
+    "tweet-6": {
+      "type": "TweetCard",
+      "props": {
+        "author": "joraweb3",
+        "handle": "joraweb3",
+        "text": "$miroshark accumulation thesis alongside $aeon, $wbc, $clawbank, $gitlawb",
+        "likes": 7,
+        "retweets": 0
+      },
+      "children": []
+    },
+    "link-6": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/joraweb3/status/2047783129411149972"
+      },
+      "children": []
+    },
+    "item-7": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-7",
+        "link-7"
+      ]
+    },
+    "tweet-7": {
+      "type": "TweetCard",
+      "props": {
+        "author": "me8_x1782",
+        "handle": "me8_x1782",
+        "text": "$MIROSHARK project mention/update",
+        "likes": 2,
+        "retweets": 2
+      },
+      "children": []
+    },
+    "link-7": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/me8_x1782/status/2047790740462244070"
+      },
+      "children": []
+    },
+    "item-8": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-8",
+        "link-8"
+      ]
+    },
+    "tweet-8": {
+      "type": "TweetCard",
+      "props": {
+        "author": "AriDavidUSA",
+        "handle": "AriDavidUSA",
+        "text": "@miroshark_ LFG, pump it up",
+        "likes": 0,
+        "retweets": 0
+      },
+      "children": []
+    },
+    "link-8": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/AriDavidUSA/status/2047794216512966723"
+      },
+      "children": []
+    },
+    "item-9": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-9",
+        "link-9"
+      ]
+    },
+    "tweet-9": {
+      "type": "TweetCard",
+      "props": {
+        "author": "RovercryptoE",
+        "handle": "RovercryptoE",
+        "text": "@miroshark_ promotion DM inquiry",
+        "likes": 0,
+        "retweets": 0
+      },
+      "children": []
+    },
+    "link-9": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/RovercryptoE/status/2047923773345599892"
+      },
+      "children": []
+    },
+    "item-10": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-10",
+        "link-10"
+      ]
+    },
+    "tweet-10": {
+      "type": "TweetCard",
+      "props": {
+        "author": "FlokiBull_",
+        "handle": "FlokiBull_",
+        "text": "@miroshark_ follow/collaborate request",
+        "likes": 0,
+        "retweets": 0
+      },
+      "children": []
+    },
+    "link-10": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/FlokiBull_/status/2047921104090440165"
+      },
+      "children": []
+    }
+  }
+}
