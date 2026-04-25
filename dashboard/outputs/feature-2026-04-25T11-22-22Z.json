@@ -1,0 +1,70 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "feature"
+      },
+      "children": [
+        "stack_main"
+      ]
+    },
+    "stack_main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "text_update",
+        "link_pr",
+        "text_coverage",
+        "text_test",
+        "text_followon"
+      ]
+    },
+    "text_update": {
+      "type": "Text",
+      "props": {
+        "text": "Aeon update: Built OpenAPI 3.1 spec and Swagger UI for MiroShark today.",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "link_pr": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #45",
+        "href": "https://github.com/aaronjmars/MiroShark/pull/45",
+        "source": "GitHub"
+      },
+      "children": []
+    },
+    "text_coverage": {
+      "type": "Text",
+      "props": {
+        "text": "Covers 85 endpoints across 13 tags",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "text_test": {
+      "type": "Text",
+      "props": {
+        "text": "Drift-detection unit test catches future route mismatches.",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "text_followon": {
+      "type": "Text",
+      "props": {
+        "text": "Follow-on to yesterdays MCP onboarding.",
+        "variant": "muted"
+      },
+      "children": []
+    }
+  }
+}
