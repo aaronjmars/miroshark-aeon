@@ -1,14 +1,14 @@
-*Push Recap — 2026-04-24*
-MiroShark + miroshark-aeon — 2 substantive commits, both merged 13:20 UTC (8 min apart) by Aaron Mars with Aeon co-author. Plus ~31 automation-bookkeeping commits on aeon.
+*Push Recap — 2026-04-25*
+MiroShark: 1 substantive commit (PR #45, still open). miroshark-aeon: 0 substantive commits (~31 chore/automation).
 
-*AI Integration · MCP Onboarding (MiroShark PR #44):* The bundled `mcp_server.py` is now discoverable from inside the app. New `/api/mcp/status` endpoint ships an 8-tool catalog, resolved absolute paths, and copy-paste config snippets for Claude Desktop / Cursor / Windsurf / Continue plus a fallback direct-interpreter form. SettingsPanel.vue gains an AI Integration section with health badge (Ready / Neo4j down / Server file missing), client tabs, dark snippet block + copy button (with execCommand fallback for non-secure contexts), and a collapsed tool catalog. The Apr-21 direct-push graph-memory stack was invisible to users — this PR exposes it.
+REST surface gets its own spec: PR #45 lands a handwritten 1.9K-line OpenAPI 3.1 covering ~85 paths under 13 tags, plus a Flask blueprint serving Swagger UI at `/api/docs`, raw YAML at `/api/openapi.yaml`, and a JSON form for `openapi-generator` consumers. The natural follow-on to yesterday's PR #44 MCP onboarding — same developer audience, REST instead of MCP-over-stdio.
 
-*Fetch-tweets dedup hardening (miroshark-aeon PR #23):* `self-improve` caught a latent re-notify bug before it fired. Grok returns the same tweet under two URL shapes — `x.com/<handle>/status/<id>` when it has the text and `x.com/i/status/<id>` when harvested via `content.annotations[]` (PR #20). 47% of the 115 historical seen URLs are in the `i/status` form. Step 1 + step 5 of `fetch-tweets/SKILL.md` now dedup on numeric tweet ID (regex `/status/(\d+)`) instead of full URL. Seen-file write path unchanged.
+Drift test is the load-bearing piece: a regex-based unit test statically scans every `app/api/*.py` for `@<bp>_bp.route(...)` decorators, fully qualifies via blueprint `url_prefix`, and fails CI the moment the spec falls behind the implementation. Same shape as PR #44's mcp_server.py drift check — handwritten source of truth + static-scan tripwire.
 
 Key changes:
-- `backend/app/api/mcp.py` — new Flask blueprint, 291 lines, per-client pre-rendered JSON snippets; tool-catalog drift caught by regex-based unit test against `mcp_server.py`
-- `SettingsPanel.vue` — +445 lines, clipboard API + execCommand fallback so the copy button works in non-secure contexts too
-- `skills/fetch-tweets/SKILL.md` — `SEEN_IDS` set extracted via regex from persistent seen-file + last 3 days of logs; reconciles with `filter-xai-tweets.py`'s existing in-run ID dedup
+- `backend/openapi.yaml` (+1,966): 13 tags, named schemas (`SuccessEnvelope`, `RunStatus`, `BeliefDrift`, `EmbedSummary`, `GalleryCard`, `McpStatus`, …), reusable params/responses.
+- `backend/app/api/docs.py` (+268): Swagger UI pinned to `swagger-ui-dist@5.17.14` from jsDelivr, plus YAML + JSON endpoints, pyyaml soft-optional.
+- `backend/tests/test_unit_openapi.py` (+321): 8 offline tests, drift detection centerpiece.
 
-Stats: 15 substantive files / +1,382 / −32 across 2 commits (+ ~31 automation chores on aeon).
-Full recap: articles/push-recap-2026-04-24.md (github.com/aaronjmars/miroshark-aeon)
+Stats: 7 files / +2,577 / −2 across 1 commit. PR #45 open at window close (filed 11:17 UTC).
+Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-04-25.md

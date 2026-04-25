@@ -1,0 +1,286 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Push Recap — 2026-04-25"
+      },
+      "children": [
+        "stack_main"
+      ]
+    },
+    "stack_main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "summary_section",
+        "sep_1",
+        "pr45_section",
+        "sep_2",
+        "drift_section",
+        "sep_3",
+        "changes_section",
+        "sep_4",
+        "stats_section",
+        "sep_5",
+        "recap_link"
+      ]
+    },
+    "summary_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "summary_heading",
+        "miroshark_item",
+        "miroshark_aeon_item"
+      ]
+    },
+    "summary_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Summary",
+        "level": "h2"
+      }
+    },
+    "miroshark_item": {
+      "type": "Text",
+      "props": {
+        "text": "MiroShark: 1 substantive commit (PR #45, still open)"
+      }
+    },
+    "miroshark_aeon_item": {
+      "type": "Text",
+      "props": {
+        "text": "miroshark-aeon: 0 substantive commits (~31 chore/automation)"
+      }
+    },
+    "sep_1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "pr45_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "pr45_heading",
+        "pr45_text1",
+        "pr45_endpoints",
+        "pr45_text2",
+        "pr45_text3"
+      ]
+    },
+    "pr45_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "REST Surface (PR #45)",
+        "level": "h2"
+      }
+    },
+    "pr45_text1": {
+      "type": "Text",
+      "props": {
+        "text": "Handwritten 1.9K-line OpenAPI 3.1 covering ~85 paths under 13 tags, plus a Flask blueprint serving Swagger UI at `/api/docs`, raw YAML at `/api/openapi.yaml`, and a JSON form for `openapi-generator` consumers."
+      }
+    },
+    "pr45_endpoints": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "xs"
+      },
+      "children": [
+        "endpoint_docs",
+        "endpoint_yaml",
+        "endpoint_json"
+      ]
+    },
+    "endpoint_docs": {
+      "type": "Text",
+      "props": {
+        "text": "Swagger UI: `/api/docs`",
+        "variant": "caption"
+      }
+    },
+    "endpoint_yaml": {
+      "type": "Text",
+      "props": {
+        "text": "Raw YAML: `/api/openapi.yaml`",
+        "variant": "caption"
+      }
+    },
+    "endpoint_json": {
+      "type": "Text",
+      "props": {
+        "text": "JSON form: for `openapi-generator` consumers",
+        "variant": "caption"
+      }
+    },
+    "pr45_text2": {
+      "type": "Text",
+      "props": {
+        "text": "The natural follow-on to yesterday's PR #44 MCP onboarding — same developer audience, REST instead of MCP-over-stdio."
+      }
+    },
+    "pr45_text3": {
+      "type": "Text",
+      "props": {
+        "text": "PR #45 open at window close (filed 11:17 UTC)."
+      }
+    },
+    "sep_2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "drift_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "drift_heading",
+        "drift_text1",
+        "drift_text2"
+      ]
+    },
+    "drift_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Drift Test",
+        "level": "h2"
+      }
+    },
+    "drift_text1": {
+      "type": "Text",
+      "props": {
+        "text": "The load-bearing piece: a regex-based unit test statically scans every `app/api/*.py` for `@<bp>_bp.route(...)` decorators, fully qualifies via blueprint `url_prefix`, and fails CI the moment the spec falls behind the implementation."
+      }
+    },
+    "drift_text2": {
+      "type": "Text",
+      "props": {
+        "text": "Same shape as PR #44's mcp_server.py drift check — handwritten source of truth + static-scan tripwire."
+      }
+    },
+    "sep_3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "changes_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "changes_heading",
+        "change_item_1",
+        "change_item_2",
+        "change_item_3"
+      ]
+    },
+    "changes_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Key Changes",
+        "level": "h2"
+      }
+    },
+    "change_item_1": {
+      "type": "Text",
+      "props": {
+        "text": "`backend/openapi.yaml` (+1,966): 13 tags, named schemas (`SuccessEnvelope`, `RunStatus`, `BeliefDrift`, `EmbedSummary`, `GalleryCard`, `McpStatus`, …), reusable params/responses."
+      }
+    },
+    "change_item_2": {
+      "type": "Text",
+      "props": {
+        "text": "`backend/app/api/docs.py` (+268): Swagger UI pinned to `swagger-ui-dist@5.17.14` from jsDelivr, plus YAML + JSON endpoints, pyyaml soft-optional."
+      }
+    },
+    "change_item_3": {
+      "type": "Text",
+      "props": {
+        "text": "`backend/tests/test_unit_openapi.py` (+321): 8 offline tests, drift detection centerpiece."
+      }
+    },
+    "sep_4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stats_section": {
+      "type": "Grid",
+      "props": {
+        "columns": 2,
+        "gap": "md"
+      },
+      "children": [
+        "stat_files",
+        "stat_commits",
+        "stat_additions",
+        "stat_deletions"
+      ]
+    },
+    "stat_files": {
+      "type": "Stat",
+      "props": {
+        "label": "Files Changed",
+        "value": "7"
+      }
+    },
+    "stat_commits": {
+      "type": "Stat",
+      "props": {
+        "label": "Commits",
+        "value": "1"
+      }
+    },
+    "stat_additions": {
+      "type": "Stat",
+      "props": {
+        "label": "Additions",
+        "value": "+2,577"
+      }
+    },
+    "stat_deletions": {
+      "type": "Stat",
+      "props": {
+        "label": "Deletions",
+        "value": "−2"
+      }
+    },
+    "sep_5": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "recap_link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full Push Recap",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-04-25.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}
