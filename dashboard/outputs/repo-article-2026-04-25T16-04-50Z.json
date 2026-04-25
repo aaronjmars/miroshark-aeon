@@ -1,0 +1,96 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "Two Protocols in Two Days: MiroShark Files Its Second Formal Spec"
+      },
+      "children": [
+        "stack-main"
+      ]
+    },
+    "stack-main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "text-content",
+        "sep-1",
+        "stack-stats",
+        "sep-2",
+        "link-article"
+      ]
+    },
+    "text-content": {
+      "type": "Text",
+      "props": {
+        "text": "Yesterday MiroShark turned its hidden MCP server into a Settings panel for four AI editors. Today PR #45 ships the same trick for the REST surface — a 1.9K-line handwritten OpenAPI 3.1 spec, Swagger UI at /api/docs, and a regex-driven drift test that fails CI the moment routes and spec disagree. Two days, two machine-readable contracts over the same engine, each backed by a unit test that holds the implementation to the spec — at 829 stars / 152 forks with 5 days to go on the 1K-stars-by-Apr-30 target.",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "sep-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "stack-stats": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "lg"
+      },
+      "children": [
+        "stat-stars",
+        "stat-forks",
+        "stat-target"
+      ]
+    },
+    "stat-stars": {
+      "type": "Stat",
+      "props": {
+        "label": "Stars",
+        "value": "829"
+      },
+      "children": []
+    },
+    "stat-forks": {
+      "type": "Stat",
+      "props": {
+        "label": "Forks",
+        "value": "152"
+      },
+      "children": []
+    },
+    "stat-target": {
+      "type": "Stat",
+      "props": {
+        "label": "Days to 1K target",
+        "value": "5"
+      },
+      "children": []
+    },
+    "sep-2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "link-article": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Read full article",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-04-25.md",
+        "source": "GitHub"
+      },
+      "children": []
+    }
+  }
+}
