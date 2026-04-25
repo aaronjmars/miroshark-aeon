@@ -123,10 +123,10 @@
   },
   "hyperstitions-ideas": {
     "last_dispatch": "2026-04-25T10:19:18Z",
-    "last_status": "dispatched",
-    "last_success": "2026-04-18T12:00:58Z",
-    "total_runs": 2,
-    "total_successes": 2,
+    "last_status": "success",
+    "last_success": "2026-04-25T10:22:43Z",
+    "total_runs": 3,
+    "total_successes": 3,
     "total_failures": 0,
     "consecutive_failures": 0,
     "success_rate": 1
