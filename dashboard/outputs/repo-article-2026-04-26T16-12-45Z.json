@@ -1,0 +1,196 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Three Protocols in Three Days: MiroShark Closes the Outbound Side"
+      },
+      "children": [
+        "stack_main"
+      ]
+    },
+    "stack_main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "text_overview",
+        "stack_protocols",
+        "stack_technical",
+        "stack_integration",
+        "storylink_article"
+      ]
+    },
+    "text_overview": {
+      "type": "Text",
+      "props": {
+        "text": "PR #46 Completion Webhook lands as MiroShark's third machine-readable contract over the same engine in three calendar days, shipping the outbound side for operator environments.",
+        "variant": "lead"
+      }
+    },
+    "stack_protocols": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "heading_protocols",
+        "text_mcp",
+        "text_openapi",
+        "text_webhook"
+      ]
+    },
+    "heading_protocols": {
+      "type": "Heading",
+      "props": {
+        "text": "Three Protocols in Three Days",
+        "level": "h4"
+      }
+    },
+    "text_mcp": {
+      "type": "Text",
+      "props": {
+        "text": "MCP — Merged Apr 24, inbound for AI editors"
+      }
+    },
+    "text_openapi": {
+      "type": "Text",
+      "props": {
+        "text": "OpenAPI — Filed Apr 25, inbound for HTTP/SDK clients"
+      }
+    },
+    "text_webhook": {
+      "type": "Text",
+      "props": {
+        "text": "Completion Webhook — Today, outbound for operator environments"
+      }
+    },
+    "stack_technical": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "heading_technical",
+        "text_stdlib",
+        "text_dedup",
+        "text_threshold"
+      ]
+    },
+    "heading_technical": {
+      "type": "Heading",
+      "props": {
+        "text": "Implementation Details",
+        "level": "h4"
+      }
+    },
+    "text_stdlib": {
+      "type": "Text",
+      "props": {
+        "text": "Stdlib-only urllib.request with zero new dependencies"
+      }
+    },
+    "text_dedup": {
+      "type": "Text",
+      "props": {
+        "text": "Daemon-thread fire-and-forget with (sim_id, status) deduplication"
+      }
+    },
+    "text_threshold": {
+      "type": "Text",
+      "props": {
+        "text": "Uses the same ±0.2 stance threshold as the share card and gallery for consistent consensus"
+      }
+    },
+    "stack_integration": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "heading_integration",
+        "text_fanout",
+        "stack_channels"
+      ]
+    },
+    "heading_integration": {
+      "type": "Heading",
+      "props": {
+        "text": "Integration & Fan-Out",
+        "level": "h4"
+      }
+    },
+    "text_fanout": {
+      "type": "Text",
+      "props": {
+        "text": "One URL field closes the inbound/outbound symmetry by fanning out to:"
+      }
+    },
+    "stack_channels": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "badge_slack",
+        "badge_discord",
+        "badge_zapier",
+        "badge_make",
+        "badge_n8n",
+        "badge_ifttt"
+      ]
+    },
+    "badge_slack": {
+      "type": "Badge",
+      "props": {
+        "text": "Slack"
+      }
+    },
+    "badge_discord": {
+      "type": "Badge",
+      "props": {
+        "text": "Discord"
+      }
+    },
+    "badge_zapier": {
+      "type": "Badge",
+      "props": {
+        "text": "Zapier"
+      }
+    },
+    "badge_make": {
+      "type": "Badge",
+      "props": {
+        "text": "Make"
+      }
+    },
+    "badge_n8n": {
+      "type": "Badge",
+      "props": {
+        "text": "n8n"
+      }
+    },
+    "badge_ifttt": {
+      "type": "Badge",
+      "props": {
+        "text": "IFTTT"
+      }
+    },
+    "storylink_article": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full Article: repo-article-2026-04-26.md",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-04-26.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}

@@ -1,5 +1,5 @@
-*New Article: Two Protocols in Two Days: MiroShark Files Its Second Formal Spec*
+*New Article: Three Protocols in Three Days: MiroShark Closes the Outbound Side*
 
-Yesterday MiroShark turned its hidden MCP server into a Settings panel for four AI editors. Today PR #45 ships the same trick for the REST surface — a 1.9K-line handwritten OpenAPI 3.1 spec, Swagger UI at /api/docs, and a regex-driven drift test that fails CI the moment routes and spec disagree. Two days, two machine-readable contracts over the same engine, each backed by a unit test that holds the implementation to the spec — at 829 stars / 152 forks with 5 days to go on the 1K-stars-by-Apr-30 target.
+PR #46 Completion Webhook lands as MiroShark's third machine-readable contract over the same engine in three calendar days — after MCP (merged Apr 24, inbound for AI editors) and OpenAPI (filed Apr 25, inbound for HTTP/SDK clients), today's webhook ships the outbound side for operator environments. Stdlib-only `urllib.request` with zero new deps, daemon-thread fire-and-forget with `(sim_id, status)` dedup, and the same ±0.2 stance threshold the share card and gallery already use so consensus stays consistent. One URL field fans out to Slack, Discord, Zapier, Make, n8n, IFTTT — closing the inbound/outbound symmetry on the engine.
 
-Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-04-25.md
+Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-04-26.md
