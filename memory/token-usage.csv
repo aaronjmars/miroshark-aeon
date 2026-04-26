@@ -127,3 +127,4 @@ date,skill,model,input_tokens,output_tokens,cache_read,cache_creation
 2026-04-26,project-lens,claude-opus-4-7,44,29400,2514727,131928
 2026-04-26,skill-leaderboard,claude-sonnet-4-6,23,9236,839270,42024
 2026-04-26,self-improve,claude-opus-4-7,37,23418,2396580,83159
+2026-04-26,tweet-allocator,claude-sonnet-4-6,12,12589,449551,49298

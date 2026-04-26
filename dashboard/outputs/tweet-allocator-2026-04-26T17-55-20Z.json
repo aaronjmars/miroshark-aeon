@@ -1,0 +1,189 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "Tweet Rewards",
+        "description": "2026-04-26"
+      },
+      "children": [
+        "main_stack"
+      ]
+    },
+    "main_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "lg"
+      },
+      "children": [
+        "budget_stat",
+        "sep1",
+        "tweets_stack",
+        "sep2",
+        "total_stack"
+      ]
+    },
+    "budget_stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Budget",
+        "value": "$10.00 in $MIROSHARK on Base"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "tweets_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "lg"
+      },
+      "children": [
+        "tweet1_group",
+        "tweet2_group"
+      ]
+    },
+    "tweet1_group": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "tweet1_stats",
+        "tweet1_card",
+        "tweet1_link"
+      ]
+    },
+    "tweet1_stats": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "tweet1_amount",
+        "tweet1_score"
+      ]
+    },
+    "tweet1_amount": {
+      "type": "Stat",
+      "props": {
+        "label": "Allocation",
+        "value": "$8.93 in $MIROSHARK"
+      }
+    },
+    "tweet1_score": {
+      "type": "Stat",
+      "props": {
+        "label": "Score",
+        "value": "276"
+      }
+    },
+    "tweet1_card": {
+      "type": "TweetCard",
+      "props": {
+        "author": "bankrbot",
+        "handle": "bankrbot",
+        "text": "Bankr Terminal v2 roundup cites miroshark_ simulating Aave vulnerabilities prior to rsETH incident"
+      }
+    },
+    "tweet1_link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/bankrbot/status/2048026489707442360"
+      }
+    },
+    "tweet2_group": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "tweet2_stats",
+        "tweet2_card",
+        "tweet2_link"
+      ]
+    },
+    "tweet2_stats": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "tweet2_amount",
+        "tweet2_score"
+      ]
+    },
+    "tweet2_amount": {
+      "type": "Stat",
+      "props": {
+        "label": "Allocation",
+        "value": "$1.07 in $MIROSHARK"
+      }
+    },
+    "tweet2_score": {
+      "type": "Stat",
+      "props": {
+        "label": "Score",
+        "value": "33"
+      }
+    },
+    "tweet2_card": {
+      "type": "TweetCard",
+      "props": {
+        "author": "TheGodfath13541",
+        "handle": "TheGodfath13541",
+        "text": "$MIROSHARK vs Aaru ($1B valuation) undervaluation thesis; Alibaba Cloud + OriginTrail V10 catalysts"
+      }
+    },
+    "tweet2_link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/TheGodfath13541/status/2048175575781519459"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "total_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "total_amount",
+        "total_authors"
+      ]
+    },
+    "total_amount": {
+      "type": "Stat",
+      "props": {
+        "label": "Total Allocated",
+        "value": "$10.00 in $MIROSHARK"
+      }
+    },
+    "total_authors": {
+      "type": "Stat",
+      "props": {
+        "label": "Authors",
+        "value": "2"
+      }
+    }
+  }
+}
