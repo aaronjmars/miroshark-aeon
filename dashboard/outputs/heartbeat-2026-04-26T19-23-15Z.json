@@ -1,0 +1,201 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "Heartbeat",
+        "description": "Apr 26, 19:21 UTC"
+      },
+      "children": [
+        "status-badge",
+        "sep-1",
+        "prs-section",
+        "sep-2",
+        "skills-section",
+        "sep-3",
+        "summary-section",
+        "sep-4",
+        "followup-section"
+      ]
+    },
+    "status-badge": {
+      "type": "Alert",
+      "props": {
+        "message": "All systems green",
+        "type": "success"
+      }
+    },
+    "sep-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "prs-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "prs-heading",
+        "prs-table"
+      ]
+    },
+    "prs-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "PRs Merged Today"
+      }
+    },
+    "prs-table": {
+      "type": "Table",
+      "props": {
+        "columns": [
+          "PR",
+          "Repository",
+          "Title"
+        ],
+        "rows": [
+          [
+            "#45",
+            "MiroShark",
+            "OpenAPI/Swagger"
+          ],
+          [
+            "#46",
+            "MiroShark",
+            "Completion Webhook"
+          ],
+          [
+            "#24",
+            "miroshark-aeon",
+            "Bankr diagnostics"
+          ],
+          [
+            "#25",
+            "miroshark-aeon",
+            "Bankr maxMode fix"
+          ]
+        ]
+      }
+    },
+    "sep-2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "skills-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "skills-heading",
+        "skills-text"
+      ]
+    },
+    "skills-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Scheduled Skills"
+      }
+    },
+    "skills-text": {
+      "type": "Text",
+      "props": {
+        "text": "All 12 scheduled skills ran on time"
+      }
+    },
+    "sep-3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "summary-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "summary-heading",
+        "summary-stats"
+      ]
+    },
+    "summary-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Status Summary"
+      }
+    },
+    "summary-stats": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "lg"
+      },
+      "children": [
+        "stat-prs",
+        "stat-issues",
+        "stat-stuck"
+      ]
+    },
+    "stat-prs": {
+      "type": "Stat",
+      "props": {
+        "label": "Open PRs",
+        "value": "0"
+      }
+    },
+    "stat-issues": {
+      "type": "Stat",
+      "props": {
+        "label": "Urgent Issues",
+        "value": "0"
+      }
+    },
+    "stat-stuck": {
+      "type": "Stat",
+      "props": {
+        "label": "Stuck Runs",
+        "value": "0"
+      }
+    },
+    "sep-4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "followup-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "followup-heading",
+        "followup-alert"
+      ]
+    },
+    "followup-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Follow-up"
+      }
+    },
+    "followup-alert": {
+      "type": "Alert",
+      "props": {
+        "type": "warning",
+        "message": "openapi.yaml needs POST /api/settings/test-webhook added (or the drift-test allowlist updated) — PR #46 added the route, PR #45's drift test merged second and will fail without this patch."
+      }
+    }
+  }
+}
