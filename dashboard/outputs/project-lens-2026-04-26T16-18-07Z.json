@@ -1,0 +1,82 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "project-lens",
+        "description": "When the Bots Started Citing Each Other: Mapping the Agent Integration Economy"
+      },
+      "children": [
+        "storylink",
+        "details_stack"
+      ]
+    },
+    "storylink": {
+      "type": "StoryLink",
+      "props": {
+        "title": "When the Bots Started Citing Each Other: Mapping the Agent Integration Economy",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-04-26.md",
+        "source": "GitHub"
+      }
+    },
+    "details_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "bankr_text",
+        "views_text",
+        "economy_text",
+        "protocol_text",
+        "miroshark_text",
+        "comparison_text"
+      ]
+    },
+    "bankr_text": {
+      "type": "Text",
+      "props": {
+        "text": "Bankr Terminal v2 — an autonomous on-chain agent runtime — posted a roundup tweet citing @miroshark_ for predicting Aave vulnerabilities prior to the rsETH incident.",
+        "variant": "body"
+      }
+    },
+    "views_text": {
+      "type": "Text",
+      "props": {
+        "text": "The thread reached an estimated 15M views over the weekend.",
+        "variant": "body"
+      }
+    },
+    "economy_text": {
+      "type": "Text",
+      "props": {
+        "text": "The article maps the new \"agents citing agents\" economy: who's citing whom.",
+        "variant": "body"
+      }
+    },
+    "protocol_text": {
+      "type": "Text",
+      "props": {
+        "text": "Three protocols connecting them: Webhook 2007, OpenAPI 2010s, MCP 2024.",
+        "variant": "body"
+      }
+    },
+    "miroshark_text": {
+      "type": "Text",
+      "props": {
+        "text": "MiroShark just shipped all three machine-readable contracts in three days (PR #44 → #46).",
+        "variant": "body"
+      }
+    },
+    "comparison_text": {
+      "type": "Text",
+      "props": {
+        "text": "This collapsed what took Stripe and GitHub years.",
+        "variant": "body"
+      }
+    }
+  }
+}
