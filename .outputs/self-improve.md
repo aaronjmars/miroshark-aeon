@@ -1,14 +1,13 @@
-*Agent Self-Improvement — 2026-04-24*
+*Agent Self-Improvement — 2026-04-26*
 
-Dedup fetch-tweets by tweet ID instead of URL. Today's log has 13 named + 11 annotation-only tweet URLs, and 47% of the 115 historical seen URLs are in the annotation `x.com/i/status/<id>` form — the URL-matching dedup was one crossover away from re-notifying the same tweet under two different shapes.
+Tweet Allocator now classifies Bankr prefetch failures into five distinct states (no-api-key / no-candidates / lookups-failed / completed-no-wallets / completed) instead of guessing "missing or empty cache → BANKR_API_KEY unset". The misleading daily error notification stops, and a real Bankr API outage now shows an accurate "Bankr Agent API unreachable" message with the actual lookup-failure count.
 
-Why: Grok surfaces the same tweet as `x.com/<handle>/status/<id>` when it has the text, and as `x.com/i/status/<id>` when harvested from `content.annotations[]` (PR #20). Across runs those are the same tweet — URL dedup saw them as different. No active duplicate yet, but the invariant was fragile by construction.
+Why: TWEET_ALLOCATOR_ERROR fired Apr 25 and Apr 26 with the same text — "BANKR_API_KEY likely not set". But the secret IS set (5 wallets verified daily Apr 22–24); when it's unset the prefetch exits before creating the cache, so an empty cache means lookups silently failed. The bot was telling its operator to chase a wild goose for two days running.
 
 What changed:
-- skills/fetch-tweets/SKILL.md step 1: load `SEEN_IDS` via `/status/(\d+)` regex over the persistent seen-file + last 3 days of logs
-- skills/fetch-tweets/SKILL.md step 5: match candidates by tweet ID, not URL
-- Seen-file write path unchanged — ID extraction happens on read
+- `scripts/prefetch-bankr.sh`: new `write_status` helper writes `.bankr-cache/prefetch-status.json` at every exit with `{status, note, candidate_count, lookup_attempted, curl_failed, verified_count, null_count}`. Inline counters track per-handle outcomes so we can distinguish "all curl calls failed" from "Bankr returned null for everyone".
+- `skills/tweet-allocator/SKILL.md`: step 4 branches on the sidecar's status field. `no-api-key` becomes `TWEET_ALLOCATOR_DISABLED` and is silent (no operator can fix it from the bot side — daily noise stops). `lookups-failed` keeps the loud alert but with accurate text. `completed-no-wallets` reuses the existing `_EMPTY` flow.
 
-Impact: Stops a future duplicate-notification regression before it lands. Matches the in-run ID dedup already in `scripts/filter-xai-tweets.py`. Zero new deps.
+Impact: stops false-alarm daily notifications when the real cause is a Bankr API outage, AND silences the dormant-skill case entirely if BANKR_API_KEY ever gets rotated out. Future tweet-allocator alerts will be actionable.
 
-PR: https://github.com/aaronjmars/miroshark-aeon/pull/23
+PR: https://github.com/aaronjmars/miroshark-aeon/pull/24
