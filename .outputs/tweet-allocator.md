@@ -1,1 +1,1 @@
-Tweet Allocator — 2026-04-25: ERROR — Bankr cache is empty, check BANKR_API_KEY secret and prefetch-bankr.sh workflow output.
+Tweet Allocator — 2026-04-26: ERROR — Bankr cache missing, check BANKR_API_KEY secret.
