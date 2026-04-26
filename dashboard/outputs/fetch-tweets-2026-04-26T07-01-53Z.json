@@ -1,0 +1,314 @@
+{
+  "root": "card-root",
+  "state": {},
+  "elements": {
+    "card-root": {
+      "type": "Card",
+      "props": {
+        "title": "Top Tweets — $MIROSHARK OR @miroshark_ (2026-04-26)"
+      },
+      "children": [
+        "stack-root"
+      ]
+    },
+    "stack-root": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "tweet1-stack",
+        "tweet2-stack",
+        "tweet3-stack",
+        "tweet4-stack",
+        "tweet5-stack",
+        "tweet6-stack",
+        "tweet7-stack",
+        "tweet8-stack",
+        "tweet9-stack",
+        "tweet10-stack"
+      ]
+    },
+    "tweet1-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet1",
+        "link1"
+      ]
+    },
+    "tweet1": {
+      "type": "TweetCard",
+      "props": {
+        "author": "bankrbot",
+        "handle": "bankrbot",
+        "text": "Bankr Terminal v2 roundup: \"@miroshark_ simulated Aave vulnerabilities prior to rsETH incident\" — highest-signal mention of the week",
+        "likes": 156,
+        "retweets": 40
+      }
+    },
+    "link1": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/bankrbot/status/2048026489707442360"
+      }
+    },
+    "tweet2-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet2",
+        "link2"
+      ]
+    },
+    "tweet2": {
+      "type": "TweetCard",
+      "props": {
+        "author": "aaronjmars",
+        "handle": "aaronjmars",
+        "text": "big week huh quote-tweet of bankrbot mention (15M-view Polymarket spoof + Aeon/vercel patch + miroshark Aave sim)",
+        "likes": 28,
+        "retweets": 7
+      }
+    },
+    "link2": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/aaronjmars/status/2048170438107271382"
+      }
+    },
+    "tweet3-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet3",
+        "link3"
+      ]
+    },
+    "tweet3": {
+      "type": "TweetCard",
+      "props": {
+        "author": "TheGodfath13541",
+        "handle": "TheGodfath13541",
+        "text": "$MIROSHARK vs Aaru ($1B valuation) undervaluation thesis; Alibaba Cloud + OriginTrail V10 as catalysts; \"conservative 15x-30x target\"",
+        "likes": 12,
+        "retweets": 7
+      }
+    },
+    "link3": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/TheGodfath13541/status/2048175575781519459"
+      }
+    },
+    "tweet4-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet4",
+        "link4"
+      ]
+    },
+    "tweet4": {
+      "type": "TweetCard",
+      "props": {
+        "author": "TheGodfath13541",
+        "handle": "TheGodfath13541",
+        "text": "Prior 4X public calls; \"you're fading $Miroshark? Got it.\"",
+        "likes": 12,
+        "retweets": 0
+      }
+    },
+    "link4": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/TheGodfath13541/status/2048178525627208134"
+      }
+    },
+    "tweet5-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet5",
+        "link5"
+      ]
+    },
+    "tweet5": {
+      "type": "TweetCard",
+      "props": {
+        "author": "Jsxontop",
+        "handle": "Jsxontop",
+        "text": "$11.5K buy spotted on-chain; \"Whales are starting to arrive\"",
+        "likes": 5,
+        "retweets": 2
+      }
+    },
+    "link5": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/Jsxontop/status/2048249831437549764"
+      }
+    },
+    "tweet6-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet6",
+        "link6"
+      ]
+    },
+    "tweet6": {
+      "type": "TweetCard",
+      "props": {
+        "author": "TheGodfath13541",
+        "handle": "TheGodfath13541",
+        "text": "\"Me & @MrDegenWolf been the only ones really pushing it. Dropping more alpha today.\"",
+        "likes": 5,
+        "retweets": 0
+      }
+    },
+    "link6": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/TheGodfath13541/status/2047964218784149670"
+      }
+    },
+    "tweet7-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet7",
+        "link7"
+      ]
+    },
+    "tweet7": {
+      "type": "TweetCard",
+      "props": {
+        "author": "TheGodfath13541",
+        "handle": "TheGodfath13541",
+        "text": "OriginTrail V10 teaser thread for $Miroshark holders",
+        "likes": 4,
+        "retweets": 1
+      }
+    },
+    "link7": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/TheGodfath13541/status/2048182706333257865"
+      }
+    },
+    "tweet8-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet8",
+        "link8"
+      ]
+    },
+    "tweet8": {
+      "type": "TweetCard",
+      "props": {
+        "author": "TheGodfath13541",
+        "handle": "TheGodfath13541",
+        "text": "\"The views and attention $Miroshark has gotten is insane\"",
+        "likes": 3,
+        "retweets": 0
+      }
+    },
+    "link8": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/TheGodfath13541/status/2048176713880805629"
+      }
+    },
+    "tweet9-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet9",
+        "link9"
+      ]
+    },
+    "tweet9": {
+      "type": "TweetCard",
+      "props": {
+        "author": "cybercelos",
+        "handle": "cybercelos",
+        "text": "\"After $miroshark, I am loading $darksol\"",
+        "likes": 2,
+        "retweets": 0
+      }
+    },
+    "link9": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/cybercelos/status/2048256323784257895"
+      }
+    },
+    "tweet10-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet10",
+        "link10"
+      ]
+    },
+    "tweet10": {
+      "type": "TweetCard",
+      "props": {
+        "author": "Veireen3",
+        "handle": "Veireen3",
+        "text": "\"$miroshark time will come, imminent. Dev keeps delivering.\"",
+        "likes": 2,
+        "retweets": 0
+      }
+    },
+    "link10": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/Veireen3/status/2048178147288625508"
+      }
+    }
+  }
+}

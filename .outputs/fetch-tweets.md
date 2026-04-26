@@ -1,41 +1,41 @@
-*Top Tweets — $MIROSHARK OR @miroshark_ OR github.com/aaronjmars/miroshark (2026-04-25)*
+*Top Tweets — $MIROSHARK OR @miroshark_ (2026-04-26)*
 
-1. x.com/miroshark_ — Official pin: simulate anything for $1 & under 10 min, Universal Swarm Intelligence Engine
-Likes: 68 | RTs: 6
-[View tweet](https://x.com/miroshark_/status/2047688722519396728)
+1. x.com/bankrbot — Bankr Terminal v2 roundup: "@miroshark_ simulated Aave vulnerabilities prior to rsETH incident" — highest-signal mention of the week
+Likes: 156 | RTs: 40
+[View tweet](https://x.com/bankrbot/status/2048026489707442360)
 
-2. x.com/MrDegenWolf — still pushing higher for $AEON & $MIROSHARK; @aaronjmars live on Agent Hours by Bankr; way higher conviction
-Likes: 27 | RTs: 9
-[View tweet](https://x.com/MrDegenWolf/status/2047610150551171474)
+2. x.com/aaronjmars — "big week huh" quote-tweet of bankrbot mention (15M-view Polymarket spoof + Aeon/vercel patch + miroshark Aave sim)
+Likes: 28 | RTs: 7
+[View tweet](https://x.com/aaronjmars/status/2048170438107271382)
 
-3. x.com/me8_x1782 — $MiroShark top tier base AI meta alongside $WBC/$Doppel — extremely detailed report incoming; moat and uniqueness real, still undiscovered
-Likes: 16 | RTs: 2
-[View tweet](https://x.com/me8_x1782/status/2047603893886984365)
+3. x.com/TheGodfath13541 — $MIROSHARK vs Aaru ($1B valuation) undervaluation thesis; Alibaba Cloud + OriginTrail V10 as catalysts; "conservative 15x-30x target"
+Likes: 12 | RTs: 7
+[View tweet](https://x.com/TheGodfath13541/status/2048175575781519459)
 
-4. x.com/Karma_Nfa — morning market update request to @bankrbot listing $MIROSHARK among 10 tracked tokens
-Likes: 17 | RTs: 1
-[View tweet](https://x.com/Karma_Nfa/status/2047646664580571270)
+4. x.com/TheGodfath13541 — Prior 4X public calls; "you're fading $Miroshark? Got it."
+Likes: 12 | RTs: 0
+[View tweet](https://x.com/TheGodfath13541/status/2048178525627208134)
 
-5. x.com/miroshark_ — WE'RE LIVE $MIROSHARK (Agent Hours announcement)
-Likes: 16 | RTs: 1
-[View tweet](https://x.com/miroshark_/status/2047723553785622893)
+5. x.com/Jsxontop — $11.5K buy spotted on-chain; "Whales are starting to arrive"
+Likes: 5 | RTs: 2
+[View tweet](https://x.com/Jsxontop/status/2048249831437549764)
 
-6. x.com/joraweb3 — $miroshark accumulation thesis alongside $aeon, $wbc, $clawbank, $gitlawb
-Likes: 7 | RTs: 0
-[View tweet](https://x.com/joraweb3/status/2047783129411149972)
+6. x.com/TheGodfath13541 — "Me & @MrDegenWolf been the only ones really pushing it. Dropping more alpha today."
+Likes: 5 | RTs: 0
+[View tweet](https://x.com/TheGodfath13541/status/2047964218784149670)
 
-7. x.com/me8_x1782 — $MIROSHARK project mention/update
-Likes: 2 | RTs: 2
-[View tweet](https://x.com/me8_x1782/status/2047790740462244070)
+7. x.com/TheGodfath13541 — OriginTrail V10 teaser thread for $Miroshark holders
+Likes: 4 | RTs: 1
+[View tweet](https://x.com/TheGodfath13541/status/2048182706333257865)
 
-8. x.com/AriDavidUSA — @miroshark_ LFG, pump it up
-Likes: 0 | RTs: 0
-[View tweet](https://x.com/AriDavidUSA/status/2047794216512966723)
+8. x.com/TheGodfath13541 — "The views and attention $Miroshark has gotten is insane"
+Likes: 3 | RTs: 0
+[View tweet](https://x.com/TheGodfath13541/status/2048176713880805629)
 
-9. x.com/RovercryptoE — @miroshark_ promotion DM inquiry
-Likes: 0 | RTs: 0
-[View tweet](https://x.com/RovercryptoE/status/2047923773345599892)
+9. x.com/cybercelos — "After $miroshark, I am loading $darksol"
+Likes: 2 | RTs: 0
+[View tweet](https://x.com/cybercelos/status/2048256323784257895)
 
-10. x.com/FlokiBull_ — @miroshark_ follow/collaborate request
-Likes: 0 | RTs: 0
-[View tweet](https://x.com/FlokiBull_/status/2047921104090440165)
+10. x.com/Veireen3 — "$miroshark time will come, imminent. Dev keeps delivering."
+Likes: 2 | RTs: 0
+[View tweet](https://x.com/Veireen3/status/2048178147288625508)
