@@ -1,8 +1,12 @@
 ## Summary
 
-- **Active forks scanned:** 1 (AITOBIAS04/miroshark-aeon, still the only fork, pushed today at 18:13 UTC)
-- **Enabled skills in fork:** 14 — identical configuration to last week's baseline, no changes
-- **Adoption gap vs source:** `tweet-allocator` was added to the source repo but not adopted by the fork (wallet opt-in required)
-- **Week-over-week:** zero rank changes, zero new entries, zero dropouts
-- **Notification:** not sent — fleet below the 2-fork minimum threshold
-- **Files written:** `articles/skill-leaderboard-2026-04-20.md`, `memory/logs/2026-04-20.md` (appended)
+Skill `skill-leaderboard` completed with status **SKILL_LEADERBOARD_INSUFFICIENT_DATA**.
+
+**What happened:**
+- **Step 1:** Target repo = `aaronjmars/MiroShark` (first entry in `memory/watched-repos.md`)
+- **Step 2:** 107 active forks found (pushed within last 30 days)
+- **Step 3:** Sampled forks — none have `aeon.yml`. MiroShark is an application repo, not an aeon framework instance; its forks wouldn't run skills
+- **Fallback check:** `aaronjmars/miroshark-aeon` has exactly 1 active fork (`AITOBIAS04/miroshark-aeon`) with a readable `aeon.yml` and 14 enabled skills — still below the 2-fork minimum
+- **Result:** No article written, no notification sent per skill rules. Log entry appended to `memory/logs/2026-04-26.md`
+
+**Recommendation:** Update `memory/watched-repos.md` to put `aaronjmars/miroshark-aeon` as the first entry so this skill targets the correct repo type (an aeon instance) rather than the application repo. The skill will remain insufficient until other users fork and activate `miroshark-aeon` with their own aeon instances.
