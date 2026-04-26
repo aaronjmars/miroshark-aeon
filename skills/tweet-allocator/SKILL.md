@@ -121,7 +121,7 @@ The Bankr Agent API requires `BANKR_API_KEY` in the header — **the sandbox blo
 
 ## Environment Variables Required
 
-- `BANKR_API_KEY` — **Read-only** Bankr API key (required for prefetch). Enable Wallet API + Agent API, keep Read Only Mode **on**. Cannot send funds.
+- `BANKR_API_KEY` — **Read-only** Bankr API key (required for prefetch). Enable Wallet API + Agent API, keep Read Only Mode **on**. Cannot send funds. Bankr's Agent API now requires Max Mode for AI prompts, so the account must have **LLM credits** topped up at https://bankr.bot/llm?tab=credits (separate pool from regular API credits). The prefetch sends `maxMode: {enabled: true, model: "claude-sonnet-4.6"}` and bills against that pool.
 - `BANKR_SEND_KEY` — **Read-write** Bankr API key (optional). Only set when enabling auto-send. Enable Wallet API + Agent API, Read Only Mode **off**.
 
 ## Status flags

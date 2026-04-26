@@ -114,7 +114,8 @@ bankr_lookup() {
 
   local payload
   payload=$(jq -n --arg h "$handle" \
-    '{prompt: ("what is the wallet address for @" + $h + " on base? just tell me the 0x address or say no wallet")}')
+    '{prompt: ("what is the wallet address for @" + $h + " on base? just tell me the 0x address or say no wallet"),
+      maxMode: {enabled: true, model: "claude-sonnet-4.6"}}')
 
   local submit_response
   submit_response=$(curl -s --max-time 30 -X POST "https://api.bankr.bot/agent/prompt" \
