@@ -26,12 +26,43 @@ case "$SKILL" in
     ;;
 esac
 
+mkdir -p .bankr-cache
+
+# Status sidecar — written at every exit point so the skill can tell what
+# actually happened (no-api-key vs no-candidates vs lookups-failed vs ok)
+# instead of guessing from an empty verified-handles.json.
+write_status() {
+  local status="$1"
+  local note="${2:-}"
+  local candidate_count="${3:-0}"
+  local lookup_attempted="${4:-0}"
+  local curl_failed="${5:-0}"
+  local verified_count="${6:-0}"
+  local null_count="${7:-0}"
+  jq -n \
+    --arg status "$status" \
+    --arg note "$note" \
+    --arg ts "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+    --argjson candidate_count "$candidate_count" \
+    --argjson lookup_attempted "$lookup_attempted" \
+    --argjson curl_failed "$curl_failed" \
+    --argjson verified_count "$verified_count" \
+    --argjson null_count "$null_count" \
+    '{status: $status, note: $note, timestamp: $ts,
+      candidate_count: $candidate_count,
+      lookup_attempted: $lookup_attempted,
+      curl_failed: $curl_failed,
+      verified_count: $verified_count,
+      null_count: $null_count}' \
+    > .bankr-cache/prefetch-status.json
+}
+
 if [ -z "${BANKR_API_KEY:-}" ]; then
   echo "::warning::bankr-prefetch: BANKR_API_KEY not set — skipping Bankr lookups (tweet-allocator will mark all handles unverified)"
+  echo "{}" > .bankr-cache/verified-handles.json
+  write_status "no-api-key" "BANKR_API_KEY env var not set in workflow"
   exit 0
 fi
-
-mkdir -p .bankr-cache
 
 # Collect candidate handles from multiple sources (in freshness order):
 # 1. .xai-cache/fetch-tweets.json (if prefetch-xai.sh just ran)
@@ -62,6 +93,7 @@ if [ -z "$HANDLES" ]; then
   echo "bankr-prefetch: no candidate handles found in .xai-cache/ or memory/logs/${TODAY}.md — nothing to verify"
   # Write an empty cache so the skill knows the prefetch ran
   echo "{}" > .bankr-cache/verified-handles.json
+  write_status "no-candidates" "no candidate handles found in .xai-cache/ or today's log"
   exit 0
 fi
 
@@ -71,8 +103,14 @@ echo "bankr-prefetch: looking up $COUNT handles on Bankr Agent API..."
 # Start from an empty map (overwrite any stale cache)
 echo "{}" > .bankr-cache/verified-handles.json
 
+# Per-handle outcome counters surfaced into the status sidecar so the skill
+# can distinguish "all curl calls failed" from "Bankr returned null for all".
+LOOKUP_ATTEMPTED=0
+CURL_FAILED=0
+
 bankr_lookup() {
   local handle="$1"
+  LOOKUP_ATTEMPTED=$((LOOKUP_ATTEMPTED + 1))
 
   local payload
   payload=$(jq -n --arg h "$handle" \
@@ -84,6 +122,7 @@ bankr_lookup() {
     -H "Content-Type: application/json" \
     -d "$payload" 2>/dev/null) || {
     echo "bankr-prefetch: @$handle — submit failed (curl error)"
+    CURL_FAILED=$((CURL_FAILED + 1))
     return 1
   }
 
@@ -91,6 +130,7 @@ bankr_lookup() {
   job_id=$(echo "$submit_response" | jq -r '.jobId // .job_id // empty' 2>/dev/null)
   if [ -z "$job_id" ]; then
     echo "bankr-prefetch: @$handle — no jobId in response: $(echo "$submit_response" | head -c 200)"
+    CURL_FAILED=$((CURL_FAILED + 1))
     return 1
   fi
 
@@ -129,5 +169,18 @@ done <<< "$HANDLES"
 
 VERIFIED=$(jq -r 'to_entries | map(select(.value != null)) | length' .bankr-cache/verified-handles.json 2>/dev/null || echo 0)
 TOTAL=$(jq -r 'to_entries | length' .bankr-cache/verified-handles.json 2>/dev/null || echo 0)
-echo "bankr-prefetch: done — $VERIFIED/$TOTAL handles have Bankr wallets"
+NULL_COUNT=$((TOTAL - VERIFIED))
+echo "bankr-prefetch: done — $VERIFIED/$TOTAL handles have Bankr wallets ($CURL_FAILED curl failures across $LOOKUP_ATTEMPTED attempts)"
+
+if [ "$LOOKUP_ATTEMPTED" -gt 0 ] && [ "$CURL_FAILED" -eq "$LOOKUP_ATTEMPTED" ]; then
+  STATUS_NOTE="all $LOOKUP_ATTEMPTED Bankr lookups failed at curl/jobId step (API down, key invalid, or rate-limited)"
+  STATUS="lookups-failed"
+elif [ "$VERIFIED" -eq 0 ] && [ "$LOOKUP_ATTEMPTED" -gt 0 ]; then
+  STATUS_NOTE="$LOOKUP_ATTEMPTED handles checked, 0 verified ($CURL_FAILED curl failed, $NULL_COUNT returned null)"
+  STATUS="completed-no-wallets"
+else
+  STATUS_NOTE="$VERIFIED/$LOOKUP_ATTEMPTED handles have Bankr wallets"
+  STATUS="completed"
+fi
+write_status "$STATUS" "$STATUS_NOTE" "$COUNT" "$LOOKUP_ATTEMPTED" "$CURL_FAILED" "$VERIFIED" "$NULL_COUNT"
 ls -la .bankr-cache/ 2>/dev/null || true
