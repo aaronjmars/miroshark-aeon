@@ -74,4 +74,4 @@
 - From repo-actions Apr 22 (still unbuilt): History Search & Tags (#4); #1 Public Gallery shipped (PR #43), #2 Simulation Clone already wired by PR #41/#43 fork, #3 MCP Onboarding shipped (PR #44), #5 Multi-Scenario Compare already exists from PR #41
 - From repo-actions Apr 20 (still unbuilt): Collaborative Comments (#4), Config Export/Import (#5); Round Scrubber (#1) partly exists in `ReplayView`
 - Open PRs: 1 on MiroShark (#45 OpenAPI/Swagger, filed Apr 25 — #44 merged), 0 on miroshark-aeon
-- MiroShark at 823 stars / 152 forks as of Apr 25 (repo-pulse); 1K-stars-by-Apr-30 needs ~35/day with 5 days left (26 stars/day pace yesterday)
+- MiroShark at 829 stars / 152 forks as of Apr 26 (repo-pulse); 1K-stars-by-Apr-30 needs ~43/day with 4 days left (6 stars/day pace today — well below target)
