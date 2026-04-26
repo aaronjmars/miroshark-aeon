@@ -1,0 +1,128 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "MIROSHARK Daily — 2026-04-26"
+      },
+      "children": [
+        "mainStack"
+      ]
+    },
+    "mainStack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "priceStat",
+        "metricsGrid",
+        "sep1",
+        "performanceGrid",
+        "sep2",
+        "descriptionText",
+        "sep3",
+        "chartLink"
+      ]
+    },
+    "priceStat": {
+      "type": "Stat",
+      "props": {
+        "label": "Price",
+        "value": "$0.000003620",
+        "delta": "+34.75%",
+        "trend": "up"
+      }
+    },
+    "metricsGrid": {
+      "type": "Grid",
+      "props": {
+        "columns": 3,
+        "gap": "md"
+      },
+      "children": [
+        "liquidityStat",
+        "volumeStat",
+        "ratioStat"
+      ]
+    },
+    "liquidityStat": {
+      "type": "Stat",
+      "props": {
+        "label": "Liquidity",
+        "value": "$229.0K"
+      }
+    },
+    "volumeStat": {
+      "type": "Stat",
+      "props": {
+        "label": "24h Vol",
+        "value": "$57.2K"
+      }
+    },
+    "ratioStat": {
+      "type": "Stat",
+      "props": {
+        "label": "Buys/Sells",
+        "value": "1.57x"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {}
+    },
+    "performanceGrid": {
+      "type": "Grid",
+      "props": {
+        "columns": 2,
+        "gap": "md"
+      },
+      "children": [
+        "sevenDayStat",
+        "thirtyDayStat"
+      ]
+    },
+    "sevenDayStat": {
+      "type": "Stat",
+      "props": {
+        "label": "7d",
+        "value": "+63.2%",
+        "trend": "up"
+      }
+    },
+    "thirtyDayStat": {
+      "type": "Stat",
+      "props": {
+        "label": "30d",
+        "value": "+630%",
+        "trend": "up"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {}
+    },
+    "descriptionText": {
+      "type": "Text",
+      "props": {
+        "text": "Sharp breakout ~05:00 UTC pushed MIROSHARK to within 5.1% of all-time high ($3.815e-6). Closest ATH approach since Apr 14. Buy pressure asymmetric, liquidity growing.",
+        "variant": "body"
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {}
+    },
+    "chartLink": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Price Chart",
+        "href": "https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209",
+        "source": "GeckoTerminal"
+      }
+    }
+  }
+}
