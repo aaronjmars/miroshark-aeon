@@ -1,0 +1,151 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Repo Action Ideas — 2026-04-26"
+      },
+      "children": [
+        "repo_info",
+        "separator_1",
+        "action_section"
+      ]
+    },
+    "repo_info": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "repo_name",
+        "repo_stats",
+        "repo_context"
+      ]
+    },
+    "repo_name": {
+      "type": "Text",
+      "props": {
+        "text": "aaronjmars/MiroShark",
+        "variant": "lead"
+      }
+    },
+    "repo_stats": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "lg"
+      },
+      "children": [
+        "stars_stat",
+        "forks_stat"
+      ]
+    },
+    "stars_stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Stars",
+        "value": "829"
+      }
+    },
+    "forks_stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Forks",
+        "value": "153"
+      }
+    },
+    "repo_context": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "sprint_info",
+        "citation_info"
+      ]
+    },
+    "sprint_info": {
+      "type": "Text",
+      "props": {
+        "text": "4 days left on 1K sprint",
+        "variant": "body"
+      }
+    },
+    "citation_info": {
+      "type": "Text",
+      "props": {
+        "text": "Bankr Terminal v2 Aave simulation citation live",
+        "variant": "body"
+      }
+    },
+    "separator_1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "action_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "action_title",
+        "action_badges"
+      ]
+    },
+    "action_title": {
+      "type": "Heading",
+      "props": {
+        "text": "Predictive Accuracy Ledger",
+        "level": "h3"
+      }
+    },
+    "action_badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "badge_type",
+        "badge_size",
+        "badge_community",
+        "badge_verified"
+      ]
+    },
+    "badge_type": {
+      "type": "Badge",
+      "props": {
+        "text": "Growth/Feature",
+        "variant": "default"
+      }
+    },
+    "badge_size": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "secondary"
+      }
+    },
+    "badge_community": {
+      "type": "Badge",
+      "props": {
+        "text": "Community-annotatable",
+        "variant": "outline"
+      }
+    },
+    "badge_verified": {
+      "type": "Badge",
+      "props": {
+        "text": "Verified",
+        "variant": "default"
+      }
+    }
+  }
+}
