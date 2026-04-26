@@ -10,8 +10,8 @@
     "success_rate": 1
   },
   "memory-flush": {
-    "last_dispatch": "2026-04-22T18:07:35Z",
-    "last_status": "success",
+    "last_dispatch": "2026-04-26T18:08:13Z",
+    "last_status": "dispatched",
     "last_success": "2026-04-22T18:12:01Z",
     "total_runs": 4,
     "total_successes": 4,
