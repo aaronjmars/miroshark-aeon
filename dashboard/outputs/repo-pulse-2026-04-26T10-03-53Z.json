@@ -1,0 +1,136 @@
+{
+  "root": "card-root",
+  "state": {},
+  "elements": {
+    "card-root": {
+      "type": "Card",
+      "props": {
+        "title": "Repo Pulse — 2026-04-26"
+      },
+      "children": [
+        "stack-main"
+      ]
+    },
+    "stack-main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "repo-name",
+        "stat-stars",
+        "stat-forks",
+        "separator-1",
+        "heading-stargazers",
+        "stack-stargazers"
+      ]
+    },
+    "repo-name": {
+      "type": "Heading",
+      "props": {
+        "text": "aaronjmars/MiroShark",
+        "level": "h2"
+      },
+      "children": []
+    },
+    "stat-stars": {
+      "type": "Stat",
+      "props": {
+        "label": "Stars",
+        "value": "829",
+        "delta": "+6",
+        "trend": "up"
+      },
+      "children": []
+    },
+    "stat-forks": {
+      "type": "Stat",
+      "props": {
+        "label": "Forks",
+        "value": "152",
+        "delta": "+0",
+        "trend": "neutral"
+      },
+      "children": []
+    },
+    "separator-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "heading-stargazers": {
+      "type": "Heading",
+      "props": {
+        "text": "New stargazers",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "stack-stargazers": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "link-1",
+        "link-2",
+        "link-3",
+        "link-4",
+        "link-5",
+        "link-6"
+      ]
+    },
+    "link-1": {
+      "type": "Link",
+      "props": {
+        "label": "kleos94",
+        "href": "https://github.com/kleos94"
+      },
+      "children": []
+    },
+    "link-2": {
+      "type": "Link",
+      "props": {
+        "label": "MaGioMusic",
+        "href": "https://github.com/MaGioMusic"
+      },
+      "children": []
+    },
+    "link-3": {
+      "type": "Link",
+      "props": {
+        "label": "ymma",
+        "href": "https://github.com/ymma"
+      },
+      "children": []
+    },
+    "link-4": {
+      "type": "Link",
+      "props": {
+        "label": "cwcheak",
+        "href": "https://github.com/cwcheak"
+      },
+      "children": []
+    },
+    "link-5": {
+      "type": "Link",
+      "props": {
+        "label": "parzi-val",
+        "href": "https://github.com/parzi-val"
+      },
+      "children": []
+    },
+    "link-6": {
+      "type": "Link",
+      "props": {
+        "label": "nazimkhwaja24-spec",
+        "href": "https://github.com/nazimkhwaja24-spec"
+      },
+      "children": []
+    }
+  }
+}
