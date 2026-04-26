@@ -1,0 +1,268 @@
+{
+  "root": "main-card",
+  "state": {},
+  "elements": {
+    "main-card": {
+      "type": "Card",
+      "props": {
+        "title": "Push Recap — 2026-04-26"
+      },
+      "children": [
+        "content-stack"
+      ]
+    },
+    "content-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "overview-section",
+        "sep1",
+        "webhook-section",
+        "sep2",
+        "tweet-allocator-section",
+        "sep3",
+        "automation-section",
+        "sep4",
+        "key-changes-section",
+        "sep5",
+        "followup-section",
+        "sep6",
+        "recap-link"
+      ]
+    },
+    "overview-section": {
+      "type": "Text",
+      "props": {
+        "text": "MiroShark + miroshark-aeon — 2 substantive commits across 2 open PRs (1 per repo); ~30 chore auto-commits on aeon main.",
+        "variant": "lead"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "webhook-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "webhook-header-stack",
+        "webhook-desc1",
+        "webhook-desc2",
+        "webhook-desc3",
+        "webhook-desc4"
+      ]
+    },
+    "webhook-header-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "webhook-title",
+        "webhook-badge"
+      ]
+    },
+    "webhook-title": {
+      "type": "Heading",
+      "props": {
+        "text": "Completion Webhook",
+        "level": "h3"
+      }
+    },
+    "webhook-badge": {
+      "type": "Badge",
+      "props": {
+        "text": "MiroShark PR #46 (open)",
+        "variant": "outline"
+      }
+    },
+    "webhook-desc1": {
+      "type": "Text",
+      "props": {
+        "text": "Fire-and-forget daemon-thread POST to a user-configured URL the moment a sim hits completed/failed — Slack/Discord auto-unfurl with the share-card PNG, Zapier/n8n/IFTTT/custom listeners just work. One env var (or Settings save) + zero new deps (stdlib urllib.request)."
+      }
+    },
+    "webhook-desc2": {
+      "type": "Text",
+      "props": {
+        "text": "Per-(sim_id,status) dedup so the runner's exit-code path AND simulation_end-event path both fire safely; consensus uses the same ±0.2 stance threshold as gallery + share card so the three surfaces stay consistent. Settings modal gains \"Integrations · Webhook\" section with masked URL input + \"Send test event\" button."
+      }
+    },
+    "webhook-desc3": {
+      "type": "Text",
+      "props": {
+        "text": "18 offline unit tests + docs/WEBHOOKS.md with full payload schema."
+      }
+    },
+    "webhook-desc4": {
+      "type": "Text",
+      "props": {
+        "text": "Key file: backend/app/services/webhook_service.py — 457-line stdlib-only outbound webhook with fire-and-forget threading, (sim_id,status) dedup, scheme://host/*** URL masking.",
+        "variant": "muted"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "tweet-allocator-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-header-stack",
+        "tweet-desc1",
+        "tweet-desc2",
+        "tweet-desc3"
+      ]
+    },
+    "tweet-header-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-title",
+        "tweet-badge"
+      ]
+    },
+    "tweet-title": {
+      "type": "Heading",
+      "props": {
+        "text": "Tweet Allocator stops false-alarming",
+        "level": "h3"
+      }
+    },
+    "tweet-badge": {
+      "type": "Badge",
+      "props": {
+        "text": "miroshark-aeon PR #24 (open)",
+        "variant": "outline"
+      }
+    },
+    "tweet-desc1": {
+      "type": "Text",
+      "props": {
+        "text": "The skill emitted misleading \"BANKR_API_KEY not set\" alerts two days running despite the secret being set since Apr 22 (5 wallets verified daily Apr 22–24)."
+      }
+    },
+    "tweet-desc2": {
+      "type": "Text",
+      "props": {
+        "text": "prefetch-bankr.sh now writes a .bankr-cache/prefetch-status.json sidecar at every exit point (no-api-key / no-candidates / lookups-failed / completed-no-wallets / completed); skill branches on it instead of guessing from an empty cache."
+      }
+    },
+    "tweet-desc3": {
+      "type": "Text",
+      "props": {
+        "text": "New silent TWEET_ALLOCATOR_DISABLED flag for the no-recipient-can-fix-this case; lookups-failed now produces an accurate \"Bankr Agent API unreachable (X/N curl failures)\" message."
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "automation-section": {
+      "type": "Text",
+      "props": {
+        "text": "Routine automation: ~30 chore auto-commits on miroshark-aeon main (cron success, scheduler state, per-skill log+article auto-commits) + 1 auto-generated repo-actions article (5 ideas for Apr 26)."
+      }
+    },
+    "sep4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "key-changes-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "key-changes-heading",
+        "key-changes-item1",
+        "key-changes-item2",
+        "key-changes-item3",
+        "key-changes-stats"
+      ]
+    },
+    "key-changes-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Key changes",
+        "level": "h3"
+      }
+    },
+    "key-changes-item1": {
+      "type": "Text",
+      "props": {
+        "text": "backend/app/services/webhook_service.py — 457-line stdlib-only outbound webhook with fire-and-forget threading, (sim_id,status) dedup, scheme://host/*** URL masking"
+      }
+    },
+    "key-changes-item2": {
+      "type": "Text",
+      "props": {
+        "text": "backend/app/services/simulation_runner.py — webhook hooked into both terminal paths (exit-code at line ~619, simulation_end event at line ~754) alongside existing push notification"
+      }
+    },
+    "key-changes-item3": {
+      "type": "Text",
+      "props": {
+        "text": "scripts/prefetch-bankr.sh + skills/tweet-allocator/SKILL.md — sidecar-based status reporting; same architectural move as XAI cache validation + fetch-tweets ID dedup, now consolidating across three skills"
+      }
+    },
+    "key-changes-stats": {
+      "type": "Text",
+      "props": {
+        "text": "Stats: 14 substantive files / +1,497 / −10 across 2 substantive commits.",
+        "variant": "muted"
+      }
+    },
+    "sep5": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "followup-section": {
+      "type": "Alert",
+      "props": {
+        "title": "Open follow-up",
+        "message": "When PR #45 (OpenAPI) and PR #46 (Webhook) both land, the second merger needs POST /api/settings/test-webhook in openapi.yaml or PR #45's drift-test allowlist.",
+        "type": "info"
+      }
+    },
+    "sep6": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "recap-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full recap",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-04-26.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}
