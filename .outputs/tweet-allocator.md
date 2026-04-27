@@ -1,13 +1,10 @@
-*Tweet Rewards — 2026-04-26*
+*Tweet Rewards — 2026-04-27*
 
 Budget: $10.00 in $MIROSHARK on Base
 
-1. x.com/bankrbot — $8.93 in $MIROSHARK (score: 276)
-   Bankr Terminal v2 roundup cites miroshark_ simulating Aave vulnerabilities prior to rsETH incident
-   View tweet: https://x.com/bankrbot/status/2048026489707442360
+1. x.com/100xDarren — $10.00 in $MIROSHARK (score: 1)
+   Called $Miroshark a "solid AI projects with dedicated dev" alongside $Gitlawb, $Juno, $Sibyl, $Litcoin, $Darksol
+   [Tweet URL not captured in cache]
 
-2. x.com/TheGodfath13541 — $1.07 in $MIROSHARK (score: 33)
-   $MIROSHARK vs Aaru ($1B valuation) undervaluation thesis; Alibaba Cloud + OriginTrail V10 catalysts
-   View tweet: https://x.com/TheGodfath13541/status/2048175575781519459
-
-Total: $10.00 in $MIROSHARK allocated to 2 authors
+Total: $10.00 in $MIROSHARK allocated to 1 author
+Note: BANKR_SEND_KEY not set — manual send required. Wallet: 0xa5c3cc8e8f9a7ca610a73195f98ca8e616eed1c3

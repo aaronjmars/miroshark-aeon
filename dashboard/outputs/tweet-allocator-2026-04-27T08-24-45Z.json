@@ -1,0 +1,165 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Tweet Rewards — 2026-04-27"
+      },
+      "children": [
+        "budget_section",
+        "separator1",
+        "allocation_section",
+        "separator2",
+        "total_section",
+        "warning_section"
+      ]
+    },
+    "budget_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "budget_heading",
+        "budget_stat"
+      ]
+    },
+    "budget_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Budget",
+        "level": "h3"
+      }
+    },
+    "budget_stat": {
+      "type": "Stat",
+      "props": {
+        "label": "on Base",
+        "value": "$10.00 in $MIROSHARK"
+      }
+    },
+    "separator1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "allocation_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "allocation_heading",
+        "author_link",
+        "allocation_stat",
+        "tweet_card",
+        "url_note"
+      ]
+    },
+    "allocation_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Allocations",
+        "level": "h3"
+      }
+    },
+    "author_link": {
+      "type": "Link",
+      "props": {
+        "label": "x.com/100xDarren",
+        "href": "https://x.com/100xDarren"
+      }
+    },
+    "allocation_stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Score 1",
+        "value": "$10.00 in $MIROSHARK"
+      }
+    },
+    "tweet_card": {
+      "type": "TweetCard",
+      "props": {
+        "author": "100xDarren",
+        "handle": "@100xDarren",
+        "text": "Called $Miroshark a \"solid AI projects with dedicated dev\" alongside $Gitlawb, $Juno, $Sibyl, $Litcoin, $Darksol"
+      }
+    },
+    "url_note": {
+      "type": "Text",
+      "props": {
+        "text": "Tweet URL not captured in cache",
+        "variant": "caption"
+      }
+    },
+    "separator2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "total_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "total_heading",
+        "total_stat",
+        "author_count"
+      ]
+    },
+    "total_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Total",
+        "level": "h3"
+      }
+    },
+    "total_stat": {
+      "type": "Stat",
+      "props": {
+        "value": "$10.00 in $MIROSHARK"
+      }
+    },
+    "author_count": {
+      "type": "Text",
+      "props": {
+        "text": "allocated to 1 author",
+        "variant": "caption"
+      }
+    },
+    "warning_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "alert_bankr",
+        "wallet_text"
+      ]
+    },
+    "alert_bankr": {
+      "type": "Alert",
+      "props": {
+        "title": "Manual Send Required",
+        "message": "BANKR_SEND_KEY not set",
+        "type": "warning"
+      }
+    },
+    "wallet_text": {
+      "type": "Text",
+      "props": {
+        "text": "Wallet: 0xa5c3cc8e8f9a7ca610a73195f98ca8e616eed1c3",
+        "variant": "caption"
+      }
+    }
+  }
+}
