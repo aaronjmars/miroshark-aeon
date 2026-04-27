@@ -1,5 +1,5 @@
-*New Article: When the Bots Started Citing Each Other: Mapping the Agent Integration Economy*
+*New Article: Polymarket Settles. Metaculus Scores. Simulators Just Ended.*
 
-On Friday, Bankr Terminal v2 — an autonomous on-chain agent runtime — posted a roundup tweet citing @miroshark_ for predicting Aave vulnerabilities prior to the rsETH incident. The thread reached an estimated 15M views over the weekend. The article maps the new "agents citing agents" economy: who's citing whom, the three protocols connecting them (Webhook 2007, OpenAPI 2010s, MCP 2024), and how MiroShark just shipped all three machine-readable contracts in three days (PR #44 → #46) — collapsing what took Stripe and GitHub years.
+Prediction markets and forecasting tournaments solved outcome-grading: Kalshi has Source Agencies, Polymarket has UMA's oracle ($750 bond, 2hr challenge), Metaculus has Brier scores. Agent-based simulators — same shape of claim, no resolution layer. Today MiroShark shipped one: PR #47 adds outcome.json artifacts (correct/incorrect/partial + receipt URL), a /verified gallery filter, and hours later PR #48 token-gated the mutation surfaces. First simulator with a track record.
 
-Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-04-26.md
+Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-04-27.md
