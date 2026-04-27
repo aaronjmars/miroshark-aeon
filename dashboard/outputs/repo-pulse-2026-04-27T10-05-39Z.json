@@ -1,0 +1,235 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "Repo Pulse — 2026-04-27",
+        "description": "aaronjmars/MiroShark"
+      },
+      "children": [
+        "stats-stack",
+        "separator-1",
+        "stargazers-section",
+        "separator-2",
+        "forks-section"
+      ]
+    },
+    "stats-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "stat-stars",
+        "stat-forks"
+      ]
+    },
+    "stat-stars": {
+      "type": "Stat",
+      "props": {
+        "label": "Stars",
+        "value": "837",
+        "delta": "+9",
+        "trend": "up"
+      }
+    },
+    "stat-forks": {
+      "type": "Stat",
+      "props": {
+        "label": "Forks",
+        "value": "157",
+        "delta": "+6",
+        "trend": "up"
+      }
+    },
+    "separator-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stargazers-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stargazers-heading",
+        "stargazers-grid"
+      ]
+    },
+    "stargazers-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "New Stargazers",
+        "level": "h3"
+      }
+    },
+    "stargazers-grid": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "link-creativeskyai",
+        "link-pyhe-design",
+        "link-0x-ultra",
+        "link-steve-goldberg",
+        "link-systemsrethinking",
+        "link-schwjustin",
+        "link-kaydoceo",
+        "link-woo2071",
+        "link-meydeey"
+      ]
+    },
+    "link-creativeskyai": {
+      "type": "Link",
+      "props": {
+        "label": "creativeskyai",
+        "href": "https://github.com/creativeskyai"
+      }
+    },
+    "link-pyhe-design": {
+      "type": "Link",
+      "props": {
+        "label": "pyhe-design",
+        "href": "https://github.com/pyhe-design"
+      }
+    },
+    "link-0x-ultra": {
+      "type": "Link",
+      "props": {
+        "label": "0x-ultra",
+        "href": "https://github.com/0x-ultra"
+      }
+    },
+    "link-steve-goldberg": {
+      "type": "Link",
+      "props": {
+        "label": "steve-goldberg",
+        "href": "https://github.com/steve-goldberg"
+      }
+    },
+    "link-systemsrethinking": {
+      "type": "Link",
+      "props": {
+        "label": "systemsrethinking",
+        "href": "https://github.com/systemsrethinking"
+      }
+    },
+    "link-schwjustin": {
+      "type": "Link",
+      "props": {
+        "label": "schwjustin",
+        "href": "https://github.com/schwjustin"
+      }
+    },
+    "link-kaydoceo": {
+      "type": "Link",
+      "props": {
+        "label": "kaydoceo",
+        "href": "https://github.com/kaydoceo"
+      }
+    },
+    "link-woo2071": {
+      "type": "Link",
+      "props": {
+        "label": "woo2071",
+        "href": "https://github.com/woo2071"
+      }
+    },
+    "link-meydeey": {
+      "type": "Link",
+      "props": {
+        "label": "meydeey",
+        "href": "https://github.com/meydeey"
+      }
+    },
+    "separator-2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "forks-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "forks-heading",
+        "forks-grid"
+      ]
+    },
+    "forks-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "New Forks",
+        "level": "h3"
+      }
+    },
+    "forks-grid": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "link-plainvectorlabs-miroshark",
+        "link-nt4gws6khk-dev-miroshark",
+        "link-neovertex1-miroshark",
+        "link-sammane-miroshark",
+        "link-creativeskyai-miroshark",
+        "link-ramona-dsouza-team-miroshark"
+      ]
+    },
+    "link-plainvectorlabs-miroshark": {
+      "type": "StoryLink",
+      "props": {
+        "title": "plainvectorlabs/MiroShark",
+        "href": "https://github.com/plainvectorlabs/MiroShark"
+      }
+    },
+    "link-nt4gws6khk-dev-miroshark": {
+      "type": "StoryLink",
+      "props": {
+        "title": "nt4gws6khk-dev/MiroShark",
+        "href": "https://github.com/nt4gws6khk-dev/MiroShark"
+      }
+    },
+    "link-neovertex1-miroshark": {
+      "type": "StoryLink",
+      "props": {
+        "title": "NeoVertex1/MiroShark",
+        "href": "https://github.com/NeoVertex1/MiroShark"
+      }
+    },
+    "link-sammane-miroshark": {
+      "type": "StoryLink",
+      "props": {
+        "title": "SamSammane/miroshark",
+        "href": "https://github.com/SamSammane/miroshark"
+      }
+    },
+    "link-creativeskyai-miroshark": {
+      "type": "StoryLink",
+      "props": {
+        "title": "creativeskyai/miroshark",
+        "href": "https://github.com/creativeskyai/miroshark"
+      }
+    },
+    "link-ramona-dsouza-team-miroshark": {
+      "type": "StoryLink",
+      "props": {
+        "title": "ramona-dsouza/team-miroshark",
+        "href": "https://github.com/ramona-dsouza/team-miroshark"
+      }
+    }
+  }
+}
