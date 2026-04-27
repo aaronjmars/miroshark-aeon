@@ -41,13 +41,13 @@
     "last_quality_score": 5
   },
   "push-recap": {
-    "last_status": "dispatched",
-    "last_success": "2026-04-26T15:14:28Z",
-    "total_runs": 15,
-    "total_successes": 14,
+    "last_status": "success",
+    "last_success": "2026-04-27T15:17:42Z",
+    "total_runs": 16,
+    "total_successes": 15,
     "total_failures": 1,
     "consecutive_failures": 0,
-    "success_rate": 0.93,
+    "success_rate": 0.94,
     "last_dispatch": "2026-04-27T15:10:21Z",
     "last_failed": "2026-04-17T16:58:29Z",
     "last_error": "dc1098cf5df3fe999e32efbe90 5c21220ef39cb0ba1df052bc9398ba5d16be2e82; do\\n  gh api repos/aaronjmars/miroshark-aeon/commits/\\\"$sha\\\" --jq '{sha: .sha[0:7], stats: .stats, files: [.files[] | {filename: ."
