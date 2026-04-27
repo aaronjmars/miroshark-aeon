@@ -1,0 +1,256 @@
+{
+  "root": "root-card",
+  "state": {},
+  "elements": {
+    "root-card": {
+      "type": "Card",
+      "props": {
+        "title": "Weekly Shiplog — 2026-04-27"
+      },
+      "children": [
+        "heading-intro",
+        "intro-text",
+        "sep-1",
+        "shipped-heading",
+        "shipped-content",
+        "sep-2",
+        "stats-heading",
+        "stats-content",
+        "sep-3",
+        "full-update"
+      ]
+    },
+    "heading-intro": {
+      "type": "Heading",
+      "props": {
+        "text": "The week MiroShark became addressable",
+        "level": "h2"
+      }
+    },
+    "intro-text": {
+      "type": "Text",
+      "props": {
+        "text": "Three machine-readable contracts shipped over the same engine in three calendar days.",
+        "variant": "lead"
+      }
+    },
+    "sep-1": {
+      "type": "Separator",
+      "props": {}
+    },
+    "shipped-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Shipped",
+        "level": "h3"
+      }
+    },
+    "shipped-content": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "shipped-item-1",
+        "shipped-item-2",
+        "shipped-item-3",
+        "shipped-item-4"
+      ]
+    },
+    "shipped-item-1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "shipped-1-title",
+        "shipped-1-pr44",
+        "shipped-1-pr45",
+        "shipped-1-pr46"
+      ]
+    },
+    "shipped-1-title": {
+      "type": "Text",
+      "props": {
+        "text": "Three Protocols in Three Days",
+        "variant": "lead"
+      }
+    },
+    "shipped-1-pr44": {
+      "type": "Text",
+      "props": {
+        "text": "PR #44 MCP Onboarding (Apr 24, Settings panel + Claude Desktop/Cursor/Windsurf/Continue snippets)"
+      }
+    },
+    "shipped-1-pr45": {
+      "type": "Text",
+      "props": {
+        "text": "PR #45 OpenAPI 3.1 + Swagger UI (Apr 26, 1.9K-line spec + drift test)"
+      }
+    },
+    "shipped-1-pr46": {
+      "type": "Text",
+      "props": {
+        "text": "PR #46 Completion Webhook (Apr 26, Slack/Discord/Zapier/n8n outbound, zero new deps)"
+      }
+    },
+    "shipped-item-2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "shipped-2-title",
+        "shipped-2-text"
+      ]
+    },
+    "shipped-2-title": {
+      "type": "Text",
+      "props": {
+        "text": "Distribution surfaces",
+        "variant": "lead"
+      }
+    },
+    "shipped-2-text": {
+      "type": "Text",
+      "props": {
+        "text": "PR #42 Social Share Card (Apr 22, OG image + landing page) and PR #43 Public Gallery /explore (Apr 23) close the inbound side; same `_build_*_payload` family + ±0.2 stance threshold across share-card/gallery/webhook"
+      }
+    },
+    "shipped-item-3": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "shipped-3-title",
+        "shipped-3-text"
+      ]
+    },
+    "shipped-3-title": {
+      "type": "Text",
+      "props": {
+        "text": "Onboarding pivot",
+        "variant": "lead"
+      }
+    },
+    "shipped-3-text": {
+      "type": "Text",
+      "props": {
+        "text": "Cheap preset (Qwen/DeepSeek/Grok, CoT off, ~3× lower latency), Settings preset dropdown + per-slot overrides, README slim 698→243 + nine docs/ files, \"$1 & under 10 min\" tagline; runner hardening + simulation-page UI overhaul underneath"
+      }
+    },
+    "shipped-item-4": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "shipped-4-title",
+        "shipped-4-text"
+      ]
+    },
+    "shipped-4-title": {
+      "type": "Text",
+      "props": {
+        "text": "Aeon prefetch-sidecar pattern",
+        "variant": "lead"
+      }
+    },
+    "shipped-4-text": {
+      "type": "Text",
+      "props": {
+        "text": "Across 7 PRs — XAI cache validation/annotation harvest, fetch-tweets ID dedup, token-report XAI prefetch, bankr diagnostics"
+      }
+    },
+    "sep-2": {
+      "type": "Separator",
+      "props": {}
+    },
+    "stats-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Stats",
+        "level": "h3"
+      }
+    },
+    "stats-content": {
+      "type": "Grid",
+      "props": {
+        "columns": 2,
+        "gap": "md"
+      },
+      "children": [
+        "stat-commits",
+        "stat-prs",
+        "stat-lines",
+        "stat-stars",
+        "stat-forks",
+        "stat-open-prs"
+      ]
+    },
+    "stat-commits": {
+      "type": "Stat",
+      "props": {
+        "label": "Substantive commits",
+        "value": "43"
+      }
+    },
+    "stat-prs": {
+      "type": "Stat",
+      "props": {
+        "label": "PRs merged",
+        "value": "14"
+      }
+    },
+    "stat-lines": {
+      "type": "Stat",
+      "props": {
+        "label": "Net lines",
+        "value": "+23,500 / -4,000"
+      }
+    },
+    "stat-stars": {
+      "type": "Stat",
+      "props": {
+        "label": "Stars",
+        "value": "751 → 836",
+        "delta": "+85",
+        "trend": "up"
+      }
+    },
+    "stat-forks": {
+      "type": "Stat",
+      "props": {
+        "label": "Forks",
+        "value": "146 → 157",
+        "delta": "+11",
+        "trend": "up"
+      }
+    },
+    "stat-open-prs": {
+      "type": "Stat",
+      "props": {
+        "label": "Open PRs at week close",
+        "value": "0"
+      }
+    },
+    "sep-3": {
+      "type": "Separator",
+      "props": {}
+    },
+    "full-update": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full update",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/weekly-shiplog-2026-04-27.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}

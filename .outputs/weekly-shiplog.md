@@ -1,11 +1,12 @@
-*Weekly Shiplog — 2026-04-21*
+*Weekly Shiplog — 2026-04-27*
 
-The week MiroShark stopped being a simulator. Went from "simulation engine with five analytics overlays" to "MCP-addressable research substrate with 62 unit tests" in seven days. 12 PRs merged on MiroShark, 7 on miroshark-aeon, 0 open at close. Stars 698 → 751 (+53). First sustained external backend contributor landed two PRs.
+The week MiroShark became addressable: three machine-readable contracts shipped over the same engine in three calendar days.
 
 Shipped:
-- Blank-canvas trilogy closed — Scenario Auto-Suggest (#39) + Counterfactual Explorer (#37) + Trending Topics (#40): two clicks from landing page to three prediction-market scenario cards
-- Graph memory stack (direct push) + PR #41 sibling-repo siphon — bi-temporal edges, Leiden clustering, MCP server, Nash equilibrium, per-agent mid-sim tools, 62 unit tests as first CI gate
-- First external backend PRs from mbs5 (builtbydesigninc): 5x report speedup (#36) + lazy embedding-config fix (#38) caught from their own Railway deploy
+- *Three Protocols in Three Days* — PR #44 MCP Onboarding (Apr 24, Settings panel + Claude Desktop/Cursor/Windsurf/Continue snippets), PR #45 OpenAPI 3.1 + Swagger UI (Apr 26, 1.9K-line spec + drift test), PR #46 Completion Webhook (Apr 26, Slack/Discord/Zapier/n8n outbound, zero new deps)
+- *Distribution surfaces* — PR #42 Social Share Card (Apr 22, OG image + landing page) and PR #43 Public Gallery /explore (Apr 23) close the inbound side; same `_build_*_payload` family + ±0.2 stance threshold across share-card/gallery/webhook
+- *Onboarding pivot* — Cheap preset (Qwen/DeepSeek/Grok, CoT off, ~3× lower latency), Settings preset dropdown + per-slot overrides, README slim 698→243 + nine docs/ files, "$1 & under 10 min" tagline; runner hardening + simulation-page UI overhaul underneath
+- *Aeon prefetch-sidecar pattern* across 7 PRs — XAI cache validation/annotation harvest, fetch-tweets ID dedup, token-report XAI prefetch, bankr diagnostics
 
-Stats: 12+7 PRs, +~15,000 / −~1,100 lines, +53 stars, +9 forks, 0 open PRs at close.
-Full update: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/weekly-shiplog-2026-04-21.md
+Stats: ~43 substantive commits, 14 PRs merged, +~23,500/-~4,000 lines, 751→836 stars (+85), 146→157 forks, 0 open PRs at week close
+Full update: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/weekly-shiplog-2026-04-27.md
