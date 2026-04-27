@@ -53,8 +53,8 @@
     "last_error": "dc1098cf5df3fe999e32efbe90 5c21220ef39cb0ba1df052bc9398ba5d16be2e82; do\\n  gh api repos/aaronjmars/miroshark-aeon/commits/\\\"$sha\\\" --jq '{sha: .sha[0:7], stats: .stats, files: [.files[] | {filename: ."
   },
   "token-report": {
-    "last_dispatch": "2026-04-26T06:10:11Z",
-    "last_status": "success",
+    "last_dispatch": "2026-04-27T06:27:25Z",
+    "last_status": "dispatched",
     "last_success": "2026-04-26T06:14:30Z",
     "total_runs": 11,
     "total_successes": 11,
