@@ -1,0 +1,97 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "From Citation to Surface — MiroShark Builds the Page That Survives the Tweet"
+      },
+      "children": [
+        "stack"
+      ]
+    },
+    "stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "narrative-text",
+        "separator1",
+        "pr-details",
+        "separator2",
+        "article-link"
+      ]
+    },
+    "narrative-text": {
+      "type": "Text",
+      "props": {
+        "text": "Yesterday Bankr Terminal v2 cited the Aave-sim in a 15M-view thread; today PR #47 `/verified` merged at 13:46 UTC turning that citation into a permanent gallery hall, and PR #48/#49 admin-token auth landed 18 minutes later locking every mutation endpoint behind a fail-closed Bearer gate. The architectural through-line — sim dir IS the schema, views are cheap projections — lands for the third time in a week, and PR #45's drift-detection test passed on first run because the new Flask route was properly documented in the spec.",
+        "variant": "body"
+      }
+    },
+    "separator1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "pr-details": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "badge-pr47",
+        "badge-pr48",
+        "badge-pr49",
+        "badge-pr45"
+      ]
+    },
+    "badge-pr47": {
+      "type": "Badge",
+      "props": {
+        "text": "PR #47 /verified merged 13:46 UTC",
+        "variant": "default"
+      }
+    },
+    "badge-pr48": {
+      "type": "Badge",
+      "props": {
+        "text": "PR #48 admin-token auth",
+        "variant": "default"
+      }
+    },
+    "badge-pr49": {
+      "type": "Badge",
+      "props": {
+        "text": "PR #49 admin-token auth",
+        "variant": "default"
+      }
+    },
+    "badge-pr45": {
+      "type": "Badge",
+      "props": {
+        "text": "PR #45 drift-detection test passed",
+        "variant": "secondary"
+      }
+    },
+    "separator2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "article-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Read the full article",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-04-27.md",
+        "source": "repo-article"
+      }
+    }
+  }
+}
