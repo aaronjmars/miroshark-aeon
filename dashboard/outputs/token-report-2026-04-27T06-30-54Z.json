@@ -1,0 +1,137 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "$MIROSHARK Daily — 2026-04-27"
+      },
+      "children": [
+        "main_stack"
+      ]
+    },
+    "main_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "price_section",
+        "market_section",
+        "buys_sells",
+        "period_section",
+        "ath_text",
+        "separator",
+        "chart_link"
+      ]
+    },
+    "price_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "price_stat",
+        "ath_badge"
+      ]
+    },
+    "price_stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Price",
+        "value": "$0.000003991",
+        "delta": "+10.24%",
+        "trend": "up"
+      }
+    },
+    "ath_badge": {
+      "type": "Badge",
+      "props": {
+        "text": "NEW ATH",
+        "variant": "secondary"
+      }
+    },
+    "market_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "liquidity_stat",
+        "volume_stat"
+      ]
+    },
+    "liquidity_stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Liquidity",
+        "value": "$239.6K"
+      }
+    },
+    "volume_stat": {
+      "type": "Stat",
+      "props": {
+        "label": "24h Vol",
+        "value": "$83.9K"
+      }
+    },
+    "buys_sells": {
+      "type": "Stat",
+      "props": {
+        "label": "Buys/Sells",
+        "value": "167/136 (1.23x buy ratio)"
+      }
+    },
+    "period_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "change_7d",
+        "change_30d"
+      ]
+    },
+    "change_7d": {
+      "type": "Stat",
+      "props": {
+        "label": "7d",
+        "value": "+69.6%",
+        "trend": "up"
+      }
+    },
+    "change_30d": {
+      "type": "Stat",
+      "props": {
+        "label": "30d",
+        "value": "+891%",
+        "trend": "up"
+      }
+    },
+    "ath_text": {
+      "type": "Text",
+      "props": {
+        "text": "Intraday high $0.000004784 cleared the Apr 14 ATH ($0.000003815) by 25.4% — first close above the old ATH since launch.",
+        "variant": "body"
+      }
+    },
+    "separator": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "chart_link": {
+      "type": "Link",
+      "props": {
+        "label": "Chart: GeckoTerminal",
+        "href": "https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209"
+      }
+    }
+  }
+}
