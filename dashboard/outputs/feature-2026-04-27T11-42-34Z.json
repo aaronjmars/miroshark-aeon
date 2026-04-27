@@ -1,0 +1,195 @@
+{
+  "root": "main-card",
+  "state": {},
+  "elements": {
+    "main-card": {
+      "type": "Card",
+      "props": {
+        "title": "Feature Built — 2026-04-27"
+      },
+      "children": [
+        "main-stack"
+      ]
+    },
+    "main-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "feature-name",
+        "intro-text",
+        "sep1",
+        "why-matters-heading",
+        "why-matters-text",
+        "sep2",
+        "what-built-heading",
+        "what-built-stack",
+        "sep3",
+        "how-works-heading",
+        "how-works-text",
+        "sep4",
+        "whats-next-heading",
+        "whats-next-text",
+        "sep5",
+        "pr-link"
+      ]
+    },
+    "feature-name": {
+      "type": "Heading",
+      "props": {
+        "text": "Predictive Accuracy Ledger + /verified gallery hall",
+        "level": "h2"
+      }
+    },
+    "intro-text": {
+      "type": "Text",
+      "props": {
+        "text": "MiroShark's public gallery now has a credibility surface. Any operator who publishes a simulation can mark its real-world outcome — \"Called it\" / \"Partial\" / \"Called wrong\", plus an optional source URL and a one-sentence summary — straight from the Embed dialog. The annotation immediately surfaces as a 📍 Verified pill on the gallery card and on a brand-new /verified page that lists only the runs that called real events."
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "why-matters-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Why this matters",
+        "level": "h3"
+      }
+    },
+    "why-matters-text": {
+      "type": "Text",
+      "props": {
+        "text": "Yesterday Bankr Terminal v2 cited MiroShark's Aave vulnerability simulation in a 15M-view thread — the strongest external signal in the project's history, and the moment that frames MiroShark as an early-warning system rather than a simulation demo. That citation lived on X and nowhere in the product. With /verified, every researcher who calls an event early gets a permanent home for that proof — and visitors evaluating the project land on a page full of real predictions instead of having to take screenshots on faith. For the 1K-stars-by-Apr-30 sprint, /verified is the single most compelling link to drop into a thread about pre-incident simulations."
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "what-built-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "What was built",
+        "level": "h3"
+      }
+    },
+    "what-built-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "file-sim-api",
+        "file-explore-view",
+        "file-embed-dialog",
+        "file-router",
+        "file-openapi",
+        "file-tests",
+        "file-docs"
+      ]
+    },
+    "file-sim-api": {
+      "type": "Text",
+      "props": {
+        "text": "backend/app/api/simulation.py: New POST/GET /api/simulation/<id>/outcome endpoints (publish-gated on POST, read-only GET) writing <sim_dir>/outcome.json. _read_outcome_file() helper validates the correct/incorrect/partial vocabulary, truncates oversized summaries with an ellipsis, and strips any non-http URL — so a corrupt artifact can never land a javascript: value on the gallery. _build_gallery_card_payload() now surfaces an `outcome` field on every card. /api/simulation/public gains a `?verified=1` filter that paginates the verified set and reflects `verified_only` back in the response."
+      }
+    },
+    "file-explore-view": {
+      "type": "Text",
+      "props": {
+        "text": "frontend/src/views/ExploreView.vue: New \"Verified only\" filter chip in the stats row (toggles between /explore and /verified URLs so the view is shareable). 📍/⚠/◑ outcome pills on each card, clickable when an outcome URL was provided. Coloured left-edge accent on cards with a verified outcome. Dynamic page title/copy/empty-state when in verified-only mode + a `verifiedCount` stat chip."
+      }
+    },
+    "file-embed-dialog": {
+      "type": "Text",
+      "props": {
+        "text": "frontend/src/components/EmbedDialog.vue: New \"Mark outcome\" panel — 3-way radio group (Called it / Partial / Called wrong), URL input, 280-char textarea with live counter, save/update button, success/error inline message, \"View on /verified ↗\" once saved. Inputs disabled until the simulation is public."
+      }
+    },
+    "file-router": {
+      "type": "Text",
+      "props": {
+        "text": "frontend/src/router/index.js: New /verified route mapped to ExploreView with `verifiedOnly: true`."
+      }
+    },
+    "file-openapi": {
+      "type": "Text",
+      "props": {
+        "text": "backend/openapi.yaml: New path + SimulationOutcome schema + `outcome` field on GalleryCard + `verified` query param + `verified_only` response field. Drift-detection test continues to pass."
+      }
+    },
+    "file-tests": {
+      "type": "Text",
+      "props": {
+        "text": "backend/tests/test_unit_outcome.py: 8 offline unit tests covering valid record parsing, unknown-label rejection, corrupt-JSON swallowing, missing-file behaviour, oversized-summary truncation, non-http URL stripping, and gallery-card integration with and without an outcome."
+      }
+    },
+    "file-docs": {
+      "type": "Text",
+      "props": {
+        "text": "docs/FEATURES.md + README.md: New Verified Predictions section + feature row."
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "how-works-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "How it works",
+        "level": "h3"
+      }
+    },
+    "how-works-text": {
+      "type": "Text",
+      "props": {
+        "text": "The outcome.json artifact is intentionally a sibling of the existing resolution.json — /resolve is binary YES/NO and tied to Polymarket consensus accuracy_score, /outcome is open-ended text + a label + an optional URL aimed at the gallery. A simulation can have both. The /verified URL renders the same Vue component as /explore but boots the filter on via a route prop, and the filter chip on /explore replaces the URL between the two paths (router.replace) so the page is shareable and bookmarkable in either state. The pill component switches between <a> and <span> at runtime depending on whether an outcome URL was provided — clickable when there's a destination, plain pill otherwise."
+      }
+    },
+    "sep4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "whats-next-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "What's next",
+        "level": "h3"
+      }
+    },
+    "whats-next-text": {
+      "type": "Text",
+      "props": {
+        "text": "Ideas #2 (Animated GIF Export) and #3 (Share as Thread Formatter) from yesterday's repo-actions both build naturally on this — every verified sim becomes a stronger candidate for both formats. A \"Most accurate operator\" leaderboard (#2 from Apr 24's batch) is now also unlocked: the ledger has the data it needs."
+      }
+    },
+    "sep5": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "pr-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Pull Request #47",
+        "href": "https://github.com/aaronjmars/MiroShark/pull/47",
+        "source": "GitHub"
+      }
+    }
+  }
+}
