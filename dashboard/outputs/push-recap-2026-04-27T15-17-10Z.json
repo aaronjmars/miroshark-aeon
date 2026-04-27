@@ -1,0 +1,235 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Push Recap"
+      },
+      "children": [
+        "heading_title",
+        "text_intro",
+        "separator_1",
+        "section_contracts",
+        "separator_2",
+        "section_verified",
+        "separator_3",
+        "section_mutation",
+        "separator_4",
+        "section_bankr",
+        "separator_5",
+        "section_key_changes",
+        "separator_6",
+        "link_full_recap"
+      ]
+    },
+    "heading_title": {
+      "type": "Heading",
+      "props": {
+        "text": "Push Recap — 2026-04-27",
+        "level": "h2"
+      }
+    },
+    "text_intro": {
+      "type": "Text",
+      "props": {
+        "text": "MiroShark — 4 commits / miroshark-aeon — 1 commit (24h window)",
+        "variant": "lead"
+      }
+    },
+    "separator_1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "section_contracts": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading_contracts",
+        "text_contracts"
+      ]
+    },
+    "heading_contracts": {
+      "type": "Heading",
+      "props": {
+        "text": "Three contracts on main",
+        "level": "h3"
+      }
+    },
+    "text_contracts": {
+      "type": "Text",
+      "props": {
+        "text": "PR #45 OpenAPI 3.1 + PR #46 Webhook merged within 9 minutes Apr 26 17:03/17:12 UTC. PR #45's drift-detection regex test caught the missing `/api/settings/test-webhook` entry from PR #46 and absorbed the OpenAPI patch into its squash — second-merge coordination pattern working as intended. Three machine-readable surfaces (MCP stdio inbound / OpenAPI HTTP inbound / Webhook outbound) now all on main.",
+        "variant": "body"
+      }
+    },
+    "separator_2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "section_verified": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading_verified",
+        "text_verified"
+      ]
+    },
+    "heading_verified": {
+      "type": "Heading",
+      "props": {
+        "text": "Verified Predictions ship",
+        "level": "h3"
+      }
+    },
+    "text_verified": {
+      "type": "Text",
+      "props": {
+        "text": "PR #47, +1,194/−21: New `POST /api/simulation/<id>/outcome` writes `outcome.json` to sim dir; gallery cards surface 📍/⚠/◑ outcome pills + coloured edge accents; new `/verified` route filters Explore to runs with recorded outcomes. `_read_outcome_file` strips non-http URLs as defense-in-depth so a corrupt artifact can't land `javascript:` on a card. EmbedDialog gains \"Mark outcome\" panel. Pivot from Apr 26 idea #1 — turns Bankr Terminal v2 Aave-sim citation (15M-view quote-tweet) into a permanent product surface.",
+        "variant": "body"
+      }
+    },
+    "separator_3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "section_mutation": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading_mutation",
+        "text_mutation"
+      ]
+    },
+    "heading_mutation": {
+      "type": "Heading",
+      "props": {
+        "text": "Mutation surface locked down",
+        "level": "h3"
+      }
+    },
+    "text_mutation": {
+      "type": "Text",
+      "props": {
+        "text": "PR #48/#49, +540/−1: `require_admin_token` decorator on `/publish`, `/resolve`, `/outcome` — `Authorization: Bearer $MIROSHARK_ADMIN_TOKEN` with constant-time `hmac.compare_digest`. Fail-closed: 503 if env unset (so a misconfigured deploy doesn't silently ship an open mutation surface), 401 generic if wrong/missing (so probes can't fingerprint). 17 new unit tests.",
+        "variant": "body"
+      }
+    },
+    "separator_4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "section_bankr": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading_bankr",
+        "text_bankr"
+      ]
+    },
+    "heading_bankr": {
+      "type": "Heading",
+      "props": {
+        "text": "Bankr Agent unblocked",
+        "level": "h3"
+      }
+    },
+    "text_bankr": {
+      "type": "Text",
+      "props": {
+        "text": "miroshark-aeon PR #25, +4/−2: Two-line `jq -n` payload fix — adds `maxMode: {enabled: true, model: \"claude-sonnet-4.6\"}` to the prompt. Bankr started subscription-gating AI prompts ~Apr 25; `verified-handles.json` had been empty 2 days running. Today's tweet-allocator log already shows wallet resolution working again.",
+        "variant": "body"
+      }
+    },
+    "separator_5": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "section_key_changes": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading_key_changes",
+        "text_file_1",
+        "text_file_2",
+        "text_file_3",
+        "stat_overall"
+      ]
+    },
+    "heading_key_changes": {
+      "type": "Heading",
+      "props": {
+        "text": "Key changes",
+        "level": "h3"
+      }
+    },
+    "text_file_1": {
+      "type": "Text",
+      "props": {
+        "text": "`backend/app/api/simulation.py` — `require_admin_token` decorator + `/outcome` POST+GET + `_read_outcome_file` + verified gallery filter",
+        "variant": "body"
+      }
+    },
+    "text_file_2": {
+      "type": "Text",
+      "props": {
+        "text": "`backend/openapi.yaml` — `AdminToken` securityScheme + `SimulationOutcome` schema + `outcome` on `GalleryCard` + `verified` query param",
+        "variant": "body"
+      }
+    },
+    "text_file_3": {
+      "type": "Text",
+      "props": {
+        "text": "`scripts/prefetch-bankr.sh` — `maxMode` field added to Bankr Agent prompt payload",
+        "variant": "body"
+      }
+    },
+    "stat_overall": {
+      "type": "Stat",
+      "props": {
+        "label": "Files changed / Lines added / Lines removed",
+        "value": "34 / +5,764 / −25"
+      }
+    },
+    "separator_6": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "link_full_recap": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full recap",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-04-27.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}

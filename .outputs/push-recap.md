@@ -1,17 +1,18 @@
-*Push Recap — 2026-04-26*
-MiroShark + miroshark-aeon — 2 substantive commits across 2 open PRs (1 per repo); ~30 chore auto-commits on aeon main.
+*Push Recap — 2026-04-27*
+MiroShark — 4 commits / miroshark-aeon — 1 commit (24h window)
 
-Completion Webhook (MiroShark PR #46, open): fire-and-forget daemon-thread POST to a user-configured URL the moment a sim hits completed/failed — Slack/Discord auto-unfurl with the share-card PNG, Zapier/n8n/IFTTT/custom listeners just work. One env var (or Settings save) + zero new deps (stdlib urllib.request). Per-(sim_id,status) dedup so the runner's exit-code path AND simulation_end-event path both fire safely; consensus uses the same ±0.2 stance threshold as gallery + share card so the three surfaces stay consistent. Settings modal gains "Integrations · Webhook" section with masked URL input + "Send test event" button. 18 offline unit tests + docs/WEBHOOKS.md with full payload schema.
+*Three contracts on main:* PR #45 OpenAPI 3.1 + PR #46 Webhook merged within 9 minutes Apr 26 17:03/17:12 UTC. PR #45's drift-detection regex test caught the missing `/api/settings/test-webhook` entry from PR #46 and absorbed the OpenAPI patch into its squash — second-merge coordination pattern working as intended. Three machine-readable surfaces (MCP stdio inbound / OpenAPI HTTP inbound / Webhook outbound) now all on main.
 
-Tweet Allocator stops false-alarming (miroshark-aeon PR #24, open): the skill emitted misleading "BANKR_API_KEY not set" alerts two days running despite the secret being set since Apr 22 (5 wallets verified daily Apr 22–24). prefetch-bankr.sh now writes a .bankr-cache/prefetch-status.json sidecar at every exit point (no-api-key / no-candidates / lookups-failed / completed-no-wallets / completed); skill branches on it instead of guessing from an empty cache. New silent TWEET_ALLOCATOR_DISABLED flag for the no-recipient-can-fix-this case; lookups-failed now produces an accurate "Bankr Agent API unreachable (X/N curl failures)" message.
+*Verified Predictions ship (PR #47, +1,194/−21):* New `POST /api/simulation/<id>/outcome` writes `outcome.json` to sim dir; gallery cards surface 📍/⚠/◑ outcome pills + coloured edge accents; new `/verified` route filters Explore to runs with recorded outcomes. `_read_outcome_file` strips non-http URLs as defense-in-depth so a corrupt artifact can't land `javascript:` on a card. EmbedDialog gains "Mark outcome" panel. Pivot from Apr 26 idea #1 — turns Bankr Terminal v2 Aave-sim citation (15M-view quote-tweet) into a permanent product surface.
 
-Routine automation: ~30 chore auto-commits on miroshark-aeon main (cron success, scheduler state, per-skill log+article auto-commits) + 1 auto-generated repo-actions article (5 ideas for Apr 26).
+*Mutation surface locked down (PR #48/#49, +540/−1):* `require_admin_token` decorator on `/publish`, `/resolve`, `/outcome` — `Authorization: Bearer $MIROSHARK_ADMIN_TOKEN` with constant-time `hmac.compare_digest`. Fail-closed: 503 if env unset (so a misconfigured deploy doesn't silently ship an open mutation surface), 401 generic if wrong/missing (so probes can't fingerprint). 17 new unit tests.
+
+*Bankr Agent unblocked (miroshark-aeon PR #25, +4/−2):* Two-line `jq -n` payload fix — adds `maxMode: {enabled: true, model: "claude-sonnet-4.6"}` to the prompt. Bankr started subscription-gating AI prompts ~Apr 25; `verified-handles.json` had been empty 2 days running. Today's tweet-allocator log already shows wallet resolution working again.
 
 Key changes:
-- backend/app/services/webhook_service.py — 457-line stdlib-only outbound webhook with fire-and-forget threading, (sim_id,status) dedup, scheme://host/*** URL masking
-- backend/app/services/simulation_runner.py — webhook hooked into both terminal paths (exit-code at line ~619, simulation_end event at line ~754) alongside existing push notification
-- scripts/prefetch-bankr.sh + skills/tweet-allocator/SKILL.md — sidecar-based status reporting; same architectural move as XAI cache validation + fetch-tweets ID dedup, now consolidating across three skills
+- `backend/app/api/simulation.py` — `require_admin_token` decorator + `/outcome` POST+GET + `_read_outcome_file` + verified gallery filter
+- `backend/openapi.yaml` — `AdminToken` securityScheme + `SimulationOutcome` schema + `outcome` on `GalleryCard` + `verified` query param
+- `scripts/prefetch-bankr.sh` — `maxMode` field added to Bankr Agent prompt payload
 
-Stats: 14 substantive files / +1,497 / −10 across 2 substantive commits.
-Open follow-up: when PR #45 (OpenAPI) and PR #46 (Webhook) both land, the second merger needs POST /api/settings/test-webhook in openapi.yaml or PR #45's drift-test allowlist.
-Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-04-26.md
+Stats: 34 substantive files / +5,764 / −25
+Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-04-27.md
