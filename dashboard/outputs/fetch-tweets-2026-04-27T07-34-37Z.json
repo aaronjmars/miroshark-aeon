@@ -1,0 +1,149 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "Top Tweets — $MIROSHARK (2026-04-27)"
+      },
+      "children": [
+        "alert-highlight",
+        "separator1",
+        "featured-tweet",
+        "separator2",
+        "tweets-section"
+      ]
+    },
+    "alert-highlight": {
+      "type": "Alert",
+      "props": {
+        "type": "info",
+        "message": "$Miroshark named in curated list of 'solid AI projects with dedicated dev' alongside $Gitlawb, $Juno, $Sibyl, $Litcoin, $Darksol — 41 new mentions found today"
+      },
+      "children": []
+    },
+    "separator1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "featured-tweet": {
+      "type": "TweetCard",
+      "props": {
+        "author": "100xDarren",
+        "handle": "100xDarren",
+        "text": "Solid AI projects w/ dedicated dev: ... $Miroshark @miroshark_ - @aaronjmars ..."
+      },
+      "children": []
+    },
+    "separator2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "tweets-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet2",
+        "tweet3",
+        "tweet4",
+        "tweet5",
+        "tweet6",
+        "tweet7",
+        "tweet8",
+        "tweet9",
+        "tweet10"
+      ]
+    },
+    "tweet2": {
+      "type": "StoryLink",
+      "props": {
+        "title": "MIROSHARK mention",
+        "href": "https://x.com/i/status/2048640371488649593",
+        "source": "Tweet #2"
+      },
+      "children": []
+    },
+    "tweet3": {
+      "type": "StoryLink",
+      "props": {
+        "title": "MIROSHARK mention",
+        "href": "https://x.com/i/status/2048598322152399017",
+        "source": "Tweet #3"
+      },
+      "children": []
+    },
+    "tweet4": {
+      "type": "StoryLink",
+      "props": {
+        "title": "MIROSHARK mention",
+        "href": "https://x.com/i/status/2048562473947554021",
+        "source": "Tweet #4"
+      },
+      "children": []
+    },
+    "tweet5": {
+      "type": "StoryLink",
+      "props": {
+        "title": "MIROSHARK mention",
+        "href": "https://x.com/i/status/2048546931467813237",
+        "source": "Tweet #5"
+      },
+      "children": []
+    },
+    "tweet6": {
+      "type": "StoryLink",
+      "props": {
+        "title": "MIROSHARK mention",
+        "href": "https://x.com/i/status/2048544855593275499",
+        "source": "Tweet #6"
+      },
+      "children": []
+    },
+    "tweet7": {
+      "type": "StoryLink",
+      "props": {
+        "title": "MIROSHARK mention",
+        "href": "https://x.com/i/status/2048540302873432445",
+        "source": "Tweet #7"
+      },
+      "children": []
+    },
+    "tweet8": {
+      "type": "StoryLink",
+      "props": {
+        "title": "MIROSHARK mention",
+        "href": "https://x.com/i/status/2048505077812404435",
+        "source": "Tweet #8"
+      },
+      "children": []
+    },
+    "tweet9": {
+      "type": "StoryLink",
+      "props": {
+        "title": "MIROSHARK mention",
+        "href": "https://x.com/i/status/2048491736867963172",
+        "source": "Tweet #9"
+      },
+      "children": []
+    },
+    "tweet10": {
+      "type": "StoryLink",
+      "props": {
+        "title": "MIROSHARK mention",
+        "href": "https://x.com/i/status/2048467761936949664",
+        "source": "Tweet #10"
+      },
+      "children": []
+    }
+  }
+}

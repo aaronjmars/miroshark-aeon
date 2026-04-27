@@ -1,41 +1,33 @@
-*Top Tweets — $MIROSHARK OR @miroshark_ (2026-04-26)*
+*Top Tweets — $MIROSHARK (2026-04-27)*
 
-1. x.com/bankrbot — Bankr Terminal v2 roundup: "@miroshark_ simulated Aave vulnerabilities prior to rsETH incident" — highest-signal mention of the week
-Likes: 156 | RTs: 40
-[View tweet](https://x.com/bankrbot/status/2048026489707442360)
+x.com/100xDarren named $Miroshark in a curated list of "solid AI projects with dedicated dev" alongside $Gitlawb, $Juno, $Sibyl, $Litcoin, $Darksol — 41 new mentions found today.
 
-2. x.com/aaronjmars — "big week huh" quote-tweet of bankrbot mention (15M-view Polymarket spoof + Aeon/vercel patch + miroshark Aave sim)
-Likes: 28 | RTs: 7
-[View tweet](https://x.com/aaronjmars/status/2048170438107271382)
+1. x.com/100xDarren — "Solid AI projects w/ dedicated dev: ... $Miroshark @miroshark_ - @aaronjmars ..."
+[View profile](https://x.com/100xDarren) _(tweet link unavailable in cache)_
 
-3. x.com/TheGodfath13541 — $MIROSHARK vs Aaru ($1B valuation) undervaluation thesis; Alibaba Cloud + OriginTrail V10 as catalysts; "conservative 15x-30x target"
-Likes: 12 | RTs: 7
-[View tweet](https://x.com/TheGodfath13541/status/2048175575781519459)
+2. x.com/i/status/2048640371488649593 — MIROSHARK mention
+[View tweet](https://x.com/i/status/2048640371488649593)
 
-4. x.com/TheGodfath13541 — Prior 4X public calls; "you're fading $Miroshark? Got it."
-Likes: 12 | RTs: 0
-[View tweet](https://x.com/TheGodfath13541/status/2048178525627208134)
+3. x.com/i/status/2048598322152399017 — MIROSHARK mention
+[View tweet](https://x.com/i/status/2048598322152399017)
 
-5. x.com/Jsxontop — $11.5K buy spotted on-chain; "Whales are starting to arrive"
-Likes: 5 | RTs: 2
-[View tweet](https://x.com/Jsxontop/status/2048249831437549764)
+4. x.com/i/status/2048562473947554021 — MIROSHARK mention
+[View tweet](https://x.com/i/status/2048562473947554021)
 
-6. x.com/TheGodfath13541 — "Me & @MrDegenWolf been the only ones really pushing it. Dropping more alpha today."
-Likes: 5 | RTs: 0
-[View tweet](https://x.com/TheGodfath13541/status/2047964218784149670)
+5. x.com/i/status/2048546931467813237 — MIROSHARK mention
+[View tweet](https://x.com/i/status/2048546931467813237)
 
-7. x.com/TheGodfath13541 — OriginTrail V10 teaser thread for $Miroshark holders
-Likes: 4 | RTs: 1
-[View tweet](https://x.com/TheGodfath13541/status/2048182706333257865)
+6. x.com/i/status/2048544855593275499 — MIROSHARK mention
+[View tweet](https://x.com/i/status/2048544855593275499)
 
-8. x.com/TheGodfath13541 — "The views and attention $Miroshark has gotten is insane"
-Likes: 3 | RTs: 0
-[View tweet](https://x.com/TheGodfath13541/status/2048176713880805629)
+7. x.com/i/status/2048540302873432445 — MIROSHARK mention
+[View tweet](https://x.com/i/status/2048540302873432445)
 
-9. x.com/cybercelos — "After $miroshark, I am loading $darksol"
-Likes: 2 | RTs: 0
-[View tweet](https://x.com/cybercelos/status/2048256323784257895)
+8. x.com/i/status/2048505077812404435 — MIROSHARK mention
+[View tweet](https://x.com/i/status/2048505077812404435)
 
-10. x.com/Veireen3 — "$miroshark time will come, imminent. Dev keeps delivering."
-Likes: 2 | RTs: 0
-[View tweet](https://x.com/Veireen3/status/2048178147288625508)
+9. x.com/i/status/2048491736867963172 — MIROSHARK mention
+[View tweet](https://x.com/i/status/2048491736867963172)
+
+10. x.com/i/status/2048467761936949664 — MIROSHARK mention
+[View tweet](https://x.com/i/status/2048467761936949664)
