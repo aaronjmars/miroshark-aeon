@@ -1,5 +1,5 @@
-*New Article: From Citation to Surface — MiroShark Builds the Page That Survives the Tweet*
+*New Article: The Day MiroShark Watched Itself Spend Money*
 
-Yesterday Bankr Terminal v2 cited the Aave-sim in a 15M-view thread; today PR #47 `/verified` merged at 13:46 UTC turning that citation into a permanent gallery hall, and PR #48/#49 admin-token auth landed 18 minutes later locking every mutation endpoint behind a fail-closed Bearer gate. The architectural through-line — sim dir IS the schema, views are cheap projections — lands for the third time in a week, and PR #45's drift-detection test passed on first run because the new Flask route was properly documented in the spec.
+Four PRs landed on aaronjmars/MiroShark in 3.5 hours today: an Animated Belief Replay GIF endpoint (PR #50), Langfuse metadata on every OpenRouter call (PR #51), three cost-leak fixes the new traces immediately surfaced 47 seconds later (PR #52), and a default round-count clamp from 128 to 30–40 (PR #53). Read together, today is the operational counterpart to the week's surfacing arc — turning the metering on, then turning the bill down, until the "$1 & under 10 min" tagline finally holds by default rather than only if you knew what to set.
 
-Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-04-27.md
+Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-04-28.md

@@ -1,0 +1,117 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "repo-article"
+      },
+      "children": [
+        "heading",
+        "narrative",
+        "separator1",
+        "prs_heading",
+        "prs_stack",
+        "separator2",
+        "article_link"
+      ]
+    },
+    "heading": {
+      "type": "Heading",
+      "props": {
+        "text": "The Day MiroShark Watched Itself Spend Money",
+        "level": "h2"
+      },
+      "children": []
+    },
+    "narrative": {
+      "type": "Text",
+      "props": {
+        "text": "Four PRs landed on aaronjmars/MiroShark in 3.5 hours today: an Animated Belief Replay GIF endpoint (PR #50), Langfuse metadata on every OpenRouter call (PR #51), three cost-leak fixes the new traces immediately surfaced 47 seconds later (PR #52), and a default round-count clamp from 128 to 30–40 (PR #53). Read together, today is the operational counterpart to the week's surfacing arc — turning the metering on, then turning the bill down, until the \"$1 & under 10 min\" tagline finally holds by default rather than only if you knew what to set.",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "separator1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "prs_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Merged Pull Requests",
+        "level": "h4"
+      },
+      "children": []
+    },
+    "prs_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "pr50",
+        "pr51",
+        "pr52",
+        "pr53"
+      ]
+    },
+    "pr50": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #50: Animated Belief Replay GIF endpoint",
+        "href": "https://github.com/aaronjmars/MiroShark/pull/50",
+        "source": "MiroShark"
+      },
+      "children": []
+    },
+    "pr51": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #51: Langfuse metadata on every OpenRouter call",
+        "href": "https://github.com/aaronjmars/MiroShark/pull/51",
+        "source": "MiroShark"
+      },
+      "children": []
+    },
+    "pr52": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #52: Three cost-leak fixes the new traces immediately surfaced 47 seconds later",
+        "href": "https://github.com/aaronjmars/MiroShark/pull/52",
+        "source": "MiroShark"
+      },
+      "children": []
+    },
+    "pr53": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #53: Default round-count clamp from 128 to 30–40",
+        "href": "https://github.com/aaronjmars/MiroShark/pull/53",
+        "source": "MiroShark"
+      },
+      "children": []
+    },
+    "separator2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "article_link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Read full article",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-04-28.md",
+        "source": "GitHub"
+      },
+      "children": []
+    }
+  }
+}
