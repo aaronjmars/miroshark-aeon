@@ -1,0 +1,334 @@
+{
+  "root": "main-card",
+  "state": {},
+  "elements": {
+    "main-card": {
+      "type": "Card",
+      "props": {
+        "title": "Top Tweets — $MIROSHARK OR @miroshark_ OR github.com/aaronjmars/miroshark (2026-04-28)"
+      },
+      "children": [
+        "tweets-stack"
+      ]
+    },
+    "tweets-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "lg"
+      },
+      "children": [
+        "tweet-1",
+        "tweet-2",
+        "tweet-3",
+        "tweet-4",
+        "tweet-5",
+        "tweet-6",
+        "tweet-7",
+        "tweet-8",
+        "tweet-9",
+        "tweet-10"
+      ]
+    },
+    "tweet-1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-card-1",
+        "link-1"
+      ]
+    },
+    "tweet-card-1": {
+      "type": "TweetCard",
+      "props": {
+        "author": "traderdq444",
+        "handle": "traderdq444",
+        "text": "The only open-source Swarm Intelligence Engine out there. Built by @aaronjmars, cloud deploy under 3 min. $300K–$400K mcap — extremely undervalued imo.",
+        "likes": 13,
+        "retweets": 2
+      },
+      "children": []
+    },
+    "link-1": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/traderdq444/status/2048689567167877229"
+      },
+      "children": []
+    },
+    "tweet-2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-card-2",
+        "link-2"
+      ]
+    },
+    "tweet-card-2": {
+      "type": "TweetCard",
+      "props": {
+        "author": "Karma_Nfa",
+        "handle": "Karma_Nfa",
+        "text": "GM bankrbot market update mentioning $MIROSHARK alongside other tokens",
+        "likes": 21,
+        "retweets": 0
+      },
+      "children": []
+    },
+    "link-2": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/Karma_Nfa/status/2048716519882813545"
+      },
+      "children": []
+    },
+    "tweet-3": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-card-3",
+        "link-3"
+      ]
+    },
+    "tweet-card-3": {
+      "type": "TweetCard",
+      "props": {
+        "author": "miroshark_",
+        "handle": "miroshark_",
+        "text": "github.com/aaronjmars/MiroShark",
+        "likes": 7,
+        "retweets": 0
+      },
+      "children": []
+    },
+    "link-3": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/miroshark_/status/2048879690652266903"
+      },
+      "children": []
+    },
+    "tweet-4": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-card-4",
+        "link-4"
+      ]
+    },
+    "tweet-card-4": {
+      "type": "TweetCard",
+      "props": {
+        "author": "DaMikey23",
+        "handle": "DaMikey23",
+        "text": "$MIROSHARK (image post)",
+        "likes": 5,
+        "retweets": 0
+      },
+      "children": []
+    },
+    "link-4": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/DaMikey23/status/2048578499112255878"
+      },
+      "children": []
+    },
+    "tweet-5": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-card-5",
+        "link-5"
+      ]
+    },
+    "tweet-card-5": {
+      "type": "TweetCard",
+      "props": {
+        "author": "Jsxontop",
+        "handle": "Jsxontop",
+        "text": "Nice little $2.4k $miroshark buy. Chart is looking good.",
+        "likes": 3,
+        "retweets": 0
+      },
+      "children": []
+    },
+    "link-5": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/Jsxontop/status/2048776536229077086"
+      },
+      "children": []
+    },
+    "tweet-6": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-card-6",
+        "link-6"
+      ]
+    },
+    "tweet-card-6": {
+      "type": "TweetCard",
+      "props": {
+        "author": "LauweTosti69",
+        "handle": "LauweTosti69",
+        "text": "$miroshark",
+        "likes": 3,
+        "retweets": 1
+      },
+      "children": []
+    },
+    "link-6": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/LauweTosti69/status/2048810278050021439"
+      },
+      "children": []
+    },
+    "tweet-7": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-card-7",
+        "link-7"
+      ]
+    },
+    "tweet-card-7": {
+      "type": "TweetCard",
+      "props": {
+        "author": "dr_osse",
+        "handle": "dr_osse",
+        "text": "Lets fast forward to the point where we use $miroshark to pay for it..",
+        "likes": 2,
+        "retweets": 0
+      },
+      "children": []
+    },
+    "link-7": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/dr_osse/status/2048875747494744073"
+      },
+      "children": []
+    },
+    "tweet-8": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-card-8",
+        "link-8"
+      ]
+    },
+    "tweet-card-8": {
+      "type": "TweetCard",
+      "props": {
+        "author": "bluenami866",
+        "handle": "bluenami866",
+        "text": "$Miroshark mention",
+        "likes": 2,
+        "retweets": 0
+      },
+      "children": []
+    },
+    "link-8": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/bluenami866/status/2048750074902053131"
+      },
+      "children": []
+    },
+    "tweet-9": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-card-9",
+        "link-9"
+      ]
+    },
+    "tweet-card-9": {
+      "type": "TweetCard",
+      "props": {
+        "author": "miroshark_",
+        "handle": "miroshark_",
+        "text": "github.com/aaronjmars/MiroShark",
+        "likes": 2,
+        "retweets": 0
+      },
+      "children": []
+    },
+    "link-9": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/miroshark_/status/2048872726631235743"
+      },
+      "children": []
+    },
+    "tweet-10": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-card-10",
+        "link-10"
+      ]
+    },
+    "tweet-card-10": {
+      "type": "TweetCard",
+      "props": {
+        "author": "cybercelos",
+        "handle": "cybercelos",
+        "text": "After $aeon $miroshark $dclaw $mythos is play under 100k — going to see massive growth",
+        "likes": 1,
+        "retweets": 0
+      },
+      "children": []
+    },
+    "link-10": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/cybercelos/status/2048786511718682975"
+      },
+      "children": []
+    }
+  }
+}
