@@ -1,0 +1,179 @@
+{
+  "root": "card-root",
+  "state": {},
+  "elements": {
+    "card-root": {
+      "type": "Card",
+      "props": {
+        "title": "Agent Self-Improvement",
+        "description": "2026-04-28"
+      },
+      "children": [
+        "main-statement",
+        "separator-1",
+        "why-section",
+        "separator-2",
+        "what-changed-section",
+        "separator-3",
+        "impact-section",
+        "separator-4",
+        "pr-section"
+      ]
+    },
+    "main-statement": {
+      "type": "Text",
+      "props": {
+        "text": "skill-leaderboard now scans every watched repo, not just the first.",
+        "variant": "lead"
+      },
+      "children": []
+    },
+    "separator-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "why-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "why-heading",
+        "why-content"
+      ]
+    },
+    "why-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Why",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "why-content": {
+      "type": "Text",
+      "props": {
+        "text": "Sunday Apr 26 logged SKILL_LEADERBOARD_INSUFFICIENT_DATA — the skill only scanned aaronjmars/MiroShark (107 active forks, 0 with aeon.yml since it's an application repo). The actual aeon instance miroshark-aeon sat at list position 2 and never got read. Next Sunday (May 3) would have hit the same wall.",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "separator-2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "what-changed-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "what-changed-heading",
+        "change-items"
+      ]
+    },
+    "what-changed-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "What Changed",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "change-items": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "change-1",
+        "change-2"
+      ]
+    },
+    "change-1": {
+      "type": "Text",
+      "props": {
+        "text": "skills/skill-leaderboard/SKILL.md: step 1 reads every entry from memory/watched-repos.md into a TARGET_REPOS array; step 2 iterates and unions active forks deduped by full_name. Article footer + log line record the full source-repo list.",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "change-2": {
+      "type": "Text",
+      "props": {
+        "text": "Picked over reordering watched-repos.md directly — that file is read by 17 other skills as their primary repo selector and reordering would cascade. Fix the skill, not the shared list.",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "separator-3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "impact-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "impact-heading",
+        "impact-content"
+      ]
+    },
+    "impact-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Impact",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "impact-content": {
+      "type": "Text",
+      "props": {
+        "text": "Sunday's leaderboard run can now meet the ≥2-fork threshold as soon as a second aeon fork appears, instead of being blocked indefinitely by an application repo at list position 1. Future-proof: adding new aeon instances to watched-repos.md automatically expands the leaderboard surface.",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "separator-4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "pr-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "pr-link"
+      ]
+    },
+    "pr-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Fix skill-leaderboard to scan all watched repos",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/pull/26",
+        "source": "GitHub"
+      },
+      "children": []
+    }
+  }
+}
