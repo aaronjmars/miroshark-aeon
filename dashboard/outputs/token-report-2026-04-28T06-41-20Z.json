@@ -1,0 +1,128 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "$MIROSHARK Daily — 2026-04-28"
+      },
+      "children": [
+        "stack-main"
+      ]
+    },
+    "stack-main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "price-section",
+        "liquidity-volume-section",
+        "buysells-section",
+        "periods-section",
+        "separator-1",
+        "commentary-section",
+        "chart-link"
+      ]
+    },
+    "price-section": {
+      "type": "Stat",
+      "props": {
+        "label": "Price",
+        "value": "$0.000003318",
+        "delta": "-12.1%",
+        "trend": "down"
+      }
+    },
+    "liquidity-volume-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "liquidity-stat",
+        "volume-stat"
+      ]
+    },
+    "liquidity-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Liquidity",
+        "value": "$217.3K"
+      }
+    },
+    "volume-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "24h Vol",
+        "value": "$24.2K"
+      }
+    },
+    "buysells-section": {
+      "type": "Stat",
+      "props": {
+        "label": "Buys/Sells",
+        "value": "86/60 (1.43x)"
+      }
+    },
+    "periods-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "period-7d",
+        "period-30d",
+        "period-ath"
+      ]
+    },
+    "period-7d": {
+      "type": "Stat",
+      "props": {
+        "label": "7d",
+        "value": "+47.9%",
+        "trend": "up"
+      }
+    },
+    "period-30d": {
+      "type": "Stat",
+      "props": {
+        "label": "30d",
+        "value": "+622%",
+        "trend": "up"
+      }
+    },
+    "period-ath": {
+      "type": "Stat",
+      "props": {
+        "label": "ATH",
+        "value": "-30.6%",
+        "trend": "down"
+      }
+    },
+    "separator-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "commentary-section": {
+      "type": "Text",
+      "props": {
+        "text": "Healthy exhale after yesterday's ATH ($0.000004784) — pullback on 77% lower volume, 1.43x buy ratio holding, $2.4K new buy spotted on-chain.",
+        "variant": "body"
+      }
+    },
+    "chart-link": {
+      "type": "Link",
+      "props": {
+        "label": "Chart",
+        "href": "https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209"
+      }
+    }
+  }
+}
