@@ -1,0 +1,164 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Feature Built — 2026-04-28"
+      },
+      "children": [
+        "heading_feature",
+        "text_description",
+        "separator1",
+        "heading_why",
+        "text_why",
+        "separator2",
+        "heading_built",
+        "stack_built",
+        "separator3",
+        "heading_how",
+        "text_how",
+        "separator4",
+        "heading_next",
+        "text_next",
+        "pr_link"
+      ]
+    },
+    "heading_feature": {
+      "type": "Heading",
+      "props": {
+        "text": "Animated Belief Replay (GIF)",
+        "level": "h2"
+      }
+    },
+    "text_description": {
+      "type": "Text",
+      "props": {
+        "text": "MiroShark simulations now have an animated belief-replay GIF — same 1200×630 canvas as the existing share card, but instead of a static snapshot it plays the per-round belief drift one frame at a time with bullish / neutral / bearish bars sliding to each round's distribution, a round counter, and a progress bar at the bottom. Drop the URL into a Discord or Slack channel and it auto-plays inline; download it from the Embed dialog and post it anywhere a GIF works."
+      }
+    },
+    "separator1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading_why": {
+      "type": "Heading",
+      "props": {
+        "text": "Why this matters",
+        "level": "h3"
+      }
+    },
+    "text_why": {
+      "type": "Text",
+      "props": {
+        "text": "The share card is static — every published simulation produced one frozen image. Discord and Slack auto-play GIFs from a direct file URL, so a per-round animation lands as motion in places where a screenshot can't compete. The 1.91:1 OG aspect matches the existing card so unfurl shapes stay consistent across the static + animated formats. With the 1K-stars-by-Apr-30 sprint at 853 stars and 2 days left, every share now ships motion alongside the still — the same audience surface, twice the asset."
+      }
+    },
+    "separator2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading_built": {
+      "type": "Heading",
+      "props": {
+        "text": "What was built",
+        "level": "h3"
+      }
+    },
+    "stack_built": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "built_item_1",
+        "built_item_2",
+        "built_item_3",
+        "built_item_4",
+        "built_item_5"
+      ]
+    },
+    "built_item_1": {
+      "type": "Text",
+      "props": {
+        "text": "backend/app/services/replay_gif.py: New 405-line Pillow renderer. Builds one frame per round on a dark canvas (bullish teal / neutral slate / bearish coral, MiroShark orange accent), composes the same font-discovery + text-wrap helpers the share card uses, encodes the GIF with `loop=0` infinite repeat and `disposal=2` so shrinking bars don't ghost between rounds. Final frame holds 3× longer (1800 ms vs 600 ms) so the resting consensus reads as the punch-line. `MAX_FRAMES=60` cap with even subsampling that always preserves the final round — a 200-round sim compresses to ≤60 frames so playback stays under ~36 s."
+      }
+    },
+    "built_item_2": {
+      "type": "Text",
+      "props": {
+        "text": "backend/app/api/simulation.py: New `GET /<sim_id>/replay.gif` endpoint right next to the existing share-card route. Reuses `_build_embed_summary_payload()` for the data pipeline (so trajectory parsing stays single-sourced), enforces the same `is_public` publish gate (private sims get 403), and caches generated GIFs on disk at `<sim_dir>/replay-gifs/<hash>.gif` with `Cache-Control: public, max-age=3600`."
+      }
+    },
+    "built_item_3": {
+      "type": "Text",
+      "props": {
+        "text": "frontend/src/components/EmbedDialog.vue: New \"Belief replay (animated)\" section under the share-card row. Dark themed to differentiate from the static-card section above, with a paused thumbnail + tap-to-play overlay so opening the dialog doesn't pull GIF bytes for every viewer (the `<img>` mounts only on click). Copyable replay URL + Download GIF button match the existing share-card actions."
+      }
+    },
+    "built_item_4": {
+      "type": "Text",
+      "props": {
+        "text": "backend/tests/test_unit_replay_gif.py: 14 offline unit tests — GIF signature + dimension via raw byte parse, frame count via `PIL.ImageSequence`, `MAX_FRAMES` subsampling preserves the final round, empty-trajectory poster fallback, cache-key stability under float jitter, route-decorator presence as a guard against silent removal."
+      }
+    },
+    "built_item_5": {
+      "type": "Text",
+      "props": {
+        "text": "backend/openapi.yaml + README + docs/FEATURES.md: Spec entry under the Publish & Embed tag (drift-detection test will fail if the route is renamed without updating the spec), README Features row, and a dedicated section in FEATURES.md."
+      }
+    },
+    "separator3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading_how": {
+      "type": "Heading",
+      "props": {
+        "text": "How it works",
+        "level": "h3"
+      }
+    },
+    "text_how": {
+      "type": "Text",
+      "props": {
+        "text": "The endpoint pulls the same per-round belief percentages the share card uses (`belief.rounds`, `belief.bullish/neutral/bearish` from `_build_embed_summary_payload`), then `extract_frames_from_summary()` either passes them through (≤60 rounds) or evenly subsamples down to 60 frames while keeping the last round in place. Each frame is a 1200×630 RGB Pillow image: header band with brand wordmark, scenario headline (auto-wrapped to 2 lines), three labelled stacked horizontal bars with rounded pill ends and percentage values, a thin orange progress bar, and a footer band with the GitHub URL. `Image.save(format=\"GIF\", save_all=True, append_images=frames[1:], duration=[600,...,1800], loop=0, disposal=2)` encodes the lot in a single Pillow call — no FFmpeg, no extra deps. Cache key hashes the trajectory rounded to 1 decimal place so float jitter in `json.load` doesn't bust the disk cache."
+      }
+    },
+    "separator4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading_next": {
+      "type": "Heading",
+      "props": {
+        "text": "What's next",
+        "level": "h3"
+      }
+    },
+    "text_next": {
+      "type": "Text",
+      "props": {
+        "text": "Idea #3 from the same Apr 26 batch — \"Share as Thread\" formatter — auto-writes a 5-tweet copy block from the same trajectory data and would land naturally in the same EmbedDialog footer. Idea #4 (Python SDK from the OpenAPI spec via openapi-generator CI) and idea #5 (Director Event Overlay on the belief chart) are also unbuilt and scoped for the feature skill."
+      }
+    },
+    "pr_link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Pull Request #50",
+        "href": "https://github.com/aaronjmars/MiroShark/pull/50",
+        "source": "GitHub"
+      }
+    }
+  }
+}
