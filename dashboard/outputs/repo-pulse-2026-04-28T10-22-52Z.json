@@ -1,0 +1,267 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "Repo Pulse — 2026-04-28",
+        "description": "aaronjmars/MiroShark"
+      },
+      "children": [
+        "stats_section",
+        "separator1",
+        "stargazers_section",
+        "separator2",
+        "forks_section"
+      ]
+    },
+    "stats_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "lg"
+      },
+      "children": [
+        "stat_stars",
+        "stat_forks"
+      ]
+    },
+    "stat_stars": {
+      "type": "Stat",
+      "props": {
+        "label": "Stars",
+        "value": "853",
+        "delta": "+15",
+        "trend": "up"
+      }
+    },
+    "stat_forks": {
+      "type": "Stat",
+      "props": {
+        "label": "Forks",
+        "value": "161",
+        "delta": "+4",
+        "trend": "up"
+      }
+    },
+    "separator1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stargazers_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stargazers_heading",
+        "stargazers_links"
+      ]
+    },
+    "stargazers_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "New Stargazers",
+        "level": "h3"
+      }
+    },
+    "stargazers_links": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "link_1",
+        "link_2",
+        "link_3",
+        "link_4",
+        "link_5",
+        "link_6",
+        "link_7",
+        "link_8",
+        "link_9",
+        "link_10",
+        "link_11",
+        "link_12",
+        "link_13",
+        "link_14",
+        "link_15"
+      ]
+    },
+    "link_1": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/DeCaelo",
+        "href": "https://github.com/DeCaelo"
+      }
+    },
+    "link_2": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/Zarbel974",
+        "href": "https://github.com/Zarbel974"
+      }
+    },
+    "link_3": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/kessotolom-ship-it",
+        "href": "https://github.com/kessotolom-ship-it"
+      }
+    },
+    "link_4": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/igoryuzo",
+        "href": "https://github.com/igoryuzo"
+      }
+    },
+    "link_5": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/sfab07",
+        "href": "https://github.com/sfab07"
+      }
+    },
+    "link_6": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/issuehuang",
+        "href": "https://github.com/issuehuang"
+      }
+    },
+    "link_7": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/zinkh",
+        "href": "https://github.com/zinkh"
+      }
+    },
+    "link_8": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/LaTige34",
+        "href": "https://github.com/LaTige34"
+      }
+    },
+    "link_9": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/BenjaminJornet",
+        "href": "https://github.com/BenjaminJornet"
+      }
+    },
+    "link_10": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/web-differently12",
+        "href": "https://github.com/web-differently12"
+      }
+    },
+    "link_11": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/s62dads4-rgb",
+        "href": "https://github.com/s62dads4-rgb"
+      }
+    },
+    "link_12": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/DOVEANE",
+        "href": "https://github.com/DOVEANE"
+      }
+    },
+    "link_13": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/valerocyx",
+        "href": "https://github.com/valerocyx"
+      }
+    },
+    "link_14": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/lucaslgk",
+        "href": "https://github.com/lucaslgk"
+      }
+    },
+    "link_15": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/MehdyDriouech",
+        "href": "https://github.com/MehdyDriouech"
+      }
+    },
+    "separator2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "forks_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "forks_heading",
+        "forks_links"
+      ]
+    },
+    "forks_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "New Forks",
+        "level": "h3"
+      }
+    },
+    "forks_links": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "fork_1",
+        "fork_2",
+        "fork_3",
+        "fork_4"
+      ]
+    },
+    "fork_1": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/benewende-dev/MiroShark",
+        "href": "https://github.com/benewende-dev/MiroShark"
+      }
+    },
+    "fork_2": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/Nciaravola/MiroShark",
+        "href": "https://github.com/Nciaravola/MiroShark"
+      }
+    },
+    "fork_3": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/jcferranddenievre/MiroShark",
+        "href": "https://github.com/jcferranddenievre/MiroShark"
+      }
+    },
+    "fork_4": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/lrochetta/AI-R-D-MiroShark",
+        "href": "https://github.com/lrochetta/AI-R-D-MiroShark"
+      }
+    }
+  }
+}
