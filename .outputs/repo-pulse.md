@@ -1,11 +1,11 @@
-*Repo Pulse — 2026-04-28*
-aaronjmars/MiroShark
+*Repo Pulse — 2026-04-29*
+[aaronjmars/MiroShark]
 
-Stars: 853 total (+15 new)
-Forks: 161 total (+4 new)
+Stars: 860 total (+7 new)
+Forks: 166 total (+5 new)
 
 New stargazers:
-github.com/DeCaelo | github.com/Zarbel974 | github.com/kessotolom-ship-it | github.com/igoryuzo | github.com/sfab07 | github.com/issuehuang | github.com/zinkh | github.com/LaTige34 | github.com/BenjaminJornet | github.com/web-differently12 | github.com/s62dads4-rgb | github.com/DOVEANE | github.com/valerocyx | github.com/lucaslgk | github.com/MehdyDriouech
+github.com/NicolasArnouts | github.com/Kwixotic | github.com/jeanduboisdelaforet | github.com/Lohrey | github.com/cresslank | github.com/novabd | github.com/criptogus
 
 New forks:
-github.com/benewende-dev/MiroShark | github.com/Nciaravola/MiroShark | github.com/jcferranddenievre/MiroShark | github.com/lrochetta/AI-R-D-MiroShark
+github.com/d3v3l15h1976-arch/MiroShark | github.com/brandon-deriv/MiroShark | github.com/Lohrey/MiroShark | github.com/Afristrat/MiroShark | github.com/dadu523/Simulate-anything

@@ -1,0 +1,236 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Repo Pulse",
+        "description": "2026-04-29"
+      },
+      "children": [
+        "stack_main"
+      ]
+    },
+    "stack_main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "repo_name",
+        "sep1",
+        "stats_section",
+        "sep2",
+        "stargazers_section",
+        "sep3",
+        "forks_section"
+      ]
+    },
+    "repo_name": {
+      "type": "Heading",
+      "props": {
+        "text": "aaronjmars/MiroShark",
+        "level": "h2"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stats_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "lg"
+      },
+      "children": [
+        "stat_stars",
+        "stat_forks"
+      ]
+    },
+    "stat_stars": {
+      "type": "Stat",
+      "props": {
+        "label": "Stars",
+        "value": "860",
+        "delta": "+7",
+        "trend": "up"
+      }
+    },
+    "stat_forks": {
+      "type": "Stat",
+      "props": {
+        "label": "Forks",
+        "value": "166",
+        "delta": "+5",
+        "trend": "up"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stargazers_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stargazers_heading",
+        "stargazers_list"
+      ]
+    },
+    "stargazers_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "New Stargazers",
+        "level": "h3"
+      }
+    },
+    "stargazers_list": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "link_nicolas",
+        "link_kwixotic",
+        "link_jean",
+        "link_lohrey",
+        "link_cresslank",
+        "link_novabd",
+        "link_criptogus"
+      ]
+    },
+    "link_nicolas": {
+      "type": "Link",
+      "props": {
+        "label": "NicolasArnouts",
+        "href": "https://github.com/NicolasArnouts"
+      }
+    },
+    "link_kwixotic": {
+      "type": "Link",
+      "props": {
+        "label": "Kwixotic",
+        "href": "https://github.com/Kwixotic"
+      }
+    },
+    "link_jean": {
+      "type": "Link",
+      "props": {
+        "label": "jeanduboisdelaforet",
+        "href": "https://github.com/jeanduboisdelaforet"
+      }
+    },
+    "link_lohrey": {
+      "type": "Link",
+      "props": {
+        "label": "Lohrey",
+        "href": "https://github.com/Lohrey"
+      }
+    },
+    "link_cresslank": {
+      "type": "Link",
+      "props": {
+        "label": "cresslank",
+        "href": "https://github.com/cresslank"
+      }
+    },
+    "link_novabd": {
+      "type": "Link",
+      "props": {
+        "label": "novabd",
+        "href": "https://github.com/novabd"
+      }
+    },
+    "link_criptogus": {
+      "type": "Link",
+      "props": {
+        "label": "criptogus",
+        "href": "https://github.com/criptogus"
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "forks_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "forks_heading",
+        "forks_list"
+      ]
+    },
+    "forks_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "New Forks",
+        "level": "h3"
+      }
+    },
+    "forks_list": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "fork_d3v3l15h",
+        "fork_brandon",
+        "fork_lohrey2",
+        "fork_afristrat",
+        "fork_dadu523"
+      ]
+    },
+    "fork_d3v3l15h": {
+      "type": "Link",
+      "props": {
+        "label": "d3v3l15h1976-arch/MiroShark",
+        "href": "https://github.com/d3v3l15h1976-arch/MiroShark"
+      }
+    },
+    "fork_brandon": {
+      "type": "Link",
+      "props": {
+        "label": "brandon-deriv/MiroShark",
+        "href": "https://github.com/brandon-deriv/MiroShark"
+      }
+    },
+    "fork_lohrey2": {
+      "type": "Link",
+      "props": {
+        "label": "Lohrey/MiroShark",
+        "href": "https://github.com/Lohrey/MiroShark"
+      }
+    },
+    "fork_afristrat": {
+      "type": "Link",
+      "props": {
+        "label": "Afristrat/MiroShark",
+        "href": "https://github.com/Afristrat/MiroShark"
+      }
+    },
+    "fork_dadu523": {
+      "type": "Link",
+      "props": {
+        "label": "dadu523/Simulate-anything",
+        "href": "https://github.com/dadu523/Simulate-anything"
+      }
+    }
+  }
+}
