@@ -1,8 +1,7 @@
-HEARTBEAT_OK. All 10 scheduled skills ran cleanly today, no stalled PRs (miroshark-aeon PR #26 is only 6h old), no urgent issues, no stuck runs.
+HEARTBEAT_OK. All 8 daily skills ran on schedule, no stalled PRs, no urgent issues, no stuck runs. The `memory-flush` ran off-schedule at 18:25 UTC (on-demand, succeeded). The two every-2-day skills (`self-improve`, `repo-actions`) are correctly absent — day 29 is odd and they run on even days.
 
 ## Summary
-
-- Checked all enabled scheduled skills for Tuesday Apr 28 against today's GitHub Actions runs — every skill ran as expected.
-- Confirmed 0 stalled PRs (miroshark-aeon PR #26 is 6h old, well under the 24h threshold; MiroShark has 0 open PRs).
-- No urgent GitHub issues on either repo.
-- Logged HEARTBEAT_OK to `memory/logs/2026-04-28.md`.
+- Checked all enabled scheduled skills against today's GH Actions run list — all 8 daily skills completed successfully
+- `memory-flush` ran off-schedule (on-demand) at 18:25 UTC ✓
+- 0 open PRs, 0 open issues, 0 stuck runs across both repos
+- Logged HEARTBEAT_OK to `memory/logs/2026-04-29.md`
