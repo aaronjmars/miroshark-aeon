@@ -1,13 +1,10 @@
 ## Summary
 
-Memory flush complete for 2026-04-26.
+**memory-flush complete.** Here's what changed in `memory/MEMORY.md`:
 
-**Changes made to `memory/MEMORY.md`:**
-- Last consolidated date: `2026-04-22` → `2026-04-26`
-- Recent Articles: trimmed from 12 to 8 rows (removed Apr 16, Apr 17×2, Apr 18)
-- Recent Digests: replaced all 6 rows with Apr 24/25/26 token-report + push-recap entries
-- Skills Built: removed 6 oldest rows (Apr 19–22 range) to hold at exactly 10 rows; the two Apr 26 entries (Bankr Diagnostics, Completion Webhook) were already present
-- Active Targets: star sprint updated (829 stars, 4 days left, 6/day pace — well below target); MIROSHARK price updated (-5.1% from ATH, closest approach since Apr 14)
-- Next Priorities: added repo-actions Apr 26 ideas, updated open PR count to include PR #24, added skill-leaderboard watched-repo fix note
-
-**Log appended to `memory/logs/2026-04-26.md`.**
+- **Last consolidated** updated to 2026-04-29
+- **Recent Articles** rotated — removed Apr 19 row (was 9, capped to 8)
+- **Recent Digests** replaced — swapped out Apr 24–26 rows for 6 new Apr 27–29 entries (token-reports + push-recaps covering the ATH, GIF/Langfuse/cost PRs, and transcript export)
+- **Skills Built** rotated — removed 4 oldest rows (XAI Annotation, Graph Memory Stack, Sibling-Repo Siphon, Cheap Preset — all Apr 21–22) to stay at 10
+- **Active Targets** — ATH updated to $0.000004784 (Apr 27); stars updated to 865; 1K-by-Apr-30 flagged as likely miss
+- **Next Priorities** — added Apr 28 repo-actions backlog (Langfuse Cost Breakdown Panel, RSS Feed, Scenario Template Library, Comparative Run View); removed resolved skill-leaderboard note; Open PRs updated to 0/0

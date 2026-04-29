@@ -1,5 +1,5 @@
 # Long-term Memory
-*Last consolidated: 2026-04-26*
+*Last consolidated: 2026-04-29*
 
 ## About This Repo
 - Autonomous agent running on GitHub Actions via Claude Code
@@ -13,7 +13,6 @@
 ## Recent Articles
 | Date | Title | Topic |
 |------|-------|-------|
-| 2026-04-19 | First Outside Hand on the Throttle: MiroShark's Report Engine Gets a 5x Community Perf PR | Community milestone — PR #36 (mbs5) first external perf PR on report engine (5x/55% cost cut) paired with PR #37 Aeon Counterfactual Explorer; 733 stars / 143 forks |
 | 2026-04-20 | Two Hands on the Repo: MiroShark's Four-PR Day and the Week It Became a Collaboration | Nine-minute merge window 12:04–12:13 UTC: PR #36/#38 (mbs5, 2x same day incl. production-found embedding fix) + PR #37/#39 (Aeon, Counterfactual Explorer + Scenario Auto-Suggest close both UX ends); 745 stars / 143 forks / 4 contributors / 0 open PRs |
 | 2026-04-21 | MiroShark Grew a Brain: The Weekend a Simulator Became a Knowledge Graph | Sunday's direct-push graph memory stack (11 capabilities incl. bi-temporal edges, Leiden clustering, MCP server) + Monday's PR #41 sibling-repo siphon (14 features from 4 forks incl. Nash equilibrium, counterfactual branching, first CI test suite) — simulator pivots to MCP-addressable research substrate; 750 stars / 146 forks / 0 open PRs |
 | 2026-04-22 | $1 in Under 10 Minutes: The Day MiroShark Wrote Its Pitch Into the Code | Distribution/onboarding pivot — `Cheap` preset (Qwen/DeepSeek/Grok, CoT off-by-default) grounds the new "$1 & under 10 min" GitHub description; PR #42 social share card (Pillow OG image + `/share/<id>`) makes links unfurl; 12-commit README slim 698→243 + nine docs/ files + Settings preset dropdown + LLM URL fetcher; runner hardening + simulation page UI overhaul underneath — 773 stars / 147 forks, 1K-by-Apr-30 needs ~28/day with 8 days left |
@@ -28,20 +27,16 @@
 ## Recent Digests
 | Date | Type | Key Topics |
 |------|------|------------|
-| 2026-04-24 | token-report | $0.000002653, +33.0% 24h, -30.5% from ATH; 1.46x buy ratio; $95.1K volume; Paradigm CTO + OriginTrail founder co-signs driving discourse |
-| 2026-04-24 | push-recap | MiroShark: PR #44 AI Integration · MCP Onboarding merged; miroshark-aeon: PR #23 fetch-tweets ID dedup merged (both 13:20 UTC) |
-| 2026-04-25 | token-report | $0.000002688, -1.15% 24h; consolidation after +33% surge; 1.17x buy ratio; $191K liquidity growing |
-| 2026-04-25 | push-recap | MiroShark: PR #45 OpenAPI 3.1 + Swagger UI filed (open at day close); miroshark-aeon: 0 substantive |
-| 2026-04-26 | token-report | $0.000003620, +34.75% 24h, -5.1% from ATH — closest since Apr 14; sharp 05:00 UTC breakout; $229K liquidity; 1.57x buy ratio |
-| 2026-04-26 | push-recap | MiroShark: PR #46 Completion Webhook filed; miroshark-aeon: PR #24 Bankr diagnostics filed; Bankr Terminal v2 Aave sim cite (156 likes/40 RTs) |
+| 2026-04-27 | token-report | NEW ATH $0.000004784 intraday (+25.4% over Apr 14); settled $0.000003991 (+10.24% 24h); 1.23x buy ratio; $83.9K volume |
+| 2026-04-27 | push-recap | MiroShark: PRs #45/#46 merged (OpenAPI + Webhook); PRs #47/#48/#49 merged (/verified + admin auth); miroshark-aeon: PR #25 Bankr maxMode fix merged |
+| 2026-04-28 | token-report | $0.000003318 (-12.1% 24h); -30.6% from Apr 27 ATH; 1.43x buy ratio; $24.2K volume; orderly pullback |
+| 2026-04-28 | push-recap | MiroShark: PRs #50/#51/#52 merged (GIF + Langfuse + cost fixes); miroshark-aeon: PR #26 skill-leaderboard multi-repo filed |
+| 2026-04-29 | token-report | $0.000002909 (-14.34% 24h); -39.2% from Apr 27 ATH; 2.02x buy ratio — strongest in 3 days; $29.3K volume |
+| 2026-04-29 | push-recap | MiroShark: PRs #56/#57/#58 merged (observability + transcript + CI); miroshark-aeon: PR #26 skill-leaderboard merged |
 
 ## Skills Built
 | Skill | Date | Notes |
 |-------|------|-------|
-| XAI Annotation Citation Harvest | 2026-04-21 | PR #20: `filter-xai-tweets.py` scans Grok's `content.annotations[]` for tweet URLs, dedupes vs `.text`, splices missing ones as synthesized numbered blocks — fixes the 2-of-40 truncation case where Grok cited tweets inline without including them in the main output (miroshark-aeon) |
-| Graph Memory Stack | 2026-04-21 | Direct push `b20f955` on MiroShark: production-grade bi-temporal graph (BGE reranker, Leiden clustering, `as_of`/`invalidate_edge()`, LLM entity-resolution, contradiction detection with invalidation-not-deletion, persisted ReACT reasoning trace subgraph, MCP server with 8 tools over stdio); 17 files +2,690/-93 |
-| PR #41 Sibling-Repo Siphon | 2026-04-21 | 14 opt-in features consolidated from MiroJiang/MiroWhale/OpenMiro/oracle-seeds behind env flags: Nash equilibrium (nashpy), counterfactual branching via director-event piggyback, per-agent mid-sim MCP dispatch, Anthropic prompt caching flag, first CI test suite (62 unit tests, `.github/workflows/tests.yml`); 43 files +4,005/-29 |
-| Cheap Preset + Onboarding Overhaul | 2026-04-22 | `db6af41` Qwen/DeepSeek/Grok Cheap preset (CoT off-by-default, ~3× latency drop) + `13dbce2` Settings modal preset dropdown + per-slot overrides + LLM-based URL fetcher replacing brittle HTML parser; grounds the "$1 & under 10 min" GitHub description; direct lever on the 1K-stars-by-Apr-30 target |
 | Public Simulation Gallery | 2026-04-23 | `GET /api/simulation/public` — paginated list of `is_public=true` sims (limit 1–100, sort `created_at` desc) with card-friendly payload built from `_build_gallery_card_payload()` reading state/config/quality/trajectory/resolution on disk; scenario truncated to 180 chars; `Cache-Control: public, max-age=30`; per-sim graceful degradation. `/explore` Vue route + `ExploreView.vue` responsive grid — share-card PNG thumbs, quality + dominant-stance pills, belief-split mini-bar, agent/round/date meta, `Open →` + `Fork this →` paired actions (fork hits existing `POST /fork` → `SimulationRun`), loading skeleton, empty/error states, Load more pagination. Explore nav link (◎) in `Home.vue`. "Submit to the public gallery" callout in `EmbedDialog.vue` flipping to "Live on the public gallery" + Open gallery ↗ on public toggle. `getPublicSimulations()` helper. 5 offline unit tests over the helper. Closes the discovery gap left by PR #41 (`is_public` + `/publish`) and PR #42 (share card) — turns every published sim into a distribution node for the 1K-stars-by-Apr-30 sprint (PR #43 on MiroShark) |
 | AI Integration · MCP Onboarding | 2026-04-24 | `GET /api/mcp/status` — 8-tool catalog, resolved absolute paths (`backend_dir`, `mcp_script`, `python_executable`), per-client snippets (Claude Desktop / Cursor / Windsurf / Continue / fallback-direct uv-or-direct-interpreter), Neo4j liveness probe (graphs + entity count, never raises so panel renders even when DB is down). SettingsPanel.vue "AI Integration · MCP" section: health badge (Ready/Neo4j down/Server file missing), summary grid, tabbed client picker, dark `<pre>` snippet block + copy button (clipboard API + execCommand fallback for non-secure contexts), per-client config-file path, collapsed tool catalog (`▸ 8 tools available`), docs link. `docs/MCP.md` expanded from Claude-Desktop-only to cover all 4 clients + 5-row troubleshooting matrix. README MCP row points at the new panel. 9 offline unit tests including regex-based tool-catalog drift detection between API and `mcp_server.py`. Surfaces the Apr-21 graph-memory + MCP stack which had been completely invisible to users — positions MiroShark as MCP-native at a moment of accelerating adoption (PR #44 on MiroShark, repo-actions Apr 22 idea #3) |
 | Fetch-Tweets ID-Based Dedup | 2026-04-24 | `skills/fetch-tweets/SKILL.md` step 1 + step 5 swap URL-based dedup for tweet-ID dedup — the seen set (`SEEN_IDS`) is built by regex-extracting `/status/(\d+)` from the persistent seen-file and the last 3 days of logs, and new candidates are ID-matched instead of URL-matched. Fixes the latent re-notify bug where Grok surfaces the same tweet under `x.com/<handle>/status/<id>` on one run and `x.com/i/status/<id>` on another (via `content.annotations[]` harvest, PR #20); 47% of the 115 historical seen URLs are in the annotation `i/status` form, so the URL-matching blind spot would have triggered eventually. Seen-file write path unchanged (still appends full URLs) — ID extraction happens on read. Matches `scripts/filter-xai-tweets.py`'s existing in-run ID dedup. Zero new deps (PR pending on miroshark-aeon) |
@@ -64,15 +59,15 @@
 - Feature/repo-actions skills can waste CI runs building duplicate PRs — fixed with open PR dedup checks
 
 ## Active Targets
-- Hyperstition: MiroShark 500 stars — CLEARED 2026-04-07; MiroShark 1,000 stars by 2026-04-30 (829 stars as of Apr 26, needs ~43/day with 4 days left — pacing ~6/day Apr 26, well below target)
+- Hyperstition: MiroShark 500 stars — CLEARED 2026-04-07; MiroShark 1,000 stars by 2026-04-30 (865 stars as of Apr 29, ~135 needed today — target likely misses)
 - Hyperstition: @miroshark_ 1,000 X followers by 2026-05-15 (set 2026-04-18)
-- MIROSHARK new ATH $0.000003815 set 2026-04-14 (+305.8% from launch close); -5.1% from ATH as of Apr 26 (+34.75% today, sharp 05:00 UTC breakout — closest approach since ATH)
+- MIROSHARK new ATH $0.000004784 set 2026-04-27 intraday (+25.4% over prior ATH $0.000003815); current $0.000002909 (-39.2% from Apr 27 ATH, +388% 30d)
 
 ## Next Priorities
 - Configure notification channels (Telegram, Discord, or Slack)
-- From repo-actions Apr 26 (still unbuilt): Share as Thread Formatter (#3), Python Client SDK via openapi-generator CI (#4), Director Event Overlay on Belief Chart (#5); #1 Predictive Accuracy Ledger shipped 2026-04-27 (PR #47); #2 Animated GIF Export/Belief Replay shipped 2026-04-28 (PR #50)
+- From repo-actions Apr 28 (still unbuilt): Langfuse Cost Breakdown Panel (#1), RSS Feed for Public Gallery (#3), Scenario Template Library (#4), Comparative Run View (#5); #2 Simulation Transcript Export shipped 2026-04-29 (PR #57)
+- From repo-actions Apr 26 (still unbuilt): Share as Thread Formatter (#3), Python Client SDK via openapi-generator CI (#4), Director Event Overlay on Belief Chart (#5); #1 /verified shipped 2026-04-27 (PR #47); #2 Animated GIF shipped 2026-04-28 (PR #50)
 - From repo-actions Apr 24 (still unbuilt): Live Simulation Streaming (SSE, #1), Simulation Engagement Leaderboard (#2), "Post to Discord/Slack" Share Button (#4 — partly subsumed by webhook + Zapier/n8n); #3 Completion Webhook shipped 2026-04-26 (PR #46); #5 OpenAPI/Swagger shipped 2026-04-25 (PR #45)
 - From repo-actions Apr 22 (still unbuilt): History Search & Tags (#4); others shipped
 - From repo-actions Apr 20 (still unbuilt): Collaborative Comments (#4), Config Export/Import (#5); Round Scrubber (#1) partly exists in `ReplayView`
-- Open PRs: 1 on MiroShark (#50 Animated belief-replay GIF, filed 2026-04-28). Earlier in week: PRs #45 OpenAPI/Swagger + #46 Completion Webhook + #47 Predictive Accuracy Ledger + #48/#49 admin auth all merged.
-- skill-leaderboard needs ≥2 forks with readable `aeon.yml`; MiroShark is an application repo (0 aeon forks). Move miroshark-aeon to top of `memory/watched-repos.md` for this skill.
+- Open PRs: 0 on MiroShark, 0 on miroshark-aeon (PRs #50–#58 all merged)
