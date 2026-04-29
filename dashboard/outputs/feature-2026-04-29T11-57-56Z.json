@@ -1,0 +1,456 @@
+{
+  "root": "card_root",
+  "state": {},
+  "elements": {
+    "card_root": {
+      "type": "Card",
+      "props": {
+        "title": "Feature Built: Simulation Transcript Export",
+        "description": "2026-04-29"
+      },
+      "children": [
+        "stack_main"
+      ]
+    },
+    "stack_main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "section_endpoints",
+        "sep_1",
+        "section_formats",
+        "sep_2",
+        "section_integration",
+        "sep_3",
+        "section_tech",
+        "sep_4",
+        "section_ui",
+        "sep_5",
+        "section_api",
+        "sep_6",
+        "section_tests",
+        "sep_7",
+        "story_pr"
+      ]
+    },
+    "section_endpoints": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "heading_endpoints",
+        "text_endpoints"
+      ]
+    },
+    "heading_endpoints": {
+      "type": "Heading",
+      "props": {
+        "text": "New Endpoints",
+        "level": "h2"
+      }
+    },
+    "text_endpoints": {
+      "type": "Text",
+      "props": {
+        "text": "GET /api/simulation/<id>/transcript.md + transcript.json"
+      }
+    },
+    "sep_1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "section_formats": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "heading_formats",
+        "text_formats",
+        "stack_format_badges"
+      ]
+    },
+    "heading_formats": {
+      "type": "Heading",
+      "props": {
+        "text": "Export Formats",
+        "level": "h2"
+      }
+    },
+    "text_formats": {
+      "type": "Text",
+      "props": {
+        "text": "Per-round agent posts plus stance labels plus final consensus"
+      }
+    },
+    "stack_format_badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "badge_markdown",
+        "badge_json"
+      ]
+    },
+    "badge_markdown": {
+      "type": "Badge",
+      "props": {
+        "text": "Markdown with YAML front matter"
+      }
+    },
+    "badge_json": {
+      "type": "Badge",
+      "props": {
+        "text": "Structured JSON"
+      }
+    },
+    "sep_2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "section_integration": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "heading_integration",
+        "text_integration_1",
+        "text_integration_2"
+      ]
+    },
+    "heading_integration": {
+      "type": "Heading",
+      "props": {
+        "text": "Integration",
+        "level": "h2"
+      }
+    },
+    "text_integration_1": {
+      "type": "Text",
+      "props": {
+        "text": "Third quote-friendly share format alongside share-card PNG (Apr 22) and replay GIF (Apr 28)"
+      }
+    },
+    "text_integration_2": {
+      "type": "Text",
+      "props": {
+        "text": "First way to cite a simulation in prose without screenshot"
+      }
+    },
+    "sep_3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "section_tech": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "heading_tech",
+        "text_pure_stdlib",
+        "stack_tech_badges_1",
+        "text_pr52",
+        "text_markdown_cap",
+        "text_json_all",
+        "stack_tech_badges_2"
+      ]
+    },
+    "heading_tech": {
+      "type": "Heading",
+      "props": {
+        "text": "Technical Implementation",
+        "level": "h2"
+      }
+    },
+    "text_pure_stdlib": {
+      "type": "Text",
+      "props": {
+        "text": "Pure stdlib, no new dependencies"
+      }
+    },
+    "stack_tech_badges_1": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "badge_publish",
+        "badge_cache",
+        "badge_stance"
+      ]
+    },
+    "badge_publish": {
+      "type": "Badge",
+      "props": {
+        "text": "Publish-gated"
+      }
+    },
+    "badge_cache": {
+      "type": "Badge",
+      "props": {
+        "text": "60s Cache-Control"
+      }
+    },
+    "badge_stance": {
+      "type": "Badge",
+      "props": {
+        "text": "±0.2 stance threshold"
+      }
+    },
+    "text_pr52": {
+      "type": "Text",
+      "props": {
+        "text": "PR 52 pruned tool-call boilerplate from agent memory, making transcript readable"
+      }
+    },
+    "text_markdown_cap": {
+      "type": "Text",
+      "props": {
+        "text": "80-round Markdown cap with first-20 + last-20 preserved"
+      }
+    },
+    "text_json_all": {
+      "type": "Text",
+      "props": {
+        "text": "JSON keeps every round"
+      }
+    },
+    "stack_tech_badges_2": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "badge_consistent"
+      ]
+    },
+    "badge_consistent": {
+      "type": "Badge",
+      "props": {
+        "text": "Consistent across all share formats"
+      }
+    },
+    "sep_4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "section_ui": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "heading_ui",
+        "text_ui_intro",
+        "stack_ui_badges",
+        "text_markdown_url"
+      ]
+    },
+    "heading_ui": {
+      "type": "Heading",
+      "props": {
+        "text": "UI Changes",
+        "level": "h2"
+      }
+    },
+    "text_ui_intro": {
+      "type": "Text",
+      "props": {
+        "text": "EmbedDialog adds download buttons and copyable URL:"
+      }
+    },
+    "stack_ui_badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "badge_download_md",
+        "badge_download_json"
+      ]
+    },
+    "badge_download_md": {
+      "type": "Badge",
+      "props": {
+        "text": "Download .md"
+      }
+    },
+    "badge_download_json": {
+      "type": "Badge",
+      "props": {
+        "text": "Download .json"
+      }
+    },
+    "text_markdown_url": {
+      "type": "Text",
+      "props": {
+        "text": "Copyable Markdown URL beneath the replay-GIF row"
+      }
+    },
+    "sep_5": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "section_api": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "heading_api",
+        "text_openapi",
+        "text_schema",
+        "badge_drift"
+      ]
+    },
+    "heading_api": {
+      "type": "Heading",
+      "props": {
+        "text": "API Documentation",
+        "level": "h2"
+      }
+    },
+    "text_openapi": {
+      "type": "Text",
+      "props": {
+        "text": "openapi.yaml updated with both routes"
+      }
+    },
+    "text_schema": {
+      "type": "Text",
+      "props": {
+        "text": "New SimulationTranscript schema added"
+      }
+    },
+    "badge_drift": {
+      "type": "Badge",
+      "props": {
+        "text": "Drift-detection test: passing",
+        "variant": "outline"
+      }
+    },
+    "sep_6": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "section_tests": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "heading_tests",
+        "text_tests_intro",
+        "stack_test_badges"
+      ]
+    },
+    "heading_tests": {
+      "type": "Heading",
+      "props": {
+        "text": "Test Coverage",
+        "level": "h2"
+      }
+    },
+    "text_tests_intro": {
+      "type": "Text",
+      "props": {
+        "text": "18 offline unit tests covering:"
+      }
+    },
+    "stack_test_badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "badge_parity",
+        "badge_names",
+        "badge_corrupt",
+        "badge_yaml",
+        "badge_escaping",
+        "badge_truncation"
+      ]
+    },
+    "badge_parity": {
+      "type": "Badge",
+      "props": {
+        "text": "Stance threshold parity"
+      }
+    },
+    "badge_names": {
+      "type": "Badge",
+      "props": {
+        "text": "Profile-name resolution"
+      }
+    },
+    "badge_corrupt": {
+      "type": "Badge",
+      "props": {
+        "text": "Corrupt-artifact graceful degradation"
+      }
+    },
+    "badge_yaml": {
+      "type": "Badge",
+      "props": {
+        "text": "YAML front-matter integrity"
+      }
+    },
+    "badge_escaping": {
+      "type": "Badge",
+      "props": {
+        "text": "Quote + newline escaping"
+      }
+    },
+    "badge_truncation": {
+      "type": "Badge",
+      "props": {
+        "text": "Oversized-trajectory truncation"
+      }
+    },
+    "sep_7": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "story_pr": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #57: Simulation Transcript Export",
+        "href": "https://github.com/aaronjmars/MiroShark/pull/57",
+        "source": "GitHub"
+      }
+    }
+  }
+}
