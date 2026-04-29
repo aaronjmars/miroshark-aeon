@@ -1,0 +1,487 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Repo Action Ideas — 2026-04-28"
+      },
+      "children": [
+        "heading_repo",
+        "stack_repo_stats",
+        "text_context",
+        "separator_1",
+        "heading_ideas",
+        "stack_all_ideas",
+        "separator_2",
+        "link_full_article"
+      ]
+    },
+    "heading_repo": {
+      "type": "Heading",
+      "props": {
+        "text": "aaronjmars/MiroShark",
+        "level": "h3"
+      }
+    },
+    "stack_repo_stats": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "stat_stars",
+        "stat_forks",
+        "stat_prs",
+        "text_merged"
+      ]
+    },
+    "stat_stars": {
+      "type": "Stat",
+      "props": {
+        "label": "Stars",
+        "value": "854"
+      }
+    },
+    "stat_forks": {
+      "type": "Stat",
+      "props": {
+        "label": "Forks",
+        "value": "162"
+      }
+    },
+    "stat_prs": {
+      "type": "Stat",
+      "props": {
+        "label": "Open PRs",
+        "value": "0"
+      }
+    },
+    "text_merged": {
+      "type": "Text",
+      "props": {
+        "text": "Merged today: PR #51 (Langfuse trace metadata) + PR #52 (tool retry loop fix, 30-40% cost reduction)",
+        "variant": "caption"
+      }
+    },
+    "text_context": {
+      "type": "Text",
+      "props": {
+        "text": "Langfuse wiring is done, cost data is in traces but invisible in product.",
+        "variant": "lead"
+      }
+    },
+    "separator_1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading_ideas": {
+      "type": "Heading",
+      "props": {
+        "text": "Five Net-New Ideas",
+        "level": "h3"
+      }
+    },
+    "stack_all_ideas": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "lg"
+      },
+      "children": [
+        "idea_1",
+        "idea_2",
+        "idea_3",
+        "idea_4",
+        "idea_5"
+      ]
+    },
+    "idea_1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "idea_1_header",
+        "idea_1_content"
+      ]
+    },
+    "idea_1_header": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "idea_1_heading",
+        "badge_1_type",
+        "badge_1_size"
+      ]
+    },
+    "idea_1_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Langfuse Cost Breakdown Panel",
+        "level": "h4"
+      }
+    },
+    "badge_1_type": {
+      "type": "Badge",
+      "props": {
+        "text": "Feature",
+        "variant": "outline"
+      }
+    },
+    "badge_1_size": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "secondary"
+      }
+    },
+    "idea_1_content": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "idea_1_desc",
+        "idea_1_goal"
+      ]
+    },
+    "idea_1_desc": {
+      "type": "Text",
+      "props": {
+        "text": "Expose per-sim cost in the UI — setup/rounds/research breakdown from Langfuse traces.",
+        "variant": "body"
+      }
+    },
+    "idea_1_goal": {
+      "type": "Text",
+      "props": {
+        "text": "Makes the \"$1 & under 10 min\" tagline verifiable inside the app.",
+        "variant": "caption"
+      }
+    },
+    "idea_2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "idea_2_header",
+        "idea_2_content"
+      ]
+    },
+    "idea_2_header": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "idea_2_heading",
+        "badge_2_type",
+        "badge_2_size"
+      ]
+    },
+    "idea_2_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Simulation Transcript Export",
+        "level": "h4"
+      }
+    },
+    "badge_2_type": {
+      "type": "Badge",
+      "props": {
+        "text": "Feature",
+        "variant": "outline"
+      }
+    },
+    "badge_2_size": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "secondary"
+      }
+    },
+    "idea_2_content": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "idea_2_api",
+        "idea_2_context",
+        "idea_2_usecase"
+      ]
+    },
+    "idea_2_api": {
+      "type": "Text",
+      "props": {
+        "text": "GET /api/simulation/:id/transcript.md — round-by-round agent dialogue, downloadable from EmbedDialog.",
+        "variant": "body"
+      }
+    },
+    "idea_2_context": {
+      "type": "Text",
+      "props": {
+        "text": "PR #52 cleaned the conversation history; the text is now readable.",
+        "variant": "caption"
+      }
+    },
+    "idea_2_usecase": {
+      "type": "Text",
+      "props": {
+        "text": "Research-quotable companion to the GIF.",
+        "variant": "caption"
+      }
+    },
+    "idea_3": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "idea_3_header",
+        "idea_3_content"
+      ]
+    },
+    "idea_3_header": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "idea_3_heading",
+        "badge_3_type",
+        "badge_3_size"
+      ]
+    },
+    "idea_3_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "RSS Feed for Public Gallery",
+        "level": "h4"
+      }
+    },
+    "badge_3_type": {
+      "type": "Badge",
+      "props": {
+        "text": "Integration",
+        "variant": "outline"
+      }
+    },
+    "badge_3_size": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "secondary"
+      }
+    },
+    "idea_3_content": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "idea_3_api",
+        "idea_3_tech",
+        "idea_3_usecase"
+      ]
+    },
+    "idea_3_api": {
+      "type": "Text",
+      "props": {
+        "text": "GET /api/feed.rss serving the 20 most recent public sims as Atom 1.0.",
+        "variant": "body"
+      }
+    },
+    "idea_3_tech": {
+      "type": "Text",
+      "props": {
+        "text": "Zero new deps (stdlib xml).",
+        "variant": "caption"
+      }
+    },
+    "idea_3_usecase": {
+      "type": "Text",
+      "props": {
+        "text": "Researchers subscribe in Feedly/Readwise the same way they follow newsletters.",
+        "variant": "caption"
+      }
+    },
+    "idea_4": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "idea_4_header",
+        "idea_4_content"
+      ]
+    },
+    "idea_4_header": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "idea_4_heading",
+        "badge_4_type",
+        "badge_4_size"
+      ]
+    },
+    "idea_4_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Scenario Template Library",
+        "level": "h4"
+      }
+    },
+    "badge_4_type": {
+      "type": "Badge",
+      "props": {
+        "text": "DX",
+        "variant": "outline"
+      }
+    },
+    "badge_4_size": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "secondary"
+      }
+    },
+    "idea_4_content": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "idea_4_desc",
+        "idea_4_templates",
+        "idea_4_goal"
+      ]
+    },
+    "idea_4_desc": {
+      "type": "Text",
+      "props": {
+        "text": "Static JSON of 12-15 curated templates accessible from a \"Browse templates\" picker on the new-sim form.",
+        "variant": "body"
+      }
+    },
+    "idea_4_templates": {
+      "type": "Text",
+      "props": {
+        "text": "Templates: DeFi vulnerability, token launch, governance vote, regulatory action.",
+        "variant": "caption"
+      }
+    },
+    "idea_4_goal": {
+      "type": "Text",
+      "props": {
+        "text": "Eliminates the blank textarea conversion barrier.",
+        "variant": "caption"
+      }
+    },
+    "idea_5": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "idea_5_header",
+        "idea_5_content"
+      ]
+    },
+    "idea_5_header": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "idea_5_heading",
+        "badge_5_type",
+        "badge_5_size"
+      ]
+    },
+    "idea_5_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Comparative Run View",
+        "level": "h4"
+      }
+    },
+    "badge_5_type": {
+      "type": "Badge",
+      "props": {
+        "text": "Feature",
+        "variant": "outline"
+      }
+    },
+    "badge_5_size": {
+      "type": "Badge",
+      "props": {
+        "text": "Medium",
+        "variant": "secondary"
+      }
+    },
+    "idea_5_content": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "idea_5_desc",
+        "idea_5_benefit"
+      ]
+    },
+    "idea_5_desc": {
+      "type": "Text",
+      "props": {
+        "text": "/compare?a=$id&b=$id — side-by-side belief charts, consensus delta pills, quality comparison.",
+        "variant": "body"
+      }
+    },
+    "idea_5_benefit": {
+      "type": "Text",
+      "props": {
+        "text": "Makes fork-then-change-preset a first-class research workflow with a shareable URL format.",
+        "variant": "caption"
+      }
+    },
+    "separator_2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "link_full_article": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full details: Repo Action Ideas",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-actions-2026-04-28.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}

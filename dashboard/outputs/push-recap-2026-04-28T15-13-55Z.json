@@ -1,0 +1,212 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "Push Recap — 2026-04-28"
+      },
+      "children": [
+        "summary",
+        "sep1",
+        "pr50_section",
+        "sep2",
+        "pr51_section",
+        "sep3",
+        "pr52_section",
+        "sep4",
+        "key_changes_heading",
+        "key_changes_list",
+        "sep5",
+        "stats_section",
+        "sep6",
+        "full_recap_link"
+      ]
+    },
+    "summary": {
+      "type": "Text",
+      "props": {
+        "text": "MiroShark — 3 PRs merged in 75 minutes by aaronjmars (+1,513 / −59 across 21 files); miroshark-aeon — 0 substantive (chore auto-commits only).",
+        "variant": "lead"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {}
+    },
+    "pr50_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "pr50_heading",
+        "pr50_text"
+      ]
+    },
+    "pr50_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Animated Belief Replay GIF (PR #50, 12:56 UTC)",
+        "level": "h3"
+      }
+    },
+    "pr50_text": {
+      "type": "Text",
+      "props": {
+        "text": "/api/simulation/<id>/replay.gif renders per-round belief drift as a 1200×630 GIF, same OG aspect as the share card so unfurl shapes stay consistent. Pure Pillow, zero new deps; cached at <sim_dir>/replay-gifs/<hash>.gif. Discord and Slack auto-play GIFs from a direct file URL — every share now ships motion as well as a still."
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {}
+    },
+    "pr51_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "pr51_heading",
+        "pr51_text"
+      ]
+    },
+    "pr51_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Langfuse-grouping metadata on every OpenRouter call (PR #51, 14:09:24 UTC)",
+        "level": "h3"
+      }
+    },
+    "pr51_text": {
+      "type": "Text",
+      "props": {
+        "text": "Mirrors miroshark-api so generations land in Langfuse with sessionId (via extra[\"user\"] = sim_id), tags (miroshark / prompt_type / phase:* / run:*), and a useful trace name per row. 16-entry caller→prompt_type map → 4-phase rollup (setup/round/report/ingest). New TraceContext.wrap_fn snapshots context across ThreadPoolExecutor workers (threading.local doesn't propagate)."
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {}
+    },
+    "pr52_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "pr52_heading",
+        "pr52_text"
+      ]
+    },
+    "pr52_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Three cost fixes (PR #52, 14:10:10 UTC — merged 47 s later)",
+        "level": "h3"
+      }
+    },
+    "pr52_text": {
+      "type": "Text",
+      "props": {
+        "text": "(1) 12 idempotent platform actions used to return success=False when already in desired state, so agents retried the same tool 4+ times per round (40k+ input tokens) — now {success: True, noop: True}. (2) max_iteration was stored but never plumbed to CAMEL — ReAct loop was unbounded; now passed through, default 1→3, prune_tool_calls_from_memory enabled. (3) simulation_requirement capped at 1,500 chars in entity-research prompts — a multi-KB briefing was getting pasted into every call (60–80k tokens per entity)."
+      }
+    },
+    "sep4": {
+      "type": "Separator",
+      "props": {}
+    },
+    "key_changes_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Key changes:",
+        "level": "h3"
+      }
+    },
+    "key_changes_list": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "kc1",
+        "kc2",
+        "kc3"
+      ]
+    },
+    "kc1": {
+      "type": "Text",
+      "props": {
+        "text": "platform.py: 12 idempotent actions (like/unlike, dislike/undo, repost ×2 branches, follow/unfollow, mute, report, +4 comment variants) now no-op success instead of false-error",
+        "variant": "body"
+      }
+    },
+    "kc2": {
+      "type": "Text",
+      "props": {
+        "text": "replay_gif.py: 519-line Pillow renderer with FRAME_MS=600, FINAL_HOLD_MS=1800, MAX_FRAMES=60 even-subsampling preserving final round",
+        "variant": "body"
+      }
+    },
+    "kc3": {
+      "type": "Text",
+      "props": {
+        "text": "TraceContext.wrap_fn: reusable thread-pool context-propagation primitive used in graph_builder + wonderwall_profile_generator",
+        "variant": "body"
+      }
+    },
+    "sep5": {
+      "type": "Separator",
+      "props": {}
+    },
+    "stats_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "lg"
+      },
+      "children": [
+        "stat_files",
+        "stat_additions",
+        "stat_deletions"
+      ]
+    },
+    "stat_files": {
+      "type": "Stat",
+      "props": {
+        "label": "Files changed",
+        "value": "21"
+      }
+    },
+    "stat_additions": {
+      "type": "Stat",
+      "props": {
+        "label": "Lines added",
+        "value": "+1,513"
+      }
+    },
+    "stat_deletions": {
+      "type": "Stat",
+      "props": {
+        "label": "Lines removed",
+        "value": "−59"
+      }
+    },
+    "sep6": {
+      "type": "Separator",
+      "props": {}
+    },
+    "full_recap_link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full recap",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-04-28.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}

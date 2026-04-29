@@ -1,0 +1,285 @@
+{
+  "root": "card-root",
+  "state": {},
+  "elements": {
+    "card-root": {
+      "type": "Card",
+      "props": {
+        "title": "Top Tweets — $MIROSHARK OR @miroshark_ OR github.com/aaronjmars/miroshark (2026-04-29)"
+      },
+      "children": [
+        "stack-root"
+      ]
+    },
+    "stack-root": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "lg"
+      },
+      "children": [
+        "tweet-1-container",
+        "tweet-2-container",
+        "tweet-3-container",
+        "tweet-4-container",
+        "tweet-5-container",
+        "tweet-6-container",
+        "tweet-7-container",
+        "tweet-8-container",
+        "tweet-9-container"
+      ]
+    },
+    "tweet-1-container": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-1-card",
+        "tweet-1-link"
+      ]
+    },
+    "tweet-1-card": {
+      "type": "TweetCard",
+      "props": {
+        "author": "aaronjmars",
+        "handle": "aaronjmars",
+        "text": "dope overview of @miroshark_ use-cases (with image)",
+        "likes": 20,
+        "retweets": 4
+      }
+    },
+    "tweet-1-link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/aaronjmars/status/2049151524354367927"
+      }
+    },
+    "tweet-2-container": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-2-card",
+        "tweet-2-link"
+      ]
+    },
+    "tweet-2-card": {
+      "type": "TweetCard",
+      "props": {
+        "author": "aaronjmars",
+        "handle": "aaronjmars",
+        "text": "CEO steering tool deep-dive: Qwen 3-235B, 678 events, 0 errors, $1 cost, counterfactual branches, ghost guilds, Polymarket integration",
+        "likes": 19,
+        "retweets": 2
+      }
+    },
+    "tweet-2-link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/aaronjmars/status/2049123822662549995"
+      }
+    },
+    "tweet-3-container": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-3-card",
+        "tweet-3-link"
+      ]
+    },
+    "tweet-3-card": {
+      "type": "TweetCard",
+      "props": {
+        "author": "aaronjmars",
+        "handle": "aaronjmars",
+        "text": "if i release @miroshark_ in chinese i think it can easily reach 100k stars",
+        "likes": 19,
+        "retweets": 6
+      }
+    },
+    "tweet-3-link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/aaronjmars/status/2049259757299483129"
+      }
+    },
+    "tweet-4-container": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-4-card",
+        "tweet-4-link"
+      ]
+    },
+    "tweet-4-card": {
+      "type": "TweetCard",
+      "props": {
+        "author": "bluenami866",
+        "handle": "bluenami866",
+        "text": "$Miroshark (quotes @miroshark_ post)",
+        "likes": 6,
+        "retweets": 1
+      }
+    },
+    "tweet-4-link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/bluenami866/status/2048986405611688018"
+      }
+    },
+    "tweet-5-container": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-5-card",
+        "tweet-5-link"
+      ]
+    },
+    "tweet-5-card": {
+      "type": "TweetCard",
+      "props": {
+        "author": "dr_osse",
+        "handle": "dr_osse",
+        "text": "Woaah @miroshark_ (quotes post mentioning @miroshark_)",
+        "likes": 5,
+        "retweets": 3
+      }
+    },
+    "tweet-5-link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/dr_osse/status/2049210980270284801"
+      }
+    },
+    "tweet-6-container": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-6-card",
+        "tweet-6-link"
+      ]
+    },
+    "tweet-6-card": {
+      "type": "TweetCard",
+      "props": {
+        "author": "NexlifyCoin",
+        "handle": "NexlifyCoin",
+        "text": "$miroshark $aeon av7x $delu $dclaw now $mythos token run list",
+        "likes": 0,
+        "retweets": 0
+      }
+    },
+    "tweet-6-link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/NexlifyCoin/status/2049227693158432919"
+      }
+    },
+    "tweet-7-container": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-7-card",
+        "tweet-7-link"
+      ]
+    },
+    "tweet-7-card": {
+      "type": "TweetCard",
+      "props": {
+        "author": "MrDegenWolf",
+        "handle": "MrDegenWolf",
+        "text": "@miroshark_ & @aeonframework on @base (reply about AI on Base)",
+        "likes": 0,
+        "retweets": 0
+      }
+    },
+    "tweet-7-link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/MrDegenWolf/status/2049245328524620098"
+      }
+    },
+    "tweet-8-container": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-8-card",
+        "tweet-8-link"
+      ]
+    },
+    "tweet-8-card": {
+      "type": "TweetCard",
+      "props": {
+        "author": "BasedCult33",
+        "handle": "BasedCult33",
+        "text": "$MIROSHARK and $AEON millions coded F.A.F.O. 🦈⭐️",
+        "likes": 0,
+        "retweets": 0
+      }
+    },
+    "tweet-8-link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/BasedCult33/status/2049246192622551112"
+      }
+    },
+    "tweet-9-container": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-9-card",
+        "tweet-9-link"
+      ]
+    },
+    "tweet-9-card": {
+      "type": "TweetCard",
+      "props": {
+        "author": "BasedCult33",
+        "handle": "BasedCult33",
+        "text": "$MIROSHARK #1 🦈",
+        "likes": 0,
+        "retweets": 0
+      }
+    },
+    "tweet-9-link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/BasedCult33/status/2049245702262321494"
+      }
+    }
+  }
+}

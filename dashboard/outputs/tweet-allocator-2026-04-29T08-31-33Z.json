@@ -1,0 +1,198 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "Tweet Rewards — 2026-04-29"
+      },
+      "children": [
+        "budget_stat",
+        "sep1",
+        "tweet1_section",
+        "sep2",
+        "tweet2_section",
+        "sep3",
+        "footer_alert"
+      ]
+    },
+    "budget_stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Total Budget",
+        "value": "$10.00 MIROSHARK on Base"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "tweet1_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet1_header_row",
+        "tweet1_card",
+        "tweet1_footer_row"
+      ]
+    },
+    "tweet1_header_row": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "tweet1_author_link",
+        "tweet1_score_badge"
+      ]
+    },
+    "tweet1_author_link": {
+      "type": "Link",
+      "props": {
+        "label": "x.com/dr_osse",
+        "href": "https://x.com/dr_osse"
+      }
+    },
+    "tweet1_score_badge": {
+      "type": "Badge",
+      "props": {
+        "text": "Score: 14",
+        "variant": "outline"
+      }
+    },
+    "tweet1_card": {
+      "type": "TweetCard",
+      "props": {
+        "author": "dr_osse",
+        "handle": "dr_osse",
+        "text": "Woaah @miroshark_ — quotes a post mentioning the project",
+        "likes": 5,
+        "retweets": 3
+      }
+    },
+    "tweet1_footer_row": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "tweet1_reward_stat",
+        "tweet1_view_link"
+      ]
+    },
+    "tweet1_reward_stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Reward",
+        "value": "$6.09 MIROSHARK"
+      }
+    },
+    "tweet1_view_link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/dr_osse/status/2049210980270284801"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "tweet2_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet2_header_row",
+        "tweet2_card",
+        "tweet2_footer_row"
+      ]
+    },
+    "tweet2_header_row": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "tweet2_author_link",
+        "tweet2_score_badge"
+      ]
+    },
+    "tweet2_author_link": {
+      "type": "Link",
+      "props": {
+        "label": "x.com/bluenami866",
+        "href": "https://x.com/bluenami866"
+      }
+    },
+    "tweet2_score_badge": {
+      "type": "Badge",
+      "props": {
+        "text": "Score: 9",
+        "variant": "outline"
+      }
+    },
+    "tweet2_card": {
+      "type": "TweetCard",
+      "props": {
+        "author": "bluenami866",
+        "handle": "bluenami866",
+        "text": "$Miroshark — quotes @miroshark_ post",
+        "likes": 6,
+        "retweets": 1
+      }
+    },
+    "tweet2_footer_row": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "tweet2_reward_stat",
+        "tweet2_view_link"
+      ]
+    },
+    "tweet2_reward_stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Reward",
+        "value": "$3.91 MIROSHARK"
+      }
+    },
+    "tweet2_view_link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/bluenami866/status/2048986405611688018"
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "footer_alert": {
+      "type": "Alert",
+      "props": {
+        "title": "Manual Send Required",
+        "message": "Total: $10.00 MIROSHARK allocated to 2 authors. BANKR_SEND_KEY not set.",
+        "type": "warning"
+      }
+    }
+  }
+}
