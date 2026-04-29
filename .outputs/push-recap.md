@@ -1,16 +1,18 @@
-*Push Recap — 2026-04-28*
-MiroShark — 3 PRs merged in 75 minutes by aaronjmars (+1,513 / −59 across 21 files); miroshark-aeon — 0 substantive (chore auto-commits only).
+*Push Recap — 2026-04-29*
+MiroShark — 6 substantive commits · miroshark-aeon — 1 substantive commit · all by aaronjmars
 
-Animated Belief Replay GIF (PR #50, 12:56 UTC): /api/simulation/<id>/replay.gif renders per-round belief drift as a 1200×630 GIF, same OG aspect as the share card so unfurl shapes stay consistent. Pure Pillow, zero new deps; cached at <sim_dir>/replay-gifs/<hash>.gif. Discord and Slack auto-play GIFs from a direct file URL — every share now ships motion as well as a still.
+*Cost-compression continuation (PR #54, PR #55):* Yesterday's PR #51 Langfuse metadata was being silently dropped at OpenRouter's broadcast boundary (only `user`/`session_id`/`trace` keys forwarded) — verified against a 1,783-event Langfuse export: 0/1783 had tags. PR #54 moves per-call context into the spec-compliant `trace` block + adds missing `session_id`. PR #55 ports the agent-env wire compaction from miroshark-api PR #30: −57% input tokens, −55% per-agent simulate cost, −27% simulate stage cost, −24% simulate wall time, no rounds dropped.
 
-Langfuse-grouping metadata on every OpenRouter call (PR #51, 14:09:24 UTC): mirrors miroshark-api so generations land in Langfuse with sessionId (via extra["user"] = sim_id), tags (miroshark / prompt_type / phase:* / run:*), and a useful trace name per row. 16-entry caller→prompt_type map → 4-phase rollup (setup/round/report/ingest). New TraceContext.wrap_fn snapshots context across ThreadPoolExecutor workers (threading.local doesn't propagate).
+*Three quote-friendly share formats now complete (PR #57):* Markdown + JSON transcript download from EmbedDialog. Pure-stdlib renderer, ±0.2 stance threshold matches every other surface, YAML front matter so Notion/Obsidian/Bear/Substack pick it up as page metadata. 18 offline tests, openapi drift test passes. Closes the screenshot-only gap for prose quoting; complements share card (preview) and replay GIF (motion).
 
-Three cost fixes the new traces immediately exposed (PR #52, 14:10:10 UTC — merged 47 s later): (1) 12 idempotent platform actions used to return success=False when already in desired state, so agents retried the same tool 4+ times per round (40k+ input tokens) — now {success: True, noop: True}. (2) max_iteration was stored but never plumbed to CAMEL — ReAct loop was unbounded; now passed through, default 1→3, prune_tool_calls_from_memory enabled. (3) simulation_requirement capped at 1,500 chars in entity-research prompts — a multi-KB briefing was getting pasted into every call (60–80k tokens per entity).
+*Hardening + CI repair (PR #53, PR #56, PR #58):* PR #53 5× NoneType guards on Reddit/Twitter post handlers (closed a tool-retry-loop cost leak), Polymarket on 4 more templates (5/6 default), default round count capped to [30,40], clickable history files. PR #56 `request.args.get(..., type=int)` so `?from_line=abc` no longer 500s on observability. PR #58 finally green-mained CI on the third iteration: moved compaction helpers to `backend/lib/env_compact.py` (sibling of `wonderwall/`) to dodge the camel/numpy/torch chain that `wonderwall/__init__.py` eagerly imports.
+
+*Aeon (PR #26):* skill-leaderboard now reads every entry in `memory/watched-repos.md` (was reading only first, missed the actual aeon-instance repo at position 2) — application repos contribute zero and fall out naturally.
 
 Key changes:
-- platform.py: 12 idempotent actions (like/unlike, dislike/undo, repost ×2 branches, follow/unfollow, mute, report, +4 comment variants) now no-op success instead of false-error
-- replay_gif.py: 519-line Pillow renderer with FRAME_MS=600, FINAL_HOLD_MS=1800, MAX_FRAMES=60 even-subsampling preserving final round
-- TraceContext.wrap_fn: reusable thread-pool context-propagation primitive used in graph_builder + wonderwall_profile_generator
+- `backend/app/services/transcript.py` (new, 615 lines) — pure-stdlib transcript renderer; YAML front matter + ±0.2 stance + 80-round Markdown cap with first-20+last-20 preservation
+- `backend/wonderwall/social_agent/agent_environment.py` — compact env wire format (no `indent=4`, relative timestamps, top-3 comments by score with `comments_total` hint, drop-zero-counts) → −57% input tokens
+- `backend/app/utils/llm_client.py` — Langfuse pass-through moved into the spec-compliant `trace` block + `session_id` so dashboard filters actually work
 
-Stats: 21 files changed, +1,513 / −59 lines
-Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-04-28.md
+Stats: 32 files changed, +2,419/−258 across 7 substantive commits
+Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-04-29.md

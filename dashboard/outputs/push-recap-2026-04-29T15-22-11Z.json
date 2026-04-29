@@ -1,0 +1,618 @@
+{
+  "root": "card_recap",
+  "state": {},
+  "elements": {
+    "card_recap": {
+      "type": "Card",
+      "props": {
+        "title": "Push Recap — 2026-04-29"
+      },
+      "children": [
+        "stack_header",
+        "sep_1",
+        "section_cost",
+        "sep_2",
+        "section_quotes",
+        "sep_3",
+        "section_hardening",
+        "sep_4",
+        "section_aeon",
+        "sep_5",
+        "section_changes",
+        "sep_6",
+        "section_stats"
+      ]
+    },
+    "stack_header": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "text_repos"
+      ]
+    },
+    "text_repos": {
+      "type": "Text",
+      "props": {
+        "text": "MiroShark — 6 substantive commits · miroshark-aeon — 1 substantive commit · all by aaronjmars",
+        "variant": "lead"
+      },
+      "children": []
+    },
+    "sep_1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "section_cost": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading_cost",
+        "text_cost_pr51_context",
+        "text_cost_verification",
+        "text_cost_pr54",
+        "text_cost_pr55_intro",
+        "grid_cost_stats",
+        "text_cost_no_rounds_dropped",
+        "stack_cost_links"
+      ]
+    },
+    "heading_cost": {
+      "type": "Heading",
+      "props": {
+        "text": "Cost-compression continuation",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "text_cost_pr51_context": {
+      "type": "Text",
+      "props": {
+        "text": "Yesterday's PR #51 Langfuse metadata was being silently dropped at OpenRouter's broadcast boundary (only user/session_id/trace keys forwarded)"
+      },
+      "children": []
+    },
+    "text_cost_verification": {
+      "type": "Text",
+      "props": {
+        "text": "Verified against a 1,783-event Langfuse export: 0/1783 had tags"
+      },
+      "children": []
+    },
+    "text_cost_pr54": {
+      "type": "Text",
+      "props": {
+        "text": "PR #54 moves per-call context into the spec-compliant trace block + adds missing session_id"
+      },
+      "children": []
+    },
+    "text_cost_pr55_intro": {
+      "type": "Text",
+      "props": {
+        "text": "PR #55 ports the agent-env wire compaction from miroshark-api PR #30:"
+      },
+      "children": []
+    },
+    "grid_cost_stats": {
+      "type": "Grid",
+      "props": {
+        "columns": 2,
+        "gap": "md"
+      },
+      "children": [
+        "stat_input_tokens",
+        "stat_per_agent_cost",
+        "stat_stage_cost",
+        "stat_wall_time"
+      ]
+    },
+    "stat_input_tokens": {
+      "type": "Stat",
+      "props": {
+        "label": "Input tokens",
+        "value": "−57%",
+        "trend": "down"
+      },
+      "children": []
+    },
+    "stat_per_agent_cost": {
+      "type": "Stat",
+      "props": {
+        "label": "Per-agent simulate cost",
+        "value": "−55%",
+        "trend": "down"
+      },
+      "children": []
+    },
+    "stat_stage_cost": {
+      "type": "Stat",
+      "props": {
+        "label": "Simulate stage cost",
+        "value": "−27%",
+        "trend": "down"
+      },
+      "children": []
+    },
+    "stat_wall_time": {
+      "type": "Stat",
+      "props": {
+        "label": "Simulate wall time",
+        "value": "−24%",
+        "trend": "down"
+      },
+      "children": []
+    },
+    "text_cost_no_rounds_dropped": {
+      "type": "Badge",
+      "props": {
+        "text": "No rounds dropped",
+        "variant": "success"
+      },
+      "children": []
+    },
+    "stack_cost_links": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "link_pr54",
+        "link_pr55"
+      ]
+    },
+    "link_pr54": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #54",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/pull/54",
+        "source": "GitHub"
+      },
+      "children": []
+    },
+    "link_pr55": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #55",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/pull/55",
+        "source": "GitHub"
+      },
+      "children": []
+    },
+    "sep_2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "section_quotes": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading_quotes",
+        "text_quotes_main",
+        "text_quotes_formats",
+        "text_quotes_renderer",
+        "text_quotes_features",
+        "text_quotes_tests",
+        "text_quotes_complements",
+        "link_pr57"
+      ]
+    },
+    "heading_quotes": {
+      "type": "Heading",
+      "props": {
+        "text": "Three quote-friendly share formats now complete",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "text_quotes_main": {
+      "type": "Text",
+      "props": {
+        "text": "Markdown + JSON transcript download from EmbedDialog"
+      },
+      "children": []
+    },
+    "text_quotes_formats": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "badge_markdown",
+        "badge_json",
+        "badge_yaml"
+      ]
+    },
+    "badge_markdown": {
+      "type": "Badge",
+      "props": {
+        "text": "Markdown",
+        "variant": "secondary"
+      },
+      "children": []
+    },
+    "badge_json": {
+      "type": "Badge",
+      "props": {
+        "text": "JSON transcript",
+        "variant": "secondary"
+      },
+      "children": []
+    },
+    "badge_yaml": {
+      "type": "Badge",
+      "props": {
+        "text": "YAML front matter",
+        "variant": "secondary"
+      },
+      "children": []
+    },
+    "text_quotes_renderer": {
+      "type": "Text",
+      "props": {
+        "text": "Pure-stdlib renderer with ±0.2 stance threshold matches every other surface. YAML front matter so Notion/Obsidian/Bear/Substack pick it up as page metadata"
+      },
+      "children": []
+    },
+    "text_quotes_features": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "text_quotes_80round",
+        "text_quotes_tests"
+      ]
+    },
+    "text_quotes_80round": {
+      "type": "Text",
+      "props": {
+        "text": "80-round Markdown cap with first-20+last-20 preservation"
+      },
+      "children": []
+    },
+    "text_quotes_tests": {
+      "type": "Text",
+      "props": {
+        "text": "18 offline tests, openapi drift test passes"
+      },
+      "children": []
+    },
+    "text_quotes_complements": {
+      "type": "Text",
+      "props": {
+        "text": "Closes the screenshot-only gap for prose quoting; complements share card (preview) and replay GIF (motion)"
+      },
+      "children": []
+    },
+    "link_pr57": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #57",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/pull/57",
+        "source": "GitHub"
+      },
+      "children": []
+    },
+    "sep_3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "section_hardening": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading_hardening",
+        "text_hardening_pr53",
+        "text_hardening_pr53_details",
+        "text_hardening_pr56",
+        "text_hardening_pr58",
+        "stack_hardening_links"
+      ]
+    },
+    "heading_hardening": {
+      "type": "Heading",
+      "props": {
+        "text": "Hardening + CI repair",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "text_hardening_pr53": {
+      "type": "Text",
+      "props": {
+        "text": "PR #53: 5× NoneType guards on Reddit/Twitter post handlers (closed a tool-retry-loop cost leak)"
+      },
+      "children": []
+    },
+    "text_hardening_pr53_details": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "text_hardening_polymarket",
+        "text_hardening_round_count",
+        "text_hardening_history"
+      ]
+    },
+    "text_hardening_polymarket": {
+      "type": "Text",
+      "props": {
+        "text": "Polymarket on 4 more templates (5/6 default)"
+      },
+      "children": []
+    },
+    "text_hardening_round_count": {
+      "type": "Text",
+      "props": {
+        "text": "Default round count capped to [30,40]"
+      },
+      "children": []
+    },
+    "text_hardening_history": {
+      "type": "Text",
+      "props": {
+        "text": "Clickable history files"
+      },
+      "children": []
+    },
+    "text_hardening_pr56": {
+      "type": "Text",
+      "props": {
+        "text": "PR #56: request.args.get(..., type=int) so ?from_line=abc no longer 500s on observability"
+      },
+      "children": []
+    },
+    "text_hardening_pr58": {
+      "type": "Text",
+      "props": {
+        "text": "PR #58: moved compaction helpers to backend/lib/env_compact.py (sibling of wonderwall/) to dodge the camel/numpy/torch chain that wonderwall/__init__.py eagerly imports"
+      },
+      "children": []
+    },
+    "stack_hardening_links": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "link_pr53",
+        "link_pr56",
+        "link_pr58"
+      ]
+    },
+    "link_pr53": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #53",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/pull/53",
+        "source": "GitHub"
+      },
+      "children": []
+    },
+    "link_pr56": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #56",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/pull/56",
+        "source": "GitHub"
+      },
+      "children": []
+    },
+    "link_pr58": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #58",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/pull/58",
+        "source": "GitHub"
+      },
+      "children": []
+    },
+    "sep_4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "section_aeon": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading_aeon",
+        "text_aeon_main",
+        "text_aeon_detail",
+        "text_aeon_natural",
+        "link_pr26"
+      ]
+    },
+    "heading_aeon": {
+      "type": "Heading",
+      "props": {
+        "text": "Aeon",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "text_aeon_main": {
+      "type": "Text",
+      "props": {
+        "text": "skill-leaderboard now reads every entry in memory/watched-repos.md (was reading only first, missed the actual aeon-instance repo at position 2)"
+      },
+      "children": []
+    },
+    "text_aeon_detail": {
+      "type": "Text",
+      "props": {
+        "text": "Application repos contribute zero and fall out naturally"
+      },
+      "children": []
+    },
+    "text_aeon_natural": {
+      "type": "Badge",
+      "props": {
+        "text": "Automatic repo filtering",
+        "variant": "outline"
+      },
+      "children": []
+    },
+    "link_pr26": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #26",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/pull/26",
+        "source": "GitHub"
+      },
+      "children": []
+    },
+    "sep_5": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "section_changes": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading_changes",
+        "table_changes"
+      ]
+    },
+    "heading_changes": {
+      "type": "Heading",
+      "props": {
+        "text": "Key changes",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "table_changes": {
+      "type": "Table",
+      "props": {
+        "columns": [
+          "File",
+          "Details"
+        ],
+        "rows": [
+          [
+            "backend/app/services/transcript.py",
+            "New, 615 lines. Pure-stdlib transcript renderer; YAML front matter + ±0.2 stance + 80-round Markdown cap with first-20+last-20 preservation"
+          ],
+          [
+            "backend/wonderwall/social_agent/agent_environment.py",
+            "Compact env wire format (no indent=4, relative timestamps, top-3 comments by score with comments_total hint, drop-zero-counts) → −57% input tokens"
+          ],
+          [
+            "backend/app/utils/llm_client.py",
+            "Langfuse pass-through moved into the spec-compliant trace block + session_id so dashboard filters actually work"
+          ]
+        ]
+      },
+      "children": []
+    },
+    "sep_6": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "section_stats": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading_stats",
+        "stat_files_changed",
+        "stat_additions",
+        "stat_deletions",
+        "stat_commits",
+        "link_full_recap"
+      ]
+    },
+    "heading_stats": {
+      "type": "Heading",
+      "props": {
+        "text": "Summary",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "stat_files_changed": {
+      "type": "Stat",
+      "props": {
+        "label": "Files changed",
+        "value": "32"
+      },
+      "children": []
+    },
+    "stat_additions": {
+      "type": "Stat",
+      "props": {
+        "label": "Additions",
+        "value": "+2,419"
+      },
+      "children": []
+    },
+    "stat_deletions": {
+      "type": "Stat",
+      "props": {
+        "label": "Deletions",
+        "value": "−258"
+      },
+      "children": []
+    },
+    "stat_commits": {
+      "type": "Stat",
+      "props": {
+        "label": "Substantive commits",
+        "value": "7"
+      },
+      "children": []
+    },
+    "link_full_recap": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full recap",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-04-29.md",
+        "source": "GitHub"
+      },
+      "children": []
+    }
+  }
+}
