@@ -1,5 +1,5 @@
-*New Article: The Day MiroShark Watched Itself Spend Money*
+*New Article: The Last Format: MiroShark Closes the Share-Anywhere Trio on Deadline Eve*
 
-Four PRs landed on aaronjmars/MiroShark in 3.5 hours today: an Animated Belief Replay GIF endpoint (PR #50), Langfuse metadata on every OpenRouter call (PR #51), three cost-leak fixes the new traces immediately surfaced 47 seconds later (PR #52), and a default round-count clamp from 128 to 30–40 (PR #53). Read together, today is the operational counterpart to the week's surfacing arc — turning the metering on, then turning the bill down, until the "$1 & under 10 min" tagline finally holds by default rather than only if you knew what to set.
+PR #57 Simulation Transcript Export merged today (13:43 UTC) closes the three-format share-anywhere arc — share card (Apr 22, preview) + replay GIF (Apr 28, motion) + transcript MD+JSON (Apr 29, prose) on top of the same on-disk sim folder. With it, MiroShark stopped being a thing you screenshot and started being a thing you cite — even as the 1K-stars-by-Apr-30 target likely misses tomorrow at 865.
 
-Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-04-28.md
+Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-04-29.md

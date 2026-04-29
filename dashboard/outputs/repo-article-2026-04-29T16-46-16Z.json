@@ -1,0 +1,210 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "The Last Format: MiroShark Closes the Share-Anywhere Trio on Deadline Eve"
+      },
+      "children": [
+        "story-link",
+        "narrative-lead",
+        "sep-1",
+        "pr-heading",
+        "pr-details",
+        "sep-2",
+        "formats-heading",
+        "formats-grid",
+        "sep-3",
+        "transformation-text",
+        "sep-4",
+        "stars-stat"
+      ]
+    },
+    "story-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "The Last Format: MiroShark Closes the Share-Anywhere Trio on Deadline Eve",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-04-29.md",
+        "source": "GitHub"
+      }
+    },
+    "narrative-lead": {
+      "type": "Text",
+      "props": {
+        "text": "PR #57 Simulation Transcript Export merged today (13:43 UTC) closes the three-format share-anywhere arc.",
+        "variant": "lead"
+      }
+    },
+    "sep-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "pr-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Merge Details",
+        "level": "h3"
+      }
+    },
+    "pr-details": {
+      "type": "Text",
+      "props": {
+        "text": "PR #57: Simulation Transcript Export merged at 13:43 UTC on top of the same on-disk sim folder"
+      }
+    },
+    "sep-2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "formats-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Share-Anywhere Formats",
+        "level": "h3"
+      }
+    },
+    "formats-grid": {
+      "type": "Grid",
+      "props": {
+        "columns": 3,
+        "gap": "md"
+      },
+      "children": [
+        "format-1",
+        "format-2",
+        "format-3"
+      ]
+    },
+    "format-1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "f1-title",
+        "f1-date",
+        "f1-badge"
+      ]
+    },
+    "f1-title": {
+      "type": "Heading",
+      "props": {
+        "text": "Share Card",
+        "level": "h4"
+      }
+    },
+    "f1-date": {
+      "type": "Text",
+      "props": {
+        "text": "Apr 22",
+        "variant": "caption"
+      }
+    },
+    "f1-badge": {
+      "type": "Badge",
+      "props": {
+        "text": "preview",
+        "variant": "secondary"
+      }
+    },
+    "format-2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "f2-title",
+        "f2-date",
+        "f2-badge"
+      ]
+    },
+    "f2-title": {
+      "type": "Heading",
+      "props": {
+        "text": "Replay GIF",
+        "level": "h4"
+      }
+    },
+    "f2-date": {
+      "type": "Text",
+      "props": {
+        "text": "Apr 28",
+        "variant": "caption"
+      }
+    },
+    "f2-badge": {
+      "type": "Badge",
+      "props": {
+        "text": "motion",
+        "variant": "secondary"
+      }
+    },
+    "format-3": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "f3-title",
+        "f3-date",
+        "f3-badge"
+      ]
+    },
+    "f3-title": {
+      "type": "Heading",
+      "props": {
+        "text": "Transcript MD+JSON",
+        "level": "h4"
+      }
+    },
+    "f3-date": {
+      "type": "Text",
+      "props": {
+        "text": "Apr 29",
+        "variant": "caption"
+      }
+    },
+    "f3-badge": {
+      "type": "Badge",
+      "props": {
+        "text": "prose",
+        "variant": "secondary"
+      }
+    },
+    "sep-3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "transformation-text": {
+      "type": "Text",
+      "props": {
+        "text": "With it, MiroShark stopped being a thing you screenshot and started being a thing you cite.",
+        "variant": "lead"
+      }
+    },
+    "sep-4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stars-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "GitHub Stars (1K-by-Apr-30 target likely misses)",
+        "value": "865"
+      }
+    }
+  }
+}
