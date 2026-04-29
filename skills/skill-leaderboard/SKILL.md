@@ -4,20 +4,22 @@ description: Weekly ranking of which skills are most popular across all active f
 var: ""
 tags: [meta]
 ---
-> **${var}** — Target repo to scan forks of (e.g. "owner/aeon"). If empty, reads from memory/watched-repos.md.
+> **${var}** — Target repo to scan forks of (e.g. "owner/aeon"). If empty, reads ALL repos from memory/watched-repos.md and aggregates their forks.
 
 Today is ${today}. Generate a leaderboard of the most popular Aeon skills across all active forks.
 
 ## Steps
 
-1. **Determine the target repo.** If `${var}` is set, use that. Otherwise read `memory/watched-repos.md` and use the first watched repo. Store as `TARGET_REPO`.
+1. **Determine the target repo(s).** If `${var}` is set, use that single repo as `TARGET_REPOS`. Otherwise read **every** entry from `memory/watched-repos.md` into `TARGET_REPOS` — application repos (no aeon.yml in their forks) contribute zero data and fall out naturally; aeon-instance repos contribute their forks. This avoids hard-coding ordering: if the first watched repo is an application repo (e.g. MiroShark) and the second is the aeon instance (e.g. miroshark-aeon), both still get scanned.
 
-2. **Fetch all active forks** (pushed within the last 30 days):
+2. **Fetch active forks** (pushed within the last 30 days) **for every repo in `TARGET_REPOS`** and union the results, deduped by `full_name`:
    ```bash
    CUTOFF=$(date -u -d "30 days ago" +%Y-%m-%dT%H:%M:%SZ 2>/dev/null || date -u -v-30d +%Y-%m-%dT%H:%M:%SZ)
-   gh api repos/${TARGET_REPO}/forks --paginate --jq "[.[] | select(.pushed_at > \"$CUTOFF\") | {owner: .owner.login, full_name: .full_name, pushed_at}]"
+   for REPO in "${TARGET_REPOS[@]}"; do
+     gh api repos/${REPO}/forks --paginate --jq "[.[] | select(.pushed_at > \"$CUTOFF\") | {owner: .owner.login, full_name: .full_name, pushed_at, source: \"${REPO}\"}]"
+   done
    ```
-   If no active forks found, log "SKILL_LEADERBOARD_NO_FORKS" and stop (no notification).
+   If no active forks found across any source repo, log "SKILL_LEADERBOARD_NO_FORKS" and stop (no notification).
 
 3. **Read each active fork's `aeon.yml`** to extract enabled skills:
    ```bash
@@ -67,7 +69,7 @@ Today is ${today}. Generate a leaderboard of the most popular Aeon skills across
    - **Forks with no aeon.yml:** N (likely template/non-running forks)
 
    ---
-   *Source: GitHub API — forks of ${TARGET_REPO}*
+   *Source: GitHub API — forks of ${TARGET_REPOS joined by ", "}*
    ```
 
 8. **Send notification** via `./notify`:
@@ -93,6 +95,7 @@ Today is ${today}. Generate a leaderboard of the most popular Aeon skills across
 9. **Log** to `memory/logs/${today}.md`:
    ```
    ## Skill Leaderboard
+   - **Source repos scanned:** [comma-separated list from TARGET_REPOS]
    - **Forks scanned:** N active (of M total)
    - **Top skill:** [skill-name] (N forks)
    - **Consensus skills:** [list or "none"]
