@@ -1,0 +1,216 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "Repo Action Ideas",
+        "description": "2026-04-30"
+      },
+      "children": [
+        "subtitle",
+        "sep-1",
+        "ideas-stack",
+        "sep-2",
+        "details-link"
+      ]
+    },
+    "subtitle": {
+      "type": "Text",
+      "props": {
+        "text": "Generated from analysis of aaronjmars/MiroShark (904 stars, 0 open PRs). Five net-new ideas — none overlap with the past 7 days of suggestions.",
+        "variant": "body"
+      }
+    },
+    "sep-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "ideas-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "idea-1",
+        "idea-2",
+        "idea-3",
+        "idea-4",
+        "idea-5"
+      ]
+    },
+    "idea-1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "idea-1-title",
+        "idea-1-type",
+        "idea-1-desc"
+      ]
+    },
+    "idea-1-title": {
+      "type": "Heading",
+      "props": {
+        "text": "1. Historical Simulation Mode",
+        "level": "h3"
+      }
+    },
+    "idea-1-type": {
+      "type": "Badge",
+      "props": {
+        "text": "Feature, Small"
+      }
+    },
+    "idea-1-desc": {
+      "type": "Text",
+      "props": {
+        "text": "Date-anchor picker + historical templates (WWII, 1929 Crash, Cuban Missile Crisis) capitalising on the viral WWII talkie demo; per-slot Wonderwall override already works — UI layer is the missing piece."
+      }
+    },
+    "idea-2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "idea-2-title",
+        "idea-2-type",
+        "idea-2-desc"
+      ]
+    },
+    "idea-2-title": {
+      "type": "Heading",
+      "props": {
+        "text": "2. LLM-as-Judge Audit Panel",
+        "level": "h3"
+      }
+    },
+    "idea-2-type": {
+      "type": "Badge",
+      "props": {
+        "text": "Feature, Small"
+      }
+    },
+    "idea-2-desc": {
+      "type": "Text",
+      "props": {
+        "text": "`GET /api/simulation/:id/audit` sends transcript.json to a configurable judge model and returns per-agent reasoning/factual/stance-consistency scores; README explicitly says the transcript is for 'LLM-as-judge pipelines' — the entry point just doesn't exist yet."
+      }
+    },
+    "idea-3": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "idea-3-title",
+        "idea-3-type",
+        "idea-3-desc"
+      ]
+    },
+    "idea-3-title": {
+      "type": "Heading",
+      "props": {
+        "text": "3. Batch Rerun / Reproducibility Badge",
+        "level": "h3"
+      }
+    },
+    "idea-3-type": {
+      "type": "Badge",
+      "props": {
+        "text": "Feature, Medium"
+      }
+    },
+    "idea-3-desc": {
+      "type": "Text",
+      "props": {
+        "text": "Run the same scenario N times (cap 5), compute consensus mean ± std, write a 'Reproducible (n=3)' or 'Varies (n=3)' badge to gallery cards — turns a one-off result into a scientific finding; 3× Cheap runs now cost ~$0.50."
+      }
+    },
+    "idea-4": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "idea-4-title",
+        "idea-4-type",
+        "idea-4-desc"
+      ]
+    },
+    "idea-4-title": {
+      "type": "Heading",
+      "props": {
+        "text": "4. Belief Trajectory CSV / JSONL Export",
+        "level": "h3"
+      }
+    },
+    "idea-4-type": {
+      "type": "Badge",
+      "props": {
+        "text": "Integration, Small"
+      }
+    },
+    "idea-4-desc": {
+      "type": "Text",
+      "props": {
+        "text": "`GET /api/simulation/:id/trajectory.csv` — one row per round, per-round belief %s + agent count; stdlib csv, zero new deps; the fifth export surface and the one Pandas/Excel/Tableau users reach for automatically."
+      }
+    },
+    "idea-5": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "idea-5-title",
+        "idea-5-type",
+        "idea-5-desc"
+      ]
+    },
+    "idea-5-title": {
+      "type": "Heading",
+      "props": {
+        "text": "5. Spectator Watch Page",
+        "level": "h3"
+      }
+    },
+    "idea-5-type": {
+      "type": "Badge",
+      "props": {
+        "text": "Growth, Small"
+      }
+    },
+    "idea-5-desc": {
+      "type": "Text",
+      "props": {
+        "text": "`/watch/:id` — minimal fullscreen live viewer with OG meta that auto-unfurls as a share card when tweeted; 'Watch this $AAVE depeg sim in real time →' is a different content format than sharing a finished result; zero new backend."
+      }
+    },
+    "sep-2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "details-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full details",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-actions-2026-04-30.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}
