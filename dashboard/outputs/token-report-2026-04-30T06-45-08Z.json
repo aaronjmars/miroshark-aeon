@@ -1,0 +1,110 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "$MiroShark Daily — 2026-04-30"
+      },
+      "children": [
+        "stack_main"
+      ]
+    },
+    "stack_main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "grid_stats",
+        "separator_1",
+        "text_narrative",
+        "link_chart"
+      ]
+    },
+    "grid_stats": {
+      "type": "Grid",
+      "props": {
+        "columns": 3,
+        "gap": "md"
+      },
+      "children": [
+        "stat_price",
+        "stat_liquidity",
+        "stat_volume",
+        "stat_buys_sells",
+        "stat_7d",
+        "stat_30d"
+      ]
+    },
+    "stat_price": {
+      "type": "Stat",
+      "props": {
+        "label": "Price",
+        "value": "$0.00000271",
+        "delta": "-2.76%",
+        "trend": "down"
+      }
+    },
+    "stat_liquidity": {
+      "type": "Stat",
+      "props": {
+        "label": "Liquidity",
+        "value": "$195.2K"
+      }
+    },
+    "stat_volume": {
+      "type": "Stat",
+      "props": {
+        "label": "24h Vol",
+        "value": "$41.2K"
+      }
+    },
+    "stat_buys_sells": {
+      "type": "Stat",
+      "props": {
+        "label": "Buys/Sells",
+        "value": "129/54",
+        "delta": "2.39x"
+      }
+    },
+    "stat_7d": {
+      "type": "Stat",
+      "props": {
+        "label": "7d",
+        "value": "-1.2%",
+        "trend": "down"
+      }
+    },
+    "stat_30d": {
+      "type": "Stat",
+      "props": {
+        "label": "30d",
+        "value": "+392%",
+        "trend": "up"
+      }
+    },
+    "separator_1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "text_narrative": {
+      "type": "Text",
+      "props": {
+        "text": "Volume recovering after 3-day ATH pullback; 2.39x buy ratio strongest in 4 days — market is absorbing supply rather than stepping aside.",
+        "variant": "body"
+      }
+    },
+    "link_chart": {
+      "type": "Link",
+      "props": {
+        "label": "Chart: GeckoTerminal",
+        "href": "https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209"
+      }
+    }
+  }
+}
