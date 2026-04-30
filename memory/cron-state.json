@@ -84,10 +84,10 @@
   },
   "feature": {
     "last_dispatch": "2026-04-30T11:01:23Z",
-    "last_status": "dispatched",
-    "last_success": "2026-04-29T11:58:43Z",
-    "total_runs": 16,
-    "total_successes": 16,
+    "last_status": "success",
+    "last_success": "2026-04-30T11:21:29Z",
+    "total_runs": 17,
+    "total_successes": 17,
     "total_failures": 0,
     "consecutive_failures": 0,
     "success_rate": 1
