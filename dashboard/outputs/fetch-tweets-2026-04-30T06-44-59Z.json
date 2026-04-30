@@ -1,0 +1,113 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "Top Tweets",
+        "description": "$MIROSHARK OR @miroshark_ OR github.com/aaronjmars/miroshark (2026-04-30)"
+      },
+      "children": [
+        "tweets-stack"
+      ]
+    },
+    "tweets-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "tweet-1",
+        "tweet-2",
+        "tweet-3",
+        "tweet-4",
+        "tweet-5",
+        "tweet-6",
+        "tweet-7",
+        "tweet-8"
+      ]
+    },
+    "tweet-1": {
+      "type": "TweetCard",
+      "props": {
+        "author": "aaronjmars",
+        "handle": "@aaronjmars",
+        "text": "could we predict WWII if we had LLMs back then? simulated 34 agents with 'talkie' model trained only on pre-1930 data on @miroshark_; \"maybe they would've priced him in faster\"",
+        "likes": 24,
+        "retweets": 6
+      }
+    },
+    "tweet-2": {
+      "type": "TweetCard",
+      "props": {
+        "author": "aaronjmars",
+        "handle": "@aaronjmars",
+        "text": "simulated Nazi AI agents posting on reddit & betting on polymarket, new 'talkie' model (pre-1930 training), running on @miroshark_",
+        "likes": 13,
+        "retweets": 2
+      }
+    },
+    "tweet-3": {
+      "type": "TweetCard",
+      "props": {
+        "author": "MrDegenWolf",
+        "handle": "@MrDegenWolf",
+        "text": "im not sure you understand how big $miroshark can be big.",
+        "likes": 12,
+        "retweets": 3
+      }
+    },
+    "tweet-4": {
+      "type": "TweetCard",
+      "props": {
+        "author": "TheGodfath13541",
+        "handle": "@TheGodfath13541",
+        "text": "Cool stuff bro. Continuing to demonstrate the use cases of $miroshark is great marketing.",
+        "likes": 3,
+        "retweets": 0
+      }
+    },
+    "tweet-5": {
+      "type": "TweetCard",
+      "props": {
+        "author": "BasedCult33",
+        "handle": "@BasedCult33",
+        "text": "Many are sleeping to this right now, $MIROSHARK will achieve incredible things...",
+        "likes": 3,
+        "retweets": 0
+      }
+    },
+    "tweet-6": {
+      "type": "TweetCard",
+      "props": {
+        "author": "DaMikey23",
+        "handle": "@DaMikey23",
+        "text": "$AEON $MIROSHARK Brought to you from the man himself Insane Agent tech, Built different and designed to lead.",
+        "likes": 2,
+        "retweets": 1
+      }
+    },
+    "tweet-7": {
+      "type": "TweetCard",
+      "props": {
+        "author": "dr_osse",
+        "handle": "@dr_osse",
+        "text": "Can @miroshark_ predict the winner of the first world cup game?",
+        "likes": 0,
+        "retweets": 0
+      }
+    },
+    "tweet-8": {
+      "type": "TweetCard",
+      "props": {
+        "author": "miroshark_",
+        "handle": "@miroshark_",
+        "text": "Link to github.com/aaronjmars/MiroShark",
+        "likes": 0,
+        "retweets": 0
+      }
+    }
+  }
+}

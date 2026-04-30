@@ -156,4 +156,4 @@ date,skill,model,input_tokens,output_tokens,cache_read,cache_creation
 2026-04-29,project-lens,claude-opus-4-7,40,25986,1954043,112523
 2026-04-29,memory-flush,claude-sonnet-4-6,14,11557,643413,56761
 2026-04-29,heartbeat,claude-sonnet-4-6,1334,6941,239329,41478
-2026-04-30,token-report,claude-sonnet-4-6,9,8303,350875,52102
+2026-04-30,fetch-tweets,claude-sonnet-4-6,14,7676,460029,36978
