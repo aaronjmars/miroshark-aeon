@@ -1,18 +1,16 @@
-*Push Recap — 2026-04-29*
-MiroShark — 6 substantive commits · miroshark-aeon — 1 substantive commit · all by aaronjmars
+*Push Recap — 2026-04-30*
+MiroShark + miroshark-aeon — 3 substantive commits by 1 human author (aaronjmars), Claude Opus 4.7 1M-ctx co-author on all three.
 
-*Cost-compression continuation (PR #54, PR #55):* Yesterday's PR #51 Langfuse metadata was being silently dropped at OpenRouter's broadcast boundary (only `user`/`session_id`/`trace` keys forwarded) — verified against a 1,783-event Langfuse export: 0/1783 had tags. PR #54 moves per-call context into the spec-compliant `trace` block + adds missing `session_id`. PR #55 ports the agent-env wire compaction from miroshark-api PR #30: −57% input tokens, −55% per-agent simulate cost, −27% simulate stage cost, −24% simulate wall time, no rounds dropped.
+*Discovery loop closes — RSS / Atom feeds (PR #60, MiroShark, +1,604/−1):* `/api/feed.atom` + `/api/feed.rss` syndicate the public gallery as a fourth orthogonal share/discovery surface alongside share card (Apr 22) + replay GIF (Apr 28) + transcript Markdown/JSON (Apr 29). Pure stdlib `xml.etree.ElementTree`; same `_build_gallery_card_payload` + ±0.2 stance threshold across five surfaces, one folder. Per-entry payload carries the share-card PNG + replay GIF as media enclosures and outcome+quality as `<category>`; `?verified=1` mirrors `/verified`. 17 offline tests, openapi drift test passes. Repo-actions Apr 28 idea #3.
 
-*Three quote-friendly share formats now complete (PR #57):* Markdown + JSON transcript download from EmbedDialog. Pure-stdlib renderer, ±0.2 stance threshold matches every other surface, YAML front matter so Notion/Obsidian/Bear/Substack pick it up as page metadata. 18 offline tests, openapi drift test passes. Closes the screenshot-only gap for prose quoting; complements share card (preview) and replay GIF (motion).
+*Wonderwall per-slot endpoint override + Cloud preset refresh (PR #59, MiroShark, +267/−266):* New `WONDERWALL_BASE_URL` + `WONDERWALL_API_KEY` so the simulation loop (the #1 cost driver, 850+ calls/run) can target any OpenAI-compatible endpoint — self-hosted vLLM, Modal, fine-tunes, remote Ollama — without touching Default/Smart/NER. `simulation_runner.py:start_simulation()` forwards Config values into subprocess env so Settings UI mutations apply on next run without a Flask restart. *Best preset deleted entirely* — the new Cloud preset (`xiaomi/mimo-v2-flash` + `x-ai/grok-4.1-fast`) hits the same ~$1/run budget that made the Claude tier redundant for most users.
 
-*Hardening + CI repair (PR #53, PR #56, PR #58):* PR #53 5× NoneType guards on Reddit/Twitter post handlers (closed a tool-retry-loop cost leak), Polymarket on 4 more templates (5/6 default), default round count capped to [30,40], clickable history files. PR #56 `request.args.get(..., type=int)` so `?from_line=abc` no longer 500s on observability. PR #58 finally green-mained CI on the third iteration: moved compaction helpers to `backend/lib/env_compact.py` (sibling of `wonderwall/`) to dodge the camel/numpy/torch chain that `wonderwall/__init__.py` eagerly imports.
-
-*Aeon (PR #26):* skill-leaderboard now reads every entry in `memory/watched-repos.md` (was reading only first, missed the actual aeon-instance repo at position 2) — application repos contribute zero and fall out naturally.
+*Aeon: Heartbeat day-of-week accuracy (PR #27, miroshark-aeon, +130/−9; +20 substantive):* Apr 29 heartbeat opened "Date: Tuesday Apr 29" when it was Wednesday — LLM hallucinated weekday from the YYYY-MM-DD `${today}` value and re-classified an on-schedule memory-flush run as "off-schedule". Fix: explicit Step 0 runs `date -u +%A/%u/%d`; report header anchored on shell output; cron-translation note added (cron `0=Sun` vs `+%u` `7=Sun` silently off-by-one); ground-truth guidance for every-other-day cron expressions points at `cron-state.json` `last_dispatch` history.
 
 Key changes:
-- `backend/app/services/transcript.py` (new, 615 lines) — pure-stdlib transcript renderer; YAML front matter + ±0.2 stance + 80-round Markdown cap with first-20+last-20 preservation
-- `backend/wonderwall/social_agent/agent_environment.py` — compact env wire format (no `indent=4`, relative timestamps, top-3 comments by score with `comments_total` hint, drop-zero-counts) → −57% input tokens
-- `backend/app/utils/llm_client.py` — Langfuse pass-through moved into the spec-compliant `trace` block + `session_id` so dashboard filters actually work
+- `backend/app/services/feed.py` (NEW, +584) + `backend/app/api/feed.py` (NEW, +144) + `backend/tests/test_unit_feed.py` (NEW, +566) — the full RSS/Atom service + blueprint + 17-test guard
+- `backend/app/api/settings.py` (+14/−27) drops the Best preset and adds Wonderwall base_url/api_key fields; `simulation_runner.py` (+10) forwards Config.WONDERWALL_* into subprocess env at spawn
+- `skills/heartbeat/SKILL.md` (+20) — Step 0 shells out for the canonical weekday rather than letting the LLM guess
 
-Stats: 32 files changed, +2,419/−258 across 7 substantive commits
-Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-04-29.md
+Stats: 35 files changed, +2,001/−276
+Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-04-30.md
