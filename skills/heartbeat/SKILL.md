@@ -11,6 +11,26 @@ If `${var}` is set, focus checks on that specific area.
 
 Read memory/MEMORY.md and the last 2 days of memory/logs/ for context.
 
+## Step 0: Compute today's day-of-week from the shell — do not infer it
+
+Before checking any schedules, run:
+
+```bash
+date -u +%A          # full name, e.g. "Wednesday"
+date -u +%u          # numeric, 1=Mon … 7=Sun
+date -u +%d          # day-of-month, e.g. "30"
+```
+
+Use the **shell-computed** day-of-week as the source of truth in every "is this skill scheduled today?" comparison below. **Do not infer the day-of-week from `${today}` or the YYYY-MM-DD date** — past heartbeat runs have hallucinated the wrong weekday from the date (Apr 29 2026 was logged as "Tuesday" when it was actually Wednesday, which then mis-classified `memory-flush`'s on-schedule Wed run as "off-schedule" because the skill thought Wed wasn't a memory-flush day). The shell value is deterministic; the inferred value is not.
+
+Anchor the heartbeat report header on the shell output: `Date: <%A> <Mon DD>, <YYYY> — <HH:MM> UTC`.
+
+Translate cron expressions before checking schedules:
+- Weekday (`0 N * * D`) — `D` is `0=Sun, 1=Mon, …, 6=Sat`. Compare against `date -u +%u` (which is `1=Mon … 7=Sun` — Sunday differs).
+- Every-other-day (`0 N */2 * *`) — when in doubt, ground-truth against the last 7 days of `cron-state.json` `last_dispatch` timestamps for that skill. Do **not** assume which parity (odd / even days-of-month) the cron resolves to without checking.
+
+## Checks
+
 Check the following:
 - [ ] Any open PRs stalled > 24h? (use `gh pr list` to check)
 - [ ] Anything flagged in memory that needs follow-up?
