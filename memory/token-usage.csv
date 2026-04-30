@@ -159,3 +159,4 @@ date,skill,model,input_tokens,output_tokens,cache_read,cache_creation
 2026-04-30,fetch-tweets,claude-sonnet-4-6,14,7676,460029,36978
 2026-04-30,tweet-allocator,claude-sonnet-4-6,13,7701,421569,36688
 2026-04-30,repo-pulse,claude-sonnet-4-6,14,6183,486497,39059
+2026-04-30,feature,claude-opus-4-7,164,72617,23736667,269438
