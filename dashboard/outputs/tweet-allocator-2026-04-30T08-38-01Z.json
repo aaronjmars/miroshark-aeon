@@ -1,0 +1,246 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Tweet Rewards — 2026-04-30"
+      },
+      "children": [
+        "stack_main"
+      ]
+    },
+    "stack_main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "lg"
+      },
+      "children": [
+        "text_budget",
+        "separator_1",
+        "tweet1_stack",
+        "tweet2_stack",
+        "tweet3_stack",
+        "separator_2",
+        "text_total"
+      ]
+    },
+    "text_budget": {
+      "type": "Text",
+      "props": {
+        "text": "Budget: $10.00 in $MIROSHARK on Base"
+      },
+      "children": []
+    },
+    "separator_1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "tweet1_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "tweet1_header",
+        "tweet1_text",
+        "tweet1_link"
+      ]
+    },
+    "tweet1_header": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "tweet1_author",
+        "tweet1_amount",
+        "tweet1_score"
+      ]
+    },
+    "tweet1_author": {
+      "type": "Text",
+      "props": {
+        "text": "x.com/DaMikey23"
+      },
+      "children": []
+    },
+    "tweet1_amount": {
+      "type": "Stat",
+      "props": {
+        "value": "$5.56",
+        "label": "in $MIROSHARK"
+      },
+      "children": []
+    },
+    "tweet1_score": {
+      "type": "Badge",
+      "props": {
+        "text": "score: 5"
+      },
+      "children": []
+    },
+    "tweet1_text": {
+      "type": "Text",
+      "props": {
+        "text": "$AEON $MIROSHARK — Insane Agent tech, Built different and designed to lead.",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "tweet1_link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/DaMikey23/status/2049635453947552027"
+      },
+      "children": []
+    },
+    "tweet2_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "tweet2_header",
+        "tweet2_text",
+        "tweet2_link"
+      ]
+    },
+    "tweet2_header": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "tweet2_author",
+        "tweet2_amount",
+        "tweet2_score"
+      ]
+    },
+    "tweet2_author": {
+      "type": "Text",
+      "props": {
+        "text": "x.com/TheGodfath13541"
+      },
+      "children": []
+    },
+    "tweet2_amount": {
+      "type": "Stat",
+      "props": {
+        "value": "$3.33",
+        "label": "in $MIROSHARK"
+      },
+      "children": []
+    },
+    "tweet2_score": {
+      "type": "Badge",
+      "props": {
+        "text": "score: 3"
+      },
+      "children": []
+    },
+    "tweet2_text": {
+      "type": "Text",
+      "props": {
+        "text": "Continuing to demonstrate the use cases of $miroshark is great marketing.",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "tweet2_link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/TheGodfath13541/status/2049619015245394215"
+      },
+      "children": []
+    },
+    "tweet3_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "tweet3_header",
+        "tweet3_text",
+        "tweet3_link"
+      ]
+    },
+    "tweet3_header": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "tweet3_author",
+        "tweet3_amount",
+        "tweet3_score"
+      ]
+    },
+    "tweet3_author": {
+      "type": "Text",
+      "props": {
+        "text": "x.com/dr_osse"
+      },
+      "children": []
+    },
+    "tweet3_amount": {
+      "type": "Stat",
+      "props": {
+        "value": "$1.11",
+        "label": "in $MIROSHARK"
+      },
+      "children": []
+    },
+    "tweet3_score": {
+      "type": "Badge",
+      "props": {
+        "text": "score: 1"
+      },
+      "children": []
+    },
+    "tweet3_text": {
+      "type": "Text",
+      "props": {
+        "text": "Can @miroshark_ predict the winner of the match of the first world cup game?",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "tweet3_link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/dr_osse/status/2049591279021957305"
+      },
+      "children": []
+    },
+    "separator_2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "text_total": {
+      "type": "Text",
+      "props": {
+        "text": "Total: $10.00 in $MIROSHARK allocated to 3 authors",
+        "variant": "lead"
+      },
+      "children": []
+    }
+  }
+}
