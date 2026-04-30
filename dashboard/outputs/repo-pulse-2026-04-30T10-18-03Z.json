@@ -1,0 +1,322 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Repo Pulse"
+      },
+      "children": [
+        "repo_section",
+        "stats_section",
+        "sep1",
+        "stargazers_section",
+        "sep2",
+        "forks_section"
+      ]
+    },
+    "repo_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "date_text",
+        "repo_link"
+      ]
+    },
+    "date_text": {
+      "type": "Text",
+      "props": {
+        "text": "2026-04-30",
+        "variant": "caption"
+      }
+    },
+    "repo_link": {
+      "type": "Link",
+      "props": {
+        "label": "aaronjmars/MiroShark",
+        "href": "https://github.com/aaronjmars/MiroShark"
+      }
+    },
+    "stats_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "stat_stars",
+        "stat_forks"
+      ]
+    },
+    "stat_stars": {
+      "type": "Stat",
+      "props": {
+        "label": "Stars",
+        "value": "881",
+        "delta": "+21",
+        "trend": "up"
+      }
+    },
+    "stat_forks": {
+      "type": "Stat",
+      "props": {
+        "label": "Forks",
+        "value": "169",
+        "delta": "+3",
+        "trend": "up"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stargazers_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "stargazers_heading",
+        "stargazers_grid"
+      ]
+    },
+    "stargazers_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "New Stargazers",
+        "level": "h3"
+      }
+    },
+    "stargazers_grid": {
+      "type": "Grid",
+      "props": {
+        "columns": 3,
+        "gap": "sm"
+      },
+      "children": [
+        "stargazer_1",
+        "stargazer_2",
+        "stargazer_3",
+        "stargazer_4",
+        "stargazer_5",
+        "stargazer_6",
+        "stargazer_7",
+        "stargazer_8",
+        "stargazer_9",
+        "stargazer_10",
+        "stargazer_11",
+        "stargazer_12",
+        "stargazer_13",
+        "stargazer_14",
+        "stargazer_15",
+        "stargazer_16",
+        "stargazer_17",
+        "stargazer_18",
+        "stargazer_19",
+        "stargazer_20",
+        "stargazer_21"
+      ]
+    },
+    "stargazer_1": {
+      "type": "Link",
+      "props": {
+        "label": "davidkpiano",
+        "href": "https://github.com/davidkpiano"
+      }
+    },
+    "stargazer_2": {
+      "type": "Link",
+      "props": {
+        "label": "joni3k",
+        "href": "https://github.com/joni3k"
+      }
+    },
+    "stargazer_3": {
+      "type": "Link",
+      "props": {
+        "label": "funaileo",
+        "href": "https://github.com/funaileo"
+      }
+    },
+    "stargazer_4": {
+      "type": "Link",
+      "props": {
+        "label": "Alaev",
+        "href": "https://github.com/Alaev"
+      }
+    },
+    "stargazer_5": {
+      "type": "Link",
+      "props": {
+        "label": "imsmith",
+        "href": "https://github.com/imsmith"
+      }
+    },
+    "stargazer_6": {
+      "type": "Link",
+      "props": {
+        "label": "fanispoulinakisai-boop",
+        "href": "https://github.com/fanispoulinakisai-boop"
+      }
+    },
+    "stargazer_7": {
+      "type": "Link",
+      "props": {
+        "label": "tomdavenport",
+        "href": "https://github.com/tomdavenport"
+      }
+    },
+    "stargazer_8": {
+      "type": "Link",
+      "props": {
+        "label": "Adebesin-Cell",
+        "href": "https://github.com/Adebesin-Cell"
+      }
+    },
+    "stargazer_9": {
+      "type": "Link",
+      "props": {
+        "label": "marioushev",
+        "href": "https://github.com/marioushev"
+      }
+    },
+    "stargazer_10": {
+      "type": "Link",
+      "props": {
+        "label": "buzzjeux",
+        "href": "https://github.com/buzzjeux"
+      }
+    },
+    "stargazer_11": {
+      "type": "Link",
+      "props": {
+        "label": "gaborforgacs",
+        "href": "https://github.com/gaborforgacs"
+      }
+    },
+    "stargazer_12": {
+      "type": "Link",
+      "props": {
+        "label": "imam0096361",
+        "href": "https://github.com/imam0096361"
+      }
+    },
+    "stargazer_13": {
+      "type": "Link",
+      "props": {
+        "label": "phitrann",
+        "href": "https://github.com/phitrann"
+      }
+    },
+    "stargazer_14": {
+      "type": "Link",
+      "props": {
+        "label": "chenyihuang",
+        "href": "https://github.com/chenyihuang"
+      }
+    },
+    "stargazer_15": {
+      "type": "Link",
+      "props": {
+        "label": "fbotond11",
+        "href": "https://github.com/fbotond11"
+      }
+    },
+    "stargazer_16": {
+      "type": "Link",
+      "props": {
+        "label": "joobn72",
+        "href": "https://github.com/joobn72"
+      }
+    },
+    "stargazer_17": {
+      "type": "Link",
+      "props": {
+        "label": "Argado",
+        "href": "https://github.com/Argado"
+      }
+    },
+    "stargazer_18": {
+      "type": "Link",
+      "props": {
+        "label": "yanjigb",
+        "href": "https://github.com/yanjigb"
+      }
+    },
+    "stargazer_19": {
+      "type": "Link",
+      "props": {
+        "label": "jaimedhenriques",
+        "href": "https://github.com/jaimedhenriques"
+      }
+    },
+    "stargazer_20": {
+      "type": "Link",
+      "props": {
+        "label": "ShpxLbh",
+        "href": "https://github.com/ShpxLbh"
+      }
+    },
+    "stargazer_21": {
+      "type": "Link",
+      "props": {
+        "label": "do-accelerate",
+        "href": "https://github.com/do-accelerate"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "forks_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "forks_heading",
+        "fork_1",
+        "fork_2",
+        "fork_3"
+      ]
+    },
+    "forks_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "New Forks",
+        "level": "h3"
+      }
+    },
+    "fork_1": {
+      "type": "StoryLink",
+      "props": {
+        "title": "funaileo/MiroShark",
+        "href": "https://github.com/funaileo/MiroShark"
+      }
+    },
+    "fork_2": {
+      "type": "StoryLink",
+      "props": {
+        "title": "isflorian-hash/MiroShark",
+        "href": "https://github.com/isflorian-hash/MiroShark"
+      }
+    },
+    "fork_3": {
+      "type": "StoryLink",
+      "props": {
+        "title": "curatedhealth/miroshark",
+        "href": "https://github.com/curatedhealth/miroshark"
+      }
+    }
+  }
+}
