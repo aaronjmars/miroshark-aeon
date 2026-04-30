@@ -1,0 +1,198 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "project-lens"
+      },
+      "children": [
+        "heading-article",
+        "sep-1",
+        "heading-dora",
+        "stat-throughput",
+        "stat-failure-rate",
+        "sep-2",
+        "heading-spring",
+        "stat-flaws",
+        "text-flaws-detail",
+        "sep-3",
+        "heading-lever",
+        "text-test-speed",
+        "sep-4",
+        "heading-miroshark",
+        "text-pr60-intro",
+        "stat-pr60",
+        "stat-past-week",
+        "text-components",
+        "stat-suite-time",
+        "sep-5",
+        "heading-architecture",
+        "text-architecture",
+        "text-principle",
+        "sep-6",
+        "storylink-article"
+      ]
+    },
+    "heading-article": {
+      "type": "Heading",
+      "props": {
+        "text": "Sub-Second Tests — The Boring Discipline Letting Some Teams Ship Daily While AI Slows Others Down",
+        "level": "h2"
+      }
+    },
+    "sep-1": {
+      "type": "Separator",
+      "props": {}
+    },
+    "heading-dora": {
+      "type": "Heading",
+      "props": {
+        "text": "DORA 2025 Findings",
+        "level": "h3"
+      }
+    },
+    "stat-throughput": {
+      "type": "Stat",
+      "props": {
+        "label": "Throughput increase from AI tools",
+        "value": "30–40%"
+      }
+    },
+    "stat-failure-rate": {
+      "type": "Stat",
+      "props": {
+        "label": "Change failure rate increase",
+        "value": "15–25%"
+      }
+    },
+    "sep-2": {
+      "type": "Separator",
+      "props": {}
+    },
+    "heading-spring": {
+      "type": "Heading",
+      "props": {
+        "text": "Spring Research",
+        "level": "h3"
+      }
+    },
+    "stat-flaws": {
+      "type": "Stat",
+      "props": {
+        "label": "AI-generated code containing real flaws",
+        "value": "68–73%"
+      }
+    },
+    "text-flaws-detail": {
+      "type": "Text",
+      "props": {
+        "text": "Unit tests AI writes alongside fail to catch them — both come from the same training-data blind spots.",
+        "variant": "caption"
+      }
+    },
+    "sep-3": {
+      "type": "Separator",
+      "props": {}
+    },
+    "heading-lever": {
+      "type": "Heading",
+      "props": {
+        "text": "The Hidden Lever: Test Speed",
+        "level": "h3"
+      }
+    },
+    "text-test-speed": {
+      "type": "Text",
+      "props": {
+        "text": "When the loop is under a second, AI's mistakes get caught the same minute they're made.",
+        "variant": "lead"
+      }
+    },
+    "sep-4": {
+      "type": "Separator",
+      "props": {}
+    },
+    "heading-miroshark": {
+      "type": "Heading",
+      "props": {
+        "text": "MiroShark Example",
+        "level": "h3"
+      }
+    },
+    "text-pr60-intro": {
+      "type": "Text",
+      "props": {
+        "text": "PR #60 shipped today:",
+        "variant": "body"
+      }
+    },
+    "stat-pr60": {
+      "type": "Stat",
+      "props": {
+        "label": "Unit tests for new RSS/Atom feed",
+        "value": "17"
+      }
+    },
+    "stat-past-week": {
+      "type": "Stat",
+      "props": {
+        "label": "Tests added this past week",
+        "value": "~80"
+      }
+    },
+    "text-components": {
+      "type": "Text",
+      "props": {
+        "text": "For: share card, replay GIF, transcript, /verified endpoint",
+        "variant": "caption"
+      }
+    },
+    "stat-suite-time": {
+      "type": "Stat",
+      "props": {
+        "label": "Full test suite duration",
+        "value": "< 1 second",
+        "delta": "no Flask, no internet, no database"
+      }
+    },
+    "sep-5": {
+      "type": "Separator",
+      "props": {}
+    },
+    "heading-architecture": {
+      "type": "Heading",
+      "props": {
+        "text": "Architecture & Testing Principle",
+        "level": "h3"
+      }
+    },
+    "text-architecture": {
+      "type": "Text",
+      "props": {
+        "text": "Renderers are pure functions and request handlers are a thin shell on top.",
+        "variant": "body"
+      }
+    },
+    "text-principle": {
+      "type": "Text",
+      "props": {
+        "text": "A 1990s testing principle (Bernhardt's \"functional core, imperative shell\"; Google Testing Blog re-argued Oct 2025) is proving to be one of the quiet competitive advantages of the AI era.",
+        "variant": "body"
+      }
+    },
+    "sep-6": {
+      "type": "Separator",
+      "props": {}
+    },
+    "storylink-article": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Sub-Second Tests — The Boring Discipline Letting Some Teams Ship Daily While AI Slows Others Down",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-04-30.md",
+        "source": "MiroShark"
+      }
+    }
+  }
+}
