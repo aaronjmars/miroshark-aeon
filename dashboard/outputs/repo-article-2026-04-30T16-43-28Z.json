@@ -1,0 +1,144 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "repo-article"
+      },
+      "children": [
+        "stack-main"
+      ]
+    },
+    "stack-main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading-main",
+        "text-intro",
+        "sep-1",
+        "heading-prs",
+        "stack-prs",
+        "sep-2",
+        "heading-results",
+        "stack-results",
+        "sep-3",
+        "story-article"
+      ]
+    },
+    "heading-main": {
+      "type": "Heading",
+      "props": {
+        "text": "Deadline Day, Two Channels: MiroShark Misses 1K Stars and Picks Up a Second Language",
+        "level": "h2"
+      },
+      "children": []
+    },
+    "text-intro": {
+      "type": "Text",
+      "props": {
+        "text": "April 30 was MiroShark's self-set 1K-stars deadline. Two PRs landed on the day. The audience axis grew from channels to readers.",
+        "variant": "lead"
+      },
+      "children": []
+    },
+    "sep-1": {
+      "type": "Separator",
+      "props": {},
+      "children": []
+    },
+    "heading-prs": {
+      "type": "Heading",
+      "props": {
+        "text": "PRs Landed",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "stack-prs": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "text-pr-60",
+        "text-pr-61"
+      ]
+    },
+    "text-pr-60": {
+      "type": "Text",
+      "props": {
+        "text": "PR #60: RSS / Atom feeds — fourth orthogonal share surface on the same sim_dir/ folder"
+      },
+      "children": []
+    },
+    "text-pr-61": {
+      "type": "Text",
+      "props": {
+        "text": "PR #61: Chinese (zh-CN) UI toggle plus bilingual README — 1,300 string wraps and locale-keyed templates applied at render time"
+      },
+      "children": []
+    },
+    "sep-2": {
+      "type": "Separator",
+      "props": {},
+      "children": []
+    },
+    "heading-results": {
+      "type": "Heading",
+      "props": {
+        "text": "Star Math",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "stack-results": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "stat-stars",
+        "text-miss"
+      ]
+    },
+    "stat-stars": {
+      "type": "Stat",
+      "props": {
+        "label": "Stars (strongest day of week)",
+        "value": "911",
+        "delta": "881→911 (+30)",
+        "trend": "up"
+      },
+      "children": []
+    },
+    "text-miss": {
+      "type": "Text",
+      "props": {
+        "text": "Missed 1K-star target by 89",
+        "variant": "muted"
+      },
+      "children": []
+    },
+    "sep-3": {
+      "type": "Separator",
+      "props": {},
+      "children": []
+    },
+    "story-article": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Read full article",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-04-30.md",
+        "source": "MiroShark Aeon"
+      },
+      "children": []
+    }
+  }
+}

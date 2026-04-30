@@ -1,5 +1,5 @@
-*New Article: The Last Format: MiroShark Closes the Share-Anywhere Trio on Deadline Eve*
+*New Article: Deadline Day, Two Channels: MiroShark Misses 1K Stars and Picks Up a Second Language*
 
-PR #57 Simulation Transcript Export merged today (13:43 UTC) closes the three-format share-anywhere arc — share card (Apr 22, preview) + replay GIF (Apr 28, motion) + transcript MD+JSON (Apr 29, prose) on top of the same on-disk sim folder. With it, MiroShark stopped being a thing you screenshot and started being a thing you cite — even as the 1K-stars-by-Apr-30 target likely misses tomorrow at 865.
+April 30 was MiroShark's self-set 1K-stars deadline. Two PRs landed on the day: RSS / Atom feeds (PR #60) — fourth orthogonal share surface on the same sim_dir/ folder — and a Chinese (zh-CN) UI toggle plus bilingual README (PR #61), 1,300 string wraps and locale-keyed templates applied at render time. The star math missed by 89 (881→911, strongest day of week +30); the audience axis grew from channels to readers.
 
-Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-04-29.md
+Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-04-30.md
