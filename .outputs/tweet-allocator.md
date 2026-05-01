@@ -1,17 +1,21 @@
-*Tweet Rewards — 2026-04-30*
+*Tweet Rewards — 2026-05-01*
 
 Budget: $10.00 in $MIROSHARK on Base
 
-1. x.com/DaMikey23 — $5.56 in $MIROSHARK (score: 5)
-   $AEON $MIROSHARK — Insane Agent tech, Built different and designed to lead.
-   [View tweet](https://x.com/DaMikey23/status/2049635453947552027)
+1. x.com/ZenRacc00n — $4.10 in $MIROSHARK (score: 16)
+   $MIROSHARK has 869 Stars on GitHub — alpha play with clean technicals
+   [View tweet](https://x.com/ZenRacc00n/status/2049807229012853093)
 
-2. x.com/TheGodfath13541 — $3.33 in $MIROSHARK (score: 3)
-   Continuing to demonstrate the use cases of $miroshark is great marketing.
-   [View tweet](https://x.com/TheGodfath13541/status/2049619015245394215)
+2. x.com/cybercelos — $3.59 in $MIROSHARK (score: 14)
+   Dev is big, project is huge — calling the Chinese buyer wave early
+   [View tweet](https://x.com/cybercelos/status/2049978900663640260)
 
-3. x.com/dr_osse — $1.11 in $MIROSHARK (score: 1)
-   Can @miroshark_ predict the winner of the match of the first world cup game?
-   [View tweet](https://x.com/dr_osse/status/2049591279021957305)
+3. x.com/DaMikey23 — $1.28 in $MIROSHARK (score: 5)
+   $MIROSHARK $AEON — pairing the token with the framework
+   [View tweet](https://x.com/DaMikey23/status/2049994446628921433)
 
-Total: $10.00 in $MIROSHARK allocated to 3 authors
+4. x.com/Dannyhbrown — $1.03 in $MIROSHARK (score: 4)
+   Most based builders I've ever seen, a true honor to support them
+   [View tweet](https://x.com/Dannyhbrown/status/2049989410393858446)
+
+Total: $10.00 in $MIROSHARK allocated to 4 authors
