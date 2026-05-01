@@ -1,5 +1,5 @@
-*New Article: Deadline Day, Two Channels: MiroShark Misses 1K Stars and Picks Up a Second Language*
+*New Article: Six Surfaces, One Folder: The Day After Deadline, MiroShark Shipped Its Quantitative Layer*
 
-April 30 was MiroShark's self-set 1K-stars deadline. Two PRs landed on the day: RSS / Atom feeds (PR #60) — fourth orthogonal share surface on the same sim_dir/ folder — and a Chinese (zh-CN) UI toggle plus bilingual README (PR #61), 1,300 string wraps and locale-keyed templates applied at render time. The star math missed by 89 (881→911, strongest day of week +30); the audience axis grew from channels to readers.
+May 1 is the day after MiroShark's self-set 1K-stars target came due. The repo missed by 89 yesterday and crossed past it almost as an afterthought; today's PR #66 (Belief Trajectory CSV / JSONL Export, aeon-built) adds the sixth thin renderer over the same on-disk simulation folder — five qualitative surfaces plus a quantitative one — while Apr 30 evening's PR #62 + PR #65 quietly closed the Tier 2 + Tier 3 localization scope yesterday's release notes had explicitly deferred. The deadline shaped the calendar; it did not shape the substrate.
 
-Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-04-30.md
+Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-05-01.md
