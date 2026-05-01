@@ -75,4 +75,4 @@
 - From repo-actions Apr 24 (still unbuilt): Live Simulation Streaming (SSE, #1), Simulation Engagement Leaderboard (#2), "Post to Discord/Slack" Share Button (#4 — partly subsumed by webhook + Zapier/n8n); #3 Completion Webhook shipped 2026-04-26 (PR #46); #5 OpenAPI/Swagger shipped 2026-04-25 (PR #45)
 - From repo-actions Apr 22 (still unbuilt): History Search & Tags (#4); others shipped
 - From repo-actions Apr 20 (still unbuilt): Collaborative Comments (#4), Config Export/Import (#5); Round Scrubber (#1) partly exists in `ReplayView`
-- Open PRs: PR #66 on MiroShark (Belief Trajectory CSV / JSONL Export, filed 2026-05-01, CI pending); 0 on miroshark-aeon
+- Open PRs: 0 on MiroShark; 0 on miroshark-aeon (PR #66 merged 2026-05-01 13:44 UTC)
