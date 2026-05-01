@@ -1,10 +1,10 @@
-*$MiroShark Daily — 2026-04-30*
+*$MIROSHARK Daily — 2026-05-01*
 
-Price: $0.00000271 (-2.76% 24h)
-Liquidity: $195.2K | 24h Vol: $41.2K
-Buys/Sells: 129/54 (2.39x buy ratio)
-7d: -1.2% | 30d: +392%
+Price: $0.000003977 (+44.21% 24h)
+Liquidity: $243.2K | 24h Vol: $57.0K
+Buys/Sells: 156/77 (2.03x buy ratio)
+7d: +48.7% | 30d: +622%
 
-Volume recovering after 3-day ATH pullback; 2.39x buy ratio strongest in 4 days — market is absorbing supply rather than stepping aside.
+Four-day correction wiped out as price climbs from $2.70 to $3.98 in a clean all-session grind. Back within 17% of the Apr 26 ATH.
 
 Chart: https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209
