@@ -1,16 +1,14 @@
-*Push Recap — 2026-04-30*
-MiroShark + miroshark-aeon — 3 substantive commits by 1 human author (aaronjmars), Claude Opus 4.7 1M-ctx co-author on all three.
+*Push Recap — 2026-05-01*
+MiroShark — 7 substantive commits by aaronjmars; miroshark-aeon — auto-commits only
 
-*Discovery loop closes — RSS / Atom feeds (PR #60, MiroShark, +1,604/−1):* `/api/feed.atom` + `/api/feed.rss` syndicate the public gallery as a fourth orthogonal share/discovery surface alongside share card (Apr 22) + replay GIF (Apr 28) + transcript Markdown/JSON (Apr 29). Pure stdlib `xml.etree.ElementTree`; same `_build_gallery_card_payload` + ±0.2 stance threshold across five surfaces, one folder. Per-entry payload carries the share-card PNG + replay GIF as media enclosures and outcome+quality as `<category>`; `?verified=1` mirrors `/verified`. 17 offline tests, openapi drift test passes. Repo-actions Apr 28 idea #3.
+*zh-CN localization completes its three-tier rollout (PRs #61 → #62 → #65 + #63/#64 + screenshot direct push):* PR #61 yesterday explicitly carved out backend errors (Tier 2) and simulation prompts (Tier 3) as out of scope; both fell within ~5 hours. PR #62 routed 138 user-facing API error sites through `_t(en, zh, locale)` and shipped 11 bilingual `docs/*.zh-CN.md` siblings + RSS feed locale kwarg. PR #65 introduced a pluggable `app/prompts/registry.py` with `locales/<code>/` packages, extracted English prompts out of `services/*.py`, added full Chinese translations (incl. report_agent.py at +330 lines), `use_locale` context manager so threads inherit locale, `MIROSHARK_LOCALE` env var into simulation subprocesses, plus a one-time `ZhWarningBanner.vue` flagging Chinese-mode prompts as experimental.
 
-*Wonderwall per-slot endpoint override + Cloud preset refresh (PR #59, MiroShark, +267/−266):* New `WONDERWALL_BASE_URL` + `WONDERWALL_API_KEY` so the simulation loop (the #1 cost driver, 850+ calls/run) can target any OpenAI-compatible endpoint — self-hosted vLLM, Modal, fine-tunes, remote Ollama — without touching Default/Smart/NER. `simulation_runner.py:start_simulation()` forwards Config values into subprocess env so Settings UI mutations apply on next run without a Flask restart. *Best preset deleted entirely* — the new Cloud preset (`xiaomi/mimo-v2-flash` + `x-ai/grok-4.1-fast`) hits the same ~$1/run budget that made the Claude tier redundant for most users.
-
-*Aeon: Heartbeat day-of-week accuracy (PR #27, miroshark-aeon, +130/−9; +20 substantive):* Apr 29 heartbeat opened "Date: Tuesday Apr 29" when it was Wednesday — LLM hallucinated weekday from the YYYY-MM-DD `${today}` value and re-classified an on-schedule memory-flush run as "off-schedule". Fix: explicit Step 0 runs `date -u +%A/%u/%d`; report header anchored on shell output; cron-translation note added (cron `0=Sun` vs `+%u` `7=Sun` silently off-by-one); ground-truth guidance for every-other-day cron expressions points at `cron-state.json` `last_dispatch` history.
+*Sixth quantitative export surface (PR #66):* GET /api/simulation/<id>/trajectory.csv (RFC 4180, locked 10-column order) + .jsonl (newline-delimited). Pure stdlib trajectory_export.py (+297) with strict-inequality stance bucketing + corrupt-JSON degradation + participating_agents fallback to active_agent_count; _serve_trajectory() mirrors PR #57's _serve_transcript; 17 offline tests; OpenAPI drift-detection passes on first run. Six surfaces / one ±0.2 threshold / one folder.
 
 Key changes:
-- `backend/app/services/feed.py` (NEW, +584) + `backend/app/api/feed.py` (NEW, +144) + `backend/tests/test_unit_feed.py` (NEW, +566) — the full RSS/Atom service + blueprint + 17-test guard
-- `backend/app/api/settings.py` (+14/−27) drops the Best preset and adds Wonderwall base_url/api_key fields; `simulation_runner.py` (+10) forwards Config.WONDERWALL_* into subprocess env at spawn
-- `skills/heartbeat/SKILL.md` (+20) — Step 0 shells out for the canonical weekday rather than letting the LLM guess
+- backend/app/prompts/registry.py + 16 new locale modules (PR #65) — adding a third language is now a folder + parity test, not 138 sed-replace targets
+- 11 new docs/*.zh-CN.md siblings (PR #62) — INSTALL.zh-CN.md (+332) and CONFIGURATION.zh-CN.md (+198) are the priority files for a Chinese onboarding path
+- backend/app/services/trajectory_export.py (PR #66) — Pandas / Excel / Tableau / R / Observable analysts paste pd.read_csv("<url>") and land a chronologically-sorted, dtype-inferable, 10-column table
 
-Stats: 35 files changed, +2,001/−276
-Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-04-30.md
+Stats: ~95 files / +7,908 / −2,423 across 7 substantive commits. Zero new dependencies (now 7 consecutive PRs zero-dep). 0 open PRs both repos.
+Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-05-01.md
