@@ -1,0 +1,251 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Top Tweets — $MIROSHARK OR @miroshark_ OR github.com/aaronjmars/miroshark (2026-05-02)"
+      },
+      "children": [
+        "stack_tweets"
+      ]
+    },
+    "stack_tweets": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "tweet_1",
+        "link_1",
+        "sep_1",
+        "tweet_2",
+        "link_2",
+        "sep_2",
+        "tweet_3",
+        "link_3",
+        "sep_3",
+        "tweet_4",
+        "link_4",
+        "sep_4",
+        "tweet_5",
+        "link_5",
+        "sep_5",
+        "tweet_6",
+        "link_6",
+        "sep_6",
+        "tweet_7",
+        "link_7",
+        "sep_7",
+        "tweet_8",
+        "link_8",
+        "sep_8",
+        "tweet_9",
+        "link_9"
+      ]
+    },
+    "tweet_1": {
+      "type": "TweetCard",
+      "props": {
+        "author": "aaronjmars",
+        "handle": "aaronjmars",
+        "text": "Correction, he used MiroShark + GitHub link",
+        "likes": 7,
+        "retweets": 1
+      }
+    },
+    "link_1": {
+      "type": "Link",
+      "props": {
+        "label": "[View tweet]",
+        "href": "https://x.com/aaronjmars/status/2050267179107385451"
+      }
+    },
+    "sep_1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "tweet_2": {
+      "type": "TweetCard",
+      "props": {
+        "author": "bankrbot",
+        "handle": "bankrbot",
+        "text": "gm ☀️ morning market update featuring $MIROSHARK price data",
+        "likes": 5,
+        "retweets": 1
+      }
+    },
+    "link_2": {
+      "type": "Link",
+      "props": {
+        "label": "[View tweet]",
+        "href": "https://x.com/bankrbot/status/2050200268890063241"
+      }
+    },
+    "sep_2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "tweet_3": {
+      "type": "TweetCard",
+      "props": {
+        "author": "aaronjmars",
+        "handle": "aaronjmars",
+        "text": "I think he used MiroShark actually + GitHub link",
+        "likes": 3,
+        "retweets": 1
+      }
+    },
+    "link_3": {
+      "type": "Link",
+      "props": {
+        "label": "[View tweet]",
+        "href": "https://x.com/aaronjmars/status/2050267237714403394"
+      }
+    },
+    "sep_3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "tweet_4": {
+      "type": "TweetCard",
+      "props": {
+        "author": "penguinxbt_",
+        "handle": "penguinxbt_",
+        "text": "$aeon and $miroshark gearing up…",
+        "likes": 2,
+        "retweets": 0
+      }
+    },
+    "link_4": {
+      "type": "Link",
+      "props": {
+        "label": "[View tweet]",
+        "href": "https://x.com/penguinxbt_/status/2050272988021260656"
+      }
+    },
+    "sep_4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "tweet_5": {
+      "type": "TweetCard",
+      "props": {
+        "author": "aaronjmars",
+        "handle": "aaronjmars",
+        "text": "yep, doesnt even work you should try MiroShark + GitHub link",
+        "likes": 1,
+        "retweets": 0
+      }
+    },
+    "link_5": {
+      "type": "Link",
+      "props": {
+        "label": "[View tweet]",
+        "href": "https://x.com/aaronjmars/status/2050267414428840142"
+      }
+    },
+    "sep_5": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "tweet_6": {
+      "type": "TweetCard",
+      "props": {
+        "author": "BasedCult33",
+        "handle": "BasedCult33",
+        "text": "$MIROSHARK is the one",
+        "likes": 1,
+        "retweets": 0
+      }
+    },
+    "link_6": {
+      "type": "Link",
+      "props": {
+        "label": "[View tweet]",
+        "href": "https://x.com/BasedCult33/status/2050318833391427749"
+      }
+    },
+    "sep_6": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "tweet_7": {
+      "type": "TweetCard",
+      "props": {
+        "author": "bluenami866",
+        "handle": "bluenami866",
+        "text": "$miroshark",
+        "likes": 1,
+        "retweets": 0
+      }
+    },
+    "link_7": {
+      "type": "Link",
+      "props": {
+        "label": "[View tweet]",
+        "href": "https://x.com/bluenami866/status/2050108038795669792"
+      }
+    },
+    "sep_7": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "tweet_8": {
+      "type": "TweetCard",
+      "props": {
+        "author": "LauweTosti69",
+        "handle": "LauweTosti69",
+        "text": "$miroshark such an easy play",
+        "likes": 1,
+        "retweets": 0
+      }
+    },
+    "link_8": {
+      "type": "Link",
+      "props": {
+        "label": "[View tweet]",
+        "href": "https://x.com/LauweTosti69/status/2050297915990487503"
+      }
+    },
+    "sep_8": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "tweet_9": {
+      "type": "TweetCard",
+      "props": {
+        "author": "bluenami866",
+        "handle": "bluenami866",
+        "text": "$miroshark",
+        "likes": 0,
+        "retweets": 0
+      }
+    },
+    "link_9": {
+      "type": "Link",
+      "props": {
+        "label": "[View tweet]",
+        "href": "https://x.com/bluenami866/status/2050066161757241751"
+      }
+    }
+  }
+}
