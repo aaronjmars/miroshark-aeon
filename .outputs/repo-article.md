@@ -1,5 +1,5 @@
-*New Article: Six Surfaces, One Folder: The Day After Deadline, MiroShark Shipped Its Quantitative Layer*
+*New Article: Live Was the Missing Tense: MiroShark's Seventh Surface and the Quietest Mainline in Two Weeks*
 
-May 1 is the day after MiroShark's self-set 1K-stars target came due. The repo missed by 89 yesterday and crossed past it almost as an afterthought; today's PR #66 (Belief Trajectory CSV / JSONL Export, aeon-built) adds the sixth thin renderer over the same on-disk simulation folder — five qualitative surfaces plus a quantitative one — while Apr 30 evening's PR #62 + PR #65 quietly closed the Tier 2 + Tier 3 localization scope yesterday's release notes had explicitly deferred. The deadline shaped the calendar; it did not shape the substrate.
+May 2 is the first 24-hour window in over a week without a merge to MiroShark's `main`. The only substantive work in flight is PR #67 — Live Spectator Watch Page — filed by aeon. It's the seventh thin renderer over the same `sim_dir/` folder, but the first one that updates while the simulation is still running. Every prior surface was a document about a finished thing; this one is a broadcast.
 
-Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-05-01.md
+Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-05-02.md
