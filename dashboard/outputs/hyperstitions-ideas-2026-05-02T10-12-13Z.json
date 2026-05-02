@@ -1,0 +1,211 @@
+{
+  "root": "card_root",
+  "state": {},
+  "elements": {
+    "card_root": {
+      "type": "Card",
+      "props": {
+        "title": "Hyperstitions Idea — 2026-05-02"
+      },
+      "children": [
+        "heading_main",
+        "sep1",
+        "stack_coordination",
+        "sep2",
+        "stack_why_now",
+        "sep3",
+        "stack_resolution",
+        "sep4",
+        "stack_scores",
+        "sep5",
+        "stack_hyperstitions"
+      ]
+    },
+    "heading_main": {
+      "type": "Heading",
+      "props": {
+        "text": "Will MiroShark merge a PR from a Chinese-locale contributor (or land a substantive Chinese-language tutorial / blog / video covering the project) by June 15, 2026?",
+        "level": "h2"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stack_coordination": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading_coordination",
+        "text_coordination"
+      ]
+    },
+    "heading_coordination": {
+      "type": "Heading",
+      "props": {
+        "text": "The coordination play",
+        "level": "h3"
+      }
+    },
+    "text_coordination": {
+      "type": "Text",
+      "props": {
+        "text": "Yesterday's PR #65 closed the three-tier zh-CN rollout — UI, backend errors, agent prompts, report-writer, RSS feed metadata, bilingual docs all flip with one toggle. The substrate now speaks Mandarin; nobody Mandarin-speaking has shipped against it yet. Holders forwarding the repo into Chinese-language WeChat groups / Zhihu / Bilibili / xiaohongshu, translators writing the first quickstart on a CN dev blog, devs filing the first PR with CN commit history — these are the exact moves an AI agent can't make on its own. The market's existence is the rally signal that this is the gap worth closing right now.",
+        "variant": "body"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stack_why_now": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading_why_now",
+        "text_why_now"
+      ]
+    },
+    "heading_why_now": {
+      "type": "Heading",
+      "props": {
+        "text": "Why now",
+        "level": "h3"
+      }
+    },
+    "text_why_now": {
+      "type": "Text",
+      "props": {
+        "text": "PR #65 (Apr 30, 18:30 UTC) was filed five hours after PR #61 explicitly carved zh-CN agent prompts as Tier 3 / out of scope — Aaron walked back the carve-out the same evening. Three tiers in ~27 hours. @bluenami866's CN-flagged tweets surfaced in today's social pulse. New audience axis is wide open and the ship is fresh.",
+        "variant": "body"
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stack_resolution": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading_resolution",
+        "text_resolution_intro",
+        "text_resolution_criteria_a",
+        "text_resolution_criteria_b",
+        "text_resolution_verification"
+      ]
+    },
+    "heading_resolution": {
+      "type": "Heading",
+      "props": {
+        "text": "Resolution",
+        "level": "h3"
+      }
+    },
+    "text_resolution_intro": {
+      "type": "Text",
+      "props": {
+        "text": "YES if, by 23:59 UTC 2026-06-15, EITHER:",
+        "variant": "body"
+      }
+    },
+    "text_resolution_criteria_a": {
+      "type": "Text",
+      "props": {
+        "text": "(a) `aaronjmars/MiroShark` has merged a PR whose author's GitHub profile bio/name is in Chinese OR whose commit messages contain CJK characters, OR",
+        "variant": "body"
+      }
+    },
+    "text_resolution_criteria_b": {
+      "type": "Text",
+      "props": {
+        "text": "(b) a Chinese-language piece ≥500 chars / 3+ min runtime (WeChat article, Zhihu post, Bilibili video, CN dev blog) substantively covers MiroShark with a working repo link.",
+        "variant": "body"
+      }
+    },
+    "text_resolution_verification": {
+      "type": "Text",
+      "props": {
+        "text": "Verified via `gh api repos/aaronjmars/MiroShark/pulls?state=closed` + manual link check. Otherwise NO.",
+        "variant": "muted"
+      }
+    },
+    "sep4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stack_scores": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "stat_reflexivity",
+        "stat_viral"
+      ]
+    },
+    "stat_reflexivity": {
+      "type": "Stat",
+      "props": {
+        "label": "Reflexivity",
+        "value": "4/5"
+      }
+    },
+    "stat_viral": {
+      "type": "Stat",
+      "props": {
+        "label": "Viral",
+        "value": "3/5"
+      }
+    },
+    "sep5": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stack_hyperstitions": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "text_soon_on",
+        "link_hyperstitions"
+      ]
+    },
+    "text_soon_on": {
+      "type": "Text",
+      "props": {
+        "text": "Soon on",
+        "variant": "muted"
+      }
+    },
+    "link_hyperstitions": {
+      "type": "Link",
+      "props": {
+        "label": "https://www.hyperstitions.com/",
+        "href": "https://www.hyperstitions.com/"
+      }
+    }
+  }
+}

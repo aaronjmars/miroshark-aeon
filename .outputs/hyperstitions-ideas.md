@@ -1,12 +1,12 @@
-*Hyperstitions Idea — 2026-04-25*
+*Hyperstitions Idea — 2026-05-02*
 
-"Will MiroShark be listed in at least 3 public MCP server directories by May 31, 2026?"
+"Will MiroShark merge a PR from a Chinese-locale contributor (or land a substantive Chinese-language tutorial / blog / video covering the project) by June 15, 2026?"
 
-The coordination play: PR #44 (AI Integration · MCP Onboarding, merged Apr 24) packaged the whole stdio integration — 8-tool catalog, Claude Desktop / Cursor / Windsurf / Continue snippets, Neo4j liveness probe — but discovery still happens in registries that require human submissions. Holders, contributors, and MCP-curious devs need to file the entries themselves: a markdown PR to punkpeye/awesome-mcp-servers, the submission form on mcp.so, the listing flow on glama.ai/mcp, the community list under modelcontextprotocol.io. One person per directory flips the bit. The market converts "someone should do this" into "I'll do this" because the deadline is now public and three is in arm's reach.
+The coordination play: yesterday's PR #65 closed the three-tier zh-CN rollout — UI, backend errors, agent prompts, report-writer, RSS feed metadata, bilingual docs all flip with one toggle. The substrate now speaks Mandarin; nobody Mandarin-speaking has shipped against it yet. Holders forwarding the repo into Chinese-language WeChat groups / Zhihu / Bilibili / xiaohongshu, translators writing the first quickstart on a CN dev blog, devs filing the first PR with CN commit history — these are the exact moves an AI agent can't make on its own. The market's existence is the rally signal that this is the gap worth closing right now.
 
-Why now: PR #44 surfaced the Apr-21 direct-push graph-memory substrate (bi-temporal edges, Leiden clusters, ReACT reasoning traces) to any MCP client; same week, Paradigm CTO @gakonst starred the repo and OriginTrail's founder co-signed for DKG V10 — the research-substrate audience is suddenly real. MCP is at 97M monthly SDK downloads with 67% enterprise eval; directories are the discovery layer of that funnel and MiroShark is currently absent from every one of them.
+Why now: PR #65 (Apr 30, 18:30 UTC) was filed five hours after PR #61 explicitly carved zh-CN agent prompts as Tier 3 / out of scope — Aaron walked back the carve-out the same evening. Three tiers in ~27 hours. @bluenami866's CN-flagged tweets surfaced in today's social pulse. New audience axis is wide open and the ship is fresh.
 
-Resolution: YES if, at 23:59 UTC 2026-05-31, at least 3 distinct public MCP server registries (verified via direct URL check against mcp.so, glama.ai/mcp, punkpeye/awesome-mcp-servers, modelcontextprotocol.io community list, pulsemcp.com, or a recognized equivalent) list MiroShark with a working link to github.com/aaronjmars/MiroShark. Otherwise NO.
+Resolution: YES if, by 23:59 UTC 2026-06-15, EITHER (a) `aaronjmars/MiroShark` has merged a PR whose author's GitHub profile bio/name is in Chinese OR whose commit messages contain CJK characters, OR (b) a Chinese-language piece ≥500 chars / 3+ min runtime (WeChat article, Zhihu post, Bilibili video, CN dev blog) substantively covers MiroShark with a working repo link. Verified via `gh api repos/aaronjmars/MiroShark/pulls?state=closed` + manual link check. Otherwise NO.
 
 Scores: Reflexivity 4/5 | Viral 3/5
 
