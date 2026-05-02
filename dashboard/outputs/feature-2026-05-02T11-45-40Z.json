@@ -1,0 +1,277 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Feature Built — 2026-05-02"
+      },
+      "children": [
+        "heading_main",
+        "text_intro",
+        "sep_1",
+        "heading_why",
+        "text_why",
+        "sep_2",
+        "heading_built",
+        "stack_built_items",
+        "sep_3",
+        "heading_howit",
+        "text_howit",
+        "sep_4",
+        "heading_next",
+        "text_next",
+        "sep_5",
+        "storylink_pr"
+      ]
+    },
+    "heading_main": {
+      "type": "Heading",
+      "props": {
+        "text": "Live Spectator Watch Page",
+        "level": "h2"
+      }
+    },
+    "text_intro": {
+      "type": "Text",
+      "props": {
+        "text": "MiroShark just shipped a \"watch live\" page at `/watch/<simulation_id>`. Tweet that URL while a simulation is running and the link unfurls as a 1200×630 image card on Twitter / X / Discord / Slack — clicking through opens a minimal full-viewport broadcast view with a belief bar, round counter, and progress bar that update every 15 seconds in real time. When the simulation ends, the page transitions to a final result card with \"View full simulation →\" + \"Fork this scenario →\" CTAs."
+      }
+    },
+    "sep_1": {
+      "type": "Separator"
+    },
+    "heading_why": {
+      "type": "Heading",
+      "props": {
+        "text": "Why this matters",
+        "level": "h3"
+      }
+    },
+    "text_why": {
+      "type": "Text",
+      "props": {
+        "text": "The past distribution arc landed six share surfaces (gallery card, share card PNG, replay GIF, Markdown + JSON transcript, RSS / Atom feed, trajectory CSV / JSONL — yesterday's PR #66) but every one of them serializes a finished simulation. The \"tweet a sim that's running right now\" format had no product home — the runner URL today opens the full SPA simulation view with chrome unrelated to spectating and no auto-unfurl as live state. `/watch/<id>` is the live-broadcast complement: same URL keeps a snapshot-perfect OG card after the run finishes, and the page itself transitions from live polling → final result + CTAs at the end. From repo-actions Apr 30 idea #5 — the cleanest unbuilt small-effort idea on the list once trajectory CSV / JSONL shipped yesterday."
+      }
+    },
+    "sep_2": {
+      "type": "Separator"
+    },
+    "heading_built": {
+      "type": "Heading",
+      "props": {
+        "text": "What was built",
+        "level": "h3"
+      }
+    },
+    "stack_built_items": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "lg"
+      },
+      "children": [
+        "item_renderer",
+        "item_api",
+        "item_tests",
+        "item_openapi",
+        "item_frontend",
+        "item_docs"
+      ]
+    },
+    "item_renderer": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "badge_renderer_file",
+        "text_renderer_detail"
+      ]
+    },
+    "badge_renderer_file": {
+      "type": "Badge",
+      "props": {
+        "text": "backend/app/services/watch_renderer.py",
+        "variant": "outline"
+      }
+    },
+    "text_renderer_detail": {
+      "type": "Text",
+      "props": {
+        "text": "NEW pure-stdlib HTML + vanilla-JS renderer. STANCE_THRESHOLD = 0.2 constant for parity with every other surface, `_truncate` preserves trailing ellipsis under OG char budgets (200 / 280 / 220), `_belief_summary` graceful-degrades on corrupt input, `_broadcast_js` emits the in-page poller as a single triple-quoted string, `_build_meta_description` composes the OG description from round + split + scenario, `render_watch_html` assembles the full document with OG / Twitter tags + ~200 lines of inline CSS (gradient dark theme, pulsing live badge, responsive breakpoints) + SSR belief bars with widths matching the legend numbers byte-for-byte.",
+        "variant": "body"
+      }
+    },
+    "item_api": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "badge_api_file",
+        "text_api_detail"
+      ]
+    },
+    "badge_api_file": {
+      "type": "Badge",
+      "props": {
+        "text": "backend/app/api/watch.py",
+        "variant": "outline"
+      }
+    },
+    "text_api_detail": {
+      "type": "Text",
+      "props": {
+        "text": "NEW Flask blueprint `watch_bp` mounted at the root (no `/api` prefix, mirroring `share_bp`). `_resolve_base_url` honours `X-Forwarded-Proto` / `X-Forwarded-Host`. `_build_summary_for_watch` pulls scenario + run state + belief + quality from `SimulationManager` + `SimulationRunner` + on-disk `trajectory.json` + `quality.json`; defensive fall-through to `None` on missing or non-public sim so a private sim's existence never leaks through page chrome.",
+        "variant": "body"
+      }
+    },
+    "item_tests": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "badge_tests_file",
+        "text_tests_detail"
+      ]
+    },
+    "badge_tests_file": {
+      "type": "Badge",
+      "props": {
+        "text": "backend/tests/test_unit_watch.py",
+        "variant": "outline"
+      }
+    },
+    "text_tests_detail": {
+      "type": "Text",
+      "props": {
+        "text": "NEW 18 offline unit tests covering OG / Twitter tags, completed-sim CTA visibility, in-flight CTA hidden, idle-sim empty-belief note + quote escaping, private-sim scenario suppression, bootstrap blob `json.loads` round-trip, STANCE_THRESHOLD parity guard, proportional bar widths (60/100 = `width:60.00%`), zero-belief zero-width bars, long-scenario truncation with ellipsis, blueprint export presence, meta-description shape across running / idle / missing summaries, initial-state corrupt-input fallthrough, missing-summary defensive render.",
+        "variant": "body"
+      }
+    },
+    "item_openapi": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "badge_openapi_file",
+        "text_openapi_detail"
+      ]
+    },
+    "badge_openapi_file": {
+      "type": "Badge",
+      "props": {
+        "text": "backend/openapi.yaml + test_unit_openapi.py",
+        "variant": "outline"
+      }
+    },
+    "text_openapi_detail": {
+      "type": "Text",
+      "props": {
+        "text": "`/watch/{simulation_id}` entry under Publish & Embed; `watch_bp: \"\"` in `_BLUEPRINT_PREFIXES`; PR #45 drift-detection test passes.",
+        "variant": "body"
+      }
+    },
+    "item_frontend": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "badge_frontend_file",
+        "text_frontend_detail"
+      ]
+    },
+    "badge_frontend_file": {
+      "type": "Badge",
+      "props": {
+        "text": "frontend/src/components/EmbedDialog.vue",
+        "variant": "outline"
+      }
+    },
+    "text_frontend_detail": {
+      "type": "Text",
+      "props": {
+        "text": "\"Watch live (broadcast page)\" callout between the share-card and replay-GIF sections — warm-orange gradient + orange \"Open watch page ↗\" button to signal the live framing distinct from the finished-result share card above; publish-gated; copyable URL; `copy('watch')` wired alongside the existing share / replay / transcript / trajectory copy handlers. `getWatchUrl` helper in api/simulation.js.",
+        "variant": "body"
+      }
+    },
+    "item_docs": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "badge_docs_file",
+        "text_docs_detail"
+      ]
+    },
+    "badge_docs_file": {
+      "type": "Badge",
+      "props": {
+        "text": "README.md + docs/FEATURES.md + docs/API.md",
+        "variant": "outline"
+      }
+    },
+    "text_docs_detail": {
+      "type": "Text",
+      "props": {
+        "text": "feature row + dedicated section + endpoint table rows.",
+        "variant": "body"
+      }
+    },
+    "sep_3": {
+      "type": "Separator"
+    },
+    "heading_howit": {
+      "type": "Heading",
+      "props": {
+        "text": "How it works",
+        "level": "h3"
+      }
+    },
+    "text_howit": {
+      "type": "Text",
+      "props": {
+        "text": "The watch page is a fully self-contained server-rendered HTML document — no SPA build dependency, no framework runtime. The Flask handler reads the on-disk `sim_dir/` (same files the embed-summary endpoint reads) and renders OG / Twitter tags + an inline `<style>` + an SSR initial-frame body + a JSON bootstrap blob in `<script type=\"application/json\">` + a vanilla-JS poller in a final `<script>` tag. The poller hits `/api/simulation/<id>/embed-summary` and `/api/simulation/<id>/run-status` every 15 seconds (matching the existing SPA polling cadence), updates the DOM in place via the same updaters the SSR initial frame uses, backs off to 60 s on transient failures, gives up after a 6 h absolute timeout, and fires one trailing 4 s refresh once the runner status flips terminal so the final belief snapshot lands. The bootstrap blob exposes the ±0.2 stance threshold as a constant so a spectator who sees the share card on Twitter and clicks through to `/watch/<id>` doesn't see the numbers shift mid-flow. Works behind a restrictive CSP that allows only `img-src 'self'`, and even with JS disabled (the SSR HTML still shows a meaningful frame)."
+      }
+    },
+    "sep_4": {
+      "type": "Separator"
+    },
+    "heading_next": {
+      "type": "Heading",
+      "props": {
+        "text": "What's next",
+        "level": "h3"
+      }
+    },
+    "text_next": {
+      "type": "Text",
+      "props": {
+        "text": "Three unbuilt repo-actions Apr 30 ideas remain (Historical Simulation Mode / LLM-as-Judge Audit Panel / Batch Rerun & Reproducibility Badge) — all medium-effort or content-dependent. Today's ship makes the share-arc into a 7-surfaces / 1-threshold / 1-folder system; the natural follow-on is the LLM-as-judge audit (the `/transcript.json` was explicitly designed for that pipeline) once an operator-driven cost path is sorted."
+      }
+    },
+    "sep_5": {
+      "type": "Separator"
+    },
+    "storylink_pr": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Pull Request #67",
+        "href": "https://github.com/aaronjmars/MiroShark/pull/67",
+        "source": "GitHub"
+      }
+    }
+  }
+}
