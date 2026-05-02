@@ -1,11 +1,11 @@
-*Repo Pulse — 2026-05-01*
-aaronjmars/MiroShark
+*Repo Pulse — 2026-05-02*
+[aaronjmars/MiroShark]
 
-Stars: 943 total (+60 new)
-Forks: 187 total (+16 new)
+Stars: 973 total (+31 new)
+Forks: 195 total (+8 new)
 
 New stargazers:
-github.com/Daizaerh | github.com/Manchu505 | github.com/clasense4 | github.com/Prometheus351 | github.com/Gerik18 | github.com/matrixise | github.com/publied | github.com/dev-ops-mn | github.com/mattF90 | github.com/tengwaran | github.com/doubianimehdi | github.com/fightjudgeai | github.com/jtmoney007 | github.com/LouisLetcher | github.com/soengkanel | github.com/SSamPPak | github.com/jagosu2010-ctrl | github.com/rchgit | github.com/khondhaker | github.com/cobaohieu | github.com/nghiado007 | github.com/DanLittlewood | github.com/RichMePython | github.com/Qbert-ImThePappy | github.com/neshpatph | github.com/Mic-Kov | github.com/xXTungNDXx | github.com/ScopetechDigital | github.com/annongukhoe | github.com/littlebigmedia | github.com/AmrEidAly | github.com/krf1786 | github.com/worldkinglive | github.com/AEIKAN | github.com/nefter | github.com/LostMagicIsland | github.com/oelkamla-beep | github.com/pechjacob | github.com/morgansmullins | github.com/sunzzxtt | github.com/kinnsei | github.com/bormaa | github.com/globalbtc1 | github.com/FancyP4nda | github.com/MaddHatter4 | github.com/mhadeli | github.com/mtsmxd | github.com/tranngochung0885-pixel | github.com/Cc-kris | github.com/costlaskar | github.com/kiransre1 | github.com/jraya106 | github.com/HiepLeHoaiNghia | github.com/physicsjm32 | github.com/axelior | github.com/shakahl | github.com/3xp10its | github.com/wallmage | github.com/Donyta79 | github.com/rhyswynn
+github.com/rhyswynn | github.com/niteshsharoff | github.com/lyylabs | github.com/Silverfoxsa | github.com/venezuela412 | github.com/LaplaceXD | github.com/pawelknorps | github.com/Azi3z | github.com/idev-bz | github.com/brndngln | github.com/hieple7985 | github.com/ZAG23 | github.com/Neolio42 | github.com/l-wermelinger | github.com/raynorpat | github.com/koddins | github.com/Umphman | github.com/michaelcasado | github.com/leonardo-vanschaik | github.com/stjordanis | github.com/kykaz | github.com/harrisonsantos | github.com/tuksaur | github.com/monroyminerodiego | github.com/mot369 | github.com/6ogo | github.com/mackmanmcguire | github.com/startrekor | github.com/Rawrongrow | github.com/nafiss007 | github.com/SLUCIENNE
 
 New forks:
-github.com/Donyta79/MiroShark | github.com/OsirisZeroDawn/MiroShark | github.com/shakahl/MiroShark | github.com/junaidnisar-commits/MiroShark | github.com/prakalathann/MiroShark | github.com/AEIKAN/MiroShark | github.com/ai-skynet-labs/MiroShark | github.com/369neri/MiroShark | github.com/JulioCesarHE/MiroShark | github.com/neshpatph/MiroShark | github.com/ammar453/MiroShark | github.com/autosolutionsai-didac/miroshark | github.com/nghiado007/MiroShark | github.com/khondhaker/miroshark | github.com/mdameron76/miroshark | github.com/gambetcoder2025/MiroShark
+github.com/0xysh/miroshark | github.com/artmxra7/MiroShark | github.com/phattbeats/MiroShark | github.com/brndngln/MiroShark | github.com/larg7/MiroShark | github.com/AliceXandra/MiroShark | github.com/stjordanis/MiroShark | github.com/inde5media/MiroShark
