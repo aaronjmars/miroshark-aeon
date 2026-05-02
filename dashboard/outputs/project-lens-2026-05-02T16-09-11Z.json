@@ -1,0 +1,41 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "project-lens"
+      },
+      "children": [
+        "stack"
+      ]
+    },
+    "stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "intro_text",
+        "story_link"
+      ]
+    },
+    "intro_text": {
+      "type": "Text",
+      "props": {
+        "text": "In 1911, twice as many New Yorkers stood in Herald Square watching a Playograph — a wooden diamond driven by Western Union telegraph — as watched the actual World Series in Philadelphia. The pattern (thin event stream → separate live spectator surface → crowd watching together) keeps coming back: teletype tickers, ESPN GameCast, Twitch, bonding-curve pages. PR #67's `/watch/<id>` is the seventh surface MiroShark has projected over the same `sim_dir/` substrate, and it is the first one architected for live group spectating rather than reading a finished result.",
+        "variant": "body"
+      }
+    },
+    "story_link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Before Radio: 70,000 People Who Watched a Wooden Board Pretend to Play Baseball",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-05-02.md",
+        "source": "MiroShark"
+      }
+    }
+  }
+}

@@ -1,5 +1,5 @@
-*New Article: The Quietest Integration in 2026 Is Still a CSV Link*
+*New Article: Before Radio: 70,000 People Who Watched a Wooden Board Pretend to Play Baseball*
 
-A look at why CSV — schemaless, typeless, 50 years old — still wins the analyst's first ten seconds in 2026 over Parquet, Arrow, and MCP. Yesterday MiroShark shipped its sixth share surface as a CSV/JSONL trajectory export (PR #66): 297 stdlib-only lines, zero new deps, on the same on-disk sim folder feeding the gallery, share card, replay GIF, transcript, and RSS feed. Six surfaces, one ±0.2 stance threshold, one folder — the boring format keeps closing the loop because every LLM in production was trained on a corpus where CSV was the default.
+In 1911, twice as many New Yorkers stood in Herald Square watching a Playograph — a wooden diamond driven by Western Union telegraph — as watched the actual World Series in Philadelphia. The pattern (thin event stream → separate live spectator surface → crowd watching together) keeps coming back: teletype tickers, ESPN GameCast, Twitch, bonding-curve pages. PR #67's `/watch/<id>` is the seventh surface MiroShark has projected over the same `sim_dir/` substrate, and it is the first one architected for live group spectating rather than reading a finished result.
 
-Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-05-01.md
+Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-05-02.md
