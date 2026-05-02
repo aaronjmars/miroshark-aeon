@@ -43,9 +43,12 @@ Bad examples (too generic, not project-specific):
 ## Steps
 
 0. **Dedup guard — skip if already ran today**:
-   If `${var}` is empty, check `memory/logs/${today}.md`. If a `## Hyperstitions Ideas` section already exists (with or without a `(run N)` suffix), this skill has already produced today's market idea.
-   - Log `HYPERSTITIONS_SKIP: already ran today — {existing question}` and **do NOT send any notification. Stop here.**
-   - Only proceed when `${var}` is explicitly set (operator override for a second idea on the same day) or when today's log contains no prior Hyperstitions section.
+   If `${var}` is empty, check `memory/logs/${today}.md`. If **any** of the following match, this skill has already produced today's market idea:
+   - A `## Hyperstitions Ideas` section already exists (with or without a `(run N)` suffix), OR
+   - A bare `- **Question:**` bullet appears in the log without a Hyperstitions header above it (defensive backstop — catches the case where a prior run's LLM dropped the section header on write; observed 2026-05-02 when heartbeat would have otherwise re-dispatched).
+
+   On a match: log `HYPERSTITIONS_SKIP: already ran today — {existing question}` and **do NOT send any notification. Stop here.**
+   - Only proceed when `${var}` is explicitly set (operator override for a second idea on the same day) or when today's log contains neither marker.
    - Rationale: this skill contracts "ONE prediction market idea per day" — duplicate runs (heartbeat auto-dispatch, manual re-trigger, cron retry) otherwise dilute the coordination signal and spam notification channels with conflicting targets.
 
 1. **Understand the current project state**:
@@ -92,7 +95,7 @@ Bad examples (too generic, not project-specific):
    Soon on https://www.hyperstitions.com/ ?
    ```
 
-8. **Log** to `memory/logs/${today}.md`:
+8. **Log** to `memory/logs/${today}.md`. The very first line you append **MUST** be the literal section header `## Hyperstitions Ideas` on its own line, followed by a blank line, then the bullets. Do NOT skip the header — the dedup guard in step 0, the heartbeat skill's "did this run today?" check, and the next memory-flush all key off this header. If the header is missing, heartbeat will silently auto-dispatch a duplicate run and the operator will get two conflicting market questions in the same channel (observed 2026-05-02: bullet points written without header → would have caused duplicate dispatch had the dedup-guard backstop in step 0 not been added).
    ```
    ## Hyperstitions Ideas
    - **Question:** [the market question]
