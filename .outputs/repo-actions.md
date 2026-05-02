@@ -1,19 +1,19 @@
-*Repo Action Ideas — 2026-04-30*
-Generated from analysis of aaronjmars/MiroShark (904 stars, 0 open PRs). Five net-new ideas — none overlap with the past 7 days of suggestions.
+*Repo Action Ideas — 2026-05-02*
+Generated from analysis of MiroShark (976 stars · 195 forks · 1 open PR) — five ideas the feature skill can autonomously build next.
 
-1. Historical Simulation Mode (Feature, Small)
-   Date-anchor picker + historical templates (WWII, 1929 Crash, Cuban Missile Crisis) capitalising on the viral WWII talkie demo; per-slot Wonderwall override already works — UI layer is the missing piece.
+1. 1-Click Cloud Deploy (DX/Growth, Small)
+   Deploy to Railway button + fly.toml + docker-compose.prod.yml — cuts install from ~20 min to ~3 min; 976 stars, 4 contributors, the star-to-deploy gap is the bottleneck before 1K.
 
-2. LLM-as-Judge Audit Panel (Feature, Small)
-   `GET /api/simulation/:id/audit` sends transcript.json to a configurable judge model and returns per-agent reasoning/factual/stance-consistency scores; README explicitly says the transcript is for 'LLM-as-judge pipelines' — the entry point just doesn't exist yet.
+2. Gallery Full-Text Search & Consensus Filter (Feature, Small)
+   `?q=<keyword>&consensus=bullish&quality=excellent` query params on /api/simulation/public + search bar + filter chips in /explore — turns the gallery from a reverse-chron scroll into a searchable research corpus.
 
-3. Batch Rerun / Reproducibility Badge (Feature, Medium)
-   Run the same scenario N times (cap 5), compute consensus mean ± std, write a 'Reproducible (n=3)' or 'Varies (n=3)' badge to gallery cards — turns a one-off result into a scientific finding; 3× Cheap runs now cost ~$0.50.
+3. Pre-Run Cost & Time Estimator Widget (DX/Feature, Small)
+   '~$0.40 · ~7 min' line next to the Run button, computed from pricing_constants.json + existing Langfuse cost data — renders the '$1 & under 10 min' promise at the moment of decision, zero new API calls.
 
-4. Belief Trajectory CSV / JSONL Export (Integration, Small)
-   `GET /api/simulation/:id/trajectory.csv` — one row per round, per-round belief %s + agent count; stdlib csv, zero new deps; the fifth export surface and the one Pandas/Excel/Tableau users reach for automatically.
+4. Per-Agent Stance Sparklines / Character Arc View (Feature/Research, Small)
+   GET /api/simulation/:id/agent-arcs returns per-agent stance time-series; SimulationView 'Agent Arcs' tab renders 120×24px SVG sparklines per agent — the per-agent cut of the trajectory CSV, makes results citable in research.
 
-5. Spectator Watch Page (Growth, Small)
-   `/watch/:id` — minimal fullscreen live viewer with OG meta that auto-unfurls as a share card when tweeted; 'Watch this $AAVE depeg sim in real time →' is a different content format than sharing a finished result; zero new backend.
+5. Pre-filled Scenario URL (Growth/DX, Small)
+   /new?scenario=...&preset=Cheap&rounds=30 pre-fills the New Sim form; 'Copy link' button in the form and on template cards — turns any tweet or blog post CTA into a one-click 'run this sim yourself' flow.
 
-Full details: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-actions-2026-04-30.md
+Full details: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-actions-2026-05-02.md
