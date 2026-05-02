@@ -1,14 +1,14 @@
-*Push Recap — 2026-05-01*
-MiroShark — 7 substantive commits by aaronjmars; miroshark-aeon — auto-commits only
+*Push Recap — 2026-05-02*
+MiroShark — 0 commits to main (first 24h gap in over a week); 1 commit on feat/spectator-watch-page branch (PR #67, aeon, +1,780/−1, 12 files, CI pending). miroshark-aeon — auto-commit churn only.
 
-*zh-CN localization completes its three-tier rollout (PRs #61 → #62 → #65 + #63/#64 + screenshot direct push):* PR #61 yesterday explicitly carved out backend errors (Tier 2) and simulation prompts (Tier 3) as out of scope; both fell within ~5 hours. PR #62 routed 138 user-facing API error sites through `_t(en, zh, locale)` and shipped 11 bilingual `docs/*.zh-CN.md` siblings + RSS feed locale kwarg. PR #65 introduced a pluggable `app/prompts/registry.py` with `locales/<code>/` packages, extracted English prompts out of `services/*.py`, added full Chinese translations (incl. report_agent.py at +330 lines), `use_locale` context manager so threads inherit locale, `MIROSHARK_LOCALE` env var into simulation subprocesses, plus a one-time `ZhWarningBanner.vue` flagging Chinese-mode prompts as experimental.
+Seventh share surface filed: PR #67 Live Spectator Watch Page is the format MiroShark didn't have for tweet-a-sim-mid-run sharing. `/watch/<sim_id>` is a self-contained server-rendered page with embedded OG/Twitter card meta, a vanilla-JS poller hitting the existing embed-summary + run-status endpoints every 15 s, and CTAs revealed once terminal. Sits next to share card / replay GIF / transcript MD+JSON / RSS+Atom feed / trajectory CSV+JSONL as the seventh thin renderer over the same `sim_dir/` folder, second after `/share/<id>` to skip the `/api` prefix.
 
-*Sixth quantitative export surface (PR #66):* GET /api/simulation/<id>/trajectory.csv (RFC 4180, locked 10-column order) + .jsonl (newline-delimited). Pure stdlib trajectory_export.py (+297) with strict-inequality stance bucketing + corrupt-JSON degradation + participating_agents fallback to active_agent_count; _serve_trajectory() mirrors PR #57's _serve_transcript; 17 offline tests; OpenAPI drift-detection passes on first run. Six surfaces / one ±0.2 threshold / one folder.
+Aeon harness: scheduled-skill auto-commit churn only — token-report, fetch-tweets, tweet-allocator, repo-pulse, repo-article, project-lens, hyperstitions-ideas, feature, self-improve, repo-actions all wrote their outputs and dispatched. No human or feature changes to the harness itself.
 
 Key changes:
-- backend/app/prompts/registry.py + 16 new locale modules (PR #65) — adding a third language is now a folder + parity test, not 138 sed-replace targets
-- 11 new docs/*.zh-CN.md siblings (PR #62) — INSTALL.zh-CN.md (+332) and CONFIGURATION.zh-CN.md (+198) are the priority files for a Chinese onboarding path
-- backend/app/services/trajectory_export.py (PR #66) — Pandas / Excel / Tableau / R / Observable analysts paste pd.read_csv("<url>") and land a chronologically-sorted, dtype-inferable, 10-column table
+- backend/app/services/watch_renderer.py NEW (+895): pure-stdlib renderer, STANCE_THRESHOLD=0.2 parity guard, `_broadcast_js` poller with 60 s back-off + 6 h absolute timeout + trailing 4 s refresh on terminal
+- backend/app/api/watch.py NEW (+261): root-mounted watch_bp, X-Forwarded-Proto/Host honour, private-sim defensive fallthrough so existence never leaks through page chrome
+- backend/tests/test_unit_watch.py NEW (+392): 18 offline tests including OG meta presence, completed/in-flight CTA visibility split, bootstrap JSON round-trip, ±0.2 threshold parity, blueprint route guard
 
-Stats: ~95 files / +7,908 / −2,423 across 7 substantive commits. Zero new dependencies (now 7 consecutive PRs zero-dep). 0 open PRs both repos.
-Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-05-01.md
+Stats: 12 files changed, +1,780 / −1
+Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-05-02.md
