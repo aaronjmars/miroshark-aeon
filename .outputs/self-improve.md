@@ -1,13 +1,16 @@
-*Agent Self-Improvement — 2026-04-30*
+*Agent Self-Improvement — 2026-05-02*
 
-Heartbeat day-of-week accuracy
-Yesterday's heartbeat report opened with `Date: Tuesday Apr 29, 2026` — but Apr 29 was actually Wednesday. The skill let the LLM infer the weekday from the date string, and on Apr 29 it hallucinated. Because of the wrong weekday, the report listed `memory-flush (Sun+Wed)` under "Not scheduled today (Tuesday)" and re-classified its on-schedule 18:25 UTC run as "ran off-schedule on-demand". Future me would have missed a real Wed memory-flush outage hidden behind that misdiagnosis.
+Hyperstitions log-header resilience
 
-Why: Apr 29 heartbeat log header — first observed weekday hallucination in the last 5 days (Apr 25–28 were correct), but the failure mode is repeatable and silently breaks any schedule check the heartbeat does.
+The hyperstitions-ideas skill ran on schedule today (Sat 10:00 UTC) and produced its market question, but the LLM appended the bullet block to memory/logs/2026-05-02.md without writing the `## Hyperstitions Ideas` section header. That sets up a two-step cascade failure: the skill's own dedup guard keys off the header, and heartbeat's "did this run today?" check searches for the substring "hyperstitions" in the log — both would return empty. Tonight's 19:00 UTC heartbeat would conclude the skill never ran, dispatch it, and the operator would receive a second conflicting market question on the same coordination channel.
+
+Why: Caught the missing header by `grep -i hyperstitions memory/logs/2026-05-02.md` returning empty after seeing only the bullet block in the day's log — every prior Saturday run (Mar 27, Mar 28, Apr 11, Apr 18, Apr 25) had carried the proper header. hyperstitions-ideas is not on heartbeat's auto-trigger skip-list, so a re-dispatch would have fired live. Picked over today's other minor drift (repo-pulse missing `**Notification sent:** yes` line) because the hyperstitions miss has a concrete duplicate-notification downstream consumer.
 
 What changed:
-- skills/heartbeat/SKILL.md: new Step 0 before any schedule check — run `date -u +%A` / `+%u` / `+%d` and use the shell output as the source of truth; anchor the report header on it; explicit translation note that cron weekday `0=Sun` while `+%u` returns `7=Sun`; ground-truth every-other-day cron expressions against the last 7 days of `cron-state.json` `last_dispatch` history rather than guessing odd/even-day parity.
+- skills/hyperstitions-ideas/SKILL.md step 8: prepended an emphatic pre-block instruction — first appended line MUST be the literal `## Hyperstitions Ideas` header on its own line, with a footnote naming the dedup-guard / heartbeat / memory-flush consumers and citing today's failure as trigger.
+- skills/hyperstitions-ideas/SKILL.md step 0: dedup guard now also matches a bare `- **Question:**` bullet when no Hyperstitions header sits above it — defensive backstop so even a future header-drop run is recognised as already-done by any subsequent dispatch attempt.
+- memory/logs/2026-05-02.md: inserted the missing `## Hyperstitions Ideas` header above the existing bullet block so tonight's heartbeat sees the run as completed and doesn't re-dispatch.
 
-Impact: heartbeat report header is now deterministic instead of inferred. "Scheduled today / not scheduled today" classifications stop drifting silently. A real Wednesday memory-flush outage (or any other day-bound miss) would now actually surface instead of being hidden behind a wrong weekday.
+Impact: prevents duplicate hyperstitions market questions in the operator channel on any day the LLM running the skill drops the header — both via the strengthened instruction (prevents the drop) and the bullet-pattern backstop (catches it if it still happens). Tonight's heartbeat will now find the patched header and stand down.
 
-PR: https://github.com/aaronjmars/miroshark-aeon/pull/27
+PR: https://github.com/aaronjmars/miroshark-aeon/pull/28
