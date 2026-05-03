@@ -1,0 +1,40 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "Tweet Allocator"
+      },
+      "children": [
+        "stack-content"
+      ]
+    },
+    "stack-content": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "text-date",
+        "alert-status"
+      ]
+    },
+    "text-date": {
+      "type": "Text",
+      "props": {
+        "text": "2026-05-03",
+        "variant": "caption"
+      }
+    },
+    "alert-status": {
+      "type": "Alert",
+      "props": {
+        "message": "No tweets in today's log to allocate from.",
+        "type": "info"
+      }
+    }
+  }
+}
