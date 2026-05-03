@@ -182,6 +182,7 @@ date,skill,model,input_tokens,output_tokens,cache_read,cache_creation
 2026-05-02,push-recap,claude-opus-4-7,46,14262,2525325,122578
 2026-05-02,project-lens,claude-opus-4-7,27,15389,1073728,112661
 2026-05-02,heartbeat,claude-sonnet-4-6,1817,7340,327595,51652
+2026-05-02,self-improve,claude-opus-4-7,59,36323,6003617,233841
 2026-05-03,token-report,claude-sonnet-4-6,1731,12693,587620,79792
 2026-05-03,tweet-allocator,claude-sonnet-4-6,3057,2027,175282,26597
 2026-05-03,repo-pulse,claude-sonnet-4-6,1919,6603,615956,53554
