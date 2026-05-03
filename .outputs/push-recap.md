@@ -1,14 +1,17 @@
-*Push Recap — 2026-05-02*
-MiroShark — 0 commits to main (first 24h gap in over a week); 1 commit on feat/spectator-watch-page branch (PR #67, aeon, +1,780/−1, 12 files, CI pending). miroshark-aeon — auto-commit churn only.
+*Push Recap — 2026-05-03*
+MiroShark — 2 commits merged (Aaron); miroshark-aeon — 1 substantive merge + ~25 chore auto-commits
 
-Seventh share surface filed: PR #67 Live Spectator Watch Page is the format MiroShark didn't have for tweet-a-sim-mid-run sharing. `/watch/<sim_id>` is a self-contained server-rendered page with embedded OG/Twitter card meta, a vanilla-JS poller hitting the existing embed-summary + run-status endpoints every 15 s, and CTAs revealed once terminal. Sits next to share card / replay GIF / transcript MD+JSON / RSS+Atom feed / trajectory CSV+JSONL as the seventh thin renderer over the same `sim_dir/` folder, second after `/share/<id>` to skip the `/api` prefix.
+Eighth surface over sim_dir/ — PR #69 Gallery Search & Filtering filed AND merged today (13:24 UTC). /explore turns from a reverse-chronological scroll into a queryable corpus: q / consensus / quality / outcome / sort / page on GET /api/simulation/public, all bookmarkable via URL params, +1,507/-62 across 11 files. First multiplicative surface — an index across the prior seven, not a renderer of one sim. Includes a fix-during-review inside the same squash that tightens dominant_stance() to require ≥0.2pp over the runner-up so the gallery filter doesn't become the first surface to contradict the threshold every other surface enforces.
 
-Aeon harness: scheduled-skill auto-commit churn only — token-report, fetch-tweets, tweet-allocator, repo-pulse, repo-article, project-lens, hyperstitions-ideas, feature, self-improve, repo-actions all wrote their outputs and dispatched. No human or feature changes to the harness itself.
+Seventh surface lands — PR #67 Live Spectator Watch Page (filed Apr 30 by aeon) squash-merged 13:23 UTC. /watch/<id> serves an SSR page with a 15s vanilla-JS poller that hits embed-summary + run-status, transitions to "View full sim →" + "Fork →" CTAs once terminal. OG/Twitter card unfurls live state on Twitter. Squash includes a fix(watch) follow-up: bar-count rename, scenario truncation in bootstrap blob, document.visibilityState poll gating (backgrounded tabs pause), prefers-reduced-motion media query.
+
+Hyperstitions resilience — PR #28 on miroshark-aeon merged 13:24 UTC. Step 8 instruction made emphatic: first appended log line MUST be the literal `## Hyperstitions Ideas` header. Step 0 dedup adds defensive backstop matching a bare `- **Question:**` bullet when no header sits above it. Closes the two-step latent cascade observed yesterday where a missing header would have tripped both the skill's own dedup AND heartbeat's "did it run today?" check.
 
 Key changes:
-- backend/app/services/watch_renderer.py NEW (+895): pure-stdlib renderer, STANCE_THRESHOLD=0.2 parity guard, `_broadcast_js` poller with 60 s back-off + 6 h absolute timeout + trailing 4 s refresh on terminal
-- backend/app/api/watch.py NEW (+261): root-mounted watch_bp, X-Forwarded-Proto/Host honour, private-sim defensive fallthrough so existence never leaks through page chrome
-- backend/tests/test_unit_watch.py NEW (+392): 18 offline tests including OG meta presence, completed/in-flight CTA visibility split, bootstrap JSON round-trip, ±0.2 threshold parity, blueprint route guard
+- backend/app/services/gallery_filters.py NEW (+345) — pure-stdlib filter/sort/paginate composition with ±0.2 threshold parity
+- backend/app/services/watch_renderer.py NEW (+928) — SSR live-broadcast page, OG card, visibility-gated 15s poller
+- skills/hyperstitions-ideas/SKILL.md (+7/-4) — log header now mandatory + bullet-pattern dedup backstop
+- 33 + 18 offline unit tests added across the two MiroShark PRs
 
-Stats: 12 files changed, +1,780 / −1
-Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-05-02.md
+Stats: 29 files changed, +3,531/-74 across 3 substantive merges. Zero-new-deps streak now 9 PRs (#57/#58/#60/#61/#62/#65/#66/#67/#69). 1K-stars line crossed today (1018 / 204 forks, +45/24h).
+Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-05-03.md
