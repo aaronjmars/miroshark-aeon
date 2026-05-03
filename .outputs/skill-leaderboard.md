@@ -1,12 +1,17 @@
+Done. Here's what was produced:
+
 ## Summary
 
-Skill `skill-leaderboard` completed with status **SKILL_LEADERBOARD_INSUFFICIENT_DATA**.
+**Forks scanned:** 147 total active forks across `aaronjmars/MiroShark` + `aaronjmars/miroshark-aeon`. All 146 MiroShark forks are application forks with no `aeon.yml`. One miroshark-aeon fork (`AITOBIAS04/miroshark-aeon`, pushed today at 15:33 UTC) has a readable `aeon.yml`.
 
-**What happened:**
-- **Step 1:** Target repo = `aaronjmars/MiroShark` (first entry in `memory/watched-repos.md`)
-- **Step 2:** 107 active forks found (pushed within last 30 days)
-- **Step 3:** Sampled forks — none have `aeon.yml`. MiroShark is an application repo, not an aeon framework instance; its forks wouldn't run skills
-- **Fallback check:** `aaronjmars/miroshark-aeon` has exactly 1 active fork (`AITOBIAS04/miroshark-aeon`) with a readable `aeon.yml` and 14 enabled skills — still below the 2-fork minimum
-- **Result:** No article written, no notification sent per skill rules. Log entry appended to `memory/logs/2026-04-26.md`
+**Leaderboard:** 14 skills at 100% adoption in the single-fork fleet — identical configuration to the Apr 20 run with no changes. Top skills: token-report, fetch-tweets, repo-pulse, push-recap, project-lens, repo-actions, repo-article, self-improve, weekly-shiplog, hyperstitions-ideas, feature, heartbeat, memory-flush, skill-leaderboard.
 
-**Recommendation:** Update `memory/watched-repos.md` to put `aaronjmars/miroshark-aeon` as the first entry so this skill targets the correct repo type (an aeon instance) rather than the application repo. The skill will remain insufficient until other users fork and activate `miroshark-aeon` with their own aeon instances.
+**Adoption gap:** `tweet-allocator` enabled in source, absent from every fork (requires wallet/spend allowance opt-in — expected).
+
+**Notification:** Not sent — only 1 aeon-instance fork with a readable `aeon.yml` (threshold is 2).
+
+**Files written:**
+- `articles/skill-leaderboard-2026-05-03.md` — full leaderboard article
+- `memory/logs/2026-05-03.md` — log entry appended
+
+**Notable context:** The 146 MiroShark application forks represent a large pool following yesterday's 1K-star milestone — if even 1% evolve into running aeon instances, the fleet could see its first multi-fork leaderboard within weeks.
