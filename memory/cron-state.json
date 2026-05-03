@@ -145,10 +145,10 @@
   },
   "skill-leaderboard": {
     "last_dispatch": "2026-05-03T17:13:17Z",
-    "last_status": "dispatched",
-    "last_success": "2026-04-26T17:13:54Z",
-    "total_runs": 3,
-    "total_successes": 3,
+    "last_status": "success",
+    "last_success": "2026-05-03T17:16:50Z",
+    "total_runs": 4,
+    "total_successes": 4,
     "total_failures": 0,
     "consecutive_failures": 0,
     "success_rate": 1
