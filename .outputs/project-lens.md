@@ -1,5 +1,5 @@
-*New Article: Before Radio: 70,000 People Who Watched a Wooden Board Pretend to Play Baseball*
+*New Article: Between ArXiv and Polymarket: The Queryable Layer Researchers Didn't Have*
 
-In 1911, twice as many New Yorkers stood in Herald Square watching a Playograph — a wooden diamond driven by Western Union telegraph — as watched the actual World Series in Philadelphia. The pattern (thin event stream → separate live spectator surface → crowd watching together) keeps coming back: teletype tickers, ESPN GameCast, Twitch, bonding-curve pages. PR #67's `/watch/<id>` is the seventh surface MiroShark has projected over the same `sim_dir/` substrate, and it is the first one architected for live group spectating rather than reading a finished result.
+Hugging Face, Kaggle, Metaculus, Polymarket — every research archive that outlived its first wave learned to be queryable. PR #69 (merged today, eighth surface over `sim_dir/`) is the first index across MiroShark's seven prior renderers — the gallery of agent-debate simulations now filters by consensus, quality, outcome, sort, and free-text search, all composing via URL params. The interesting move is what filter vocabulary an emerging artifact class inherits — and PR #69 is the first version of that vocabulary for agent-based opinion dynamics simulations, deployed in 300 lines of stdlib.
 
-Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-05-02.md
+Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-05-03.md
