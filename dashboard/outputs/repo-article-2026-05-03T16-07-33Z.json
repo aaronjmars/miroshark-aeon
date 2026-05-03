@@ -1,0 +1,159 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "The 1,001st Star and the Index That Followed: MiroShark Crosses Its Self-Set Line on the Day It Stops Being a Stream"
+      },
+      "children": [
+        "intro-text",
+        "separator1",
+        "stats-section",
+        "pr-heading",
+        "pr67-section",
+        "pr69-section",
+        "separator2",
+        "full-article-link"
+      ]
+    },
+    "intro-text": {
+      "type": "Text",
+      "props": {
+        "text": "MiroShark crossed 1,000 stars today — three days past the self-set Apr 30 deadline that closed at 911. Same May 3 afternoon shipped two aeon-built PRs in adjacent minutes."
+      }
+    },
+    "separator1": {
+      "type": "Separator"
+    },
+    "stats-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "stat-stars",
+        "stat-forks"
+      ]
+    },
+    "stat-stars": {
+      "type": "Stat",
+      "props": {
+        "label": "Stars",
+        "value": "1,045",
+        "delta": "+134",
+        "trend": "up"
+      }
+    },
+    "stat-forks": {
+      "type": "Stat",
+      "props": {
+        "label": "Forks",
+        "value": "208"
+      }
+    },
+    "pr-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "PRs Shipped May 3",
+        "level": "h3"
+      }
+    },
+    "pr67-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "pr67-title",
+        "pr67-details"
+      ]
+    },
+    "pr67-title": {
+      "type": "Heading",
+      "props": {
+        "text": "PR #67: Live Spectator-Watch Page",
+        "level": "h4"
+      }
+    },
+    "pr67-details": {
+      "type": "Text",
+      "props": {
+        "text": "Shipped at 13:23 UTC"
+      }
+    },
+    "pr69-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "pr69-title",
+        "pr69-time",
+        "pr69-context",
+        "pr69-significance"
+      ]
+    },
+    "pr69-title": {
+      "type": "Heading",
+      "props": {
+        "text": "PR #69: Gallery Search & Filtering",
+        "level": "h4"
+      }
+    },
+    "pr69-time": {
+      "type": "Text",
+      "props": {
+        "text": "Shipped at 13:24 UTC",
+        "variant": "caption"
+      }
+    },
+    "pr69-context": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "badge-eighth",
+        "badge-multiplicative"
+      ]
+    },
+    "badge-eighth": {
+      "type": "Badge",
+      "props": {
+        "text": "Eighth surface over sim_dir/",
+        "variant": "default"
+      }
+    },
+    "badge-multiplicative": {
+      "type": "Badge",
+      "props": {
+        "text": "First multiplicative surface",
+        "variant": "secondary"
+      }
+    },
+    "pr69-significance": {
+      "type": "Text",
+      "props": {
+        "text": "An index across the prior seven serializing surfaces. Transforms the gallery from a stream you scroll into a corpus you query.",
+        "variant": "body"
+      }
+    },
+    "separator2": {
+      "type": "Separator"
+    },
+    "full-article-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Read the full article",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-05-03.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}
