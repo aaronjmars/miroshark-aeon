@@ -1,0 +1,565 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "Repo Pulse",
+        "description": "aaronjmars/MiroShark — 2026-05-03"
+      },
+      "children": [
+        "main_stack"
+      ]
+    },
+    "main_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stats_stack",
+        "milestone_badge",
+        "sep1",
+        "stargazers_section",
+        "sep2",
+        "forks_section"
+      ]
+    },
+    "stats_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "stars_stat",
+        "forks_stat"
+      ]
+    },
+    "stars_stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Stars",
+        "value": "1,018",
+        "delta": "+45",
+        "trend": "up"
+      }
+    },
+    "forks_stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Forks",
+        "value": "204",
+        "delta": "+9",
+        "trend": "up"
+      }
+    },
+    "milestone_badge": {
+      "type": "Badge",
+      "props": {
+        "text": "1K milestone crossed! 🎉",
+        "variant": "secondary"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stargazers_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stargazers_heading",
+        "stargazers_grid"
+      ]
+    },
+    "stargazers_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "New stargazers (45)",
+        "level": "h3"
+      }
+    },
+    "stargazers_grid": {
+      "type": "Grid",
+      "props": {
+        "columns": 5,
+        "gap": "sm"
+      },
+      "children": [
+        "star_1",
+        "star_2",
+        "star_3",
+        "star_4",
+        "star_5",
+        "star_6",
+        "star_7",
+        "star_8",
+        "star_9",
+        "star_10",
+        "star_11",
+        "star_12",
+        "star_13",
+        "star_14",
+        "star_15",
+        "star_16",
+        "star_17",
+        "star_18",
+        "star_19",
+        "star_20",
+        "star_21",
+        "star_22",
+        "star_23",
+        "star_24",
+        "star_25",
+        "star_26",
+        "star_27",
+        "star_28",
+        "star_29",
+        "star_30",
+        "star_31",
+        "star_32",
+        "star_33",
+        "star_34",
+        "star_35",
+        "star_36",
+        "star_37",
+        "star_38",
+        "star_39",
+        "star_40",
+        "star_41",
+        "star_42",
+        "star_43",
+        "star_44",
+        "star_45"
+      ]
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "forks_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "forks_heading",
+        "forks_stack"
+      ]
+    },
+    "forks_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "New forks (9)",
+        "level": "h3"
+      }
+    },
+    "forks_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "fork_1",
+        "fork_2",
+        "fork_3",
+        "fork_4",
+        "fork_5",
+        "fork_6",
+        "fork_7",
+        "fork_8",
+        "fork_9"
+      ]
+    },
+    "star_1": {
+      "type": "Link",
+      "props": {
+        "label": "JeanFM",
+        "href": "https://github.com/JeanFM"
+      }
+    },
+    "star_2": {
+      "type": "Link",
+      "props": {
+        "label": "OutsizedAlpha",
+        "href": "https://github.com/OutsizedAlpha"
+      }
+    },
+    "star_3": {
+      "type": "Link",
+      "props": {
+        "label": "SuketuShahPhilips",
+        "href": "https://github.com/SuketuShahPhilips"
+      }
+    },
+    "star_4": {
+      "type": "Link",
+      "props": {
+        "label": "Vivekv25",
+        "href": "https://github.com/Vivekv25"
+      }
+    },
+    "star_5": {
+      "type": "Link",
+      "props": {
+        "label": "amnmachado",
+        "href": "https://github.com/amnmachado"
+      }
+    },
+    "star_6": {
+      "type": "Link",
+      "props": {
+        "label": "patrickbrandao",
+        "href": "https://github.com/patrickbrandao"
+      }
+    },
+    "star_7": {
+      "type": "Link",
+      "props": {
+        "label": "gen-droid",
+        "href": "https://github.com/gen-droid"
+      }
+    },
+    "star_8": {
+      "type": "Link",
+      "props": {
+        "label": "locomoki",
+        "href": "https://github.com/locomoki"
+      }
+    },
+    "star_9": {
+      "type": "Link",
+      "props": {
+        "label": "P7AYER-1",
+        "href": "https://github.com/P7AYER-1"
+      }
+    },
+    "star_10": {
+      "type": "Link",
+      "props": {
+        "label": "shenghsi",
+        "href": "https://github.com/shenghsi"
+      }
+    },
+    "star_11": {
+      "type": "Link",
+      "props": {
+        "label": "jinnzy",
+        "href": "https://github.com/jinnzy"
+      }
+    },
+    "star_12": {
+      "type": "Link",
+      "props": {
+        "label": "ande128",
+        "href": "https://github.com/ande128"
+      }
+    },
+    "star_13": {
+      "type": "Link",
+      "props": {
+        "label": "akoh1649",
+        "href": "https://github.com/akoh1649"
+      }
+    },
+    "star_14": {
+      "type": "Link",
+      "props": {
+        "label": "traddo",
+        "href": "https://github.com/traddo"
+      }
+    },
+    "star_15": {
+      "type": "Link",
+      "props": {
+        "label": "CHYbeta",
+        "href": "https://github.com/CHYbeta"
+      }
+    },
+    "star_16": {
+      "type": "Link",
+      "props": {
+        "label": "step0xhen",
+        "href": "https://github.com/step0xhen"
+      }
+    },
+    "star_17": {
+      "type": "Link",
+      "props": {
+        "label": "saliey",
+        "href": "https://github.com/saliey"
+      }
+    },
+    "star_18": {
+      "type": "Link",
+      "props": {
+        "label": "HToTH",
+        "href": "https://github.com/HToTH"
+      }
+    },
+    "star_19": {
+      "type": "Link",
+      "props": {
+        "label": "arden",
+        "href": "https://github.com/arden"
+      }
+    },
+    "star_20": {
+      "type": "Link",
+      "props": {
+        "label": "notglossy",
+        "href": "https://github.com/notglossy"
+      }
+    },
+    "star_21": {
+      "type": "Link",
+      "props": {
+        "label": "safekbull",
+        "href": "https://github.com/safekbull"
+      }
+    },
+    "star_22": {
+      "type": "Link",
+      "props": {
+        "label": "abe1272001",
+        "href": "https://github.com/abe1272001"
+      }
+    },
+    "star_23": {
+      "type": "Link",
+      "props": {
+        "label": "jakehon1993",
+        "href": "https://github.com/jakehon1993"
+      }
+    },
+    "star_24": {
+      "type": "Link",
+      "props": {
+        "label": "hastefuI",
+        "href": "https://github.com/hastefuI"
+      }
+    },
+    "star_25": {
+      "type": "Link",
+      "props": {
+        "label": "supadumb",
+        "href": "https://github.com/supadumb"
+      }
+    },
+    "star_26": {
+      "type": "Link",
+      "props": {
+        "label": "pcherkashin",
+        "href": "https://github.com/pcherkashin"
+      }
+    },
+    "star_27": {
+      "type": "Link",
+      "props": {
+        "label": "morgonhu",
+        "href": "https://github.com/morgonhu"
+      }
+    },
+    "star_28": {
+      "type": "Link",
+      "props": {
+        "label": "code5717",
+        "href": "https://github.com/code5717"
+      }
+    },
+    "star_29": {
+      "type": "Link",
+      "props": {
+        "label": "treper",
+        "href": "https://github.com/treper"
+      }
+    },
+    "star_30": {
+      "type": "Link",
+      "props": {
+        "label": "xieburoucoco",
+        "href": "https://github.com/xieburoucoco"
+      }
+    },
+    "star_31": {
+      "type": "Link",
+      "props": {
+        "label": "wayne-pan",
+        "href": "https://github.com/wayne-pan"
+      }
+    },
+    "star_32": {
+      "type": "Link",
+      "props": {
+        "label": "bj-mckay",
+        "href": "https://github.com/bj-mckay"
+      }
+    },
+    "star_33": {
+      "type": "Link",
+      "props": {
+        "label": "Carence1998",
+        "href": "https://github.com/Carence1998"
+      }
+    },
+    "star_34": {
+      "type": "Link",
+      "props": {
+        "label": "pecpwee",
+        "href": "https://github.com/pecpwee"
+      }
+    },
+    "star_35": {
+      "type": "Link",
+      "props": {
+        "label": "Ashi-10101",
+        "href": "https://github.com/Ashi-10101"
+      }
+    },
+    "star_36": {
+      "type": "Link",
+      "props": {
+        "label": "BerkSenturkTV",
+        "href": "https://github.com/BerkSenturkTV"
+      }
+    },
+    "star_37": {
+      "type": "Link",
+      "props": {
+        "label": "beiluo",
+        "href": "https://github.com/beiluo"
+      }
+    },
+    "star_38": {
+      "type": "Link",
+      "props": {
+        "label": "nathan3hui-oss",
+        "href": "https://github.com/nathan3hui-oss"
+      }
+    },
+    "star_39": {
+      "type": "Link",
+      "props": {
+        "label": "alahmad077",
+        "href": "https://github.com/alahmad077"
+      }
+    },
+    "star_40": {
+      "type": "Link",
+      "props": {
+        "label": "Adityaakr",
+        "href": "https://github.com/Adityaakr"
+      }
+    },
+    "star_41": {
+      "type": "Link",
+      "props": {
+        "label": "Bwy999",
+        "href": "https://github.com/Bwy999"
+      }
+    },
+    "star_42": {
+      "type": "Link",
+      "props": {
+        "label": "AtaleFeng",
+        "href": "https://github.com/AtaleFeng"
+      }
+    },
+    "star_43": {
+      "type": "Link",
+      "props": {
+        "label": "jixiaobao2026-afk",
+        "href": "https://github.com/jixiaobao2026-afk"
+      }
+    },
+    "star_44": {
+      "type": "Link",
+      "props": {
+        "label": "virgi911",
+        "href": "https://github.com/virgi911"
+      }
+    },
+    "star_45": {
+      "type": "Link",
+      "props": {
+        "label": "Herklos",
+        "href": "https://github.com/Herklos"
+      }
+    },
+    "fork_1": {
+      "type": "StoryLink",
+      "props": {
+        "title": "jixiaobao2026-afk/MiroShark",
+        "href": "https://github.com/jixiaobao2026-afk/MiroShark"
+      }
+    },
+    "fork_2": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Adityaakr/MiroShark",
+        "href": "https://github.com/Adityaakr/MiroShark"
+      }
+    },
+    "fork_3": {
+      "type": "StoryLink",
+      "props": {
+        "title": "lepic974/MiroShark",
+        "href": "https://github.com/lepic974/MiroShark"
+      }
+    },
+    "fork_4": {
+      "type": "StoryLink",
+      "props": {
+        "title": "swillows/MiroShark",
+        "href": "https://github.com/swillows/MiroShark"
+      }
+    },
+    "fork_5": {
+      "type": "StoryLink",
+      "props": {
+        "title": "opcop/MiroShark",
+        "href": "https://github.com/opcop/MiroShark"
+      }
+    },
+    "fork_6": {
+      "type": "StoryLink",
+      "props": {
+        "title": "akoh1649/MiroShark",
+        "href": "https://github.com/akoh1649/MiroShark"
+      }
+    },
+    "fork_7": {
+      "type": "StoryLink",
+      "props": {
+        "title": "kloewer/miroshark",
+        "href": "https://github.com/kloewer/miroshark"
+      }
+    },
+    "fork_8": {
+      "type": "StoryLink",
+      "props": {
+        "title": "bbp96/MiroShark",
+        "href": "https://github.com/bbp96/MiroShark"
+      }
+    },
+    "fork_9": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Allan77bot/MiroShark",
+        "href": "https://github.com/Allan77bot/MiroShark"
+      }
+    }
+  }
+}
