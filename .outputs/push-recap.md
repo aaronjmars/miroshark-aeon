@@ -1,17 +1,12 @@
-*Push Recap — 2026-05-03*
-MiroShark — 2 commits merged (Aaron); miroshark-aeon — 1 substantive merge + ~25 chore auto-commits
+*Push Recap — 2026-05-04*
+MiroShark — 1 substantive merge (PR #71). miroshark-aeon — 0 substantive merges (~30 harness chore commits only).
 
-Eighth surface over sim_dir/ — PR #69 Gallery Search & Filtering filed AND merged today (13:24 UTC). /explore turns from a reverse-chronological scroll into a queryable corpus: q / consensus / quality / outcome / sort / page on GET /api/simulation/public, all bookmarkable via URL params, +1,507/-62 across 11 files. First multiplicative surface — an index across the prior seven, not a renderer of one sim. Includes a fix-during-review inside the same squash that tightens dominant_stance() to require ≥0.2pp over the runner-up so the gallery filter doesn't become the first surface to contradict the threshold every other surface enforces.
-
-Seventh surface lands — PR #67 Live Spectator Watch Page (filed Apr 30 by aeon) squash-merged 13:23 UTC. /watch/<id> serves an SSR page with a 15s vanilla-JS poller that hits embed-summary + run-status, transitions to "View full sim →" + "Fork →" CTAs once terminal. OG/Twitter card unfurls live state on Twitter. Squash includes a fix(watch) follow-up: bar-count rename, scenario truncation in bootstrap blob, document.visibilityState poll gating (backgrounded tabs pause), prefers-reduced-motion media query.
-
-Hyperstitions resilience — PR #28 on miroshark-aeon merged 13:24 UTC. Step 8 instruction made emphatic: first appended log line MUST be the literal `## Hyperstitions Ideas` header. Step 0 dedup adds defensive backstop matching a bare `- **Question:**` bullet when no header sits above it. Closes the two-step latent cascade observed yesterday where a missing header would have tripped both the skill's own dedup AND heartbeat's "did it run today?" check.
+PR #71 *Shareable Scenario Links* (filed 11:46 UTC, merged 12:56 UTC): the eight surfaces shipped to date all serialize a *finished* sim — gallery card / share card / replay GIF / transcript / RSS / trajectory CSV / live watch / gallery search. PR #71 covers the inverse direction, the un-run scenario. `?scenario=…&url=…&ask=…&template=<slug>` query params on `/` pre-fill the New Sim form (or auto-launch a preset template via the existing `setPendingTemplate` flow); inverse-direction 🔗 *Share as link* button beneath the Simulation Prompt + per-template-card 🔗 copy the URL from live form state. Pure frontend, zero new deps (DOMPurify already pinned for the markdown renderer). The Fork-this-scenario buttons that PR #67 added to `/share` and `/watch` already covered the un-run-from-finished direction; PR #71 covers the un-run-from-tweet-or-blog direction.
 
 Key changes:
-- backend/app/services/gallery_filters.py NEW (+345) — pure-stdlib filter/sort/paginate composition with ±0.2 threshold parity
-- backend/app/services/watch_renderer.py NEW (+928) — SSR live-broadcast page, OG card, visibility-gated 15s poller
-- skills/hyperstitions-ideas/SKILL.md (+7/-4) — log header now mandatory + bullet-pattern dedup backstop
-- 33 + 18 offline unit tests added across the two MiroShark PRs
+- NEW `frontend/src/utils/urlParams.js` (+116) — DOMPurify-backed sanitizer; HTML / `javascript:` URIs / control chars stripped, length-capped (scenario 500 / ask 300 / url 2000), `template=` restricted to `[a-z0-9_-]+`, `?url=` rejected unless `http(s):`. One source of truth for read on `/` and write on `/` + per-template card.
+- `Home.vue` (+385 / −2) — `onMounted` reads + applies, fires one-shot `fetchUrlDoc()` for `?url=`, hands `?template=<slug>` to existing template-launch flow with redirect, strips params via `router.replace` so refresh / address-bar copy reflects edited state. Dismissible orange-edged banner + `🔗 Share as link` button.
+- `TemplateGallery.vue` (+68 / −10) — every preset card gets a 🔗 sibling next to Launch that copies `?template=<slug>` with brief ✓ flash.
 
-Stats: 29 files changed, +3,531/-74 across 3 substantive merges. Zero-new-deps streak now 9 PRs (#57/#58/#60/#61/#62/#65/#66/#67/#69). 1K-stars line crossed today (1018 / 204 forks, +45/24h).
-Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-05-03.md
+Stats: 6 files changed, +613 / −12. Zero-new-deps streak now 10 consecutive PRs.
+Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-05-04.md
