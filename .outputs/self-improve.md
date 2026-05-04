@@ -1,16 +1,16 @@
-*Agent Self-Improvement — 2026-05-02*
+*Agent Self-Improvement — 2026-05-04*
 
-Hyperstitions log-header resilience
+Project-Lens Angle Rotation Rule
+Rewrote the angle-rotation rule in `skills/project-lens/SKILL.md`. The old rule said "Never repeat an angle used in the last 14 days" — but with 8 angle categories on a daily cadence, day 9 onward forces a repeat into any 14-day window. The rule was unsatisfiable, and every project-lens entry from Apr 22 → May 2 ended up writing a rationalization rather than rotating clean.
 
-The hyperstitions-ideas skill ran on schedule today (Sat 10:00 UTC) and produced its market question, but the LLM appended the bullet block to memory/logs/2026-05-02.md without writing the `## Hyperstitions Ideas` section header. That sets up a two-step cascade failure: the skill's own dedup guard keys off the header, and heartbeat's "did this run today?" check searches for the substring "hyperstitions" in the log — both would return empty. Tonight's 19:00 UTC heartbeat would conclude the skill never ran, dispatch it, and the operator would receive a second conflicting market question on the same coordination channel.
-
-Why: Caught the missing header by `grep -i hyperstitions memory/logs/2026-05-02.md` returning empty after seeing only the bullet block in the day's log — every prior Saturday run (Mar 27, Mar 28, Apr 11, Apr 18, Apr 25) had carried the proper header. hyperstitions-ideas is not on heartbeat's auto-trigger skip-list, so a re-dispatch would have fired live. Picked over today's other minor drift (repo-pulse missing `**Notification sent:** yes` line) because the hyperstitions miss has a concrete duplicate-notification downstream consumer.
+Why: every log entry from Apr 22 → May 2 violated the rule (Apr 22 #6 used 4 days prior, Apr 25 #6 used 2 days prior, Apr 27 #3 used 6 days prior, Apr 29 #5 used 8 days prior, Apr 30 #6 used 5 days prior, May 2 #7 used 10 days prior). The rule was producing log noise without changing behavior — and the rationalizations were drift in disguise.
 
 What changed:
-- skills/hyperstitions-ideas/SKILL.md step 8: prepended an emphatic pre-block instruction — first appended line MUST be the literal `## Hyperstitions Ideas` header on its own line, with a footnote naming the dedup-guard / heartbeat / memory-flush consumers and citing today's failure as trigger.
-- skills/hyperstitions-ideas/SKILL.md step 0: dedup guard now also matches a bare `- **Question:**` bullet when no Hyperstitions header sits above it — defensive backstop so even a future header-drop run is recognised as already-done by any subsequent dispatch attempt.
-- memory/logs/2026-05-02.md: inserted the missing `## Hyperstitions Ideas` header above the existing bullet block so tonight's heartbeat sees the run as completed and doesn't re-dispatch.
+- skills/project-lens/SKILL.md: replaced impossible 14-day rule with "least recently used" + 30-day count tie-break + 6-day soft floor + two explicit override paths that must be stated in the log under **Override:**
+- Added a math-aware preface explaining why strict-no-repeat is only satisfiable for N ≤ 8 days
+- Added a **Last used:** log line so future runs see rotation health at a glance
+- Step 2 instructions rewritten to scan memory logs as well as articles (logs were the under-utilized data source)
 
-Impact: prevents duplicate hyperstitions market questions in the operator channel on any day the LLM running the skill drops the header — both via the strengthened instruction (prevents the drop) and the bullet-pattern backstop (catches it if it still happens). Tonight's heartbeat will now find the patched header and stand down.
+Impact: stops the daily quality drift where the skill rationalized itself out of an impossible rule. Future project-lens entries will rotate cleanly on least-recently-used and only override when explicitly justified — no more invented narratives around a violated 14-day window.
 
-PR: https://github.com/aaronjmars/miroshark-aeon/pull/28
+PR: https://github.com/aaronjmars/miroshark-aeon/pull/29
