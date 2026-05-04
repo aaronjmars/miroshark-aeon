@@ -1,0 +1,167 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "Weekly Shiplog — 2026-05-04"
+      },
+      "children": [
+        "intro",
+        "sep1",
+        "shipped-heading",
+        "shipped-stack",
+        "sep2",
+        "stats-heading",
+        "stats-stack",
+        "sep3",
+        "link"
+      ]
+    },
+    "intro": {
+      "type": "Text",
+      "props": {
+        "text": "Eight surfaces, one folder, one thousand stars: MiroShark went from one canonical view of every published sim to eight different ones — and crossed the 1K-star line three days late but with a 9-PR zero-new-deps streak intact.",
+        "variant": "lead"
+      },
+      "children": []
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "shipped-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Shipped",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "shipped-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "shipped-1",
+        "shipped-2",
+        "shipped-3"
+      ]
+    },
+    "shipped-1": {
+      "type": "Text",
+      "props": {
+        "text": "Five new surfaces over sim_dir/: verified ledger (#47), animated GIF (#50), transcript MD+JSON (#57), RSS/Atom (#60), trajectory CSV/JSONL (#66)"
+      },
+      "children": []
+    },
+    "shipped-2": {
+      "type": "Text",
+      "props": {
+        "text": "Live spectator watch page (#67) + gallery search & filtering index (#69) — adjacent-minute merges that crossed the 1K line same afternoon"
+      },
+      "children": []
+    },
+    "shipped-3": {
+      "type": "Text",
+      "props": {
+        "text": "Chinese-locale UI / 138-site backend localization / bilingual README (#61, #62, #65) — reader axis added alongside the channel axis"
+      },
+      "children": []
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "stats-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Stats",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "stats-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stat-prs-miroshark",
+        "stat-prs-aeon",
+        "stat-lines",
+        "stat-stars",
+        "stat-forks"
+      ]
+    },
+    "stat-prs-miroshark": {
+      "type": "Stat",
+      "props": {
+        "label": "PRs merged on MiroShark",
+        "value": "21"
+      },
+      "children": []
+    },
+    "stat-prs-aeon": {
+      "type": "Stat",
+      "props": {
+        "label": "PRs merged on miroshark-aeon",
+        "value": "3"
+      },
+      "children": []
+    },
+    "stat-lines": {
+      "type": "Text",
+      "props": {
+        "text": "+14,309/−1,449 lines across 144 files"
+      },
+      "children": []
+    },
+    "stat-stars": {
+      "type": "Stat",
+      "props": {
+        "label": "GitHub Stars",
+        "value": "1,061",
+        "delta": "+223",
+        "trend": "up"
+      },
+      "children": []
+    },
+    "stat-forks": {
+      "type": "Stat",
+      "props": {
+        "label": "GitHub Forks",
+        "value": "211",
+        "delta": "+53",
+        "trend": "up"
+      },
+      "children": []
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full update",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/weekly-shiplog-2026-05-04.md",
+        "source": "GitHub"
+      },
+      "children": []
+    }
+  }
+}
