@@ -15,7 +15,16 @@ This is NOT a repo progress update. `repo-article` and `push-recap` already cove
 
 ## Angle Selection
 
-If `${var}` is empty, pick from the angle categories below. **Never repeat an angle used in the last 14 days** — check recent `articles/project-lens-*.md` files and memory logs to see what's been done.
+If `${var}` is empty, pick from the angle categories below.
+
+**Rotation rule (math-aware):** there are 8 angle categories and this skill runs daily. Strict "never repeat in the last N days" is only satisfiable for N ≤ 8 — past 8 daily runs the oldest angle *must* re-enter any longer window. Past versions of this skill said "never repeat in the last 14 days" and every entry from Apr 22 → May 2 ended up rationalizing the violation in the log. Replace that with the rule below.
+
+Pick the **least recently used** angle — i.e. the category whose most-recent entry across `articles/project-lens-*.md` and memory logs is the oldest. Tie-break by which category has been used **least often** in the last 30 days. Avoid repeating an angle used in the **last 6 days** unless one of these explicit overrides applies (and only one):
+
+1. `${var}` is set and forces a specific angle.
+2. Today's project signal maps so cleanly onto a single angle (e.g. a major shipped feature, milestone, or external event) that any other choice would feel forced — in which case state the override in the log under `**Override:**` with the reason.
+
+Do **not** invent your own justification narrative around a violated 14-day window. If the skill drifts toward repeating the same 1–2 angles, that's a signal to widen the rotation, not to write longer rationalizations.
 
 ### Angle categories (rotate through these):
 
@@ -36,7 +45,7 @@ If `${var}` is empty, pick from the angle categories below. **Never repeat an an
    ```
    Also read 2-3 recent `articles/repo-article-*.md` and `articles/push-recap-*.md` to know what's been shipped lately.
 
-2. **Check what angles have been used recently** — read any `articles/project-lens-*.md` from the last 14 days. Pick a different angle category.
+2. **Check what angles have been used recently** — read `articles/project-lens-*.md` from the last 14 days, plus any `## Project Lens` log entries with an explicit `**Angle category:**` line. Build a `{category: last_used_date}` map. Pick the angle with the oldest `last_used_date` (or any unused category if one exists). If two are tied, pick whichever has appeared **fewer times** in the last 30 days.
 
 3. **Research the external connection**:
    - Use WebSearch to find 3-5 current articles, discussions, or events related to the chosen angle
@@ -86,7 +95,9 @@ If `${var}` is empty, pick from the angle categories below. **Never repeat an an
 7. **Log** to `memory/logs/${today}.md`:
    ```
    ## Project Lens
-   - **Angle category:** [which of the 8 categories]
+   - **Angle category:** [which of the 8 categories — e.g. "Historical parallel (#7)"]
+   - **Last used:** [YYYY-MM-DD of the most recent prior entry in this category, or "never in last 30 days"]
+   - **Override:** [only present if rule overridden — state which override applies and why]
    - **Title:** [article title]
    - **External hook:** [what trend/event/idea was used]
    - **Notification sent:** yes
