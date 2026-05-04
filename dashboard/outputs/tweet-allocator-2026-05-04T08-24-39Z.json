@@ -1,0 +1,223 @@
+{
+  "root": "card-root",
+  "state": {},
+  "elements": {
+    "card-root": {
+      "type": "Card",
+      "props": {
+        "title": "Tweet Rewards"
+      },
+      "children": [
+        "heading-main",
+        "text-budget",
+        "separator-1",
+        "tweet-container-1",
+        "tweet-container-2",
+        "tweet-container-3",
+        "tweet-container-4",
+        "tweet-container-5",
+        "separator-2",
+        "text-total"
+      ]
+    },
+    "heading-main": {
+      "type": "Heading",
+      "props": {
+        "text": "Tweet Rewards — 2026-05-04",
+        "level": "h2"
+      }
+    },
+    "text-budget": {
+      "type": "Text",
+      "props": {
+        "text": "Budget: $10.00 in $MIROSHARK on Base",
+        "variant": "lead"
+      }
+    },
+    "separator-1": {
+      "type": "Separator",
+      "props": {}
+    },
+    "tweet-container-1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "stat-1",
+        "tweet-1",
+        "link-1"
+      ]
+    },
+    "stat-1": {
+      "type": "Stat",
+      "props": {
+        "label": "bluenami866 (score: 12)",
+        "value": "$3.15 in $MIROSHARK"
+      }
+    },
+    "tweet-1": {
+      "type": "TweetCard",
+      "props": {
+        "author": "bluenami866",
+        "handle": "bluenami866",
+        "text": "$miroshark (quoting article link)"
+      }
+    },
+    "link-1": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/bluenami866/status/2050947637017235762"
+      }
+    },
+    "tweet-container-2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "stat-2",
+        "tweet-2",
+        "link-2"
+      ]
+    },
+    "stat-2": {
+      "type": "Stat",
+      "props": {
+        "label": "Qryptopound (score: 9)",
+        "value": "$2.37 in $MIROSHARK"
+      }
+    },
+    "tweet-2": {
+      "type": "TweetCard",
+      "props": {
+        "author": "Qryptopound",
+        "handle": "Qryptopound",
+        "text": "$Miroshark 🔥🔥🔥 (quoting 1K stars post)"
+      }
+    },
+    "link-2": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/Qryptopound/status/2050988784842416493"
+      }
+    },
+    "tweet-container-3": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "stat-3",
+        "tweet-3",
+        "link-3"
+      ]
+    },
+    "stat-3": {
+      "type": "Stat",
+      "props": {
+        "label": "DaMikey23 (score: 9)",
+        "value": "$2.37 in $MIROSHARK"
+      }
+    },
+    "tweet-3": {
+      "type": "TweetCard",
+      "props": {
+        "author": "DaMikey23",
+        "handle": "DaMikey23",
+        "text": "$MIROSHARK is doing incredible things that other tech can only dream of."
+      }
+    },
+    "link-3": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/DaMikey23/status/2050747713512227020"
+      }
+    },
+    "tweet-container-4": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "stat-4",
+        "tweet-4",
+        "link-4"
+      ]
+    },
+    "stat-4": {
+      "type": "Stat",
+      "props": {
+        "label": "WazzupCrypto (score: 5)",
+        "value": "$1.32 in $MIROSHARK"
+      }
+    },
+    "tweet-4": {
+      "type": "TweetCard",
+      "props": {
+        "author": "WazzupCrypto",
+        "handle": "WazzupCrypto",
+        "text": "$MIROSHARK are my largest bags too!"
+      }
+    },
+    "link-4": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/WazzupCrypto/status/2050952577148399790"
+      }
+    },
+    "tweet-container-5": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "stat-5",
+        "tweet-5",
+        "link-5"
+      ]
+    },
+    "stat-5": {
+      "type": "Stat",
+      "props": {
+        "label": "khayyanpoo14 (score: 3)",
+        "value": "$0.79 in $MIROSHARK"
+      }
+    },
+    "tweet-5": {
+      "type": "TweetCard",
+      "props": {
+        "author": "khayyanpoo14",
+        "handle": "khayyanpoo14",
+        "text": "$WBC + $MIROSHARK synergy: MiroShark runs massive agent swarm simulations..."
+      }
+    },
+    "link-5": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/khayyanpoo14/status/2050954924822090061"
+      }
+    },
+    "separator-2": {
+      "type": "Separator",
+      "props": {}
+    },
+    "text-total": {
+      "type": "Text",
+      "props": {
+        "text": "Total: $10.00 in $MIROSHARK allocated to 5 authors",
+        "variant": "lead"
+      }
+    }
+  }
+}
