@@ -1,0 +1,228 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "project-lens"
+      },
+      "children": [
+        "article_link",
+        "content_stack"
+      ]
+    },
+    "article_link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Show Your Work: The Audit Question Coming for Every Outcome Resolver",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-05-04.md",
+        "source": "GitHub"
+      }
+    },
+    "content_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "opening",
+        "sep1",
+        "issues_section",
+        "sep2",
+        "insight",
+        "sep3",
+        "miroshark_section",
+        "sep4",
+        "closing"
+      ]
+    },
+    "opening": {
+      "type": "Text",
+      "props": {
+        "text": "On Apr 30, Sen. Merkley led congressional Democrats in a letter to the CFTC about \"rapid erosion of integrity\" in Kalshi/Polymarket.",
+        "variant": "body"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "issues_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "issues_title",
+        "issue1",
+        "issue2",
+        "issue3",
+        "issue4"
+      ]
+    },
+    "issues_title": {
+      "type": "Heading",
+      "props": {
+        "text": "Key Issues",
+        "level": "h4"
+      }
+    },
+    "issue1": {
+      "type": "Badge",
+      "props": {
+        "text": "Soldier's $400K Polymarket bets on Venezuela military action",
+        "variant": "outline"
+      }
+    },
+    "issue2": {
+      "type": "Badge",
+      "props": {
+        "text": "Three Kalshi candidates suspended for trading on their own elections",
+        "variant": "outline"
+      }
+    },
+    "issue3": {
+      "type": "Badge",
+      "props": {
+        "text": "Brazil's block on prediction markets",
+        "variant": "outline"
+      }
+    },
+    "issue4": {
+      "type": "Badge",
+      "props": {
+        "text": "Minnesota's pending ban on prediction markets",
+        "variant": "outline"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "insight": {
+      "type": "Alert",
+      "props": {
+        "title": "The Core Question",
+        "message": "The pressure isn't whether prediction markets exist; it's how a contract's resolution gets audited.",
+        "type": "info"
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "miroshark_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "miroshark_title",
+        "miroshark_intro",
+        "outputs_section"
+      ]
+    },
+    "miroshark_title": {
+      "type": "Heading",
+      "props": {
+        "text": "MiroShark's Response",
+        "level": "h3"
+      }
+    },
+    "miroshark_intro": {
+      "type": "Text",
+      "props": {
+        "text": "MiroShark, also in the business of resolving outcomes, has spent the last nine days writing the entire derivation to disk.",
+        "variant": "body"
+      }
+    },
+    "outputs_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "outputs_heading",
+        "output1",
+        "output2",
+        "output3",
+        "output4",
+        "output5",
+        "threshold_info"
+      ]
+    },
+    "outputs_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Eight Surfaces in /verified Folder",
+        "level": "h4"
+      }
+    },
+    "output1": {
+      "type": "Badge",
+      "props": {
+        "text": "Outcome ledger",
+        "variant": "secondary"
+      }
+    },
+    "output2": {
+      "type": "Badge",
+      "props": {
+        "text": "Transcript MD+JSON",
+        "variant": "secondary"
+      }
+    },
+    "output3": {
+      "type": "Badge",
+      "props": {
+        "text": "Trajectory CSV+JSONL",
+        "variant": "secondary"
+      }
+    },
+    "output4": {
+      "type": "Badge",
+      "props": {
+        "text": "Live watch page",
+        "variant": "secondary"
+      }
+    },
+    "output5": {
+      "type": "Badge",
+      "props": {
+        "text": "Gallery search",
+        "variant": "secondary"
+      }
+    },
+    "threshold_info": {
+      "type": "Text",
+      "props": {
+        "text": "All gated by ±0.2 threshold",
+        "variant": "caption"
+      }
+    },
+    "sep4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "closing": {
+      "type": "Alert",
+      "props": {
+        "message": "The bet has gotten cheaper; the receipt is what's getting expensive.",
+        "type": "success"
+      }
+    }
+  }
+}
