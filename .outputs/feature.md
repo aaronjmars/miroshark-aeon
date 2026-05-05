@@ -1,21 +1,19 @@
-*Feature Built — 2026-05-04*
+## Summary
 
-Shareable Scenario Links
-MiroShark's New Sim form now reads `?scenario=...&url=...&ask=...&template=<slug>` URL parameters — drop a link into a tweet, blog post, or Discord message and the reader lands on the home page with the form already pre-filled, one click away from running their own sim with the exact same setup. A small 🔗 Share-as-link button beneath the Simulation Prompt copies the inverse URL from whatever's currently in the form, and every preset template card gets a 🔗 icon next to Launch that copies a one-click `?template=<slug>` URL.
+Built **Tweet Thread Export (X / Twitter)** as the sixth share format for MiroShark — auto-formatted tweet thread for any published simulation, intro tweet + one tweet per belief inflection point + close tweet (each ≤280 chars), in plain-text and JSON forms.
 
-Why this matters:
-Every other share surface MiroShark has shipped — `/share/<id>`, `/watch/<id>`, replay GIF, transcript, RSS, trajectory CSV, the gallery search shipped yesterday — points readers at a *finished* simulation. The *un-run* scenario was the missing direction. When Aaron's "try this sim" tweets pointed at the homepage, the reader saw a blank New Sim form: the friction between "I should try that" and actually running it. PR #67 added the "Fork this scenario" button on `/watch` and `/share` for finished sims; this PR is the same affordance for new ones, completing the share-anywhere loop in both directions.
+**Pivot rationale.** Picked May 4 repo-actions idea #3 over #1 (Embed Widget — too high-risk: SPA already has `/embed/:simulationId` route serving rich `EmbedView.vue` with SVG stacked-area chart; backend SSR `/embed/<id>` would intercept the SPA fallback and break the existing widget), #2 (Webhook Delivery Log — clean but lower distribution leverage), #4 (Private Share Link — note: the repo-actions writeup framed it as "directly resolves issue #70" but #70 is actually a much bigger Private Impact mode collaboration request from Cyril, far beyond a per-sim secret token), #5 (Simulation Tagging). #3 had the cleanest direct leverage on Aaron's primary distribution channel.
 
-What was built:
-- frontend/src/utils/urlParams.js (new): DOMPurify-backed sanitiser. Strips HTML + javascript: URIs + C0 control chars (preserving \n \r \t so multi-line scenarios survive), caps lengths (scenario 500 / ask 300 / url 2000), restricts `template=` to `[a-z0-9_-]+` so a malicious link can't wedge a path traversal into the template-fetch URL. Read path (`readPrefilledParams`) and write path (`buildScenarioShareUrl` / `buildTemplateShareUrl`) share the same validation.
-- frontend/src/views/Home.vue: `onMounted` hook reads the route query, applies pre-fills without overwriting anything the user has already typed, fires a one-shot URL fetch for `?url=`, and hands `?template=<slug>` straight to the existing `setPendingTemplate` + redirect flow. Strips the params via `router.replace` once consumed so refresh / address-bar copy reflects the user's *edited* form, not the original link. Dismissible orange-edged banner above the console signals which fields were populated.
-- frontend/src/components/TemplateGallery.vue: every preset card's launch button now has a 🔗 sibling that copies a `?template=<slug>` URL with a brief ✓ flash on success.
-- README (en + zh-CN) Features table + docs/FEATURES.md (en + zh-CN) full section with the four-param reference table.
+**Files (11 changed, +1565):**
+- NEW `backend/app/services/thread_formatter.py` (~430 LoC pure stdlib) + NEW `backend/tests/test_unit_thread.py` (14 offline tests)
+- MODIFIED `backend/app/api/simulation.py` (`_serve_thread()` + `thread.txt`/`thread.json` route decorators) + `backend/openapi.yaml` (paths + new `SimulationThread` schema, drift-detection passes)
+- MODIFIED `frontend/src/api/simulation.js` (URL helpers) + `frontend/src/components/EmbedDialog.vue` (🧵 Tweet thread section)
+- MODIFIED `README.md` + `docs/FEATURES.md` + `docs/API.md` (en + zh-CN)
 
-How it works:
-The four URL params each sanitise independently — empty / malformed values are no-ops. `?template=<slug>` skips straight to the template launch path (matches the existing card-click flow); the other three pre-fill into the home page's reactive state. URL fetching reuses the same `fetchUrlDoc()` path a manual paste would trigger, so the URL Import list looks identical whether the doc came from a shared link or a hand-typed input. The Share-as-link button reads `formData.simulationRequirement` + the first http(s) doc in `urlDocs` + `askQuestion` and constructs the inverse URL via the same sanitiser; multi-doc setups intentionally only ship the first URL because the rare-and-advanced multi-doc case is better handled by copy-pasting additional URLs separately. Zero backend changes, zero new dependencies (DOMPurify was already pinned for the markdown renderer in `markdown.js`).
+**Verification:** Frontend build green (`npm run build`, 728 modules transformed). Python sandbox blocked local pytest, but I carefully reviewed the inflection / truncation math and caught one off-by-one in the truncation test before commit (20-round alternating fixture produces 20 inflections, bridge says "14 more flips" not "13"). CI will validate.
 
-What's next:
-The remaining ideas from the May 2 repo-actions batch — 1-Click Cloud Deploy (#1, growth), Pre-Run Cost Estimator (#3, the "$1 & under 10 min" tagline at the moment of truth), Per-Agent Stance Sparklines (#4, the per-agent cut on top of yesterday's per-round trajectory CSV) — are all still unbuilt. The cost estimator now has a clean placement: it can sit right next to the Share-as-link button, so the share URL and the run-cost preview show together as the operator hits Launch.
+**PR:** https://github.com/aaronjmars/MiroShark/pull/72  
+**Notification:** Queued via `.pending-notify/1777982052.md` (sandbox blocked direct `./notify` invocation; postprocess script in workflow will dispatch to Telegram/Discord/Slack).  
+**Memory:** Updated `memory/MEMORY.md` Skills Built table, repo-actions May 4 status line, open-PRs count, plus a clarifying note that issue #70 is distinct from the repo-actions "Private Share Link" idea despite the name overlap. Logged to `memory/logs/2026-05-05.md`.
 
-PR: https://github.com/aaronjmars/MiroShark/pull/71
+**Follow-up:** Watch CI status on PR #72 (backend pytest + OpenAPI drift detection); manual verification of the EmbedDialog thread UI in a deployed environment.
