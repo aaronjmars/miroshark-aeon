@@ -1,0 +1,152 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Heartbeat"
+      },
+      "children": [
+        "stack_main"
+      ]
+    },
+    "stack_main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "lg"
+      },
+      "children": [
+        "heading_main",
+        "text_timestamp",
+        "sep1",
+        "section_skills",
+        "sep2",
+        "section_prs",
+        "sep3",
+        "text_summary"
+      ]
+    },
+    "heading_main": {
+      "type": "Heading",
+      "props": {
+        "text": "🫀 Heartbeat",
+        "level": "h1"
+      },
+      "children": []
+    },
+    "text_timestamp": {
+      "type": "Text",
+      "props": {
+        "text": "Tue May 05, 2026 19:15 UTC",
+        "variant": "caption"
+      },
+      "children": []
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "section_skills": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading_skills",
+        "badge_skills"
+      ]
+    },
+    "heading_skills": {
+      "type": "Heading",
+      "props": {
+        "text": "Daily Skills",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "badge_skills": {
+      "type": "Badge",
+      "props": {
+        "text": "All 8 daily skills ran ✓",
+        "variant": "default"
+      },
+      "children": []
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "section_prs": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading_prs",
+        "alert_pr29",
+        "storylink_pr29",
+        "storylink_pr72"
+      ]
+    },
+    "heading_prs": {
+      "type": "Heading",
+      "props": {
+        "text": "Pull Requests",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "alert_pr29": {
+      "type": "Alert",
+      "props": {
+        "title": "Stalled PR",
+        "message": "PR #29 has been open for 29.5h with no merge or review activity.",
+        "type": "warning"
+      },
+      "children": []
+    },
+    "storylink_pr29": {
+      "type": "StoryLink",
+      "props": {
+        "title": "miroshark-aeon PR #29: project-lens rotation rule rewrite",
+        "href": "https://github.com/miroshark-aeon/miroshark-aeon/pull/29",
+        "source": "Branch: improve/project-lens-angle-rotation-rule | Filed: 2026-05-04 13:35 UTC | Age: 29.5h"
+      },
+      "children": []
+    },
+    "storylink_pr72": {
+      "type": "StoryLink",
+      "props": {
+        "title": "MiroShark PR #72: Tweet Thread Export",
+        "href": "https://github.com/miroshark-aeon/MiroShark/pull/72",
+        "source": "Filed: 11:51 UTC today | Age: 7h | Status: CI pending, not yet stalled"
+      },
+      "children": []
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "text_summary": {
+      "type": "Text",
+      "props": {
+        "text": "No urgent issues. No missing skills.",
+        "variant": "lead"
+      },
+      "children": []
+    }
+  }
+}
