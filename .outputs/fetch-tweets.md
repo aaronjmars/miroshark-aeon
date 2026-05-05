@@ -1,41 +1,41 @@
-*Top Tweets — $MIROSHARK OR @miroshark_ OR github.com/aaronjmars/miroshark (2026-05-04)*
+*Top Tweets — $MIROSHARK OR @miroshark_ OR github.com/aaronjmars/miroshark (2026-05-05)*
 
-1. x.com/Qryptopound — $Miroshark 🔥🔥🔥 (quoting 1K stars post)
-Likes: 6 | RTs: 1
-[View tweet](https://x.com/Qryptopound/status/2050988784842416493)
+1. x.com/TheGodfath13541 — OriginTrail V10 + 1K stars repricing thesis: "New article by @origin_trail is very bullish for the shark. $Miroshark just hit 1,000 GitHub stars, has a tech cloud partner announcement coming and is directly involved with @origin_trail upcoming V10 release."
+Likes: 20 | RTs: 7
+[View tweet](https://x.com/TheGodfath13541/status/2051303601855680852)
 
-2. x.com/bluenami866 — $miroshark (quoting article link)
+2. x.com/DaMikey23 — "$AEON Framework Built It. $MIROSHARK AI Hunts With It."
 Likes: 6 | RTs: 2
-[View tweet](https://x.com/bluenami866/status/2050947637017235762)
+[View tweet](https://x.com/DaMikey23/status/2051363944124551340)
 
-3. x.com/DaMikey23 — $MIROSHARK is doing incredible things that other tech can only dream of.
-Likes: 6 | RTs: 1
-[View tweet](https://x.com/DaMikey23/status/2050747713512227020)
+3. x.com/TheGodfath13541 — 5K stars plan: "yes, and in new $miroshark report @aaronjmars gave good plan scaling to 5,000 GitHub stars. comfy in my position here. mfers jump ship way too fast in this space."
+Likes: 6 | RTs: 0
+[View tweet](https://x.com/TheGodfath13541/status/2051384245965226394)
 
-4. x.com/khayyanpoo14 — $WBC + $MIROSHARK synergy: agent swarm sims + permanent archival = verifiable history future agents can learn from.
+4. x.com/Squiddyderpypy — "$miroshark should be sitting at millions already. no idea why people are still not noticing this"
 Likes: 3 | RTs: 0
-[View tweet](https://x.com/khayyanpoo14/status/2050954924822090061)
+[View tweet](https://x.com/Squiddyderpypy/status/2051440924157530427)
 
-5. x.com/bluenami866 — $miroshark (quoting 'boom boom boom' post)
+5. x.com/DaWachu80608 — "1000 GitHub stars is big $MiroShark"
+Likes: 3 | RTs: 0
+[View tweet](https://x.com/DaWachu80608/status/2051328752567652540)
+
+6. x.com/LauweTosti69 — "400k is cheap for this tech! Repricing imminent"
 Likes: 2 | RTs: 0
-[View tweet](https://x.com/bluenami866/status/2050960997012132254)
+[View tweet](https://x.com/LauweTosti69/status/2051310324452565012)
 
-6. x.com/_THOR_ASGARD — $MIROSHARK is my top conviction play on Base.
-Likes: 2 | RTs: 0
-[View tweet](https://x.com/_THOR_ASGARD/status/2050958163839696976)
-
-7. x.com/WazzupCrypto — $MIROSHARK are my largest bags too!
-Likes: 2 | RTs: 1
-[View tweet](https://x.com/WazzupCrypto/status/2050952577148399790)
-
-8. x.com/bluenami866 — $miroshark ⭐️ (quoting 1K stars)
-Likes: 2 | RTs: 0
-[View tweet](https://x.com/bluenami866/status/2050948238128161103)
-
-9. x.com/cryptallergy — Multi-ticker shill including $miroshark
+7. x.com/LauweTosti69 — "$miroshark shipping more in a week than most projects do in a quarter. Insane that this one is still shilling well below a million marketcap."
 Likes: 1 | RTs: 0
-[View tweet](https://x.com/cryptallergy/status/2050977423454318965)
+[View tweet](https://x.com/LauweTosti69/status/2051312405917888942)
 
-10. x.com/NexlifyCoin — 112k views on $miroshark. Soon will explode with Chinese buyers.
+8. x.com/bluenami866 — "$miroshark shipping"
+Likes: 2 | RTs: 0
+[View tweet](https://x.com/bluenami866/status/2051334147671498979)
+
+9. x.com/bluenami866 — "$miroshark"
+Likes: 3 | RTs: 0
+[View tweet](https://x.com/bluenami866/status/2051331870441275679)
+
+10. x.com/bluenami866 — "$miroshark"
 Likes: 0 | RTs: 0
-[View tweet](https://x.com/NexlifyCoin/status/2050883221647487239)
+[View tweet](https://x.com/bluenami866/status/2051306694102204441)
