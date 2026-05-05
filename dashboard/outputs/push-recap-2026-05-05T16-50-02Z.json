@@ -1,0 +1,237 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "Push Recap — 2026-05-05"
+      },
+      "children": [
+        "stack-main"
+      ]
+    },
+    "stack-main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "text-overview",
+        "sep-1",
+        "heading-pr72",
+        "text-pr72-desc",
+        "text-pr72-detail1",
+        "text-pr72-detail2",
+        "text-pr72-detail3",
+        "sep-2",
+        "heading-harness",
+        "text-harness",
+        "sep-3",
+        "heading-keychanges",
+        "stack-changes",
+        "sep-4",
+        "heading-stats",
+        "text-stats",
+        "story-recap"
+      ]
+    },
+    "text-overview": {
+      "type": "Text",
+      "props": {
+        "text": "aaronjmars/MiroShark — 1 substantive commit (in flight) by 1 author; aaronjmars/miroshark-aeon — 0 substantive merges, ~20 harness chore auto-commits.",
+        "variant": "body"
+      }
+    },
+    "sep-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading-pr72": {
+      "type": "Heading",
+      "props": {
+        "text": "Sixth share format (PR #72, OPEN): feat/tweet-thread-export",
+        "level": "h2"
+      }
+    },
+    "text-pr72-desc": {
+      "type": "Text",
+      "props": {
+        "text": "GET /api/simulation/<id>/thread.{txt,json} — the short-form text channel the prior five surfaces (share card / replay GIF / transcript / trajectory CSV+JSONL / live watch page) don't cover. Single squash candidate e85c803 at 11:50 UTC, +1565/−0 across 11 files.",
+        "variant": "body"
+      }
+    },
+    "text-pr72-detail1": {
+      "type": "Text",
+      "props": {
+        "text": "New 493-LoC pure-stdlib thread_formatter.py with STANCE_THRESHOLD=0.2 parity, dominant-stance hysteresis (≥0.2pp lead requirement suppresses 49/51 noise), inflection-point detection, MAX_THREAD_TWEETS=15 with bridge-tweet truncation; new 446-LoC test file (14 offline tests).",
+        "variant": "body"
+      }
+    },
+    "text-pr72-detail2": {
+      "type": "Text",
+      "props": {
+        "text": "Frontend EmbedDialog 🧵 section with Copy full thread + per-tweet copy + char counters + truncation note.",
+        "variant": "body"
+      }
+    },
+    "text-pr72-detail3": {
+      "type": "Text",
+      "props": {
+        "text": "The first share surface whose primary consumer is the operator's own posting flow — five priors produce outputs viewers consume; this produces an input the operator paste-edits.",
+        "variant": "body"
+      }
+    },
+    "sep-2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading-harness": {
+      "type": "Heading",
+      "props": {
+        "text": "Harness chores (no substantive merges)",
+        "level": "h2"
+      }
+    },
+    "text-harness": {
+      "type": "Text",
+      "props": {
+        "text": "Standard scheduler / cron-state / skill-output triples on miroshark-aeon main — same pattern as May 2. PR #29 (project-lens rotation rule rewrite) now ~27h old, still open.",
+        "variant": "body"
+      }
+    },
+    "sep-3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading-keychanges": {
+      "type": "Heading",
+      "props": {
+        "text": "Key changes",
+        "level": "h3"
+      }
+    },
+    "stack-changes": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "lg"
+      },
+      "children": [
+        "change-1",
+        "change-2",
+        "change-3"
+      ]
+    },
+    "change-1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "text-change1-title",
+        "text-change1-detail"
+      ]
+    },
+    "text-change1-title": {
+      "type": "Text",
+      "props": {
+        "text": "backend/app/services/thread_formatter.py NEW (+493)",
+        "variant": "lead"
+      }
+    },
+    "text-change1-detail": {
+      "type": "Text",
+      "props": {
+        "text": "STANCE_THRESHOLD=0.2 / MAX_TWEET_CHARS=280 / MAX_THREAD_TWEETS=15; dominant-stance hysteresis, inflection-point walker, bridge-tweet truncation",
+        "variant": "body"
+      }
+    },
+    "change-2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "text-change2-title",
+        "text-change2-detail"
+      ]
+    },
+    "text-change2-title": {
+      "type": "Text",
+      "props": {
+        "text": "backend/app/api/simulation.py (+127)",
+        "variant": "lead"
+      }
+    },
+    "text-change2-detail": {
+      "type": "Text",
+      "props": {
+        "text": "_resolve_share_base_url() proxy helper + _serve_thread() shared body following _serve_transcript / _serve_trajectory pattern; Cache-Control: public, max-age=300",
+        "variant": "body"
+      }
+    },
+    "change-3": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "text-change3-title",
+        "text-change3-detail"
+      ]
+    },
+    "text-change3-title": {
+      "type": "Text",
+      "props": {
+        "text": "frontend/src/components/EmbedDialog.vue (+300)",
+        "variant": "lead"
+      }
+    },
+    "text-change3-detail": {
+      "type": "Text",
+      "props": {
+        "text": "🧵 Tweet thread section beneath trajectory row + Copy buttons + char counters + truncation note",
+        "variant": "body"
+      }
+    },
+    "sep-4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading-stats": {
+      "type": "Heading",
+      "props": {
+        "text": "Stats",
+        "level": "h3"
+      }
+    },
+    "text-stats": {
+      "type": "Text",
+      "props": {
+        "text": "11 files changed, +1,565 / −0 lines (PR #72 still open; CI pending). Zero-new-deps streak would hit 12 consecutive PRs once merged.",
+        "variant": "body"
+      }
+    },
+    "story-recap": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full recap: push-recap-2026-05-05.md",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-05-05.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}

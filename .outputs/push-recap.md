@@ -1,12 +1,15 @@
-*Push Recap — 2026-05-04*
-MiroShark — 1 substantive merge (PR #71). miroshark-aeon — 0 substantive merges (~30 harness chore commits only).
+*Push Recap — 2026-05-05*
 
-PR #71 *Shareable Scenario Links* (filed 11:46 UTC, merged 12:56 UTC): the eight surfaces shipped to date all serialize a *finished* sim — gallery card / share card / replay GIF / transcript / RSS / trajectory CSV / live watch / gallery search. PR #71 covers the inverse direction, the un-run scenario. `?scenario=…&url=…&ask=…&template=<slug>` query params on `/` pre-fill the New Sim form (or auto-launch a preset template via the existing `setPendingTemplate` flow); inverse-direction 🔗 *Share as link* button beneath the Simulation Prompt + per-template-card 🔗 copy the URL from live form state. Pure frontend, zero new deps (DOMPurify already pinned for the markdown renderer). The Fork-this-scenario buttons that PR #67 added to `/share` and `/watch` already covered the un-run-from-finished direction; PR #71 covers the un-run-from-tweet-or-blog direction.
+aaronjmars/MiroShark — 1 substantive commit (in flight) by 1 author; aaronjmars/miroshark-aeon — 0 substantive merges, ~20 harness chore auto-commits.
+
+**Sixth share format (PR #72, OPEN):** `feat/tweet-thread-export` adds `GET /api/simulation/<id>/thread.{txt,json}` — the short-form text channel the prior five surfaces (share card / replay GIF / transcript / trajectory CSV+JSONL / live watch page) don't cover. Single squash candidate `e85c803` at 11:50 UTC, +1565/−0 across 11 files. New 493-LoC pure-stdlib `thread_formatter.py` with STANCE_THRESHOLD=0.2 parity, dominant-stance hysteresis (≥0.2pp lead requirement suppresses 49/51 noise), inflection-point detection, MAX_THREAD_TWEETS=15 with bridge-tweet truncation; new 446-LoC test file (14 offline tests). Frontend EmbedDialog 🧵 section with Copy full thread + per-tweet copy + char counters + truncation note. The first share surface whose primary consumer is the operator's *own* posting flow — five priors produce outputs viewers consume; this produces an input the operator paste-edits.
+
+**Harness chores (no substantive merges):** Standard scheduler / cron-state / skill-output triples on miroshark-aeon `main` — same pattern as May 2. PR #29 (project-lens rotation rule rewrite) now ~27h old, still open.
 
 Key changes:
-- NEW `frontend/src/utils/urlParams.js` (+116) — DOMPurify-backed sanitizer; HTML / `javascript:` URIs / control chars stripped, length-capped (scenario 500 / ask 300 / url 2000), `template=` restricted to `[a-z0-9_-]+`, `?url=` rejected unless `http(s):`. One source of truth for read on `/` and write on `/` + per-template card.
-- `Home.vue` (+385 / −2) — `onMounted` reads + applies, fires one-shot `fetchUrlDoc()` for `?url=`, hands `?template=<slug>` to existing template-launch flow with redirect, strips params via `router.replace` so refresh / address-bar copy reflects edited state. Dismissible orange-edged banner + `🔗 Share as link` button.
-- `TemplateGallery.vue` (+68 / −10) — every preset card gets a 🔗 sibling next to Launch that copies `?template=<slug>` with brief ✓ flash.
+- `backend/app/services/thread_formatter.py` NEW (+493) — STANCE_THRESHOLD=0.2 / MAX_TWEET_CHARS=280 / MAX_THREAD_TWEETS=15; dominant-stance hysteresis, inflection-point walker, bridge-tweet truncation
+- `backend/app/api/simulation.py` (+127) — `_resolve_share_base_url()` proxy helper + `_serve_thread()` shared body following `_serve_transcript` / `_serve_trajectory` pattern; `Cache-Control: public, max-age=300`
+- `frontend/src/components/EmbedDialog.vue` (+300) — 🧵 Tweet thread section beneath trajectory row + Copy buttons + char counters + truncation note
 
-Stats: 6 files changed, +613 / −12. Zero-new-deps streak now 10 consecutive PRs.
-Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-05-04.md
+Stats: 11 files changed, +1,565 / −0 lines (PR #72 still open; CI pending). Zero-new-deps streak would hit 12 consecutive PRs once merged.
+Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-05-05.md
