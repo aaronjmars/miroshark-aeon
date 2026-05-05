@@ -1,5 +1,5 @@
-*New Article: Show Your Work: The Audit Question Coming for Every Outcome Resolver*
+*New Article: Friday, 9:14 AM: A Lending-Risk Analyst Drafts a Thread She'd Have Spent Two Hours On*
 
-On Apr 30 Sen. Merkley led congressional Democrats in a letter to the CFTC about "rapid erosion of integrity" in Kalshi/Polymarket — a soldier's $400K Polymarket bets on Venezuela military action, three Kalshi candidates suspended for trading on their own elections, plus Brazil's block and Minnesota's pending ban. The pressure isn't whether prediction markets exist; it's how a contract's resolution gets audited. MiroShark, also in the business of resolving outcomes, has spent the last nine days writing the entire derivation to disk — `/verified` outcome ledger, transcript MD+JSON, trajectory CSV+JSONL, live watch page, gallery search — eight surfaces over one folder, all gated by the same ±0.2 threshold. The bet has gotten cheaper; the receipt is what's getting expensive.
+A day-in-the-life of a Crypto Twitter DeFi analyst named Layla, who normally spends two hours stitching together a thread out of DeBank, Nansen, Glassnode, and Typefully on a quiet morning. Today she drops onto a pre-filled MiroShark form via someone's shared scenario URL (PR #71), runs a 6-minute sim, hits 'Copy full thread' (PR #72 today), and gets nine ≤280-char tweets — only the rounds where the dominant stance crossed ±0.2 with hysteresis, no wall of text, paste-and-edit into X compose. The story isn't speed; it's that the simulator's output finally lives in the box where the work is already typed.
 
-Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-05-04.md
+Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-05-05.md
