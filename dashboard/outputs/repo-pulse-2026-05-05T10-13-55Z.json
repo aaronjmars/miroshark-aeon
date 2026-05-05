@@ -1,0 +1,225 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "Repo Pulse"
+      },
+      "children": [
+        "heading-repo",
+        "text-date",
+        "stat-stars",
+        "stat-forks",
+        "separator-1",
+        "heading-stargazers",
+        "stargazers-stack",
+        "separator-2",
+        "heading-forks",
+        "forks-stack"
+      ]
+    },
+    "heading-repo": {
+      "type": "Heading",
+      "props": {
+        "text": "aaronjmars/MiroShark",
+        "level": "h2"
+      },
+      "children": []
+    },
+    "text-date": {
+      "type": "Text",
+      "props": {
+        "text": "2026-05-05",
+        "variant": "muted"
+      },
+      "children": []
+    },
+    "stat-stars": {
+      "type": "Stat",
+      "props": {
+        "label": "Stars",
+        "value": "1,071",
+        "delta": "+11",
+        "trend": "up"
+      },
+      "children": []
+    },
+    "stat-forks": {
+      "type": "Stat",
+      "props": {
+        "label": "Forks",
+        "value": "213",
+        "delta": "+2",
+        "trend": "up"
+      },
+      "children": []
+    },
+    "separator-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "heading-stargazers": {
+      "type": "Heading",
+      "props": {
+        "text": "New Stargazers",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "stargazers-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "link-stargazer-1",
+        "link-stargazer-2",
+        "link-stargazer-3",
+        "link-stargazer-4",
+        "link-stargazer-5",
+        "link-stargazer-6",
+        "link-stargazer-7",
+        "link-stargazer-8",
+        "link-stargazer-9",
+        "link-stargazer-10",
+        "link-stargazer-11"
+      ]
+    },
+    "link-stargazer-1": {
+      "type": "Link",
+      "props": {
+        "label": "Donatien-Wallaert",
+        "href": "https://github.com/Donatien-Wallaert"
+      },
+      "children": []
+    },
+    "link-stargazer-2": {
+      "type": "Link",
+      "props": {
+        "label": "Vini0408",
+        "href": "https://github.com/Vini0408"
+      },
+      "children": []
+    },
+    "link-stargazer-3": {
+      "type": "Link",
+      "props": {
+        "label": "davidtrost7",
+        "href": "https://github.com/davidtrost7"
+      },
+      "children": []
+    },
+    "link-stargazer-4": {
+      "type": "Link",
+      "props": {
+        "label": "quiromaniaco",
+        "href": "https://github.com/quiromaniaco"
+      },
+      "children": []
+    },
+    "link-stargazer-5": {
+      "type": "Link",
+      "props": {
+        "label": "ilyamalshv-arch",
+        "href": "https://github.com/ilyamalshv-arch"
+      },
+      "children": []
+    },
+    "link-stargazer-6": {
+      "type": "Link",
+      "props": {
+        "label": "giuseppegg02",
+        "href": "https://github.com/giuseppegg02"
+      },
+      "children": []
+    },
+    "link-stargazer-7": {
+      "type": "Link",
+      "props": {
+        "label": "Mattph1963",
+        "href": "https://github.com/Mattph1963"
+      },
+      "children": []
+    },
+    "link-stargazer-8": {
+      "type": "Link",
+      "props": {
+        "label": "nikofebrianur",
+        "href": "https://github.com/nikofebrianur"
+      },
+      "children": []
+    },
+    "link-stargazer-9": {
+      "type": "Link",
+      "props": {
+        "label": "harshith-vaddiparthy",
+        "href": "https://github.com/harshith-vaddiparthy"
+      },
+      "children": []
+    },
+    "link-stargazer-10": {
+      "type": "Link",
+      "props": {
+        "label": "wadajenze-bit",
+        "href": "https://github.com/wadajenze-bit"
+      },
+      "children": []
+    },
+    "link-stargazer-11": {
+      "type": "Link",
+      "props": {
+        "label": "barthoekstra",
+        "href": "https://github.com/barthoekstra"
+      },
+      "children": []
+    },
+    "separator-2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "heading-forks": {
+      "type": "Heading",
+      "props": {
+        "text": "New Forks",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "forks-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "link-fork-1",
+        "link-fork-2"
+      ]
+    },
+    "link-fork-1": {
+      "type": "Link",
+      "props": {
+        "label": "Donatien-Wallaert/MiroShark",
+        "href": "https://github.com/Donatien-Wallaert/MiroShark"
+      },
+      "children": []
+    },
+    "link-fork-2": {
+      "type": "Link",
+      "props": {
+        "label": "huiguyy/MiroShark",
+        "href": "https://github.com/huiguyy/MiroShark"
+      },
+      "children": []
+    }
+  }
+}
