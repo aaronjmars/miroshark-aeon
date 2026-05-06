@@ -70,6 +70,7 @@
 
 ## Next Priorities
 - Configure notification channels (Telegram, Discord, or Slack)
+- From repo-actions May 6 (still unbuilt): Simulation Config Export + Reproducibility Badge (#1), Python Client SDK via openapi-generator CI (#2), Director Event Timeline Overlay on Belief Chart (#3), Share Surface Usage Analytics (#4), Comparative Run View (#5)
 - From repo-actions May 4 (still unbuilt): Embeddable Live Belief Widget (#1 — autonomous-risky, conflicts with existing SPA `/embed/:id`), Private Share Link (#4 — note: does NOT actually resolve issue #70 / Cyril's Private Impact mode), Simulation Tagging (#5); #2 Webhook Delivery Log shipped 2026-05-06 (PR #73); #3 Tweet Thread Formatter shipped 2026-05-05 (PR #72)
 - From repo-actions May 2 (still unbuilt): 1-Click Cloud Deploy (#1), Pre-Run Cost Estimator (#3), Per-Agent Stance Sparklines (#4); #2 Gallery Search & Filtering shipped 2026-05-03 (PR #69), #5 Pre-filled Scenario URL shipped 2026-05-04 (PR #71)
 - From repo-actions Apr 30 (still unbuilt): Historical Simulation Mode (#1), LLM-as-Judge Audit Panel (#2), Batch Rerun / Reproducibility Badge (#3); #4 Belief Trajectory CSV / JSONL Export shipped 2026-05-01 (PR #66); #5 Spectator Watch Page shipped 2026-05-02 (PR #67)
