@@ -1,0 +1,213 @@
+{
+  "root": "push-recap-card",
+  "state": {},
+  "elements": {
+    "push-recap-card": {
+      "type": "Card",
+      "props": {
+        "title": "Push Recap",
+        "description": "MiroShark + miroshark-aeon — 5 substantive commits, +3,259/−20"
+      },
+      "children": [
+        "main-stack"
+      ]
+    },
+    "main-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading-summary",
+        "sep-1",
+        "heading-merged",
+        "link-pr72",
+        "text-pr72",
+        "link-pr73",
+        "text-pr73",
+        "sep-2",
+        "heading-fixes",
+        "link-pr29",
+        "text-pr29",
+        "link-pr30",
+        "text-pr30",
+        "link-pr31",
+        "text-pr31",
+        "sep-3",
+        "heading-changes",
+        "text-changes",
+        "sep-4",
+        "heading-stats",
+        "text-stats-files",
+        "text-stats-deps",
+        "sep-5",
+        "link-full-recap"
+      ]
+    },
+    "heading-summary": {
+      "type": "Heading",
+      "props": {
+        "text": "2026-05-06",
+        "level": "h2"
+      }
+    },
+    "sep-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading-merged": {
+      "type": "Heading",
+      "props": {
+        "text": "Merged PRs",
+        "level": "h3"
+      }
+    },
+    "link-pr72": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Tweet Thread Export merged (PR #72)",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/pull/72"
+      }
+    },
+    "text-pr72": {
+      "type": "Text",
+      "props": {
+        "text": "Sixth share surface lands on main at 01:23 UTC, exactly as filed yesterday — short-form X/Twitter thread text with ±0.2 stance hysteresis so noisy 49/51 rounds produce zero tweets, MAX_THREAD_TWEETS=15 truncation with bridge tweet, 14 offline tests, zero new deps.",
+        "variant": "body"
+      }
+    },
+    "link-pr73": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Webhook Delivery Log filed (PR #73)",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/pull/73"
+      }
+    },
+    "text-pr73": {
+      "type": "Text",
+      "props": {
+        "text": "Operational closure for May 1's outbound webhook — `<sim_dir>/webhook-log.jsonl`, admin-gated GET /webhook-log + POST /webhook-retry, 50-line atomic-replace cap, URL masked before disk write so Slack/Discord secret never round-trips. First non-share surface in the share-surface family (deliveries out, not views in). +1,646 lines, still open at end of window.",
+        "variant": "body"
+      }
+    },
+    "sep-2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading-fixes": {
+      "type": "Heading",
+      "props": {
+        "text": "Aeon-side Skill Quality Fixes",
+        "level": "h3"
+      }
+    },
+    "link-pr29": {
+      "type": "StoryLink",
+      "props": {
+        "title": "project-lens (PR #29)",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/pull/29"
+      }
+    },
+    "text-pr29": {
+      "type": "Text",
+      "props": {
+        "text": "Replaces a mathematically impossible \"no repeat in 14 days\" rule with LRU + 6-day floor, after the skill spent 11 days rationalizing violations.",
+        "variant": "body"
+      }
+    },
+    "link-pr30": {
+      "type": "StoryLink",
+      "props": {
+        "title": "token-report (PR #30)",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/pull/30"
+      }
+    },
+    "text-pr30": {
+      "type": "Text",
+      "props": {
+        "text": "Adds a missing daily volume-trend dimension.",
+        "variant": "body"
+      }
+    },
+    "link-pr31": {
+      "type": "StoryLink",
+      "props": {
+        "title": "heartbeat (PR #31, still open)",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/pull/31"
+      }
+    },
+    "text-pr31": {
+      "type": "Text",
+      "props": {
+        "text": "Tightens \"did skill X run today\" from substring search to header-line regex after today's log already had 4 body-text \"feature\" false matches outside the real header.",
+        "variant": "body"
+      }
+    },
+    "sep-3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading-changes": {
+      "type": "Heading",
+      "props": {
+        "text": "Key Changes",
+        "level": "h3"
+      }
+    },
+    "text-changes": {
+      "type": "Text",
+      "props": {
+        "text": "`backend/app/services/thread_formatter.py` (+493) — pure stdlib, dominant-stance hysteresis, bridge-tweet truncation\n`backend/app/services/webhook_service.py` (+318/−4) — atomic-rename log writer, masked URLs, retry replay flag\n`skills/heartbeat/SKILL.md` (+15/−8) — 14 pre-computed per-skill header regexes from aeon.yml",
+        "variant": "body"
+      }
+    },
+    "sep-4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading-stats": {
+      "type": "Heading",
+      "props": {
+        "text": "Statistics",
+        "level": "h3"
+      }
+    },
+    "text-stats-files": {
+      "type": "Text",
+      "props": {
+        "text": "29 files changed, +3,259/−20 (plus ~25 harness chores)",
+        "variant": "lead"
+      }
+    },
+    "text-stats-deps": {
+      "type": "Text",
+      "props": {
+        "text": "Zero-new-deps streak holds at 13 consecutive PRs.",
+        "variant": "body"
+      }
+    },
+    "sep-5": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "link-full-recap": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full recap",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-05-06.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}
