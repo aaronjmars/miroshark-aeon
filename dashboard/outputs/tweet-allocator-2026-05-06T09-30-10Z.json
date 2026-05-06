@@ -1,0 +1,282 @@
+{
+  "root": "card-root",
+  "state": {},
+  "elements": {
+    "card-root": {
+      "type": "Card",
+      "props": {
+        "title": "Tweet Rewards — 2026-05-06"
+      },
+      "children": [
+        "budget-text",
+        "sep-1",
+        "tweets-stack",
+        "sep-2",
+        "total-text"
+      ]
+    },
+    "budget-text": {
+      "type": "Text",
+      "props": {
+        "text": "Budget: $10.00 in $MIROSHARK on Base",
+        "variant": "lead"
+      }
+    },
+    "sep-1": {
+      "type": "Separator",
+      "props": {}
+    },
+    "tweets-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "lg"
+      },
+      "children": [
+        "tweet-1",
+        "tweet-2",
+        "tweet-3",
+        "tweet-4"
+      ]
+    },
+    "tweet-1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-1-header",
+        "tweet-1-desc",
+        "tweet-1-link"
+      ]
+    },
+    "tweet-1-header": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "tweet-1-author",
+        "tweet-1-reward",
+        "tweet-1-score"
+      ]
+    },
+    "tweet-1-author": {
+      "type": "Text",
+      "props": {
+        "text": "x.com/heygurisingh"
+      }
+    },
+    "tweet-1-reward": {
+      "type": "Stat",
+      "props": {
+        "label": "Reward",
+        "value": "$3.43 in $MIROSHARK"
+      }
+    },
+    "tweet-1-score": {
+      "type": "Stat",
+      "props": {
+        "label": "Score",
+        "value": "12"
+      }
+    },
+    "tweet-1-desc": {
+      "type": "Text",
+      "props": {
+        "text": "Repo link share — clean signal, highest engagement today"
+      }
+    },
+    "tweet-1-link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/heygurisingh/status/2051561692484780483"
+      }
+    },
+    "tweet-2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-2-header",
+        "tweet-2-desc",
+        "tweet-2-link"
+      ]
+    },
+    "tweet-2-header": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "tweet-2-author",
+        "tweet-2-reward",
+        "tweet-2-score"
+      ]
+    },
+    "tweet-2-author": {
+      "type": "Text",
+      "props": {
+        "text": "x.com/0xOpalian"
+      }
+    },
+    "tweet-2-reward": {
+      "type": "Stat",
+      "props": {
+        "label": "Reward",
+        "value": "$2.86 in $MIROSHARK"
+      }
+    },
+    "tweet-2-score": {
+      "type": "Stat",
+      "props": {
+        "label": "Score",
+        "value": "10"
+      }
+    },
+    "tweet-2-desc": {
+      "type": "Text",
+      "props": {
+        "text": "$aeon + $miroshark as Base agentic economy pair"
+      }
+    },
+    "tweet-2-link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/0xOpalian/status/2051587736688029951"
+      }
+    },
+    "tweet-3": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-3-header",
+        "tweet-3-desc",
+        "tweet-3-link"
+      ]
+    },
+    "tweet-3-header": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "tweet-3-author",
+        "tweet-3-reward",
+        "tweet-3-score"
+      ]
+    },
+    "tweet-3-author": {
+      "type": "Text",
+      "props": {
+        "text": "x.com/Karma_Nfa"
+      }
+    },
+    "tweet-3-reward": {
+      "type": "Stat",
+      "props": {
+        "label": "Reward",
+        "value": "$2.57 in $MIROSHARK"
+      }
+    },
+    "tweet-3-score": {
+      "type": "Stat",
+      "props": {
+        "label": "Score",
+        "value": "9"
+      }
+    },
+    "tweet-3-desc": {
+      "type": "Text",
+      "props": {
+        "text": "Bankr morning watchlist mention alongside $BTC, $AEON, $BNKR"
+      }
+    },
+    "tweet-3-link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/Karma_Nfa/status/2051641747638227414"
+      }
+    },
+    "tweet-4": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-4-header",
+        "tweet-4-desc",
+        "tweet-4-link"
+      ]
+    },
+    "tweet-4-header": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "tweet-4-author",
+        "tweet-4-reward",
+        "tweet-4-score"
+      ]
+    },
+    "tweet-4-author": {
+      "type": "Text",
+      "props": {
+        "text": "x.com/DaWachu80608"
+      }
+    },
+    "tweet-4-reward": {
+      "type": "Stat",
+      "props": {
+        "label": "Reward",
+        "value": "$1.14 in $MIROSHARK"
+      }
+    },
+    "tweet-4-score": {
+      "type": "Stat",
+      "props": {
+        "label": "Score",
+        "value": "4"
+      }
+    },
+    "tweet-4-desc": {
+      "type": "Text",
+      "props": {
+        "text": "5K stars / $5M MC thesis"
+      }
+    },
+    "tweet-4-link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/DaWachu80608/status/2051604452096807143"
+      }
+    },
+    "sep-2": {
+      "type": "Separator",
+      "props": {}
+    },
+    "total-text": {
+      "type": "Text",
+      "props": {
+        "text": "Total: $10.00 in $MIROSHARK allocated to 4 authors",
+        "variant": "lead"
+      }
+    }
+  }
+}
