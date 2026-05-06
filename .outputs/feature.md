@@ -1,19 +1,24 @@
 ## Summary
 
-Built **Tweet Thread Export (X / Twitter)** as the sixth share format for MiroShark — auto-formatted tweet thread for any published simulation, intro tweet + one tweet per belief inflection point + close tweet (each ≤280 chars), in plain-text and JSON forms.
+Built **Webhook Delivery Log + Manual Retry** for MiroShark — picked from May 4 repo-actions idea #2 over the autonomous-risky #1 (Embed Widget conflicts with existing SPA route), the mislabeled #4 (Private Share Link doesn't actually resolve issue #70), and the lower-leverage #5 (editorial Tagging).
 
-**Pivot rationale.** Picked May 4 repo-actions idea #3 over #1 (Embed Widget — too high-risk: SPA already has `/embed/:simulationId` route serving rich `EmbedView.vue` with SVG stacked-area chart; backend SSR `/embed/<id>` would intercept the SPA fallback and break the existing widget), #2 (Webhook Delivery Log — clean but lower distribution leverage), #4 (Private Share Link — note: the repo-actions writeup framed it as "directly resolves issue #70" but #70 is actually a much bigger Private Impact mode collaboration request from Cyril, far beyond a per-sim secret token), #5 (Simulation Tagging). #3 had the cleanest direct leverage on Aaron's primary distribution channel.
+**PR:** https://github.com/aaronjmars/MiroShark/pull/73
 
-**Files (11 changed, +1565):**
-- NEW `backend/app/services/thread_formatter.py` (~430 LoC pure stdlib) + NEW `backend/tests/test_unit_thread.py` (14 offline tests)
-- MODIFIED `backend/app/api/simulation.py` (`_serve_thread()` + `thread.txt`/`thread.json` route decorators) + `backend/openapi.yaml` (paths + new `SimulationThread` schema, drift-detection passes)
-- MODIFIED `frontend/src/api/simulation.js` (URL helpers) + `frontend/src/components/EmbedDialog.vue` (🧵 Tweet thread section)
-- MODIFIED `README.md` + `docs/FEATURES.md` + `docs/API.md` (en + zh-CN)
+**Files modified/created on MiroShark:**
+- `backend/app/services/webhook_service.py` — log helpers + `_start_dispatch_thread` shared between auto-fire and retry + `retry_webhook_for_simulation`
+- `backend/app/api/simulation.py` — `GET /<id>/webhook-log` + `POST /<id>/webhook-retry` admin-token-gated routes
+- `backend/openapi.yaml` — both paths + `WebhookDeliveryEntry`/`WebhookDeliveryLog` schemas
+- `backend/tests/test_unit_webhook_log.py` — 13 offline unit tests (NEW)
+- `frontend/src/api/simulation.js` — `getWebhookLog` + `retryWebhookDelivery` helpers
+- `frontend/src/components/EmbedDialog.vue` — 📡 Delivery history panel with status chips + refresh/retry buttons
+- README + docs/FEATURES.md + docs/API.md + docs/WEBHOOKS.md (en + zh-CN mirrors)
 
-**Verification:** Frontend build green (`npm run build`, 728 modules transformed). Python sandbox blocked local pytest, but I carefully reviewed the inflection / truncation math and caught one off-by-one in the truncation test before commit (20-round alternating fixture produces 20 inflections, bridge says "14 more flips" not "13"). CI will validate.
+**Files modified on miroshark-aeon (this repo):**
+- `memory/logs/2026-05-06.md` — feature build log entry
+- `memory/MEMORY.md` — Skills Built table + Next Priorities updated
 
-**PR:** https://github.com/aaronjmars/MiroShark/pull/72  
-**Notification:** Queued via `.pending-notify/1777982052.md` (sandbox blocked direct `./notify` invocation; postprocess script in workflow will dispatch to Telegram/Discord/Slack).  
-**Memory:** Updated `memory/MEMORY.md` Skills Built table, repo-actions May 4 status line, open-PRs count, plus a clarifying note that issue #70 is distinct from the repo-actions "Private Share Link" idea despite the name overlap. Logged to `memory/logs/2026-05-05.md`.
+**Notification:** Queued via `.pending-notify/1778067202.md` (sandbox blocked direct invocation of `./notify`; the post-run delivery step will pick it up — same pattern documented in CLAUDE.md for sandbox-restricted environments).
 
-**Follow-up:** Watch CI status on PR #72 (backend pytest + OpenAPI drift detection); manual verification of the EmbedDialog thread UI in a deployed environment.
+**Verification:** Frontend `npm run build` green (728 modules, vite v7.2.7); Python tests written but not run locally — sandbox blocks `python3` invocations beyond `--version`. CI on the PR will validate.
+
+**Follow-ups:** Three May 4 ideas remain unbuilt (#1 Embeddable Live Widget if route conflict gets resolved, #5 Simulation Tagging, and a properly scoped take on issue #70).
