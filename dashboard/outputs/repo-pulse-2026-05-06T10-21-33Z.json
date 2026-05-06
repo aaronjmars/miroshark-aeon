@@ -1,0 +1,387 @@
+{
+  "root": "card_root",
+  "state": {},
+  "elements": {
+    "card_root": {
+      "type": "Card",
+      "props": {
+        "title": "Repo Pulse",
+        "description": "2026-05-06"
+      },
+      "children": [
+        "repo_info",
+        "stats_container",
+        "sep1",
+        "stargazers_section",
+        "sep2",
+        "forks_section"
+      ]
+    },
+    "repo_info": {
+      "type": "Text",
+      "props": {
+        "text": "aaronjmars/MiroShark",
+        "variant": "lead"
+      }
+    },
+    "stats_container": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "stat_stars",
+        "stat_forks"
+      ]
+    },
+    "stat_stars": {
+      "type": "Stat",
+      "props": {
+        "label": "Stars",
+        "value": "1098",
+        "delta": "+27",
+        "trend": "up"
+      }
+    },
+    "stat_forks": {
+      "type": "Stat",
+      "props": {
+        "label": "Forks",
+        "value": "219",
+        "delta": "+6",
+        "trend": "up"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stargazers_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading_stargazers",
+        "stargazers_list"
+      ]
+    },
+    "heading_stargazers": {
+      "type": "Heading",
+      "props": {
+        "text": "New stargazers",
+        "level": "h3"
+      }
+    },
+    "stargazers_list": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "link_tout4nkhamoun",
+        "link_MertCapkin",
+        "link_AyushMaria",
+        "link_amirtanveershah",
+        "link_eak723",
+        "link_de_ansh",
+        "link_MartinCampbell1",
+        "link_qiqi1qiqi",
+        "link_BullishMomentum56",
+        "link_puzzlepeaches",
+        "link_reedj94",
+        "link_amadex",
+        "link_RumskiRubes",
+        "link_bdouble",
+        "link_XIAOCUICUII",
+        "link_JM2197",
+        "link_MightyJax",
+        "link_FreyjasWrath",
+        "link_Buckeyes22",
+        "link_thesovereignman",
+        "link_official_ildephonse",
+        "link_irazasyed",
+        "link_Nas20two",
+        "link_yuwri",
+        "link_biobitworks",
+        "link_Sakolkrit",
+        "link_CriptoNuno2024"
+      ]
+    },
+    "link_tout4nkhamoun": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/tout4nkhamoun",
+        "href": "https://github.com/tout4nkhamoun"
+      }
+    },
+    "link_MertCapkin": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/MertCapkin",
+        "href": "https://github.com/MertCapkin"
+      }
+    },
+    "link_AyushMaria": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/AyushMaria",
+        "href": "https://github.com/AyushMaria"
+      }
+    },
+    "link_amirtanveershah": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/amirtanveershah",
+        "href": "https://github.com/amirtanveershah"
+      }
+    },
+    "link_eak723": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/eak723",
+        "href": "https://github.com/eak723"
+      }
+    },
+    "link_de_ansh": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/de-ansh",
+        "href": "https://github.com/de-ansh"
+      }
+    },
+    "link_MartinCampbell1": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/MartinCampbell1",
+        "href": "https://github.com/MartinCampbell1"
+      }
+    },
+    "link_qiqi1qiqi": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/qiqi1qiqi",
+        "href": "https://github.com/qiqi1qiqi"
+      }
+    },
+    "link_BullishMomentum56": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/BullishMomentum56",
+        "href": "https://github.com/BullishMomentum56"
+      }
+    },
+    "link_puzzlepeaches": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/puzzlepeaches",
+        "href": "https://github.com/puzzlepeaches"
+      }
+    },
+    "link_reedj94": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/reedj94",
+        "href": "https://github.com/reedj94"
+      }
+    },
+    "link_amadex": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/amadex",
+        "href": "https://github.com/amadex"
+      }
+    },
+    "link_RumskiRubes": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/RumskiRubes",
+        "href": "https://github.com/RumskiRubes"
+      }
+    },
+    "link_bdouble": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/bdouble",
+        "href": "https://github.com/bdouble"
+      }
+    },
+    "link_XIAOCUICUII": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/XIAOCUICUII",
+        "href": "https://github.com/XIAOCUICUII"
+      }
+    },
+    "link_JM2197": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/JM2197",
+        "href": "https://github.com/JM2197"
+      }
+    },
+    "link_MightyJax": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/MightyJax",
+        "href": "https://github.com/MightyJax"
+      }
+    },
+    "link_FreyjasWrath": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/FreyjasWrath",
+        "href": "https://github.com/FreyjasWrath"
+      }
+    },
+    "link_Buckeyes22": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/Buckeyes22",
+        "href": "https://github.com/Buckeyes22"
+      }
+    },
+    "link_thesovereignman": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/thesovereignman",
+        "href": "https://github.com/thesovereignman"
+      }
+    },
+    "link_official_ildephonse": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/official-ildephonse",
+        "href": "https://github.com/official-ildephonse"
+      }
+    },
+    "link_irazasyed": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/irazasyed",
+        "href": "https://github.com/irazasyed"
+      }
+    },
+    "link_Nas20two": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/Nas20two",
+        "href": "https://github.com/Nas20two"
+      }
+    },
+    "link_yuwri": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/yuwri",
+        "href": "https://github.com/yuwri"
+      }
+    },
+    "link_biobitworks": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/biobitworks",
+        "href": "https://github.com/biobitworks"
+      }
+    },
+    "link_Sakolkrit": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/Sakolkrit",
+        "href": "https://github.com/Sakolkrit"
+      }
+    },
+    "link_CriptoNuno2024": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/CriptoNuno2024",
+        "href": "https://github.com/CriptoNuno2024"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "forks_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading_forks",
+        "forks_list"
+      ]
+    },
+    "heading_forks": {
+      "type": "Heading",
+      "props": {
+        "text": "New forks",
+        "level": "h3"
+      }
+    },
+    "forks_list": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "link_fork_ModRanger",
+        "link_fork_Ravix3",
+        "link_fork_Aigov",
+        "link_fork_volcano",
+        "link_fork_RumskiRubes_fork",
+        "link_fork_FreyjasWrath_fork"
+      ]
+    },
+    "link_fork_ModRanger": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/ModRanger/MiroShark",
+        "href": "https://github.com/ModRanger/MiroShark"
+      }
+    },
+    "link_fork_Ravix3": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/Ravix-3/MiroShark",
+        "href": "https://github.com/Ravix-3/MiroShark"
+      }
+    },
+    "link_fork_Aigov": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/Aigov-consulting/MiroShark",
+        "href": "https://github.com/Aigov-consulting/MiroShark"
+      }
+    },
+    "link_fork_volcano": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/volcano-claw/MiroShark",
+        "href": "https://github.com/volcano-claw/MiroShark"
+      }
+    },
+    "link_fork_RumskiRubes_fork": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/RumskiRubes/MiroShark",
+        "href": "https://github.com/RumskiRubes/MiroShark"
+      }
+    },
+    "link_fork_FreyjasWrath_fork": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/FreyjasWrath/MiroShark",
+        "href": "https://github.com/FreyjasWrath/MiroShark"
+      }
+    }
+  }
+}
