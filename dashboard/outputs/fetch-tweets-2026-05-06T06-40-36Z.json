@@ -1,0 +1,228 @@
+{
+  "root": "main-card",
+  "state": {},
+  "elements": {
+    "main-card": {
+      "type": "Card",
+      "props": {
+        "title": "Top Tweets",
+        "description": "$MIROSHARK OR @miroshark_ OR github.com/aaronjmars/miroshark (2026-05-06)"
+      },
+      "children": [
+        "tweets-stack"
+      ]
+    },
+    "tweets-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "lg"
+      },
+      "children": [
+        "tweet1-stack",
+        "sep1",
+        "tweet2-stack",
+        "sep2",
+        "tweet3-stack",
+        "sep3",
+        "tweet4-stack",
+        "sep4",
+        "tweet5-stack",
+        "sep5",
+        "tweet6-stack"
+      ]
+    },
+    "tweet1-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet1",
+        "tweet1-link"
+      ]
+    },
+    "tweet1": {
+      "type": "TweetCard",
+      "props": {
+        "author": "heygurisingh",
+        "text": "Repo: https://github.com/aaronjmars/MiroShark",
+        "likes": 9,
+        "retweets": 1
+      }
+    },
+    "tweet1-link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/heygurisingh/status/2051561692484780483"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "tweet2-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet2",
+        "tweet2-link"
+      ]
+    },
+    "tweet2": {
+      "type": "TweetCard",
+      "props": {
+        "author": "aaronjmars",
+        "text": "Nice @miroshark_ 👀",
+        "likes": 4,
+        "retweets": 2
+      }
+    },
+    "tweet2-link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/aaronjmars/status/2051747442979115374"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "tweet3-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet3",
+        "tweet3-link"
+      ]
+    },
+    "tweet3": {
+      "type": "TweetCard",
+      "props": {
+        "author": "Karma_Nfa",
+        "text": "Morning Bankr update mentioning $MIROSHARK in token watchlist alongside $BTC, $AEON, $BNKR",
+        "likes": 6,
+        "retweets": 1
+      }
+    },
+    "tweet3-link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/Karma_Nfa/status/2051641747638227414"
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "tweet4-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet4",
+        "tweet4-link"
+      ]
+    },
+    "tweet4": {
+      "type": "TweetCard",
+      "props": {
+        "author": "DaWachu80608",
+        "text": "We welcome them again when $Miroshark be over 5k stars and 5 mln MC",
+        "likes": 4,
+        "retweets": 0
+      }
+    },
+    "tweet4-link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/DaWachu80608/status/2051604452096807143"
+      }
+    },
+    "sep4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "tweet5-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet5",
+        "tweet5-link"
+      ]
+    },
+    "tweet5": {
+      "type": "TweetCard",
+      "props": {
+        "author": "0xOpalian",
+        "text": "Pretty hyped by $aeon and $miroshark, big things coming 👀",
+        "likes": 4,
+        "retweets": 2
+      }
+    },
+    "tweet5-link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/0xOpalian/status/2051587736688029951"
+      }
+    },
+    "sep5": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "tweet6-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet6",
+        "tweet6-link"
+      ]
+    },
+    "tweet6": {
+      "type": "TweetCard",
+      "props": {
+        "author": "_THOR_ASGARD",
+        "text": "$MIROSHARK should have been trading in trillions though Math is not mathing here",
+        "likes": 0,
+        "retweets": 0
+      }
+    },
+    "tweet6-link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/_THOR_ASGARD/status/2051665636150165610"
+      }
+    }
+  }
+}
