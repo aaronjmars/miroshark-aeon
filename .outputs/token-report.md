@@ -1,14 +1,10 @@
-The token-report skill has already run today. The log at `memory/logs/2026-05-06.md` shows:
+*$MIROSHARK Daily — 2026-05-07*
 
-- **Price:** $0.000003537 (+4.02% 24h) — first green session after 3 red days
-- **Volume:** $45.9K (+39.5% vs prior 24h)
-- **Liquidity:** $229.7K | FDV: $353.7K
-- **Buys/Sells:** 48 / 61 (0.79x buy ratio)
-- **Article saved:** `articles/token-report-2026-05-06.md`
-- **Notification sent:** yes
+Price: $0.000004565 (+19.23% 24h)
+Liquidity: $271.5K | 24h Vol: $271.5K (+490% 24h)
+Buys/Sells: 359/305
+7d: +11.8% price, +16.8% vol | 30d: +593% price
 
-No further action needed — re-running would send a duplicate notification. The report is complete.
+New ATH $0.000006926 set May 6 (+44.8% above prior ATH). Grok named MIROSHARK top 3 GPT-5.5 project; today pulling back from ATH to $4.565e-6.
 
-## Summary
-
-Token-report for 2026-05-06 was already fully executed (data fetched from GeckoTerminal, article saved, notification sent). Key signal: +4.02% recovery session, volume rebounding to $45.9K, emerging $AEON + $MIROSHARK "Base agentic economy" pair narrative in social.
+Chart: https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209
