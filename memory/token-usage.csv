@@ -221,3 +221,4 @@ date,skill,model,input_tokens,output_tokens,cache_read,cache_creation
 2026-05-06,memory-flush,claude-sonnet-4-6,27,60673,2460864,129987
 2026-05-06,heartbeat,claude-sonnet-4-6,1877,5752,390959,49801
 2026-05-07,token-report,claude-sonnet-4-6,12,18120,836175,102663
+2026-05-07,tweet-allocator,claude-sonnet-4-6,17,11123,763871,48259
