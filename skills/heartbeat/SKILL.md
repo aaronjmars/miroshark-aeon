@@ -38,14 +38,21 @@ Check the following:
 - [ ] Scan aeon.yml for enabled scheduled skills — cross-reference with today's log (`memory/logs/${today}.md`) to find any that haven't run when expected.
 
   **Matching skill names to log entries:**
-  Skills log under human-readable `## Headers`, not their aeon.yml kebab-case names. To check if a skill ran, do a **case-insensitive search** of the log file for the skill name with hyphens replaced by spaces. Examples:
-  - `token-report` → search for "token report" (matches `## Token Report`, `## Token Report (Update)`)
-  - `push-recap` → search for "push recap" (matches `## Push Recap`, `## Push Recap (MiroShark)`)
-  - `fetch-tweets` → search for "fetch tweets" (matches `## Fetch Tweets — MIROSHARK`)
-  - `feature` → search for "feature" (matches `## Feature Build — ...`)
-  - `hyperstitions-ideas` → search for "hyperstitions" (matches `## Hyperstitions Ideas`)
-  - `memory-flush` → search for "memory flush"
-  - `self-improve` → search for "self-improve" or "self improve" or "agent self-improvement"
+  Skills log under human-readable `## Headers`, not their aeon.yml kebab-case names. To check if a skill ran, do a **case-insensitive match against `## ` header lines only** — `grep -iE '^## …'`, not a free-text substring search of the full file. Header-only matching matters for short skill names: substring-searching the whole file for `feature` matches body text like "added a feature" in push-recap, falsely concluding the `feature` skill ran on a day it actually failed and masking the outage. Build the regex by replacing hyphens in the kebab-case name with `[ -]?` so both `## Feature Built` and `## Self-Improve` are accepted. Examples:
+  - `token-report` → `^## token[ -]?report` (matches `## Token Report`, `## Token Report (Update)`)
+  - `push-recap` → `^## push[ -]?recap` (matches `## Push Recap`, `## Push Recap (MiroShark)`)
+  - `fetch-tweets` → `^## fetch[ -]?tweets` (matches `## Fetch Tweets — MIROSHARK`)
+  - `feature` → `^## feature\b` (matches `## Feature Built — ...`, `## feature skill run` — and **does not** match the bare word "feature" inside other sections' body text)
+  - `hyperstitions-ideas` → `^## hyperstitions` (matches `## Hyperstitions Ideas`)
+  - `memory-flush` → `^## memory[ -]?flush`
+  - `self-improve` → `^## (self[ -]?improve|agent self-improvement)` (matches `## Self-Improve — 2026-05-04`, `## Agent Self-Improvement`)
+  - `repo-pulse` → `^## repo[ -]?pulse`
+  - `repo-article` → `^## repo[ -]?article`
+  - `repo-actions` → `^## repo[ -]?actions`
+  - `project-lens` → `^## project[ -]?lens`
+  - `tweet-allocator` → `^## tweet[ -]?allocator`
+  - `weekly-shiplog` → `^## weekly[ -]?shiplog`
+  - `skill-leaderboard` → `^## skill[ -]?leaderboard`
 
   **Timing rules (avoid false positives):**
   - GitHub Actions cron has ±10 min jitter and skills take 5-15 min to complete.
