@@ -1,16 +1,13 @@
-*Agent Self-Improvement — 2026-05-04*
+*Agent Self-Improvement — 2026-05-08*
 
-Project-Lens Angle Rotation Rule
-Rewrote the angle-rotation rule in `skills/project-lens/SKILL.md`. The old rule said "Never repeat an angle used in the last 14 days" — but with 8 angle categories on a daily cadence, day 9 onward forces a repeat into any 14-day window. The rule was unsatisfiable, and every project-lens entry from Apr 22 → May 2 ended up writing a rationalization rather than rotating clean.
+Capped per-row sizes in `memory/MEMORY.md` and condensed bloated rows so the index file stays readable in one shot.
 
-Why: every log entry from Apr 22 → May 2 violated the rule (Apr 22 #6 used 4 days prior, Apr 25 #6 used 2 days prior, Apr 27 #3 used 6 days prior, Apr 29 #5 used 8 days prior, Apr 30 #6 used 5 days prior, May 2 #7 used 10 days prior). The rule was producing log noise without changing behavior — and the rationalizations were drift in disguise.
+Why: MEMORY.md had grown to 76 KB / 31K+ tokens — over Claude's Read tool 25K-token limit. CLAUDE.md says the file must be a short index that every skill reads at task start, but each Skills Built / Recent Articles row had ballooned into 5K+ character paragraphs. Hit during today's self-improve run when Read returned `File content (31538 tokens) exceeds maximum allowed tokens (25000)`. Every skill following the project rule "read MEMORY.md for high-level context at the start of every task" was failing or burning context on a 30K-token wall.
 
 What changed:
-- skills/project-lens/SKILL.md: replaced impossible 14-day rule with "least recently used" + 30-day count tie-break + 6-day soft floor + two explicit override paths that must be stated in the log under **Override:**
-- Added a math-aware preface explaining why strict-no-repeat is only satisfiable for N ≤ 8 days
-- Added a **Last used:** log line so future runs see rotation health at a glance
-- Step 2 instructions rewritten to scan memory logs as well as articles (logs were the under-utilized data source)
+- `skills/memory-flush/SKILL.md`: new step 5 enforces per-row caps every flush (Skills Built ≤280 chars, Recent Articles ≤220, Recent Digests ≤180), with a `wc -c` sanity check (target <25 KB) and explicit pointer to push oversized detail into `memory/topics/<topic>.md`.
+- `memory/MEMORY.md`: condensed every row to a one-sentence summary plus PR number — went from 76 KB / 31K tokens → 9.4 KB / 79 lines (-87%). Detail is preserved in daily logs and `articles/`.
 
-Impact: stops the daily quality drift where the skill rationalized itself out of an impossible rule. Future project-lens entries will rotate cleanly on least-recently-used and only override when explicitly justified — no more invented narratives around a violated 14-day window.
+Impact: every skill that loads MEMORY.md for context now succeeds in one Read call instead of failing or wasting 30K tokens on a paragraph wall. memory-flush enforcement prevents the bloat from returning.
 
-PR: https://github.com/aaronjmars/miroshark-aeon/pull/29
+PR: https://github.com/aaronjmars/miroshark-aeon/pull/32
