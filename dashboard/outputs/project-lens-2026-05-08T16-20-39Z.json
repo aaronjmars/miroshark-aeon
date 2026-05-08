@@ -1,0 +1,75 @@
+{
+  "root": "main-card",
+  "state": {},
+  "elements": {
+    "main-card": {
+      "type": "Card",
+      "props": {
+        "title": "There Is No AI Reproducibility Crisis. There's a File-Saving Crisis."
+      },
+      "children": [
+        "narrative-text",
+        "separator-1",
+        "pr-section",
+        "separator-2",
+        "read-link"
+      ]
+    },
+    "narrative-text": {
+      "type": "Text",
+      "props": {
+        "text": "The 2026 narrative says LLM nondeterminism is the bottleneck — Thinking Machines Lab's bitwise-stable inference work, NeurIPS 2025's LayerCast paper, the whole genre of FP32-vs-BF16 explainers. Contrarian take: even if every model output became deterministic tomorrow, most agent and simulator work still couldn't be reproduced — because nobody wrote the inputs down."
+      },
+      "children": []
+    },
+    "separator-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "pr-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "pr-heading",
+        "pr-details"
+      ]
+    },
+    "pr-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "MiroShark PR #75: Reproducibility Config Export",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "pr-details": {
+      "type": "Text",
+      "props": {
+        "text": "Merged today. Ships a 370-LoC stdlib citation primitive: SCHEMA_VERSION pinned, REQUIRED_KEYS frozenset, sort_keys + indent + trailing newline so the SHA-256 of reproduce.json is a stable citation key. Bench science figured this out decades ago; the agent ecosystem skipped the step."
+      },
+      "children": []
+    },
+    "separator-2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "read-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "There Is No AI Reproducibility Crisis. There's a File-Saving Crisis.",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-05-08.md",
+        "source": "project-lens"
+      },
+      "children": []
+    }
+  }
+}
