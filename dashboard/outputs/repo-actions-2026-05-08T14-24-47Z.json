@@ -1,0 +1,265 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "Repo Action Ideas — 2026-05-08"
+      },
+      "children": [
+        "context",
+        "separator1",
+        "items-stack",
+        "separator2",
+        "source-link"
+      ]
+    },
+    "context": {
+      "type": "Text",
+      "props": {
+        "text": "Generated from analysis of MiroShark (1,117 stars / 222 forks / 0 open PRs / PR #75 merged today)",
+        "variant": "muted"
+      }
+    },
+    "separator1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "items-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "item1",
+        "item2",
+        "item3",
+        "item4",
+        "item5"
+      ]
+    },
+    "item1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "item1-title",
+        "item1-desc"
+      ]
+    },
+    "item1-title": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "item1-heading",
+        "item1-badge"
+      ]
+    },
+    "item1-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "1. Trending Simulations Sort",
+        "level": "h3"
+      }
+    },
+    "item1-badge": {
+      "type": "Badge",
+      "props": {
+        "text": "Feature, Small"
+      }
+    },
+    "item1-desc": {
+      "type": "Text",
+      "props": {
+        "text": "Extends gallery sort with 'trending' option — ranks public sims by surface-stats total, turning observability data into a discovery signal."
+      }
+    },
+    "item2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "item2-title",
+        "item2-desc"
+      ]
+    },
+    "item2-title": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "item2-heading",
+        "item2-badge"
+      ]
+    },
+    "item2-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "2. oEmbed Endpoint",
+        "level": "h3"
+      }
+    },
+    "item2-badge": {
+      "type": "Badge",
+      "props": {
+        "text": "Integration, Small"
+      }
+    },
+    "item2-desc": {
+      "type": "Text",
+      "props": {
+        "text": "GET /api/oembed?url=... makes every share card URL auto-embed in Substack, Notion, Ghost, and WordPress — zero new deps, pure stdlib."
+      }
+    },
+    "item3": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "item3-title",
+        "item3-desc"
+      ]
+    },
+    "item3-title": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "item3-heading",
+        "item3-badge"
+      ]
+    },
+    "item3-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "3. Simulation Lineage Navigator",
+        "level": "h3"
+      }
+    },
+    "item3-badge": {
+      "type": "Badge",
+      "props": {
+        "text": "Feature, Small"
+      }
+    },
+    "item3-desc": {
+      "type": "Text",
+      "props": {
+        "text": "GET /api/simulation/<id>/lineage exposes the fork/counterfactual tree from reproduce.json metadata — turns parent_simulation_id into a navigable graph in SimulationView."
+      }
+    },
+    "item4": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "item4-title",
+        "item4-desc"
+      ]
+    },
+    "item4-title": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "item4-heading",
+        "item4-badge"
+      ]
+    },
+    "item4-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "4. Peak-Round Belief Snapshot",
+        "level": "h3"
+      }
+    },
+    "item4-badge": {
+      "type": "Badge",
+      "props": {
+        "text": "Feature, Small"
+      }
+    },
+    "item4-desc": {
+      "type": "Text",
+      "props": {
+        "text": "GET /api/simulation/<id>/peak-round identifies the highest-divergence round and exports a 1200×630 share card of that moment — the inflection, not just the verdict."
+      }
+    },
+    "item5": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "item5-title",
+        "item5-desc"
+      ]
+    },
+    "item5-title": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "item5-heading",
+        "item5-badge"
+      ]
+    },
+    "item5-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "5. Operator Profile + Attribution",
+        "level": "h3"
+      }
+    },
+    "item5-badge": {
+      "type": "Badge",
+      "props": {
+        "text": "DX, Small"
+      }
+    },
+    "item5-desc": {
+      "type": "Text",
+      "props": {
+        "text": "GET /api/operator/profile from env vars (OPERATOR_NAME / BIO / URL) — adds authorship byline to share pages and gallery cards; relevant as MiroShark results circulate on Umia and in Grok citations."
+      }
+    },
+    "separator2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "source-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full details",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-actions-2026-05-08.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}

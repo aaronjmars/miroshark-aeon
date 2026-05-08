@@ -1,19 +1,19 @@
-*Repo Action Ideas — 2026-05-06*
-Generated from analysis of MiroShark — ideas for autonomous implementation by the feature skill.
+*Repo Action Ideas — 2026-05-08*
+Generated from analysis of MiroShark (1,117 stars / 222 forks / 0 open PRs / PR #75 merged today).
 
-1. Simulation Config Export + Reproducibility Badge (DX/Research, Small)
-   Complete config.json export + import that makes any MiroShark run reproducible — scenario, model config, agent count, rounds, all params; the primitive academic and quant audiences need before they can cite the tool seriously.
+1. Trending Simulations Sort (Feature, Small)
+   Extends gallery sort with 'trending' option — ranks public sims by surface-stats total, turning observability data into a discovery signal.
 
-2. Python Client SDK via openapi-generator CI (Integration/DX, Small)
-   CI job turns the existing OpenAPI spec into a generated Python client, published as a GitHub Release asset — closes the Jupyter-notebook / quant-pipeline gap without writing SDK code.
+2. oEmbed Endpoint (Integration, Small)
+   `GET /api/oembed?url=...` makes every share card URL auto-embed in Substack, Notion, Ghost, and WordPress — zero new deps, pure stdlib.
 
-3. Director Event Timeline Overlay on Belief Chart (Feature, Small)
-   Annotates the belief chart with vertical markers at director-mode injection points ("Liquidity Crisis — Round 15"), turning the raw belief curve into a causal narrative.
+3. Simulation Lineage Navigator (Feature, Small)
+   `GET /api/simulation/<id>/lineage` exposes the fork/counterfactual tree from reproduce.json metadata — turns parent_simulation_id into a navigable graph in SimulationView.
 
-4. Share Surface Usage Analytics (DX/Feature, Small)
-   One atomic counter per serve_* handler, one read endpoint — tells operators how many times each surface was used (share card vs RSS vs thread) for the first time.
+4. Peak-Round Belief Snapshot (Feature, Small)
+   `GET /api/simulation/<id>/peak-round` identifies the highest-divergence round and exports a 1200×630 share card of that moment — the inflection, not just the verdict.
 
-5. Comparative Run View (Feature/Research, Small)
-   /compare?a=<id>&b=<id> renders two published sims side-by-side with stance delta — pure frontend, uses existing embed-summary endpoint, zero new backend code.
+5. Operator Profile + Attribution (DX, Small)
+   `GET /api/operator/profile` from env vars (OPERATOR_NAME / BIO / URL) — adds authorship byline to share pages and gallery cards; relevant as MiroShark results circulate on Umia and in Grok citations.
 
-Full details: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-actions-2026-05-06.md
+Full details: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-actions-2026-05-08.md
