@@ -1,0 +1,216 @@
+{
+  "root": "card-root",
+  "state": {},
+  "elements": {
+    "card-root": {
+      "type": "Card",
+      "props": {
+        "title": "Push Recap"
+      },
+      "children": [
+        "date-text",
+        "summary-text",
+        "sep1",
+        "miroshark-pr",
+        "miroshark-details",
+        "sep2",
+        "aeon-pr",
+        "aeon-details",
+        "sep3",
+        "key-changes-title",
+        "file1",
+        "file2",
+        "file3",
+        "sep4",
+        "stats-heading",
+        "stats-detail",
+        "sep5",
+        "full-recap-link"
+      ]
+    },
+    "date-text": {
+      "type": "Text",
+      "props": {
+        "text": "2026-05-08",
+        "variant": "muted"
+      },
+      "children": []
+    },
+    "summary-text": {
+      "type": "Text",
+      "props": {
+        "text": "2 substantive commits across both watched repos."
+      },
+      "children": []
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "miroshark-pr": {
+      "type": "StoryLink",
+      "props": {
+        "title": "MiroShark — PR #75 merged (Reproducibility Config Export)",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/pull/75"
+      },
+      "children": []
+    },
+    "miroshark-details": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "miroshark-desc1",
+        "miroshark-desc2",
+        "miroshark-desc3",
+        "miroshark-desc4"
+      ]
+    },
+    "miroshark-desc1": {
+      "type": "Text",
+      "props": {
+        "text": "New GET /api/simulation/<id>/reproduce.json returns a v1-schema JSON blob with scenario, agents, rounds, platforms, time_config, director events, and lineage (original/fork/counterfactual)."
+      },
+      "children": []
+    },
+    "miroshark-desc2": {
+      "type": "Text",
+      "props": {
+        "text": "Pretty-printed + sort_keys=True so identical exports are bytewise-identical — the file hash becomes a stable citation key. Closes the reproducibility gap behind the six citation surfaces (transcript/trajectory/thread/watch/GIF/share card)."
+      },
+      "children": []
+    },
+    "miroshark-desc3": {
+      "type": "Text",
+      "props": {
+        "text": "Pure stdlib; 22 offline tests; new EmbedDialog \"🔬 Reproducibility config\" panel with curl snippet + Download button + lineage badge."
+      },
+      "children": []
+    },
+    "miroshark-desc4": {
+      "type": "Text",
+      "props": {
+        "text": "Zero-new-deps streak now 15 consecutive PRs."
+      },
+      "children": []
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "aeon-pr": {
+      "type": "StoryLink",
+      "props": {
+        "title": "aeon — PR #32 opened (MEMORY.md row caps)",
+        "href": "https://github.com/aaronjmars/aeon/pull/32"
+      },
+      "children": []
+    },
+    "aeon-details": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "aeon-desc1",
+        "aeon-desc2"
+      ]
+    },
+    "aeon-desc1": {
+      "type": "Text",
+      "props": {
+        "text": "The index had grown to 76KB / 31K+ tokens — over the Read tool's 25K limit, so every skill loading MEMORY.md was failing the Read call."
+      },
+      "children": []
+    },
+    "aeon-desc2": {
+      "type": "Text",
+      "props": {
+        "text": "Condensed each row to a one-sentence summary (file now 9.4KB / 79 lines, 8x smaller); memory-flush skill now enforces per-row caps (Skills Built ≤280, Recent Articles ≤220, Recent Digests ≤180) with a wc -c sanity check after every flush."
+      },
+      "children": []
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "key-changes-title": {
+      "type": "Heading",
+      "props": {
+        "text": "Key changes:",
+        "level": "h4"
+      },
+      "children": []
+    },
+    "file1": {
+      "type": "Text",
+      "props": {
+        "text": "New backend/app/services/repro_export.py (487 lines, pure stdlib): SCHEMA_VERSION=1, REQUIRED_KEYS frozenset, build_repro_config(), _build_lineage() (3 cases), _read_director_events() (handles JSONL + legacy formats), render_json_bytes() for citation-hash stability, validate_blob() helper"
+      },
+      "children": []
+    },
+    "file2": {
+      "type": "Text",
+      "props": {
+        "text": "frontend/src/components/EmbedDialog.vue (+484 lines): collapsed-by-default panel between Distribution and Mark-outcome, lineage badge (🪐 Forked / 🔀 Counterfactual) with parent-id tooltip, copy-ready curl snippet, Download reproduce.json button"
+      },
+      "children": []
+    },
+    "file3": {
+      "type": "Text",
+      "props": {
+        "text": "memory/MEMORY.md shrunk 8x (76KB → 9.4KB) + new top-of-file callout banner explaining the index contract"
+      },
+      "children": []
+    },
+    "sep4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "stats-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Stats",
+        "level": "h4"
+      },
+      "children": []
+    },
+    "stats-detail": {
+      "type": "Text",
+      "props": {
+        "text": "13 files changed, +1,961 / -42 lines across 2 substantive commits (~35 commits total counting the day's routine cron auto-commits — token-report / fetch-tweets / tweet-allocator / repo-pulse / feature / self-improve / repo-actions all OK)."
+      },
+      "children": []
+    },
+    "sep5": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "full-recap-link": {
+      "type": "Link",
+      "props": {
+        "label": "Full recap",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-05-08.md"
+      },
+      "children": []
+    }
+  }
+}

@@ -1,16 +1,14 @@
-*Push Recap — 2026-05-07*
-aaronjmars/MiroShark + aaronjmars/miroshark-aeon — 3 substantive commits + ~24 cron auto-commits
+*Push Recap — 2026-05-08*
+2 substantive commits across both watched repos.
 
-*Observability loop closes (MiroShark):* PR #73 ships an outbound webhook delivery log + manual retry endpoint; PR #74 ships per-share-surface usage counters. Together they give operators end-to-end feedback over what MiroShark sent out (Slack/Discord/n8n delivery status, latency, retries) and what audiences pulled in (share card / replay GIF / transcript / trajectory / RSS / watch page). Both PRs land within 14 minutes of each other on the same `<sim_dir>/` substrate, same atomic-write contract, same EmbedDialog panel pattern, zero new deps.
+*MiroShark — PR #75 merged (Reproducibility Config Export):* New `GET /api/simulation/<id>/reproduce.json` returns a v1-schema JSON blob with scenario, agents, rounds, platforms, time_config, director events, and lineage (original/fork/counterfactual). Pretty-printed + sort_keys=True so identical exports are bytewise-identical — the file hash becomes a stable citation key. Closes the reproducibility gap behind the six citation surfaces (transcript/trajectory/thread/watch/GIF/share card). Pure stdlib; 22 offline tests; new EmbedDialog "🔬 Reproducibility config" panel with curl snippet + Download button + lineage badge. Zero-new-deps streak now 15 consecutive PRs.
 
-*PR #73 caught its own concurrency hazards before merge:* a second commit on the same PR added a module-level write lock around the read-modify-rename log window (so two concurrent dispatches can't drop each other's entries — exactly the visibility failure the log is meant to surface) plus a 5-second per-sim cooldown on the retry endpoint (so a leaked admin token can't be weaponized as an amplifier against the configured downstream). Verified by a 32-thread barrier test.
-
-*Heartbeat false-positive fix (aeon):* PR #31 tightens skill-ran detection in `skills/heartbeat/SKILL.md` from a free-text substring search of the full log to `^## ` header-line grep with explicit per-skill regexes. The bug it fixes: body text like "added a feature" was matching the `feature` skill name and masking real outages of the `feature` skill. Self-monitoring layer was lying.
+*aeon — PR #32 opened (MEMORY.md row caps):* The index had grown to 76KB / 31K+ tokens — over the Read tool's 25K limit, so every skill loading MEMORY.md was failing the Read call. Condensed each row to a one-sentence summary (file now 9.4KB / 79 lines, 8x smaller); `memory-flush` skill now enforces per-row caps (Skills Built ≤280, Recent Articles ≤220, Recent Digests ≤180) with a `wc -c` sanity check after every flush.
 
 Key changes:
-- New backend module `surface_stats.py` (+215, frozen 11-key SURFACE_KEYS schema, atomic tempfile + os.replace, fire-and-forget) wired into every `_serve_X` handler in simulation.py, watch_landing (public sims only), and per-card feed dispatch
-- `webhook_service.py` (+365): new `webhook-log.jsonl` (50-line atomic cap, URL-masked before write), GET `/webhook-log` (admin-token), POST `/webhook-retry` (admin-token, rate-limited, bypasses per-process auto-fire dedup with `retry: true` payload marker)
-- `EmbedDialog.vue` grew two new collapsible panels (+499 + 342): "📡 Webhook delivery history" (✓/✗/⏱ chips, Refresh + Retry) and "📊 Distribution" (sorted table with stable-sort tiebreaker, explicit cache caveat so operators don't compare counts to CDN dashboards and conclude the counter is broken)
+- New `backend/app/services/repro_export.py` (487 lines, pure stdlib): SCHEMA_VERSION=1, REQUIRED_KEYS frozenset, `build_repro_config()`, `_build_lineage()` (3 cases), `_read_director_events()` (handles JSONL + legacy formats), `render_json_bytes()` for citation-hash stability, `validate_blob()` helper
+- `frontend/src/components/EmbedDialog.vue` (+484 lines): collapsed-by-default panel between Distribution and Mark-outcome, lineage badge (🪐 Forked / 🔀 Counterfactual) with parent-id tooltip, copy-ready curl snippet, Download `reproduce.json` button
+- `memory/MEMORY.md` shrunk 8x (76KB → 9.4KB) + new top-of-file callout banner explaining the index contract
 
-Stats: 26 file diffs, +2,987 / -5 lines on MiroShark; +15 / -8 on the aeon heartbeat fix; ~24 routine cron auto-commits.
-Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-05-07.md
+Stats: 13 files changed, +1,961 / -42 lines across 2 substantive commits (~35 commits total counting the day's routine cron auto-commits — token-report / fetch-tweets / tweet-allocator / repo-pulse / feature / self-improve / repo-actions all OK).
+Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-05-08.md
