@@ -1,10 +1,10 @@
-*$MIROSHARK Daily — 2026-05-07*
+*$MIROSHARK Daily — 2026-05-08*
 
-Price: $0.000004565 (+19.23% 24h)
-Liquidity: $271.5K | 24h Vol: $271.5K (+490% 24h)
-Buys/Sells: 359/305
-7d: +11.8% price, +16.8% vol | 30d: +593% price
+Price: $0.00000437 (+1.17% 24h)
+Liquidity: $264.4K | 24h Vol: $60.1K (-27.7% 24h)
+Buys/Sells: 101/75 (1.35x)
+7d: +15.6% price, +30.2% vol | 30d: +563% price
 
-New ATH $0.000006926 set May 6 (+44.8% above prior ATH). Grok named MIROSHARK top 3 GPT-5.5 project; today pulling back from ATH to $4.565e-6.
+Post-ATH consolidation (-37% from $6.93e-6 ATH set May 6). Buy ratio 1.35x holding; volume normalizing to 30d median (~$60K). Grok AI citation loop keeps social momentum intact.
 
 Chart: https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209
