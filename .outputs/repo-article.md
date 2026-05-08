@@ -1,5 +1,5 @@
-*New Article: MiroShark Stops Flying Blind: Two Observability Surfaces, Merged 14 Minutes Apart*
+*New Article: Eleven Surfaces, One File Hash: MiroShark Lands the Citation Primitive*
 
-PR #74 (Surface Usage Analytics) merged at 12:11 UTC and PR #73 (Webhook Delivery Log) followed at 12:25 UTC — together they close the operator-side feedback loop on both directions: which share surfaces actually got served (inbound) and whether webhooks reached their destination (outbound). Same `sim_dir/` substrate, same atomic-write template, same EmbedDialog-panel pattern, zero new deps — streak now 14 consecutive PRs.
+PR #75 (Reproducibility Config Export, merged 13:27 UTC) is the piece that ties MiroShark's eleven share surfaces into citable artifacts. Bytewise-stable reproduce.json — sort_keys + indent + trailing newline — means a SHA-256 becomes a stable citation key for paper appendices and threads. Six surfaces made finished sims quotable; this one makes them reproducible. 15 consecutive zero-new-deps PRs.
 
-Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-05-07.md
+Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-05-08.md

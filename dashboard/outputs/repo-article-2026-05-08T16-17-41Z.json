@@ -1,0 +1,51 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "New Article: Eleven Surfaces, One File Hash: MiroShark Lands the Citation Primitive"
+      },
+      "children": [
+        "content-stack"
+      ]
+    },
+    "content-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "body-text",
+        "separator",
+        "link"
+      ]
+    },
+    "body-text": {
+      "type": "Text",
+      "props": {
+        "text": "PR #75 (Reproducibility Config Export, merged 13:27 UTC) is the piece that ties MiroShark's eleven share surfaces into citable artifacts. Bytewise-stable reproduce.json — sort_keys + indent + trailing newline — means a SHA-256 becomes a stable citation key for paper appendices and threads. Six surfaces made finished sims quotable; this one makes them reproducible. 15 consecutive zero-new-deps PRs.",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "separator": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Read article",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-05-08.md",
+        "source": "GitHub"
+      },
+      "children": []
+    }
+  }
+}
