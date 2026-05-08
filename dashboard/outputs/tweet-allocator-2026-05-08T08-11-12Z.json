@@ -1,0 +1,177 @@
+{
+  "root": "card-root",
+  "state": {},
+  "elements": {
+    "card-root": {
+      "type": "Card",
+      "props": {
+        "title": "Tweet Rewards — 2026-05-08"
+      },
+      "children": [
+        "stack-main"
+      ]
+    },
+    "stack-main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stat-budget",
+        "separator-1",
+        "tweet-1-stack",
+        "tweet-2-stack",
+        "tweet-3-stack",
+        "separator-2",
+        "stat-total"
+      ]
+    },
+    "stat-budget": {
+      "type": "Stat",
+      "props": {
+        "label": "Budget",
+        "value": "$10.00 in $MIROSHARK on Base"
+      }
+    },
+    "separator-1": {
+      "type": "Separator"
+    },
+    "tweet-1-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-1-header",
+        "tweet-1-card",
+        "tweet-1-link",
+        "tweet-1-score"
+      ]
+    },
+    "tweet-1-header": {
+      "type": "Text",
+      "props": {
+        "text": "x.com/MrDegenWolf — $8.33 in $MIROSHARK",
+        "variant": "lead"
+      }
+    },
+    "tweet-1-card": {
+      "type": "TweetCard",
+      "props": {
+        "author": "MrDegenWolf",
+        "handle": "x.com/MrDegenWolf",
+        "text": "both undervalued millions for $AEON & $MIROSHARK"
+      }
+    },
+    "tweet-1-link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/MrDegenWolf/status/2052482121046835273"
+      }
+    },
+    "tweet-1-score": {
+      "type": "Badge",
+      "props": {
+        "text": "Score: 20",
+        "variant": "secondary"
+      }
+    },
+    "tweet-2-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-2-header",
+        "tweet-2-card",
+        "tweet-2-link",
+        "tweet-2-score"
+      ]
+    },
+    "tweet-2-header": {
+      "type": "Text",
+      "props": {
+        "text": "x.com/DaMikey23 — $0.83 in $MIROSHARK",
+        "variant": "lead"
+      }
+    },
+    "tweet-2-card": {
+      "type": "TweetCard",
+      "props": {
+        "author": "DaMikey23",
+        "handle": "x.com/DaMikey23",
+        "text": "If it's AI on Base, Then $AEON and $MIROSHARK needs to be on that list"
+      }
+    },
+    "tweet-2-link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/DaMikey23/status/2052537116823855309"
+      }
+    },
+    "tweet-2-score": {
+      "type": "Badge",
+      "props": {
+        "text": "Score: 2",
+        "variant": "secondary"
+      }
+    },
+    "tweet-3-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-3-header",
+        "tweet-3-card",
+        "tweet-3-link",
+        "tweet-3-score"
+      ]
+    },
+    "tweet-3-header": {
+      "type": "Text",
+      "props": {
+        "text": "x.com/BasedCult33 — $0.83 in $MIROSHARK",
+        "variant": "lead"
+      }
+    },
+    "tweet-3-card": {
+      "type": "TweetCard",
+      "props": {
+        "author": "BasedCult33",
+        "handle": "x.com/BasedCult33",
+        "text": "Look at @miroshark_, the best. @sama"
+      }
+    },
+    "tweet-3-link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/BasedCult33/status/2052211770412982352"
+      }
+    },
+    "tweet-3-score": {
+      "type": "Badge",
+      "props": {
+        "text": "Score: 2",
+        "variant": "secondary"
+      }
+    },
+    "separator-2": {
+      "type": "Separator"
+    },
+    "stat-total": {
+      "type": "Stat",
+      "props": {
+        "label": "Total Allocated",
+        "value": "$9.99 in $MIROSHARK to 3 authors"
+      }
+    }
+  }
+}

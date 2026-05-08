@@ -1,25 +1,17 @@
-*Tweet Rewards — 2026-05-07*
+*Tweet Rewards — 2026-05-08*
 
 Budget: $10.00 in $MIROSHARK on Base
 
-1. x.com/DaMikey23 — $3.28 in $MIROSHARK (score: 19)
-   Hey @sama, $MIROSHARK, Then you want to talk to @aaronjmars (quoting Sam Altman)
-   [View tweet](https://x.com/DaMikey23/status/2052119151422980351)
+1. x.com/MrDegenWolf — $8.33 in $MIROSHARK (score: 20)
+   both undervalued millions for $AEON & $MIROSHARK
+   [View tweet](https://x.com/MrDegenWolf/status/2052482121046835273)
 
-2. x.com/joraweb3 — $3.10 in $MIROSHARK (score: 18)
-   Grok called $MIROSHARK one of the best projects built with GPT-5.5 just sayin'
-   [View tweet](https://x.com/joraweb3/status/2051899219686945276)
+2. x.com/DaMikey23 — $0.83 in $MIROSHARK (score: 2)
+   If it's AI on Base, Then $AEON and $MIROSHARK needs to be on that list
+   [View tweet](https://x.com/DaMikey23/status/2052537116823855309)
 
-3. x.com/LauweTosti69 — $1.55 in $MIROSHARK (score: 9)
-   $miroshark doing amazing work at the fraction of a traditional cost.
-   [View tweet](https://x.com/LauweTosti69/status/2051925934740001073)
+3. x.com/BasedCult33 — $0.83 in $MIROSHARK (score: 2)
+   Look at @miroshark_, the best. @sama
+   [View tweet](https://x.com/BasedCult33/status/2052211770412982352)
 
-4. x.com/0xETHBTC5 — $1.03 in $MIROSHARK (score: 6)
-   Send it $litcoin $miroshark $wbc
-   [View tweet](https://x.com/0xETHBTC5/status/2051879525785509915)
-
-5. x.com/Dutch_AJ89 — $1.03 in $MIROSHARK (score: 6)
-   $Miroshark is just getting started. This gem have so much potential
-   [View tweet](https://x.com/Dutch_AJ89/status/2051935174166827257)
-
-Total: $10.00 in $MIROSHARK allocated to 5 authors
+Total: $9.99 in $MIROSHARK allocated to 3 authors
