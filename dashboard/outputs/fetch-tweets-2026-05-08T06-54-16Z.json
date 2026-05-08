@@ -1,0 +1,74 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Top Tweets — $MIROSHARK OR @miroshark_ OR github.com/aaronjmars/miroshark (2026-05-08)"
+      },
+      "children": [
+        "tweet_1",
+        "tweet_2",
+        "tweet_3",
+        "tweet_4",
+        "tweet_5",
+        "tweet_6"
+      ]
+    },
+    "tweet_1": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Simulated Elon Musk's response to Cursor AI coding in a Starship sprint; \"The Absorption Paradox\"",
+        "href": "https://x.com/aaronjmars/status/2052449244246581401",
+        "source": "aaronjmars",
+        "score": "18 likes, 3 RTs"
+      }
+    },
+    "tweet_2": {
+      "type": "StoryLink",
+      "props": {
+        "title": "cool shit, @aeonframework is top #6 with $7M TPV and @miroshark_ top #7 with $6M TPV (Umia leaderboard)",
+        "href": "https://x.com/aaronjmars/status/2052479228898099250",
+        "source": "aaronjmars",
+        "score": "29 likes, 4 RTs"
+      }
+    },
+    "tweet_3": {
+      "type": "StoryLink",
+      "props": {
+        "title": "both undervalued millions for $AEON & $MIROSHARK",
+        "href": "https://x.com/MrDegenWolf/status/2052482121046835273",
+        "source": "MrDegenWolf",
+        "score": "11 likes, 3 RTs"
+      }
+    },
+    "tweet_4": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Look at x.com/miroshark_, the best. @sama",
+        "href": "https://x.com/BasedCult33/status/2052211770412982352",
+        "source": "BasedCult33",
+        "score": "2 likes, 0 RTs"
+      }
+    },
+    "tweet_5": {
+      "type": "StoryLink",
+      "props": {
+        "title": "If it's AI on Base, Then $AEON and $MIROSHARK needs to be on that list",
+        "href": "https://x.com/DaMikey23/status/2052537116823855309",
+        "source": "DaMikey23",
+        "score": "2 likes, 0 RTs"
+      }
+    },
+    "tweet_6": {
+      "type": "StoryLink",
+      "props": {
+        "title": "$Miroshark 3x in paid calls recap",
+        "href": "https://x.com/10xgemhunter/status/2052484291532329378",
+        "source": "10xgemhunter",
+        "score": "0 likes, 0 RTs"
+      }
+    }
+  }
+}
