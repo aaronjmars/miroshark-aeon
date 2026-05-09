@@ -1,0 +1,134 @@
+{
+  "root": "card-root",
+  "state": {},
+  "elements": {
+    "card-root": {
+      "type": "Card",
+      "props": {
+        "title": "Top Tweets — $MIROSHARK OR @miroshark_ OR github.com/aaronjmars/miroshark (2026-05-09)"
+      },
+      "children": [
+        "stack-tweets"
+      ]
+    },
+    "stack-tweets": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "tweet-1",
+        "tweet-2",
+        "tweet-3",
+        "tweet-4",
+        "tweet-5",
+        "tweet-6",
+        "tweet-7",
+        "tweet-8",
+        "tweet-9",
+        "tweet-10"
+      ]
+    },
+    "tweet-1": {
+      "type": "TweetCard",
+      "props": {
+        "author": "soboltoshi",
+        "handle": "soboltoshi",
+        "text": "cancer research AI stack (CancerHawk) citing MiroShark + @miroshark_ as the peer-review layer alongside @IntrafereLLC and @precigenetic",
+        "likes": 18,
+        "retweets": 4
+      }
+    },
+    "tweet-2": {
+      "type": "TweetCard",
+      "props": {
+        "author": "aaronjmars",
+        "handle": "aaronjmars",
+        "text": "reminder: tweet about $miroshark / $aeon and get paid daily — $10 distributed to top tweets, link your X to @bankrbot",
+        "likes": 23,
+        "retweets": 5
+      }
+    },
+    "tweet-3": {
+      "type": "TweetCard",
+      "props": {
+        "author": "Mnosh06",
+        "handle": "Mnosh06",
+        "text": "detailed adoption thread: Revault using MiroShark for sneaker/collectibles drops, Grok #1 small AI on Base, Umia #7 at $6M TPV, BeInCrypto + Bitget coverage, +55 GitHub stars in 4 days (1,060→1,115), 222 forks",
+        "likes": 17,
+        "retweets": 6
+      }
+    },
+    "tweet-4": {
+      "type": "TweetCard",
+      "props": {
+        "author": "aaronjmars",
+        "handle": "aaronjmars",
+        "text": "coordination layer WIP: @aeonframework (king agent, long-term strategy) + @miroshark_ (simulation in chaotic environments) + @hyperstiti0ns (prediction market for smaller goals)",
+        "likes": 17,
+        "retweets": 6
+      }
+    },
+    "tweet-5": {
+      "type": "TweetCard",
+      "props": {
+        "author": "btcbabycow",
+        "handle": "btcbabycow",
+        "text": "(Chinese) $miroshark's prediction model hasn't shown its full potential yet — contract: 0xd7bc6a05a56655fb2052f742b012d1dfd66e1ba3",
+        "likes": 9,
+        "retweets": 2
+      }
+    },
+    "tweet-6": {
+      "type": "TweetCard",
+      "props": {
+        "author": "MrDegenWolf",
+        "handle": "MrDegenWolf",
+        "text": "stacking tokens just by talking about $AEON & $MIROSHARK — life's beautiful",
+        "likes": 8,
+        "retweets": 2
+      }
+    },
+    "tweet-7": {
+      "type": "TweetCard",
+      "props": {
+        "author": "bankrbot",
+        "handle": "bankrbot",
+        "text": "$MIROSHARK TA: +29.6% 24h, ~$500K mcap, floor at $0.00000440, flip $0.00000520 opens door to retest $0.00000600+; chart coiled amid broader risk-off",
+        "likes": 3,
+        "retweets": 2
+      }
+    },
+    "tweet-8": {
+      "type": "TweetCard",
+      "props": {
+        "author": "lila2001uo",
+        "handle": "lila2001uo",
+        "text": "noting soboltoshi created CancerHawk token, Aaron hasn't claimed the fee",
+        "likes": 1,
+        "retweets": 0
+      }
+    },
+    "tweet-9": {
+      "type": "TweetCard",
+      "props": {
+        "author": "soboltoshi",
+        "handle": "soboltoshi",
+        "text": "@miroshark_ @aaronjmars tagged as peer-review layer for CancerHawk's CDC endpoint research work",
+        "likes": 1,
+        "retweets": 0
+      }
+    },
+    "tweet-10": {
+      "type": "TweetCard",
+      "props": {
+        "author": "aaronjmars",
+        "handle": "aaronjmars",
+        "text": "@miroshark_ is serving 200M tokens daily on OpenRouter",
+        "likes": 0,
+        "retweets": 0
+      }
+    }
+  }
+}
