@@ -1,14 +1,14 @@
-*Push Recap — 2026-05-08*
-2 substantive commits across both watched repos.
+*Push Recap — 2026-05-09*
+aaronjmars/MiroShark — 1 substantive commit (PR #76, open) · aaronjmars/miroshark-aeon — chore commits only
 
-*MiroShark — PR #75 merged (Reproducibility Config Export):* New `GET /api/simulation/<id>/reproduce.json` returns a v1-schema JSON blob with scenario, agents, rounds, platforms, time_config, director events, and lineage (original/fork/counterfactual). Pretty-printed + sort_keys=True so identical exports are bytewise-identical — the file hash becomes a stable citation key. Closes the reproducibility gap behind the six citation surfaces (transcript/trajectory/thread/watch/GIF/share card). Pure stdlib; 22 offline tests; new EmbedDialog "🔬 Reproducibility config" panel with curl snippet + Download button + lineage badge. Zero-new-deps streak now 15 consecutive PRs.
+*Simulation Lineage Navigator (PR #76):* Direct sequel to yesterday's PR #75 reproducibility config. PR #75 wrote `parent_simulation_id` + counterfactual trigger metadata into every reproduce.json — the data was on disk, but the lineage was one-directional (a child knew its parent, the parent had no view into its children). PR #76 adds the reverse pointer: new `GET /api/simulation/<id>/lineage` endpoint returning the parent + every public child with kind (fork / counterfactual) + inline trigger metadata, plus an EmbedDialog 🌳 panel that auto-shows only when there's something to navigate to. A researcher running 3 counterfactual branches off a base scenario can finally walk from parent → all branches without remembering each child sim id.
 
-*aeon — PR #32 opened (MEMORY.md row caps):* The index had grown to 76KB / 31K+ tokens — over the Read tool's 25K limit, so every skill loading MEMORY.md was failing the Read call. Condensed each row to a one-sentence summary (file now 9.4KB / 79 lines, 8x smaller); `memory-flush` skill now enforces per-row caps (Skills Built ≤280, Recent Articles ≤220, Recent Digests ≤180) with a `wc -c` sanity check after every flush.
+*aeon steady-state:* No feature/fix work today; ~28 routine cron auto-commits from the day's scheduled skill runs (token-report, fetch-tweets, tweet-allocator, repo-pulse, hyperstitions-ideas, feature, push-recap). PR #32 (MEMORY.md row caps) still open + unchanged from yesterday.
 
 Key changes:
-- New `backend/app/services/repro_export.py` (487 lines, pure stdlib): SCHEMA_VERSION=1, REQUIRED_KEYS frozenset, `build_repro_config()`, `_build_lineage()` (3 cases), `_read_director_events()` (handles JSONL + legacy formats), `render_json_bytes()` for citation-hash stability, `validate_blob()` helper
-- `frontend/src/components/EmbedDialog.vue` (+484 lines): collapsed-by-default panel between Distribution and Mark-outcome, lineage badge (🪐 Forked / 🔀 Counterfactual) with parent-id tooltip, copy-ready curl snippet, Download `reproduce.json` button
-- `memory/MEMORY.md` shrunk 8x (76KB → 9.4KB) + new top-of-file callout banner explaining the index contract
+- New `backend/app/services/lineage_service.py` (+390, pure stdlib): MAX_CHILDREN=50 cap with honest total_children, public-children-only privacy primitive, corrupt state.json silently skipped, self-pointer doesn't recurse, oldest-first sort
+- 501-line offline test pin (`test_unit_lineage.py`, ~16 tests) covering every shape promise + degradation path; OpenAPI drift guard + route-decorator + module-import guards all pass
+- EmbedDialog gains 🌳 Lineage panel between repro config + verified-prediction sections; counterfactual rows render trigger round + label inline ("At round 12 (ceo_resigns)") so each branch reads as the narrative event, not a slightly different scenario
 
-Stats: 13 files changed, +1,961 / -42 lines across 2 substantive commits (~35 commits total counting the day's routine cron auto-commits — token-report / fetch-tweets / tweet-allocator / repo-pulse / feature / self-improve / repo-actions all OK).
-Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-05-08.md
+Stats: 11 files, +1,778 / -0 lines (MiroShark) · zero new deps · 16 consecutive zero-new-deps PRs (#57 → #76 assuming merge)
+Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-05-09.md
