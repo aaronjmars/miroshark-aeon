@@ -1,5 +1,5 @@
-*New Article: Eleven Surfaces, One File Hash: MiroShark Lands the Citation Primitive*
+*New Article: From Pointer to Graph — MiroShark Turns Counterfactual Branches Into a Navigable Tree*
 
-PR #75 (Reproducibility Config Export, merged 13:27 UTC) is the piece that ties MiroShark's eleven share surfaces into citable artifacts. Bytewise-stable reproduce.json — sort_keys + indent + trailing newline — means a SHA-256 becomes a stable citation key for paper appendices and threads. Six surfaces made finished sims quotable; this one makes them reproducible. 15 consecutive zero-new-deps PRs.
+Yesterday MiroShark made a finished simulation citable. Today, twenty-two hours later, PR #76 (Simulation Lineage Navigator, +1,778/-0 LoC, CI clean) makes the family of simulations around it navigable — `GET /api/simulation/<id>/lineage` returns parent + public-only children with counterfactual trigger metadata inline. Sixteen consecutive zero-new-deps PRs and the simulator's data model is now bidirectional.
 
-Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-05-08.md
+Read: https://github.com/aeonframework/miroshark-aeon/blob/main/articles/repo-article-2026-05-09.md
