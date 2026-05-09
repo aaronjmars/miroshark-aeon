@@ -1,17 +1,21 @@
 ## Summary
 
-Built and shipped **Reproducibility Config Export** — May 6 repo-actions idea #1, the citation primitive behind every existing share surface.
+**Built and shipped Simulation Lineage Navigator** — repo-actions 2026-05-08 idea #3 — as PR #76 on aaronjmars/MiroShark. Direct follow-up to PR #75 (Reproducibility Config Export merged yesterday): turns the one-directional `parent_simulation_id` pointer into a navigable graph, so a researcher running counterfactual branches off a base scenario can finally walk from the parent to "the three branches that diverged at round 12".
 
-**What landed (PR #75 on aaronjmars/MiroShark):**
-- `GET /api/simulation/<id>/reproduce.json` — pretty-printed v1-schema JSON document with scenario, agent_count, total_rounds, platforms, time_config knobs, director_events list, lineage block (original/fork/counterfactual + parent + 140-char preview), config_reasoning. Sort-keyed + indented so identical exports are bytewise-identical (file hash works as a citation key).
-- New `backend/app/services/repro_export.py` (~370 LoC, pure stdlib) + 22 offline unit tests.
-- OpenAPI `ReproductionConfig` schema; drift test passes.
-- EmbedDialog "🔬 Reproducibility config" panel with summary grid, inline 🪐 Forked / 🔀 Counterfactual lineage badge, copy-ready curl snippet, Download / Copy URL / Refresh buttons.
-- README + docs/FEATURES.md + docs/API.md (en + zh-CN mirrors).
-- Frontend build green (`vite v7.2.7`, 728 modules); zero new deps. Zero-new-deps streak now 15 consecutive PRs.
+**Files created/modified:**
+- `backend/app/services/lineage_service.py` (new, ~390 LoC, pure stdlib)
+- `backend/app/api/simulation.py` — `GET /api/simulation/<id>/lineage` route
+- `backend/openapi.yaml` — `SimulationLineage` schema under Analytics
+- `backend/tests/test_unit_lineage.py` (new, 16 offline tests)
+- `frontend/src/api/simulation.js` — `getSimulationLineage()` helper
+- `frontend/src/components/EmbedDialog.vue` — 🌳 Lineage panel
+- `README.md` + `docs/FEATURES.md` + `docs/API.md` (en + zh-CN mirrors)
+- `memory/MEMORY.md` Skills Built table + `memory/logs/2026-05-09.md` log entry
 
-**Files modified in agent repo:** `memory/MEMORY.md` (Skills Built + Next Priorities), `memory/logs/2026-05-08.md` (feature log entry), `.pending-notify/1778240291.md` (notification queued; the inline `./notify` invocation hit an "Unhandled node type" sandbox barrier — the workflow's post-run step will dispatch from `.pending-notify/`).
+**Outcomes:**
+- PR: https://github.com/aaronjmars/MiroShark/pull/76 (CI pending)
+- Frontend builds clean (728 modules, vite v7.2.7); zero new deps; 16-PR zero-new-deps streak
+- Notification queued in `.pending-notify/` for post-run delivery (Telegram/Discord/Slack)
+- Could not run `pytest` directly (sandbox restrictions on python3 invocations) — CI will validate
 
-**Not run locally:** Backend pytest (`python -m pytest …` consistently required approval that wasn't granted). CI will run the new `test_unit_repro_export.py` (22 tests) + the existing `test_unit_openapi.py` drift suite.
-
-PR: https://github.com/aaronjmars/MiroShark/pull/75
+**Follow-ups:** Tests run on CI; if they fail, will need a follow-up commit. Counterfactual-branch comparison view (diff belief curves across parent + branches via existing `/api/simulation/compare`) is a natural next step.
