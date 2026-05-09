@@ -1,13 +1,13 @@
-*Hyperstitions Idea — 2026-05-02*
+*Hyperstitions Idea — 2026-05-09*
 
-"Will MiroShark merge a PR from a Chinese-locale contributor (or land a substantive Chinese-language tutorial / blog / video covering the project) by June 15, 2026?"
+"Will the Aeon agent framework be deployed by ≥1 external operator (non-aaronjmars) running publicly under their own project identity by June 30, 2026?"
 
-The coordination play: yesterday's PR #65 closed the three-tier zh-CN rollout — UI, backend errors, agent prompts, report-writer, RSS feed metadata, bilingual docs all flip with one toggle. The substrate now speaks Mandarin; nobody Mandarin-speaking has shipped against it yet. Holders forwarding the repo into Chinese-language WeChat groups / Zhihu / Bilibili / xiaohongshu, translators writing the first quickstart on a CN dev blog, devs filing the first PR with CN commit history — these are the exact moves an AI agent can't make on its own. The market's existence is the rally signal that this is the gap worth closing right now.
+The coordination play: Aaron just publicly declared the trio — @aeonframework (king agent) + @miroshark_ (simulation) + @hyperstiti0ns (prediction markets) — making the king-agent layer canonical. miroshark-aeon is the live reference deployment, but zero outside teams have spun up their own Aeon. The market creates a "be the first" prize: fork, wire your secrets, point the soul at your token, ship public notifications under your project's voice. None of that is something an AI agent can do for you — it needs a human operator with their own GitHub Actions, their own X handle, their own community.
 
-Why now: PR #65 (Apr 30, 18:30 UTC) was filed five hours after PR #61 explicitly carved zh-CN agent prompts as Tier 3 / out of scope — Aaron walked back the carve-out the same evening. Three tiers in ~27 hours. @bluenami866's CN-flagged tweets surfaced in today's social pulse. New audience axis is wide open and the ship is fresh.
+Why now: Today (May 9) Aaron tweeted the explicit trio framing — first time @aeonframework has been name-dropped as canonical king-agent layer (17L/6RT). 222 forks of MiroShark + 1,116 stars + @miroshark_ serving 200M tokens/day on OpenRouter = a pool of awareness already crossed; what's missing is the first external pilot. The soboltoshi/CancerHawk thread today shows the appetite to plug into the stack.
 
-Resolution: YES if, by 23:59 UTC 2026-06-15, EITHER (a) `aaronjmars/MiroShark` has merged a PR whose author's GitHub profile bio/name is in Chinese OR whose commit messages contain CJK characters, OR (b) a Chinese-language piece ≥500 chars / 3+ min runtime (WeChat article, Zhihu post, Bilibili video, CN dev blog) substantively covers MiroShark with a working repo link. Verified via `gh api repos/aaronjmars/MiroShark/pulls?state=closed` + manual link check. Otherwise NO.
+Resolution: YES if, by 23:59 UTC 2026-06-30, a public GitHub repo (not under the aaronjmars account or the miroshark-aeon namespace) is running the Aeon framework — defined as (a) aeon.yml + skills/ directory derived from this framework, (b) ≥7 successful GitHub Actions workflow runs in the trailing 14 days as of resolution, and (c) ≥1 public notification artifact (Telegram / Discord / Slack post, dashboard output, or X tweet) demonstrating the agent acting in its own non-MiroShark-non-Aeon project voice. Verified via repo URL + workflow run history + linked notification.
 
-Scores: Reflexivity 4/5 | Viral 3/5
+Scores: Reflexivity 4/5 | Viral 4/5
 
 Soon on https://www.hyperstitions.com/ ?
