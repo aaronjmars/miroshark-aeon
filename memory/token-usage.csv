@@ -242,4 +242,4 @@ date,skill,model,input_tokens,output_tokens,cache_read,cache_creation
 2026-05-09,hyperstitions-ideas,claude-opus-4-7,21,14367,922962,73310
 2026-05-09,feature,claude-opus-4-7,186,81178,35604272,302768
 2026-05-09,push-recap,claude-opus-4-7,40,17350,2016761,101953
-2026-05-09,repo-article,claude-opus-4-7,1564,12675,974795,92214
+2026-05-09,project-lens,claude-opus-4-7,359,20588,2702142,91966

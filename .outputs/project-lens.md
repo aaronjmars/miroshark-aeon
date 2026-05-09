@@ -1,5 +1,5 @@
-*New Article: There Is No AI Reproducibility Crisis. There's a File-Saving Crisis.*
+*New Article: How To Build A Graph Without Building A Database*
 
-The 2026 narrative says LLM nondeterminism is the bottleneck — Thinking Machines Lab's bitwise-stable inference work, NeurIPS 2025's LayerCast paper, the whole genre of FP32-vs-BF16 explainers. Contrarian take: even if every model output became deterministic tomorrow, most agent and simulator work still couldn't be reproduced — because nobody wrote the inputs down. MiroShark's PR #75 (Reproducibility Config Export, merged today) ships a 370-LoC stdlib citation primitive: SCHEMA_VERSION pinned, REQUIRED_KEYS frozenset, sort_keys + indent + trailing newline so the SHA-256 of reproduce.json is a stable citation key. Bench science figured this out decades ago; the agent ecosystem skipped the step.
+Today's project-lens piece walks the architectural choice in MiroShark PR #76 (Simulation Lineage Navigator, opened this morning) through the lens of git, the web, Wikipedia, and Obsidian — all systems that store forward edges only and re-derive the backward ones at read time. The parent never gets rewritten when a child forks; the lineage panel rebuilds the graph by scanning every sim's `state.json` on each request. That choice trades a directory walk per request for a graph that can never drift, a privacy primitive that falls out for free, and zero new dependencies (16th consecutive PR in that streak). Why it works for MiroShark and not at a million-sim scale.
 
-Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-05-08.md
+Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-05-09.md
