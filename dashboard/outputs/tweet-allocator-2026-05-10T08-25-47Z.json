@@ -1,0 +1,265 @@
+{
+  "root": "card-root",
+  "state": {},
+  "elements": {
+    "card-root": {
+      "type": "Card",
+      "props": {
+        "title": "Tweet Rewards — 2026-05-10",
+        "description": "Budget allocation across tweets on Base"
+      },
+      "children": [
+        "budget-stat",
+        "sep-1",
+        "tweets-stack",
+        "sep-2",
+        "total-text"
+      ]
+    },
+    "budget-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Total Budget",
+        "value": "$10.00 in $MIROSHARK"
+      }
+    },
+    "sep-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "tweets-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "lg"
+      },
+      "children": [
+        "tweet-1",
+        "tweet-2",
+        "tweet-3",
+        "tweet-4",
+        "tweet-5"
+      ]
+    },
+    "tweet-1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-1-header",
+        "tweet-1-score",
+        "tweet-1-card",
+        "tweet-1-link"
+      ]
+    },
+    "tweet-1-header": {
+      "type": "Text",
+      "props": {
+        "text": "x.com/BaseCaptainHB — $4.60 in $MIROSHARK",
+        "variant": "lead"
+      }
+    },
+    "tweet-1-score": {
+      "type": "Badge",
+      "props": {
+        "text": "score: 69"
+      }
+    },
+    "tweet-1-card": {
+      "type": "TweetCard",
+      "props": {
+        "author": "BaseCaptainHB",
+        "handle": "BaseCaptainHB",
+        "text": "AI agents on bankrbot — $MIROSHARK among low-mcap plays worth a closer look"
+      }
+    },
+    "tweet-1-link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/BaseCaptainHB/status/2053104511514767367"
+      }
+    },
+    "tweet-2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-2-header",
+        "tweet-2-score",
+        "tweet-2-card",
+        "tweet-2-link"
+      ]
+    },
+    "tweet-2-header": {
+      "type": "Text",
+      "props": {
+        "text": "x.com/TheGodfath13541 — $2.73 in $MIROSHARK",
+        "variant": "lead"
+      }
+    },
+    "tweet-2-score": {
+      "type": "Badge",
+      "props": {
+        "text": "score: 41"
+      }
+    },
+    "tweet-2-card": {
+      "type": "TweetCard",
+      "props": {
+        "author": "TheGodfath13541",
+        "handle": "TheGodfath13541",
+        "text": "Bullish deep-dive: first $10K buy, Lorimer Ventures followed Aaron, 1K+ GitHub stars, x402/API live, China unlocked"
+      }
+    },
+    "tweet-2-link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/TheGodfath13541/status/2053232105308713276"
+      }
+    },
+    "tweet-3": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-3-header",
+        "tweet-3-score",
+        "tweet-3-card",
+        "tweet-3-link"
+      ]
+    },
+    "tweet-3-header": {
+      "type": "Text",
+      "props": {
+        "text": "x.com/Jsxontop — $1.27 in $MIROSHARK",
+        "variant": "lead"
+      }
+    },
+    "tweet-3-score": {
+      "type": "Badge",
+      "props": {
+        "text": "score: 19"
+      }
+    },
+    "tweet-3-card": {
+      "type": "TweetCard",
+      "props": {
+        "author": "Jsxontop",
+        "handle": "Jsxontop",
+        "text": "$MIROSHARK at ~$500K mcap — absolute steal at this price"
+      }
+    },
+    "tweet-3-link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/Jsxontop/status/2053153974044316109"
+      }
+    },
+    "tweet-4": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-4-header",
+        "tweet-4-score",
+        "tweet-4-card",
+        "tweet-4-link"
+      ]
+    },
+    "tweet-4-header": {
+      "type": "Text",
+      "props": {
+        "text": "x.com/DaMikey23 — $0.87 in $MIROSHARK",
+        "variant": "lead"
+      }
+    },
+    "tweet-4-score": {
+      "type": "Badge",
+      "props": {
+        "text": "score: 13"
+      }
+    },
+    "tweet-4-card": {
+      "type": "TweetCard",
+      "props": {
+        "author": "DaMikey23",
+        "handle": "DaMikey23",
+        "text": "Someone just aped $10K into $MIROSHARK"
+      }
+    },
+    "tweet-4-link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/DaMikey23/status/2053220587808436401"
+      }
+    },
+    "tweet-5": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-5-header",
+        "tweet-5-score",
+        "tweet-5-card",
+        "tweet-5-link"
+      ]
+    },
+    "tweet-5-header": {
+      "type": "Text",
+      "props": {
+        "text": "x.com/bluenami866 — $0.53 in $MIROSHARK",
+        "variant": "lead"
+      }
+    },
+    "tweet-5-score": {
+      "type": "Badge",
+      "props": {
+        "text": "score: 8"
+      }
+    },
+    "tweet-5-card": {
+      "type": "TweetCard",
+      "props": {
+        "author": "bluenami866",
+        "handle": "bluenami866",
+        "text": "$miroshark"
+      }
+    },
+    "tweet-5-link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/bluenami866/status/2052964164520284222"
+      }
+    },
+    "sep-2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "total-text": {
+      "type": "Text",
+      "props": {
+        "text": "Total: $10.00 in $MIROSHARK allocated to 5 authors",
+        "variant": "body"
+      }
+    }
+  }
+}
