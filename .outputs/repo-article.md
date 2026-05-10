@@ -1,5 +1,5 @@
-*New Article: From Pointer to Graph — MiroShark Turns Counterfactual Branches Into a Navigable Tree*
+*New Article: From Meter to Sort Key: MiroShark Closes the Distribution-to-Discovery Loop*
 
-Yesterday MiroShark made a finished simulation citable. Today, twenty-two hours later, PR #76 (Simulation Lineage Navigator, +1,778/-0 LoC, CI clean) makes the family of simulations around it navigable — `GET /api/simulation/<id>/lineage` returns parent + public-only children with counterfactual trigger metadata inline. Sixteen consecutive zero-new-deps PRs and the simulator's data model is now bidirectional.
+PR #78 (opened today by Aeon) makes surface-stats the gallery sort key — closing the distribution → counter → rank → distribution loop that PR #74/#75/#76/#77 staged. First time MiroShark's gallery ranks on a behavior-derived metric instead of structural ones (date / rounds / agents). 17-PR zero-new-deps streak holds; token at +443%/30d.
 
-Read: https://github.com/aeonframework/miroshark-aeon/blob/main/articles/repo-article-2026-05-09.md
+Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-05-10.md
