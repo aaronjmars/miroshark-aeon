@@ -1,0 +1,319 @@
+{
+  "root": "card-root",
+  "state": {},
+  "elements": {
+    "card-root": {
+      "type": "Card",
+      "props": {
+        "title": "Repo Action Ideas"
+      },
+      "children": [
+        "main-stack"
+      ]
+    },
+    "main-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "intro-text",
+        "sep1",
+        "items-stack",
+        "sep2",
+        "details-link"
+      ]
+    },
+    "intro-text": {
+      "type": "Text",
+      "props": {
+        "text": "Generated from analysis of MiroShark (1,127 stars, near-ATH token, bankrbot feature + VC discovery today)"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "items-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "lg"
+      },
+      "children": [
+        "item1",
+        "item2",
+        "item3",
+        "item4",
+        "item5"
+      ]
+    },
+    "item1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "item1-title",
+        "item1-badges",
+        "item1-desc"
+      ]
+    },
+    "item1-title": {
+      "type": "Heading",
+      "props": {
+        "text": "1. Webhook HMAC Signature Verification",
+        "level": "h3"
+      }
+    },
+    "item1-badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "item1-badge1",
+        "item1-badge2"
+      ]
+    },
+    "item1-badge1": {
+      "type": "Badge",
+      "props": {
+        "text": "Security",
+        "variant": "default"
+      }
+    },
+    "item1-badge2": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "secondary"
+      }
+    },
+    "item1-desc": {
+      "type": "Text",
+      "props": {
+        "text": "HMAC sha256= header on every dispatch — Stripe/GitHub model closes the auth gap as Revault + CancerHawk integrations scale."
+      }
+    },
+    "item2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "item2-title",
+        "item2-badges",
+        "item2-desc"
+      ]
+    },
+    "item2-title": {
+      "type": "Heading",
+      "props": {
+        "text": "2. Jupyter Notebook Export",
+        "level": "h3"
+      }
+    },
+    "item2-badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "item2-badge1",
+        "item2-badge2"
+      ]
+    },
+    "item2-badge1": {
+      "type": "Badge",
+      "props": {
+        "text": "Feature",
+        "variant": "default"
+      }
+    },
+    "item2-badge2": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "secondary"
+      }
+    },
+    "item2-desc": {
+      "type": "Text",
+      "props": {
+        "text": "GET /api/simulation/id/notebook.ipynb — trajectory data + belief charts pre-loaded, runs standalone. Institutional handoff for the Lorimer Ventures tier."
+      }
+    },
+    "item3": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "item3-title",
+        "item3-badges",
+        "item3-desc"
+      ]
+    },
+    "item3-title": {
+      "type": "Heading",
+      "props": {
+        "text": "3. Trading Signal JSON Export",
+        "level": "h3"
+      }
+    },
+    "item3-badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "item3-badge1",
+        "item3-badge2"
+      ]
+    },
+    "item3-badge1": {
+      "type": "Badge",
+      "props": {
+        "text": "Integration",
+        "variant": "default"
+      }
+    },
+    "item3-badge2": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "secondary"
+      }
+    },
+    "item3-desc": {
+      "type": "Text",
+      "props": {
+        "text": "GET /api/simulation/id/signal.json — schema-locked direction + confidence_margin + quality tier for bankrbot and terminal APIs."
+      }
+    },
+    "item4": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "item4-title",
+        "item4-badges",
+        "item4-desc"
+      ]
+    },
+    "item4-title": {
+      "type": "Heading",
+      "props": {
+        "text": "4. Per-Agent Stance Sparklines",
+        "level": "h3"
+      }
+    },
+    "item4-badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "item4-badge1",
+        "item4-badge2"
+      ]
+    },
+    "item4-badge1": {
+      "type": "Badge",
+      "props": {
+        "text": "Feature",
+        "variant": "default"
+      }
+    },
+    "item4-badge2": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "secondary"
+      }
+    },
+    "item4-desc": {
+      "type": "Text",
+      "props": {
+        "text": "GET /api/simulation/id/agent-timeline — colored dot sequence per agent per round. The 'who moved the needle?' view organic GIF demos show resonates."
+      }
+    },
+    "item5": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "item5-title",
+        "item5-badges",
+        "item5-desc"
+      ]
+    },
+    "item5-title": {
+      "type": "Heading",
+      "props": {
+        "text": "5. Simulation Archive Bundle",
+        "level": "h3"
+      }
+    },
+    "item5-badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "item5-badge1",
+        "item5-badge2"
+      ]
+    },
+    "item5-badge1": {
+      "type": "Badge",
+      "props": {
+        "text": "Feature",
+        "variant": "default"
+      }
+    },
+    "item5-badge2": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "secondary"
+      }
+    },
+    "item5-desc": {
+      "type": "Text",
+      "props": {
+        "text": "GET /api/simulation/id/archive.zip — all artifacts in one download. Share card, GIF, transcript, trajectory, reproduce.json in a single ZIP."
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "details-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full details",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-actions-2026-05-10.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}
