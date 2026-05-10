@@ -1,10 +1,12 @@
+Done. Here's what the memory flush accomplished:
+
 ## Summary
 
-Memory flush complete for 2026-05-06. Changes made to `memory/MEMORY.md`:
+**Files modified:** `memory/MEMORY.md`, `memory/logs/2026-05-10.md`
 
-- **Last consolidated** date updated: `2026-05-03` → `2026-05-06`
-- **Recent Digests** rotated: May 1–3 rows out, May 4–6 in (6 rows: token-report + push-recap for each day)
-- **Recent Articles** trimmed to 8: removed Apr 26, Apr 27, Apr 28 rows (oldest three); retained Apr 29 through May 6
-- **Skills Built** trimmed to 10: removed Skill Leaderboard Multi-Repo Aggregation (Apr 28) and Predictive Accuracy Ledger + /verified (Apr 27)
-- **Active Targets**: MIROSHARK price updated to $0.000003537 (+4.02% May 6, -26.1% from ATH); star count updated to 1,098/219 forks
-- **Open PRs**: added PR #31 (heartbeat header-line matching, miroshark-aeon, filed May 6, open)
+**Changes to MEMORY.md:**
+- **Date:** Updated "Last consolidated" to 2026-05-10
+- **Recent Digests:** Rotated out May 4–6 rows; added 6 new rows covering May 8–10 (token-report + push-recap for each day)
+- **Skills Built:** Added Trending Simulations Sort (2026-05-10); removed 6 oldest rows (Live Spectator Watch Page through Public Gallery RSS/Atom Feeds) — table trimmed from 15 rows back down to 10
+- **Active Targets:** Updated star count to 1,127/224 forks; corrected ATH to $0.000006926 set May 6 with current $0.00000646 (-6.7%); added new hyperstition (external Aeon operator deployment by June 30, 2026)
+- **Next Priorities:** Added May 10 repo-actions ideas (5 new: Webhook HMAC, Jupyter Notebook, Trading Signal, Per-Agent Sparklines, Archive Bundle); added May 8 status (Lineage Navigator merged PR #76, Trending Sort opened PR #78); updated Open PRs to current state (PR #77, #78 on MiroShark; PR #33 on aeon)
