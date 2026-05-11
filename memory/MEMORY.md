@@ -41,6 +41,7 @@ Full implementation notes in daily logs. Each row ≤280 chars.
 
 | Skill | Date | Notes |
 |-------|------|-------|
+| Webhook HMAC Signature Verification | 2026-05-11 | PR #79 — `WEBHOOK_SECRET` → `X-MiroShark-Signature: sha256=<hex>` on every dispatch (Stripe/GitHub scheme). `compute_signature` + `verify_signature` published for symmetry; backward compat when secret blank. 8 offline tests (urlopen-mock integration), Python/Node/curl docs snippets, EmbedDialog hint, zero new deps (streak: 18 PRs). |
 | Trending Simulations Sort | 2026-05-10 | PR #78 — `?sort=trending` ranks public sims by `surface-stats.json` totals (date tie-break), turns inbound observability into discovery primitive. 8 offline tests, frontend "🔥 Trending" option, zero new deps (streak: 17 PRs). |
 | Simulation Lineage Navigator | 2026-05-09 | PR #76 — `GET /api/simulation/<id>/lineage` reverse-pointer scan with public-only children, oldest-first, cap 50. New `lineage_service.py` (~390 LoC stdlib), 16 offline tests, EmbedDialog 🌳 panel. |
 | Reproducibility Config Export | 2026-05-08 | PR #75 — `GET /api/simulation/<id>/reproduce.json` v1-schema citation primitive (scenario + agents + rounds + platforms + lineage). `repro_export.py` ~370 LoC stdlib, sort_keys+indent=2 → SHA-256 citation key. 22 tests. |
@@ -71,7 +72,7 @@ Full implementation notes in daily logs. Each row ≤280 chars.
 - $MIROSHARK ATH $0.000006926 set 2026-05-06 intraday; current $0.00000646 (+30.6% 24h on 2026-05-10, -6.7% from ATH, near-retest)
 
 ## Next Priorities
-- Open MiroShark PRs: #77 (surface-stats reproduce/lineage), #78 (trending sort, opened 2026-05-10)
+- Open MiroShark PRs: #79 (webhook HMAC signing, opened 2026-05-11)
 - Open miroshark-aeon PRs: today's self-improve (re-doing closed PR #32 work — owner instruction)
-- Unbuilt repo-actions ideas tracked in `articles/repo-actions-*.md`. Most recent batch (2026-05-08): #2 oEmbed Endpoint, #4 Peak-Round Snapshot, #5 Operator Profile (#1 Trending Sort shipped 2026-05-10 PR #78, #3 Lineage Navigator shipped 2026-05-09 PR #76)
+- Unbuilt repo-actions ideas (2026-05-10 batch): #2 Jupyter Notebook Export, #3 Trading Signal JSON, #4 Per-Agent Stance Sparklines, #5 Simulation Archive Bundle (#1 Webhook HMAC shipped 2026-05-11 PR #79). Earlier batch (2026-05-08): #2 oEmbed Endpoint, #4 Peak-Round Snapshot, #5 Operator Profile
 - Issue #70 on MiroShark — Cyril Private Impact mode + MiroResult collaboration request (substantial cross-builder feature track)
