@@ -1,0 +1,528 @@
+{
+  "root": "card_root",
+  "state": {},
+  "elements": {
+    "card_root": {
+      "type": "Card",
+      "props": {
+        "title": "Push Recap — 2026-05-11",
+        "description": "MiroShark & aeon merge activity, closed-loop primitives, memory optimization"
+      },
+      "children": [
+        "summary_badges",
+        "sep1",
+        "projects_section",
+        "sep2",
+        "distribution_section",
+        "sep3",
+        "webhook_section",
+        "sep4",
+        "memory_section",
+        "sep5",
+        "key_changes_section",
+        "sep6",
+        "stats_section",
+        "sep7",
+        "tech_debt_alert",
+        "sep8",
+        "notable_mention",
+        "sep9",
+        "recap_link"
+      ]
+    },
+    "summary_badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "badge_miroshark",
+        "badge_aeon"
+      ]
+    },
+    "badge_miroshark": {
+      "type": "Badge",
+      "props": {
+        "text": "MiroShark: 2 merges (PR #77, #78) + 1 new PR (#79)",
+        "variant": "default"
+      }
+    },
+    "badge_aeon": {
+      "type": "Badge",
+      "props": {
+        "text": "aeon: 1 merge (PR #33) + steady cron",
+        "variant": "secondary"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "projects_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "projects_heading"
+      ]
+    },
+    "projects_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Repositories",
+        "level": "h3"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "distribution_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "dist_heading",
+        "dist_desc1",
+        "dist_desc2",
+        "dist_desc3",
+        "dist_desc4"
+      ]
+    },
+    "dist_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Distribution→discovery loop closes",
+        "level": "h3"
+      }
+    },
+    "dist_desc1": {
+      "type": "Text",
+      "props": {
+        "text": "PR #77 (c6edeb6) backfills reproduce_json + lineage into the surface-stats counter that PR #75 + #76 had been silently undercounting.",
+        "variant": "body"
+      }
+    },
+    "dist_desc2": {
+      "type": "Text",
+      "props": {
+        "text": "PR #78 (77bb1ed) promotes the now-complete counter sum into the /explore sort dropdown as 🔥 Trending.",
+        "variant": "body"
+      }
+    },
+    "dist_desc3": {
+      "type": "Text",
+      "props": {
+        "text": "Both merged within 2 minutes of each other (22:39 + 22:41 UTC).",
+        "variant": "body"
+      }
+    },
+    "dist_desc4": {
+      "type": "Text",
+      "props": {
+        "text": "First closed-loop primitive on the sim_dir/ substrate — sims that get distributed rise in discovery, and that direction is one-way.",
+        "variant": "body"
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "webhook_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "webhook_heading",
+        "webhook_desc1",
+        "webhook_desc2",
+        "webhook_desc3"
+      ]
+    },
+    "webhook_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Webhook signing primitive opened",
+        "level": "h3"
+      }
+    },
+    "webhook_desc1": {
+      "type": "Text",
+      "props": {
+        "text": "PR #79 drafted by today's feature skill — X-MiroShark-Signature: sha256=<hex> injected when WEBHOOK_SECRET env var is set, omitted otherwise (backward-compatible).",
+        "variant": "body"
+      }
+    },
+    "webhook_desc2": {
+      "type": "Text",
+      "props": {
+        "text": "8 offline tests, +692/-6 across 10 files, pure stdlib hmac + hashlib.",
+        "variant": "body"
+      }
+    },
+    "webhook_desc3": {
+      "type": "Text",
+      "props": {
+        "text": "Pending merge.",
+        "variant": "lead"
+      }
+    },
+    "sep4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "memory_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "memory_heading",
+        "memory_desc1",
+        "memory_desc2",
+        "memory_desc3"
+      ]
+    },
+    "memory_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Memory-index self-heal",
+        "level": "h3"
+      }
+    },
+    "memory_desc1": {
+      "type": "Text",
+      "props": {
+        "text": "aeon PR #33 (9e3f55b) re-applies closed PR #32 — memory-flush step 5 now caps Skills Built ≤280 / Articles ≤220 / Digests ≤180 chars per row + post-flush wc -c sanity check (<25 KB).",
+        "variant": "body"
+      }
+    },
+    "memory_desc2": {
+      "type": "Text",
+      "props": {
+        "text": "MEMORY.md condensed from 81 KB to 7.7 KB so every skill's at-task-start Read stops failing past the 25K-token cap.",
+        "variant": "body"
+      }
+    },
+    "memory_desc3": {
+      "type": "Text",
+      "props": {
+        "text": "Addresses 2026-05-08 incident.",
+        "variant": "muted"
+      }
+    },
+    "sep5": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "key_changes_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "changes_heading",
+        "pr78_changes",
+        "pr77_changes",
+        "aeon_changes"
+      ]
+    },
+    "changes_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Key changes",
+        "level": "h3"
+      }
+    },
+    "pr78_changes": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "pr78_badge",
+        "pr78_text1",
+        "pr78_text2",
+        "pr78_text3",
+        "pr78_text4"
+      ]
+    },
+    "pr78_badge": {
+      "type": "Badge",
+      "props": {
+        "text": "PR #78",
+        "variant": "default"
+      }
+    },
+    "pr78_text1": {
+      "type": "Text",
+      "props": {
+        "text": "SORT_VALUES gains trending",
+        "variant": "body"
+      }
+    },
+    "pr78_text2": {
+      "type": "Text",
+      "props": {
+        "text": "_trending_key clamps non-int / negative to zero, tie-breaks on created_at desc",
+        "variant": "body"
+      }
+    },
+    "pr78_text3": {
+      "type": "Text",
+      "props": {
+        "text": "TRENDING_FIELD = \"_serves_total\" literal pin",
+        "variant": "body"
+      }
+    },
+    "pr78_text4": {
+      "type": "Text",
+      "props": {
+        "text": "Sweep only on ?sort=trending so default date path stays read-free; 8 new tests",
+        "variant": "body"
+      }
+    },
+    "pr77_changes": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "pr77_badge",
+        "pr77_text1",
+        "pr77_text2",
+        "pr77_text3"
+      ]
+    },
+    "pr77_badge": {
+      "type": "Badge",
+      "props": {
+        "text": "PR #77",
+        "variant": "default"
+      }
+    },
+    "pr77_text1": {
+      "type": "Text",
+      "props": {
+        "text": "SURFACE_KEYS frozenset extended with reproduce_json + lineage",
+        "variant": "body"
+      }
+    },
+    "pr77_text2": {
+      "type": "Text",
+      "props": {
+        "text": "increment_surface_stat calls added to both route handlers' success paths",
+        "variant": "body"
+      }
+    },
+    "pr77_text3": {
+      "type": "Text",
+      "props": {
+        "text": "SURFACE_STAT_LABELS updated so EmbedDialog renders the new counters",
+        "variant": "body"
+      }
+    },
+    "aeon_changes": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "aeon_badge",
+        "aeon_text1",
+        "aeon_text2"
+      ]
+    },
+    "aeon_badge": {
+      "type": "Badge",
+      "props": {
+        "text": "aeon PR #33",
+        "variant": "secondary"
+      }
+    },
+    "aeon_text1": {
+      "type": "Text",
+      "props": {
+        "text": "memory-flush SKILL.md step 5 + literal callout to the 2026-05-08 incident",
+        "variant": "body"
+      }
+    },
+    "aeon_text2": {
+      "type": "Text",
+      "props": {
+        "text": "MEMORY.md condensed 90%",
+        "variant": "body"
+      }
+    },
+    "sep6": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stats_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stats_heading",
+        "stats_grid"
+      ]
+    },
+    "stats_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Stats",
+        "level": "h3"
+      }
+    },
+    "stats_grid": {
+      "type": "Grid",
+      "props": {
+        "columns": 3,
+        "gap": "md"
+      },
+      "children": [
+        "stat_miroshark_files",
+        "stat_miroshark_diff",
+        "stat_aeon_files",
+        "stat_aeon_diff",
+        "stat_deps",
+        "stat_streak"
+      ]
+    },
+    "stat_miroshark_files": {
+      "type": "Stat",
+      "props": {
+        "label": "MiroShark files changed",
+        "value": "21"
+      }
+    },
+    "stat_miroshark_diff": {
+      "type": "Stat",
+      "props": {
+        "label": "MiroShark net diff (2 merges)",
+        "value": "+253/-31"
+      }
+    },
+    "stat_aeon_files": {
+      "type": "Stat",
+      "props": {
+        "label": "aeon PR #33 files",
+        "value": "4"
+      }
+    },
+    "stat_aeon_diff": {
+      "type": "Stat",
+      "props": {
+        "label": "aeon PR #33 net diff",
+        "value": "+198/-60"
+      }
+    },
+    "stat_deps": {
+      "type": "Stat",
+      "props": {
+        "label": "New dependencies",
+        "value": "0"
+      }
+    },
+    "stat_streak": {
+      "type": "Stat",
+      "props": {
+        "label": "No-new-deps streak",
+        "value": "18 PRs (#57→#78)"
+      }
+    },
+    "sep7": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "tech_debt_alert": {
+      "type": "Alert",
+      "props": {
+        "title": "Tech debt flagged",
+        "message": "sig_smoke.py committed today by feature skill (31-line scratch HMAC verifier) — second day in a row a scratch verifier landed in repo root; yesterday's .aeon-tmp-verify-trending.py still uncleaned. Worth a skill-repair pass.",
+        "type": "warning"
+      }
+    },
+    "sep8": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "notable_mention": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "notable_heading",
+        "notable_text1",
+        "notable_text2"
+      ]
+    },
+    "notable_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Also notable",
+        "level": "h3"
+      }
+    },
+    "notable_text1": {
+      "type": "Text",
+      "props": {
+        "text": "fetch-tweets caught the first Chinese-language $MIROSHARK mention today (@btcbabycow, \"米罗莎 就是进化版AI预测市场\")",
+        "variant": "body"
+      }
+    },
+    "notable_text2": {
+      "type": "Text",
+      "props": {
+        "text": "5 weeks ahead of the 2026-06-15 hyperstition deadline.",
+        "variant": "lead"
+      }
+    },
+    "sep9": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "recap_link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full recap",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-05-11.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}
