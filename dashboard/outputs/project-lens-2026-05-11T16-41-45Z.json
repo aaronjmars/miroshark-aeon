@@ -1,0 +1,199 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "The AI Forecasting Stack Has Four Neighborhoods. Most Tools Pick One.",
+        "description": "New Article"
+      },
+      "children": [
+        "intro",
+        "neighborhoods",
+        "separator",
+        "miroshark"
+      ]
+    },
+    "intro": {
+      "type": "Text",
+      "props": {
+        "text": "Today's project-lens maps AI prediction tooling into four stacks:"
+      }
+    },
+    "neighborhoods": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "n1",
+        "n2",
+        "n3",
+        "n4"
+      ]
+    },
+    "n1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "n1-name",
+        "n1-items"
+      ]
+    },
+    "n1-name": {
+      "type": "Text",
+      "props": {
+        "text": "Prediction Markets",
+        "variant": "lead"
+      }
+    },
+    "n1-items": {
+      "type": "Text",
+      "props": {
+        "text": "Polymarket, Kalshi",
+        "variant": "caption"
+      }
+    },
+    "n2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "n2-name",
+        "n2-items"
+      ]
+    },
+    "n2-name": {
+      "type": "Text",
+      "props": {
+        "text": "Forecasting Platforms",
+        "variant": "lead"
+      }
+    },
+    "n2-items": {
+      "type": "Text",
+      "props": {
+        "text": "Metaculus",
+        "variant": "caption"
+      }
+    },
+    "n3": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "n3-name",
+        "n3-items"
+      ]
+    },
+    "n3-name": {
+      "type": "Text",
+      "props": {
+        "text": "Multi-Agent Frameworks",
+        "variant": "lead"
+      }
+    },
+    "n3-items": {
+      "type": "Text",
+      "props": {
+        "text": "AutoGen, CrewAI, MetaGPT",
+        "variant": "caption"
+      }
+    },
+    "n4": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "n4-name",
+        "n4-items"
+      ]
+    },
+    "n4-name": {
+      "type": "Text",
+      "props": {
+        "text": "Reproducibility Infrastructure",
+        "variant": "lead"
+      }
+    },
+    "n4-items": {
+      "type": "Text",
+      "props": {
+        "text": "Papers with Code, DOI, Inspect",
+        "variant": "caption"
+      }
+    },
+    "separator": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "miroshark": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "ms-heading",
+        "ms-gap",
+        "ms-position1",
+        "ms-position2",
+        "ms-position3",
+        "ms-link"
+      ]
+    },
+    "ms-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "MiroShark's Position",
+        "level": "h3"
+      }
+    },
+    "ms-gap": {
+      "type": "Text",
+      "props": {
+        "text": ""
+      }
+    },
+    "ms-position1": {
+      "type": "Text",
+      "props": {
+        "text": "MiroShark doesn't sit in any of them."
+      }
+    },
+    "ms-position2": {
+      "type": "Text",
+      "props": {
+        "text": "It lives in the gap as a simulation substrate — the layer that runs a scenario, records it as a citable artifact, and publishes it across 11 surfaces over sim_dir/."
+      }
+    },
+    "ms-position3": {
+      "type": "Text",
+      "props": {
+        "text": "The surfaces are the moat, not the agents.",
+        "variant": "lead"
+      }
+    },
+    "ms-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Read the full article",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-05-11.md",
+        "source": "project-lens"
+      }
+    }
+  }
+}
