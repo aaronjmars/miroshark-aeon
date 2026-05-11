@@ -15,6 +15,8 @@ Full text in `articles/repo-article-YYYY-MM-DD.md`. Each row ≤220 chars.
 
 | Date | Title | One-line frame |
 |------|-------|----------------|
+| 2026-05-11 | The First Surface MiroShark Doesn't Own | PR #79 Webhook HMAC Signing (Stripe/GitHub `X-MiroShark-Signature` header, opt-in `WEBHOOK_SECRET`) — first crypto check on recipient hardware; reproduce.json's transport twin. |
+| 2026-05-10 | From Meter to Sort Key | PR #78 Trending Sort exposes PR #74's `_serves_total` via `?sort=trending` — first feedback loop from distribution analytics into gallery ranking. Closes measure→rank→distribution. |
 | 2026-05-09 | From Pointer to Graph | PR #76 Simulation Lineage Navigator (parent + public-only children, sorted oldest-first, capped 50) — turns reproduce.json's one-way `parent_simulation_id` into a navigable graph. |
 | 2026-05-08 | Eleven Surfaces, One File Hash | PR #75 Reproducibility Config Export — bytewise-stable `reproduce.json` v1 schema (sort_keys + indent=2) makes SHA-256 a citation key for the 11-surface arc. |
 | 2026-05-07 | MiroShark Stops Flying Blind | PR #74 (Surface Usage Analytics, inbound) + PR #73 (Webhook Delivery Log, outbound) merged 14 minutes apart — first coherent operator-observability layer over `sim_dir/`. |
