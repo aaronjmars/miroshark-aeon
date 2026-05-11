@@ -1,11 +1,13 @@
-*Weekly Shiplog — 2026-05-04*
+*Weekly Shiplog — 2026-05-11*
 
-Eight surfaces, one folder, one thousand stars: MiroShark went from one canonical view of every published sim to eight different ones — and crossed the 1K-star line three days late but with a 9-PR zero-new-deps streak intact.
+Many surfaces became a surface network: 8 MiroShark PRs (#71-#78) converted last week's fan of independent endpoints into a self-reinforcing observability → distribution → discovery loop, closed Sunday night.
 
 Shipped:
-- Five new surfaces over `sim_dir/`: verified ledger (#47), animated GIF (#50), transcript MD+JSON (#57), RSS/Atom (#60), trajectory CSV/JSONL (#66)
-- Live spectator watch page (#67) + gallery search & filtering index (#69) — adjacent-minute merges that crossed the 1K line same afternoon
-- Chinese-locale UI / 138-site backend localization / bilingual README (#61, #62, #65) — reader axis added alongside the channel axis
+- Three new surfaces (PR #72 tweet thread, PR #73 webhook delivery log, PR #74 surface usage analytics) closed the operator-observability loop
+- Two metadata primitives (PR #75 reproduce.json citation key + PR #76 lineage navigator) made finished sims citable AND navigable
+- PR #77 + #78 wired the metadata into surface-stats and turned the counter into ?sort=trending — first feedback loop where pulls decide what gets shown
+- Aeon side: 4 self-corrections (project-lens rotation, token-report volume, heartbeat headers, MEMORY.md row caps)
 
-Stats: 21 PRs merged on MiroShark, 3 on miroshark-aeon, +14,309/−1,449 lines across 144 files; 838 → 1,061 stars (+223), 158 → 211 forks (+53)
-Full update: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/weekly-shiplog-2026-05-04.md
+Stats: 8 MiroShark PRs + 4 aeon PRs merged, +9,351 / -124 lines, 17-PR zero-new-deps streak, 1,061 → 1,130 stars (+69), $MIROSHARK new ATH $0.000007517 today (+113.5% week)
+
+Full update: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/weekly-shiplog-2026-05-11.md
