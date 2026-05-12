@@ -1,0 +1,119 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Repo Pulse"
+      },
+      "children": [
+        "repo_link",
+        "separator_1",
+        "stats_stack",
+        "separator_2",
+        "stargazers_section"
+      ]
+    },
+    "repo_link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "aaronjmars/MiroShark",
+        "href": "https://github.com/aaronjmars/MiroShark",
+        "source": "GitHub"
+      }
+    },
+    "separator_1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stats_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stat_stars",
+        "stat_forks"
+      ]
+    },
+    "stat_stars": {
+      "type": "Stat",
+      "props": {
+        "label": "Stars",
+        "value": "1134",
+        "delta": "+3",
+        "trend": "up"
+      }
+    },
+    "stat_forks": {
+      "type": "Stat",
+      "props": {
+        "label": "Forks",
+        "value": "224",
+        "delta": "+0",
+        "trend": "neutral"
+      }
+    },
+    "separator_2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stargazers_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stargazers_heading",
+        "stargazers_list"
+      ]
+    },
+    "stargazers_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "New stargazers",
+        "level": "h3"
+      }
+    },
+    "stargazers_list": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "link_aigoose",
+        "link_ajmz",
+        "link_zniniz"
+      ]
+    },
+    "link_aigoose": {
+      "type": "Link",
+      "props": {
+        "label": "AIGoose",
+        "href": "https://github.com/AIGoose"
+      }
+    },
+    "link_ajmz": {
+      "type": "Link",
+      "props": {
+        "label": "ajmz",
+        "href": "https://github.com/ajmz"
+      }
+    },
+    "link_zniniz": {
+      "type": "Link",
+      "props": {
+        "label": "Zniniz",
+        "href": "https://github.com/Zniniz"
+      }
+    }
+  }
+}
