@@ -1,0 +1,36 @@
+# 1 in 277: The Citation Layer Failed In Public, And What Survives Is The Artifact
+
+On May 7, 2026, *The Lancet* published a correspondence piece that should have made more noise than it did. Maxim Topaz and a team at Columbia's Data Science Institute had run an AI-assisted audit on roughly 2.5 million PubMed-indexed papers and found 4,406 fabricated references across 2,810 papers. In the first weeks of 2026, the rate of papers containing at least one hallucinated citation had climbed to **1 in 277** — up from 1 in 458 in 2025 and 1 in 2,828 in 2023. A twelve-fold rise in two years.
+
+The headline number isn't really the story. The story is that citations — the load-bearing element of scholarly trust for four hundred years — are now produced at a rate and by a process that makes them statistically unreliable as evidence of anything at all.
+
+## What Failed, Exactly
+
+The rise wasn't evenly distributed. Topaz's team found a 57% higher fabrication rate in review articles, which is exactly where you'd expect generative tools to do the most damage: review articles are the genre that asks a writer to produce a wide bibliography under deadline. The citation layer didn't fail because researchers stopped caring. It failed because the act of producing a citation is now a place where an LLM gets invited in to "help draft the related work section."
+
+The proposed fix from the Topaz letter is automated screening: publishers should run reference verification into submission workflows before peer review. That fix takes the citation as the unit of trust and tries to defend it. But the citation is a pointer, and a pointer is only as trustworthy as the metadata used to verify it — which is the thing that's been getting hallucinated.
+
+The unit that is *not* failing this way is one layer up: the **artifact** the citation points at. A dataset. A notebook. A model checkpoint. A simulation trajectory. When those are produced by a system rather than assembled by a person, and when they carry a cryptographic hash of their own bytes, the failure modes change.
+
+## How The Pattern Looks From The Software Side
+
+A 2019 IEEE study by Pimentel and colleagues remains the cleanest empirical look at notebook reproducibility: of 863,878 valid Jupyter notebooks they attempted to execute, only 24.11% ran without error and only 4.03% produced identical results. The cause was almost never the science. It was missing dependency declarations, broken file paths, cell ordering that depended on hidden state, and external data that had moved or changed. Six years later, despite better dependency tooling, the median academic notebook on GitHub is still in that shape.
+
+MiroShark — an open-source autonomous simulation tool — landed [PR #80](https://github.com/aaronjmars/MiroShark/pull/80) on May 12 with a notebook export endpoint that quietly refuses every Pimentel failure mode at once. `GET /api/simulation/<id>/notebook.ipynb` returns an `.ipynb` file with seven cells in a pinned order: header, imports, data load, belief-evolution chart, consensus distribution, quality summary, footer. The trajectory CSV is embedded in the load cell as a Python string literal — produced via `repr()`, so pathological quotes and backslashes round-trip bytewise. There are no relative paths to break; the data is in the file. There is no hidden state to depend on; the cell order is fixed. There is no `requirements.txt` to drift away from; the imports are pandas, matplotlib, and the standard library. And the whole `.ipynb` is rendered with `sort_keys=True` and `indent=2`, so two exports of the same finished simulation produce byte-identical files. The SHA-256 of that file becomes a stable citation key.
+
+That last part is the same trick used a week earlier for [`reproduce.json`](https://github.com/aaronjmars/MiroShark/pull/75) and again in the webhook HMAC signing of [PR #79](https://github.com/aaronjmars/MiroShark/pull/79): a deterministic byte rendering whose hash anyone can recompute on their own hardware. The project is now three artifacts deep into a single discipline — system emits the artifact, bytes are stable, hash is the citation.
+
+## The Quieter Shift That Showed Up In Policy
+
+The same week the *Lancet* letter dropped, NIST quietly released a concept note for an AI RMF Profile on Trustworthy AI in Critical Infrastructure (April 7, 2026). The 2026 implementation guidance now circulating among compliance teams captures the shift in one sentence: *governance documentation must be continuously generated from operational systems, not manually assembled before audits.* The reason an audit document hand-assembled the night before submission can't be trusted in 2026 is the same reason a citation hand-typed by a tool can't: the production process invites fabrication, and the artifact carries no internal evidence of its own integrity.
+
+The Topaz fix attacks fabrication at the *write* step. The NIST framing — and the pattern MiroShark's three deterministic surfaces accidentally illustrate — attacks it at the *output* step: change what a system emits so that the emitted thing is, by construction, a verifiable record of what happened.
+
+## What This Means If You Build Tools
+
+If you're building any kind of analytical tool in 2026 — a model, a benchmark suite, a simulation engine, a dashboard — the calculus around what to ship has shifted. Three years ago, a CSV download was a courtesy. Now it's a piece of evidence in a literature where 1 in 277 papers is provably citing something that doesn't exist. The artifact a tool produces is now, in some non-trivial way, more credible than the paragraph in the related-work section that cites a result the tool generated. That is a strange inversion, but it's the one Topaz's letter quietly establishes.
+
+The answer probably isn't a new file format. It's a new discipline around the formats that already exist: emit, don't assemble; embed, don't reference; sort, don't drift; hash, don't promise. The tools that do this won't make a louder noise than a single endpoint that returns an `.ipynb`. They'll just be the ones still trustworthy after the citation layer finishes failing.
+
+---
+*Sources: [Retraction Watch — One in 277 PubMed-indexed papers in 2026 shows fabricated references (May 7, 2026)](https://retractionwatch.com/2026/05/07/one-in-277-pubmed-indexed-papers-in-2026-shows-fabricated-references-says-analysis/) · [STAT — Lancet study finds steep rise in fraudulent citations in academic papers (May 7, 2026)](https://www.statnews.com/2026/05/07/lancet-study-finds-steep-rise-fraudulent-citations-academic-papers/) · [Fortune — NeurIPS research papers contained 100+ AI-hallucinated citations (Jan 21, 2026)](https://fortune.com/2026/01/21/neurips-ai-conferences-research-papers-hallucinations/) · [Pimentel et al. — A Large-scale Study about Quality and Reproducibility of Jupyter Notebooks (IEEE MSR 2019)](https://ieeexplore.ieee.org/document/8816763/) · [NIST AI Risk Management Framework — Critical Infrastructure Profile concept note (April 7, 2026)](https://www.nist.gov/itl/ai-risk-management-framework) · [MiroShark PR #80 — Jupyter notebook export (May 12, 2026)](https://github.com/aaronjmars/MiroShark/pull/80)*
