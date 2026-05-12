@@ -1,0 +1,129 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "From Citable to Runnable"
+      },
+      "children": [
+        "content_stack"
+      ]
+    },
+    "content_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "intro_text",
+        "pr79_heading",
+        "pr79_text",
+        "pr80_heading",
+        "pr80_text",
+        "benefits_text",
+        "separator",
+        "badges_stack",
+        "story_link"
+      ]
+    },
+    "intro_text": {
+      "type": "Text",
+      "props": {
+        "text": "Two days, two detachments."
+      },
+      "children": []
+    },
+    "pr79_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "PR #79: Verification",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "pr79_text": {
+      "type": "Text",
+      "props": {
+        "text": "Made verification runnable on the recipient's hardware."
+      },
+      "children": []
+    },
+    "pr80_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "PR #80: Analysis",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "pr80_text": {
+      "type": "Text",
+      "props": {
+        "text": "Made analysis runnable on the recipient's hardware. Ships a 7-cell nbformat 4 Jupyter notebook with the trajectory CSV embedded in the source and a SHA-256 citation hash in the footer."
+      },
+      "children": []
+    },
+    "benefits_text": {
+      "type": "Text",
+      "props": {
+        "text": "Download once, hit Run All, never talk to MiroShark again. Pure stdlib, bytewise-stable, twentieth consecutive zero-new-deps PR."
+      },
+      "children": []
+    },
+    "separator": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "badges_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "badge_stdlib",
+        "badge_stable",
+        "badge_nodeps"
+      ]
+    },
+    "badge_stdlib": {
+      "type": "Badge",
+      "props": {
+        "text": "Pure stdlib",
+        "variant": "default"
+      },
+      "children": []
+    },
+    "badge_stable": {
+      "type": "Badge",
+      "props": {
+        "text": "Bytewise-stable",
+        "variant": "default"
+      },
+      "children": []
+    },
+    "badge_nodeps": {
+      "type": "Badge",
+      "props": {
+        "text": "20th zero-new-deps PR",
+        "variant": "secondary"
+      },
+      "children": []
+    },
+    "story_link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Read full article",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-05-12.md",
+        "source": "miroshark-aeon"
+      },
+      "children": []
+    }
+  }
+}

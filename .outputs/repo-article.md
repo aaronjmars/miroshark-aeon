@@ -1,5 +1,5 @@
-*New Article: The First Surface MiroShark Doesn't Own*
+*New Article: From Citable to Runnable*
 
-PR #79 (Webhook HMAC Signature Verification, opened today) is framed as the first MiroShark surface whose trust check runs on the recipient's hardware — not on Aaron's instance. Stripe/GitHub scheme: HMAC-SHA-256 over raw body bytes shipped as `X-MiroShark-Signature: sha256=<hex>`. Structural twin of PR #75's reproduce.json — content was already citable; now transport is too.
+Two days, two detachments. PR #79 yesterday made *verification* runnable on the recipient's hardware. PR #80 today makes *analysis* runnable there too — a new endpoint ships a 7-cell nbformat 4 Jupyter notebook with the trajectory CSV embedded in the source and a SHA-256 citation hash in the footer. Download once, hit Run All, never talk to MiroShark again. Pure stdlib, bytewise-stable, twentieth consecutive zero-new-deps PR.
 
-Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-05-11.md
+Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-05-12.md

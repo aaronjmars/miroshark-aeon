@@ -15,6 +15,7 @@ Full text in `articles/repo-article-YYYY-MM-DD.md`. Each row ≤220 chars.
 
 | Date | Title | One-line frame |
 |------|-------|----------------|
+| 2026-05-12 | From Citable to Runnable | PR #80 Jupyter Notebook Export — analysis-side detachment twin to PR #79's transport-side HMAC; triangulates institutional citation arc with trajectory.csv + reproduce.json. |
 | 2026-05-11 | The First Surface MiroShark Doesn't Own | PR #79 Webhook HMAC Signing (Stripe/GitHub `X-MiroShark-Signature` header, opt-in `WEBHOOK_SECRET`) — first crypto check on recipient hardware; reproduce.json's transport twin. |
 | 2026-05-10 | From Meter to Sort Key | PR #78 Trending Sort exposes PR #74's `_serves_total` via `?sort=trending` — first feedback loop from distribution analytics into gallery ranking. Closes measure→rank→distribution. |
 | 2026-05-09 | From Pointer to Graph | PR #76 Simulation Lineage Navigator (parent + public-only children, sorted oldest-first, capped 50) — turns reproduce.json's one-way `parent_simulation_id` into a navigable graph. |
@@ -24,7 +25,6 @@ Full text in `articles/repo-article-YYYY-MM-DD.md`. Each row ≤220 chars.
 | 2026-05-05 | Aeon, Two Days Running | PR #71 + PR #72 both authored by Aeon — first time two consecutive same-day MiroShark distribution surfaces ship from the autonomous agent. Externally noticed by @russian_acai. |
 | 2026-05-04 | The Way In | PR #71 Shareable Scenario Links (ninth surface, the *inverse* one — pre-fills New Sim form from `?scenario=`) + Issue #70 (Cyril Private Impact mode collab request, first cross-builder ask). |
 | 2026-05-03 | The 1,001st Star and the Index That Followed | 1K-stars-crossed-3-days-late frame paired with PR #69 Gallery Search/Filter — first **multiplicative** surface, the index across the prior seven serializing surfaces. |
-| 2026-05-02 | Live Was the Missing Tense | PR #67 Live Spectator Watch Page on first quiet-mainline day in 12+ days — first surface that updates *while sim is running*, the first with a present tense. |
 
 ## Recent Digests
 Each row ≤180 chars. Full data in `articles/{token-report,push-recap}-YYYY-MM-DD.md`.
