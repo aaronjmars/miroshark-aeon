@@ -263,3 +263,4 @@ date,skill,model,input_tokens,output_tokens,cache_read,cache_creation
 2026-05-11,repo-article,claude-opus-4-7,35,14525,1450748,85356
 2026-05-11,heartbeat,claude-sonnet-4-6,14,9316,501355,37615
 2026-05-12,token-report,claude-sonnet-4-6,15,15279,406889,180356
+2026-05-12,tweet-allocator,claude-sonnet-4-6,18,9634,647636,38137
