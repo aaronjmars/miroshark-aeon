@@ -1,21 +1,18 @@
-*Push Recap — 2026-05-11*
-MiroShark — 2 substantive merges (PR #77 + #78), 1 new PR opened (#79); aeon — 1 merge (PR #33) + steady cron
+*Push Recap — 2026-05-12*
+aaronjmars/MiroShark + miroshark-aeon — 2 merged MiroShark PRs, 1 open aeon self-repair PR, daily cron content.
 
-*Distribution→discovery loop closes:* PR #77 (c6edeb6) backfills `reproduce_json` + `lineage` into the surface-stats counter that PR #75 + #76 had been silently undercounting. PR #78 (77bb1ed) promotes the now-complete counter sum into the `/explore` sort dropdown as `🔥 Trending`. Both merged within 2 minutes of each other (22:39 + 22:41 UTC). First closed-loop primitive on the `sim_dir/` substrate — sims that get distributed rise in discovery, and that direction is one-way.
+*Institutional-researcher second surface (PR #80, Jupyter notebook export):* GET /api/simulation/<id>/notebook.ipynb returns a pre-populated nbformat 4 .ipynb with the trajectory CSV embedded inline + a 7-cell pinned analysis sequence (header → imports → load → belief chart → consensus → quality summary → footer). Runs air-gapped (no callback to host), bytewise-stable (sort_keys + indent=2 → SHA-256 = stable citation key). Pure stdlib, 559 LoC service + 20 offline tests. The 2nd export aimed at academic/institutional users after trajectory.csv: CSV said "here is the data", notebook says "here is the analysis, ready to run".
 
-*Webhook signing primitive opened:* PR #79 drafted by today's feature skill — `X-MiroShark-Signature: sha256=<hex>` injected when `WEBHOOK_SECRET` env var is set, omitted otherwise (backward-compatible). Stripe / GitHub's standard scheme, 8 offline tests, +692/-6 across 10 files, pure stdlib `hmac` + `hashlib`. Pending merge.
+*Transport-layer security goes live (PR #79, webhook HMAC signing, merged from yesterday's draft):* WEBHOOK_SECRET env → X-MiroShark-Signature: sha256=<hex> on every dispatch (Stripe/GitHub scheme). First MiroShark surface whose verification check runs on the *recipient's* hardware. Structural twin of PR #75 reproduce.json — both SHA-256 over deterministic bytes, both verifiable without trusting the server. Backward-compat: blank secret omits header entirely.
 
-*Memory-index self-heal:* aeon PR #33 (9e3f55b) re-applies closed PR #32 — memory-flush step 5 now caps Skills Built ≤280 / Articles ≤220 / Digests ≤180 chars per row + post-flush `wc -c` sanity check (<25 KB). MEMORY.md condensed from 81 KB to 7.7 KB so every skill's at-task-start Read stops failing past the 25K-token cap.
+*Aeon self-repair (PR #34, open):* Yesterday's push-recap flagged 2 consecutive days of feature skill leaking scratch verifier .py files to repo root (.aeon-tmp-verify-trending.py, sig_smoke.py). self-improve picked it up — deletes 3 dead files, patches skills/feature/SKILL.md step 6 (forbid cwd .py, mandate /tmp/verify-${feature}.py + pre-finish cleanup check), adds .gitignore safety net. Two-layer fix.
 
-Key changes:
-- PR #78: `SORT_VALUES` gains `trending`; `_trending_key` clamps non-int / negative to zero, tie-breaks on `created_at` desc; `TRENDING_FIELD = "_serves_total"` literal pin; sweep only on `?sort=trending` so default `date` path stays read-free; 8 new tests
-- PR #77: `SURFACE_KEYS` frozenset extended with `reproduce_json` + `lineage`; `increment_surface_stat` calls added to both route handlers' success paths; `SURFACE_STAT_LABELS` updated so EmbedDialog renders the new counters
-- aeon PR #33: memory-flush SKILL.md step 5 + literal callout to the 2026-05-08 incident; MEMORY.md condensed 90%
+*Key changes:*
+- PR #80 frontend: 📓 Jupyter panel in EmbedDialog.vue, pure-download UX (no inline preview — .ipynb is 30+ KB JSON)
+- PR #79 transport-only: signature header never persisted to webhook-log.jsonl; receiver-side `verify_signature` published symmetrically
+- repo-actions batch: 5 new ideas (lifecycle webhooks, embed widget iframe, filtered RSS, per-round API, sitemap.xml) — #1 leverages PR #79 HMAC infra for mid-run events Revault/CancerHawk want
 
-Stats: 21 files / +253/-31 across 2 MiroShark merges; 4 files / +198/-60 on aeon PR #33. Zero new deps on either side — streak now 18 PRs (#57 → #78).
+Zero-new-deps streak: 20 consecutive PRs (#57 → #80). Token: new ATH $0.0000160 (+76.1% 24h), FDV $1.28M crossed $1M milestone, vol $636.5K (+1,109%). @Mnosh06 deep-tech thread (17L/4RT) named Revault + CancerHawk as live integrations. 2nd consecutive day of Chinese-language $MIROSHARK engagement (@btcbabycow "你们可以合作").
 
-Tech debt: `sig_smoke.py` committed today by feature skill (31-line scratch HMAC verifier) — second day in a row a scratch verifier landed in repo root; yesterday's `.aeon-tmp-verify-trending.py` still uncleaned. Worth a skill-repair pass.
-
-Also notable: fetch-tweets caught the first Chinese-language $MIROSHARK mention today (@btcbabycow, "米罗莎 就是进化版AI预测市场") — 5 weeks ahead of the 2026-06-15 hyperstition deadline.
-
-Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-05-11.md
+Stats: 21 files changed, +2,128 / -9 lines across the two merged MiroShark PRs.
+Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-05-12.md

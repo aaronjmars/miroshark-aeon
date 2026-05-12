@@ -1,0 +1,479 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Push Recap — 2026-05-12",
+        "description": "aaronjmars/MiroShark + miroshark-aeon — 2 merged MiroShark PRs, 1 open aeon self-repair PR, daily cron content"
+      },
+      "children": [
+        "stack_main"
+      ]
+    },
+    "stack_main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "pr80_section",
+        "sep1",
+        "pr79_section",
+        "sep2",
+        "pr34_section",
+        "sep3",
+        "key_changes_section",
+        "sep4",
+        "token_stats_section",
+        "sep5",
+        "engagement_section",
+        "sep6",
+        "file_stats_section",
+        "sep7",
+        "streak_note",
+        "full_recap_link"
+      ]
+    },
+    "pr80_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "pr80_heading",
+        "pr80_text1",
+        "pr80_text2",
+        "pr80_text3",
+        "pr80_badge"
+      ]
+    },
+    "pr80_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Institutional-researcher second surface (PR #80, Jupyter notebook export)",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "pr80_text1": {
+      "type": "Text",
+      "props": {
+        "text": "GET /api/simulation/<id>/notebook.ipynb returns a pre-populated nbformat 4 .ipynb with the trajectory CSV embedded inline + a 7-cell pinned analysis sequence (header → imports → load → belief chart → consensus → quality summary → footer). Runs air-gapped (no callback to host), bytewise-stable (sort_keys + indent=2 → SHA-256 = stable citation key). Pure stdlib, 559 LoC service + 20 offline tests.",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "pr80_text2": {
+      "type": "Text",
+      "props": {
+        "text": "The 2nd export aimed at academic/institutional users after trajectory.csv: CSV said \"here is the data\", notebook says \"here is the analysis, ready to run\".",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "pr80_text3": {
+      "type": "Text",
+      "props": {
+        "text": "Frontend: 📓 Jupyter panel in EmbedDialog.vue, pure-download UX (no inline preview — .ipynb is 30+ KB JSON)",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "pr80_badge": {
+      "type": "Badge",
+      "props": {
+        "text": "Merged",
+        "variant": "default"
+      },
+      "children": []
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "pr79_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "pr79_heading",
+        "pr79_text1",
+        "pr79_text2",
+        "pr79_text3",
+        "pr79_badge"
+      ]
+    },
+    "pr79_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Transport-layer security goes live (PR #79, webhook HMAC signing)",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "pr79_text1": {
+      "type": "Text",
+      "props": {
+        "text": "WEBHOOK_SECRET env → X-MiroShark-Signature: sha256=<hex> on every dispatch (Stripe/GitHub scheme). First MiroShark surface whose verification check runs on the recipient's hardware.",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "pr79_text2": {
+      "type": "Text",
+      "props": {
+        "text": "Structural twin of PR #75 reproduce.json — both SHA-256 over deterministic bytes, both verifiable without trusting the server.",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "pr79_text3": {
+      "type": "Text",
+      "props": {
+        "text": "Backward-compat: blank secret omits header entirely. Signature header never persisted to webhook-log.jsonl; receiver-side verify_signature published symmetrically.",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "pr79_badge": {
+      "type": "Badge",
+      "props": {
+        "text": "Merged (from yesterday's draft)",
+        "variant": "default"
+      },
+      "children": []
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "pr34_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "pr34_heading",
+        "pr34_text1",
+        "pr34_text2",
+        "pr34_badge"
+      ]
+    },
+    "pr34_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Aeon self-repair (PR #34)",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "pr34_text1": {
+      "type": "Text",
+      "props": {
+        "text": "Yesterday's push-recap flagged 2 consecutive days of feature skill leaking scratch verifier .py files to repo root (.aeon-tmp-verify-trending.py, sig_smoke.py). self-improve picked it up — deletes 3 dead files, patches skills/feature/SKILL.md step 6 (forbid cwd .py, mandate /tmp/verify-${feature}.py + pre-finish cleanup check), adds .gitignore safety net.",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "pr34_text2": {
+      "type": "Text",
+      "props": {
+        "text": "Two-layer fix: removes artifacts and prevents future occurrences.",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "pr34_badge": {
+      "type": "Badge",
+      "props": {
+        "text": "Open",
+        "variant": "outline"
+      },
+      "children": []
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "key_changes_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "key_changes_heading",
+        "key_change_1",
+        "key_change_2",
+        "key_change_3"
+      ]
+    },
+    "key_changes_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Key Changes",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "key_change_1": {
+      "type": "Text",
+      "props": {
+        "text": "• PR #80 frontend: 📓 Jupyter panel in EmbedDialog.vue, pure-download UX (no inline preview — .ipynb is 30+ KB JSON)",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "key_change_2": {
+      "type": "Text",
+      "props": {
+        "text": "• PR #79 transport-only: signature header never persisted to webhook-log.jsonl; receiver-side verify_signature published symmetrically",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "key_change_3": {
+      "type": "Text",
+      "props": {
+        "text": "• repo-actions batch: 5 new ideas (lifecycle webhooks, embed widget iframe, filtered RSS, per-round API, sitemap.xml) — #1 leverages PR #79 HMAC infra for mid-run events Revault/CancerHawk want",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "sep4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "token_stats_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "token_stats_heading",
+        "token_stats_grid"
+      ]
+    },
+    "token_stats_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Token Metrics",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "token_stats_grid": {
+      "type": "Grid",
+      "props": {
+        "columns": 3,
+        "gap": "md"
+      },
+      "children": [
+        "stat_price",
+        "stat_fdv",
+        "stat_volume"
+      ]
+    },
+    "stat_price": {
+      "type": "Stat",
+      "props": {
+        "label": "Token Price (ATH)",
+        "value": "$0.0000160",
+        "delta": "+76.1%",
+        "trend": "up"
+      },
+      "children": []
+    },
+    "stat_fdv": {
+      "type": "Stat",
+      "props": {
+        "label": "FDV",
+        "value": "$1.28M",
+        "delta": "crossed $1M milestone",
+        "trend": "up"
+      },
+      "children": []
+    },
+    "stat_volume": {
+      "type": "Stat",
+      "props": {
+        "label": "24h Volume",
+        "value": "$636.5K",
+        "delta": "+1,109%",
+        "trend": "up"
+      },
+      "children": []
+    },
+    "sep5": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "engagement_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "engagement_heading",
+        "engagement_context",
+        "tweet_mnosh06",
+        "tweet_btcbabycow"
+      ]
+    },
+    "engagement_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Community Engagement",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "engagement_context": {
+      "type": "Text",
+      "props": {
+        "text": "2nd consecutive day of community engagement",
+        "variant": "muted"
+      },
+      "children": []
+    },
+    "tweet_mnosh06": {
+      "type": "TweetCard",
+      "props": {
+        "author": "Mnosh06",
+        "text": "Deep-tech thread naming Revault + CancerHawk as live integrations",
+        "likes": 17,
+        "retweets": 4
+      },
+      "children": []
+    },
+    "tweet_btcbabycow": {
+      "type": "TweetCard",
+      "props": {
+        "author": "btcbabycow",
+        "handle": "@btcbabycow",
+        "text": "你们可以合作"
+      },
+      "children": []
+    },
+    "sep6": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "file_stats_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "file_stats_heading",
+        "file_stats_note",
+        "file_stats_grid"
+      ]
+    },
+    "file_stats_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "PR Statistics",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "file_stats_note": {
+      "type": "Text",
+      "props": {
+        "text": "Across the two merged MiroShark PRs",
+        "variant": "caption"
+      },
+      "children": []
+    },
+    "file_stats_grid": {
+      "type": "Grid",
+      "props": {
+        "columns": 3,
+        "gap": "md"
+      },
+      "children": [
+        "stat_files",
+        "stat_additions",
+        "stat_removals"
+      ]
+    },
+    "stat_files": {
+      "type": "Stat",
+      "props": {
+        "label": "Files Changed",
+        "value": "21"
+      },
+      "children": []
+    },
+    "stat_additions": {
+      "type": "Stat",
+      "props": {
+        "label": "Lines Added",
+        "value": "+2,128"
+      },
+      "children": []
+    },
+    "stat_removals": {
+      "type": "Stat",
+      "props": {
+        "label": "Lines Removed",
+        "value": "-9"
+      },
+      "children": []
+    },
+    "sep7": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "streak_note": {
+      "type": "Alert",
+      "props": {
+        "title": "Zero-new-deps Streak",
+        "message": "20 consecutive PRs (#57 → #80) without adding new dependencies",
+        "type": "success"
+      },
+      "children": []
+    },
+    "full_recap_link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full Recap",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-05-12.md",
+        "source": "GitHub"
+      },
+      "children": []
+    }
+  }
+}
