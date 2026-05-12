@@ -1,10 +1,10 @@
-*$MIROSHARK Daily — 2026-05-11*
+*$MIROSHARK Daily — 2026-05-12*
 
-Price: $0.000007107 (+10.03% 24h) 🆕 NEW ATH
-Liquidity: $357.8K | 24h Vol: $52.6K (+34.8%)
-Buys/Sells: 86/59 (1.46×)
-7d: +113.5% | 30d: +273%
+Price: $0.0000128 (+76.1% 24h) — new ATH $0.0000160
+Liquidity: $522.7K | 24h Vol: $636.5K (+1,109%)
+Buys/Sells: 853/505 (1.69×)
+7d: +266% | 30d: +634% | FDV: $1.28M
 
-New intraday ATH $0.000007517 today — May 6's $0.000006926 ceiling broken. Buy ratio strongest in a week; pool depth expanding alongside price. @MrDegenWolf calling it part of a Base trifecta; academic use (Wang Shuyi multi-agent sims) and institutional interest (Paradigm CEO, Lorimer Ventures) continue surfacing.
+Volume eruption today — $636.5K vs $52.6K yesterday. Price broke to a new ATH of $0.0000160 before consolidating at $0.0000128. FDV crossed $1M. Broad-based buying across 853 transactions; LP inflow lifted pool depth to $522.7K.
 
 Chart: https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209
