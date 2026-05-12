@@ -1,0 +1,315 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "Repo Action Ideas — 2026-05-12"
+      },
+      "children": [
+        "header-text",
+        "sep1",
+        "ideas-stack",
+        "sep2",
+        "details-link"
+      ]
+    },
+    "header-text": {
+      "type": "Text",
+      "props": {
+        "text": "Generated from analysis of aaronjmars/MiroShark (1,135 stars · ATH day · FDV $1.28M) — five ideas the feature skill can autonomously build.",
+        "variant": "lead"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "ideas-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "lg"
+      },
+      "children": [
+        "idea1",
+        "idea2",
+        "idea3",
+        "idea4",
+        "idea5"
+      ]
+    },
+    "idea1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "idea1-heading",
+        "idea1-meta",
+        "idea1-desc"
+      ]
+    },
+    "idea1-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "1. Simulation Lifecycle Webhooks",
+        "level": "h3"
+      }
+    },
+    "idea1-meta": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "idea1-category",
+        "idea1-size"
+      ]
+    },
+    "idea1-category": {
+      "type": "Badge",
+      "props": {
+        "text": "Feature/Integration",
+        "variant": "secondary"
+      }
+    },
+    "idea1-size": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "outline"
+      }
+    },
+    "idea1-desc": {
+      "type": "Text",
+      "props": {
+        "text": "Extends webhook events to simulation_started, consensus_reached, quality_milestone, and round_complete — giving live integrators (Revault, CancerHawk) an event stream instead of a single completion signal.",
+        "variant": "body"
+      }
+    },
+    "idea2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "idea2-heading",
+        "idea2-meta",
+        "idea2-desc"
+      ]
+    },
+    "idea2-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "2. Interactive Embed Widget",
+        "level": "h3"
+      }
+    },
+    "idea2-meta": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "idea2-category",
+        "idea2-size"
+      ]
+    },
+    "idea2-category": {
+      "type": "Badge",
+      "props": {
+        "text": "Feature/Integration",
+        "variant": "secondary"
+      }
+    },
+    "idea2-size": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "outline"
+      }
+    },
+    "idea2-desc": {
+      "type": "Text",
+      "props": {
+        "text": "GET /embed/<id> returns a no-chrome iframe page with live belief bars that update while the sim runs — the missing interactive embed for Substack, Notion, Ghost, and Mirror.",
+        "variant": "body"
+      }
+    },
+    "idea3": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "idea3-heading",
+        "idea3-meta",
+        "idea3-desc"
+      ]
+    },
+    "idea3-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "3. Filtered RSS/Atom Feed",
+        "level": "h3"
+      }
+    },
+    "idea3-meta": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "idea3-category",
+        "idea3-size"
+      ]
+    },
+    "idea3-category": {
+      "type": "Badge",
+      "props": {
+        "text": "Integration/Growth",
+        "variant": "secondary"
+      }
+    },
+    "idea3-size": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "outline"
+      }
+    },
+    "idea3-desc": {
+      "type": "Text",
+      "props": {
+        "text": "Adds ?consensus=&quality=&sort= query params to the existing feed using gallery_filters.py logic — turns the feed into a structured signal source for n8n, Zapier, and RSS-based trading monitors.",
+        "variant": "body"
+      }
+    },
+    "idea4": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "idea4-heading",
+        "idea4-meta",
+        "idea4-desc"
+      ]
+    },
+    "idea4-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "4. Per-Round Belief Snapshot API",
+        "level": "h3"
+      }
+    },
+    "idea4-meta": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "idea4-category",
+        "idea4-size"
+      ]
+    },
+    "idea4-category": {
+      "type": "Badge",
+      "props": {
+        "text": "Feature/DX",
+        "variant": "secondary"
+      }
+    },
+    "idea4-size": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "outline"
+      }
+    },
+    "idea4-desc": {
+      "type": "Text",
+      "props": {
+        "text": "GET /api/simulation/<id>/round/<n> returns belief state at a specific round — turns the trajectory into an addressable document for step-through replay, live monitoring, and round-level citations.",
+        "variant": "body"
+      }
+    },
+    "idea5": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "idea5-heading",
+        "idea5-meta",
+        "idea5-desc"
+      ]
+    },
+    "idea5-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "5. Sitemap.xml for Published Simulations",
+        "level": "h3"
+      }
+    },
+    "idea5-meta": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "idea5-category",
+        "idea5-size"
+      ]
+    },
+    "idea5-category": {
+      "type": "Badge",
+      "props": {
+        "text": "Growth/SEO",
+        "variant": "secondary"
+      }
+    },
+    "idea5-size": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "outline"
+      }
+    },
+    "idea5-desc": {
+      "type": "Text",
+      "props": {
+        "text": "Auto-generated XML sitemap from the public sim index — enables search engine discovery of published simulations when submitted to Google Search Console.",
+        "variant": "body"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "details-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full details",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-actions-2026-05-12.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}
