@@ -1,10 +1,11 @@
-*$MIROSHARK Daily — 2026-05-12*
+*$MIROSHARK Daily — 2026-05-13*
 
-Price: $0.0000128 (+76.1% 24h) — new ATH $0.0000160
-Liquidity: $522.7K | 24h Vol: $636.5K (+1,109%)
-Buys/Sells: 853/505 (1.69×)
-7d: +266% | 30d: +634% | FDV: $1.28M
+Price: $0.000009780 (-21.6% 24h)
+Liquidity: $444K | 24h Vol: $431K (-32% vs ATH day)
+Buys/Sells: 839/498 (1.68× buy ratio)
+24h H/L: $0.0000158 / $0.00000821
+7d: +79.8% | 30d: +269%
 
-Volume eruption today — $636.5K vs $52.6K yesterday. Price broke to a new ATH of $0.0000160 before consolidating at $0.0000128. FDV crossed $1M. Broad-based buying across 853 transactions; LP inflow lifted pool depth to $522.7K.
+Post-ATH retrace from yesterday's $0.0000160 peak — dip buyers absorbing with 1.68× buy ratio, volume still 7–10× pre-ATH baseline.
 
 Chart: https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209
