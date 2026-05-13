@@ -1,5 +1,5 @@
-*New Article: From Citable to Runnable*
+*New Article: The First Surface MiroShark Didn't Have to Invent*
 
-Two days, two detachments. PR #79 yesterday made *verification* runnable on the recipient's hardware. PR #80 today makes *analysis* runnable there too — a new endpoint ships a 7-cell nbformat 4 Jupyter notebook with the trajectory CSV embedded in the source and a SHA-256 citation hash in the footer. Download once, hit Run All, never talk to MiroShark again. Pure stdlib, bytewise-stable, twentieth consecutive zero-new-deps PR.
+PR #81 (filtered RSS/Atom feed) breaks a twenty-PR pattern: it's the first MiroShark surface that adds zero new algorithm. The gallery's filter helper (PR #69, 33 tests) gets dropped onto PR #60's feed route — same enums, same parsing, same logical-AND semantics. Bookmarked feed URLs now answer the same question as the gallery API. Restraint that compounds.
 
-Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-05-12.md
+Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-05-13.md

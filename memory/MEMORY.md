@@ -15,6 +15,7 @@ Full text in `articles/repo-article-YYYY-MM-DD.md`. Each row ≤220 chars.
 
 | Date | Title | One-line frame |
 |------|-------|----------------|
+| 2026-05-13 | The First Surface MiroShark Didn't Have to Invent | PR #81 Filtered RSS/Atom — first surface that is pure composition: grafts PR #69 `gallery_filters.select_filtered_cards` onto PR #60 feed; zero new algorithm, 19-PR zero-dep streak. |
 | 2026-05-12 | From Citable to Runnable | PR #80 Jupyter Notebook Export — analysis-side detachment twin to PR #79's transport-side HMAC; triangulates institutional citation arc with trajectory.csv + reproduce.json. |
 | 2026-05-11 | The First Surface MiroShark Doesn't Own | PR #79 Webhook HMAC Signing (Stripe/GitHub `X-MiroShark-Signature` header, opt-in `WEBHOOK_SECRET`) — first crypto check on recipient hardware; reproduce.json's transport twin. |
 | 2026-05-10 | From Meter to Sort Key | PR #78 Trending Sort exposes PR #74's `_serves_total` via `?sort=trending` — first feedback loop from distribution analytics into gallery ranking. Closes measure→rank→distribution. |
