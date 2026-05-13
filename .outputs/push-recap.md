@@ -1,18 +1,16 @@
-*Push Recap — 2026-05-12*
-aaronjmars/MiroShark + miroshark-aeon — 2 merged MiroShark PRs, 1 open aeon self-repair PR, daily cron content.
+*Push Recap — 2026-05-13*
+MiroShark + miroshark-aeon — 1 substantive PR opened, 27 aeon auto-commits, 0 main merges in window
 
-*Institutional-researcher second surface (PR #80, Jupyter notebook export):* GET /api/simulation/<id>/notebook.ipynb returns a pre-populated nbformat 4 .ipynb with the trajectory CSV embedded inline + a 7-cell pinned analysis sequence (header → imports → load → belief chart → consensus → quality summary → footer). Runs air-gapped (no callback to host), bytewise-stable (sort_keys + indent=2 → SHA-256 = stable citation key). Pure stdlib, 559 LoC service + 20 offline tests. The 2nd export aimed at academic/institutional users after trajectory.csv: CSV said "here is the data", notebook says "here is the analysis, ready to run".
+Composition over invention: PR #81 (filtered RSS/Atom feed, opened by Aaron/Aeon, mergeable, not yet merged) grafts the gallery's six existing filter knobs (?q, ?consensus, ?quality, ?outcome, ?sort, ?limit) onto /api/feed.{atom,rss}. Reuses gallery_filters.select_filtered_cards (PR #69, 33 tests) so gallery + feed answer the same question identically. EN/zh-CN active-filter chips in channel title.
 
-*Transport-layer security goes live (PR #79, webhook HMAC signing, merged from yesterday's draft):* WEBHOOK_SECRET env → X-MiroShark-Signature: sha256=<hex> on every dispatch (Stripe/GitHub scheme). First MiroShark surface whose verification check runs on the *recipient's* hardware. Structural twin of PR #75 reproduce.json — both SHA-256 over deterministic bytes, both verifiable without trusting the server. Backward-compat: blank secret omits header entirely.
+Steady-state cron through day 2 of retrace: token-report -21.6% 24h to $0.00000978, FDV $978K back under $1M; but 1.68× buy/sell, 7-10× pre-ATH volume, +9 stars / +2 forks (1143/226), @pmarca following sister $AEON. Structure intact.
 
-*Aeon self-repair (PR #34, open):* Yesterday's push-recap flagged 2 consecutive days of feature skill leaking scratch verifier .py files to repo root (.aeon-tmp-verify-trending.py, sig_smoke.py). self-improve picked it up — deletes 3 dead files, patches skills/feature/SKILL.md step 6 (forbid cwd .py, mandate /tmp/verify-${feature}.py + pre-finish cleanup check), adds .gitignore safety net. Two-layer fix.
+Aeon self-discipline: feature skill 2nd straight day with zero scratch-verifier leak (PR #34's prompt-level fix working even pre-merge).
 
-*Key changes:*
-- PR #80 frontend: 📓 Jupyter panel in EmbedDialog.vue, pure-download UX (no inline preview — .ipynb is 30+ KB JSON)
-- PR #79 transport-only: signature header never persisted to webhook-log.jsonl; receiver-side `verify_signature` published symmetrically
-- repo-actions batch: 5 new ideas (lifecycle webhooks, embed widget iframe, filtered RSS, per-round API, sitemap.xml) — #1 leverages PR #79 HMAC infra for mid-run events Revault/CancerHawk want
+Key changes:
+- backend/app/services/feed.py +209/-15 (select_public_cards gains 6 kwargs + surface_stats_reader callback, render_feed gains _filter_chip helper, MAX_FEED_LIMIT=50)
+- backend/tests/test_unit_feed_filters.py +622 new (16 offline tests: ±0.2 stance parity, quality first-word match, logical AND, trending callback, graceful unknown-sort fallback, rel="self" query preservation, drift guard)
+- frontend EmbedDialog +221: "Build a filtered feed" block — 3 dropdowns + live URL preview + copy button
 
-Zero-new-deps streak: 20 consecutive PRs (#57 → #80). Token: new ATH $0.0000160 (+76.1% 24h), FDV $1.28M crossed $1M milestone, vol $636.5K (+1,109%). @Mnosh06 deep-tech thread (17L/4RT) named Revault + CancerHawk as live integrations. 2nd consecutive day of Chinese-language $MIROSHARK engagement (@btcbabycow "你们可以合作").
-
-Stats: 21 files changed, +2,128 / -9 lines across the two merged MiroShark PRs.
-Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-05-12.md
+Stats: 7 files / +1280/-37 (PR #81). Zero new deps — 19-PR streak (#57 → #81).
+Full recap: articles/push-recap-2026-05-13.md
