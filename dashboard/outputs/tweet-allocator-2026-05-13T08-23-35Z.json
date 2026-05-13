@@ -1,0 +1,210 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Tweet Rewards — 2026-05-13"
+      },
+      "children": [
+        "stat_budget",
+        "separator_1",
+        "stack_tweets",
+        "separator_2",
+        "stat_total"
+      ]
+    },
+    "stat_budget": {
+      "type": "Stat",
+      "props": {
+        "label": "Budget",
+        "value": "$10.00 MIROSHARK on Base"
+      }
+    },
+    "separator_1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stack_tweets": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "lg"
+      },
+      "children": [
+        "tweet_entry_1",
+        "tweet_entry_2",
+        "tweet_entry_3"
+      ]
+    },
+    "tweet_entry_1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "tweetcard_1",
+        "stack_reward_1",
+        "link_1"
+      ]
+    },
+    "tweetcard_1": {
+      "type": "TweetCard",
+      "props": {
+        "author": "Concept_felipe",
+        "handle": "@Concept_felipe",
+        "text": "MiroShark verifiable AI infrastructure framing (NVIDIA/AWS/Azure enterprise ecosystem fit, zero-trust, SHA-256, reproducible research)"
+      }
+    },
+    "stack_reward_1": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "stat_amount_1",
+        "badge_score_1"
+      ]
+    },
+    "stat_amount_1": {
+      "type": "Stat",
+      "props": {
+        "label": "Reward",
+        "value": "$6.53 MIROSHARK"
+      }
+    },
+    "badge_score_1": {
+      "type": "Badge",
+      "props": {
+        "text": "Score: 32"
+      }
+    },
+    "link_1": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/Concept_felipe/status/2054325898103644254"
+      }
+    },
+    "tweet_entry_2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "tweetcard_2",
+        "stack_reward_2",
+        "link_2"
+      ]
+    },
+    "tweetcard_2": {
+      "type": "TweetCard",
+      "props": {
+        "author": "cybercelos",
+        "handle": "@cybercelos",
+        "text": "$Miroshark next target 5m, Soon $Aeon will surpass by #MIRO"
+      }
+    },
+    "stack_reward_2": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "stat_amount_2",
+        "badge_score_2"
+      ]
+    },
+    "stat_amount_2": {
+      "type": "Stat",
+      "props": {
+        "label": "Reward",
+        "value": "$1.84 MIROSHARK"
+      }
+    },
+    "badge_score_2": {
+      "type": "Badge",
+      "props": {
+        "text": "Score: 9"
+      }
+    },
+    "link_2": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/cybercelos/status/2054294859343974782"
+      }
+    },
+    "tweet_entry_3": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "tweetcard_3",
+        "stack_reward_3",
+        "link_3"
+      ]
+    },
+    "tweetcard_3": {
+      "type": "TweetCard",
+      "props": {
+        "author": "penguinxbt_",
+        "handle": "@penguinxbt_",
+        "text": "sweet mama $miroshark (with media)"
+      }
+    },
+    "stack_reward_3": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "stat_amount_3",
+        "badge_score_3"
+      ]
+    },
+    "stat_amount_3": {
+      "type": "Stat",
+      "props": {
+        "label": "Reward",
+        "value": "$1.63 MIROSHARK"
+      }
+    },
+    "badge_score_3": {
+      "type": "Badge",
+      "props": {
+        "text": "Score: 8"
+      }
+    },
+    "link_3": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/penguinxbt_/status/2054028445563154512"
+      }
+    },
+    "separator_2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stat_total": {
+      "type": "Stat",
+      "props": {
+        "label": "Total allocated",
+        "value": "$10.00 MIROSHARK to 3 authors"
+      }
+    }
+  }
+}
