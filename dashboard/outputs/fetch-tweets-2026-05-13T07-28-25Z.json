@@ -1,0 +1,172 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Top Tweets — $MIROSHARK OR @miroshark_ OR github.com/aaronjmars/miroshark (2026-05-13)"
+      },
+      "children": [
+        "stack_main"
+      ]
+    },
+    "stack_main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "tweet1_group",
+        "sep1",
+        "tweet2_group",
+        "sep2",
+        "tweet3_group",
+        "sep3",
+        "tweet4_group"
+      ]
+    },
+    "tweet1_group": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet1_card",
+        "tweet1_link"
+      ]
+    },
+    "tweet1_card": {
+      "type": "TweetCard",
+      "props": {
+        "author": "cybercelos",
+        "handle": "x.com/cybercelos",
+        "text": "$Miroshark next target 5m, Soon $Aeon will surpass by #MIRO",
+        "likes": 9,
+        "retweets": 0
+      },
+      "children": []
+    },
+    "tweet1_link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/cybercelos/status/2054294859343974782"
+      },
+      "children": []
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "tweet2_group": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet2_card",
+        "tweet2_link"
+      ]
+    },
+    "tweet2_card": {
+      "type": "TweetCard",
+      "props": {
+        "author": "Concept_felipe",
+        "handle": "x.com/Concept_felipe",
+        "text": "MiroShark as verifiable AI infrastructure: NVIDIA/AWS/Azure ecosystem fit, zero-trust, SHA-256 citation keys, reproducible research. \"Trust layer for AI-generated analysis.\"",
+        "likes": 11,
+        "retweets": 7
+      },
+      "children": []
+    },
+    "tweet2_link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/Concept_felipe/status/2054325898103644254"
+      },
+      "children": []
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "tweet3_group": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet3_card",
+        "tweet3_link"
+      ]
+    },
+    "tweet3_card": {
+      "type": "TweetCard",
+      "props": {
+        "author": "penguinxbt_",
+        "handle": "x.com/penguinxbt_",
+        "text": "sweet mama $miroshark (with media)",
+        "likes": 5,
+        "retweets": 1
+      },
+      "children": []
+    },
+    "tweet3_link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/penguinxbt_/status/2054028445563154512"
+      },
+      "children": []
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "tweet4_group": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet4_card",
+        "tweet4_link"
+      ]
+    },
+    "tweet4_card": {
+      "type": "TweetCard",
+      "props": {
+        "author": "Concept_felipe",
+        "handle": "x.com/Concept_felipe",
+        "text": "Today is 5M+ day for @miroshark_",
+        "likes": 2,
+        "retweets": 0
+      },
+      "children": []
+    },
+    "tweet4_link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/Concept_felipe/status/2054151390646141400"
+      },
+      "children": []
+    }
+  }
+}
