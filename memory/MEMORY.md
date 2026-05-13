@@ -43,6 +43,7 @@ Full implementation notes in daily logs. Each row ≤280 chars.
 
 | Skill | Date | Notes |
 |-------|------|-------|
+| Filtered RSS / Atom Feed | 2026-05-13 | PR #81 — `?consensus=`, `?quality=`, `?outcome=`, `?q=`, `?sort=`, `?limit=` on `/api/feed.{atom,rss}` via existing `gallery_filters.select_filtered_cards`. Active filters surface in feed title+subtitle. `MAX_FEED_LIMIT = 50`. Trending sort uses lazy `surface_stats_reader` callback. `verified_only` keeps on-disk `outcome_reader` gate (PR #60 compat). 16 offline tests, EmbedDialog filter-builder block (3 dropdowns + live URL + copy), zero new deps (streak: 19 PRs). |
 | Jupyter Notebook Export | 2026-05-12 | PR #80 — `GET /<id>/notebook.ipynb` returns nbformat 4 JSON with trajectory CSV embedded via `repr()` + 7-cell pinned sequence (header → imports → load → belief chart → consensus → quality summary → footer). Runs air-gapped, bytewise-stable (SHA-256 citation key). `notebook_export.py` (~560 LoC stdlib), reuses trajectory_export + repro_export, surface_key `notebook_ipynb`. 20 offline tests, EmbedDialog 📓 panel, zero new deps (streak: 19 PRs). |
 | Webhook HMAC Signature Verification | 2026-05-11 | PR #79 — `WEBHOOK_SECRET` → `X-MiroShark-Signature: sha256=<hex>` on every dispatch (Stripe/GitHub scheme). `compute_signature` + `verify_signature` published for symmetry; backward compat when secret blank. 8 offline tests (urlopen-mock integration), Python/Node/curl docs snippets, EmbedDialog hint, zero new deps (streak: 18 PRs). |
 | Trending Simulations Sort | 2026-05-10 | PR #78 — `?sort=trending` ranks public sims by `surface-stats.json` totals (date tie-break), turns inbound observability into discovery primitive. 8 offline tests, frontend "🔥 Trending" option, zero new deps (streak: 17 PRs). |
@@ -75,7 +76,7 @@ Full implementation notes in daily logs. Each row ≤280 chars.
 - $MIROSHARK ATH $0.000006926 set 2026-05-06 intraday; current $0.00000646 (+30.6% 24h on 2026-05-10, -6.7% from ATH, near-retest)
 
 ## Next Priorities
-- Open MiroShark PRs: #80 (Jupyter notebook export, opened 2026-05-12)
+- Open MiroShark PRs: #81 (Filtered RSS/Atom feed, opened 2026-05-13)
 - Open miroshark-aeon PRs: today's self-improve (re-doing closed PR #32 work — owner instruction)
-- Unbuilt repo-actions ideas (2026-05-10 batch): #3 Trading Signal JSON, #4 Per-Agent Stance Sparklines, #5 Simulation Archive Bundle (#1 HMAC → PR #79 2026-05-11, #2 Jupyter notebook → PR #80 2026-05-12). Earlier batch (2026-05-08): #2 oEmbed Endpoint, #4 Peak-Round Snapshot, #5 Operator Profile
+- Unbuilt repo-actions ideas (2026-05-12 batch): #1 Simulation Lifecycle Webhooks (granular event subscriptions), #2 Interactive Embed Widget (`/embed/<id>` iframe), #4 Per-Round Belief Snapshot API, #5 Sitemap.xml (#3 Filtered RSS → PR #81 2026-05-13). 2026-05-10 batch: #3 Trading Signal JSON, #4 Per-Agent Stance Sparklines, #5 Simulation Archive Bundle. 2026-05-08 batch: #2 oEmbed Endpoint, #4 Peak-Round Snapshot, #5 Operator Profile
 - Issue #70 on MiroShark — Cyril Private Impact mode + MiroResult collaboration request (substantial cross-builder feature track)
