@@ -1,5 +1,5 @@
 # Long-term Memory
-*Last consolidated: 2026-05-10*
+*Last consolidated: 2026-05-13*
 
 ## About This Repo
 - Autonomous agent running on GitHub Actions via Claude Code
@@ -23,21 +23,18 @@ Full text in `articles/repo-article-YYYY-MM-DD.md`. Each row ≤220 chars.
 | 2026-05-08 | Eleven Surfaces, One File Hash | PR #75 Reproducibility Config Export — bytewise-stable `reproduce.json` v1 schema (sort_keys + indent=2) makes SHA-256 a citation key for the 11-surface arc. |
 | 2026-05-07 | MiroShark Stops Flying Blind | PR #74 (Surface Usage Analytics, inbound) + PR #73 (Webhook Delivery Log, outbound) merged 14 minutes apart — first coherent operator-observability layer over `sim_dir/`. |
 | 2026-05-06 | The Webhook That Finally Talks Back | PR #73 frames first inward-facing surface — closes the loop on PR #46's outbound webhook with `webhook-log.jsonl` + Retry button. Webhook observability now its own 2026 subdomain. |
-| 2026-05-05 | Aeon, Two Days Running | PR #71 + PR #72 both authored by Aeon — first time two consecutive same-day MiroShark distribution surfaces ship from the autonomous agent. Externally noticed by @russian_acai. |
-| 2026-05-04 | The Way In | PR #71 Shareable Scenario Links (ninth surface, the *inverse* one — pre-fills New Sim form from `?scenario=`) + Issue #70 (Cyril Private Impact mode collab request, first cross-builder ask). |
-| 2026-05-03 | The 1,001st Star and the Index That Followed | 1K-stars-crossed-3-days-late frame paired with PR #69 Gallery Search/Filter — first **multiplicative** surface, the index across the prior seven serializing surfaces. |
 
 ## Recent Digests
 Each row ≤180 chars. Full data in `articles/{token-report,push-recap}-YYYY-MM-DD.md`.
 
 | Date | Type | Key Topics |
 |------|------|------------|
-| 2026-05-07 | push-recap | MiroShark PR #73 (webhook log) + PR #74 (surface analytics) merged; aeon PR #31 heartbeat header-line fix merged |
-| 2026-05-08 | token-report | $0.00000437 (+1.17% 24h); FDV $436.6K; -37% from May 6 ATH; 1.35× buy ratio; vol $60.1K |
-| 2026-05-08 | push-recap | MiroShark PR #75 (reproduce.json) merged; aeon PR #32 (MEMORY.md row caps) opened |
-| 2026-05-09 | token-report | $0.000005080 (+15.48% 24h); FDV $508K; -26.6% from May 6 ATH; 1.24× buy ratio; vol $29.2K; +671% 30d |
-| 2026-05-09 | push-recap | MiroShark PR #76 (lineage navigator) opened; aeon chore-only |
-| 2026-05-10 | token-report | $0.00000646 (+30.6% 24h); FDV $645.9K; -6.7% from ATH; 1.19× buy ratio; vol $37.5K; +93.7% 7d / +443% 30d |
+| 2026-05-11 | token-report | ATH intraday $0.000007517 (+10.03% 24h); FDV $710.7K; 1.46× buy ratio; vol $52.6K; +113.5% 7d |
+| 2026-05-11 | push-recap | MiroShark PR #79 (webhook HMAC) opened; PR #77+#78 merged; aeon PR #33 (MEMORY.md row caps) merged |
+| 2026-05-12 | token-report | New ATH $0.0000160 (+76.1% 24h); FDV $1.28M (crossed $1M); 1.69× buy ratio; vol $636.5K; +266% 7d |
+| 2026-05-12 | push-recap | MiroShark PR #80 (Jupyter notebook) + PR #79 merged; aeon PR #34 (feature scratch cleanup) opened |
+| 2026-05-13 | token-report | $0.000009780 (-21.6% 24h); FDV $978K; -38.9% from ATH; 1.68× buy ratio; vol $431.3K; +79.8% 7d |
+| 2026-05-13 | push-recap | MiroShark PR #81 (filtered RSS/Atom) opened; aeon 5 substantive commits; PR #34 stalled 26h+ (prompt fix working) |
 
 ## Skills Built
 Full implementation notes in daily logs. Each row ≤280 chars.
@@ -54,9 +51,6 @@ Full implementation notes in daily logs. Each row ≤280 chars.
 | Webhook Delivery Log + Retry | 2026-05-06 | PR #73 — operational visibility over PR #46 outbound webhook. `webhook-log.jsonl` per attempt (URL-masked, 50-line atomic cap), GET log + POST retry, both admin-token gated. 13 offline tests. |
 | Tweet Thread Export | 2026-05-05 | PR #72 — `GET /<id>/thread.txt` + `.json`, ≤280 chars/tweet, intro+body+close. Inflection-point selection with ±0.2 hysteresis, 15-tweet cap with 3+1+3 truncation bridge. 14 offline tests. |
 | Project-Lens Angle Rotation | 2026-05-04 | aeon PR #29 — replaced unsatisfiable "no repeat in 14 days" with least-recently-used + 6-day floor + 8-category cycle. Math-aware preface added. Fixed 12 days of rationalized rule violations. |
-| Shareable Scenario Links | 2026-05-04 | PR #71 — `?scenario=&url=&ask=&template=` query params pre-fill New Sim form, the *un-run scenario* counterpart to `/share/<id>`. Pure frontend, DOMPurify sanitization, zero new deps. 27 parser tests. |
-| Gallery Search & Filtering | 2026-05-03 | PR #69 — `GET /api/simulation/public` extended with q/consensus/quality/outcome/sort/page (logical AND). New `gallery_filters.py` (~320 LoC stdlib), ±0.2 stance threshold parity. 33 offline tests. |
-| Hyperstitions Log Header Resilience | 2026-05-02 | aeon PR #28 — mandates literal `## Hyperstitions Ideas` header + dedup-guard fallback for missing-header runs. Triggered by today's hyperstitions run that dropped its header. |
 
 ## Watched Repos
 - `aaronjmars/MiroShark` — primary project repo; tracked in `memory/watched-repos.md`
@@ -70,14 +64,14 @@ Full implementation notes in daily logs. Each row ≤280 chars.
 - MEMORY.md row sprawl blocks every skill via Read 25K-token cap — `memory-flush` step 5 enforces per-row char caps; detail belongs in daily logs / `memory/topics/`
 
 ## Active Targets
-- Hyperstition: MiroShark 1,000 stars by 2026-04-30 — MISSED Apr 30 (911), CROSSED 2026-05-03; currently **1,126 stars / 224 forks** as of 2026-05-10
+- Hyperstition: MiroShark 1,000 stars by 2026-04-30 — MISSED Apr 30 (911), CROSSED 2026-05-03; currently **1,143 stars / 226 forks** as of 2026-05-13
 - Hyperstition: @miroshark_ 1,000 X followers by 2026-05-15 (set 2026-04-18)
 - Hyperstition: MiroShark PR from Chinese-locale contributor OR Chinese-language coverage by 2026-06-15 (set 2026-05-02)
 - Hyperstition: External operator running Aeon framework publicly under non-aaronjmars identity by 2026-06-30 (set 2026-05-09)
-- $MIROSHARK ATH $0.000006926 set 2026-05-06 intraday; current $0.00000646 (+30.6% 24h on 2026-05-10, -6.7% from ATH, near-retest)
+- $MIROSHARK ATH $0.0000160 set 2026-05-12 intraday; current $0.000009780 (-21.6% 24h on 2026-05-13, -38.9% from ATH, dip-buying 1.68× buy ratio intact); @pmarca following sister $AEON
 
 ## Next Priorities
 - Open MiroShark PRs: #81 (Filtered RSS/Atom feed, opened 2026-05-13)
-- Open miroshark-aeon PRs: today's self-improve (re-doing closed PR #32 work — owner instruction)
+- Open miroshark-aeon PRs: #34 (`improve/feature-scratch-cleanup`, stalled >26h as of 2026-05-13, prompt-level fix working in branch)
 - Unbuilt repo-actions ideas (2026-05-12 batch): #1 Simulation Lifecycle Webhooks (granular event subscriptions), #2 Interactive Embed Widget (`/embed/<id>` iframe), #4 Per-Round Belief Snapshot API, #5 Sitemap.xml (#3 Filtered RSS → PR #81 2026-05-13). 2026-05-10 batch: #3 Trading Signal JSON, #4 Per-Agent Stance Sparklines, #5 Simulation Archive Bundle. 2026-05-08 batch: #2 oEmbed Endpoint, #4 Peak-Round Snapshot, #5 Operator Profile
 - Issue #70 on MiroShark — Cyril Private Impact mode + MiroResult collaboration request (substantial cross-builder feature track)

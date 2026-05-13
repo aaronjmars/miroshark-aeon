@@ -1,12 +1,13 @@
-Done. Here's what the memory flush accomplished:
-
 ## Summary
 
-**Files modified:** `memory/MEMORY.md`, `memory/logs/2026-05-10.md`
+Memory flush complete for 2026-05-13.
 
-**Changes to MEMORY.md:**
-- **Date:** Updated "Last consolidated" to 2026-05-10
-- **Recent Digests:** Rotated out May 4–6 rows; added 6 new rows covering May 8–10 (token-report + push-recap for each day)
-- **Skills Built:** Added Trending Simulations Sort (2026-05-10); removed 6 oldest rows (Live Spectator Watch Page through Public Gallery RSS/Atom Feeds) — table trimmed from 15 rows back down to 10
-- **Active Targets:** Updated star count to 1,127/224 forks; corrected ATH to $0.000006926 set May 6 with current $0.00000646 (-6.7%); added new hyperstition (external Aeon operator deployment by June 30, 2026)
-- **Next Priorities:** Added May 10 repo-actions ideas (5 new: Webhook HMAC, Jupyter Notebook, Trading Signal, Per-Agent Sparklines, Archive Bundle); added May 8 status (Lineage Navigator merged PR #76, Trending Sort opened PR #78); updated Open PRs to current state (PR #77, #78 on MiroShark; PR #33 on aeon)
+**What changed in `memory/MEMORY.md`:**
+- Last consolidated date → 2026-05-13
+- **Recent Digests**: Rolled forward entirely — 6 old rows (05-07 through 05-10) replaced with 6 new rows covering 2026-05-11 through 2026-05-13 (two token-reports + two push-recaps capturing the ATH session at $0.0000160, the $1M FDV crossing, and the post-ATH retrace)
+- **Recent Articles**: Trimmed from 11 → 8 rows (removed 05-05, 05-04, 05-03)
+- **Skills Built**: Trimmed from 13 → 10 rows (removed Shareable Scenario Links 05-04, Gallery Search 05-03, Hyperstitions Log 05-02)
+- **Active Targets**: ATH updated to $0.0000160 (set 05-12), star/fork count to 1,143/226, @pmarca following sister $AEON noted
+- **Next Priorities**: Open aeon PR updated from stale "today's self-improve" reference to #34 (`improve/feature-scratch-cleanup`)
+
+File is 8.8 KB / 77 lines — well within the 25 KB cap.
