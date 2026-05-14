@@ -2,7 +2,7 @@
   "version": "1.0",
   "generated": "2026-04-04T00:00:00Z",
   "repo": "aaronjmars/aeon",
-  "total": 55,
+  "total": 62,
   "categories": {
     "research": "Research & Content",
     "dev": "Dev & Code",
@@ -560,6 +560,76 @@
       "var": "",
       "files": 1,
       "install": "./add-skill aaronjmars/aeon tweet-allocator"
+    },
+    {
+      "slug": "auto-merge-agent-prs",
+      "name": "auto-merge-agent-prs",
+      "description": "Close the loop on agent-authored PRs \u2014 auto-merge green, unblocked PRs in the aeon-agent repo so feature shipping doesn't stall waiting for a human click",
+      "category": "dev",
+      "schedule": "0 18 * * *",
+      "var": "",
+      "files": 0,
+      "install": "./add-skill aaronjmars/aeon auto-merge-agent-prs"
+    },
+    {
+      "slug": "fork-cohort",
+      "name": "fork-cohort",
+      "description": "Weekly fork-activation cohort tracker \u2014 buckets every fork by recent run activity (COLD / STALE / ACTIVE / POWER) with week-over-week deltas",
+      "category": "productivity",
+      "schedule": "0 19 * * 0",
+      "var": "",
+      "files": 0,
+      "install": "./add-skill aaronjmars/aeon fork-cohort"
+    },
+    {
+      "slug": "operator-scorecard",
+      "name": "operator-scorecard",
+      "description": "Weekly plain-language synthesis of agent health + community growth + economic activity \u2014 answers \"was this week worth it?\" in one notification",
+      "category": "productivity",
+      "schedule": "30 10 * * 1",
+      "var": "",
+      "files": 0,
+      "install": "./add-skill aaronjmars/aeon operator-scorecard"
+    },
+    {
+      "slug": "skill-freshness",
+      "name": "skill-freshness",
+      "description": "Audit every enabled skill's upstream file dependencies for staleness \u2014 flags chained skills about to consume yesterday's article or a long-dead topic file",
+      "category": "productivity",
+      "schedule": "0 8 * * *",
+      "var": "",
+      "files": 0,
+      "install": "./add-skill aaronjmars/aeon skill-freshness"
+    },
+    {
+      "slug": "thread-formatter",
+      "name": "Thread Formatter",
+      "description": "Score the day's events from memory/logs and format the top one as a 5-tweet thread ready to paste",
+      "category": "social",
+      "schedule": "30 17 * * *",
+      "var": "",
+      "files": 0,
+      "install": "./add-skill aaronjmars/aeon thread-formatter"
+    },
+    {
+      "slug": "v4-readiness",
+      "name": "v4-readiness",
+      "description": "Generate a per-fork v4 upgrade readiness checklist \u2014 reads the fork's aeon.yml, skills.json, and MEMORY.md, cross-references against the embedded v4 change manifest, emits Safe / Review / Custom / Action-items breakdown",
+      "category": "productivity",
+      "schedule": "workflow_dispatch",
+      "var": "",
+      "files": 0,
+      "install": "./add-skill aaronjmars/aeon v4-readiness"
+    },
+    {
+      "slug": "webhook-bridge",
+      "name": "webhook-bridge",
+      "description": "External-event-to-skill bridge \u2014 fire any Aeon skill via repository_dispatch from outside GitHub Actions UI",
+      "category": "productivity",
+      "schedule": "workflow_dispatch",
+      "var": "",
+      "files": 0,
+      "install": "./add-skill aaronjmars/aeon webhook-bridge"
     }
   ],
   "install_all": "./add-skill aaronjmars/aeon --all",

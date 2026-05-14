@@ -47,6 +47,7 @@ skills:
   issue-triage: { enabled: false, schedule: "0 9 * * *" }
   pr-review: { enabled: false, schedule: "0 9 * * *" }
   auto-merge: { enabled: false, schedule: "0 14 * * *" }
+  auto-merge-agent-prs: { enabled: false, schedule: "0 18 * * *", model: "claude-sonnet-4-6", var: "" } # daily 18:00 UTC — close the loop on agent-authored PRs by auto-merging green, unblocked ones (author=aeonframework, all checks SUCCESS, no blocking labels). Uses gh pr merge --squash --auto (queues mid-CI merges). 5-PR-per-run cap, 3-attempt retry cap, 24h re-notify dedup on ALL_BLOCKED. Pass dry-run to preview, or owner/repo to scope.
   github-monitor: { enabled: false, schedule: "0 9 * * *" }
   github-issues: { enabled: false, schedule: "0 9 * * *" }
   github-trending: { enabled: false, schedule: "0 9 * * *" }
@@ -102,9 +103,11 @@ skills:
   vibecoding-digest: { enabled: false, schedule: "30 17 * * *" }
   channel-recap: { enabled: false, schedule: "0 17 * * 0", var: "" }
   rss-feed: { enabled: false, schedule: "30 17 * * *" }
+  thread-formatter: { enabled: false, schedule: "30 17 * * *", model: "claude-sonnet-4-6", var: "" } # daily 17:30 UTC — score today's events from memory/logs and format the top one as a 5-tweet thread ready to paste; no-op silently on quiet days (THREAD_FORMATTER_NO_SIGNAL when top score < 3). Set var to override the topic.
   update-gallery: { enabled: false, schedule: "0 18 * * 0" }
   goal-tracker: { enabled: false, schedule: "0 18 * * *" }
   skill-health: { enabled: false, schedule: "0 18 * * *" }
+  skill-freshness: { enabled: false, schedule: "0 8 * * *", model: "claude-sonnet-4-6", var: "" } # daily 08:00 UTC — audit enabled skills' upstream file dependencies for staleness; pass dry-run to skip notify; per-class thresholds (articles 28h / .outputs 4h / topics 7d / state 30d); fingerprint-based dedup, 7d re-emit window
   skill-leaderboard: { enabled: true, schedule: "0 17 * * 0", model: "claude-sonnet-4-6" }
   self-review: { enabled: false, schedule: "0 18 * * *" }
   reflect: { enabled: false, schedule: "0 18 * * *" }
@@ -116,14 +119,18 @@ skills:
   vercel-projects: { enabled: false, schedule: "0 18 * * 0", model: "claude-sonnet-4-6", var: "" }
   cost-report: { enabled: false, schedule: "0 7 * * 1", model: "claude-sonnet-4-6" }
   fork-fleet: { enabled: false, schedule: "0 10 * * 1" }
+  fork-cohort: { enabled: false, schedule: "0 19 * * 0", model: "claude-sonnet-4-6" } # Sunday 19:00 UTC — bucket every fork by activation stage (COLD/STALE/ACTIVE/POWER) using GitHub Actions run history; week-over-week deltas in memory/topics/fork-cohort-state.json; gated notify (skip on STEADY + no transitions). Read-only across the fleet.
   skill-evals: { enabled: false, schedule: "0 6 * * 0", model: "claude-sonnet-4-6" }
   skill-update-check: { enabled: false, schedule: "0 19 * * 0", model: "claude-sonnet-4-6" }
+  v4-readiness: { enabled: false, schedule: "workflow_dispatch", model: "claude-sonnet-4-6", var: "" } # one-shot — per-fork v4 upgrade readiness checklist. Reads aeon.yml + skills.json + MEMORY.md against an embedded v4 change manifest; emits Safe / Review / Custom / Action breakdown. Pass dry-run to skip notify, or owner/repo to audit a fork remotely.
   spawn-instance: { enabled: false, schedule: "workflow_dispatch", var: "" }
   fleet-control: { enabled: false, schedule: "0 9,15 * * *" }
   weekly-review: { enabled: false, schedule: "0 19 * * 1" }
+  operator-scorecard: { enabled: false, schedule: "30 10 * * 1", model: "claude-sonnet-4-6", var: "" }
   repo-scanner: { enabled: false, schedule: "0 15 * * 0", model: "claude-sonnet-4-6", var: "" }
   workflow-security-audit: { enabled: false, schedule: "0 16 * * 0" }
   security: { enabled: false, schedule: "0 16 * * *" }
+  webhook-bridge: { enabled: false, schedule: "workflow_dispatch", var: "" } # external-event-to-skill bridge; the real wiring lives in .github/workflows/webhook.yml — operators don't dispatch this skill, they POST repository_dispatch with event_type=aeon-skill
 
 # Reactive triggers — event-driven skill dispatch based on cron-state.json conditions.
 reactive:
