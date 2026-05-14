@@ -1,19 +1,19 @@
-*Repo Action Ideas — 2026-05-12*
-Generated from analysis of aaronjmars/MiroShark (1,135 stars · ATH day · FDV $1.28M) — five ideas the feature skill can autonomously build.
+*Repo Action Ideas — 2026-05-14*
+Generated from analysis of aaronjmars/MiroShark (1,147 stars · 227 forks · 0 open PRs) — ideas buildable by the feature skill tomorrow.
 
-1. Simulation Lifecycle Webhooks (Feature/Integration, Small)
-   Extends webhook events to simulation_started, consensus_reached, quality_milestone, and round_complete — giving live integrators (Revault, CancerHawk) an event stream instead of a single completion signal.
+1. Discord + Slack Rich Completion Notifications (Integration, Small)
+   Two env vars trigger platform-native sim-completion messages in Discord (rich embed, consensus-color-coded) and Slack (Block Kit with belief bars) — gives RevaultDrops a live MiroShark channel without writing integration code.
 
-2. Interactive Embed Widget (Feature/Integration, Small)
-   GET /embed/<id> returns a no-chrome iframe page with live belief bars that update while the sim runs — the missing interactive embed for Substack, Notion, Ghost, and Mirror.
+2. Director Event Timeline (Feature/Research, Small)
+   `GET /api/simulation/<id>/director-events` + amber annotation layer on the belief chart shows exactly which round director injections fired and what they triggered — the citation surface director mode has always needed.
 
-3. Filtered RSS/Atom Feed (Integration/Growth, Small)
-   Adds ?consensus=&quality=&sort= query params to the existing feed using gallery_filters.py logic — turns the feed into a structured signal source for n8n, Zapier, and RSS-based trading monitors.
+3. Shareable Belief Chart SVG (Feature/DX, Small)
+   `GET /api/simulation/<id>/chart.svg` generates the full belief trajectory as a pure-stdlib SVG via `xml.etree.ElementTree` — embeddable as `<img>` in Notion, Substack, GitHub READMEs, and LaTeX papers with zero deps.
 
-4. Per-Round Belief Snapshot API (Feature/DX, Small)
-   GET /api/simulation/<id>/round/<n> returns belief state at a specific round — turns the trajectory into an addressable document for step-through replay, live monitoring, and round-level citations.
+4. Comparative Run View (Feature/Research, Small)
+   `/compare?a=<id>&b=<id>` renders two published sims side-by-side with a Δ column showing signed stance deltas — the analytic complement to the lineage navigator (PR #76), zero new backend code.
 
-5. Sitemap.xml for Published Simulations (Growth/SEO, Small)
-   Auto-generated XML sitemap from the public sim index — enables search engine discovery of published simulations when submitted to Google Search Console.
+5. Private Share Link (Feature/Security, Small)
+   HMAC-signed time-limited token grants full share-page access to an unpublished sim — gives institutional observers (Lorimer Ventures tier) a pre-publication preview window using the same hmac+hashlib.sha256 pair as PR #79.
 
-Full details: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-actions-2026-05-12.md
+Full details: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-actions-2026-05-14.md

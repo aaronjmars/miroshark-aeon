@@ -1,0 +1,295 @@
+{
+  "root": "card-root",
+  "state": {},
+  "elements": {
+    "card-root": {
+      "type": "Card",
+      "props": {
+        "title": "Repo Action Ideas — 2026-05-14"
+      },
+      "children": [
+        "repo-meta",
+        "sep1",
+        "ideas-container",
+        "sep2",
+        "article-link"
+      ]
+    },
+    "repo-meta": {
+      "type": "Text",
+      "props": {
+        "text": "Generated from analysis of aaronjmars/MiroShark (1,147 stars · 227 forks · 0 open PRs) — ideas buildable by the feature skill tomorrow.",
+        "variant": "muted"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {}
+    },
+    "ideas-container": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "idea-1",
+        "idea-2",
+        "idea-3",
+        "idea-4",
+        "idea-5"
+      ]
+    },
+    "idea-1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "idea-1-header",
+        "idea-1-desc"
+      ]
+    },
+    "idea-1-header": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "idea-1-title",
+        "idea-1-badge-cat",
+        "idea-1-badge-size"
+      ]
+    },
+    "idea-1-title": {
+      "type": "Heading",
+      "props": {
+        "text": "Discord + Slack Rich Completion Notifications",
+        "level": "h3"
+      }
+    },
+    "idea-1-badge-cat": {
+      "type": "Badge",
+      "props": {
+        "text": "Integration"
+      }
+    },
+    "idea-1-badge-size": {
+      "type": "Badge",
+      "props": {
+        "text": "Small"
+      }
+    },
+    "idea-1-desc": {
+      "type": "Text",
+      "props": {
+        "text": "Two env vars trigger platform-native sim-completion messages in Discord (rich embed, consensus-color-coded) and Slack (Block Kit with belief bars) — gives RevaultDrops a live MiroShark channel without writing integration code."
+      }
+    },
+    "idea-2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "idea-2-header",
+        "idea-2-desc"
+      ]
+    },
+    "idea-2-header": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "idea-2-title",
+        "idea-2-badge-cat",
+        "idea-2-badge-size"
+      ]
+    },
+    "idea-2-title": {
+      "type": "Heading",
+      "props": {
+        "text": "Director Event Timeline",
+        "level": "h3"
+      }
+    },
+    "idea-2-badge-cat": {
+      "type": "Badge",
+      "props": {
+        "text": "Feature/Research"
+      }
+    },
+    "idea-2-badge-size": {
+      "type": "Badge",
+      "props": {
+        "text": "Small"
+      }
+    },
+    "idea-2-desc": {
+      "type": "Text",
+      "props": {
+        "text": "`GET /api/simulation/<id>/director-events` + amber annotation layer on the belief chart shows exactly which round director injections fired and what they triggered — the citation surface director mode has always needed."
+      }
+    },
+    "idea-3": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "idea-3-header",
+        "idea-3-desc"
+      ]
+    },
+    "idea-3-header": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "idea-3-title",
+        "idea-3-badge-cat",
+        "idea-3-badge-size"
+      ]
+    },
+    "idea-3-title": {
+      "type": "Heading",
+      "props": {
+        "text": "Shareable Belief Chart SVG",
+        "level": "h3"
+      }
+    },
+    "idea-3-badge-cat": {
+      "type": "Badge",
+      "props": {
+        "text": "Feature/DX"
+      }
+    },
+    "idea-3-badge-size": {
+      "type": "Badge",
+      "props": {
+        "text": "Small"
+      }
+    },
+    "idea-3-desc": {
+      "type": "Text",
+      "props": {
+        "text": "`GET /api/simulation/<id>/chart.svg` generates the full belief trajectory as a pure-stdlib SVG via `xml.etree.ElementTree` — embeddable as `<img>` in Notion, Substack, GitHub READMEs, and LaTeX papers with zero deps."
+      }
+    },
+    "idea-4": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "idea-4-header",
+        "idea-4-desc"
+      ]
+    },
+    "idea-4-header": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "idea-4-title",
+        "idea-4-badge-cat",
+        "idea-4-badge-size"
+      ]
+    },
+    "idea-4-title": {
+      "type": "Heading",
+      "props": {
+        "text": "Comparative Run View",
+        "level": "h3"
+      }
+    },
+    "idea-4-badge-cat": {
+      "type": "Badge",
+      "props": {
+        "text": "Feature/Research"
+      }
+    },
+    "idea-4-badge-size": {
+      "type": "Badge",
+      "props": {
+        "text": "Small"
+      }
+    },
+    "idea-4-desc": {
+      "type": "Text",
+      "props": {
+        "text": "`/compare?a=<id>&b=<id>` renders two published sims side-by-side with a Δ column showing signed stance deltas — the analytic complement to the lineage navigator (PR #76), zero new backend code."
+      }
+    },
+    "idea-5": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "idea-5-header",
+        "idea-5-desc"
+      ]
+    },
+    "idea-5-header": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "idea-5-title",
+        "idea-5-badge-cat",
+        "idea-5-badge-size"
+      ]
+    },
+    "idea-5-title": {
+      "type": "Heading",
+      "props": {
+        "text": "Private Share Link",
+        "level": "h3"
+      }
+    },
+    "idea-5-badge-cat": {
+      "type": "Badge",
+      "props": {
+        "text": "Feature/Security"
+      }
+    },
+    "idea-5-badge-size": {
+      "type": "Badge",
+      "props": {
+        "text": "Small"
+      }
+    },
+    "idea-5-desc": {
+      "type": "Text",
+      "props": {
+        "text": "HMAC-signed time-limited token grants full share-page access to an unpublished sim — gives institutional observers (Lorimer Ventures tier) a pre-publication preview window using the same hmac+hashlib.sha256 pair as PR #79."
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {}
+    },
+    "article-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full details",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-actions-2026-05-14.md"
+      }
+    }
+  }
+}
