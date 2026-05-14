@@ -103,7 +103,7 @@ skills:
   vibecoding-digest: { enabled: false, schedule: "30 17 * * *" }
   channel-recap: { enabled: false, schedule: "0 17 * * 0", var: "" }
   rss-feed: { enabled: false, schedule: "30 17 * * *" }
-  thread-formatter: { enabled: false, schedule: "30 17 * * *", model: "claude-sonnet-4-6", var: "" } # daily 17:30 UTC — score today's events from memory/logs and format the top one as a 5-tweet thread ready to paste; no-op silently on quiet days (THREAD_FORMATTER_NO_SIGNAL when top score < 3). Set var to override the topic.
+  thread-formatter: { enabled: true, schedule: "30 17 * * *", model: "claude-sonnet-4-6", var: "" } # daily 17:30 UTC — score today's events from memory/logs and format the top one as a 5-tweet thread ready to paste; no-op silently on quiet days (THREAD_FORMATTER_NO_SIGNAL when top score < 3). Set var to override the topic.
   update-gallery: { enabled: false, schedule: "0 18 * * 0" }
   goal-tracker: { enabled: false, schedule: "0 18 * * *" }
   skill-health: { enabled: false, schedule: "0 18 * * *" }
@@ -126,17 +126,17 @@ skills:
   spawn-instance: { enabled: false, schedule: "workflow_dispatch", var: "" }
   fleet-control: { enabled: false, schedule: "0 9,15 * * *" }
   weekly-review: { enabled: false, schedule: "0 19 * * 1" }
-  operator-scorecard: { enabled: false, schedule: "30 10 * * 1", model: "claude-sonnet-4-6", var: "" }
+  operator-scorecard: { enabled: true, schedule: "30 10 * * 1", model: "claude-sonnet-4-6", var: "" }
   repo-scanner: { enabled: false, schedule: "0 15 * * 0", model: "claude-sonnet-4-6", var: "" }
   workflow-security-audit: { enabled: false, schedule: "0 16 * * 0" }
   security: { enabled: false, schedule: "0 16 * * *" }
   webhook-bridge: { enabled: false, schedule: "workflow_dispatch", var: "" } # external-event-to-skill bridge; the real wiring lives in .github/workflows/webhook.yml — operators don't dispatch this skill, they POST repository_dispatch with event_type=aeon-skill
 
   # --- Upstream sync (2026-05-14) ---
-  ai-framework-watch: { enabled: false, schedule: "30 8 * * 1", model: "claude-sonnet-4-6", var: "" } # Monday 08:30 UTC — weekly competitive-intelligence digest across 9 AI agent frameworks (anchor + 8 peers). Momentum signals, 7d/30d star deltas, release listings, breaking-change flags. Set var to a watchlist slug (e.g. langgraph) for a single-framework deep dive.
+  ai-framework-watch: { enabled: true, schedule: "30 8 * * 1", model: "claude-sonnet-4-6", var: "" } # Monday 08:30 UTC — weekly competitive-intelligence digest across 9 AI agent frameworks (anchor + 8 peers). Momentum signals, 7d/30d star deltas, release listings, breaking-change flags. Set var to a watchlist slug (e.g. langgraph) for a single-framework deep dive.
   aixbt-pulse: { enabled: false, schedule: "0 9,21 * * *", model: "claude-sonnet-4-6" } # twice daily — cross-domain market pulse from AIXBT's free grounding endpoint
   contributor-reward: { enabled: false, schedule: "30 9 * * 1", model: "claude-sonnet-4-6", var: "" } # Monday — turn Sunday's leaderboard into a tier-priced rewards plan in memory/distributions.yml; pass dry-run to preview
-  contributor-spotlight: { enabled: false, schedule: "0 20 * * 0", model: "claude-sonnet-4-6", var: "" } # Sunday 20:00 UTC — weekly recognition post: pick one POWER fork from the latest fork-cohort run and convert it into a named human moment (operator handle, enabled stack, diverged work, 30d commits). 4-week dedup. Pass dry-run to skip notify, or owner/repo to override the auto-pick.
+  contributor-spotlight: { enabled: true, schedule: "0 20 * * 0", model: "claude-sonnet-4-6", var: "" } # Sunday 20:00 UTC — weekly recognition post: pick one POWER fork from the latest fork-cohort run and convert it into a named human moment (operator handle, enabled stack, diverged work, 30d commits). 4-week dedup. Pass dry-run to skip notify, or owner/repo to override the auto-pick.
   create-campaign: { enabled: false, schedule: "workflow_dispatch", var: "" } # one-shot — provision Meta campaigns and ad sets on AdManage.ai from declarative config. Entities created PAUSED.
   fleet-state: { enabled: false, schedule: "0 8 * * 1", model: "claude-sonnet-4-6", var: "" } # Monday 08:00 UTC — weekly synthesis of fork-cohort + fork-release-tracker + contributor-spotlight into one fleet-state digest with WoW deltas + 12-week trend. Quiet weeks suppress notify. Pass dry-run to skip notify, or owner/repo to override parent.
   fork-contributor-leaderboard: { enabled: false, schedule: "30 17 * * 0", model: "claude-sonnet-4-6" } # Sunday — rank community contributors across forks and upstream PRs
@@ -152,8 +152,8 @@ skills:
   skill-analytics: { enabled: false, schedule: "30 18 * * 3", model: "claude-sonnet-4-6" } # Wednesday — fleet-level skill-run analytics: ranked run counts, exit-taxonomy distribution, anomaly flags (significance-gated)
   skill-graph: { enabled: false, schedule: "0 17 * * 0" } # Sunday — regenerate skill dependency map
   smithery-manifest: { enabled: false, schedule: "0 6 1/7 * *", model: "claude-sonnet-4-6" } # weekly — refresh docs/smithery-manifest.json + smithery.yaml + smithery-submission.md from skills.json + aeon-mcp; PR + notify only on diff
-  star-milestone: { enabled: false, schedule: "15 15 * * *" } # daily — announce when watched repos cross star-count milestones
-  star-momentum-alert: { enabled: false, schedule: "10 10 * * *", model: "claude-sonnet-4-6", var: "" } # daily — project next milestone crossing date from 14-day repo-pulse history; alert only when projected date lands in 7-14d window on Tue/Wed/Thu (Show HN dispatch slot)
+  star-milestone: { enabled: true, schedule: "15 15 * * *" } # daily — announce when watched repos cross star-count milestones
+  star-momentum-alert: { enabled: true, schedule: "10 10 * * *", model: "claude-sonnet-4-6", var: "" } # daily — project next milestone crossing date from 14-day repo-pulse history; alert only when projected date lands in 7-14d window on Tue/Wed/Thu (Show HN dispatch slot)
   syndicate-article: { enabled: false, schedule: "30 15 * * *", model: "claude-sonnet-4-6", var: "" } # cross-post latest article to Dev.to
 
 # Reactive triggers — event-driven skill dispatch based on cron-state.json conditions.
