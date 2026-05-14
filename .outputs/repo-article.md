@@ -1,5 +1,5 @@
-*New Article: The First Surface MiroShark Didn't Have to Invent*
+*New Article: From Browse to Subscribe to Crawl*
 
-PR #81 (filtered RSS/Atom feed) breaks a twenty-PR pattern: it's the first MiroShark surface that adds zero new algorithm. The gallery's filter helper (PR #69, 33 tests) gets dropped onto PR #60's feed route — same enums, same parsing, same logical-AND semantics. Bookmarked feed URLs now answer the same question as the gallery API. Restraint that compounds.
+PR #82 (sitemap.xml + robots.txt, merged 12:49 UTC today) closes a three-surface external-discovery arc — gallery filter helper (PR #69) → filtered RSS/Atom (PR #81) → sitemap (PR #82). Three audience tiers — human-browser, aggregator, crawler — all now served, and the May-12 idea batch is resolved 5/5. Twentieth consecutive zero-new-deps PR.
 
-Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-05-13.md
+Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-05-14.md

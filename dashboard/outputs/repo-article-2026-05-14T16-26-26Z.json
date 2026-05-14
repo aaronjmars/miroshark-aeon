@@ -1,0 +1,170 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "From Browse to Subscribe to Crawl"
+      },
+      "children": [
+        "text-pr82",
+        "sep1",
+        "heading-arc",
+        "stack-prs",
+        "sep2",
+        "heading-tiers",
+        "stack-tiers",
+        "sep3",
+        "heading-stats",
+        "stack-stats",
+        "sep4",
+        "link-article"
+      ]
+    },
+    "text-pr82": {
+      "type": "Text",
+      "props": {
+        "text": "PR #82 (sitemap.xml + robots.txt, merged 12:49 UTC today) closes a three-surface external-discovery arc."
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading-arc": {
+      "type": "Heading",
+      "props": {
+        "text": "Discovery Arc",
+        "level": "h3"
+      }
+    },
+    "stack-prs": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "pr69",
+        "pr81",
+        "pr82"
+      ]
+    },
+    "pr69": {
+      "type": "Text",
+      "props": {
+        "text": "PR #69: Gallery filter helper"
+      }
+    },
+    "pr81": {
+      "type": "Text",
+      "props": {
+        "text": "PR #81: Filtered RSS/Atom"
+      }
+    },
+    "pr82": {
+      "type": "Text",
+      "props": {
+        "text": "PR #82: Sitemap + robots.txt"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading-tiers": {
+      "type": "Heading",
+      "props": {
+        "text": "Audience Tiers Served",
+        "level": "h3"
+      }
+    },
+    "stack-tiers": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "badge-browser",
+        "badge-aggregator",
+        "badge-crawler"
+      ]
+    },
+    "badge-browser": {
+      "type": "Badge",
+      "props": {
+        "text": "human-browser"
+      }
+    },
+    "badge-aggregator": {
+      "type": "Badge",
+      "props": {
+        "text": "aggregator"
+      }
+    },
+    "badge-crawler": {
+      "type": "Badge",
+      "props": {
+        "text": "crawler"
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading-stats": {
+      "type": "Heading",
+      "props": {
+        "text": "Achievements",
+        "level": "h3"
+      }
+    },
+    "stack-stats": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "lg"
+      },
+      "children": [
+        "stat-batch",
+        "stat-deps"
+      ]
+    },
+    "stat-batch": {
+      "type": "Stat",
+      "props": {
+        "label": "May-12 idea batch resolved",
+        "value": "5/5"
+      }
+    },
+    "stat-deps": {
+      "type": "Stat",
+      "props": {
+        "label": "Consecutive zero-new-deps PRs",
+        "value": "20"
+      }
+    },
+    "sep4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "link-article": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Read full article",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-05-14.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}
