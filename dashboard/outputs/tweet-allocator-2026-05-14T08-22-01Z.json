@@ -1,0 +1,253 @@
+{
+  "root": "mainCard",
+  "state": {},
+  "elements": {
+    "mainCard": {
+      "type": "Card",
+      "props": {
+        "title": "Tweet Rewards — 2026-05-14"
+      },
+      "children": [
+        "budget",
+        "sep1",
+        "tweets",
+        "sep2",
+        "total"
+      ]
+    },
+    "budget": {
+      "type": "Text",
+      "props": {
+        "text": "Budget: $10.00 in $MIROSHARK on Base",
+        "variant": "lead"
+      }
+    },
+    "sep1": {
+      "type": "Separator"
+    },
+    "tweets": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "tweet1",
+        "tweet2",
+        "tweet3",
+        "tweet4",
+        "tweet5"
+      ]
+    },
+    "tweet1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "t1Author",
+        "t1Stats",
+        "t1Quote",
+        "t1Link"
+      ]
+    },
+    "t1Author": {
+      "type": "Badge",
+      "props": {
+        "text": "x.com/MrDegenWolf"
+      }
+    },
+    "t1Stats": {
+      "type": "Text",
+      "props": {
+        "text": "$4.45 in $MIROSHARK (score: 49)",
+        "variant": "muted"
+      }
+    },
+    "t1Quote": {
+      "type": "Text",
+      "props": {
+        "text": "\"not enough bullish on $AEON $MIROSHARK\"",
+        "variant": "body"
+      }
+    },
+    "t1Link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/MrDegenWolf/status/2054577086791127508"
+      }
+    },
+    "tweet2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "t2Author",
+        "t2Stats",
+        "t2Quote",
+        "t2Link"
+      ]
+    },
+    "t2Author": {
+      "type": "Badge",
+      "props": {
+        "text": "x.com/Karma_Nfa"
+      }
+    },
+    "t2Stats": {
+      "type": "Text",
+      "props": {
+        "text": "$2.00 in $MIROSHARK (score: 22)",
+        "variant": "muted"
+      }
+    },
+    "t2Quote": {
+      "type": "Text",
+      "props": {
+        "text": "Quoting bull thesis: $AEON $MIROSHARK amplifier",
+        "variant": "body"
+      }
+    },
+    "t2Link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/Karma_Nfa/status/2054658611364728838"
+      }
+    },
+    "tweet3": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "t3Author",
+        "t3Stats",
+        "t3Quote",
+        "t3Link"
+      ]
+    },
+    "t3Author": {
+      "type": "Badge",
+      "props": {
+        "text": "x.com/btcbabycow"
+      }
+    },
+    "t3Stats": {
+      "type": "Text",
+      "props": {
+        "text": "$1.91 in $MIROSHARK (score: 21)",
+        "variant": "muted"
+      }
+    },
+    "t3Quote": {
+      "type": "Text",
+      "props": {
+        "text": "相信更多应用实例即将到来 — more use cases coming",
+        "variant": "body"
+      }
+    },
+    "t3Link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/btcbabycow/status/2054576505347567898"
+      }
+    },
+    "tweet4": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "t4Author",
+        "t4Stats",
+        "t4Quote",
+        "t4Link"
+      ]
+    },
+    "t4Author": {
+      "type": "Badge",
+      "props": {
+        "text": "x.com/cybercelos"
+      }
+    },
+    "t4Stats": {
+      "type": "Text",
+      "props": {
+        "text": "$0.82 in $MIROSHARK (score: 9)",
+        "variant": "muted"
+      }
+    },
+    "t4Quote": {
+      "type": "Text",
+      "props": {
+        "text": "\"$AEON & $MIROSHARK have real potential to explode next round\"",
+        "variant": "body"
+      }
+    },
+    "t4Link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/cybercelos/status/2054598913479590394"
+      }
+    },
+    "tweet5": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "t5Author",
+        "t5Stats",
+        "t5Quote",
+        "t5Link"
+      ]
+    },
+    "t5Author": {
+      "type": "Badge",
+      "props": {
+        "text": "x.com/TheGodfath13541"
+      }
+    },
+    "t5Stats": {
+      "type": "Text",
+      "props": {
+        "text": "$0.82 in $MIROSHARK (score: 9)",
+        "variant": "muted"
+      }
+    },
+    "t5Quote": {
+      "type": "Text",
+      "props": {
+        "text": "Cited $miroshark as a 10x success call",
+        "variant": "body"
+      }
+    },
+    "t5Link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/TheGodfath13541/status/2054664912748646833"
+      }
+    },
+    "sep2": {
+      "type": "Separator"
+    },
+    "total": {
+      "type": "Text",
+      "props": {
+        "text": "Total: $10.00 in $MIROSHARK allocated to 5 authors",
+        "variant": "lead"
+      }
+    }
+  }
+}
