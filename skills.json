@@ -2,7 +2,7 @@
   "version": "1.0",
   "generated": "2026-04-04T00:00:00Z",
   "repo": "aaronjmars/aeon",
-  "total": 62,
+  "total": 84,
   "categories": {
     "research": "Research & Content",
     "dev": "Dev & Code",
@@ -114,7 +114,7 @@
     {
       "slug": "deep-research",
       "name": "Deep Research",
-      "description": "Exhaustive multi-source synthesis on any topic \u2014 30-50 sources, 3000-5000 word analyst-grade report",
+      "description": "Exhaustive multi-source synthesis on any topic — 30-50 sources, 3000-5000 word analyst-grade report",
       "category": "research",
       "schedule": "on-demand",
       "var": "",
@@ -324,7 +324,7 @@
     {
       "slug": "defi-overview",
       "name": "DeFi Overview",
-      "description": "Daily overview of DeFi activity from DeFiLlama \u2014 TVL changes, top chains, top protocols",
+      "description": "Daily overview of DeFi activity from DeFiLlama — TVL changes, top chains, top protocols",
       "category": "crypto",
       "schedule": "0 12 * * *",
       "var": "",
@@ -334,7 +334,7 @@
     {
       "slug": "polymarket",
       "name": "Polymarket",
-      "description": "Trending and top markets on Polymarket \u2014 volume, new markets, biggest movers",
+      "description": "Trending and top markets on Polymarket — volume, new markets, biggest movers",
       "category": "crypto",
       "schedule": "0 12 * * *",
       "var": "",
@@ -404,7 +404,7 @@
     {
       "slug": "morning-brief",
       "name": "Morning Brief",
-      "description": "Aggregated daily briefing \u2014 digests, priorities, and what's ahead",
+      "description": "Aggregated daily briefing — digests, priorities, and what's ahead",
       "category": "productivity",
       "schedule": "0 7 * * *",
       "var": "",
@@ -424,7 +424,7 @@
     {
       "slug": "heartbeat",
       "name": "Heartbeat",
-      "description": "Proactive ambient check \u2014 surface anything worth attention",
+      "description": "Proactive ambient check — surface anything worth attention",
       "category": "productivity",
       "schedule": "0 12 * * *",
       "var": "",
@@ -504,7 +504,7 @@
     {
       "slug": "idea-capture",
       "name": "Idea Capture",
-      "description": "Quick note capture triggered via Telegram \u2014 stores to memory",
+      "description": "Quick note capture triggered via Telegram — stores to memory",
       "category": "productivity",
       "schedule": "0 14 * * *",
       "var": "",
@@ -534,7 +534,7 @@
     {
       "slug": "distribute-tokens",
       "name": "Distribute Tokens",
-      "description": "Send tokens to contributors via Bankr Agent API \u2014 supports Twitter handles and EVM addresses",
+      "description": "Send tokens to contributors via Bankr Agent API — supports Twitter handles and EVM addresses",
       "category": "crypto",
       "schedule": "on-demand",
       "var": "",
@@ -564,7 +564,7 @@
     {
       "slug": "auto-merge-agent-prs",
       "name": "auto-merge-agent-prs",
-      "description": "Close the loop on agent-authored PRs \u2014 auto-merge green, unblocked PRs in the aeon-agent repo so feature shipping doesn't stall waiting for a human click",
+      "description": "Close the loop on agent-authored PRs — auto-merge green, unblocked PRs in the aeon-agent repo so feature shipping doesn't stall waiting for a human click",
       "category": "dev",
       "schedule": "0 18 * * *",
       "var": "",
@@ -574,7 +574,7 @@
     {
       "slug": "fork-cohort",
       "name": "fork-cohort",
-      "description": "Weekly fork-activation cohort tracker \u2014 buckets every fork by recent run activity (COLD / STALE / ACTIVE / POWER) with week-over-week deltas",
+      "description": "Weekly fork-activation cohort tracker — buckets every fork by recent run activity (COLD / STALE / ACTIVE / POWER) with week-over-week deltas",
       "category": "productivity",
       "schedule": "0 19 * * 0",
       "var": "",
@@ -584,7 +584,7 @@
     {
       "slug": "operator-scorecard",
       "name": "operator-scorecard",
-      "description": "Weekly plain-language synthesis of agent health + community growth + economic activity \u2014 answers \"was this week worth it?\" in one notification",
+      "description": "Weekly plain-language synthesis of agent health + community growth + economic activity — answers \"was this week worth it?\" in one notification",
       "category": "productivity",
       "schedule": "30 10 * * 1",
       "var": "",
@@ -594,7 +594,7 @@
     {
       "slug": "skill-freshness",
       "name": "skill-freshness",
-      "description": "Audit every enabled skill's upstream file dependencies for staleness \u2014 flags chained skills about to consume yesterday's article or a long-dead topic file",
+      "description": "Audit every enabled skill's upstream file dependencies for staleness — flags chained skills about to consume yesterday's article or a long-dead topic file",
       "category": "productivity",
       "schedule": "0 8 * * *",
       "var": "",
@@ -614,7 +614,7 @@
     {
       "slug": "v4-readiness",
       "name": "v4-readiness",
-      "description": "Generate a per-fork v4 upgrade readiness checklist \u2014 reads the fork's aeon.yml, skills.json, and MEMORY.md, cross-references against the embedded v4 change manifest, emits Safe / Review / Custom / Action-items breakdown",
+      "description": "Generate a per-fork v4 upgrade readiness checklist — reads the fork's aeon.yml, skills.json, and MEMORY.md, cross-references against the embedded v4 change manifest, emits Safe / Review / Custom / Action-items breakdown",
       "category": "productivity",
       "schedule": "workflow_dispatch",
       "var": "",
@@ -624,12 +624,232 @@
     {
       "slug": "webhook-bridge",
       "name": "webhook-bridge",
-      "description": "External-event-to-skill bridge \u2014 fire any Aeon skill via repository_dispatch from outside GitHub Actions UI",
+      "description": "External-event-to-skill bridge — fire any Aeon skill via repository_dispatch from outside GitHub Actions UI",
       "category": "productivity",
       "schedule": "workflow_dispatch",
       "var": "",
       "files": 0,
       "install": "./add-skill aaronjmars/aeon webhook-bridge"
+    },
+    {
+      "slug": "ai-framework-watch",
+      "name": "AI Framework Watch",
+      "description": "Weekly competitive-intelligence digest on the AI agent framework space — momentum, releases, breaking changes across a curated watchlist",
+      "category": "dev",
+      "schedule": "30 8 * * 1",
+      "var": "",
+      "files": 0,
+      "install": "./add-skill aaronjmars/aeon ai-framework-watch"
+    },
+    {
+      "slug": "aixbt-pulse",
+      "name": "AIXBT Pulse",
+      "description": "Cross-domain market pulse from AIXBT's free grounding endpoint — crypto, macro, tradfi, geopolitics. Refreshes taxonomy references (clusters, chains) as a bonus.",
+      "category": "crypto",
+      "schedule": "0 9,21 * * *",
+      "var": "",
+      "files": 0,
+      "install": "./add-skill aaronjmars/aeon aixbt-pulse"
+    },
+    {
+      "slug": "contributor-reward",
+      "name": "contributor-reward",
+      "description": "Closes the contributor flywheel — turns the weekly fork-contributor-leaderboard ranking into a tier-priced rewards plan, writes it into memory/distributions.yml, and hands off to distribute-tokens for the actual on-chain send",
+      "category": "productivity",
+      "schedule": "30 9 * * 1",
+      "var": "",
+      "files": 0,
+      "install": "./add-skill aaronjmars/aeon contributor-reward"
+    },
+    {
+      "slug": "contributor-spotlight",
+      "name": "contributor-spotlight",
+      "description": "Weekly recognition post for one fork operator — converts fork-cohort cohort data into a named human moment (POWER fork callout with their work, stars, and skills enabled)",
+      "category": "productivity",
+      "schedule": "0 20 * * 0",
+      "var": "",
+      "files": 0,
+      "install": "./add-skill aaronjmars/aeon contributor-spotlight"
+    },
+    {
+      "slug": "create-campaign",
+      "name": "Create Campaign",
+      "description": "Provision Meta campaigns and ad sets on AdManage.ai from a declarative config. Runs on-demand — creates entities PAUSED, writes the returned IDs back into state so schedule-ads can launch into them.",
+      "category": "social",
+      "schedule": "workflow_dispatch",
+      "var": "",
+      "files": 1,
+      "install": "./add-skill aaronjmars/aeon create-campaign"
+    },
+    {
+      "slug": "fleet-state",
+      "name": "fleet-state",
+      "description": "Weekly fleet-state digest — synthesises fork-cohort, contributor-spotlight, and fork-release-tracker into one \"state of the fleet\" narrative",
+      "category": "productivity",
+      "schedule": "0 8 * * 1",
+      "var": "",
+      "files": 0,
+      "install": "./add-skill aaronjmars/aeon fleet-state"
+    },
+    {
+      "slug": "fork-contributor-leaderboard",
+      "name": "fork-contributor-leaderboard",
+      "description": "Weekly ranking of developers contributing to the fork fleet and back upstream",
+      "category": "productivity",
+      "schedule": "30 17 * * 0",
+      "var": "",
+      "files": 0,
+      "install": "./add-skill aaronjmars/aeon fork-contributor-leaderboard"
+    },
+    {
+      "slug": "fork-release-tracker",
+      "name": "fork-release-tracker",
+      "description": "Weekly scan — celebrate when any fork of the parent repo cuts a tagged GitHub release. Silent when no fork releases in the window.",
+      "category": "productivity",
+      "schedule": "30 19 * * 0",
+      "var": "",
+      "files": 0,
+      "install": "./add-skill aaronjmars/aeon fork-release-tracker"
+    },
+    {
+      "slug": "fork-skill-digest",
+      "name": "fork-skill-digest",
+      "description": "Weekly cross-fork customization digest — surfaces where the fleet's enable/disable/var/model decisions diverge from upstream defaults",
+      "category": "productivity",
+      "schedule": "30 18 * * 0",
+      "var": "",
+      "files": 0,
+      "install": "./add-skill aaronjmars/aeon fork-skill-digest"
+    },
+    {
+      "slug": "huggingface-trending",
+      "name": "Hugging Face Trending",
+      "description": "Curated trending Hugging Face models, datasets, and spaces — filtered, clustered, and labeled with a \"why notable\" line per pick",
+      "category": "research",
+      "schedule": "30 9 * * *",
+      "var": "",
+      "files": 0,
+      "install": "./add-skill aaronjmars/aeon huggingface-trending"
+    },
+    {
+      "slug": "monitor-kalshi",
+      "name": "Monitor Kalshi",
+      "description": "Monitor specific Kalshi prediction markets for 24h price moves, volume changes, and top events",
+      "category": "crypto",
+      "schedule": "0 13 * * *",
+      "var": "",
+      "files": 1,
+      "install": "./add-skill aaronjmars/aeon monitor-kalshi"
+    },
+    {
+      "slug": "onboard",
+      "name": "onboard",
+      "description": "One-shot setup validator — runs every check from the ./onboard CLI inside the workflow and sends the resulting checklist to the configured notification channel",
+      "category": "productivity",
+      "schedule": "workflow_dispatch",
+      "var": "",
+      "files": 0,
+      "install": "./add-skill aaronjmars/aeon onboard"
+    },
+    {
+      "slug": "pr-triage",
+      "name": "PR Triage",
+      "description": "First-touch triage for external pull requests — verdict + label + welcoming comment within minutes of open",
+      "category": "dev",
+      "schedule": "30 9 * * *",
+      "var": "",
+      "files": 0,
+      "install": "./add-skill aaronjmars/aeon pr-triage"
+    },
+    {
+      "slug": "price-threshold-alert",
+      "name": "price-threshold-alert",
+      "description": "Fire when the tracked token does something — new ATH, sharp 1h move, or operator-set target crossed. Silent on normal days.",
+      "category": "crypto",
+      "schedule": "*/30 * * * *",
+      "var": "",
+      "files": 0,
+      "install": "./add-skill aaronjmars/aeon price-threshold-alert"
+    },
+    {
+      "slug": "schedule-ads",
+      "name": "Schedule Ads",
+      "description": "Schedule paid ads across Meta/TikTok/Snapchat/Pinterest/LinkedIn via the AdManage.ai API, driven by a declarative config file. Launches PAUSED by default — never auto-activates live spend.",
+      "category": "social",
+      "schedule": "0 8 * * *",
+      "var": "",
+      "files": 1,
+      "install": "./add-skill aaronjmars/aeon schedule-ads"
+    },
+    {
+      "slug": "show-hn-draft",
+      "name": "show-hn-draft",
+      "description": "Draft a Show HN post (plus shorter Reddit r/MachineLearning + r/selfhosted variants) from the live repo state — README, SHOWCASE, recent repo-articles + project-lens, real autonomous behavior examples from logs, and current stars/forks/skill counts. Operator pastes; agent writes.",
+      "category": "productivity",
+      "schedule": "workflow_dispatch",
+      "var": "",
+      "files": 0,
+      "install": "./add-skill aaronjmars/aeon show-hn-draft"
+    },
+    {
+      "slug": "skill-analytics",
+      "name": "skill-analytics",
+      "description": "Weekly fleet-level skill-run analytics — ranks skills by 7d run count, surfaces success rates, exit-taxonomy distribution, and anomaly flags (significance-gated)",
+      "category": "productivity",
+      "schedule": "30 18 * * 3",
+      "var": "",
+      "files": 0,
+      "install": "./add-skill aaronjmars/aeon skill-analytics"
+    },
+    {
+      "slug": "skill-graph",
+      "name": "Skill Dependency Graph",
+      "description": "Generate a navigable Mermaid dependency map of all skills with change detection, per-category drill-downs, and enabled overlay",
+      "category": "productivity",
+      "schedule": "0 17 * * 0",
+      "var": "",
+      "files": 0,
+      "install": "./add-skill aaronjmars/aeon skill-graph"
+    },
+    {
+      "slug": "smithery-manifest",
+      "name": "smithery-manifest",
+      "description": "Auto-generate Smithery + MCP Registry submission docs from skills.json and the aeon-mcp server — turns the 6-week-stuck \"submit Aeon to Smithery\" idea into a copy-paste form",
+      "category": "productivity",
+      "schedule": "0 6 1/7 * *",
+      "var": "",
+      "files": 0,
+      "install": "./add-skill aaronjmars/aeon smithery-manifest"
+    },
+    {
+      "slug": "star-milestone",
+      "name": "star-milestone",
+      "description": "Announces when a watched repo crosses a star-count milestone (100, 150, 200, 250, 500, 1000, ...) with a velocity-shaped narrative — time-to-milestone, growth shape, projection, and a tight highlight reel",
+      "category": "dev",
+      "schedule": "15 15 * * *",
+      "var": "",
+      "files": 0,
+      "install": "./add-skill aaronjmars/aeon star-milestone"
+    },
+    {
+      "slug": "star-momentum-alert",
+      "name": "star-momentum-alert",
+      "description": "Project the date a watched repo crosses its next star milestone — alert only when projected date lands inside the Show HN dispatch window (7-14 days out, Tue/Wed/Thu)",
+      "category": "dev",
+      "schedule": "10 10 * * *",
+      "var": "",
+      "files": 0,
+      "install": "./add-skill aaronjmars/aeon star-momentum-alert"
+    },
+    {
+      "slug": "syndicate-article",
+      "name": "syndicate-article",
+      "description": "Cross-post articles to Dev.to and Farcaster with hook-driven copy and click-optimized metadata",
+      "category": "social",
+      "schedule": "30 15 * * *",
+      "var": "",
+      "files": 0,
+      "install": "./add-skill aaronjmars/aeon syndicate-article"
     }
   ],
   "install_all": "./add-skill aaronjmars/aeon --all",
