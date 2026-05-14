@@ -35,7 +35,30 @@ Today is ${today}. Your task is to build a new feature for the **watched repo** 
 
 5. **Read the codebase** — understand the project structure, README, package.json/config files, and the area you'll be modifying.
 
-6. **Implement the feature.** Write clean, complete code. No TODOs or placeholders.
+6. **Verify the idea doesn't already exist.** Before writing any code, grep the cloned repo to confirm the chosen idea isn't already shipped under a different name / path / surface. Past misses (May-12 repo-actions batch): "Interactive Embed Widget" already existed as SPA route `/embed/:simulationId`; "Per-Round Belief Snapshot" already existed as `/frame/<round_num>`. Three of five ideas that day were redundant — the build cycle catches it, but the exploration cost is real. A 60-second grep upstream is cheaper.
+
+   Cast a wide net across at least these surfaces (skip ones that don't apply to the cloned repo):
+   ```bash
+   cd /tmp/build-target
+
+   # Backend API routes (Flask / FastAPI / Express / Django / Rails patterns)
+   grep -rEn "@(app|blueprint|router|bp)\.(route|get|post|put|delete|patch)|app\.(get|post|put|delete|patch)\(|router\.(get|post|put|delete|patch)\(" \
+     backend/ src/ app/ 2>/dev/null | head -80
+
+   # SPA routes (Vue Router / React Router patterns)
+   grep -rEn "path:\s*['\"]|<Route\s+path=|createBrowserRouter|RouterModule" \
+     frontend/ src/router/ src/routes/ 2>/dev/null | head -50
+
+   # Documented surfaces (features index, API index, README)
+   grep -in -E "$KEYWORD1|$KEYWORD2|$KEYWORD3" \
+     docs/FEATURES.md docs/API.md README.md openapi.yaml 2>/dev/null
+   ```
+
+   Pick 2–4 keywords from the idea's name and intended functionality (e.g. "embed widget" → `embed`, `iframe`, `widget`; "per-round snapshot" → `round`, `snapshot`, `frame`). If a route, SPA path, OpenAPI entry, or documented feature already covers the same intent, **skip this idea and return to step 2 to pick the next candidate.** If ALL candidates from step 2 already exist, log `FEATURE_SKIP: all candidates already implemented` and stop — do not send a notification.
+
+   Brief evidence of the grep (what you searched, what you found) goes in the log entry from step 10.
+
+7. **Implement the feature.** Write clean, complete code. No TODOs or placeholders.
 
    **Scratch / verifier scripts — repo root is OFF-LIMITS.**
    Any throwaway script you use to sanity-check the build (HMAC verifiers, smoke tests, `sys.path.insert(0, '/tmp/build-target/...')` probes, etc.) MUST live under `/tmp/` — never in the agent repo working directory. The workflow runs `git add -A` after this skill, so any `.py` you leave at the agent repo root gets auto-committed to `main` as tech debt. Past leaks: `sig_smoke.py`, `_smoke_webhook.py`, `.aeon-tmp-verify-trending.py` — flagged in 2026-05-11 push-recap.
@@ -44,7 +67,7 @@ Today is ${today}. Your task is to build a new feature for the **watched repo** 
    - Before finishing this step, run `ls *.py .*-tmp-* _smoke_*.py sig_smoke.py 2>/dev/null` in the agent repo root and delete anything that appears. If nothing prints, you're clean.
    - All file-edit tools should target paths under `/tmp/build-target/` (the watched-repo clone) — never paths relative to the agent repo cwd.
 
-7. **Create a branch and push** to the watched repo:
+8. **Create a branch and push** to the watched repo:
    ```bash
    cd /tmp/build-target
    git checkout -b feat/short-feature-name
@@ -53,7 +76,7 @@ Today is ${today}. Your task is to build a new feature for the **watched repo** 
    git push -u origin feat/short-feature-name
    ```
 
-8. **Open a PR** on the watched repo:
+9. **Open a PR** on the watched repo:
    ```bash
    gh pr create -R owner/repo \
      --title "feat: short description" \
@@ -71,9 +94,9 @@ Today is ${today}. Your task is to build a new feature for the **watched repo** 
    *Built autonomously by Aeon*"
    ```
 
-9. **Update memory** — log what was built to `memory/logs/${today}.md` and update `memory/MEMORY.md` Skills Built table.
+10. **Update memory** — log what was built to `memory/logs/${today}.md` and update `memory/MEMORY.md` Skills Built table.
 
-10. **Send a DETAILED notification** via `./notify`. This is the most important part — the notification goes to a Telegram group and must be rich enough that readers understand exactly what was built, why it matters, and how it works WITHOUT clicking the PR link.
+11. **Send a DETAILED notification** via `./notify`. This is the most important part — the notification goes to a Telegram group and must be rich enough that readers understand exactly what was built, why it matters, and how it works WITHOUT clicking the PR link.
 
    DO NOT compress this into 1-2 lines. Every section below is REQUIRED:
 
