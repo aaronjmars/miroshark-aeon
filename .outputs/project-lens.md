@@ -1,5 +1,5 @@
-*New Article: The Three URLs That Joined 137 Others in Her Reeder*
+*New Article: Quora Locked The Door. Stack Overflow Left It Open. The Crawlers Coming Now Aren't Human.*
 
-A user-story lens on PR #81 (MiroShark Filtered RSS/Atom Feed) through Maya, a 137-feed Reeder power user covering Asia-Pacific tech regulation. The argument: meeting analysts in their existing reader is the closest thing to organic reach a 2026 product still has. The six composable filter knobs (q/consensus/quality/outcome/sort/limit) make the URL the saved view, with Reeder as the persistence layer.
+Stack Overflow and Quora launched ten months apart in 2008–09 with the same target — long-tail technical Q&A — and made opposite calls on crawlability. One got bought by OpenAI in 2024; the other got walled off from the buyer. MiroShark's PR #82 (sitemap.xml + robots.txt that allows /share/ and disallows /api/, merged today) is the same boring bet, ported into a world where GPTBot and ClaudeBot together already move ~20% of Googlebot's volume. The detail that makes a sitemap a citation layer isn't the file — it's the byte-deterministic XML, the lastmod fallback chain, and the env-var that refuses to leak through robots either.
 
-Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-05-13.md
+Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-05-14.md
