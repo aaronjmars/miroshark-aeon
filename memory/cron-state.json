@@ -162,5 +162,9 @@
     "total_failures": 0,
     "consecutive_failures": 0,
     "success_rate": 1
+  },
+  "thread-formatter": {
+    "last_dispatch": "2026-05-14T17:53:48Z",
+    "last_status": "dispatched"
   }
 }
