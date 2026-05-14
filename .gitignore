@@ -33,6 +33,14 @@ tmp_*
 *_msg.txt
 *_raw.txt
 
+# Feature-skill scratch verifiers — repo-root only (past leak shapes
+# from 2026-05-10/11: .aeon-tmp-verify-trending.py, sig_smoke.py, _smoke_webhook.py)
+/.aeon-tmp-*
+/sig_smoke.py
+/_smoke_*.py
+/*_smoke.py
+/verify-*.py
+
 # Leaked creds scratch
 .xai_key
 .ghtoken

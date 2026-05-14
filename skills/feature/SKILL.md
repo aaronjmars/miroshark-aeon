@@ -37,6 +37,13 @@ Today is ${today}. Your task is to build a new feature for the **watched repo** 
 
 6. **Implement the feature.** Write clean, complete code. No TODOs or placeholders.
 
+   **Scratch / verifier scripts — repo root is OFF-LIMITS.**
+   Any throwaway script you use to sanity-check the build (HMAC verifiers, smoke tests, `sys.path.insert(0, '/tmp/build-target/...')` probes, etc.) MUST live under `/tmp/` — never in the agent repo working directory. The workflow runs `git add -A` after this skill, so any `.py` you leave at the agent repo root gets auto-committed to `main` as tech debt. Past leaks: `sig_smoke.py`, `_smoke_webhook.py`, `.aeon-tmp-verify-trending.py` — flagged in 2026-05-11 push-recap.
+   - **DO**: write verifier scripts to `/tmp/verify-${feature}.py` and run them from there.
+   - **DON'T**: write `*.py` files in the agent repo cwd, even with leading dot or underscore.
+   - Before finishing this step, run `ls *.py .*-tmp-* _smoke_*.py sig_smoke.py 2>/dev/null` in the agent repo root and delete anything that appears. If nothing prints, you're clean.
+   - All file-edit tools should target paths under `/tmp/build-target/` (the watched-repo clone) — never paths relative to the agent repo cwd.
+
 7. **Create a branch and push** to the watched repo:
    ```bash
    cd /tmp/build-target
