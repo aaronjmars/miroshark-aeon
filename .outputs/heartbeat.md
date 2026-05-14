@@ -1,10 +1,15 @@
+HEARTBEAT_OK.
+
 ## Summary
 
-**HEARTBEAT_OK** — Wednesday May 13, 2026 at 19:13 UTC.
+**Date:** Thursday May 14, 2026 — 19:21 UTC
 
-- All 9 scheduled daily/weekly skills confirmed completed via GH Actions: token-report, fetch-tweets, tweet-allocator, repo-pulse, feature, push-recap, project-lens, repo-article, memory-flush
-- Every-2-day skills (repo-actions, self-improve) correctly absent — odd day, even parity
-- No missing skills, no stuck runs
-- aeon PR #34 stalled >24h but already flagged by today's push-recap with known fix path — dedup rule applied, no duplicate notification sent
-- MiroShark PR #81 only 8h old, well within threshold
-- Log entry appended to `memory/logs/2026-05-13.md`
+All checks passed:
+
+- **Skills:** All 12 scheduled skills confirmed ran today. Every-2-day skills (self-improve, repo-actions) ran on even day-of-month ✓. No weekly skills due on Thursday.
+- **Newly enabled:** `skill-freshness` and `star-momentum-alert` enabled today via PRs merged at 14:32–14:51 UTC — both missed today's windows (08:00/10:10 UTC) because they weren't enabled yet. First runs tomorrow.
+- **Open PRs:** None — MiroShark #81+#82 and aeon #34–#39 all merged today.
+- **Issues:** No urgent-labeled issues on either repo.
+- **Memory flag:** X followers hyperstition deadline tomorrow (2026-05-15). Informational only.
+- **Auto-triggered:** nothing.
+- **Log:** Appended to `memory/logs/2026-05-14.md`.
