@@ -1,0 +1,374 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "Push Recap — 2026-05-14"
+      },
+      "children": [
+        "stack-main"
+      ]
+    },
+    "stack-main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "text-repos",
+        "sep-1",
+        "section-external",
+        "sep-2",
+        "section-catalog",
+        "sep-3",
+        "section-rollout",
+        "sep-4",
+        "section-improve",
+        "sep-5",
+        "section-changes",
+        "sep-6",
+        "stats-stack",
+        "sep-7",
+        "link-full"
+      ]
+    },
+    "text-repos": {
+      "type": "Text",
+      "props": {
+        "text": "MiroShark — 2 commits by aaronjmars (Aeon co-author) | aeon — 30 commits, 6 substantive PRs",
+        "variant": "lead"
+      }
+    },
+    "sep-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "section-external": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "heading-external",
+        "pr-81",
+        "pr-82",
+        "text-external-desc",
+        "stack-external-stats"
+      ]
+    },
+    "heading-external": {
+      "type": "Heading",
+      "props": {
+        "text": "External Discovery Layer Closed Out",
+        "level": "h2"
+      }
+    },
+    "pr-81": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #81 — filtered RSS/Atom feed",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/pull/81",
+        "score": "+1280/-37"
+      }
+    },
+    "pr-82": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #82 — sitemap.xml + robots.txt",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/pull/82",
+        "score": "+1273/-2"
+      }
+    },
+    "text-external-desc": {
+      "type": "Text",
+      "props": {
+        "text": "Filtered feed grafts the gallery's `select_filtered_cards` onto the syndication channel — six new query knobs (`?consensus=`, `?quality=`, `?outcome=`, `?q=`, `?sort=`, `?limit=`) make \"subscribe to my bullish-consensus stream\" a one-URL operation in Feedly / n8n / Zapier. Sitemap is sitemaps.org 0.9 XML over public sims (priority 0.8 per `/share/<id>`, 0.7 per `/watch/<id>`), byte-deterministic via id-ascending sort, behind `ENABLE_SITEMAP=true`. Together they close the May-12 repo-actions batch entirely (5/5 resolved — 3 redundant, 1 deferred, 2 = these PRs). Zero-new-deps streak: 20 consecutive PRs (#57 → #82).",
+        "variant": "body"
+      }
+    },
+    "stack-external-stats": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "badge-streak",
+        "badge-batch"
+      ]
+    },
+    "badge-streak": {
+      "type": "Badge",
+      "props": {
+        "text": "Zero-new-deps: 20 PRs",
+        "variant": "default"
+      }
+    },
+    "badge-batch": {
+      "type": "Badge",
+      "props": {
+        "text": "May-12 batch: 5/5 resolved",
+        "variant": "default"
+      }
+    },
+    "sep-2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "section-catalog": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "heading-catalog",
+        "pr-36",
+        "pr-37",
+        "text-catalog-desc"
+      ]
+    },
+    "heading-catalog": {
+      "type": "Heading",
+      "props": {
+        "text": "Skill Catalog Refresh",
+        "level": "h2"
+      }
+    },
+    "pr-36": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #36 — Sync 7 skills from aeon-agent",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/pull/36",
+        "score": "+1964/-2"
+      }
+    },
+    "pr-37": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #37 — Sync 22 skills from aeon upstream",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/pull/37",
+        "score": "+5696/-14"
+      }
+    },
+    "text-catalog-desc": {
+      "type": "Text",
+      "props": {
+        "text": "13 minutes apart, catalog roughly doubles (skills.json 55 → 84 entries). All `enabled:false` so the operator picks rollout cadence. First-class fleet vocabulary lands: `fleet-state`, `fork-skill-digest`, `fork-release-tracker`, `fork-contributor-leaderboard` — miroshark-aeon now structurally aware it's one of multiple operator forks.",
+        "variant": "body"
+      }
+    },
+    "sep-3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "section-rollout": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "heading-rollout",
+        "pr-38",
+        "pr-39",
+        "text-rollout-desc"
+      ]
+    },
+    "heading-rollout": {
+      "type": "Heading",
+      "props": {
+        "text": "Selective Rollout + Self-Correction",
+        "level": "h2"
+      }
+    },
+    "pr-38": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #38 — Enable 6 launch-comms / weekly-visibility skills",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/pull/38"
+      }
+    },
+    "pr-39": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #39 — Disable contributor-spotlight (pre-flight check)",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/pull/39"
+      }
+    },
+    "text-rollout-desc": {
+      "type": "Text",
+      "props": {
+        "text": "PR #38 enables 6 launch-comms / weekly-visibility skills (`star-milestone`, `star-momentum-alert`, `thread-formatter`, `contributor-spotlight`, `operator-scorecard`, `ai-framework-watch`) — all silent on quiet days. PR #39 disables `contributor-spotlight` 2 minutes later because its dependency `fork-cohort` is still `enabled:false`; pre-flight check working as intended, caught before first Sunday firing.",
+        "variant": "body"
+      }
+    },
+    "sep-4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "section-improve": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "heading-improve",
+        "pr-34",
+        "text-34-desc",
+        "pr-35",
+        "text-35-desc"
+      ]
+    },
+    "heading-improve": {
+      "type": "Heading",
+      "props": {
+        "text": "Self-Improve Pair",
+        "level": "h2"
+      }
+    },
+    "pr-34": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #34 — Hardening & scratch cleanup",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/pull/34",
+        "score": "+280/-96"
+      }
+    },
+    "text-34-desc": {
+      "type": "Text",
+      "props": {
+        "text": "Adds \"repo root OFF-LIMITS\" guidance to feature skill + .gitignore hardening + removes 3 past scratch leaks (`sig_smoke.py`, `_smoke_webhook.py`, `.aeon-tmp-verify-trending.py`).",
+        "variant": "body"
+      }
+    },
+    "pr-35": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #35 — Step 6: pre-flight surface checks",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/pull/35",
+        "score": "+28/-5"
+      }
+    },
+    "text-35-desc": {
+      "type": "Text",
+      "props": {
+        "text": "Inserts a new step 6 — grep backend routes / SPA router / OpenAPI / docs before building — bails to next candidate if surface already exists. Both lessons surfaced in earlier push-recaps, fixed same week.",
+        "variant": "body"
+      }
+    },
+    "sep-5": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "section-changes": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "heading-changes",
+        "text-sitemap",
+        "text-feed",
+        "text-skills"
+      ]
+    },
+    "heading-changes": {
+      "type": "Heading",
+      "props": {
+        "text": "Key Changes",
+        "level": "h3"
+      }
+    },
+    "text-sitemap": {
+      "type": "Text",
+      "props": {
+        "text": "`backend/app/services/sitemap.py` (+362, new) — Pure-stdlib XML renderer, byte-deterministic via id-ascending sort, `<lastmod>` fallback chain `updated_at → created_at → state.json mtime`, `<changefreq>` `always`/`weekly`/`daily` per status, cap 50,000 URLs",
+        "variant": "body"
+      }
+    },
+    "text-feed": {
+      "type": "Text",
+      "props": {
+        "text": "`backend/app/services/feed.py` (+209/-15) — `select_public_cards` and `render_feed` gain six new kwargs + `surface_stats_reader` callback; reuses `gallery_filters.select_filtered_cards` so gallery and feed answer the same question identically",
+        "variant": "body"
+      }
+    },
+    "text-skills": {
+      "type": "Text",
+      "props": {
+        "text": "29 new SKILL.md files across aeon (avg ~240 LoC each) — including 4 first-class \"fleet\" skills, 6 daily launch-comms skills (3 now live in cron), 3 crypto skills (kalshi, aixbt, price-threshold), 2 social spend skills paused-by-default for safety",
+        "variant": "body"
+      }
+    },
+    "sep-6": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stats-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "lg"
+      },
+      "children": [
+        "stat-files",
+        "stat-added",
+        "stat-removed"
+      ]
+    },
+    "stat-files": {
+      "type": "Stat",
+      "props": {
+        "label": "Files changed",
+        "value": "70"
+      }
+    },
+    "stat-added": {
+      "type": "Stat",
+      "props": {
+        "label": "Lines added",
+        "value": "+10,528"
+      }
+    },
+    "stat-removed": {
+      "type": "Stat",
+      "props": {
+        "label": "Lines removed",
+        "value": "-163"
+      }
+    },
+    "sep-7": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "link-full": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full recap",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-05-14.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}

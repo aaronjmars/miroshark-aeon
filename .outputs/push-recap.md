@@ -1,16 +1,18 @@
-*Push Recap — 2026-05-13*
-MiroShark + miroshark-aeon — 1 substantive PR opened, 27 aeon auto-commits, 0 main merges in window
+*Push Recap — 2026-05-14*
+MiroShark — 2 commits by aaronjmars (Aeon co-author) | aeon — 30 commits, 6 substantive PRs
 
-Composition over invention: PR #81 (filtered RSS/Atom feed, opened by Aaron/Aeon, mergeable, not yet merged) grafts the gallery's six existing filter knobs (?q, ?consensus, ?quality, ?outcome, ?sort, ?limit) onto /api/feed.{atom,rss}. Reuses gallery_filters.select_filtered_cards (PR #69, 33 tests) so gallery + feed answer the same question identically. EN/zh-CN active-filter chips in channel title.
+*External Discovery Layer Closed Out*: PR #81 (filtered RSS/Atom feed, +1280/-37) and PR #82 (sitemap.xml + robots.txt, +1273/-2) merged 11 minutes apart. Filtered feed grafts the gallery's `select_filtered_cards` onto the syndication channel — six new query knobs (`?consensus=`, `?quality=`, `?outcome=`, `?q=`, `?sort=`, `?limit=`) make "subscribe to my bullish-consensus stream" a one-URL operation in Feedly / n8n / Zapier. Sitemap is sitemaps.org 0.9 XML over public sims (priority 0.8 per `/share/<id>`, 0.7 per `/watch/<id>`), byte-deterministic via id-ascending sort, behind `ENABLE_SITEMAP=true`. Together they close the May-12 repo-actions batch entirely (5/5 resolved — 3 redundant, 1 deferred, 2 = these PRs). Zero-new-deps streak: 20 consecutive PRs (#57 → #82).
 
-Steady-state cron through day 2 of retrace: token-report -21.6% 24h to $0.00000978, FDV $978K back under $1M; but 1.68× buy/sell, 7-10× pre-ATH volume, +9 stars / +2 forks (1143/226), @pmarca following sister $AEON. Structure intact.
+*Skill Catalog Refresh*: PR #36 (+1964/-2) syncs 7 skills from aeon-agent, PR #37 (+5696/-14) syncs 22 skills from aeon upstream — 13 minutes apart, catalog roughly doubles (skills.json 55 → 84 entries). All `enabled:false` so the operator picks rollout cadence. First-class fleet vocabulary lands: `fleet-state`, `fork-skill-digest`, `fork-release-tracker`, `fork-contributor-leaderboard` — miroshark-aeon now structurally aware it's one of multiple operator forks.
 
-Aeon self-discipline: feature skill 2nd straight day with zero scratch-verifier leak (PR #34's prompt-level fix working even pre-merge).
+*Selective Rollout + Self-Correction*: PR #38 enables 6 launch-comms / weekly-visibility skills (`star-milestone`, `star-momentum-alert`, `thread-formatter`, `contributor-spotlight`, `operator-scorecard`, `ai-framework-watch`) — all silent on quiet days. PR #39 disables `contributor-spotlight` 2 minutes later because its dependency `fork-cohort` is still `enabled:false`; pre-flight check working as intended, caught before first Sunday firing.
+
+*Self-Improve Pair*: PR #34 (+280/-96) adds "repo root OFF-LIMITS" guidance to feature skill + .gitignore hardening + removes 3 past scratch leaks (`sig_smoke.py`, `_smoke_webhook.py`, `.aeon-tmp-verify-trending.py`). PR #35 (+28/-5) inserts a new step 6 — grep backend routes / SPA router / OpenAPI / docs before building — bails to next candidate if surface already exists. Both lessons surfaced in earlier push-recaps, fixed same week.
 
 Key changes:
-- backend/app/services/feed.py +209/-15 (select_public_cards gains 6 kwargs + surface_stats_reader callback, render_feed gains _filter_chip helper, MAX_FEED_LIMIT=50)
-- backend/tests/test_unit_feed_filters.py +622 new (16 offline tests: ±0.2 stance parity, quality first-word match, logical AND, trending callback, graceful unknown-sort fallback, rel="self" query preservation, drift guard)
-- frontend EmbedDialog +221: "Build a filtered feed" block — 3 dropdowns + live URL preview + copy button
+- `backend/app/services/sitemap.py` (+362, new) — pure-stdlib XML renderer, byte-deterministic via id-ascending sort, `<lastmod>` fallback chain `updated_at → created_at → state.json mtime`, `<changefreq>` `always`/`weekly`/`daily` per status, cap 50,000 URLs
+- `backend/app/services/feed.py` (+209/-15) — `select_public_cards` and `render_feed` gain six new kwargs + `surface_stats_reader` callback; reuses `gallery_filters.select_filtered_cards` so gallery and feed answer the same question identically
+- 29 new SKILL.md files across aeon (avg ~240 LoC each) — including 4 first-class "fleet" skills, 6 daily launch-comms skills (3 now live in cron), 3 crypto skills (kalshi, aixbt, price-threshold), 2 social spend skills paused-by-default for safety
 
-Stats: 7 files / +1280/-37 (PR #81). Zero new deps — 19-PR streak (#57 → #81).
-Full recap: articles/push-recap-2026-05-13.md
+Stats: 70 files changed, +10,528 / -163 lines across 8 substantive PRs
+Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-05-14.md
