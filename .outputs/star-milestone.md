@@ -1,16 +1,13 @@
 ## Summary
 
-Ran the `star-milestone` skill on watched repos.
+Ran `star-milestone` skill for 2026-05-15.
 
-**Outcome: bootstrap — no notification sent.**
+**Per-repo verdicts:**
+- `aaronjmars/MiroShark` — 1158 stars. Highest threshold ≤ count is **1000**, already in `memory/topics/milestones.md` as `(bootstrap)` from 2026-05-14. Step 5a applies → **no action / no notification**. Next threshold is 1500 (342 to go).
+- `aaronjmars/miroshark-aeon` — **skipped** (name ends with `-aeon`, agent repo per step 1).
 
-- **Watched repos checked**: `aaronjmars/MiroShark` (1147 stars). `aaronjmars/miroshark-aeon` skipped per step 1 (`-aeon` suffix filter).
-- **Highest threshold crossed**: 1000 stars (M = 1000).
-- **Gate hit**: 5b Bootstrap — no prior entries in `memory/topics/milestones.md`. The skill correctly suppresses the notification: announcing 1000 today would be a retroactive vanity ping (MiroShark actually crossed 1000 on 2026-05-03 per MEMORY.md). Silent record establishes baseline for future runs.
-- **Velocity captured for the log** (informational, not used): v7=39, v30≈480, baseline ≈ 16/day, days_since_last_star = 0. Trajectory looks strongly above-trend — relevant when the next threshold (1500) is crossed.
+**Velocity (for the log):** v7=46, v30=473, baseline ≈15.8/day, days_since_last_star=0. Note v7 (6.6/day) is well below baseline — last 7d are decelerating after the early-May ATH-week burst, though still organic.
 
-**Files modified:**
-- `memory/topics/milestones.md` — created with `- 1000 stars — 2026-05-14 (bootstrap)` under `aaronjmars/MiroShark`.
-- `memory/logs/2026-05-14.md` — appended `## Star Milestone` block with status `STAR_MILESTONE_OK`.
+**Files modified:** `memory/logs/2026-05-15.md` (appended `## Star Milestone` block, status `STAR_MILESTONE_QUIET`).
 
-**Follow-up:** Next threshold to watch is **1500 stars** (gap 353, ETA ≈ 2026-07-16 at current pace). The next skill run that finds STARS ≥ 1500 will send a real velocity-shaped notification.
+**Follow-ups:** None. At ~6.6/day pace, 1500 lands ~2026-07-06; the next milestone notification is gated on that crossing or a velocity reversal.
