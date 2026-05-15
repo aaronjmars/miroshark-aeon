@@ -1,0 +1,59 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "The First Feature MiroShark Knew Who It Was For"
+      },
+      "children": [
+        "heading_1",
+        "text_1",
+        "text_2",
+        "separator_1",
+        "story_link"
+      ]
+    },
+    "heading_1": {
+      "type": "Heading",
+      "props": {
+        "text": "The First Feature MiroShark Knew Who It Was For",
+        "level": "h2"
+      },
+      "children": []
+    },
+    "text_1": {
+      "type": "Text",
+      "props": {
+        "text": "For 56 days and 26 feature PRs, MiroShark shipped surfaces aimed at \"whoever shows up.\" PR #83 (Discord + Slack rich notifications, opened today) is the first feature whose PR body cites a named external integrator's stack — @revaultdrops Discord — by name.",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "text_2": {
+      "type": "Text",
+      "props": {
+        "text": "Architecturally, it's the third instance of the channel-notifier idiom; the fourth channel becomes a copy.",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "separator_1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "story_link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "repo-article-2026-05-15.md",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-05-15.md",
+        "source": "GitHub"
+      },
+      "children": []
+    }
+  }
+}

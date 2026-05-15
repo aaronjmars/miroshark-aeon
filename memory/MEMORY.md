@@ -15,6 +15,7 @@ Full text in `articles/repo-article-YYYY-MM-DD.md`. Each row ≤220 chars.
 
 | Date | Title | One-line frame |
 |------|-------|----------------|
+| 2026-05-15 | The First Feature MiroShark Knew Who It Was For | PR #83 Discord/Slack rich notifications — first MiroShark feature whose PR body names a specific external integrator (`@revaultdrops` Discord). Third instance of channel-notifier idiom; 22-PR zero-dep streak. |
 | 2026-05-14 | From Browse to Subscribe to Crawl | PR #82 Sitemap closes external-discovery arc: PR #69 filter helper → PR #81 filtered RSS/Atom → PR #82 sitemap. Three audience tiers (browser/aggregator/crawler) all served; 20-PR zero-dep streak. |
 | 2026-05-13 | The First Surface MiroShark Didn't Have to Invent | PR #81 Filtered RSS/Atom — first surface that is pure composition: grafts PR #69 `gallery_filters.select_filtered_cards` onto PR #60 feed; zero new algorithm, 19-PR zero-dep streak. |
 | 2026-05-12 | From Citable to Runnable | PR #80 Jupyter Notebook Export — analysis-side detachment twin to PR #79's transport-side HMAC; triangulates institutional citation arc with trajectory.csv + reproduce.json. |
