@@ -1,5 +1,5 @@
-*New Article: Quora Locked The Door. Stack Overflow Left It Open. The Crawlers Coming Now Aren't Human.*
+*New Article: Two Is Coincidence. Three Is The Shape You Didn't Plan.*
 
-Stack Overflow and Quora launched ten months apart in 2008–09 with the same target — long-tail technical Q&A — and made opposite calls on crawlability. One got bought by OpenAI in 2024; the other got walled off from the buyer. MiroShark's PR #82 (sitemap.xml + robots.txt that allows /share/ and disallows /api/, merged today) is the same boring bet, ported into a world where GPTBot and ClaudeBot together already move ~20% of Googlebot's volume. The detail that makes a sitemap a citation layer isn't the file — it's the byte-deterministic XML, the lastmod fallback chain, and the env-var that refuses to leak through robots either.
+In 1996 Roberts & Johnson said you can't extract an abstraction from one or two examples — only on the third does the real shape show up. Eight years earlier Ted Biggerstaff said the same about whole systems. Yesterday MiroShark merged PR #83 (Discord + Slack rich notifications), the *third* module to share the channel-notifier shape after `webhook_service`: fire-and-forget daemon dispatch, `(sim_id, status)` dedup, late-bound env-var reads. The article uses Saltzer/Reed/Clark's end-to-end argument to explain why each notifier's payload diverges on purpose — MiroShark doesn't render embeds, Discord does.
 
-Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-05-14.md
+Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-05-15.md
