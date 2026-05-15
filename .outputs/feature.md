@@ -1,23 +1,24 @@
-## Summary
+*Feature Built — 2026-05-15*
 
-Built the **Search-Engine Sitemap** feature on MiroShark (idea #5 from `repo-actions-2026-05-12.md`) — auto-generated `/sitemap.xml` + `/robots.txt` so Googlebot / Bingbot / DuckDuckBot can crawl every published simulation's `/share/<id>` and `/watch/<id>` pages.
+Discord + Slack Rich Completion Notifications
+MiroShark now sends a properly formatted card to your Discord channel or Slack workspace the moment a simulation finishes. Until today the generic webhook (PR #46) accepted those URLs but Discord showed nothing from the raw JSON and Slack inlined it as an ugly code-block dump. Two new env vars (DISCORD_WEBHOOK_URL, SLACK_WEBHOOK_URL) turn that JSON into a Discord-native rich embed and a Slack-native Block Kit message — coloured borders, belief bars, fields, action buttons, the whole thing — so community channels can actually read what just simulated.
 
-**PR opened:** https://github.com/aaronjmars/MiroShark/pull/82 (`feat/sitemap-xml-search-discovery`)
+Why this matters:
+RevaultDrops went live on 2026-05-13 with the first third-party public attribution of a MiroShark integration ("ReVault intelligence layer powered by @miroshark_") — and their sneaker-resell community runs on Discord. The existing webhook could ping their server but Discord refuses to render anything from a raw JSON post; an operator had to write integration glue to get a usable card. This PR removes that friction: paste the Discord webhook URL into one env var and every completed simulation becomes a coloured embed with belief percentages, scenario title, share-card thumbnail, and a tap-through link to the share page. The same arc opens for Slack ops channels. This is the highest-leverage move identified for the integration tier now that the SEO / distribution surface layer is complete (PR #82 closed the May-12 batch).
 
-**Files created/modified (14):**
-- `backend/app/services/sitemap.py` (new, ~334 LoC pure stdlib `xml.etree.ElementTree`)
-- `backend/app/api/sitemap.py` (new — `sitemap_bp` Blueprint with three routes)
-- `backend/tests/test_unit_sitemap.py` (new, 22 offline tests)
-- `backend/app/__init__.py`, `backend/app/api/__init__.py`, `backend/app/config.py` (blueprint wiring + `ENABLE_SITEMAP` flag)
-- `backend/openapi.yaml` (+111 lines, new `Discovery` tag)
-- `frontend/src/api/simulation.js`, `frontend/src/components/EmbedDialog.vue` (new "🔍 Discoverable in web search" callout, bilingual)
-- `docs/FEATURES.md`, `docs/API.md`, `docs/API.zh-CN.md`, `README.md`, `.env.example` (full doc coverage)
+What was built:
+- backend/app/services/discord_notify.py: ~390 LoC pure-stdlib module that builds a Discord embed from the existing webhook payload — consensus-coloured border (#22c55e bullish, #6b7280 neutral, #ef4444 bearish, #f59e0b failed), scenario title truncated to 100 chars, Bullish/Neutral/Bearish/Quality/Rounds/Agents/Resolution fields, share-card thumbnail, share-page link. Fire-and-forget daemon-thread dispatch, (sim_id, status) dedup, never raises.
+- backend/app/services/slack_notify.py: ~370 LoC twin module for Slack — Block Kit body with header + status-verb context + section fields carrying Unicode block-bar belief percentages (█████░░░░░ 52.0%) + "View simulation" action button. belief_bar() helper clamps out-of-range inputs.
+- backend/app/api/notifications.py: new GET /api/config/notifications returning {webhook_configured, discord_configured, slack_configured} booleans — no URLs ever leave the backend. Mirrors the existing GET /api/config/sitemap posture.
+- backend/app/services/simulation_runner.py: three new dispatch sites (completed exit-code path, failed exit-code path, simulation_end event in _read_action_log) each calling both notifiers right after the existing webhook dispatch. Per-channel try/except so one failure doesn't block the others.
+- frontend/src/components/EmbedDialog.vue: new "🔔 Channel notifications on completion" callout with three live status chips (Webhook / Discord / Slack) — ✓ when configured, ○ when not, tooltips explain how to enable each. CSS adds .notifications-chip with green-tinted .notifications-chip-on variant.
+- docs/NOTIFICATIONS.md: full setup walkthrough — webhook URL provisioning steps for each platform, payload shapes, channel-selection guidance ("Discord for community, Slack for ops, generic webhook for automation").
+- 57 new offline unit tests across test_unit_discord_notify.py (24) + test_unit_slack_notify.py (24) + test_unit_notifications_config.py (9).
 
-**Aeon-side updates:**
-- `memory/logs/2026-05-14.md` — feature build log entry with design notes + lesson learned
-- `memory/MEMORY.md` — Skills Built table updated, Next Priorities re-scoped (May-12 batch fully closed 5/5; logged that 3 of the 5 ideas were redundant)
-- Notification staged in `.pending-notify/aeon-feature-sitemap.md` for the workflow's post-run delivery step (sandbox blocks direct `./notify` execution but the post-run dispatcher will pick it up)
+How it works:
+Both modules reuse webhook_service.build_payload — the existing helper that reads simulation_config.json / quality.json / trajectory.json / state.json off disk — so the artifact-loading logic is not duplicated. The Discord builder projects that payload into a Discord embed dict ({type: rich, title, color, fields[], thumbnail, url, footer, timestamp}); the Slack builder projects it into Block Kit JSON ({blocks: [header, context, section, actions]}). Each notifier maintains its own (sim_id, status) dedup set so the runner's two terminal code paths (exit-code monitor + simulation_end action-log event) never produce two cards for the same finish. Dispatch happens in a daemon thread with a 5-second urlopen timeout — a slow channel endpoint never blocks the simulation runner. Unset env vars no-op silently, so existing deployments are completely unaffected. Pure stdlib (urllib.request + json + os) — zero new dependencies, 22nd consecutive zero-new-deps PR (#57 → #82 → #83).
 
-**Lesson logged for future `feature` runs:** grep existing routes / SPA paths before committing to a repo-actions idea — two of the May-12 batch ideas (Interactive Embed Widget, Per-Round Belief Snapshot) already existed in the codebase as `/embed/:simulationId` and `/frame/<round_num>`.
+What's next:
+The remaining May-14 batch ideas (Director Event Timeline, Belief Chart SVG, Comparative Run View, Private Share Link) are all still on the roadmap. A natural follow-up to this PR is a Telegram-native notifier — same pattern, different payload shape — which would round out the messaging-channel tier alongside the email / SMS surfaces that operators occasionally request.
 
-**Streak preserved:** 20 consecutive zero-new-deps PRs on MiroShark (#57 → #82).
+PR: https://github.com/aaronjmars/MiroShark/pull/83
