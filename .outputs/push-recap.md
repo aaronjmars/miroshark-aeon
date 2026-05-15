@@ -1,18 +1,19 @@
-*Push Recap — 2026-05-14*
-MiroShark — 2 commits by aaronjmars (Aeon co-author) | aeon — 30 commits, 6 substantive PRs
+*Push Recap — 2026-05-15*
+MiroShark + miroshark-aeon — 1 substantive PR pushed + 6 skill auto-commits
 
-*External Discovery Layer Closed Out*: PR #81 (filtered RSS/Atom feed, +1280/-37) and PR #82 (sitemap.xml + robots.txt, +1273/-2) merged 11 minutes apart. Filtered feed grafts the gallery's `select_filtered_cards` onto the syndication channel — six new query knobs (`?consensus=`, `?quality=`, `?outcome=`, `?q=`, `?sort=`, `?limit=`) make "subscribe to my bullish-consensus stream" a one-URL operation in Feedly / n8n / Zapier. Sitemap is sitemaps.org 0.9 XML over public sims (priority 0.8 per `/share/<id>`, 0.7 per `/watch/<id>`), byte-deterministic via id-ascending sort, behind `ENABLE_SITEMAP=true`. Together they close the May-12 repo-actions batch entirely (5/5 resolved — 3 redundant, 1 deferred, 2 = these PRs). Zero-new-deps streak: 20 consecutive PRs (#57 → #82).
+*Channel-Native Notifications (PR #83, open):* Discord rich-embed and Slack Block Kit completion cards land alongside the existing generic webhook — operators paste one URL per platform and get a properly formatted card on every sim terminal-state transition, no Zapier glue. First MiroShark surface explicitly built around externally-confirmed integrators' stacks (RevaultDrops Discord, May 13).
 
-*Skill Catalog Refresh*: PR #36 (+1964/-2) syncs 7 skills from aeon-agent, PR #37 (+5696/-14) syncs 22 skills from aeon upstream — 13 minutes apart, catalog roughly doubles (skills.json 55 → 84 entries). All `enabled:false` so the operator picks rollout cadence. First-class fleet vocabulary lands: `fleet-state`, `fork-skill-digest`, `fork-release-tracker`, `fork-contributor-leaderboard` — miroshark-aeon now structurally aware it's one of multiple operator forks.
+*Architecture:* "Channel notifier" pattern now used 3× (`webhook_service` + new `discord_notify` + new `slack_notify`) — fire-and-forget daemon dispatch, per-process `(sim_id, status)` dedup, late-bound env reads. Fourth channel becomes copy-paste. 22nd consecutive zero-new-deps PR (#57 → #83).
 
-*Selective Rollout + Self-Correction*: PR #38 enables 6 launch-comms / weekly-visibility skills (`star-milestone`, `star-momentum-alert`, `thread-formatter`, `contributor-spotlight`, `operator-scorecard`, `ai-framework-watch`) — all silent on quiet days. PR #39 disables `contributor-spotlight` 2 minutes later because its dependency `fork-cohort` is still `enabled:false`; pre-flight check working as intended, caught before first Sunday firing.
-
-*Self-Improve Pair*: PR #34 (+280/-96) adds "repo root OFF-LIMITS" guidance to feature skill + .gitignore hardening + removes 3 past scratch leaks (`sig_smoke.py`, `_smoke_webhook.py`, `.aeon-tmp-verify-trending.py`). PR #35 (+28/-5) inserts a new step 6 — grep backend routes / SPA router / OpenAPI / docs before building — bails to next candidate if surface already exists. Both lessons surfaced in earlier push-recaps, fixed same week.
+*First field test of yesterday's grep step:* The feature skill that produced PR #83 ran through PR #35's new pre-build grep step cleanly — no Discord/Slack symbols existed pre-build; prompt-level fix passed silently in production.
 
 Key changes:
-- `backend/app/services/sitemap.py` (+362, new) — pure-stdlib XML renderer, byte-deterministic via id-ascending sort, `<lastmod>` fallback chain `updated_at → created_at → state.json mtime`, `<changefreq>` `always`/`weekly`/`daily` per status, cap 50,000 URLs
-- `backend/app/services/feed.py` (+209/-15) — `select_public_cards` and `render_feed` gain six new kwargs + `surface_stats_reader` callback; reuses `gallery_filters.select_filtered_cards` so gallery and feed answer the same question identically
-- 29 new SKILL.md files across aeon (avg ~240 LoC each) — including 4 first-class "fleet" skills, 6 daily launch-comms skills (3 now live in cron), 3 crypto skills (kalshi, aixbt, price-threshold), 2 social spend skills paused-by-default for safety
+- `backend/app/services/discord_notify.py` (+441 NEW) — embed builder, consensus-coloured border integers picked from the SPA's own palette (green/grey/red/amber), ±0.2 threshold
+- `backend/app/services/slack_notify.py` (+432 NEW) — Block Kit header + context + section with Unicode block-bar belief % (`█████░░░░░ 52.0%`) + action button
+- `backend/app/api/notifications.py` (+59 NEW) — `GET /api/config/notifications` boolean probe (no URLs leaked); 3 live status chips in EmbedDialog
+- 57 offline tests across three new test files (24+24+9); follow-up fix `cc4ec7c` mapped `notifications_bp` in OpenAPI drift scanner
 
-Stats: 70 files changed, +10,528 / -163 lines across 8 substantive PRs
-Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-05-14.md
+aeon-side: 6 substantive skill auto-commits today (token-report, fetch-tweets, tweet-allocator, star-momentum-alert, repo-pulse, feature) + 29 cron-state/scheduler/yesterday-tail housekeeping commits. No miroshark-aeon PRs opened or merged.
+
+Stats: 32 substantive files changed, +4,138 / -67 lines. PR #83 still open as of 14:10 UTC, likely merges within the day.
+Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-05-15.md
