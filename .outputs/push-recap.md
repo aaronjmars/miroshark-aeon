@@ -1,19 +1,20 @@
-*Push Recap — 2026-05-15*
-MiroShark + miroshark-aeon — 1 substantive PR pushed + 6 skill auto-commits
+*Push Recap — 2026-05-16*
+MiroShark — 3 merges + 1 PR open / aeon — 1 PR open (all aaronjmars-authored)
 
-*Channel-Native Notifications (PR #83, open):* Discord rich-embed and Slack Block Kit completion cards land alongside the existing generic webhook — operators paste one URL per platform and get a properly formatted card on every sim terminal-state transition, no Zapier glue. First MiroShark surface explicitly built around externally-confirmed integrators' stacks (RevaultDrops Discord, May 13).
+Theme 1 — Citation gap closes on-chain: PR #84 (OriginTrail DKG citation, merged, +1988/-2) anchors finished sims as DKG Knowledge Assets. Reproduce.json's SHA-256 becomes a blockchain-anchored citation key — same provenance property a DOI gives a paper. Caps the 11-surface arc PRs #57–#84.
 
-*Architecture:* "Channel notifier" pattern now used 3× (`webhook_service` + new `discord_notify` + new `slack_notify`) — fire-and-forget daemon dispatch, per-process `(sim_id, status)` dedup, late-bound env reads. Fourth channel becomes copy-paste. 22nd consecutive zero-new-deps PR (#57 → #83).
+Theme 2 — First operational hotfix loop: PR #86 (merged, +44/-44) swaps xAI's deprecated grok-4.1-fast (now returning 404 on OpenRouter) → google/gemini-3-flash-preview across 3 cloud-preset slots + EN/ZH docs. Same-day open + merge.
 
-*First field test of yesterday's grep step:* The feature skill that produced PR #83 ran through PR #35's new pre-build grep step cleanly — no Discord/Slack symbols existed pre-build; prompt-level fix passed silently in production.
+Theme 3 — Vector embed surface: PR #85 (open) adds GET /api/simulation/<id>/chart.svg via pure-stdlib xml.etree. Byte-stable, embeddable in Notion/Substack/Ghost/LaTeX. Closes May-14 batch idea #3 once merged.
+
+Theme 4 — Channel-notifier idiom at 4 instances: webhook_service + discord_notify + slack_notify + dkg_publisher all share fire-and-forget + (sim_id, status) dedup + late-bound env-var reads. First on-chain channel.
+
+Theme 5 — Aeon self-correction: PR #40 (open, +3/-0) hardens project-lens to verify PR state via 'gh pr view' before notify. 24h round-trip from yesterday's 'merged'/'opened' drift bug to in-CI prompt fix.
 
 Key changes:
-- `backend/app/services/discord_notify.py` (+441 NEW) — embed builder, consensus-coloured border integers picked from the SPA's own palette (green/grey/red/amber), ±0.2 threshold
-- `backend/app/services/slack_notify.py` (+432 NEW) — Block Kit header + context + section with Unicode block-bar belief % (`█████░░░░░ 52.0%`) + action button
-- `backend/app/api/notifications.py` (+59 NEW) — `GET /api/config/notifications` boolean probe (no URLs leaked); 3 live status chips in EmbedDialog
-- 57 offline tests across three new test files (24+24+9); follow-up fix `cc4ec7c` mapped `notifications_bp` in OpenAPI drift scanner
+- New backend/app/services/dkg_publisher.py (+709 LoC stdlib) — walks WM → SWM → VM publish pipeline, persists dkg-citation.json atomically for idempotence
+- EmbedDialog grows DKG citation card (testnet/mainnet chip + UAL + Merkle + tx hash + explorer link) + 📈 Trajectory Chart SVG section
+- backend/app/api/settings.py 'cheap' preset label flips 'Mimo V2 Flash + Grok-4.1 Fast' → 'Mimo V2 Flash + Gemini 3 Flash'
 
-aeon-side: 6 substantive skill auto-commits today (token-report, fetch-tweets, tweet-allocator, star-momentum-alert, repo-pulse, feature) + 29 cron-state/scheduler/yesterday-tail housekeeping commits. No miroshark-aeon PRs opened or merged.
-
-Stats: 32 substantive files changed, +4,138 / -67 lines. PR #83 still open as of 14:10 UTC, likely merges within the day.
-Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-05-15.md
+Stats: ~53 files / +4,301 / -47 lines merged (PR #83 + #84 + #86) + 1,099 / -4 staged in open PR #85. 23rd consecutive zero-new-deps MiroShark PR.
+Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-05-16.md
