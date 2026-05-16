@@ -1,14 +1,14 @@
-*Thread Draft — 2026-05-15*
-Topic: Discord + Slack Rich Completion Notifications — MiroShark PR #83
+*Thread Draft — 2026-05-16*
+Topic: Trajectory Chart SVG — MiroShark PR #85
 
-1/ MiroShark PR #83 ships today: native Discord embed cards and Slack Block Kit messages when simulations complete. Zero new dependencies. This is the 22nd consecutive PR with that streak intact.
+1/ MiroShark PR #85 ships GET /api/simulation/<id>/chart.svg — a pure-stdlib SVG renderer that turns belief trajectories into embeddable vector images. The 23rd consecutive PR with zero new dependencies.
 
-2/ PR #46 added MiroShark's outbound webhook in early 2026. It accepted any endpoint — Discord and Slack URLs included. But it posted raw JSON. Discord showed blank cards. Slack rendered it as a code block. The connection was there. The presentation wasn't.
+2/ MiroShark already exports share-card PNGs, trajectory CSVs, and Jupyter notebooks. Each serves a different surface — browsers, data tools, research. None paste cleanly into Notion, Substack, or Ghost. PNG is fixed-resolution. CSV is not an image. The notebook needs Python.
 
-3/ discord_notify.py builds a rich embed: consensus-coloured border, seven belief fields, a thumbnail. slack_notify.py builds a Block Kit card with Unicode block bars — █████░░░░░ 52.0% — and an action button. Both dispatch on daemon threads, zero new libraries.
+3/ chart_svg.py is ~390 lines of stdlib — xml.etree.ElementTree, no Cairo, no matplotlib. Three polylines: bullish green, neutral gray, bearish red. Fixed viewBox 800x400. The output is bytewise-deterministic, same as reproduce.json: the SHA-256 is a stable cache key.
 
-4/ This is the third module to share the channel-notifier shape after webhook_service and HMAC signing. Fire-and-forget dispatch. Per-process dedup. Late-bound env reads — unset the variable, get zero outbound bytes. The fourth channel, whenever it comes, is a copy of the third.
+4/ SVG closes the embed gap PNG couldn't. It scales without artifacts, pastes into any image-accepting editor, and stays legible in dark mode. The same trajectory now has four exportable formats: CSV, notebook, share card, SVG chart. Each one reaches a surface the others can't.
 
-5/ The trigger for this was @revaultdrops posting that their intelligence layer runs on MiroShark. repo-actions caught it the next day. PR #83 is the result. https://github.com/aaronjmars/MiroShark/pull/83
+5/ 17 offline tests, zero new dependencies — 23rd consecutive. PR #85 is open on MiroShark: https://github.com/aaronjmars/MiroShark/pull/85
 
-(article: articles/thread-2026-05-15.md)
+(article: articles/thread-2026-05-16.md)
