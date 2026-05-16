@@ -1,0 +1,168 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "Agent Self-Improvement — 2026-05-16"
+      },
+      "children": [
+        "main_stack"
+      ]
+    },
+    "main_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "section_heading",
+        "intro_text",
+        "sep1",
+        "why_section",
+        "sep2",
+        "changes_section",
+        "sep3",
+        "impact_section",
+        "sep4",
+        "pr_section"
+      ]
+    },
+    "section_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Project-Lens PR Status Verification",
+        "level": "h2"
+      }
+    },
+    "intro_text": {
+      "type": "Text",
+      "props": {
+        "text": "The project-lens skill now requires `gh pr view --json state,mergedAt` for any PR it references by number, and asserts that the notification's PR-status verb (`opened`/`merged`/`closed`/`draft`) must match the article body word-for-word. If the two ever disagree, re-query gh and let the JSON win."
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "why_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "why_heading",
+        "why_text"
+      ]
+    },
+    "why_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Why",
+        "level": "h3"
+      }
+    },
+    "why_text": {
+      "type": "Text",
+      "props": {
+        "text": "The 2026-05-15 project-lens log self-reported a notification quality bug — the notification text said \"merged\" while the article body correctly said \"opened\". MiroShark PR #83 was still open at notify time (~16:10 UTC); it didn't merge until ~16:25 UTC. The skill had zero PR-state verification guidance, so the LLM's status assertion drifted between the two surfaces it produced in the same run."
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "changes_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "changes_heading",
+        "changes_text"
+      ]
+    },
+    "changes_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "What changed",
+        "level": "h3"
+      }
+    },
+    "changes_text": {
+      "type": "Text",
+      "props": {
+        "text": "skills/project-lens/SKILL.md: new PR-status verification bullet under step 5's writing guidelines (run gh pr view, cache the verb); pre-notification assertion at the top of step 6 (notification verbs must match article body; re-query on doubt)."
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "impact_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "impact_heading",
+        "impact_text"
+      ]
+    },
+    "impact_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Impact",
+        "level": "h3"
+      }
+    },
+    "impact_text": {
+      "type": "Text",
+      "props": {
+        "text": "Eliminates a class of factual error in the highest-visibility surface the skill emits (push to Telegram/Discord/Slack). One extra gh call per article (~30s) prevents a user-visible mismatch. Pattern is reusable — if repo-article or thread-formatter ever exhibit the same drift, the same two-line addition applies."
+      }
+    },
+    "sep4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "pr_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "pr_heading",
+        "pr_link"
+      ]
+    },
+    "pr_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "PR",
+        "level": "h3"
+      }
+    },
+    "pr_link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "miroshark-aeon/pull/40",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/pull/40"
+      }
+    }
+  }
+}

@@ -1,13 +1,13 @@
-*Agent Self-Improvement — 2026-05-14*
+*Agent Self-Improvement — 2026-05-16*
 
-Feature skill — grep existing routes before building
-The `feature` skill now greps the cloned watched repo for routes / SPA paths / OpenAPI / docs before writing any code. If the chosen idea already exists under another name, the skill bails to the next candidate from step 2 instead of burning a build cycle rediscovering it.
+Project-Lens PR Status Verification
+The project-lens skill now requires `gh pr view --json state,mergedAt` for any PR it references by number, and asserts that the notification's PR-status verb (`opened`/`merged`/`closed`/`draft`) must match the article body word-for-word. If the two ever disagree, re-query gh and let the JSON win.
 
-Why: three of five ideas in the 2026-05-12 repo-actions batch were redundant — "Interactive Embed Widget" already shipped as SPA route `/embed/:simulationId`, "Per-Round Belief Snapshot" already shipped as `/frame/<round_num>` (pre-PR #57). Build cycle caught them, but the exploration cost was real. The 2026-05-14 daily log and MEMORY.md both call out the same fix: grep upstream of implementation.
+Why: The 2026-05-15 project-lens log self-reported a notification quality bug — the notification text said "merged" while the article body correctly said "opened". MiroShark PR #83 was still open at notify time (~16:10 UTC); it didn't merge until ~16:25 UTC. The skill had zero PR-state verification guidance, so the LLM's status assertion drifted between the two surfaces it produced in the same run.
 
 What changed:
-- skills/feature/SKILL.md: new step 6 with concrete grep patterns for backend route decorators (Flask/FastAPI/Express/Django/Rails), SPA router config (Vue Router / React Router), OpenAPI, and `docs/FEATURES.md` / `docs/API.md` / `README.md`. Skips to next candidate if surface already exists; logs `FEATURE_SKIP: all candidates already implemented` and stops without notification if every candidate is taken. Subsequent steps renumbered 7–11.
+- skills/project-lens/SKILL.md: new PR-status verification bullet under step 5's writing guidelines (run gh pr view, cache the verb); pre-notification assertion at the top of step 6 (notification verbs must match article body; re-query on doubt).
 
-Impact: a ~60-second grep upstream replaces a wasted feature-skill run. The May-12 batch would have spent two such runs on redundant ideas before the grep landed; future repo-actions batches with overlapping ideas (likely as MiroShark's surface area grows past 25 routes) will bail to the next candidate without leaving an empty feature day.
+Impact: Eliminates a class of factual error in the highest-visibility surface the skill emits (push to Telegram/Discord/Slack). One extra gh call per article (~30s) prevents a user-visible mismatch. Pattern is reusable — if repo-article or thread-formatter ever exhibit the same drift, the same two-line addition applies.
 
-PR: https://github.com/aaronjmars/miroshark-aeon/pull/35
+PR: https://github.com/aaronjmars/miroshark-aeon/pull/40
