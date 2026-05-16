@@ -1,41 +1,35 @@
-*Top Tweets — $MIROSHARK OR @miroshark_ OR github.com/aaronjmars/miroshark (2026-05-15)*
+*Top Tweets — $MIROSHARK OR @miroshark_ (2026-05-16)*
 
-1. x.com/aaronjmars — Fork MiroShark & add custom simulation steps for internal DB multi-step chaotic simulations
-Likes: 21 | RTs: 3
-[View tweet](https://x.com/aaronjmars/status/2055037278532063395)
+1. x.com/tsubixxx — "Who's ready for this? $MIROSHARK is next. Bookmark it." (May 15)
+Likes: 6 | RTs: 2
+[View tweet](https://x.com/tsubixxx/status/2055435946494181381)
 
-2. x.com/cybercelos — "Coded for billion dollar $MIROSHARK" (quoting swarm AI simulation bullish take)
-Likes: 19 | RTs: 4
-[View tweet](https://x.com/cybercelos/status/2055048630218998184)
+2. x.com/PoodleFi_ — Smart Money Buys on Base Chain (May 15): $MIROSHARK listed alongside $BNKR, $AEON, $VVV
+Likes: 6 | RTs: 1
+[View tweet](https://x.com/PoodleFi_/status/2055423915267354953)
 
-3. x.com/NexlifyCoin — "$MIROSHARK cooking — Soon $AEON and $MIROSHARK cross 10m"
-Likes: 8 | RTs: 0
-[View tweet](https://x.com/NexlifyCoin/status/2055049582753779730)
+3. x.com/btcbabycow — "米罗莎要来了 $miroshark" (Chinese: MiroShark is coming) (May 15)
+Likes: 6 | RTs: 0
+[View tweet](https://x.com/btcbabycow/status/2055418785964986533)
 
-4. x.com/WazzupCrypto — "$MIROSHARK 100X from here!!!"
-Likes: 7 | RTs: 2
-[View tweet](https://x.com/WazzupCrypto/status/2055071697272005012)
+4. x.com/hectic_sneeze — "$MIROSHARK" (May 15)
+Likes: 0 | RTs: 0
+[View tweet](https://x.com/hectic_sneeze/status/2055415229098701262)
 
-5. x.com/LemonMarkets — New Listing Alert: MiroShark now tradeable MiroShark/WETH on Lemon Markets
-Likes: 4 | RTs: 3
-[View tweet](https://x.com/LemonMarkets/status/2054826703696830898)
+5. https://x.com/i/status/2055422507285717357
+[View tweet](https://x.com/i/status/2055422507285717357)
 
-6. x.com/cybercelos — "$AEON & $MIROSHARK coded for bigger run"
-Likes: 4 | RTs: 0
-[View tweet](https://x.com/cybercelos/status/2054968514738593962)
+6. https://x.com/i/status/2055417088018108556
+[View tweet](https://x.com/i/status/2055417088018108556)
 
-7. x.com/_THOR_ASGARD — MiroShark outputs: Replay GIFs, CSV/JSON data, tweet threads, observability dashboards with retry+logs
-Likes: 3 | RTs: 0
-[View tweet](https://x.com/_THOR_ASGARD/status/2054779593865970068)
+7. https://x.com/i/status/2055422379619443161
+[View tweet](https://x.com/i/status/2055422379619443161)
 
-8. x.com/BasedCult33 — "$MIROSHARK top tech on Base 🦈"
-Likes: 3 | RTs: 0
-[View tweet](https://x.com/BasedCult33/status/2054909273059016949)
+8. https://x.com/i/status/2055421286369706087
+[View tweet](https://x.com/i/status/2055421286369706087)
 
-9. x.com/cybercelos — "$MIROSHARK 👀🚀" (replying to MrDegenWolf)
-Likes: 3 | RTs: 0
-[View tweet](https://x.com/cybercelos/status/2054977504759447892)
+9. https://x.com/i/status/2055422640559673799
+[View tweet](https://x.com/i/status/2055422640559673799)
 
-10. x.com/soboltoshi — Aaron ships at light speed — aeon + miroshark could autonomously research, simulate, and trade
-Likes: 2 | RTs: 0
-[View tweet](https://x.com/soboltoshi/status/2055067112557699459)
+10. https://x.com/i/status/2055434076085989726
+[View tweet](https://x.com/i/status/2055434076085989726)
