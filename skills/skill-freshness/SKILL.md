@@ -39,6 +39,7 @@ The threshold for a dependency depends on its path class:
 | Path class | Threshold | Rationale |
 |------------|-----------|-----------|
 | `articles/{skill}-*.md` | 28 hours | Daily skills run once per day; 28h gives a 4h grace window for clock skew + run delays. |
+| `articles/{skill}-*.md` produced by an every-N-day skill (day-of-month `*/N`) | `24 × N + 4` hours | Cadence + 4h grace. `*/2` → 52h (covers `repo-actions`, `self-improve`); `*/3` → 76h. |
 | `articles/{skill}-*.md` produced by a weekly skill (cron starts with `0 _ * * 0`-`6` only) | 8 days (192h) | Weekly producers have a 24h grace window. |
 | `.outputs/{skill}.md` (chain runner outputs) | 4 hours | Chain steps run minutes apart; a 4h-old `.outputs/` file is a stale chain run. |
 | `memory/topics/{name}.md` | 7 days (168h) | Topic files are reference material, edited on memory-flush cycles (~weekly). |
@@ -68,8 +69,9 @@ Per-class thresholds are computed at runtime — not hardcoded per dependency. T
 Parse `aeon.yml`. Build two maps:
 
 - `ENABLED` — set of skill names where `enabled: true`. (Skills with `enabled: false` are not audited as consumers — their dependencies don't matter until they're turned on. They CAN appear as producers though, and their freshness is still tracked since other consumers may depend on them.)
-- `PRODUCER_CADENCE` — map skill_name → `daily` | `weekly` | `on_demand` derived from the cron expression:
+- `PRODUCER_CADENCE` — map skill_name → `daily` | `every_Nd` | `weekly` | `on_demand` derived from the cron expression:
   - cron with `* * *` in days/months/weekdays → `daily`
+  - cron whose day-of-month field matches `^\*/(\d+)$` (e.g. `*/2`, `*/3`) → `every_Nd` where N is the step value. Today's `aeon.yml` uses `*/2` for `repo-actions` and `self-improve`; the regex handles any step.
   - cron whose weekday field matches `^[0-6]$` (single weekday) → `weekly`
   - `workflow_dispatch` or empty → `on_demand` (skipped from freshness audit; on-demand outputs have no expected cadence)
 
@@ -101,7 +103,7 @@ Each surviving reference becomes an **implicit** edge with the appropriate path 
 
 For every `articles/{producer}-${today}.md` reference (or the date-suffixed equivalent), resolve to the actual most-recent file on disk: `ls -1t articles/{producer}-*.md 2>/dev/null | head -1`. Record the resolved path AND the producer's expected cadence (from step 2's `PRODUCER_CADENCE` map).
 
-If no file matches the pattern at all, record as `MISSING` (only counted if the producer has cadence `daily` or `weekly` — `on_demand` producers may legitimately have never run).
+If no file matches the pattern at all, record as `MISSING` (only counted if the producer has cadence `daily`, `every_Nd`, or `weekly` — `on_demand` producers may legitimately have never run).
 
 ### 6. Score each dependency
 
