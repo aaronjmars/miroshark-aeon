@@ -318,3 +318,4 @@ date,skill,model,input_tokens,output_tokens,cache_read,cache_creation
 2026-05-17,tweet-allocator,claude-sonnet-4-6,16,10564,530270,34917
 2026-05-17,repo-pulse,claude-sonnet-4-6,16,6146,645253,43335
 2026-05-17,feature,claude-opus-4-7,119,81877,17171143,242431
+2026-05-17,push-recap,claude-opus-4-7,34,17947,1689607,119446

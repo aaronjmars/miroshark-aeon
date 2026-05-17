@@ -1,20 +1,19 @@
-*Push Recap — 2026-05-16*
-MiroShark — 3 merges + 1 PR open / aeon — 1 PR open (all aaronjmars-authored)
+*Push Recap — 2026-05-17*
+MiroShark + miroshark-aeon — 1 substantive PR opened, 0 merges to MiroShark main, 36 housekeeping commits on aeon main.
 
-Theme 1 — Citation gap closes on-chain: PR #84 (OriginTrail DKG citation, merged, +1988/-2) anchors finished sims as DKG Knowledge Assets. Reproduce.json's SHA-256 becomes a blockchain-anchored citation key — same provenance property a DOI gives a paper. Caps the 11-surface arc PRs #57–#84.
+Notification quadrant closes: PR #87 (open) lands SMTP email as the 4th completion-notification channel alongside webhook / Discord / Slack. Pure stdlib (`smtplib` + `email.mime`), zero new deps — the 24-PR no-dependency streak from PR #57 is preserved (23 merged + 1 open). Mirrors the `discord_notify` / `slack_notify` shape exactly; runner-side dispatch sites now five-deep at each terminal-state branch.
 
-Theme 2 — First operational hotfix loop: PR #86 (merged, +44/-44) swaps xAI's deprecated grok-4.1-fast (now returning 404 on OpenRouter) → google/gemini-3-flash-preview across 3 cloud-preset slots + EN/ZH docs. Same-day open + merge.
+Auth-optional, zero-platform-dependency design: blank `SMTP_USER`/`SMTP_PASSWORD` routes through an unauthenticated LAN relay (`localhost:25` / self-hosted Postfix). Every research team already has an inbox — no Discord server or Slack workspace required for completion alerts. Visual language stays identical: same Unicode block bars Slack uses, same consensus colours Discord uses (#22c55e/#6b7280/#ef4444/#f59e0b), plus subject `[MiroShark] <Direction>: <Scenario>` for inbox triage.
 
-Theme 3 — Vector embed surface: PR #85 (open) adds GET /api/simulation/<id>/chart.svg via pure-stdlib xml.etree. Byte-stable, embeddable in Notion/Substack/Ghost/LaTeX. Closes May-14 batch idea #3 once merged.
+Credential-leak refusal as security posture: STARTTLS failure on a credentialed connection refuses to send rather than fall back to cleartext — same "secret never crosses a degraded boundary" rule as HMAC signing in PR #79. The channel-notifier idiom now spans 5 transports (HTTP webhook, Discord HTTP, Slack HTTP, on-chain DKG daemon, SMTP).
 
-Theme 4 — Channel-notifier idiom at 4 instances: webhook_service + discord_notify + slack_notify + dkg_publisher all share fire-and-forget + (sim_id, status) dedup + late-bound env-var reads. First on-chain channel.
-
-Theme 5 — Aeon self-correction: PR #40 (open, +3/-0) hardens project-lens to verify PR state via 'gh pr view' before notify. 24h round-trip from yesterday's 'merged'/'opened' drift bug to in-CI prompt fix.
+Aeon-side window is pure housekeeping — 36 chore/auto-commit pairs from the cron loop firing token-report → fetch-tweets → tweet-allocator → star-momentum-alert → repo-pulse → feature. No skill prompts edited, no aeon Python code touched. One substantive content commit: today's $MIROSHARK token report logging a 3rd consecutive ATH week ($0.0000225, FDV $2.22M).
 
 Key changes:
-- New backend/app/services/dkg_publisher.py (+709 LoC stdlib) — walks WM → SWM → VM publish pipeline, persists dkg-citation.json atomically for idempotence
-- EmbedDialog grows DKG citation card (testnet/mainnet chip + UAL + Merkle + tx hash + explorer link) + 📈 Trajectory Chart SVG section
-- backend/app/api/settings.py 'cheap' preset label flips 'Mimo V2 Flash + Grok-4.1 Fast' → 'Mimo V2 Flash + Gemini 3 Flash'
+- `backend/app/services/email_notify.py` — new 796 LoC stdlib SMTP dispatcher; transport selects by port (465 ⇒ SMTP_SSL, 587 ⇒ SMTP+STARTTLS, 25 ⇒ plain); per-process `(sim_id, status)` dedup; fire-and-forget daemon-thread dispatch
+- `backend/app/services/simulation_runner.py` — 3 new dispatch sites (exit-code completed, exit-code failed, `simulation_end` action-log event), each wrapped in try/except mirroring Discord/Slack
+- `backend/tests/test_unit_email_notify.py` — 34 offline unit tests (env-var pinning, port resolution, transport selection, dedup, credential-leak refusal, MIME structure)
+- `frontend/src/components/EmbedDialog.vue` — 4th "Email" notification chip + reactive `email_configured` field
 
-Stats: ~53 files / +4,301 / -47 lines merged (PR #83 + #84 + #86) + 1,099 / -4 staged in open PR #85. 23rd consecutive zero-new-deps MiroShark PR.
-Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-05-16.md
+Stats: 12 files changed, +1,661 / -29 lines in PR #87.
+Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-05-17.md
