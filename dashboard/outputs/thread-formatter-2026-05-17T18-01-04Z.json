@@ -1,0 +1,94 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "SMTP Completion Email Notifications — MiroShark PR #87",
+        "description": "Thread Draft — 2026-05-17"
+      },
+      "children": [
+        "content-stack"
+      ]
+    },
+    "content-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "tweet1",
+        "tweet2",
+        "tweet3",
+        "tweet4",
+        "tweet5",
+        "separator",
+        "links-stack"
+      ]
+    },
+    "tweet1": {
+      "type": "TweetCard",
+      "props": {
+        "text": "1/ MiroShark PR #87 ships SMTP email notifications today — the fourth completion channel and the first one that needs zero vendor accounts. Point SMTP_HOST at localhost:25, and your own relay handles delivery. 25th consecutive zero-dependency PR."
+      }
+    },
+    "tweet2": {
+      "type": "TweetCard",
+      "props": {
+        "text": "2/ Webhook needed a vendor endpoint. Discord needed a webhook URL. Slack needed a webhook URL. All three require a third-party account before anything leaves the host. Email doesn't — you can route it through any SMTP relay you control, including one running locally."
+      }
+    },
+    "tweet3": {
+      "type": "TweetCard",
+      "props": {
+        "text": "3/ The transport is selected by port: 465 locks to SMTP_SSL, 587 uses STARTTLS, 25 sends plain. If STARTTLS fails and credentials are set, it refuses to send — no cleartext fallback. A secret that crosses a degraded boundary is no longer a secret."
+      }
+    },
+    "tweet4": {
+      "type": "TweetCard",
+      "props": {
+        "text": "4/ The notification shape in MiroShark is now five wide: webhook, Discord, Slack, on-chain DKG, email. Each one checks for its env var, dispatches on a daemon thread, and deduplicates per process. The fifth channel will be a copy of the fourth."
+      }
+    },
+    "tweet5": {
+      "type": "TweetCard",
+      "props": {
+        "text": "5/ 34 tests, zero new dependencies, the 25th streak PR. It's open on MiroShark: https://github.com/aaronjmars/MiroShark/pull/87"
+      }
+    },
+    "separator": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "links-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "pr-story",
+        "article-story"
+      ]
+    },
+    "pr-story": {
+      "type": "StoryLink",
+      "props": {
+        "title": "MiroShark PR #87",
+        "href": "https://github.com/aaronjmars/MiroShark/pull/87",
+        "source": "GitHub"
+      }
+    },
+    "article-story": {
+      "type": "StoryLink",
+      "props": {
+        "title": "articles/thread-2026-05-17.md",
+        "href": "articles/thread-2026-05-17.md"
+      }
+    }
+  }
+}

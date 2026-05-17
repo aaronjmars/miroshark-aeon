@@ -1,14 +1,14 @@
-*Thread Draft — 2026-05-16*
-Topic: Trajectory Chart SVG — MiroShark PR #85
+*Thread Draft — 2026-05-17*
+Topic: SMTP Completion Email Notifications — MiroShark PR #87
 
-1/ MiroShark PR #85 ships GET /api/simulation/<id>/chart.svg — a pure-stdlib SVG renderer that turns belief trajectories into embeddable vector images. The 23rd consecutive PR with zero new dependencies.
+1/ MiroShark PR #87 ships SMTP email notifications today — the fourth completion channel and the first one that needs zero vendor accounts. Point SMTP_HOST at localhost:25, and your own relay handles delivery. 25th consecutive zero-dependency PR.
 
-2/ MiroShark already exports share-card PNGs, trajectory CSVs, and Jupyter notebooks. Each serves a different surface — browsers, data tools, research. None paste cleanly into Notion, Substack, or Ghost. PNG is fixed-resolution. CSV is not an image. The notebook needs Python.
+2/ Webhook needed a vendor endpoint. Discord needed a webhook URL. Slack needed a webhook URL. All three require a third-party account before anything leaves the host. Email doesn't — you can route it through any SMTP relay you control, including one running locally.
 
-3/ chart_svg.py is ~390 lines of stdlib — xml.etree.ElementTree, no Cairo, no matplotlib. Three polylines: bullish green, neutral gray, bearish red. Fixed viewBox 800x400. The output is bytewise-deterministic, same as reproduce.json: the SHA-256 is a stable cache key.
+3/ The transport is selected by port: 465 locks to SMTP_SSL, 587 uses STARTTLS, 25 sends plain. If STARTTLS fails and credentials are set, it refuses to send — no cleartext fallback. A secret that crosses a degraded boundary is no longer a secret.
 
-4/ SVG closes the embed gap PNG couldn't. It scales without artifacts, pastes into any image-accepting editor, and stays legible in dark mode. The same trajectory now has four exportable formats: CSV, notebook, share card, SVG chart. Each one reaches a surface the others can't.
+4/ The notification shape in MiroShark is now five wide: webhook, Discord, Slack, on-chain DKG, email. Each one checks for its env var, dispatches on a daemon thread, and deduplicates per process. The fifth channel will be a copy of the fourth.
 
-5/ 17 offline tests, zero new dependencies — 23rd consecutive. PR #85 is open on MiroShark: https://github.com/aaronjmars/MiroShark/pull/85
+5/ 34 tests, zero new dependencies, the 25th streak PR. It's open on MiroShark: https://github.com/aaronjmars/MiroShark/pull/87
 
-(article: articles/thread-2026-05-16.md)
+(article: articles/thread-2026-05-17.md)
