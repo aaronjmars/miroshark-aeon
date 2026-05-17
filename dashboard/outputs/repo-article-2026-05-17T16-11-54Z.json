@@ -1,0 +1,193 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "New Article: MiroShark's Last Notification Channel Is Just a Protocol"
+      },
+      "children": [
+        "pr_header",
+        "sep1",
+        "pr_meta",
+        "sep2",
+        "description",
+        "sep3",
+        "design_heading",
+        "design_stack",
+        "sep4",
+        "stats_stack",
+        "sep5",
+        "article_link"
+      ]
+    },
+    "pr_header": {
+      "type": "Heading",
+      "props": {
+        "text": "PR #87: SMTP Completion-Email Notifications",
+        "level": "h2"
+      },
+      "children": []
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "pr_meta": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "badge_pr",
+        "badge_smtp",
+        "text_timestamp"
+      ]
+    },
+    "badge_pr": {
+      "type": "Badge",
+      "props": {
+        "text": "PR #87",
+        "variant": "default"
+      },
+      "children": []
+    },
+    "badge_smtp": {
+      "type": "Badge",
+      "props": {
+        "text": "SMTP",
+        "variant": "secondary"
+      },
+      "children": []
+    },
+    "text_timestamp": {
+      "type": "Text",
+      "props": {
+        "text": "Opened today 11:35 UTC",
+        "variant": "caption"
+      },
+      "children": []
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "description": {
+      "type": "Text",
+      "props": {
+        "text": "First MiroShark notification channel whose far end can be a protocol relay (localhost:25) instead of a vendor URL — closing the four-channel quadrant (webhook/Discord/Slack/email).",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "design_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Notable Design Moves",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "design_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "design_1",
+        "design_2",
+        "design_3"
+      ]
+    },
+    "design_1": {
+      "type": "Text",
+      "props": {
+        "text": "Transport-selection table keyed on port (no parallel TLS_MODE env var)",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "design_2": {
+      "type": "Text",
+      "props": {
+        "text": "Auth-optional posture for unauthenticated LAN relays",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "design_3": {
+      "type": "Text",
+      "props": {
+        "text": "Credential-leak refusal on STARTTLS failure",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "sep4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "stats_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "lg"
+      },
+      "children": [
+        "stat_notifier",
+        "stat_streak"
+      ]
+    },
+    "stat_notifier": {
+      "type": "Stat",
+      "props": {
+        "label": "Channel-notifier idiom",
+        "value": "5 instances"
+      },
+      "children": []
+    },
+    "stat_streak": {
+      "type": "Stat",
+      "props": {
+        "label": "Zero-dep streak",
+        "value": "25 PRs"
+      },
+      "children": []
+    },
+    "sep5": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "article_link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Read Full Article",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-05-17.md",
+        "source": "GitHub"
+      },
+      "children": []
+    }
+  }
+}

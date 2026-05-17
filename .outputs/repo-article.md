@@ -1,5 +1,5 @@
-*New Article: What a Hash Becomes When You Stop Holding It*
+*New Article: MiroShark's Last Notification Channel Is Just a Protocol*
 
-PR #84 (OriginTrail DKG citation, merged 2026-05-15 19:53 UTC) is the first MiroShark surface where a piece of provenance lives off-host. The SHA-256 of `reproduce.json` gets anchored on-chain as a Knowledge Asset, walking OriginTrail's Working Memory → Shared Working Memory → Verified Memory pipeline; idempotency keyed on a persisted `dkg-citation.json`. DOI parallel: the citation key survives the host going away. Fourth instance of the channel-notifier idiom, first on-chain.
+PR #87 (SMTP completion-email notifications, opened today 11:35 UTC) is the first MiroShark notification channel whose far end can be a protocol relay (`localhost:25`) instead of a vendor URL — closing the four-channel quadrant (webhook/Discord/Slack/email). Notable design moves: transport-selection table keyed on port (no parallel TLS_MODE env var), auth-optional posture for unauthenticated LAN relays, and credential-leak refusal on STARTTLS failure. Channel-notifier idiom now at 5 instances; 25-PR zero-dep streak preserved.
 
-Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-05-16.md
+Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-05-17.md
