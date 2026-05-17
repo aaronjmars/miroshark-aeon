@@ -82,8 +82,11 @@ Do **not** invent your own justification narrative around a violated 14-day wind
    - Include at least 2 concrete external references (data, quotes, examples).
    - Include at least 2 concrete project references (specific features, code patterns, design choices).
    - Write for a smart reader who doesn't know this project but cares about the topic.
+   - **PR status verification.** Any time the article references a specific PR by number, verify its real state first — never assume "opened" or "merged" from memory or context inference. Run `gh pr view <num> --repo <owner>/<repo> --json state,mergedAt,updatedAt --jq '{state, mergedAt, updatedAt}'` (states: `OPEN`, `MERGED`, `CLOSED`). Use the resulting verb in the article body. Cache the verb (e.g. `PR_VERB=opened`) so the notification step reuses the same word.
 
 6. **Send notification** via `./notify`:
+   Before drafting the notification body, re-read the article paragraph(s) that reference any PR. The notification's PR-status verbs (`opened` / `merged` / `closed` / `draft`) MUST match the article body word-for-word — if you wrote "opened" in the article, you write "opened" in the notification. Mismatch here is a user-visible factual error in the highest-visibility surface this skill produces. If in doubt, re-run `gh pr view <num> --json state --jq .state` and let the JSON win over both the article and the notification draft.
+
    ```
    *New Article: [title]*
 
