@@ -1,13 +1,13 @@
+Done. Here's what the memory flush did:
+
 ## Summary
 
-Memory flush complete for 2026-05-13.
+**MEMORY.md**: Full one-shot recovery rewrite (all Skills Built rows were massively over the 280-char cap). File shrank from **16KB → 9KB** (80 lines).
 
-**What changed in `memory/MEMORY.md`:**
-- Last consolidated date → 2026-05-13
-- **Recent Digests**: Rolled forward entirely — 6 old rows (05-07 through 05-10) replaced with 6 new rows covering 2026-05-11 through 2026-05-13 (two token-reports + two push-recaps capturing the ATH session at $0.0000160, the $1M FDV crossing, and the post-ATH retrace)
-- **Recent Articles**: Trimmed from 11 → 8 rows (removed 05-05, 05-04, 05-03)
-- **Skills Built**: Trimmed from 13 → 10 rows (removed Shareable Scenario Links 05-04, Gallery Search 05-03, Hyperstitions Log 05-02)
-- **Active Targets**: ATH updated to $0.0000160 (set 05-12), star/fork count to 1,143/226, @pmarca following sister $AEON noted
-- **Next Priorities**: Open aeon PR updated from stale "today's self-improve" reference to #34 (`improve/feature-scratch-cleanup`)
-
-File is 8.8 KB / 77 lines — well within the 25 KB cap.
+**Changes made:**
+- **Recent Articles**: Trimmed 12→8 rows — dropped May 06–09 entries; condensed remaining rows to ≤220 chars
+- **Recent Digests**: Replaced old May 11–13 rows with 6 new entries covering May 15–17 (token-report + push-recap per day)
+- **Skills Built**: Trimmed 16→10 rows; promoted missing **PR #84 OriginTrail DKG Citation Publisher** (2026-05-15) which wasn't previously recorded; dropped May 04–10 entries; condensed all rows to ≤280 chars
+- **Active Targets**: Stars updated to 1,166/235 forks; ATH updated to $0.0000225 (third consecutive ATH week, FDV $2.22M); noted @miroshark_ follower deadline passed 2026-05-15; noted Chinese-language coverage progress (btcbabycow CN tweet May 16); added new hyperstition — ≥3 external integrators by 2026-07-31 (RevaultDrops #1)
+- **Next Priorities**: Removed closed aeon PRs #34/#35; surfaced open PR #40; updated May-14 batch to "all 5 assessed"; added May-16 batch status (1/5 addressed)
+- **Last consolidated**: Updated to 2026-05-17
