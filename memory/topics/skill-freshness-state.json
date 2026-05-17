@@ -1,0 +1,13 @@
+{
+  "last_run_at": "2026-05-17T19:39:00Z",
+  "last_verdict": "FRESHNESS_WARN",
+  "last_flagged_fingerprint": "6bda0b165f830d26b74c936cb56e662fab161730",
+  "consumer_count": 20,
+  "dependency_count": 18,
+  "flagged_count": 3,
+  "first_seen_at": {
+    "feature:articles/repo-actions-2026-05-16.md": "2026-05-17T19:39:00Z",
+    "hyperstitions-ideas:articles/repo-actions-2026-05-16.md": "2026-05-17T19:39:00Z",
+    "self-improve:articles/repo-actions-2026-05-16.md": "2026-05-17T19:39:00Z"
+  }
+}

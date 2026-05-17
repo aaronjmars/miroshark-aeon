@@ -1,0 +1,281 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Skill Freshness — 2026-05-17"
+      },
+      "children": [
+        "alert_warning",
+        "sep1",
+        "worst_section",
+        "sep2",
+        "context_section",
+        "sep3",
+        "arch_section",
+        "sep4",
+        "action_section",
+        "sep5",
+        "fullreport_link"
+      ]
+    },
+    "alert_warning": {
+      "type": "Alert",
+      "props": {
+        "title": "FRESHNESS_WARN",
+        "message": "3 of 18 deps flagged across 3 of 20 enabled consumers",
+        "type": "warning"
+      }
+    },
+    "sep1": {
+      "type": "Separator"
+    },
+    "worst_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "worst_heading",
+        "worst_item1",
+        "worst_item2",
+        "worst_item3"
+      ]
+    },
+    "worst_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Worst",
+        "level": "h3"
+      }
+    },
+    "worst_item1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "worst_text1",
+        "worst_meta1"
+      ]
+    },
+    "worst_text1": {
+      "type": "Text",
+      "props": {
+        "text": "feature ← articles/repo-actions-2026-05-16.md"
+      }
+    },
+    "worst_meta1": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "worst_age1",
+        "worst_class1",
+        "worst_sev1"
+      ]
+    },
+    "worst_age1": {
+      "type": "Badge",
+      "props": {
+        "text": "29.6h old",
+        "variant": "outline"
+      }
+    },
+    "worst_class1": {
+      "type": "Badge",
+      "props": {
+        "text": "articles/daily",
+        "variant": "secondary"
+      }
+    },
+    "worst_sev1": {
+      "type": "Badge",
+      "props": {
+        "text": "sev WARN",
+        "variant": "destructive"
+      }
+    },
+    "worst_item2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "worst_text2",
+        "worst_meta2"
+      ]
+    },
+    "worst_text2": {
+      "type": "Text",
+      "props": {
+        "text": "hyperstitions-ideas ← articles/repo-actions-2026-05-16.md"
+      }
+    },
+    "worst_meta2": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "worst_age2",
+        "worst_sameDep2"
+      ]
+    },
+    "worst_age2": {
+      "type": "Badge",
+      "props": {
+        "text": "29.6h old",
+        "variant": "outline"
+      }
+    },
+    "worst_sameDep2": {
+      "type": "Badge",
+      "props": {
+        "text": "same dep",
+        "variant": "secondary"
+      }
+    },
+    "worst_item3": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "worst_text3",
+        "worst_meta3"
+      ]
+    },
+    "worst_text3": {
+      "type": "Text",
+      "props": {
+        "text": "self-improve ← articles/repo-actions-2026-05-16.md"
+      }
+    },
+    "worst_meta3": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "worst_age3",
+        "worst_sameDep3"
+      ]
+    },
+    "worst_age3": {
+      "type": "Badge",
+      "props": {
+        "text": "29.6h old",
+        "variant": "outline"
+      }
+    },
+    "worst_sameDep3": {
+      "type": "Badge",
+      "props": {
+        "text": "same dep",
+        "variant": "secondary"
+      }
+    },
+    "sep2": {
+      "type": "Separator"
+    },
+    "context_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "context_heading",
+        "context_text"
+      ]
+    },
+    "context_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Context",
+        "level": "h3"
+      }
+    },
+    "context_text": {
+      "type": "Text",
+      "props": {
+        "text": "repo-actions runs every 2 days (0 14 */2 * *) — it ran May 16, next run May 18. The WARN is a spec cadence-bucket artifact (daily threshold = 28h; every-2-day cadence supports 52h). No genuine staleness; these consumers will read the correct most-recent output."
+      }
+    },
+    "sep3": {
+      "type": "Separator"
+    },
+    "arch_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "arch_heading",
+        "arch_text"
+      ]
+    },
+    "arch_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Architectural note",
+        "level": "h3"
+      }
+    },
+    "arch_text": {
+      "type": "Text",
+      "props": {
+        "text": "repo-pulse has never written articles/ (referenced by thread-formatter + operator-scorecard). operator-scorecard also references missing skill-analytics and heartbeat articles — degrades gracefully."
+      }
+    },
+    "sep4": {
+      "type": "Separator"
+    },
+    "action_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "action_heading",
+        "action_text"
+      ]
+    },
+    "action_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Action",
+        "level": "h3"
+      }
+    },
+    "action_text": {
+      "type": "Text",
+      "props": {
+        "text": "Monitor — expected to clear when repo-actions runs tomorrow (May 18 ~14:00 UTC)."
+      }
+    },
+    "sep5": {
+      "type": "Separator"
+    },
+    "fullreport_link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full Report",
+        "href": "articles/skill-freshness-2026-05-17.md"
+      }
+    }
+  }
+}
