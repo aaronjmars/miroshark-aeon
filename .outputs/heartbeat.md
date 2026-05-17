@@ -1,9 +1,11 @@
-**Date: Saturday May 16, 2026 — 19:08 UTC**
+Heartbeat — Sunday May 17, 2026 19:31 UTC
 
-HEARTBEAT_OK — all systems clear.
+✅ All 13 expected Sunday skills confirmed: token-report, fetch-tweets, tweet-allocator, repo-pulse, star-momentum-alert, feature, push-recap, star-milestone, project-lens, repo-article, thread-formatter, skill-leaderboard, memory-flush
 
-**Skills checked (14 ran, all confirmed):** token-report, fetch-tweets, tweet-allocator, repo-pulse, star-momentum-alert, hyperstitions-ideas (Saturday schedule), feature, self-improve, repo-actions (even-day), push-recap, star-milestone, project-lens, repo-article, thread-formatter.
+⚠️ skill-freshness (08:00 UTC daily) — absent from today's run list, 11.5h past schedule. Auto-triggered: https://github.com/aaronjmars/miroshark-aeon/actions/runs/26000601486
 
-**Open PRs:** MiroShark #85 (7.6h old) and aeon #40 (6h old) — neither stalled past 24h.
+📋 Stalled PRs (noted in push-recap, no new notification):
+  • MiroShark PR #85 Trajectory Chart SVG (~32h) — still open
+  • miroshark-aeon PR #40 project-lens PR-status verify (~30h) — still open
 
-**Issues:** No urgent labels on either repo. No stuck runs. No auto-triggers needed. Log appended to `memory/logs/2026-05-16.md`.
+No urgent issues on either repo.
