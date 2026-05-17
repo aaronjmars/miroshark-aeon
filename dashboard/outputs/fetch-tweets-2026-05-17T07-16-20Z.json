@@ -1,0 +1,314 @@
+{
+  "root": "card_root",
+  "state": {},
+  "elements": {
+    "card_root": {
+      "type": "Card",
+      "props": {
+        "title": "Top Tweets — $MIROSHARK OR @miroshark_ OR github.com/aaronjmars/miroshark (2026-05-17)"
+      },
+      "children": [
+        "stack_main"
+      ]
+    },
+    "stack_main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "group_tweet_1",
+        "group_tweet_2",
+        "group_tweet_3",
+        "group_tweet_4",
+        "group_tweet_5",
+        "group_tweet_6",
+        "group_tweet_7",
+        "group_tweet_8",
+        "group_tweet_9",
+        "group_tweet_10"
+      ]
+    },
+    "group_tweet_1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet_1",
+        "link_1"
+      ]
+    },
+    "tweet_1": {
+      "type": "TweetCard",
+      "props": {
+        "author": "100xDarren",
+        "handle": "100xDarren",
+        "text": "Both $Aeon and $Miroshark are looking strong today... I see a gap",
+        "likes": 56,
+        "retweets": 2
+      }
+    },
+    "link_1": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/100xDarren/status/2055797257652654291"
+      }
+    },
+    "group_tweet_2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet_2",
+        "link_2"
+      ]
+    },
+    "tweet_2": {
+      "type": "TweetCard",
+      "props": {
+        "author": "0xmikedee",
+        "handle": "0xmikedee",
+        "text": "$aeon and $miroshark are next up @aaronjmars what do you think?",
+        "likes": 50,
+        "retweets": 4
+      }
+    },
+    "link_2": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/0xmikedee/status/2055788775092170884"
+      }
+    },
+    "group_tweet_3": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet_3",
+        "link_3"
+      ]
+    },
+    "tweet_3": {
+      "type": "TweetCard",
+      "props": {
+        "author": "moonmarketcap",
+        "handle": "moonmarketcap",
+        "text": "MoonMarketCap New Listing ($MIROSHARK) MC: $1.4M, github.com/aaronjmars/MiroShark",
+        "likes": 27,
+        "retweets": 0
+      }
+    },
+    "link_3": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/moonmarketcap/status/2055557120771174807"
+      }
+    },
+    "group_tweet_4": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet_4",
+        "link_4"
+      ]
+    },
+    "tweet_4": {
+      "type": "TweetCard",
+      "props": {
+        "author": "m000_crypto",
+        "handle": "m000_crypto",
+        "text": "Japanese-language Grok breakdown of $AEON and $MIROSHARK — \"Universal Swarm Intelligence Engine\" summary",
+        "likes": 16,
+        "retweets": 1
+      }
+    },
+    "link_4": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/m000_crypto/status/2055798055832822151"
+      }
+    },
+    "group_tweet_5": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet_5",
+        "link_5"
+      ]
+    },
+    "tweet_5": {
+      "type": "TweetCard",
+      "props": {
+        "author": "madebyshun",
+        "handle": "madebyshun",
+        "text": "$Aeon x $BlueAgent x $MiroShark",
+        "likes": 9,
+        "retweets": 2
+      }
+    },
+    "link_5": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/madebyshun/status/2055788587950719009"
+      }
+    },
+    "group_tweet_6": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet_6",
+        "link_6"
+      ]
+    },
+    "tweet_6": {
+      "type": "TweetCard",
+      "props": {
+        "author": "BasedCult33",
+        "handle": "BasedCult33",
+        "text": "$MIROSHARK can be a good option too since $TACHI is a swarm system",
+        "likes": 7,
+        "retweets": 0
+      }
+    },
+    "link_6": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/BasedCult33/status/2055792626041807270"
+      }
+    },
+    "group_tweet_7": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet_7",
+        "link_7"
+      ]
+    },
+    "tweet_7": {
+      "type": "TweetCard",
+      "props": {
+        "author": "cybercelos",
+        "handle": "cybercelos",
+        "text": "$miroshark gap will be gone soon. This prophecy. $aeon and miroshark_ coded",
+        "likes": 4,
+        "retweets": 0
+      }
+    },
+    "link_7": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/cybercelos/status/2055798651893784674"
+      }
+    },
+    "group_tweet_8": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet_8",
+        "link_8"
+      ]
+    },
+    "tweet_8": {
+      "type": "TweetCard",
+      "props": {
+        "author": "Squiddyderpypy",
+        "handle": "Squiddyderpypy",
+        "text": "$AEON 6M / $MIROSHARK 2M / $RVAULT 200K",
+        "likes": 4,
+        "retweets": 0
+      }
+    },
+    "link_8": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/Squiddyderpypy/status/2055905347626504671"
+      }
+    },
+    "group_tweet_9": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet_9",
+        "link_9"
+      ]
+    },
+    "tweet_9": {
+      "type": "TweetCard",
+      "props": {
+        "author": "KoustavCh",
+        "handle": "KoustavCh",
+        "text": "$Miroshark creating a move soon! 1M MC, 300-450k avg vol, no bundled, no major holders. A GEM?!",
+        "likes": 4,
+        "retweets": 1
+      }
+    },
+    "link_9": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/KoustavCh/status/2055314728382271884"
+      }
+    },
+    "group_tweet_10": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet_10",
+        "link_10"
+      ]
+    },
+    "tweet_10": {
+      "type": "TweetCard",
+      "props": {
+        "author": "Dutch_AJ89",
+        "handle": "Dutch_AJ89",
+        "text": "$Miroshark still unknown and under the radar. Something unique",
+        "likes": 3,
+        "retweets": 0
+      }
+    },
+    "link_10": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/Dutch_AJ89/status/2055790287205650724"
+      }
+    }
+  }
+}

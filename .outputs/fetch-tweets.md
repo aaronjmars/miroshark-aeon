@@ -1,35 +1,41 @@
-*Top Tweets — $MIROSHARK OR @miroshark_ (2026-05-16)*
+*Top Tweets — $MIROSHARK OR @miroshark_ OR github.com/aaronjmars/miroshark (2026-05-17)*
 
-1. x.com/tsubixxx — "Who's ready for this? $MIROSHARK is next. Bookmark it." (May 15)
-Likes: 6 | RTs: 2
-[View tweet](https://x.com/tsubixxx/status/2055435946494181381)
+1. x.com/100xDarren — "Both $Aeon and $Miroshark are looking strong today... I see a gap"
+Likes: 56 | RTs: 2
+[View tweet](https://x.com/100xDarren/status/2055797257652654291)
 
-2. x.com/PoodleFi_ — Smart Money Buys on Base Chain (May 15): $MIROSHARK listed alongside $BNKR, $AEON, $VVV
-Likes: 6 | RTs: 1
-[View tweet](https://x.com/PoodleFi_/status/2055423915267354953)
+2. x.com/0xmikedee — "$aeon and $miroshark are next up @aaronjmars what do you think?"
+Likes: 50 | RTs: 4
+[View tweet](https://x.com/0xmikedee/status/2055788775092170884)
 
-3. x.com/btcbabycow — "米罗莎要来了 $miroshark" (Chinese: MiroShark is coming) (May 15)
-Likes: 6 | RTs: 0
-[View tweet](https://x.com/btcbabycow/status/2055418785964986533)
+3. x.com/moonmarketcap — "MoonMarketCap New Listing ($MIROSHARK) MC: $1.4M, github.com/aaronjmars/MiroShark"
+Likes: 27 | RTs: 0
+[View tweet](https://x.com/moonmarketcap/status/2055557120771174807)
 
-4. x.com/hectic_sneeze — "$MIROSHARK" (May 15)
-Likes: 0 | RTs: 0
-[View tweet](https://x.com/hectic_sneeze/status/2055415229098701262)
+4. x.com/m000_crypto — Japanese-language Grok breakdown of $AEON and $MIROSHARK — "Universal Swarm Intelligence Engine" summary
+Likes: 16 | RTs: 1
+[View tweet](https://x.com/m000_crypto/status/2055798055832822151)
 
-5. https://x.com/i/status/2055422507285717357
-[View tweet](https://x.com/i/status/2055422507285717357)
+5. x.com/madebyshun — "$Aeon x $BlueAgent x $MiroShark"
+Likes: 9 | RTs: 2
+[View tweet](https://x.com/madebyshun/status/2055788587950719009)
 
-6. https://x.com/i/status/2055417088018108556
-[View tweet](https://x.com/i/status/2055417088018108556)
+6. x.com/BasedCult33 — "$MIROSHARK can be a good option too since $TACHI is a swarm system"
+Likes: 7 | RTs: 0
+[View tweet](https://x.com/BasedCult33/status/2055792626041807270)
 
-7. https://x.com/i/status/2055422379619443161
-[View tweet](https://x.com/i/status/2055422379619443161)
+7. x.com/cybercelos — "$miroshark gap will be gone soon. This prophecy. $aeon and miroshark_ coded"
+Likes: 4 | RTs: 0
+[View tweet](https://x.com/cybercelos/status/2055798651893784674)
 
-8. https://x.com/i/status/2055421286369706087
-[View tweet](https://x.com/i/status/2055421286369706087)
+8. x.com/Squiddyderpypy — "$AEON 6M / $MIROSHARK 2M / $RVAULT 200K"
+Likes: 4 | RTs: 0
+[View tweet](https://x.com/Squiddyderpypy/status/2055905347626504671)
 
-9. https://x.com/i/status/2055422640559673799
-[View tweet](https://x.com/i/status/2055422640559673799)
+9. x.com/KoustavCh — "$Miroshark creating a move soon! 1M MC, 300-450k avg vol, no bundled, no major holders. A GEM?!"
+Likes: 4 | RTs: 1
+[View tweet](https://x.com/KoustavCh/status/2055314728382271884)
 
-10. https://x.com/i/status/2055434076085989726
-[View tweet](https://x.com/i/status/2055434076085989726)
+10. x.com/Dutch_AJ89 — "$Miroshark still unknown and under the radar. Something unique"
+Likes: 3 | RTs: 0
+[View tweet](https://x.com/Dutch_AJ89/status/2055790287205650724)
