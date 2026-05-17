@@ -1,0 +1,300 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Tweet Rewards — 2026-05-17",
+        "description": "$10.00 in $MIROSHARK on Base"
+      },
+      "children": [
+        "tweets_stack",
+        "separator",
+        "total"
+      ]
+    },
+    "tweets_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "lg"
+      },
+      "children": [
+        "tweet_1",
+        "tweet_2",
+        "tweet_3",
+        "tweet_4",
+        "tweet_5"
+      ]
+    },
+    "tweet_1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet_1_meta",
+        "tweet_1_card",
+        "tweet_1_link"
+      ]
+    },
+    "tweet_1_meta": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "tweet_1_reward",
+        "tweet_1_score"
+      ]
+    },
+    "tweet_1_reward": {
+      "type": "Stat",
+      "props": {
+        "label": "Reward",
+        "value": "$4.25 MIROSHARK"
+      }
+    },
+    "tweet_1_score": {
+      "type": "Badge",
+      "props": {
+        "text": "score: 62"
+      }
+    },
+    "tweet_1_card": {
+      "type": "TweetCard",
+      "props": {
+        "author": "100xDarren",
+        "handle": "100xDarren",
+        "text": "Both $Aeon and $Miroshark are looking strong today... I see a gap"
+      }
+    },
+    "tweet_1_link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/100xDarren/status/2055797257652654291"
+      }
+    },
+    "tweet_2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet_2_meta",
+        "tweet_2_card",
+        "tweet_2_link"
+      ]
+    },
+    "tweet_2_meta": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "tweet_2_reward",
+        "tweet_2_score"
+      ]
+    },
+    "tweet_2_reward": {
+      "type": "Stat",
+      "props": {
+        "label": "Reward",
+        "value": "$4.25 MIROSHARK"
+      }
+    },
+    "tweet_2_score": {
+      "type": "Badge",
+      "props": {
+        "text": "score: 62"
+      }
+    },
+    "tweet_2_card": {
+      "type": "TweetCard",
+      "props": {
+        "author": "0xmikedee",
+        "handle": "0xmikedee",
+        "text": "$aeon and $miroshark are next up @aaronjmars what do you think?"
+      }
+    },
+    "tweet_2_link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/0xmikedee/status/2055788775092170884"
+      }
+    },
+    "tweet_3": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet_3_meta",
+        "tweet_3_card",
+        "tweet_3_link"
+      ]
+    },
+    "tweet_3_meta": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "tweet_3_reward",
+        "tweet_3_score"
+      ]
+    },
+    "tweet_3_reward": {
+      "type": "Stat",
+      "props": {
+        "label": "Reward",
+        "value": "$0.50 MIROSHARK"
+      }
+    },
+    "tweet_3_score": {
+      "type": "Badge",
+      "props": {
+        "text": "score: 7"
+      }
+    },
+    "tweet_3_card": {
+      "type": "TweetCard",
+      "props": {
+        "author": "BasedCult33",
+        "handle": "BasedCult33",
+        "text": "$MIROSHARK can be a good option too since $TACHI is a swarm system"
+      }
+    },
+    "tweet_3_link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/BasedCult33/status/2055792626041807270"
+      }
+    },
+    "tweet_4": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet_4_meta",
+        "tweet_4_card",
+        "tweet_4_link"
+      ]
+    },
+    "tweet_4_meta": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "tweet_4_reward",
+        "tweet_4_score"
+      ]
+    },
+    "tweet_4_reward": {
+      "type": "Stat",
+      "props": {
+        "label": "Reward",
+        "value": "$0.50 MIROSHARK"
+      }
+    },
+    "tweet_4_score": {
+      "type": "Badge",
+      "props": {
+        "text": "score: 7"
+      }
+    },
+    "tweet_4_card": {
+      "type": "TweetCard",
+      "props": {
+        "author": "KoustavCh",
+        "handle": "KoustavCh",
+        "text": "$Miroshark creating a move soon! 1M MC, no bundled, no major holders. A GEM?!"
+      }
+    },
+    "tweet_4_link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/KoustavCh/status/2055314728382271884"
+      }
+    },
+    "tweet_5": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet_5_meta",
+        "tweet_5_card",
+        "tweet_5_link"
+      ]
+    },
+    "tweet_5_meta": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "tweet_5_reward",
+        "tweet_5_score"
+      ]
+    },
+    "tweet_5_reward": {
+      "type": "Stat",
+      "props": {
+        "label": "Reward",
+        "value": "$0.50 MIROSHARK"
+      }
+    },
+    "tweet_5_score": {
+      "type": "Badge",
+      "props": {
+        "text": "score: 4"
+      }
+    },
+    "tweet_5_card": {
+      "type": "TweetCard",
+      "props": {
+        "author": "cybercelos",
+        "handle": "cybercelos",
+        "text": "$miroshark gap will be gone soon. This prophecy. $aeon coded"
+      }
+    },
+    "tweet_5_link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/cybercelos/status/2055798651893784674"
+      }
+    },
+    "separator": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "total": {
+      "type": "Text",
+      "props": {
+        "text": "Total: $10.00 in $MIROSHARK allocated to 5 authors",
+        "variant": "lead"
+      }
+    }
+  }
+}
