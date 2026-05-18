@@ -328,3 +328,4 @@ date,skill,model,input_tokens,output_tokens,cache_read,cache_creation
 2026-05-18,token-report,claude-sonnet-4-6,11,17978,503315,60288
 2026-05-18,ai-framework-watch,claude-sonnet-4-6,16,17956,697303,49693
 2026-05-18,operator-scorecard,claude-sonnet-4-6,13,12983,806406,83868
+2026-05-18,feature,claude-opus-4-7,192,75236,25776435,234321
