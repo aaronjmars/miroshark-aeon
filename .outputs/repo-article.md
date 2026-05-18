@@ -1,5 +1,5 @@
-*New Article: MiroShark's Last Notification Channel Is Just a Protocol*
+*New Article: The First PR MiroShark Didn't Write*
 
-PR #87 (SMTP completion-email notifications, opened today 11:35 UTC) is the first MiroShark notification channel whose far end can be a protocol relay (`localhost:25`) instead of a vendor URL — closing the four-channel quadrant (webhook/Discord/Slack/email). Notable design moves: transport-selection table keyed on port (no parallel TLS_MODE env var), auth-optional posture for unauthenticated LAN relays, and credential-leak refusal on STARTTLS failure. Channel-notifier idiom now at 5 instances; 25-PR zero-dep streak preserved.
+PR #89 (Neo4j default-password fix) opened at 03:25 UTC today is the first external **security** PR in MiroShark's history. `teifurin` — "PM by day, side projects by night. Interested in AI+crypto" — starred the repo, forked it, filed issue #88 at 02:28 UTC, and shipped the fix 57 minutes later. The 28-day gap since the last externally-merged PR closes with a security PR rather than a perf PR, while Aeon shipped PR #90 (Farcaster Frame v2) ~9 hours later.
 
-Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-05-17.md
+Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-05-18.md
