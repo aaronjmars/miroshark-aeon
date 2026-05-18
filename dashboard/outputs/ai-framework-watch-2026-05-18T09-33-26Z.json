@@ -1,0 +1,221 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "AI Framework Watch"
+      },
+      "children": [
+        "heading-main",
+        "stack-release-week",
+        "stack-metrics",
+        "sep-1",
+        "heading-releases",
+        "table-releases",
+        "sep-2",
+        "heading-gaps",
+        "stack-gaps",
+        "sep-3",
+        "heading-anchor",
+        "text-anchor",
+        "sep-4",
+        "link-digest"
+      ]
+    },
+    "heading-main": {
+      "type": "Heading",
+      "props": {
+        "text": "AI Framework Watch — 2026-05-18",
+        "level": "h1"
+      },
+      "children": []
+    },
+    "stack-release-week": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "text-release-week"
+      ]
+    },
+    "text-release-week": {
+      "type": "Text",
+      "props": {
+        "text": "RELEASE WEEK: 6 frameworks shipped — langgraph, crewAI [PRE], llamaindex, mastra, smolagents, pydantic-ai",
+        "variant": "lead"
+      },
+      "children": []
+    },
+    "stack-metrics": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "lg"
+      },
+      "children": [
+        "stat-frameworks",
+        "stat-releases",
+        "stat-breaking"
+      ]
+    },
+    "stat-frameworks": {
+      "type": "Stat",
+      "props": {
+        "label": "Tracked frameworks",
+        "value": "9/9"
+      },
+      "children": []
+    },
+    "stat-releases": {
+      "type": "Stat",
+      "props": {
+        "label": "Releases (7d)",
+        "value": "16"
+      },
+      "children": []
+    },
+    "stat-breaking": {
+      "type": "Stat",
+      "props": {
+        "label": "Breaking flags",
+        "value": "0"
+      },
+      "children": []
+    },
+    "sep-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "heading-releases": {
+      "type": "Heading",
+      "props": {
+        "text": "Releases worth reading",
+        "level": "h2"
+      },
+      "children": []
+    },
+    "table-releases": {
+      "type": "Table",
+      "props": {
+        "columns": [
+          "Framework",
+          "Version",
+          "Key Changes"
+        ],
+        "rows": [
+          [
+            "langchain-ai/langgraph",
+            "1.2.0",
+            "durable error-handler resume across host crashes; set_node_defaults(); DeltaChannel APIs marked beta (5 packages promoted stable)"
+          ],
+          [
+            "pydantic/pydantic-ai",
+            "v1.97.0",
+            "GoogleProvider split into GoogleProvider + GoogleCloudProvider; provider IDs renamed; MCPToolset replaces MCPServer* (deprecated) — provider API changed, review changelog before upgrading"
+          ],
+          [
+            "mastra-ai/mastra",
+            "@mastra/core@1.34.0",
+            "ACP coding agents as tools/subagents; xAI realtime voice; push-capable PubSub + HTTP workflow events; ResponseCache"
+          ],
+          [
+            "huggingface/smolagents",
+            "v1.25.0",
+            "importlib → registry pattern for agent/model deserialization"
+          ],
+          [
+            "crewAIInc/crewAI",
+            "1.14.5a6 [PRE]",
+            "alpha cadence continues; last stable release was 2025-09-30"
+          ]
+        ]
+      },
+      "children": []
+    },
+    "sep-2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "heading-gaps": {
+      "type": "Heading",
+      "props": {
+        "text": "Notable gaps",
+        "level": "h2"
+      },
+      "children": []
+    },
+    "stack-gaps": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "text-gap-1",
+        "text-gap-2"
+      ]
+    },
+    "text-gap-1": {
+      "type": "Text",
+      "props": {
+        "text": "microsoft/autogen (★58k) — last push 2026-04-15; quiet ~33 days, no release"
+      },
+      "children": []
+    },
+    "text-gap-2": {
+      "type": "Text",
+      "props": {
+        "text": "stanfordnlp/dspy — 3.2.1 shipped 2026-05-05, just outside the 7d window"
+      },
+      "children": []
+    },
+    "sep-3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "heading-anchor": {
+      "type": "Heading",
+      "props": {
+        "text": "Anchor (aeon)",
+        "level": "h2"
+      },
+      "children": []
+    },
+    "text-anchor": {
+      "type": "Text",
+      "props": {
+        "text": "★ 366 (+— this week) · 0 releases · 9/9 by absolute rank · active dev, GitHub-Actions-native cadence"
+      },
+      "children": []
+    },
+    "sep-4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "link-digest": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full digest",
+        "href": "articles/ai-framework-watch-2026-05-18.md",
+        "source": "Aeon"
+      },
+      "children": []
+    }
+  }
+}
