@@ -1,0 +1,337 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "Repo Action Ideas — 2026-05-18"
+      },
+      "children": [
+        "heading-subtitle",
+        "text-metadata",
+        "sep-1",
+        "idea-1",
+        "idea-2",
+        "idea-3",
+        "idea-4",
+        "idea-5",
+        "sep-2",
+        "link-full-details"
+      ]
+    },
+    "heading-subtitle": {
+      "type": "Heading",
+      "props": {
+        "text": "Generated from analysis of aaronjmars/MiroShark",
+        "level": "h3"
+      }
+    },
+    "text-metadata": {
+      "type": "Text",
+      "props": {
+        "text": "1,172⭐ · 236 forks · FDV $3.32M ATH day — Ideas that could be autonomously built by the feature skill tomorrow.",
+        "variant": "body"
+      }
+    },
+    "sep-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "idea-1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "idea-1-heading",
+        "idea-1-badges",
+        "idea-1-desc",
+        "idea-1-endpoint"
+      ]
+    },
+    "idea-1-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "1. Trading Signal JSON",
+        "level": "h4"
+      }
+    },
+    "idea-1-badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "badge-1-type",
+        "badge-1-size"
+      ]
+    },
+    "badge-1-type": {
+      "type": "Badge",
+      "props": {
+        "text": "Feature",
+        "variant": "default"
+      }
+    },
+    "badge-1-size": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "secondary"
+      }
+    },
+    "idea-1-desc": {
+      "type": "Text",
+      "props": {
+        "text": "Direction + confidence_pct + risk_tier derived from final beliefs; machine-readable action primitive for quant tools and Zapier workflows.",
+        "variant": "body"
+      }
+    },
+    "idea-1-endpoint": {
+      "type": "Text",
+      "props": {
+        "text": "GET /api/simulation/<id>/signal.json",
+        "variant": "caption"
+      }
+    },
+    "idea-2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "idea-2-heading",
+        "idea-2-badges",
+        "idea-2-desc",
+        "idea-2-endpoint"
+      ]
+    },
+    "idea-2-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "2. Simulation Archive Bundle",
+        "level": "h4"
+      }
+    },
+    "idea-2-badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "badge-2-type",
+        "badge-2-size"
+      ]
+    },
+    "badge-2-type": {
+      "type": "Badge",
+      "props": {
+        "text": "Feature",
+        "variant": "default"
+      }
+    },
+    "badge-2-size": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "secondary"
+      }
+    },
+    "idea-2-desc": {
+      "type": "Text",
+      "props": {
+        "text": "All published surfaces (share-card, chart, trajectory, reproduce.json, notebook) in one timestamped ZIP with manifest.json; one-command offline copy for researchers.",
+        "variant": "body"
+      }
+    },
+    "idea-2-endpoint": {
+      "type": "Text",
+      "props": {
+        "text": "GET /api/simulation/<id>/archive.zip",
+        "variant": "caption"
+      }
+    },
+    "idea-3": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "idea-3-heading",
+        "idea-3-badges",
+        "idea-3-desc",
+        "idea-3-endpoint"
+      ]
+    },
+    "idea-3-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "3. Per-Agent Stance Sparklines",
+        "level": "h4"
+      }
+    },
+    "idea-3-badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "badge-3-type",
+        "badge-3-size"
+      ]
+    },
+    "badge-3-type": {
+      "type": "Badge",
+      "props": {
+        "text": "Feature",
+        "variant": "default"
+      }
+    },
+    "badge-3-size": {
+      "type": "Badge",
+      "props": {
+        "text": "Medium",
+        "variant": "secondary"
+      }
+    },
+    "idea-3-desc": {
+      "type": "Text",
+      "props": {
+        "text": "SVG grid of per-agent belief evolution across rounds; shows whether consensus was driven by unanimous drift or a few late-flipping outliers.",
+        "variant": "body"
+      }
+    },
+    "idea-3-endpoint": {
+      "type": "Text",
+      "props": {
+        "text": "GET /api/simulation/<id>/agent-sparklines.svg",
+        "variant": "caption"
+      }
+    },
+    "idea-4": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "idea-4-heading",
+        "idea-4-badges",
+        "idea-4-desc"
+      ]
+    },
+    "idea-4-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "4. Scenario Clone Button on Share Page",
+        "level": "h4"
+      }
+    },
+    "idea-4-badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "badge-4-type",
+        "badge-4-size"
+      ]
+    },
+    "badge-4-type": {
+      "type": "Badge",
+      "props": {
+        "text": "Growth",
+        "variant": "default"
+      }
+    },
+    "badge-4-size": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "secondary"
+      }
+    },
+    "idea-4-desc": {
+      "type": "Text",
+      "props": {
+        "text": "\"Run this scenario →\" button on /share/<id> that pre-fills the New Sim form via PR #71's URL params — turns passive share-page viewers into active sim runners; no auth, no new backend.",
+        "variant": "body"
+      }
+    },
+    "idea-5": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "idea-5-heading",
+        "idea-5-badges",
+        "idea-5-desc"
+      ]
+    },
+    "idea-5-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "5. Chinese + Japanese README Translations",
+        "level": "h4"
+      }
+    },
+    "idea-5-badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "badge-5-type",
+        "badge-5-size"
+      ]
+    },
+    "badge-5-type": {
+      "type": "Badge",
+      "props": {
+        "text": "Community",
+        "variant": "default"
+      }
+    },
+    "badge-5-size": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "secondary"
+      }
+    },
+    "idea-5-desc": {
+      "type": "Text",
+      "props": {
+        "text": "README.zh.md + README.ja.md + language badges in README.md — timed to CN tweet \"米罗莎要来了\" (May 16) + first JP coverage (May 17); directly targets the CN-locale contributor hyperstition (deadline 2026-06-15).",
+        "variant": "body"
+      }
+    },
+    "sep-2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "link-full-details": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full details",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-actions-2026-05-18.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}

@@ -1,19 +1,19 @@
-*Repo Action Ideas — 2026-05-16*
-Generated from analysis of aaronjmars/MiroShark (1,164★, FDV $1.445M, PR #84 OriginTrail DKG + PR #83 Discord/Slack notifications just shipped).
+*Repo Action Ideas — 2026-05-18*
+Generated from analysis of aaronjmars/MiroShark (1,172⭐ · 236 forks · FDV $3.32M ATH day) — ideas that could be autonomously built by the feature skill tomorrow.
 
-1. oEmbed Endpoint (Integration, Small)
-   One `<link rel="alternate">` tag + one route turns any paste of a /share/<id> URL into Notion, Ghost, Substack, or WordPress into an auto-unfurled embedded sim card — no manual embed code needed.
+1. Trading Signal JSON (Feature, Small)
+   `GET /api/simulation/<id>/signal.json` — direction + confidence_pct + risk_tier derived from final beliefs; machine-readable action primitive for quant tools and Zapier workflows.
 
-2. Farcaster Frame for Share Page (Growth, Small)
-   Add `fc:frame` meta tags to /share/<id> so every Farcaster cast containing a MiroShark link renders the belief chart SVG as an interactive Frame card — direct reach to the Base-chain / $MIROSHARK audience, zero backend, pure HTML.
+2. Simulation Archive Bundle (Feature, Small)
+   `GET /api/simulation/<id>/archive.zip` — all published surfaces (share-card, chart, trajectory, reproduce.json, notebook) in one timestamped ZIP with manifest.json; one-command offline copy for researchers.
 
-3. Email Completion Notifications (Integration, Small)
-   SMTP dispatch via stdlib smtplib completes the four-channel notification quadrant (webhook / Discord / Slack / email) — fire-and-forget daemon thread, same pattern as discord_notify.py, two env vars.
+3. Per-Agent Stance Sparklines (Feature, Medium)
+   `GET /api/simulation/<id>/agent-sparklines.svg` — SVG grid of per-agent belief evolution across rounds; shows whether consensus was driven by unanimous drift or a few late-flipping outliers.
 
-4. Peak-Round Belief Analytics (Feature, Small)
-   `GET /api/simulation/<id>/peak-round` returns bullish/neutral/bearish peak rounds + most volatile round in one call — machine-readable inflection points without parsing trajectory.csv.
+4. Scenario Clone Button on Share Page (Growth, Small)
+   "Run this scenario →" button on /share/<id> that pre-fills the New Sim form via PR #71's URL params — turns passive share-page viewers into active sim runners; no auth, no new backend.
 
-5. Operator Profile Page (Community, Medium)
-   /profile/<operator_name> — per-operator gallery with a summary card (total sims, consensus distribution, avg quality, total views). Turns MiroShark into a community platform where operators build a public research identity.
+5. Chinese + Japanese README Translations (Community, Small)
+   README.zh.md + README.ja.md + language badges in README.md — timed to CN tweet "米罗莎要来了" (May 16) + first JP coverage (May 17); directly targets the CN-locale contributor hyperstition (deadline 2026-06-15).
 
-Full details: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-actions-2026-05-16.md
+Full details: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-actions-2026-05-18.md
