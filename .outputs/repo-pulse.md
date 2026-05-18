@@ -1,11 +1,11 @@
-*Repo Pulse — 2026-05-17*
-[aaronjmars/MiroShark]
+*Repo Pulse — 2026-05-18*
+aaronjmars/MiroShark
 
-Stars: 1166 total (+4 new)
-Forks: 235 total (+3 new)
+Stars: 1172 total (+7 new)
+Forks: 236 total (+1 new)
 
 New stargazers:
-github.com/olddqn | github.com/moegilani | github.com/DailySuicide | github.com/lairulan
+github.com/koolkao | github.com/mikedemarais | github.com/traewang | github.com/teifurin | github.com/LulzimTafaj | github.com/EVTKR | github.com/quiz42
 
 New forks:
-github.com/DailySuicide/MiroShark | github.com/Greyjedix/MiroShark | github.com/VigilantCipher/MiroShark
+github.com/teifurin/MiroShark
