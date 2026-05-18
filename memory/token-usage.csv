@@ -326,4 +326,4 @@ date,skill,model,input_tokens,output_tokens,cache_read,cache_creation
 2026-05-17,memory-flush,claude-sonnet-4-6,10,28128,433941,63069
 2026-05-17,skill-freshness,claude-sonnet-4-6,21,30845,1388213,85342
 2026-05-18,token-report,claude-sonnet-4-6,11,17978,503315,60288
-2026-05-18,tweet-allocator,claude-sonnet-4-6,11,4206,326400,29529
+2026-05-18,weekly-shiplog,claude-opus-4-7,32,22327,1641151,125741

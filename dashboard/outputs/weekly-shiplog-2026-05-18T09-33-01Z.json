@@ -1,0 +1,282 @@
+{
+  "root": "card-weekly-shiplog",
+  "state": {},
+  "elements": {
+    "card-weekly-shiplog": {
+      "type": "Card",
+      "props": {
+        "title": "Weekly Shiplog"
+      },
+      "children": [
+        "stack-main"
+      ]
+    },
+    "stack-main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading-date",
+        "text-intro",
+        "separator-1",
+        "heading-shipped",
+        "stack-shipped-items",
+        "separator-2",
+        "heading-aeon",
+        "stack-aeon-items",
+        "separator-3",
+        "heading-stats",
+        "grid-stats",
+        "separator-4",
+        "link-full-article"
+      ]
+    },
+    "heading-date": {
+      "type": "Heading",
+      "props": {
+        "text": "2026-05-18",
+        "level": "h2"
+      }
+    },
+    "text-intro": {
+      "type": "Text",
+      "props": {
+        "text": "Surfaces left the host. Two structural quadrants closed: notifications went from 1 channel to 4 (Webhook + Discord + Slack + Email), and the citation chain reached on-chain provenance.",
+        "variant": "body"
+      }
+    },
+    "separator-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading-shipped": {
+      "type": "Heading",
+      "props": {
+        "text": "Shipped (9 MiroShark PRs)",
+        "level": "h3"
+      }
+    },
+    "stack-shipped-items": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "shipped-1",
+        "shipped-2",
+        "shipped-3",
+        "shipped-4",
+        "shipped-5"
+      ]
+    },
+    "shipped-1": {
+      "type": "Text",
+      "props": {
+        "text": "Discord/Slack rich-embed completion notifications (#83) + SMTP email (#87) — channel-notifier idiom now at 5 instances",
+        "variant": "body"
+      }
+    },
+    "shipped-2": {
+      "type": "Text",
+      "props": {
+        "text": "OriginTrail DKG on-chain citation (#84) — first MiroShark artifact verifiable on hardware Aaron does not own",
+        "variant": "body"
+      }
+    },
+    "shipped-3": {
+      "type": "Text",
+      "props": {
+        "text": "Jupyter notebook export (#80) + trajectory chart SVG (#85) — citation chain reaches runnable + embeddable",
+        "variant": "body"
+      }
+    },
+    "shipped-4": {
+      "type": "Text",
+      "props": {
+        "text": "Filtered RSS/Atom (#81) + sitemap.xml (#82) — corpus becomes discoverable to syndicators and search engines",
+        "variant": "body"
+      }
+    },
+    "shipped-5": {
+      "type": "Text",
+      "props": {
+        "text": "Webhook HMAC signing (#79) + Grok→Gemini deprecation hotfix (#86) — first ops-keepalive merge in repo history",
+        "variant": "body"
+      }
+    },
+    "separator-2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading-aeon": {
+      "type": "Heading",
+      "props": {
+        "text": "Aeon Self-Corrections (8 PRs)",
+        "level": "h3"
+      }
+    },
+    "stack-aeon-items": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "aeon-1",
+        "aeon-2",
+        "aeon-3",
+        "aeon-4",
+        "aeon-5"
+      ]
+    },
+    "aeon-1": {
+      "type": "Text",
+      "props": {
+        "text": "Feature-skill scratch leak cleanup",
+        "variant": "body"
+      }
+    },
+    "aeon-2": {
+      "type": "Text",
+      "props": {
+        "text": "Grep-existing-routes",
+        "variant": "body"
+      }
+    },
+    "aeon-3": {
+      "type": "Text",
+      "props": {
+        "text": "29-skill catalog sync",
+        "variant": "body"
+      }
+    },
+    "aeon-4": {
+      "type": "Text",
+      "props": {
+        "text": "Project-lens PR-status verify",
+        "variant": "body"
+      }
+    },
+    "aeon-5": {
+      "type": "Text",
+      "props": {
+        "text": "Skill-freshness cron cadence",
+        "variant": "body"
+      }
+    },
+    "separator-3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading-stats": {
+      "type": "Heading",
+      "props": {
+        "text": "Stats",
+        "level": "h3"
+      }
+    },
+    "grid-stats": {
+      "type": "Grid",
+      "props": {
+        "columns": 2,
+        "gap": "md"
+      },
+      "children": [
+        "stat-prs",
+        "stat-lines",
+        "stat-streak",
+        "stat-stars",
+        "stat-forks",
+        "stat-miroshark",
+        "stat-ath",
+        "stat-fdv"
+      ]
+    },
+    "stat-prs": {
+      "type": "Stat",
+      "props": {
+        "label": "PRs Merged",
+        "value": "17",
+        "delta": "9 MiroShark + 8 aeon"
+      }
+    },
+    "stat-lines": {
+      "type": "Stat",
+      "props": {
+        "label": "Lines Changed",
+        "value": "+11,627",
+        "delta": "-128"
+      }
+    },
+    "stat-streak": {
+      "type": "Stat",
+      "props": {
+        "label": "Zero-New-Deps Streak",
+        "value": "24 PRs"
+      }
+    },
+    "stat-stars": {
+      "type": "Stat",
+      "props": {
+        "label": "GitHub Stars",
+        "value": "1,171",
+        "delta": "+37",
+        "trend": "up"
+      }
+    },
+    "stat-forks": {
+      "type": "Stat",
+      "props": {
+        "label": "GitHub Forks",
+        "value": "236",
+        "delta": "+10",
+        "trend": "up"
+      }
+    },
+    "stat-miroshark": {
+      "type": "Stat",
+      "props": {
+        "label": "$MIROSHARK Weekly Gain",
+        "value": "+447%",
+        "trend": "up"
+      }
+    },
+    "stat-ath": {
+      "type": "Stat",
+      "props": {
+        "label": "ATH Sessions",
+        "value": "4 Consecutive"
+      }
+    },
+    "stat-fdv": {
+      "type": "Stat",
+      "props": {
+        "label": "Fully Diluted Valuation",
+        "value": "$3.32M"
+      }
+    },
+    "separator-4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "link-full-article": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full Weekly Shiplog Update",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/weekly-shiplog-2026-05-18.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}

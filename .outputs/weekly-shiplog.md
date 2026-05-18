@@ -1,13 +1,16 @@
-*Weekly Shiplog — 2026-05-11*
+*Weekly Shiplog — 2026-05-18*
 
-Many surfaces became a surface network: 8 MiroShark PRs (#71-#78) converted last week's fan of independent endpoints into a self-reinforcing observability → distribution → discovery loop, closed Sunday night.
+Surfaces left the host. Two structural quadrants closed: notifications went from 1 channel to 4 (Webhook + Discord + Slack + Email), and the citation chain reached on-chain provenance.
 
-Shipped:
-- Three new surfaces (PR #72 tweet thread, PR #73 webhook delivery log, PR #74 surface usage analytics) closed the operator-observability loop
-- Two metadata primitives (PR #75 reproduce.json citation key + PR #76 lineage navigator) made finished sims citable AND navigable
-- PR #77 + #78 wired the metadata into surface-stats and turned the counter into ?sort=trending — first feedback loop where pulls decide what gets shown
-- Aeon side: 4 self-corrections (project-lens rotation, token-report volume, heartbeat headers, MEMORY.md row caps)
+Shipped (9 MiroShark PRs):
+- Discord/Slack rich-embed completion notifications (#83) + SMTP email (#87) — channel-notifier idiom now at 5 instances
+- OriginTrail DKG on-chain citation (#84) — first MiroShark artifact verifiable on hardware Aaron does not own
+- Jupyter notebook export (#80) + trajectory chart SVG (#85) — citation chain reaches runnable + embeddable
+- Filtered RSS/Atom (#81) + sitemap.xml (#82) — corpus becomes discoverable to syndicators and search engines
+- Webhook HMAC signing (#79) + Grok→Gemini deprecation hotfix (#86) — first ops-keepalive merge in repo history
 
-Stats: 8 MiroShark PRs + 4 aeon PRs merged, +9,351 / -124 lines, 17-PR zero-new-deps streak, 1,061 → 1,130 stars (+69), $MIROSHARK new ATH $0.000007517 today (+113.5% week)
+Plus 8 aeon self-corrections — feature-skill scratch leak cleanup, grep-existing-routes, 29-skill catalog sync, project-lens PR-status verify, skill-freshness cron cadence.
 
-Full update: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/weekly-shiplog-2026-05-11.md
+Stats: 9 MiroShark PRs + 8 aeon PRs merged, +11,627/-128 lines, 24-PR zero-new-deps streak. Stars 1,134 → 1,171 (+37); forks 226 → 236 (+10). $MIROSHARK +447% week, four consecutive ATH sessions, FDV $3.32M.
+
+Full update: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/weekly-shiplog-2026-05-18.md
