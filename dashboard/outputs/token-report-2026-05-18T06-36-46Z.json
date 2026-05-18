@@ -1,0 +1,154 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "$MIROSHARK Daily — 2026-05-18"
+      },
+      "children": [
+        "stack-main"
+      ]
+    },
+    "stack-main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "grid-metrics-1",
+        "grid-metrics-2",
+        "stat-buys-sells",
+        "grid-metrics-3",
+        "separator-1",
+        "text-commentary",
+        "separator-2",
+        "link-chart"
+      ]
+    },
+    "grid-metrics-1": {
+      "type": "Grid",
+      "props": {
+        "columns": 2,
+        "gap": "md"
+      },
+      "children": [
+        "stat-price",
+        "stat-ath"
+      ]
+    },
+    "stat-price": {
+      "type": "Stat",
+      "props": {
+        "label": "Price",
+        "value": "$0.00003323",
+        "delta": "+41.25%",
+        "trend": "up"
+      }
+    },
+    "stat-ath": {
+      "type": "Stat",
+      "props": {
+        "label": "🆕 ATH",
+        "value": "$0.0000377"
+      }
+    },
+    "grid-metrics-2": {
+      "type": "Grid",
+      "props": {
+        "columns": 2,
+        "gap": "md"
+      },
+      "children": [
+        "stat-liquidity",
+        "stat-volume"
+      ]
+    },
+    "stat-liquidity": {
+      "type": "Stat",
+      "props": {
+        "label": "Liquidity",
+        "value": "$1.05M"
+      }
+    },
+    "stat-volume": {
+      "type": "Stat",
+      "props": {
+        "label": "24h Volume",
+        "value": "$1.18M",
+        "delta": "+17.2%",
+        "trend": "up"
+      }
+    },
+    "stat-buys-sells": {
+      "type": "Stat",
+      "props": {
+        "label": "Buys/Sells",
+        "value": "1,340/876 (1.53×)"
+      }
+    },
+    "grid-metrics-3": {
+      "type": "Grid",
+      "props": {
+        "columns": 3,
+        "gap": "md"
+      },
+      "children": [
+        "stat-7d",
+        "stat-30d",
+        "stat-fdv"
+      ]
+    },
+    "stat-7d": {
+      "type": "Stat",
+      "props": {
+        "label": "7d",
+        "value": "+447%",
+        "trend": "up"
+      }
+    },
+    "stat-30d": {
+      "type": "Stat",
+      "props": {
+        "label": "30d",
+        "value": "+1,397%",
+        "trend": "up"
+      }
+    },
+    "stat-fdv": {
+      "type": "Stat",
+      "props": {
+        "label": "FDV",
+        "value": "$3.32M"
+      }
+    },
+    "separator-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "text-commentary": {
+      "type": "Text",
+      "props": {
+        "text": "4th consecutive ATH session. Volume cleared $1M/day for the first time — absorbing at highs.",
+        "variant": "lead"
+      }
+    },
+    "separator-2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "link-chart": {
+      "type": "Link",
+      "props": {
+        "label": "Chart",
+        "href": "https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209"
+      }
+    }
+  }
+}
