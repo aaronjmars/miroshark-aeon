@@ -1,0 +1,44 @@
+{
+  "version": "1",
+  "generated_at": "2026-05-18T10:30:00Z",
+  "skill": "operator-scorecard",
+  "title": "Operator Scorecard — 2026-05-18",
+  "spec": {
+    "type": "Stack",
+    "props": {"direction": "vertical", "gap": "md"},
+    "children": [
+      {"type": "Heading", "props": {"level": 2, "children": "Operator Scorecard — 2026-05-18"}},
+      {"type": "Alert", "props": {"variant": "default", "children": "OK — Clean week across all three lanes: 6/7 heartbeats passing, +42 stars, $69.99 in $AEON distributed to 20 recipients, $MIROSHARK +447% 7d through four consecutive ATH sessions."}},
+      {"type": "Grid", "props": {"columns": 3, "gap": "sm"}, "children": [
+        {"type": "Card", "props": {"children": [
+          {"type": "Text", "props": {"variant": "muted", "children": "Agent health"}},
+          {"type": "Heading", "props": {"level": 3, "children": "6/7"}},
+          {"type": "Text", "props": {"children": "heartbeat runs · 1 auto-remediated"}}
+        ]}},
+        {"type": "Card", "props": {"children": [
+          {"type": "Text", "props": {"variant": "muted", "children": "Stars added"}},
+          {"type": "Heading", "props": {"level": 3, "children": "+42"}},
+          {"type": "Text", "props": {"children": "12 forks · new contributors N/A"}}
+        ]}},
+        {"type": "Card", "props": {"children": [
+          {"type": "Text", "props": {"variant": "muted", "children": "$AEON distributed"}},
+          {"type": "Heading", "props": {"level": 3, "children": "$69.99"}},
+          {"type": "Text", "props": {"children": "20 recipients · token +447% 7d"}}
+        ]}}
+      ]},
+      {"type": "Heading", "props": {"level": 3, "children": "Verdicts by lane"}},
+      {"type": "Table", "props": {
+        "columns": [
+          {"key": "lane", "header": "Lane"},
+          {"key": "verdict", "header": "Verdict"},
+          {"key": "headline", "header": "Headline"}
+        ],
+        "rows": [
+          {"lane": "Agent health", "verdict": "OK", "headline": "6/7 clean heartbeats; 1 auto-remediated missing-skill alert, 0 P0/P1 flags"},
+          {"lane": "Community growth", "verdict": "OK", "headline": "+42 stars, +12 forks this week (6.0/day average)"},
+          {"lane": "Economic activity", "verdict": "OK", "headline": "$69.99 to 20 recipients; token +447% 7d, FDV $3.32M, 4th consecutive ATH session"}
+        ]
+      }}
+    ]
+  }
+}
