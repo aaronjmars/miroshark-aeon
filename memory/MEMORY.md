@@ -41,6 +41,7 @@ Full implementation notes in daily logs. Each row ≤280 chars.
 
 | Skill | Date | Notes |
 |-------|------|-------|
+| repo-pulse Article Output | 2026-05-18 | aeon PR #42 — new step 7 in `skills/repo-pulse/SKILL.md` writes `articles/repo-pulse-${today}.md` with canonical fields (`stargazers_count`, `forks_count`, `New stars (24h)`, `New forks (24h)`) that operator-scorecard's parser already targets. Closes architectural gap flagged by 2026-05-17 skill-freshness audit (5 consumers referenced the article, producer never wrote it). |
 | Farcaster Frame v2 | 2026-05-18 | PR #90 — `fc:frame:*` meta tags in share-page `<head>` + `GET /<id>/frame-metadata`. Chart-SVG (2:1) as Frame image with share-card PNG (1.91:1) fallback for pre-trajectory sims. Single "View Simulation →" link button. `frame_metadata.py` (~210 LoC stdlib), 13 offline tests. EmbedDialog 🟣 section with Warpcast composer link. Closes Base-chain audience gap. Zero new deps (streak: 26 PRs). |
 | SMTP Completion Email Notifications | 2026-05-17 | PR #87 — stdlib `smtplib` completion emails. Port-keyed transport (465=SSL, 587=STARTTLS, 25=plain), auth-optional, STARTTLS-failure refusal. `multipart/alternative` body with Unicode block bars + inline-CSS swatches. 34 tests. Zero new deps (streak: 25 PRs). |
 | Project-Lens PR Status Verification | 2026-05-16 | aeon PR #40 — `gh pr view <num> --json state,mergedAt` verification step added to project-lens; step-6 assertion that notification PR-status verb matches article body word-for-word. Fixes 2026-05-15 "merged"/"opened" drift bug. |
