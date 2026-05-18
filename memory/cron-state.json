@@ -20,14 +20,14 @@
     "success_rate": 1
   },
   "project-lens": {
-    "last_status": "success",
+    "last_status": "dispatched",
     "last_success": "2026-05-17T16:13:44Z",
     "total_runs": 35,
     "total_successes": 35,
     "total_failures": 0,
     "consecutive_failures": 0,
     "success_rate": 1,
-    "last_dispatch": "2026-05-17T16:07:49Z",
+    "last_dispatch": "2026-05-18T16:01:52Z",
     "last_quality_score": 4
   },
   "repo-actions": {
@@ -42,14 +42,14 @@
     "last_quality_score": 5
   },
   "push-recap": {
-    "last_status": "success",
+    "last_status": "dispatched",
     "last_success": "2026-05-17T15:20:08Z",
     "total_runs": 36,
     "total_successes": 35,
     "total_failures": 1,
     "consecutive_failures": 0,
     "success_rate": 0.97,
-    "last_dispatch": "2026-05-17T15:14:42Z",
+    "last_dispatch": "2026-05-18T16:01:52Z",
     "last_failed": "2026-04-17T16:58:29Z",
     "last_error": "dc1098cf5df3fe999e32efbe90 5c21220ef39cb0ba1df052bc9398ba5d16be2e82; do\\n  gh api repos/aaronjmars/miroshark-aeon/commits/\\\"$sha\\\" --jq '{sha: .sha[0:7], stats: .stats, files: [.files[] | {filename: ."
   },
@@ -104,8 +104,8 @@
     "success_rate": 1
   },
   "repo-article": {
-    "last_dispatch": "2026-05-17T16:07:49Z",
-    "last_status": "success",
+    "last_dispatch": "2026-05-18T16:01:52Z",
+    "last_status": "dispatched",
     "last_success": "2026-05-17T16:12:16Z",
     "total_runs": 34,
     "total_successes": 34,
@@ -154,8 +154,8 @@
     "success_rate": 1
   },
   "star-milestone": {
-    "last_dispatch": "2026-05-17T15:41:40Z",
-    "last_status": "success",
+    "last_dispatch": "2026-05-18T16:01:52Z",
+    "last_status": "dispatched",
     "last_success": "2026-05-17T15:43:11Z",
     "total_runs": 4,
     "total_successes": 4,
