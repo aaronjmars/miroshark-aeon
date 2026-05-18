@@ -1,0 +1,60 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "Tweet Allocator",
+        "description": "2026-05-18"
+      },
+      "children": [
+        "status-alert",
+        "separator-1",
+        "details-stack"
+      ]
+    },
+    "status-alert": {
+      "type": "Alert",
+      "props": {
+        "title": "No Eligible Tweeters",
+        "type": "info"
+      },
+      "children": []
+    },
+    "separator-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "details-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stat-tweets",
+        "stat-artifacts"
+      ]
+    },
+    "stat-tweets": {
+      "type": "Stat",
+      "props": {
+        "label": "Real tweets from excluded project account (aaronjmars)",
+        "value": "3"
+      },
+      "children": []
+    },
+    "stat-artifacts": {
+      "type": "Stat",
+      "props": {
+        "label": "XAI annotation artifacts dropped",
+        "value": "4"
+      },
+      "children": []
+    }
+  }
+}
