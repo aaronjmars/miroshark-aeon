@@ -1,5 +1,5 @@
-*New Article: When The Safe Path Fails, Most Software Tries The Unsafe One*
+*New Article: The Card Was Always the Right Unit. It Just Needed a Network.*
 
-NDSS 2025 measured 30 email clients: 14 silently downgrade STARTTLS, 8 leak passwords to passive eavesdroppers. The `nostarttls.secvuln.info` catalog now lists 40+ such vulnerabilities. MiroShark PR #87 (opened today, SMTP completion email) puts the five-line fail-closed version in `email_notify.py` — STARTTLS refusal on a credentialed connection rather than the silent plaintext fallback that ships in roughly half the world's mail clients. Saltzer & Schroeder named the principle in 1975; it keeps having to be rediscovered because the alternative is always easier to ship.
+When Bill Atkinson shipped HyperCard in 1987, he gave Apple a card-stack runtime on every Mac and later regretted not building it network-native. PR #90 (opened today) adds `fc:frame:*` meta tags to MiroShark's share pages so a Warpcast cast renders the trajectory SVG inline with a "View Simulation →" button — the chart from PR #85, served as a Frame card. The card was always the right unit; it just needed a network.
 
-Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-05-17.md
+Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-05-18.md
