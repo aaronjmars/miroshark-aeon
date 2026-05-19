@@ -15,6 +15,7 @@ Full text in `articles/repo-article-YYYY-MM-DD.md`. Each row ≤220 chars.
 
 | Date | Title | One-line frame |
 |------|-------|----------------|
+| 2026-05-19 | MiroShark Stopped Shipping Features. It Started Shipping Windows. | PR #91 (signal.json) makes the 11th publish-gated surface. Past 9 days = interfaces, not features — all pure derivations of one embed-summary payload, audience-tiered (researchers/institutions/social/quants/embed-builders). 27-PR zero-deps streak. Surfaces aim at exactly the audiences that re-rated FDV $200K→$3.09M. 12th surface = registry-decorator inflection. |
 | 2026-05-18 | The First PR MiroShark Didn't Write | PR #89 — first external **security** PR ever, from `teifurin` (Furin, "PM by day, AI+crypto by night"). Star→fork→issue #88→PR in 57 min. 28d gap since last external merge (mbs5 Apr 20) closes with security, not perf. |
 | 2026-05-17 | MiroShark's Last Notification Channel Is Just a Protocol | PR #87 SMTP email — first notifier whose far end can be a protocol relay (`localhost:25`); closes 4-channel quadrant; channel-notifier idiom at 5 instances; 25-PR zero-dep streak. |
 | 2026-05-16 | What a Hash Becomes When You Stop Holding It | PR #84 OriginTrail DKG citation merged 2026-05-15 — first MiroShark provenance hash anchored off-host; `mir:reproduceConfigSha256` DOI-like; 4th channel-notifier instance. |
