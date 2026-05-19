@@ -1,21 +1,16 @@
-*Push Recap — 2026-05-18*
-MiroShark: 2 PRs merged, 3 open — 6 substantive commits by 2 authors
-aeon: 2 PRs merged, 1 open — ~9 substantive content commits
+*Push Recap — 2026-05-19*
+aaronjmars/MiroShark — 1 PR merged on main, 1 PR opened (branch push); aaronjmars/miroshark-aeon — 1 PR merged on main. Authors: aeonframework + Aeon (CI).
 
-*Two-merge night on MiroShark*: PR #85 (chart SVG, +1,099/-4) and PR #87 (SMTP email, +1,661/-29) both landed at 23:43Z May 17, within 4 seconds of each other. Closes the embed citation chain (chart_svg.py via stdlib `xml.etree.ElementTree` joins the notebook + DKG embed family) AND the notification quadrant (4th channel after webhook/Discord/Slack). 24-PR zero-new-deps streak preserved. simulation_runner.py now runs a 5-deep channel fan-out at terminal-state hooks.
+*Farcaster Frame v2 lands:* PR #90 merged ~25.5h after opening. `fc:frame:*` meta-tag injection in `<head>` of public share pages + `GET /<id>/frame-metadata`. Chart SVG (PR #85 merged yesterday) becomes the Frame backing image at 2:1 — bullish/neutral/bearish curves visible directly in Warpcast feed. Single "View Simulation →" link button. Pre-trajectory sims fall back to share-card PNG at 1.91:1. Closes Base-chain audience gap: `$MIROSHARK` lives on Base, Base-native social = Farcaster.
 
-*First external security PR ever on MiroShark*: PR #89 (Neo4j default password removal) opened today by `teifurin` (Furin) — same handle that starred AND forked the repo today. +3/-3 across docker-compose.yml + .env.example. Body cites the 2020 Neo4j "Meow" attacks + Shodan-driven sweeps. First external contributor doing focused security review with a clear threat model.
+*Trading Signal JSON opens (PR #91, OPEN):* 11th publish-gated share surface. `GET /<id>/signal.json` collapses final-state belief split + quality health into a single machine-readable action primitive — direction (Bullish/Neutral/Bearish) + confidence_pct (0=split / 100=unanimous) + risk_tier from quality health. Pure derivation from existing embed-summary payload; a "Bullish 62%" signal here matches every other surface byte-for-byte. Quant-tool surface twin to PR #80 (Jupyter, researcher) and PR #84 (DKG, institutional). 26 new offline tests.
 
-*Aeon self-correction PRs land*: PR #40 (project-lens must verify PR status with `gh pr view --json state,mergedAt` before drafting notify; word-for-word verb match) and PR #41 (skill-freshness `every_Nd` cadence bucket; `*/2` skills now get 52h threshold instead of false-firing FRESHNESS_WARN every odd day) both merged. Both single-file, both surgical fixes for false-positives caught in last week's logs.
-
-*Tight self-improve loop*: yesterday's skill-freshness audit flagged "repo-pulse never writes articles/" → today's self-improve emits aeon PR #42 to fix it. 24h from observation to PR.
-
-*Base-chain audience reach pending*: PR #90 Farcaster Frame v2 opened today (+1,140/-0, 10 files). Pairs with the now-merged chart.svg as the 2:1 Frame backing image. Likely fast-merge.
+*Aeon self-improve loop closes again:* PR #42 (repo-pulse article output) merged 48h after the May-17 skill-freshness audit flagged the gap. Step 7 added to `skills/repo-pulse/SKILL.md` to emit `articles/repo-pulse-${today}.md` with the canonical fields 5 consumer skills (operator-scorecard, thread-formatter, star-momentum-alert, show-hn-draft, skill-freshness) had been silently falling back to memory/logs parsers for. Second consecutive self-correction cycle merged <48h.
 
 Key changes:
-- chart_svg.py (442 LoC stdlib): bytewise-deterministic SVG with three stance polylines, fixed 800×400 viewBox, reuses trajectory_export.build_rows
-- email_notify.py (796 LoC stdlib): port-keyed transport (465=SSL, 587=STARTTLS, 25=plain), auth-optional, refuses to send on credentialed STARTTLS failure (no cleartext password leak)
-- skill-freshness `every_Nd` cadence handler — eliminates false-positives on *2-day skills
+- `backend/app/services/frame_metadata.py` (+235 new, stdlib): `build_frame_metadata()` selects chart.svg at 2:1 or share-card.png at 1.91:1, suppresses Frame tags for private sims
+- `backend/app/services/signal_service.py` (+241 new, stdlib): `compute_signal(summary)` with plurality + `bullish>bearish>neutral` tie-break, confidence anchors (33.3% ⇒ 0, 100% ⇒ 100), risk-tier from quality health
+- `skills/repo-pulse/SKILL.md` (+33, -1): new step 7 closes the longest-standing producer/consumer gap in the aeon skill graph
 
-Stats: +2,760/-33 across 25 files merged to MiroShark main; +7/-2 in aeon SKILL.md fixes; ~600 lines new article content; 36+ housekeeping commits.
-Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-05-18.md
+Stats: +2,362 / -3 across 21 files (MiroShark main 1,140 LoC + MiroShark PR-branch 1,189 LoC + aeon main 33 LoC). 27-PR zero-new-deps streak preserved (#57 → #87 → #90 → #91 candidate). Stars 1172 → 1175 (+3); forks 236 → 237 (+1).
+Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-05-19.md
