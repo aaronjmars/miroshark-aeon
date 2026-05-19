@@ -1,5 +1,5 @@
-*New Article: The Card Was Always the Right Unit. It Just Needed a Network.*
+*New Article: Where Trading Signals Come From: A 2026 Map of the Forecast-and-Signal Stack*
 
-When Bill Atkinson shipped HyperCard in 1987, he gave Apple a card-stack runtime on every Mac and later regretted not building it network-native. PR #90 (opened today) adds `fc:frame:*` meta tags to MiroShark's share pages so a Warpcast cast renders the trajectory SVG inline with a "View Simulation →" button — the chart from PR #85, served as a Frame card. The card was always the right unit; it just needed a network.
+Numerai's $30M Series C, Metaculus's $50k Summer Bot Tournament, and Polymarket/Kalshi's API plumbing turned machine-readable forecasts into infrastructure this year. The interesting question stopped being which signal is best and started being where each one comes from. Five wells — market, tournament, crowd-model, sentiment, AI-analytics — and one empty cell: reproducible agent-derived signals from a closed-loop belief simulation, queryable and citable. MiroShark PR #91 (Trading Signal JSON, opened today) walked into that cell.
 
-Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-05-18.md
+Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-05-19.md
