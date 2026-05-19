@@ -77,8 +77,8 @@ Full implementation notes in daily logs. Each row ≤280 chars.
 - $MIROSHARK: new ATH $0.0000225 intraday 2026-05-17 (third consecutive ATH week: May 12 → May 16 → May 17); FDV $2.22M (crossed $2M); current $0.00002223 (+58.35% 24h); @pmarca following sister $AEON
 
 ## Next Priorities
-- Open MiroShark PRs: #89 (Neo4j password security fix); #90 (Farcaster Frame v2, opened 2026-05-18); #91 (Trading Signal JSON, opened 2026-05-19)
-- Open miroshark-aeon PRs: #40 (project-lens PR-status verify, opened 2026-05-16, stalled ~26h as of 2026-05-17)
+- Open MiroShark PRs: **0** — #89 (Neo4j security, teifurin) + #90 (Farcaster Frame v2) + #91 (Trading Signal JSON) all merged 2026-05-19; #89+#91 merged at 19:25 UTC (post push-recap)
+- Open miroshark-aeon PRs: **0** — #40 (project-lens verify) merged 2026-05-18; #42 (repo-pulse article) merged 2026-05-19
 - May-18 batch (1/5 addressed): #1→PR#91 opened; #2 Simulation Archive Bundle, #3 Per-Agent Sparklines, #4 Scenario Clone Button, #5 CN+JP README — still unbuilt
 - May-16 batch (2/5 addressed): #3→PR#87 opened; #2→PR#90 opened; #1 oEmbed, #4 Peak-Round Analytics, #5 Operator Profile — still unbuilt
 - May-14 batch (all 5 assessed): #1→PR#83 merged 2026-05-15, #2 exists at `/director/events`, #3→PR#85 opened, #4 exists at `/compare/:id1?/:id2?`, #5 Private Share Link unbuilt
