@@ -1,1 +1,1 @@
-Tweet Allocator — 2026-05-18: no eligible tweeters (all 3 real tweets from excluded project account aaronjmars; 4 XAI annotation artifacts dropped).
+Tweet Allocator — 2026-05-19: no eligible tweeters (8 annotation citations in today's log have no author handles or engagement data).
