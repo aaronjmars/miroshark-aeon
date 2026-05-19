@@ -1,25 +1,27 @@
-*Top Tweets — $MIROSHARK OR @miroshark_ OR github.com/aaronjmars/miroshark (2026-05-18)*
+*Top Tweets — $MIROSHARK OR @miroshark_ OR github.com/aaronjmars/miroshark (2026-05-19)*
 
-1. x.com/aaronjmars — message to all new solana users on base: just ask chatgpt / claude / grok to explain miroshark & aeon repo to you
-Likes: 45 | RTs: 6
-[View tweet](https://x.com/aaronjmars/status/2056159484808921203)
+8 new tweets found via XAI search (annotation citations — no preview available).
 
-2. x.com/aaronjmars — any big VC eyeing on $MIROSHARK?
-Likes: 8 | RTs: 0
-[View tweet](https://x.com/aaronjmars/status/2056159155967189068)
+1. x.com/i/status/2056511643912134685
+[View tweet](https://x.com/i/status/2056511643912134685)
 
-3. x.com/aaronjmars — you can do this on MiroShark (with github.com/aaronjmars/MiroShark link)
-Likes: 0 | RTs: 0
-[View tweet](https://x.com/aaronjmars/status/2056161008813518980)
+2. x.com/i/status/2056517000340385812
+[View tweet](https://x.com/i/status/2056517000340385812)
 
-4. x.com/i/status/2056156356915441812 — (annotation citation)
-[View tweet](https://x.com/i/status/2056156356915441812)
+3. x.com/i/status/2056511861450023106
+[View tweet](https://x.com/i/status/2056511861450023106)
 
-5. x.com/i/status/2056152697510801646 — (annotation citation)
-[View tweet](https://x.com/i/status/2056152697510801646)
+4. x.com/i/status/2056514042337071543
+[View tweet](https://x.com/i/status/2056514042337071543)
 
-6. x.com/i/status/2056151445540610446 — (annotation citation)
-[View tweet](https://x.com/i/status/2056151445540610446)
+5. x.com/i/status/2056511621774651630
+[View tweet](https://x.com/i/status/2056511621774651630)
 
-7. x.com/i/status/2056153283409154101 — (annotation citation)
-[View tweet](https://x.com/i/status/2056153283409154101)
+6. x.com/i/status/2056511583711338807
+[View tweet](https://x.com/i/status/2056511583711338807)
+
+7. x.com/i/status/2056521454741598447
+[View tweet](https://x.com/i/status/2056521454741598447)
+
+8. x.com/i/status/2056525189748240805
+[View tweet](https://x.com/i/status/2056525189748240805)
