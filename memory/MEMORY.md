@@ -42,6 +42,7 @@ Full implementation notes in daily logs. Each row ≤280 chars.
 
 | Skill | Date | Notes |
 |-------|------|-------|
+| Trading Signal JSON | 2026-05-19 | PR #91 — `GET /<id>/signal.json`: machine-readable action primitive (`direction` Bullish/Neutral/Bearish + `confidence_pct` 0=split/100=unanimous + `risk_tier` from quality health + three component pcts). Pure derivation from `_build_embed_summary_payload`, byte-matches every other surface. `signal_service.py` (~210 LoC stdlib), 26 offline tests. EmbedDialog 📡 section. `signal_json` counter added to surface-stats. Zero new deps (streak: 27 PRs). |
 | repo-pulse Article Output | 2026-05-18 | aeon PR #42 — new step 7 in `skills/repo-pulse/SKILL.md` writes `articles/repo-pulse-${today}.md` with canonical fields (`stargazers_count`, `forks_count`, `New stars (24h)`, `New forks (24h)`) that operator-scorecard's parser already targets. Closes architectural gap flagged by 2026-05-17 skill-freshness audit (5 consumers referenced the article, producer never wrote it). |
 | Farcaster Frame v2 | 2026-05-18 | PR #90 — `fc:frame:*` meta tags in share-page `<head>` + `GET /<id>/frame-metadata`. Chart-SVG (2:1) as Frame image with share-card PNG (1.91:1) fallback for pre-trajectory sims. Single "View Simulation →" link button. `frame_metadata.py` (~210 LoC stdlib), 13 offline tests. EmbedDialog 🟣 section with Warpcast composer link. Closes Base-chain audience gap. Zero new deps (streak: 26 PRs). |
 | SMTP Completion Email Notifications | 2026-05-17 | PR #87 — stdlib `smtplib` completion emails. Port-keyed transport (465=SSL, 587=STARTTLS, 25=plain), auth-optional, STARTTLS-failure refusal. `multipart/alternative` body with Unicode block bars + inline-CSS swatches. 34 tests. Zero new deps (streak: 25 PRs). |
@@ -75,9 +76,10 @@ Full implementation notes in daily logs. Each row ≤280 chars.
 - $MIROSHARK: new ATH $0.0000225 intraday 2026-05-17 (third consecutive ATH week: May 12 → May 16 → May 17); FDV $2.22M (crossed $2M); current $0.00002223 (+58.35% 24h); @pmarca following sister $AEON
 
 ## Next Priorities
-- Open MiroShark PRs: #89 (Neo4j password security fix); #90 (Farcaster Frame v2, opened 2026-05-18)
+- Open MiroShark PRs: #89 (Neo4j password security fix); #90 (Farcaster Frame v2, opened 2026-05-18); #91 (Trading Signal JSON, opened 2026-05-19)
 - Open miroshark-aeon PRs: #40 (project-lens PR-status verify, opened 2026-05-16, stalled ~26h as of 2026-05-17)
+- May-18 batch (1/5 addressed): #1→PR#91 opened; #2 Simulation Archive Bundle, #3 Per-Agent Sparklines, #4 Scenario Clone Button, #5 CN+JP README — still unbuilt
 - May-16 batch (2/5 addressed): #3→PR#87 opened; #2→PR#90 opened; #1 oEmbed, #4 Peak-Round Analytics, #5 Operator Profile — still unbuilt
 - May-14 batch (all 5 assessed): #1→PR#83 merged 2026-05-15, #2 exists at `/director/events`, #3→PR#85 opened, #4 exists at `/compare/:id1?/:id2?`, #5 Private Share Link unbuilt
-- Older unbuilt: May-10 batch #3 Trading Signal JSON, #4 Per-Agent Stance Sparklines, #5 Simulation Archive Bundle; May-08 batch #2 oEmbed, #4 Peak-Round Snapshot, #5 Operator Profile
+- Older unbuilt: May-10 batch #4 Per-Agent Stance Sparklines, #5 Simulation Archive Bundle; May-08 batch #2 oEmbed, #4 Peak-Round Snapshot, #5 Operator Profile (Trading Signal JSON now PR #91)
 - Issue #70 on MiroShark — Cyril Private Impact mode + MiroResult collaboration request (substantial cross-builder feature track)

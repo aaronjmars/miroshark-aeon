@@ -1,0 +1,171 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Feature Built"
+      },
+      "children": [
+        "heading_signal",
+        "text_intro",
+        "sep1",
+        "heading_why",
+        "text_why",
+        "sep2",
+        "heading_built",
+        "stack_built",
+        "sep3",
+        "heading_how",
+        "text_how",
+        "sep4",
+        "heading_next",
+        "text_next",
+        "sep5",
+        "link_pr"
+      ]
+    },
+    "heading_signal": {
+      "type": "Heading",
+      "props": {
+        "text": "Trading Signal JSON",
+        "level": "h2"
+      }
+    },
+    "text_intro": {
+      "type": "Text",
+      "props": {
+        "text": "MiroShark simulations now produce a machine-readable trading signal. GET /api/simulation/<id>/signal.json returns a single JSON line with direction (Bullish / Neutral / Bearish), confidence_pct (0 = pure three-way split, 100 = unanimous), risk_tier (low / medium / high, mapped from quality health), and the three component percentages. A quant tool, Zapier / Make / n8n workflow, or alert pipeline can branch on direction without parsing CSV or reading a chart."
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading_why": {
+      "type": "Heading",
+      "props": {
+        "text": "Why this matters",
+        "level": "h3"
+      }
+    },
+    "text_why": {
+      "type": "Text",
+      "props": {
+        "text": "Five export surfaces already exist (trajectory.csv, chart.svg, transcript, reproduce.json, notebook.ipynb) — all of them describe what happened. None of them produces a signal. The audience holding $MIROSHARK has shifted from \"people who run sims\" to \"people who use sim output in trading workflows\" — btcbabycow CN tweet \"米罗莎要来了\", first JP coverage @m000_crypto, and the 5-session ATH streak driving FDV from $1.18M → $3.09M all converge on the same gap. PR #91 closes the last mile between \"a sim produces data\" and \"a sim produces a signal.\""
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading_built": {
+      "type": "Heading",
+      "props": {
+        "text": "What was built",
+        "level": "h3"
+      }
+    },
+    "stack_built": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "item1",
+        "item2",
+        "item3",
+        "item4",
+        "item5"
+      ]
+    },
+    "item1": {
+      "type": "Text",
+      "props": {
+        "text": "backend/app/services/signal_service.py (new, ~210 LoC stdlib): compute_signal() reads the same belief.final percentages the embed-summary builds, picks the plurality stance with a documented tie-break order (bullish > bearish > neutral), computes confidence as distance from the 33.3% noise floor, maps quality health → risk tier with a default-to-high posture for unknown quality."
+      }
+    },
+    "item2": {
+      "type": "Text",
+      "props": {
+        "text": "backend/app/api/simulation.py: new GET /<sim_id>/signal.json route — publish-gated, 404 on sims without a final block, pretty-printed sorted-keys output, 5-minute cache, increments the new signal_json surface counter."
+      }
+    },
+    "item3": {
+      "type": "Text",
+      "props": {
+        "text": "backend/openapi.yaml: TradingSignal schema + operation under Publish & Embed; signal_json registered on SimulationSurfaceStats so OpenAPI consumers see the counter."
+      }
+    },
+    "item4": {
+      "type": "Text",
+      "props": {
+        "text": "backend/tests/test_unit_signal_service.py (new, 26 offline tests): payload shape, plurality + tie-break edges (3-way split, 50/50 bullish/bearish, bearish==neutral), confidence anchors (33.3⇒0, 100⇒100, 66.7⇒~50), every None-returning input path, risk-tier mapping across all health values, ISO-8601 UTC + Z shape."
+      }
+    },
+    "item5": {
+      "type": "Text",
+      "props": {
+        "text": "frontend/src/components/EmbedDialog.vue: 📡 Trading signal section beneath the chart row — direction/confidence badge in header, preview rows for direction + confidence + risk tier + breakdown, Download .json + Copy URL + Copy curl, loads on dialog open and re-fetches when publish flips."
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading_how": {
+      "type": "Heading",
+      "props": {
+        "text": "How it works",
+        "level": "h3"
+      }
+    },
+    "text_how": {
+      "type": "Text",
+      "props": {
+        "text": "Pure derivation. No new computation. The underlying numbers are the same ones the gallery card already displays, the share card PNG already renders, and the trajectory CSV already serves — a \"Bullish 62%\" signal here matches every other surface byte-for-byte; only the shape is new. Confidence formula is (leading_pct - 33.333) / 66.667 * 100 clamped to [0, 100] and rounded to 1 dp, so a quant consumer can interpret the field on paper without reading docs. signal_generated_at re-derives on every request (it tracks the signal computation time, not the underlying sim) — bytewise determinism is deliberately not a property of this surface, unlike reproduce.json / notebook.ipynb whose bytes need to be citation-hashable."
+      }
+    },
+    "sep4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading_next": {
+      "type": "Heading",
+      "props": {
+        "text": "What's next",
+        "level": "h3"
+      }
+    },
+    "text_next": {
+      "type": "Text",
+      "props": {
+        "text": "A ?format=text variant for cron / email consumers, a signal-history.csv historical series (one row per round) for signal-stability research, and a \"consensus alert\" webhook variant that posts on every direction flip during a live run."
+      }
+    },
+    "sep5": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "link_pr": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #91: Trading Signal JSON feature",
+        "href": "https://github.com/aaronjmars/MiroShark/pull/91",
+        "source": "GitHub"
+      }
+    }
+  }
+}
