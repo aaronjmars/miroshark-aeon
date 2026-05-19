@@ -83,12 +83,44 @@ Read memory/watched-repos.md for the list of repos to track. Skip any repo whose
    - Omit "New forks" section entirely if there are none
    - Do NOT include traffic data, watchers, or open issues
 
-7. **Log** to `memory/logs/${today}.md` — ALWAYS include the exact current counts so the next run can calculate deltas:
+7. **Write the article** to `articles/repo-pulse-${today}.md` — this is the canonical structured artifact that downstream consumers (`operator-scorecard`, `thread-formatter`, `star-momentum-alert`, `show-hn-draft`, `skill-freshness`) read. Always write the file when at least one repo was fetched in this run, even when there are zero new stars and zero new forks — consumers need the counts row to verify "no activity" vs "no run". Overwrite on same-day reruns so the file always reflects the latest counts.
+
+   Format (one `##` block per non-skipped repo, in the order they were processed):
+
+   ```markdown
+   # Repo Pulse — ${today}
+
+   ## aaronjmars/repo
+
+   - **stargazers_count:** X
+   - **forks_count:** Y
+   - **New stars (24h):** N
+   - **New forks (24h):** M
+   - **Notification sent:** yes/no
+
+   **New stargazers:**
+   - github.com/user1
+   - github.com/user2
+
+   **New forks:**
+   - github.com/user1/repo
+   ```
+
+   Format rules:
+   - The two key fields `stargazers_count` and `forks_count` MUST use the exact `**stargazers_count:** N` / `**forks_count:** N` markup (matches `operator-scorecard` step 3a parser).
+   - The two delta fields `New stars (24h)` and `New forks (24h)` MUST use the exact `**New stars (24h):** N` / `**New forks (24h):** N` markup (same parser).
+   - Omit the `**New stargazers:**` block entirely if N == 0. Same for forks.
+   - For multi-repo runs, emit one `##` block per repo in fetch order; do not interleave fields across repos.
+   - Repos that were skipped via the step-1 idempotency gate (`REPO_PULSE_DUPLICATE`) appear in the article as a single-line `- **Status:** REPO_PULSE_DUPLICATE` row under the repo header — keep the counts on the same row as a courtesy for the parser, but omit the `New stargazers` / `New forks` lists (the earlier same-day run already covered them).
+   - If ALL repos in the run hit the idempotency gate, still write the file (overwrite) so the article date suffix advances and consumers can find today's file — the body is just the per-repo `REPO_PULSE_DUPLICATE` rows.
+
+8. **Log** to `memory/logs/${today}.md` — ALWAYS include the exact current counts so the next run can calculate deltas:
    ```
    ## Repo Pulse
    - **aaronjmars/repo**: stargazers_count=X, forks_count=Y
    - **New stars (24h):** N
    - **New forks (24h):** N
+   - **Article:** articles/repo-pulse-${today}.md
    - **Notification sent:** yes/no
    ```
 
