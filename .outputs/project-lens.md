@@ -1,5 +1,5 @@
-*New Article: Where Trading Signals Come From: A 2026 Map of the Forecast-and-Signal Stack*
+*New Article: Cryptographic Provenance Was a Mandate This Week. For One Project, It Was Already Architecture.*
 
-Numerai's $30M Series C, Metaculus's $50k Summer Bot Tournament, and Polymarket/Kalshi's API plumbing turned machine-readable forecasts into infrastructure this year. The interesting question stopped being which signal is best and started being where each one comes from. Five wells — market, tournament, crowd-model, sentiment, AI-analytics — and one empty cell: reproducible agent-derived signals from a closed-loop belief simulation, queryable and citable. MiroShark PR #91 (Trading Signal JSON, opened today) walked into that cell.
+OpenAI joined C2PA on May 19 and the EU AI Act's Article 50 draft guidelines on synthetic-content marking are now in consultation ahead of an August 2 deadline. MiroShark merged PR #92 yesterday — `archive.zip` with a per-file SHA-256 manifest, the 12th cryptographically-anchored surface the project has shipped in nine days. The whole audit-trail stack the regulation is reaching toward is already running in production, built from the standard library, with no new dependency in 28 PRs.
 
-Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-05-19.md
+Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-05-20.md
