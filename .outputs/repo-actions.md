@@ -1,19 +1,19 @@
-*Repo Action Ideas — 2026-05-18*
-Generated from analysis of aaronjmars/MiroShark (1,172⭐ · 236 forks · FDV $3.32M ATH day) — ideas that could be autonomously built by the feature skill tomorrow.
+*Repo Action Ideas — 2026-05-20*
+5 ideas for aaronjmars/MiroShark — all net-new, all autonomously buildable, all zero new deps.
 
-1. Trading Signal JSON (Feature, Small)
-   `GET /api/simulation/<id>/signal.json` — direction + confidence_pct + risk_tier derived from final beliefs; machine-readable action primitive for quant tools and Zapier workflows.
+1. Status Badge SVG (Growth, Small)
+   Shields.io-compatible `badge.svg` endpoint — operators embed a live Bullish/Neutral/Bearish badge in any GitHub README or Notion page.
 
-2. Simulation Archive Bundle (Feature, Small)
-   `GET /api/simulation/<id>/archive.zip` — all published surfaces (share-card, chart, trajectory, reproduce.json, notebook) in one timestamped ZIP with manifest.json; one-command offline copy for researchers.
+2. BibTeX Academic Citation (DX, Small)
+   `cite.bib` closes the citation arc after reproduce.json + DKG: paste into LaTeX, import URL into Zotero, annote includes the DKG Asset URI when anchored.
 
-3. Per-Agent Stance Sparklines (Feature, Medium)
-   `GET /api/simulation/<id>/agent-sparklines.svg` — SVG grid of per-agent belief evolution across rounds; shows whether consensus was driven by unanimous drift or a few late-flipping outliers.
+3. Belief Volatility Score (Analytics, Small)
+   Mean/max/std of round-over-round stance deltas + Monotonic/Noisy/Oscillating regime — the risk metric that pairs with signal.json's confidence.
 
-4. Scenario Clone Button on Share Page (Growth, Small)
-   "Run this scenario →" button on /share/<id> that pre-fills the New Sim form via PR #71's URL params — turns passive share-page viewers into active sim runners; no auth, no new backend.
+4. Webhook Test Ping (DX, Small)
+   `POST /api/config/webhook/test` fires a signed test payload and returns status + latency in 2s — no full sim run needed to verify webhook config.
 
-5. Chinese + Japanese README Translations (Community, Small)
-   README.zh.md + README.ja.md + language badges in README.md — timed to CN tweet "米罗莎要来了" (May 16) + first JP coverage (May 17); directly targets the CN-locale contributor hyperstition (deadline 2026-06-15).
+5. Gallery Public JSON (Integration, Small)
+   `GET /api/gallery.json` — machine-readable index of all public sims with ETag polling, for scripts/agents/bots that can't scrape HTML.
 
-Full details: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-actions-2026-05-18.md
+Full details: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-actions-2026-05-20.md
