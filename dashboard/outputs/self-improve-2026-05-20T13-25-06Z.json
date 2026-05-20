@@ -1,0 +1,215 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "Agent Self-Improvement"
+      },
+      "children": [
+        "header-stack"
+      ]
+    },
+    "header-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "lg"
+      },
+      "children": [
+        "date-badge",
+        "sep-0",
+        "headline",
+        "problem-block",
+        "rootcause-block",
+        "sep-1",
+        "changes-block",
+        "sep-2",
+        "impact-block",
+        "sep-3",
+        "pr-link"
+      ]
+    },
+    "date-badge": {
+      "type": "Text",
+      "props": {
+        "text": "2026-05-20",
+        "variant": "muted"
+      }
+    },
+    "sep-0": {
+      "type": "Separator"
+    },
+    "headline": {
+      "type": "Text",
+      "props": {
+        "text": "Distinguished Bankr Agent timed-out jobs from genuine \"no wallet\" responses in scripts/prefetch-bankr.sh",
+        "variant": "lead"
+      }
+    },
+    "problem-block": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "problem-h",
+        "problem-t"
+      ]
+    },
+    "problem-h": {
+      "type": "Heading",
+      "props": {
+        "text": "Problem",
+        "level": "h3"
+      }
+    },
+    "problem-t": {
+      "type": "Text",
+      "props": {
+        "text": "When a Bankr Agent prompt (Max-Mode claude-sonnet-4.6) didn't finish inside the 64-second polling window, the script was silently recording the handle as null — same shape as Bankr saying \"this handle has no wallet.\" tweet-allocator then treated it as TWEET_ALLOCATOR_EMPTY instead of an error worth alerting on."
+      }
+    },
+    "rootcause-block": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "rootcause-h",
+        "rootcause-t"
+      ]
+    },
+    "rootcause-h": {
+      "type": "Heading",
+      "props": {
+        "text": "Why",
+        "level": "h3"
+      }
+    },
+    "rootcause-t": {
+      "type": "Text",
+      "props": {
+        "text": "3 consecutive empty days (May 18 → May 20). Handles previously verified on May 14/16/17 (100xDarren, cybercelos, btcbabycow) all came back null in the May 20 prefetch, and the only signal tweet-allocator saw was \"6 candidates, 0 wallets.\" That's the exact signature of an LLM-call timeout, not a real allocation cliff."
+      }
+    },
+    "sep-1": {
+      "type": "Separator"
+    },
+    "changes-block": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "changes-h",
+        "change1",
+        "change2"
+      ]
+    },
+    "changes-h": {
+      "type": "Heading",
+      "props": {
+        "text": "What Changed",
+        "level": "h3"
+      }
+    },
+    "change1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "change1-h",
+        "change1-t"
+      ]
+    },
+    "change1-h": {
+      "type": "Text",
+      "props": {
+        "text": "scripts/prefetch-bankr.sh",
+        "variant": "lead"
+      }
+    },
+    "change1-t": {
+      "type": "Text",
+      "props": {
+        "text": "poll loop 8→14 iterations (~64s→~112s budget); submit max-time 30s→45s; new TIMED_OUT counter; timed-out handles excluded from verified-handles.json; new prefetch-status.json field timed_out; new top-level status agent-timeout when most lookups hit the poll-window ceiling."
+      }
+    },
+    "change2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "change2-h",
+        "change2-t"
+      ]
+    },
+    "change2-h": {
+      "type": "Text",
+      "props": {
+        "text": "skills/tweet-allocator/SKILL.md",
+        "variant": "lead"
+      }
+    },
+    "change2-t": {
+      "type": "Text",
+      "props": {
+        "text": "new step-4 branch for agent-timeout → TWEET_ALLOCATOR_ERROR with retry/credit hint, instead of silent _EMPTY."
+      }
+    },
+    "sep-2": {
+      "type": "Separator"
+    },
+    "impact-block": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "impact-h",
+        "impact1",
+        "impact2"
+      ]
+    },
+    "impact-h": {
+      "type": "Heading",
+      "props": {
+        "text": "Impact",
+        "level": "h3"
+      }
+    },
+    "impact1": {
+      "type": "Text",
+      "props": {
+        "text": "Future Bankr LLM-mode latency surfaces as a real alert (actionable: check api.bankr.bot status / LLM credits), not a silent skip."
+      }
+    },
+    "impact2": {
+      "type": "Text",
+      "props": {
+        "text": "Doubled polling window should also rescue handles that drift out of the previous 64s budget on slower Bankr days."
+      }
+    },
+    "sep-3": {
+      "type": "Separator"
+    },
+    "pr-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #43: Bankr Agent Timeout Detection Fix",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/pull/43",
+        "source": "GitHub"
+      }
+    }
+  }
+}
