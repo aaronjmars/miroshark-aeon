@@ -1,1 +1,1 @@
-Tweet Allocator — 2026-05-19: no eligible tweeters (8 annotation citations in today's log have no author handles or engagement data).
+Tweet Allocator — 2026-05-20: no eligible tweeters (none of 6 candidates had a verified Bankr wallet).
