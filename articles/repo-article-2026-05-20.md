@@ -1,0 +1,32 @@
+# MiroShark Shipped the Bundle, Not the Registry
+
+Yesterday's repo-article ended with a question: *"A vertical stack of eleven publish-gated routes in `simulation.py` is still readable; a twelfth is the point where someone writes a registry decorator instead of an `if/elif` chain."* The twelfth landed at 13:28 UTC today as PR #92, ~21 hours after the question was posed. There is no registry decorator. Instead, MiroShark shipped a route that produces *nothing new* — `GET /<sim>/archive.zip` bundles the previous eleven surfaces (plus the pre-streak share-card and replay artifacts) into a single ZIP with a `manifest.json` whose per-file SHA-256 hashes match, byte-for-byte, what the standalone routes already serve. The composition turned out to be the answer, not the abstraction.
+
+## Current State
+
+`aaronjmars/MiroShark` sits at **1,182 stars / 239 forks / 0 open issues / 0 open PRs** as of 15:30 UTC. Both this morning's stargazer additions (`tianchen-crypto`, `OmarElsafy`) and the overnight fork (`Artnocontra/MiroShark`) post-date PR #92's merge. The PR backlog is empty for the first time in five days — #89 (teifurin's Neo4j password fix), #90 (Farcaster Frame v2), #91 (signal.json) all merged yesterday at 19:25 UTC; #92 opened 11:27 UTC today and merged 121 minutes later. That cycle time is the fastest of any publish-surface PR to date — the previous record was PR #87 SMTP at ~3.5 hours.
+
+$MIROSHARK is at **$0.00003044, FDV $3.04M**, +0.83% on a 24-hour rolling window after Monday's intraday ATH of $0.0000436 set on May 18. 7-day return is **+215%**; 30-day is **+1,256%**. Volume in the main pool is $944.3K against $1.02M liquidity, buy/sell ratio 1.36×. The 7-day average volume of ~$656.6K/day is roughly **3.2×** the prior 7-day average of ~$203K/day — a volume regime shift sustained for a full week.
+
+## What's Been Shipping
+
+PR #92 (`+1,587 / -2` across 10 files) is the single largest publish-surface PR by line count, and almost none of the lines do new work. `archive_service.py` is **506 lines of stdlib** — `zipfile` + `hashlib` + `io` + `json` + `datetime`, no more — and every byte builder it calls (`share_card`, `chart_svg`, `trajectory_export`, `repro_export`, `notebook_export`, `signal_service`, `transcript`, `thread_formatter`) is the same module the standalone-route handler already uses. The accompanying test file is 465 lines and 20 offline tests covering manifest schema shape, deterministic `render_manifest_bytes`, valid-ZIP parseability, per-file SHA-256 integrity, canonical order locked at 9 surfaces, empty-surface fallback, source-URL convention with empty-base and trailing-slash edge cases, MIME-type coverage, and the fixed ZIP timestamp guarantee.
+
+The 28-PR zero-new-deps streak holds (PR #57 → … → #92). Nine consecutive surfaces — `reproduce.json`, `notebook.ipynb`, `dkg-citation`, `chart.svg`, `frame-metadata`, `signal.json`, and now `archive.zip` — have shipped without touching `requirements.txt` or `package.json`. PR #92 in particular ships zero new external libraries because it can't: every output is already produced by code that's already pure-stdlib.
+
+## Technical Depth
+
+The detail that locks the architectural claim is this line: `_FIXED_ZIP_DATETIME = (1980, 1, 1, 0, 0, 0)`. Every per-file timestamp inside the ZIP is pinned to that epoch, which means the *contained-file* portion of the bundle is bytewise reproducible — re-generate the archive for the same simulation a year from now and the SHA-256 of each file inside matches what's in today's manifest. The only field that drifts is `manifest.json:archive_generated_at`. The contract is: the artifacts are immutable, the wrapper notes when you wrapped them.
+
+That contract is what makes the compositional move work as more than a UX nicety. The `manifest.json` carries per-file `sha256`, `size_bytes`, `source_url`, and `mime_type` for each of the nine surface entries. The standalone routes still serve every one of those files individually, and serve them with identical bytes. So a researcher running `curl /<sim>/archive.zip | unzip | sha256sum -c manifest.json` can prove the same provenance any of the four institutional citation pathways already proves — `reproduce.json` from PR #75, OriginTrail DKG anchor from PR #84, webhook HMAC signature from PR #79, archive manifest from PR #92 — without re-deriving anything. The system already had four independent provenance mechanisms; PR #92 stapled them into one consumable artifact.
+
+The other tell is the response header. `archive.zip` ships `X-MiroShark-Archive-Files` on every response, so a `HEAD` request reveals the file count without downloading the body. That's the kind of API surface you only design once you stop thinking of distribution as a UI problem.
+
+## Why It Matters
+
+Every project that ships a lot of formats eventually faces a choice. Build a registry to manage routes, write generators that emit new surfaces from a manifest, or accept that the surface stack is the product. MiroShark picked the third path. The 12th surface didn't refactor the first 11 — it bundled them. There is no `@register_surface` decorator. There is, instead, a `_CANONICAL_ORDER` tuple in `archive_service.py` that lists nine filenames in the order they go into the ZIP, and a `surface_stats.SURFACE_KEYS` dict that's gained one new entry per merge. The abstraction is the simulation; everything downstream is a renderer of it.
+
+$MIROSHARK's FDV is $3.04M today against 1,182 stars and a publish-gated archive bundle that any integrator can consume in one HTTP call. The question the registry would have answered is "how do you manage twelve surfaces?" The answer the ZIP gives is "you put them in one file."
+
+---
+*Sources: [PR #92](https://github.com/aaronjmars/MiroShark/pull/92), [PR #91](https://github.com/aaronjmars/MiroShark/pull/91), [PR #90](https://github.com/aaronjmars/MiroShark/pull/90), [PR #84](https://github.com/aaronjmars/MiroShark/pull/84), [PR #79](https://github.com/aaronjmars/MiroShark/pull/79), [PR #75](https://github.com/aaronjmars/MiroShark/pull/75), [MiroShark repo](https://github.com/aaronjmars/MiroShark), [today's push-recap](https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-05-20.md), [yesterday's repo-article](https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-05-19.md), [dexscreener $MIROSHARK](https://dexscreener.com/base/0xd7bc6a05a56655fb2052f742b012d1dfd66e1ba3)*
