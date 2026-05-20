@@ -1,11 +1,11 @@
-*$MIROSHARK Daily — 2026-05-19*
+*$MIROSHARK Daily — 2026-05-20*
 
-Price: $0.0000309 (-1.31% 24h)
-Liquidity: $998.4K | 24h Vol: $1.38M (+17% 24h)
-Buys/Sells: 1,371/1,021 (1.34×)
-24h H/L: $0.0000436 / $0.0000265
-7d: +106% price | 30d: +1,215% price | FDV: $3.09M
+Price: $0.00003044 (+0.83% 24h)
+Liquidity: $1.02M | 24h Vol: $944.3K (-31.6% vs prior day)
+Buys/Sells: 983/725 (1.36×)
+7d: +215% price, +223% vol avg | 30d: +1,256% price
 
-Post-ATH consolidation after 5th consecutive ATH session ($0.0000436, May 18). Volume holding near $1.4M; buyer ratio 1.34×. Official @miroshark_ ecosystem map (108L/30RT) and $blueagent integration headline the social session.
+Consolidating in the $0.000028–$0.000033 band post-ATH ($0.0000436 May 18). Overnight wick to $0.0000206 absorbed; full recovery. 0 open PRs, 11 publish-gated surfaces. Community framing shifting toward "autonomous internet infrastructure."
 
 Chart: https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209
+
