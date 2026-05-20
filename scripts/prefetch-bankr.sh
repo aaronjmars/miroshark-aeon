@@ -39,6 +39,7 @@ write_status() {
   local curl_failed="${5:-0}"
   local verified_count="${6:-0}"
   local null_count="${7:-0}"
+  local timed_out="${8:-0}"
   jq -n \
     --arg status "$status" \
     --arg note "$note" \
@@ -48,12 +49,14 @@ write_status() {
     --argjson curl_failed "$curl_failed" \
     --argjson verified_count "$verified_count" \
     --argjson null_count "$null_count" \
+    --argjson timed_out "$timed_out" \
     '{status: $status, note: $note, timestamp: $ts,
       candidate_count: $candidate_count,
       lookup_attempted: $lookup_attempted,
       curl_failed: $curl_failed,
       verified_count: $verified_count,
-      null_count: $null_count}' \
+      null_count: $null_count,
+      timed_out: $timed_out}' \
     > .bankr-cache/prefetch-status.json
 }
 
@@ -104,9 +107,11 @@ echo "bankr-prefetch: looking up $COUNT handles on Bankr Agent API..."
 echo "{}" > .bankr-cache/verified-handles.json
 
 # Per-handle outcome counters surfaced into the status sidecar so the skill
-# can distinguish "all curl calls failed" from "Bankr returned null for all".
+# can distinguish "all curl calls failed" from "Bankr returned null for all"
+# from "the LLM-backed Agent job did not complete in time."
 LOOKUP_ATTEMPTED=0
 CURL_FAILED=0
+TIMED_OUT=0
 
 bankr_lookup() {
   local handle="$1"
@@ -118,7 +123,7 @@ bankr_lookup() {
       maxMode: {enabled: true, model: "claude-sonnet-4.6"}}')
 
   local submit_response
-  submit_response=$(curl -s --max-time 30 -X POST "https://api.bankr.bot/agent/prompt" \
+  submit_response=$(curl -s --max-time 45 -X POST "https://api.bankr.bot/agent/prompt" \
     -H "X-API-Key: $BANKR_API_KEY" \
     -H "Content-Type: application/json" \
     -d "$payload" 2>/dev/null) || {
@@ -135,9 +140,12 @@ bankr_lookup() {
     return 1
   fi
 
+  # Poll up to 14 × 8s = 112s. Max-Mode Agent calls (claude-sonnet-4.6) can
+  # chain multiple tool calls inside Bankr; the previous 64s window timed out
+  # for handles that were verifiable on slower-tier days (May 18–20 drift).
   local result=""
   local status=""
-  for _ in 1 2 3 4 5 6 7 8; do
+  for _ in 1 2 3 4 5 6 7 8 9 10 11 12 13 14; do
     result=$(curl -s --max-time 15 "https://api.bankr.bot/agent/job/$job_id" \
       -H "X-API-Key: $BANKR_API_KEY" 2>/dev/null) || break
     status=$(echo "$result" | jq -r '.status // ""' 2>/dev/null)
@@ -145,6 +153,18 @@ bankr_lookup() {
     [ "$status" = "failed" ] && break
     sleep 8
   done
+
+  # If the job never reached a terminal state, treat as a transient timeout
+  # rather than "no wallet" — the agent might have answered eventually. Leave
+  # the handle out of verified-handles.json entirely (same downstream effect
+  # as null for this run, but surfaced separately in prefetch-status.json so
+  # the skill can distinguish "Bankr genuinely doesn't know" from "we didn't
+  # wait long enough for an LLM response").
+  if [ "$status" != "completed" ] && [ "$status" != "failed" ]; then
+    TIMED_OUT=$((TIMED_OUT + 1))
+    echo "bankr-prefetch: @$handle → job timed out (last status=\"${status:-empty}\")"
+    return 0
+  fi
 
   # Try several common response shapes; grab the first 0x address we can find
   local text wallet
@@ -171,17 +191,22 @@ done <<< "$HANDLES"
 VERIFIED=$(jq -r 'to_entries | map(select(.value != null)) | length' .bankr-cache/verified-handles.json 2>/dev/null || echo 0)
 TOTAL=$(jq -r 'to_entries | length' .bankr-cache/verified-handles.json 2>/dev/null || echo 0)
 NULL_COUNT=$((TOTAL - VERIFIED))
-echo "bankr-prefetch: done — $VERIFIED/$TOTAL handles have Bankr wallets ($CURL_FAILED curl failures across $LOOKUP_ATTEMPTED attempts)"
+echo "bankr-prefetch: done — $VERIFIED/$TOTAL handles have Bankr wallets ($CURL_FAILED curl failures + $TIMED_OUT job timeouts across $LOOKUP_ATTEMPTED attempts)"
 
 if [ "$LOOKUP_ATTEMPTED" -gt 0 ] && [ "$CURL_FAILED" -eq "$LOOKUP_ATTEMPTED" ]; then
   STATUS_NOTE="all $LOOKUP_ATTEMPTED Bankr lookups failed at curl/jobId step (API down, key invalid, or rate-limited)"
   STATUS="lookups-failed"
+elif [ "$VERIFIED" -eq 0 ] && [ "$TIMED_OUT" -gt 0 ] && [ "$TIMED_OUT" -ge "$NULL_COUNT" ]; then
+  # Distinct from "completed-no-wallets" — the LLM-backed Agent jobs did not
+  # finish in our polling window. Treated as a transient outage by the skill.
+  STATUS_NOTE="$LOOKUP_ATTEMPTED handles checked, 0 verified — $TIMED_OUT Agent jobs did not complete within 112s ($NULL_COUNT returned no wallet, $CURL_FAILED curl failed)"
+  STATUS="agent-timeout"
 elif [ "$VERIFIED" -eq 0 ] && [ "$LOOKUP_ATTEMPTED" -gt 0 ]; then
-  STATUS_NOTE="$LOOKUP_ATTEMPTED handles checked, 0 verified ($CURL_FAILED curl failed, $NULL_COUNT returned null)"
+  STATUS_NOTE="$LOOKUP_ATTEMPTED handles checked, 0 verified ($CURL_FAILED curl failed, $NULL_COUNT returned null, $TIMED_OUT timed out)"
   STATUS="completed-no-wallets"
 else
-  STATUS_NOTE="$VERIFIED/$LOOKUP_ATTEMPTED handles have Bankr wallets"
+  STATUS_NOTE="$VERIFIED/$LOOKUP_ATTEMPTED handles have Bankr wallets ($TIMED_OUT timed out)"
   STATUS="completed"
 fi
-write_status "$STATUS" "$STATUS_NOTE" "$COUNT" "$LOOKUP_ATTEMPTED" "$CURL_FAILED" "$VERIFIED" "$NULL_COUNT"
+write_status "$STATUS" "$STATUS_NOTE" "$COUNT" "$LOOKUP_ATTEMPTED" "$CURL_FAILED" "$VERIFIED" "$NULL_COUNT" "$TIMED_OUT"
 ls -la .bankr-cache/ 2>/dev/null || true
