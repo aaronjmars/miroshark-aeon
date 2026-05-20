@@ -1,14 +1,14 @@
-*Thread Draft — 2026-05-19*
-Topic: Trading Signal JSON — MiroShark PR #91
+*Thread Draft — 2026-05-20*
+Topic: Simulation Archive Bundle — MiroShark PR #92
 
-1/ MiroShark PR #91 ships signal.json — a machine-readable direction/confidence/risk verdict derived from the same belief-split data that powers every other surface on the project. 11th publish-gated interface. 27th consecutive zero-dependency PR.
+1/ MiroShark shipped its 12th publish-gated surface today — not a new renderer, a ZIP of all 9 existing ones. PR #92 opened at 11:27 UTC, merged at 13:28. Two hours. 28th consecutive zero-dependency PR.
 
-2/ Ten publish-gated surfaces already exist on MiroShark — trajectory CSV, chart SVG, Jupyter notebook, replay GIF, Farcaster Frame, and five others. All pure derivations of the same embed-summary payload. None collapse into a verdict a quant tool can act on.
+2/ Before PR #92, every MiroShark surface was its own download: trajectory CSV, chart SVG, notebook, signal.json, share-card, and six others — eleven routes, eleven trips. No single call returned everything. The bundle didn't exist.
 
-3/ signal_service.py (210 lines, stdlib only) reads the final-state belief split and quality health score. The plurality stance becomes direction — Bullish, Bearish, or Neutral. confidence_pct maps the spread to 0–100. risk_tier derives from quality health: excellent → low.
+3/ archive_service.py (506 lines, stdlib only — zipfile + hashlib + io + json) orchestrates nine surface builders. Each file inside the ZIP is byte-for-byte identical to its standalone route. manifest.json includes per-file SHA-256, size, source URL, and MIME type.
 
-4/ MiroShark's FDV went from $200K to $3.09M as each surface landed — DKG for institutions, Frame v2 for Farcaster-native social, signal.json for quants. The project isn't adding features. It's adding audiences. Every surface is the same data, different shape, different room.
+4/ The 12th surface being a compositor is load-bearing. It means the inventory is rich enough to package. That's the architectural state the first 11 surfaces were building toward — a point where the next ship isn't a renderer, it's a wrapper.
 
-5/ 26 offline tests, zero new dependencies, 27th consecutive. PR #91 is open on MiroShark: https://github.com/aaronjmars/MiroShark/pull/91
+5/ 20 offline tests, zero new dependencies — the 28th streak PR. The bundle is merged and available on MiroShark: https://github.com/aaronjmars/MiroShark/pull/92
 
-(article: articles/thread-2026-05-19.md)
+(article: articles/thread-2026-05-20.md)
