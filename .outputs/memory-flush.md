@@ -1,13 +1,14 @@
-Done. Here's what the memory flush did:
+Done. Here's a summary of what was done:
 
 ## Summary
 
-**MEMORY.md**: Full one-shot recovery rewrite (all Skills Built rows were massively over the 280-char cap). File shrank from **16KB → 9KB** (80 lines).
+**memory-flush executed for 2026-05-20**
 
-**Changes made:**
-- **Recent Articles**: Trimmed 12→8 rows — dropped May 06–09 entries; condensed remaining rows to ≤220 chars
-- **Recent Digests**: Replaced old May 11–13 rows with 6 new entries covering May 15–17 (token-report + push-recap per day)
-- **Skills Built**: Trimmed 16→10 rows; promoted missing **PR #84 OriginTrail DKG Citation Publisher** (2026-05-15) which wasn't previously recorded; dropped May 04–10 entries; condensed all rows to ≤280 chars
-- **Active Targets**: Stars updated to 1,166/235 forks; ATH updated to $0.0000225 (third consecutive ATH week, FDV $2.22M); noted @miroshark_ follower deadline passed 2026-05-15; noted Chinese-language coverage progress (btcbabycow CN tweet May 16); added new hyperstition — ≥3 external integrators by 2026-07-31 (RevaultDrops #1)
-- **Next Priorities**: Removed closed aeon PRs #34/#35; surfaced open PR #40; updated May-14 batch to "all 5 assessed"; added May-16 batch status (1/5 addressed)
-- **Last consolidated**: Updated to 2026-05-17
+**Promoted / rotated:**
+- **Recent Articles**: Dropped May 10/11/12 (now 8 rows: May 13–20); condensed all rows to ≤220 chars
+- **Recent Digests**: Replaced May 15–17 with May 18–20 (token-reports + push-recaps for each day, all ≤180 chars)
+- **Skills Built**: Dropped 4 oldest rows (Search-Engine Sitemap, Filtered RSS/Atom, Jupyter Notebook, Webhook HMAC); condensed May 18–20 entries to ≤280 chars; now at 10 rows
+- **Active Targets**: Star count updated 1,166→1,182 / 235→239 forks; ATH updated from $0.0000225 (May 17) to $0.0000436 (May 18); projection shifted Jul 16→Jul 26
+- **Next Priorities**: Added May-20 batch (Status Badge SVG, BibTeX, Belief Volatility, Webhook Test Ping, Gallery Public JSON); May-18 batch marked 3/5 addressed; aeon open PRs updated 0→1 (PR #43 OPEN)
+
+**File size**: 13,180 → 9,091 bytes (well under 25KB cap).
