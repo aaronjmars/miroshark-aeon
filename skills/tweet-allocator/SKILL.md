@@ -34,11 +34,12 @@ Project-owned accounts. Valuable signal, but self-dealing:
 
 3. **Exclude already-paid tweets and authors.** Scan the last 30 days of `memory/logs/` for previous `## Tweet Allocator` entries. Drop any tweet URL that's already been rewarded. Drop any author who already got paid today.
 
-4. **Check Bankr.** First read `.bankr-cache/prefetch-status.json` (a sidecar written by `scripts/prefetch-bankr.sh` at every exit point). It has `{status, note, candidate_count, lookup_attempted, curl_failed, verified_count, null_count}`. Branch on `status`:
+4. **Check Bankr.** First read `.bankr-cache/prefetch-status.json` (a sidecar written by `scripts/prefetch-bankr.sh` at every exit point). It has `{status, note, candidate_count, lookup_attempted, curl_failed, verified_count, null_count, timed_out}`. Branch on `status`:
 
    - `"no-api-key"` → `BANKR_API_KEY` env var was not set in the workflow when prefetch ran. Log `TWEET_ALLOCATOR_DISABLED — BANKR_API_KEY not set in workflow; skill is dormant until secret is configured` and **skip the notification entirely** — there's no recipient who can fix this, and a daily alert is just noise. Stop.
    - `"no-candidates"` → prefetch found no eligible handles to look up. Log `TWEET_ALLOCATOR_EMPTY — no candidate handles in .xai-cache/ or today's log` and send a one-line notification: `Tweet Allocator — ${today}: no candidate handles to allocate to.` Stop.
    - `"lookups-failed"` → all `lookup_attempted` Bankr API calls failed at the curl/jobId step (API down, key invalid, or rate-limited). This is a real outage. Log `TWEET_ALLOCATOR_ERROR — Bankr Agent API unreachable: <note>` and send an alert: `Tweet Allocator — ${today}: ERROR — Bankr Agent API unreachable (X/N curl failures). Check api.bankr.bot status / BANKR_API_KEY validity.` Stop.
+   - `"agent-timeout"` → Bankr Agent jobs were submitted successfully but the LLM-backed responses didn't complete inside the prefetch's polling window (112s). Transient — likely Bankr LLM-mode latency, *not* a "these handles have no wallet" signal. Log `TWEET_ALLOCATOR_ERROR — Bankr Agent jobs timed out: <note>` and send an alert: `Tweet Allocator — ${today}: ERROR — Bankr Agent jobs did not complete in time (N/N timed out). Retrying tomorrow; check api.bankr.bot LLM credit / Max Mode latency.` Stop.
    - `"completed-no-wallets"` → prefetch ran cleanly but no candidate handle had a Bankr wallet. Treat as empty (TWEET_ALLOCATOR_EMPTY): `Tweet Allocator — ${today}: no eligible tweeters (none of N candidates had a verified Bankr wallet).` Stop.
    - `"completed"` → continue below.
 
@@ -129,4 +130,4 @@ The Bankr Agent API requires `BANKR_API_KEY` in the header — **the sandbox blo
 - `TWEET_ALLOCATOR_OK` — allocation plan produced (or auto-send completed).
 - `TWEET_ALLOCATOR_EMPTY` — no tweets in today's log, OR no candidates have a Bankr wallet (either zero candidates or all returned null). Sends a brief one-line notification.
 - `TWEET_ALLOCATOR_DISABLED` — `BANKR_API_KEY` not set in workflow. Logged but **silent** (no notification — no human can fix this from the bot side and a daily alert is just noise).
-- `TWEET_ALLOCATOR_ERROR` — real failure: Bankr Agent API unreachable (all lookups failed) or prefetch script didn't run at all. Sends an alert notification.
+- `TWEET_ALLOCATOR_ERROR` — real failure: Bankr Agent API unreachable (all lookups failed), Bankr Agent jobs timed out before completing (`agent-timeout`), or prefetch script didn't run at all. Sends an alert notification.
