@@ -1,12 +1,14 @@
 ## Summary
 
-Ran `star-milestone` skill.
+Ran the `star-milestone` skill for 2026-05-21.
 
-- **Watched repos**: `aaronjmars/MiroShark`, `aaronjmars/miroshark-aeon` (skipped — name ends with `-aeon`)
-- **MiroShark stargazers_count**: 1182
-- **Highest threshold crossed**: 1000 — already recorded as `(bootstrap)` on 2026-05-14 in `memory/topics/milestones.md`
-- **Gate hit**: 5a (already recorded) → no notification, no `milestones.md` update
-- **Next threshold**: 1500 (repo at ~79%)
-- **Status**: `STAR_MILESTONE_QUIET`
+**Result**: `STAR_MILESTONE_QUIET` — no notification.
 
-Files modified: `memory/logs/2026-05-20.md` (appended Star Milestone log section).
+- **Repos checked**: 1 (`aaronjmars/MiroShark` at 1186 stars). `aaronjmars/miroshark-aeon` skipped per step 1 (name ends with `-aeon`).
+- **Highest threshold ≤ 1186**: 1000 — already recorded in `memory/topics/milestones.md` (bootstrap entry, 2026-05-14). Gate 5a short-circuits.
+- **Next threshold**: 1500 (314 stars away).
+
+**Files modified**:
+- `memory/logs/2026-05-21.md` — appended `## Star Milestone` log entry per step 9.
+
+**No changes** to `memory/topics/milestones.md` (gate 5a forbids any update for already-recorded milestones).
