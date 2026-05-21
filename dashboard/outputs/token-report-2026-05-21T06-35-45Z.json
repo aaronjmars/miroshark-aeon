@@ -1,0 +1,100 @@
+{
+  "root": "card1",
+  "state": {},
+  "elements": {
+    "card1": {
+      "type": "Card",
+      "props": {
+        "title": "$MIROSHARK Daily — 2026-05-21"
+      },
+      "children": [
+        "stack1"
+      ]
+    },
+    "stack1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stat-price",
+        "stat-liquidity",
+        "stat-vol",
+        "stat-ratio",
+        "stat-7d",
+        "stat-30d",
+        "separator1",
+        "text-narrative",
+        "link-chart"
+      ]
+    },
+    "stat-price": {
+      "type": "Stat",
+      "props": {
+        "label": "Price",
+        "value": "$0.00002742",
+        "delta": "-9.09%",
+        "trend": "down"
+      }
+    },
+    "stat-liquidity": {
+      "type": "Stat",
+      "props": {
+        "label": "Liquidity",
+        "value": "$969.4K"
+      }
+    },
+    "stat-vol": {
+      "type": "Stat",
+      "props": {
+        "label": "24h Vol",
+        "value": "$736.4K",
+        "delta": "-22.0%",
+        "trend": "down"
+      }
+    },
+    "stat-ratio": {
+      "type": "Stat",
+      "props": {
+        "label": "Buys/Sells",
+        "value": "687/650 (1.06×)"
+      }
+    },
+    "stat-7d": {
+      "type": "Stat",
+      "props": {
+        "label": "7d",
+        "value": "+130.2%"
+      }
+    },
+    "stat-30d": {
+      "type": "Stat",
+      "props": {
+        "label": "30d",
+        "value": "+1,043%"
+      }
+    },
+    "separator1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "text-narrative": {
+      "type": "Text",
+      "props": {
+        "text": "Post-ATH stair-step down continues — volume cooling orderly from $1.24M peak (May 18); buy ratio compressed to near-even; -37.2% from ATH with 30-day return still +1,043%.",
+        "variant": "body"
+      }
+    },
+    "link-chart": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Chart",
+        "href": "https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209",
+        "source": "GeckoTerminal"
+      }
+    }
+  }
+}
