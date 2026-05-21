@@ -1,12 +1,17 @@
 ## Summary
 
-**Status: STAR_MOMENTUM_NO_ALERTS**
+Skill complete. Here's what happened:
 
-Audited 1 repo (aaronjmars/miroshark-aeon filtered as agent repo). The projection for aaronjmars/MiroShark:
+**Repos audited**: 1 (`aaronjmars/MiroShark`; `miroshark-aeon` filtered as an agent repo)
 
-- **Current:** 1,177 ⭐ → **Target:** 1,500 ⭐ (gap: 323)
-- **v7 pace:** 4.86 stars/day (down from 6.0/day on prior run — last 3 days averaged only 3.67/day as post-ATH momentum moderates)
-- **v7 projection:** 2026-07-26 (Sunday) — **67 days out**
-- **Gate failed:** Out of window (67 > 14d ceiling). No alert.
+**Projection** — 13 data points from May 8–20 repo-pulse logs:
+- current stars: **1,177** → target: **1,500** (gap: 323)
+- v7 = **4.86/day**, v3 = **3.67/day** (pace has cooled from ATH-week highs)
+- Projected crossing: **2026-07-27 (Monday)**, 67 days out
 
-Article written to `articles/star-momentum-2026-05-20.md`. State updated with new projected date (was 2026-07-13, now 2026-07-26). Log appended. No notification sent.
+**Verdict**: `OUT_OF_WINDOW` — 67 days exceeds the 7-14 day launch window, and Monday is not a Tue/Wed/Thu Show HN day in any case. No notification sent.
+
+**Files written**:
+- `articles/star-momentum-2026-05-21.md` — projection report
+- `memory/topics/star-momentum-state.json` — updated projected date to 2026-07-27
+- `memory/logs/2026-05-21.md` — log block appended
