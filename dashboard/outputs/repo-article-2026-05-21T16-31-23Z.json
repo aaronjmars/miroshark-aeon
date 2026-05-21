@@ -1,0 +1,148 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "New Article: MiroShark Stopped Building Destinations. It Started Building Billboards."
+      },
+      "children": [
+        "pr94_section",
+        "separator1",
+        "pr93_section",
+        "separator2",
+        "article_link"
+      ]
+    },
+    "pr94_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "pr94_heading",
+        "pr94_main",
+        "pr94_surfaces",
+        "pr94_design"
+      ]
+    },
+    "pr94_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "PR #94: Status Badge SVG",
+        "level": "h2"
+      }
+    },
+    "pr94_main": {
+      "type": "Text",
+      "props": {
+        "text": "The 13th publish-gated surface — and the first one shaped as push, not pull."
+      }
+    },
+    "pr94_surfaces": {
+      "type": "Text",
+      "props": {
+        "text": "Twelve prior surfaces were destinations a reader navigates to; the badge is meant to live in third-party READMEs and point inward."
+      }
+    },
+    "pr94_design": {
+      "type": "Text",
+      "props": {
+        "text": "Surface design now categorises on a push-vs-pull axis.",
+        "variant": "muted"
+      }
+    },
+    "separator1": {
+      "type": "Separator",
+      "props": {}
+    },
+    "pr93_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "pr93_heading",
+        "pr93_main",
+        "channels_stack"
+      ]
+    },
+    "pr93_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "PR #93: Channel-Notifier Pentagon",
+        "level": "h2"
+      }
+    },
+    "pr93_main": {
+      "type": "Text",
+      "props": {
+        "text": "Closes the 5-vertex channel-notifier pentagon."
+      }
+    },
+    "channels_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "ch_webhook",
+        "ch_discord",
+        "ch_slack",
+        "ch_smtp",
+        "ch_telegram"
+      ]
+    },
+    "ch_webhook": {
+      "type": "Badge",
+      "props": {
+        "text": "Webhook",
+        "variant": "default"
+      }
+    },
+    "ch_discord": {
+      "type": "Badge",
+      "props": {
+        "text": "Discord",
+        "variant": "default"
+      }
+    },
+    "ch_slack": {
+      "type": "Badge",
+      "props": {
+        "text": "Slack",
+        "variant": "default"
+      }
+    },
+    "ch_smtp": {
+      "type": "Badge",
+      "props": {
+        "text": "SMTP",
+        "variant": "default"
+      }
+    },
+    "ch_telegram": {
+      "type": "Badge",
+      "props": {
+        "text": "Telegram",
+        "variant": "default"
+      }
+    },
+    "separator2": {
+      "type": "Separator",
+      "props": {}
+    },
+    "article_link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Read the full article",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-05-21.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}

@@ -15,6 +15,7 @@ Full text in `articles/repo-article-YYYY-MM-DD.md`. Each row ≤220 chars.
 
 | Date | Title | One-line frame |
 |------|-------|----------------|
+| 2026-05-21 | MiroShark Stopped Building Destinations. It Started Building Billboards. | PRs #93+#94 — Telegram closes 5-vertex channel-notifier pentagon; Status Badge SVG is 13th surface and first push (vs prior 12 pull). 29-PR zero-deps. |
 | 2026-05-20 | MiroShark Shipped the Bundle, Not the Registry | PR #92 — 12th publish-gated surface; compositional ZIP bundles 9 existing renderers + manifest.json (per-file SHA-256). 28-PR zero-deps streak. |
 | 2026-05-19 | MiroShark Stopped Shipping Features. It Started Shipping Windows. | PR #91 (signal.json) — 11th surface; audience-tiered interfaces from one embed-summary payload. 27-PR zero-deps streak. |
 | 2026-05-18 | The First PR MiroShark Didn't Write | PR #89 — first external security PR (teifurin); star→issue #88→PR in 57 min; closes 28d external-merge gap. |

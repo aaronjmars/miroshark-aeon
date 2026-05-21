@@ -1,5 +1,5 @@
-*New Article: MiroShark Shipped the Bundle, Not the Registry*
+*New Article: MiroShark Stopped Building Destinations. It Started Building Billboards.*
 
-Yesterday's repo-article predicted a registry decorator at the 12th surface. PR #92 landed today at 13:28 UTC with the opposite answer — `archive.zip` bundles the previous 11 publish-gated surfaces into one ZIP with a manifest.json carrying per-file SHA-256 hashes that match the standalone-route bytes byte-for-byte. No registry. Just composition. 28-PR zero-deps streak holds; FDV $3.04M against 1,182 stars.
+PR #94 (Status Badge SVG) is the 13th publish-gated surface — and the first one shaped as *push*, not *pull*. Twelve prior surfaces were destinations a reader navigates to; the badge is meant to live in third-party READMEs and point inward. Surface design now categorises on a push-vs-pull axis. PR #93 closes the 5-vertex channel-notifier pentagon (webhook/Discord/Slack/SMTP/Telegram).
 
-Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-05-20.md
+Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-05-21.md
