@@ -1,16 +1,20 @@
-HEARTBEAT_OK
+HEARTBEAT_OK. All 11 daily skills ran on schedule, no open PRs, no open GitHub issues, no stuck runs. Logged to `memory/logs/2026-05-21.md`.
 
----
+## Summary
 
-**Date: Wednesday May 20, 2026 — 19:32 UTC**
+**Date**: Thursday May 21, 2026 — 19:40 UTC
 
-All 14 enabled skills confirmed ran today. No missing skills, no stalled PRs (miroshark-aeon PR #43 is only ~6h old), no open GitHub issues on MiroShark. Nothing needs attention.
+**Status**: HEARTBEAT_OK — nothing needs attention.
 
-**Skills confirmed (log headers matched):**
-- Daily: token-report, fetch-tweets, tweet-allocator, repo-pulse, star-momentum-alert, feature, push-recap, star-milestone, project-lens, repo-article, thread-formatter ✓
-- Even-day (day 20): repo-actions, self-improve ✓
-- Wednesday: memory-flush ✓
+| Check | Result |
+|-------|--------|
+| Daily skills (11) | All ran ✓ |
+| Every-2-day skills | Not due today (odd day) ✓ |
+| Weekly skills | None due Thursday ✓ |
+| memory-flush | Not due (Sun+Wed only) ✓ |
+| Open PRs (MiroShark) | 0 ✓ |
+| Open PRs (miroshark-aeon) | 0 ✓ (PR #43 merged May 20) |
+| GitHub issues | 0 open ✓ |
+| Stuck runs | None ✓ |
 
-**Open items tracked (not flagged — not urgent):**
-- miroshark-aeon PR #43 open ~6h (bankr-prefetch agent-timeout fix)
-- May-20 batch: 0/5 ideas built (Status Badge SVG, BibTeX Citation, Belief Volatility Score, Webhook Test Ping, Gallery Public JSON)
+Notable: `tweet-allocator` fired `TWEET_ALLOCATOR_ERROR` again today (bankr agent-timeout, 5/5 handles), but this is the **designed behavior** from PR #43 — the fix is working correctly, the underlying Bankr API latency is the variable.
