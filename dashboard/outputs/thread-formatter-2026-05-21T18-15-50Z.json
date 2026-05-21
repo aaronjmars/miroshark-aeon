@@ -1,0 +1,82 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "Thread Draft — 2026-05-21",
+        "description": "Consensus Status Badge SVG — MiroShark PR #94"
+      },
+      "children": [
+        "separator1",
+        "text_point1",
+        "text_point2",
+        "text_point3",
+        "text_point4",
+        "text_point5",
+        "separator2",
+        "storylink_pr",
+        "storylink_article"
+      ]
+    },
+    "separator1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "text_point1": {
+      "type": "Text",
+      "props": {
+        "text": "1/ MiroShark shipped a Status Badge SVG today — the 13th publish-gated surface and the first one designed to leave the site. Every prior surface waited for a reader to arrive. This one lives in someone else's README and sends them back."
+      }
+    },
+    "text_point2": {
+      "type": "Text",
+      "props": {
+        "text": "2/ Twelve publish-gated surfaces shipped before today — trajectory CSV, chart SVG, Jupyter notebook, signal.json, archive ZIP, and seven others. All pull-based: a reader visits MiroShark, fetches an artifact, leaves. None were designed to live somewhere else."
+      }
+    },
+    "text_point3": {
+      "type": "Text",
+      "props": {
+        "text": "3/ badge_service.py (330 lines, stdlib only — xml.etree.ElementTree, no other dependencies) renders a 20-pixel flat SVG. Shields.io-compatible. Direction and confidence derive from compute_signal — the same function signal.json uses. 22 offline tests. 29th zero-dependency PR."
+      }
+    },
+    "text_point4": {
+      "type": "Text",
+      "props": {
+        "text": "4/ Twelve surfaces were endpoints — places a reader had to find. PR #94 inverts that: the badge embeds anywhere. A third-party README, a blog post, a tool's docs page. Each one is a discovery point MiroShark didn't have to build. The funnel now runs in both directions."
+      }
+    },
+    "text_point5": {
+      "type": "Text",
+      "props": {
+        "text": "5/ 22 tests, zero new dependencies — the 29th streak PR. Status Badge SVG is merged and in production."
+      }
+    },
+    "separator2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "storylink_pr": {
+      "type": "StoryLink",
+      "props": {
+        "title": "MiroShark PR #94",
+        "href": "https://github.com/aaronjmars/MiroShark/pull/94",
+        "source": "GitHub"
+      }
+    },
+    "storylink_article": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Thread Article: Consensus Status Badge SVG",
+        "href": "articles/thread-2026-05-21.md",
+        "source": "MiroShark"
+      }
+    }
+  }
+}

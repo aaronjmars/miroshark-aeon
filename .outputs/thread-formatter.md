@@ -1,14 +1,14 @@
-*Thread Draft — 2026-05-20*
-Topic: Simulation Archive Bundle — MiroShark PR #92
+*Thread Draft — 2026-05-21*
+Topic: Consensus Status Badge SVG — MiroShark PR #94
 
-1/ MiroShark shipped its 12th publish-gated surface today — not a new renderer, a ZIP of all 9 existing ones. PR #92 opened at 11:27 UTC, merged at 13:28. Two hours. 28th consecutive zero-dependency PR.
+1/ MiroShark shipped a Status Badge SVG today — the 13th publish-gated surface and the first one designed to leave the site. Every prior surface waited for a reader to arrive. This one lives in someone else's README and sends them back.
 
-2/ Before PR #92, every MiroShark surface was its own download: trajectory CSV, chart SVG, notebook, signal.json, share-card, and six others — eleven routes, eleven trips. No single call returned everything. The bundle didn't exist.
+2/ Twelve publish-gated surfaces shipped before today — trajectory CSV, chart SVG, Jupyter notebook, signal.json, archive ZIP, and seven others. All pull-based: a reader visits MiroShark, fetches an artifact, leaves. None were designed to live somewhere else.
 
-3/ archive_service.py (506 lines, stdlib only — zipfile + hashlib + io + json) orchestrates nine surface builders. Each file inside the ZIP is byte-for-byte identical to its standalone route. manifest.json includes per-file SHA-256, size, source URL, and MIME type.
+3/ badge_service.py (330 lines, stdlib only — xml.etree.ElementTree, no other dependencies) renders a 20-pixel flat SVG. Shields.io-compatible. Direction and confidence derive from compute_signal — the same function signal.json uses. 22 offline tests. 29th zero-dependency PR.
 
-4/ The 12th surface being a compositor is load-bearing. It means the inventory is rich enough to package. That's the architectural state the first 11 surfaces were building toward — a point where the next ship isn't a renderer, it's a wrapper.
+4/ Twelve surfaces were endpoints — places a reader had to find. PR #94 inverts that: the badge embeds anywhere. A third-party README, a blog post, a tool's docs page. Each one is a discovery point MiroShark didn't have to build. The funnel now runs in both directions.
 
-5/ 20 offline tests, zero new dependencies — the 28th streak PR. The bundle is merged and available on MiroShark: https://github.com/aaronjmars/MiroShark/pull/92
+5/ 22 tests, zero new dependencies — the 29th streak PR. Status Badge SVG is merged and in production: https://github.com/aaronjmars/MiroShark/pull/94
 
-(article: articles/thread-2026-05-20.md)
+(article: articles/thread-2026-05-21.md)
