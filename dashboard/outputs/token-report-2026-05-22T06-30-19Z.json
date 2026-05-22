@@ -1,0 +1,201 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "MiroShark Daily — 2026-05-22"
+      },
+      "children": [
+        "price_section",
+        "sep1",
+        "metrics_grid",
+        "badge_ratio",
+        "sep2",
+        "ath_section",
+        "sep3",
+        "narrative",
+        "sep4",
+        "chart_link"
+      ]
+    },
+    "price_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "stat_price",
+        "stat_7d",
+        "stat_30d"
+      ]
+    },
+    "stat_price": {
+      "type": "Stat",
+      "props": {
+        "label": "Current Price",
+        "value": "$0.00002141",
+        "delta": "-23.85%",
+        "trend": "down"
+      }
+    },
+    "stat_7d": {
+      "type": "Stat",
+      "props": {
+        "label": "7d Change",
+        "value": "+45.6%",
+        "trend": "up"
+      }
+    },
+    "stat_30d": {
+      "type": "Stat",
+      "props": {
+        "label": "30d Change",
+        "value": "+792%",
+        "trend": "up"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "metrics_grid": {
+      "type": "Grid",
+      "props": {
+        "columns": 2,
+        "gap": "md"
+      },
+      "children": [
+        "stat_liquidity",
+        "stat_volume",
+        "stat_buys",
+        "stat_sells"
+      ]
+    },
+    "stat_liquidity": {
+      "type": "Stat",
+      "props": {
+        "label": "Liquidity",
+        "value": "$809.5K"
+      }
+    },
+    "stat_volume": {
+      "type": "Stat",
+      "props": {
+        "label": "24h Volume",
+        "value": "$318.3K",
+        "delta": "-56.8%",
+        "trend": "down"
+      }
+    },
+    "stat_buys": {
+      "type": "Stat",
+      "props": {
+        "label": "Buys",
+        "value": "370"
+      }
+    },
+    "stat_sells": {
+      "type": "Stat",
+      "props": {
+        "label": "Sells",
+        "value": "339"
+      }
+    },
+    "badge_ratio": {
+      "type": "Badge",
+      "props": {
+        "text": "1.09× Buy/Sell Ratio",
+        "variant": "default"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "ath_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "text_ath_label",
+        "ath_grid"
+      ]
+    },
+    "text_ath_label": {
+      "type": "Text",
+      "props": {
+        "text": "All-Time High Analysis",
+        "variant": "lead"
+      }
+    },
+    "ath_grid": {
+      "type": "Grid",
+      "props": {
+        "columns": 3,
+        "gap": "md"
+      },
+      "children": [
+        "stat_ath_price",
+        "stat_ath_date",
+        "stat_ath_drawdown"
+      ]
+    },
+    "stat_ath_price": {
+      "type": "Stat",
+      "props": {
+        "label": "ATH Price",
+        "value": "$0.0000436"
+      }
+    },
+    "stat_ath_date": {
+      "type": "Stat",
+      "props": {
+        "label": "ATH Date",
+        "value": "May 18"
+      }
+    },
+    "stat_ath_drawdown": {
+      "type": "Stat",
+      "props": {
+        "label": "Current Drawdown",
+        "value": "-50.9%",
+        "trend": "down"
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "narrative": {
+      "type": "Text",
+      "props": {
+        "text": "Post-ATH correction deepens: -50.9% from the $0.0000436 ATH (May 18), volume at its lowest since pre-breakout. Buy pressure holding marginally positive. Ecosystem building on — PRs #93+#94 merged yesterday (13 surfaces, 5 channels, 29-PR zero-deps streak).",
+        "variant": "body"
+      }
+    },
+    "sep4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "chart_link": {
+      "type": "Link",
+      "props": {
+        "label": "View on GeckoTerminal",
+        "href": "https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209"
+      }
+    }
+  }
+}
