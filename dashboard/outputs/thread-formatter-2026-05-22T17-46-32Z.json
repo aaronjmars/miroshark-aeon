@@ -1,0 +1,83 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "BibTeX Academic Citation — MiroShark PR #96",
+        "description": "Thread Draft — 2026-05-22"
+      },
+      "children": [
+        "point1",
+        "point2",
+        "point3",
+        "point4",
+        "point5-stack",
+        "separator",
+        "article-ref"
+      ]
+    },
+    "point1": {
+      "type": "Text",
+      "props": {
+        "text": "1/ MiroShark PR #96 merged today — a BibTeX endpoint that closes the academic citation arc. Four HTTP routes now cover the full researcher path: BibTeX entry, reproducibility manifest, Jupyter notebook, on-chain DKG provenance. No publisher, no registrar, no DOI fee."
+      }
+    },
+    "point2": {
+      "type": "Text",
+      "props": {
+        "text": "2/ Academic citation of simulation results didn't have a clean path before today. If a researcher wanted to cite a MiroShark run in a paper, they had the UI — not a stable identifier, not a downloadable reference, not a content-verifiable endpoint."
+      }
+    },
+    "point3": {
+      "type": "Text",
+      "props": {
+        "text": "3/ bibtex_service.py is 310 lines, stdlib only — hashlib, datetime, re. GET /<id>/cite.bib returns a single @misc{...} entry. The note field carries the reproduce.json SHA-256. When DKG is anchored, annote carries the UAL. 27 offline tests. 30th consecutive zero-dependency PR."
+      }
+    },
+    "point4": {
+      "type": "Text",
+      "props": {
+        "text": "4/ Academic publishing built its citation infrastructure over decades — CrossRef in 1999, DataCite, Zenodo in 2013. Each requires intermediaries: registrars, uploads, fees. MiroShark's approach is four static routes, no middleman. The stack is just borrowable."
+      }
+    },
+    "point5-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "point5",
+        "pr-link"
+      ]
+    },
+    "point5": {
+      "type": "Text",
+      "props": {
+        "text": "5/ 27 offline tests, zero new dependencies — the 30th streak PR. BibTeX academic citation is merged and in production:"
+      }
+    },
+    "pr-link": {
+      "type": "Link",
+      "props": {
+        "label": "https://github.com/aaronjmars/MiroShark/pull/96",
+        "href": "https://github.com/aaronjmars/MiroShark/pull/96"
+      }
+    },
+    "separator": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "article-ref": {
+      "type": "Text",
+      "props": {
+        "text": "(article: articles/thread-2026-05-22.md)",
+        "variant": "caption"
+      }
+    }
+  }
+}

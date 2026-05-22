@@ -1,14 +1,14 @@
-*Thread Draft — 2026-05-21*
-Topic: Consensus Status Badge SVG — MiroShark PR #94
+*Thread Draft — 2026-05-22*
+Topic: BibTeX Academic Citation — MiroShark PR #96
 
-1/ MiroShark shipped a Status Badge SVG today — the 13th publish-gated surface and the first one designed to leave the site. Every prior surface waited for a reader to arrive. This one lives in someone else's README and sends them back.
+1/ MiroShark PR #96 merged today — a BibTeX endpoint that closes the academic citation arc. Four HTTP routes now cover the full researcher path: BibTeX entry, reproducibility manifest, Jupyter notebook, on-chain DKG provenance. No publisher, no registrar, no DOI fee.
 
-2/ Twelve publish-gated surfaces shipped before today — trajectory CSV, chart SVG, Jupyter notebook, signal.json, archive ZIP, and seven others. All pull-based: a reader visits MiroShark, fetches an artifact, leaves. None were designed to live somewhere else.
+2/ Academic citation of simulation results didn't have a clean path before today. If a researcher wanted to cite a MiroShark run in a paper, they had the UI — not a stable identifier, not a downloadable reference, not a content-verifiable endpoint.
 
-3/ badge_service.py (330 lines, stdlib only — xml.etree.ElementTree, no other dependencies) renders a 20-pixel flat SVG. Shields.io-compatible. Direction and confidence derive from compute_signal — the same function signal.json uses. 22 offline tests. 29th zero-dependency PR.
+3/ bibtex_service.py is 310 lines, stdlib only — hashlib, datetime, re. GET /<id>/cite.bib returns a single @misc{...} entry. The note field carries the reproduce.json SHA-256. When DKG is anchored, annote carries the UAL. 27 offline tests. 30th consecutive zero-dependency PR.
 
-4/ Twelve surfaces were endpoints — places a reader had to find. PR #94 inverts that: the badge embeds anywhere. A third-party README, a blog post, a tool's docs page. Each one is a discovery point MiroShark didn't have to build. The funnel now runs in both directions.
+4/ Academic publishing built its citation infrastructure over decades — CrossRef in 1999, DataCite, Zenodo in 2013. Each requires intermediaries: registrars, uploads, fees. MiroShark's approach is four static routes, no middleman. The stack is just borrowable.
 
-5/ 22 tests, zero new dependencies — the 29th streak PR. Status Badge SVG is merged and in production: https://github.com/aaronjmars/MiroShark/pull/94
+5/ 27 offline tests, zero new dependencies — the 30th streak PR. BibTeX academic citation is merged and in production: https://github.com/aaronjmars/MiroShark/pull/96
 
-(article: articles/thread-2026-05-21.md)
+(article: articles/thread-2026-05-22.md)
