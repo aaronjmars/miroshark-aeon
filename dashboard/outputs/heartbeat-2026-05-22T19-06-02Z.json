@@ -1,0 +1,197 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "Heartbeat",
+        "description": "Friday May 22, 2026 — 19:04 UTC"
+      },
+      "children": [
+        "status",
+        "separator1",
+        "skills_section",
+        "sep2",
+        "prs_section",
+        "sep3",
+        "issues_section",
+        "sep4",
+        "health_section"
+      ]
+    },
+    "status": {
+      "type": "Badge",
+      "props": {
+        "text": "HEARTBEAT_OK",
+        "variant": "default"
+      }
+    },
+    "separator1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "skills_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "skills_heading",
+        "skills_summary",
+        "skills_list",
+        "exec_notes"
+      ]
+    },
+    "skills_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Scheduled Skills",
+        "level": "h3"
+      }
+    },
+    "skills_summary": {
+      "type": "Stat",
+      "props": {
+        "label": "Completed",
+        "value": "13"
+      }
+    },
+    "skills_list": {
+      "type": "Text",
+      "props": {
+        "text": "token-report, fetch-tweets, tweet-allocator, repo-pulse, star-momentum-alert, feature, self-improve, repo-actions, push-recap, star-milestone, project-lens, repo-article, thread-formatter",
+        "variant": "body"
+      }
+    },
+    "exec_notes": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "note1",
+        "note2"
+      ]
+    },
+    "note1": {
+      "type": "Text",
+      "props": {
+        "text": "Every-2-day skills ran (day 22 = even)",
+        "variant": "caption"
+      }
+    },
+    "note2": {
+      "type": "Text",
+      "props": {
+        "text": "Weekly skills not due (Friday)",
+        "variant": "caption"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "prs_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "prs_heading",
+        "prs_stat1",
+        "prs_stat2"
+      ]
+    },
+    "prs_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Open Pull Requests",
+        "level": "h3"
+      }
+    },
+    "prs_stat1": {
+      "type": "Stat",
+      "props": {
+        "label": "MiroShark",
+        "value": "0"
+      }
+    },
+    "prs_stat2": {
+      "type": "Stat",
+      "props": {
+        "label": "miroshark-aeon",
+        "value": "0"
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "issues_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "issues_heading",
+        "issue_link",
+        "issue_detail"
+      ]
+    },
+    "issues_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "GitHub Issues",
+        "level": "h3"
+      }
+    },
+    "issue_link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "#95 French locale request",
+        "href": "https://github.com/miroshark-aeon/miroshark-aeon/issues/95"
+      }
+    },
+    "issue_detail": {
+      "type": "Text",
+      "props": {
+        "text": "No urgent label; already scoped into today's repo-actions idea #2",
+        "variant": "caption"
+      }
+    },
+    "sep4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "health_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stuck_runs"
+      ]
+    },
+    "stuck_runs": {
+      "type": "Text",
+      "props": {
+        "text": "No stuck runs",
+        "variant": "body"
+      }
+    }
+  }
+}
