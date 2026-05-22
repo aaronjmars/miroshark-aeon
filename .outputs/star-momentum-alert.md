@@ -1,17 +1,17 @@
 ## Summary
 
-Skill complete. Here's what happened:
+**star-momentum-alert** ran for 2026-05-22. Status: **STAR_MOMENTUM_NO_ALERTS**.
 
-**Repos audited**: 1 (`aaronjmars/MiroShark`; `miroshark-aeon` filtered as an agent repo)
+- **Repo audited**: `aaronjmars/MiroShark` (1 repo after filtering `-aeon` repos)
+- **14-day series**: complete — all days May 9–22 present in logs
+- **Current stars**: 1,190 | **Target**: 1,500 | **Gap**: 310
+- **v7** (7-day avg): 4.86 stars/day | **v3** (3-day avg): 5.0 stars/day
+- **Verdict**: OUT_OF_WINDOW — projected crossing 2026-07-25 (Saturday) is 64 days out, well beyond the 7-14d dispatch window
+- **No notification sent** — skill is silent on non-actionable days
 
-**Projection** — 13 data points from May 8–20 repo-pulse logs:
-- current stars: **1,177** → target: **1,500** (gap: 323)
-- v7 = **4.86/day**, v3 = **3.67/day** (pace has cooled from ATH-week highs)
-- Projected crossing: **2026-07-27 (Monday)**, 67 days out
+**Files written/modified:**
+- `articles/star-momentum-2026-05-22.md` — projection report
+- `memory/topics/star-momentum-state.json` — updated projected_date_v7 to 2026-07-25
+- `memory/logs/2026-05-22.md` — log block appended
 
-**Verdict**: `OUT_OF_WINDOW` — 67 days exceeds the 7-14 day launch window, and Monday is not a Tue/Wed/Thu Show HN day in any case. No notification sent.
-
-**Files written**:
-- `articles/star-momentum-2026-05-21.md` — projection report
-- `memory/topics/star-momentum-state.json` — updated projected date to 2026-07-27
-- `memory/logs/2026-05-21.md` — log block appended
+The 1,500-star signal will become actionable around early-to-mid July when the projection closes into the 7-14 day window.
