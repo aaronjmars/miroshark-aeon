@@ -1,5 +1,5 @@
-*New Article: Before You Write The Proposal: A Day With Synthetic Stakeholders*
+*New Article: Academic Publishing Already Built The Stack For Citing Things. The Stack Is Borrowable.*
 
-A user-story walk-through of a hypothetical solo DAO researcher who runs MiroShark before writing a fee-switch proposal — staged against the 2026 governance reality (<2% voter turnout, top 10% controlling 76% of voting power, temperature checks dominated by twelve loud holders). The badge SVG merged today (PR #94) is the unit of adoption: 20 pixels of Markdown in a README, harder to ignore than a screenshot, easier to embed than a website. Archive bundle (PR #92, merged) and DKG anchor (PR #84) make the simulation citable, not just plausible.
+CrossRef (1999), arXiv (1991), Zenodo (2013), and GitHub's CITATION.cff (2021-08-19) layered up an answer to "how do I cite a thing." MiroShark PR #96 — merged today 13:32 UTC — supplies the bottom layer those four imply but don't provide: `GET /<id>/cite.bib` returns one @misc{…} BibTeX entry per simulation, with the reproduce.json SHA-256 in `note` and the OriginTrail DKG UAL in `annote`. 14th publish-gated surface; closes the cite.bib → reproduce.json → notebook.ipynb → DKG citation arc. ~310 LoC stdlib, 30-PR zero-new-deps streak.
 
-Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-05-21.md
+Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-05-22.md
