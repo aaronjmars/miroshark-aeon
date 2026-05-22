@@ -89,8 +89,20 @@ if [ -f "memory/logs/${TODAY}.md" ]; then
   HANDLES=$(printf "%s\n%s\n" "$HANDLES" "$FROM_LOG" | sort -u)
 fi
 
-# Exclude project-owned accounts (never allocate to these)
-HANDLES=$(echo "$HANDLES" | grep -viE '^(aaronjmars|miroshark_)$' | grep -v '^$' | head -25)
+# Exclude project-owned accounts (never allocate to these) and X.com reserved
+# paths that are NOT user handles. `i` is the big one — XAI annotation citations
+# surface as `x.com/i/status/<id>` URLs (3–4/day in recent fetch-tweets runs),
+# and the path-level grep above slurps `i` in as if it were a handle. Without
+# this filter, every prefetch wastes one Bankr Agent Max-Mode call (~16–112s
+# polling budget) on `@i`, which Bankr cheerfully reports has no wallet.
+# Reserved paths cover the broader x.com URL surface so any other non-handle
+# path that lands in a log via a future content type is also skipped.
+RESERVED_X_PATHS='^(i|home|explore|notifications|messages|compose|intent|settings|search|hashtag|share|lists|bookmarks|topics|moments|analytics|following|followers|jobs|verified-orgs|tos|privacy|about|login|signup|logout|account|help)$'
+HANDLES=$(echo "$HANDLES" \
+  | grep -viE '^(aaronjmars|miroshark_)$' \
+  | grep -viE "$RESERVED_X_PATHS" \
+  | grep -v '^$' \
+  | head -25)
 
 if [ -z "$HANDLES" ]; then
   echo "bankr-prefetch: no candidate handles found in .xai-cache/ or memory/logs/${TODAY}.md — nothing to verify"
