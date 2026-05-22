@@ -1,0 +1,41 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "Tweet Allocator"
+      },
+      "children": [
+        "stack"
+      ]
+    },
+    "stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "date_text",
+        "alert"
+      ]
+    },
+    "date_text": {
+      "type": "Text",
+      "props": {
+        "text": "2026-05-22",
+        "variant": "caption"
+      }
+    },
+    "alert": {
+      "type": "Alert",
+      "props": {
+        "title": "No Eligible Tweeters",
+        "message": "None of 5 real candidates had a verified Bankr wallet",
+        "type": "info"
+      }
+    }
+  }
+}

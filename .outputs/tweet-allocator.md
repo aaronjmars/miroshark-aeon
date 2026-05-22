@@ -1,1 +1,1 @@
-Tweet Allocator — 2026-05-21: ERROR — Bankr Agent jobs did not complete in time (5/5 timed out). Retrying tomorrow; check api.bankr.bot LLM credit / Max Mode latency.
+Tweet Allocator — 2026-05-22: no eligible tweeters (none of 5 real candidates had a verified Bankr wallet).
