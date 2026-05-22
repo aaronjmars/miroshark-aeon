@@ -1,0 +1,351 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Repo Action Ideas"
+      },
+      "children": [
+        "stack_main"
+      ]
+    },
+    "stack_main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading_title",
+        "text_subtitle",
+        "separator_1",
+        "idea_1",
+        "separator_2",
+        "idea_2",
+        "separator_3",
+        "idea_3",
+        "separator_4",
+        "idea_4",
+        "separator_5",
+        "idea_5",
+        "separator_6",
+        "link_details"
+      ]
+    },
+    "heading_title": {
+      "type": "Heading",
+      "props": {
+        "text": "Repo Action Ideas — 2026-05-22",
+        "level": "h1"
+      }
+    },
+    "text_subtitle": {
+      "type": "Text",
+      "props": {
+        "text": "Generated from analysis of aaronjmars/MiroShark (1,190⭐ / 243 forks / 1 open issue) — ideas that can be autonomously built by the feature skill.",
+        "variant": "muted"
+      }
+    },
+    "separator_1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "idea_1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "idea_1_heading",
+        "idea_1_badges",
+        "idea_1_text"
+      ]
+    },
+    "idea_1_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "1. Private Share Link",
+        "level": "h2"
+      }
+    },
+    "idea_1_badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "idea_1_badge_1",
+        "idea_1_badge_2"
+      ]
+    },
+    "idea_1_badge_1": {
+      "type": "Badge",
+      "props": {
+        "text": "Security/Feature",
+        "variant": "default"
+      }
+    },
+    "idea_1_badge_2": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "secondary"
+      }
+    },
+    "idea_1_text": {
+      "type": "Text",
+      "props": {
+        "text": "HMAC-signed expiring URL lets operators share unpublished sims with collaborators — converts the binary publish/unpublish gate into a three-state model using PR #79's existing signature infrastructure.",
+        "variant": "body"
+      }
+    },
+    "separator_2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "idea_2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "idea_2_heading",
+        "idea_2_badges",
+        "idea_2_text"
+      ]
+    },
+    "idea_2_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "2. French Locale Simulation Prompts",
+        "level": "h2"
+      }
+    },
+    "idea_2_badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "idea_2_badge_1",
+        "idea_2_badge_2"
+      ]
+    },
+    "idea_2_badge_1": {
+      "type": "Badge",
+      "props": {
+        "text": "Community/DX",
+        "variant": "default"
+      }
+    },
+    "idea_2_badge_2": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "secondary"
+      }
+    },
+    "idea_2_text": {
+      "type": "Text",
+      "props": {
+        "text": "Issue #95 (opened today) asks for French support; PR #65's Chinese locale is the complete template — add LOCALE_FR env var + translated prompt templates, close the issue with the PR.",
+        "variant": "body"
+      }
+    },
+    "separator_3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "idea_3": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "idea_3_heading",
+        "idea_3_badges",
+        "idea_3_text"
+      ]
+    },
+    "idea_3_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "3. Polymarket-Ready Prediction JSON",
+        "level": "h2"
+      }
+    },
+    "idea_3_badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "idea_3_badge_1",
+        "idea_3_badge_2"
+      ]
+    },
+    "idea_3_badge_1": {
+      "type": "Badge",
+      "props": {
+        "text": "Integration/Growth",
+        "variant": "default"
+      }
+    },
+    "idea_3_badge_2": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "secondary"
+      }
+    },
+    "idea_3_text": {
+      "type": "Text",
+      "props": {
+        "text": "GET /<id>/polymarket.json maps signal.json's Bullish/Neutral/Bearish output to YES/NO probability format for Polymarket bots — directly targeting the use case that drove MiroFish to 32k GitHub stars.",
+        "variant": "body"
+      }
+    },
+    "separator_4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "idea_4": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "idea_4_heading",
+        "idea_4_badges",
+        "idea_4_text"
+      ]
+    },
+    "idea_4_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "4. Platform Aggregate Statistics API",
+        "level": "h2"
+      }
+    },
+    "idea_4_badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "idea_4_badge_1",
+        "idea_4_badge_2"
+      ]
+    },
+    "idea_4_badge_1": {
+      "type": "Badge",
+      "props": {
+        "text": "Integration",
+        "variant": "default"
+      }
+    },
+    "idea_4_badge_2": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "secondary"
+      }
+    },
+    "idea_4_text": {
+      "type": "Text",
+      "props": {
+        "text": "GET /api/stats returns total sims, consensus distribution, avg confidence, total surface views, unique operators — the first endpoint describing the platform itself rather than a specific simulation.",
+        "variant": "body"
+      }
+    },
+    "separator_5": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "idea_5": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "idea_5_heading",
+        "idea_5_badges",
+        "idea_5_text"
+      ]
+    },
+    "idea_5_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "5. Platform Stats Badge SVG",
+        "level": "h2"
+      }
+    },
+    "idea_5_badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "idea_5_badge_1",
+        "idea_5_badge_2"
+      ]
+    },
+    "idea_5_badge_1": {
+      "type": "Badge",
+      "props": {
+        "text": "Growth",
+        "variant": "default"
+      }
+    },
+    "idea_5_badge_2": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "secondary"
+      }
+    },
+    "idea_5_text": {
+      "type": "Text",
+      "props": {
+        "text": "GET /api/stats/badge.svg returns a live \"MiroShark | N simulations\" Shields.io badge for community READMEs — reuses badge_service.py from PR #94, completes the sim-level + platform-level badge layer.",
+        "variant": "body"
+      }
+    },
+    "separator_6": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "link_details": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full details",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-actions-2026-05-22.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}
