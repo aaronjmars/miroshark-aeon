@@ -1,22 +1,15 @@
-*Feature Built — 2026-05-21*
+## Summary
 
-Consensus Status Badge SVG
-MiroShark sims now have a Shields.io-compatible status badge. Any researcher, operator, or token holder can drop one line of Markdown into a GitHub README, Notion page, Substack post, or personal site and the page renders a live 20-pixel badge showing the current consensus (e.g. "Bullish 72%"). The badge updates as the underlying simulation runs — paste it once and the embed never goes stale.
+Built **BibTeX Academic Citation Export** for the watched MiroShark repo. Picked #2 from the 2026-05-20 repo-actions batch — closes the academic-citation arc that started with reproduce.json (PR #79), notebook.ipynb (PR #80), and the OriginTrail DKG citation (PR #84).
 
-Why this matters:
-The previous 12 share surfaces (chart SVG, replay GIF, trajectory CSV, notebook, signal.json, archive.zip, Farcaster Frame, …) all describe a sim in increasing depth — but every one waits for a reader to navigate to the share page. The badge inverts the funnel direction. Every embedding README becomes a pull point: a reader skimming a researcher's repo sees the live consensus, recognises the colour vocabulary from any other MiroShark surface, and clicks through. This was #1 in the May-20 repo-actions batch and the cheapest visible pointer back the surface stack still lacked.
+**PR:** https://github.com/aaronjmars/MiroShark/pull/96 — branch `feat/cite-bib-academic-citation`. 10 files changed, 1213 insertions.
 
-What was built:
-- backend/app/services/badge_service.py (new): pure stdlib xml.etree.ElementTree renderer (~330 LoC). Flat Shields.io layout — left half `MiroShark` on `#555555`, right half `{direction} {confidence_pct}%` on stance colour (`#22c55e` Bullish / `#6b7280` Neutral / `#ef4444` Bearish). Pill ends via clipPath rx=3; bytewise-deterministic output; defensive on unknown direction (neutral grey + `Unknown` label) and clamping on out-of-range confidence.
-- backend/app/api/simulation.py: new GET /<id>/badge.svg route. Same publish gate as every other share surface; 404 when no `belief.final` yet so an embedded <img> renders a broken-image placeholder rather than a misleading `Unknown 0%`. `Cache-Control: public, max-age=60` so live-sim stance flips propagate within one polling cycle.
-- backend/tests/test_unit_badge_service.py (new): 22 offline unit tests covering well-formed SVG + namespace, aria-label contents, all three stance colours + case variants, integer-rounded confidence display, unknown / None / empty fallbacks, clamping (negative / >100 / non-numeric), route + mimetype + cache header, surface_stats registration + counter increment, bytewise determinism, rounded pill corners, and a viewBox-matches-width-height invariant.
-- frontend/src/components/EmbedDialog.vue + api/simulation.js: new 🏷️ Status badge section with in-place live preview plus Copy URL / Copy Markdown / Copy HTML snippet buttons. Same template + i18n conventions as the surrounding sections.
-- backend/openapi.yaml + docs/API.md + docs/FEATURES.md: documents the endpoint, adds `badge_svg` to the SimulationSurfaceStats schema, and explains the distribution-amplifier framing.
+**What shipped:**
+- `backend/app/services/bibtex_service.py` — pure stdlib (~310 LoC) BibTeX builder with citation-key sanitizer, BibTeX-special escaper, ISO-8601 → year/month derivation, and SHA-256 sourcing precedence (DKG anchor > fresh hash > omit).
+- `backend/app/api/simulation.py` — `GET /<id>/cite.bib` route serving `text/plain` with the `.bib` Content-Disposition that Zotero / Mendeley "Import from URL" consumes directly.
+- `backend/tests/test_unit_bibtex_service.py` — 27 offline unit tests covering escaping, key shape, SHA precedence, URL composition, bytewise determinism, defensive fallbacks.
+- `frontend/src/components/EmbedDialog.vue` — new 📖 BibTeX section between the notebook + DKG panels: copyable URL, curl snippet, `\cite{miroshark-...}` LaTeX reference snippet, Download .bib anchor.
+- `backend/openapi.yaml`, `docs/API.md`, `docs/FEATURES.md` — full spec + docs.
+- `cite_bib` counter wired into `SURFACE_KEYS` (with the test expected-set updated in lockstep).
 
-How it works:
-The handler resolves the simulation's embed-summary payload, runs it through the existing `compute_signal` pipeline to derive direction + confidence_pct (same numbers signal.json returns), and passes the pair to `build_badge_svg(direction, confidence_pct)`. The SVG is assembled element-by-element with xml.etree.ElementTree — clipPath with rx=3 for the pill ends, one rect per half with the stance colour on the right, two `<text>` elements centred inside each section, and a `<title>` + `role="img"` + `aria-label` block for accessibility. The colour vocabulary is pinned to the same `#22c55e` / `#6b7280` / `#ef4444` triplet every other belief surface uses, so a reader who saw the chart in the same README recognises the badge immediately. Bytewise determinism is preserved (deterministic element order + `short_empty_elements=True`), so a future ETag layer can hash the body directly.
-
-What's next:
-The remaining four May-20 ideas — BibTeX Academic Citation, Belief Volatility Score, Webhook Test Ping, Gallery Public JSON — are still unbuilt. The badge surface also opens the door to `badge.json` (machine-readable status equivalent for tools that don't render SVG), a `?style=for-the-badge` parameter to ship a taller Shields.io variant, and a Discord-flavoured embed thumbnail variant that pairs with PR #83's rich notifications.
-
-PR: https://github.com/aaronjmars/MiroShark/pull/94
+Zero new dependencies — 30-PR zero-deps streak. Notification queued in `.pending-notify/1779449617.md` for post-run delivery. Memory log + MEMORY.md skills table + Next Priorities updated. May-20 batch now 2/5 addressed.

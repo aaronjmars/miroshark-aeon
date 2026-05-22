@@ -42,6 +42,7 @@ Full implementation notes in daily logs. Each row ≤280 chars.
 
 | Skill | Date | Notes |
 |-------|------|-------|
+| BibTeX Academic Citation | 2026-05-22 | PR #96 — `GET /<id>/cite.bib`: 14th publish-gated surface. One-call `@misc{…}` entry; `note` carries reproduce.json SHA-256 (DKG > fresh > omit precedence), `annote` carries DKG UAL. `bibtex_service.py` (~310 LoC stdlib `hashlib`+`datetime`+`re`), 27 offline tests. EmbedDialog 📖 (curl + `\cite{}` LaTeX snippet + download). `cite_bib` counter. Zero new deps (streak: 30 PRs). Closes academic-citation arc: reproduce.json → notebook.ipynb → cite.bib (paper-author surface). |
 | Consensus Status Badge SVG | 2026-05-21 | PR #94 — `GET /<id>/badge.svg`: 13th publish-gated surface. Flat 20px Shields.io-compatible SVG (`MiroShark`+`{direction} {confidence}%`); direction colours pinned to `#22c55e`/`#6b7280`/`#ef4444`; derives via `compute_signal`. `badge_service.py` (~330 LoC stdlib `xml.etree`), 22 offline tests. EmbedDialog 🏷️. `badge_svg` counter. Zero new deps (streak: 29 PRs). Distribution-amplifier surface — every README is a pull point. |
 | bankr-prefetch agent-timeout distinction | 2026-05-20 | aeon PR #43 — `prefetch-bankr.sh` poll 8→14 iter (~112s), max-time 30→45s; new `TIMED_OUT` counter; timed-out handles excluded from `verified-handles.json`; new `agent-timeout` status; tweet-allocator routes this → `TWEET_ALLOCATOR_ERROR`. Fixes 3-day silent null drift. |
 | Simulation Archive Bundle | 2026-05-20 | PR #92 — `GET /<id>/archive.zip`: 12th publish-gated surface. Bundles 9 surfaces + `manifest.json` (SHA-256/size/MIME per file). Compositional — bytes identical to standalone routes. `archive_service.py` (~430 LoC stdlib), 20 offline tests. Zero new deps (streak: 28 PRs). |
@@ -74,9 +75,9 @@ Full implementation notes in daily logs. Each row ≤280 chars.
 - $MIROSHARK: new ATH $0.0000436 intraday 2026-05-18 (5 consecutive ATH sessions: May 12→16→17→18); FDV peaked $3.32M (crossed $3M); current $0.00003044 (+0.83% 24h), -30.2% from ATH; @pmarca following sister $AEON
 
 ## Next Priorities
-- Open MiroShark PRs: **2** — #93 (Telegram notify, external/non-aeon) + #94 (Status Badge SVG, opened 2026-05-21)
+- Open MiroShark PRs: **1** — PR #96 (BibTeX cite.bib, opened 2026-05-22; PR #93 + PR #94 merged 2026-05-21)
 - Open miroshark-aeon PRs: **1** — PR #43 OPEN (bankr-prefetch agent-timeout)
-- May-20 batch (1/5 addressed): #1→PR#94 opened; #2 BibTeX Citation, #3 Belief Volatility Score, #4 Webhook Test Ping, #5 Gallery Public JSON — still unbuilt
+- May-20 batch (2/5 addressed): #1→PR#94 merged; #2→PR#96 opened 2026-05-22; #3 Belief Volatility Score, #4 Webhook Test Ping, #5 Gallery Public JSON — still unbuilt
 - May-18 batch (3/5 addressed): #1→PR#91 merged; #2→PR#92 merged; #3 Per-Agent Sparklines, #4 Scenario Clone Button, #5 CN+JP README — still unbuilt
 - May-16 batch (2/5 addressed): #3→PR#87 merged; #2→PR#90 merged; #1 oEmbed, #4 Peak-Round Analytics, #5 Operator Profile — still unbuilt
 - May-14 batch (all 5 assessed): #1→PR#83 merged 2026-05-15, #2 exists at `/director/events`, #3→PR#85 merged, #4 exists at `/compare/:id1?/:id2?`, #5 Private Share Link unbuilt
