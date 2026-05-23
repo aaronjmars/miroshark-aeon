@@ -380,3 +380,4 @@ date,skill,model,input_tokens,output_tokens,cache_read,cache_creation
 2026-05-23,hyperstitions-ideas,claude-opus-4-7,92,10412,604409,59867
 2026-05-23,star-momentum-alert,claude-sonnet-4-6,14,15064,451150,61016
 2026-05-23,feature,claude-opus-4-7,121,66527,17086012,189577
+2026-05-23,star-milestone,claude-opus-4-7,12,2896,299341,28926
