@@ -75,10 +75,10 @@
   },
   "repo-pulse": {
     "last_dispatch": "2026-05-23T10:02:46Z",
-    "last_status": "dispatched",
-    "last_success": "2026-05-22T10:03:19Z",
-    "total_runs": 38,
-    "total_successes": 38,
+    "last_status": "success",
+    "last_success": "2026-05-23T10:04:45Z",
+    "total_runs": 39,
+    "total_successes": 39,
     "total_failures": 0,
     "consecutive_failures": 0,
     "success_rate": 1
