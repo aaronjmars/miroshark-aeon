@@ -74,8 +74,8 @@
     "success_rate": 1
   },
   "repo-pulse": {
-    "last_dispatch": "2026-05-22T10:01:36Z",
-    "last_status": "success",
+    "last_dispatch": "2026-05-23T10:02:46Z",
+    "last_status": "dispatched",
     "last_success": "2026-05-22T10:03:19Z",
     "total_runs": 38,
     "total_successes": 38,
@@ -124,8 +124,8 @@
     "last_dispatch": "2026-05-23T08:33:27Z"
   },
   "hyperstitions-ideas": {
-    "last_dispatch": "2026-05-16T10:08:48Z",
-    "last_status": "success",
+    "last_dispatch": "2026-05-23T10:02:46Z",
+    "last_status": "dispatched",
     "last_success": "2026-05-16T10:12:30Z",
     "total_runs": 6,
     "total_successes": 6,
