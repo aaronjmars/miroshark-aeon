@@ -1,0 +1,126 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "project-lens"
+      },
+      "children": [
+        "heading1",
+        "text1",
+        "separator1",
+        "heading2",
+        "text2",
+        "separator2",
+        "heading3",
+        "text3",
+        "stack1",
+        "separator3",
+        "storylink1"
+      ]
+    },
+    "heading1": {
+      "type": "Heading",
+      "props": {
+        "text": "New Article: A Forecast Is Cheap Talk Until Someone Can Bet On It",
+        "level": "h2"
+      }
+    },
+    "text1": {
+      "type": "Text",
+      "props": {
+        "text": "Today's project-lens article through the philosophy lens — Taleb's *skin in the game*, Hanson's futarchy, and the question of what changes about a forecast when it has to be tradeable.",
+        "variant": "body"
+      }
+    },
+    "separator1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading2": {
+      "type": "Heading",
+      "props": {
+        "text": "MiroShark PR #99",
+        "level": "h3"
+      }
+    },
+    "text2": {
+      "type": "Text",
+      "props": {
+        "text": "MiroShark PR #99 opened today reshapes the existing `signal.json` (descriptive: direction + confidence) into `polymarket.json` (prescriptive: YES/NO probability + suggested market title).",
+        "variant": "body"
+      }
+    },
+    "separator2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading3": {
+      "type": "Heading",
+      "props": {
+        "text": "Constraints",
+        "level": "h3"
+      }
+    },
+    "text3": {
+      "type": "Text",
+      "props": {
+        "text": "Three constraints make the envelope shift honest:",
+        "variant": "body"
+      }
+    },
+    "stack1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "text4",
+        "text5",
+        "text6"
+      ]
+    },
+    "text4": {
+      "type": "Text",
+      "props": {
+        "text": "1. Direction-aware `yes_probability`",
+        "variant": "body"
+      }
+    },
+    "text5": {
+      "type": "Text",
+      "props": {
+        "text": "2. Stricter publish gate (completed sims only)",
+        "variant": "body"
+      }
+    },
+    "text6": {
+      "type": "Text",
+      "props": {
+        "text": "3. Pure derivation from the descriptive form — same numbers, different envelope",
+        "variant": "body"
+      }
+    },
+    "separator3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "storylink1": {
+      "type": "StoryLink",
+      "props": {
+        "title": "A Forecast Is Cheap Talk Until Someone Can Bet On It",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-05-23.md",
+        "source": "project-lens"
+      }
+    }
+  }
+}
