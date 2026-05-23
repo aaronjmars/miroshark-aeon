@@ -1,0 +1,184 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "Hyperstitions Idea — 2026-05-23"
+      },
+      "children": [
+        "heading-q",
+        "stack-sections"
+      ]
+    },
+    "heading-q": {
+      "type": "Heading",
+      "props": {
+        "text": "Will a non-Aeon/non-aaronjmars project publicly ship a feature using one of MiroShark's 14 publish-gated surfaces by 2026-07-04?",
+        "level": "h2"
+      }
+    },
+    "stack-sections": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading-coord",
+        "text-coord",
+        "sep-1",
+        "heading-why",
+        "text-why",
+        "sep-2",
+        "heading-res",
+        "text-res-yes",
+        "text-res-no",
+        "sep-3",
+        "heading-scores",
+        "stack-scores",
+        "sep-4",
+        "stack-footer"
+      ]
+    },
+    "heading-coord": {
+      "type": "Heading",
+      "props": {
+        "text": "The Coordination Play",
+        "level": "h3"
+      }
+    },
+    "text-coord": {
+      "type": "Text",
+      "props": {
+        "text": "MiroShark just shipped its 14th publish-gated surface yesterday (PR #96 cite.bib) — capping a 30-PR zero-deps streak that built every endpoint integrators would need (cite.bib, signal.json, badge.svg, archive.zip, notebook.ipynb, reproduce.json, etc.). The architecture is finished; adoption is the gap. A market here puts a target on being the first named external integrator past RevaultDrops — researchers citing cite.bib in a paper, a Polymarket bot consuming signal.json, a fork embedding badge.svg in its README, a dashboard streaming chart.svg. Any of these resolves YES. An AI agent can't be that integrator — only a human builder choosing MiroShark over rolling their own can.",
+        "variant": "body"
+      }
+    },
+    "sep-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading-why": {
+      "type": "Heading",
+      "props": {
+        "text": "Why Now",
+        "level": "h3"
+      }
+    },
+    "text-why": {
+      "type": "Text",
+      "props": {
+        "text": "$MIROSHARK printed -37.2% today (5th consecutive declining session, -68.8% from May-18 ATH $0.0000436, FDV $1.36M from $3.32M peak). The build cadence held through the entire drawdown — 14 surfaces, 30 zero-dep PRs, 4 self-correction cycles in 7 days. The thesis \"architecture decoupled from price\" only proves itself when someone outside the project picks up the architecture. This market makes that pickup the explicit prize.",
+        "variant": "body"
+      }
+    },
+    "sep-2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading-res": {
+      "type": "Heading",
+      "props": {
+        "text": "Resolution",
+        "level": "h3"
+      }
+    },
+    "text-res-yes": {
+      "type": "Text",
+      "props": {
+        "text": "YES if, by 2026-07-04 23:59 UTC, a public GitHub repo, blog post, or X/Twitter announcement from an account unaffiliated with aaronjmars or the Aeon framework (a) names MiroShark as a dependency or data source and (b) demonstrably consumes at least one of the 14 publish-gated endpoints. Detected via aeon's fetch-tweets/repo-pulse skills or community link drop.",
+        "variant": "body"
+      }
+    },
+    "text-res-no": {
+      "type": "Text",
+      "props": {
+        "text": "NO if deadline passes with no qualifying integration.",
+        "variant": "body"
+      }
+    },
+    "sep-3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading-scores": {
+      "type": "Heading",
+      "props": {
+        "text": "Scores",
+        "level": "h3"
+      }
+    },
+    "stack-scores": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "lg"
+      },
+      "children": [
+        "stat-reflex",
+        "stat-viral"
+      ]
+    },
+    "stat-reflex": {
+      "type": "Stat",
+      "props": {
+        "label": "Reflexivity",
+        "value": "4/5"
+      }
+    },
+    "stat-viral": {
+      "type": "Stat",
+      "props": {
+        "label": "Viral",
+        "value": "4/5"
+      }
+    },
+    "sep-4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stack-footer": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "text-soon",
+        "link-hyper",
+        "text-question"
+      ]
+    },
+    "text-soon": {
+      "type": "Text",
+      "props": {
+        "text": "Soon on",
+        "variant": "lead"
+      }
+    },
+    "link-hyper": {
+      "type": "Link",
+      "props": {
+        "label": "Hyperstitions",
+        "href": "https://www.hyperstitions.com/"
+      }
+    },
+    "text-question": {
+      "type": "Text",
+      "props": {
+        "text": "?",
+        "variant": "lead"
+      }
+    }
+  }
+}
