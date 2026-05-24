@@ -1,13 +1,11 @@
 {
-  "last_run_at": "2026-05-17T19:39:00Z",
-  "last_verdict": "FRESHNESS_WARN",
-  "last_flagged_fingerprint": "6bda0b165f830d26b74c936cb56e662fab161730",
+  "last_run_at": "2026-05-24T19:07:55Z",
+  "last_verdict": "FRESHNESS_STALE",
+  "last_flagged_fingerprint": "2eb254be306989703fe289599021ae9947cffa4e",
   "consumer_count": 20,
-  "dependency_count": 18,
-  "flagged_count": 3,
+  "dependency_count": 15,
+  "flagged_count": 1,
   "first_seen_at": {
-    "feature:articles/repo-actions-2026-05-16.md": "2026-05-17T19:39:00Z",
-    "hyperstitions-ideas:articles/repo-actions-2026-05-16.md": "2026-05-17T19:39:00Z",
-    "self-improve:articles/repo-actions-2026-05-16.md": "2026-05-17T19:39:00Z"
+    "operator-scorecard:articles/tweet-allocator-2026-05-17.md": "2026-05-24T19:07:55Z"
   }
 }
