@@ -1,23 +1,16 @@
-Done. Here's the summary:
-
 ## Summary
 
-**Skill:** star-momentum-alert | **Date:** 2026-05-23 | **Status:** STAR_MOMENTUM_NO_ALERTS
+**STAR_MOMENTUM_NO_ALERTS** — skill executed cleanly.
 
-**What ran:**
-- Filtered `memory/watched-repos.md`: 1 repo audited (`aaronjmars/miroshark-aeon` excluded as it ends in `-aeon`)
-- Built 15-point star series for `aaronjmars/MiroShark` from 2026-05-09 to 2026-05-23
+**aaronjmars/MiroShark**: 1194⭐ → 1500⭐ milestone projected in **~77 days** (2026-08-09, Sunday). That's outside the 7-14 day Show HN dispatch window, so no alert fires and no notification was sent.
 
-**Projection — aaronjmars/MiroShark:**
-- Current: **1,192 stars** | Target: **1,500** | Gap: **308**
-- v7 (7-day avg): **4.29/day** | v3 (3-day avg): **5.00/day**
-- Days to milestone (v7): **72 days** → **2026-08-03 (Monday)**
-- Days to milestone (v3): **62 days** → **2026-07-24 (Friday)**
-- Verdict: **OUT_OF_WINDOW** — projection lands 72 days out, well beyond the 7-14 day Show HN dispatch window. No notification sent.
+| Metric | Value |
+|--------|-------|
+| 14-day series | 1130 → 1194 (+64 total) |
+| v7 (7-day avg) | 4.00/day |
+| v3 (3-day avg) | 2.67/day |
+| Gap to 1500 | 306 stars |
+| v7 projected date | 2026-08-09 (Sun) |
+| Verdict | OUT_OF_WINDOW (77 > 14) |
 
-**Files written:**
-- `articles/star-momentum-2026-05-23.md` — projection report
-- `memory/topics/star-momentum-state.json` — updated with new v7 (4.29) and projected date (2026-08-03)
-- `memory/logs/2026-05-23.md` — appended Star Momentum block
-
-No action needed today. The 1,500-star milestone is tracking for early August; the alert will fire automatically once the projection window narrows to 7-14 days out on a Tue/Wed/Thu landing.
+The pace has slowed from 4.29/day (last run May 23) to 4.00/day — three consecutive +2 star days (May 22–24) pulling the recent average down. When the projection window shrinks to 7-14 days and lands on a Tue/Wed/Thu, the alert will fire automatically.
