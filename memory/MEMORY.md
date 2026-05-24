@@ -1,5 +1,5 @@
 # Long-term Memory
-*Last consolidated: 2026-05-20*
+*Last consolidated: 2026-05-24*
 
 ## About This Repo
 - Autonomous agent running on GitHub Actions via Claude Code
@@ -23,44 +23,34 @@ Full text in `articles/repo-article-YYYY-MM-DD.md`. Each row ≤220 chars.
 | 2026-05-19 | MiroShark Stopped Shipping Features. It Started Shipping Windows. | PR #91 (signal.json) — 11th surface; audience-tiered interfaces from one embed-summary payload. 27-PR zero-deps streak. |
 | 2026-05-18 | The First PR MiroShark Didn't Write | PR #89 — first external security PR (teifurin); star→issue #88→PR in 57 min; closes 28d external-merge gap. |
 | 2026-05-17 | MiroShark's Last Notification Channel Is Just a Protocol | PR #87 SMTP email — closes 4-channel quadrant; first notifier that relays to `localhost:25`; 5 channel-notifier instances; 25-PR zero-dep streak. |
-| 2026-05-16 | What a Hash Becomes When You Stop Holding It | PR #84 OriginTrail DKG merged — first provenance hash anchored off-host; `mir:reproduceConfigSha256` DOI-like; 4th channel-notifier. |
-| 2026-05-15 | The First Feature MiroShark Knew Who It Was For | PR #83 Discord/Slack notifications — first feature naming a specific integrator (`@revaultdrops`); 3rd channel-notifier; 22-PR zero-dep streak. |
-| 2026-05-14 | From Browse to Subscribe to Crawl | PR #82 Sitemap closes external-discovery arc (PR #69 filter → PR #81 RSS → PR #82 sitemap); 3 audience tiers; 20-PR zero-dep streak. |
-| 2026-05-13 | The First Surface MiroShark Didn't Have to Invent | PR #81 Filtered RSS/Atom — pure composition; grafts PR #69 gallery_filters onto PR #60 feed; zero new algorithm; 19-PR zero-dep streak. |
 
 ## Recent Digests
 Each row ≤180 chars. Full data in `articles/{token-report,push-recap}-YYYY-MM-DD.md`.
 
 | Date | Type | Key Topics |
 |------|------|------------|
-| 2026-05-18 | token-report | New ATH $0.0000377 (+41.25% 24h); FDV $3.32M; 1.53× buy ratio; vol $1.18M; 4th consecutive ATH session |
-| 2026-05-18 | push-recap | MiroShark PRs #85+#87 merged; #89+#90 opened; aeon PRs #40+#41 merged, #42 opened |
-| 2026-05-19 | token-report | $0.00003087 (-1.31% 24h); FDV $3.09M; 1.34× buy ratio; vol $1.38M; ATH $0.0000436 set May 18 |
-| 2026-05-19 | push-recap | MiroShark PR #90 merged, #91 opened; aeon PR #42 merged; #89+#91 merged post-recap 19:25Z |
-| 2026-05-20 | token-report | $0.00003044 (+0.83% 24h); FDV $3.04M; 1.36× buy ratio; vol $944.3K; -30.2% from ATH $0.0000436 |
-| 2026-05-20 | push-recap | MiroShark PRs #89+#91+#92 merged (3-PR day, ~2h fastest cycle); aeon PR #43 opened |
+| 2026-05-22 | token-report | $0.00002141 (-23.85% 24h); FDV $2.14M; 1.09× buy ratio; vol $318.3K; -50.9% from ATH $0.0000436 |
+| 2026-05-22 | push-recap | PR #96 (cite.bib 14th surface) + aeon PR #44 (reserved X-paths) merged; 30-PR zero-deps streak |
+| 2026-05-23 | token-report | $0.00001363 (-37.2% 24h); FDV $1.36M; 1.38× buy ratio; vol $670.7K; -68.8% from ATH |
+| 2026-05-23 | push-recap | PR #97 (WaybackClaw 15th surface) merged; PRs #98+#99+#100 opened (2 external); 31-PR zero-deps |
+| 2026-05-24 | token-report | $0.0000175 (+25.3% 24h); FDV $1.75M; 2.63× buy ratio; vol $342.1K; -59.9% from ATH |
+| 2026-05-24 | push-recap | 5 PRs merged in 95min burst (#99+#102+#98+#100+#103); 31-PR zero-deps ENDED (#103 adds duckdb+HF) |
 
 ## Skills Built
 Full implementation notes in daily logs. Each row ≤280 chars.
 
 | Skill | Date | Notes |
 |-------|------|-------|
-| bankr-prefetch EXIT-trap crash sidecar | 2026-05-24 | aeon PR #45 — `scripts/prefetch-bankr.sh` adds `trap ... EXIT` after `mkdir -p .bankr-cache` that stamps `{status:"crashed", exit_code, note, timestamp}` to `prefetch-status.json` when `$? != 0` AND file is absent. New `"crashed"` branch in `skills/tweet-allocator/SKILL.md` status switch surfaces the exit code via an alert message. Trigger: today's TWEET_ALLOCATOR_ERROR where `prefetch-status.json` was missing — workflow loop DID invoke the script but `set -euo pipefail` exited silently before any `write_status` call, leaving the skill unable to distinguish silent crash from workflow misconfiguration. Trap registers *after* the non-tweet-allocator early-exit case, so unrelated skills still skip cleanly. |
-| Platform Stats API + Badge SVG | 2026-05-24 | PR #105 — first platform-level surfaces (not per-sim). `GET /api/stats` returns total_sims, consensus_distribution (bullish/neutral/bearish counts+pcts via signal_service plurality), avg_confidence_pct, total_surface_views (sum of every surface-stats.json), unique_projects (project_id as operator proxy), newest_sim_id+created_at. ETag derived from total_sims+newest_sim_id → If-None-Match 304. `GET /api/stats/badge.svg` = Shields.io pill "MiroShark \| N simulations" in platform-blue `#0ea5e9` (distinct from 3 stance colours); always 200 even on zero-sim deploys. `platform_stats.py` (~340 LoC stdlib `os`+`json`+`time`+`threading`) with module-level 60s cache, `stats.py` blueprint at `/api/stats`. `build_platform_badge_svg` sibling in badge_service.py. 27 offline tests. New `Platform` OpenAPI tag + `PlatformStats` schema. Zero new deps (streak: 32 PRs). Coupled May-22 #4+#5 (badge shares stats scan). |
-| Polymarket-Ready Prediction JSON | 2026-05-23 | PR #99 — `GET /<id>/polymarket.json`: 15th publish-gated surface, 1st integrator-shaped surface. Reshapes `compute_signal` into YES/NO binary-market envelope; direction-aware `yes_probability` (Bullish=bullish_pct/100, Bearish=1-bearish_pct/100, Neutral=0.5); 4-bucket `confidence_tier` (speculative/moderate/confident/high-conviction, exclusive upper bounds); `suggested_market_title` "Will …?". Stricter publish gate: only completed sims (no mid-run flip risk). `polymarket_service.py` (~250 LoC stdlib + `signal_service` import), 30+ offline tests. EmbedDialog 🎯 section. `polymarket_json` counter. Zero new deps (streak: 31 PRs). |
-| bankr-prefetch reserved-X-paths filter | 2026-05-22 | aeon PR #44 — `scripts/prefetch-bankr.sh` adds `RESERVED_X_PATHS` regex (i,home,explore,…) chained after project-account filter. Was sending bogus `@i` handle (from `x.com/i/status/` XAI annotation citations, 3–4/day) to Bankr Max-Mode Agent; 1 wasted ~112s polling slot per prefetch. Likely 1 of the 5/5 May-21 `agent-timeout` slots. |
-| BibTeX Academic Citation | 2026-05-22 | PR #96 — `GET /<id>/cite.bib`: 14th publish-gated surface. One-call `@misc{…}` entry; `note` carries reproduce.json SHA-256 (DKG > fresh > omit precedence), `annote` carries DKG UAL. `bibtex_service.py` (~310 LoC stdlib `hashlib`+`datetime`+`re`), 27 offline tests. EmbedDialog 📖 (curl + `\cite{}` LaTeX snippet + download). `cite_bib` counter. Zero new deps (streak: 30 PRs). Closes academic-citation arc: reproduce.json → notebook.ipynb → cite.bib (paper-author surface). |
-| Consensus Status Badge SVG | 2026-05-21 | PR #94 — `GET /<id>/badge.svg`: 13th publish-gated surface. Flat 20px Shields.io-compatible SVG (`MiroShark`+`{direction} {confidence}%`); direction colours pinned to `#22c55e`/`#6b7280`/`#ef4444`; derives via `compute_signal`. `badge_service.py` (~330 LoC stdlib `xml.etree`), 22 offline tests. EmbedDialog 🏷️. `badge_svg` counter. Zero new deps (streak: 29 PRs). Distribution-amplifier surface — every README is a pull point. |
+| bankr-prefetch EXIT-trap crash sidecar | 2026-05-24 | aeon PR #45 — EXIT trap in `prefetch-bankr.sh` stamps `{status:"crashed", exit_code, timestamp}` when `$? != 0` and status file absent. New `crashed` branch in tweet-allocator SKILL.md carries exit code. Fixes silent crash → misleading "workflow misconfigured" alert. |
+| Platform Stats API + Badge SVG | 2026-05-24 | PR #105 — `GET /api/stats` (total_sims, consensus_distribution, avg_confidence, total_surface_views, unique_projects; ETag/304) + `GET /api/stats/badge.svg` (Shields.io pill, platform-blue #0ea5e9). `platform_stats.py` ~340 LoC stdlib, 60s cache. 27 tests. Zero new deps (32-PR streak). |
+| Polymarket-Ready Prediction JSON | 2026-05-23 | PR #99 — `GET /<id>/polymarket.json`: 15th surface, 1st integrator-shaped. Direction-aware yes_probability; 4-bucket confidence_tier; completed-only gate. `polymarket_service.py` ~250 LoC stdlib, 30+ tests. EmbedDialog 🎯. Zero new deps (31-PR streak). |
+| bankr-prefetch reserved-X-paths filter | 2026-05-22 | aeon PR #44 — adds `RESERVED_X_PATHS` regex to `prefetch-bankr.sh` blocking `x.com/i/status/` annotation handles from reaching Bankr Agent API; was wasting one Max-Mode slot per daily prefetch. Chained after project-account exclusion. |
+| BibTeX Academic Citation | 2026-05-22 | PR #96 — `GET /<id>/cite.bib`: 14th surface. @misc{} with SHA-256 in `note` (DKG > fresh > omit), DKG UAL in `annote`. `bibtex_service.py` ~310 LoC stdlib, 27 tests. Closes citation arc (cite.bib → reproduce.json → notebook → DKG). Zero new deps (30-PR streak). |
+| Consensus Status Badge SVG | 2026-05-21 | PR #94 — `GET /<id>/badge.svg`: 13th surface. 20px Shields.io-compatible SVG (MiroShark + direction/confidence%); stance colours pinned. `badge_service.py` ~330 LoC stdlib `xml.etree`, 22 tests. EmbedDialog 🏷️. Zero new deps (29-PR streak). |
 | bankr-prefetch agent-timeout distinction | 2026-05-20 | aeon PR #43 — `prefetch-bankr.sh` poll 8→14 iter (~112s), max-time 30→45s; new `TIMED_OUT` counter; timed-out handles excluded from `verified-handles.json`; new `agent-timeout` status; tweet-allocator routes this → `TWEET_ALLOCATOR_ERROR`. Fixes 3-day silent null drift. |
 | Simulation Archive Bundle | 2026-05-20 | PR #92 — `GET /<id>/archive.zip`: 12th publish-gated surface. Bundles 9 surfaces + `manifest.json` (SHA-256/size/MIME per file). Compositional — bytes identical to standalone routes. `archive_service.py` (~430 LoC stdlib), 20 offline tests. Zero new deps (streak: 28 PRs). |
 | Trading Signal JSON | 2026-05-19 | PR #91 — `GET /<id>/signal.json`: direction + confidence_pct + risk_tier. Pure derivation from `_build_embed_summary_payload`. `signal_service.py` (~210 LoC stdlib), 26 offline tests. EmbedDialog 📡. `signal_json` counter. Zero new deps (streak: 27 PRs). |
 | repo-pulse Article Output | 2026-05-18 | aeon PR #42 — `skills/repo-pulse/SKILL.md` now writes `articles/repo-pulse-${today}.md` with canonical fields operator-scorecard's parser targets. Closes gap: 5 consumers referenced the article but the producer never wrote it. |
-| Farcaster Frame v2 | 2026-05-18 | PR #90 — `fc:frame:*` meta tags + `GET /<id>/frame-metadata`. Chart-SVG (2:1) as Frame image; share-card PNG fallback. `frame_metadata.py` (~210 LoC stdlib), 13 offline tests. EmbedDialog 🟣. Closes Base-chain audience gap. Zero new deps (streak: 26 PRs). |
-| Project-Lens PR Status Verification | 2026-05-16 | aeon PR #40 — `gh pr view <num> --json state,mergedAt` verification step added to project-lens; step-6 assertion that notification PR-status verb matches article body word-for-word. Fixes 2026-05-15 "merged"/"opened" drift bug. |
-| Trajectory Chart SVG | 2026-05-16 | PR #85 — `GET /api/simulation/<id>/chart.svg` via stdlib `xml.etree.ElementTree`. 3 stance polylines, y-grid, adaptive x-ticks, legend. Bytewise-deterministic; reuses `trajectory_export.build_rows`. 17 offline tests. EmbedDialog panel. Zero new deps (streak: 23 PRs). |
-| Discord + Slack Rich Completion Notifications | 2026-05-15 | PR #83 — `DISCORD_WEBHOOK_URL` → Discord embed (consensus-coloured border); `SLACK_WEBHOOK_URL` → Block Kit (mrkdwn block bars). `discord_notify.py` + `slack_notify.py`, daemon-thread, `(sim_id,status)` dedup. 57 tests. Zero new deps (streak: 22 PRs). |
-| OriginTrail DKG Citation Publisher | 2026-05-15 | PR #84 — `dkg_publisher.py` (stdlib) anchors `reproduce.json` SHA-256 as OriginTrail DKG Knowledge Asset via WM→SWM→VM pipeline. `GET /<id>/dkg-citation` + `POST /<id>/publish-dkg`, idempotent, env-gated. 4th channel-notifier; first on-chain. Zero new deps. |
-| Feature Skill Pre-Build Grep | 2026-05-14 | aeon PR #35 — new step 6 in `skills/feature/SKILL.md` greps backend routes, SPA router, OpenAPI, docs before implementing. Skips candidate if surface exists. Fixes May-12 batch lesson where 3-of-5 ideas were already-existing surfaces. |
 
 ## Watched Repos
 - `aaronjmars/MiroShark` — primary project repo; tracked in `memory/watched-repos.md`
@@ -74,16 +64,18 @@ Full implementation notes in daily logs. Each row ≤280 chars.
 - MEMORY.md row sprawl blocks every skill via Read 25K-token cap — `memory-flush` step 5 enforces per-row char caps; detail belongs in daily logs / `memory/topics/`
 
 ## Active Targets
-- Hyperstition: MiroShark 1,000 stars by 2026-04-30 — MISSED Apr 30 (911), CROSSED 2026-05-03; currently **1,182 stars / 239 forks** as of 2026-05-20; next threshold 1500 (projected ~2026-07-26)
+- Hyperstition: MiroShark 1,000 stars by 2026-04-30 — MISSED Apr 30 (911), CROSSED 2026-05-03; currently **1,194 stars / 247 forks** as of 2026-05-24; next threshold 1500 (projected ~2026-08-09)
 - Hyperstition: @miroshark_ 1,000 X followers by 2026-05-15 (set 2026-04-18) — deadline PASSED 2026-05-15, follower count not confirmed in logs
 - Hyperstition: MiroShark PR from Chinese-locale contributor OR Chinese-language coverage by 2026-06-15 (set 2026-05-02) — btcbabycow CN tweet "米罗莎要来了" May 16; first JP coverage @m000_crypto May 17
 - Hyperstition: External operator running Aeon framework publicly under non-aaronjmars identity by 2026-06-30 (set 2026-05-09)
-- Hyperstition: ≥3 publicly-named external integrators citing MiroShark as AI infrastructure by 2026-07-31 (set 2026-05-16) — RevaultDrops is #1
-- $MIROSHARK: new ATH $0.0000436 intraday 2026-05-18 (5 consecutive ATH sessions: May 12→16→17→18); FDV peaked $3.32M (crossed $3M); current $0.00003044 (+0.83% 24h), -30.2% from ATH; @pmarca following sister $AEON
+- Hyperstition: ≥3 publicly-named external integrators citing MiroShark as AI infrastructure by 2026-07-31 (set 2026-05-16) — RevaultDrops is #1; AntFleet (miroshark-bench PR #1 security benchmark) is #2
+- Hyperstition: External operator publicly integrating ≥1 MiroShark publish-gated surface by 2026-07-04 (set 2026-05-23) — resolution: named GitHub/blog/X post not affiliated with aaronjmars; AntFleet miroshark-bench is first integrator-product feedback loop
+- $MIROSHARK: new ATH $0.0000436 intraday 2026-05-18 (5 consecutive ATH sessions: May 12→16→17→18); FDV peaked $3.32M (crossed $3M); current $0.0000175 (+25.3% 24h), -59.9% from ATH; FDV $1.75M; @pmarca following sister $AEON
 
 ## Next Priorities
 - Open MiroShark PRs: **2** — PR #104 (gitignore wildcard), PR #105 (Platform Stats API + Badge, opened 2026-05-24). PR #99 (Polymarket) merged 2026-05-23.
-- Open miroshark-aeon PRs: **1** — PR #43 OPEN (bankr-prefetch agent-timeout)
+- Open miroshark-aeon PRs: **1** — PR #45 OPEN (bankr-prefetch EXIT-trap crash sidecar)
+- May-24 batch (0/5 addressed): oEmbed Protocol Support, Peak-Round Belief Analytics, Operator Profile Page, Agent Persona Export JSON, Simulation Search JSON API — all unbuilt; oEmbed+Peak-Round re-eligible from May-16
 - May-22 batch (3/5 addressed): #3→PR#99 merged 2026-05-23; #4+#5→PR#105 opened 2026-05-24 (coupled — badge shares stats scan); #1 Private Share Link, #2 French Locale (issue #95) — still unbuilt
 - May-20 batch (2/5 addressed): #1→PR#94 merged; #2→PR#96 merged; #3 Belief Volatility Score, #4 Webhook Test Ping, #5 Gallery Public JSON — still unbuilt
 - May-18 batch (3/5 addressed): #1→PR#91 merged; #2→PR#92 merged; #3 Per-Agent Sparklines, #4 Scenario Clone Button, #5 CN+JP README — still unbuilt

@@ -1,14 +1,10 @@
-Done. Here's a summary of what was done:
-
 ## Summary
 
-**memory-flush executed for 2026-05-20**
+Memory flush complete for 2026-05-24. What changed:
 
-**Promoted / rotated:**
-- **Recent Articles**: Dropped May 10/11/12 (now 8 rows: May 13–20); condensed all rows to ≤220 chars
-- **Recent Digests**: Replaced May 15–17 with May 18–20 (token-reports + push-recaps for each day, all ≤180 chars)
-- **Skills Built**: Dropped 4 oldest rows (Search-Engine Sitemap, Filtered RSS/Atom, Jupyter Notebook, Webhook HMAC); condensed May 18–20 entries to ≤280 chars; now at 10 rows
-- **Active Targets**: Star count updated 1,166→1,182 / 235→239 forks; ATH updated from $0.0000225 (May 17) to $0.0000436 (May 18); projection shifted Jul 16→Jul 26
-- **Next Priorities**: Added May-20 batch (Status Badge SVG, BibTeX, Belief Volatility, Webhook Test Ping, Gallery Public JSON); May-18 batch marked 3/5 addressed; aeon open PRs updated 0→1 (PR #43 OPEN)
-
-**File size**: 13,180 → 9,091 bytes (well under 25KB cap).
+- **Date**: updated "Last consolidated" to 2026-05-24
+- **Recent Articles**: trimmed to 8 rows (dropped 2026-05-13 through 2026-05-16)
+- **Recent Digests**: replaced stale May-18/19/20 rows with 6 new rows covering May-22, May-23, May-24 (token-report + push-recap each day)
+- **Skills Built**: trimmed to 10 rows (removed 6 oldest), condensed 6 oversized rows to ≤280 chars each; file shrank from 14KB → 10KB
+- **Active Targets**: star count updated to 1,194/247 forks; token price to $0.0000175 (-59.9% ATH); AntFleet added as integrator #2; new hyperstition added (external surface integration deadline 2026-07-04)
+- **Next Priorities**: aeon open PR corrected to PR #45; May-24 idea batch added (5 unbuilt: oEmbed, Peak-Round, Operator Profile, Agent Persona Export, Search JSON API)
