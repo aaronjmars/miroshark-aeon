@@ -1,0 +1,156 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "Heartbeat",
+        "description": "Sunday May 24, 2026 — 19:00 UTC"
+      },
+      "children": [
+        "status-section",
+        "separator-1",
+        "missing-skill-section",
+        "separator-2",
+        "prs-section",
+        "separator-3",
+        "issues-section"
+      ]
+    },
+    "status-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "status-alert"
+      ]
+    },
+    "status-alert": {
+      "type": "Alert",
+      "props": {
+        "message": "All daily + Sunday skills confirmed ran ✓",
+        "type": "success"
+      }
+    },
+    "separator-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "missing-skill-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "missing-skill-alert",
+        "missing-skill-link"
+      ]
+    },
+    "missing-skill-alert": {
+      "type": "Alert",
+      "props": {
+        "title": "Missing Skill Detected",
+        "message": "skill-freshness (scheduled 08:00 UTC, 11h overdue, no prior report in 48h)",
+        "type": "warning"
+      }
+    },
+    "missing-skill-link": {
+      "type": "Link",
+      "props": {
+        "label": "Auto-triggered GitHub Actions run",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/actions/runs/26370067477"
+      }
+    },
+    "separator-2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "prs-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "prs-heading",
+        "prs-list"
+      ]
+    },
+    "prs-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Open PRs",
+        "level": "h3"
+      }
+    },
+    "prs-list": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "pr-1",
+        "pr-2",
+        "pr-3"
+      ]
+    },
+    "pr-1": {
+      "type": "StoryLink",
+      "props": {
+        "title": "MiroShark #104 — gitignore wildcard",
+        "source": "voidfreud",
+        "score": "19h",
+        "href": "https://github.com/aaronjmars/miroshark/pull/104"
+      }
+    },
+    "pr-2": {
+      "type": "StoryLink",
+      "props": {
+        "title": "MiroShark #105 — platform stats API",
+        "score": "7.5h",
+        "href": "https://github.com/aaronjmars/miroshark/pull/105"
+      }
+    },
+    "pr-3": {
+      "type": "StoryLink",
+      "props": {
+        "title": "miroshark-aeon PR #45 — bankr-prefetch crash trap",
+        "source": "review pending",
+        "score": "5.5h",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/pull/45"
+      }
+    },
+    "separator-3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "issues-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "issues-text"
+      ]
+    },
+    "issues-text": {
+      "type": "Text",
+      "props": {
+        "text": "No urgent GitHub issues",
+        "variant": "muted"
+      }
+    }
+  }
+}
