@@ -1,0 +1,319 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Repo Action Ideas"
+      },
+      "children": [
+        "heading_main",
+        "repo_stats",
+        "separator1",
+        "ideas_stack",
+        "separator2",
+        "full_details"
+      ]
+    },
+    "heading_main": {
+      "type": "Heading",
+      "props": {
+        "text": "Repo Action Ideas — 2026-05-24",
+        "level": "h2"
+      }
+    },
+    "repo_stats": {
+      "type": "Text",
+      "props": {
+        "text": "Generated from analysis of aaronjmars/MiroShark (1,194⭐ / 247 forks / 4 open issues) — ideas the feature skill can autonomously build next.",
+        "variant": "muted"
+      }
+    },
+    "separator1": {
+      "type": "Separator",
+      "props": {}
+    },
+    "ideas_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "idea1",
+        "idea2",
+        "idea3",
+        "idea4",
+        "idea5"
+      ]
+    },
+    "idea1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "idea1_heading",
+        "idea1_tags",
+        "idea1_desc"
+      ]
+    },
+    "idea1_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "1. oEmbed Protocol Support",
+        "level": "h3"
+      }
+    },
+    "idea1_tags": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "idea1_tag1",
+        "idea1_tag2"
+      ]
+    },
+    "idea1_tag1": {
+      "type": "Badge",
+      "props": {
+        "text": "Integration",
+        "variant": "secondary"
+      }
+    },
+    "idea1_tag2": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "outline"
+      }
+    },
+    "idea1_desc": {
+      "type": "Text",
+      "props": {
+        "text": "Auto-unfurl MiroShark share URLs in Notion, Ghost, Substack, WordPress — one route + two discovery link tags, no user action required.",
+        "variant": "body"
+      }
+    },
+    "idea2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "idea2_heading",
+        "idea2_tags",
+        "idea2_desc"
+      ]
+    },
+    "idea2_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "2. Peak-Round Belief Analytics",
+        "level": "h3"
+      }
+    },
+    "idea2_tags": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "idea2_tag1",
+        "idea2_tag2"
+      ]
+    },
+    "idea2_tag1": {
+      "type": "Badge",
+      "props": {
+        "text": "Feature",
+        "variant": "secondary"
+      }
+    },
+    "idea2_tag2": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "outline"
+      }
+    },
+    "idea2_desc": {
+      "type": "Text",
+      "props": {
+        "text": "GET /<id>/peak-round returns machine-readable inflection points (per-stance peaks, most volatile round) in one O(n) trajectory pass.",
+        "variant": "body"
+      }
+    },
+    "idea3": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "idea3_heading",
+        "idea3_tags",
+        "idea3_desc"
+      ]
+    },
+    "idea3_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "3. Operator Profile Page",
+        "level": "h3"
+      }
+    },
+    "idea3_tags": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "idea3_tag1",
+        "idea3_tag2"
+      ]
+    },
+    "idea3_tag1": {
+      "type": "Badge",
+      "props": {
+        "text": "Community",
+        "variant": "secondary"
+      }
+    },
+    "idea3_tag2": {
+      "type": "Badge",
+      "props": {
+        "text": "Medium",
+        "variant": "outline"
+      }
+    },
+    "idea3_desc": {
+      "type": "Text",
+      "props": {
+        "text": "/profile/<operator_name> — per-operator gallery with summary card; every share page becomes a backlink; researchers can follow an operator's body of work.",
+        "variant": "body"
+      }
+    },
+    "idea4": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "idea4_heading",
+        "idea4_tags",
+        "idea4_desc"
+      ]
+    },
+    "idea4_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "4. Agent Persona Export JSON",
+        "level": "h3"
+      }
+    },
+    "idea4_tags": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "idea4_tag1",
+        "idea4_tag2"
+      ]
+    },
+    "idea4_tag1": {
+      "type": "Badge",
+      "props": {
+        "text": "Feature",
+        "variant": "secondary"
+      }
+    },
+    "idea4_tag2": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "outline"
+      }
+    },
+    "idea4_desc": {
+      "type": "Text",
+      "props": {
+        "text": "GET /<id>/agents.json — 17th publish-gated surface; structured per-agent export (name, role, initial/final stance, trajectory) for cross-sim agent analysis.",
+        "variant": "body"
+      }
+    },
+    "idea5": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "idea5_heading",
+        "idea5_tags",
+        "idea5_desc"
+      ]
+    },
+    "idea5_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "5. Simulation Search JSON API",
+        "level": "h3"
+      }
+    },
+    "idea5_tags": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "idea5_tag1",
+        "idea5_tag2"
+      ]
+    },
+    "idea5_tag1": {
+      "type": "Badge",
+      "props": {
+        "text": "Integration",
+        "variant": "secondary"
+      }
+    },
+    "idea5_tag2": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "outline"
+      }
+    },
+    "idea5_desc": {
+      "type": "Text",
+      "props": {
+        "text": "GET /api/search.json?q=&consensus=&min_confidence= — filtered, query-driven JSON endpoint; distinct from a full-index dump; enables LLM agents and research scripts to query specific sim characteristics.",
+        "variant": "body"
+      }
+    },
+    "separator2": {
+      "type": "Separator",
+      "props": {}
+    },
+    "full_details": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full details",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-actions-2026-05-24.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}
