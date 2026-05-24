@@ -1,0 +1,303 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Push Recap — 2026-05-24"
+      },
+      "children": [
+        "heading_status",
+        "stack_summary",
+        "sep1",
+        "heading_merge",
+        "text_merge",
+        "sep2",
+        "heading_deps",
+        "text_deps",
+        "sep3",
+        "heading_contrib",
+        "text_contrib",
+        "sep4",
+        "heading_changes",
+        "stack_pr103",
+        "stack_pr99",
+        "stack_pr98",
+        "sep5",
+        "heading_stats",
+        "grid_stats",
+        "sep6",
+        "link_recap"
+      ]
+    },
+    "heading_status": {
+      "type": "Heading",
+      "props": {
+        "text": "MiroShark & miroshark-aeon Status",
+        "level": "h2"
+      }
+    },
+    "stack_summary": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "text_ms_summary",
+        "text_aeon_summary"
+      ]
+    },
+    "text_ms_summary": {
+      "type": "Text",
+      "props": {
+        "text": "MiroShark — 5 PRs merged (2 external) in a 95-min burst on 2026-05-23 between 17:09Z and 18:43Z, all post-yesterday's-recap.",
+        "variant": "body"
+      }
+    },
+    "text_aeon_summary": {
+      "type": "Text",
+      "props": {
+        "text": "miroshark-aeon — 0 merges (skill auto-commits only); PR #45 (bankr-prefetch EXIT trap) opened today.",
+        "variant": "body"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading_merge": {
+      "type": "Heading",
+      "props": {
+        "text": "Post-recap Merge Wave",
+        "level": "h3"
+      }
+    },
+    "text_merge": {
+      "type": "Text",
+      "props": {
+        "text": "PR #99 (Polymarket prediction JSON, 15th publish-gated surface and first integrator-shaped) + PR #102 (CI fix backfilling openapi+tests that PR #97 should have shipped) + external PRs #98 (antfleet path-traversal fix, found by their two-model Claude Opus 4.7 + GPT-5 consensus review) + #100 (voidfreud Aura launcher fix, merged 5s apart) + PR #103 (Nemotron demographic grounding). Densest single-window merge of the month.",
+        "variant": "body"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading_deps": {
+      "type": "Heading",
+      "props": {
+        "text": "31-PR Zero-Deps Streak Ended",
+        "level": "h3"
+      }
+    },
+    "text_deps": {
+      "type": "Text",
+      "props": {
+        "text": "Held from PR #72 → #102 — broken when demographic grounding added unconditional duckdb >=1.0.0 + huggingface_hub >=0.23.0 to pyproject.toml + requirements.txt. Framing is careful (code degrades to graph-only if deps missing) but the install surface grows. New streak restarts at PR #104 / #105.",
+        "variant": "body"
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading_contrib": {
+      "type": "Heading",
+      "props": {
+        "text": "External Contributors Now Sustained",
+        "level": "h3"
+      }
+    },
+    "text_contrib": {
+      "type": "Text",
+      "props": {
+        "text": "Third external in 10 days (teifurin → antfleet → voidfreud). voidfreud back today with PR #104 (gitignore wildcard). AntFleet running MiroShark as a public security-benchmark target at AntFleet/miroshark-bench/pull/1 — first integrator-product feedback loop.",
+        "variant": "body"
+      }
+    },
+    "sep4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading_changes": {
+      "type": "Heading",
+      "props": {
+        "text": "Key Changes",
+        "level": "h3"
+      }
+    },
+    "stack_pr103": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "badge_pr103",
+        "text_pr103"
+      ]
+    },
+    "badge_pr103": {
+      "type": "Badge",
+      "props": {
+        "text": "PR #103: Demographic Grounding",
+        "variant": "default"
+      }
+    },
+    "text_pr103": {
+      "type": "Text",
+      "props": {
+        "text": "new demographic_sampler.py (+360 LoC DuckDB+HF parquet), country_registry.py loading pluggable JSON packs (sg=39 planning areas, us=51 states), CountryPicker.vue with EN+CN i18n, SimulationState gains country + demographic_filters fields. First opt-in remote dataset dependency and first pluggable JSON registry in MiroShark.",
+        "variant": "body"
+      }
+    },
+    "stack_pr99": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "badge_pr99",
+        "text_pr99"
+      ]
+    },
+    "badge_pr99": {
+      "type": "Badge",
+      "props": {
+        "text": "PR #99: Polymarket Prediction JSON",
+        "variant": "default"
+      }
+    },
+    "text_pr99": {
+      "type": "Text",
+      "props": {
+        "text": "polymarket_service.py (+253 LoC stdlib) — direction-aware yes_probability (Bullish=bullish_pct/100, Bearish=1-bearish_pct/100, Neutral=0.5 exactly), 4-bucket confidence_tier, sum-to-1.0 invariant, stricter publish gate (completed sims only — no mid-run flip risk for Polymarket bots).",
+        "variant": "body"
+      }
+    },
+    "stack_pr98": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "badge_pr98",
+        "text_pr98"
+      ]
+    },
+    "badge_pr98": {
+      "type": "Badge",
+      "props": {
+        "text": "PR #98: Path-Traversal Security Fix",
+        "variant": "destructive"
+      }
+    },
+    "text_pr98": {
+      "type": "Text",
+      "props": {
+        "text": "_validate_project_id regex at single _get_project_dir entry point — closes a real arbitrary-file-read/write vuln (../../etc/passwd would have worked).",
+        "variant": "body"
+      }
+    },
+    "sep5": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading_stats": {
+      "type": "Heading",
+      "props": {
+        "text": "Statistics",
+        "level": "h3"
+      }
+    },
+    "grid_stats": {
+      "type": "Grid",
+      "props": {
+        "columns": 2,
+        "gap": "md"
+      },
+      "children": [
+        "stat_lines",
+        "stat_files",
+        "stat_stars",
+        "stat_forks",
+        "stat_miroshark_prs",
+        "stat_aeon_prs"
+      ]
+    },
+    "stat_lines": {
+      "type": "Stat",
+      "props": {
+        "label": "Lines Changed",
+        "value": "+3,004 / -18"
+      }
+    },
+    "stat_files": {
+      "type": "Stat",
+      "props": {
+        "label": "Files Modified",
+        "value": "~30"
+      }
+    },
+    "stat_stars": {
+      "type": "Stat",
+      "props": {
+        "label": "Stars",
+        "value": "1194",
+        "delta": "+2",
+        "trend": "up"
+      }
+    },
+    "stat_forks": {
+      "type": "Stat",
+      "props": {
+        "label": "Forks",
+        "value": "247",
+        "delta": "+2",
+        "trend": "up"
+      }
+    },
+    "stat_miroshark_prs": {
+      "type": "Stat",
+      "props": {
+        "label": "MiroShark PRs Open",
+        "value": "3"
+      }
+    },
+    "stat_aeon_prs": {
+      "type": "Stat",
+      "props": {
+        "label": "Aeon PRs Open",
+        "value": "1"
+      }
+    },
+    "sep6": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "link_recap": {
+      "type": "StoryLink",
+      "props": {
+        "title": "push-recap-2026-05-24",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-05-24.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}
