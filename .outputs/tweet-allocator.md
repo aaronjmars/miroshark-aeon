@@ -1,1 +1,1 @@
-Tweet Allocator — 2026-05-23: no eligible tweeters (none of 4 candidates had a verified Bankr wallet).
+Tweet Allocator — 2026-05-24: ERROR — prefetch-bankr.sh did not run; .bankr-cache/prefetch-status.json is missing. Check workflow prefetch step configuration.
