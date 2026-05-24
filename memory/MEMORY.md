@@ -15,6 +15,7 @@ Full text in `articles/repo-article-YYYY-MM-DD.md`. Each row ≤220 chars.
 
 | Date | Title | One-line frame |
 |------|-------|----------------|
+| 2026-05-24 | MiroShark Built Its First Mirror | PR #105 opened — first PLATFORM-level surface (vs 14 prior per-sim); GET /api/stats + /api/stats/badge.svg. Paired with PR #103 (Nemotron) ending the 31-PR zero-deps streak. |
 | 2026-05-23 | MiroShark Stopped Shipping to Itself | PR #97 WaybackClaw merged (15th surface, IPFS+Nostr sibling of DKG=2-channel provenance) + PR #99 Polymarket JSON opened (16th, 1st integrator-shaped); 2 external PRs same day; -68.8% from ATH. |
 | 2026-05-22 | MiroShark Stopped Needing a Publisher | PR #96 cite.bib — 14th publish-gated surface closes 4-route citation arc (cite.bib→reproduce.json→notebook.ipynb→DKG); DOI-grade provenance, no publishing intermediary. 30-PR zero-deps. |
 | 2026-05-21 | MiroShark Stopped Building Destinations. It Started Building Billboards. | PRs #93+#94 — Telegram closes 5-vertex channel-notifier pentagon; Status Badge SVG is 13th surface and first push (vs prior 12 pull). 29-PR zero-deps. |
