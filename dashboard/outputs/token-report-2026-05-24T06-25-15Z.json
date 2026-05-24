@@ -1,0 +1,171 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "MiroShark Daily — 2026-05-24"
+      },
+      "children": [
+        "stack-main"
+      ]
+    },
+    "stack-main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "section-current",
+        "section-performance",
+        "section-notes"
+      ]
+    },
+    "section-current": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "price-stat",
+        "liquidity-vol-stack",
+        "buys-sells-stat"
+      ]
+    },
+    "price-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Price",
+        "value": "$0.0000175",
+        "delta": "+25.3%",
+        "trend": "up"
+      }
+    },
+    "liquidity-vol-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "liquidity-stat",
+        "volume-stat"
+      ]
+    },
+    "liquidity-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Liquidity",
+        "value": "$712.8K"
+      }
+    },
+    "volume-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "24h Vol",
+        "value": "$342.1K",
+        "delta": "-49.0%",
+        "trend": "down"
+      }
+    },
+    "buys-sells-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Buys/Sells",
+        "value": "854/325 (2.63×)"
+      }
+    },
+    "section-performance": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "performance-heading",
+        "stats-7d-stack",
+        "stats-30d-stack"
+      ]
+    },
+    "performance-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Performance",
+        "level": "h3"
+      }
+    },
+    "stats-7d-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "stats-7d-price",
+        "stats-7d-vol"
+      ]
+    },
+    "stats-7d-price": {
+      "type": "Stat",
+      "props": {
+        "label": "7d Price",
+        "value": "-34.0%",
+        "trend": "down"
+      }
+    },
+    "stats-7d-vol": {
+      "type": "Stat",
+      "props": {
+        "label": "7d Vol Avg",
+        "value": "+140%",
+        "trend": "up"
+      }
+    },
+    "stats-30d-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "stats-30d-price"
+      ]
+    },
+    "stats-30d-price": {
+      "type": "Stat",
+      "props": {
+        "label": "30d Price",
+        "value": "+600%",
+        "trend": "up"
+      }
+    },
+    "section-notes": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "narrative-text",
+        "chart-link"
+      ]
+    },
+    "narrative-text": {
+      "type": "Text",
+      "props": {
+        "text": "Recovery bounce extending from ATH correction — intraday spike to $0.0000212 before settling; buy-side leading 2.63× on transaction count. PR #99 (Polymarket JSON, 15th surface) merged May 23.",
+        "variant": "body"
+      }
+    },
+    "chart-link": {
+      "type": "Link",
+      "props": {
+        "label": "Chart (GeckoTerminal)",
+        "href": "https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209"
+      }
+    }
+  }
+}
