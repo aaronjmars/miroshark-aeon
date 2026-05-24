@@ -1,12 +1,18 @@
-Done. Here's the summary:
+Skill leaderboard complete. Here's the summary:
 
 ## Summary
 
-**Skill Leaderboard — 2026-05-17**
+**Active forks scanned:** 103 total (102 MiroShark application forks + 1 miroshark-aeon aeon-instance fork)
 
-- **Fleet size:** 107 active forks (106 MiroShark application forks + 1 miroshark-aeon aeon-instance fork). Down from 117 last week as the 30-day rolling window advances.
-- **Aeon-instance forks with aeon.yml:** 1 — AITOBIAS04/miroshark-aeon, pushed today at 15:39 UTC
-- **Top 14 skills:** All identical to last week — token-report, fetch-tweets, repo-pulse, push-recap, project-lens, repo-actions, repo-article, self-improve, weekly-shiplog, hyperstitions-ideas, feature, heartbeat, memory-flush, skill-leaderboard. **5th consecutive week with zero configuration drift.**
-- **Adoption gap:** tweet-allocator (enabled in source, zero forks — 4th consecutive week; structural by design)
-- **Notification:** Not sent — fleet below the 2-fork threshold (SKILL_LEADERBOARD_INSUFFICIENT_DATA)
-- **Files:** `articles/skill-leaderboard-2026-05-17.md` created, `memory/logs/2026-05-17.md` updated, committed to main.
+**Fleet:** Still a single aeon-instance fork — `AITOBIAS04/CHORUS` (renamed from `AITOBIAS04/miroshark-aeon`, the first fork publicly rebranding away from the template name).
+
+**Top 14 skills** (all tied at 100% of 1-fork fleet, unchanged for the 6th consecutive week):
+1. token-report, 2. fetch-tweets, 3. repo-pulse, 4. push-recap, 5. project-lens, 6. repo-actions, 7. repo-article, 8. self-improve, 9. weekly-shiplog, 10. hyperstitions-ideas, 11. feature, 12. heartbeat, 13. memory-flush, 14. skill-leaderboard
+
+**Adoption gaps:** 6 source-enabled skills at zero fork adoption — `tweet-allocator` (persistent, structural, 5+ weeks) plus 5 new skills added to source since the fork's last upstream sync: `thread-formatter`, `star-milestone`, `star-momentum-alert`, `ai-framework-watch`, `operator-scorecard`.
+
+**Notification:** Not sent — only 1 fork with readable aeon.yml, below the 2-fork threshold (`SKILL_LEADERBOARD_INSUFFICIENT_DATA`).
+
+**Files written:**
+- `articles/skill-leaderboard-2026-05-24.md`
+- `memory/logs/2026-05-24.md` (appended)
