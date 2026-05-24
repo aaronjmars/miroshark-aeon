@@ -1,14 +1,13 @@
-*Agent Self-Improvement — 2026-05-22*
+*Agent Self-Improvement — 2026-05-24*
 
-Filter X.com reserved paths from Bankr lookup candidates.
+bankr-prefetch EXIT-trap crash sidecar — scripts/prefetch-bankr.sh now stamps a 'crashed' status to .bankr-cache/prefetch-status.json whenever the script exits non-zero before reaching a normal write_status call, and skills/tweet-allocator/SKILL.md has a new 'crashed' branch in its status switch that surfaces the exit code in its alert message.
 
-The candidate-extraction grep in `scripts/prefetch-bankr.sh` was capturing the path token `i` from XAI annotation citation URLs (`x.com/i/status/<id>`) as if it were a real user handle, then sending `@i` to the Bankr Agent API on every prefetch. Each call is a Max-Mode (`claude-sonnet-4.6`) LLM job with a 112s polling budget — wasted on a handle that doesn't exist.
-
-Why: fetch-tweets has been logging 3–4 annotation citations per day across May 20–22, and yesterday's TWEET_ALLOCATOR_ERROR (5/5 Bankr Agent jobs timed out) almost certainly burned one of those five slots on `@i`. The tweet-allocator log format already excluded annotation citations from the candidate count — now the prefetch script does too, end-to-end.
+Why: today's tweet-allocator run logged TWEET_ALLOCATOR_ERROR — prefetch-bankr.sh did not run; .bankr-cache/prefetch-status.json is missing and fired a workflow-misconfiguration alert. The workflow does invoke the script — but set -euo pipefail can exit silently if any early jq/grep pipeline bails before reaching write_status. With no sidecar written, the skill couldn't tell 'workflow misconfigured' (file truly absent) from 'script crashed mid-run' (silent failure) — so the alert pointed at the wrong root cause.
 
 What changed:
-- `scripts/prefetch-bankr.sh`: new `RESERVED_X_PATHS` regex (i|home|explore|notifications|messages|compose|intent|settings|search|hashtag|share|lists|bookmarks|topics|moments|analytics|following|followers|jobs|verified-orgs|tos|privacy|about|login|signup|logout|account|help) chained into the candidate filter alongside the existing project-account exclusion.
+- scripts/prefetch-bankr.sh: trap ... EXIT registered after mkdir -p .bankr-cache; fires only when $? != 0 AND prefetch-status.json is absent. Writes {status: 'crashed', exit_code: N, note, timestamp} via jq. Normal exits (which always call write_status) untouched. Non-tweet-allocator early exit happens before the trap registers, so unrelated skills still skip cleanly.
+- skills/tweet-allocator/SKILL.md: new 'crashed' branch in the status switch with its own alert message (exit code surfaced via the note field); Status flags section updated.
 
-Impact: One fewer wasted Bankr Agent Max-Mode call per daily prefetch (~16–112s reclaimed). The `agent-timeout` status now reflects only real-handle latency, not synthetic-handle latency, so the diagnostic signal stays meaningful.
+Impact: next silent prefetch crash produces an actionable diagnostic (exit code + timestamp) instead of a misleading 'workflow misconfigured' alert. The truly-absent-file case still falls through to the original missing-file branch.
 
-PR: https://github.com/aaronjmars/miroshark-aeon/pull/44
+PR: https://github.com/aaronjmars/miroshark-aeon/pull/45

@@ -1,0 +1,126 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "Agent Self-Improvement — 2026-05-24"
+      },
+      "children": [
+        "main-heading",
+        "sep1",
+        "intro",
+        "sep2",
+        "why-heading",
+        "why-text",
+        "sep3",
+        "changes-heading",
+        "changes-stack",
+        "sep4",
+        "impact-heading",
+        "impact-text",
+        "sep5",
+        "pr-link"
+      ]
+    },
+    "main-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "bankr-prefetch EXIT-trap crash sidecar",
+        "level": "h2"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {}
+    },
+    "intro": {
+      "type": "Text",
+      "props": {
+        "text": "scripts/prefetch-bankr.sh now stamps a 'crashed' status to .bankr-cache/prefetch-status.json whenever the script exits non-zero before reaching a normal write_status call, and skills/tweet-allocator/SKILL.md has a new 'crashed' branch in its status switch that surfaces the exit code in its alert message.",
+        "variant": "lead"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {}
+    },
+    "why-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Why",
+        "level": "h3"
+      }
+    },
+    "why-text": {
+      "type": "Text",
+      "props": {
+        "text": "today's tweet-allocator run logged TWEET_ALLOCATOR_ERROR — prefetch-bankr.sh did not run; .bankr-cache/prefetch-status.json is missing and fired a workflow-misconfiguration alert. The workflow does invoke the script — but set -euo pipefail can exit silently if any early jq/grep pipeline bails before reaching write_status. With no sidecar written, the skill couldn't tell 'workflow misconfigured' (file truly absent) from 'script crashed mid-run' (silent failure) — so the alert pointed at the wrong root cause."
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {}
+    },
+    "changes-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "What changed",
+        "level": "h3"
+      }
+    },
+    "changes-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "change1",
+        "change2"
+      ]
+    },
+    "change1": {
+      "type": "Text",
+      "props": {
+        "text": "scripts/prefetch-bankr.sh: trap ... EXIT registered after mkdir -p .bankr-cache; fires only when $? != 0 AND prefetch-status.json is absent. Writes {status: 'crashed', exit_code: N, note, timestamp} via jq. Normal exits (which always call write_status) untouched. Non-tweet-allocator early exit happens before the trap registers, so unrelated skills still skip cleanly."
+      }
+    },
+    "change2": {
+      "type": "Text",
+      "props": {
+        "text": "skills/tweet-allocator/SKILL.md: new 'crashed' branch in the status switch with its own alert message (exit code surfaced via the note field); Status flags section updated."
+      }
+    },
+    "sep4": {
+      "type": "Separator",
+      "props": {}
+    },
+    "impact-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Impact",
+        "level": "h3"
+      }
+    },
+    "impact-text": {
+      "type": "Text",
+      "props": {
+        "text": "next silent prefetch crash produces an actionable diagnostic (exit code + timestamp) instead of a misleading 'workflow misconfigured' alert. The truly-absent-file case still falls through to the original missing-file branch."
+      }
+    },
+    "sep5": {
+      "type": "Separator",
+      "props": {}
+    },
+    "pr-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #45",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/pull/45",
+        "source": "GitHub"
+      }
+    }
+  }
+}
