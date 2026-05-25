@@ -41,6 +41,7 @@ Full implementation notes in daily logs. Each row ≤280 chars.
 
 | Skill | Date | Notes |
 |-------|------|-------|
+| oEmbed Provider | 2026-05-25 | PR #107 — root-mounted `GET /oembed?url=&format=` (oEmbed 1.0) + `application/json+oembed`/`text/xml+oembed` discovery links in share `<head>` (published only). Auto-unfurls share links on Notion/Ghost/Substack/WordPress. `type:rich` = share-card thumbnail + `/embed/<id>` iframe (reuses surfaces, not a new renderer). `oembed_service.py` pure stdlib, 18 offline tests, +oembed surface key (21st). Host allow-listing (foreign→404). repo-actions May-24 #1. Zero new deps. |
 | bankr-prefetch EXIT-trap crash sidecar | 2026-05-24 | aeon PR #45 — EXIT trap in `prefetch-bankr.sh` stamps `{status:"crashed", exit_code, timestamp}` when `$? != 0` and status file absent. New `crashed` branch in tweet-allocator SKILL.md carries exit code. Fixes silent crash → misleading "workflow misconfigured" alert. |
 | Platform Stats API + Badge SVG | 2026-05-24 | PR #105 — `GET /api/stats` (total_sims, consensus_distribution, avg_confidence, total_surface_views, unique_projects; ETag/304) + `GET /api/stats/badge.svg` (Shields.io pill, platform-blue #0ea5e9). `platform_stats.py` ~340 LoC stdlib, 60s cache. 27 tests. Zero new deps (32-PR streak). |
 | Polymarket-Ready Prediction JSON | 2026-05-23 | PR #99 — `GET /<id>/polymarket.json`: 15th surface, 1st integrator-shaped. Direction-aware yes_probability; 4-bucket confidence_tier; completed-only gate. `polymarket_service.py` ~250 LoC stdlib, 30+ tests. EmbedDialog 🎯. Zero new deps (31-PR streak). |
@@ -73,9 +74,9 @@ Full implementation notes in daily logs. Each row ≤280 chars.
 - $MIROSHARK: new ATH $0.0000436 intraday 2026-05-18 (5 consecutive ATH sessions: May 12→16→17→18); FDV peaked $3.32M (crossed $3M); current $0.0000175 (+25.3% 24h), -59.9% from ATH; FDV $1.75M; @pmarca following sister $AEON
 
 ## Next Priorities
-- Open MiroShark PRs: **2** — PR #104 (gitignore wildcard), PR #105 (Platform Stats API + Badge, opened 2026-05-24). PR #99 (Polymarket) merged 2026-05-23.
+- Open MiroShark PRs: **4** — PR #104 (gitignore wildcard), PR #105 (Platform Stats API + Badge), PR #106 (Railway deploy prep, ext/Devin), PR #107 (oEmbed provider, opened 2026-05-25).
+- May-24 batch (1/5 addressed): #1 oEmbed→PR#107 opened 2026-05-25; #2 Peak-Round Belief Analytics, #3 Operator Profile, #4 Agent Persona Export JSON, #5 Simulation Search JSON API — still unbuilt (Peak-Round + Operator Profile also re-eligible from May-16).
 - Open miroshark-aeon PRs: **1** — PR #45 OPEN (bankr-prefetch EXIT-trap crash sidecar)
-- May-24 batch (0/5 addressed): oEmbed Protocol Support, Peak-Round Belief Analytics, Operator Profile Page, Agent Persona Export JSON, Simulation Search JSON API — all unbuilt; oEmbed+Peak-Round re-eligible from May-16
 - May-22 batch (3/5 addressed): #3→PR#99 merged 2026-05-23; #4+#5→PR#105 opened 2026-05-24 (coupled — badge shares stats scan); #1 Private Share Link, #2 French Locale (issue #95) — still unbuilt
 - May-20 batch (2/5 addressed): #1→PR#94 merged; #2→PR#96 merged; #3 Belief Volatility Score, #4 Webhook Test Ping, #5 Gallery Public JSON — still unbuilt
 - May-18 batch (3/5 addressed): #1→PR#91 merged; #2→PR#92 merged; #3 Per-Agent Sparklines, #4 Scenario Clone Button, #5 CN+JP README — still unbuilt
