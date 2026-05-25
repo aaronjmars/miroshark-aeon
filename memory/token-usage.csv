@@ -399,3 +399,4 @@ date,skill,model,input_tokens,output_tokens,cache_read,cache_creation
 2026-05-24,thread-formatter,claude-sonnet-4-6,12,15706,441819,43023
 2026-05-24,memory-flush,claude-sonnet-4-6,29,35326,2179488,84248
 2026-05-24,skill-freshness,claude-sonnet-4-6,22,19044,1206295,61907
+2026-05-25,fetch-tweets,claude-sonnet-4-6,13,7835,494609,53665

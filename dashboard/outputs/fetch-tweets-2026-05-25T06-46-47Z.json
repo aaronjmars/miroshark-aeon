@@ -1,0 +1,223 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Top Tweets — $MIROSHARK OR @miroshark_ OR github.com/aaronjmars/miroshark (2026-05-25)"
+      },
+      "children": [
+        "stack_main"
+      ]
+    },
+    "stack_main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "item_1",
+        "item_2",
+        "item_3",
+        "item_4",
+        "item_5",
+        "separator_1",
+        "item_6",
+        "item_7",
+        "item_8",
+        "item_9"
+      ]
+    },
+    "item_1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet_1",
+        "link_1"
+      ]
+    },
+    "tweet_1": {
+      "type": "TweetCard",
+      "props": {
+        "author": "dr_osse",
+        "handle": "dr_osse",
+        "text": "buying more $aeon and $miroshark; quoted aaronjmars AI compute unlock thesis",
+        "likes": 12,
+        "retweets": 1
+      },
+      "children": []
+    },
+    "link_1": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/dr_osse/status/2058684814329307474"
+      },
+      "children": []
+    },
+    "item_2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet_2",
+        "link_2"
+      ]
+    },
+    "tweet_2": {
+      "type": "TweetCard",
+      "props": {
+        "author": "MrDegenWolf",
+        "handle": "MrDegenWolf",
+        "text": "check @aeonframework @miroshark_",
+        "likes": 3,
+        "retweets": 0
+      },
+      "children": []
+    },
+    "link_2": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/MrDegenWolf/status/2058680890369188102"
+      },
+      "children": []
+    },
+    "item_3": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet_3",
+        "link_3"
+      ]
+    },
+    "tweet_3": {
+      "type": "TweetCard",
+      "props": {
+        "author": "mewling_flask",
+        "handle": "mewling_flask",
+        "text": "Scam/airdrop post; contract address + suspicious link (taketkn.pro)",
+        "likes": 0,
+        "retweets": 0
+      },
+      "children": []
+    },
+    "link_3": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/mewling_flask/status/2058693399474311511"
+      },
+      "children": []
+    },
+    "item_4": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet_4",
+        "link_4"
+      ]
+    },
+    "tweet_4": {
+      "type": "TweetCard",
+      "props": {
+        "author": "HashHarborittt",
+        "handle": "HashHarborittt",
+        "text": "Scam/airdrop post; contract address + suspicious link (taketkn.live)",
+        "likes": 0,
+        "retweets": 0
+      },
+      "children": []
+    },
+    "link_4": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/HashHarborittt/status/2058689741021692066"
+      },
+      "children": []
+    },
+    "item_5": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet_5",
+        "link_5"
+      ]
+    },
+    "tweet_5": {
+      "type": "TweetCard",
+      "props": {
+        "author": "sinter_wagon",
+        "handle": "sinter_wagon",
+        "text": "Scam/airdrop post; contract address + suspicious link (taketkn.pro)",
+        "likes": 0,
+        "retweets": 0
+      },
+      "children": []
+    },
+    "link_5": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/sinter_wagon/status/2058679764869882031"
+      },
+      "children": []
+    },
+    "separator_1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "item_6": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/i/status/2058679361872515304"
+      },
+      "children": []
+    },
+    "item_7": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/i/status/2058680488920064368"
+      },
+      "children": []
+    },
+    "item_8": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/i/status/2058675477791838571"
+      },
+      "children": []
+    },
+    "item_9": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/i/status/2058679925272678722"
+      },
+      "children": []
+    }
+  }
+}
