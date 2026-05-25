@@ -15,6 +15,7 @@ Full text in `articles/repo-article-YYYY-MM-DD.md`. Each row ≤220 chars.
 
 | Date | Title | One-line frame |
 |------|-------|----------------|
+| 2026-05-25 | MiroShark Built a Surface Nobody Has to Find | PR #107 oEmbed merged — first "discovery not destination" surface (consumer never names a route); closes publishing-platform unfurl gap (Notion/Ghost/Substack/WordPress read oEmbed `<link>`, not OG). Protocol-not-renderer: reuses share-card + /embed iframe. 21st surface key, zero deps. |
 | 2026-05-24 | MiroShark Built Its First Mirror | PR #105 opened — first PLATFORM-level surface (vs 14 prior per-sim); GET /api/stats + /api/stats/badge.svg. Paired with PR #103 (Nemotron) ending the 31-PR zero-deps streak. |
 | 2026-05-23 | MiroShark Stopped Shipping to Itself | PR #97 WaybackClaw merged (15th surface, IPFS+Nostr sibling of DKG=2-channel provenance) + PR #99 Polymarket JSON opened (16th, 1st integrator-shaped); 2 external PRs same day; -68.8% from ATH. |
 | 2026-05-22 | MiroShark Stopped Needing a Publisher | PR #96 cite.bib — 14th publish-gated surface closes 4-route citation arc (cite.bib→reproduce.json→notebook.ipynb→DKG); DOI-grade provenance, no publishing intermediary. 30-PR zero-deps. |
@@ -22,7 +23,6 @@ Full text in `articles/repo-article-YYYY-MM-DD.md`. Each row ≤220 chars.
 | 2026-05-20 | MiroShark Shipped the Bundle, Not the Registry | PR #92 — 12th publish-gated surface; compositional ZIP bundles 9 existing renderers + manifest.json (per-file SHA-256). 28-PR zero-deps streak. |
 | 2026-05-19 | MiroShark Stopped Shipping Features. It Started Shipping Windows. | PR #91 (signal.json) — 11th surface; audience-tiered interfaces from one embed-summary payload. 27-PR zero-deps streak. |
 | 2026-05-18 | The First PR MiroShark Didn't Write | PR #89 — first external security PR (teifurin); star→issue #88→PR in 57 min; closes 28d external-merge gap. |
-| 2026-05-17 | MiroShark's Last Notification Channel Is Just a Protocol | PR #87 SMTP email — closes 4-channel quadrant; first notifier that relays to `localhost:25`; 5 channel-notifier instances; 25-PR zero-dep streak. |
 
 ## Recent Digests
 Each row ≤180 chars. Full data in `articles/{token-report,push-recap}-YYYY-MM-DD.md`.
