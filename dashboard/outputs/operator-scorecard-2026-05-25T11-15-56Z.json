@@ -1,0 +1,225 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "Operator Scorecard",
+        "description": "2026-05-25"
+      },
+      "children": [
+        "alert-status",
+        "sep-1",
+        "heading-agent",
+        "stat-heartbeats",
+        "badge-analytics",
+        "sep-2",
+        "heading-community",
+        "grid-community",
+        "text-contributors",
+        "sep-3",
+        "heading-economic",
+        "stat-donation",
+        "stat-recipients",
+        "stat-token-change",
+        "text-fdv",
+        "sep-4",
+        "heading-notable",
+        "storylink-api",
+        "storylink-bankr",
+        "sep-5",
+        "text-window",
+        "sep-6",
+        "link-full"
+      ]
+    },
+    "alert-status": {
+      "type": "Alert",
+      "props": {
+        "type": "warning",
+        "title": "🔴 DEGRADED",
+        "message": "Fleet ran clean and community growth held, but the token's -64.6% 7d correction pushed the economic lane into DEGRADED territory."
+      }
+    },
+    "sep-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading-agent": {
+      "type": "Heading",
+      "props": {
+        "text": "Agent Health",
+        "level": "h3"
+      }
+    },
+    "stat-heartbeats": {
+      "type": "Stat",
+      "props": {
+        "label": "Clean / Total Runs",
+        "value": "6 / 7"
+      }
+    },
+    "badge-analytics": {
+      "type": "Badge",
+      "props": {
+        "text": "skill-analytics not enabled",
+        "variant": "outline"
+      }
+    },
+    "sep-2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading-community": {
+      "type": "Heading",
+      "props": {
+        "text": "Community Growth",
+        "level": "h3"
+      }
+    },
+    "grid-community": {
+      "type": "Grid",
+      "props": {
+        "columns": 2,
+        "gap": "md"
+      },
+      "children": [
+        "stat-stars",
+        "stat-forks",
+        "text-repos"
+      ]
+    },
+    "stat-stars": {
+      "type": "Stat",
+      "props": {
+        "label": "Stars",
+        "value": "+32",
+        "trend": "up"
+      }
+    },
+    "stat-forks": {
+      "type": "Stat",
+      "props": {
+        "label": "Forks",
+        "value": "+12",
+        "trend": "up"
+      }
+    },
+    "text-repos": {
+      "type": "Text",
+      "props": {
+        "text": "1 repo · external contributions sustained",
+        "variant": "body"
+      }
+    },
+    "text-contributors": {
+      "type": "Text",
+      "props": {
+        "text": "Contributors: antfleet-ops, voidfreud, DYAI2025",
+        "variant": "caption"
+      }
+    },
+    "sep-3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading-economic": {
+      "type": "Heading",
+      "props": {
+        "text": "Economic Activity",
+        "level": "h3"
+      }
+    },
+    "stat-donation": {
+      "type": "Stat",
+      "props": {
+        "label": "$MIROSHARK Distributed",
+        "value": "$10.00"
+      }
+    },
+    "stat-recipients": {
+      "type": "Stat",
+      "props": {
+        "label": "Recipients",
+        "value": "2"
+      }
+    },
+    "stat-token-change": {
+      "type": "Stat",
+      "props": {
+        "label": "Token 7d Change",
+        "value": "-64.6%",
+        "trend": "down"
+      }
+    },
+    "text-fdv": {
+      "type": "Text",
+      "props": {
+        "text": "FDV: $3.32M → $1.23M (FADING)",
+        "variant": "body"
+      }
+    },
+    "sep-4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading-notable": {
+      "type": "Heading",
+      "props": {
+        "text": "Notable",
+        "level": "h3"
+      }
+    },
+    "storylink-api": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Platform Stats API + Badge SVG",
+        "href": "https://github.com/miroshark/miroshark-aeon/pull/105",
+        "source": "PR #105 · 32nd zero-deps PR"
+      }
+    },
+    "storylink-bankr": {
+      "type": "StoryLink",
+      "props": {
+        "title": "bankr-prefetch EXIT-trap crash sidecar",
+        "href": "https://github.com/miroshark/miroshark-aeon/pull/45",
+        "source": "PR #45"
+      }
+    },
+    "sep-5": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "text-window": {
+      "type": "Text",
+      "props": {
+        "text": "Reporting window: last 7 days",
+        "variant": "caption"
+      }
+    },
+    "sep-6": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "link-full": {
+      "type": "Link",
+      "props": {
+        "label": "View full report",
+        "href": "articles/operator-scorecard-2026-05-25.md"
+      }
+    }
+  }
+}
