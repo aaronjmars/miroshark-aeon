@@ -1,21 +1,21 @@
-*AI Framework Watch — 2026-05-18*
+*AI Framework Watch — 2026-05-25*
 
-RELEASE WEEK: 6 frameworks shipped — langgraph, crewAI [PRE], llamaindex, mastra, smolagents, pydantic-ai
+RELEASE WEEK: 4 frameworks shipped — langgraph, crewai, mastra, pydantic-ai
 
-Tracked 9/9 frameworks · 16 releases (7d) · 0 breaking flags · cold start (deltas from next week)
+Tracked 9/9 frameworks · 11 releases (7d) · 0 breaking flag(s)
+
+*Top movers (7d stars)*
+• langchain-ai/langgraph — ★ 32,885 (+574 · 1.8%)
+• crewAIInc/crewAI — ★ 52,142 (+509 · 1.0%)
+• mastra-ai/mastra — ★ 24,280 (+299 · 1.2%)
+• microsoft/autogen — ★ 58,375 (+238 · 0.4%)
 
 *Releases worth reading*
-• langchain-ai/langgraph 1.2.0 — durable error-handler resume across host crashes; `set_node_defaults()`; DeltaChannel APIs marked beta (5 packages promoted stable)
-• pydantic/pydantic-ai v1.97.0 — GoogleProvider split into GoogleProvider + GoogleCloudProvider; provider IDs renamed; MCPToolset replaces MCPServer* (deprecated) — provider API changed, review changelog before upgrading
-• mastra-ai/mastra @mastra/core@1.34.0 — ACP coding agents as tools/subagents; xAI realtime voice; push-capable PubSub + HTTP workflow events; ResponseCache
-• huggingface/smolagents v1.25.0 — importlib → registry pattern for agent/model deserialization
-• crewAIInc/crewAI 1.14.5a6 [PRE] — alpha cadence continues; last stable release was 2025-09-30
-
-*Notable gaps*
-• microsoft/autogen (★58k) — last push 2026-04-15; quiet ~33 days, no release
-• stanfordnlp/dspy — 3.2.1 shipped 2026-05-05, just outside the 7d window
+• pydantic/pydantic-ai v2.0.0b1 [PRE] — V2 Beta launched; dual-track (v1 stable + v2 beta) now active
+• langchain-ai/langgraph 1.2.1 — Post-1.2.0 patch; sdk 0.3.15 + checkpoint 4.1.1 also shipped
+• crewAIInc/crewAI 1.14.5 — Stable release; 1.14.6a1 [PRE] underway
 
 *Anchor (aeon)*
-★ 366 (+— this week) · 0 releases · 9/9 by absolute rank · active dev, GitHub-Actions-native cadence
+★ 442 (+76 this week · 20.8%) · 0 releases (7d) · leads cohort by % growth rate
 
-Full digest: articles/ai-framework-watch-2026-05-18.md
+Full digest: articles/ai-framework-watch-2026-05-25.md

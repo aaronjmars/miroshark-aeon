@@ -1,0 +1,251 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "AI Framework Watch",
+        "description": "2026-05-25"
+      },
+      "children": [
+        "releaseWeek",
+        "sep1",
+        "trackingLabel",
+        "trackingStats",
+        "sep2",
+        "topMoversHeading",
+        "topMoversStack",
+        "sep3",
+        "releasesHeading",
+        "releasesStack",
+        "sep4",
+        "anchorHeading",
+        "anchorStack",
+        "sep5",
+        "digestLink"
+      ]
+    },
+    "releaseWeek": {
+      "type": "Text",
+      "props": {
+        "text": "RELEASE WEEK: 4 frameworks shipped — langgraph, crewai, mastra, pydantic-ai",
+        "variant": "lead"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "trackingLabel": {
+      "type": "Text",
+      "props": {
+        "text": "Tracked 9/9 frameworks · 11 releases (7d) · 0 breaking flag(s)",
+        "variant": "body"
+      }
+    },
+    "trackingStats": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "trackStat1",
+        "trackStat2",
+        "trackStat3"
+      ]
+    },
+    "trackStat1": {
+      "type": "Stat",
+      "props": {
+        "label": "Frameworks tracked",
+        "value": "9/9"
+      }
+    },
+    "trackStat2": {
+      "type": "Stat",
+      "props": {
+        "label": "Releases (7d)",
+        "value": "11"
+      }
+    },
+    "trackStat3": {
+      "type": "Stat",
+      "props": {
+        "label": "Breaking flags",
+        "value": "0"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "topMoversHeading": {
+      "type": "Heading",
+      "props": {
+        "text": "Top movers (7d stars)",
+        "level": "h3"
+      }
+    },
+    "topMoversStack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "topMover1",
+        "topMover2",
+        "topMover3",
+        "topMover4"
+      ]
+    },
+    "topMover1": {
+      "type": "StoryLink",
+      "props": {
+        "title": "langchain-ai/langgraph",
+        "href": "https://github.com/langchain-ai/langgraph",
+        "score": "★ 32,885 (+574 · 1.8%)"
+      }
+    },
+    "topMover2": {
+      "type": "StoryLink",
+      "props": {
+        "title": "crewAIInc/crewAI",
+        "href": "https://github.com/crewAIInc/crewAI",
+        "score": "★ 52,142 (+509 · 1.0%)"
+      }
+    },
+    "topMover3": {
+      "type": "StoryLink",
+      "props": {
+        "title": "mastra-ai/mastra",
+        "href": "https://github.com/mastra-ai/mastra",
+        "score": "★ 24,280 (+299 · 1.2%)"
+      }
+    },
+    "topMover4": {
+      "type": "StoryLink",
+      "props": {
+        "title": "microsoft/autogen",
+        "href": "https://github.com/microsoft/autogen",
+        "score": "★ 58,375 (+238 · 0.4%)"
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "releasesHeading": {
+      "type": "Heading",
+      "props": {
+        "text": "Releases worth reading",
+        "level": "h3"
+      }
+    },
+    "releasesStack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "release1",
+        "release2",
+        "release3"
+      ]
+    },
+    "release1": {
+      "type": "StoryLink",
+      "props": {
+        "title": "pydantic/pydantic-ai v2.0.0b1 [PRE]",
+        "href": "https://github.com/pydantic/pydantic-ai/releases/tag/v2.0.0b1",
+        "source": "V2 Beta launched; dual-track (v1 stable + v2 beta) now active"
+      }
+    },
+    "release2": {
+      "type": "StoryLink",
+      "props": {
+        "title": "langchain-ai/langgraph 1.2.1",
+        "href": "https://github.com/langchain-ai/langgraph/releases/tag/1.2.1",
+        "source": "Post-1.2.0 patch; sdk 0.3.15 + checkpoint 4.1.1 also shipped"
+      }
+    },
+    "release3": {
+      "type": "StoryLink",
+      "props": {
+        "title": "crewAIInc/crewAI 1.14.5",
+        "href": "https://github.com/crewAIInc/crewAI/releases/tag/1.14.5",
+        "source": "Stable release; 1.14.6a1 [PRE] underway"
+      }
+    },
+    "sep4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "anchorHeading": {
+      "type": "Heading",
+      "props": {
+        "text": "Anchor (aeon)",
+        "level": "h3"
+      }
+    },
+    "anchorStack": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "anchorStat1",
+        "anchorStat2",
+        "anchorStat3"
+      ]
+    },
+    "anchorStat1": {
+      "type": "Stat",
+      "props": {
+        "label": "Stars",
+        "value": "442",
+        "delta": "+76 · 20.8%",
+        "trend": "up"
+      }
+    },
+    "anchorStat2": {
+      "type": "Stat",
+      "props": {
+        "label": "Releases (7d)",
+        "value": "0"
+      }
+    },
+    "anchorStat3": {
+      "type": "Stat",
+      "props": {
+        "label": "Growth rate",
+        "value": "Leads cohort by %"
+      }
+    },
+    "sep5": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "digestLink": {
+      "type": "Link",
+      "props": {
+        "label": "Full digest: articles/ai-framework-watch-2026-05-25.md",
+        "href": "articles/ai-framework-watch-2026-05-25.md"
+      }
+    }
+  }
+}
