@@ -28,6 +28,31 @@ esac
 
 mkdir -p .bankr-cache
 
+# Defensive crash sidecar — if the script exits with a non-zero status before
+# reaching one of the write_status calls below, the EXIT trap stamps a "crashed"
+# status so the skill can distinguish "script never ran" (workflow
+# misconfiguration → file truly absent) from "script ran but bailed early"
+# (e.g. set -e on an unexpected jq/grep failure → file present with exit_code).
+# Triggered on TWEET_ALLOCATOR_ERROR drift observed 2026-05-24 where
+# prefetch-status.json was missing and the cause was unrecoverable from logs.
+trap 'PREFETCH_EXIT_CODE=$?
+  if [ "$PREFETCH_EXIT_CODE" -ne 0 ] && [ -d .bankr-cache ] && [ ! -s .bankr-cache/prefetch-status.json ]; then
+    jq -n \
+      --arg ts "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+      --argjson code "$PREFETCH_EXIT_CODE" \
+      "{status: \"crashed\",
+        note: (\"prefetch-bankr.sh exited with code \" + (\$code|tostring) + \" before completing — see workflow logs\"),
+        timestamp: \$ts,
+        candidate_count: 0,
+        lookup_attempted: 0,
+        curl_failed: 0,
+        verified_count: 0,
+        null_count: 0,
+        timed_out: 0,
+        exit_code: \$code}" \
+      > .bankr-cache/prefetch-status.json 2>/dev/null || true
+  fi' EXIT
+
 # Status sidecar — written at every exit point so the skill can tell what
 # actually happened (no-api-key vs no-candidates vs lookups-failed vs ok)
 # instead of guessing from an empty verified-handles.json.

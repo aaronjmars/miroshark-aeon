@@ -41,9 +41,10 @@ Project-owned accounts. Valuable signal, but self-dealing:
    - `"lookups-failed"` → all `lookup_attempted` Bankr API calls failed at the curl/jobId step (API down, key invalid, or rate-limited). This is a real outage. Log `TWEET_ALLOCATOR_ERROR — Bankr Agent API unreachable: <note>` and send an alert: `Tweet Allocator — ${today}: ERROR — Bankr Agent API unreachable (X/N curl failures). Check api.bankr.bot status / BANKR_API_KEY validity.` Stop.
    - `"agent-timeout"` → Bankr Agent jobs were submitted successfully but the LLM-backed responses didn't complete inside the prefetch's polling window (112s). Transient — likely Bankr LLM-mode latency, *not* a "these handles have no wallet" signal. Log `TWEET_ALLOCATOR_ERROR — Bankr Agent jobs timed out: <note>` and send an alert: `Tweet Allocator — ${today}: ERROR — Bankr Agent jobs did not complete in time (N/N timed out). Retrying tomorrow; check api.bankr.bot LLM credit / Max Mode latency.` Stop.
    - `"completed-no-wallets"` → prefetch ran cleanly but no candidate handle had a Bankr wallet. Treat as empty (TWEET_ALLOCATOR_EMPTY): `Tweet Allocator — ${today}: no eligible tweeters (none of N candidates had a verified Bankr wallet).` Stop.
+   - `"crashed"` → prefetch script started but bailed before completing (e.g. unexpected `set -e` exit on a jq/grep failure). The `note` carries the exit code. Log `TWEET_ALLOCATOR_ERROR — bankr prefetch crashed mid-run: <note>` and send an alert: `Tweet Allocator — ${today}: ERROR — bankr-prefetch crashed mid-run (exit_code=N). Check workflow logs for scripts/prefetch-bankr.sh.` Stop.
    - `"completed"` → continue below.
 
-   If `prefetch-status.json` is **missing entirely** (prefetch script didn't run at all — workflow misconfiguration), log `TWEET_ALLOCATOR_ERROR — prefetch-bankr.sh did not run; check workflow prefetch step` and send an alert. Stop.
+   If `prefetch-status.json` is **missing entirely** (prefetch script didn't run at all — workflow misconfiguration; the script's EXIT trap should have stamped a `crashed` status, so a truly absent file means the script never started), log `TWEET_ALLOCATOR_ERROR — prefetch-bankr.sh did not run; check workflow prefetch step` and send an alert. Stop.
 
    On `"completed"`, read `.bankr-cache/verified-handles.json` — a `{ "handle": "0xwallet" | null }` map. For each remaining candidate, look up the handle:
    - Value is a `0x...` address → **eligible**, keep for allocation.
@@ -130,4 +131,4 @@ The Bankr Agent API requires `BANKR_API_KEY` in the header — **the sandbox blo
 - `TWEET_ALLOCATOR_OK` — allocation plan produced (or auto-send completed).
 - `TWEET_ALLOCATOR_EMPTY` — no tweets in today's log, OR no candidates have a Bankr wallet (either zero candidates or all returned null). Sends a brief one-line notification.
 - `TWEET_ALLOCATOR_DISABLED` — `BANKR_API_KEY` not set in workflow. Logged but **silent** (no notification — no human can fix this from the bot side and a daily alert is just noise).
-- `TWEET_ALLOCATOR_ERROR` — real failure: Bankr Agent API unreachable (all lookups failed), Bankr Agent jobs timed out before completing (`agent-timeout`), or prefetch script didn't run at all. Sends an alert notification.
+- `TWEET_ALLOCATOR_ERROR` — real failure: Bankr Agent API unreachable (all lookups failed), Bankr Agent jobs timed out before completing (`agent-timeout`), prefetch script crashed mid-run (`crashed`), or prefetch script didn't run at all. Sends an alert notification.
