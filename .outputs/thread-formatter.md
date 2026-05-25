@@ -1,14 +1,14 @@
-*Thread Draft — 2026-05-24*
-Topic: Platform Aggregate Stats API + Shields.io Platform Badge — MiroShark PR #105
+*Thread Draft — 2026-05-25*
+Topic: oEmbed Provider — MiroShark PR #107
 
-1/ PR #105 opened today: MiroShark's first platform-level endpoint. Fourteen surfaces exist scoped to individual simulations. This is the first that looks at the whole fleet — total sims, consensus distribution, unique projects, aggregate surface views.
+1/ MiroShark PR #107 merged today. Twenty prior surfaces require someone to know the URL. This one gets discovered automatically when a share link is pasted into Notion, Ghost, Substack, or WordPress.
 
-2/ The 14 surfaces that shipped before this all answer the same implicit question: what did one simulation find? Trajectory CSV, chart SVG, cite.bib, signal.json, archive ZIP, Polymarket JSON. Each scoped to a single sim ID. None of them answer what the platform is doing.
+2/ Open Graph and Twitter Card metadata covered social platforms — when you paste a URL into X or LinkedIn, they read og:image and og:title. Writing platforms like Notion, Ghost, and WordPress use a different standard: oEmbed. MiroShark had the first but not the second.
 
-3/ GET /api/stats returns total_sims, consensus distribution (bullish/neutral/bearish counts + percentages), avg_confidence_pct, total surface views, unique_projects. badge.svg renders a Shields.io pill: MiroShark | N simulations, always 200.
+3/ GET /oembed?url=&format= is the new root-mounted route. Every published simulation's share page now carries oEmbed discovery link tags. When Notion or WordPress encounters one, it calls the endpoint and gets back a thumbnail and an iframe. No custom integration required.
 
-4/ Every prior surface was a leaf — attached to one sim. This one is the root. Operators embedding the badge in a README now link to live platform state, not a static snapshot. The aggregate view is the surface that makes all the other surfaces countable.
+4/ Every prior MiroShark surface was opt-in — someone had to decide to embed a chart or fetch a JSON. oEmbed is the first surface the platform triggers on their behalf. The content moves when someone writes about it, not when a developer wires it up.
 
-5/ platform_stats.py is 340 lines, stdlib only — 27 offline tests, zero new dependencies. PR is open: https://github.com/aaronjmars/MiroShark/pull/105
+5/ oembed_service.py is pure stdlib — 18 offline tests, zero new dependencies. Merged today as the 21st surface key. PR: https://github.com/aaronjmars/MiroShark/pull/107
 
-(article: articles/thread-2026-05-24.md)
+(article: articles/thread-2026-05-25.md)
