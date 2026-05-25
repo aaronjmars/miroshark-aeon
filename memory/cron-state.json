@@ -135,14 +135,14 @@
     "success_rate": 1
   },
   "weekly-shiplog": {
-    "last_status": "success",
+    "last_status": "dispatched",
     "last_success": "2026-05-18T09:33:34Z",
     "total_runs": 7,
     "total_successes": 7,
     "total_failures": 0,
     "consecutive_failures": 0,
     "success_rate": 1,
-    "last_dispatch": "2026-05-18T09:27:12Z"
+    "last_dispatch": "2026-05-25T09:40:28Z"
   },
   "skill-leaderboard": {
     "last_dispatch": "2026-05-24T17:02:33Z",
@@ -195,8 +195,8 @@
     "success_rate": 1
   },
   "ai-framework-watch": {
-    "last_dispatch": "2026-05-18T09:27:12Z",
-    "last_status": "success",
+    "last_dispatch": "2026-05-25T09:40:28Z",
+    "last_status": "dispatched",
     "last_success": "2026-05-18T09:34:03Z",
     "total_runs": 1,
     "total_successes": 1,
