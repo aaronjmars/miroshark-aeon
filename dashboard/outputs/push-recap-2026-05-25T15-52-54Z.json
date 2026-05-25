@@ -1,0 +1,295 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "Push Recap — 2026-05-25"
+      },
+      "children": [
+        "repos-overview",
+        "sep1",
+        "platform-section",
+        "sep2",
+        "repo-hygiene-section",
+        "sep3",
+        "agent-hardening-section",
+        "sep4",
+        "key-changes-section",
+        "sep5",
+        "stats-summary",
+        "sep6",
+        "pr-note",
+        "full-recap-link"
+      ]
+    },
+    "repos-overview": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "overview-text",
+        "contributors-badge"
+      ]
+    },
+    "overview-text": {
+      "type": "Text",
+      "props": {
+        "text": "MiroShark — 3 commits · miroshark-aeon — 1 substantive (+47 scheduler auto-commits) · all by aaronjmars + 1 external",
+        "variant": "lead"
+      }
+    },
+    "contributors-badge": {
+      "type": "Badge",
+      "props": {
+        "text": "4th distinct external contributor",
+        "variant": "secondary"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "platform-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "platform-heading",
+        "platform-intro",
+        "platform-detail-1",
+        "platform-detail-2",
+        "platform-detail-3"
+      ]
+    },
+    "platform-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Platform self-description surfaces",
+        "level": "h2"
+      }
+    },
+    "platform-intro": {
+      "type": "Text",
+      "props": {
+        "text": "MiroShark merged its oEmbed provider (#107) and Platform Stats API + badge (#105) back-to-back — the first endpoints that describe the platform itself, not one simulation.",
+        "variant": "body"
+      }
+    },
+    "platform-detail-1": {
+      "type": "Text",
+      "props": {
+        "text": "/api/stats returns aggregate consensus/confidence/view counts (+ a Shields.io badge for READMEs)",
+        "variant": "body"
+      }
+    },
+    "platform-detail-2": {
+      "type": "Text",
+      "props": {
+        "text": "/oembed makes share links auto-unfurl into rich cards on Notion/Ghost/Substack/WordPress",
+        "variant": "body"
+      }
+    },
+    "platform-detail-3": {
+      "type": "Text",
+      "props": {
+        "text": "Both pure stdlib, zero new deps",
+        "variant": "caption"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "repo-hygiene-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "repo-heading",
+        "repo-text"
+      ]
+    },
+    "repo-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Repo hygiene",
+        "level": "h2"
+      }
+    },
+    "repo-text": {
+      "type": "Text",
+      "props": {
+        "text": "#104 (ext contributor Void Freud) collapsed five explicit .env lines into one .env.* wildcard + !.env.example — fourth distinct external contributor on the repo.",
+        "variant": "body"
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "agent-hardening-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "agent-heading",
+        "agent-text"
+      ]
+    },
+    "agent-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Agent self-hardening",
+        "level": "h2"
+      }
+    },
+    "agent-text": {
+      "type": "Text",
+      "props": {
+        "text": "aeon #45 adds an EXIT trap to prefetch-bankr.sh that stamps a 'crashed' status with the exit code, so tweet-allocator can tell a crashed prefetch from one that never ran (fixes the misleading May-24 alert).",
+        "variant": "body"
+      }
+    },
+    "sep4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "key-changes-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "changes-heading",
+        "change-1",
+        "change-2",
+        "change-3"
+      ]
+    },
+    "changes-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Key changes",
+        "level": "h2"
+      }
+    },
+    "change-1": {
+      "type": "Text",
+      "props": {
+        "text": "New platform_stats.py (+444): one O(n) scan over all public+completed sims, 60s cache, ETag/304",
+        "variant": "body"
+      }
+    },
+    "change-2": {
+      "type": "Text",
+      "props": {
+        "text": "New oembed_service.py (+207): host-allow-listed URL→sim_id parsing, never dereferences inbound url, JSON/XML payload",
+        "variant": "body"
+      }
+    },
+    "change-3": {
+      "type": "Text",
+      "props": {
+        "text": "prefetch-bankr.sh EXIT trap (+25): writes {status:crashed, exit_code} when the script bails before its normal write_status",
+        "variant": "body"
+      }
+    },
+    "sep5": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stats-summary": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stats-heading",
+        "stats-grid"
+      ]
+    },
+    "stats-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Statistics",
+        "level": "h2"
+      }
+    },
+    "stats-grid": {
+      "type": "Grid",
+      "props": {
+        "columns": 3,
+        "gap": "md"
+      },
+      "children": [
+        "stat-files",
+        "stat-delta",
+        "stat-commits"
+      ]
+    },
+    "stat-files": {
+      "type": "Stat",
+      "props": {
+        "label": "Files changed",
+        "value": "22"
+      }
+    },
+    "stat-delta": {
+      "type": "Stat",
+      "props": {
+        "label": "Net change",
+        "value": "+2,418 / −10"
+      }
+    },
+    "stat-commits": {
+      "type": "Stat",
+      "props": {
+        "label": "Substantive commits",
+        "value": "4"
+      }
+    },
+    "sep6": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "pr-note": {
+      "type": "Text",
+      "props": {
+        "text": "3 of 4 recently-open MiroShark PRs merged today (#106 Railway still open)",
+        "variant": "muted"
+      }
+    },
+    "full-recap-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full recap",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-05-25.md",
+        "source": "miroshark-aeon"
+      }
+    }
+  }
+}
