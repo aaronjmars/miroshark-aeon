@@ -1,16 +1,12 @@
-*Weekly Shiplog — 2026-05-18*
+*Weekly Shiplog — 2026-05-25*
 
-Surfaces left the host. Two structural quadrants closed: notifications went from 1 channel to 4 (Webhook + Discord + Slack + Email), and the citation chain reached on-chain provenance.
+MiroShark finished its surface layer — then deliberately broke its own streak. Six new publish-gated surfaces (inventory 10→16), then PR #103 ended a 31-PR zero-deps run to ship real demographic grounding.
 
-Shipped (9 MiroShark PRs):
-- Discord/Slack rich-embed completion notifications (#83) + SMTP email (#87) — channel-notifier idiom now at 5 instances
-- OriginTrail DKG on-chain citation (#84) — first MiroShark artifact verifiable on hardware Aaron does not own
-- Jupyter notebook export (#80) + trajectory chart SVG (#85) — citation chain reaches runnable + embeddable
-- Filtered RSS/Atom (#81) + sitemap.xml (#82) — corpus becomes discoverable to syndicators and search engines
-- Webhook HMAC signing (#79) + Grok→Gemini deprecation hotfix (#86) — first ops-keepalive merge in repo history
+Shipped:
+- 6 surfaces: trading signal, archive bundle (compositional), status badge (first push surface), BibTeX citation, WaybackClaw (IPFS+Nostr), Polymarket JSON (first integrator-shaped)
+- 2nd decentralized provenance channel + DOI-grade citation chain, all off static URLs
+- Nemotron demographic grounding — first new deps in a month, spent only where derivation couldn't reach
+- Telegram (5th notification channel)
 
-Plus 8 aeon self-corrections — feature-skill scratch leak cleanup, grep-existing-routes, 29-skill catalog sync, project-lens PR-status verify, skill-freshness cron cadence.
-
-Stats: 9 MiroShark PRs + 8 aeon PRs merged, +11,627/-128 lines, 24-PR zero-new-deps streak. Stars 1,134 → 1,171 (+37); forks 226 → 236 (+10). $MIROSHARK +447% week, four consecutive ATH sessions, FDV $3.32M.
-
-Full update: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/weekly-shiplog-2026-05-18.md
+Stats: 13 MiroShark PRs, +11,826/-58, 3 external contributors (a 4th opened a PR today)
+Full update: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/weekly-shiplog-2026-05-25.md
