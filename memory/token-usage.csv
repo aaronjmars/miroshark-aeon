@@ -403,3 +403,4 @@ date,skill,model,input_tokens,output_tokens,cache_read,cache_creation
 2026-05-25,tweet-allocator,claude-sonnet-4-6,12,5770,340062,25008
 2026-05-25,ai-framework-watch,claude-sonnet-4-6,18,22142,874295,58649
 2026-05-25,feature,claude-opus-4-7,213,77768,14272780,254590
+2026-05-25,star-milestone,claude-opus-4-7,23,5124,459367,29263
