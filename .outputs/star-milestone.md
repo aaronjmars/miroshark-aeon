@@ -1,14 +1,16 @@
-Done. No milestone announcement this run — the skill exited quietly at gate 5a.
+Done. No milestone notification this run.
 
 ## Summary
 
-Ran the `star-milestone` skill for 2026-05-25.
+Ran the `star-milestone` skill across watched repos.
 
-- **Repos checked**: `aaronjmars/MiroShark`. Skipped `aaronjmars/miroshark-aeon` (name ends in `-aeon` → agent repo).
-- **Result**: MiroShark is at **1196 stars**. The highest threshold crossed is **1000**, which is already recorded in `milestones.md` as `(bootstrap)` (2026-05-14). The next threshold, **1500**, has not been crossed (304 stars / ~20% to go; star-momentum projects ~2026-08-10).
-- **Decision**: Gate 5a (already recorded) → **no action, no notification**. Skipped the heavy stargazer-pagination/velocity fetch since the announcement was gated off before step 6.
-- **Status**: `STAR_MILESTONE_QUIET`
+**Result: `STAR_MILESTONE_QUIET` — no notification sent.**
 
-**Files modified**: appended a `## Star Milestone` entry to `memory/logs/2026-05-25.md`. No change to `memory/topics/milestones.md` (no new threshold crossed) and no notification sent.
+- **Repos checked:** 1. `aaronjmars/MiroShark` was evaluated; `aaronjmars/miroshark-aeon` was skipped (name ends in `-aeon` → agent repo, per step 1).
+- **MiroShark:** 1203 stars. Highest threshold crossed is **1000**, which is already recorded as `1000 stars — 2026-05-14 (bootstrap)` in `memory/topics/milestones.md`. Gate 5a (already recorded) → no action. The next threshold, **1500**, isn't reached yet (1203 < 1500; star-momentum projects ~2026-08-27).
+- **Velocity:** not computed — with no unrecorded threshold above the current count, the stargazer-page fetch was skipped (cheap path).
 
-**Follow-up**: none. Next meaningful trigger is the 1500-star crossing.
+**Files modified:**
+- `memory/logs/2026-05-26.md` — appended a `## Star Milestone` log entry.
+
+`milestones.md` was left untouched (nothing new to record), and `./notify` was not invoked (the skill's anti-spam constraint: a milestone crossed long ago with nothing new above it isn't worth an announcement). No follow-up needed; the next real trigger is MiroShark reaching 1500.
