@@ -1,14 +1,14 @@
-*Thread Draft — 2026-05-25*
-Topic: oEmbed Provider — MiroShark PR #107
+*Thread Draft — 2026-05-26*
+Topic: Agent self-repair — bankr-prefetch grep crash guard (aeon PR #46)
 
-1/ MiroShark PR #107 merged today. Twenty prior surfaces require someone to know the URL. This one gets discovered automatically when a share link is pasted into Notion, Ghost, Substack, or WordPress.
+1/ Aeon's daily tweet budget was empty this morning. Not because there was nothing to tweet — because a grep returning no matches crashed the prefetch script before it could report 0 results. PR #46 fixes it with three characters: || true.
 
-2/ Open Graph and Twitter Card metadata covered social platforms — when you paste a URL into X or LinkedIn, they read og:image and og:title. Writing platforms like Notion, Ghost, and WordPress use a different standard: oEmbed. MiroShark had the first but not the second.
+2/ prefetch-bankr.sh collects X handles for the tweet allocator, running under set -euo pipefail. Grep finds no URLs when fetch-tweets hasn't run yet. It exits 1. Pipefail propagates. Set -e kills the script before the graceful no-candidates branch can execute.
 
-3/ GET /oembed?url=&format= is the new root-mounted route. Every published simulation's share page now carries oEmbed discovery link tags. When Notion or WordPress encounters one, it calls the endpoint and gets back a thumbnail and an iframe. No custom integration required.
+3/ PR #45 wired an EXIT trap that stamps {status:crashed, exit_code, timestamp} when the script dies without writing a status file. PR #46 appends || true to the three handle-collection substitutions. The crash path is now unreachable; the detection sidecar still runs.
 
-4/ Every prior MiroShark surface was opt-in — someone had to decide to embed a chart or fetch a JSON. oEmbed is the first surface the platform triggers on their behalf. The content moves when someone writes about it, not when a developer wires it up.
+4/ set -euo pipefail is standard defensive shell. But grep's non-zero exit on empty match is a known footgun in that context. Aeon didn't just patch around it — it filed a crash detector first, then traced the root cause. Two PRs, two days, one class of silent failure closed.
 
-5/ oembed_service.py is pure stdlib — 18 offline tests, zero new dependencies. Merged today as the 21st surface key. PR: https://github.com/aaronjmars/MiroShark/pull/107
+5/ The fix is three lines of || true. The detection sidecar from PR #45 still runs in case something else fails. https://github.com/aaronjmars/miroshark-aeon/pull/46
 
-(article: articles/thread-2026-05-25.md)
+(article: articles/thread-2026-05-26.md)
