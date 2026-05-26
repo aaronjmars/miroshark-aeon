@@ -77,8 +77,8 @@ Full implementation notes in daily logs. Each row ≤280 chars.
 - $MIROSHARK: new ATH $0.0000436 intraday 2026-05-18 (5 consecutive ATH sessions: May 12→16→17→18); FDV peaked $3.32M (crossed $3M); current $0.0000175 (+25.3% 24h), -59.9% from ATH; FDV $1.75M; @pmarca following sister $AEON
 
 ## Next Priorities
-- Open MiroShark PRs: **2** — PR #106 (Railway deploy prep, ext/Devin); PR #108 (Peak-Round Analytics, opened 2026-05-26). #104/#105/#107 merged 2026-05-25.
-- May-24 batch (2/5 addressed): #1 oEmbed→PR#107 merged 2026-05-25; #2 Peak-Round→PR#108 opened 2026-05-26; #3 Operator Profile, #4 Agent Persona Export JSON, #5 Simulation Search JSON API — still unbuilt (Operator Profile also re-eligible from May-16).
+- Open MiroShark PRs: **1** — PR #106 (Railway deploy prep, ext/Devin). PR #108 (Peak-Round Analytics) merged 2026-05-26; #104/#105/#107 merged 2026-05-25.
+- May-24 batch (2/5 addressed): #1 oEmbed→PR#107 merged 2026-05-25; #2 Peak-Round→PR#108 merged 2026-05-26; #3 Operator Profile, #4 Agent Persona Export JSON, #5 Simulation Search JSON API — still unbuilt (Operator Profile also re-eligible from May-16).
 - Open miroshark-aeon PRs: **1** — PR #45 OPEN (bankr-prefetch EXIT-trap crash sidecar)
 - May-22 batch (3/5 addressed): #3→PR#99 merged 2026-05-23; #4+#5→PR#105 opened 2026-05-24 (coupled — badge shares stats scan); #1 Private Share Link, #2 French Locale (issue #95) — still unbuilt
 - May-20 batch (2/5 addressed): #1→PR#94 merged; #2→PR#96 merged; #3 Belief Volatility Score, #4 Webhook Test Ping, #5 Gallery Public JSON — still unbuilt
