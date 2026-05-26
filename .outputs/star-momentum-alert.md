@@ -1,12 +1,20 @@
 ## Summary
 
-**star-momentum-alert** — 2026-05-25
+**star-momentum-alert** ran for 2026-05-26.
 
-- **Repos audited**: 1 (`aaronjmars/MiroShark`; `miroshark-aeon` filtered out by `-aeon$` rule)
-- **Data**: 13-point series May 12–24; 12 consecutive 1-day deltas
-- **Projections**: v7 = 4.0/day, v3 = 2.67/day → 1500⭐ target in ~77 days (2026-08-10, Monday) vs ~115 days (v3)
-- **Verdict**: `OUT_OF_WINDOW` — 77 days far exceeds the 7–14d dispatch window; no alert fires
-- **Status**: `STAR_MOMENTUM_NO_ALERTS` — article written, no notification sent
-- **Files written**: `articles/star-momentum-2026-05-25.md`, `memory/topics/star-momentum-state.json`, log appended to `memory/logs/2026-05-25.md`
+**Repo audited**: `aaronjmars/MiroShark` (1 repo; `miroshark-aeon` filtered as agent repo)
 
-At current pace (~4 stars/day), MiroShark crosses 1500 stars around August 10. The skill will begin alerting when that projection falls inside the 7–14 day window — roughly early-to-mid July.
+**Result**: `STAR_MOMENTUM_NO_ALERTS` — no notification sent.
+
+**Projection**:
+- Current: 1,195 stars → Target: 1,500 stars (gap: 305)
+- v7 (7-day avg): 3.29/day → projected crossing **2026-08-27 (Thursday)** in 93 days
+- v3 (3-day avg): 1.67/day → projected crossing 2026-11-25 (Wednesday) in 183 days
+- Gate failed: `OUT_OF_WINDOW` (93 days > 14-day window ceiling)
+
+Notably, pace has slowed: the 3-day avg (1.67/day) is well below the 7-day avg (3.29/day), reflecting only +1 star on May 25 vs the +9 spike on May 21. The 1,500-star milestone is roughly 3 months out at current pace — no Show HN dispatch window to flag today.
+
+**Files written**:
+- `articles/star-momentum-2026-05-26.md` — full projection report
+- `memory/topics/star-momentum-state.json` — updated with new projected date (was Aug 10, now Aug 27)
+- `memory/logs/2026-05-26.md` — log block appended
