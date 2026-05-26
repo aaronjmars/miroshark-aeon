@@ -1,15 +1,7 @@
-**Heartbeat — Monday May 25, 2026 — 19:20 UTC**
+Heartbeat — Tue May 26, 19:11 UTC
 
-All clear. Here's the full picture:
+All 14 scheduled skills ran clean today. One item flagged:
 
-**Skills (14 daily + 3 Monday-specific — all confirmed ran):**
-- token-report, fetch-tweets, tweet-allocator, ai-framework-watch, weekly-shiplog, repo-pulse, star-momentum-alert, feature, operator-scorecard, push-recap, star-milestone, project-lens, repo-article, thread-formatter ✓
-- Every-2-day skills (repo-actions, self-improve) — not due today; parity is even days, day 25 is odd, confirmed via cron-state last_dispatch on May 24
+⚠️ MiroShark PR #106 (Railway deployment, DYAI2025) — stalled >24h. Opened May 25 00:22Z, last activity 14:06Z yesterday (~29h ago). External contributor, awaiting maintainer review.
 
-**PRs:** MiroShark #106 (Railway deployment, 19h old — not stalled). miroshark-aeon PR #45 has merged (empty list now).
-
-**Issues:** #95 French locale — no urgent label, no new flags.
-
-**Other:** tweet-allocator freshness issue from yesterday's skill-freshness run is resolved (ran today at 08:16).
-
-**Status: HEARTBEAT_OK** — logged to `memory/logs/2026-05-25.md`, no notification sent.
+Also: fetch-tweets workflow completed (07:39) but log entry missing from May-26.md — likely a concurrent-write git conflict. PR #46 (bankr crash guard, merged today) prevents downstream impact. No auto-triggers dispatched.
