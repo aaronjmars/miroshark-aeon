@@ -1,16 +1,16 @@
-*Push Recap — 2026-05-25*
-MiroShark — 3 commits · miroshark-aeon — 1 substantive (+47 scheduler auto-commits) · all by aaronjmars + 1 external
+*Push Recap — 2026-05-26*
+aaronjmars/MiroShark + miroshark-aeon — 3 substantive commits by 3 authors (last 24h)
 
-Platform self-description surfaces: MiroShark merged its oEmbed provider (#107) and Platform Stats API + badge (#105) back-to-back — the first endpoints that describe the *platform itself*, not one simulation. /api/stats returns aggregate consensus/confidence/view counts (+ a Shields.io badge for READMEs); /oembed makes share links auto-unfurl into rich cards on Notion/Ghost/Substack/WordPress. Both pure stdlib, zero new deps.
+*Ecosystem registry (#109, external):* Community contributor NurstarK added ECOSYSTEM.md — the first curated index of 10 named projects built on MiroShark (AntFleet, Blue Agent, Crucible Sim, Echo, Monitor, Nookplot, RootAI, Signa, Supercompact, Xerg) plus a "no stock forks" PR guideline. Latest in the run of external merges.
 
-Repo hygiene: #104 (ext contributor Void Freud) collapsed five explicit .env lines into one .env.* wildcard + !.env.example — fourth distinct external contributor on the repo.
+*New analytics surface (#108):* GET /api/simulation/<id>/peak-round collapses a full belief trajectory into one machine-readable summary — which round each stance peaked, the most volatile round, max swing, total rounds. Pure O(n) derivation reusing trajectory.csv's stance-split (peaks match byte-for-byte); 22nd surface, zero deps.
 
-Agent self-hardening: aeon #45 adds an EXIT trap to prefetch-bankr.sh that stamps a 'crashed' status with the exit code, so tweet-allocator can tell a crashed prefetch from one that never ran (fixes the misleading May-24 alert).
+*Agent self-fix (#46):* Patched bankr-prefetch crashing on tweetless days — a no-match grep under set -euo pipefail exited 1 and stamped a false "crashed" status, which broke today's tweet-allocator (TWEET_ALLOCATOR_EMPTY). Now falls through to a clean no-candidates path.
 
 Key changes:
-- New platform_stats.py (+444): one O(n) scan over all public+completed sims, 60s cache, ETag/304
-- New oembed_service.py (+207): host-allow-listed URL→sim_id parsing, never dereferences inbound url, JSON/XML payload
-- prefetch-bankr.sh EXIT trap (+25): writes {status:crashed, exit_code} when the script bails before its normal write_status
+- New peak_round.py service (187 LoC, stdlib) + publish-gated route + 19 offline tests + 📊 EmbedDialog section
+- ECOSYSTEM.md: 10-project integrator table with contribution rules, merged from an external fork-owner
+- prefetch-bankr.sh: |+|| true guards on 3 grep pipelines (complements PR #45 which detected the crash)
 
-Stats: 22 files, +2,418 / -10 across 4 substantive commits. 3 of 4 recently-open MiroShark PRs merged today (#106 Railway still open).
-Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-05-25.md
+Stats: 12 files changed, +893/-4. All 3 merges zero-deps.
+Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-05-26.md

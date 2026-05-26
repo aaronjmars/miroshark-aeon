@@ -1,0 +1,266 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "Push Recap — 2026-05-26"
+      },
+      "children": [
+        "header",
+        "sep1",
+        "ecosystem",
+        "sep2",
+        "analytics",
+        "sep3",
+        "selffix",
+        "sep4",
+        "changes_section",
+        "sep5",
+        "stats_section",
+        "sep6",
+        "recap"
+      ]
+    },
+    "header": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "header_text"
+      ]
+    },
+    "header_text": {
+      "type": "Text",
+      "props": {
+        "text": "aaronjmars/MiroShark + miroshark-aeon — 3 substantive commits by 3 authors (last 24h)"
+      }
+    },
+    "sep1": {
+      "type": "Separator"
+    },
+    "ecosystem": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "eco_title",
+        "eco_text1",
+        "eco_projects",
+        "eco_text2"
+      ]
+    },
+    "eco_title": {
+      "type": "Heading",
+      "props": {
+        "text": "Ecosystem registry (#109, external)",
+        "level": "h3"
+      }
+    },
+    "eco_text1": {
+      "type": "Text",
+      "props": {
+        "text": "Community contributor NurstarK added ECOSYSTEM.md — the first curated index of 10 named projects built on MiroShark"
+      }
+    },
+    "eco_projects": {
+      "type": "Text",
+      "props": {
+        "text": "AntFleet, Blue Agent, Crucible Sim, Echo, Monitor, Nookplot, RootAI, Signa, Supercompact, Xerg"
+      }
+    },
+    "eco_text2": {
+      "type": "Text",
+      "props": {
+        "text": "Plus a \"no stock forks\" PR guideline. Latest in the run of external merges."
+      }
+    },
+    "sep2": {
+      "type": "Separator"
+    },
+    "analytics": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "analytics_title",
+        "analytics_text1",
+        "analytics_text2"
+      ]
+    },
+    "analytics_title": {
+      "type": "Heading",
+      "props": {
+        "text": "New analytics surface (#108)",
+        "level": "h3"
+      }
+    },
+    "analytics_text1": {
+      "type": "Text",
+      "props": {
+        "text": "GET /api/simulation/<id>/peak-round collapses a full belief trajectory into one machine-readable summary — which round each stance peaked, the most volatile round, max swing, total rounds."
+      }
+    },
+    "analytics_text2": {
+      "type": "Text",
+      "props": {
+        "text": "Pure O(n) derivation reusing trajectory.csv's stance-split (peaks match byte-for-byte); 22nd surface, zero deps."
+      }
+    },
+    "sep3": {
+      "type": "Separator"
+    },
+    "selffix": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "selffix_title",
+        "selffix_text1",
+        "selffix_text2"
+      ]
+    },
+    "selffix_title": {
+      "type": "Heading",
+      "props": {
+        "text": "Agent self-fix (#46)",
+        "level": "h3"
+      }
+    },
+    "selffix_text1": {
+      "type": "Text",
+      "props": {
+        "text": "Patched bankr-prefetch crashing on tweetless days — a no-match grep under set -euo pipefail exited 1 and stamped a false \"crashed\" status, which broke today's tweet-allocator (TWEET_ALLOCATOR_EMPTY)."
+      }
+    },
+    "selffix_text2": {
+      "type": "Text",
+      "props": {
+        "text": "Now falls through to a clean no-candidates path."
+      }
+    },
+    "sep4": {
+      "type": "Separator"
+    },
+    "changes_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "changes_title",
+        "change1",
+        "change2",
+        "change3"
+      ]
+    },
+    "changes_title": {
+      "type": "Heading",
+      "props": {
+        "text": "Key changes",
+        "level": "h3"
+      }
+    },
+    "change1": {
+      "type": "Text",
+      "props": {
+        "text": "New peak_round.py service (187 LoC, stdlib) + publish-gated route + 19 offline tests + 📊 EmbedDialog section"
+      }
+    },
+    "change2": {
+      "type": "Text",
+      "props": {
+        "text": "ECOSYSTEM.md: 10-project integrator table with contribution rules, merged from an external fork-owner"
+      }
+    },
+    "change3": {
+      "type": "Text",
+      "props": {
+        "text": "prefetch-bankr.sh: |+|| true guards on 3 grep pipelines (complements PR #45 which detected the crash)"
+      }
+    },
+    "sep5": {
+      "type": "Separator"
+    },
+    "stats_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stats_title",
+        "stats_row",
+        "deps_note"
+      ]
+    },
+    "stats_title": {
+      "type": "Heading",
+      "props": {
+        "text": "Stats",
+        "level": "h3"
+      }
+    },
+    "stats_row": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "lg"
+      },
+      "children": [
+        "stat_files",
+        "stat_adds",
+        "stat_dels"
+      ]
+    },
+    "stat_files": {
+      "type": "Stat",
+      "props": {
+        "label": "Files changed",
+        "value": "12"
+      }
+    },
+    "stat_adds": {
+      "type": "Stat",
+      "props": {
+        "label": "Lines added",
+        "value": "893"
+      }
+    },
+    "stat_dels": {
+      "type": "Stat",
+      "props": {
+        "label": "Lines deleted",
+        "value": "4"
+      }
+    },
+    "deps_note": {
+      "type": "Text",
+      "props": {
+        "text": "All 3 merges zero-deps.",
+        "variant": "muted"
+      }
+    },
+    "sep6": {
+      "type": "Separator"
+    },
+    "recap": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full recap",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-05-26.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}
