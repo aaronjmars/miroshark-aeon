@@ -15,6 +15,7 @@ Full text in `articles/repo-article-YYYY-MM-DD.md`. Each row ≤220 chars.
 
 | Date | Title | One-line frame |
 |------|-------|----------------|
+| 2026-05-26 | MiroShark Stopped Being the Only Thing Built on MiroShark | PR #109 ECOSYSTEM.md merged — EXTERNAL contributor (NurstarK) authored first inbound census: roster of 10 products built ON engine (AntFleet/BlueAgent/Crucible/Echo/Monitor/Nookplot/RootAI/Signa/Supercompact/Xerg). Guidelines exclude stock forks. Paired w/ PR #108 peak-round (22nd surface). Tool→substrate inflection; maintainer didn't write the page. |
 | 2026-05-25 | MiroShark Built a Surface Nobody Has to Find | PR #107 oEmbed merged — first "discovery not destination" surface (consumer never names a route); closes publishing-platform unfurl gap (Notion/Ghost/Substack/WordPress read oEmbed `<link>`, not OG). Protocol-not-renderer: reuses share-card + /embed iframe. 21st surface key, zero deps. |
 | 2026-05-24 | MiroShark Built Its First Mirror | PR #105 opened — first PLATFORM-level surface (vs 14 prior per-sim); GET /api/stats + /api/stats/badge.svg. Paired with PR #103 (Nemotron) ending the 31-PR zero-deps streak. |
 | 2026-05-23 | MiroShark Stopped Shipping to Itself | PR #97 WaybackClaw merged (15th surface, IPFS+Nostr sibling of DKG=2-channel provenance) + PR #99 Polymarket JSON opened (16th, 1st integrator-shaped); 2 external PRs same day; -68.8% from ATH. |

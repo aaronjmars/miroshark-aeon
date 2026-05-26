@@ -1,5 +1,5 @@
-*New Article: MiroShark Built a Surface Nobody Has to Find*
+*New Article: MiroShark Stopped Being the Only Thing Built on MiroShark*
 
-PR #107 (oEmbed provider) merged today is MiroShark's first "discovery, not destination" surface — a consumer never names a route. It closes the unfurl gap for publishing platforms (Notion/Ghost/Substack/WordPress read oEmbed discovery tags, not Open Graph), and does it as a protocol, not a renderer: the preview card reuses the existing share-card PNG and /embed iframe. One of three zero-deps merges today.
+For ten weeks MiroShark shipped outbound surfaces so other tools could consume one simulation. Today PR #109 reached back: an external contributor added ECOSYSTEM.md, a roster of 10 products built *on* the engine (forks explicitly excluded) — the maintainer didn't write his own ecosystem page, an outsider did. It merged the same hour as PR #108, the 22nd outbound surface.
 
-Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-05-25.md
+Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-05-26.md
