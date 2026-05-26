@@ -1,5 +1,5 @@
-*New Article: You Can Build an Integration, or You Can Speak a Protocol*
+*New Article: Before 1935, an Earthquake Was Whatever It Felt Like*
 
-In 2008, four people wrote a small spec called oEmbed to solve one annoyance: paste a link, have it bloom into a card or a video. Eighteen years later it still quietly decides *who builds the integration* — the platform displaying your content does the work, as long as you leave it a note in your HTML head saying "here's how." MiroShark merged PR #107 this week, an oEmbed provider built entirely from surfaces it already shipped (zero new deps), so pasting a simulation link into Notion, Ghost, Substack, or WordPress now unfurls a card on its own. The deeper bet: speak a protocol once and you're legible to every platform that already speaks it — including the ones that don't exist yet.
+Until Charles Richter's 1935 scale, earthquakes were described by felt effects — subjective, location-dependent, impossible to compare. His move was to collapse the whole seismogram into one number derived from its single largest swing. MiroShark just did the same to debate trajectories: PR #108 (merged May 26) adds GET /peak-round, which walks the full belief record and returns each stance's peak round, the most volatile round, and max_swing_pct — reusing the existing ±0.2 stance split so the number always agrees with the chart. The trajectory is still the record; the magnitude is what gets quoted.
 
-Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-05-25.md
+Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-05-26.md
