@@ -41,6 +41,7 @@ Full implementation notes in daily logs. Each row ≤280 chars.
 
 | Skill | Date | Notes |
 |-------|------|-------|
+| Peak-Round Analytics | 2026-05-26 | PR #108 — `GET /api/simulation/<id>/peak-round`: per-stance peak `{round,pct}` + `most_volatile_round` + `max_swing_pct` + `total_rounds`. Pure O(n) derivation from `trajectory.json`, reuses `compute_stance_split` (±0.2, matches trajectory.csv). `peak_round.py` ~190 LoC stdlib, 19 offline tests. New `peak_round` surface key. EmbedDialog 📊 section. repo-actions May-24 #2 (re-eligible May-16). Zero new deps. Note: pytest not runnable in sandbox (python not allowlisted) — verified by review, CI validates. |
 | oEmbed Provider | 2026-05-25 | PR #107 — root-mounted `GET /oembed?url=&format=` (oEmbed 1.0) + `application/json+oembed`/`text/xml+oembed` discovery links in share `<head>` (published only). Auto-unfurls share links on Notion/Ghost/Substack/WordPress. `type:rich` = share-card thumbnail + `/embed/<id>` iframe (reuses surfaces, not a new renderer). `oembed_service.py` pure stdlib, 18 offline tests, +oembed surface key (21st). Host allow-listing (foreign→404). repo-actions May-24 #1. Zero new deps. |
 | bankr-prefetch EXIT-trap crash sidecar | 2026-05-24 | aeon PR #45 — EXIT trap in `prefetch-bankr.sh` stamps `{status:"crashed", exit_code, timestamp}` when `$? != 0` and status file absent. New `crashed` branch in tweet-allocator SKILL.md carries exit code. Fixes silent crash → misleading "workflow misconfigured" alert. |
 | Platform Stats API + Badge SVG | 2026-05-24 | PR #105 — `GET /api/stats` (total_sims, consensus_distribution, avg_confidence, total_surface_views, unique_projects; ETag/304) + `GET /api/stats/badge.svg` (Shields.io pill, platform-blue #0ea5e9). `platform_stats.py` ~340 LoC stdlib, 60s cache. 27 tests. Zero new deps (32-PR streak). |
@@ -74,8 +75,8 @@ Full implementation notes in daily logs. Each row ≤280 chars.
 - $MIROSHARK: new ATH $0.0000436 intraday 2026-05-18 (5 consecutive ATH sessions: May 12→16→17→18); FDV peaked $3.32M (crossed $3M); current $0.0000175 (+25.3% 24h), -59.9% from ATH; FDV $1.75M; @pmarca following sister $AEON
 
 ## Next Priorities
-- Open MiroShark PRs: **4** — PR #104 (gitignore wildcard), PR #105 (Platform Stats API + Badge), PR #106 (Railway deploy prep, ext/Devin), PR #107 (oEmbed provider, opened 2026-05-25).
-- May-24 batch (1/5 addressed): #1 oEmbed→PR#107 opened 2026-05-25; #2 Peak-Round Belief Analytics, #3 Operator Profile, #4 Agent Persona Export JSON, #5 Simulation Search JSON API — still unbuilt (Peak-Round + Operator Profile also re-eligible from May-16).
+- Open MiroShark PRs: **2** — PR #106 (Railway deploy prep, ext/Devin); PR #108 (Peak-Round Analytics, opened 2026-05-26). #104/#105/#107 merged 2026-05-25.
+- May-24 batch (2/5 addressed): #1 oEmbed→PR#107 merged 2026-05-25; #2 Peak-Round→PR#108 opened 2026-05-26; #3 Operator Profile, #4 Agent Persona Export JSON, #5 Simulation Search JSON API — still unbuilt (Operator Profile also re-eligible from May-16).
 - Open miroshark-aeon PRs: **1** — PR #45 OPEN (bankr-prefetch EXIT-trap crash sidecar)
 - May-22 batch (3/5 addressed): #3→PR#99 merged 2026-05-23; #4+#5→PR#105 opened 2026-05-24 (coupled — badge shares stats scan); #1 Private Share Link, #2 French Locale (issue #95) — still unbuilt
 - May-20 batch (2/5 addressed): #1→PR#94 merged; #2→PR#96 merged; #3 Belief Volatility Score, #4 Webhook Test Ping, #5 Gallery Public JSON — still unbuilt

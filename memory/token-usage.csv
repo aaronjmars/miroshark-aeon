@@ -411,3 +411,4 @@ date,skill,model,input_tokens,output_tokens,cache_read,cache_creation
 2026-05-26,fetch-tweets,claude-sonnet-4-6,25,11260,787101,32815
 2026-05-26,tweet-allocator,claude-sonnet-4-6,6,3355,123978,19143
 2026-05-26,star-momentum-alert,claude-sonnet-4-6,12,6627,347714,25538
+2026-05-26,feature,claude-opus-4-7,193,72454,13353034,212771

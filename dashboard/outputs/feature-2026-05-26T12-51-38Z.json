@@ -1,0 +1,218 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Peak-Round Analytics"
+      },
+      "children": [
+        "stack_content"
+      ]
+    },
+    "stack_content": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "meta_info",
+        "desc_main",
+        "sep1",
+        "section_why",
+        "sep2",
+        "section_built",
+        "sep3",
+        "section_how",
+        "sep4",
+        "section_next",
+        "sep5",
+        "pr_link"
+      ]
+    },
+    "meta_info": {
+      "type": "Text",
+      "props": {
+        "text": "Feature Built — 2026-05-26",
+        "variant": "muted"
+      }
+    },
+    "desc_main": {
+      "type": "Text",
+      "props": {
+        "text": "MiroShark simulations now expose a one-call summary of when belief shifted, not just what the final belief was. The new GET /api/simulation/<id>/peak-round endpoint reports the exact round each stance (bullish / neutral / bearish) hit its high point, which round saw the biggest swing, and how big that swing was — the answers a researcher used to get only by reading 100 rows of the trajectory CSV by hand."
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "section_why": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "heading_why",
+        "text_why1",
+        "text_why2"
+      ]
+    },
+    "heading_why": {
+      "type": "Heading",
+      "props": {
+        "text": "Why this matters:",
+        "level": "h3"
+      }
+    },
+    "text_why1": {
+      "type": "Text",
+      "props": {
+        "text": "The project already ships the raw per-round data (trajectory.csv) and the visual (chart.svg), but neither answers \"which round did bullish peak?\" or \"which round was the most volatile?\" without parsing."
+      }
+    },
+    "text_why2": {
+      "type": "Text",
+      "props": {
+        "text": "Quant tools and research scripts needed that inflection summary as a single machine-readable call. This was the #2 idea in the 2026-05-24 repo-actions batch (and re-eligible from May-16) — it completes the analytical quadrant alongside signal.json."
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "section_built": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "heading_built",
+        "built_item1",
+        "built_item2",
+        "built_item3",
+        "built_item4",
+        "built_item5"
+      ]
+    },
+    "heading_built": {
+      "type": "Heading",
+      "props": {
+        "text": "What was built:",
+        "level": "h3"
+      }
+    },
+    "built_item1": {
+      "type": "Text",
+      "props": {
+        "text": "backend/app/services/peak_round.py: load_trajectory_rounds() + compute_peak_rounds() — a pure O(n) pass over trajectory.json that finds each stance's earliest peak round, the most-volatile round (largest summed round-over-round swing), and total rounds. ~190 LoC, pure stdlib."
+      }
+    },
+    "built_item2": {
+      "type": "Text",
+      "props": {
+        "text": "backend/app/api/simulation.py: the publish-gated /peak-round route, mirroring the signal.json handler (404 = no trajectory yet, 403 = unpublished) and incrementing a new surface counter."
+      }
+    },
+    "built_item3": {
+      "type": "Text",
+      "props": {
+        "text": "backend/openapi.yaml + surface_stats: new PeakRoundResponse/StancePeak schemas and a peak_round surface key."
+      }
+    },
+    "built_item4": {
+      "type": "Text",
+      "props": {
+        "text": "frontend EmbedDialog.vue: a \"📊 Peak beliefs\" panel showing the bullish/bearish peaks, most-volatile round, and total rounds, with copyable URL + curl snippet."
+      }
+    },
+    "built_item5": {
+      "type": "Text",
+      "props": {
+        "text": "19 offline unit tests + docs (API.md, FEATURES.md)."
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "section_how": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "heading_how",
+        "text_how"
+      ]
+    },
+    "heading_how": {
+      "type": "Heading",
+      "props": {
+        "text": "How it works:",
+        "level": "h3"
+      }
+    },
+    "text_how": {
+      "type": "Text",
+      "props": {
+        "text": "It reuses trajectory_export.compute_stance_split — the exact ±0.2-threshold function trajectory.csv uses — so \"bullish peaked at 71% on round 4\" matches row 4 of the CSV byte-for-byte. Nothing is re-computed; the endpoint only changes the shape of existing data into an inflection summary. Peak ties resolve to the earliest round so the output is deterministic. Zero new dependencies, consistent with the project's surface pattern."
+      }
+    },
+    "sep4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "section_next": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "heading_next",
+        "text_next"
+      ]
+    },
+    "heading_next": {
+      "type": "Heading",
+      "props": {
+        "text": "What's next:",
+        "level": "h3"
+      }
+    },
+    "text_next": {
+      "type": "Text",
+      "props": {
+        "text": "Still unbuilt from the May-24 batch: Operator Profile pages, Agent Persona Export JSON (the first per-agent data surface), and a query-driven Simulation Search API."
+      }
+    },
+    "sep5": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "pr_link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Pull Request #108",
+        "href": "https://github.com/aaronjmars/MiroShark/pull/108",
+        "source": "GitHub"
+      }
+    }
+  }
+}

@@ -1,21 +1,22 @@
-*Feature Built — 2026-05-25*
+*Feature Built — 2026-05-26*
 
-oEmbed Provider
-MiroShark share links now auto-unfurl into rich preview cards on the platforms where researchers and analysts actually publish — Notion, Ghost, Substack, and WordPress. Before today, pasting a simulation link into a Notion page or a Substack draft showed a bare URL; now it renders a card with the scenario title, the share-card image, and an embeddable live view of the sim.
+Peak-Round Analytics
+MiroShark simulations now expose a one-call summary of *when* belief shifted, not just *what* the final belief was. The new GET /api/simulation/<id>/peak-round endpoint reports the exact round each stance (bullish / neutral / bearish) hit its high point, which round saw the biggest swing, and how big that swing was — the answers a researcher used to get only by reading 100 rows of the trajectory CSV by hand.
 
 Why this matters:
-The share page already produced rich previews on social platforms (Twitter/X, Discord, Slack, Farcaster) through Open Graph and Frame tags. But the writing platforms do not read Open Graph — they implement the oEmbed standard, look for a small discovery tag on the page, then ask the site for a structured embed. That gap meant every organic citation of a MiroShark sim in a research note or blog post degraded to a plain link. This was the highest-impact distribution idea in the May-24 repo-actions batch (re-eligible since May 16, still unbuilt). It widens reach with roughly 80 lines of pure-stdlib code and zero new dependencies.
+The project already ships the raw per-round data (trajectory.csv) and the visual (chart.svg), but neither answers "which round did bullish peak?" or "which round was the most volatile?" without parsing. Quant tools and research scripts needed that inflection summary as a single machine-readable call. This was the #2 idea in the 2026-05-24 repo-actions batch (and re-eligible from May-16) — it completes the analytical quadrant alongside signal.json.
 
 What was built:
-- backend/app/services/oembed_service.py: new pure-stdlib core that parses a sim ID out of a share/embed/simulation URL with host allow-listing, builds the oEmbed "rich" payload, and serializes it to JSON or XML.
-- backend/app/api/share.py: new root-mounted GET /oembed route (publish-gated, domain-validated, json/xml with a 501 on unsupported formats) plus the two discovery link tags injected into the share-page head for published sims only.
-- backend/app/services/surface_stats.py: registers an "oembed" usage counter so operators can see how many third-party unfurls the endpoint drives.
-- frontend + docs: a getOEmbedUrl helper, an OpenAPI entry with response schema, and API/FEATURES docs with curl examples.
+- backend/app/services/peak_round.py: load_trajectory_rounds() + compute_peak_rounds() — a pure O(n) pass over trajectory.json that finds each stance's earliest peak round, the most-volatile round (largest summed round-over-round swing), and total rounds. ~190 LoC, pure stdlib.
+- backend/app/api/simulation.py: the publish-gated /peak-round route, mirroring the signal.json handler (404 = no trajectory yet, 403 = unpublished) and incrementing a new surface counter.
+- backend/openapi.yaml + surface_stats: new PeakRoundResponse/StancePeak schemas and a peak_round surface key.
+- frontend EmbedDialog.vue: a "📊 Peak beliefs" panel showing the bullish/bearish peaks, most-volatile round, and total rounds, with copyable URL + curl snippet.
+- 19 offline unit tests + docs (API.md, FEATURES.md).
 
 How it works:
-A consumer that scrapes a share page finds the discovery tag, calls GET /oembed with the share URL, and receives a "rich" payload whose thumbnail is the existing 1200x630 share-card PNG and whose html is an 800x500 iframe over the existing /embed route. oEmbed adds a protocol, not a renderer — it reuses surfaces that already ship. The endpoint never fetches the inbound URL; it only extracts a sim ID from a path on a host this deployment owns, so a foreign domain returns 404, and private or missing sims also return 404 so the endpoint never reveals that a private sim exists.
+It reuses trajectory_export.compute_stance_split — the exact ±0.2-threshold function trajectory.csv uses — so "bullish peaked at 71% on round 4" matches row 4 of the CSV byte-for-byte. Nothing is re-computed; the endpoint only changes the *shape* of existing data into an inflection summary. Peak ties resolve to the earliest round so the output is deterministic. Zero new dependencies, consistent with the project's surface pattern.
 
 What's next:
-Four ideas from the same batch remain unbuilt — Peak-Round Belief Analytics, Operator Profile Page, Agent Persona Export JSON, and a Simulation Search JSON API. The natural follow-up here is wiring an oEmbed preview row into the EmbedDialog so an operator can confirm the card before sharing.
+Still unbuilt from the May-24 batch: Operator Profile pages, Agent Persona Export JSON (the first per-agent data surface), and a query-driven Simulation Search API.
 
-PR: https://github.com/aaronjmars/MiroShark/pull/107
+PR: https://github.com/aaronjmars/MiroShark/pull/108
