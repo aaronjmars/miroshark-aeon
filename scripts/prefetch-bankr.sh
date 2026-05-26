@@ -98,19 +98,24 @@ fi
 TODAY=$(date -u +%Y-%m-%d)
 HANDLES=""
 
+# `|| true` guards: under `set -e -o pipefail`, a grep that matches nothing exits
+# 1, pipefail propagates it, and set -e would crash the whole script — false
+# "crashed" status on a legitimately tweetless day (observed 2026-05-26: no
+# x.com URLs in the log → grep no-match → exit 1). The empty result must instead
+# fall through to the graceful "no-candidates" branch below.
 if [ -f ".xai-cache/fetch-tweets.json" ]; then
   FROM_CACHE=$(jq -r '.output[]? | select(.type == "message") | .content[]? | select(.type == "output_text") | .text' \
     .xai-cache/fetch-tweets.json 2>/dev/null \
     | grep -oE '@[A-Za-z0-9_]{1,15}' \
     | sed 's/^@//' \
-    | sort -u)
+    | sort -u) || true
   HANDLES="$FROM_CACHE"
 fi
 
 if [ -f "memory/logs/${TODAY}.md" ]; then
   FROM_LOG=$(grep -oE 'x\.com/[A-Za-z0-9_]{1,15}' "memory/logs/${TODAY}.md" 2>/dev/null \
     | sed 's|x\.com/||' \
-    | sort -u)
+    | sort -u) || true
   HANDLES=$(printf "%s\n%s\n" "$HANDLES" "$FROM_LOG" | sort -u)
 fi
 
@@ -127,7 +132,7 @@ HANDLES=$(echo "$HANDLES" \
   | grep -viE '^(aaronjmars|miroshark_)$' \
   | grep -viE "$RESERVED_X_PATHS" \
   | grep -v '^$' \
-  | head -25)
+  | head -25) || true
 
 if [ -z "$HANDLES" ]; then
   echo "bankr-prefetch: no candidate handles found in .xai-cache/ or memory/logs/${TODAY}.md — nothing to verify"
