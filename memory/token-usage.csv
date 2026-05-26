@@ -408,3 +408,4 @@ date,skill,model,input_tokens,output_tokens,cache_read,cache_creation
 2026-05-25,thread-formatter,claude-sonnet-4-6,10,10410,321315,34271
 2026-05-25,heartbeat,claude-sonnet-4-6,13,9889,522168,49243
 2026-05-26,token-report,claude-sonnet-4-6,14,15911,743055,71655
+2026-05-26,fetch-tweets,claude-sonnet-4-6,25,11260,787101,32815

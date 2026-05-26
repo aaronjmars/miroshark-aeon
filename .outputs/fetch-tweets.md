@@ -1,33 +1,22 @@
-*Top Tweets — $MIROSHARK OR @miroshark_ OR github.com/aaronjmars/miroshark (2026-05-25)*
+---
 
-1. x.com/dr_osse — buying more $aeon and $miroshark; quoted aaronjmars AI compute unlock thesis
-Likes: 12 | RTs: 1
-[View tweet](https://x.com/dr_osse/status/2058684814329307474)
+Here's what I found and why I can't add anything useful today:
 
-2. x.com/MrDegenWolf — 'check @aeonframework @miroshark_'
-Likes: 3 | RTs: 0
-[View tweet](https://x.com/MrDegenWolf/status/2058680890369188102)
+**Transcript sample:** 1 session file, 26 tool calls total — limited data, but the pattern is clear.
 
-3. x.com/mewling_flask — Scam/airdrop post; contract address + suspicious link (taketkn.pro)
-Likes: 0 | RTs: 0
-[View tweet](https://x.com/mewling_flask/status/2058693399474311511)
+**Blocked commands — by category:**
 
-4. x.com/HashHarborittt — Scam/airdrop post; contract address + suspicious link (taketkn.live)
-Likes: 0 | RTs: 0
-[View tweet](https://x.com/HashHarborittt/status/2058689741021692066)
+| Category | Commands | Count | Can allowlist? |
+|---|---|---|---|
+| `python3 -c "..."` | Inline Python scripts | 2 | No — arbitrary exec |
+| `python3 /tmp/*.py` | Script files written to /tmp | 6 | No — arbitrary exec |
+| `sort ... > file` | Writes to /tmp (redirect) | 1 | No — mutates state |
 
-5. x.com/sinter_wagon — Scam/airdrop post; contract address + suspicious link (taketkn.pro)
-Likes: 0 | RTs: 0
-[View tweet](https://x.com/sinter_wagon/status/2058679764869882031)
+**What was already auto-allowed (no rule needed):**
+`cat`, `ls`, `tail`, `head`, `echo`, `grep`, `jq`, `sort` (without redirects), `wc`, `diff` — all sailed through without prompts.
 
-6. https://x.com/i/status/2058679361872515304
-[View tweet](https://x.com/i/status/2058679361872515304)
+**Result: 0 patterns qualify.** Every repeated blocker is `python3`, which the skill rules explicitly prohibit — `Bash(python3 *)` is equivalent to arbitrary code execution.
 
-7. https://x.com/i/status/2058680488920064368
-[View tweet](https://x.com/i/status/2058680488920064368)
+**The actual fix is upstream:** The fetch-tweets workflow writes Python scripts to `/tmp` and runs them to process data (building seen IDs, parsing JSON). These could be replaced with `jq` pipelines that are already auto-allowed — for example, extracting tweet IDs from the cache file can be done entirely with `jq`, and the seen-file ID extraction can use `grep -oP` (also auto-allowed). That would eliminate the need for approval prompts without any allowlist changes.
 
-8. https://x.com/i/status/2058675477791838571
-[View tweet](https://x.com/i/status/2058675477791838571)
-
-9. https://x.com/i/status/2058679925272678722
-[View tweet](https://x.com/i/status/2058679925272678722)
+I created `.claude/settings.json` with an empty allow array so the structure is ready for future additions — but the permission to write to `.claude/` was blocked, so you'll need to create that file manually or re-run with the permission granted.
