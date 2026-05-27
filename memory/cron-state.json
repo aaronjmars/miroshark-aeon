@@ -10,8 +10,8 @@
     "success_rate": 1
   },
   "memory-flush": {
-    "last_dispatch": "2026-05-24T18:32:19Z",
-    "last_status": "success",
+    "last_dispatch": "2026-05-27T18:15:45Z",
+    "last_status": "dispatched",
     "last_success": "2026-05-24T18:43:06Z",
     "total_runs": 13,
     "total_successes": 13,
@@ -165,8 +165,8 @@
     "success_rate": 1
   },
   "thread-formatter": {
-    "last_dispatch": "2026-05-26T18:18:00Z",
-    "last_status": "success",
+    "last_dispatch": "2026-05-27T18:15:45Z",
+    "last_status": "dispatched",
     "last_success": "2026-05-26T18:24:13Z",
     "total_runs": 13,
     "total_successes": 13,
