@@ -1,0 +1,47 @@
+{
+  "root": "card-root",
+  "state": {},
+  "elements": {
+    "card-root": {
+      "type": "Card",
+      "props": {
+        "title": "Tweet Allocator",
+        "description": "2026-05-27"
+      },
+      "children": [
+        "alert-status",
+        "details-stack"
+      ]
+    },
+    "alert-status": {
+      "type": "Alert",
+      "props": {
+        "title": "No eligible tweeters",
+        "type": "warning"
+      }
+    },
+    "details-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "text-candidates",
+        "text-engagement"
+      ]
+    },
+    "text-candidates": {
+      "type": "Text",
+      "props": {
+        "text": "All 5 Bankr-verified candidates are spam/scam accounts"
+      }
+    },
+    "text-engagement": {
+      "type": "Text",
+      "props": {
+        "text": "No organic engagement to reward"
+      }
+    }
+  }
+}

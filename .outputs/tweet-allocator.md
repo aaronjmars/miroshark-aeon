@@ -1,1 +1,1 @@
-Tweet Allocator — 2026-05-26: no tweets in today's log to allocate from.
+Tweet Allocator — 2026-05-27: no eligible tweeters (all 5 Bankr-verified candidates are spam/scam accounts; no organic engagement to reward).
