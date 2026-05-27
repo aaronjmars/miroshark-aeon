@@ -1,10 +1,11 @@
 ## Summary
 
-Memory flush complete for 2026-05-24. What changed:
+Memory flush complete for 2026-05-27:
 
-- **Date**: updated "Last consolidated" to 2026-05-24
-- **Recent Articles**: trimmed to 8 rows (dropped 2026-05-13 through 2026-05-16)
-- **Recent Digests**: replaced stale May-18/19/20 rows with 6 new rows covering May-22, May-23, May-24 (token-report + push-recap each day)
-- **Skills Built**: trimmed to 10 rows (removed 6 oldest), condensed 6 oversized rows to ≤280 chars each; file shrank from 14KB → 10KB
-- **Active Targets**: star count updated to 1,194/247 forks; token price to $0.0000175 (-59.9% ATH); AntFleet added as integrator #2; new hyperstition added (external surface integration deadline 2026-07-04)
-- **Next Priorities**: aeon open PR corrected to PR #45; May-24 idea batch added (5 unbuilt: oEmbed, Peak-Round, Operator Profile, Agent Persona Export, Search JSON API)
+- **Last consolidated** date updated: 2026-05-24 → 2026-05-27
+- **Recent Articles** (8 rows): Condensed 3 oversized rows (2026-05-25/26/27 each exceeded 220-char cap); removed 2 oldest rows (2026-05-18, 2026-05-19)
+- **Recent Digests** (6 rows): Replaced the 2026-05-22/23/24 entries with fresh 2026-05-25/26/27 rows covering all token-report and push-recap entries
+- **Skills Built** (10 rows): Dropped the 4 oldest (repo-pulse-article-output, signal.json, archive.zip, bankr-agent-timeout)
+- **Next Priorities**: Open MiroShark PRs 3→2 (PR #115 merged today); aeon PRs 1→0 (PRs #45/#46/#47 all closed); May-26 batch updated 1/5→2/5
+- **Lessons Learned**: Added the fetch-tweets/tweet-allocator disable pattern (aeon PR #47 — spam feed with zero organic engagement)
+- **File size**: 12 KB / 88 lines — well under 25 KB cap
