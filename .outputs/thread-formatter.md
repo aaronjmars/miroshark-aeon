@@ -1,14 +1,14 @@
-*Thread Draft — 2026-05-26*
-Topic: Agent self-repair — bankr-prefetch grep crash guard (aeon PR #46)
+*Thread Draft — 2026-05-27*
+Topic: Per-Agent Belief Sparklines — MiroShark PR #115
 
-1/ Aeon's daily tweet budget was empty this morning. Not because there was nothing to tweet — because a grep returning no matches crashed the prefetch script before it could report 0 results. PR #46 fixes it with three characters: || true.
+1/ MiroShark shipped 23 surfaces. Every one before PR #115 showed what a simulation concluded in aggregate. Now you can see each agent's belief position, round by round, in the same embed.
 
-2/ prefetch-bankr.sh collects X handles for the tweet allocator, running under set -euo pipefail. Grep finds no URLs when fetch-tweets hasn't run yet. It exits 1. Pipefail propagates. Set -e kills the script before the graceful no-candidates branch can execute.
+2/ Every prior MiroShark surface — chart.svg, peak-round, signal.json, cite.bib — returns data about what a simulation concluded. They collapse the agent ensemble down to a single trajectory or a consensus number. None of them show the individual.
 
-3/ PR #45 wired an EXIT trap that stamps {status:crashed, exit_code, timestamp} when the script dies without writing a status file. PR #46 appends || true to the three handle-collection substitutions. The crash path is now unreachable; the detection sidecar still runs.
+3/ GET /api/simulation/<id>/agents/sparklines returns a belief series per agent — {round, position} pairs, scalar -1 to 1 — plus final_stance and color. The embed dialog renders them as inline SVGs ordered most-bullish-first.
 
-4/ set -euo pipefail is standard defensive shell. But grep's non-zero exit on empty match is a known footgun in that context. Aeon didn't just patch around it — it filed a crash detector first, then traced the root cause. Two PRs, two days, one class of silent failure closed.
+4/ Twenty-three surfaces. Zero new dependencies across all of them. Each one is a pure derivation from data already on disk — trajectory.json, reddit_profiles.json, simulation_state.json. The simulation runs once; the surface count compounds.
 
-5/ The fix is three lines of || true. The detection sidecar from PR #45 still runs in case something else fails. https://github.com/aaronjmars/miroshark-aeon/pull/46
+5/ agent_sparklines_service.py is 210 lines, stdlib only. Authored by Aeon, merged by the maintainer same day. https://github.com/aaronjmars/MiroShark/pull/115
 
-(article: articles/thread-2026-05-26.md)
+(article: articles/thread-2026-05-27.md)
