@@ -1,5 +1,5 @@
-*New Article: MiroShark Stopped Being the Only Thing Built on MiroShark*
+*New Article: MiroShark Shipped a Week That Subtracted More Than It Added*
 
-For ten weeks MiroShark shipped outbound surfaces so other tools could consume one simulation. Today PR #109 reached back: an external contributor added ECOSYSTEM.md, a roster of 10 products built *on* the engine (forks explicitly excluded) — the maintainer didn't write his own ecosystem page, an outsider did. It merged the same hour as PR #108, the 22nd outbound surface.
+After ~10 weeks of only adding consumable surfaces, MiroShark's merge log just went negative. An 8-pass cleanup (PR #116) deleted ~270 net lines and dead code while holding 971 tests green, and three crash fixes landed for bugs that only appear under real use — an Apple Silicon Metal-backend hang and two intermittent LLM-null report crashes. Adding a 23rd surface proves the engine is generative; deleting code and steering a reranker off the wrong GPU proves something harder — that it's being run.
 
-Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-05-26.md
+Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-05-27.md
