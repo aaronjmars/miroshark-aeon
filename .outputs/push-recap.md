@@ -1,16 +1,18 @@
-*Push Recap — 2026-05-26*
-aaronjmars/MiroShark + miroshark-aeon — 3 substantive commits by 3 authors (last 24h)
+*Push Recap — 2026-05-27*
+MiroShark — 7 PRs merged (#110–#116) + Aeon repo #47. 3 authors (maintainer, Aeon, external).
 
-*Ecosystem registry (#109, external):* Community contributor NurstarK added ECOSYSTEM.md — the first curated index of 10 named projects built on MiroShark (AntFleet, Blue Agent, Crucible Sim, Echo, Monitor, Nookplot, RootAI, Signa, Supercompact, Xerg) plus a "no stock forks" PR guideline. Latest in the run of external merges.
+Reliability hardening: Three crash/hang fixes. #111 + #112 stop report sections from dying when a reasoning model (Gemini 3 Flash) returns null content into a regex; #110 stops the retrieval reranker from hanging forever on Apple Silicon by steering off the MPS backend (new RERANKER_DEVICE knob).
 
-*New analytics surface (#108):* GET /api/simulation/<id>/peak-round collapses a full belief trajectory into one machine-readable summary — which round each stance peaked, the most volatile round, max swing, total rounds. Pure O(n) derivation reusing trajectory.csv's stance-split (peaks match byte-for-byte); 22nd surface, zero deps.
+New surface (#115): Per-agent belief sparklines — GET /api/simulation/<id>/agents/sparklines, the 23rd public surface. Aeon authored it yesterday; maintainer merged it today. Each agent's belief trajectory as an inline SVG, zero new deps.
 
-*Agent self-fix (#46):* Patched bankr-prefetch crashing on tweetless days — a no-match grep under set -euo pipefail exited 1 and stamped a false "crashed" status, which broke today's tweet-allocator (TWEET_ALLOCATOR_EMPTY). Now falls through to a clean no-candidates path.
+Cleanup (#116): 8-pass code-quality sweep, +1627/-532 across 61 files — dropped dead retry.py (-238), deduped the CommandType enum, removed 27 unused imports, narrowed silent excepts, all behavior-preserving (+9 docs/cleanup notes).
 
 Key changes:
-- New peak_round.py service (187 LoC, stdlib) + publish-gated route + 19 offline tests + 📊 EmbedDialog section
-- ECOSYSTEM.md: 10-project integrator table with contribution rules, merged from an external fork-owner
-- prefetch-bankr.sh: |+|| true guards on 3 grep pipelines (complements PR #45 which detected the crash)
+- Reports now retry instead of crashing on flaky/null LLM turns; Macs can finish a sim with the reranker on
+- 23rd surface ships: per-agent sparklines complete the chart.svg / peak-round / per-agent trio
+- aeon #47 disabled fetch-tweets + tweet-allocator (the spam-feed skills that paid 0 this week) + 3 weekly digests
 
-Stats: 12 files changed, +893/-4. All 3 merges zero-deps.
-Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-05-26.md
+Also: ecosystem roster hit 11 integrators (external add: ZER0), and a one-click 'Regenerate Report' button landed in the UI (#113).
+
+Stats: ~76 files changed, +2,871/-547
+Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-05-27.md
