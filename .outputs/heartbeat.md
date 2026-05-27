@@ -1,7 +1,15 @@
-Heartbeat — Tue May 26, 19:11 UTC
+**Date: Wednesday May 27, 2026 — 19:08 UTC**
 
-All 14 scheduled skills ran clean today. One item flagged:
+**HEARTBEAT_OK** — all 10 enabled skills due today ran successfully:
 
-⚠️ MiroShark PR #106 (Railway deployment, DYAI2025) — stalled >24h. Opened May 25 00:22Z, last activity 14:06Z yesterday (~29h ago). External contributor, awaiting maintainer review.
+- token-report, repo-pulse, star-momentum-alert, feature, push-recap, star-milestone, project-lens, repo-article, thread-formatter, memory-flush — all ✓
+- repo-actions / self-improve — not due (even-day `*/2` schedule; today is day 27 odd)
+- New PR #117 (noelclaw ecosystem entry) opened 45 min ago — not stalled
+- PR #106 stall (DYAI2025) already flagged in yesterday's heartbeat — within 48h dedup, skipped
+- No urgent GitHub issues
 
-Also: fetch-tweets workflow completed (07:39) but log entry missing from May-26.md — likely a concurrent-write git conflict. PR #46 (bankr crash guard, merged today) prevents downstream impact. No auto-triggers dispatched.
+No notifications sent, no skills auto-triggered.
+
+## Summary
+
+All scheduled skills ran on time. Logged `HEARTBEAT_OK` to `memory/logs/2026-05-27.md`. No action required.
