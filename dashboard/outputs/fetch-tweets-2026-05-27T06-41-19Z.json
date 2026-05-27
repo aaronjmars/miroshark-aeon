@@ -1,0 +1,230 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Top Tweets — $MIROSHARK OR @miroshark_ OR github.com/aaronjmars/miroshark (2026-05-27)"
+      },
+      "children": [
+        "stack_tweets"
+      ]
+    },
+    "stack_tweets": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stack_tweet_1",
+        "stack_tweet_2",
+        "stack_tweet_3",
+        "stack_tweet_4",
+        "stack_tweet_5",
+        "stack_tweet_6",
+        "link_7",
+        "link_8",
+        "link_9",
+        "link_10"
+      ]
+    },
+    "stack_tweet_1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet_1",
+        "link_1"
+      ]
+    },
+    "tweet_1": {
+      "type": "TweetCard",
+      "props": {
+        "author": "corrosion_ud3c",
+        "handle": "corrosion_ud3c",
+        "text": "Contract address posted with $MIROSHARK cashtag (arbihunter.live link)",
+        "likes": 0,
+        "retweets": 0
+      }
+    },
+    "link_1": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/corrosion_ud3c/status/2059421679042941199"
+      }
+    },
+    "stack_tweet_2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet_2",
+        "link_2"
+      ]
+    },
+    "tweet_2": {
+      "type": "TweetCard",
+      "props": {
+        "author": "sapkarthik",
+        "handle": "sapkarthik",
+        "text": "$miroshark AI simulation + contract address",
+        "likes": 1,
+        "retweets": 0
+      }
+    },
+    "link_2": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/sapkarthik/status/2059418767013318876"
+      }
+    },
+    "stack_tweet_3": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet_3",
+        "link_3"
+      ]
+    },
+    "tweet_3": {
+      "type": "TweetCard",
+      "props": {
+        "author": "scumbled_flange",
+        "handle": "scumbled_flange",
+        "text": "Contract address + $MIROSHARK spam (arbihunter.live)",
+        "likes": 0,
+        "retweets": 0
+      }
+    },
+    "link_3": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/scumbled_flange/status/2059414119149891871"
+      }
+    },
+    "stack_tweet_4": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet_4",
+        "link_4"
+      ]
+    },
+    "tweet_4": {
+      "type": "TweetCard",
+      "props": {
+        "author": "platinum_shiver",
+        "handle": "platinum_shiver",
+        "text": "Drop your vote for $MIROSHARK (coinmarkettcap.fun link)",
+        "likes": 0,
+        "retweets": 0
+      }
+    },
+    "link_4": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/platinum_shiver/status/2059414055039930874"
+      }
+    },
+    "stack_tweet_5": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet_5",
+        "link_5"
+      ]
+    },
+    "tweet_5": {
+      "type": "TweetCard",
+      "props": {
+        "author": "HashHarborittt",
+        "handle": "HashHarborittt",
+        "text": "$MIROSHARK fam drop went live (toknsite.live spam)",
+        "likes": 0,
+        "retweets": 0
+      }
+    },
+    "link_5": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/HashHarborittt/status/2059414038812262515"
+      }
+    },
+    "stack_tweet_6": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet_6",
+        "link_6"
+      ]
+    },
+    "tweet_6": {
+      "type": "TweetCard",
+      "props": {
+        "author": "dao_votes_hxzc",
+        "handle": "dao_votes_hxzc",
+        "text": "$MIROSHARK said otherwise exclusive drop (toknsite.club spam)",
+        "likes": 0,
+        "retweets": 0
+      }
+    },
+    "link_6": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/dao_votes_hxzc/status/2059412550723178557"
+      }
+    },
+    "link_7": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/i/status/2059413646133133757"
+      }
+    },
+    "link_8": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/i/status/2059412693254066279"
+      }
+    },
+    "link_9": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/i/status/2059412761327579616"
+      }
+    },
+    "link_10": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/i/status/2059412470503244208"
+      }
+    }
+  }
+}
