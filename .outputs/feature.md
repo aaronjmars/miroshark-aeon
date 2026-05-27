@@ -1,22 +1,21 @@
-*Feature Built — 2026-05-26*
+*Feature Built — 2026-05-27*
 
-Peak-Round Analytics
-MiroShark simulations now expose a one-call summary of *when* belief shifted, not just *what* the final belief was. The new GET /api/simulation/<id>/peak-round endpoint reports the exact round each stance (bullish / neutral / bearish) hit its high point, which round saw the biggest swing, and how big that swing was — the answers a researcher used to get only by reading 100 rows of the trajectory CSV by hand.
+Per-Agent Belief Sparklines
+MiroShark simulations already show the *swarm's* belief curve — the aggregate read of where all the agents collectively landed each round. This adds the layer underneath: a tiny line chart for *every individual agent*, tracing how that one agent's conviction moved round by round, colored green/gray/red by where they ended up (bullish/neutral/bearish). A new API endpoint serves the raw data; the Embed dialog draws the little charts.
 
 Why this matters:
-The project already ships the raw per-round data (trajectory.csv) and the visual (chart.svg), but neither answers "which round did bullish peak?" or "which round was the most volatile?" without parsing. Quant tools and research scripts needed that inflection summary as a single machine-readable call. This was the #2 idea in the 2026-05-24 repo-actions batch (and re-eligible from May-16) — it completes the analytical quadrant alongside signal.json.
+Until now, the only way to study how individual agents converged — which agent anchored the consensus, whether one cohort (say, financial-analyst personas) aligned before another — was to read the full transcript by hand. There was no surface for the per-agent view. This was the #1 idea in the 2026-05-26 repo-actions batch and the last remaining agent-level visualization gap: aggregate curves and inflection-point summaries existed, but the individual-agent trajectory did not.
 
 What was built:
-- backend/app/services/peak_round.py: load_trajectory_rounds() + compute_peak_rounds() — a pure O(n) pass over trajectory.json that finds each stance's earliest peak round, the most-volatile round (largest summed round-over-round swing), and total rounds. ~190 LoC, pure stdlib.
-- backend/app/api/simulation.py: the publish-gated /peak-round route, mirroring the signal.json handler (404 = no trajectory yet, 403 = unpublished) and incrementing a new surface counter.
-- backend/openapi.yaml + surface_stats: new PeakRoundResponse/StancePeak schemas and a peak_round surface key.
-- frontend EmbedDialog.vue: a "📊 Peak beliefs" panel showing the bullish/bearish peaks, most-volatile round, and total rounds, with copyable URL + curl snippet.
-- 19 offline unit tests + docs (API.md, FEATURES.md).
+- agent_sparklines_service.py: New stdlib-only service that reads trajectory.json, computes each agent's scalar belief position per round, and groups it into per-agent series. Returns None (→ 404) when a sim has no per-agent data yet.
+- simulation.py: New GET /api/simulation/<id>/agents/sparklines route — publish-gated, 5-minute cache, increments a new agent_sparklines surface counter (the 23rd share surface).
+- EmbedDialog.vue + api/simulation.js: A "🤖 Agent trajectories" section — a scrollable list of agents, each rendered as a name + an inline SVG sparkline stroked in the agent's stance color + the final-stance label, plus copyable URL and curl snippet.
+- openapi.yaml / docs/API.md / docs/FEATURES.md: Full documentation of the surface and its JSON schema.
 
 How it works:
-It reuses trajectory_export.compute_stance_split — the exact ±0.2-threshold function trajectory.csv uses — so "bullish peaked at 71% on round 4" matches row 4 of the CSV byte-for-byte. Nothing is re-computed; the endpoint only changes the *shape* of existing data into an inflection summary. Peak ties resolve to the earliest round so the output is deterministic. Zero new dependencies, consistent with the project's surface pattern.
+It's a pure derivation, transposed. Every other surface buckets all agents into one per-round percentage (the aggregate view); this one instead tracks one scalar per agent per round — the same per-topic mean and ±0.2 stance threshold every surface uses, so an agent tagged "bullish" here is "bullish" in the transcript too. Agent names resolve from reddit_profiles.json with an "Agent <id>" fallback. The frontend maps each agent's belief position (clamped to -1..1) onto a 60×16px SVG polyline. Agents are ordered most-bullish-first so the list reads top-to-bottom from strongest bull to strongest bear. A has_per_agent_data flag is false for single-round sims, where a sparkline would just be a dot. 18 offline unit tests cover it; zero new dependencies.
 
 What's next:
-Still unbuilt from the May-24 batch: Operator Profile pages, Agent Persona Export JSON (the first per-agent data surface), and a query-driven Simulation Search API.
+Natural follow-ons: a sortable/filterable agent table, or grouping sparklines by demographic archetype to make cohort-level convergence patterns visible at a glance.
 
-PR: https://github.com/aaronjmars/MiroShark/pull/108
+PR: https://github.com/aaronjmars/MiroShark/pull/115
