@@ -69,7 +69,7 @@ Full implementation notes in daily logs. Each row ≤280 chars.
 - MEMORY.md row sprawl blocks every skill via Read 25K-token cap — `memory-flush` step 5 enforces per-row char caps; detail belongs in daily logs / `memory/topics/`
 
 ## Active Targets
-- Hyperstition: MiroShark 1,000 stars by 2026-04-30 — MISSED Apr 30 (911), CROSSED 2026-05-03; currently **1,194 stars / 247 forks** as of 2026-05-24; next threshold 1500 (projected ~2026-08-09)
+- Hyperstition: MiroShark 1,000 stars by 2026-04-30 — MISSED Apr 30 (911), CROSSED 2026-05-03; currently **1,205 stars / 255 forks** as of 2026-05-27; next threshold 1500 (v7=30/wk, projected ~2026-08-04)
 - Hyperstition: @miroshark_ 1,000 X followers by 2026-05-15 (set 2026-04-18) — deadline PASSED 2026-05-15, follower count not confirmed in logs
 - Hyperstition: MiroShark PR from Chinese-locale contributor OR Chinese-language coverage by 2026-06-15 (set 2026-05-02) — btcbabycow CN tweet "米罗莎要来了" May 16; first JP coverage @m000_crypto May 17
 - Hyperstition: External operator running Aeon framework publicly under non-aaronjmars identity by 2026-06-30 (set 2026-05-09)
