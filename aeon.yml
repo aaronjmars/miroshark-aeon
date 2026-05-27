@@ -8,11 +8,11 @@ skills:
 
   # --- Daily: Market & Social ---
   token-report: { enabled: true, schedule: "0 6 * * *", model: "claude-sonnet-4-6" }
-  fetch-tweets: { enabled: true, schedule: "30 6 * * *", var: "$MIROSHARK OR @miroshark_ OR github.com/aaronjmars/miroshark", model: "claude-sonnet-4-6" }
+  fetch-tweets: { enabled: false, schedule: "30 6 * * *", var: "$MIROSHARK OR @miroshark_ OR github.com/aaronjmars/miroshark", model: "claude-sonnet-4-6" }
   repo-pulse: { enabled: true, schedule: "0 10 * * *", model: "claude-sonnet-4-6" }
 
   # --- Daily: Rewards ---
-  tweet-allocator: { enabled: true, schedule: "0 8 * * *", model: "claude-sonnet-4-6" }
+  tweet-allocator: { enabled: false, schedule: "0 8 * * *", model: "claude-sonnet-4-6" }
 
   # --- Daily: Shipping & Content ---
   push-recap: { enabled: true, schedule: "0 15 * * *" }
@@ -25,7 +25,7 @@ skills:
 
   # --- Weekly ---
   weekly-shiplog: { enabled: true, schedule: "0 9 * * 1" }  # Monday morning
-  hyperstitions-ideas: { enabled: true, schedule: "0 10 * * 6" }
+  hyperstitions-ideas: { enabled: false, schedule: "0 10 * * 6" }
 
   # --- Build (Daily) ---
   feature: { enabled: true, schedule: "0 11 * * *" }
@@ -108,7 +108,7 @@ skills:
   goal-tracker: { enabled: false, schedule: "0 18 * * *" }
   skill-health: { enabled: false, schedule: "0 18 * * *" }
   skill-freshness: { enabled: false, schedule: "0 8 * * *", model: "claude-sonnet-4-6", var: "" } # daily 08:00 UTC — audit enabled skills' upstream file dependencies for staleness; pass dry-run to skip notify; per-class thresholds (articles 28h / .outputs 4h / topics 7d / state 30d); fingerprint-based dedup, 7d re-emit window
-  skill-leaderboard: { enabled: true, schedule: "0 17 * * 0", model: "claude-sonnet-4-6" }
+  skill-leaderboard: { enabled: false, schedule: "0 17 * * 0", model: "claude-sonnet-4-6" }
   self-review: { enabled: false, schedule: "0 18 * * *" }
   reflect: { enabled: false, schedule: "0 18 * * *" }
   action-converter: { enabled: false, schedule: "0 18 * * *" }
@@ -133,7 +133,7 @@ skills:
   webhook-bridge: { enabled: false, schedule: "workflow_dispatch", var: "" } # external-event-to-skill bridge; the real wiring lives in .github/workflows/webhook.yml — operators don't dispatch this skill, they POST repository_dispatch with event_type=aeon-skill
 
   # --- Upstream sync (2026-05-14) ---
-  ai-framework-watch: { enabled: true, schedule: "30 8 * * 1", model: "claude-sonnet-4-6", var: "" } # Monday 08:30 UTC — weekly competitive-intelligence digest across 9 AI agent frameworks (anchor + 8 peers). Momentum signals, 7d/30d star deltas, release listings, breaking-change flags. Set var to a watchlist slug (e.g. langgraph) for a single-framework deep dive.
+  ai-framework-watch: { enabled: false, schedule: "30 8 * * 1", model: "claude-sonnet-4-6", var: "" } # Monday 08:30 UTC — weekly competitive-intelligence digest across 9 AI agent frameworks (anchor + 8 peers). Momentum signals, 7d/30d star deltas, release listings, breaking-change flags. Set var to a watchlist slug (e.g. langgraph) for a single-framework deep dive.
   aixbt-pulse: { enabled: false, schedule: "0 9,21 * * *", model: "claude-sonnet-4-6" } # twice daily — cross-domain market pulse from AIXBT's free grounding endpoint
   contributor-reward: { enabled: false, schedule: "30 9 * * 1", model: "claude-sonnet-4-6", var: "" } # Monday — turn Sunday's leaderboard into a tier-priced rewards plan in memory/distributions.yml; pass dry-run to preview
   contributor-spotlight: { enabled: false, schedule: "0 20 * * 0", model: "claude-sonnet-4-6", var: "" } # Sunday 20:00 UTC — weekly recognition post: pick one POWER fork from the latest fork-cohort run and convert it into a named human moment (operator handle, enabled stack, diverged work, 30d commits). 4-week dedup. Pass dry-run to skip notify, or owner/repo to override the auto-pick.
