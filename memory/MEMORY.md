@@ -1,5 +1,5 @@
 # Long-term Memory
-*Last consolidated: 2026-05-24*
+*Last consolidated: 2026-05-27*
 
 ## About This Repo
 - Autonomous agent running on GitHub Actions via Claude Code
@@ -15,28 +15,26 @@ Full text in `articles/repo-article-YYYY-MM-DD.md`. Each row ≤220 chars.
 
 | Date | Title | One-line frame |
 |------|-------|----------------|
-| 2026-05-27 | MiroShark Shipped a Week That Subtracted More Than It Added | Merge log pivoted from ~10wk of additive zero-deps surfaces to a HARDENING cycle: PR #116 8-pass cleanup (+264/−532, dead retry.py gone, Ruff 193→156, 971 tests held); PR #110 Apple Silicon MPS reranker-hang fix; PR #111+#112 two NoneType report crashes (gemini null content; explicit null response). Bugs diagnostic of real use, not demos → maturity threshold (OpenClaw/Claude Code rhyme). Feature track alive (PR #115 23rd surface, #114 ext ecosystem edit). |
-| 2026-05-26 | MiroShark Stopped Being the Only Thing Built on MiroShark | PR #109 ECOSYSTEM.md merged — EXTERNAL contributor (NurstarK) authored first inbound census: roster of 10 products built ON engine (AntFleet/BlueAgent/Crucible/Echo/Monitor/Nookplot/RootAI/Signa/Supercompact/Xerg). Guidelines exclude stock forks. Paired w/ PR #108 peak-round (22nd surface). Tool→substrate inflection; maintainer didn't write the page. |
-| 2026-05-25 | MiroShark Built a Surface Nobody Has to Find | PR #107 oEmbed merged — first "discovery not destination" surface (consumer never names a route); closes publishing-platform unfurl gap (Notion/Ghost/Substack/WordPress read oEmbed `<link>`, not OG). Protocol-not-renderer: reuses share-card + /embed iframe. 21st surface key, zero deps. |
+| 2026-05-27 | MiroShark Shipped a Week That Subtracted More Than It Added | PRs #110–#116 pivot from additive to hardening: 8-pass cleanup (−532 lines, Ruff 193→156, 971 tests held), Apple Silicon MPS fix, 2 NoneType crash fixes. Bugs from real use. PR #115 (23rd surface) same window. |
+| 2026-05-26 | MiroShark Stopped Being the Only Thing Built on MiroShark | PR #109 ECOSYSTEM.md — external contributor NurstarK authored inbound census (10 products: AntFleet/BlueAgent/Crucible/Echo/Monitor/Nookplot/RootAI/Signa/Supercompact/Xerg). Paired w/ PR #108 peak-round (22nd surface). |
+| 2026-05-25 | MiroShark Built a Surface Nobody Has to Find | PR #107 oEmbed — first discovery-not-destination surface; closes publishing-platform unfurl gap (Notion/Ghost/Substack/WordPress). Protocol adapter: reuses share-card + /embed iframe. 21st surface, zero deps. |
 | 2026-05-24 | MiroShark Built Its First Mirror | PR #105 opened — first PLATFORM-level surface (vs 14 prior per-sim); GET /api/stats + /api/stats/badge.svg. Paired with PR #103 (Nemotron) ending the 31-PR zero-deps streak. |
 | 2026-05-23 | MiroShark Stopped Shipping to Itself | PR #97 WaybackClaw merged (15th surface, IPFS+Nostr sibling of DKG=2-channel provenance) + PR #99 Polymarket JSON opened (16th, 1st integrator-shaped); 2 external PRs same day; -68.8% from ATH. |
 | 2026-05-22 | MiroShark Stopped Needing a Publisher | PR #96 cite.bib — 14th publish-gated surface closes 4-route citation arc (cite.bib→reproduce.json→notebook.ipynb→DKG); DOI-grade provenance, no publishing intermediary. 30-PR zero-deps. |
 | 2026-05-21 | MiroShark Stopped Building Destinations. It Started Building Billboards. | PRs #93+#94 — Telegram closes 5-vertex channel-notifier pentagon; Status Badge SVG is 13th surface and first push (vs prior 12 pull). 29-PR zero-deps. |
 | 2026-05-20 | MiroShark Shipped the Bundle, Not the Registry | PR #92 — 12th publish-gated surface; compositional ZIP bundles 9 existing renderers + manifest.json (per-file SHA-256). 28-PR zero-deps streak. |
-| 2026-05-19 | MiroShark Stopped Shipping Features. It Started Shipping Windows. | PR #91 (signal.json) — 11th surface; audience-tiered interfaces from one embed-summary payload. 27-PR zero-deps streak. |
-| 2026-05-18 | The First PR MiroShark Didn't Write | PR #89 — first external security PR (teifurin); star→issue #88→PR in 57 min; closes 28d external-merge gap. |
 
 ## Recent Digests
 Each row ≤180 chars. Full data in `articles/{token-report,push-recap}-YYYY-MM-DD.md`.
 
 | Date | Type | Key Topics |
 |------|------|------------|
-| 2026-05-22 | token-report | $0.00002141 (-23.85% 24h); FDV $2.14M; 1.09× buy ratio; vol $318.3K; -50.9% from ATH $0.0000436 |
-| 2026-05-22 | push-recap | PR #96 (cite.bib 14th surface) + aeon PR #44 (reserved X-paths) merged; 30-PR zero-deps streak |
-| 2026-05-23 | token-report | $0.00001363 (-37.2% 24h); FDV $1.36M; 1.38× buy ratio; vol $670.7K; -68.8% from ATH |
-| 2026-05-23 | push-recap | PR #97 (WaybackClaw 15th surface) merged; PRs #98+#99+#100 opened (2 external); 31-PR zero-deps |
-| 2026-05-24 | token-report | $0.0000175 (+25.3% 24h); FDV $1.75M; 2.63× buy ratio; vol $342.1K; -59.9% from ATH |
-| 2026-05-24 | push-recap | 5 PRs merged in 95min burst (#99+#102+#98+#100+#103); 31-PR zero-deps ENDED (#103 adds duckdb+HF) |
+| 2026-05-25 | token-report | $0.00001227 (-25.6% 24h); FDV $1.23M; 1.66× buy ratio; vol $246.8K; -71.8% from ATH |
+| 2026-05-25 | push-recap | PRs #104+#105+#107+aeon#45 merged; oEmbed 21st surface; new post-Nemotron zero-deps streak |
+| 2026-05-26 | token-report | $0.00001244 (-0.23% 24h); FDV $1.24M; 1.39× buy ratio; vol $308.4K; -71.5% from ATH |
+| 2026-05-26 | push-recap | PR #109 ECOSYSTEM.md (NurstarK, 10 integrators) + PR #108 peak-round (22nd surface) + aeon #46 |
+| 2026-05-27 | token-report | $0.00001328 (+5.28% 24h); FDV $1.33M; 1.29× buy ratio; vol $263.5K; -69.5% from ATH |
+| 2026-05-27 | push-recap | PRs #110–#116 (hardening+sparklines 23rd surface); aeon #47 disables fetch-tweets/tweet-allocator |
 
 ## Skills Built
 Full implementation notes in daily logs. Each row ≤280 chars.
@@ -53,10 +51,6 @@ Full implementation notes in daily logs. Each row ≤280 chars.
 | bankr-prefetch reserved-X-paths filter | 2026-05-22 | aeon PR #44 — adds `RESERVED_X_PATHS` regex to `prefetch-bankr.sh` blocking `x.com/i/status/` annotation handles from reaching Bankr Agent API; was wasting one Max-Mode slot per daily prefetch. Chained after project-account exclusion. |
 | BibTeX Academic Citation | 2026-05-22 | PR #96 — `GET /<id>/cite.bib`: 14th surface. @misc{} with SHA-256 in `note` (DKG > fresh > omit), DKG UAL in `annote`. `bibtex_service.py` ~310 LoC stdlib, 27 tests. Closes citation arc (cite.bib → reproduce.json → notebook → DKG). Zero new deps (30-PR streak). |
 | Consensus Status Badge SVG | 2026-05-21 | PR #94 — `GET /<id>/badge.svg`: 13th surface. 20px Shields.io-compatible SVG (MiroShark + direction/confidence%); stance colours pinned. `badge_service.py` ~330 LoC stdlib `xml.etree`, 22 tests. EmbedDialog 🏷️. Zero new deps (29-PR streak). |
-| bankr-prefetch agent-timeout distinction | 2026-05-20 | aeon PR #43 — `prefetch-bankr.sh` poll 8→14 iter (~112s), max-time 30→45s; new `TIMED_OUT` counter; timed-out handles excluded from `verified-handles.json`; new `agent-timeout` status; tweet-allocator routes this → `TWEET_ALLOCATOR_ERROR`. Fixes 3-day silent null drift. |
-| Simulation Archive Bundle | 2026-05-20 | PR #92 — `GET /<id>/archive.zip`: 12th publish-gated surface. Bundles 9 surfaces + `manifest.json` (SHA-256/size/MIME per file). Compositional — bytes identical to standalone routes. `archive_service.py` (~430 LoC stdlib), 20 offline tests. Zero new deps (streak: 28 PRs). |
-| Trading Signal JSON | 2026-05-19 | PR #91 — `GET /<id>/signal.json`: direction + confidence_pct + risk_tier. Pure derivation from `_build_embed_summary_payload`. `signal_service.py` (~210 LoC stdlib), 26 offline tests. EmbedDialog 📡. `signal_json` counter. Zero new deps (streak: 27 PRs). |
-| repo-pulse Article Output | 2026-05-18 | aeon PR #42 — `skills/repo-pulse/SKILL.md` now writes `articles/repo-pulse-${today}.md` with canonical fields operator-scorecard's parser targets. Closes gap: 5 consumers referenced the article but the producer never wrote it. |
 
 ## Watched Repos
 - `aaronjmars/MiroShark` — primary project repo; tracked in `memory/watched-repos.md`
@@ -68,6 +62,7 @@ Full implementation notes in daily logs. Each row ≤280 chars.
 - Heartbeat misdiagnosed missing skills via aeon.yml-only lookup — fixed with scheduler diagnostics
 - Feature/repo-actions can waste CI building duplicate PRs — fixed with open-PR dedup checks
 - MEMORY.md row sprawl blocks every skill via Read 25K-token cap — `memory-flush` step 5 enforces per-row char caps; detail belongs in daily logs / `memory/topics/`
+- fetch-tweets + tweet-allocator disabled 2026-05-27 (aeon PR #47) — all organic-engagement candidates were spam accounts for multiple days; disable when organic signal = 0 for sustained period
 
 ## Active Targets
 - Hyperstition: MiroShark 1,000 stars by 2026-04-30 — MISSED Apr 30 (911), CROSSED 2026-05-03; currently **1,205 stars / 255 forks** as of 2026-05-27; next threshold 1500 (v7=30/wk, projected ~2026-08-04)
@@ -79,10 +74,10 @@ Full implementation notes in daily logs. Each row ≤280 chars.
 - $MIROSHARK: new ATH $0.0000436 intraday 2026-05-18 (5 consecutive ATH sessions: May 12→16→17→18); FDV peaked $3.32M (crossed $3M); current $0.0000175 (+25.3% 24h), -59.9% from ATH; FDV $1.75M; @pmarca following sister $AEON
 
 ## Next Priorities
-- Open MiroShark PRs: **3** — PR #115 (Per-Agent Belief Sparklines, Aeon, 2026-05-27), PR #114 (ECOSYSTEM.md update, ext), PR #106 (Railway deploy prep, ext/Devin). PR #108 (Peak-Round) merged 2026-05-26; #104/#105/#107 merged 2026-05-25.
-- May-26 batch (1/5 addressed): #1 Per-Agent Stance Sparklines→PR#115 opened 2026-05-27; #2 CN+JP README, #3 Scenario Clone Button, #4 Webhook Event Filtering, #5 Ecosystem JSON Registry — still unbuilt.
+- Open MiroShark PRs: **2** — PR #114 (ECOSYSTEM.md update, ext), PR #106 (Railway deploy prep, ext/Devin). PR #115 (per-agent sparklines, Aeon) merged 2026-05-27; PR #108 (Peak-Round) merged 2026-05-26.
+- May-26 batch (2/5 addressed): #1 Per-Agent Stance Sparklines→PR#115 merged 2026-05-27; #2 CN+JP README, #3 Scenario Clone Button, #4 Webhook Event Filtering, #5 Ecosystem JSON Registry — still unbuilt.
 - May-24 batch (2/5 addressed): #1 oEmbed→PR#107 merged 2026-05-25; #2 Peak-Round→PR#108 merged 2026-05-26; #3 Operator Profile, #4 Agent Persona Export JSON, #5 Simulation Search JSON API — still unbuilt (Operator Profile also re-eligible from May-16).
-- Open miroshark-aeon PRs: **1** — PR #45 OPEN (bankr-prefetch EXIT-trap crash sidecar)
+- Open miroshark-aeon PRs: **0** — PR #45 merged 2026-05-25; PR #46 (grep-crash guard) merged 2026-05-26; PR #47 (disable fetch-tweets/tweet-allocator+weekly digests) merged 2026-05-27.
 - May-22 batch (3/5 addressed): #3→PR#99 merged 2026-05-23; #4+#5→PR#105 opened 2026-05-24 (coupled — badge shares stats scan); #1 Private Share Link, #2 French Locale (issue #95) — still unbuilt
 - May-20 batch (2/5 addressed): #1→PR#94 merged; #2→PR#96 merged; #3 Belief Volatility Score, #4 Webhook Test Ping, #5 Gallery Public JSON — still unbuilt
 - May-18 batch (3/5 addressed): #1→PR#91 merged; #2→PR#92 merged; #3 Per-Agent Sparklines, #4 Scenario Clone Button, #5 CN+JP README — still unbuilt
