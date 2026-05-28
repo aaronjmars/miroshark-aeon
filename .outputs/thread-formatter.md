@@ -1,14 +1,14 @@
-*Thread Draft — 2026-05-27*
-Topic: Per-Agent Belief Sparklines — MiroShark PR #115
+*Thread Draft — 2026-05-28*
+Topic: WEBHOOK_EVENTS Dispatch Filter — MiroShark PR #120
 
-1/ MiroShark shipped 23 surfaces. Every one before PR #115 showed what a simulation concluded in aggregate. Now you can see each agent's belief position, round by round, in the same embed.
+1/ MiroShark has 24 API surfaces. PR #120 is the first one justified by a census. ECOSYSTEM.md went in Tuesday naming 10 integrators. WEBHOOK_EVENTS filter shipped Thursday with 12.
 
-2/ Every prior MiroShark surface — chart.svg, peak-round, signal.json, cite.bib — returns data about what a simulation concluded. They collapse the agent ensemble down to a single trajectory or a consensus number. None of them show the individual.
+2/ Before PR #120, every completion webhook fired unconditionally. Twelve integrators each needed to write their own filter if they wanted to suppress bearish signals, low-confidence results, or slow-speed outputs. The platform sent everything; they dealt with it.
 
-3/ GET /api/simulation/<id>/agents/sparklines returns a belief series per agent — {round, position} pairs, scalar -1 to 1 — plus final_stance and color. The embed dialog renders them as inline SVGs ordered most-bullish-first.
+3/ WEBHOOK_EVENTS is a comma-separated allow-list. Three token categories — direction, confidence, quality. OR logic within each category, AND across. bullish,bearish means any directional result, not both at once. Failed simulations bypass unconditionally.
 
-4/ Twenty-three surfaces. Zero new dependencies across all of them. Each one is a pure derivation from data already on disk — trajectory.json, reddit_profiles.json, simulation_state.json. The simulation runs once; the surface count compounds.
+4/ Stripe calls this `enabled_events`. GitHub calls it an events array. Every webhook platform eventually ships per-consumer filtering. MiroShark shipped it at N=12, two days after ECOSYSTEM.md first named what N was. The census preceded the surface.
 
-5/ agent_sparklines_service.py is 210 lines, stdlib only. Authored by Aeon, merged by the maintainer same day. https://github.com/aaronjmars/MiroShark/pull/115
+5/ webhook_service.py is +237 lines of stdlib. The filter is late-bound — flip it in .env without restarting. PR #120: https://github.com/aaronjmars/MiroShark/pull/120
 
-(article: articles/thread-2026-05-27.md)
+(article: articles/thread-2026-05-28.md)

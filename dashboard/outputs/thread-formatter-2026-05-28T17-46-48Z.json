@@ -1,0 +1,130 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Thread Draft — WEBHOOK_EVENTS Dispatch Filter"
+      },
+      "children": [
+        "metadata_stack",
+        "separator1",
+        "tweets_stack",
+        "separator2",
+        "links_stack"
+      ]
+    },
+    "metadata_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "date_text",
+        "topic_badge"
+      ]
+    },
+    "date_text": {
+      "type": "Text",
+      "props": {
+        "text": "2026-05-28",
+        "variant": "caption"
+      }
+    },
+    "topic_badge": {
+      "type": "Badge",
+      "props": {
+        "text": "WEBHOOK_EVENTS Dispatch Filter — MiroShark PR #120"
+      }
+    },
+    "separator1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "tweets_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "tweet1",
+        "tweet2",
+        "tweet3",
+        "tweet4",
+        "tweet5"
+      ]
+    },
+    "tweet1": {
+      "type": "Text",
+      "props": {
+        "text": "1/ MiroShark has 24 API surfaces. PR #120 is the first one justified by a census. ECOSYSTEM.md went in Tuesday naming 10 integrators. WEBHOOK_EVENTS filter shipped Thursday with 12.",
+        "variant": "body"
+      }
+    },
+    "tweet2": {
+      "type": "Text",
+      "props": {
+        "text": "2/ Before PR #120, every completion webhook fired unconditionally. Twelve integrators each needed to write their own filter if they wanted to suppress bearish signals, low-confidence results, or slow-speed outputs. The platform sent everything; they dealt with it.",
+        "variant": "body"
+      }
+    },
+    "tweet3": {
+      "type": "Text",
+      "props": {
+        "text": "3/ WEBHOOK_EVENTS is a comma-separated allow-list. Three token categories — direction, confidence, quality. OR logic within each category, AND across. bullish,bearish means any directional result, not both at once. Failed simulations bypass unconditionally.",
+        "variant": "body"
+      }
+    },
+    "tweet4": {
+      "type": "Text",
+      "props": {
+        "text": "4/ Stripe calls this `enabled_events`. GitHub calls it an events array. Every webhook platform eventually ships per-consumer filtering. MiroShark shipped it at N=12, two days after ECOSYSTEM.md first named what N was. The census preceded the surface.",
+        "variant": "body"
+      }
+    },
+    "tweet5": {
+      "type": "Text",
+      "props": {
+        "text": "5/ webhook_service.py is +237 lines of stdlib. The filter is late-bound — flip it in .env without restarting.",
+        "variant": "body"
+      }
+    },
+    "separator2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "links_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "pr_link",
+        "article_link"
+      ]
+    },
+    "pr_link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "MiroShark PR #120",
+        "href": "https://github.com/aaronjmars/MiroShark/pull/120",
+        "source": "GitHub"
+      }
+    },
+    "article_link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Thread Article",
+        "href": "articles/thread-2026-05-28.md"
+      }
+    }
+  }
+}
