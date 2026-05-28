@@ -1,0 +1,115 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "MiroShark Daily — 2026-05-28"
+      },
+      "children": [
+        "stat_price",
+        "stat_liquidity",
+        "stat_volume_24h",
+        "stat_buys",
+        "stat_sells",
+        "stat_ratio",
+        "stat_7d",
+        "stat_30d",
+        "stat_ath",
+        "separator_1",
+        "text_narrative",
+        "link_chart"
+      ]
+    },
+    "stat_price": {
+      "type": "Stat",
+      "props": {
+        "label": "Price",
+        "value": "$0.00000742",
+        "delta": "-47.0%",
+        "trend": "down"
+      }
+    },
+    "stat_liquidity": {
+      "type": "Stat",
+      "props": {
+        "label": "Liquidity",
+        "value": "$409.2K"
+      }
+    },
+    "stat_volume_24h": {
+      "type": "Stat",
+      "props": {
+        "label": "24h Volume",
+        "value": "$160.5K",
+        "delta": "-39.1%",
+        "trend": "down"
+      }
+    },
+    "stat_buys": {
+      "type": "Stat",
+      "props": {
+        "label": "Buys",
+        "value": "269"
+      }
+    },
+    "stat_sells": {
+      "type": "Stat",
+      "props": {
+        "label": "Sells",
+        "value": "197"
+      }
+    },
+    "stat_ratio": {
+      "type": "Stat",
+      "props": {
+        "label": "Buy/Sell Ratio",
+        "value": "1.37×"
+      }
+    },
+    "stat_7d": {
+      "type": "Stat",
+      "props": {
+        "label": "7d",
+        "value": "-70.5%",
+        "trend": "down"
+      }
+    },
+    "stat_30d": {
+      "type": "Stat",
+      "props": {
+        "label": "30d",
+        "value": "+133%",
+        "trend": "up"
+      }
+    },
+    "stat_ath": {
+      "type": "Stat",
+      "props": {
+        "label": "ATH (May 18: $0.0000436)",
+        "value": "-83.0%",
+        "trend": "down"
+      }
+    },
+    "separator_1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "text_narrative": {
+      "type": "Text",
+      "props": {
+        "text": "Sharp intraday sell-off — broke below $0.00001 for first time since May 12; low $0.00000659, now at 30d-back price levels. Volume and liquidity compressing. Project cadence unaffected (PR #115 merged yesterday)."
+      }
+    },
+    "link_chart": {
+      "type": "Link",
+      "props": {
+        "label": "View Chart",
+        "href": "https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209"
+      }
+    }
+  }
+}
