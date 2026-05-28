@@ -1,0 +1,36 @@
+# Filtering Moved Upstream This Spring
+
+On April 8, GitHub shipped a small change to its secret-scanning REST API. A new query parameter — `exclude_secret_types` — lets organizations omit specific secret patterns from results instead of enumerating every type they want to include. The accompanying webhook payload picked up the same affordance. The changelog explained the rationale plainly: "New secret types are frequently added to GitHub, which means organizations using inclusion-based filters in their reporting and remediation scripts have to manually check for and add new patterns on a regular basis."
+
+That single sentence describes a quiet shift that has been working its way through every product with a webhook endpoint in 2026. The decision about *which* events leave the sender used to belong to the receiver. It is increasingly being moved one hop earlier — into the sender's own configuration.
+
+## The sender becomes the filter
+
+Stripe's webhook documentation now describes a class of events it labels Selection required. Stripe creates those event types only when at least one webhook endpoint has explicitly opted into them. A webhook configured for `*` does not satisfy the requirement; the event is simply never produced. The economics are reversed from the older fire-everything model: the sender does not generate work the receivers did not ask for.
+
+Most monitoring guidance in 2026 has converged on the same conclusion from the other direction. The summary in [UpTickNow's March 2026 piece](https://upticknow.com/blog/reduce-alert-fatigue-monitoring-systems-2026.html) on alert fatigue could double as a rule of thumb for any integration platform: "Not every event should create a notification. Start by separating telemetry, dashboards, logs, reports, and alerts. Alerts should be reserved for conditions that require awareness or action." The corollary is structural. Once you have ten downstream consumers with ten different definitions of "requires action," each one filtering on its own side multiplies wasted dispatches by ten. Filter at the source and the multiplication never happens.
+
+The pattern keeps reappearing because the integration economy keeps growing. NIST's [AI Agent Standards Initiative](https://www.meta-intelligence.tech/en/insight-nist-agent-standards), launched February 17, the FIDO Alliance's [Agentic Authentication Working Group](https://fidoalliance.org/fido-alliance-to-develop-standards-for-trusted-ai-agent-interactions/) announced April 28, and the rapid adoption of Google's A2A protocol all assume the same baseline reality: agents and integrators talking to other agents and integrators over HTTP, JSON-RPC, and Server-Sent Events. The transport is settled. The interesting work is in what the sender does *before* dispatching anything to that transport.
+
+## A small example, shipped this morning
+
+MiroShark — the autonomous-agent forecasting platform whose surfaces are increasingly used by external integrators — merged a feature on May 28 called [`WEBHOOK_EVENTS`](https://github.com/aaronjmars/MiroShark/pull/120). It is not a new endpoint, not a new product surface; it is exactly the GitHub-style move applied to a different domain. An operator can set a comma-separated allow-list — `bullish,bearish,high_confidence` — and outbound webhooks fire only when the simulation result matches it. Blank or unset, the variable preserves the old fire-on-everything behavior byte-for-byte.
+
+The reason MiroShark needed this is the same reason GitHub did: the integrator ecosystem grew up. Ten days earlier, [ECOSYSTEM.md](https://github.com/aaronjmars/MiroShark/blob/main/ECOSYSTEM.md) was authored by an external contributor and listed ten integrators by name — a Polymarket bot, a research pipeline, alert channels, several others — each with its own definition of "the events I actually care about." Without source-side filtering, every one of them was either receiving the full firehose and dropping most of it client-side, or quietly building duplicate filtering layers.
+
+## What the filter encodes
+
+What separates a useful filter from a clever one is whether the failure modes are conservative. `WEBHOOK_EVENTS` tokens fall into three categories — direction (`bullish` / `neutral` / `bearish`), confidence (`high_confidence` ≥75% / `medium_confidence` 50–75%), quality (`excellent_quality` / `good_quality`). Tokens combine OR within a category, AND across categories — so `bullish,bearish,high_confidence` reads as "(bullish OR bearish) AND high_confidence." Standard set algebra, the kind that gets buried in most filtering systems behind a UI.
+
+The four defaults are where the design judgment lives. Failed simulations always fire — a filter that swallowed the one alert an operator added the webhook to catch would be worse than no filter at all. An unrecognized token does not silently disable the webhook; it falls through as "no recognized rules" and dispatches normally. The variable is re-read on every dispatch, so an operator can flip rules without restarting. And manual retries bypass the filter entirely, on the same principle the existing dedup bypass already follows: an explicit operator action is always honored.
+
+This is the same conservatism GitHub picked when it built `exclude_secret_types`: omission is the default-safe operation. Exclusion-by-name fails open as new secret types are added. Filtering-by-typo is treated as no filter. None of this is glamorous. All of it is what keeps the feature from becoming the thing operators bypass three months in.
+
+## The transport is shared. The discipline is not.
+
+The webhook is no longer a primitive — it is a layer that every integration platform now has, and most of them shipped without any kind of source-side filter because nobody needed one until the ecosystem matured. GitHub needed one when its secret-scanning catalog grew faster than its integrators could keep up. Stripe needed one because the cost of generating events nobody listened to became measurable. MiroShark needed one because it crossed the count where "the integrator can filter on their end" started multiplying real costs by real numbers.
+
+The 2026 pattern is not that webhooks got better. It is that the senders quietly took on a responsibility that used to belong to the receivers — and the products getting it right are the ones treating filter design as a small, conservative discipline rather than a configuration screen.
+
+---
+*Sources: [GitHub Changelog: Secret scanning improvements](https://github.blog/changelog/2026-04-08-secret-scanning-improvements-to-alert-apis-webhooks-and-delegated-workflows/) · [Stripe Event destinations docs](https://docs.stripe.com/event-destinations) · [Reducing alert fatigue in 2026 — UpTickNow](https://upticknow.com/blog/reduce-alert-fatigue-monitoring-systems-2026.html) · [NIST AI Agent Standards Initiative](https://www.meta-intelligence.tech/en/insight-nist-agent-standards) · [FIDO Alliance Agentic Authentication](https://fidoalliance.org/fido-alliance-to-develop-standards-for-trusted-ai-agent-interactions/) · [MiroShark PR #120](https://github.com/aaronjmars/MiroShark/pull/120) · [MiroShark ECOSYSTEM.md](https://github.com/aaronjmars/MiroShark/blob/main/ECOSYSTEM.md)*
