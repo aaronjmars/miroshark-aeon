@@ -1,0 +1,308 @@
+{
+  "root": "mainCard",
+  "state": {},
+  "elements": {
+    "mainCard": {
+      "type": "Card",
+      "props": {
+        "title": "Repo Action Ideas"
+      },
+      "children": [
+        "heading",
+        "subtitle",
+        "separator1",
+        "idea1",
+        "idea2",
+        "idea3",
+        "idea4",
+        "idea5",
+        "separator2",
+        "fullDetails"
+      ]
+    },
+    "heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Repo Action Ideas — 2026-05-28",
+        "level": "h2"
+      }
+    },
+    "subtitle": {
+      "type": "Text",
+      "props": {
+        "text": "Generated from analysis of aaronjmars/MiroShark (1,207⭐ · 257 forks · 24 surfaces · 11+ integrators).",
+        "variant": "caption"
+      }
+    },
+    "separator1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "idea1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "idea1Header",
+        "idea1Desc",
+        "idea1Note"
+      ]
+    },
+    "idea1Header": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "idea1Title",
+        "idea1Type"
+      ]
+    },
+    "idea1Title": {
+      "type": "Heading",
+      "props": {
+        "text": "1. Gallery Public JSON",
+        "level": "h3"
+      }
+    },
+    "idea1Type": {
+      "type": "Badge",
+      "props": {
+        "text": "Integration, Small",
+        "variant": "outline"
+      }
+    },
+    "idea1Desc": {
+      "type": "Text",
+      "props": {
+        "text": "Paginated JSON index of all published sims — the machine-readable full index that every integrator, external directory, and Aeon skill needs before any query-driven surface can exist."
+      }
+    },
+    "idea1Note": {
+      "type": "Text",
+      "props": {
+        "text": "Re-eligible from May-20.",
+        "variant": "muted"
+      }
+    },
+    "idea2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "idea2Header",
+        "idea2Desc",
+        "idea2Note"
+      ]
+    },
+    "idea2Header": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "idea2Title",
+        "idea2Type"
+      ]
+    },
+    "idea2Title": {
+      "type": "Heading",
+      "props": {
+        "text": "2. Simulation Comparison API",
+        "level": "h3"
+      }
+    },
+    "idea2Type": {
+      "type": "Badge",
+      "props": {
+        "text": "Feature, Small",
+        "variant": "outline"
+      }
+    },
+    "idea2Desc": {
+      "type": "Text",
+      "props": {
+        "text": "GET /api/compare?a=<simId>&b=<simId> — structured diff of two sims: belief delta, consensus agreement, confidence delta, quality winner. AntFleet is already doing this manually; one curl replaces two JSON downloads and a manual diff."
+      }
+    },
+    "idea2Note": {
+      "type": "Text",
+      "props": {
+        "text": "Net-new.",
+        "variant": "muted"
+      }
+    },
+    "idea3": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "idea3Header",
+        "idea3Desc",
+        "idea3Note"
+      ]
+    },
+    "idea3Header": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "idea3Title",
+        "idea3Type"
+      ]
+    },
+    "idea3Title": {
+      "type": "Heading",
+      "props": {
+        "text": "3. Belief Volatility Score",
+        "level": "h3"
+      }
+    },
+    "idea3Type": {
+      "type": "Badge",
+      "props": {
+        "text": "Feature, Small",
+        "variant": "outline"
+      }
+    },
+    "idea3Desc": {
+      "type": "Text",
+      "props": {
+        "text": "GET /api/simulation/<id>/volatility — 0–100 turbulence index (std dev of per-round belief deltas) + trend label (Converging/Stable/Contested). High-volatility Bullish ≠ low-volatility Bullish. 25th surface; completes the quant analytical layer."
+      }
+    },
+    "idea3Note": {
+      "type": "Text",
+      "props": {
+        "text": "Re-eligible from May-20.",
+        "variant": "muted"
+      }
+    },
+    "idea4": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "idea4Header",
+        "idea4Desc",
+        "idea4Note"
+      ]
+    },
+    "idea4Header": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "idea4Title",
+        "idea4Type"
+      ]
+    },
+    "idea4Title": {
+      "type": "Heading",
+      "props": {
+        "text": "4. Webhook Test Ping",
+        "level": "h3"
+      }
+    },
+    "idea4Type": {
+      "type": "Badge",
+      "props": {
+        "text": "DX, Small",
+        "variant": "outline"
+      }
+    },
+    "idea4Desc": {
+      "type": "Text",
+      "props": {
+        "text": "POST /api/webhook/test — sends a synthetic completion payload to WEBHOOK_URL and returns delivery status immediately. Eliminates the 'wait for a real sim to test your endpoint' loop that every new integrator hits exactly once."
+      }
+    },
+    "idea4Note": {
+      "type": "Text",
+      "props": {
+        "text": "Re-eligible from May-20.",
+        "variant": "muted"
+      }
+    },
+    "idea5": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "idea5Header",
+        "idea5Desc",
+        "idea5Note"
+      ]
+    },
+    "idea5Header": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "idea5Title",
+        "idea5Type"
+      ]
+    },
+    "idea5Title": {
+      "type": "Heading",
+      "props": {
+        "text": "5. Surface Catalog API",
+        "level": "h3"
+      }
+    },
+    "idea5Type": {
+      "type": "Badge",
+      "props": {
+        "text": "Integration, Small",
+        "variant": "outline"
+      }
+    },
+    "idea5Desc": {
+      "type": "Text",
+      "props": {
+        "text": "GET /api/surfaces.json — machine-readable catalog of all 24 publish-gated surfaces: key, endpoint, type, description, example curl. Integrators check what's available on a deployment; Aeon tracks live surface count without parsing docs."
+      }
+    },
+    "idea5Note": {
+      "type": "Text",
+      "props": {
+        "text": "Net-new, ~60 LoC, static catalog.",
+        "variant": "muted"
+      }
+    },
+    "separator2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "fullDetails": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full details",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-actions-2026-05-28.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}
