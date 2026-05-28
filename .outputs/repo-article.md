@@ -1,5 +1,5 @@
-*New Article: MiroShark Shipped a Week That Subtracted More Than It Added*
+*New Article: MiroShark Just Shipped the First Surface Its Census Demanded*
 
-After ~10 weeks of only adding consumable surfaces, MiroShark's merge log just went negative. An 8-pass cleanup (PR #116) deleted ~270 net lines and dead code while holding 971 tests green, and three crash fixes landed for bugs that only appear under real use — an Apple Silicon Metal-backend hang and two intermittent LLM-null report crashes. Adding a 23rd surface proves the engine is generative; deleting code and steering a reranker off the wrong GPU proves something harder — that it's being run.
+Forty-eight hours after PR #109 ECOSYSTEM.md publicly named ten integrators, MiroShark merged PR #120 — the WEBHOOK_EVENTS dispatch filter, 24th surface — letting each integrator declare which slice of the firehose they want (direction × confidence × quality, OR-within / AND-across, 25 tests, zero deps). Same day PR #117 added Noelclaw as the 12th integrator. The PR body literally names the registry as the justification: "ten integrators means ten different filtering needs." It's the first surface whose existence is justified by a list of other people's products.
 
-Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-05-27.md
+Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-05-28.md

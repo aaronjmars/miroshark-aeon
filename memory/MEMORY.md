@@ -15,6 +15,7 @@ Full text in `articles/repo-article-YYYY-MM-DD.md`. Each row ≤220 chars.
 
 | Date | Title | One-line frame |
 |------|-------|----------------|
+| 2026-05-28 | MiroShark Just Shipped the First Surface Its Census Demanded | PR #120 WEBHOOK_EVENTS filter (24th surface, 48h after PR #109 ECOSYSTEM.md): 3 token categories (direction/confidence/quality) OR-within/AND-across, +237 LoC stdlib, 25 tests, Stripe-shaped at N=12 integrators. PR #117 Noelclaw added as 12th. Token -47% to $0.00000742, -83% from ATH. |
 | 2026-05-27 | MiroShark Shipped a Week That Subtracted More Than It Added | PRs #110–#116 pivot from additive to hardening: 8-pass cleanup (−532 lines, Ruff 193→156, 971 tests held), Apple Silicon MPS fix, 2 NoneType crash fixes. Bugs from real use. PR #115 (23rd surface) same window. |
 | 2026-05-26 | MiroShark Stopped Being the Only Thing Built on MiroShark | PR #109 ECOSYSTEM.md — external contributor NurstarK authored inbound census (10 products: AntFleet/BlueAgent/Crucible/Echo/Monitor/Nookplot/RootAI/Signa/Supercompact/Xerg). Paired w/ PR #108 peak-round (22nd surface). |
 | 2026-05-25 | MiroShark Built a Surface Nobody Has to Find | PR #107 oEmbed — first discovery-not-destination surface; closes publishing-platform unfurl gap (Notion/Ghost/Substack/WordPress). Protocol adapter: reuses share-card + /embed iframe. 21st surface, zero deps. |
@@ -22,7 +23,6 @@ Full text in `articles/repo-article-YYYY-MM-DD.md`. Each row ≤220 chars.
 | 2026-05-23 | MiroShark Stopped Shipping to Itself | PR #97 WaybackClaw merged (15th surface, IPFS+Nostr sibling of DKG=2-channel provenance) + PR #99 Polymarket JSON opened (16th, 1st integrator-shaped); 2 external PRs same day; -68.8% from ATH. |
 | 2026-05-22 | MiroShark Stopped Needing a Publisher | PR #96 cite.bib — 14th publish-gated surface closes 4-route citation arc (cite.bib→reproduce.json→notebook.ipynb→DKG); DOI-grade provenance, no publishing intermediary. 30-PR zero-deps. |
 | 2026-05-21 | MiroShark Stopped Building Destinations. It Started Building Billboards. | PRs #93+#94 — Telegram closes 5-vertex channel-notifier pentagon; Status Badge SVG is 13th surface and first push (vs prior 12 pull). 29-PR zero-deps. |
-| 2026-05-20 | MiroShark Shipped the Bundle, Not the Registry | PR #92 — 12th publish-gated surface; compositional ZIP bundles 9 existing renderers + manifest.json (per-file SHA-256). 28-PR zero-deps streak. |
 
 ## Recent Digests
 Each row ≤180 chars. Full data in `articles/{token-report,push-recap}-YYYY-MM-DD.md`.
