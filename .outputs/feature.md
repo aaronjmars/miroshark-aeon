@@ -1,21 +1,23 @@
-*Feature Built — 2026-05-27*
+## Summary
 
-Per-Agent Belief Sparklines
-MiroShark simulations already show the *swarm's* belief curve — the aggregate read of where all the agents collectively landed each round. This adds the layer underneath: a tiny line chart for *every individual agent*, tracing how that one agent's conviction moved round by round, colored green/gray/red by where they ended up (bullish/neutral/bearish). A new API endpoint serves the raw data; the Embed dialog draws the little charts.
+Built **WEBHOOK_EVENTS dispatch filter** for MiroShark — picked from 2026-05-26 repo-actions batch (idea #4, net-new). PR opened: https://github.com/aaronjmars/MiroShark/pull/120
 
-Why this matters:
-Until now, the only way to study how individual agents converged — which agent anchored the consensus, whether one cohort (say, financial-analyst personas) aligned before another — was to read the full transcript by hand. There was no surface for the per-agent view. This was the #1 idea in the 2026-05-26 repo-actions batch and the last remaining agent-level visualization gap: aggregate curves and inflection-point summaries existed, but the individual-agent trajectory did not.
+**What shipped**
+- `backend/app/services/webhook_service.py` (+237 LoC) — token constants, category frozensets, `_resolve_event_filter`, `_payload_direction` / `_payload_confidence_pct` / `_payload_quality_key` helpers, `payload_passes_event_filter(payload, events) -> (bool, trace)`. Filter wired between `_mark_fired` and `_start_dispatch_thread` in `fire_webhook_for_simulation`.
+- `backend/tests/test_unit_webhook_events.py` (new, 25 offline tests) — parser, all three categories, AND across / OR within, confidence floors, quality bucket inclusion, unknown-token handling, failed-sim bypass, end-to-end fire/skip behavior.
+- `.env.example`, `docs/WEBHOOKS.md` (new "Filtering events" section), `docs/FEATURES.md` (new "Webhook Event Filtering" entry).
 
-What was built:
-- agent_sparklines_service.py: New stdlib-only service that reads trajectory.json, computes each agent's scalar belief position per round, and groups it into per-agent series. Returns None (→ 404) when a sim has no per-agent data yet.
-- simulation.py: New GET /api/simulation/<id>/agents/sparklines route — publish-gated, 5-minute cache, increments a new agent_sparklines surface counter (the 23rd share surface).
-- EmbedDialog.vue + api/simulation.js: A "🤖 Agent trajectories" section — a scrollable list of agents, each rendered as a name + an inline SVG sparkline stroked in the agent's stance color + the final-stance label, plus copyable URL and curl snippet.
-- openapi.yaml / docs/API.md / docs/FEATURES.md: Full documentation of the surface and its JSON schema.
+**Design choices** (recorded in commit + PR body):
+- OR within category, AND across categories
+- Failed sims bypass the filter
+- Unknown tokens silently ignored
+- Manual retries bypass (matches existing dedup-bypass pattern)
+- Late-bound env read (no restart)
+- Direction rule matches share-card / Discord embed colour (no drift between filter and visual)
+- Suppressed deliveries log but don't write to `webhook-log.jsonl`
 
-How it works:
-It's a pure derivation, transposed. Every other surface buckets all agents into one per-round percentage (the aggregate view); this one instead tracks one scalar per agent per round — the same per-topic mean and ±0.2 stance threshold every surface uses, so an agent tagged "bullish" here is "bullish" in the transcript too. Agent names resolve from reddit_profiles.json with an "Agent <id>" fallback. The frontend maps each agent's belief position (clamped to -1..1) onto a 60×16px SVG polyline. Agents are ordered most-bullish-first so the list reads top-to-bottom from strongest bull to strongest bear. A has_per_agent_data flag is false for single-round sims, where a sparkline would just be a dot. 18 offline unit tests cover it; zero new dependencies.
+**Memory**: appended detailed entry to `memory/logs/2026-05-28.md`, added row to `MEMORY.md` Skills Built table, bumped "Next Priorities" to show 3/5 May-26 batch addressed.
 
-What's next:
-Natural follow-ons: a sortable/filterable agent table, or grouping sparklines by demographic archetype to make cohort-level convergence patterns visible at a glance.
+**Notification**: queued at `.pending-notify/1779971119.md` (sandbox blocked direct `./notify` invocation; the workflow's post-run "Re-deliver pending notifications" step will fan it out to Telegram/Discord/Slack from there).
 
-PR: https://github.com/aaronjmars/MiroShark/pull/115
+**Validation note**: pytest blocked in sandbox (`python` not allowlisted, consistent with prior skill runs) — CI is authoritative. Logic reviewed offline against the existing `discord_notify._consensus_color` plurality rule and `signal_service._confidence_tier` thresholds for consistency.
