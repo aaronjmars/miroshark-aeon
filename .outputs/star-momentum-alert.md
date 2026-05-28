@@ -1,10 +1,22 @@
+Done. Here's the summary:
+
 ## Summary
 
-**star-momentum-alert** complete — `STAR_MOMENTUM_NO_ALERTS`.
+**Skill**: `star-momentum-alert` — 2026-05-28
 
-**aaronjmars/MiroShark** is at 1,199★ (13 data points, 2026-05-14 to 2026-05-26). Next milestone is 1,500 (gap: 301). At the 7-day rolling pace of 3.43★/day, crossing is projected for **2026-08-23 (Sunday)** — 88 days out. Gate b fails (88 > 14), verdict: **OUT_OF_WINDOW**. No notification sent.
+**Repos audited**: 1 (`aaronjmars/MiroShark`; `miroshark-aeon` filtered out — ends in `-aeon`)
 
-Files written:
-- `articles/star-momentum-2026-05-27.md` — projection report
-- `memory/topics/star-momentum-state.json` — updated projected date (2026-08-27 → 2026-08-23, v7 3.29 → 3.43)
-- `memory/logs/2026-05-27.md` — log block appended
+**Data**: 14 data points (2026-05-14 through 2026-05-27, from `repo-pulse` entries in daily logs)
+
+**Projection**:
+- Current: **1,204⭐** → Target: **1,500⭐** (gap: 296)
+- v7 (7-day avg): **3.86/day** | v3 (3-day avg): **3.33/day**
+- Projected crossing (v7): **2026-08-13** (Thursday) — **77 days out**
+- Projected crossing (v3): **2026-08-25** (Tuesday) — 89 days out
+
+**Verdict**: `OUT_OF_WINDOW` — 77 days far exceeds the 7–14 day launch window. No alert fires.
+
+**Files written**:
+- `articles/star-momentum-2026-05-28.md` — projection report
+- `memory/topics/star-momentum-state.json` — updated last_run_at and v7 snapshot
+- `memory/logs/2026-05-28.md` — log entry appended
