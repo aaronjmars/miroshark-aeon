@@ -1,18 +1,18 @@
-*Push Recap — 2026-05-27*
-MiroShark — 7 PRs merged (#110–#116) + Aeon repo #47. 3 authors (maintainer, Aeon, external).
+*Push Recap — 2026-05-28*
+aaronjmars/MiroShark — 4 commits by 2 authors (@aaronjmars + ext noelclaw) | aaronjmars/miroshark-aeon — 1 substantive commit (Aeon self-improve)
 
-Reliability hardening: Three crash/hang fixes. #111 + #112 stop report sections from dying when a reasoning model (Gemini 3 Flash) returns null content into a regex; #110 stops the retrieval reranker from hanging forever on Apple Silicon by steering off the MPS backend (new RERANKER_DEVICE knob).
+*Integrator-side surface (PR #120):* WEBHOOK_EVENTS — opt-in allow-list filtering outbound webhooks by direction (bullish/neutral/bearish), confidence (high ≥75% / medium 50–75%), and quality (excellent/good). OR within category, AND across; failed sims always fire; unknown tokens silently ignored; late-bound env so flips take effect without restart. Direct response to PR #109's 10+ integrator list — each integrator now subscribes to its own slice instead of writing request-side filters. 24th surface, +769 LoC, zero deps, Aeon-built.
 
-New surface (#115): Per-agent belief sparklines — GET /api/simulation/<id>/agents/sparklines, the 23rd public surface. Aeon authored it yesterday; maintainer merged it today. Each agent's belief trajectory as an inline SVG, zero new deps.
+*README pivot (PRs #118 + #119):* Use cases section moved above the feature wall (so "is this for me?" hits before "what does it have?"); 25-row feature table condensed from multi-sentence rows to scannable one-liners; "Simulate anything" hero banner + grounding & graph-memory diagrams added. 2-minute documentation reordering with outsized funnel effect.
 
-Cleanup (#116): 8-pass code-quality sweep, +1627/-532 across 61 files — dropped dead retry.py (-238), deduped the CommandType enum, removed 27 unused imports, narrowed silent excepts, all behavior-preserving (+9 docs/cleanup notes).
+*Ecosystem self-recruitment (PR #117):* External integrator noelclaw added themselves to ECOSYSTEM.md — 11th named integrator. Brings X handle, .com domain, AND a MiroShark-facing MCP server repo (`noelclaw/mcp`). Second external self-submission since the list shipped 2 days ago — the inbound census is starting to function as a passive recruitment surface.
+
+*Self-improving aeon skill (PR #48):* token-report Grok query rewritten with three explicit pre-filters — drop zero-likes-AND-zero-RT tweets, drop contract-drop/vote-for templates + named clone domains, drop duplicate-template spam. Complements PR #47 (which disabled fetch-tweets + tweet-allocator entirely): token-report keeps running but its Social Pulse section degrades cleanly when only spam exists, instead of citing scam contract drops as sentiment.
 
 Key changes:
-- Reports now retry instead of crashing on flaky/null LLM turns; Macs can finish a sim with the reranker on
-- 23rd surface ships: per-agent sparklines complete the chart.svg / peak-round / per-agent trio
-- aeon #47 disabled fetch-tweets + tweet-allocator (the spam-feed skills that paid 0 this week) + 3 weekly digests
+- `backend/app/services/webhook_service.py` +237 LoC — token frozensets, `_resolve_event_filter`, `_payload_direction/_confidence_pct/_quality_key`, `payload_passes_event_filter(payload, events) → (bool, trace)` wired between dedup and dispatch
+- `backend/tests/test_unit_webhook_events.py` new +454 LoC — 25 tests covering OR/AND semantics, failed-sim bypass, unknown-token tolerance, end-to-end fire_webhook behaviour
+- `scripts/prefetch-xai.sh` 1-line prompt rewrite — moves spam-filter logic into Grok's picking step rather than post-process
 
-Also: ecosystem roster hit 11 integrators (external add: ZER0), and a one-click 'Regenerate Report' button landed in the UI (#113).
-
-Stats: ~76 files changed, +2,871/-547
-Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-05-27.md
+Stats: ~10 files changed, +1,037 / -49 lines across 5 substantive PRs (excluding ~14 scheduler auto-commits)
+Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-05-28.md

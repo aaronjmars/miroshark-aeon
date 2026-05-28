@@ -1,0 +1,380 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "Push Recap — 2026-05-28"
+      },
+      "children": [
+        "header-repos",
+        "sep1",
+        "pr120-section",
+        "sep2",
+        "pr118-section",
+        "sep3",
+        "pr117-section",
+        "sep4",
+        "pr48-section",
+        "sep5",
+        "key-changes-section",
+        "sep6",
+        "stats-section",
+        "sep7",
+        "footer-link"
+      ]
+    },
+    "header-repos": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "repo1-text",
+        "repo2-text"
+      ]
+    },
+    "repo1-text": {
+      "type": "Text",
+      "props": {
+        "text": "aaronjmars/MiroShark — 4 commits by 2 authors (@aaronjmars + ext noelclaw)",
+        "variant": "body"
+      }
+    },
+    "repo2-text": {
+      "type": "Text",
+      "props": {
+        "text": "aaronjmars/miroshark-aeon — 1 substantive commit (Aeon self-improve)",
+        "variant": "body"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "pr120-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "pr120-heading",
+        "pr120-desc1",
+        "pr120-desc2",
+        "pr120-desc3"
+      ]
+    },
+    "pr120-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Integrator-side surface (PR #120)",
+        "level": "h3"
+      }
+    },
+    "pr120-desc1": {
+      "type": "Text",
+      "props": {
+        "text": "WEBHOOK_EVENTS — opt-in allow-list filtering outbound webhooks by direction (bullish/neutral/bearish), confidence (high ≥75% / medium 50–75%), and quality (excellent/good). OR within category, AND across; failed sims always fire; unknown tokens silently ignored; late-bound env so flips take effect without restart.",
+        "variant": "body"
+      }
+    },
+    "pr120-desc2": {
+      "type": "Text",
+      "props": {
+        "text": "Direct response to PR #109's 10+ integrator list — each integrator now subscribes to its own slice instead of writing request-side filters. 24th surface, +769 LoC, zero deps, Aeon-built.",
+        "variant": "body"
+      }
+    },
+    "pr120-desc3": {
+      "type": "Text",
+      "props": {
+        "text": "",
+        "variant": "body"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "pr118-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "pr118-heading",
+        "pr118-desc1",
+        "pr118-desc2"
+      ]
+    },
+    "pr118-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "README pivot (PRs #118 + #119)",
+        "level": "h3"
+      }
+    },
+    "pr118-desc1": {
+      "type": "Text",
+      "props": {
+        "text": "Use cases section moved above the feature wall (so \"is this for me?\" hits before \"what does it have?\"); 25-row feature table condensed from multi-sentence rows to scannable one-liners; \"Simulate anything\" hero banner + grounding & graph-memory diagrams added. 2-minute documentation reordering with outsized funnel effect.",
+        "variant": "body"
+      }
+    },
+    "pr118-desc2": {
+      "type": "Text",
+      "props": {
+        "text": "",
+        "variant": "body"
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "pr117-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "pr117-heading",
+        "pr117-desc1",
+        "pr117-desc2"
+      ]
+    },
+    "pr117-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Ecosystem self-recruitment (PR #117)",
+        "level": "h3"
+      }
+    },
+    "pr117-desc1": {
+      "type": "Text",
+      "props": {
+        "text": "External integrator noelclaw added themselves to ECOSYSTEM.md — 11th named integrator. Brings X handle, .com domain, AND a MiroShark-facing MCP server repo (noelclaw/mcp). Second external self-submission since the list shipped 2 days ago — the inbound census is starting to function as a passive recruitment surface.",
+        "variant": "body"
+      }
+    },
+    "pr117-desc2": {
+      "type": "Text",
+      "props": {
+        "text": "",
+        "variant": "body"
+      }
+    },
+    "sep4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "pr48-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "pr48-heading",
+        "pr48-desc1",
+        "pr48-desc2"
+      ]
+    },
+    "pr48-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Self-improving aeon skill (PR #48)",
+        "level": "h3"
+      }
+    },
+    "pr48-desc1": {
+      "type": "Text",
+      "props": {
+        "text": "token-report Grok query rewritten with three explicit pre-filters — drop zero-likes-AND-zero-RT tweets, drop contract-drop/vote-for templates + named clone domains, drop duplicate-template spam. Complements PR #47 (which disabled fetch-tweets + tweet-allocator entirely): token-report keeps running but its Social Pulse section degrades cleanly when only spam exists, instead of citing scam contract drops as sentiment.",
+        "variant": "body"
+      }
+    },
+    "pr48-desc2": {
+      "type": "Text",
+      "props": {
+        "text": "",
+        "variant": "body"
+      }
+    },
+    "sep5": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "key-changes-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "key-changes-heading",
+        "file1-stack",
+        "file2-stack",
+        "file3-stack"
+      ]
+    },
+    "key-changes-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Key changes",
+        "level": "h3"
+      }
+    },
+    "file1-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "file1-path",
+        "file1-desc"
+      ]
+    },
+    "file1-path": {
+      "type": "Text",
+      "props": {
+        "text": "backend/app/services/webhook_service.py +237 LoC",
+        "variant": "lead"
+      }
+    },
+    "file1-desc": {
+      "type": "Text",
+      "props": {
+        "text": "token frozensets, _resolve_event_filter, _payload_direction/_confidence_pct/_quality_key, payload_passes_event_filter(payload, events) → (bool, trace) wired between dedup and dispatch",
+        "variant": "caption"
+      }
+    },
+    "file2-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "file2-path",
+        "file2-desc"
+      ]
+    },
+    "file2-path": {
+      "type": "Text",
+      "props": {
+        "text": "backend/tests/test_unit_webhook_events.py new +454 LoC",
+        "variant": "lead"
+      }
+    },
+    "file2-desc": {
+      "type": "Text",
+      "props": {
+        "text": "25 tests covering OR/AND semantics, failed-sim bypass, unknown-token tolerance, end-to-end fire_webhook behaviour",
+        "variant": "caption"
+      }
+    },
+    "file3-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "file3-path",
+        "file3-desc"
+      ]
+    },
+    "file3-path": {
+      "type": "Text",
+      "props": {
+        "text": "scripts/prefetch-xai.sh 1-line prompt rewrite",
+        "variant": "lead"
+      }
+    },
+    "file3-desc": {
+      "type": "Text",
+      "props": {
+        "text": "moves spam-filter logic into Grok's picking step rather than post-process",
+        "variant": "caption"
+      }
+    },
+    "sep6": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stats-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stats-heading",
+        "files-changed",
+        "lines-summary",
+        "prs-summary"
+      ]
+    },
+    "stats-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Stats",
+        "level": "h3"
+      }
+    },
+    "files-changed": {
+      "type": "Stat",
+      "props": {
+        "label": "Files changed",
+        "value": "~10"
+      }
+    },
+    "lines-summary": {
+      "type": "Text",
+      "props": {
+        "text": "+1,037 / -49 lines across 5 substantive PRs (excluding ~14 scheduler auto-commits)",
+        "variant": "body"
+      }
+    },
+    "prs-summary": {
+      "type": "Text",
+      "props": {
+        "text": "",
+        "variant": "body"
+      }
+    },
+    "sep7": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "footer-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full recap",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-05-28.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}
