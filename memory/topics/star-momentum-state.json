@@ -1,12 +1,12 @@
 {
-  "last_run_at": "2026-05-28T10:10:00Z",
+  "last_run_at": "2026-05-29T00:00:00Z",
   "alerts": {
     "aaronjmars/MiroShark": {
       "1500": {
         "first_seen_in_window_at": null,
         "alerted_at": null,
-        "projected_date_v7": "2026-08-13",
-        "v7_at_alert": 3.86
+        "projected_date_v7": "2026-09-04",
+        "v7_at_alert": 3.0
       }
     }
   }
