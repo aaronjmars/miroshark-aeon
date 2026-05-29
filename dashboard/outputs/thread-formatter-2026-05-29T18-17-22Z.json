@@ -1,0 +1,90 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Thread Draft — 2026-05-29"
+      },
+      "children": [
+        "heading_topic",
+        "stack_points",
+        "sep_1",
+        "link_pr",
+        "text_article"
+      ]
+    },
+    "heading_topic": {
+      "type": "Heading",
+      "props": {
+        "text": "Belief Volatility Score — MiroShark PR #124",
+        "level": "h2"
+      }
+    },
+    "stack_points": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "point_1",
+        "point_2",
+        "point_3",
+        "point_4",
+        "point_5"
+      ]
+    },
+    "point_1": {
+      "type": "Text",
+      "props": {
+        "text": "1/ MiroShark has 25 API surfaces. The 25th — merged today as PR #124 — describes how contested a simulation was. Not just which direction it ended. Not just when it peaked. The full distribution of belief swings."
+      }
+    },
+    "point_2": {
+      "type": "Text",
+      "props": {
+        "text": "2/ Every prior MiroShark surface answers what a simulation concluded or when it moved. signal.json returns direction and confidence. peak-round returns the single most volatile round. Nothing described whether the consensus formed smoothly or under sustained pressure."
+      }
+    },
+    "point_3": {
+      "type": "Text",
+      "props": {
+        "text": "3/ GET /api/simulation/<id>/volatility returns mean and standard deviation of round-over-round swings, a volatility_index from 0 to 100, and a trend label — stable, converging, or contested. A 404 enforces minimum two rounds. No new dependencies. 200 lines of stdlib."
+      }
+    },
+    "point_4": {
+      "type": "Text",
+      "props": {
+        "text": "4/ Peak-round already showed you the single most volatile round. Volatility shows you the shape behind it — whether momentum compressed into one inflection or stayed contested across the whole simulation. Direction plus peak plus distribution: that's the full analytical answer."
+      }
+    },
+    "point_5": {
+      "type": "Text",
+      "props": {
+        "text": "5/ volatility_service.py — 200 lines of stdlib. Reuses load_trajectory_rounds from peak-round; max_delta_round matches by construction. The distribution is the new information."
+      }
+    },
+    "sep_1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "link_pr": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #124",
+        "href": "https://github.com/aaronjmars/MiroShark/pull/124"
+      }
+    },
+    "text_article": {
+      "type": "Text",
+      "props": {
+        "text": "Article: articles/thread-2026-05-29.md",
+        "variant": "muted"
+      }
+    }
+  }
+}

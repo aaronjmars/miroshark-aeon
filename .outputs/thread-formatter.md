@@ -1,14 +1,14 @@
-*Thread Draft — 2026-05-28*
-Topic: WEBHOOK_EVENTS Dispatch Filter — MiroShark PR #120
+*Thread Draft — 2026-05-29*
+Topic: Belief Volatility Score — MiroShark PR #124
 
-1/ MiroShark has 24 API surfaces. PR #120 is the first one justified by a census. ECOSYSTEM.md went in Tuesday naming 10 integrators. WEBHOOK_EVENTS filter shipped Thursday with 12.
+1/ MiroShark has 25 API surfaces. The 25th — merged today as PR #124 — describes how contested a simulation was. Not just which direction it ended. Not just when it peaked. The full distribution of belief swings.
 
-2/ Before PR #120, every completion webhook fired unconditionally. Twelve integrators each needed to write their own filter if they wanted to suppress bearish signals, low-confidence results, or slow-speed outputs. The platform sent everything; they dealt with it.
+2/ Every prior MiroShark surface answers what a simulation concluded or when it moved. signal.json returns direction and confidence. peak-round returns the single most volatile round. Nothing described whether the consensus formed smoothly or under sustained pressure.
 
-3/ WEBHOOK_EVENTS is a comma-separated allow-list. Three token categories — direction, confidence, quality. OR logic within each category, AND across. bullish,bearish means any directional result, not both at once. Failed simulations bypass unconditionally.
+3/ GET /api/simulation/<id>/volatility returns mean and standard deviation of round-over-round swings, a volatility_index from 0 to 100, and a trend label — stable, converging, or contested. A 404 enforces minimum two rounds. No new dependencies. 200 lines of stdlib.
 
-4/ Stripe calls this `enabled_events`. GitHub calls it an events array. Every webhook platform eventually ships per-consumer filtering. MiroShark shipped it at N=12, two days after ECOSYSTEM.md first named what N was. The census preceded the surface.
+4/ Peak-round already showed you the single most volatile round. Volatility shows you the shape behind it — whether momentum compressed into one inflection or stayed contested across the whole simulation. Direction plus peak plus distribution: that's the full analytical answer.
 
-5/ webhook_service.py is +237 lines of stdlib. The filter is late-bound — flip it in .env without restarting. PR #120: https://github.com/aaronjmars/MiroShark/pull/120
+5/ volatility_service.py — 200 lines of stdlib. Reuses load_trajectory_rounds from peak-round; max_delta_round matches by construction. The distribution is the new information. PR #124: https://github.com/aaronjmars/MiroShark/pull/124
 
-(article: articles/thread-2026-05-28.md)
+(article: articles/thread-2026-05-29.md)
