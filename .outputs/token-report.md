@@ -1,10 +1,10 @@
-*$MiroShark Daily — 2026-05-28*
+*$MIROSHARK Daily — 2026-05-29*
 
-Price: $0.00000742 (-47.0% 24h)
-Liquidity: $409.2K | 24h Vol: $160.5K (-39.1% 24h)
-Buys/Sells: 269/197 (1.37×)
-7d: -70.5% | 30d: +133% | ATH: -83.0% ($0.0000436 May 18)
+Price: $0.00001030 (+36.8% 24h)
+Liquidity: $513.0K | 24h Vol: $156.9K (-2.2% 24h)
+Buys/Sells: 241/159
+7d: -25.9% price, ~flat vol | 30d: +152.5% price
 
-Sharp intraday sell-off — broke below $0.00001 for first time since May 12; low $0.00000659, now at 30d-back price levels. Volume and liquidity compressing. Project cadence unaffected (PR #115 merged yesterday).
+Bounced +36.8% off yesterday's -47% low; buy ratio 1.52×, liquidity up +25.3% to $513K — recovery with LP interest, but still -76.4% from ATH $0.0000436.
 
 Chart: https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209
