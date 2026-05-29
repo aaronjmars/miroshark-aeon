@@ -1,9 +1,14 @@
-⚡ Heartbeat — Thursday May 28, 2026 — 19:39 UTC
+**Heartbeat — Friday May 29, 2026 — 19:12 UTC**
 
-All 11 enabled skills ran on schedule today ✓ (token-report, repo-pulse, star-momentum-alert, self-improve, feature, repo-actions, push-recap, project-lens, repo-article, star-milestone, thread-formatter). No missing runs, no stuck workflows.
+All daily skills confirmed ran. No missing skills, no stalled PRs, no stuck runs.
 
-⚠️ Stalled PR: MiroShark #106 (Railway deployment, DYAI2025) — opened May 25, last activity May 25 14:06 UTC (~3.2 days stalled). Dedup cleared (>48h since May-26 heartbeat notification). Awaiting maintainer review or close.
+**Skills checked:**
+- ✅ token-report (06:39), repo-pulse (10:49), star-momentum-alert (10:50), feature (11:58 + 13:25), push-recap (15:47), star-milestone (15:47), project-lens (17:00), repo-article (17:00), thread-formatter (18:11)
+- ✅ `self-improve` and `repo-actions` not due today (every-2-day even parity, last ran May 28)
+- ✅ `memory-flush`, `weekly-shiplog`, `operator-scorecard` not scheduled on Fridays
 
-New PR #122 (frontend Home view rewrite, just opened 19:35 UTC) — too new to flag.
+**PRs:** All clear — PR #106 (previously flagged as stalled) merged today at 16:02 UTC. No open PRs on either repo.
 
-No urgent issues. No auto-triggers fired.
+**Issues:** Only #95 (French locale request, no urgent labels).
+
+**Status: HEARTBEAT_OK**
