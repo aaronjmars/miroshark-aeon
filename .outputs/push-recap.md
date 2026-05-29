@@ -1,18 +1,16 @@
-*Push Recap — 2026-05-28*
-aaronjmars/MiroShark — 4 commits by 2 authors (@aaronjmars + ext noelclaw) | aaronjmars/miroshark-aeon — 1 substantive commit (Aeon self-improve)
+*Push Recap — 2026-05-29*
+aaronjmars/MiroShark — 3 PRs merged in a 2-min window (14:36–14:38 UTC), 2 authors. miroshark-aeon: scheduler chore only.
 
-*Integrator-side surface (PR #120):* WEBHOOK_EVENTS — opt-in allow-list filtering outbound webhooks by direction (bullish/neutral/bearish), confidence (high ≥75% / medium 50–75%), and quality (excellent/good). OR within category, AND across; failed sims always fire; unknown tokens silently ignored; late-bound env so flips take effect without restart. Direct response to PR #109's 10+ integrator list — each integrator now subscribes to its own slice instead of writing request-side filters. 24th surface, +769 LoC, zero deps, Aeon-built.
+*Analytics:* PR #124 `/volatility` — 25th surface, Aeon-built today. Distribution of round-over-round belief swings (mean / std dev / max / 0–100 index / stable-converging-contested trend). Reuses peak_round.load_trajectory_rounds so max_delta_round matches peak-round's most_volatile_round by construction; the new info is the *distribution*, not the max. Closes the analytical triangle with signal.json (where) and peak-round (when) — a quant tool can finally tell high-volatility Bullish from low-volatility Bullish.
 
-*README pivot (PRs #118 + #119):* Use cases section moved above the feature wall (so "is this for me?" hits before "what does it have?"); 25-row feature table condensed from multi-sentence rows to scannable one-liners; "Simulate anything" hero banner + grounding & graph-memory diagrams added. 2-minute documentation reordering with outsized funnel effect.
+*Frontend:* PR #122 — light Hyperstitions → dark deep-space-violet. Token remap in App.vue (orange→violet, green→soft violet, white→deep panel, black→light text, background→#05030a) cascaded through 27 components. Eight stacked commits as the cascade exposed dark-on-dark + invisible-CTA bugs; final commit flipped #0A0A0A literal → #f4f1ff across 13 files. Step3 sim view + Settings + TemplateGallery + HistoryDatabase + every visualization canvas reskinned. Logic untouched on Home (refs/computed/handlers 1:1).
 
-*Ecosystem self-recruitment (PR #117):* External integrator noelclaw added themselves to ECOSYSTEM.md — 11th named integrator. Brings X handle, .com domain, AND a MiroShark-facing MCP server repo (`noelclaw/mcp`). Second external self-submission since the list shipped 2 days ago — the inbound census is starting to function as a passive recruitment surface.
-
-*Self-improving aeon skill (PR #48):* token-report Grok query rewritten with three explicit pre-filters — drop zero-likes-AND-zero-RT tweets, drop contract-drop/vote-for templates + named clone domains, drop duplicate-template spam. Complements PR #47 (which disabled fetch-tweets + tweet-allocator entirely): token-report keeps running but its Social Pulse section degrades cleanly when only spam exists, instead of citing scam contract drops as sentiment.
+*Docs:* PR #123 — locale negotiation protocol (`?lang=` → X-MiroShark-Locale → Accept-Language → en) was already in code but undiscoverable. Now documented in API.md + API.zh-CN.md with curl examples. Answers issue #95 (French locale).
 
 Key changes:
-- `backend/app/services/webhook_service.py` +237 LoC — token frozensets, `_resolve_event_filter`, `_payload_direction/_confidence_pct/_quality_key`, `payload_passes_event_filter(payload, events) → (bool, trace)` wired between dedup and dispatch
-- `backend/tests/test_unit_webhook_events.py` new +454 LoC — 25 tests covering OR/AND semantics, failed-sim bypass, unknown-token tolerance, end-to-end fire_webhook behaviour
-- `scripts/prefetch-xai.sh` 1-line prompt rewrite — moves spam-filter logic into Grok's picking step rather than post-process
+- backend/app/services/volatility_service.py (new, +206 LoC stdlib) — math + json + os, reuses peak-round's stance split (±0.2) for byte-consistent cross-surface numbers
+- frontend/src/App.vue (+28/-18) — :root token remap cascades the whole palette flip via legacy names
+- frontend/src/views/Home.vue (+996/-1237) — full rewrite to deep-space radial bg + glossy violet console + Geist font system
 
-Stats: ~10 files changed, +1,037 / -49 lines across 5 substantive PRs (excluding ~14 scheduler auto-commits)
-Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-05-28.md
+Stats: 48 files, +4782 / -3452 lines, zero new deps (33rd straight PR since Nemotron). PR #124 first push failed CI (`SURFACE_KEYS` test had hard-coded set without 'volatility' — fixed in same PR).
+Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-05-29.md
