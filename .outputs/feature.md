@@ -1,23 +1,22 @@
-## Summary
+*Feature Built — 2026-05-29*
 
-Built **WEBHOOK_EVENTS dispatch filter** for MiroShark — picked from 2026-05-26 repo-actions batch (idea #4, net-new). PR opened: https://github.com/aaronjmars/MiroShark/pull/120
+Belief Volatility Score
+MiroShark sims now ship a turbulence metric next to the direction and the inflection points. `GET /api/simulation/<id>/volatility` answers a question signal.json and peak-round between them have never answered: how contested was the path to consensus? You get the mean, standard deviation, and max of the round-over-round belief swing, a 0–100 volatility index, and a "stable / converging / contested" trend label — so a quant tool can finally tell a swarm that aligned in round three and held from one that swung repeatedly before landing on the same direction.
 
-**What shipped**
-- `backend/app/services/webhook_service.py` (+237 LoC) — token constants, category frozensets, `_resolve_event_filter`, `_payload_direction` / `_payload_confidence_pct` / `_payload_quality_key` helpers, `payload_passes_event_filter(payload, events) -> (bool, trace)`. Filter wired between `_mark_fired` and `_start_dispatch_thread` in `fire_webhook_for_simulation`.
-- `backend/tests/test_unit_webhook_events.py` (new, 25 offline tests) — parser, all three categories, AND across / OR within, confidence floors, quality bucket inclusion, unknown-token handling, failed-sim bypass, end-to-end fire/skip behavior.
-- `.env.example`, `docs/WEBHOOKS.md` (new "Filtering events" section), `docs/FEATURES.md` (new "Webhook Event Filtering" entry).
+Why this matters:
+For a position-sizing model, two Bullish results with identical confidence are not the same input. High-volatility Bullish is a swarm that almost flipped multiple times; low-volatility Bullish is a swarm that converged early and stayed. signal.json gave the *where*, peak-round gave the *when*, but the *how contested* layer was missing — and it's the one third-party integrators (AntFleet, Polymarket-shaped consumers) have asked for to size positions defensibly. This was repo-actions May-28 idea #3, re-eligible from May-20. 25th publish-gated surface, completing the analytical quadrant.
 
-**Design choices** (recorded in commit + PR body):
-- OR within category, AND across categories
-- Failed sims bypass the filter
-- Unknown tokens silently ignored
-- Manual retries bypass (matches existing dedup-bypass pattern)
-- Late-bound env read (no restart)
-- Direction rule matches share-card / Discord embed colour (no drift between filter and visual)
-- Suppressed deliveries log but don't write to `webhook-log.jsonl`
+What was built:
+- backend/app/services/volatility_service.py: New stdlib service (~200 LoC, json + os + math). `compute_volatility(rounds)` does one O(n) pass over the per-round stance split, returning `mean_delta_pct`, `std_dev_delta_pct`, `max_delta_pct`, `max_delta_round`, the normalized `volatility_index`, and the `trend` bucket. Returns `None` for <2 rounds so the route can 404 cleanly.
+- backend/app/api/simulation.py: `GET /<id>/volatility` route. Publish-gated via `_build_embed_summary_payload` (403 when private), 404 when there aren't two rounds yet, pretty-printed JSON + 5-minute cache + Content-Disposition. Increments a new `volatility` surface counter so an operator can see how often the turbulence view is pulled vs. the raw CSV.
+- backend/openapi.yaml + docs/API.md + docs/FEATURES.md: Path + `VolatilityResponse` schema + a full FEATURES section explaining the index formula and trend buckets so external integrators can rescale without reverse-engineering.
+- backend/tests/test_unit_volatility.py: 18 offline tests covering boundary (None on <2 rounds), arithmetic (mean / max / population std dev, including the equality with peak-round's `most_volatile_round`), index normalization (flat → 0, capped at 100), trend classifier (stable / converging / contested), and the route + surface-stats + OpenAPI wiring guards.
+- frontend/src/components/EmbedDialog.vue + frontend/src/api/simulation.js: 📈 Belief volatility section under the peak-round row. Volatility index sits behind a gradient bar (green ≤33, amber 34–66, red ≥67), max-swing + round, mean swing, std dev, trend chip, copyable URL and curl snippet — same publish-gate-flip lifecycle as peak-round.
 
-**Memory**: appended detailed entry to `memory/logs/2026-05-28.md`, added row to `MEMORY.md` Skills Built table, bumped "Next Priorities" to show 3/5 May-26 batch addressed.
+How it works:
+The delta definition is deliberately identical to peak-round's: `|Δbullish| + |Δneutral| + |Δbearish|` per consecutive round pair. By construction `max_delta_round` here equals peak-round's `most_volatile_round` on the same trajectory — the new information is the *distribution* of those deltas, not the maximum. Volatility index uses `min(std_dev_delta_pct × 5, 100)` so a 20 pp std dev maps to 100; the formula is documented in the schema rather than hidden in code. Trend classifier splits the delta list in half and compares standard deviations: lower in the second half ⇒ `converging`; below 3 pp overall ⇒ `stable`; otherwise ⇒ `contested`. Fewer than four deltas fall back to the std-dev-only buckets since there's no honest half-vs-half claim. Stdlib only — `json`, `os`, `math` — keeping the 33-PR zero-deps streak alive.
 
-**Notification**: queued at `.pending-notify/1779971119.md` (sandbox blocked direct `./notify` invocation; the workflow's post-run "Re-deliver pending notifications" step will fan it out to Telegram/Discord/Slack from there).
+What's next:
+Three-factor quant view is now complete (signal = direction, peak-round = when, volatility = how contested) — the natural follow-up is the Polymarket integrator surface gaining a volatility field so a market-making bot can widen its quote on contested simulations without parsing the full trajectory. Webhook Test Ping (#4 in the same May-20 batch) remains unbuilt and is the next-highest integrator-impact candidate.
 
-**Validation note**: pytest blocked in sandbox (`python` not allowlisted, consistent with prior skill runs) — CI is authoritative. Logic reviewed offline against the existing `discord_notify._consensus_color` plurality rule and `signal_service._confidence_tier` thresholds for consistency.
+PR: https://github.com/aaronjmars/MiroShark/pull/124
