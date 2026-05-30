@@ -1,16 +1,16 @@
-*Push Recap — 2026-05-29*
-aaronjmars/MiroShark — 3 PRs merged in a 2-min window (14:36–14:38 UTC), 2 authors. miroshark-aeon: scheduler chore only.
+*Push Recap — 2026-05-30*
+aaronjmars/MiroShark — 5 PRs by 1 author (all merged 2026-05-29 evening UTC)
 
-*Analytics:* PR #124 `/volatility` — 25th surface, Aeon-built today. Distribution of round-over-round belief swings (mean / std dev / max / 0–100 index / stable-converging-contested trend). Reuses peak_round.load_trajectory_rounds so max_delta_round matches peak-round's most_volatile_round by construction; the new info is the *distribution*, not the max. Closes the analytical triangle with signal.json (where) and peak-round (when) — a quant tool can finally tell high-volatility Bullish from low-volatility Bullish.
+Runtime + agent identity: PR #125 closes the FLASK_DEBUG default-true fail-open gap with a new _is_deployed_environment() helper that fails closed on Railway/Cloud Run env vars regardless of DEBUG, switches the internal-key check to hmac.compare_digest, exempts OPTIONS, and runs gunicorn (1 worker / 8 threads, gthread) instead of the Flask dev server in Dockerfile.railway — taking review fixes back in from external PR #106. PR #126 declares MiroShark's treasury 0x7753…0dC1 + deployer 0x6cab…2b24f on Base in .x402books/wallets.json (+19 LoC, merged 18s after open) — first machine-readable on-chain identity surface that isn't a UI element.
 
-*Frontend:* PR #122 — light Hyperstitions → dark deep-space-violet. Token remap in App.vue (orange→violet, green→soft violet, white→deep panel, black→light text, background→#05030a) cascaded through 27 components. Eight stacked commits as the cascade exposed dark-on-dark + invisible-CTA bugs; final commit flipped #0A0A0A literal → #f4f1ff across 13 files. Step3 sim view + Settings + TemplateGallery + HistoryDatabase + every visualization canvas reskinned. Logic untouched on Home (refs/computed/handlers 1:1).
-
-*Docs:* PR #123 — locale negotiation protocol (`?lang=` → X-MiroShark-Locale → Accept-Language → en) was already in code but undiscoverable. Now documented in API.md + API.zh-CN.md with curl examples. Answers issue #95 (French locale).
+Marketing-site visual identity port (3-PR cascade): PR #127 swaps the design system at the :root token level (legacy --color-* names kept, values remapped to space-violet), repoints fonts to Geist/Geist Mono *without touching ~400 call sites*, adds reusable site classes + global nebula + animated star field + boot splash + SiteFooter. PR #128 chases the contrast/visibility regressions the cascade exposed (fully restyles ExploreView, fixes inverted "light button" traps in CounterfactualBranchPanel/WhatIfPanel/Settings, repoints 73 stray Space Mono / Young Serif literals to Geist). PR #129 re-themes the embed dialog (was still a light widget inside the dark app — white-on-white size buttons, near-black iframe code), fixes Step5Interaction's black-on-black hover, unifies sentiment to violet/fuchsia, and switches the ReplayView playback bar from invisible-white to dark glossy.
 
 Key changes:
-- backend/app/services/volatility_service.py (new, +206 LoC stdlib) — math + json + os, reuses peak-round's stance split (±0.2) for byte-consistent cross-surface numbers
-- frontend/src/App.vue (+28/-18) — :root token remap cascades the whole palette flip via legacy names
-- frontend/src/views/Home.vue (+996/-1237) — full rewrite to deep-space radial bg + glossy violet console + Geist font system
+- backend/app/__init__.py +33/-8 — new _is_deployed_environment() helper + hmac.compare_digest + OPTIONS exempt; regression test fakes RAILWAY_ENVIRONMENT=production with FLASK_DEBUG=true and asserts 503
+- Dockerfile.railway +22/-3 — exec gunicorn as PID 1, single worker (torch + sentence-transformers per worker would multiply memory), threads handle I/O-bound LLM + Neo4j workload
+- frontend/src/App.vue +419/-34 — palette + font tokens repointed at :root so 400+ scoped <style> blocks inherit automatically; deep-space nebula + star field rendered behind every route
 
-Stats: 48 files, +4782 / -3452 lines, zero new deps (33rd straight PR since Nemotron). PR #124 first push failed CI (`SURFACE_KEYS` test had hard-coded set without 'volatility' — fixed in same PR).
-Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-05-29.md
+aaronjmars/miroshark-aeon: scheduler/cron auto-commits only — no substantive code.
+
+Stats: 56 files changed, +1,954 / -878 lines. Zero new frontend deps (streak 34+). gunicorn added on backend (first runtime dep since Nemotron).
+Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-05-30.md

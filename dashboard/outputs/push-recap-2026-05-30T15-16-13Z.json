@@ -1,0 +1,315 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Push Recap — 2026-05-30"
+      },
+      "children": [
+        "header_stack",
+        "separator_1",
+        "section_runtime",
+        "separator_2",
+        "section_marketing",
+        "separator_3",
+        "section_details",
+        "separator_4",
+        "section_stats",
+        "separator_5",
+        "footer_link"
+      ]
+    },
+    "header_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "repo_heading",
+        "pr_stat"
+      ]
+    },
+    "repo_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "aaronjmars/MiroShark",
+        "level": "h2"
+      }
+    },
+    "pr_stat": {
+      "type": "Text",
+      "props": {
+        "text": "5 PRs by 1 author (all merged 2026-05-29 evening UTC)",
+        "variant": "lead"
+      }
+    },
+    "separator_1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "section_runtime": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "runtime_heading",
+        "pr_125_link",
+        "pr_125_detail",
+        "pr_126_link",
+        "pr_126_detail"
+      ]
+    },
+    "runtime_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Runtime + agent identity",
+        "level": "h3"
+      }
+    },
+    "pr_125_link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #125",
+        "href": "https://github.com/aaronjmars/MiroShark/pull/125",
+        "source": "GitHub"
+      }
+    },
+    "pr_125_detail": {
+      "type": "Text",
+      "props": {
+        "text": "Closes the FLASK_DEBUG default-true fail-open gap with a new _is_deployed_environment() helper that fails closed on Railway/Cloud Run env vars regardless of DEBUG, switches the internal-key check to hmac.compare_digest, exempts OPTIONS, and runs gunicorn (1 worker / 8 threads, gthread) instead of the Flask dev server in Dockerfile.railway — taking review fixes back in from external PR #106.",
+        "variant": "body"
+      }
+    },
+    "pr_126_link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #126",
+        "href": "https://github.com/aaronjmars/MiroShark/pull/126",
+        "source": "GitHub"
+      }
+    },
+    "pr_126_detail": {
+      "type": "Text",
+      "props": {
+        "text": "Declares MiroShark's treasury 0x7753…0dC1 + deployer 0x6cab…2b24f on Base in .x402books/wallets.json (+19 LoC, merged 18s after open) — first machine-readable on-chain identity surface that isn't a UI element.",
+        "variant": "body"
+      }
+    },
+    "separator_2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "section_marketing": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "marketing_heading",
+        "marketing_intro",
+        "pr_127_link",
+        "pr_127_detail",
+        "pr_128_link",
+        "pr_128_detail",
+        "pr_129_link",
+        "pr_129_detail"
+      ]
+    },
+    "marketing_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Marketing-site visual identity port",
+        "level": "h3"
+      }
+    },
+    "marketing_intro": {
+      "type": "Text",
+      "props": {
+        "text": "3-PR cascade",
+        "variant": "muted"
+      }
+    },
+    "pr_127_link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #127",
+        "href": "https://github.com/aaronjmars/MiroShark/pull/127",
+        "source": "GitHub"
+      }
+    },
+    "pr_127_detail": {
+      "type": "Text",
+      "props": {
+        "text": "Swaps the design system at the :root token level (legacy --color-* names kept, values remapped to space-violet), repoints fonts to Geist/Geist Mono without touching ~400 call sites, adds reusable site classes + global nebula + animated star field + boot splash + SiteFooter.",
+        "variant": "body"
+      }
+    },
+    "pr_128_link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #128",
+        "href": "https://github.com/aaronjmars/MiroShark/pull/128",
+        "source": "GitHub"
+      }
+    },
+    "pr_128_detail": {
+      "type": "Text",
+      "props": {
+        "text": "Chases the contrast/visibility regressions the cascade exposed (fully restyles ExploreView, fixes inverted \"light button\" traps in CounterfactualBranchPanel/WhatIfPanel/Settings, repoints 73 stray Space Mono / Young Serif literals to Geist).",
+        "variant": "body"
+      }
+    },
+    "pr_129_link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #129",
+        "href": "https://github.com/aaronjmars/MiroShark/pull/129",
+        "source": "GitHub"
+      }
+    },
+    "pr_129_detail": {
+      "type": "Text",
+      "props": {
+        "text": "Re-themes the embed dialog (was still a light widget inside the dark app — white-on-white size buttons, near-black iframe code), fixes Step5Interaction's black-on-black hover, unifies sentiment to violet/fuchsia, and switches the ReplayView playback bar from invisible-white to dark glossy.",
+        "variant": "body"
+      }
+    },
+    "separator_3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "section_details": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "details_heading",
+        "detail_1",
+        "detail_2",
+        "detail_3"
+      ]
+    },
+    "details_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Key changes",
+        "level": "h3"
+      }
+    },
+    "detail_1": {
+      "type": "Text",
+      "props": {
+        "text": "backend/app/__init__.py +33/-8 — new _is_deployed_environment() helper + hmac.compare_digest + OPTIONS exempt; regression test fakes RAILWAY_ENVIRONMENT=production with FLASK_DEBUG=true and asserts 503",
+        "variant": "body"
+      }
+    },
+    "detail_2": {
+      "type": "Text",
+      "props": {
+        "text": "Dockerfile.railway +22/-3 — exec gunicorn as PID 1, single worker (torch + sentence-transformers per worker would multiply memory), threads handle I/O-bound LLM + Neo4j workload",
+        "variant": "body"
+      }
+    },
+    "detail_3": {
+      "type": "Text",
+      "props": {
+        "text": "frontend/src/App.vue +419/-34 — palette + font tokens repointed at :root so 400+ scoped <style> blocks inherit automatically; deep-space nebula + star field rendered behind every route",
+        "variant": "body"
+      }
+    },
+    "separator_4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "section_stats": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stats_grid",
+        "aeon_note",
+        "deps_note"
+      ]
+    },
+    "stats_grid": {
+      "type": "Grid",
+      "props": {
+        "columns": 3,
+        "gap": "md"
+      },
+      "children": [
+        "stat_files",
+        "stat_added",
+        "stat_removed"
+      ]
+    },
+    "stat_files": {
+      "type": "Stat",
+      "props": {
+        "label": "Files changed",
+        "value": "56"
+      }
+    },
+    "stat_added": {
+      "type": "Stat",
+      "props": {
+        "label": "Lines added",
+        "value": "+1,954"
+      }
+    },
+    "stat_removed": {
+      "type": "Stat",
+      "props": {
+        "label": "Lines removed",
+        "value": "-878"
+      }
+    },
+    "aeon_note": {
+      "type": "Text",
+      "props": {
+        "text": "aaronjmars/miroshark-aeon: scheduler/cron auto-commits only — no substantive code.",
+        "variant": "caption"
+      }
+    },
+    "deps_note": {
+      "type": "Text",
+      "props": {
+        "text": "Zero new frontend deps (streak 34+). gunicorn added on backend (first runtime dep since Nemotron).",
+        "variant": "caption"
+      }
+    },
+    "separator_5": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "footer_link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full recap",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-05-30.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}
