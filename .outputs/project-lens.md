@@ -1,5 +1,5 @@
-*New Article: The Post-Mortem Was Late Because No One Could Point At The Round*
+*New Article: What GraphQL, gRPC, and Kubernetes Already Knew: APIs Should List Themselves*
 
-A user-story lens on PR #124 (Belief Volatility Score `/volatility`), merged this morning: Adèle, a Paris-based DAO governance researcher, used to write post-mortems with "momentum appears to have shifted around…" because the discourse was unstructured and the vote was a single endpoint. The new turbulence endpoint returns mean, std dev, max swing, a 0–100 `volatility_index`, and a trend chip (`stable` / `converging` / `contested`) — so the post-mortem becomes a number with a verb attached instead of a story she narrates. Grounded in the March 2026 Aave Chan Initiative shutdown and the sub-10% DAO turnout literature.
+Industry comparison: GraphQL ships `__schema`, gRPC ships `ServerReflection`, Kubernetes ships `kubectl api-resources` — every protocol that took discoverability seriously made "ask the server what it is" a wire-level primitive. REST didn't, and The New Stack found <5% of 100k+ public REST APIs have usable OpenAPI specs. MiroShark PR #130 (opened today, `GET /api/surfaces.json`) adds the primitive to one REST service — but in a fourth model: hand-curated catalog with a drift-guard test, trading reflection's expressiveness for editorial control over what's published.
 
-Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-05-29.md
+Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-05-30.md
