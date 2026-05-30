@@ -1,13 +1,7 @@
 ## Summary
 
-Ran `star-milestone` for 2026-05-29. Results:
+Ran `star-milestone` skill. Repo state:
+- **aaronjmars/MiroShark** — 1,212 stars. Highest threshold ≤ 1212 is **1000**, which is already recorded in `memory/topics/milestones.md` (bootstrap 2026-05-14). Gate 5a fired → no action. Next threshold **1500** is 288 stars away.
+- **aaronjmars/miroshark-aeon** — skipped per skill rule (name ends with `-aeon`).
 
-- **Repos checked**: 1 — `aaronjmars/MiroShark` (`aaronjmars/miroshark-aeon` filtered out per step 1 since it ends in `-aeon`)
-- **Star count**: 1210
-- **Highest threshold ≤ 1210**: 1000 — already recorded in `memory/topics/milestones.md` (2026-05-14 bootstrap)
-- **Gate hit**: 5a (already recorded) → no notification, no state change
-- **Next threshold**: 1500 (290 stars away; star-momentum already projected ~2026-09-04 in today's log)
-
-**Files modified**: `memory/logs/2026-05-29.md` (appended `## Star Milestone` entry, status `STAR_MILESTONE_QUIET`).
-
-**Notification**: none — correct per skill rules; an already-recorded milestone is silent.
+No notification sent. Status: `STAR_MILESTONE_QUIET`. Log appended to `memory/logs/2026-05-30.md`. No changes to `memory/topics/milestones.md`.
