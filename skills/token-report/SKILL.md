@@ -46,17 +46,19 @@ Read the last 7 days of memory/logs/ for previous price and volume data to show 
    curl -s "https://api.geckoterminal.com/api/v2/networks/base/pools/POOL_ADDRESS/ohlcv/hour?aggregate=1&limit=24"
    ```
 
-4. **Fetch recent trades** for activity signal:
+4. **Fetch recent trades** for activity signal (also used as Path B fallback in step 5):
    ```bash
    curl -s "https://api.geckoterminal.com/api/v2/networks/base/pools/POOL_ADDRESS/trades"
    ```
+   Each trade entry has `attributes.kind` (`buy`/`sell`), `volume_in_usd`, `block_timestamp`, and `tx_from_address` — enough to render a "top trades" view without any other call.
 
 5. **Search for social sentiment** (optional — requires XAI_API_KEY):
    The sandbox blocks `$XAI_API_KEY` expansion in curl headers, so this skill consumes results that `scripts/prefetch-xai.sh` fetched before Claude started.
 
    **Path A (cache present):** If `.xai-cache/token-report-social.json` exists AND `.xai-cache/token-report-social.symbol` matches the token symbol you just read from MEMORY.md (strip any leading `$`), parse `output[].content[].text` / `output_text` from the JSON and use those tweets + sentiment for the Social Pulse section. Cite @handles and paste permalinks verbatim.
 
-   **Path B (no cache / symbol mismatch / empty results):** Write one line in the Social Pulse section stating that X/Grok data wasn't available for this run (do NOT claim "XAI_API_KEY not set" — the key may well be set; the prefetch may simply have been skipped, rate-limited, or returned nothing). You may optionally use WebSearch for a loose secondary signal but keep it brief.
+   **Path B (no cache / symbol mismatch / empty results):** Drop the "Social Pulse" heading entirely and replace it with a **"Top Trades (24h)"** section built from the step-4 trades response — the 3 largest trades by `volume_in_usd` in the last 24h, one bullet each: `kind` (Buy/Sell), USD value, token amount, time-ago (e.g. "3h ago"), and a [tx](https://basescan.org/tx/0x...) link from `tx_hash`. Lead with one sentence on the buy/sell mix in those top 3 (e.g. "Top flows were 2 buys + 1 sell"). Do **not** write a "X/Grok data unavailable" apology — the trades data is the section now. Skip the section entirely only if the trades response is empty.
+   Log the path you took as `Social: Path A` or `Social: Path B (top-trades fallback)` so future self-improve runs can see which fired.
 
 6. **Compile the daily report**:
    ```markdown
@@ -88,8 +90,11 @@ Read the last 7 days of memory/logs/ for previous price and volume data to show 
    ## Volume & Liquidity
    [Is volume increasing/decreasing? Any notable large trades? Buy/sell ratio?]
 
-   ## Social Pulse
-   [Key mentions, sentiment, notable tweets from the `.xai-cache/token-report-social.json` Path A cache — or a short "X/Grok data unavailable this run" note when the cache is missing or the symbol sidecar doesn't match]
+   ## Social Pulse  *(Path A only — when XAI cache present + symbol matches + non-empty after spam filter)*
+   [Key mentions, sentiment, notable tweets from the `.xai-cache/token-report-social.json` Path A cache]
+
+   ## Top Trades (24h)  *(Path B only — when cache missing / symbol mismatch / all candidates filtered)*
+   [One-sentence flow summary, then 3 bullets — the 3 largest trades by USD from step 4, each: Buy/Sell · $X · N.NM TOKEN · Xh ago · [tx](https://basescan.org/tx/...)]
 
    ## Context
    [1-2 sentences connecting price action to any known events — repo updates, market conditions]
