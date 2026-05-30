@@ -1,19 +1,19 @@
-*Repo Action Ideas — 2026-05-28*
-Generated from analysis of aaronjmars/MiroShark (1,207⭐ · 257 forks · 24 surfaces · 11+ integrators).
+*Repo Action Ideas — 2026-05-30*
+Generated from analysis of the current project — these are ideas that could be autonomously built by the feature skill tomorrow.
 
-1. Gallery Public JSON (Integration, Small)
-   Paginated JSON index of all published sims — the machine-readable full index that every integrator, external directory, and Aeon skill needs before any query-driven surface can exist. Re-eligible from May-20.
+1. Private Share Link (Feature, Medium)
+   Token-gated /share/<token> URL that exposes a private simulation to specific people without publishing it publicly — the first selective-access pattern the platform has.
 
-2. Simulation Comparison API (Feature, Small)
-   GET /api/compare?a=<simId>&b=<simId> — structured diff of two sims: belief delta, consensus agreement, confidence delta, quality winner. AntFleet is already doing this manually; one curl replaces two JSON downloads and a manual diff. Net-new.
+2. French Locale (Community, Medium)
+   Add lang=fr support following the protocol documented in PR #123; direct response to open issue #95 (the only open issue on the repo).
 
-3. Belief Volatility Score (Feature, Small)
-   GET /api/simulation/<id>/volatility — 0–100 turbulence index (std dev of per-round belief deltas) + trend label (Converging/Stable/Contested). High-volatility Bullish ≠ low-volatility Bullish. 25th surface; completes the quant analytical layer. Re-eligible from May-20.
+3. Simulation RSS Feed (Integration, Small)
+   GET /api/feed.rss — RSS 2.0 feed of recent public simulations, opening MiroShark to every automation platform and RSS reader that uses feed subscriptions as a native trigger.
 
-4. Webhook Test Ping (DX, Small)
-   POST /api/webhook/test — sends a synthetic completion payload to WEBHOOK_URL and returns delivery status immediately. Eliminates the 'wait for a real sim to test your endpoint' loop that every new integrator hits exactly once. Re-eligible from May-20.
+4. Simulation Clone JSON (Feature, Small)
+   GET /api/simulation/<id>/clone.json — returns the exact input configuration (scenario text, agent count, rounds, locale, model) ready to POST to /run; first surface that returns inputs, not outputs.
 
-5. Surface Catalog API (Integration, Small)
-   GET /api/surfaces.json — machine-readable catalog of all 24 publish-gated surfaces: key, endpoint, type, description, example curl. Integrators check what's available on a deployment; Aeon tracks live surface count without parsing docs. Net-new, ~60 LoC, static catalog.
+5. Simulation Comparison UI View (Feature, Small)
+   CompareView.vue at /compare?a=<id>&b=<id> — human-usable frontend for the existing compare API; two sim cards side-by-side with colored belief deltas and consensus agreement chip.
 
-Full details: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-actions-2026-05-28.md
+Full details: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-actions-2026-05-30.md
