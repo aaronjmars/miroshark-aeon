@@ -440,4 +440,4 @@ date,skill,model,input_tokens,output_tokens,cache_read,cache_creation
 2026-05-29,thread-formatter,claude-sonnet-4-6,10,21393,414846,45520
 2026-05-29,heartbeat,claude-sonnet-4-6,11,6924,430764,38415
 2026-05-30,token-report,claude-sonnet-4-6,12,15015,650239,65190
-2026-05-30,repo-pulse,claude-sonnet-4-6,12,3809,465607,34684
+2026-05-30,star-momentum-alert,claude-sonnet-4-6,11,8602,380231,29556
