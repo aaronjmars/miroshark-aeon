@@ -1,14 +1,14 @@
-*Thread Draft — 2026-05-29*
-Topic: Belief Volatility Score — MiroShark PR #124
+*Thread Draft — 2026-05-30*
+Topic: Surface Catalog API — MiroShark PR #130
 
-1/ MiroShark has 25 API surfaces. The 25th — merged today as PR #124 — describes how contested a simulation was. Not just which direction it ended. Not just when it peaked. The full distribution of belief swings.
+1/ The 26th MiroShark surface is different from the first 25. The first 25 deliver simulation data — directions, agent beliefs, exports, embeds. The 26th is GET /api/surfaces.json: a machine-readable catalog of the other 25. PR #130 opened today.
 
-2/ Every prior MiroShark surface answers what a simulation concluded or when it moved. signal.json returns direction and confidence. peak-round returns the single most volatile round. Nothing described whether the consensus formed smoothly or under sustained pressure.
+2/ All 25 prior surfaces answer the same class of question: what did this simulation conclude, how confident, what are the agents doing? direction, peak-round, volatility, badge.svg, cite.bib, chart.svg. Each one is a payload. None of them describe the platform itself.
 
-3/ GET /api/simulation/<id>/volatility returns mean and standard deviation of round-over-round swings, a volatility_index from 0 to 100, and a trend label — stable, converging, or contested. A 404 enforces minimum two rounds. No new dependencies. 200 lines of stdlib.
+3/ surfaces.json returns 27 entries: 24 publish-gated per-simulation surfaces, 2 platform-level (stats + badge.svg), 1 self-referential. Each row carries the key, route, method, type, description, originating PR, and a copy-pasteable curl example.
 
-4/ Peak-round already showed you the single most volatile round. Volatility shows you the shape behind it — whether momentum compressed into one inflection or stayed contested across the whole simulation. Direction plus peak plus distribution: that's the full analytical answer.
+4/ Stripe catalogs enabled_events because at sufficient integrator scale, developers can't otherwise figure out what to listen for. MCP ships tools/list for the same reason. Platforms that don't describe themselves force every new integrator to reconstruct the surface map by hand.
 
-5/ volatility_service.py — 200 lines of stdlib. Reuses load_trajectory_rounds from peak-round; max_delta_round matches by construction. The distribution is the new information. PR #124: https://github.com/aaronjmars/MiroShark/pull/124
+5/ surfaces_catalog.py — 370 lines stdlib, 27 entries, 18 tests. Hardcoded by design; drift-guard CI cross-checks the per-sim subset against SURFACE_KEYS. https://github.com/aaronjmars/MiroShark/pull/130
 
-(article: articles/thread-2026-05-29.md)
+(article: articles/thread-2026-05-30.md)

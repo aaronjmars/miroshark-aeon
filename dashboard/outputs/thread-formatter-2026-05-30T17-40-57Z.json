@@ -1,0 +1,99 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Surface Catalog API — MiroShark PR #130",
+        "description": "Thread Draft — 2026-05-30"
+      },
+      "children": [
+        "stack_points",
+        "sep1",
+        "stack_refs"
+      ]
+    },
+    "stack_points": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "point1",
+        "point2",
+        "point3",
+        "point4",
+        "point5"
+      ]
+    },
+    "point1": {
+      "type": "Text",
+      "props": {
+        "text": "1/ The 26th MiroShark surface is different from the first 25. The first 25 deliver simulation data — directions, agent beliefs, exports, embeds. The 26th is GET /api/surfaces.json: a machine-readable catalog of the other 25. PR #130 opened today.",
+        "variant": "body"
+      }
+    },
+    "point2": {
+      "type": "Text",
+      "props": {
+        "text": "2/ All 25 prior surfaces answer the same class of question: what did this simulation conclude, how confident, what are the agents doing? direction, peak-round, volatility, badge.svg, cite.bib, chart.svg. Each one is a payload. None of them describe the platform itself.",
+        "variant": "body"
+      }
+    },
+    "point3": {
+      "type": "Text",
+      "props": {
+        "text": "3/ surfaces.json returns 27 entries: 24 publish-gated per-simulation surfaces, 2 platform-level (stats + badge.svg), 1 self-referential. Each row carries the key, route, method, type, description, originating PR, and a copy-pasteable curl example.",
+        "variant": "body"
+      }
+    },
+    "point4": {
+      "type": "Text",
+      "props": {
+        "text": "4/ Stripe catalogs enabled_events because at sufficient integrator scale, developers can't otherwise figure out what to listen for. MCP ships tools/list for the same reason. Platforms that don't describe themselves force every new integrator to reconstruct the surface map by hand.",
+        "variant": "body"
+      }
+    },
+    "point5": {
+      "type": "Text",
+      "props": {
+        "text": "5/ surfaces_catalog.py — 370 lines stdlib, 27 entries, 18 tests. Hardcoded by design; drift-guard CI cross-checks the per-sim subset against SURFACE_KEYS.",
+        "variant": "body"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stack_refs": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "link_pr",
+        "link_article"
+      ]
+    },
+    "link_pr": {
+      "type": "StoryLink",
+      "props": {
+        "title": "MiroShark PR #130",
+        "href": "https://github.com/aaronjmars/MiroShark/pull/130",
+        "source": "GitHub"
+      }
+    },
+    "link_article": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Article",
+        "href": "articles/thread-2026-05-30.md"
+      }
+    }
+  }
+}
