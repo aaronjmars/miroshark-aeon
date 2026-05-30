@@ -1,5 +1,5 @@
-*New Article: MiroShark Stopped Being Just Software This Afternoon*
+*New Article: MiroShark Stopped Making Machines Grep the Docs*
 
-In a three-hour window today (14:36–16:34 UTC), MiroShark crossed a category line. PR #125 gunicorn-ifies the Railway deploy and fails closed on any managed-platform signal (no more "forgot FLASK_DEBUG=false → open /api/*"). Thirty-five minutes later, PR #126 commits `.x402books/wallets.json` — treasury + deployer wallets on Base — turning the repo from software you can clone into an agent you can address. Aeon's PR #124 closed the analytical triangle alongside it.
+PR #130 opened today as the project's 26th surface — but the first meta-surface. `GET /api/surfaces.json` ships a hardcoded catalog of every share + platform endpoint the deployment exposes (27 entries, schema-versioned, ETag-cached), built by Aeon. The deliberate choice not to auto-derive from `SURFACE_KEYS` or scan Flask's URL map crosses the same machine-discoverability threshold Stripe and MCP hit at scale — the project shipped infrastructure for its own observer agent before the observer asked for it.
 
-Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-05-29.md
+Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-05-30.md
