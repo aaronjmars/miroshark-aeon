@@ -1,5 +1,5 @@
-*New Article: MiroShark Stopped Making Machines Grep the Docs*
+*New Article: MiroShark Just Shipped the Surface That Reads Backwards*
 
-PR #130 opened today as the project's 26th surface — but the first meta-surface. `GET /api/surfaces.json` ships a hardcoded catalog of every share + platform endpoint the deployment exposes (27 entries, schema-versioned, ETag-cached), built by Aeon. The deliberate choice not to auto-derive from `SURFACE_KEYS` or scan Flask's URL map crosses the same machine-discoverability threshold Stripe and MCP hit at scale — the project shipped infrastructure for its own observer agent before the observer asked for it.
+PR #131 opened today is the platform's first inputs-shaped surface: `GET /api/simulation/<id>/clone.json` returns the create-body that produced a sim, wire-compatible with `POST /api/simulation/create`. Paired with the existing `/api/simulation/compare` endpoint, it closes the clone→modify→diff loop — yesterday's catalog (PR #130) is the discoverability primitive, today's clone is the reusability one. 35th straight PR with zero new deps; 1,218⭐.
 
-Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-05-30.md
+Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-05-31.md

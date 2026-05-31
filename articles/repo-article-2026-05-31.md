@@ -1,0 +1,36 @@
+# MiroShark Just Shipped the Surface That Reads Backwards
+
+Yesterday the catalog told you which surfaces a MiroShark deployment exposes. Today the surface opened as PR #131 tells you what configuration produced the one you're looking at. Twenty-six per-simulation surfaces ship a chart, an export, an analytics payload, or an embed iframe. The twenty-seventh ships the create-body of the simulation itself — the literal request the platform would accept to make it again.
+
+`GET /api/simulation/<id>/clone.json` is the first share surface in MiroShark's catalogue that returns **inputs** instead of outputs. Project ID, graph ID, the four enable-platform toggles, the Polymarket market count clamped to one through five, country normalised lowercase, demographic filters passed through verbatim. Wrap that with the scenario text (informational; the platform reuses it from the project, not the create body) and a copy-pasteable `curl` against `/api/simulation/create`, and you have a fork-and-run recipe a stranger can paste into their own deployment.
+
+## What the deployment looks like the morning the clone surface ships
+
+The watched repo is `aaronjmars/MiroShark` — Universal Swarm Intelligence Engine, "simulate anything for $1 in under ten minutes." 1,218 stars (+7 in the last twenty-four hours, from FebbyUtomo, FLIYP-KIC, jav13rrez, fredoss-vs, janicegrech1-hash, mai-ia, andreasalomone). 258 forks. Three open items in the issue tracker: PR #131 itself, PR #130 (the surfaces catalog, opened yesterday), and community issue #95 (a French-locale request still unanswered from May 22). No commits have landed on `main` since Friday night UTC when the marketing-site visual port closed out PR #129. Five quiet days of `main`; two open Aeon PRs filling the gap.
+
+`$MIROSHARK` itself sits at $0.00000850, down another 13% on the day and 80.5% off the May 18 all-time high of $0.0000436. FDV $850K. The token is in the deepest part of its post-ATH drawdown; the platform is still shipping API surfaces on a daily cadence.
+
+## What's been shipping
+
+Friday's burst was the last time the maintainer-of-record pushed to `main`. PR #124 added the `volatility` surface — mean, standard deviation, and a 0–100 turbulence index — closing the analytical triangle with peak-round and signal. PR #125 closed a fail-open gap on Railway where `FLASK_DEBUG=true` could bypass internal-auth and swapped the Flask dev server for gunicorn. PR #126 declared the project's treasury and deployer wallets on Base in nineteen lines of `.x402books/wallets.json`. The three-PR UI cascade (#127 → #128 → #129) ported the marketing-site palette across roughly sixty files of the app — token swap, contrast fixes, embed-dialog rethemes — each PR existing because the previous one's screenshots revealed which buttons had quietly disappeared into a darker background.
+
+Saturday and Sunday added Aeon's two: the surfaces catalog yesterday morning, the clone surface this morning. Both opened, neither merged.
+
+## How an inputs surface differs from an outputs surface
+
+Eleven of the twenty-six prior per-simulation surfaces describe trajectories the swarm produced — `signal`, `peak-round`, `volatility`, `agents/sparklines`, `polymarket.json`, the chart, the share card, the badge, the transcript, the trajectory CSV, the lineage record. Each one is a different projection of `state.json`. `clone.json` projects in the other direction: it reads `state.json` plus `simulation_config.json` and returns a payload that re-creates the configuration. The wire format is the literal body `POST /api/simulation/create` accepts. Same field set, same defaults, same `polymarket_market_count` clamp, same country normalisation, same demographic_filters pass-through.
+
+One field doesn't survive the round trip: `simulation_requirement`. The scenario text lives at the project level, not on the create body, so it's emitted in the envelope as informational metadata. A caller forking with a different scenario updates the project before posting. The cache window is one hour rather than five minutes — unlike volatility or peak-round, the inputs are structural and don't shift round-to-round.
+
+The PR ships +1,205 lines across ten files, no deletions. `clone_service.py` is roughly 250 lines of pure stdlib (`json`, `os`). Twenty-four offline unit tests cover payload shape, the clamp, unicode survival, the curl example format, and a static guard that the route decorator and surface-stats increment are wired in the API module. The `example_curl` field uses the literal placeholder `https://your-host` — no real deployment URL ships in the payload, so a copy-paste cannot accidentally hit an internal endpoint. Thirty-fifth straight PR since the Nemotron persona-grounding work without adding a runtime dependency.
+
+## Why an inputs surface matters
+
+The January 2026 paper *On the reproducibility of discrete-event simulation studies* named the failure mode directly: across the open models the authors tried to re-run, the recurring gap was that "describing input parameters, scenarios, and dependencies" wasn't done well enough for independent reconstruction. Computational reproducibility literature usually splits the problem two ways — *replicability* (rerun the exact same code and get the exact same numbers) and *reproducibility* (rebuild from the description and get something comparable). Outputs surfaces don't help with either; you can't rebuild a simulation from its chart.
+
+Clone.json plus the already-shipped `/api/simulation/compare` endpoint closes the loop on the cheaper of the two: pull the clone payload, swap `polymarket_market_count` from one to five, POST it back, then feed both simulation IDs to `compare`. That sequence is the smallest possible API-driven counterfactual workflow. It is also exactly the workflow the still-unbuilt "Scenario Clone Button" UI in the May-26 batch will eventually wrap. The button is frontend sugar over a primitive the platform now has.
+
+The catalog ships the discoverability primitive. The clone ships the reusability primitive. They are the two halves of the surface that lets a future integrator land on a published MiroShark simulation it has never seen before and ask the platform, in two HTTP calls, both *what is here* and *how was it made*.
+
+---
+*Sources: [PR #131 — simulation clone JSON](https://github.com/aaronjmars/MiroShark/pull/131), [PR #130 — surfaces catalog](https://github.com/aaronjmars/MiroShark/pull/130), [PR #124 — belief volatility](https://github.com/aaronjmars/MiroShark/pull/124), [PR #125 — Railway hardening](https://github.com/aaronjmars/MiroShark/pull/125), [PR #126 — wallets.json](https://github.com/aaronjmars/MiroShark/pull/126), [PRs #127](https://github.com/aaronjmars/MiroShark/pull/127) / [#128](https://github.com/aaronjmars/MiroShark/pull/128) / [#129](https://github.com/aaronjmars/MiroShark/pull/129) — UI cascade, [aaronjmars/MiroShark on GitHub](https://github.com/aaronjmars/MiroShark), [On the reproducibility of discrete-event simulation studies (arXiv, Jan 2026)](https://arxiv.org/html/2501.13137v2), [Reproducibility in Computational Neuroscience Models and Simulations (PMC)](https://pmc.ncbi.nlm.nih.gov/articles/PMC5016202/)*

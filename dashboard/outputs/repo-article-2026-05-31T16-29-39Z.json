@@ -1,0 +1,74 @@
+{
+  "root": "card-root",
+  "state": {},
+  "elements": {
+    "card-root": {
+      "type": "Card",
+      "props": {
+        "title": "repo-article"
+      },
+      "children": [
+        "stack-main"
+      ]
+    },
+    "stack-main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading-1",
+        "text-1",
+        "separator-1",
+        "stack-read"
+      ]
+    },
+    "heading-1": {
+      "type": "Heading",
+      "props": {
+        "text": "New Article: MiroShark Just Shipped the Surface That Reads Backwards",
+        "level": "h2"
+      }
+    },
+    "text-1": {
+      "type": "Text",
+      "props": {
+        "text": "PR #131 opened today is the platform's first inputs-shaped surface: `GET /api/simulation/<id>/clone.json` returns the create-body that produced a sim, wire-compatible with `POST /api/simulation/create`. Paired with the existing `/api/simulation/compare` endpoint, it closes the clone→modify→diff loop — yesterday's catalog (PR #130) is the discoverability primitive, today's clone is the reusability one. 35th straight PR with zero new deps; 1,218⭐.",
+        "variant": "body"
+      }
+    },
+    "separator-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stack-read": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "text-read",
+        "link-article"
+      ]
+    },
+    "text-read": {
+      "type": "Text",
+      "props": {
+        "text": "Read:",
+        "variant": "body"
+      }
+    },
+    "link-article": {
+      "type": "StoryLink",
+      "props": {
+        "title": "MiroShark Just Shipped the Surface That Reads Backwards",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-05-31.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}
