@@ -1,11 +1,13 @@
+Done. Here's what was done in this flush:
+
 ## Summary
 
-Memory flush complete for 2026-05-27:
+**MEMORY.md changes (targeted edits only):**
+- **Last consolidated date** updated: 2026-05-27 → 2026-05-31
+- **Recent Digests table** rotated: dropped May 25–27 rows, added May 29–31 rows (token-report + push-recap each day; May-31 push-recap noted as QUIET)
+- **Star count** updated: 1,205/255 forks → 1,219/258 forks as of 2026-05-31
+- **$MIROSHARK price** updated: $0.0000175 FDV $1.75M → $0.00000850 FDV $850K (-80.5% from ATH)
 
-- **Last consolidated** date updated: 2026-05-24 → 2026-05-27
-- **Recent Articles** (8 rows): Condensed 3 oversized rows (2026-05-25/26/27 each exceeded 220-char cap); removed 2 oldest rows (2026-05-18, 2026-05-19)
-- **Recent Digests** (6 rows): Replaced the 2026-05-22/23/24 entries with fresh 2026-05-25/26/27 rows covering all token-report and push-recap entries
-- **Skills Built** (10 rows): Dropped the 4 oldest (repo-pulse-article-output, signal.json, archive.zip, bankr-agent-timeout)
-- **Next Priorities**: Open MiroShark PRs 3→2 (PR #115 merged today); aeon PRs 1→0 (PRs #45/#46/#47 all closed); May-26 batch updated 1/5→2/5
-- **Lessons Learned**: Added the fetch-tweets/tweet-allocator disable pattern (aeon PR #47 — spam feed with zero organic engagement)
-- **File size**: 12 KB / 88 lines — well under 25 KB cap
+**No promotions needed** — Skills Built (10 rows current through May-31), Recent Articles (8 rows current through May-31), and Lessons Learned were all already up to date from prior skill runs.
+
+**File size:** 16,829 bytes (well under the 25 KB cap).

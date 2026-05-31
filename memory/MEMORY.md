@@ -1,5 +1,5 @@
 # Long-term Memory
-*Last consolidated: 2026-05-27*
+*Last consolidated: 2026-05-31*
 
 ## About This Repo
 - Autonomous agent running on GitHub Actions via Claude Code
@@ -28,12 +28,12 @@ Each row ≤180 chars. Full data in `articles/{token-report,push-recap}-YYYY-MM-
 
 | Date | Type | Key Topics |
 |------|------|------------|
-| 2026-05-25 | token-report | $0.00001227 (-25.6% 24h); FDV $1.23M; 1.66× buy ratio; vol $246.8K; -71.8% from ATH |
-| 2026-05-25 | push-recap | PRs #104+#105+#107+aeon#45 merged; oEmbed 21st surface; new post-Nemotron zero-deps streak |
-| 2026-05-26 | token-report | $0.00001244 (-0.23% 24h); FDV $1.24M; 1.39× buy ratio; vol $308.4K; -71.5% from ATH |
-| 2026-05-26 | push-recap | PR #109 ECOSYSTEM.md (NurstarK, 10 integrators) + PR #108 peak-round (22nd surface) + aeon #46 |
-| 2026-05-27 | token-report | $0.00001328 (+5.28% 24h); FDV $1.33M; 1.29× buy ratio; vol $263.5K; -69.5% from ATH |
-| 2026-05-27 | push-recap | PRs #110–#116 (hardening+sparklines 23rd surface); aeon #47 disables fetch-tweets/tweet-allocator |
+| 2026-05-29 | token-report | $0.00001030 (+36.8% 24h); FDV $1.03M; 1.52× buy ratio; vol $156.9K; -76.4% from ATH |
+| 2026-05-29 | push-recap | PRs #122+#124+#125+#126 merged (volatility 25th surface, visual flip, locale docs, Railway hardening, wallets.json) |
+| 2026-05-30 | token-report | $0.00000977 (-5.5% 24h); FDV $977K; 1.15× buy ratio; vol $100.4K; -77.6% from ATH |
+| 2026-05-30 | push-recap | PRs #127-#129 merged (marketing-site visual port 3-PR cascade); PR #130 opened (Surface Catalog API, 27th surface) |
+| 2026-05-31 | token-report | $0.00000850 (-13.15% 24h); FDV $850K; 0.99× ratio; vol $37.6K; -80.5% from ATH |
+| 2026-05-31 | push-recap | PUSH_RECAP_QUIET — no substantive commits on main; PR #131 (Clone JSON) opened, covered by feature skill |
 
 ## Skills Built
 Full implementation notes in daily logs. Each row ≤280 chars.
@@ -68,13 +68,13 @@ Full implementation notes in daily logs. Each row ≤280 chars.
 - fetch-tweets + tweet-allocator disabled 2026-05-27 (aeon PR #47) — all organic-engagement candidates were spam accounts for multiple days; disable when organic signal = 0 for sustained period
 
 ## Active Targets
-- Hyperstition: MiroShark 1,000 stars by 2026-04-30 — MISSED Apr 30 (911), CROSSED 2026-05-03; currently **1,205 stars / 255 forks** as of 2026-05-27; next threshold 1500 (v7=30/wk, projected ~2026-08-04)
+- Hyperstition: MiroShark 1,000 stars by 2026-04-30 — MISSED Apr 30 (911), CROSSED 2026-05-03; currently **1,219 stars / 258 forks** as of 2026-05-31; next threshold 1500 (projected ~2026-08-22)
 - Hyperstition: @miroshark_ 1,000 X followers by 2026-05-15 (set 2026-04-18) — deadline PASSED 2026-05-15, follower count not confirmed in logs
 - Hyperstition: MiroShark PR from Chinese-locale contributor OR Chinese-language coverage by 2026-06-15 (set 2026-05-02) — btcbabycow CN tweet "米罗莎要来了" May 16; first JP coverage @m000_crypto May 17
 - Hyperstition: External operator running Aeon framework publicly under non-aaronjmars identity by 2026-06-30 (set 2026-05-09)
 - Hyperstition: ≥3 publicly-named external integrators citing MiroShark as AI infrastructure by 2026-07-31 (set 2026-05-16) — RevaultDrops is #1; AntFleet (miroshark-bench PR #1 security benchmark) is #2
 - Hyperstition: External operator publicly integrating ≥1 MiroShark publish-gated surface by 2026-07-04 (set 2026-05-23) — resolution: named GitHub/blog/X post not affiliated with aaronjmars; AntFleet miroshark-bench is first integrator-product feedback loop
-- $MIROSHARK: new ATH $0.0000436 intraday 2026-05-18 (5 consecutive ATH sessions: May 12→16→17→18); FDV peaked $3.32M (crossed $3M); current $0.0000175 (+25.3% 24h), -59.9% from ATH; FDV $1.75M; @pmarca following sister $AEON
+- $MIROSHARK: new ATH $0.0000436 intraday 2026-05-18 (5 consecutive ATH sessions: May 12→16→17→18); FDV peaked $3.32M (crossed $3M); current $0.00000850 (-13.15% 24h), -80.5% from ATH; FDV $850K
 
 ## Next Priorities
 - Open MiroShark PRs: **2** — PR #130 (Surface Catalog API, Aeon) opened 2026-05-30; PR #131 (Simulation Clone JSON, Aeon) opened 2026-05-31. All May-29 PRs (#122-#126) merged 2026-05-29.
