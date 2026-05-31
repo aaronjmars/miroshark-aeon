@@ -1,0 +1,90 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Heartbeat",
+        "description": "Sunday May 31, 2026 — 19:19 UTC"
+      },
+      "children": [
+        "stack_main"
+      ]
+    },
+    "stack_main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stat_daily_skills",
+        "sep_1",
+        "heading_schedule",
+        "text_memory_flush",
+        "text_pending_tasks",
+        "sep_2",
+        "alert_stalled_pr",
+        "text_pr131",
+        "sep_3",
+        "text_health_status"
+      ]
+    },
+    "stat_daily_skills": {
+      "type": "Stat",
+      "props": {
+        "label": "Daily skills confirmed completed",
+        "value": "10/10"
+      }
+    },
+    "sep_1": {
+      "type": "Separator"
+    },
+    "heading_schedule": {
+      "type": "Heading",
+      "props": {
+        "text": "Task Schedule",
+        "level": "h3"
+      }
+    },
+    "text_memory_flush": {
+      "type": "Text",
+      "props": {
+        "text": "memory-flush ran on schedule (Sun)"
+      }
+    },
+    "text_pending_tasks": {
+      "type": "Text",
+      "props": {
+        "text": "repo-actions + self-improve not due today (every-2-day, next run Jun 1)"
+      }
+    },
+    "sep_2": {
+      "type": "Separator"
+    },
+    "alert_stalled_pr": {
+      "type": "Alert",
+      "props": {
+        "title": "Stalled PR #130",
+        "message": "MiroShark PR #130 (Surface Catalog API — GET /api/surfaces.json) has been open for ~32h without merge",
+        "type": "warning"
+      }
+    },
+    "text_pr131": {
+      "type": "Text",
+      "props": {
+        "text": "PR #131 (Clone JSON) opened today — not yet stalled"
+      }
+    },
+    "sep_3": {
+      "type": "Separator"
+    },
+    "text_health_status": {
+      "type": "Text",
+      "props": {
+        "text": "No missing skills. No urgent issues. No stuck runs."
+      }
+    }
+  }
+}
