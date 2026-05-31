@@ -449,3 +449,4 @@ date,skill,model,input_tokens,output_tokens,cache_read,cache_creation
 2026-05-30,thread-formatter,claude-sonnet-4-6,12,20281,538296,47889
 2026-05-30,heartbeat,claude-sonnet-4-6,8,4430,282299,36885
 2026-05-31,token-report,claude-sonnet-4-6,11,17496,582096,74992
+2026-05-31,repo-pulse,claude-sonnet-4-6,14,4495,575397,36902
