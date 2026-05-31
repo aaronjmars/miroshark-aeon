@@ -1,7 +1,13 @@
 ## Summary
 
-Ran `star-milestone` skill. Repo state:
-- **aaronjmars/MiroShark** — 1,212 stars. Highest threshold ≤ 1212 is **1000**, which is already recorded in `memory/topics/milestones.md` (bootstrap 2026-05-14). Gate 5a fired → no action. Next threshold **1500** is 288 stars away.
-- **aaronjmars/miroshark-aeon** — skipped per skill rule (name ends with `-aeon`).
+Ran `star-milestone` for 2026-05-31.
 
-No notification sent. Status: `STAR_MILESTONE_QUIET`. Log appended to `memory/logs/2026-05-30.md`. No changes to `memory/topics/milestones.md`.
+**Watched repos audited**: 1 — `aaronjmars/MiroShark`. `aaronjmars/miroshark-aeon` filtered out per step 1 (`-aeon` suffix → agent repo).
+
+**MiroShark**: stargazers_count = **1219**. Highest threshold `M ≤ 1219` is **1000**. That threshold is already recorded as `1000 stars — 2026-05-14 (bootstrap)` in `memory/topics/milestones.md`, so gate 5a triggers — no announcement, no state change. Next threshold is 1500 (281 stars away).
+
+**Files modified**: `memory/logs/2026-05-31.md` — appended `## Star Milestone` block with status `STAR_MILESTONE_QUIET`.
+
+**Notifications sent**: 0.
+
+**Follow-up**: none. Next milestone announcement opportunity is when MiroShark crosses 1500 stars — at the current ~30 stars/week pace tracked in MEMORY.md, that's projected around 2026-08-22.
