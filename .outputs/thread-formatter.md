@@ -1,14 +1,14 @@
-*Thread Draft — 2026-05-30*
-Topic: Surface Catalog API — MiroShark PR #130
+*Thread Draft — 2026-05-31*
+Topic: Simulation Clone JSON — MiroShark PR #131
 
-1/ The 26th MiroShark surface is different from the first 25. The first 25 deliver simulation data — directions, agent beliefs, exports, embeds. The 26th is GET /api/surfaces.json: a machine-readable catalog of the other 25. PR #130 opened today.
+1/ MiroShark shipped 26 API surfaces before today. All 26 return what a simulation concluded — directions, beliefs, exports, badges, the catalog itself. PR #131, opened this morning, is the first that returns what went in. GET /api/simulation/<id>/clone.json.
 
-2/ All 25 prior surfaces answer the same class of question: what did this simulation conclude, how confident, what are the agents doing? direction, peak-round, volatility, badge.svg, cite.bib, chart.svg. Each one is a payload. None of them describe the platform itself.
+2/ Every prior surface answers one question: what did this simulation produce? signal.json delivers direction and confidence. volatility.json delivers the distribution of belief swings. cite.bib delivers the academic citation. None deliver the configuration that produced the result.
 
-3/ surfaces.json returns 27 entries: 24 publish-gated per-simulation surfaces, 2 platform-level (stats + badge.svg), 1 self-referential. Each row carries the key, route, method, type, description, originating PR, and a copy-pasteable curl example.
+3/ GET /api/simulation/<id>/clone.json returns the body that produced the simulation. Wire-compatible with POST /api/simulation/create: same fields, same defaults, same polymarket_market_count clamp [1,5], same country normalisation. 250 lines of stdlib. 1h cache.
 
-4/ Stripe catalogs enabled_events because at sufficient integrator scale, developers can't otherwise figure out what to listen for. MCP ships tools/list for the same reason. Platforms that don't describe themselves force every new integrator to reconstruct the surface map by hand.
+4/ It pairs with /api/simulation/compare, which already exists: clone the inputs, modify one field, run a new simulation, diff the outputs. That loop — fork, modify, diff — needed no new UI, no new database schema, just an endpoint returning what went in.
 
-5/ surfaces_catalog.py — 370 lines stdlib, 27 entries, 18 tests. Hardcoded by design; drift-guard CI cross-checks the per-sim subset against SURFACE_KEYS. https://github.com/aaronjmars/MiroShark/pull/130
+5/ clone_service.py — 250 lines stdlib, 24 offline tests. 35th consecutive zero-dependency PR. https://github.com/aaronjmars/MiroShark/pull/131
 
-(article: articles/thread-2026-05-30.md)
+(article: articles/thread-2026-05-31.md)
