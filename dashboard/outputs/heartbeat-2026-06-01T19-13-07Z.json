@@ -1,0 +1,134 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "Heartbeat",
+        "description": "Monday Jun 1, 2026 — 19:09 UTC"
+      },
+      "children": [
+        "stack-main"
+      ]
+    },
+    "stack-main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading-missed",
+        "table-missed",
+        "separator-1",
+        "heading-monitoring",
+        "alert-thread-formatter",
+        "separator-2",
+        "heading-summary",
+        "stack-summary"
+      ]
+    },
+    "heading-missed": {
+      "type": "Heading",
+      "props": {
+        "text": "3 Skills Missed Their Scheduled Window Today",
+        "level": "h3"
+      }
+    },
+    "table-missed": {
+      "type": "Table",
+      "props": {
+        "columns": [
+          "Skill",
+          "Scheduled Time",
+          "Overdue",
+          "Status"
+        ],
+        "rows": [
+          [
+            "feature",
+            "11:00 UTC",
+            "8h",
+            "Dispatched"
+          ],
+          [
+            "repo-actions",
+            "14:00 UTC",
+            "5h",
+            "Dispatched"
+          ],
+          [
+            "self-improve",
+            "13:00 UTC",
+            "6h",
+            "Skipped (meta skill)"
+          ]
+        ]
+      }
+    },
+    "separator-1": {
+      "type": "Separator",
+      "props": {}
+    },
+    "heading-monitoring": {
+      "type": "Heading",
+      "props": {
+        "text": "Monitoring",
+        "level": "h3"
+      }
+    },
+    "alert-thread-formatter": {
+      "type": "Alert",
+      "props": {
+        "title": "thread-formatter",
+        "message": "1h39m past scheduled time (17:30 UTC) — under 2h flag threshold, monitoring",
+        "type": "warning"
+      }
+    },
+    "separator-2": {
+      "type": "Separator",
+      "props": {}
+    },
+    "heading-summary": {
+      "type": "Heading",
+      "props": {
+        "text": "Status Summary",
+        "level": "h3"
+      }
+    },
+    "stack-summary": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "text-prs",
+        "text-issues",
+        "text-other"
+      ]
+    },
+    "text-prs": {
+      "type": "Text",
+      "props": {
+        "text": "No stalled PRs (both #130 + #131 merged today)",
+        "variant": "body"
+      }
+    },
+    "text-issues": {
+      "type": "Text",
+      "props": {
+        "text": "No open GitHub issues",
+        "variant": "body"
+      }
+    },
+    "text-other": {
+      "type": "Text",
+      "props": {
+        "text": "All other daily and Monday skills ran clean",
+        "variant": "body"
+      }
+    }
+  }
+}

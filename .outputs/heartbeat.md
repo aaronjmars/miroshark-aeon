@@ -1,7 +1,10 @@
-Heartbeat — Sunday May 31, 2026 — 19:19 UTC
+Heartbeat — Monday Jun 1, 2026 — 19:09 UTC
 
-All 10 daily skills confirmed completed. memory-flush ran on schedule (Sun). repo-actions + self-improve not due today (every-2-day, next run Jun 1).
+3 skills missed their scheduled window today:
+• feature (11:00 UTC) — 8h overdue → dispatched
+• repo-actions (14:00 UTC) — 5h overdue → dispatched
+• self-improve (13:00 UTC) — 6h overdue → skipped (meta skill)
 
-⚠️ Stalled PR: MiroShark PR #130 (Surface Catalog API — GET /api/surfaces.json) has been open for ~32h without merge. PR #131 (Clone JSON) opened today — not yet stalled.
+thread-formatter (17:30 UTC) is 1h39m past scheduled time — under 2h flag threshold, monitoring.
 
-No missing skills. No urgent issues. No stuck runs.
+No stalled PRs (both #130 + #131 merged today). No open GitHub issues. All other daily and Monday skills ran clean.
