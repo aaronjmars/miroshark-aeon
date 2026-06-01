@@ -1,0 +1,189 @@
+{
+  "root": "card-root",
+  "state": {},
+  "elements": {
+    "card-root": {
+      "type": "Card",
+      "props": {
+        "title": "Repo Pulse"
+      },
+      "children": [
+        "date",
+        "repo-link",
+        "separator-1",
+        "stats-section",
+        "separator-2",
+        "stargazers-section",
+        "separator-3",
+        "forks-section"
+      ]
+    },
+    "date": {
+      "type": "Text",
+      "props": {
+        "text": "2026-06-01",
+        "variant": "caption"
+      },
+      "children": []
+    },
+    "repo-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "aaronjmars/MiroShark",
+        "href": "https://github.com/aaronjmars/MiroShark"
+      },
+      "children": []
+    },
+    "separator-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "stats-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "lg"
+      },
+      "children": [
+        "stat-stars",
+        "stat-forks"
+      ]
+    },
+    "stat-stars": {
+      "type": "Stat",
+      "props": {
+        "label": "Stars",
+        "value": "1222",
+        "delta": "+4"
+      },
+      "children": []
+    },
+    "stat-forks": {
+      "type": "Stat",
+      "props": {
+        "label": "Forks",
+        "value": "259",
+        "delta": "+1"
+      },
+      "children": []
+    },
+    "separator-2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "stargazers-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stargazers-heading",
+        "stargazers-links"
+      ]
+    },
+    "stargazers-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "New Stargazers",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "stargazers-links": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "sg-1",
+        "sg-2",
+        "sg-3",
+        "sg-4"
+      ]
+    },
+    "sg-1": {
+      "type": "Link",
+      "props": {
+        "label": "mlongarzo",
+        "href": "https://github.com/mlongarzo"
+      },
+      "children": []
+    },
+    "sg-2": {
+      "type": "Link",
+      "props": {
+        "label": "AxDSan",
+        "href": "https://github.com/AxDSan"
+      },
+      "children": []
+    },
+    "sg-3": {
+      "type": "Link",
+      "props": {
+        "label": "RwBrown90",
+        "href": "https://github.com/RwBrown90"
+      },
+      "children": []
+    },
+    "sg-4": {
+      "type": "Link",
+      "props": {
+        "label": "Eva-E1",
+        "href": "https://github.com/Eva-E1"
+      },
+      "children": []
+    },
+    "separator-3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "forks-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "forks-heading",
+        "forks-links"
+      ]
+    },
+    "forks-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "New Forks",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "forks-links": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "fork-1"
+      ]
+    },
+    "fork-1": {
+      "type": "StoryLink",
+      "props": {
+        "title": "ericlbrault/MiroShark",
+        "href": "https://github.com/ericlbrault/MiroShark"
+      },
+      "children": []
+    }
+  }
+}
