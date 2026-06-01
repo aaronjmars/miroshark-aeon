@@ -1,12 +1,12 @@
-*Weekly Shiplog — 2026-05-25*
+*Weekly Shiplog — 2026-06-01*
 
-MiroShark finished its surface layer — then deliberately broke its own streak. Six new publish-gated surfaces (inventory 10→16), then PR #103 ended a 31-PR zero-deps run to ship real demographic grounding.
+Three legs of the agent stack moved in 95 minutes Friday — runtime, identity, observability all production by sundown — then the SPA's visual identity caught up with the marketing site over the weekend.
 
 Shipped:
-- 6 surfaces: trading signal, archive bundle (compositional), status badge (first push surface), BibTeX citation, WaybackClaw (IPFS+Nostr), Polymarket JSON (first integrator-shaped)
-- 2nd decentralized provenance channel + DOI-grade citation chain, all off static URLs
-- Nemotron demographic grounding — first new deps in a month, spent only where derivation couldn't reach
-- Telegram (5th notification channel)
+- Analytical triangle closed — Peak-Round (#108), Per-Agent Sparklines (#115), Volatility (#124) now compose; same `compute_stance_split(±0.2)` underneath all three.
+- Runtime + identity hardened — gunicorn replaces Flask dev server, `FLASK_DEBUG` no longer bypasses internal-auth (#125); `.x402books/wallets.json` declares treasury+deployer on Base (#126).
+- Visual identity port — 4-PR cascade (#122/#127/#128/#129) rebuilt ~60 files in deep-space + glossy violet, zero logic changes.
+- Meta layer opened — PR #130 (Surface Catalog API) + PR #131 (Clone JSON, 1st *inputs* surface) both opened by Aeon this weekend, still in flight.
 
-Stats: 13 MiroShark PRs, +11,826/-58, 3 external contributors (a 4th opened a PR today)
-Full update: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/weekly-shiplog-2026-05-25.md
+Stats: 25 PRs merged on MiroShark (5 external), +12,400 / -4,800 lines, stars 1,195 → 1,222 (+27).
+Full update: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/weekly-shiplog-2026-06-01.md

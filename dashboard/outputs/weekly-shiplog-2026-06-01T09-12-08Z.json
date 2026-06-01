@@ -1,0 +1,145 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Weekly Shiplog — 2026-06-01"
+      },
+      "children": [
+        "intro",
+        "shipped_heading",
+        "shipped_stack",
+        "separator_1",
+        "stats_heading",
+        "stats_grid",
+        "full_update"
+      ]
+    },
+    "intro": {
+      "type": "Text",
+      "props": {
+        "text": "Three legs of the agent stack moved in 95 minutes Friday — runtime, identity, observability all production by sundown — then the SPA's visual identity caught up with the marketing site over the weekend.",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "shipped_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Shipped",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "shipped_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "shipped_1",
+        "shipped_2",
+        "shipped_3",
+        "shipped_4"
+      ]
+    },
+    "shipped_1": {
+      "type": "Text",
+      "props": {
+        "text": "Analytical triangle closed — Peak-Round (#108), Per-Agent Sparklines (#115), Volatility (#124) now compose; same `compute_stance_split(±0.2)` underneath all three.",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "shipped_2": {
+      "type": "Text",
+      "props": {
+        "text": "Runtime + identity hardened — gunicorn replaces Flask dev server, `FLASK_DEBUG` no longer bypasses internal-auth (#125); `.x402books/wallets.json` declares treasury+deployer on Base (#126).",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "shipped_3": {
+      "type": "Text",
+      "props": {
+        "text": "Visual identity port — 4-PR cascade (#122/#127/#128/#129) rebuilt ~60 files in deep-space + glossy violet, zero logic changes.",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "shipped_4": {
+      "type": "Text",
+      "props": {
+        "text": "Meta layer opened — PR #130 (Surface Catalog API) + PR #131 (Clone JSON, 1st *inputs* surface) both opened by Aeon this weekend, still in flight.",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "separator_1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "stats_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Stats",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "stats_grid": {
+      "type": "Grid",
+      "props": {
+        "columns": 3,
+        "gap": "md"
+      },
+      "children": [
+        "stat_prs",
+        "stat_lines",
+        "stat_stars"
+      ]
+    },
+    "stat_prs": {
+      "type": "Stat",
+      "props": {
+        "label": "PRs merged on MiroShark",
+        "value": "25",
+        "delta": "+5 external"
+      },
+      "children": []
+    },
+    "stat_lines": {
+      "type": "Stat",
+      "props": {
+        "label": "Lines",
+        "value": "+12,400 / -4,800"
+      },
+      "children": []
+    },
+    "stat_stars": {
+      "type": "Stat",
+      "props": {
+        "label": "GitHub stars",
+        "value": "1,222",
+        "delta": "+27",
+        "trend": "up"
+      },
+      "children": []
+    },
+    "full_update": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full update",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/weekly-shiplog-2026-06-01.md",
+        "source": "GitHub"
+      },
+      "children": []
+    }
+  }
+}
