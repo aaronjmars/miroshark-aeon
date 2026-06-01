@@ -463,4 +463,4 @@ date,skill,model,input_tokens,output_tokens,cache_read,cache_creation
 2026-06-01,operator-scorecard,claude-sonnet-4-6,16,18059,1185884,95526
 2026-06-01,push-recap,claude-opus-4-7,26,16180,1341418,122915
 2026-06-01,project-lens,claude-opus-4-7,38,22945,2121927,101370
-2026-06-01,repo-actions,claude-sonnet-4-6,18,23293,1147982,82363
+2026-06-01,feature,claude-opus-4-7,179,80300,23860675,237019
