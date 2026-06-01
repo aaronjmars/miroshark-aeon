@@ -1,0 +1,217 @@
+{
+  "root": "card-scorecard",
+  "state": {},
+  "elements": {
+    "card-scorecard": {
+      "type": "Card",
+      "props": {
+        "title": "Operator Scorecard",
+        "description": "2026-06-01"
+      },
+      "children": [
+        "alert-degraded",
+        "sep-1",
+        "heading-health",
+        "stack-health",
+        "sep-2",
+        "heading-community",
+        "grid-community",
+        "text-repo-note",
+        "sep-3",
+        "heading-economic",
+        "grid-economic",
+        "text-economic-note",
+        "sep-4",
+        "heading-notable",
+        "story-pr",
+        "sep-5",
+        "text-window",
+        "story-article"
+      ]
+    },
+    "alert-degraded": {
+      "type": "Alert",
+      "props": {
+        "title": "🔴 DEGRADED",
+        "message": "7 surfaces shipped and 25 stars gained; token down -42.5% 7d and tweet-allocator disabled — code cadence solid, economic signals weakest of the three lanes.",
+        "type": "error"
+      }
+    },
+    "sep-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading-health": {
+      "type": "Heading",
+      "props": {
+        "text": "Agent Health",
+        "level": "h3"
+      }
+    },
+    "stack-health": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "text-health-main",
+        "text-health-note"
+      ]
+    },
+    "text-health-main": {
+      "type": "Text",
+      "props": {
+        "text": "4 clean / 3 flagged heartbeats across 7 runs",
+        "variant": "body"
+      }
+    },
+    "text-health-note": {
+      "type": "Text",
+      "props": {
+        "text": "(skill-analytics not enabled)",
+        "variant": "muted"
+      }
+    },
+    "sep-2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading-community": {
+      "type": "Heading",
+      "props": {
+        "text": "Community Growth",
+        "level": "h3"
+      }
+    },
+    "grid-community": {
+      "type": "Grid",
+      "props": {
+        "columns": 2,
+        "gap": "md"
+      },
+      "children": [
+        "stat-stars",
+        "stat-forks"
+      ]
+    },
+    "stat-stars": {
+      "type": "Stat",
+      "props": {
+        "label": "Stars",
+        "value": "25",
+        "delta": "+25",
+        "trend": "up"
+      }
+    },
+    "stat-forks": {
+      "type": "Stat",
+      "props": {
+        "label": "Forks",
+        "value": "11",
+        "delta": "+11",
+        "trend": "up"
+      }
+    },
+    "text-repo-note": {
+      "type": "Text",
+      "props": {
+        "text": "across 1 repo",
+        "variant": "caption"
+      }
+    },
+    "sep-3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading-economic": {
+      "type": "Heading",
+      "props": {
+        "text": "Economic Activity",
+        "level": "h3"
+      }
+    },
+    "grid-economic": {
+      "type": "Grid",
+      "props": {
+        "columns": 2,
+        "gap": "md"
+      },
+      "children": [
+        "stat-aeon",
+        "stat-token"
+      ]
+    },
+    "stat-aeon": {
+      "type": "Stat",
+      "props": {
+        "label": "$AEON Distributed",
+        "value": "$10.00"
+      }
+    },
+    "stat-token": {
+      "type": "Stat",
+      "props": {
+        "label": "Token Change",
+        "value": "-42.5%",
+        "delta": "-42.5%",
+        "trend": "down"
+      }
+    },
+    "text-economic-note": {
+      "type": "Text",
+      "props": {
+        "text": "to 2 recipients · 7d window (FADING)",
+        "variant": "caption"
+      }
+    },
+    "sep-4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading-notable": {
+      "type": "Heading",
+      "props": {
+        "text": "Notable",
+        "level": "h3"
+      }
+    },
+    "story-pr": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Simulation Clone JSON — PR #131",
+        "href": "https://github.com/miroshark-aeon/miroshark-aeon/pull/131",
+        "source": "26th surface, 1st returning inputs not outputs; wire-compat with POST /api/simulation/create"
+      }
+    },
+    "sep-5": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "text-window": {
+      "type": "Text",
+      "props": {
+        "text": "Window: last 7d",
+        "variant": "caption"
+      }
+    },
+    "story-article": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full Operator Scorecard Article",
+        "href": "articles/operator-scorecard-2026-06-01.md",
+        "source": "articles"
+      }
+    }
+  }
+}

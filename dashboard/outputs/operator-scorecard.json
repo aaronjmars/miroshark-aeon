@@ -1,29 +1,29 @@
 {
   "version": "1",
-  "generated_at": "2026-05-25T00:00:00Z",
+  "generated_at": "2026-06-01T00:00:00Z",
   "skill": "operator-scorecard",
-  "title": "Operator Scorecard — 2026-05-25",
+  "title": "Operator Scorecard — 2026-06-01",
   "spec": {
     "type": "Stack",
     "props": {"direction": "vertical", "gap": "md"},
     "children": [
-      {"type": "Heading", "props": {"level": 2, "children": "Operator Scorecard — 2026-05-25"}},
-      {"type": "Alert", "props": {"variant": "destructive", "children": "DEGRADED — Fleet ran clean and community growth held, but the token's -64.6% 7d correction pushed the economic lane into DEGRADED territory."}},
+      {"type": "Heading", "props": {"level": 2, "children": "Operator Scorecard — 2026-06-01"}},
+      {"type": "Alert", "props": {"variant": "destructive", "children": "DEGRADED — 7 surfaces shipped and 25 stars gained; token down -42.5% 7d and tweet-allocator disabled — code cadence solid, economic signals weakest of the three lanes."}},
       {"type": "Grid", "props": {"columns": 3, "gap": "sm"}, "children": [
         {"type": "Card", "props": {"children": [
           {"type": "Text", "props": {"variant": "muted", "children": "Agent health"}},
-          {"type": "Heading", "props": {"level": 3, "children": "heartbeat-only"}},
-          {"type": "Text", "props": {"children": "6 clean · 1 action · 0 P0/P1 flags"}}
+          {"type": "Heading", "props": {"level": 3, "children": "4/7"}},
+          {"type": "Text", "props": {"children": "clean heartbeats · 3 P3 flags"}}
         ]}},
         {"type": "Card", "props": {"children": [
           {"type": "Text", "props": {"variant": "muted", "children": "Stars added"}},
-          {"type": "Heading", "props": {"level": 3, "children": "+32"}},
-          {"type": "Text", "props": {"children": "12 forks · new contributors N/A"}}
+          {"type": "Heading", "props": {"level": 3, "children": "+25"}},
+          {"type": "Text", "props": {"children": "11 forks · no leaderboard data"}}
         ]}},
         {"type": "Card", "props": {"children": [
           {"type": "Text", "props": {"variant": "muted", "children": "$AEON distributed"}},
           {"type": "Heading", "props": {"level": 3, "children": "$10.00"}},
-          {"type": "Text", "props": {"children": "2 recipients · token -64.6% 7d"}}
+          {"type": "Text", "props": {"children": "2 recipients · token -42.5% 7d"}}
         ]}}
       ]},
       {"type": "Heading", "props": {"level": 3, "children": "Verdicts by lane"}},
@@ -34,9 +34,9 @@
           {"key": "headline", "header": "Headline"}
         ],
         "rows": [
-          {"lane": "Agent health", "verdict": "OK", "headline": "6 clean heartbeats / 1 action (skill-freshness auto-dispatched) · skill-analytics not enabled"},
-          {"lane": "Community growth", "verdict": "OK", "headline": "+32 stars +12 forks · 3 external contributor merges (antfleet-ops, voidfreud, DYAI2025)"},
-          {"lane": "Economic activity", "verdict": "DEGRADED", "headline": "$10.00 to 2 recipients · token -64.6% 7d (FADING) · FDV $3.32M→$1.23M"}
+          {"lane": "Agent health", "verdict": "WATCH", "headline": "4/7 clean heartbeats · P3×3 (stalled PRs) · heartbeat-only"},
+          {"lane": "Community growth", "verdict": "OK", "headline": "+25⭐ +11 forks · avg 3.6/day · no leaderboard"},
+          {"lane": "Economic activity", "verdict": "DEGRADED", "headline": "$10.00 to 2 recipients · token -42.5% 7d (FADING)"}
         ]
       }}
     ]

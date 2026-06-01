@@ -1,13 +1,13 @@
-*Operator Scorecard — 2026-05-25*
-🔴 DEGRADED — Fleet ran clean and community growth held, but the token's -64.6% 7d correction pushed the economic lane into DEGRADED territory.
+*Operator Scorecard — 2026-06-01*
+🔴 DEGRADED — 7 surfaces shipped and 25 stars gained; token down -42.5% 7d and tweet-allocator disabled — code cadence solid, economic signals weakest of the three lanes.
 
-Agent health: 6 clean / 1 action heartbeats across 7 runs (skill-analytics not enabled)
+Agent health: 4 clean / 3 flagged heartbeats across 7 runs (skill-analytics not enabled)
 
-Community growth: +32⭐ +12 forks across 1 repo · external contributions sustained (antfleet-ops, voidfreud, DYAI2025)
+Community growth: +25⭐ +11 forks across 1 repo
 
-Economic activity: $10.00 in $MIROSHARK to 2 recipients · token -64.6% 7d (FADING · FDV $3.32M→$1.23M)
+Economic activity: $10.00 in $AEON to 2 recipients · token -42.5% 7d (FADING)
 
-Notable: Platform Stats API + Badge SVG (PR #105) — 32nd zero-deps PR; bankr-prefetch EXIT-trap crash sidecar (PR #45)
+Notable: Simulation Clone JSON — PR #131: 26th surface, 1st returning inputs not outputs; wire-compat with POST /api/simulation/create.
 
 Window: last 7d
-Full: articles/operator-scorecard-2026-05-25.md
+Full: articles/operator-scorecard-2026-06-01.md
