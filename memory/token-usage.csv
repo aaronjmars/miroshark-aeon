@@ -461,3 +461,4 @@ date,skill,model,input_tokens,output_tokens,cache_read,cache_creation
 2026-06-01,token-report,claude-sonnet-4-6,420,14348,786826,95265
 2026-06-01,weekly-shiplog,claude-opus-4-7,64,15234,3688889,112085
 2026-06-01,operator-scorecard,claude-sonnet-4-6,16,18059,1185884,95526
+2026-06-01,star-milestone,claude-opus-4-7,60,3625,320966,30728
