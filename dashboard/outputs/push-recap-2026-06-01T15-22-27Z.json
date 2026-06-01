@@ -1,0 +1,272 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Push Recap — 2026-06-01",
+        "description": "aaronjmars/MiroShark — 2 commits · aaronjmars/miroshark-aeon — 1 commit · 3 substantive merges, all by Aeon"
+      },
+      "children": [
+        "stack_main"
+      ]
+    },
+    "stack_main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "miroshark_heading",
+        "miroshark_pr131",
+        "miroshark_pr130",
+        "miroshark_details",
+        "separator1",
+        "aeon_heading",
+        "aeon_pr49",
+        "aeon_details",
+        "separator2",
+        "changes_heading",
+        "changes_section",
+        "separator3",
+        "stats_heading",
+        "stats_text",
+        "cron_note",
+        "separator4",
+        "recap_link"
+      ]
+    },
+    "miroshark_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "MiroShark",
+        "level": "h2"
+      }
+    },
+    "miroshark_pr131": {
+      "type": "Text",
+      "props": {
+        "text": "PR #131 Clone JSON merged 14:07Z — Returns a published sim's inputs (wire-compatible with POST /api/simulation/create, same field set + defaults + polymarket_market_count clamp [1,5] + country normalisation + demographic_filters pass-through, 1h cache vs 5min on analytical surfaces)"
+      }
+    },
+    "miroshark_pr130": {
+      "type": "Text",
+      "props": {
+        "text": "PR #130 Surface Catalog API merged 14:11Z — Returns the machine-readable list of every surface this deployment exposes (28 entries: 26 publish-gated per-sim + 2 platform)"
+      }
+    },
+    "miroshark_details": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "miroshark_detail1",
+        "miroshark_detail2",
+        "miroshark_detail3"
+      ]
+    },
+    "miroshark_detail1": {
+      "type": "Text",
+      "props": {
+        "text": "PR #130's merge bundled a third commit that registered PR #131's clone_json in the catalog (27→28), so main ships both surfaces and the catalog already knows about both — no drift PR.",
+        "variant": "body"
+      }
+    },
+    "miroshark_detail2": {
+      "type": "Text",
+      "props": {
+        "text": "Both pure stdlib + Flask, both zero new deps.",
+        "variant": "body"
+      }
+    },
+    "miroshark_detail3": {
+      "type": "Badge",
+      "props": {
+        "text": "36th consecutive zero-deps PR streak",
+        "variant": "secondary"
+      }
+    },
+    "separator1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "aeon_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Aeon",
+        "level": "h2"
+      }
+    },
+    "aeon_pr49": {
+      "type": "Text",
+      "props": {
+        "text": "PR #49 merged 12:45Z — token-report Path B repaired"
+      }
+    },
+    "aeon_details": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "aeon_detail1",
+        "aeon_detail2",
+        "aeon_detail3",
+        "aeon_detail4",
+        "aeon_detail5"
+      ]
+    },
+    "aeon_detail1": {
+      "type": "Text",
+      "props": {
+        "text": "Social Pulse section had been filler 3 days running (May 28/29/30) — the May-28 spam filter (PR #48) correctly screened all Grok candidates, but Path B then printed \"X/Grok data unavailable for this run\" every day.",
+        "variant": "body"
+      }
+    },
+    "aeon_detail2": {
+      "type": "Text",
+      "props": {
+        "text": "Path B now replaces that line with \"Top Trades (24h)\": 3 largest trades by USD from the already-fetched GeckoTerminal /trades response",
+        "variant": "body"
+      }
+    },
+    "aeon_detail3": {
+      "type": "Text",
+      "props": {
+        "text": "Each trade shown as: Buy/Sell · $value · token amount · time-ago · basescan tx link",
+        "variant": "caption"
+      }
+    },
+    "aeon_detail4": {
+      "type": "Text",
+      "props": {
+        "text": "Zero new API calls — data was in scope, being thrown away.",
+        "variant": "body"
+      }
+    },
+    "aeon_detail5": {
+      "type": "Text",
+      "props": {
+        "text": "Path A unchanged, auto-returns on organic X signal.",
+        "variant": "body"
+      }
+    },
+    "separator2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "changes_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Key Changes",
+        "level": "h3"
+      }
+    },
+    "changes_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "change1",
+        "change2",
+        "change3"
+      ]
+    },
+    "change1": {
+      "type": "Text",
+      "props": {
+        "text": "backend/app/services/clone_service.py (new, +279 stdlib, 24 offline tests) — wire-compatible with create body, deterministic example_curl, 404 vs 403 distinguishes not-ready from not-allowed."
+      }
+    },
+    "change2": {
+      "type": "Text",
+      "props": {
+        "text": "backend/app/services/surfaces_catalog.py (new, +443 stdlib, 18 tests) — hardcoded list, NOT URL-map-scanned; drift-guard test cross-checks per-sim subset against SURFACE_KEYS so a new per-sim surface can't ship without an entry."
+      }
+    },
+    "change3": {
+      "type": "Text",
+      "props": {
+        "text": "skills/token-report/SKILL.md (+9/−4) — step-5 Path B rewrite; new mutually-exclusive Social Pulse / Top Trades headings in step-6 template; new Path A / Path B log convention."
+      }
+    },
+    "separator3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stats_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Stats",
+        "level": "h3"
+      }
+    },
+    "stats_text": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "lg"
+      },
+      "children": [
+        "stat_files",
+        "stat_additions",
+        "stat_deletions"
+      ]
+    },
+    "stat_files": {
+      "type": "Stat",
+      "props": {
+        "label": "Files changed",
+        "value": "26"
+      }
+    },
+    "stat_additions": {
+      "type": "Stat",
+      "props": {
+        "label": "Additions",
+        "value": "+2,603"
+      }
+    },
+    "stat_deletions": {
+      "type": "Stat",
+      "props": {
+        "label": "Deletions",
+        "value": "−11"
+      }
+    },
+    "cron_note": {
+      "type": "Text",
+      "props": {
+        "text": "30+ cron auto-commits on miroshark-aeon excluded as noise. Across 3 commits.",
+        "variant": "caption"
+      }
+    },
+    "separator4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "recap_link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full recap: articles/push-recap-2026-06-01.md",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-06-01.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}
