@@ -1,19 +1,19 @@
-*Repo Action Ideas — 2026-06-01*
-Generated from analysis of aaronjmars/MiroShark (1,222⭐ · 259 forks · 0 open PRs · 28 surfaces). Three re-eligible from May-24 + two net-new.
+*Repo Action Ideas — 2026-06-02*
+Four ecosystem PRs opened today (HivemindOS, Echo Oracle, Capacitr, SyntheticsAI). 16+ named integrators and no machine-readable discovery path. Today's batch addresses that gap and three others.
 
-1. Operator Profile (Community, Medium)
-   Per-operator gallery at /profile/<name> + API — every share page gains a backlink to the operator's full body of work.
+1. Ecosystem JSON Registry (Integration, Small)
+   GET /api/ecosystem.json — structured surface for the 16+ integrators; static-hardcoded pattern of /api/surfaces.json; all 4 new PRs included
 
-2. Agent Persona Export JSON (Feature, Small)
-   GET /api/simulation/<id>/agents.json — 29th surface, exports the full agent roster (name, role, initial belief, final stance) so researchers don't parse transcript.md.
+2. Scenario Clone Button (DX, Small)
+   ?clone=<id> URL param + EmbedDialog button — closes the frontend gap opened when clone.json shipped June 1
 
-3. Simulation Search JSON API (Integration, Small)
-   GET /api/search.json?q=&consensus=&min_confidence= — query-filtered companion to the full gallery index; lets LLM agents and benchmark pipelines find sims without downloading everything.
+3. Japanese README & Features Guide (Community, Medium)
+   README.ja.md + docs/FEATURES.ja.md — zero JP docs exist; @m000_crypto JP coverage since May 17
 
-4. Gallery Trending JSON (Integration, Small)
-   GET /api/gallery/trending.json — top-10 most-viewed public sims in a rolling 7-day window; exposes the existing surface_stats counters as a ranked discovery feed.
+4. Simulation Batch Create API (Integration, Medium)
+   POST /api/simulation/batch — up to 10 sim configs per call; cuts N round-trips to 1 for benchmark pipelines like AntFleet
 
-5. Per-Sim Surface Engagement JSON (Feature/DX, Small)
-   GET /api/simulation/<id>/surfaces/stats.json — per-surface view counts for a published sim; operators see which surfaces are being consumed (AntFleet benchmark vs. organic share); no new tracking needed.
+5. Per-Project Simulation Statistics (Feature/DX, Small)
+   GET /api/project/<project_id>/stats — per-project aggregates over existing project_id tracking in platform_stats.py
 
-Full details: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-actions-2026-06-01.md
+Full details: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-actions-2026-06-02.md
