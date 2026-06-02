@@ -1,0 +1,160 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "$MIROSHARK Daily — 2026-06-02"
+      },
+      "children": [
+        "stack-main"
+      ]
+    },
+    "stack-main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stat-price",
+        "sep-1",
+        "stack-liquidity-vol",
+        "sep-2",
+        "stack-buysells-hl",
+        "sep-3",
+        "stack-7d-30d",
+        "sep-4",
+        "text-narrative",
+        "sep-5",
+        "link-chart"
+      ]
+    },
+    "stat-price": {
+      "type": "Stat",
+      "props": {
+        "label": "Price",
+        "value": "$0.00000656",
+        "delta": "-6.4%",
+        "trend": "down"
+      }
+    },
+    "sep-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stack-liquidity-vol": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "lg"
+      },
+      "children": [
+        "stat-liquidity",
+        "stat-24h-vol"
+      ]
+    },
+    "stat-liquidity": {
+      "type": "Stat",
+      "props": {
+        "label": "Liquidity",
+        "value": "$393.0K"
+      }
+    },
+    "stat-24h-vol": {
+      "type": "Stat",
+      "props": {
+        "label": "24h Vol",
+        "value": "$102.8K",
+        "delta": "+22.5%",
+        "trend": "up"
+      }
+    },
+    "sep-2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stack-buysells-hl": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "lg"
+      },
+      "children": [
+        "text-buysells",
+        "text-24h-hl"
+      ]
+    },
+    "text-buysells": {
+      "type": "Text",
+      "props": {
+        "text": "Buys/Sells: 190/145"
+      }
+    },
+    "text-24h-hl": {
+      "type": "Text",
+      "props": {
+        "text": "24h H/L: $7.49e-6 / $6.15e-6"
+      }
+    },
+    "sep-3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stack-7d-30d": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "lg"
+      },
+      "children": [
+        "text-7d",
+        "text-30d"
+      ]
+    },
+    "text-7d": {
+      "type": "Text",
+      "props": {
+        "text": "7d: -42.8% price, -21.2% vol"
+      }
+    },
+    "text-30d": {
+      "type": "Text",
+      "props": {
+        "text": "30d: +97.1% price"
+      }
+    },
+    "sep-4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "text-narrative": {
+      "type": "Text",
+      "props": {
+        "text": "Top 3 trades were all sells. Buy count (190) leads sells (145) by ratio but dollar-weighted flow tilted sell-side — largest individual move was a $4.25K sell at $6.37 avg. FDV $656K, -85.0% from May 18 ATH."
+      }
+    },
+    "sep-5": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "link-chart": {
+      "type": "Link",
+      "props": {
+        "label": "Chart",
+        "href": "https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209"
+      }
+    }
+  }
+}
