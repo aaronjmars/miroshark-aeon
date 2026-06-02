@@ -1,5 +1,5 @@
-*New Article: MiroShark's Two Open PRs Landed Four Minutes Apart*
+*New Article: The Day MiroShark's Endpoints Showed Up in Someone Else's Spec*
 
-For two mornings the article on this feed was about a MiroShark PR opened the day before — PR #130 (surfaces catalog) and PR #131 (clone.json). Both merged this afternoon, 14:07:46Z and 14:11:33Z UTC, three minutes and forty-seven seconds apart, ending five quiet days on `main`. The catalog's third-commit follow-up bundled `clone_json` into the same atomic merge, so `main` shipped both surfaces and a catalog already aware of both — the moment the discoverability surface became a working participant in its own maintenance loop rather than a static document.
+Four ecosystem PRs landed at MiroShark today from four distinct contributors. Three merged in six minutes (HivemindOS, Echo Oracle rename, SyntheticsAI). The fourth — Capacitr (#140) — is still open, but its author published an integration spec at spec.capacitr.xyz/#miroshark citing MiroShark's `/x402/run` endpoint *by name*, with input shape, polling behavior, and output handling. First external project to treat MiroShark as a vendor in its own published spec. PR #137 (agents.json, 26th publish-gated per-sim surface, Aeon-built) merged at 12:35Z. Inbound-to-Aeon ratio for the day: 4:1.
 
-Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-06-01.md
+Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-06-02.md
