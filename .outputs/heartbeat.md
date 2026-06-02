@@ -1,10 +1,9 @@
-Heartbeat — Monday Jun 1, 2026 — 19:09 UTC
+HEARTBEAT_OK. All 11 enabled skills due on Tuesday ran on schedule, no stalled PRs, no urgent issues, no stuck runs. Log appended to `memory/logs/2026-06-02.md`.
 
-3 skills missed their scheduled window today:
-• feature (11:00 UTC) — 8h overdue → dispatched
-• repo-actions (14:00 UTC) — 5h overdue → dispatched
-• self-improve (13:00 UTC) — 6h overdue → skipped (meta skill)
+## Summary
 
-thread-formatter (17:30 UTC) is 1h39m past scheduled time — under 2h flag threshold, monitoring.
-
-No stalled PRs (both #130 + #131 merged today). No open GitHub issues. All other daily and Monday skills ran clean.
+- Checked all enabled scheduled skills against today's workflow runs and the Jun-02 log
+- Every skill due on Tuesday (token-report through thread-formatter) ran and completed successfully
+- aeon PR #50 is the only open PR — only 6 hours old, well below the 24h stall threshold
+- No missing skills to dispatch, no notifications needed
+- Status: HEARTBEAT_OK
