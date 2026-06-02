@@ -1,14 +1,9 @@
 ## Summary
 
-Ran `star-milestone` skill for 2026-06-01.
+Executed `skills/star-milestone/SKILL.md` for 2026-06-02.
 
-**Result: STAR_MILESTONE_QUIET — no notification sent.**
-
-- **Repos audited**: 1 (aaronjmars/MiroShark). `aaronjmars/miroshark-aeon` filtered by the `-aeon` agent-repo rule.
-- **MiroShark**: 1,223 ⭐ / 259 forks.
-- **Highest threshold crossed**: 1000 — already recorded as `(bootstrap)` on 2026-05-14, so gate 5a triggered (no action).
-- **Next threshold**: 1500 (+277 stars away). Earlier `star-momentum-alert` run today projects crossing ~2026-08-23, consistent with the OUT_OF_WINDOW verdict.
-
-**Files modified**: `memory/logs/2026-06-01.md` (appended Star Milestone section).
-
-**Follow-up**: None. Next milestone announcement will fire when MiroShark crosses 1500, or if `miroshark-aeon` is removed from the agent-repo filter and brought into scope.
+- **Repos checked**: `aaronjmars/MiroShark` (1,223 ⭐). `aaronjmars/miroshark-aeon` skipped per agent-repo filter (ends in `-aeon`).
+- **Milestone evaluation**: Highest threshold ≤ 1,223 is **1000**, already recorded in `memory/topics/milestones.md` as `(bootstrap)` on 2026-05-14. Gate 5a (already recorded) → no action.
+- **No notification sent.** Next threshold is **1500** (277 stars away).
+- **Files modified**: `memory/logs/2026-06-02.md` — appended `## Star Milestone` block with status `STAR_MILESTONE_QUIET`.
+- **Follow-up**: None. Skill is wired to re-check daily; next announce-eligible event is a 1500-star crossing.
