@@ -1,14 +1,14 @@
-*Thread Draft — 2026-05-31*
-Topic: Simulation Clone JSON — MiroShark PR #131
+*Thread Draft — 2026-06-02*
+Topic: Self-Improve — blocked-features registry (aeon PR #50)
 
-1/ MiroShark shipped 26 API surfaces before today. All 26 return what a simulation concluded — directions, beliefs, exports, badges, the catalog itself. PR #131, opened this morning, is the first that returns what went in. GET /api/simulation/<id>/clone.json.
+1/ An autonomous skill suggested Operator Profile 13 times across 25 days. Each time, a build attempt found the same wall: SimulationState has no operator field. Nothing was storing that. Today the skill wrote a fix for itself.
 
-2/ Every prior surface answers one question: what did this simulation produce? signal.json delivers direction and confidence. volatility.json delivers the distribution of belief swings. cite.bib delivers the academic citation. None deliver the configuration that produced the result.
+2/ The repo-actions skill runs daily and gates each idea on a 7-day exclusion window. After 7 days, the idea returns. Nothing logged why it was blocked. Nothing checked whether the upstream constraint still existed. The same impossible suggestion kept cycling back in.
 
-3/ GET /api/simulation/<id>/clone.json returns the body that produced the simulation. Wire-compatible with POST /api/simulation/create: same fields, same defaults, same polymarket_market_count clamp [1,5], same country normalisation. 250 lines of stdlib. 1h cache.
+3/ The fix is memory/topics/blocked-features.md — a file of verified-blocked ideas, each with signature keywords, root cause, and an unblock condition. repo-actions now matches, excludes, and re-verifies on each match so blocks lift automatically.
 
-4/ It pairs with /api/simulation/compare, which already exists: clone the inputs, modify one field, run a new simulation, diff the outputs. That loop — fork, modify, diff — needed no new UI, no new database schema, just an endpoint returning what went in.
+4/ Any autonomous system running on a schedule hits this. Without memory of verified constraints, the suggestion pipeline rediscovers the same wall every cycle. The registry converts a repeated failure into a standing fact the next run can skip.
 
-5/ clone_service.py — 250 lines stdlib, 24 offline tests. 35th consecutive zero-dependency PR. https://github.com/aaronjmars/MiroShark/pull/131
+5/ aeon PR #50 — 2 files: memory/topics/blocked-features.md (new, bootstrapped with one entry) and skills/repo-actions/SKILL.md (step 4 extended). https://github.com/aaronjmars/miroshark-aeon/pull/50
 
-(article: articles/thread-2026-05-31.md)
+(article: articles/thread-2026-06-02.md)
