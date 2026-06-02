@@ -42,10 +42,10 @@
     "last_quality_score": 5
   },
   "push-recap": {
-    "last_status": "dispatched",
-    "last_success": "2026-06-01T15:23:17Z",
-    "total_runs": 51,
-    "total_successes": 50,
+    "last_status": "success",
+    "last_success": "2026-06-02T16:13:13Z",
+    "total_runs": 52,
+    "total_successes": 51,
     "total_failures": 1,
     "consecutive_failures": 0,
     "success_rate": 0.98,
