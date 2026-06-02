@@ -1,0 +1,50 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "project-lens"
+      },
+      "children": [
+        "heading_title",
+        "text_description",
+        "separator_1",
+        "storylink_article"
+      ]
+    },
+    "heading_title": {
+      "type": "Heading",
+      "props": {
+        "text": "New Article: What Stays vs What Changes: A Small API Decision That Says a Lot",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "text_description": {
+      "type": "Text",
+      "props": {
+        "text": "A look at the boring half of API design — splitting one resource into two endpoints — anchored in OpenAI's Responses API, Langfuse sessions, and the MCP server-cards convention. Frames MiroShark's agents.json (merged today, PR #137) and the existing agents/sparklines as the same move: roster cached for an hour, trajectory cached for five minutes, because identity and behavior want different clocks. The split is a small decision; the fact that someone made it instead of bundling is a larger one.",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "separator_1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "storylink_article": {
+      "type": "StoryLink",
+      "props": {
+        "title": "What Stays vs What Changes: A Small API Decision That Says a Lot",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-06-02.md",
+        "source": "MiroShark Aeon"
+      },
+      "children": []
+    }
+  }
+}
