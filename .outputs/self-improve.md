@@ -1,13 +1,14 @@
-*Agent Self-Improvement — 2026-05-30*
+*Agent Self-Improvement — 2026-06-02*
 
-token-report Path B no longer prints "X/Grok data unavailable" — that section is now "Top Trades (24h)" rendered from the GeckoTerminal trades response already fetched in step 4. Top 3 trades by USD value, each shown as Buy/Sell · $value · token amount · time-ago · basescan tx link, with a one-sentence buy/sell mix lead-in. Path A (Social Pulse) is unchanged and reasserts the moment organic X signal returns.
+Blocked-Features Registry
+Added a small memory file (memory/topics/blocked-features.md) that lists ideas verified as architecturally blocked by an upstream constraint. Updated the repo-actions skill to read the file and filter matching candidates out of each daily batch, with a one-line note in the article so the operator sees what was filtered.
 
-Why: the Social Pulse section in the daily token report was filler 3 days running (May 28/29/30) — same "X/Grok data unavailable for this run" apology after the May-28 spam filter (aeon PR #48) correctly screened all candidates. The trades data already in scope from step 4 was being thrown away.
+Why: the repo-actions skill suggested "Operator Profile" 13 times across 2026-05-08 → 2026-06-01 (every cycle once the 7-day exclusion window expired). Today's feature build pivoted off it after grep confirmed SimulationState has no operator/created_by field — platform_stats.py:42-49 upstream documents project_id as the closest stable identifier. Without a memory primitive, tomorrow's repo-actions run would re-suggest it.
 
 What changed:
-- skills/token-report/SKILL.md: step-4 footnote flags trades response as Path B fallback source; step-5 Path B rewritten to render the Top Trades section with basescan links instead of an apology; step-6 template documents Social Pulse + Top Trades as mutually exclusive; new log convention `Social: Path A` / `Social: Path B (top-trades fallback)`.
-- memory/logs/2026-05-30.md + memory/MEMORY.md: log + Skills Built row.
+- memory/topics/blocked-features.md: new registry file with schema (signature keywords, category, reason, verifying log, suggestion history, unblock condition) + one bootstrap entry for Operator Profile
+- skills/repo-actions/SKILL.md: step 4 appended (read registry → case-insensitive keyword match → exclude → article note). Each match runs a 30-second re-verification first so blocks lift automatically when upstream constraints change.
 
-Impact: the flagship daily report's third section becomes operator-verifiable signal (basescan tx hashes) on every Path B day — currently 100% of days since May 28 — instead of a dead line. Zero new API calls. When organic X signal returns, Path A re-appears automatically.
+Impact: frees one idea slot per repo-actions run for net-new suggestions; prevents wasted feature-build cycles pivoting off the same blocked idea; creates a memory layer for verified upstream constraints that compounds across runs. Auto-unblock path keeps the registry self-cleaning.
 
-PR: https://github.com/aaronjmars/miroshark-aeon/pull/49
+PR: https://github.com/aaronjmars/miroshark-aeon/pull/50

@@ -1,0 +1,160 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Agent Self-Improvement — 2026-06-02"
+      },
+      "children": [
+        "content_stack"
+      ]
+    },
+    "content_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "section_blocked"
+      ]
+    },
+    "section_blocked": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "h_blocked",
+        "intro",
+        "sep1",
+        "why_stack",
+        "sep2",
+        "changed_stack",
+        "sep3",
+        "impact_stack",
+        "sep4",
+        "pr_link"
+      ]
+    },
+    "h_blocked": {
+      "type": "Heading",
+      "props": {
+        "text": "Blocked-Features Registry",
+        "level": "h2"
+      }
+    },
+    "intro": {
+      "type": "Text",
+      "props": {
+        "text": "Added a small memory file (memory/topics/blocked-features.md) that lists ideas verified as architecturally blocked by an upstream constraint. Updated the repo-actions skill to read the file and filter matching candidates out of each daily batch, with a one-line note in the article so the operator sees what was filtered."
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {}
+    },
+    "why_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "h_why",
+        "text_why"
+      ]
+    },
+    "h_why": {
+      "type": "Heading",
+      "props": {
+        "text": "Why",
+        "level": "h3"
+      }
+    },
+    "text_why": {
+      "type": "Text",
+      "props": {
+        "text": "the repo-actions skill suggested \"Operator Profile\" 13 times across 2026-05-08 → 2026-06-01 (every cycle once the 7-day exclusion window expired). Today's feature build pivoted off it after grep confirmed SimulationState has no operator/created_by field — platform_stats.py:42-49 upstream documents project_id as the closest stable identifier. Without a memory primitive, tomorrow's repo-actions run would re-suggest it."
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {}
+    },
+    "changed_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "h_changed",
+        "item1",
+        "item2"
+      ]
+    },
+    "h_changed": {
+      "type": "Heading",
+      "props": {
+        "text": "What changed",
+        "level": "h3"
+      }
+    },
+    "item1": {
+      "type": "Text",
+      "props": {
+        "text": "memory/topics/blocked-features.md: new registry file with schema (signature keywords, category, reason, verifying log, suggestion history, unblock condition) + one bootstrap entry for Operator Profile"
+      }
+    },
+    "item2": {
+      "type": "Text",
+      "props": {
+        "text": "skills/repo-actions/SKILL.md: step 4 appended (read registry → case-insensitive keyword match → exclude → article note). Each match runs a 30-second re-verification first so blocks lift automatically when upstream constraints change."
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {}
+    },
+    "impact_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "h_impact",
+        "text_impact"
+      ]
+    },
+    "h_impact": {
+      "type": "Heading",
+      "props": {
+        "text": "Impact",
+        "level": "h3"
+      }
+    },
+    "text_impact": {
+      "type": "Text",
+      "props": {
+        "text": "frees one idea slot per repo-actions run for net-new suggestions; prevents wasted feature-build cycles pivoting off the same blocked idea; creates a memory layer for verified upstream constraints that compounds across runs. Auto-unblock path keeps the registry self-cleaning."
+      }
+    },
+    "sep4": {
+      "type": "Separator",
+      "props": {}
+    },
+    "pr_link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #50",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/pull/50",
+        "source": "GitHub"
+      }
+    }
+  }
+}
