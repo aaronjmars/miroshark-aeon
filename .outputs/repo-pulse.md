@@ -1,11 +1,8 @@
-*Repo Pulse — 2026-06-01*
+*Repo Pulse — 2026-06-02*
 aaronjmars/MiroShark
 
-Stars: 1222 total (+4 new)
-Forks: 259 total (+1 new)
+Stars: 1,223 total (+2 new)
+Forks: 258 total (+0 new)
 
 New stargazers:
-github.com/mlongarzo | github.com/AxDSan | github.com/RwBrown90 | github.com/Eva-E1
-
-New forks:
-github.com/ericlbrault/MiroShark
+github.com/nmarcetic | github.com/nepoxiii
