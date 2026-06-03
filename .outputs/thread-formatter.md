@@ -1,14 +1,14 @@
-*Thread Draft — 2026-06-02*
-Topic: Self-Improve — blocked-features registry (aeon PR #50)
+*Thread Draft — 2026-06-03*
+Topic: Ecosystem JSON Registry — /api/ecosystem.json (PR #145)
 
-1/ An autonomous skill suggested Operator Profile 13 times across 25 days. Each time, a build attempt found the same wall: SimulationState has no operator field. Nothing was storing that. Today the skill wrote a fix for itself.
+1/ MiroShark shipped /api/ecosystem.json today. 14 integrators, 5 categories, typed JSON envelope — machine-readable version of the ECOSYSTEM.md table that external contributors have been updating since May 26.
 
-2/ The repo-actions skill runs daily and gates each idea on a 7-day exclusion window. After 7 days, the idea returns. Nothing logged why it was blocked. Nothing checked whether the upstream constraint still existed. The same impossible suggestion kept cycling back in.
+2/ ECOSYSTEM.md has been an open-contribution list since PR #109 (May 26). It's human-readable: Markdown rows with a name, URL, description, and now a logo. The machine equivalent didn't exist. Integrators who wanted to enumerate the registry had to parse Markdown.
 
-3/ The fix is memory/topics/blocked-features.md — a file of verified-blocked ideas, each with signature keywords, root cause, and an unblock condition. repo-actions now matches, excludes, and re-verifies on each match so blocks lift automatically.
+3/ The endpoint is static and hardcoded, not auto-derived from Markdown. A drift-guard test cross-checks both sources so neither drifts silently. 52 minutes after PR #145 merged, a new external PR broke sync. The drift guard caught it. PR #146 closed it 5 minutes later.
 
-4/ Any autonomous system running on a schedule hits this. Without memory of verified constraints, the suggestion pipeline rediscovers the same wall every cycle. The registry converts a repeated failure into a standing fact the next run can skip.
+4/ surfaces.json (PR #130) lists what the API exposes. ecosystem.json (PR #145) lists who is using it. They live on the same blueprint. That's the pairing a new integrator follows before writing any code. There were 10 integrators in the registry 8 days ago.
 
-5/ aeon PR #50 — 2 files: memory/topics/blocked-features.md (new, bootstrapped with one entry) and skills/repo-actions/SKILL.md (step 4 extended). https://github.com/aaronjmars/miroshark-aeon/pull/50
+5/ PR #145 — 14 integrators, 5 categories, 15 offline tests, zero new dependencies (38th consecutive). https://github.com/aaronjmars/MiroShark/pull/145
 
-(article: articles/thread-2026-06-02.md)
+(article: articles/thread-2026-06-03.md)

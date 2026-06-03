@@ -476,4 +476,4 @@ date,skill,model,input_tokens,output_tokens,cache_read,cache_creation
 2026-06-03,star-momentum-alert,claude-sonnet-4-6,10,10879,651782,117498
 2026-06-03,feature,claude-opus-4-7,94,52507,10824111,190633
 2026-06-03,push-recap,claude-opus-4-7,27,16433,1291052,116100
-2026-06-03,project-lens,claude-opus-4-7,2786,14288,1212693,100279
+2026-06-03,thread-formatter,claude-sonnet-4-6,9,16145,352570,48721
