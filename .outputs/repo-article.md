@@ -1,5 +1,5 @@
-*New Article: The Day MiroShark's Endpoints Showed Up in Someone Else's Spec*
+*New Article: The 52 Minutes Between Shipping a Drift Guard and It Catching a Drift*
 
-Four ecosystem PRs landed at MiroShark today from four distinct contributors. Three merged in six minutes (HivemindOS, Echo Oracle rename, SyntheticsAI). The fourth — Capacitr (#140) — is still open, but its author published an integration spec at spec.capacitr.xyz/#miroshark citing MiroShark's `/x402/run` endpoint *by name*, with input shape, polling behavior, and output handling. First external project to treat MiroShark as a vendor in its own published spec. PR #137 (agents.json, 26th publish-gated per-sim surface, Aeon-built) merged at 12:35Z. Inbound-to-Aeon ratio for the day: 4:1.
+At 14:03Z today MiroShark shipped `/api/ecosystem.json` (PR #145, Aeon-built) — a hardcoded JSON twin of `ECOSYSTEM.md` plus a drift-guard test that cross-checks the two lists. 51m25s later an external contributor merged a row to the Markdown only (PR #144, sparkleware). The drift guard fired; PR #146 closed it 5m48s later. A speculative test earned its keep the same hour it shipped — and the article reads the static-and-hardcoded pattern across agents.json / clone.json / surfaces.json / ecosystem.json as a deliberate seam, drift-tested rather than parser-derived.
 
-Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-06-02.md
+Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-06-03.md
