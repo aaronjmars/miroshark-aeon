@@ -1,19 +1,17 @@
-*Push Recap — 2026-06-02*
-MiroShark — 17 substantive commits to main by 2 authors. miroshark-aeon — 0 substantive (33 commits = cron churn).
+*Push Recap — 2026-06-03*
+aaronjmars/MiroShark — 6 substantive commits by 3 authors. aaronjmars/miroshark-aeon — 1 substantive commit (cron churn excluded).
 
-Two new surfaces shipped paired: PR #132 Private Share-Link (merged 19:46Z Jun 1, +1,826 LoC, 18 tests) is the first tri-state sharing primitive — token-gated /preview/<token> with noindex + no-OG + no-store + identical-404 probe protection, grants the preview page only, all per-sim REST surfaces keep their is_public gate. PR #137 agents.json (merged 12:35Z Jun 2, +1,602 LoC, 24 tests) is the 26th publish-gated per-sim surface — roster export with name/handle/bio/persona/demographics/karma + final_stance, sorted most-bullish-first, ±0.2 stance threshold shared with sparklines.
+**Ecosystem-as-a-contract finished its arc.** The ECOSYSTEM.md registry got a logo column (and lost dormant Nookplot+Supercompact rows), got linked from README in en+zh, gained Capacitr and Sparkleware, and — most consequentially — gained a machine-readable JSON twin at `GET /api/ecosystem.json` (PR #145, Aeon-built, +953/-19 across 10 files). `surfaces.json` and `ecosystem.json` now share one blueprint with identical ETag+cache posture — the platform exposes both meta-questions a new integrator hits ('what can I call?' / 'who else is built on this?') as twin JSON catalogs.
 
-README + docs visual-and-bilingual rebuild — 11 Aaron commits + PR #134 in a 78-minute evening session (18:48Z → 20:06Z Jun 1): logo + 5 diagrams refreshed, 6 product screenshots removed, README slimmed 314 → 242 lines (Highlights table + 40+-more link, full catalog moved to docs), Chinese FEATURES doubled (+590 lines, 21 missing sections + 9 missing catalog rows translated → parity 52 headings & 46-row catalog with English), first-ever Chinese DEMOGRAPHICS.zh-CN.md & NOTIFICATIONS.zh-CN.md added, PR #134 swapped diagrams PNG→JPG (~9.8 MB → 836 KB, ~92% smaller).
+**Drift guard saved itself within an hour.** PR #144 (sparkleware adding their own ECOSYSTEM.md row) merged 52 min after PR #145 — immediately breaking the catalog/Markdown sync the new tests guard. PR #146 closed the gap 5 minutes later. First live save of the design choice to hardcode rather than parse Markdown.
 
-UI polish: PR #133 (merged 19:46Z, +107/-96) fixes global button{border-radius:9999px} leak on 3 list/tab classes + Step4Report's leftover light-theme palette black-on-dark — ~85 rgba(10,10,10,…) → rgba(244,241,255,…), dim violets brightened to #a78bfa/#c4b5fd.
-
-Ecosystem grew to ≥16 named integrators: PR #138 HivemindOS (LiamVisionary), PR #139 Echo → Echo Oracle rename, PR #141 SyntheticsAI — all merged in 12 minutes (15:12–15:18Z Jun 2). PR #140 Capacitr still open at window close.
+**Aeon learned to forget on purpose (PR #50).** `repo-actions` had suggested Operator Profile 13 times across May 8 → Jun 1. New `memory/topics/blocked-features.md` registry + a 30-sec upstream re-verify on each match means the idea is filtered out until `SimulationState` gains an `operator` field — at which point the entry self-deletes and the idea returns to the pool.
 
 Key changes:
-- agents.json answers *who was in the debate* in machine-readable form — AntFleet's benchmark pipeline no longer needs a transcript.md regex to extract roster composition
-- Private share-link takes the per-sim sharing model from binary public/private to tri-state — first sharing primitive whose payload is strictly more restrictive than the public option
-- Chinese deep-dive now at locale parity (52 headings each, 46-row catalog each) for the first time since the Chinese version forked
+- PR #145 `backend/app/services/ecosystem_catalog.py` — 263 lines pure stdlib, literal list of 13 dicts, 5 categories, drift-guarded
+- PR #143 ECOSYSTEM.md visual rebuild — logo column added, Nookplot+Supercompact dropped, every row now has a 40px image
+- PR #50 `memory/topics/blocked-features.md` — schema + Operator Profile bootstrap entry, signature-keyword matching, auto-unblock condition
 
-Stats: ~40 files changed, +4,550 / −259 lines across 17 commits. Catalog count 28 → 29. Zero-new-deps streak: 36th (#132) + 37th (#137). Aeon PR #50 (blocked-features registry) opened, not merged.
-
-Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-06-02.md
+Stats: ~12 files changed, +1,003 / -36 across 7 substantive commits
+Open PRs at window close: 0/0 (both ledgers cleared)
+Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-06-03.md
