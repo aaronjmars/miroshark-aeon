@@ -45,6 +45,8 @@ Read memory/watched-repos.md for the repo to analyze.
    ```
    Also check the last 7 days of `articles/repo-actions-*.md` for previously suggested ideas. Do NOT regenerate ideas that overlap with open PRs or were already suggested in the past 7 days.
 
+   **Then check `memory/topics/blocked-features.md`** (if it exists) — list of features verified as architecturally blocked by an upstream constraint (missing data-model field, third-party API limit, etc.). For every candidate idea, do a case-insensitive substring match against each blocked entry's signature keywords. If a match hits, exclude the idea from the batch and append a one-line `Excluded (blocked): <title> — <one-line reason>` note in the article's Selection Rationale section so the operator sees what was filtered. Before excluding, do a 30-second re-verification against the entry's "Unblock when" condition (e.g. grep the upstream file for the missing field) — if the constraint has lifted, **remove the blocked-features.md entry in this same run** and treat the idea as eligible. Past offender: `Operator Profile` was suggested 13 times across 2026-05-08 → 2026-06-01 before today's feature build verified it's blocked.
+
 5. **Generate 5 action ideas** — concrete, implementable suggestions that the `feature` skill can autonomously build tomorrow. Each should be:
    - Specific enough to be a GitHub issue
    - Scoped so an AI agent can implement it autonomously (clear inputs/outputs, no ambiguous design decisions, no external approvals needed)
