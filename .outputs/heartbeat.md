@@ -1,9 +1,21 @@
-HEARTBEAT_OK. All 11 enabled skills due on Tuesday ran on schedule, no stalled PRs, no urgent issues, no stuck runs. Log appended to `memory/logs/2026-06-02.md`.
+**Date: Wednesday Jun 3, 2026 — 19:05 UTC**
 
-## Summary
+HEARTBEAT_OK — all scheduled skills for today have run or are currently running:
 
-- Checked all enabled scheduled skills against today's workflow runs and the Jun-02 log
-- Every skill due on Tuesday (token-report through thread-formatter) ran and completed successfully
-- aeon PR #50 is the only open PR — only 6 hours old, well below the 24h stall threshold
-- No missing skills to dispatch, no notifications needed
-- Status: HEARTBEAT_OK
+| Skill | Status |
+|-------|--------|
+| token-report | ✓ completed 07:28 |
+| repo-pulse | ✓ completed 10:56 |
+| star-momentum-alert | ✓ completed 10:56 |
+| feature | ✓ completed 12:37 |
+| push-recap | ✓ completed 15:54 |
+| star-milestone | ✓ completed 15:54 |
+| project-lens | ✓ completed 17:45 |
+| repo-article | ✓ completed 17:45 |
+| thread-formatter | ✓ completed 17:45 |
+| memory-flush | ⏳ in_progress since 19:04 (within 2h window) |
+| heartbeat | ⏳ running now |
+
+Not due today: `self-improve`, `repo-actions` (even-day `*/2` schedule; day 03 is odd), `weekly-shiplog`, `operator-scorecard` (Monday only).
+
+No open PRs on either repo, no urgent issues. Nothing requires auto-trigger or notification. Log appended to `memory/logs/2026-06-03.md`.
