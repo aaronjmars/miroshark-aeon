@@ -1,13 +1,10 @@
-Done. Here's what was done in this flush:
-
 ## Summary
 
-**MEMORY.md changes (targeted edits only):**
-- **Last consolidated date** updated: 2026-05-27 → 2026-05-31
-- **Recent Digests table** rotated: dropped May 25–27 rows, added May 29–31 rows (token-report + push-recap each day; May-31 push-recap noted as QUIET)
-- **Star count** updated: 1,205/255 forks → 1,219/258 forks as of 2026-05-31
-- **$MIROSHARK price** updated: $0.0000175 FDV $1.75M → $0.00000850 FDV $850K (-80.5% from ATH)
+Memory flush complete for 2026-06-03. Changes made to `memory/MEMORY.md`:
 
-**No promotions needed** — Skills Built (10 rows current through May-31), Recent Articles (8 rows current through May-31), and Lessons Learned were all already up to date from prior skill runs.
-
-**File size:** 16,829 bytes (well under the 25 KB cap).
+- **Date**: Last consolidated updated to 2026-06-03
+- **Active Targets**: Stars updated 1,219/258→1,226/263; token price updated to $0.00000682 (+6.19%, -84.4% ATH, FDV $681.7K); Capacitr confirmed as ≥3 integrators hyperstition #3; external operator hyperstition resolution condition marked met
+- **Next Priorities**: Open MiroShark PRs 1→0 (PR #145 merged); Jun-02 batch #1 status corrected to "merged"; aeon open PRs updated to reflect PR #50 merged Jun 3
+- **Recent Digests**: Rotated — replaced May-29/30/31 rows with Jun-01/02/03 entries (6 rows maintained)
+- **Skills Built**: Trimmed from 19 rows to 10 — removed 9 oldest (May-21 through May-26 entries now only in daily logs)
+- **File size**: 19,840 bytes / 90 lines — under the 20 KB target
