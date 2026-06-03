@@ -1,0 +1,233 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "Feature Built — 2026-06-03"
+      },
+      "children": [
+        "heading1",
+        "desc1",
+        "sep1",
+        "why_heading",
+        "why_text1",
+        "why_text2",
+        "sep2",
+        "what_heading",
+        "what_items",
+        "sep3",
+        "how_heading",
+        "how_text",
+        "sep4",
+        "next_heading",
+        "next_text",
+        "sep5",
+        "pr_link"
+      ]
+    },
+    "heading1": {
+      "type": "Heading",
+      "props": {
+        "text": "Ecosystem JSON Registry",
+        "level": "h2"
+      }
+    },
+    "desc1": {
+      "type": "Text",
+      "props": {
+        "text": "MiroShark's ECOSYSTEM.md — the curated list of every project, agent, and product publicly identified as built on the platform — now has a machine-readable counterpart at GET /api/ecosystem.json. Anyone building tooling over MiroShark's growing integrator base (a benchmark dashboard, an integrator-of-integrators directory, an automated cross-reference with /api/surfaces.json) gets a typed JSON envelope instead of having to scrape a Markdown table."
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {}
+    },
+    "why_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Why this matters",
+        "level": "h3"
+      }
+    },
+    "why_text1": {
+      "type": "Text",
+      "props": {
+        "text": "Yesterday afternoon (2026-06-02) four separate teams — HivemindOS, Echo Oracle, Capacitr, SyntheticsAI — opened ECOSYSTEM.md PRs inside the same 6-minute window. The ecosystem now has 13 named integrators with no machine-readable discovery path; integrators building on integrators (AntFleet's miroshark-bench security suite, Signa's Aeon skill pack, Capacitr's published integration spec) currently have to parse Markdown to know what else is built on the platform."
+      }
+    },
+    "why_text2": {
+      "type": "Text",
+      "props": {
+        "text": "This was repo-actions Jun-02 batch idea #1 and re-eligible May-26 #5 — deferred until the ecosystem had enough mass to justify the surface; four PRs in one day was that mass."
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {}
+    },
+    "what_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "What was built",
+        "level": "h3"
+      }
+    },
+    "what_items": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "what_item1",
+        "what_item2",
+        "what_item3",
+        "what_item4"
+      ]
+    },
+    "what_item1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "what_item1_title",
+        "what_item1_text"
+      ]
+    },
+    "what_item1_title": {
+      "type": "Text",
+      "props": {
+        "text": "backend/app/services/ecosystem_catalog.py (~230 LoC stdlib)",
+        "variant": "lead"
+      }
+    },
+    "what_item1_text": {
+      "type": "Text",
+      "props": {
+        "text": "static literal list of 13 integrators mirroring ECOSYSTEM.md, with get_ecosystem_catalog / catalog_count / catalog_etag / build_response_payload helpers. Five-category taxonomy: product (Capacitr/Echo Oracle/HivemindOS/RootAI/Xerg/ZER0), tool (Crucible Sim), integration (Monitor/Noelclaw/Signa), agent (Blue Agent/SyntheticsAI), benchmark (AntFleet)."
+      }
+    },
+    "what_item2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "what_item2_title",
+        "what_item2_text"
+      ]
+    },
+    "what_item2_title": {
+      "type": "Text",
+      "props": {
+        "text": "backend/app/api/surfaces.py: new GET /ecosystem.json route",
+        "variant": "lead"
+      }
+    },
+    "what_item2_text": {
+      "type": "Text",
+      "props": {
+        "text": "on the existing surfaces_bp blueprint — identical posture to /surfaces.json (same ETag/304 short-circuit, same 1-hour cache header, same {success, data: {schema_version, count, ecosystem}} envelope)."
+      }
+    },
+    "what_item3": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "what_item3_title",
+        "what_item3_text"
+      ]
+    },
+    "what_item3_title": {
+      "type": "Text",
+      "props": {
+        "text": "backend/tests/test_unit_ecosystem_catalog.py: 15 pure-offline tests",
+        "variant": "lead"
+      }
+    },
+    "what_item3_text": {
+      "type": "Text",
+      "props": {
+        "text": "covering schema invariants, category whitelist, alphabetised-order guard, ETag determinism, JSON-serialisability, a drift guard cross-checking the catalog's project name set against ECOSYSTEM.md, a wiring guard for the route decorator, and an OpenAPI presence check."
+      }
+    },
+    "what_item4": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "what_item4_title",
+        "what_item4_text"
+      ]
+    },
+    "what_item4_title": {
+      "type": "Text",
+      "props": {
+        "text": "backend/openapi.yaml + frontend/src/api/simulation.js + ECOSYSTEM.md + docs/API.md + docs/FEATURES.md + docs/FEATURES.zh-CN.md",
+        "variant": "lead"
+      }
+    },
+    "what_item4_text": {
+      "type": "Text",
+      "props": {
+        "text": "full surround — typed schemas, JS helpers (getEcosystemUrl/getEcosystem), one-line machine-readable note on ECOSYSTEM.md, English + 中文 feature sections matching the Surface Catalog API pattern."
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {}
+    },
+    "how_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "How it works",
+        "level": "h3"
+      }
+    },
+    "how_text": {
+      "type": "Text",
+      "props": {
+        "text": "Per-entry fields are locked: name (project's own canonical capitalisation, matches the ECOSYSTEM.md row), url (primary public link — repo when one exists, X otherwise), description (≤160 chars), category (one of the five), x_handle (without leading @, nullable so the consumer can compose https://x.com/<x_handle> URLs without trimming), repo (https://github.com/… or null for closed-source integrators). Static and hardcoded by design — explicitly NOT auto-derived from a Markdown parse of ECOSYSTEM.md, because the Markdown shape (cells with images, links, free text) is fragile and silent parser drift would degrade the public contract. Adding an integrator ships in two files (ECOSYSTEM.md row + catalog entry); the drift test cross-checks both sources so neither side can drift silently. The new endpoint also gets an entry in the surfaces catalog itself (PR #130's /api/surfaces.json), so a consumer iterating surfaces.json discovers ecosystem.json without reading docs."
+      }
+    },
+    "sep4": {
+      "type": "Separator",
+      "props": {}
+    },
+    "next_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "What's next",
+        "level": "h3"
+      }
+    },
+    "next_text": {
+      "type": "Text",
+      "props": {
+        "text": "The natural follow-ups from the same Jun-02 batch are the Scenario Clone Button (UI entry point for last week's clone.json backend) and the Simulation Batch Create API (1 round-trip for N sims — relevant for AntFleet's benchmark suite and SyntheticsAI's pipelines now that the ecosystem has settled into roughly Bags-style monitor + benchmark + product shapes). 38th consecutive zero-dependency PR."
+      }
+    },
+    "sep5": {
+      "type": "Separator",
+      "props": {}
+    },
+    "pr_link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #145",
+        "href": "https://github.com/aaronjmars/MiroShark/pull/145",
+        "source": "GitHub"
+      }
+    }
+  }
+}
