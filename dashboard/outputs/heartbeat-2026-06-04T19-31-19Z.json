@@ -1,0 +1,178 @@
+{
+  "root": "card-root",
+  "state": {},
+  "elements": {
+    "card-root": {
+      "type": "Card",
+      "props": {
+        "title": "Heartbeat"
+      },
+      "children": [
+        "timestamp",
+        "status-badge",
+        "sep1",
+        "skills-heading",
+        "skills-stack",
+        "sep2",
+        "system-heading",
+        "system-stack"
+      ]
+    },
+    "timestamp": {
+      "type": "Text",
+      "props": {
+        "text": "Thu Jun 4, 19:30 UTC",
+        "variant": "caption"
+      }
+    },
+    "status-badge": {
+      "type": "Badge",
+      "props": {
+        "text": "HEARTBEAT_OK",
+        "variant": "default"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "skills-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Scheduled Skills (11 executed)",
+        "level": "h3"
+      }
+    },
+    "skills-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "skill-1",
+        "skill-2",
+        "skill-3",
+        "skill-4",
+        "skill-5",
+        "skill-6",
+        "skill-7",
+        "skill-8",
+        "skill-9",
+        "skill-10",
+        "skill-11"
+      ]
+    },
+    "skill-1": {
+      "type": "Text",
+      "props": {
+        "text": "token-report"
+      }
+    },
+    "skill-2": {
+      "type": "Text",
+      "props": {
+        "text": "repo-pulse"
+      }
+    },
+    "skill-3": {
+      "type": "Text",
+      "props": {
+        "text": "star-momentum-alert"
+      }
+    },
+    "skill-4": {
+      "type": "Text",
+      "props": {
+        "text": "feature"
+      }
+    },
+    "skill-5": {
+      "type": "Text",
+      "props": {
+        "text": "self-improve"
+      }
+    },
+    "skill-6": {
+      "type": "Text",
+      "props": {
+        "text": "repo-actions"
+      }
+    },
+    "skill-7": {
+      "type": "Text",
+      "props": {
+        "text": "push-recap"
+      }
+    },
+    "skill-8": {
+      "type": "Text",
+      "props": {
+        "text": "star-milestone"
+      }
+    },
+    "skill-9": {
+      "type": "Text",
+      "props": {
+        "text": "project-lens"
+      }
+    },
+    "skill-10": {
+      "type": "Text",
+      "props": {
+        "text": "repo-article"
+      }
+    },
+    "skill-11": {
+      "type": "Text",
+      "props": {
+        "text": "thread-formatter"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "system-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "System Status",
+        "level": "h3"
+      }
+    },
+    "system-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "status-1",
+        "status-2",
+        "status-3"
+      ]
+    },
+    "status-1": {
+      "type": "Text",
+      "props": {
+        "text": "No open PRs"
+      }
+    },
+    "status-2": {
+      "type": "Text",
+      "props": {
+        "text": "No stuck runs"
+      }
+    },
+    "status-3": {
+      "type": "Text",
+      "props": {
+        "text": "No urgent issues"
+      }
+    }
+  }
+}
