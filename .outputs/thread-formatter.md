@@ -1,14 +1,14 @@
-*Thread Draft — 2026-06-03*
-Topic: Ecosystem JSON Registry — /api/ecosystem.json (PR #145)
+*Thread Draft — 2026-06-04*
+Topic: Per-Project Simulation Statistics — /api/project/<id>/stats (PR #147)
 
-1/ MiroShark shipped /api/ecosystem.json today. 14 integrators, 5 categories, typed JSON envelope — machine-readable version of the ECOSYSTEM.md table that external contributors have been updating since May 26.
+1/ MiroShark's API had per-platform stats and per-simulation stats. It had nothing in between. PR #147 ships the missing layer: GET /api/project/<id>/stats aggregates across every sim under a single project ID.
 
-2/ ECOSYSTEM.md has been an open-contribution list since PR #109 (May 26). It's human-readable: Markdown rows with a name, URL, description, and now a logo. The machine equivalent didn't exist. Integrators who wanted to enumerate the registry had to parse Markdown.
+2/ The platform exposed two endpoints: /api/stats for the whole instance and 26 per-simulation surfaces for individual runs. Operators running multiple named projects had to fetch the platform aggregate and filter it themselves on the client side.
 
-3/ The endpoint is static and hardcoded, not auto-derived from Markdown. A drift-guard test cross-checks both sources so neither drifts silently. 52 minutes after PR #145 merged, a new external PR broke sync. The drift guard caught it. PR #146 closed it 5 minutes later.
+3/ The new route validates project_id at the boundary, returns an all-zero envelope for unknown IDs (not a 404), caches at 60s, and adds one new field absent from the platform aggregate: quality_distribution — excellent/good/fair/poor buckets, only useful at per-project granularity.
 
-4/ surfaces.json (PR #130) lists what the API exposes. ecosystem.json (PR #145) lists who is using it. They live on the same blueprint. That's the pairing a new integrator follows before writing any code. There were 10 integrators in the registry 8 days ago.
+4/ This establishes a third axis the stats API can grow along. Whole-instance / per-project / per-sim is how multi-tenant analytics APIs end up shaped. stats.py now mounts three blueprints where it mounted two yesterday. 39th consecutive PR with zero new dependencies.
 
-5/ PR #145 — 14 integrators, 5 categories, 15 offline tests, zero new dependencies (38th consecutive). https://github.com/aaronjmars/MiroShark/pull/145
+5/ PR #147 — 13 files, +1,864 lines, 28 offline tests, zero new dependencies. https://github.com/aaronjmars/MiroShark/pull/147
 
-(article: articles/thread-2026-06-03.md)
+(article: articles/thread-2026-06-04.md)
