@@ -1,0 +1,333 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "Repo Action Ideas — 2026-06-04"
+      },
+      "children": [
+        "subtitle",
+        "repo_info",
+        "sep1",
+        "item1",
+        "item2",
+        "item3",
+        "item4",
+        "item5",
+        "sep2",
+        "link"
+      ]
+    },
+    "subtitle": {
+      "type": "Text",
+      "props": {
+        "text": "Generated from analysis of aaronjmars/MiroShark",
+        "variant": "muted"
+      }
+    },
+    "repo_info": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "badge_stars",
+        "badge_forks",
+        "badge_integrators",
+        "badge_pr"
+      ]
+    },
+    "badge_stars": {
+      "type": "Badge",
+      "props": {
+        "text": "1,231⭐"
+      }
+    },
+    "badge_forks": {
+      "type": "Badge",
+      "props": {
+        "text": "265 forks"
+      }
+    },
+    "badge_integrators": {
+      "type": "Badge",
+      "props": {
+        "text": "14 integrators"
+      }
+    },
+    "badge_pr": {
+      "type": "Badge",
+      "props": {
+        "text": "PR #147 open"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {}
+    },
+    "item1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "item1_title",
+        "item1_tags",
+        "item1_desc"
+      ]
+    },
+    "item1_title": {
+      "type": "Heading",
+      "props": {
+        "text": "1. Webhook Delivery Log API",
+        "level": "h3"
+      }
+    },
+    "item1_tags": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "item1_cat",
+        "item1_size"
+      ]
+    },
+    "item1_cat": {
+      "type": "Badge",
+      "props": {
+        "text": "DX",
+        "variant": "secondary"
+      }
+    },
+    "item1_size": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "outline"
+      }
+    },
+    "item1_desc": {
+      "type": "Text",
+      "props": {
+        "text": "Expose the existing per-sim webhook-log.jsonl as a GET endpoint — 14+ integrators debug delivery failures with zero platform-side visibility today."
+      }
+    },
+    "item2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "item2_title",
+        "item2_tags",
+        "item2_desc"
+      ]
+    },
+    "item2_title": {
+      "type": "Heading",
+      "props": {
+        "text": "2. Platform Status API",
+        "level": "h3"
+      }
+    },
+    "item2_tags": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "item2_cat",
+        "item2_size"
+      ]
+    },
+    "item2_cat": {
+      "type": "Badge",
+      "props": {
+        "text": "DX/Integration",
+        "variant": "secondary"
+      }
+    },
+    "item2_size": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "outline"
+      }
+    },
+    "item2_desc": {
+      "type": "Text",
+      "props": {
+        "text": "GET /api/status.json — queue depth, 24h completions, last-completed timestamp. The health check that makes MiroShark monitorable by Upptime/StatusPage. Not /api/stats."
+      }
+    },
+    "item3": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "item3_title",
+        "item3_tags",
+        "item3_desc"
+      ]
+    },
+    "item3_title": {
+      "type": "Heading",
+      "props": {
+        "text": "3. Multi-Sim Status Lookup",
+        "level": "h3"
+      }
+    },
+    "item3_tags": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "item3_cat",
+        "item3_size"
+      ]
+    },
+    "item3_cat": {
+      "type": "Badge",
+      "props": {
+        "text": "Integration",
+        "variant": "secondary"
+      }
+    },
+    "item3_size": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "outline"
+      }
+    },
+    "item3_desc": {
+      "type": "Text",
+      "props": {
+        "text": "POST /api/simulation/batch-status — check up to 20 sim IDs in one call. Capacitr's polling loop and AntFleet's benchmark pipeline pay N round-trips today; this makes it 1."
+      }
+    },
+    "item4": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "item4_title",
+        "item4_tags",
+        "item4_desc"
+      ]
+    },
+    "item4_title": {
+      "type": "Heading",
+      "props": {
+        "text": "4. All-Time Simulation Leaderboard API",
+        "level": "h3"
+      }
+    },
+    "item4_tags": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "item4_cat",
+        "item4_size"
+      ]
+    },
+    "item4_cat": {
+      "type": "Badge",
+      "props": {
+        "text": "Integration",
+        "variant": "secondary"
+      }
+    },
+    "item4_size": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "outline"
+      }
+    },
+    "item4_desc": {
+      "type": "Text",
+      "props": {
+        "text": "GET /api/leaderboard.json — four ranked top-10 lists: highest confidence, best quality, most viewed, longest debate. All-time, not windowed. The showcase endpoint directories need."
+      }
+    },
+    "item5": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "item5_title",
+        "item5_tags",
+        "item5_desc"
+      ]
+    },
+    "item5_title": {
+      "type": "Heading",
+      "props": {
+        "text": "5. Webhook Manual Retry",
+        "level": "h3"
+      }
+    },
+    "item5_tags": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "item5_cat",
+        "item5_size"
+      ]
+    },
+    "item5_cat": {
+      "type": "Badge",
+      "props": {
+        "text": "DX",
+        "variant": "secondary"
+      }
+    },
+    "item5_size": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "outline"
+      }
+    },
+    "item5_desc": {
+      "type": "Text",
+      "props": {
+        "text": "POST /api/simulation/<id>/webhook/retry — re-fire the real completion payload to the configured webhook URL, re-signed with HMAC. The escape hatch when an integrator's endpoint was temporarily unreachable."
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {}
+    },
+    "link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full details",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-actions-2026-06-04.md"
+      }
+    }
+  }
+}

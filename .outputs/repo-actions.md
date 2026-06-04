@@ -1,19 +1,19 @@
-*Repo Action Ideas — 2026-06-02*
-Four ecosystem PRs opened today (HivemindOS, Echo Oracle, Capacitr, SyntheticsAI). 16+ named integrators and no machine-readable discovery path. Today's batch addresses that gap and three others.
+*Repo Action Ideas — 2026-06-04*
+Generated from analysis of aaronjmars/MiroShark (1,231⭐ · 265 forks · 14 integrators · PR #147 open)
 
-1. Ecosystem JSON Registry (Integration, Small)
-   GET /api/ecosystem.json — structured surface for the 16+ integrators; static-hardcoded pattern of /api/surfaces.json; all 4 new PRs included
+1. Webhook Delivery Log API (DX, Small)
+   Expose the existing per-sim webhook-log.jsonl as a GET endpoint — 14+ integrators debug delivery failures with zero platform-side visibility today.
 
-2. Scenario Clone Button (DX, Small)
-   ?clone=<id> URL param + EmbedDialog button — closes the frontend gap opened when clone.json shipped June 1
+2. Platform Status API (DX/Integration, Small)
+   GET /api/status.json — queue depth, 24h completions, last-completed timestamp. The health check that makes MiroShark monitorable by Upptime/StatusPage. Not /api/stats.
 
-3. Japanese README & Features Guide (Community, Medium)
-   README.ja.md + docs/FEATURES.ja.md — zero JP docs exist; @m000_crypto JP coverage since May 17
+3. Multi-Sim Status Lookup (Integration, Small)
+   POST /api/simulation/batch-status — check up to 20 sim IDs in one call. Capacitr's polling loop and AntFleet's benchmark pipeline pay N round-trips today; this makes it 1.
 
-4. Simulation Batch Create API (Integration, Medium)
-   POST /api/simulation/batch — up to 10 sim configs per call; cuts N round-trips to 1 for benchmark pipelines like AntFleet
+4. All-Time Simulation Leaderboard API (Integration, Small)
+   GET /api/leaderboard.json — four ranked top-10 lists: highest confidence, best quality, most viewed, longest debate. All-time, not windowed. The showcase endpoint directories need.
 
-5. Per-Project Simulation Statistics (Feature/DX, Small)
-   GET /api/project/<project_id>/stats — per-project aggregates over existing project_id tracking in platform_stats.py
+5. Webhook Manual Retry (DX, Small)
+   POST /api/simulation/<id>/webhook/retry — re-fire the real completion payload to the configured webhook URL, re-signed with HMAC. The escape hatch when an integrator's endpoint was temporarily unreachable.
 
-Full details: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-actions-2026-06-02.md
+Full details: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-actions-2026-06-04.md
