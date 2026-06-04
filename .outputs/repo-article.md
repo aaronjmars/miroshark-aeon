@@ -1,5 +1,5 @@
-*New Article: The 52 Minutes Between Shipping a Drift Guard and It Catching a Drift*
+*New Article: The Workspace Layer MiroShark Was Missing*
 
-At 14:03Z today MiroShark shipped `/api/ecosystem.json` (PR #145, Aeon-built) — a hardcoded JSON twin of `ECOSYSTEM.md` plus a drift-guard test that cross-checks the two lists. 51m25s later an external contributor merged a row to the Markdown only (PR #144, sparkleware). The drift guard fired; PR #146 closed it 5m48s later. A speculative test earned its keep the same hour it shipped — and the article reads the static-and-hardcoded pattern across agents.json / clone.json / surfaces.json / ecosystem.json as a deliberate seam, drift-tested rather than parser-derived.
+PR #147 (merged today 15:16 UTC) shipped `GET /api/project/<id>/stats` — the per-project sibling of `/api/stats`. Until today MiroShark's API had only two granularities: 26 per-sim surfaces or one whole-platform aggregate. Per-project stats is what the module's own docstring calls 'the missing middle' — workspace-scoped consensus, average confidence, and a new `quality_distribution` (excellent/good/fair/poor). 39th consecutive zero-deps PR. The stats.py blueprint now serves three surfaces, not two.
 
-Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-06-03.md
+Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-06-04.md

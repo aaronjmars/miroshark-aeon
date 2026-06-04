@@ -1,0 +1,76 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "The Workspace Layer MiroShark Was Missing"
+      },
+      "children": [
+        "stack-main"
+      ]
+    },
+    "stack-main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "badge-pr",
+        "text-shipped",
+        "text-context",
+        "text-features",
+        "stat-zerodeps",
+        "separator-1",
+        "story-link"
+      ]
+    },
+    "badge-pr": {
+      "type": "Badge",
+      "props": {
+        "text": "PR #147 — Merged 15:16 UTC"
+      }
+    },
+    "text-shipped": {
+      "type": "Text",
+      "props": {
+        "text": "Shipped GET /api/project/<id>/stats — the per-project sibling of /api/stats."
+      }
+    },
+    "text-context": {
+      "type": "Text",
+      "props": {
+        "text": "Until today MiroShark's API had only two granularities: 26 per-sim surfaces or one whole-platform aggregate."
+      }
+    },
+    "text-features": {
+      "type": "Text",
+      "props": {
+        "text": "Per-project stats is the 'missing middle' providing workspace-scoped consensus, average confidence, and a new quality_distribution (excellent/good/fair/poor). The stats.py blueprint now serves three surfaces instead of two."
+      }
+    },
+    "stat-zerodeps": {
+      "type": "Stat",
+      "props": {
+        "label": "Consecutive zero-deps PRs",
+        "value": "39"
+      }
+    },
+    "separator-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "story-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Read the full article",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-06-04.md",
+        "source": "MiroShark Repository"
+      }
+    }
+  }
+}
