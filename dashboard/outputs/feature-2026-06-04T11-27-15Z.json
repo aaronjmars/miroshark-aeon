@@ -1,0 +1,330 @@
+{
+  "root": "main_card",
+  "state": {},
+  "elements": {
+    "main_card": {
+      "type": "Card",
+      "props": {
+        "title": "Feature Built — 2026-06-04"
+      },
+      "children": [
+        "main_stack"
+      ]
+    },
+    "main_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "lg"
+      },
+      "children": [
+        "intro_heading",
+        "intro_text",
+        "sep_1",
+        "why_matters_heading",
+        "why_matters_text",
+        "sep_2",
+        "built_heading",
+        "built_stack",
+        "sep_3",
+        "how_heading",
+        "how_text",
+        "sep_4",
+        "next_heading",
+        "next_text",
+        "sep_5",
+        "pr_link"
+      ]
+    },
+    "intro_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Per-Project Simulation Statistics",
+        "level": "h2"
+      }
+    },
+    "intro_text": {
+      "type": "Text",
+      "props": {
+        "text": "MiroShark just got a per-project view of its aggregate stats. Until now, operators publishing simulations across multiple projects could see the platform total (every public sim, all projects, in one number) but had no API call to scope those numbers to a single workspace. The new `GET /api/project/<project_id>/stats` returns the same shape of envelope — sim count, consensus distribution, average confidence, surface views, newest sim — filtered to one `project_id`, plus a per-bucket quality distribution (excellent / good / fair / poor) that's only meaningful at the per-project granularity."
+      }
+    },
+    "sep_1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "why_matters_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Why this matters",
+        "level": "h3"
+      }
+    },
+    "why_matters_text": {
+      "type": "Text",
+      "props": {
+        "text": "Sixteen-plus named integrators are now building on MiroShark and the ecosystem PRs keep landing. An operator running several published projects — AntFleet's miroshark-bench security suite, SyntheticsAI's pipeline, or any of the 14 other named teams — has had to fetch `/api/stats` plus the public gallery and filter client-side just to answer \"how is **this** project performing?\". One call now returns those numbers directly. This was Jun-02 #5 from repo-actions and pairs with the Ecosystem JSON Registry that shipped yesterday (PR #145) — both close gaps between MiroShark's machine-readable surface area and the integrators consuming it."
+      }
+    },
+    "sep_2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "built_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "What was built",
+        "level": "h3"
+      }
+    },
+    "built_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "built_item_1",
+        "built_item_2",
+        "built_item_3",
+        "built_item_4",
+        "built_item_5",
+        "built_item_6",
+        "built_item_7"
+      ]
+    },
+    "built_item_1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "file_1",
+        "desc_1"
+      ]
+    },
+    "file_1": {
+      "type": "Badge",
+      "props": {
+        "text": "backend/app/services/project_stats.py",
+        "variant": "outline"
+      }
+    },
+    "desc_1": {
+      "type": "Text",
+      "props": {
+        "text": "new ~470-LoC stdlib service. Scans `WONDERWALL_SIMULATION_DATA_DIR` for sims matching the requested `project_id` exactly, applies the same publish-gate (`is_public` + `completed`) as the platform aggregate, and returns the envelope. Module-level cache keyed on `(sim_root, project_id)` with a 60-second TTL matching `/api/stats`.",
+        "variant": "body"
+      }
+    },
+    "built_item_2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "file_2",
+        "desc_2"
+      ]
+    },
+    "file_2": {
+      "type": "Badge",
+      "props": {
+        "text": "backend/app/api/stats.py",
+        "variant": "outline"
+      }
+    },
+    "desc_2": {
+      "type": "Text",
+      "props": {
+        "text": "second blueprint (`project_stats_bp`) mounted at `/api/project`. `project_id` validated against `[A-Za-z0-9_.\\-]{1,120}` at the boundary; malformed returns 400, unknown returns an all-zero envelope (not 404 — absence is a valid state). ETag `\"project-<total>-<newest_id_prefix>\"` distinct from the platform ETag so a polling consumer doesn't confuse the two caches.",
+        "variant": "body"
+      }
+    },
+    "built_item_3": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "file_3",
+        "desc_3"
+      ]
+    },
+    "file_3": {
+      "type": "Badge",
+      "props": {
+        "text": "backend/app/services/surfaces_catalog.py",
+        "variant": "outline"
+      }
+    },
+    "desc_3": {
+      "type": "Text",
+      "props": {
+        "text": "added `project_stats` entry so the new endpoint is discoverable via `/api/surfaces.json` alongside `platform_stats` and `platform_stats_badge`.",
+        "variant": "body"
+      }
+    },
+    "built_item_4": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "file_4",
+        "desc_4"
+      ]
+    },
+    "file_4": {
+      "type": "Badge",
+      "props": {
+        "text": "backend/openapi.yaml",
+        "variant": "outline"
+      }
+    },
+    "desc_4": {
+      "type": "Text",
+      "props": {
+        "text": "full path + `ProjectStats` schema component (envelope shape, four-bucket `quality_distribution`, ETag header, 304/400 responses).",
+        "variant": "body"
+      }
+    },
+    "built_item_5": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "file_5",
+        "desc_5"
+      ]
+    },
+    "file_5": {
+      "type": "Badge",
+      "props": {
+        "text": "backend/tests/test_unit_project_stats.py",
+        "variant": "outline"
+      }
+    },
+    "desc_5": {
+      "type": "Text",
+      "props": {
+        "text": "28 offline unit tests covering empty/missing sim_root, unknown/non-matching/case-sensitive `project_id` filter, unpublished/incomplete exclusion, mixed-direction counts, quality bucketing (including unknown-value exclusion), surface-views per-project boundary, newest-sim selection, avg confidence rounding, 60s cache + force_refresh + per-project cache isolation, ETag derivation + distinctness from platform ETag, route/blueprint/openapi/drift-test wiring guards.",
+        "variant": "body"
+      }
+    },
+    "built_item_6": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "file_6",
+        "desc_6"
+      ]
+    },
+    "file_6": {
+      "type": "Badge",
+      "props": {
+        "text": "frontend/src/api/simulation.js",
+        "variant": "outline"
+      }
+    },
+    "desc_6": {
+      "type": "Text",
+      "props": {
+        "text": "`getProjectStats(projectId)` + `getProjectStatsUrl(projectId, origin)` helpers, same shape as the existing `getPlatformStats` / `getEcosystem` consumers (no Vue view; this is an operator/integrator-facing API).",
+        "variant": "body"
+      }
+    },
+    "built_item_7": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "file_7",
+        "desc_7"
+      ]
+    },
+    "file_7": {
+      "type": "Badge",
+      "props": {
+        "text": "docs/{API,FEATURES,OBSERVABILITY}.md",
+        "variant": "outline"
+      }
+    },
+    "desc_7": {
+      "type": "Text",
+      "props": {
+        "text": "table row, full feature section between Ecosystem JSON Registry and BibTeX Academic Citation, new Aggregate Metrics section in OBSERVABILITY listing all three platform-level endpoints.",
+        "variant": "body"
+      }
+    },
+    "sep_3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "how_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "How it works",
+        "level": "h3"
+      }
+    },
+    "how_text": {
+      "type": "Text",
+      "props": {
+        "text": "The endpoint walks the sim directory tree once and counts every directory whose `state.json` has `project_id == <requested>` AND `is_public == true` AND `status == \"completed\"`. Stance derivation reuses `signal_service.compute_signal` over each sim's trajectory — same plurality + `bullish > bearish > neutral` tie-break rules the per-sim `signal.json` uses, so a sim counted Bullish in its signal lands in the project's bullish bucket. Surface views sum over the same `surface_stats.SURFACE_KEYS` whitelist the platform aggregate uses, so unknown surface keys can't pollute the counter. The 60-second per-`(sim_root, project_id)` cache absorbs polling-dashboard load; an `If-None-Match` GET short-circuits to 304 without re-serialising the body.",
+        "variant": "body"
+      }
+    },
+    "sep_4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "next_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "What's next",
+        "level": "h3"
+      }
+    },
+    "next_text": {
+      "type": "Text",
+      "props": {
+        "text": "The Jun-02 batch is now half-built: Ecosystem JSON Registry (#1) shipped yesterday, this is #5. Three remain — Scenario Clone Button (#2, UI for the existing `/clone.json` API), Japanese README (#3, JP community signal active since @m000_crypto May-17 coverage), Simulation Batch Create API (#4, integrator pain point as benchmark suites scale). PR #147 is open and pending CI.",
+        "variant": "body"
+      }
+    },
+    "sep_5": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "pr_link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #147 - Per-Project Simulation Statistics",
+        "href": "https://github.com/aaronjmars/MiroShark/pull/147",
+        "source": "GitHub"
+      }
+    }
+  }
+}
