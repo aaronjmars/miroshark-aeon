@@ -1,14 +1,15 @@
-*Agent Self-Improvement — 2026-06-02*
+*Agent Self-Improvement — 2026-06-04*
 
-Blocked-Features Registry
-Added a small memory file (memory/topics/blocked-features.md) that lists ideas verified as architecturally blocked by an upstream constraint. Updated the repo-actions skill to read the file and filter matching candidates out of each daily batch, with a one-line note in the article so the operator sees what was filtered.
+pre-existing-features registry
+A second exclusion registry that records features the watched repo already ships. Sibling to yesterday's blocked-features.md (PR #50). Together they cover both ways an idea can be unbuildable: architecturally blocked (needs a missing field) or already done (lives elsewhere).
 
-Why: the repo-actions skill suggested "Operator Profile" 13 times across 2026-05-08 → 2026-06-01 (every cycle once the 7-day exclusion window expired). Today's feature build pivoted off it after grep confirmed SimulationState has no operator/created_by field — platform_stats.py:42-49 upstream documents project_id as the closest stable identifier. Without a memory primitive, tomorrow's repo-actions run would re-suggest it.
+Why: across May-20 → Jun-01 repo-actions batches, 8 distinct ideas were re-suggested after the watched repo had already shipped them — Gallery JSON, Gallery Trending, Compare API, Compare UI, RSS Feed, Per-Sim Surface Engagement, Webhook Test Ping, Simulation Search. May-28 batch had 3/5 pre-existing; Jun-01 batch had 3/5. The feature skill caught them via grep and pivoted, but they keep eating idea slots upstream.
 
 What changed:
-- memory/topics/blocked-features.md: new registry file with schema (signature keywords, category, reason, verifying log, suggestion history, unblock condition) + one bootstrap entry for Operator Profile
-- skills/repo-actions/SKILL.md: step 4 appended (read registry → case-insensitive keyword match → exclude → article note). Each match runs a 30-second re-verification first so blocks lift automatically when upstream constraints change.
+- memory/topics/pre-existing-features.md: new registry with 8 bootstrapped entries (signature keywords + lives-at path + verifying log per entry). Permanent — features don't unship.
+- skills/repo-actions/SKILL.md: step 4 reads both registries, with distinct "Excluded (blocked):" vs "Excluded (pre-existing):" notes in the article's Selection Rationale.
+- skills/feature/SKILL.md: step 6 checks the registry before the upstream grep, and writes back new entries when the grep discovers a previously-unknown pre-existing surface. Discovery cost paid once.
 
-Impact: frees one idea slot per repo-actions run for net-new suggestions; prevents wasted feature-build cycles pivoting off the same blocked idea; creates a memory layer for verified upstream constraints that compounds across runs. Auto-unblock path keeps the registry self-cleaning.
+Impact: frees ~1-3 idea slots per repo-actions run for net-new suggestions; eliminates "why did the agent suggest something we already have?" operator confusion. Together with yesterday's blocked-features.md, Aeon now has a complete memory layer for "do not suggest" patterns.
 
-PR: https://github.com/aaronjmars/miroshark-aeon/pull/50
+PR: https://github.com/aaronjmars/miroshark-aeon/pull/52

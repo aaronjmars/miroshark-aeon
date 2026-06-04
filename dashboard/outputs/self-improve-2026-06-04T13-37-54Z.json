@@ -1,0 +1,192 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Agent Self-Improvement — 2026-06-04"
+      },
+      "children": [
+        "heading_section",
+        "text_description",
+        "separator_1",
+        "heading_why",
+        "text_why",
+        "separator_2",
+        "heading_what_changed",
+        "stack_changes",
+        "separator_3",
+        "heading_impact",
+        "text_impact",
+        "separator_4",
+        "link_pr"
+      ]
+    },
+    "heading_section": {
+      "type": "Heading",
+      "props": {
+        "text": "pre-existing-features registry",
+        "level": "h2"
+      }
+    },
+    "text_description": {
+      "type": "Text",
+      "props": {
+        "text": "A second exclusion registry that records features the watched repo already ships. Sibling to yesterday's blocked-features.md (PR #50). Together they cover both ways an idea can be unbuildable: architecturally blocked (needs a missing field) or already done (lives elsewhere)."
+      }
+    },
+    "separator_1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading_why": {
+      "type": "Heading",
+      "props": {
+        "text": "Why",
+        "level": "h3"
+      }
+    },
+    "text_why": {
+      "type": "Text",
+      "props": {
+        "text": "Across May-20 → Jun-01 repo-actions batches, 8 distinct ideas were re-suggested after the watched repo had already shipped them — Gallery JSON, Gallery Trending, Compare API, Compare UI, RSS Feed, Per-Sim Surface Engagement, Webhook Test Ping, Simulation Search. May-28 batch had 3/5 pre-existing; Jun-01 batch had 3/5. The feature skill caught them via grep and pivoted, but they keep eating idea slots upstream."
+      }
+    },
+    "separator_2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading_what_changed": {
+      "type": "Heading",
+      "props": {
+        "text": "What changed",
+        "level": "h3"
+      }
+    },
+    "stack_changes": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "change_item_1",
+        "change_item_2",
+        "change_item_3"
+      ]
+    },
+    "change_item_1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "badge_file_1",
+        "text_change_1"
+      ]
+    },
+    "badge_file_1": {
+      "type": "Badge",
+      "props": {
+        "text": "memory/topics/pre-existing-features.md",
+        "variant": "outline"
+      }
+    },
+    "text_change_1": {
+      "type": "Text",
+      "props": {
+        "text": "New registry with 8 bootstrapped entries (signature keywords + lives-at path + verifying log per entry). Permanent — features don't unship.",
+        "variant": "body"
+      }
+    },
+    "change_item_2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "badge_file_2",
+        "text_change_2"
+      ]
+    },
+    "badge_file_2": {
+      "type": "Badge",
+      "props": {
+        "text": "skills/repo-actions/SKILL.md",
+        "variant": "outline"
+      }
+    },
+    "text_change_2": {
+      "type": "Text",
+      "props": {
+        "text": "Step 4 reads both registries, with distinct \"Excluded (blocked):\" vs \"Excluded (pre-existing):\" notes in the article's Selection Rationale.",
+        "variant": "body"
+      }
+    },
+    "change_item_3": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "badge_file_3",
+        "text_change_3"
+      ]
+    },
+    "badge_file_3": {
+      "type": "Badge",
+      "props": {
+        "text": "skills/feature/SKILL.md",
+        "variant": "outline"
+      }
+    },
+    "text_change_3": {
+      "type": "Text",
+      "props": {
+        "text": "Step 6 checks the registry before the upstream grep, and writes back new entries when the grep discovers a previously-unknown pre-existing surface. Discovery cost paid once.",
+        "variant": "body"
+      }
+    },
+    "separator_3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading_impact": {
+      "type": "Heading",
+      "props": {
+        "text": "Impact",
+        "level": "h3"
+      }
+    },
+    "text_impact": {
+      "type": "Text",
+      "props": {
+        "text": "Frees ~1-3 idea slots per repo-actions run for net-new suggestions; eliminates \"why did the agent suggest something we already have?\" operator confusion. Together with yesterday's blocked-features.md, Aeon now has a complete memory layer for \"do not suggest\" patterns."
+      }
+    },
+    "separator_4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "link_pr": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #52",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/pull/52",
+        "source": "GitHub"
+      }
+    }
+  }
+}
