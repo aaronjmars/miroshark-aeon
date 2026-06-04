@@ -1,0 +1,452 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "Push Recap — 2026-06-04"
+      },
+      "children": [
+        "commits-section",
+        "sep1",
+        "stats-section",
+        "sep2",
+        "features-section",
+        "sep3",
+        "changes-section",
+        "sep4",
+        "summary-section",
+        "sep5",
+        "recap-link"
+      ]
+    },
+    "commits-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "commits-heading",
+        "commits-content"
+      ]
+    },
+    "commits-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Commits",
+        "level": "h2"
+      }
+    },
+    "commits-content": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "commit-1",
+        "commit-2"
+      ]
+    },
+    "commit-1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "commit-1-repo",
+        "commit-1-desc",
+        "commit-1-badge"
+      ]
+    },
+    "commit-1-repo": {
+      "type": "Text",
+      "props": {
+        "text": "aaronjmars/MiroShark",
+        "variant": "lead"
+      }
+    },
+    "commit-1-desc": {
+      "type": "Text",
+      "props": {
+        "text": "1 substantive commit by Aeon"
+      }
+    },
+    "commit-1-badge": {
+      "type": "Badge",
+      "props": {
+        "text": "39th zero-deps streak",
+        "variant": "secondary"
+      }
+    },
+    "commit-2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "commit-2-repo",
+        "commit-2-desc"
+      ]
+    },
+    "commit-2-repo": {
+      "type": "Text",
+      "props": {
+        "text": "aaronjmars/miroshark-aeon",
+        "variant": "lead"
+      }
+    },
+    "commit-2-desc": {
+      "type": "Text",
+      "props": {
+        "text": "2 substantive commits by Aeon"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stats-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stats-heading",
+        "stats-content"
+      ]
+    },
+    "stats-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Per-project aggregate stats",
+        "level": "h2"
+      }
+    },
+    "stats-content": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "pr-147-title",
+        "pr-147-desc1",
+        "pr-147-desc2",
+        "pr-147-desc3",
+        "pr-147-desc4",
+        "pr-147-desc5"
+      ]
+    },
+    "pr-147-title": {
+      "type": "Text",
+      "props": {
+        "text": "PR #147 shipped GET /api/project/<id>/stats",
+        "variant": "lead"
+      }
+    },
+    "pr-147-desc1": {
+      "type": "Text",
+      "props": {
+        "text": "Missing middle between platform-wide /api/stats and per-sim signal.json"
+      }
+    },
+    "pr-147-desc2": {
+      "type": "Text",
+      "props": {
+        "text": "Same envelope shape filtered to one workspace, plus new quality_distribution (excellent/good/fair/poor) only useful at per-project granularity"
+      }
+    },
+    "pr-147-desc3": {
+      "type": "Text",
+      "props": {
+        "text": "Two blueprints (stats_bp + project_stats_bp) in one file; module docstring rewritten 'Two surfaces' → 'Three surfaces'"
+      }
+    },
+    "pr-147-desc4": {
+      "type": "Text",
+      "props": {
+        "text": "Unknown project_id returns all-zero, not 404 — absence is a valid dashboard state"
+      }
+    },
+    "pr-147-desc5": {
+      "type": "Stat",
+      "props": {
+        "label": "Surfaces catalog",
+        "value": "31",
+        "delta": "+1",
+        "trend": "up"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "features-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "features-heading",
+        "features-title",
+        "features-content"
+      ]
+    },
+    "features-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Aeon learns to forget — part 2",
+        "level": "h2"
+      }
+    },
+    "features-title": {
+      "type": "Text",
+      "props": {
+        "text": "PR #52 added memory/topics/pre-existing-features.md",
+        "variant": "lead"
+      }
+    },
+    "features-content": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "features-desc1",
+        "features-desc2",
+        "features-desc3",
+        "features-desc4",
+        "features-desc5"
+      ]
+    },
+    "features-desc1": {
+      "type": "Text",
+      "props": {
+        "text": "Sibling to yesterday's blocked-features registry. Same shape, opposite half: 'already shipped, don't suggest' vs 'architecturally blocked, don't suggest'"
+      }
+    },
+    "features-desc2": {
+      "type": "Text",
+      "props": {
+        "text": "repo-actions now reads both with distinct exclusion notes (Excluded (pre-existing) vs Excluded (blocked))"
+      }
+    },
+    "features-desc3": {
+      "type": "Text",
+      "props": {
+        "text": "feature skill checks pre-existing before its grep and writes back new entries on discovery"
+      }
+    },
+    "features-desc4": {
+      "type": "Text",
+      "props": {
+        "text": "Bootstrapped with 8 entries: Gallery JSON, Compare API, RSS Feed, Webhook Test Ping, and others"
+      }
+    },
+    "features-desc5": {
+      "type": "Text",
+      "props": {
+        "text": "Motivated by May-28/Jun-01 batches where 3 of 5 ideas were pre-existing"
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "changes-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "changes-heading",
+        "changes-list"
+      ]
+    },
+    "changes-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Key changes",
+        "level": "h2"
+      }
+    },
+    "changes-list": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "change-1",
+        "change-2",
+        "change-3"
+      ]
+    },
+    "change-1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "change-1-title",
+        "change-1-desc"
+      ]
+    },
+    "change-1-title": {
+      "type": "Text",
+      "props": {
+        "text": "backend/app/services/project_stats.py",
+        "variant": "lead"
+      }
+    },
+    "change-1-desc": {
+      "type": "Text",
+      "props": {
+        "text": "+522 lines, stdlib-only, 60s per-(root,project_id) cache, 28 offline tests in test_unit_project_stats.py +843"
+      }
+    },
+    "change-2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "change-2-title",
+        "change-2-desc"
+      ]
+    },
+    "change-2-title": {
+      "type": "Text",
+      "props": {
+        "text": "backend/app/api/stats.py",
+        "variant": "lead"
+      }
+    },
+    "change-2-desc": {
+      "type": "Text",
+      "props": {
+        "text": "+109 / -9 lines, second blueprint mounted at /api/project, ETag \"project-<total>-<newest_id_prefix>\" distinct from platform"
+      }
+    },
+    "change-3": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "change-3-title",
+        "change-3-desc"
+      ]
+    },
+    "change-3-title": {
+      "type": "Text",
+      "props": {
+        "text": "memory/topics/pre-existing-features.md",
+        "variant": "lead"
+      }
+    },
+    "change-3-desc": {
+      "type": "Text",
+      "props": {
+        "text": "New file +71 lines, 8 bootstrapped entries with signature-keywords + lives-at path + verifying log + suggestion history"
+      }
+    },
+    "sep4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "summary-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "summary-heading",
+        "summary-window",
+        "summary-stats"
+      ]
+    },
+    "summary-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Summary",
+        "level": "h2"
+      }
+    },
+    "summary-window": {
+      "type": "Text",
+      "props": {
+        "text": "24h window since 2026-06-03T15:46:09Z; 3 commits total",
+        "variant": "muted"
+      }
+    },
+    "summary-stats": {
+      "type": "Grid",
+      "props": {
+        "columns": 3,
+        "gap": "md"
+      },
+      "children": [
+        "stat-files",
+        "stat-added",
+        "stat-removed"
+      ]
+    },
+    "stat-files": {
+      "type": "Stat",
+      "props": {
+        "label": "Files changed",
+        "value": "~22"
+      }
+    },
+    "stat-added": {
+      "type": "Stat",
+      "props": {
+        "label": "Lines added",
+        "value": "2,218"
+      }
+    },
+    "stat-removed": {
+      "type": "Stat",
+      "props": {
+        "label": "Lines removed",
+        "value": "20"
+      }
+    },
+    "sep5": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "recap-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full recap",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-06-04.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}

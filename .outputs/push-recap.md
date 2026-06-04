@@ -1,17 +1,15 @@
-*Push Recap — 2026-06-03*
-aaronjmars/MiroShark — 6 substantive commits by 3 authors. aaronjmars/miroshark-aeon — 1 substantive commit (cron churn excluded).
+*Push Recap — 2026-06-04*
+aaronjmars/MiroShark — 1 substantive commit by Aeon (39th zero-deps streak)
+aaronjmars/miroshark-aeon — 2 substantive commits by Aeon
 
-**Ecosystem-as-a-contract finished its arc.** The ECOSYSTEM.md registry got a logo column (and lost dormant Nookplot+Supercompact rows), got linked from README in en+zh, gained Capacitr and Sparkleware, and — most consequentially — gained a machine-readable JSON twin at `GET /api/ecosystem.json` (PR #145, Aeon-built, +953/-19 across 10 files). `surfaces.json` and `ecosystem.json` now share one blueprint with identical ETag+cache posture — the platform exposes both meta-questions a new integrator hits ('what can I call?' / 'who else is built on this?') as twin JSON catalogs.
+*Per-project aggregate stats:* PR #147 shipped `GET /api/project/<id>/stats` — the missing middle between platform-wide `/api/stats` and per-sim `signal.json`. Same envelope shape filtered to one workspace, plus a new `quality_distribution` (excellent/good/fair/poor) that's only useful at per-project granularity. Two blueprints (`stats_bp` + `project_stats_bp`) on one file; module docstring rewritten 'Two surfaces' → 'Three surfaces.' Unknown project_id returns all-zero, not 404 — absence is a valid dashboard state. Surfaces catalog 30→31.
 
-**Drift guard saved itself within an hour.** PR #144 (sparkleware adding their own ECOSYSTEM.md row) merged 52 min after PR #145 — immediately breaking the catalog/Markdown sync the new tests guard. PR #146 closed the gap 5 minutes later. First live save of the design choice to hardcode rather than parse Markdown.
-
-**Aeon learned to forget on purpose (PR #50).** `repo-actions` had suggested Operator Profile 13 times across May 8 → Jun 1. New `memory/topics/blocked-features.md` registry + a 30-sec upstream re-verify on each match means the idea is filtered out until `SimulationState` gains an `operator` field — at which point the entry self-deletes and the idea returns to the pool.
+*Aeon learns to forget — part 2:* PR #52 added `memory/topics/pre-existing-features.md` — sibling to yesterday's blocked-features registry. Same shape, opposite half: 'already shipped, don't suggest' vs 'architecturally blocked, don't suggest.' `repo-actions` now reads both with distinct exclusion notes (`Excluded (pre-existing)` vs `Excluded (blocked)`); `feature` skill checks pre-existing before its grep and writes back new entries on discovery. Bootstrapped with 8 entries (Gallery JSON, Compare API, RSS Feed, Webhook Test Ping, etc.) — motivated by May-28/Jun-01 batches where 3 of 5 ideas were pre-existing.
 
 Key changes:
-- PR #145 `backend/app/services/ecosystem_catalog.py` — 263 lines pure stdlib, literal list of 13 dicts, 5 categories, drift-guarded
-- PR #143 ECOSYSTEM.md visual rebuild — logo column added, Nookplot+Supercompact dropped, every row now has a 40px image
-- PR #50 `memory/topics/blocked-features.md` — schema + Operator Profile bootstrap entry, signature-keyword matching, auto-unblock condition
+- backend/app/services/project_stats.py (+522, stdlib-only, 60s per-(root,project_id) cache, 28 offline tests in test_unit_project_stats.py +843)
+- backend/app/api/stats.py (+109/-9, second blueprint mounted at /api/project, ETag "project-<total>-<newest_id_prefix>" distinct from platform)
+- memory/topics/pre-existing-features.md (new +71, 8 bootstrapped entries with signature-keywords + lives-at path + verifying log + suggestion history)
 
-Stats: ~12 files changed, +1,003 / -36 across 7 substantive commits
-Open PRs at window close: 0/0 (both ledgers cleared)
-Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-06-03.md
+Stats: ~22 files changed, +2,218 / -20 across 3 commits. Window: 24h since 2026-06-03T15:46:09Z.
+Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-06-04.md
