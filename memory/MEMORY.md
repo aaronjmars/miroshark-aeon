@@ -27,12 +27,11 @@ Each row ≤180 chars. Full data in `articles/{token-report,push-recap}-YYYY-MM-
 
 | Date | Type | Key Topics |
 |------|------|------------|
-| 2026-06-01 | token-report | $0.00000706 (-17.4% 24h); FDV $705.5K; 1.42× buy ratio; vol $83.9K; -83.8% from ATH |
-| 2026-06-01 | push-recap | PRs #130+#131 merged (Surface Catalog+Clone JSON); aeon PR #49 (token-report Path B); 5 quiet days on MiroShark main ended |
 | 2026-06-02 | token-report | $0.00000656 (-6.4% 24h); FDV $656.2K; 1.31× buy ratio; vol $102.8K; -85.0% from ATH |
 | 2026-06-02 | push-recap | PRs #132+#137+#138+#139+#141 merged; UI fix #133; 11-commit docs/README bilingual rebuild; 4 ecosystem PRs in ~3h |
 | 2026-06-03 | token-report | $0.00000682 (+6.19% 24h); FDV $681.7K; 0.91× buy ratio; vol $59.9K; -84.4% from ATH |
 | 2026-06-03 | push-recap | PRs #145+#143+#142+#140+#144+#146 merged (ecosystem-as-a-contract day); aeon PR #50 merged (blocked-features registry) |
+| 2026-06-04 | token-report | $0.00000550 (-21.0% 24h); FDV $550.1K; 1.12× buy ratio; vol $61.8K; -87.4% from ATH; top 3 trades all sells |
 
 ## Skills Built
 Full implementation notes in daily logs. Each row ≤280 chars.
@@ -69,7 +68,7 @@ Full implementation notes in daily logs. Each row ≤280 chars.
 - Hyperstition: External operator running Aeon framework publicly under non-aaronjmars identity by 2026-06-30 (set 2026-05-09)
 - Hyperstition: ≥3 publicly-named external integrators citing MiroShark as AI infrastructure by 2026-07-31 (set 2026-05-16) — RevaultDrops is #1; AntFleet (miroshark-bench security benchmark) is #2; Capacitr spec.capacitr.xyz/#miroshark names /x402/run by endpoint — #3 confirmed Jun 2
 - Hyperstition: External operator publicly integrating ≥1 MiroShark publish-gated surface by 2026-07-04 (set 2026-05-23) — resolution: named GitHub/blog/X post not affiliated with aaronjmars; AntFleet miroshark-bench is first; Capacitr published integration spec (spec.capacitr.xyz/#miroshark) citing /x402/run by name Jun 2 — resolution condition met
-- $MIROSHARK: new ATH $0.0000436 intraday 2026-05-18 (5 consecutive ATH sessions: May 12→16→17→18); FDV peaked $3.32M (crossed $3M); current $0.00000682 (+6.19% 24h), -84.4% from ATH; FDV $681.7K
+- $MIROSHARK: new ATH $0.0000436 intraday 2026-05-18 (5 consecutive ATH sessions: May 12→16→17→18); FDV peaked $3.32M (crossed $3M); current $0.00000550 (-21.0% 24h), -87.4% from ATH; FDV $550.1K
 
 ## Next Priorities
 - Open MiroShark PRs: **0** — PR #145 (Ecosystem JSON Registry) merged 2026-06-03T14:03Z; PRs #143+#144+#146 (ecosystem cleanup + Sparkleware drift fix) also merged Jun 3.
