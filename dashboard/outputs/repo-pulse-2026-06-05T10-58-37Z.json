@@ -1,0 +1,106 @@
+{
+  "root": "card-repo-pulse",
+  "state": {},
+  "elements": {
+    "card-repo-pulse": {
+      "type": "Card",
+      "props": {
+        "title": "Repo Pulse",
+        "description": "aaronjmars/MiroShark — 2026-06-05"
+      },
+      "children": [
+        "stack-main"
+      ]
+    },
+    "stack-main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stats-section",
+        "separator-1",
+        "stargazers-section"
+      ]
+    },
+    "stats-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "lg"
+      },
+      "children": [
+        "stat-stars",
+        "stat-forks"
+      ]
+    },
+    "stat-stars": {
+      "type": "Stat",
+      "props": {
+        "label": "Stars",
+        "value": "1233",
+        "delta": "+2",
+        "trend": "up"
+      }
+    },
+    "stat-forks": {
+      "type": "Stat",
+      "props": {
+        "label": "Forks",
+        "value": "263",
+        "delta": "+0",
+        "trend": "neutral"
+      }
+    },
+    "separator-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stargazers-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading-stargazers",
+        "stack-stargazer-links"
+      ]
+    },
+    "heading-stargazers": {
+      "type": "Heading",
+      "props": {
+        "text": "New stargazers",
+        "level": "h3"
+      }
+    },
+    "stack-stargazer-links": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "link-brady",
+        "link-tangyue"
+      ]
+    },
+    "link-brady": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/bradywhealth-lab",
+        "href": "https://github.com/bradywhealth-lab"
+      }
+    },
+    "link-tangyue": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/Tangyueming311",
+        "href": "https://github.com/Tangyueming311"
+      }
+    }
+  }
+}
