@@ -1,14 +1,14 @@
-*Thread Draft — 2026-06-04*
-Topic: Per-Project Simulation Statistics — /api/project/<id>/stats (PR #147)
+*Thread Draft — 2026-06-05*
+Topic: Platform Status Probe — /api/status.json (PR #149)
 
-1/ MiroShark's API had per-platform stats and per-simulation stats. It had nothing in between. PR #147 ships the missing layer: GET /api/project/<id>/stats aggregates across every sim under a single project ID.
+1/ PR #149 ships GET /api/status.json — a status probe for MiroShark. The PR took three commits because the first implementation inherited auth from its neighbors. A status probe behind authentication is useless for the tools that actually read it.
 
-2/ The platform exposed two endpoints: /api/stats for the whole instance and 26 per-simulation surfaces for individual runs. Operators running multiple named projects had to fetch the platform aggregate and filter it themselves on the client side.
+2/ MiroShark's platform-surface family had two legs: /api/stats for aggregate corpus shape and /api/surfaces.json for the capability catalog. Neither is designed for uptime monitors — they return large envelopes and are not the probe format status-page tools poll.
 
-3/ The new route validates project_id at the boundary, returns an all-zero envelope for unknown IDs (not a 404), caches at 60s, and adds one new field absent from the platform aggregate: quality_distribution — excellent/good/fair/poor buckets, only useful at per-project granularity.
+3/ The envelope is minimal: ok: true (a literal, not derived), queue_depth (running sims, case-insensitive), completed_24h (uses updated_at not created_at), surface_count sourced from surfaces_catalog. 30-second HTTP cache is the only smoothing. 28 offline tests.
 
-4/ This establishes a third axis the stats API can grow along. Whole-instance / per-project / per-sim is how multi-tenant analytics APIs end up shaped. stats.py now mounts three blueprints where it mounted two yesterday. 39th consecutive PR with zero new dependencies.
+4/ /api/stats answers corpus shape. /api/surfaces.json answers capability. /api/status.json answers health. The third leg completes the set a status page, a new integrator, and an uptime monitor each need to hit first. All three are public — none require credentials.
 
-5/ PR #147 — 13 files, +1,864 lines, 28 offline tests, zero new dependencies. https://github.com/aaronjmars/MiroShark/pull/147
+5/ PR #149 — 12 files, +1,120 lines, 28 offline tests, 40th consecutive zero-dependency PR. https://github.com/aaronjmars/MiroShark/pull/149
 
-(article: articles/thread-2026-06-04.md)
+(article: articles/thread-2026-06-05.md)
