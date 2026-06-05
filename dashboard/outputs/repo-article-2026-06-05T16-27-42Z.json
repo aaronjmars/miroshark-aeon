@@ -1,0 +1,171 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "New Article: The Status Probe That Renegotiated Its Own Authentication Mid-PR"
+      },
+      "children": [
+        "stack-main"
+      ]
+    },
+    "stack-main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "text-pr",
+        "heading-family",
+        "stack-endpoints",
+        "sep1",
+        "heading-commits",
+        "stack-commits",
+        "sep2",
+        "stack-highlights",
+        "sep3",
+        "link-article"
+      ]
+    },
+    "text-pr": {
+      "type": "Text",
+      "props": {
+        "text": "PR #149 merged 13:01 UTC today"
+      }
+    },
+    "heading-family": {
+      "type": "Heading",
+      "props": {
+        "text": "Closes the three-leg platform-surface family",
+        "level": "h3"
+      }
+    },
+    "stack-endpoints": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "text-stats",
+        "text-surfaces",
+        "text-status"
+      ]
+    },
+    "text-stats": {
+      "type": "Text",
+      "props": {
+        "text": "/api/stats — for corpus shape"
+      }
+    },
+    "text-surfaces": {
+      "type": "Text",
+      "props": {
+        "text": "/api/surfaces.json — for capability catalog"
+      }
+    },
+    "text-status": {
+      "type": "Text",
+      "props": {
+        "text": "/api/status.json — for health probe"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading-commits": {
+      "type": "Heading",
+      "props": {
+        "text": "Three review-commits hidden in squash-merge",
+        "level": "h3"
+      }
+    },
+    "stack-commits": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "text-commit1",
+        "text-commit2",
+        "text-commit3"
+      ]
+    },
+    "text-commit1": {
+      "type": "Text",
+      "props": {
+        "text": "Initial implementation"
+      }
+    },
+    "text-commit2": {
+      "type": "Text",
+      "props": {
+        "text": "Drift-test fix"
+      }
+    },
+    "text-commit3": {
+      "type": "Text",
+      "props": {
+        "text": "Third commit: added to auth-exemption list, re-narrowed total_sims to public+completed"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stack-highlights": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "text-highlight1",
+        "text-highlight2",
+        "badge-zeros"
+      ]
+    },
+    "text-highlight1": {
+      "type": "Text",
+      "props": {
+        "text": "First /api/* route deliberately reachable without credentials"
+      }
+    },
+    "text-highlight2": {
+      "type": "Text",
+      "props": {
+        "text": "Code finally matched what the OpenAPI spec already said"
+      }
+    },
+    "badge-zeros": {
+      "type": "Badge",
+      "props": {
+        "text": "40th consecutive zero-deps PR",
+        "variant": "secondary"
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "link-article": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Read the full article",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-06-05.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}

@@ -1,5 +1,5 @@
-*New Article: The Workspace Layer MiroShark Was Missing*
+*New Article: The Status Probe That Renegotiated Its Own Authentication Mid-PR*
 
-PR #147 (merged today 15:16 UTC) shipped `GET /api/project/<id>/stats` — the per-project sibling of `/api/stats`. Until today MiroShark's API had only two granularities: 26 per-sim surfaces or one whole-platform aggregate. Per-project stats is what the module's own docstring calls 'the missing middle' — workspace-scoped consensus, average confidence, and a new `quality_distribution` (excellent/good/fair/poor). 39th consecutive zero-deps PR. The stats.py blueprint now serves three surfaces, not two.
+PR #149 (merged 13:01 UTC today) closes the three-leg platform-surface family — `/api/stats` for corpus shape, `/api/surfaces.json` for capability catalog, and now `/api/status.json` for health probe. The squash-merge hides three review-commits: the initial implementation, a drift-test fix, and a third commit that made the endpoint genuinely public by adding it to the auth-exemption list and re-narrowing `total_sims` to public+completed. First `/api/*` route deliberately reachable without credentials — the code finally matched what the OpenAPI spec already said. 40th consecutive zero-deps PR.
 
-Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-06-04.md
+Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-06-05.md
