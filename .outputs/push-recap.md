@@ -1,15 +1,14 @@
-*Push Recap — 2026-06-04*
-aaronjmars/MiroShark — 1 substantive commit by Aeon (39th zero-deps streak)
-aaronjmars/miroshark-aeon — 2 substantive commits by Aeon
+*Push Recap — 2026-06-05*
+aaronjmars/MiroShark — 2 substantive commits (both Aaron-merged 12:43Z + 13:01Z, 17m apart); aaronjmars/miroshark-aeon — cron churn only.
 
-*Per-project aggregate stats:* PR #147 shipped `GET /api/project/<id>/stats` — the missing middle between platform-wide `/api/stats` and per-sim `signal.json`. Same envelope shape filtered to one workspace, plus a new `quality_distribution` (excellent/good/fair/poor) that's only useful at per-project granularity. Two blueprints (`stats_bp` + `project_stats_bp`) on one file; module docstring rewritten 'Two surfaces' → 'Three surfaces.' Unknown project_id returns all-zero, not 404 — absence is a valid dashboard state. Surfaces catalog 30→31.
+*Platform-surface family completes — the third leg:* PR #149 ships `GET /api/status.json` as the health-probe sibling to `/api/stats` (corpus shape) and `/api/surfaces.json` (capability catalog). First `/api/*` endpoint deliberately public-without-auth — third review-commit had to actively remove default `internal_auth_guard` to align code to openapi docs, and filter `total_sims` to public+completed so anonymous callers can't infer private/in-flight counts. Catalog 31→32. Built by Aeon.
 
-*Aeon learns to forget — part 2:* PR #52 added `memory/topics/pre-existing-features.md` — sibling to yesterday's blocked-features registry. Same shape, opposite half: 'already shipped, don't suggest' vs 'architecturally blocked, don't suggest.' `repo-actions` now reads both with distinct exclusion notes (`Excluded (pre-existing)` vs `Excluded (blocked)`); `feature` skill checks pre-existing before its grep and writes back new entries on discovery. Bootstrapped with 8 entries (Gallery JSON, Compare API, RSS Feed, Webhook Test Ping, etc.) — motivated by May-28/Jun-01 batches where 3 of 5 ideas were pre-existing.
+*Locale-helper contract lockdown — French-locale prep:* PR #148 lands 343 lines of unit tests across 5 i18n helpers (`normalize_locale`, `get_locale`, `t`, `apply_i18n`, `_strip_i18n`, `use_locale`) with zero production-code changes, freezing behaviour ahead of the `dict[str,str]`-form `_t()` refactor that issue #95 (French) needs as prerequisite — refactor touches 195 call sites. Built by a different Aeon instance (`aeon-aaron`), the second non-miroshark-aeon Aeon to ship a MiroShark PR this week.
 
 Key changes:
-- backend/app/services/project_stats.py (+522, stdlib-only, 60s per-(root,project_id) cache, 28 offline tests in test_unit_project_stats.py +843)
-- backend/app/api/stats.py (+109/-9, second blueprint mounted at /api/project, ETag "project-<total>-<newest_id_prefix>" distinct from platform)
-- memory/topics/pre-existing-features.md (new +71, 8 bootstrapped entries with signature-keywords + lives-at path + verifying log + suggestion history)
+- `backend/app/services/platform_status.py` new +271 LoC stdlib scanner + envelope builder; tolerant of corrupt `state.json` and dotfile dirs; `ok: true` is a literal anchor for status-page body-matchers, not a derived value
+- `backend/tests/test_unit_platform_status.py` new +428 LoC, 28 offline tests including the drift guard for blueprint wiring and OpenAPI coverage
+- `backend/tests/test_unit_i18n.py` new +343 LoC, 26 tests including the `t()` "unknown-locale fallback" path that `fr` will exercise on day one
 
-Stats: ~22 files changed, +2,218 / -20 across 3 commits. Window: 24h since 2026-06-03T15:46:09Z.
-Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-06-04.md
+Stats: ~13 files changed, +1,463/-1 lines across 2 commits. PR #149 = 40th consecutive zero-deps PR on MiroShark.
+Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-06-05.md

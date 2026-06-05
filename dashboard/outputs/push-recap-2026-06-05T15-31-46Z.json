@@ -1,0 +1,315 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "Push Recap — 2026-06-05"
+      },
+      "children": [
+        "stack-main"
+      ]
+    },
+    "stack-main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "repos-section",
+        "sep-1",
+        "pr-149-section",
+        "sep-2",
+        "pr-148-section",
+        "sep-3",
+        "key-changes-section",
+        "sep-4",
+        "stats-section",
+        "sep-5",
+        "recap-link"
+      ]
+    },
+    "repos-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "repos-heading",
+        "repo-1",
+        "repo-2"
+      ]
+    },
+    "repos-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Repository Updates",
+        "level": "h3"
+      }
+    },
+    "repo-1": {
+      "type": "Text",
+      "props": {
+        "text": "aaronjmars/MiroShark — 2 substantive commits (both Aaron-merged 12:43Z + 13:01Z, 17m apart)"
+      }
+    },
+    "repo-2": {
+      "type": "Text",
+      "props": {
+        "text": "aaronjmars/miroshark-aeon — cron churn only"
+      }
+    },
+    "sep-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "pr-149-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "pr-149-heading",
+        "pr-149-details-stack",
+        "pr-149-badge"
+      ]
+    },
+    "pr-149-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "PR #149: Platform-surface family completes — the third leg",
+        "level": "h3"
+      }
+    },
+    "pr-149-details-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "pr-149-detail-1",
+        "pr-149-detail-2",
+        "pr-149-detail-3",
+        "pr-149-detail-4"
+      ]
+    },
+    "pr-149-detail-1": {
+      "type": "Text",
+      "props": {
+        "text": "Ships GET /api/status.json as the health-probe sibling to /api/stats (corpus shape) and /api/surfaces.json (capability catalog)"
+      }
+    },
+    "pr-149-detail-2": {
+      "type": "Text",
+      "props": {
+        "text": "First /api/* endpoint deliberately public-without-auth"
+      }
+    },
+    "pr-149-detail-3": {
+      "type": "Text",
+      "props": {
+        "text": "Third review-commit had to actively remove default internal_auth_guard to align code to openapi docs, and filter total_sims to public+completed so anonymous callers can't infer private/in-flight counts"
+      }
+    },
+    "pr-149-detail-4": {
+      "type": "Text",
+      "props": {
+        "text": "Catalog 31→32"
+      }
+    },
+    "pr-149-badge": {
+      "type": "Badge",
+      "props": {
+        "text": "Built by Aeon",
+        "variant": "secondary"
+      }
+    },
+    "sep-2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "pr-148-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "pr-148-heading",
+        "pr-148-details-stack",
+        "pr-148-badge"
+      ]
+    },
+    "pr-148-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "PR #148: Locale-helper contract lockdown — French-locale prep",
+        "level": "h3"
+      }
+    },
+    "pr-148-details-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "pr-148-detail-1",
+        "pr-148-detail-2",
+        "pr-148-detail-3"
+      ]
+    },
+    "pr-148-detail-1": {
+      "type": "Text",
+      "props": {
+        "text": "343 lines of unit tests across 5 i18n helpers (normalize_locale, get_locale, t, apply_i18n, _strip_i18n, use_locale) with zero production-code changes"
+      }
+    },
+    "pr-148-detail-2": {
+      "type": "Text",
+      "props": {
+        "text": "Freezing behaviour ahead of the dict[str,str]-form _t() refactor that issue #95 (French) needs as prerequisite — refactor touches 195 call sites"
+      }
+    },
+    "pr-148-detail-3": {
+      "type": "Text",
+      "props": {
+        "text": "Built by aeon-aaron (second non-miroshark-aeon Aeon to ship a MiroShark PR this week)"
+      }
+    },
+    "pr-148-badge": {
+      "type": "Badge",
+      "props": {
+        "text": "French-locale prep",
+        "variant": "secondary"
+      }
+    },
+    "sep-3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "key-changes-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "key-changes-heading",
+        "key-changes-table"
+      ]
+    },
+    "key-changes-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Key Changes",
+        "level": "h3"
+      }
+    },
+    "key-changes-table": {
+      "type": "Table",
+      "props": {
+        "columns": [
+          "File",
+          "Details"
+        ],
+        "rows": [
+          [
+            "backend/app/services/platform_status.py",
+            "new +271 LoC stdlib scanner + envelope builder; tolerant of corrupt state.json and dotfile dirs; ok: true is a literal anchor for status-page body-matchers, not a derived value"
+          ],
+          [
+            "backend/tests/test_unit_platform_status.py",
+            "new +428 LoC, 28 offline tests including the drift guard for blueprint wiring and OpenAPI coverage"
+          ],
+          [
+            "backend/tests/test_unit_i18n.py",
+            "new +343 LoC, 26 tests including the t() unknown-locale fallback path that fr will exercise on day one"
+          ]
+        ]
+      }
+    },
+    "sep-4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stats-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "stats-heading",
+        "stats-grid"
+      ]
+    },
+    "stats-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Summary Stats",
+        "level": "h3"
+      }
+    },
+    "stats-grid": {
+      "type": "Grid",
+      "props": {
+        "columns": 3,
+        "gap": "md"
+      },
+      "children": [
+        "stat-1",
+        "stat-2",
+        "stat-3"
+      ]
+    },
+    "stat-1": {
+      "type": "Stat",
+      "props": {
+        "label": "Files Changed",
+        "value": "~13"
+      }
+    },
+    "stat-2": {
+      "type": "Stat",
+      "props": {
+        "label": "Lines Changed",
+        "value": "+1,463 / -1"
+      }
+    },
+    "stat-3": {
+      "type": "Stat",
+      "props": {
+        "label": "Zero-deps Streak",
+        "value": "40 consecutive"
+      }
+    },
+    "sep-5": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "recap-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full Recap",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-06-05.md",
+        "source": "miroshark-aeon"
+      }
+    }
+  }
+}
