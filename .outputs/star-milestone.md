@@ -1,12 +1,12 @@
 ## Summary
 
-**Star Milestone — STAR_MILESTONE_QUIET** for `aaronjmars/MiroShark`.
+Ran `star-milestone` skill — quiet exit, no notification.
 
-- **Stars**: 1,232 → highest crossed threshold is **1000**
-- **Gate 5a**: 1000 already recorded in `memory/topics/milestones.md` as `(bootstrap)` on 2026-05-14 → no action, no notification
-- **Velocity captured for context** (next threshold 1500): v7 = 25, v30 = 161, baseline ≈ 5.37/day, last star today → projected 1500 ETA ~2026-08-18 (aligns with MEMORY's ~2026-08-23 estimate)
-- **`aaronjmars/miroshark-aeon`** skipped per step 1 (name ends in `-aeon`)
+- **aaronjmars/MiroShark**: 1235 stars. Highest threshold ≤ 1235 is **1000**, already recorded as `bootstrap` on 2026-05-14. Next threshold is 1500 (265 stars away). Gate 5a triggered → no action.
+- **aaronjmars/miroshark-aeon**: skipped per step 1 (name ends with `-aeon`).
 
-**Files modified**: `memory/logs/2026-06-04.md` (appended `## Star Milestone` block).
-**Not modified**: `memory/topics/milestones.md` (no new entry needed).
-**No follow-up**: nothing to announce until 1500 crosses (~Aug).
+**Files modified:** `memory/logs/2026-06-05.md` (appended `## Star Milestone` section with `STAR_MILESTONE_QUIET` status).
+
+**Files unchanged:** `memory/topics/milestones.md` (no new entry needed — nothing crossed).
+
+**Follow-up:** Next milestone announcement will fire when MiroShark crosses 1500 stars. At the current ~2 stars/day pace tracked by `star-momentum-alert`, that's projected ~2026-09-15.
