@@ -69,3 +69,15 @@ Each entry includes: signature keywords (for exclusion matching), the live path/
 - **Lives at:** Functionally redundant with `/api/simulation/public` filter set (which already supports filtering by consensus, quality, sort, verified, etc.). A separate `/search` endpoint would duplicate functionality.
 - **Verified:** 2026-06-02 by `feature` skill (`memory/logs/2026-06-02.md` — assessed as redundant).
 - **Suggestion history:** May-24 #5, Jun-01 #3.
+
+### Webhook Delivery Log API
+- **Signature keywords:** `webhook delivery log`, `webhook log api`, `webhook-log.jsonl`, `delivery history`, `/api/simulation/<id>/webhook-log`, `webhook log endpoint`
+- **Lives at:** `GET /api/simulation/<simulation_id>/webhook-log` — admin-token gated, returns last 10 entries + total count from `<sim_dir>/webhook-log.jsonl`. Registered on `simulation_bp` at `backend/app/api/simulation.py:7044`. Service helpers (`webhook_log_path`, `read_webhook_log`) live in `backend/app/services/webhook_service.py:282,401`. Fully documented in `backend/openapi.yaml:3512` + `docs/API.md` Notifications section. Backed by `backend/tests/test_unit_webhook_log.py`.
+- **Verified:** 2026-06-05 by `feature` skill grep (`memory/logs/2026-06-05.md`).
+- **Suggestion history:** Jun-04 #1.
+
+### Webhook Manual Retry
+- **Signature keywords:** `webhook retry`, `webhook manual retry`, `re-fire webhook`, `replay webhook`, `/api/simulation/<id>/webhook-retry`, `re-deliver webhook`
+- **Lives at:** `POST /api/simulation/<simulation_id>/webhook-retry` — admin-token gated, re-fires the completion webhook for a finished sim using the real payload + HMAC re-signing; appends a new entry to `webhook-log.jsonl`. Registered on `simulation_bp` at `backend/app/api/simulation.py:7083`. Documented in `backend/openapi.yaml:3556` + `docs/API.md`. Pairs with the Webhook Delivery Log endpoint above.
+- **Verified:** 2026-06-05 by `feature` skill grep (`memory/logs/2026-06-05.md`).
+- **Suggestion history:** Jun-04 #5.

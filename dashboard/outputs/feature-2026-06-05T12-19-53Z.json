@@ -1,0 +1,188 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Feature Built — 2026-06-05"
+      },
+      "children": [
+        "stack_main"
+      ]
+    },
+    "stack_main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading_probe",
+        "text_intro",
+        "sep1",
+        "heading_why",
+        "text_why",
+        "sep2",
+        "heading_built",
+        "stack_built",
+        "sep3",
+        "heading_how",
+        "text_how",
+        "sep4",
+        "heading_next",
+        "text_next",
+        "sep5",
+        "link_pr"
+      ]
+    },
+    "heading_probe": {
+      "type": "Heading",
+      "props": {
+        "text": "Platform Status Probe",
+        "level": "h2"
+      }
+    },
+    "text_intro": {
+      "type": "Text",
+      "props": {
+        "text": "MiroShark now has a dedicated health endpoint. GET /api/status.json returns a small live envelope — ok: true, current queue depth (sims running right now), completed-in-the-last-24h count, the most recent completion timestamp, lifetime sim total, the catalogued surface count, and an ISO check timestamp. The endpoint any external status monitor (Upptime, BetterUptime, Statuspage.io) can drop in to answer one question: is this MiroShark instance currently up and completing sims?"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {}
+    },
+    "heading_why": {
+      "type": "Heading",
+      "props": {
+        "text": "Why this matters",
+        "level": "h3"
+      }
+    },
+    "text_why": {
+      "type": "Text",
+      "props": {
+        "text": "Until today the platform had no health endpoint. /api/stats exists for analytics (consensus distribution, average confidence, total surface views), /api/surfaces.json for capability discovery, but neither answered the operational question every status page asks on day one. The 14+ named integrators on the ecosystem registry — AntFleet, Capacitr, HivemindOS, and others running pipelines against the public API — had no way to pre-flight check the deployment before submitting batch runs. Aeon's own heartbeat skill was reduced to parsing /api/stats. Today's repo-actions batch surfaced this as the #2 idea, after grep confirmed it was net-new (two of yesterday's five ideas — webhook delivery log and webhook manual retry — turned out to be already shipped, so they pivoted into the pre-existing-features registry instead).",
+        "variant": "body"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {}
+    },
+    "heading_built": {
+      "type": "Heading",
+      "props": {
+        "text": "What was built",
+        "level": "h3"
+      }
+    },
+    "stack_built": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "text_built_1",
+        "text_built_2",
+        "text_built_3",
+        "text_built_4",
+        "text_built_5",
+        "text_built_6",
+        "text_built_7"
+      ]
+    },
+    "text_built_1": {
+      "type": "Text",
+      "props": {
+        "text": "backend/app/services/platform_status.py: New scanner + envelope builder (~250 LoC, pure stdlib os + json + time + datetime). Walks WONDERWALL_SIMULATION_DATA_DIR, counts running sims, counts completed-in-the-last-86400s using updated_at (so a sim created weeks ago but finished today still counts), maxes the completion timestamp, tolerates corrupt state.json + dotfile dirs without raising."
+      }
+    },
+    "text_built_2": {
+      "type": "Text",
+      "props": {
+        "text": "backend/app/api/status.py: New status_bp blueprint with GET /status.json route handler. Sources surface_count from the surfaces catalog at request time. Defensive — a catalog regression can't tank the probe."
+      }
+    },
+    "text_built_3": {
+      "type": "Text",
+      "props": {
+        "text": "backend/openapi.yaml: New /api/status.json path entry + PlatformStatus schema in the components section, with the full envelope contract documented."
+      }
+    },
+    "text_built_4": {
+      "type": "Text",
+      "props": {
+        "text": "backend/app/services/surfaces_catalog.py: platform_status entry added, catalog grows 31→32 surfaces. Discoverable from /api/surfaces.json like every other platform surface."
+      }
+    },
+    "text_built_5": {
+      "type": "Text",
+      "props": {
+        "text": "backend/tests/test_unit_platform_status.py: 28 offline tests covering empty/missing/unreadable sim_root, queue_depth incrementing (including case-insensitive status matching for older sims), the 24h window semantics + updated_at vs created_at fallback, last_completed_at maxing, cumulative total_sims (public + private + in-flight + failed), surface_count injection + negative-input clamping, ISO check_at format + injected-now reflection, JSON round-trip, corrupt-state tolerance, dotfile skipping, blueprint wiring (drift guards against app/__init__.py), catalog entry discoverability, OpenAPI spec coverage."
+      }
+    },
+    "text_built_6": {
+      "type": "Text",
+      "props": {
+        "text": "frontend/src/api/simulation.js: New getPlatformStatusUrl() + getPlatformStatus() helpers — parallel to the existing getPlatformStats and getSurfacesCatalog shape."
+      }
+    },
+    "text_built_7": {
+      "type": "Text",
+      "props": {
+        "text": "docs/API.md + docs/FEATURES.md: New Platform table row + a full deep-dive feature section explaining the three semantic distinctions that matter (queue_depth filters, completed_24h window semantics, total_sims as cumulative not gated)."
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {}
+    },
+    "heading_how": {
+      "type": "Heading",
+      "props": {
+        "text": "How it works",
+        "level": "h3"
+      }
+    },
+    "text_how": {
+      "type": "Text",
+      "props": {
+        "text": "The scanner is intentionally cache-free in the service layer — the surface is meant to be live, and an in-process cache would make last_completed_at lie about the deployment's actual heartbeat. The only smoothing is Cache-Control: public, max-age=30 on the HTTP layer, which absorbs a load-balanced fleet of monitors polling at the same cadence without multiplying the scan cost. The ok: true field is a literal, not a derived value — that's a deliberate design choice so a future regression in the scan bubbles up via the JSON envelope (or a 500) rather than silently flipping the boolean and decaying a downstream alert into a no-op. total_sims is cumulative (public + private + in-flight + failed) and stays distinct from /api/stats.total_sims (filtered to public + completed), so the probe answers \"how much has the engine ever processed?\" while /api/stats answers \"how much successful corpus is visible?\". surface_count is sourced from surfaces_catalog.catalog_count() at request time so it can never drift from the catalog endpoint itself. Empty deployments return the all-zero envelope (still ok: true, still 200) — a fresh install probing its own status sees a valid response, never a 404.",
+        "variant": "body"
+      }
+    },
+    "sep4": {
+      "type": "Separator",
+      "props": {}
+    },
+    "heading_next": {
+      "type": "Heading",
+      "props": {
+        "text": "What's next",
+        "level": "h3"
+      }
+    },
+    "text_next": {
+      "type": "Text",
+      "props": {
+        "text": "Two ideas from today's batch remain unbuilt: Multi-Sim Status Lookup (POST /api/simulation/batch-status for N-to-1 polling — AntFleet + Capacitr both need this) and the All-Time Simulation Leaderboard API (GET /api/leaderboard.json for directories and showcase pages). Both are small effort, both confirmed net-new. The platform-surface family now has three legs (stats / surfaces / status); the natural fourth — a Prometheus /metrics endpoint shaped for time-series monitors rather than status pages — would be the next layer if integrator demand surfaces.",
+        "variant": "body"
+      }
+    },
+    "sep5": {
+      "type": "Separator",
+      "props": {}
+    },
+    "link_pr": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Pull Request #149",
+        "href": "https://github.com/aaronjmars/MiroShark/pull/149",
+        "source": "GitHub"
+      }
+    }
+  }
+}
