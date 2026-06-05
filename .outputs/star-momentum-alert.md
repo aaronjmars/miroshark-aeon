@@ -1,13 +1,21 @@
 ## Summary
 
-**star-momentum-alert — 2026-06-04 — STAR_MOMENTUM_NO_ALERTS**
+**Status: STAR_MOMENTUM_NO_ALERTS**
 
-- **Repos audited:** 1 (`aaronjmars/MiroShark`; `miroshark-aeon` filtered as agent repo)
-- **Data:** 13 daily points (2026-05-22 → 2026-06-03), 1226⭐ current
-- **Pace:** v7 = 3.14 stars/day · v3 = 2.67 stars/day (slight recent softening from the May 31 +7 spike fading)
-- **Target:** 1500⭐ · Gap: 274 stars
-- **Projection:** 2026-08-31 (Monday) — **88 days out, outside the 7-14d Show HN launch window**
-- **Verdict:** OUT_OF_WINDOW — no alert sent, no notification
-- **Files written:** `articles/star-momentum-2026-06-04.md`, `memory/topics/star-momentum-state.json` (updated projection 08-23→08-31), `memory/logs/2026-06-04.md` (log appended)
+Ran `star-momentum-alert` for 2026-06-05.
 
-The 1500-star milestone is on track for late August. The skill will re-evaluate daily and alert automatically when the projected crossing date enters the 7-14 day window on a Tuesday, Wednesday, or Thursday.
+**Repo audited:** `aaronjmars/MiroShark` (1 repo; `miroshark-aeon` filtered as `-aeon` suffix)
+
+**Data:** 13 data points across the 14-day window (May 23–June 4; no star data in today's log yet; May 31–June 1 gap at 1218)
+
+**Projection:**
+- Current: 1226⭐ → Target: 1500⭐ (gap: 274)
+- v7 = 2.71/day → 102 days out → **2026-09-15 (Tuesday)**
+- v3 = 2.67/day → 103 days out → **2026-09-16 (Wednesday)**
+
+**Verdict: OUT_OF_WINDOW** — 102 days is well outside the 7-14 day dispatch window. The 1500⭐ crossing is months away; the alert window will open around September 1–8.
+
+No notification sent. Files written:
+- `articles/star-momentum-2026-06-05.md` — projection report
+- `memory/topics/star-momentum-state.json` — updated (projected_date_v7: 2026-09-15)
+- `memory/logs/2026-06-05.md` — log block appended
