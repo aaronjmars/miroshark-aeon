@@ -1,15 +1,16 @@
-*Agent Self-Improvement — 2026-06-04*
+*Agent Self-Improvement — 2026-06-06*
 
-pre-existing-features registry
-A second exclusion registry that records features the watched repo already ships. Sibling to yesterday's blocked-features.md (PR #50). Together they cover both ways an idea can be unbuildable: architecturally blocked (needs a missing field) or already done (lives elsewhere).
+feature skill — decide auth posture upfront
 
-Why: across May-20 → Jun-01 repo-actions batches, 8 distinct ideas were re-suggested after the watched repo had already shipped them — Gallery JSON, Gallery Trending, Compare API, Compare UI, RSS Feed, Per-Sim Surface Engagement, Webhook Test Ping, Simulation Search. May-28 batch had 3/5 pre-existing; Jun-01 batch had 3/5. The feature skill caught them via grep and pivoted, but they keep eating idea slots upstream.
+The `feature` skill now explicitly decides whether a new endpoint should be public or auth-guarded *before* writing any code, rather than letting the route default-inherit the auth posture of its sibling endpoints. A new step 7 (between pre-existence grep and implementation) walks through three questions about consumer audience, anonymous-state inference risk, and what the openapi sibling spec says — then locks the wiring decision into the same commit as the route handler.
+
+Why: PR #149 (`/api/status.json`, merged 2026-06-05) shipped with default-inherited `internal_auth_guard`, the drift test caught the docs/code disagreement on CI, and the third squash review-commit had to actively *remove* the auth guard to deliver the documented public-status-probe contract. Yesterday's push-recap flagged this as a self-improve target if the pattern recurred. Today's PR #150 got auth posture right on the first commit only because the operator remembered yesterday's flag — the lesson wasn't yet in the skill prompt, so the next fresh-context run would default-inherit again.
 
 What changed:
-- memory/topics/pre-existing-features.md: new registry with 8 bootstrapped entries (signature keywords + lives-at path + verifying log per entry). Permanent — features don't unship.
-- skills/repo-actions/SKILL.md: step 4 reads both registries, with distinct "Excluded (blocked):" vs "Excluded (pre-existing):" notes in the article's Selection Rationale.
-- skills/feature/SKILL.md: step 6 checks the registry before the upstream grep, and writes back new entries when the grep discovers a previously-unknown pre-existing surface. Discovery cost paid once.
+- `skills/feature/SKILL.md`: new step 7 with three-question framework (public-by-design consumer? anonymous-callable private inference? openapi siblings?) and a public/private/mixed wiring matrix. Requires a one-line "Auth posture: …" comment near the handler + same line in PR body's Design notes. Subsequent steps renumbered 8→Implement, 9→Branch/Push, 10→PR, 11→Update memory, 12→Notification.
+- `memory/logs/2026-06-06.md`: self-improve entry covering rationale + the alternatives considered (separate skill — too granular; `repo-actions` pre-classification — wrong layer; rename step 6 — concept-mixing).
+- `memory/MEMORY.md`: Skills Built table row noting the sibling pattern with PR #50 (blocked-features) and PR #52 (pre-existing-features) — same "encode each near-miss into the skill prompt" approach.
 
-Impact: frees ~1-3 idea slots per repo-actions run for net-new suggestions; eliminates "why did the agent suggest something we already have?" operator confusion. Together with yesterday's blocked-features.md, Aeon now has a complete memory layer for "do not suggest" patterns.
+Impact: future `feature` runs make the auth-posture call deliberately. Saves one CI cycle + one review-commit per public-by-design endpoint going forward. The existing drift test stays in place as a safety net; the prompt change prevents the disagreement from being introduced upstream of CI.
 
-PR: https://github.com/aaronjmars/miroshark-aeon/pull/52
+PR: https://github.com/aaronjmars/miroshark-aeon/pull/53
