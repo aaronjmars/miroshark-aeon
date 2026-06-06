@@ -1,12 +1,9 @@
 ## Summary
 
-Ran `star-milestone` skill — quiet exit, no notification.
+Ran the `star-milestone` skill.
 
-- **aaronjmars/MiroShark**: 1235 stars. Highest threshold ≤ 1235 is **1000**, already recorded as `bootstrap` on 2026-05-14. Next threshold is 1500 (265 stars away). Gate 5a triggered → no action.
-- **aaronjmars/miroshark-aeon**: skipped per step 1 (name ends with `-aeon`).
-
-**Files modified:** `memory/logs/2026-06-05.md` (appended `## Star Milestone` section with `STAR_MILESTONE_QUIET` status).
-
-**Files unchanged:** `memory/topics/milestones.md` (no new entry needed — nothing crossed).
-
-**Follow-up:** Next milestone announcement will fire when MiroShark crosses 1500 stars. At the current ~2 stars/day pace tracked by `star-momentum-alert`, that's projected ~2026-09-15.
+- **Repos audited:** 1 (`aaronjmars/MiroShark`; `aaronjmars/miroshark-aeon` filtered as agent repo per step 1)
+- **Result:** MiroShark at **1,237 stars**. Highest threshold ≤ 1237 is **1000**, which is already recorded as `(bootstrap)` on 2026-05-14. Gate 5a (already-recorded) short-circuits the run — no notification.
+- **Next threshold:** 1500 stars (~263 away; momentum skill projects ~2026-08-23)
+- **State changes:** `memory/topics/milestones.md` unchanged; one log entry appended to `memory/logs/2026-06-06.md` with status `STAR_MILESTONE_QUIET`.
+- **Follow-up:** None — skill will re-evaluate next run; the next noisy event for this repo is the 1500 crossing.
