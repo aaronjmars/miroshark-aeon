@@ -1,0 +1,405 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Repo Action Ideas — 2026-06-06"
+      },
+      "children": [
+        "heading_intro",
+        "text_intro",
+        "sep1",
+        "idea1",
+        "sep2",
+        "idea2",
+        "sep3",
+        "idea3",
+        "sep4",
+        "idea4",
+        "sep5",
+        "idea5",
+        "sep6",
+        "text_note",
+        "storylink_details"
+      ]
+    },
+    "heading_intro": {
+      "type": "Heading",
+      "props": {
+        "text": "Generated from deep API audit of aaronjmars/MiroShark",
+        "level": "h2"
+      }
+    },
+    "text_intro": {
+      "type": "Text",
+      "props": {
+        "text": "5 net-new ideas for the platform-level analytics layer, confirmed not pre-existing.",
+        "variant": "lead"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "idea1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "idea1_heading",
+        "idea1_badges",
+        "idea1_endpoint",
+        "idea1_description"
+      ]
+    },
+    "idea1_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "1. Platform Outcome Distribution",
+        "level": "h3"
+      }
+    },
+    "idea1_badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "badge_idea1_analytics",
+        "badge_idea1_small"
+      ]
+    },
+    "badge_idea1_analytics": {
+      "type": "Badge",
+      "props": {
+        "text": "Analytics"
+      }
+    },
+    "badge_idea1_small": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "secondary"
+      }
+    },
+    "idea1_endpoint": {
+      "type": "Text",
+      "props": {
+        "text": "GET /api/stats/distribution.json",
+        "variant": "muted"
+      }
+    },
+    "idea1_description": {
+      "type": "Text",
+      "props": {
+        "text": "Bucketed breakdown of all public sims by direction/confidence/quality/round-count. Answers \"what do MiroShark results look like in aggregate?\" for researchers and journalists.",
+        "variant": "body"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "idea2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "idea2_heading",
+        "idea2_badges",
+        "idea2_endpoint",
+        "idea2_description"
+      ]
+    },
+    "idea2_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "2. Simulation Payload Validator",
+        "level": "h3"
+      }
+    },
+    "idea2_badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "badge_idea2_dx",
+        "badge_idea2_small"
+      ]
+    },
+    "badge_idea2_dx": {
+      "type": "Badge",
+      "props": {
+        "text": "DX"
+      }
+    },
+    "badge_idea2_small": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "secondary"
+      }
+    },
+    "idea2_endpoint": {
+      "type": "Text",
+      "props": {
+        "text": "POST /api/simulation/validate",
+        "variant": "muted"
+      }
+    },
+    "idea2_description": {
+      "type": "Text",
+      "props": {
+        "text": "Dry-run validation of a sim creation payload without spending $1 or waiting 10 minutes. Returns {valid, errors, warnings}. Reuses create's validation logic.",
+        "variant": "body"
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "idea3": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "idea3_heading",
+        "idea3_badges",
+        "idea3_endpoint",
+        "idea3_description"
+      ]
+    },
+    "idea3_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "3. Signed Simulation Result",
+        "level": "h3"
+      }
+    },
+    "idea3_badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "badge_idea3_security",
+        "badge_idea3_integration",
+        "badge_idea3_small"
+      ]
+    },
+    "badge_idea3_security": {
+      "type": "Badge",
+      "props": {
+        "text": "Security"
+      }
+    },
+    "badge_idea3_integration": {
+      "type": "Badge",
+      "props": {
+        "text": "Integration"
+      }
+    },
+    "badge_idea3_small": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "secondary"
+      }
+    },
+    "idea3_endpoint": {
+      "type": "Text",
+      "props": {
+        "text": "GET /api/simulation/<id>/signed-result.json",
+        "variant": "muted"
+      }
+    },
+    "idea3_description": {
+      "type": "Text",
+      "props": {
+        "text": "HMAC-SHA256 over the canonical signal payload using WEBHOOK_SECRET. Integrators who store results for audit trails or prediction market settlement can verify authenticity offline without a live API call.",
+        "variant": "body"
+      }
+    },
+    "sep4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "idea4": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "idea4_heading",
+        "idea4_badges",
+        "idea4_endpoint",
+        "idea4_description"
+      ]
+    },
+    "idea4_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "4. Monthly Statistics Time-Series",
+        "level": "h3"
+      }
+    },
+    "idea4_badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "badge_idea4_analytics",
+        "badge_idea4_growth",
+        "badge_idea4_small"
+      ]
+    },
+    "badge_idea4_analytics": {
+      "type": "Badge",
+      "props": {
+        "text": "Analytics"
+      }
+    },
+    "badge_idea4_growth": {
+      "type": "Badge",
+      "props": {
+        "text": "Growth"
+      }
+    },
+    "badge_idea4_small": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "secondary"
+      }
+    },
+    "idea4_endpoint": {
+      "type": "Text",
+      "props": {
+        "text": "GET /api/stats/timeseries.json",
+        "variant": "muted"
+      }
+    },
+    "idea4_description": {
+      "type": "Text",
+      "props": {
+        "text": "Month-by-month completion counts, published sims, avg confidence, distinct projects. Platform growth is invisible from the API today; this closes that gap.",
+        "variant": "body"
+      }
+    },
+    "sep5": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "idea5": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "idea5_heading",
+        "idea5_badges",
+        "idea5_endpoint",
+        "idea5_description"
+      ]
+    },
+    "idea5_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "5. Platform Agent Behavior Census",
+        "level": "h3"
+      }
+    },
+    "idea5_badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "badge_idea5_analytics",
+        "badge_idea5_research",
+        "badge_idea5_small"
+      ]
+    },
+    "badge_idea5_analytics": {
+      "type": "Badge",
+      "props": {
+        "text": "Analytics"
+      }
+    },
+    "badge_idea5_research": {
+      "type": "Badge",
+      "props": {
+        "text": "Research"
+      }
+    },
+    "badge_idea5_small": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "secondary"
+      }
+    },
+    "idea5_endpoint": {
+      "type": "Text",
+      "props": {
+        "text": "GET /api/stats/agents.json",
+        "variant": "muted"
+      }
+    },
+    "idea5_description": {
+      "type": "Text",
+      "props": {
+        "text": "Aggregate behavioral stats across all public completed sims: stance distribution at start vs end, opinion flip rate, avg belief change per round. First platform-level answer to \"how do agents on MiroShark behave as a population?\".",
+        "variant": "body"
+      }
+    },
+    "sep6": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "text_note": {
+      "type": "Text",
+      "props": {
+        "text": "Note: deep audit today discovered 17 additional pre-existing surfaces (timeline, quality, belief-drift, interaction-network, transcript, thread, cite.bib, notebook.ipynb, templates/list, and more) — all registered in pre-existing-features.md to prevent future idea-slot waste.",
+        "variant": "body"
+      }
+    },
+    "storylink_details": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full details",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-actions-2026-06-06.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}

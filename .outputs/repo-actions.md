@@ -1,19 +1,21 @@
-*Repo Action Ideas — 2026-06-04*
-Generated from analysis of aaronjmars/MiroShark (1,231⭐ · 265 forks · 14 integrators · PR #147 open)
+*Repo Action Ideas — 2026-06-06*
+Generated from deep API audit of aaronjmars/MiroShark — 5 net-new ideas for the platform-level analytics layer, confirmed not pre-existing.
 
-1. Webhook Delivery Log API (DX, Small)
-   Expose the existing per-sim webhook-log.jsonl as a GET endpoint — 14+ integrators debug delivery failures with zero platform-side visibility today.
+1. Platform Outcome Distribution (Analytics, Small)
+   GET /api/stats/distribution.json — bucketed breakdown of all public sims by direction/confidence/quality/round-count. Answers "what do MiroShark results look like in aggregate?" for researchers and journalists.
 
-2. Platform Status API (DX/Integration, Small)
-   GET /api/status.json — queue depth, 24h completions, last-completed timestamp. The health check that makes MiroShark monitorable by Upptime/StatusPage. Not /api/stats.
+2. Simulation Payload Validator (DX, Small)
+   POST /api/simulation/validate — dry-run validation of a sim creation payload without spending $1 or waiting 10 minutes. Returns {valid, errors, warnings}. Reuses create's validation logic.
 
-3. Multi-Sim Status Lookup (Integration, Small)
-   POST /api/simulation/batch-status — check up to 20 sim IDs in one call. Capacitr's polling loop and AntFleet's benchmark pipeline pay N round-trips today; this makes it 1.
+3. Signed Simulation Result (Security/Integration, Small)
+   GET /api/simulation/<id>/signed-result.json — HMAC-SHA256 over the canonical signal payload using WEBHOOK_SECRET. Integrators who store results for audit trails or prediction market settlement can verify authenticity offline without a live API call.
 
-4. All-Time Simulation Leaderboard API (Integration, Small)
-   GET /api/leaderboard.json — four ranked top-10 lists: highest confidence, best quality, most viewed, longest debate. All-time, not windowed. The showcase endpoint directories need.
+4. Monthly Statistics Time-Series (Analytics/Growth, Small)
+   GET /api/stats/timeseries.json — month-by-month completion counts, published sims, avg confidence, distinct projects. Platform growth is invisible from the API today; this closes that gap.
 
-5. Webhook Manual Retry (DX, Small)
-   POST /api/simulation/<id>/webhook/retry — re-fire the real completion payload to the configured webhook URL, re-signed with HMAC. The escape hatch when an integrator's endpoint was temporarily unreachable.
+5. Platform Agent Behavior Census (Analytics/Research, Small)
+   GET /api/stats/agents.json — aggregate behavioral stats across all public completed sims: stance distribution at start vs end, opinion flip rate, avg belief change per round. First platform-level answer to "how do agents on MiroShark behave as a population?".
 
-Full details: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-actions-2026-06-04.md
+Note: deep audit today discovered 17 additional pre-existing surfaces (timeline, quality, belief-drift, interaction-network, transcript, thread, cite.bib, notebook.ipynb, templates/list, and more) — all registered in pre-existing-features.md to prevent future idea-slot waste.
+
+Full details: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-actions-2026-06-06.md
