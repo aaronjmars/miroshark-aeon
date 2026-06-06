@@ -58,7 +58,21 @@ Today is ${today}. Your task is to build a new feature for the **watched repo** 
 
    Brief evidence of the grep (what you searched, what you found) goes in the log entry from step 10.
 
-7. **Implement the feature.** Write clean, complete code. No TODOs or placeholders.
+7. **Decide auth posture UPFRONT — before writing any code.** Most repos default new endpoints behind auth by inheriting the wiring of their sibling endpoints (in MiroShark: `internal_auth_guard` auto-applies to all `/api/*` unless the route is in an explicit allow-list). That default is correct for write/mutation/private-read endpoints but wrong for *public-by-design* surfaces (status probes, capability catalogs, status-page body-matchers, integrator polling endpoints, discoverability registries). Past miss — **PR #149** (`/api/status.json`, 2026-06-05) shipped with default auth-guarded posture, drift-test caught the docs/code disagreement on CI, third squash review-commit had to actively *remove* `internal_auth_guard` from the route. The rewrite was free in retrospect but cost one CI cycle and one review-commit that should have been the initial design.
+
+   Ask three questions before picking a posture:
+   1. **Does the picked idea's description, the openapi spec for sibling endpoints, or the PR-body audience name a public-by-design consumer?** Signals to look for: "status page" / "uptime monitor" / "integrator" / "discovery" / "machine-readable" / "polling" / "third-party". If yes → public-without-auth.
+   2. **Does the route expose data that would let an anonymous caller infer private state?** (e.g. unknown-id 404 vs private-id 403 lets a caller probe for private existence.) If yes → either keep behind auth, OR design a byte-identical envelope so private + unknown are indistinguishable to the caller (PR #150 `/api/simulation/batch-status` pattern: `{found: false, ...nulls}` for both).
+   3. **What do sibling endpoints in `openapi.yaml` say their auth posture is?** `grep -nE "security:|x-internal:|x-public:" backend/openapi.yaml` then read the path entries near the new one. If the sibling family is split (some public, some private), the openapi spec is the source of truth, not the blueprint default.
+
+   Then make the wiring decision *now*, alongside the route handler:
+   - **Public** → add the new path to the auth-exemption allow-list in the same commit that adds the route. In MiroShark this lives at `backend/app/__init__.py` in `internal_auth_guard`. The openapi `security: []` (or absence of `security:`) entry on the path must agree.
+   - **Private** → no allow-list change; rely on the blueprint default. The openapi path needs a `security:` block matching the project's convention.
+   - **Mixed** (e.g. write requires auth but read is public) → handle per-method in the route, allow-list only the public method paths.
+
+   Add a one-line "Auth posture: public / private / mixed — reason" comment near the route handler so reviewers see the decision was deliberate. Include the same line in the PR body's Design notes section.
+
+8. **Implement the feature.** Write clean, complete code. No TODOs or placeholders.
 
    **Scratch / verifier scripts — repo root is OFF-LIMITS.**
    Any throwaway script you use to sanity-check the build (HMAC verifiers, smoke tests, `sys.path.insert(0, '/tmp/build-target/...')` probes, etc.) MUST live under `/tmp/` — never in the agent repo working directory. The workflow runs `git add -A` after this skill, so any `.py` you leave at the agent repo root gets auto-committed to `main` as tech debt. Past leaks: `sig_smoke.py`, `_smoke_webhook.py`, `.aeon-tmp-verify-trending.py` — flagged in 2026-05-11 push-recap.
@@ -67,7 +81,7 @@ Today is ${today}. Your task is to build a new feature for the **watched repo** 
    - Before finishing this step, run `ls *.py .*-tmp-* _smoke_*.py sig_smoke.py 2>/dev/null` in the agent repo root and delete anything that appears. If nothing prints, you're clean.
    - All file-edit tools should target paths under `/tmp/build-target/` (the watched-repo clone) — never paths relative to the agent repo cwd.
 
-8. **Create a branch and push** to the watched repo:
+9. **Create a branch and push** to the watched repo:
    ```bash
    cd /tmp/build-target
    git checkout -b feat/short-feature-name
@@ -76,7 +90,7 @@ Today is ${today}. Your task is to build a new feature for the **watched repo** 
    git push -u origin feat/short-feature-name
    ```
 
-9. **Open a PR** on the watched repo:
+10. **Open a PR** on the watched repo:
    ```bash
    gh pr create -R owner/repo \
      --title "feat: short description" \
@@ -94,9 +108,9 @@ Today is ${today}. Your task is to build a new feature for the **watched repo** 
    *Built autonomously by Aeon*"
    ```
 
-10. **Update memory** — log what was built to `memory/logs/${today}.md` and update `memory/MEMORY.md` Skills Built table.
+11. **Update memory** — log what was built to `memory/logs/${today}.md` and update `memory/MEMORY.md` Skills Built table.
 
-11. **Send a DETAILED notification** via `./notify`. This is the most important part — the notification goes to a Telegram group and must be rich enough that readers understand exactly what was built, why it matters, and how it works WITHOUT clicking the PR link.
+12. **Send a DETAILED notification** via `./notify`. This is the most important part — the notification goes to a Telegram group and must be rich enough that readers understand exactly what was built, why it matters, and how it works WITHOUT clicking the PR link.
 
    DO NOT compress this into 1-2 lines. Every section below is REQUIRED:
 
