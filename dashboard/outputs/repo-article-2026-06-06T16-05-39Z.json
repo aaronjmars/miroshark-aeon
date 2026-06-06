@@ -1,0 +1,179 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "The First Surface That Asks About Many Sims at Once"
+      },
+      "children": [
+        "header",
+        "prinfo",
+        "sep1",
+        "description",
+        "sep2",
+        "details",
+        "sep3",
+        "ecosystem",
+        "sep4",
+        "link"
+      ]
+    },
+    "header": {
+      "type": "Heading",
+      "props": {
+        "text": "MiroShark PR #150: Batch-Shape Primitive",
+        "level": "h2"
+      }
+    },
+    "prinfo": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "pr_num",
+        "pr_status"
+      ]
+    },
+    "pr_num": {
+      "type": "Badge",
+      "props": {
+        "text": "PR #150",
+        "variant": "default"
+      }
+    },
+    "pr_status": {
+      "type": "Badge",
+      "props": {
+        "text": "Opened 11:34 UTC today · Still open",
+        "variant": "secondary"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "description": {
+      "type": "Text",
+      "props": {
+        "text": "Introduces the first batch-shape primitive in the surface catalog: POST /api/simulation/batch-status accepts 1–20 sim ids and returns one entry per id, in input order.",
+        "variant": "lead"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "details": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "detail_surfaces",
+        "detail_timeline",
+        "detail_privacy"
+      ]
+    },
+    "detail_surfaces": {
+      "type": "Text",
+      "props": {
+        "text": "Surface Significance: All 31 prior catalogued surfaces were one-or-all. This is the missing many-at-once primitive.",
+        "variant": "body"
+      }
+    },
+    "detail_timeline": {
+      "type": "Text",
+      "props": {
+        "text": "Timeline: Third pre-flight/integration surface in 72 hours. Prior: PR #147 (per-project stats) and PR #149 (platform status).",
+        "variant": "body"
+      }
+    },
+    "detail_privacy": {
+      "type": "Text",
+      "props": {
+        "text": "Privacy Invariant: Private + unknown envelopes emit byte-identical responses. Dedicated test enforces this property.",
+        "variant": "body"
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "ecosystem": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "eco_label",
+        "eco_badges"
+      ]
+    },
+    "eco_label": {
+      "type": "Text",
+      "props": {
+        "text": "Shaped by ecosystem audience:",
+        "variant": "caption"
+      }
+    },
+    "eco_badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "aud_antfleet",
+        "aud_capacitr",
+        "aud_ecosystem"
+      ]
+    },
+    "aud_antfleet": {
+      "type": "Badge",
+      "props": {
+        "text": "AntFleet",
+        "variant": "outline"
+      }
+    },
+    "aud_capacitr": {
+      "type": "Badge",
+      "props": {
+        "text": "Capacitr",
+        "variant": "outline"
+      }
+    },
+    "aud_ecosystem": {
+      "type": "Badge",
+      "props": {
+        "text": "ECOSYSTEM.md",
+        "variant": "outline"
+      }
+    },
+    "sep4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Read full article",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-06-06.md",
+        "source": "repo-article-2026-06-06.md"
+      }
+    }
+  }
+}
