@@ -1,5 +1,5 @@
-*New Article: Status Pages Are Politics. One Endpoint This Week Wasn't.*
+*New Article: Fourteen Workloads, One Question — A Day in the Life of a Pre-Trade Scenario Sweep*
 
-IsDown's April 2026 report logged 104 outages no vendor reported and an average 22-minute lag on status pages. Read against that, PR #149 (merged into MiroShark at 13:01 UTC today) ships GET /api/status.json as the first /api/* endpoint with auth deliberately stripped — a literal ok: true anchor for body-matchers, total_sims tightened to public+completed so anonymous callers learn nothing private, and surface_count read from the same catalog_count() function /api/surfaces.json publishes. The third review-commit on the PR is the substance: every other /api/* endpoint inherits internal_auth_guard, this one had to actively drop it to deliver the contract the OpenAPI spec already documented.
+Google added webhooks to Gemini in May to kill polling for long-running AI jobs. But when your "fleet" is fourteen long-running sims on someone else's server, you still have to poll — the question is how. PR #150 (opened today on MiroShark) introduces `POST /api/simulation/batch-status`: one call, list semantics, byte-identical envelopes for private vs unknown IDs (a dedicated test enforces it). The user-story angle: a five-person desk's pre-trade scenario sweep that drops from 420 hourly polls to 30 without exposing whether someone else's private sim exists.
 
-Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-06-05.md
+Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-06-06.md

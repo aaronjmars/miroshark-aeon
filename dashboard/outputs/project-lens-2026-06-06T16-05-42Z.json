@@ -1,0 +1,72 @@
+{
+  "root": "root",
+  "state": {},
+  "elements": {
+    "root": {
+      "type": "Card",
+      "props": {
+        "title": "project-lens"
+      },
+      "children": [
+        "article-link",
+        "sep1",
+        "context1",
+        "context2",
+        "sep2",
+        "impact-heading",
+        "stat-polls",
+        "impact-text"
+      ]
+    },
+    "article-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Fourteen Workloads, One Question — A Day in the Life of a Pre-Trade Scenario Sweep",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-06-06.md",
+        "source": "MiroShark"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {}
+    },
+    "context1": {
+      "type": "Text",
+      "props": {
+        "text": "Google added webhooks to Gemini in May to kill polling for long-running AI jobs. But when your \"fleet\" is fourteen long-running sims on someone else's server, you still have to poll — the question is how."
+      }
+    },
+    "context2": {
+      "type": "Text",
+      "props": {
+        "text": "PR #150 (opened today on MiroShark) introduces POST /api/simulation/batch-status: one call, list semantics, byte-identical envelopes for private vs unknown IDs (a dedicated test enforces it)."
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {}
+    },
+    "impact-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Impact",
+        "level": "h3"
+      }
+    },
+    "stat-polls": {
+      "type": "Stat",
+      "props": {
+        "label": "Hourly Polls",
+        "value": "30",
+        "delta": "-390",
+        "trend": "down"
+      }
+    },
+    "impact-text": {
+      "type": "Text",
+      "props": {
+        "text": "A five-person desk's pre-trade scenario sweep drops from 420 hourly polls to 30 without exposing whether someone else's private sim exists."
+      }
+    }
+  }
+}
