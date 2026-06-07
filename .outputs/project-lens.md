@@ -1,5 +1,5 @@
-*New Article: Fourteen Workloads, One Question — A Day in the Life of a Pre-Trade Scenario Sweep*
+*New Article: What CrUX and Cloudflare Radar Already Knew: Picking the Buckets Is the Hard Part*
 
-Google added webhooks to Gemini in May to kill polling for long-running AI jobs. But when your "fleet" is fourteen long-running sims on someone else's server, you still have to poll — the question is how. PR #150 (opened today on MiroShark) introduces `POST /api/simulation/batch-status`: one call, list semantics, byte-identical envelopes for private vs unknown IDs (a dedicated test enforces it). The user-story angle: a five-person desk's pre-trade scenario sweep that drops from 420 hourly polls to 30 without exposing whether someone else's private sim exists.
+PR #151 (Platform Outcome Distribution, merged 2026-06-07T15:41Z) ships /api/stats/distribution.json — the *shape* of MiroShark's corpus across four dimensions: direction (bullish/neutral/bearish), confidence (high ≥70 / medium 40-70 / low <40), quality (excellent/good/fair/poor), round count (short<10 / medium 10-20 / long>20). The article frames this through CrUX's 2.5s LCP threshold and Cloudflare Radar's 16 content-type categories: when you publish a distribution, the bucket boundaries become the vocabulary every downstream consumer quotes. The hard part was never the endpoint. It was picking where the buckets stop.
 
-Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-06-06.md
+Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-06-07.md
