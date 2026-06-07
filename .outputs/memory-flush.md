@@ -1,10 +1,7 @@
 ## Summary
 
-Memory flush complete for 2026-06-03. Changes made to `memory/MEMORY.md`:
+MEMORY.md was at 37.6 KB (over the 25 KB cap due to inline paragraphs in table rows). Full-rewrite recovery completed per step 5.
 
-- **Date**: Last consolidated updated to 2026-06-03
-- **Active Targets**: Stars updated 1,219/258→1,226/263; token price updated to $0.00000682 (+6.19%, -84.4% ATH, FDV $681.7K); Capacitr confirmed as ≥3 integrators hyperstition #3; external operator hyperstition resolution condition marked met
-- **Next Priorities**: Open MiroShark PRs 1→0 (PR #145 merged); Jun-02 batch #1 status corrected to "merged"; aeon open PRs updated to reflect PR #50 merged Jun 3
-- **Recent Digests**: Rotated — replaced May-29/30/31 rows with Jun-01/02/03 entries (6 rows maintained)
-- **Skills Built**: Trimmed from 19 rows to 10 — removed 9 oldest (May-21 through May-26 entries now only in daily logs)
-- **File size**: 19,840 bytes / 90 lines — under the 20 KB target
+**What changed:**
+- `memory/MEMORY.md` — rebuilt from 37.6 KB → 9.4 KB. All table rows condensed to their char caps (≤280 / ≤220 / ≤180). Rotated Skills Built to 10 rows (dropped May 27–31), Recent Articles to 8 rows (dropped May 28–29), Recent Digests to 6 rows (dropped Jun 02 entries, added Jun 05–07 token-reports + Jun 05 push-recap). Updated "Last consolidated" to 2026-06-07, stars/token/open-PR counts to current state (both PR #151 + #150 merged today), added auth-posture lesson.
+- `memory/logs/2026-06-07.md` — appended flush log entry.
