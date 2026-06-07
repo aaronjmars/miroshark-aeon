@@ -1,0 +1,228 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "Agent Self-Improvement — 2026-06-06",
+        "description": "feature skill — decide auth posture upfront"
+      },
+      "children": [
+        "section-feature",
+        "separator-1",
+        "section-why",
+        "separator-2",
+        "section-changes",
+        "separator-3",
+        "section-impact",
+        "separator-4",
+        "section-pr"
+      ]
+    },
+    "section-feature": {
+      "type": "Text",
+      "props": {
+        "text": "The `feature` skill now explicitly decides whether a new endpoint should be public or auth-guarded before writing any code, rather than letting the route default-inherit the auth posture of its sibling endpoints. A new step 7 (between pre-existence grep and implementation) walks through three questions about consumer audience, anonymous-state inference risk, and what the openapi sibling spec says — then locks the wiring decision into the same commit as the route handler.",
+        "variant": "body"
+      }
+    },
+    "separator-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "section-why": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading-why",
+        "text-why"
+      ]
+    },
+    "heading-why": {
+      "type": "Heading",
+      "props": {
+        "text": "Why",
+        "level": "h3"
+      }
+    },
+    "text-why": {
+      "type": "Text",
+      "props": {
+        "text": "PR #149 (`/api/status.json`, merged 2026-06-05) shipped with default-inherited `internal_auth_guard`, the drift test caught the docs/code disagreement on CI, and the third squash review-commit had to actively remove the auth guard to deliver the documented public-status-probe contract. Yesterday's push-recap flagged this as a self-improve target if the pattern recurred. Today's PR #150 got auth posture right on the first commit only because the operator remembered yesterday's flag — the lesson wasn't yet in the skill prompt, so the next fresh-context run would default-inherit again.",
+        "variant": "body"
+      }
+    },
+    "separator-2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "section-changes": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading-changes",
+        "changes-list"
+      ]
+    },
+    "heading-changes": {
+      "type": "Heading",
+      "props": {
+        "text": "What Changed",
+        "level": "h3"
+      }
+    },
+    "changes-list": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "lg"
+      },
+      "children": [
+        "change-1",
+        "change-2",
+        "change-3"
+      ]
+    },
+    "change-1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "text-change-1-file",
+        "text-change-1-desc"
+      ]
+    },
+    "text-change-1-file": {
+      "type": "Text",
+      "props": {
+        "text": "`skills/feature/SKILL.md`",
+        "variant": "muted"
+      }
+    },
+    "text-change-1-desc": {
+      "type": "Text",
+      "props": {
+        "text": "New step 7 with three-question framework (public-by-design consumer? anonymous-callable private inference? openapi siblings?) and a public/private/mixed wiring matrix. Requires a one-line \"Auth posture: …\" comment near the handler + same line in PR body's Design notes. Subsequent steps renumbered 8→Implement, 9→Branch/Push, 10→PR, 11→Update memory, 12→Notification.",
+        "variant": "body"
+      }
+    },
+    "change-2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "text-change-2-file",
+        "text-change-2-desc"
+      ]
+    },
+    "text-change-2-file": {
+      "type": "Text",
+      "props": {
+        "text": "`memory/logs/2026-06-06.md`",
+        "variant": "muted"
+      }
+    },
+    "text-change-2-desc": {
+      "type": "Text",
+      "props": {
+        "text": "Self-improve entry covering rationale + the alternatives considered (separate skill — too granular; `repo-actions` pre-classification — wrong layer; rename step 6 — concept-mixing).",
+        "variant": "body"
+      }
+    },
+    "change-3": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "text-change-3-file",
+        "text-change-3-desc"
+      ]
+    },
+    "text-change-3-file": {
+      "type": "Text",
+      "props": {
+        "text": "`memory/MEMORY.md`",
+        "variant": "muted"
+      }
+    },
+    "text-change-3-desc": {
+      "type": "Text",
+      "props": {
+        "text": "Skills Built table row noting the sibling pattern with PR #50 (blocked-features) and PR #52 (pre-existing-features) — same \"encode each near-miss into the skill prompt\" approach.",
+        "variant": "body"
+      }
+    },
+    "separator-3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "section-impact": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading-impact",
+        "text-impact"
+      ]
+    },
+    "heading-impact": {
+      "type": "Heading",
+      "props": {
+        "text": "Impact",
+        "level": "h3"
+      }
+    },
+    "text-impact": {
+      "type": "Text",
+      "props": {
+        "text": "Future `feature` runs make the auth-posture call deliberately. Saves one CI cycle + one review-commit per public-by-design endpoint going forward. The existing drift test stays in place as a safety net; the prompt change prevents the disagreement from being introduced upstream of CI.",
+        "variant": "body"
+      }
+    },
+    "separator-4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "section-pr": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "link-pr"
+      ]
+    },
+    "link-pr": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #53",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/pull/53",
+        "source": "GitHub"
+      }
+    }
+  }
+}
