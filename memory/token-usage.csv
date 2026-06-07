@@ -508,3 +508,4 @@ date,skill,model,input_tokens,output_tokens,cache_read,cache_creation
 2026-06-07,star-milestone,claude-opus-4-7,28,9288,1089879,80119
 2026-06-06,self-improve,claude-opus-4-7,28,13084,1734441,61670
 2026-06-07,project-lens,claude-opus-4-7,39,22878,2169381,125952
+2026-06-07,thread-formatter,claude-sonnet-4-6,11,23948,603802,65659

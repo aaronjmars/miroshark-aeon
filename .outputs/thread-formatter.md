@@ -1,14 +1,14 @@
-*Thread Draft — 2026-06-06*
-Topic: Multi-Sim Batch Status Lookup — POST /api/simulation/batch-status (PR #150)
+*Thread Draft — 2026-06-07*
+Topic: Platform Outcome Distribution — GET /api/stats/distribution.json (PR #151)
 
-1/ MiroShark had 31 API surfaces before today. All 31 ask about one sim or about all sims. PR #150 ships the first that takes a list: POST /api/simulation/batch-status, 1 to 20 IDs per request.
+1/ /api/stats tells you how many simulations are in the corpus. /api/stats/distribution.json — merged today as PR #151 — tells you how those simulations are shaped: direction, confidence, quality, and round-count, each split into buckets.
 
-2/ The per-sim surfaces answer questions about one run: signal, agents, sparklines, volatility, transcript. Platform surfaces answer questions about the whole instance: stats, catalog, status probe. Nothing in between for callers tracking a set of sims.
+2/ Before today, /api/stats answered size questions only: total sims, total views, projects. It couldn't tell you whether the corpus leaned bullish, what share hit high-confidence, or whether most runs were long. Shape questions had no surface.
 
-3/ Takes a JSON body of up to 20 sim IDs, returns one entry per ID in input order, duplicates honored. Private and unknown IDs share an identical envelope — callers cannot probe whether a private sim exists. 26 tests, one dedicated to that invariant.
+3/ Four dimensions: direction (bullish/neutral/bearish, same tie-break as per-sim signal.json), confidence (high ≥70 / medium 40–70 / low <40), quality from quality.json.health, round-count short/medium/long. Plus avg_confidence_pct and avg_total_rounds. 300-second cache.
 
-4/ AntFleet's miroshark-bench, Capacitr's polling loop, the integrators in ECOSYSTEM.md — all of them need to monitor a set of sims at once. One batch call replaces N sequential calls. This is the primitive that makes polling on a fleet of sims practical.
+4/ The cache is 300 seconds — five times /api/stats' 60 — because the consumer is press unfurls and slow dashboards, not per-tick polling. ETag bumps on a new calendar month even when totals are static. PR #150 merged 8 minutes later, closing the open-PR queue to 0.
 
-5/ PR #150 — 10 files, 26 offline tests, 41st consecutive zero-dependency PR on MiroShark. https://github.com/aaronjmars/MiroShark/pull/150
+5/ The 33rd catalogued surface, 41st stdlib-only PR in a row. GET /api/stats/distribution.json — shape companion to /api/stats. https://github.com/aaronjmars/MiroShark/pull/151
 
-(article: articles/thread-2026-06-06.md)
+(article: articles/thread-2026-06-07.md)
