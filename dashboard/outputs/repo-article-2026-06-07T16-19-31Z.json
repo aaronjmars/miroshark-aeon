@@ -1,0 +1,231 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "New Article: The Shape of the Corpus Now Has Its Own Endpoint"
+      },
+      "children": [
+        "stack_main"
+      ]
+    },
+    "stack_main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "text_intro",
+        "separator_1",
+        "heading_merges",
+        "stack_pr_details",
+        "text_timing",
+        "separator_2",
+        "heading_metrics",
+        "grid_metrics",
+        "text_queue",
+        "separator_3",
+        "heading_design",
+        "text_design_intro",
+        "stack_audiences",
+        "separator_4",
+        "link_article"
+      ]
+    },
+    "text_intro": {
+      "type": "Text",
+      "props": {
+        "text": "Two PRs merged eight minutes apart on main today, driving major capability improvements across MiroShark.",
+        "variant": "lead"
+      },
+      "children": []
+    },
+    "separator_1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "heading_merges": {
+      "type": "Heading",
+      "props": {
+        "text": "Merged Pull Requests",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "stack_pr_details": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "text_pr151",
+        "text_pr150"
+      ]
+    },
+    "text_pr151": {
+      "type": "Text",
+      "props": {
+        "text": "PR #151: /api/stats/distribution.json"
+      },
+      "children": []
+    },
+    "text_pr150": {
+      "type": "Text",
+      "props": {
+        "text": "PR #150: POST /api/simulation/batch-status"
+      },
+      "children": []
+    },
+    "text_timing": {
+      "type": "Text",
+      "props": {
+        "text": "Merged eight minutes apart on main",
+        "variant": "muted"
+      },
+      "children": []
+    },
+    "separator_2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "heading_metrics": {
+      "type": "Heading",
+      "props": {
+        "text": "Impact Metrics",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "grid_metrics": {
+      "type": "Grid",
+      "props": {
+        "columns": 2,
+        "gap": "md"
+      },
+      "children": [
+        "stat_catalog",
+        "stat_shipments"
+      ]
+    },
+    "stat_catalog": {
+      "type": "Stat",
+      "props": {
+        "label": "Capability Catalog",
+        "value": "33",
+        "delta": "+2",
+        "trend": "up"
+      },
+      "children": []
+    },
+    "stat_shipments": {
+      "type": "Stat",
+      "props": {
+        "label": "Consecutive Zero-Deps Shipments",
+        "value": "42",
+        "delta": "41st & 42nd landed today",
+        "trend": "up"
+      },
+      "children": []
+    },
+    "text_queue": {
+      "type": "Text",
+      "props": {
+        "text": "MiroShark's open Aeon-built PR queue is empty for the first time in seventeen days"
+      },
+      "children": []
+    },
+    "separator_3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "heading_design": {
+      "type": "Heading",
+      "props": {
+        "text": "Design Context",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "text_design_intro": {
+      "type": "Text",
+      "props": {
+        "text": "PR #151 serves as the shape companion to /api/stats (which only reports size). The four-audience design brief drove the envelope negotiation:"
+      },
+      "children": []
+    },
+    "stack_audiences": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "badge_researchers",
+        "badge_digest",
+        "badge_directory",
+        "badge_integrators"
+      ]
+    },
+    "badge_researchers": {
+      "type": "Badge",
+      "props": {
+        "text": "Researchers",
+        "variant": "outline"
+      },
+      "children": []
+    },
+    "badge_digest": {
+      "type": "Badge",
+      "props": {
+        "text": "Digest skills",
+        "variant": "outline"
+      },
+      "children": []
+    },
+    "badge_directory": {
+      "type": "Badge",
+      "props": {
+        "text": "Directory builders",
+        "variant": "outline"
+      },
+      "children": []
+    },
+    "badge_integrators": {
+      "type": "Badge",
+      "props": {
+        "text": "Threshold-calibrating integrators",
+        "variant": "outline"
+      },
+      "children": []
+    },
+    "separator_4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "link_article": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Read the full article",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-06-07.md",
+        "source": "MiroShark Articles"
+      },
+      "children": []
+    }
+  }
+}
