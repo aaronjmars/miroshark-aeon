@@ -1,0 +1,215 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "Feature Built — 2026-06-07"
+      },
+      "children": [
+        "heading",
+        "description",
+        "sep1",
+        "why_heading",
+        "why_content",
+        "sep2",
+        "built_heading",
+        "built_content",
+        "sep3",
+        "how_heading",
+        "how_content",
+        "sep4",
+        "next_heading",
+        "next_content",
+        "sep5",
+        "pr_link"
+      ]
+    },
+    "heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Platform Outcome Distribution",
+        "level": "h2"
+      }
+    },
+    "description": {
+      "type": "Text",
+      "props": {
+        "text": "MiroShark's `/api/stats` endpoint already tells you *how big* the platform is — a sim count, a consensus distribution, an average confidence. It does not tell you what those sims *look like* in aggregate. PR #151 adds `GET /api/stats/distribution.json`, the shape companion: bucketed breakdowns of every public, completed sim across four dimensions plus two scalar averages — direction (bullish / neutral / bearish), confidence tier (high ≥70 / medium 40-70 / low <40), quality tier (excellent / good / fair / poor), and round count (short <10 / medium 10-20 / long >20).",
+        "variant": "body"
+      }
+    },
+    "sep1": {
+      "type": "Separator"
+    },
+    "why_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Why this matters:",
+        "level": "h3"
+      }
+    },
+    "why_content": {
+      "type": "Text",
+      "props": {
+        "text": "Until today, the question *\"what fraction of MiroShark sims clear a high-confidence threshold?\"* could only be answered by scraping the gallery and computing it client-side. A researcher citing the platform in a methods section, an Aeon digest reporting *\"high-confidence sims rose from 28% to 36% of the corpus over the last 30 days,\"* a directory builder displaying *\"32% excellent / 52% good\"* alongside the sim total, an integrator picking a `confidence_pct` cutoff that lands in the top quartile of historical sims — all four of those use-cases needed shape data the platform exposed as totals only. `repo-actions` flagged the gap on Jun 6 as the highest-impact net-new platform-analytics surface; this PR fills it.",
+        "variant": "body"
+      }
+    },
+    "sep2": {
+      "type": "Separator"
+    },
+    "built_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "What was built:",
+        "level": "h3"
+      }
+    },
+    "built_content": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "built_1",
+        "built_2",
+        "built_3",
+        "built_4",
+        "built_5",
+        "built_6",
+        "built_7"
+      ]
+    },
+    "built_1": {
+      "type": "Text",
+      "props": {
+        "text": "`backend/app/services/outcome_distribution.py`: new ~440-LoC stdlib service. `build_distribution(sim_root)` walks `WONDERWALL_SIMULATION_DATA_DIR`, applies the same `is_public AND status==completed` publish gate `/api/stats` uses, and buckets each sim across the four dimensions. Reuses `signal_service.compute_signal` and the same trajectory-walk pattern as `platform_stats` / `project_stats` so a sim's contribution is byte-for-byte identical across the three platform surfaces.",
+        "variant": "body"
+      }
+    },
+    "built_2": {
+      "type": "Text",
+      "props": {
+        "text": "`backend/app/api/stats.py`: new `/distribution.json` route on the existing `stats_bp` blueprint. Sets `Cache-Control: public, max-age=300` (slower than `/api/stats`' 60-second cache — the consumer profile is press unfurls and slow-beat dashboards, not status-page polls) and supports `If-None-Match` short-circuit to 304.",
+        "variant": "body"
+      }
+    },
+    "built_3": {
+      "type": "Text",
+      "props": {
+        "text": "`backend/app/services/surfaces_catalog.py`: new `outcome_distribution` entry (type `analytics`). Catalog grows 32 → 33 entries.",
+        "variant": "body"
+      }
+    },
+    "built_4": {
+      "type": "Text",
+      "props": {
+        "text": "`backend/openapi.yaml`: full `OutcomeDistribution` schema with per-bucket field definitions and inline descriptions for each tier boundary.",
+        "variant": "body"
+      }
+    },
+    "built_5": {
+      "type": "Text",
+      "props": {
+        "text": "`frontend/src/api/simulation.js`: `getOutcomeDistribution()` + `getOutcomeDistributionUrl()` helpers.",
+        "variant": "body"
+      }
+    },
+    "built_6": {
+      "type": "Text",
+      "props": {
+        "text": "`docs/API.md` + `docs/FEATURES.md`: endpoint row and dedicated **Platform Outcome Distribution** section with example envelope and the four-audience framing.",
+        "variant": "body"
+      }
+    },
+    "built_7": {
+      "type": "Text",
+      "props": {
+        "text": "`backend/tests/test_unit_outcome_distribution.py`: 30 offline cases covering all four bucket dimensions, the publish gate, confidence boundaries (inclusive lower edge), case-insensitive quality matching, missing-trajectory handling, 5-minute cache TTL, ETag derivation and its distinctness from the platform / project sibling ETags, plus route / catalog / openapi / frontend wiring drift guards.",
+        "variant": "body"
+      }
+    },
+    "sep3": {
+      "type": "Separator"
+    },
+    "how_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "How it works:",
+        "level": "h3"
+      }
+    },
+    "how_content": {
+      "type": "Text",
+      "props": {
+        "text": "Direction buckets follow the same plurality + `bullish > bearish > neutral` tie-break the per-sim `signal.json` uses, so a sim labelled Bullish on its per-sim verdict lands in the `bullish` bucket here byte-for-byte. Confidence tiers are inclusive on the lower edge — a sim landing exactly at 70 reads as `high`, not `medium`, so a corpus shift past the threshold reads as a jump in `high` rather than as boundary noise. Quality buckets read `quality.json.health` case-insensitively; sims with missing or unrecognised health values are still counted in `total_analyzed` but excluded from the four quality buckets, so the bucket sum is conservative on purpose. Round counts derive from the number of recorded `trajectory.json` snapshots — same source `peak_round.total_rounds` uses, so a sim's bucket here matches its per-sim peak-round count exactly. The ETag is `\"distribution-<total_analyzed>-<YYYY-MM prefix of newest_completed_at>\"` — a polling consumer's `If-None-Match` GET short-circuits to 304 until either a new sim completes (bumps the count) or the first sim of a new calendar month completes (bumps the month prefix).",
+        "variant": "body"
+      }
+    },
+    "sep4": {
+      "type": "Separator"
+    },
+    "next_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "What's next:",
+        "level": "h3"
+      }
+    },
+    "next_content": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "next_1",
+        "next_2",
+        "next_3",
+        "next_4"
+      ]
+    },
+    "next_1": {
+      "type": "Text",
+      "props": {
+        "text": "Simulation Payload Validator (dry-run validate before spending $1 + 10 minutes on a malformed sim config)",
+        "variant": "body"
+      }
+    },
+    "next_2": {
+      "type": "Text",
+      "props": {
+        "text": "Signed Simulation Result (HMAC-SHA256 over the canonical signal JSON for offline integrator verification)",
+        "variant": "body"
+      }
+    },
+    "next_3": {
+      "type": "Text",
+      "props": {
+        "text": "Monthly Statistics Time-Series (month-by-month activity for growth dashboards)",
+        "variant": "body"
+      }
+    },
+    "next_4": {
+      "type": "Text",
+      "props": {
+        "text": "Platform Agent Behavior Census (aggregated agent trajectory data for ML researchers)",
+        "variant": "body"
+      }
+    },
+    "sep5": {
+      "type": "Separator"
+    },
+    "pr_link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #151",
+        "href": "https://github.com/aaronjmars/MiroShark/pull/151",
+        "source": "GitHub"
+      }
+    }
+  }
+}
