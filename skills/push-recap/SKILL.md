@@ -41,13 +41,28 @@ Read memory/watched-repos.md for the list of repos to scan.
 
 4. **Deduplicate** commits by SHA across both sources.
 
-5. **Read the actual diffs** for each commit to understand what changed:
+5. **Filter agent-repo cron noise.** On the agent repo (this repo — `aaronjmars/miroshark-aeon`, or any repo whose name ends in `-aeon`), the vast majority of commits to `main` are scheduler / skill auto-commits authored by `aeonframework`. They are NOT substantive shipping events and must be excluded from the recap (the May-31 noise-exclusion convention, re-derived in every push-recap from Jun-01 through Jun-07 before this rule was encoded here).
+
+   A commit is **noise** and gets dropped if all of:
+   - author / actor is `aeonframework` (i.e. `.author.login == "aeonframework"` or `.commit.author.name == "aeonframework"`); AND
+   - commit message first line matches one of:
+     - `chore(scheduler):` (cron-state churn)
+     - `chore(cron):` (per-skill success markers)
+     - `chore(<any-skill-name>): auto-commit` (skill output payloads landing on `main` via the auto-commit pipeline — already covered in the skill's own `## <skill>` section in today's log; recapping again would duplicate)
+
+   A commit by `aeonframework` whose message does **not** match those prefixes is substantive — e.g. an interactive PR merge, a manual fix, a non-pipeline content commit — and stays in the recap.
+
+   On the **watched repo(s)** (anything that isn't the agent repo), do not apply this filter — every commit is potentially substantive there.
+
+   When the agent-repo commit list collapses to zero substantive commits after filtering, note it in the recap body as "N cron auto-commits excluded as noise per the May-31 convention" and do not re-explain each filtered commit. If the combined substantive count across all watched repos is zero, log `PUSH_RECAP_QUIET` and do not notify (same as step 3).
+
+6. **Read the actual diffs** for each commit to understand what changed:
    ```bash
    gh api repos/owner/repo/commits/FULL_SHA --jq '{files: [.files[] | {filename: .filename, status: .status, additions: .additions, deletions: .deletions, patch: .patch}]}'
    ```
    Read ALL commits in detail. If there are more than 15, read the 15 most significant (by lines changed) and summarize the rest.
 
-6. **Analyze and explain** each commit thoroughly:
+7. **Analyze and explain** each commit thoroughly:
    - Read the actual patch content — don't just repeat the commit message
    - What files were changed and what the diff actually shows
    - What feature, fix, or improvement this represents in plain language
@@ -55,9 +70,9 @@ Read memory/watched-repos.md for the list of repos to scan.
    - Any notable patterns (new dependencies, architecture changes, refactors, new APIs)
    - If a commit touches multiple areas, break it down by area
 
-7. **Group commits by theme** — don't just list them chronologically. Cluster related commits together under descriptive headings (e.g. "New token tracking system", "Dashboard UX overhaul", "CI/CD improvements").
+8. **Group commits by theme** — don't just list them chronologically. Cluster related commits together under descriptive headings (e.g. "New token tracking system", "Dashboard UX overhaul", "CI/CD improvements").
 
-8. **Write a deep recap** to `articles/push-recap-${today}.md`:
+9. **Write a deep recap** to `articles/push-recap-${today}.md`:
    ```markdown
    # Push Recap — ${today}
 
@@ -111,9 +126,9 @@ Read memory/watched-repos.md for the list of repos to scan.
    - [Branches created but not merged?]
    ```
 
-9. **Log** to `memory/logs/${today}.md` (repos covered, commit count, article path). **Do this before sending the notification.**
+10. **Log** to `memory/logs/${today}.md` (repos covered, commit count, article path). **Do this before sending the notification.**
 
-10. **Send a detailed notification** via `./notify`:
+11. **Send a detailed notification** via `./notify`:
    ```
    *Push Recap — ${today}*
    [repo] — X commits by Y authors
