@@ -1,0 +1,165 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "project-lens",
+        "description": "New article and PR merge on signed results and attestation"
+      },
+      "children": [
+        "story_link",
+        "sep1",
+        "framework_section",
+        "sep2",
+        "standards_text",
+        "sep3",
+        "pr_heading",
+        "pr_text",
+        "endpoint_badge",
+        "sep4",
+        "metrics_stack",
+        "sep5",
+        "article_angle_heading",
+        "article_angle_text"
+      ]
+    },
+    "story_link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "The Difference Between a Witness and an Affidavit",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-06-08.md",
+        "source": "MiroShark"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {}
+    },
+    "framework_section": {
+      "type": "Text",
+      "props": {
+        "text": "A signed document carries its own warrant — the legal world has known this since John Law issued the first bearer shares in 1717, and 2026 is rediscovering it in four vocabularies at once.",
+        "variant": "lead"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {}
+    },
+    "standards_text": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "standards_heading",
+        "standards_list"
+      ]
+    },
+    "standards_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Four Standards for Signed Attestation",
+        "level": "h4"
+      }
+    },
+    "standards_list": {
+      "type": "Text",
+      "props": {
+        "text": "C2PA Content Credentials • W3C VC 2.0 offline verification • SLSA/Sigstore build attestations • HMAC envelope on JSON",
+        "variant": "body"
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {}
+    },
+    "pr_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "PR #152: Signed Result Envelope",
+        "level": "h3"
+      }
+    },
+    "pr_text": {
+      "type": "Text",
+      "props": {
+        "text": "MiroShark merged PR #152 today. The change wraps the canonical signal.json in an HMAC-SHA256 envelope so integrators can store results locally and prove later, offline, that the bytes match what the platform actually emitted.",
+        "variant": "body"
+      }
+    },
+    "endpoint_badge": {
+      "type": "Badge",
+      "props": {
+        "text": "GET /api/simulation/<id>/signed-result.json",
+        "variant": "outline"
+      }
+    },
+    "sep4": {
+      "type": "Separator",
+      "props": {}
+    },
+    "metrics_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "lg"
+      },
+      "children": [
+        "stat_service_code",
+        "stat_tests",
+        "badge_zero_deps",
+        "badge_streak"
+      ]
+    },
+    "stat_service_code": {
+      "type": "Stat",
+      "props": {
+        "label": "Service code",
+        "value": "215 LoC"
+      }
+    },
+    "stat_tests": {
+      "type": "Stat",
+      "props": {
+        "label": "Tests",
+        "value": "25"
+      }
+    },
+    "badge_zero_deps": {
+      "type": "Badge",
+      "props": {
+        "text": "Zero new dependencies",
+        "variant": "secondary"
+      }
+    },
+    "badge_streak": {
+      "type": "Badge",
+      "props": {
+        "text": "42nd straight zero-dep shipment",
+        "variant": "secondary"
+      }
+    },
+    "sep5": {
+      "type": "Separator",
+      "props": {}
+    },
+    "article_angle_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Analytical Framework",
+        "level": "h4"
+      }
+    },
+    "article_angle_text": {
+      "type": "Text",
+      "props": {
+        "text": "The article reads this through Austin's performative/constative distinction: the bytes have to outlast the service.",
+        "variant": "body"
+      }
+    }
+  }
+}
