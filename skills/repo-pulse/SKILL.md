@@ -1,6 +1,6 @@
 ---
 name: repo-pulse
-description: Daily report on new stars, forks, and traffic for watched repos
+description: Daily report on new stars, forks, and traffic for watched repos — enriched with each new starrer/forker's profile (name, company, bio, location, followers)
 var: ""
 tags: [dev]
 ---
@@ -61,6 +61,21 @@ Read memory/watched-repos.md for the list of repos to track. Skip any repo whose
 
    Only log "REPO_PULSE_QUIET" and skip notification if ZERO new stargazers AND ZERO new forks since the 24h cutoff.
 
+5b. **Enrich new stargazers and forkers (profile lookup).** Before formatting the notification and article, look up *who* each new account is — a bare handle (`github.com/xyz123`) tells the operator nothing; `@ Vercel · 2.3k followers` tells them a launch is landing. For each new stargazer handle and each new fork owner from the 24h window, make one read-only call:
+
+   ```bash
+   gh api users/$LOGIN --jq '{login, name, company, bio, location, blog, twitter_username, followers, public_repos, hireable, created_at}'
+   ```
+
+   Rules:
+   - **Cap at 25 new accounts per run** (stargazers + forkers combined). If there are more, enrich the first 25 in `starred_at` / `created_at` order and append a final `…and N more` entry un-enriched. Bounds both API calls and message length.
+   - **Skip empty fields** — most accounts have `null` company/bio/location. Omit a segment rather than printing a blank.
+   - **One-line summary per account**, joining the present fields with ` · ` in this order:
+     `${name or login} · @ ${company} · ${location} · ${followers}f · ${public_repos} repos · "${bio trimmed to ~80 chars}"`
+     Drop any segment whose source field is empty (e.g. no company → no `@ …` segment). Use `${twitter_username}` / `${blog}` only in the article, not the notification, to keep messages short.
+   - **Low-signal flag** — if `followers <= 2` AND `public_repos == 0` AND `created_at` is within the last 30 days, append ` ⚠ new/low-signal`. A soft fake-star tell that complements `star-milestone`'s burst check; annotate, don't suppress.
+   - **Sandbox note** — `gh api users/$LOGIN` is read-only and the `gh` CLI handles auth internally (no curl, no env-var headers), so it works in the Actions sandbox. If a lookup fails (deleted/renamed account), fall back to the bare handle for that entry and continue.
+
 6. **Send notification** via `./notify`:
    ```
    *Repo Pulse — ${today}*
@@ -70,15 +85,17 @@ Read memory/watched-repos.md for the list of repos to track. Skip any repo whose
    Forks: Y total (+N new)
 
    New stargazers:
-   github.com/user1 | github.com/user2 | github.com/user3
+   - github.com/alice — Alice Chen · @ Vercel · San Francisco · 2.3k followers · 87 repos · "building dev tools"
+   - github.com/bob — @ Stripe · 480 followers
+   - github.com/carol — 4 followers · joined 6d ago ⚠ new/low-signal
 
    New forks:
-   github.com/user1/repo | github.com/user2/repo
+   - github.com/dave/repo — Dave Kim · @ Acme · 1.1k followers
    ```
 
    Format rules:
-   - List stargazers on one line separated by ` | ` (not one per line)
-   - Same for forks
+   - **One enriched line per stargazer/forker** (from step 5b): `- github.com/${handle} — ${summary}`. The `github.com/${handle}` prefix MUST stay first; the profile summary follows after ` — `.
+   - If step 5b produced no summary for an account (all fields empty or lookup failed), fall back to the bare `- github.com/${handle}` line.
    - Omit "New stargazers" section entirely if there are none
    - Omit "New forks" section entirely if there are none
    - Do NOT include traffic data, watchers, or open issues
@@ -99,15 +116,16 @@ Read memory/watched-repos.md for the list of repos to track. Skip any repo whose
    - **Notification sent:** yes/no
 
    **New stargazers:**
-   - github.com/user1
-   - github.com/user2
+   - github.com/user1 — Alice Chen · @ Vercel · San Francisco · 2.3k followers · 87 repos · twitter.com/alice · "building dev tools"
+   - github.com/user2 — @ Stripe · 480 followers
 
    **New forks:**
-   - github.com/user1/repo
+   - github.com/user1/repo — Dave Kim · @ Acme · 1.1k followers
    ```
 
    Format rules:
    - The two key fields `stargazers_count` and `forks_count` MUST use the exact `**stargazers_count:** N` / `**forks_count:** N` markup (matches `operator-scorecard` step 3a parser).
+   - Each `**New stargazers:**` / `**New forks:**` bullet is `- github.com/${handle} — ${profile summary}` from step 5b (the fuller form including `twitter`/`blog`, with empty fields dropped and ` ⚠ new/low-signal` appended for low-signal accounts). The bare `github.com/${handle}` prefix MUST stay first so the handle is still parseable; if step 5b produced no summary, emit the bare handle line. Cap at the 25 enriched accounts; if more, append a final `- …and N more` bullet.
    - The two delta fields `New stars (24h)` and `New forks (24h)` MUST use the exact `**New stars (24h):** N` / `**New forks (24h):** N` markup (same parser).
    - Omit the `**New stargazers:**` block entirely if N == 0. Same for forks.
    - For multi-repo runs, emit one `##` block per repo in fetch order; do not interleave fields across repos.
