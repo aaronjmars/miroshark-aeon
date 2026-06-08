@@ -1,16 +1,14 @@
-*Agent Self-Improvement — 2026-06-06*
+*Agent Self-Improvement — 2026-06-08*
 
-feature skill — decide auth posture upfront
+push-recap skill — agent-repo noise-exclusion step
+The push-recap skill has been re-deriving the same "aeonframework cron auto-commit = noise" rule from log precedent every single day for the past seven days. That rule now lives in the skill prompt itself as a new step 5 — a mechanical three-prefix filter that runs before diff-reading.
 
-The `feature` skill now explicitly decides whether a new endpoint should be public or auth-guarded *before* writing any code, rather than letting the route default-inherit the auth posture of its sibling endpoints. A new step 7 (between pre-existence grep and implementation) walks through three questions about consumer audience, anonymous-state inference risk, and what the openapi sibling spec says — then locks the wiring decision into the same commit as the route handler.
-
-Why: PR #149 (`/api/status.json`, merged 2026-06-05) shipped with default-inherited `internal_auth_guard`, the drift test caught the docs/code disagreement on CI, and the third squash review-commit had to actively *remove* the auth guard to deliver the documented public-status-probe contract. Yesterday's push-recap flagged this as a self-improve target if the pattern recurred. Today's PR #150 got auth posture right on the first commit only because the operator remembered yesterday's flag — the lesson wasn't yet in the skill prompt, so the next fresh-context run would default-inherit again.
+Why: Every push-recap from Jun-01 through Jun-07 reinvoked the "May-31 noise-exclusion convention" inline ("Per May-31 noise-exclusion convention, aeonframework cron auto-commits are excluded as noise"). The convention was real and correct, but it lived in operator memory + log precedent, not in the skill — so each fresh run paid the same re-derivation cost.
 
 What changed:
-- `skills/feature/SKILL.md`: new step 7 with three-question framework (public-by-design consumer? anonymous-callable private inference? openapi siblings?) and a public/private/mixed wiring matrix. Requires a one-line "Auth posture: …" comment near the handler + same line in PR body's Design notes. Subsequent steps renumbered 8→Implement, 9→Branch/Push, 10→PR, 11→Update memory, 12→Notification.
-- `memory/logs/2026-06-06.md`: self-improve entry covering rationale + the alternatives considered (separate skill — too granular; `repo-actions` pre-classification — wrong layer; rename step 6 — concept-mixing).
-- `memory/MEMORY.md`: Skills Built table row noting the sibling pattern with PR #50 (blocked-features) and PR #52 (pre-existing-features) — same "encode each near-miss into the skill prompt" approach.
+- skills/push-recap/SKILL.md: new step 5 inserted between dedup and diff-reading. Drops commits where author is `aeonframework` AND first message line matches `chore(scheduler):` / `chore(cron):` / `chore(<skill>): auto-commit`. Applies only to the agent repo (`miroshark-aeon` or any repo ending `-aeon`). Steps 5–10 renumbered to 6–11.
+- memory/MEMORY.md: Skills Built table row + Lessons Learned row added.
 
-Impact: future `feature` runs make the auth-posture call deliberately. Saves one CI cycle + one review-commit per public-by-design endpoint going forward. The existing drift test stays in place as a safety net; the prompt change prevents the disagreement from being introduced upstream of CI.
+Impact: Saves ~5–10 minutes of analysis per daily push-recap run; output becomes consistent across days; the filter runs before the expensive per-commit `gh api` fan-out, so collapsed-to-zero days skip diff-reading entirely. Genuinely substantive aeonframework commits (interactive PR merges, manual fixes, non-pipeline content) survive the filter via the prefix match — the rule does not lose signal.
 
-PR: https://github.com/aaronjmars/miroshark-aeon/pull/53
+PR: https://github.com/aaronjmars/miroshark-aeon/pull/55
