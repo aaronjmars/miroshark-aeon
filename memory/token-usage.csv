@@ -518,4 +518,4 @@ date,skill,model,input_tokens,output_tokens,cache_read,cache_creation
 2026-06-08,repo-actions,claude-sonnet-4-6,24,33876,1667570,83318
 2026-06-08,repo-article,claude-opus-4-7,54,14957,3331978,59843
 2026-06-08,thread-formatter,claude-sonnet-4-6,10,15366,399946,41399
-2026-06-08,heartbeat,claude-sonnet-4-6,13,6973,547646,37942
+2026-06-08,operator-scorecard,claude-sonnet-4-6,17,16549,1329691,104281

@@ -1,29 +1,29 @@
 {
   "version": "1",
-  "generated_at": "2026-06-01T00:00:00Z",
+  "generated_at": "2026-06-08T00:00:00Z",
   "skill": "operator-scorecard",
-  "title": "Operator Scorecard — 2026-06-01",
+  "title": "Operator Scorecard — 2026-06-08",
   "spec": {
     "type": "Stack",
     "props": {"direction": "vertical", "gap": "md"},
     "children": [
-      {"type": "Heading", "props": {"level": 2, "children": "Operator Scorecard — 2026-06-01"}},
-      {"type": "Alert", "props": {"variant": "destructive", "children": "DEGRADED — 7 surfaces shipped and 25 stars gained; token down -42.5% 7d and tweet-allocator disabled — code cadence solid, economic signals weakest of the three lanes."}},
+      {"type": "Heading", "props": {"level": 2, "children": "Operator Scorecard — 2026-06-08"}},
+      {"type": "Alert", "props": {"variant": "destructive", "children": "DEGRADED — Fleet ran clean all week (6/7 heartbeats OK, 25 stars added) but $AEON distribution sits at $0 since tweet-allocator was disabled in late May."}},
       {"type": "Grid", "props": {"columns": 3, "gap": "sm"}, "children": [
         {"type": "Card", "props": {"children": [
           {"type": "Text", "props": {"variant": "muted", "children": "Agent health"}},
-          {"type": "Heading", "props": {"level": 3, "children": "4/7"}},
-          {"type": "Text", "props": {"children": "clean heartbeats · 3 P3 flags"}}
+          {"type": "Heading", "props": {"level": 3, "children": "6/7"}},
+          {"type": "Text", "props": {"children": "heartbeats OK · 0 anomalies (skill-analytics not enabled)"}}
         ]}},
         {"type": "Card", "props": {"children": [
           {"type": "Text", "props": {"variant": "muted", "children": "Stars added"}},
           {"type": "Heading", "props": {"level": 3, "children": "+25"}},
-          {"type": "Text", "props": {"children": "11 forks · no leaderboard data"}}
+          {"type": "Text", "props": {"children": "9 forks · new contributors: N/A (no leaderboard)"}}
         ]}},
         {"type": "Card", "props": {"children": [
           {"type": "Text", "props": {"variant": "muted", "children": "$AEON distributed"}},
-          {"type": "Heading", "props": {"level": 3, "children": "$10.00"}},
-          {"type": "Text", "props": {"children": "2 recipients · token -42.5% 7d"}}
+          {"type": "Heading", "props": {"level": 3, "children": "$0.00"}},
+          {"type": "Text", "props": {"children": "0 recipients · token -15.1% 7d"}}
         ]}}
       ]},
       {"type": "Heading", "props": {"level": 3, "children": "Verdicts by lane"}},
@@ -34,9 +34,9 @@
           {"key": "headline", "header": "Headline"}
         ],
         "rows": [
-          {"lane": "Agent health", "verdict": "WATCH", "headline": "4/7 clean heartbeats · P3×3 (stalled PRs) · heartbeat-only"},
-          {"lane": "Community growth", "verdict": "OK", "headline": "+25⭐ +11 forks · avg 3.6/day · no leaderboard"},
-          {"lane": "Economic activity", "verdict": "DEGRADED", "headline": "$10.00 to 2 recipients · token -42.5% 7d (FADING)"}
+          {"lane": "Agent health", "verdict": "OK", "headline": "6/7 heartbeats OK · P0=0 P1=0 P2=0 P3=0 (Branch B)"},
+          {"lane": "Community growth", "verdict": "OK", "headline": "+25⭐ +9 forks across 1 repo · no leaderboard run"},
+          {"lane": "Economic activity", "verdict": "DEGRADED", "headline": "$0 distributed (tweet-allocator off) · token -15.1% 7d"}
         ]
       }}
     ]

@@ -1,0 +1,233 @@
+{
+  "root": "card-operator-scorecard",
+  "state": {},
+  "elements": {
+    "card-operator-scorecard": {
+      "type": "Card",
+      "props": {
+        "title": "Operator Scorecard — 2026-06-08"
+      },
+      "children": [
+        "alert-degraded",
+        "sep-1",
+        "heading-agent-health",
+        "text-heartbeats",
+        "text-priorities",
+        "text-analytics-note",
+        "sep-2",
+        "heading-community",
+        "stack-community-stats",
+        "text-community-avg",
+        "sep-3",
+        "heading-economic",
+        "stack-economic",
+        "sep-4",
+        "heading-notable",
+        "stack-notable",
+        "sep-5",
+        "text-window",
+        "link-full-article"
+      ]
+    },
+    "alert-degraded": {
+      "type": "Alert",
+      "props": {
+        "type": "warning",
+        "title": "Fleet Status: DEGRADED",
+        "message": "Fleet ran clean all week (6/7 heartbeats OK, 25 stars added) but $AEON distribution sits at $0 since tweet-allocator was disabled in late May."
+      }
+    },
+    "sep-1": {
+      "type": "Separator"
+    },
+    "heading-agent-health": {
+      "type": "Heading",
+      "props": {
+        "text": "Agent Health",
+        "level": "h3"
+      }
+    },
+    "text-heartbeats": {
+      "type": "Text",
+      "props": {
+        "text": "6/7 clean heartbeats (1 skills-missing auto-dispatched Jun 1)"
+      }
+    },
+    "text-priorities": {
+      "type": "Text",
+      "props": {
+        "text": "P0=0  P1=0  P2=0  P3=0"
+      }
+    },
+    "text-analytics-note": {
+      "type": "Text",
+      "props": {
+        "text": "skill-analytics not enabled",
+        "variant": "muted"
+      }
+    },
+    "sep-2": {
+      "type": "Separator"
+    },
+    "heading-community": {
+      "type": "Heading",
+      "props": {
+        "text": "Community Growth",
+        "level": "h3"
+      }
+    },
+    "stack-community-stats": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "lg"
+      },
+      "children": [
+        "stat-stars",
+        "stat-forks"
+      ]
+    },
+    "stat-stars": {
+      "type": "Stat",
+      "props": {
+        "label": "Stars Added",
+        "value": "+25",
+        "trend": "up"
+      }
+    },
+    "stat-forks": {
+      "type": "Stat",
+      "props": {
+        "label": "Forks Added",
+        "value": "+9",
+        "trend": "up"
+      }
+    },
+    "text-community-avg": {
+      "type": "Text",
+      "props": {
+        "text": "1 repo  •  avg 3.6★/day",
+        "variant": "caption"
+      }
+    },
+    "sep-3": {
+      "type": "Separator"
+    },
+    "heading-economic": {
+      "type": "Heading",
+      "props": {
+        "text": "Economic Activity",
+        "level": "h3"
+      }
+    },
+    "stack-economic": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stat-aeon",
+        "text-aeon-details",
+        "stat-token",
+        "text-token-details"
+      ]
+    },
+    "stat-aeon": {
+      "type": "Stat",
+      "props": {
+        "label": "$AEON Distribution",
+        "value": "$0.00"
+      }
+    },
+    "text-aeon-details": {
+      "type": "Text",
+      "props": {
+        "text": "0 recipients  •  tweet-allocator disabled since May 27",
+        "variant": "caption"
+      }
+    },
+    "stat-token": {
+      "type": "Stat",
+      "props": {
+        "label": "Token 7d Change",
+        "value": "-15.1%",
+        "trend": "up"
+      }
+    },
+    "text-token-details": {
+      "type": "Text",
+      "props": {
+        "text": "$0.00000611  •  RECOVERING — 3rd consecutive up-day",
+        "variant": "caption"
+      }
+    },
+    "sep-4": {
+      "type": "Separator"
+    },
+    "heading-notable": {
+      "type": "Heading",
+      "props": {
+        "text": "Notable",
+        "level": "h3"
+      }
+    },
+    "stack-notable": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "text-pr-desc",
+        "link-pr",
+        "text-pr-tech",
+        "text-achievements"
+      ]
+    },
+    "text-pr-desc": {
+      "type": "Text",
+      "props": {
+        "text": "Signed Simulation Result"
+      }
+    },
+    "link-pr": {
+      "type": "Link",
+      "props": {
+        "label": "PR #152",
+        "href": "https://github.com/miroshark-aeon/miroshark-aeon/pull/152"
+      }
+    },
+    "text-pr-tech": {
+      "type": "Text",
+      "props": {
+        "text": "First cryptographic-verifiability surface (HMAC-SHA256)",
+        "variant": "caption"
+      }
+    },
+    "text-achievements": {
+      "type": "Text",
+      "props": {
+        "text": "catalog 33→34  •  42-PR zero-dep streak",
+        "variant": "caption"
+      }
+    },
+    "sep-5": {
+      "type": "Separator"
+    },
+    "text-window": {
+      "type": "Text",
+      "props": {
+        "text": "Window: last 7d",
+        "variant": "muted"
+      }
+    },
+    "link-full-article": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full Report",
+        "href": "articles/operator-scorecard-2026-06-08.md"
+      }
+    }
+  }
+}
