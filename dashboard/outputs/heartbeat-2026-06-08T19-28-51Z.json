@@ -1,0 +1,339 @@
+{
+  "root": "card-heartbeat",
+  "state": {},
+  "elements": {
+    "card-heartbeat": {
+      "type": "Card",
+      "props": {
+        "title": "Heartbeat",
+        "description": "Monday Jun 8, 19:26 UTC"
+      },
+      "children": [
+        "section-missing",
+        "sep-1",
+        "section-prs",
+        "sep-2",
+        "section-issues",
+        "sep-3",
+        "section-skills"
+      ]
+    },
+    "section-missing": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "alert-missing-skill",
+        "link-auto-trigger"
+      ]
+    },
+    "alert-missing-skill": {
+      "type": "Alert",
+      "props": {
+        "title": "Missing skill: operator-scorecard",
+        "message": "Scheduled Mon 10:30 UTC, 8h56m overdue, no prior run found",
+        "type": "warning"
+      }
+    },
+    "link-auto-trigger": {
+      "type": "Link",
+      "props": {
+        "label": "Auto-triggered",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/actions/runs/27161703543"
+      }
+    },
+    "sep-1": {
+      "type": "Separator",
+      "props": {}
+    },
+    "section-prs": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "h-prs",
+        "pr-list"
+      ]
+    },
+    "h-prs": {
+      "type": "Heading",
+      "props": {
+        "text": "Open PRs",
+        "level": "h3"
+      }
+    },
+    "pr-list": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "pr-repo-1",
+        "pr-repo-2"
+      ]
+    },
+    "pr-repo-1": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "text-repo-miroshark",
+        "stat-pr-count-0"
+      ]
+    },
+    "text-repo-miroshark": {
+      "type": "Text",
+      "props": {
+        "text": "MiroShark:",
+        "variant": "body"
+      }
+    },
+    "stat-pr-count-0": {
+      "type": "Stat",
+      "props": {
+        "value": "0"
+      }
+    },
+    "pr-repo-2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "pr-header-2",
+        "pr-details-2"
+      ]
+    },
+    "pr-header-2": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "text-repo-aeon",
+        "stat-pr-count-1"
+      ]
+    },
+    "text-repo-aeon": {
+      "type": "Text",
+      "props": {
+        "text": "miroshark-aeon:",
+        "variant": "body"
+      }
+    },
+    "stat-pr-count-1": {
+      "type": "Stat",
+      "props": {
+        "value": "1"
+      }
+    },
+    "pr-details-2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "pr-item-55",
+        "text-pr-status"
+      ]
+    },
+    "pr-item-55": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #55 improve/push-recap-noise-step",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/pull/55"
+      }
+    },
+    "text-pr-status": {
+      "type": "Text",
+      "props": {
+        "text": "5.5h old — not stalled",
+        "variant": "caption"
+      }
+    },
+    "sep-2": {
+      "type": "Separator",
+      "props": {}
+    },
+    "section-issues": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "h-issues",
+        "issue-item-95"
+      ]
+    },
+    "h-issues": {
+      "type": "Heading",
+      "props": {
+        "text": "Issues",
+        "level": "h3"
+      }
+    },
+    "issue-item-95": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "link-issue-95",
+        "text-issue-status"
+      ]
+    },
+    "link-issue-95": {
+      "type": "StoryLink",
+      "props": {
+        "title": "#95 French locale",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/issues/95"
+      }
+    },
+    "text-issue-status": {
+      "type": "Text",
+      "props": {
+        "text": "non-urgent, no change",
+        "variant": "caption"
+      }
+    },
+    "sep-3": {
+      "type": "Separator",
+      "props": {}
+    },
+    "section-skills": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "h-skills",
+        "skills-list"
+      ]
+    },
+    "h-skills": {
+      "type": "Heading",
+      "props": {
+        "text": "All other Monday skills ran OK",
+        "level": "h3"
+      }
+    },
+    "skills-list": {
+      "type": "Grid",
+      "props": {
+        "columns": 3,
+        "gap": "md"
+      },
+      "children": [
+        "badge-token-report",
+        "badge-repo-pulse",
+        "badge-star-momentum-alert",
+        "badge-weekly-shiplog",
+        "badge-self-improve",
+        "badge-feature",
+        "badge-repo-actions",
+        "badge-push-recap",
+        "badge-project-lens",
+        "badge-repo-article",
+        "badge-star-milestone",
+        "badge-thread-formatter"
+      ]
+    },
+    "badge-token-report": {
+      "type": "Badge",
+      "props": {
+        "text": "token-report",
+        "variant": "secondary"
+      }
+    },
+    "badge-repo-pulse": {
+      "type": "Badge",
+      "props": {
+        "text": "repo-pulse",
+        "variant": "secondary"
+      }
+    },
+    "badge-star-momentum-alert": {
+      "type": "Badge",
+      "props": {
+        "text": "star-momentum-alert",
+        "variant": "secondary"
+      }
+    },
+    "badge-weekly-shiplog": {
+      "type": "Badge",
+      "props": {
+        "text": "weekly-shiplog",
+        "variant": "secondary"
+      }
+    },
+    "badge-self-improve": {
+      "type": "Badge",
+      "props": {
+        "text": "self-improve",
+        "variant": "secondary"
+      }
+    },
+    "badge-feature": {
+      "type": "Badge",
+      "props": {
+        "text": "feature",
+        "variant": "secondary"
+      }
+    },
+    "badge-repo-actions": {
+      "type": "Badge",
+      "props": {
+        "text": "repo-actions",
+        "variant": "secondary"
+      }
+    },
+    "badge-push-recap": {
+      "type": "Badge",
+      "props": {
+        "text": "push-recap",
+        "variant": "secondary"
+      }
+    },
+    "badge-project-lens": {
+      "type": "Badge",
+      "props": {
+        "text": "project-lens",
+        "variant": "secondary"
+      }
+    },
+    "badge-repo-article": {
+      "type": "Badge",
+      "props": {
+        "text": "repo-article",
+        "variant": "secondary"
+      }
+    },
+    "badge-star-milestone": {
+      "type": "Badge",
+      "props": {
+        "text": "star-milestone",
+        "variant": "secondary"
+      }
+    },
+    "badge-thread-formatter": {
+      "type": "Badge",
+      "props": {
+        "text": "thread-formatter",
+        "variant": "secondary"
+      }
+    }
+  }
+}
