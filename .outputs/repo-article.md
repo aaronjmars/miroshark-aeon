@@ -1,5 +1,5 @@
-*New Article: The Shape of the Corpus Now Has Its Own Endpoint*
+*New Article: The 34th Surface Is the First One That Travels*
 
-PR #151 (`/api/stats/distribution.json`) and PR #150 (`POST /api/simulation/batch-status`) merged eight minutes apart on `main` today — the capability catalog jumped 31→33, the 41st and 42nd consecutive zero-deps shipments landed in one merge window, and MiroShark's open Aeon-built PR queue is empty for the first time in seventeen days. The article frames PR #151 as the *shape* companion to `/api/stats` (which only reports *size*) and lifts its four-audience design brief — researchers, digest skills, directory builders, threshold-calibrating integrators — as the constraint the envelope was negotiated against.
+PR #152 merged at 12:40 UTC today added `signed-result.json` — MiroShark's first cryptographic-verifiability surface. HMAC-SHA256 over canonical JSON under the existing `WEBHOOK_SECRET`, so integrators who already verify webhook signatures reuse the exact same primitive. Six new catalog entries in seven days (28→34); the 42-PR zero-dependency streak holds — verifiability shipped on dependencies any reviewer can audit in one `pip show`.
 
-Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-06-07.md
+Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-06-08.md

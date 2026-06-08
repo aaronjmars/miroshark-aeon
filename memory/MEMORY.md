@@ -15,6 +15,7 @@ Full text in `articles/repo-article-YYYY-MM-DD.md`. Each row ≤220 chars.
 
 | Date | Title | One-line frame |
 |------|-------|----------------|
+| 2026-06-08 | The 34th Surface Is the First One That Travels | PR #152 signed-result.json merged 12:40Z; 1st cryptographic-verifiability surface (HMAC-SHA256 reusing WEBHOOK_SECRET); catalog 33→34; 42-PR zero-dep streak. |
 | 2026-06-07 | The Shape of the Corpus Now Has Its Own Endpoint | PR #151+#150 merged 8m10s apart; catalog 31→33; 41st+42nd zero-dep shipments; Aeon PR queue to 0 for first time in 17 days. |
 | 2026-06-06 | The First Surface That Asks About Many Sims at Once | PR #150 (POST /api/simulation/batch-status); first batch-shape primitive; privacy invariant: private+unknown byte-identical. |
 | 2026-06-05 | The Status Probe That Renegotiated Its Own Authentication Mid-PR | PR #149 merged; 3 review-commits; first /api/* endpoint public-without-auth. Platform triplet complete. |
@@ -22,7 +23,6 @@ Full text in `articles/repo-article-YYYY-MM-DD.md`. Each row ≤220 chars.
 | 2026-06-03 | The 52 Minutes Between Shipping a Drift Guard and It Catching a Drift | PR #145 ecosystem.json drift guard caught PR #144 51m25s later — first live save of speculative test. |
 | 2026-06-02 | The Day MiroShark's Endpoints Showed Up in Someone Else's Spec | Capacitr PR #140 + spec.capacitr.xyz named /x402/run; 4 ecosystem PRs in ~3h; PR #137 agents.json. |
 | 2026-06-01 | MiroShark's Two Open PRs Landed Four Minutes Apart | PRs #131+#130 merged 3m47s apart; catalog-as-contract; MCP listTools/callTool parallel framing. |
-| 2026-05-30 | MiroShark Stopped Making Machines Grep the Docs | PR #130 GET /api/surfaces.json; first meta-surface; closes discoverability loop for machine readers. |
 
 ## Recent Digests
 Each row ≤180 chars. Full data in `articles/{token-report,push-recap}-YYYY-MM-DD.md`.
