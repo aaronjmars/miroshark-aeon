@@ -211,9 +211,9 @@
   "operator-scorecard": {
     "last_dispatch": "2026-06-01T10:58:29Z",
     "last_status": "success",
-    "last_success": "2026-06-01T11:04:51Z",
-    "total_runs": 3,
-    "total_successes": 3,
+    "last_success": "2026-06-08T19:34:32Z",
+    "total_runs": 4,
+    "total_successes": 4,
     "total_failures": 0,
     "consecutive_failures": 0,
     "success_rate": 1
