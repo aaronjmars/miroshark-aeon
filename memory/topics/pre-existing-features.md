@@ -183,3 +183,75 @@ Each entry includes: signature keywords (for exclusion matching), the live path/
 - **Lives at:** `GET /api/simulation/<simulation_id>/interviews/<agent_name>` — per-agent interview transcript (simulation.py:9916). Batch at `POST /api/simulation/interview/batch`. History at `POST /api/simulation/interview/history`.
 - **Verified:** 2026-06-06 by `repo-actions` skill deep audit (`memory/logs/2026-06-06.md`).
 - **Suggestion history:** Jun-06 (excluded from batch after discovery).
+
+### Platform Stats Badge (SVG)
+- **Signature keywords:** `platform badge`, `platform stats badge`, `sims badge`, `badge embed`, `/api/stats/badge.svg`, `platform count badge`, `shields badge platform`
+- **Lives at:** `GET /api/stats/badge.svg` — Shields.io-compatible flat pill badge ("MiroShark | N simulations"). Platform-level sibling of the per-sim `/badge.svg` (PR #94). Defined in `backend/app/api/stats.py` + `backend/app/services/badge_service.py`.
+- **Verified:** 2026-06-08 by `repo-actions` skill catalog audit (`memory/logs/2026-06-08.md` — entry `platform_stats_badge` found in surfaces_catalog.py).
+- **Suggestion history:** Jun-08 (excluded from batch after discovery).
+
+### Per-Sim Badge SVG
+- **Signature keywords:** `sim badge`, `per-sim badge`, `simulation badge`, `/badge.svg`, `simulation count badge`, `embed badge svg`
+- **Lives at:** `GET /api/simulation/<simulation_id>/badge.svg` — per-simulation embed badge (PR #94). Catalogued as `badge_svg` in surfaces_catalog.py.
+- **Verified:** 2026-06-08 by `repo-actions` skill catalog audit (`memory/logs/2026-06-08.md`).
+- **Suggestion history:** Jun-08 (excluded — discovered in catalog).
+
+### Simulation Clone JSON
+- **Signature keywords:** `clone json`, `simulation clone`, `sim clone api`, `/clone.json`, `fork simulation`, `clone simulation endpoint`
+- **Lives at:** `GET /api/simulation/<simulation_id>/clone.json` — simulation parameters export for cloning/forking (catalogued `clone_json` in surfaces_catalog.py). Paired with compare API (already in registry).
+- **Verified:** 2026-06-08 by `repo-actions` skill catalog audit (`memory/logs/2026-06-08.md`).
+- **Suggestion history:** Jun-08 (excluded — discovered in catalog).
+
+### Polymarket Integration JSON
+- **Signature keywords:** `polymarket json`, `polymarket integration`, `prediction market`, `polymarket api`, `/polymarket.json`, `prediction market export`, `polymarket data`
+- **Lives at:** `GET /api/simulation/<simulation_id>/polymarket.json` — Polymarket prediction market metadata for a simulation (catalogued `polymarket_json` in surfaces_catalog.py, type: integration).
+- **Verified:** 2026-06-08 by `repo-actions` skill catalog audit (`memory/logs/2026-06-08.md`).
+- **Suggestion history:** Jun-08 (excluded — discovered in catalog).
+
+### Volatility Analytics
+- **Signature keywords:** `volatility analytics`, `volatility surface`, `signal volatility`, `/volatility`, `belief volatility`, `volatility score`, `confidence volatility`
+- **Lives at:** `GET /api/simulation/<simulation_id>/volatility` — volatility analytics surface (catalogued `volatility` in surfaces_catalog.py, type: analytics).
+- **Verified:** 2026-06-08 by `repo-actions` skill catalog audit (`memory/logs/2026-06-08.md`).
+- **Suggestion history:** Jun-08 (excluded — discovered in catalog).
+
+### Agent Sparklines Visualization
+- **Signature keywords:** `agent sparklines`, `sparklines`, `agents/sparklines`, `belief sparklines`, `agent trajectory sparklines`
+- **Lives at:** `GET /api/simulation/<simulation_id>/agents/sparklines` — per-agent belief trajectory sparklines (catalogued `agent_sparklines` in surfaces_catalog.py, type: analytics).
+- **Verified:** 2026-06-08 by `repo-actions` skill catalog audit (`memory/logs/2026-06-08.md`).
+- **Suggestion history:** Jun-08 (excluded — discovered in catalog).
+
+### Live Simulation Watch Page
+- **Signature keywords:** `live watch`, `watch page`, `live sim`, `/watch/`, `simulation watch`, `live broadcast`, `real-time watch`
+- **Lives at:** `GET /watch/<simulation_id>` — live broadcast page for in-progress simulations (catalogued `watch_page` in surfaces_catalog.py, type: embed). Defined in `backend/app/api/watch.py`.
+- **Verified:** 2026-06-08 by `repo-actions` skill catalog audit (`memory/logs/2026-06-08.md`).
+- **Suggestion history:** Jun-08 (excluded — discovered in catalog).
+
+### oEmbed Discovery Endpoint
+- **Signature keywords:** `oembed`, `oEmbed`, `oembed endpoint`, `embed discovery`, `oembed api`, `rich embed preview`
+- **Lives at:** `GET /oembed` — oEmbed provider endpoint for rich embed previews (catalogued `oembed` in surfaces_catalog.py, type: embed).
+- **Verified:** 2026-06-08 by `repo-actions` skill catalog audit (`memory/logs/2026-06-08.md`).
+- **Suggestion history:** Jun-08 (excluded — discovered in catalog).
+
+### Peak Round Analytics
+- **Signature keywords:** `peak round`, `peak momentum`, `peak-round`, `most active round`, `momentum peak`, `consensus peak`
+- **Lives at:** `GET /api/simulation/<simulation_id>/peak-round` — peak round analytics surface (catalogued `peak_round` in surfaces_catalog.py, type: analytics).
+- **Verified:** 2026-06-08 by `repo-actions` skill catalog audit (`memory/logs/2026-06-08.md`).
+- **Suggestion history:** Jun-08 (excluded — discovered in catalog).
+
+### Share Card PNG
+- **Signature keywords:** `share card`, `og card`, `social card`, `share-card.png`, `social share image`, `open graph image`
+- **Lives at:** `GET /api/simulation/<simulation_id>/share-card.png` — social share card image (catalogued `share_card` in surfaces_catalog.py, type: visualization).
+- **Verified:** 2026-06-08 by `repo-actions` skill catalog audit (`memory/logs/2026-06-08.md`).
+- **Suggestion history:** Jun-08 (excluded — discovered in catalog).
+
+### Replay GIF
+- **Signature keywords:** `replay gif`, `animated replay`, `replay.gif`, `simulation replay`, `animated simulation`, `gif export`
+- **Lives at:** `GET /api/simulation/<simulation_id>/replay.gif` — animated replay GIF of simulation (catalogued `replay_gif` in surfaces_catalog.py, type: visualization).
+- **Verified:** 2026-06-08 by `repo-actions` skill catalog audit (`memory/logs/2026-06-08.md`).
+- **Suggestion history:** Jun-08 (excluded — discovered in catalog).
+
+### Chart SVG
+- **Signature keywords:** `chart svg`, `belief chart`, `simulation chart`, `/chart.svg`, `consensus chart`, `trajectory chart`
+- **Lives at:** `GET /api/simulation/<simulation_id>/chart.svg` — SVG belief/consensus chart (catalogued `chart_svg` in surfaces_catalog.py, type: visualization).
+- **Verified:** 2026-06-08 by `repo-actions` skill catalog audit (`memory/logs/2026-06-08.md`).
+- **Suggestion history:** Jun-08 (excluded — discovered in catalog).
