@@ -1,0 +1,277 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Weekly Shiplog — 2026-06-08"
+      },
+      "children": [
+        "intro_text",
+        "sep1",
+        "shipped_section",
+        "sep2",
+        "stats_section",
+        "sep3",
+        "link_full"
+      ]
+    },
+    "intro_text": {
+      "type": "Text",
+      "props": {
+        "text": "MiroShark spent the week becoming a contract other people could sign: three platform-level meta endpoints made the system describable from the outside without reading the README.",
+        "variant": "lead"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {}
+    },
+    "shipped_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "shipped_heading",
+        "meta_category",
+        "privacy_category",
+        "surface_category",
+        "aeon_category"
+      ]
+    },
+    "shipped_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Shipped",
+        "level": "h2"
+      }
+    },
+    "meta_category": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "meta_title",
+        "meta_endpoints"
+      ]
+    },
+    "meta_title": {
+      "type": "Text",
+      "props": {
+        "text": "Meta layer landed",
+        "variant": "body"
+      }
+    },
+    "meta_endpoints": {
+      "type": "Text",
+      "props": {
+        "text": "/api/surfaces.json (#130) + /api/ecosystem.json (#145) + /api/status.json (#149); catalog 28 → 33",
+        "variant": "caption"
+      }
+    },
+    "privacy_category": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "privacy_title",
+        "privacy_item1",
+        "privacy_item2"
+      ]
+    },
+    "privacy_title": {
+      "type": "Text",
+      "props": {
+        "text": "Privacy as shape",
+        "variant": "body"
+      }
+    },
+    "privacy_item1": {
+      "type": "Text",
+      "props": {
+        "text": "tri-state share-links (#132)",
+        "variant": "caption"
+      }
+    },
+    "privacy_item2": {
+      "type": "Text",
+      "props": {
+        "text": "multi-sim batch-status with byte-identical private/unknown envelope (#150)",
+        "variant": "caption"
+      }
+    },
+    "surface_category": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "surface_title",
+        "surface_item1",
+        "surface_item2",
+        "surface_item3",
+        "surface_item4"
+      ]
+    },
+    "surface_title": {
+      "type": "Text",
+      "props": {
+        "text": "Surface family composing",
+        "variant": "body"
+      }
+    },
+    "surface_item1": {
+      "type": "Text",
+      "props": {
+        "text": "Clone JSON (#131, inputs not outputs)",
+        "variant": "caption"
+      }
+    },
+    "surface_item2": {
+      "type": "Text",
+      "props": {
+        "text": "agents.json (#137)",
+        "variant": "caption"
+      }
+    },
+    "surface_item3": {
+      "type": "Text",
+      "props": {
+        "text": "per-project stats (#147)",
+        "variant": "caption"
+      }
+    },
+    "surface_item4": {
+      "type": "Text",
+      "props": {
+        "text": "outcome distribution (#151)",
+        "variant": "caption"
+      }
+    },
+    "aeon_category": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "aeon_title",
+        "aeon_item1",
+        "aeon_item2",
+        "aeon_item3"
+      ]
+    },
+    "aeon_title": {
+      "type": "Text",
+      "props": {
+        "text": "Aeon's own meta layer",
+        "variant": "body"
+      }
+    },
+    "aeon_item1": {
+      "type": "Text",
+      "props": {
+        "text": "blocked-features registry (PR #50)",
+        "variant": "caption"
+      }
+    },
+    "aeon_item2": {
+      "type": "Text",
+      "props": {
+        "text": "pre-existing-features registry (#52)",
+        "variant": "caption"
+      }
+    },
+    "aeon_item3": {
+      "type": "Text",
+      "props": {
+        "text": "feature-skill auth-posture step (#53)",
+        "variant": "caption"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {}
+    },
+    "stats_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stats_heading",
+        "stat_prs",
+        "stat_integrators",
+        "stat_stars",
+        "stat_streak",
+        "stat_queue"
+      ]
+    },
+    "stats_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Stats",
+        "level": "h2"
+      }
+    },
+    "stat_prs": {
+      "type": "Stat",
+      "props": {
+        "label": "PRs Merged",
+        "value": "24",
+        "delta": "20 MiroShark + 4 Aeon"
+      }
+    },
+    "stat_integrators": {
+      "type": "Text",
+      "props": {
+        "text": "5 external integrators: Capacitr, HivemindOS, Echo Oracle, SyntheticsAI, Sparkleware",
+        "variant": "body"
+      }
+    },
+    "stat_stars": {
+      "type": "Stat",
+      "props": {
+        "label": "Stars",
+        "value": "1,239",
+        "delta": "+17",
+        "trend": "up"
+      }
+    },
+    "stat_streak": {
+      "type": "Badge",
+      "props": {
+        "text": "42-PR zero-deps streak intact",
+        "variant": "secondary"
+      }
+    },
+    "stat_queue": {
+      "type": "Text",
+      "props": {
+        "text": "Aeon's PR queue against MiroShark cleared for first time in 17 days",
+        "variant": "body"
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {}
+    },
+    "link_full": {
+      "type": "StoryLink",
+      "props": {
+        "title": "weekly-shiplog-2026-06-08",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/weekly-shiplog-2026-06-08.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}
