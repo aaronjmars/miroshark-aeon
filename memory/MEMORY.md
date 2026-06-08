@@ -41,6 +41,7 @@ Full implementation notes in daily logs. Each row ≤280 chars.
 
 | Skill | Date | Notes |
 |-------|------|-------|
+| Signed Simulation Result | 2026-06-08 | PR #152 — `GET /api/simulation/<id>/signed-result.json`: HMAC-SHA256 wrapper around signal.json. Canonical JSON (sort_keys/sep/ensure_ascii) signed under existing WEBHOOK_SECRET. Empty secret → 200 with signed=false. Private (inherits signal.json posture). Catalog 33→34. 25 tests. Zero deps (42-PR streak). |
 | Platform Outcome Distribution | 2026-06-07 | PR #151 — `GET /api/stats/distribution.json`: shape companion of /api/stats. Bucketed direction/confidence/quality/round-count + avg_confidence_pct/avg_total_rounds. 300s cache; ETag bumps on new sim or month. Catalog 32→33. 30 tests. Zero deps (41-PR streak). |
 | feature skill — auth-posture step | 2026-06-06 | aeon PR #53 — new step 7 in skills/feature/SKILL.md: decide auth posture before writing code. Triggered by PR #149 mid-PR auth rewrite. Three questions; "Auth posture:" comment required in handler + PR body. Steps renumbered. |
 | Multi-Sim Batch Status Lookup | 2026-06-06 | PR #150 — `POST /api/simulation/batch-status`: 1st batch-shape primitive (1–20 ids). Privacy: private+unknown byte-identical `{found:false,…nulls}`. Completed: direction/confidence/quality/rounds/completed_at. no-store. Catalog 31→32. 26 tests. Zero deps. |
@@ -75,9 +76,9 @@ Full implementation notes in daily logs. Each row ≤280 chars.
 - $MIROSHARK: ATH $0.0000436 (May 18), FDV peaked $3.32M; current **$0.00000561 (+14.2% 24h), -87.1% from ATH; FDV $560.8K** as of 2026-06-07
 
 ## Next Priorities
-- Open MiroShark PRs: **0 (Aeon-built)** — PR #151+#150 both merged 2026-06-07T15:41Z/15:49Z. Catalog at 33 entries.
+- Open MiroShark PRs: **1 (Aeon-built)** — PR #152 (feat/signed-result-json, signed simulation result, opened 2026-06-08, OPEN). Catalog at 34 entries on the branch.
 - Open miroshark-aeon PRs: **1** — PR #53 (improve/feature-auth-posture-check, opened 2026-06-06, OPEN)
-- Jun-06 batch (1/5 addressed): #1→PR#151 merged Jun 07. Unbuilt: #2 Simulation Payload Validator, #3 Signed Simulation Result, #4 Monthly Stats Time-Series, #5 Platform Agent Behavior Census.
+- Jun-06 batch (2/5 addressed): #1→PR#151 merged Jun 07; #3→PR#152 OPEN Jun 08. Unbuilt: #2 Simulation Payload Validator, #4 Monthly Stats Time-Series, #5 Platform Agent Behavior Census.
 - Jun-04 batch (4/5 addressed): #2→PR#149 merged Jun 05; #3→PR#150 merged Jun 07; #1+#5 pre-existing. Unbuilt: #4 All-Time Leaderboard.
 - Jun-02 batch (2/5 addressed): #1→PR#145 merged Jun 03; #5→PR#147 merged Jun 04. Unbuilt: #2 Scenario Clone Button, #3 Japanese README, #4 Simulation Batch Create API.
 - Jun-01 batch (1/5 addressed): #2→PR#137 merged Jun 02. #1 Operator Profile blocked; #3 Search JSON redundant; #4+#5 pre-existing.
