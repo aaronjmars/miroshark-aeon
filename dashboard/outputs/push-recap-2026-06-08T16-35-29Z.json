@@ -1,0 +1,386 @@
+{
+  "root": "main-card",
+  "state": {},
+  "elements": {
+    "main-card": {
+      "type": "Card",
+      "props": {
+        "title": "Push Recap — 2026-06-08"
+      },
+      "children": [
+        "summary-section",
+        "sep-1",
+        "miroshark-section",
+        "sep-2",
+        "aeon-section",
+        "sep-3",
+        "key-changes-section",
+        "sep-4",
+        "stats-section",
+        "sep-5",
+        "full-recap"
+      ]
+    },
+    "summary-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "summary-text",
+        "repo-badges"
+      ]
+    },
+    "summary-text": {
+      "type": "Text",
+      "props": {
+        "text": "aaronjmars/MiroShark — 3 PRs merged (all Aeon-built, all zero-deps); aaronjmars/miroshark-aeon — 2 PRs merged (skill-prompt self-improvement)",
+        "variant": "lead"
+      }
+    },
+    "repo-badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "badge-miroshark",
+        "badge-aeon"
+      ]
+    },
+    "badge-miroshark": {
+      "type": "Badge",
+      "props": {
+        "text": "aaronjmars/MiroShark",
+        "variant": "default"
+      }
+    },
+    "badge-aeon": {
+      "type": "Badge",
+      "props": {
+        "text": "aaronjmars/miroshark-aeon",
+        "variant": "default"
+      }
+    },
+    "sep-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "miroshark-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "miroshark-heading",
+        "miroshark-intro",
+        "pr-151",
+        "pr-150",
+        "pr-152"
+      ]
+    },
+    "miroshark-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "MiroShark Catalog Expansion",
+        "level": "h2"
+      }
+    },
+    "miroshark-intro": {
+      "type": "Text",
+      "props": {
+        "text": "Jun-06 repo-actions batch ships in full on MiroShark (catalog 31 → 34 in ~21h):",
+        "variant": "muted"
+      }
+    },
+    "pr-151": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "pr-151-link",
+        "pr-151-desc"
+      ]
+    },
+    "pr-151-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #151: /api/stats/distribution.json",
+        "href": "https://github.com/aaronjmars/MiroShark/pull/151"
+      }
+    },
+    "pr-151-desc": {
+      "type": "Text",
+      "props": {
+        "text": "The shape-companion of /api/stats — bucketed direction/confidence/quality/round-count + two scalar averages, for researchers + Aeon digesters + threshold-tuners",
+        "variant": "caption"
+      }
+    },
+    "pr-150": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "pr-150-link",
+        "pr-150-desc"
+      ]
+    },
+    "pr-150-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #150: POST /api/simulation/batch-status",
+        "href": "https://github.com/aaronjmars/MiroShark/pull/150"
+      }
+    },
+    "pr-150-desc": {
+      "type": "Text",
+      "props": {
+        "text": "Collapses N polling HTTP calls into one for parallel batches; private and unknown sims share a byte-identical {found:false,…nulls} envelope so the surface can't be probed for private existence",
+        "variant": "caption"
+      }
+    },
+    "pr-152": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "pr-152-link",
+        "pr-152-desc"
+      ]
+    },
+    "pr-152-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #152: /api/simulation/<id>/signed-result.json",
+        "href": "https://github.com/aaronjmars/MiroShark/pull/152"
+      }
+    },
+    "pr-152-desc": {
+      "type": "Text",
+      "props": {
+        "text": "HMAC-SHA256 envelope over the canonical signal.json, signed with the existing WEBHOOK_SECRET — recipients verify stored signals with the same code they wrote for the webhook",
+        "variant": "caption"
+      }
+    },
+    "sep-2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "aeon-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "aeon-heading",
+        "aeon-intro",
+        "pr-53",
+        "pr-54"
+      ]
+    },
+    "aeon-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Skill-Prompt Self-Improvement",
+        "level": "h2"
+      }
+    },
+    "aeon-intro": {
+      "type": "Text",
+      "props": {
+        "text": "miroshark-aeon repository improvements:",
+        "variant": "muted"
+      }
+    },
+    "pr-53": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "pr-53-link",
+        "pr-53-desc"
+      ]
+    },
+    "pr-53-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #53: Feature skill auth posture wiring (step 7)",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/pull/53"
+      }
+    },
+    "pr-53-desc": {
+      "type": "Text",
+      "props": {
+        "text": "Added a new step 7 to the feature skill forcing the auth posture to be decided upfront (triggered by PR #149's three-commit mid-PR auth rewrite Jun 5) — already paid off on PR #150 the same afternoon, first-commit-correct",
+        "variant": "caption"
+      }
+    },
+    "pr-54": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "pr-54-link",
+        "pr-54-desc"
+      ]
+    },
+    "pr-54-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #54: Expanded repo-pulse with profile enrichment",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/pull/54"
+      }
+    },
+    "pr-54-desc": {
+      "type": "Text",
+      "props": {
+        "text": "Every new stargazer + forker now gets a one-line `gh api users/$LOGIN` profile summary (name · @company · location · followers · bio), capped at 25 enriched accounts per run, with a ⚠ low-signal flag for accounts with ≤2 followers AND 0 public repos AND <30d age — a soft fake-star tell that complements star-milestone's burst check",
+        "variant": "caption"
+      }
+    },
+    "sep-3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "key-changes-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "key-changes-heading",
+        "change-1",
+        "change-2",
+        "change-3"
+      ]
+    },
+    "key-changes-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Key Changes",
+        "level": "h3"
+      }
+    },
+    "change-1": {
+      "type": "Text",
+      "props": {
+        "text": "MiroShark catalog 31 → 34 (3 entries added: outcome_distribution analytics, batch_status integration, signed_result integration); 42-PR zero-deps streak on MiroShark intact",
+        "variant": "body"
+      }
+    },
+    "change-2": {
+      "type": "Text",
+      "props": {
+        "text": "New auth-posture wiring point: /api/simulation/batch-status is the second /api/* endpoint deliberately exempt from internal_auth_guard (after PR #149's status probe); /api/simulation/<id>/signed-result.json inherits signal.json's per-sim publish gate",
+        "variant": "body"
+      }
+    },
+    "change-3": {
+      "type": "Text",
+      "props": {
+        "text": "repo-pulse output will read \"Alice Chen · @ Vercel · 2.3k followers\" instead of bare \"github.com/alice\" starting tomorrow",
+        "variant": "body"
+      }
+    },
+    "sep-4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stats-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stats-heading",
+        "stats-grid"
+      ]
+    },
+    "stats-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Statistics",
+        "level": "h3"
+      }
+    },
+    "stats-grid": {
+      "type": "Grid",
+      "props": {
+        "columns": 4,
+        "gap": "md"
+      },
+      "children": [
+        "stat-files",
+        "stat-additions",
+        "stat-deletions",
+        "stat-prs"
+      ]
+    },
+    "stat-files": {
+      "type": "Stat",
+      "props": {
+        "label": "Files Changed",
+        "value": "34"
+      }
+    },
+    "stat-additions": {
+      "type": "Stat",
+      "props": {
+        "label": "Lines Added",
+        "value": "+4,638"
+      }
+    },
+    "stat-deletions": {
+      "type": "Stat",
+      "props": {
+        "label": "Lines Removed",
+        "value": "-22"
+      }
+    },
+    "stat-prs": {
+      "type": "Stat",
+      "props": {
+        "label": "PRs Merged",
+        "value": "5"
+      }
+    },
+    "sep-5": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "full-recap": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full Recap Article",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-06-08.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}
