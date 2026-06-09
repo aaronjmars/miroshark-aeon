@@ -1,0 +1,106 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Agent Self-Improvement — 2026-06-08"
+      },
+      "children": [
+        "heading_sub",
+        "text_intro",
+        "separator_1",
+        "heading_why",
+        "text_why",
+        "separator_2",
+        "heading_changes",
+        "text_changes_1",
+        "text_changes_2",
+        "separator_3",
+        "heading_impact",
+        "text_impact",
+        "separator_4",
+        "link_pr"
+      ]
+    },
+    "heading_sub": {
+      "type": "Heading",
+      "props": {
+        "text": "push-recap skill — agent-repo noise-exclusion step",
+        "level": "h2"
+      }
+    },
+    "text_intro": {
+      "type": "Text",
+      "props": {
+        "text": "The push-recap skill has been re-deriving the same \"aeonframework cron auto-commit = noise\" rule from log precedent every single day for the past seven days. That rule now lives in the skill prompt itself as a new step 5 — a mechanical three-prefix filter that runs before diff-reading."
+      }
+    },
+    "separator_1": {
+      "type": "Separator"
+    },
+    "heading_why": {
+      "type": "Heading",
+      "props": {
+        "text": "Why",
+        "level": "h3"
+      }
+    },
+    "text_why": {
+      "type": "Text",
+      "props": {
+        "text": "Every push-recap from Jun-01 through Jun-07 reinvoked the \"May-31 noise-exclusion convention\" inline (\"Per May-31 noise-exclusion convention, aeonframework cron auto-commits are excluded as noise\"). The convention was real and correct, but it lived in operator memory + log precedent, not in the skill — so each fresh run paid the same re-derivation cost."
+      }
+    },
+    "separator_2": {
+      "type": "Separator"
+    },
+    "heading_changes": {
+      "type": "Heading",
+      "props": {
+        "text": "What changed",
+        "level": "h3"
+      }
+    },
+    "text_changes_1": {
+      "type": "Text",
+      "props": {
+        "text": "skills/push-recap/SKILL.md: new step 5 inserted between dedup and diff-reading. Drops commits where author is `aeonframework` AND first message line matches `chore(scheduler):` / `chore(cron):` / `chore(<skill>): auto-commit`. Applies only to the agent repo (`miroshark-aeon` or any repo ending `-aeon`). Steps 5–10 renumbered to 6–11."
+      }
+    },
+    "text_changes_2": {
+      "type": "Text",
+      "props": {
+        "text": "memory/MEMORY.md: Skills Built table row + Lessons Learned row added."
+      }
+    },
+    "separator_3": {
+      "type": "Separator"
+    },
+    "heading_impact": {
+      "type": "Heading",
+      "props": {
+        "text": "Impact",
+        "level": "h3"
+      }
+    },
+    "text_impact": {
+      "type": "Text",
+      "props": {
+        "text": "Saves ~5–10 minutes of analysis per daily push-recap run; output becomes consistent across days; the filter runs before the expensive per-commit `gh api` fan-out, so collapsed-to-zero days skip diff-reading entirely. Genuinely substantive aeonframework commits (interactive PR merges, manual fixes, non-pipeline content) survive the filter via the prefix match — the rule does not lose signal."
+      }
+    },
+    "separator_4": {
+      "type": "Separator"
+    },
+    "link_pr": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #55: push-recap skill improvement",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/pull/55",
+        "source": "GitHub"
+      }
+    }
+  }
+}

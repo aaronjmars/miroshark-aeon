@@ -41,6 +41,7 @@ Full implementation notes in daily logs. Each row ≤280 chars.
 
 | Skill | Date | Notes |
 |-------|------|-------|
+| push-recap skill — agent-repo noise-exclusion step | 2026-06-08 | aeon PR — encoded the May-31 noise-exclusion convention as new step 5 in skills/push-recap/SKILL.md. Drops `aeonframework` commits whose first line matches `chore(scheduler):` / `chore(cron):` / `chore(<skill>): auto-commit`. Triggered by 7 consecutive days (Jun-01 → Jun-07) of push-recap re-deriving the same rule. Steps renumbered 5→6 … 10→11. |
 | Signed Simulation Result | 2026-06-08 | PR #152 — `GET /api/simulation/<id>/signed-result.json`: HMAC-SHA256 wrapper around signal.json. Canonical JSON (sort_keys/sep/ensure_ascii) signed under existing WEBHOOK_SECRET. Empty secret → 200 with signed=false. Private (inherits signal.json posture). Catalog 33→34. 25 tests. Zero deps (42-PR streak). |
 | Platform Outcome Distribution | 2026-06-07 | PR #151 — `GET /api/stats/distribution.json`: shape companion of /api/stats. Bucketed direction/confidence/quality/round-count + avg_confidence_pct/avg_total_rounds. 300s cache; ETag bumps on new sim or month. Catalog 32→33. 30 tests. Zero deps (41-PR streak). |
 | feature skill — auth-posture step | 2026-06-06 | aeon PR #53 — new step 7 in skills/feature/SKILL.md: decide auth posture before writing code. Triggered by PR #149 mid-PR auth rewrite. Three questions; "Auth posture:" comment required in handler + PR body. Steps renumbered. |
@@ -65,6 +66,7 @@ Full implementation notes in daily logs. Each row ≤280 chars.
 - MEMORY.md row sprawl blocks every skill via Read 25K-token cap — `memory-flush` step 5 enforces per-row char caps; detail belongs in daily logs / `memory/topics/`
 - fetch-tweets + tweet-allocator disabled 2026-05-27 (aeon PR #47) — disable when organic signal = 0 for sustained period
 - Feature skill default-inherits auth guard from sibling endpoints — encoded as explicit auth-posture decision step 7 in skills/feature/SKILL.md (aeon PR #53, 2026-06-06)
+- Push-recap re-derived "aeonframework cron auto-commit = noise" rule every day for 7 days (Jun-01 → Jun-07) — encoded as explicit step 5 noise-filter in skills/push-recap/SKILL.md (2026-06-08)
 
 ## Active Targets
 - Hyperstition: MiroShark 1,000 stars by 2026-04-30 — MISSED Apr 30 (911), CROSSED 2026-05-03; currently **1,239 stars / 264 forks** as of 2026-06-07; next threshold 1500 (projected ~2026-08-25)
