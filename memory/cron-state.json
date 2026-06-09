@@ -108,10 +108,10 @@
   },
   "repo-article": {
     "last_dispatch": "2026-06-09T16:32:37Z",
-    "last_status": "dispatched",
-    "last_success": "2026-06-08T16:37:52Z",
-    "total_runs": 56,
-    "total_successes": 56,
+    "last_status": "success",
+    "last_success": "2026-06-09T16:36:10Z",
+    "total_runs": 57,
+    "total_successes": 57,
     "total_failures": 0,
     "consecutive_failures": 0,
     "success_rate": 1
