@@ -521,5 +521,4 @@ date,skill,model,input_tokens,output_tokens,cache_read,cache_creation
 2026-06-08,operator-scorecard,claude-sonnet-4-6,17,16549,1329691,104281
 2026-06-09,token-report,claude-sonnet-4-6,11,14879,628236,77118
 2026-06-09,repo-pulse,claude-sonnet-4-6,13,6574,500372,34619
-2026-06-09,star-momentum-alert,claude-sonnet-4-6,12,10022,802693,129611
-2026-06-08,self-improve,claude-opus-4-7,77,19091,7779555,176024
+2026-06-09,feature,claude-opus-4-7,150,69829,22362374,261111
