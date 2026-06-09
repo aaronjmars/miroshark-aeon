@@ -42,14 +42,14 @@
     "last_quality_score": 5
   },
   "push-recap": {
-    "last_status": "success",
+    "last_status": "dispatched",
     "last_success": "2026-06-08T16:36:08Z",
     "total_runs": 58,
     "total_successes": 57,
     "total_failures": 1,
     "consecutive_failures": 0,
     "success_rate": 0.98,
-    "last_dispatch": "2026-06-08T16:30:09Z",
+    "last_dispatch": "2026-06-09T15:35:24Z",
     "last_failed": "2026-04-17T16:58:29Z",
     "last_error": "dc1098cf5df3fe999e32efbe90 5c21220ef39cb0ba1df052bc9398ba5d16be2e82; do\\n  gh api repos/aaronjmars/miroshark-aeon/commits/\\\"$sha\\\" --jq '{sha: .sha[0:7], stats: .stats, files: [.files[] | {filename: ."
   },
@@ -157,8 +157,8 @@
     "success_rate": 1
   },
   "star-milestone": {
-    "last_dispatch": "2026-06-08T16:30:09Z",
-    "last_status": "success",
+    "last_dispatch": "2026-06-09T15:35:24Z",
+    "last_status": "dispatched",
     "last_success": "2026-06-08T16:31:59Z",
     "total_runs": 27,
     "total_successes": 26,
