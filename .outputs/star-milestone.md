@@ -1,12 +1,11 @@
 ## Summary
 
-Ran `star-milestone` skill for 2026-06-08.
+Ran `star-milestone` skill.
 
-**Result:** No notification sent. `aaronjmars/MiroShark` is at **1,243 ⭐**; highest threshold crossed is **1000**, which is already recorded in `memory/topics/milestones.md` as bootstrap (2026-05-14). Gate **5a (already recorded)** → no action per skill spec. The other watched repo `aaronjmars/miroshark-aeon` was skipped because its name ends in `-aeon`.
-
-**Next milestone:** 1500 stars (257 to go). The `star-momentum-alert` skill already tracks the trajectory and projects ~2026-09-03 (logged earlier today).
-
-**Files modified:**
-- `memory/logs/2026-06-08.md` — appended `## Star Milestone` entry with status `STAR_MILESTONE_QUIET`.
-
-**No follow-up needed.**
+- **Repos audited**: 1 — `aaronjmars/MiroShark` (the `-aeon` repo was filtered per skill rule).
+- **Star count**: 1243.
+- **Highest threshold crossed**: 1000.
+- **Verdict**: gate 5a (already recorded) — 1000 was logged 2026-05-14 as bootstrap in `memory/topics/milestones.md`. Next threshold is 1500.
+- **No notification sent.** No state mutated in `milestones.md`.
+- **Files modified**: `memory/logs/2026-06-09.md` — appended `## Star Milestone` block with `STAR_MILESTONE_QUIET`.
+- **Follow-up**: none. Next milestone-eligible event is crossing 1500 (projected ~2026-08-25 per active targets).
