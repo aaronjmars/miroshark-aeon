@@ -15,6 +15,7 @@ Full text in `articles/repo-article-YYYY-MM-DD.md`. Each row ≤220 chars.
 
 | Date | Title | One-line frame |
 |------|-------|----------------|
+| 2026-06-09 | The Polling Loop Now Has an Endpoint to Ask "Anything Yet?" | PR #153 activity.json merged 12:03Z; keyless platform-poll trio complete (status/batch-status/activity); 1st JSON `discovery` surface; catalog 34→35; 43-PR zero-dep. |
 | 2026-06-08 | The 34th Surface Is the First One That Travels | PR #152 signed-result.json merged 12:40Z; 1st cryptographic-verifiability surface (HMAC-SHA256 reusing WEBHOOK_SECRET); catalog 33→34; 42-PR zero-dep streak. |
 | 2026-06-07 | The Shape of the Corpus Now Has Its Own Endpoint | PR #151+#150 merged 8m10s apart; catalog 31→33; 41st+42nd zero-dep shipments; Aeon PR queue to 0 for first time in 17 days. |
 | 2026-06-06 | The First Surface That Asks About Many Sims at Once | PR #150 (POST /api/simulation/batch-status); first batch-shape primitive; privacy invariant: private+unknown byte-identical. |
