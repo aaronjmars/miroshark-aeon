@@ -1,0 +1,244 @@
+{
+  "root": "card_heartbeat",
+  "state": {},
+  "elements": {
+    "card_heartbeat": {
+      "type": "Card",
+      "props": {
+        "title": "Heartbeat",
+        "description": "Tuesday Jun 9, 2026 — 19:09 UTC"
+      },
+      "children": [
+        "stack_main"
+      ]
+    },
+    "stack_main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading_skills",
+        "stack_skills",
+        "separator_1",
+        "heading_status",
+        "stack_status",
+        "separator_2",
+        "heading_schedule",
+        "stack_schedule",
+        "separator_3",
+        "alert_cn_readme",
+        "separator_4",
+        "alert_heartbeat_status"
+      ]
+    },
+    "heading_skills": {
+      "type": "Heading",
+      "props": {
+        "text": "Daily Skills Status",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "stack_skills": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "skill_token_report",
+        "skill_repo_pulse",
+        "skill_star_momentum",
+        "skill_feature",
+        "skill_push_recap",
+        "skill_star_milestone",
+        "skill_project_lens",
+        "skill_repo_article",
+        "skill_thread_formatter"
+      ]
+    },
+    "skill_token_report": {
+      "type": "Text",
+      "props": {
+        "text": "token-report ✓",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "skill_repo_pulse": {
+      "type": "Text",
+      "props": {
+        "text": "repo-pulse ✓",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "skill_star_momentum": {
+      "type": "Text",
+      "props": {
+        "text": "star-momentum-alert ✓",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "skill_feature": {
+      "type": "Text",
+      "props": {
+        "text": "feature ✓",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "skill_push_recap": {
+      "type": "Text",
+      "props": {
+        "text": "push-recap ✓",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "skill_star_milestone": {
+      "type": "Text",
+      "props": {
+        "text": "star-milestone ✓",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "skill_project_lens": {
+      "type": "Text",
+      "props": {
+        "text": "project-lens ✓",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "skill_repo_article": {
+      "type": "Text",
+      "props": {
+        "text": "repo-article ✓",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "skill_thread_formatter": {
+      "type": "Text",
+      "props": {
+        "text": "thread-formatter ✓",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "separator_1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "heading_status": {
+      "type": "Heading",
+      "props": {
+        "text": "System Status",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "stack_status": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "stat_stalled_prs",
+        "stat_urgent_issues"
+      ]
+    },
+    "stat_stalled_prs": {
+      "type": "Stat",
+      "props": {
+        "label": "Stalled PRs (both repos)",
+        "value": "0",
+        "trend": "down"
+      },
+      "children": []
+    },
+    "stat_urgent_issues": {
+      "type": "Stat",
+      "props": {
+        "label": "Urgent Issues",
+        "value": "0",
+        "trend": "down"
+      },
+      "children": []
+    },
+    "separator_2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "heading_schedule": {
+      "type": "Heading",
+      "props": {
+        "text": "Scheduled Skills",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "stack_schedule": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "text_schedule_note"
+      ]
+    },
+    "text_schedule_note": {
+      "type": "Text",
+      "props": {
+        "text": "repo-actions + self-improve not due today (even-day parity, next run Jun 10)",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "separator_3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "alert_cn_readme": {
+      "type": "Alert",
+      "props": {
+        "title": "Upcoming Deadline",
+        "message": "CN README (#5 Jun-08 batch) targets Jun-15 Chinese-locale hyperstition deadline — 6 days out",
+        "type": "info"
+      },
+      "children": []
+    },
+    "separator_4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "alert_heartbeat_status": {
+      "type": "Alert",
+      "props": {
+        "title": "Overall Status",
+        "message": "HEARTBEAT_OK",
+        "type": "success"
+      },
+      "children": []
+    }
+  }
+}
