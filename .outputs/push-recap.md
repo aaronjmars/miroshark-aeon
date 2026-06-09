@@ -1,14 +1,14 @@
-*Push Recap — 2026-06-08*
-aaronjmars/MiroShark — 3 PRs merged (all Aeon-built, all zero-deps); aaronjmars/miroshark-aeon — 2 PRs merged (skill-prompt self-improvement)
+*Push Recap — 2026-06-09*
+MiroShark + miroshark-aeon — 2 substantive merges, both Aeon-authored
 
-*Jun-06 repo-actions batch ships in full on MiroShark (catalog 31 → 34 in ~21h):* PR #151 `/api/stats/distribution.json` (the shape-companion of /api/stats — bucketed direction/confidence/quality/round-count + two scalar averages, for researchers + Aeon digesters + threshold-tuners), PR #150 `POST /api/simulation/batch-status` (collapses N polling HTTP calls into one for parallel batches; private and unknown sims share a byte-identical `{found:false,…nulls}` envelope so the surface can't be probed for private existence), PR #152 `/api/simulation/<id>/signed-result.json` (HMAC-SHA256 envelope over the canonical signal.json, signed with the existing WEBHOOK_SECRET — recipients verify stored signals with the same code they wrote for the webhook).
+Theme 1 (MiroShark): `/api/activity.json` lands as the 35th surface — the "what just completed?" polling primitive integrators have been asking the gallery and feed endpoints to be. Third entry in the platform-shaped/keyless cluster alongside `/api/status.json` and `/api/simulation/batch-status`; reuses signal-pipeline byte-for-byte so direction/confidence/quality/total_rounds line up across activity.json + batch-status + signal.json.
 
-*Skill-prompt self-improvement on miroshark-aeon:* PR #53 added a new step 7 to the feature skill forcing the auth posture to be decided upfront (triggered by PR #149's three-commit mid-PR auth rewrite Jun 5) — already paid off on PR #150 the same afternoon, first-commit-correct. PR #54 expanded repo-pulse: every new stargazer + forker now gets a one-line `gh api users/$LOGIN` profile summary (name · @company · location · followers · bio), capped at 25 enriched accounts per run, with a ⚠ low-signal flag for accounts with ≤2 followers AND 0 public repos AND <30d age — a soft fake-star tell that complements star-milestone's burst check.
+Theme 2 (miroshark-aeon): The 7-day re-derivation is retired. PR #55 encodes the May-31 noise-exclusion convention as explicit step 5 of the push-recap skill — `aeonframework` commits prefixed `chore(scheduler):` / `chore(cron):` / `chore(<skill>): auto-commit` are dropped on the agent repo before diff-reading. This recap is the first to run with the rule baked in; it filtered 30 cron commits, saved ~30 `gh api` calls. Second prompt-level self-improvement in 4 days.
 
 Key changes:
-- MiroShark catalog 31 → 34 (3 entries added: outcome_distribution analytics, batch_status integration, signed_result integration); 42-PR zero-deps streak on MiroShark intact
-- New auth-posture wiring point: /api/simulation/batch-status is the second /api/* endpoint deliberately exempt from internal_auth_guard (after PR #149's status probe); /api/simulation/<id>/signed-result.json inherits signal.json's per-sim publish gate
-- repo-pulse output will read "Alice Chen · @ Vercel · 2.3k followers" instead of bare "github.com/alice" starting tomorrow
+- PR #153 (+1615/-1, 10 files): new `activity_bp` blueprint with `Cache-Control: public, max-age=30` + ETag, 439-LoC service module reusing `signal_service.compute_signal` and `batch_status` trajectory walker for byte-for-byte equivalence, 39 unit tests across 18 properties, OpenAPI schemas locked
+- PR #153 follow-up fix: `test_documented_paths_exist_in_flask` had a quiet failure mode — blueprints missing from `_BLUEPRINT_PREFIXES` silently skipped; fixed for `activity_bp`, latent for any future blueprint
+- PR #55 (+163/-16, 6 files): step 5 inserted into `skills/push-recap/SKILL.md`, steps 5–10 renumbered to 6–11; filter scoped to agent repo (or any repo ending `-aeon`), never to watched project repos
 
-Stats: 34 files changed, +4,638 / -22 lines across 5 PRs
-Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-06-08.md
+Stats: 16 files changed, +1,778 / -17 lines. 43-PR zero-deps streak intact on MiroShark. Catalog 34 → 35. Both repos closed at 0 open Aeon PRs (third consecutive recap).
+Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-06-09.md

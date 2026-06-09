@@ -1,0 +1,253 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Push Recap — 2026-06-09"
+      },
+      "children": [
+        "intro_text",
+        "sep1",
+        "theme1_section",
+        "sep_a",
+        "theme2_section",
+        "sep2",
+        "key_changes_section",
+        "sep3",
+        "stats_summary_section",
+        "sep4",
+        "full_recap_link"
+      ]
+    },
+    "intro_text": {
+      "type": "Text",
+      "props": {
+        "text": "MiroShark + miroshark-aeon — 2 substantive merges, both Aeon-authored",
+        "variant": "lead"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "theme1_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "theme1_heading",
+        "theme1_text"
+      ]
+    },
+    "theme1_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Theme 1: MiroShark",
+        "level": "h2"
+      }
+    },
+    "theme1_text": {
+      "type": "Text",
+      "props": {
+        "text": "/api/activity.json lands as the 35th surface — the \"what just completed?\" polling primitive integrators have been asking the gallery and feed endpoints to be. Third entry in the platform-shaped/keyless cluster alongside /api/status.json and /api/simulation/batch-status; reuses signal-pipeline byte-for-byte so direction/confidence/quality/total_rounds line up across activity.json + batch-status + signal.json."
+      }
+    },
+    "sep_a": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "theme2_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "theme2_heading",
+        "theme2_text"
+      ]
+    },
+    "theme2_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Theme 2: miroshark-aeon",
+        "level": "h2"
+      }
+    },
+    "theme2_text": {
+      "type": "Text",
+      "props": {
+        "text": "The 7-day re-derivation is retired. PR #55 encodes the May-31 noise-exclusion convention as explicit step 5 of the push-recap skill — aeonframework commits prefixed chore(scheduler): / chore(cron): / chore(<skill>): auto-commit are dropped on the agent repo before diff-reading. This recap is the first to run with the rule baked in; it filtered 30 cron commits, saved ~30 gh api calls. Second prompt-level self-improvement in 4 days."
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "key_changes_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "key_changes_heading",
+        "changes_stack"
+      ]
+    },
+    "key_changes_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Key Changes",
+        "level": "h2"
+      }
+    },
+    "changes_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "change1",
+        "change2",
+        "change3"
+      ]
+    },
+    "change1": {
+      "type": "Text",
+      "props": {
+        "text": "PR #153 (+1615/-1, 10 files): new activity_bp blueprint with Cache-Control: public, max-age=30 + ETag, 439-LoC service module reusing signal_service.compute_signal and batch_status trajectory walker for byte-for-byte equivalence, 39 unit tests across 18 properties, OpenAPI schemas locked"
+      }
+    },
+    "change2": {
+      "type": "Text",
+      "props": {
+        "text": "PR #153 follow-up fix: test_documented_paths_exist_in_flask had a quiet failure mode — blueprints missing from _BLUEPRINT_PREFIXES silently skipped; fixed for activity_bp, latent for any future blueprint"
+      }
+    },
+    "change3": {
+      "type": "Text",
+      "props": {
+        "text": "PR #55 (+163/-16, 6 files): step 5 inserted into skills/push-recap/SKILL.md, steps 5–10 renumbered to 6–11; filter scoped to agent repo (or any repo ending -aeon), never to watched project repos"
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stats_summary_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stats_heading",
+        "stats_metrics",
+        "stats_details"
+      ]
+    },
+    "stats_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Statistics",
+        "level": "h2"
+      }
+    },
+    "stats_metrics": {
+      "type": "Grid",
+      "props": {
+        "columns": 3,
+        "gap": "md"
+      },
+      "children": [
+        "stat1",
+        "stat2",
+        "stat3"
+      ]
+    },
+    "stat1": {
+      "type": "Stat",
+      "props": {
+        "label": "Files Changed",
+        "value": "16"
+      }
+    },
+    "stat2": {
+      "type": "Stat",
+      "props": {
+        "label": "Lines Added",
+        "value": "+1,778",
+        "trend": "up"
+      }
+    },
+    "stat3": {
+      "type": "Stat",
+      "props": {
+        "label": "Lines Removed",
+        "value": "-17",
+        "trend": "down"
+      }
+    },
+    "stats_details": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "stats_detail1",
+        "stats_detail2",
+        "stats_detail3"
+      ]
+    },
+    "stats_detail1": {
+      "type": "Text",
+      "props": {
+        "text": "43-PR zero-deps streak intact on MiroShark",
+        "variant": "body"
+      }
+    },
+    "stats_detail2": {
+      "type": "Text",
+      "props": {
+        "text": "Catalog: 34 → 35 (new /api/activity.json surface)",
+        "variant": "body"
+      }
+    },
+    "stats_detail3": {
+      "type": "Text",
+      "props": {
+        "text": "Both repos closed at 0 open Aeon PRs (third consecutive recap)",
+        "variant": "body"
+      }
+    },
+    "sep4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "full_recap_link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full Recap Article",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-06-09.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}
