@@ -1,17 +1,14 @@
 ## Summary
 
-**Skill:** `star-momentum-alert` | **Status:** `STAR_MOMENTUM_NO_ALERTS`
+**star-momentum-alert** ran for 2026-06-09.
 
-- **Repo audited:** `aaronjmars/MiroShark` (1 repo; `miroshark-aeon` filtered as `-aeon` suffix)
-- **Series:** 13 data points, May 26 – Jun 7 (no Jun 8 repo-pulse yet)
-- **Current stars:** 1,239 | **Target:** 1,500 | **Gap:** 261
-- **v7:** 3.0 stars/day | **v3:** 2.67 stars/day
-- **Projected crossing (v7):** 2026-09-03 (Thursday) — 87 days out
-- **Gate result:** OUT_OF_WINDOW — 87 days exceeds the 7-14d action horizon
+- **Repo audited**: `aaronjmars/MiroShark` (1 repo; `miroshark-aeon` filtered as agent repo)
+- **14-day series**: 14 data points from 2026-05-27 (1204⭐) to 2026-06-09 (1243⭐) — full series, no gaps
+- **v7**: 2.86 stars/day (last 7 deltas averaged) | **v3**: 2.33 stars/day
+- **Gap to 1500**: 257 stars
+- **Projected crossing (v7)**: 2026-09-07 in ~90 days — a **Monday**, outside the 7–14 day Show HN dispatch window
+- **Verdict**: `OUT_OF_WINDOW` — no alert, no notification
 
-No alert fired. The 1,500-star milestone is on track but too far out to dispatch `show-hn-draft` today. The projected landing date (Sep 3) is a Thursday — inside the correct dispatch day — so when the gap closes to ~14 days (around late August), the alert will fire automatically.
+Note: today's single-star delta (+1) pulled the short-term pace slightly below the rolling average, shifting the projection from last run's 2026-09-03 (Thursday) to 2026-09-07 (Monday). That Thursday was the closest the projection has come to a valid launch window; worth tracking if pace recovers.
 
-**Files written:**
-- `articles/star-momentum-2026-06-08.md`
-- `memory/topics/star-momentum-state.json` (updated `last_run_at`, `projected_date_v7` → `2026-09-03`)
-- `memory/logs/2026-06-08.md` (log block appended)
+Files written: `articles/star-momentum-2026-06-09.md`, `memory/topics/star-momentum-state.json` (updated), `memory/logs/2026-06-09.md` (appended). Committed as `fd23510`.
