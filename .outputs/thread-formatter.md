@@ -1,14 +1,14 @@
-*Thread Draft — 2026-06-08*
-Topic: Signed Simulation Result — GET /api/simulation/:id/signed-result.json (PR #152)
+*Thread Draft — 2026-06-09*
+Topic: Simulation Activity Feed — GET /api/activity.json (PR #153)
 
-1/ PR #152 ships GET /api/simulation/:id/signed-result.json. Every finished sim now carries an HMAC-SHA256 signature over its canonical signal payload. You can verify the output offline, without re-fetching, without staying authenticated, without trusting the connection.
+1/ Three keyless endpoints. Three polling questions. /api/status.json: is the platform running? /api/simulation/batch-status: what's the state of these sims? /api/activity.json, merged today as PR #153: what just completed? The polling loop is now fully wired.
 
-2/ Before today, trust in a MiroShark sim output was connection-level. signal.json is auth-gated — the credentials that got you in were also your proof the data was authentic. Cache the payload and go offline: no verification path existed.
+2/ Before today, a keyless polling loop could confirm the platform was running (/api/status.json) and check a batch of known sim IDs (/api/simulation/batch-status). There was no endpoint to ask what had completed recently. Discovery required auth.
 
-3/ HMAC-SHA256 over canonical JSON: sorted keys, ASCII-only, comma-colon separators. The signed_at timestamp is outside the signed block — two calls on the same finished sim return identical signatures, different timestamps. 25 tests, one pinning the exact canonical form.
+3/ GET /api/activity.json returns the most-recent public completed sims, reverse-chronological (?limit= clamped 1–50, default 20). direction/confidence_pct/quality_health match signal.json byte-for-byte — same compute path. 30s public cache, ETag short-circuit.
 
-4/ Capacitr and AntFleet are named in the PR as the immediate consumers. Both run operations on simulation outputs — settlement ledgers and leaderboard entries — where they need to prove the data came from MiroShark unchanged. The trust anchor is now the artifact, not the session.
+4/ Capacitr, AntFleet, and Aeon's push-recap skills are named in the PR as consumers. Each runs a polling loop against MiroShark surfaces. Now all three have an endpoint to ask what completed — without knowing sim IDs in advance, without authenticating.
 
-5/ 34th catalogued surface on MiroShark. 42nd consecutive zero-dependency PR. schema_version and algorithm fields are the swap-seam for a future Ed25519 upgrade. https://github.com/aaronjmars/MiroShark/pull/152
+5/ 35th catalogued surface, 43rd consecutive zero-dependency PR. The third discovery surface — alongside feed_atom and feed_rss — but the first shaped for machine polling, not subscription readers. https://github.com/aaronjmars/MiroShark/pull/153
 
-(article: articles/thread-2026-06-08.md)
+(article: articles/thread-2026-06-09.md)

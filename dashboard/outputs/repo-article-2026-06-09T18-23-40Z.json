@@ -1,0 +1,170 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "The Polling Loop Now Has an Endpoint to Ask \"Anything Yet?\""
+      },
+      "children": [
+        "stack_main"
+      ]
+    },
+    "stack_main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "text_pr",
+        "sep1",
+        "heading_endpoints",
+        "stack_endpoints",
+        "sep2",
+        "heading_stats",
+        "stack_stats",
+        "sep3",
+        "link_article"
+      ]
+    },
+    "text_pr": {
+      "type": "Text",
+      "props": {
+        "text": "PR #153 merged at 12:03Z this morning — `GET /api/activity.json` — completing MiroShark's keyless platform-poll trio.",
+        "variant": "lead"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading_endpoints": {
+      "type": "Heading",
+      "props": {
+        "text": "Endpoints",
+        "level": "h3"
+      }
+    },
+    "stack_endpoints": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "ep1",
+        "ep2",
+        "ep3"
+      ]
+    },
+    "ep1": {
+      "type": "Text",
+      "props": {
+        "text": "`/api/status.json` answers \"is it alive\"",
+        "variant": "body"
+      }
+    },
+    "ep2": {
+      "type": "Text",
+      "props": {
+        "text": "`/api/simulation/batch-status` answers \"what about these N specific sims\"",
+        "variant": "body"
+      }
+    },
+    "ep3": {
+      "type": "Text",
+      "props": {
+        "text": "`/api/activity.json` answers \"what's new\"",
+        "variant": "body"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading_stats": {
+      "type": "Heading",
+      "props": {
+        "text": "Stats",
+        "level": "h3"
+      }
+    },
+    "stack_stats": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "s1",
+        "s2",
+        "s3",
+        "s4",
+        "s5",
+        "s6"
+      ]
+    },
+    "s1": {
+      "type": "Badge",
+      "props": {
+        "text": "35th catalogued surface",
+        "variant": "outline"
+      }
+    },
+    "s2": {
+      "type": "Badge",
+      "props": {
+        "text": "First JSON-shaped entry in discovery type",
+        "variant": "outline"
+      }
+    },
+    "s3": {
+      "type": "Badge",
+      "props": {
+        "text": "Byte-equivalent direction/confidence/quality fields with per-sim signal endpoint",
+        "variant": "outline"
+      }
+    },
+    "s4": {
+      "type": "Badge",
+      "props": {
+        "text": "Six surfaces in seven days",
+        "variant": "secondary"
+      }
+    },
+    "s5": {
+      "type": "Badge",
+      "props": {
+        "text": "Named integrators driving the catalog",
+        "variant": "outline"
+      }
+    },
+    "s6": {
+      "type": "Badge",
+      "props": {
+        "text": "43-PR zero-dep streak intact",
+        "variant": "secondary"
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "link_article": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Read full article",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-06-09.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}
