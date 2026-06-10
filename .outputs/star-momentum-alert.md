@@ -1,14 +1,17 @@
 ## Summary
 
-**star-momentum-alert** ran for 2026-06-09.
+**Skill**: `star-momentum-alert` — complete.
 
-- **Repo audited**: `aaronjmars/MiroShark` (1 repo; `miroshark-aeon` filtered as agent repo)
-- **14-day series**: 14 data points from 2026-05-27 (1204⭐) to 2026-06-09 (1243⭐) — full series, no gaps
-- **v7**: 2.86 stars/day (last 7 deltas averaged) | **v3**: 2.33 stars/day
-- **Gap to 1500**: 257 stars
-- **Projected crossing (v7)**: 2026-09-07 in ~90 days — a **Monday**, outside the 7–14 day Show HN dispatch window
-- **Verdict**: `OUT_OF_WINDOW` — no alert, no notification
+**Status**: `STAR_MOMENTUM_NO_ALERTS` — no notification sent.
 
-Note: today's single-star delta (+1) pulled the short-term pace slightly below the rolling average, shifting the projection from last run's 2026-09-03 (Thursday) to 2026-09-07 (Monday). That Thursday was the closest the projection has come to a valid launch window; worth tracking if pace recovers.
+**Findings**:
+- Repo audited: `aaronjmars/MiroShark` (1 repo; `miroshark-aeon` filtered as `-aeon`)
+- Current stars: **1,243** | Target: **1,500** | Gap: **257**
+- 7-day pace: **2.86/day** | 3-day pace: **2.33/day** (slight deceleration — last 3 days averaged +2.33 vs +2.86 over 7 days)
+- Projected crossing: **2026-09-08 (Tuesday)** — 90 days out
+- Verdict: **OUT_OF_WINDOW** — 90 days exceeds the 7-14 day Show HN dispatch window. The 3-day estimate (Sep 29) also falls well outside. No alert warranted.
 
-Files written: `articles/star-momentum-2026-06-09.md`, `memory/topics/star-momentum-state.json` (updated), `memory/logs/2026-06-09.md` (appended). Committed as `fd23510`.
+**Files written**:
+- `articles/star-momentum-2026-06-10.md`
+- `memory/topics/star-momentum-state.json` (updated `projected_date_v7` → 2026-09-08)
+- `memory/logs/2026-06-10.md` (appended Star Momentum block)
