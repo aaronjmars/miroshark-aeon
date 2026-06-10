@@ -1,14 +1,16 @@
-*Push Recap — 2026-06-09*
-MiroShark + miroshark-aeon — 2 substantive merges, both Aeon-authored
+*Push Recap — 2026-06-10*
+aaronjmars/MiroShark — 1 substantive commit; aaronjmars/miroshark-aeon — 3 substantive + 26 cron auto-commits excluded as noise per the May-31 convention.
 
-Theme 1 (MiroShark): `/api/activity.json` lands as the 35th surface — the "what just completed?" polling primitive integrators have been asking the gallery and feed endpoints to be. Third entry in the platform-shaped/keyless cluster alongside `/api/status.json` and `/api/simulation/batch-status`; reuses signal-pipeline byte-for-byte so direction/confidence/quality/total_rounds line up across activity.json + batch-status + signal.json.
+New Chinese-Locale Front Door: PR #155 merged on MiroShark — promotes the embedded `## 中文` block out of README.md into standalone `README.zh-CN.md` (+142 lines), mirrors the per-file `.zh-CN.md` pattern already used by CONTRIBUTING + 12 docs/*. README.md trimmed −108/+9, language switcher now cross-file link, English H3s promoted to H2. Directly addresses the Jun-15 Chinese-locale hyperstition (5 days out) — the contributor-angle resolution path; coverage-angle already hit via btcbabycow tweet May 16. Zero deps; catalog stays at 35; auth/openapi untouched.
 
-Theme 2 (miroshark-aeon): The 7-day re-derivation is retired. PR #55 encodes the May-31 noise-exclusion convention as explicit step 5 of the push-recap skill — `aeonframework` commits prefixed `chore(scheduler):` / `chore(cron):` / `chore(<skill>): auto-commit` are dropped on the agent repo before diff-reading. This recap is the first to run with the rule baked in; it filtered 30 cron commits, saved ~30 `gh api` calls. Second prompt-level self-improvement in 4 days.
+Project-Lens Contrarian #5: aeon committed `articles/project-lens-2026-06-09.md` — *Webhooks Won the Argument. Polling Won the Integration.* Re-frames PR #153's polling-shape `activity.json` against the 2026 webhook+MCP creed; argues webhooks fit one-consumer-with-infra, polling fits N-unknown-consumers where every integration is a `curl` + `sleep`.
+
+Self-Improve Bookkeeping: aeon log entry for PR #56 (improve/feature-hyperstition-tiebreaker) — encodes today's in-flight Chinese-README pick as mechanical step 2.b rule (reads Active Targets, picks unbuilt candidate matching ≤10-day hyperstition over higher-impact evergreen). 3rd SKILL.md tightening in 4 days (siblings PR #55 push-recap noise, PR #53 feature auth-posture).
 
 Key changes:
-- PR #153 (+1615/-1, 10 files): new `activity_bp` blueprint with `Cache-Control: public, max-age=30` + ETag, 439-LoC service module reusing `signal_service.compute_signal` and `batch_status` trajectory walker for byte-for-byte equivalence, 39 unit tests across 18 properties, OpenAPI schemas locked
-- PR #153 follow-up fix: `test_documented_paths_exist_in_flask` had a quiet failure mode — blueprints missing from `_BLUEPRINT_PREFIXES` silently skipped; fixed for `activity_bp`, latent for any future blueprint
-- PR #55 (+163/-16, 6 files): step 5 inserted into `skills/push-recap/SKILL.md`, steps 5–10 renumbered to 6–11; filter scoped to agent repo (or any repo ending `-aeon`), never to watched project repos
+- `README.zh-CN.md` new file +142 lines: full Chinese mirror of English README — badges row, hero + demo image, 6 H2 sections, localized overview image `miroshark-overview-cn-v2.jpg`, section-deep-linked `docs/INSTALL.zh-CN.md` anchors, license block.
+- `README.md` −108/+9 lines: removed embedded `## 中文` section, dropped `<a id="english">` + `## English` scaffold, promoted 6 orphaned H3s to H2, switcher chip changed from `#中文` anchor to `./README.zh-CN.md`.
+- `articles/project-lens-2026-06-09.md` new file +50 lines: contrarian essay on polling vs webhooks, positions activity.json as discovery-cluster sibling to feed_atom + feed_rss.
 
-Stats: 16 files changed, +1,778 / -17 lines. 43-PR zero-deps streak intact on MiroShark. Catalog 34 → 35. Both repos closed at 0 open Aeon PRs (third consecutive recap).
-Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-06-09.md
+Stats: 5 files changed, +201/-108 lines across 4 substantive commits (26 cron auto-commits excluded as noise).
+Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-06-10.md

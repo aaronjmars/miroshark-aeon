@@ -1,0 +1,395 @@
+{
+  "root": "card-root",
+  "state": {},
+  "elements": {
+    "card-root": {
+      "type": "Card",
+      "props": {
+        "title": "Push Recap — 2026-06-10"
+      },
+      "children": [
+        "summary-section",
+        "sep1",
+        "chinese-locale-section",
+        "sep2",
+        "project-lens-section",
+        "sep3",
+        "self-improve-section",
+        "sep4",
+        "key-changes-section",
+        "sep5",
+        "stats-section",
+        "sep6",
+        "recap-link"
+      ]
+    },
+    "summary-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "summary-text"
+      ]
+    },
+    "summary-text": {
+      "type": "Text",
+      "props": {
+        "text": "aaronjmars/MiroShark — 1 substantive commit; aaronjmars/miroshark-aeon — 3 substantive + 26 cron auto-commits excluded as noise per the May-31 convention."
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "chinese-locale-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "chinese-locale-title",
+        "pr155-link",
+        "chinese-locale-details",
+        "chinese-locale-impact"
+      ]
+    },
+    "chinese-locale-title": {
+      "type": "Heading",
+      "props": {
+        "text": "New Chinese-Locale Front Door",
+        "level": "h2"
+      }
+    },
+    "pr155-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #155 merged on MiroShark",
+        "href": "https://github.com/aaronjmars/MiroShark/pull/155"
+      }
+    },
+    "chinese-locale-details": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "chinese-locale-detail1",
+        "chinese-locale-detail2",
+        "chinese-locale-detail3"
+      ]
+    },
+    "chinese-locale-detail1": {
+      "type": "Text",
+      "props": {
+        "text": "Promotes embedded `## 中文` block out of README.md into standalone `README.zh-CN.md` (+142 lines)",
+        "variant": "body"
+      }
+    },
+    "chinese-locale-detail2": {
+      "type": "Text",
+      "props": {
+        "text": "Mirrors per-file `.zh-CN.md` pattern already used by CONTRIBUTING + 12 docs/*",
+        "variant": "body"
+      }
+    },
+    "chinese-locale-detail3": {
+      "type": "Text",
+      "props": {
+        "text": "README.md trimmed −108/+9, language switcher now cross-file link, English H3s promoted to H2",
+        "variant": "body"
+      }
+    },
+    "chinese-locale-impact": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "impact-badge1",
+        "impact-badge2",
+        "impact-badge3"
+      ]
+    },
+    "impact-badge1": {
+      "type": "Badge",
+      "props": {
+        "text": "Jun-15 hyperstition (5 days out)",
+        "variant": "secondary"
+      }
+    },
+    "impact-badge2": {
+      "type": "Badge",
+      "props": {
+        "text": "contributor-angle resolution",
+        "variant": "secondary"
+      }
+    },
+    "impact-badge3": {
+      "type": "Badge",
+      "props": {
+        "text": "Zero deps change",
+        "variant": "outline"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "project-lens-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "project-lens-title",
+        "project-lens-article",
+        "project-lens-detail"
+      ]
+    },
+    "project-lens-title": {
+      "type": "Heading",
+      "props": {
+        "text": "Project-Lens Contrarian #5",
+        "level": "h2"
+      }
+    },
+    "project-lens-article": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Webhooks Won the Argument. Polling Won the Integration.",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-06-09.md",
+        "source": "aeon committed"
+      }
+    },
+    "project-lens-detail": {
+      "type": "Text",
+      "props": {
+        "text": "Re-frames PR #153's polling-shape `activity.json` against the 2026 webhook+MCP creed; argues webhooks fit one-consumer-with-infra, polling fits N-unknown-consumers where every integration is a `curl` + `sleep`.",
+        "variant": "body"
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "self-improve-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "self-improve-title",
+        "self-improve-detail"
+      ]
+    },
+    "self-improve-title": {
+      "type": "Heading",
+      "props": {
+        "text": "Self-Improve Bookkeeping",
+        "level": "h2"
+      }
+    },
+    "self-improve-detail": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "self-improve-text1",
+        "self-improve-text2"
+      ]
+    },
+    "self-improve-text1": {
+      "type": "Text",
+      "props": {
+        "text": "aeon log entry for PR #56 (improve/feature-hyperstition-tiebreaker) — encodes today's in-flight Chinese-README pick as mechanical step 2.b rule (reads Active Targets, picks unbuilt candidate matching ≤10-day hyperstition over higher-impact evergreen)",
+        "variant": "body"
+      }
+    },
+    "self-improve-text2": {
+      "type": "Text",
+      "props": {
+        "text": "3rd SKILL.md tightening in 4 days (siblings PR #55 push-recap noise, PR #53 feature auth-posture)",
+        "variant": "body"
+      }
+    },
+    "sep4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "key-changes-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "key-changes-title",
+        "key-changes-grid"
+      ]
+    },
+    "key-changes-title": {
+      "type": "Heading",
+      "props": {
+        "text": "Key changes",
+        "level": "h2"
+      }
+    },
+    "key-changes-grid": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "change1",
+        "change2",
+        "change3"
+      ]
+    },
+    "change1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "change1-title",
+        "change1-detail"
+      ]
+    },
+    "change1-title": {
+      "type": "Heading",
+      "props": {
+        "text": "`README.zh-CN.md` new file +142 lines",
+        "level": "h3"
+      }
+    },
+    "change1-detail": {
+      "type": "Text",
+      "props": {
+        "text": "Full Chinese mirror of English README — badges row, hero + demo image, 6 H2 sections, localized overview image `miroshark-overview-cn-v2.jpg`, section-deep-linked `docs/INSTALL.zh-CN.md` anchors, license block",
+        "variant": "body"
+      }
+    },
+    "change2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "change2-title",
+        "change2-detail"
+      ]
+    },
+    "change2-title": {
+      "type": "Heading",
+      "props": {
+        "text": "`README.md` −108/+9 lines",
+        "level": "h3"
+      }
+    },
+    "change2-detail": {
+      "type": "Text",
+      "props": {
+        "text": "Removed embedded `## 中文` section, dropped `<a id=\"english\">` + `## English` scaffold, promoted 6 orphaned H3s to H2, switcher chip changed from `#中文` anchor to `./README.zh-CN.md`",
+        "variant": "body"
+      }
+    },
+    "change3": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "change3-title",
+        "change3-detail"
+      ]
+    },
+    "change3-title": {
+      "type": "Heading",
+      "props": {
+        "text": "`articles/project-lens-2026-06-09.md` new file +50 lines",
+        "level": "h3"
+      }
+    },
+    "change3-detail": {
+      "type": "Text",
+      "props": {
+        "text": "Contrarian essay on polling vs webhooks, positions activity.json as discovery-cluster sibling to feed_atom + feed_rss",
+        "variant": "body"
+      }
+    },
+    "sep5": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stats-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "stat1",
+        "stat2",
+        "stat3"
+      ]
+    },
+    "stat1": {
+      "type": "Stat",
+      "props": {
+        "label": "Files changed",
+        "value": "5"
+      }
+    },
+    "stat2": {
+      "type": "Stat",
+      "props": {
+        "label": "Net lines",
+        "value": "+201/-108"
+      }
+    },
+    "stat3": {
+      "type": "Stat",
+      "props": {
+        "label": "Substantive commits",
+        "value": "4"
+      }
+    },
+    "sep6": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "recap-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full recap",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-06-10.md",
+        "source": "miroshark-aeon"
+      }
+    }
+  }
+}
