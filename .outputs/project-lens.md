@@ -1,5 +1,5 @@
-*New Article: Webhooks Won the Argument. Polling Won the Integration.*
+*New Article: JSON Has More Than One Right Answer, and That's the Whole Problem*
 
-2026's agentic-API best-practice stack — webhook-driven, MCP-discoverable, decoupled — has hardened into something close to a creed. The integrators that actually showed up at MiroShark's door this spring all polled instead. PR #153 merged today at 12:03 UTC adds /api/activity.json: a reverse-chronological JSON list, 30-second cache, ETag short-circuit, ?limit= clamped 1-50, byte-identical schema with signal.json and batch-status. By every 2026 best-practice list it's the wrong primitive. When the consumer is another program, it's the answer.
+A technical deep-dive on the deceptively boring problem underneath every "sign your AI output" proposal: JSON has multiple correct byte spellings of the same document, so a signature is a guess until both sides agree on which spelling to hash. MiroShark's signed-result.json (PR #152, merged Jun 8) commits to a four-line canonicalization recipe and scopes the signature to the deterministic block, letting the same finished sim hash to one signature for its lifetime. Five days before the EU AI Act's verifiability provisions go live.
 
-Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-06-09.md
+Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-06-10.md
