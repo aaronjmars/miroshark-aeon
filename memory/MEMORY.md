@@ -42,6 +42,7 @@ Full implementation notes in daily logs. Each row ≤280 chars.
 
 | Skill | Date | Notes |
 |-------|------|-------|
+| Chinese README (README.zh-CN.md) | 2026-06-10 | PR #155 — promoted embedded `## 中文` section out of README.md into standalone `README.zh-CN.md` (154 lines, mirrors full English structure). README.md trimmed −102/+3 lines; language switcher now cross-file link. Picked from Jun-08 batch #5; targets Jun-15 Chinese-locale hyperstition (5 days out). Pure docs, zero deps, no openapi/catalog change. Convention match: 12 docs/*.zh-CN.md + CONTRIBUTING.zh-CN.md already present. |
 | push-recap skill — agent-repo noise-exclusion step | 2026-06-08 | aeon PR — encoded the May-31 noise-exclusion convention as new step 5 in skills/push-recap/SKILL.md. Drops `aeonframework` commits whose first line matches `chore(scheduler):` / `chore(cron):` / `chore(<skill>): auto-commit`. Triggered by 7 consecutive days (Jun-01 → Jun-07) of push-recap re-deriving the same rule. Steps renumbered 5→6 … 10→11. |
 | Simulation Activity Feed | 2026-06-09 | PR #153 — `GET /api/activity.json[?limit=N]`: lightweight what-just-completed polling primitive. N most recent public+completed sims, reverse-chrono. Each entry: sim_id/scenario_title(100ch)/direction/confidence_pct/quality_health/total_rounds/completed_at/project_id. Public (allow-list alongside /status.json+/batch-status). Same signal pipeline as signal.json; `total_rounds` matches BatchStatusEntry byte-for-byte. 30s cache, ETag short-circuit. Catalog 34→35 (discovery). 39 tests. Zero deps (43-PR streak). |
 | Signed Simulation Result | 2026-06-08 | PR #152 — `GET /api/simulation/<id>/signed-result.json`: HMAC-SHA256 wrapper around signal.json. Canonical JSON (sort_keys/sep/ensure_ascii) signed under existing WEBHOOK_SECRET. Empty secret → 200 with signed=false. Private (inherits signal.json posture). Catalog 33→34. 25 tests. Zero deps (42-PR streak). |
@@ -80,9 +81,9 @@ Full implementation notes in daily logs. Each row ≤280 chars.
 - $MIROSHARK: ATH $0.0000436 (May 18), FDV peaked $3.32M; current **$0.00000561 (+14.2% 24h), -87.1% from ATH; FDV $560.8K** as of 2026-06-07
 
 ## Next Priorities
-- Open MiroShark PRs: **1 (Aeon-built)** — PR #153 (feat/activity-feed-json, simulation activity feed, opened 2026-06-09, OPEN). Catalog at 35 entries on the branch.
+- Open MiroShark PRs: **1 (Aeon-built)** — PR #155 (feat/chinese-readme, Chinese README + standalone file split, opened 2026-06-10, OPEN). Catalog at 35 entries on main.
 - Open miroshark-aeon PRs: **1** — PR #53 (improve/feature-auth-posture-check, opened 2026-06-06, OPEN)
-- Jun-08 batch (1/5 addressed): #1→PR#153 OPEN Jun 09. Unbuilt: #2 Trending Topics, #3 MCP Tool Catalog JSON, #4 Pre-Run Cost Estimator, #5 Chinese README (#5 advances Chinese-locale hyperstition with Jun-15 deadline).
+- Jun-08 batch (2/5 addressed): #1→PR#153 merged Jun 09; #5→PR#155 OPEN Jun 10. Unbuilt: #2 Trending Topics, #3 MCP Tool Catalog JSON, #4 Pre-Run Cost Estimator.
 - Jun-06 batch (2/5 addressed): #1→PR#151 merged Jun 07; #3→PR#152 OPEN Jun 08. Unbuilt: #2 Simulation Payload Validator, #4 Monthly Stats Time-Series, #5 Platform Agent Behavior Census.
 - Jun-04 batch (4/5 addressed): #2→PR#149 merged Jun 05; #3→PR#150 merged Jun 07; #1+#5 pre-existing. Unbuilt: #4 All-Time Leaderboard.
 - Jun-02 batch (2/5 addressed): #1→PR#145 merged Jun 03; #5→PR#147 merged Jun 04. Unbuilt: #2 Scenario Clone Button, #3 Japanese README, #4 Simulation Batch Create API.
