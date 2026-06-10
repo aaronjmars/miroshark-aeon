@@ -1,0 +1,322 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Repo Action Ideas"
+      },
+      "children": [
+        "heading_main",
+        "text_repo_info",
+        "sep1",
+        "stack_actions",
+        "sep2",
+        "link_details"
+      ]
+    },
+    "heading_main": {
+      "type": "Heading",
+      "props": {
+        "text": "Repo Action Ideas — 2026-06-10",
+        "level": "h2"
+      }
+    },
+    "text_repo_info": {
+      "type": "Text",
+      "props": {
+        "text": "Generated from analysis of aaronjmars/MiroShark (1,244★, 263 forks, catalog 35, PR #155 Chinese README merged today).",
+        "variant": "body"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stack_actions": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "action_1",
+        "action_2",
+        "action_3",
+        "action_4",
+        "action_5"
+      ]
+    },
+    "action_1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "action_1_title",
+        "action_1_badges",
+        "action_1_desc"
+      ]
+    },
+    "action_1_title": {
+      "type": "Heading",
+      "props": {
+        "text": "1. Japanese README — README.ja.md",
+        "level": "h4"
+      }
+    },
+    "action_1_badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "badge_1_1",
+        "badge_1_2"
+      ]
+    },
+    "badge_1_1": {
+      "type": "Badge",
+      "props": {
+        "text": "Community/Growth",
+        "variant": "default"
+      }
+    },
+    "badge_1_2": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "secondary"
+      }
+    },
+    "action_1_desc": {
+      "type": "Text",
+      "props": {
+        "text": "First Japanese-language root entry point; m000_crypto JP coverage since May 17; mirrors the README.zh-CN.md pattern just proved out today.",
+        "variant": "body"
+      }
+    },
+    "action_2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "action_2_title",
+        "action_2_badges",
+        "action_2_desc"
+      ]
+    },
+    "action_2_title": {
+      "type": "Heading",
+      "props": {
+        "text": "2. Scenario Clone Button",
+        "level": "h4"
+      }
+    },
+    "action_2_badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "badge_2_1",
+        "badge_2_2"
+      ]
+    },
+    "badge_2_1": {
+      "type": "Badge",
+      "props": {
+        "text": "Feature/DX",
+        "variant": "default"
+      }
+    },
+    "badge_2_2": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "secondary"
+      }
+    },
+    "action_2_desc": {
+      "type": "Text",
+      "props": {
+        "text": "UI button + ?clone= query param that pre-fills the create form from an existing published sim's clone.json — the API exists, the front door doesn't.",
+        "variant": "body"
+      }
+    },
+    "action_3": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "action_3_title",
+        "action_3_badges",
+        "action_3_desc"
+      ]
+    },
+    "action_3_title": {
+      "type": "Heading",
+      "props": {
+        "text": "3. Simulation Batch Create API",
+        "level": "h4"
+      }
+    },
+    "action_3_badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "badge_3_1",
+        "badge_3_2"
+      ]
+    },
+    "badge_3_1": {
+      "type": "Badge",
+      "props": {
+        "text": "Integration",
+        "variant": "default"
+      }
+    },
+    "badge_3_2": {
+      "type": "Badge",
+      "props": {
+        "text": "Medium",
+        "variant": "secondary"
+      }
+    },
+    "action_3_desc": {
+      "type": "Text",
+      "props": {
+        "text": "POST /api/simulation/batch creates up to 10 sims in one request; pairs with the existing batch-status endpoint to close the create→poll→signal pipeline loop.",
+        "variant": "body"
+      }
+    },
+    "action_4": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "action_4_title",
+        "action_4_badges",
+        "action_4_desc"
+      ]
+    },
+    "action_4_title": {
+      "type": "Heading",
+      "props": {
+        "text": "4. Simulation Percentile Rank",
+        "level": "h4"
+      }
+    },
+    "action_4_badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "badge_4_1",
+        "badge_4_2"
+      ]
+    },
+    "badge_4_1": {
+      "type": "Badge",
+      "props": {
+        "text": "Analytics",
+        "variant": "default"
+      }
+    },
+    "badge_4_2": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "secondary"
+      }
+    },
+    "action_4_desc": {
+      "type": "Text",
+      "props": {
+        "text": "GET /api/simulation/<id>/rank.json — where does a specific sim's confidence and quality sit in the platform distribution? The distribution endpoint provides the shape; this applies it per-sim.",
+        "variant": "body"
+      }
+    },
+    "action_5": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "action_5_title",
+        "action_5_badges",
+        "action_5_desc"
+      ]
+    },
+    "action_5_title": {
+      "type": "Heading",
+      "props": {
+        "text": "5. Platform Performance Metrics",
+        "level": "h4"
+      }
+    },
+    "action_5_badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "badge_5_1",
+        "badge_5_2"
+      ]
+    },
+    "badge_5_1": {
+      "type": "Badge",
+      "props": {
+        "text": "Analytics",
+        "variant": "default"
+      }
+    },
+    "badge_5_2": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "secondary"
+      }
+    },
+    "action_5_desc": {
+      "type": "Text",
+      "props": {
+        "text": "GET /api/stats/performance.json — p50/p95 completion latency and sims/hour throughput over rolling windows; the number batch pipeline operators need before scheduling a run.",
+        "variant": "body"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "link_details": {
+      "type": "Link",
+      "props": {
+        "label": "Full details",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-actions-2026-06-10.md"
+      }
+    }
+  }
+}
