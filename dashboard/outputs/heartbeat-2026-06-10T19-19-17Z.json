@@ -1,0 +1,274 @@
+{
+  "root": "heartbeat_card",
+  "state": {},
+  "elements": {
+    "heartbeat_card": {
+      "type": "Card",
+      "props": {
+        "title": "Heartbeat — Wed Jun 10, 2026"
+      },
+      "children": [
+        "status_row",
+        "skills_section",
+        "sep1",
+        "prs_section",
+        "sep2",
+        "repo_section"
+      ]
+    },
+    "status_row": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "time_label",
+        "status_ok"
+      ]
+    },
+    "time_label": {
+      "type": "Text",
+      "props": {
+        "text": "19:17 UTC",
+        "variant": "muted"
+      }
+    },
+    "status_ok": {
+      "type": "Badge",
+      "props": {
+        "text": "HEARTBEAT_OK",
+        "variant": "default"
+      }
+    },
+    "skills_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "skills_heading",
+        "skills_grid"
+      ]
+    },
+    "skills_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Scheduled Skills (12/12 completed)",
+        "level": "h3"
+      }
+    },
+    "skills_grid": {
+      "type": "Grid",
+      "props": {
+        "columns": 3,
+        "gap": "sm"
+      },
+      "children": [
+        "s1",
+        "s2",
+        "s3",
+        "s4",
+        "s5",
+        "s6",
+        "s7",
+        "s8",
+        "s9",
+        "s10",
+        "s11",
+        "s12"
+      ]
+    },
+    "s1": {
+      "type": "Badge",
+      "props": {
+        "text": "token-report",
+        "variant": "secondary"
+      }
+    },
+    "s2": {
+      "type": "Badge",
+      "props": {
+        "text": "repo-pulse",
+        "variant": "secondary"
+      }
+    },
+    "s3": {
+      "type": "Badge",
+      "props": {
+        "text": "star-momentum-alert",
+        "variant": "secondary"
+      }
+    },
+    "s4": {
+      "type": "Badge",
+      "props": {
+        "text": "feature",
+        "variant": "secondary"
+      }
+    },
+    "s5": {
+      "type": "Badge",
+      "props": {
+        "text": "self-improve",
+        "variant": "secondary"
+      }
+    },
+    "s6": {
+      "type": "Badge",
+      "props": {
+        "text": "repo-actions",
+        "variant": "secondary"
+      }
+    },
+    "s7": {
+      "type": "Badge",
+      "props": {
+        "text": "push-recap",
+        "variant": "secondary"
+      }
+    },
+    "s8": {
+      "type": "Badge",
+      "props": {
+        "text": "project-lens",
+        "variant": "secondary"
+      }
+    },
+    "s9": {
+      "type": "Badge",
+      "props": {
+        "text": "repo-article",
+        "variant": "secondary"
+      }
+    },
+    "s10": {
+      "type": "Badge",
+      "props": {
+        "text": "star-milestone",
+        "variant": "secondary"
+      }
+    },
+    "s11": {
+      "type": "Badge",
+      "props": {
+        "text": "thread-formatter",
+        "variant": "secondary"
+      }
+    },
+    "s12": {
+      "type": "Badge",
+      "props": {
+        "text": "memory-flush",
+        "variant": "secondary"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "prs_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "prs_heading",
+        "pr_details"
+      ]
+    },
+    "prs_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Pull Request Activity",
+        "level": "h3"
+      }
+    },
+    "pr_details": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "pr_feature",
+        "pr_self_improve",
+        "pr_56"
+      ]
+    },
+    "pr_feature": {
+      "type": "Badge",
+      "props": {
+        "text": "PR #155 (feature) — Chinese README merged",
+        "variant": "default"
+      }
+    },
+    "pr_self_improve": {
+      "type": "Badge",
+      "props": {
+        "text": "PR #56 (self-improve) — open",
+        "variant": "outline"
+      }
+    },
+    "pr_56": {
+      "type": "Badge",
+      "props": {
+        "text": "miroshark-aeon PR #56 hyperstition-tiebreaker (5.6h old)",
+        "variant": "outline"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "repo_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "repo_heading",
+        "repo_stats"
+      ]
+    },
+    "repo_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Repository Status",
+        "level": "h3"
+      }
+    },
+    "repo_stats": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "stat_prs",
+        "issue_95"
+      ]
+    },
+    "stat_prs": {
+      "type": "Stat",
+      "props": {
+        "label": "Open PRs (MiroShark)",
+        "value": "0"
+      }
+    },
+    "issue_95": {
+      "type": "Badge",
+      "props": {
+        "text": "issue #95 non-urgent",
+        "variant": "outline"
+      }
+    }
+  }
+}
