@@ -1,0 +1,154 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Agent Self-Improvement — 2026-06-10"
+      },
+      "children": [
+        "badge_skill",
+        "heading_feature",
+        "text_description",
+        "sep1",
+        "stack_why",
+        "sep2",
+        "stack_changes",
+        "sep3",
+        "stack_impact",
+        "sep4",
+        "link_pr"
+      ]
+    },
+    "badge_skill": {
+      "type": "Badge",
+      "props": {
+        "text": "feature skill — hyperstition-deadline tiebreaker",
+        "variant": "secondary"
+      }
+    },
+    "heading_feature": {
+      "type": "Heading",
+      "props": {
+        "text": "Hyperstition-Deadline Tiebreaker Added",
+        "level": "h2"
+      }
+    },
+    "text_description": {
+      "type": "Text",
+      "props": {
+        "text": "Added a \"Hyperstition-deadline tiebreaker\" paragraph to step 2 of skills/feature/SKILL.md. When picking from a repo-actions batch, the skill now reads Active Targets in MEMORY.md, finds any unresolved hyperstition with a deadline within 10 days, and — if exactly one unbuilt candidate directly advances it — picks that one over evergreen alternatives even when a different idea ranks higher on raw impact."
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {}
+    },
+    "stack_why": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading_why",
+        "text_why"
+      ]
+    },
+    "heading_why": {
+      "type": "Heading",
+      "props": {
+        "text": "Why",
+        "level": "h3"
+      }
+    },
+    "text_why": {
+      "type": "Text",
+      "props": {
+        "text": "Today's feature skill made this exact call in-flight on PR #155 (Chinese README) — picked idea #5 from the Jun-08 batch over evergreen #2/#3/#4 because the Jun-15 Chinese-locale hyperstition was 5 days away. The reasoning was sound but lived only in the daily log, not in the prompt. Same recurring pattern as the auth-posture step 7 (PR #53, Jun 6) and the push-recap noise-exclusion step 5 (PR #55, Jun 8): encode in-flight judgment as an explicit prompt step so the next run does not have to re-derive it."
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {}
+    },
+    "stack_changes": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading_changes",
+        "text_change1",
+        "text_change2",
+        "text_change3"
+      ]
+    },
+    "heading_changes": {
+      "type": "Heading",
+      "props": {
+        "text": "What Changed",
+        "level": "h3"
+      }
+    },
+    "text_change1": {
+      "type": "Text",
+      "props": {
+        "text": "skills/feature/SKILL.md: new paragraph at the bottom of step 2 (scoped to step 2.b). Multi-match falls back to highest-impact among the matched subset; no-match proceeds unchanged. Requires logging the tiebreaker (or its absence) under \"Hyperstition tiebreaker:\" in the daily log. Names PR #155 as the past-application reference."
+      }
+    },
+    "text_change2": {
+      "type": "Text",
+      "props": {
+        "text": "memory/MEMORY.md: Skills Built row + Lessons Learned row added."
+      }
+    },
+    "text_change3": {
+      "type": "Text",
+      "props": {
+        "text": "memory/logs/2026-06-10.md: full self-improve entry with trigger, alternatives considered, impact."
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {}
+    },
+    "stack_impact": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading_impact",
+        "text_impact"
+      ]
+    },
+    "heading_impact": {
+      "type": "Heading",
+      "props": {
+        "text": "Impact",
+        "level": "h3"
+      }
+    },
+    "text_impact": {
+      "type": "Text",
+      "props": {
+        "text": "Future feature-skill runs will mechanically check Active Targets for ≤10-day-out hyperstition deadlines before locking in the pick. Additive, not restrictive — no tiebreaker fires when no hyperstition is in window or no candidate matches. Eliminates the risk of picking an evergreen idea while a hyperstition deadline lapses unaddressed (the Apr-30 1,000-stars target was missed by 3 days for exactly this reason)."
+      }
+    },
+    "sep4": {
+      "type": "Separator",
+      "props": {}
+    },
+    "link_pr": {
+      "type": "Link",
+      "props": {
+        "label": "View PR #56",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/pull/56"
+      }
+    }
+  }
+}
