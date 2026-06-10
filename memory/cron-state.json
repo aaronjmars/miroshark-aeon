@@ -75,8 +75,8 @@
     "success_rate": 1
   },
   "repo-pulse": {
-    "last_dispatch": "2026-06-09T10:09:01Z",
-    "last_status": "success",
+    "last_dispatch": "2026-06-10T11:02:07Z",
+    "last_status": "dispatched",
     "last_success": "2026-06-09T10:12:22Z",
     "total_runs": 57,
     "total_successes": 57,
@@ -85,8 +85,8 @@
     "success_rate": 1
   },
   "feature": {
-    "last_dispatch": "2026-06-09T11:22:53Z",
-    "last_status": "success",
+    "last_dispatch": "2026-06-10T11:02:07Z",
+    "last_status": "dispatched",
     "last_success": "2026-06-09T11:43:47Z",
     "total_runs": 58,
     "total_successes": 57,
@@ -180,8 +180,8 @@
     "last_quality_score": 4
   },
   "star-momentum-alert": {
-    "last_dispatch": "2026-06-09T11:22:53Z",
-    "last_status": "success",
+    "last_dispatch": "2026-06-10T11:02:07Z",
+    "last_status": "dispatched",
     "last_success": "2026-06-09T11:26:03Z",
     "total_runs": 26,
     "total_successes": 26,
