@@ -1,0 +1,97 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "repo-article"
+      },
+      "children": [
+        "heading",
+        "content-stack"
+      ]
+    },
+    "heading": {
+      "type": "Heading",
+      "props": {
+        "text": "The First Surface in This Week's Streak That Doesn't Speak JSON",
+        "level": "h2"
+      }
+    },
+    "content-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "text-main",
+        "separator1",
+        "stats-grid",
+        "separator2",
+        "storylink"
+      ]
+    },
+    "text-main": {
+      "type": "Text",
+      "props": {
+        "text": "MiroShark's seventh PR in seven days landed today — `README.zh-CN.md`, opened 11:08Z and merged 13:12Z, four hours four minutes door-to-door. The six PRs before it shipped JSON for machine readers; this one shipped Chinese markdown for a human one, extending the 43-PR zero-dep streak to 44 without touching the 35-entry catalog. The picker that picked it also got its picking rule encoded back into itself on the same day.",
+        "variant": "body"
+      }
+    },
+    "separator1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stats-grid": {
+      "type": "Grid",
+      "props": {
+        "columns": 3,
+        "gap": "md"
+      },
+      "children": [
+        "stat-time",
+        "stat-pr-count",
+        "stat-streak"
+      ]
+    },
+    "stat-time": {
+      "type": "Stat",
+      "props": {
+        "label": "Merge time",
+        "value": "4h 4m"
+      }
+    },
+    "stat-pr-count": {
+      "type": "Stat",
+      "props": {
+        "label": "PRs this week",
+        "value": "7"
+      }
+    },
+    "stat-streak": {
+      "type": "Stat",
+      "props": {
+        "label": "Zero-dep streak",
+        "value": "44 PRs"
+      }
+    },
+    "separator2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "storylink": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full article",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-06-10.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}
