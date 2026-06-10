@@ -1,0 +1,108 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Repo Pulse"
+      },
+      "children": [
+        "link_repo",
+        "text_date",
+        "stack_stats",
+        "sep1",
+        "heading_stargazers",
+        "storylink_tchai17",
+        "sep2",
+        "heading_forks",
+        "storylink_oscarlund"
+      ]
+    },
+    "link_repo": {
+      "type": "Link",
+      "props": {
+        "label": "aaronjmars/MiroShark",
+        "href": "https://github.com/aaronjmars/MiroShark"
+      }
+    },
+    "text_date": {
+      "type": "Text",
+      "props": {
+        "text": "2026-06-10",
+        "variant": "caption"
+      }
+    },
+    "stack_stats": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "stat_stars",
+        "stat_forks"
+      ]
+    },
+    "stat_stars": {
+      "type": "Stat",
+      "props": {
+        "label": "Stars",
+        "value": "1244",
+        "delta": "+1",
+        "trend": "up"
+      }
+    },
+    "stat_forks": {
+      "type": "Stat",
+      "props": {
+        "label": "Forks",
+        "value": "263",
+        "delta": "+1",
+        "trend": "up"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading_stargazers": {
+      "type": "Heading",
+      "props": {
+        "text": "New Stargazers",
+        "level": "h3"
+      }
+    },
+    "storylink_tchai17": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Timothy Chai",
+        "href": "https://github.com/tchai17",
+        "source": "0 followers · 13 repos · Web Developer specializing in Java, C#, and React"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading_forks": {
+      "type": "Heading",
+      "props": {
+        "text": "New Forks",
+        "level": "h3"
+      }
+    },
+    "storylink_oscarlund": {
+      "type": "StoryLink",
+      "props": {
+        "title": "oscarlund121/MiroShark",
+        "href": "https://github.com/oscarlund121/MiroShark",
+        "source": "Oscar Lund · 0 followers · 46 repos"
+      }
+    }
+  }
+}
