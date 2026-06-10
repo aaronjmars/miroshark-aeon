@@ -42,6 +42,7 @@ Full implementation notes in daily logs. Each row ≤280 chars.
 
 | Skill | Date | Notes |
 |-------|------|-------|
+| feature skill — hyperstition-deadline tiebreaker | 2026-06-10 | aeon PR #56 — new paragraph at bottom of `skills/feature/SKILL.md` step 2 (scoped to 2.b). Reads `Active Targets` in MEMORY.md, finds unresolved hyperstitions with ≤10-day deadline, picks matching unbuilt candidate over higher-raw-impact evergreen. Multi-match falls back to highest-impact among matched; no-match proceeds unchanged. Triggered by today's PR #155 pick where the agent applied the rule in-flight without it being encoded. |
 | Chinese README (README.zh-CN.md) | 2026-06-10 | PR #155 — promoted embedded `## 中文` section out of README.md into standalone `README.zh-CN.md` (154 lines, mirrors full English structure). README.md trimmed −102/+3 lines; language switcher now cross-file link. Picked from Jun-08 batch #5; targets Jun-15 Chinese-locale hyperstition (5 days out). Pure docs, zero deps, no openapi/catalog change. Convention match: 12 docs/*.zh-CN.md + CONTRIBUTING.zh-CN.md already present. |
 | push-recap skill — agent-repo noise-exclusion step | 2026-06-08 | aeon PR — encoded the May-31 noise-exclusion convention as new step 5 in skills/push-recap/SKILL.md. Drops `aeonframework` commits whose first line matches `chore(scheduler):` / `chore(cron):` / `chore(<skill>): auto-commit`. Triggered by 7 consecutive days (Jun-01 → Jun-07) of push-recap re-deriving the same rule. Steps renumbered 5→6 … 10→11. |
 | Simulation Activity Feed | 2026-06-09 | PR #153 — `GET /api/activity.json[?limit=N]`: lightweight what-just-completed polling primitive. N most recent public+completed sims, reverse-chrono. Each entry: sim_id/scenario_title(100ch)/direction/confidence_pct/quality_health/total_rounds/completed_at/project_id. Public (allow-list alongside /status.json+/batch-status). Same signal pipeline as signal.json; `total_rounds` matches BatchStatusEntry byte-for-byte. 30s cache, ETag short-circuit. Catalog 34→35 (discovery). 39 tests. Zero deps (43-PR streak). |
@@ -70,6 +71,7 @@ Full implementation notes in daily logs. Each row ≤280 chars.
 - fetch-tweets + tweet-allocator disabled 2026-05-27 (aeon PR #47) — disable when organic signal = 0 for sustained period
 - Feature skill default-inherits auth guard from sibling endpoints — encoded as explicit auth-posture decision step 7 in skills/feature/SKILL.md (aeon PR #53, 2026-06-06)
 - Push-recap re-derived "aeonframework cron auto-commit = noise" rule every day for 7 days (Jun-01 → Jun-07) — encoded as explicit step 5 noise-filter in skills/push-recap/SKILL.md (2026-06-08)
+- Feature skill picked Chinese README (PR #155) over higher-impact evergreen candidates by reasoning about the Jun-15 hyperstition deadline in-flight — encoded as hyperstition-deadline tiebreaker (≤10-day window) in skills/feature/SKILL.md step 2 (aeon PR #56, 2026-06-10)
 
 ## Active Targets
 - Hyperstition: MiroShark 1,000 stars by 2026-04-30 — MISSED Apr 30 (911), CROSSED 2026-05-03; currently **1,239 stars / 264 forks** as of 2026-06-07; next threshold 1500 (projected ~2026-08-25)
