@@ -41,6 +41,7 @@ Full implementation notes in daily logs. Each row ≤280 chars.
 
 | Skill | Date | Notes |
 |-------|------|-------|
+| Japanese README (README.ja.md) | 2026-06-11 | PR #156 — 143-line Japanese mirror of README.md, second alternate-language root README (after PR #155 zh-CN merged Jun 10). Language switcher entries added to README.md + README.zh-CN.md. Code blocks/image paths/endpoint paths kept English. Doc links point at English `docs/*.md` (no `docs/*.ja.md` yet — same fallback Chinese uses for DKG/WAYBACKCLAW). Hook: @m000_crypto May-17 JP coverage. Picked from Jun-10 batch #1 — pattern mechanically reproducible from yesterday's PR #155. Zero deps, zero backend, zero catalog changes (stays 35). 44-PR zero-dep streak. |
 | feature skill — hyperstition-deadline tiebreaker | 2026-06-10 | aeon PR #56 — new paragraph at bottom of `skills/feature/SKILL.md` step 2 (scoped to 2.b). Reads `Active Targets` in MEMORY.md, finds unresolved hyperstitions with ≤10-day deadline, picks matching unbuilt candidate over higher-raw-impact evergreen. Multi-match falls back to highest-impact among matched; no-match proceeds unchanged. Triggered by today's PR #155 pick where the agent applied the rule in-flight without it being encoded. |
 | Chinese README (README.zh-CN.md) | 2026-06-10 | PR #155 — promoted embedded `## 中文` section out of README.md into standalone `README.zh-CN.md` (154 lines, mirrors full English structure). README.md trimmed −102/+3 lines; language switcher now cross-file link. Picked from Jun-08 batch #5; targets Jun-15 Chinese-locale hyperstition (5 days out). Pure docs, zero deps, no openapi/catalog change. Convention match: 12 docs/*.zh-CN.md + CONTRIBUTING.zh-CN.md already present. |
 | push-recap skill — agent-repo noise-exclusion step | 2026-06-08 | aeon PR — encoded the May-31 noise-exclusion convention as new step 5 in skills/push-recap/SKILL.md. Drops `aeonframework` commits whose first line matches `chore(scheduler):` / `chore(cron):` / `chore(<skill>): auto-commit`. Triggered by 7 consecutive days (Jun-01 → Jun-07) of push-recap re-deriving the same rule. Steps renumbered 5→6 … 10→11. |
@@ -77,9 +78,9 @@ Full implementation notes in daily logs. Each row ≤280 chars.
 - $MIROSHARK: ATH $0.0000436 (May 18), FDV peaked $3.32M; current **$0.00000555 (-6.69% 24h), -87.3% from ATH; FDV $555.1K** as of 2026-06-10
 
 ## Next Priorities
-- Open MiroShark PRs: **0** — PR #155 (feat/chinese-readme) merged 2026-06-10. Catalog at 35 entries on main.
+- Open MiroShark PRs: **1** — PR #156 (feat/japanese-readme, opened 2026-06-11, OPEN). Catalog at 35 entries on main.
 - Open miroshark-aeon PRs: **1** — PR #56 (improve/feature-hyperstition-tiebreaker, opened 2026-06-10, OPEN)
-- Jun-10 batch (0/5 addressed): #1 Japanese README, #2 Scenario Clone Button, #3 Simulation Batch Create API, #4 Simulation Percentile Rank, #5 Platform Performance Metrics.
+- Jun-10 batch (1/5 addressed): #1→PR#156 OPEN Jun 11. Unbuilt: #2 Scenario Clone Button, #3 Simulation Batch Create API, #4 Simulation Percentile Rank, #5 Platform Performance Metrics.
 - Jun-08 batch (3/5 addressed): #1→PR#153 merged Jun 09; #5→PR#155 merged Jun 10. Unbuilt: #2 Trending Topics, #3 MCP Tool Catalog JSON, #4 Pre-Run Cost Estimator.
 - Jun-06 batch (2/5 addressed): #1→PR#151 merged Jun 07; #3→PR#152 OPEN Jun 08. Unbuilt: #2 Simulation Payload Validator, #4 Monthly Stats Time-Series, #5 Platform Agent Behavior Census.
 - Jun-04 batch (4/5 addressed): #2→PR#149 merged Jun 05; #3→PR#150 merged Jun 07; #1+#5 pre-existing. Unbuilt: #4 All-Time Leaderboard.

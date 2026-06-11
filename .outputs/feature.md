@@ -1,19 +1,20 @@
-*Feature Built — 2026-06-10*
+*Feature Built — 2026-06-11*
 
-Chinese README (README.zh-CN.md)
-MiroShark's root directory now has a dedicated Chinese-language README that mirrors the full English version. Chinese-speaking developers landing on the repo get a top-level native entry point instead of a buried, condensed `## 中文` anchor inside the English README. It's the same pattern Vue.js, Electron, pandas, and pytorch use to onboard CJK audiences — and the same pattern MiroShark already uses for every doc under `docs/` and for `CONTRIBUTING.zh-CN.md`. The root README was the lone holdout.
+Japanese README (README.ja.md)
+MiroShark now has a Japanese-language landing page. A native-Japanese reader hitting the GitHub repo can click 日本語 in the language strip and see the project described — the simulate-anything pitch, the Quick Start, the use cases, the full documentation index — without ever touching the English version. It's the second alternate-language root README, following yesterday's Chinese one (PR #155).
 
 Why this matters:
-A hyperstition set back in April targets either a Chinese-locale contributor PR or Chinese-language coverage by June 15 — that deadline is 5 days away. The coverage leg already landed (btcbabycow's "米罗莎要来了" tweet from May 16, plus the first JP coverage in mid-May), but the contributor leg is still open. The most active external contributor on the repo by a wide margin — 666ghj, 219 commits — plausibly already maps to that audience but has been navigating an English-first README the whole time. A standalone README.zh-CN.md is the conversion surface for that pipeline. It was also the only time-sensitive idea in the Jun-08 repo-actions batch; the other three unbuilt candidates (Trending Topics, MCP Tool Catalog JSON, Pre-Run Cost Estimator) are evergreen and can wait.
+The root README had one language until 24 hours ago, then two. Twelve docs files already had Chinese siblings, but zero `.ja.md` files existed anywhere in the repo. The Japanese audience has been visible since `@m000_crypto`'s Japanese-language coverage on May 17 — the gap was real and the precedent was fresh. This was idea #1 in the Jun-10 repo-actions batch and it was the only candidate where yesterday's just-merged PR provided a mechanically reproducible pattern to mirror.
 
 What was built:
-- README.zh-CN.md (new, 154 lines): full Chinese README mirroring the English structure 1:1 — badges row, demo image, hero/tagline, sections for what-it-does / quick-start / interface-language / use-cases / features / documentation, license, Star History chart. Replaces the condensed embedded section that was ~60% the depth of the English one.
-- README.md (-102 / +3 lines): language switcher changed from in-page anchor to cross-file link to README.zh-CN.md. Removed the embedded Chinese section. Removed the English-anchor H2 wrapper. License trimmed to English-only.
+- `README.ja.md` (new, 143 lines): Full Japanese mirror of the English README. Hero tagline rendered as `あらゆるシナリオをシミュレート、$1 以下・10 分未満で`. Feature table, use cases, image alt text, and section headings translated to natural Japanese. Code blocks, env var names, image paths, and endpoint paths remain in English by convention — matches the treatment in `README.zh-CN.md`.
+- `README.md` language switcher: `<b>English</b> · 中文` becomes `<b>English</b> · 中文 · 日本語`.
+- `README.zh-CN.md` language switcher: `English · <b>中文</b>` becomes `English · <b>中文</b> · 日本語`.
 
 How it works:
-Pure documentation PR — no backend route, no openapi changes, no surfaces_catalog.py entry, zero dependencies. The new file uses the same centered-badges-and-images pattern that README.md uses so the two root files render as visual siblings on GitHub. All 7 image paths and all 14 documentation links verified to resolve against the cloned repo before commit. The split also makes the English README shorter and more focused — 143 lines vs. the previous 242.
+The translation strategy was conservative: every image src kept as-is, every CLI command kept verbatim, every docs/ link pointed at the English `docs/*.md` because no `docs/*.ja.md` files exist yet (same fallback pattern the Chinese README already uses for DKG and WAYBACKCLAW). The 中 / EN UI toggle section honestly describes the in-app locale toggle as English / Chinese only — no Japanese UI is wired in the frontend, so the README doesn't promise one. Language switcher edits are one line per file: no layout disruption, no markdown restructuring. Three files changed, 145 insertions, 2 deletions, zero new dependencies, zero backend touches, zero openapi/catalog changes — 44-PR zero-dep streak intact.
 
 What's next:
-Companion Japanese README from the Jun-02 batch is the natural follow-up. After that, the three remaining Jun-08 evergreen ideas — Trending Topics, MCP Tool Catalog JSON, Pre-Run Cost Estimator — slot into the discovery / analytics / integration gaps the catalog audit surfaced last batch.
+The `README.ja.md` is the anchor file; `docs/*.ja.md` translations (INSTALL.ja.md, FEATURES.ja.md, CONFIGURATION.ja.md) are the natural follow-ups, same way the Chinese localization unfolded. The Korean and French gaps remain — French has open issue #95 — but the i18n dict-form refactor blocks the in-app side; the README path is unblocked and could ship in parallel.
 
-PR: https://github.com/aaronjmars/MiroShark/pull/155
+PR: https://github.com/aaronjmars/MiroShark/pull/156
