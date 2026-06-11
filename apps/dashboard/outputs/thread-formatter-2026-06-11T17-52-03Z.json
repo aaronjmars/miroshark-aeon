@@ -1,0 +1,115 @@
+{
+  "root": "main-card",
+  "state": {},
+  "elements": {
+    "main-card": {
+      "type": "Card",
+      "props": {
+        "title": "MiroShark API-surface pivot",
+        "description": "5 JSON endpoint PRs + signed payload"
+      },
+      "children": [
+        "date-text",
+        "separator-1",
+        "points-stack",
+        "separator-2",
+        "links-section"
+      ]
+    },
+    "date-text": {
+      "type": "Text",
+      "props": {
+        "text": "Thread Draft — 2026-06-11",
+        "variant": "caption"
+      }
+    },
+    "separator-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "points-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "point-1",
+        "point-2",
+        "point-3",
+        "point-4",
+        "point-5"
+      ]
+    },
+    "point-1": {
+      "type": "Text",
+      "props": {
+        "text": "1/ 5 of 8 PRs merged in MiroShark this week ship zero UI. They add JSON endpoints. The web app is not the product anymore — the contract is.",
+        "variant": "body"
+      }
+    },
+    "point-2": {
+      "type": "Text",
+      "props": {
+        "text": "2/ A year ago MiroShark was a browser demo. Three external teams — RevaultDrops, AntFleet, Capacitr — are now building on it as AI infrastructure. A browser tab can't be a dependency. So it became an API.",
+        "variant": "body"
+      }
+    },
+    "point-3": {
+      "type": "Text",
+      "props": {
+        "text": "3/ PR #152 shipped signed-result.json: HMAC-SHA256, offline-verifiable. You don't sign a response for a browser tab. You sign it so a third party can consume a prediction, verify it wasn't tampered with, and trust it without calling back.",
+        "variant": "body"
+      }
+    },
+    "point-4": {
+      "type": "Text",
+      "props": {
+        "text": "4/ The OpenAPI spec grew 1,195 lines this week. The docs now tell integrators to run openapi-generator to get a Python, TypeScript, or Go SDK in one command. This is not a web app adding features. It is a platform deciding it wants to be depended on.",
+        "variant": "body"
+      }
+    },
+    "point-5": {
+      "type": "Text",
+      "props": {
+        "text": "5/ Five API PRs, one signed payload, three named integrators. The full breakdown of what shipped and where this is going:",
+        "variant": "body"
+      }
+    },
+    "separator-2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "links-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "github-link",
+        "article-link"
+      ]
+    },
+    "github-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "MiroShark Repository",
+        "href": "https://github.com/aaronjmars/MiroShark",
+        "source": "GitHub"
+      }
+    },
+    "article-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full thread context",
+        "href": "articles/thread-2026-06-11.md",
+        "source": "Article"
+      }
+    }
+  }
+}

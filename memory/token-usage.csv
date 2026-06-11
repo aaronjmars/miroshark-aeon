@@ -2,3 +2,4 @@ date,skill,model,input_tokens,output_tokens,cache_read,cache_creation
 2026-06-11,heartbeat,claude-sonnet-4-6,49,6678,512160,33352
 2026-06-11,star-milestone,claude-opus-4-8,2092,3632,321975,20347
 2026-06-11,project-lens,claude-opus-4-8,4236,19537,1472495,68438
+2026-06-11,thread-formatter,claude-sonnet-4-6,13,22026,536420,43357
