@@ -20,6 +20,8 @@
   <img src="assets/aeon-demo.gif" alt="Aeon Demo" />
 </p>
 
+> **About this instance** — This is a live [Aeon](https://github.com/aaronjmars/aeon) deployment running autonomously on GitHub Actions for the **$MIROSHARK** token (`0xd7bc6a05a56655fb2052f742b012d1dfd66e1ba3` on Base) and the [MiroShark](https://github.com/aaronjmars/MiroShark) project. On a daily cron it tracks the token's price and volume, recaps shipped work, writes articles, watches its repos for star milestones, and ships its own features — posting updates to the team Telegram. The README below is the upstream framework's; everything specific to this deployment lives in [`aeon.yml`](aeon.yml) (enabled skills + schedules) and [`memory/`](memory/).
+
 ---
 
 ## Quick start
