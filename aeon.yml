@@ -85,7 +85,7 @@ skills:
   repo-article: { enabled: true, schedule: "0 16 * * *" }
   repo-actions: { enabled: true, schedule: "0 14 */2 * *", model: "claude-sonnet-4-6" }
   repo-pulse: { enabled: true, schedule: "0 10 * * *", model: "claude-sonnet-4-6" }
-  star-milestone: { enabled: true, schedule: "15 15 * * *" }
+  star-milestone: { enabled: true, schedule: "15 15 * * *", model: "claude-sonnet-4-6" }
   star-momentum: { enabled: true, schedule: "10 10 * * *", model: "claude-sonnet-4-6", var: "" }
   project-lens: { enabled: true, schedule: "0 16 * * *" }
   repo-scanner: { enabled: false, schedule: "0 15 * * 0", model: "claude-sonnet-4-6", var: "" } # catalog all GitHub repos — set var to username
