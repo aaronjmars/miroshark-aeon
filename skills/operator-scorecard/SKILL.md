@@ -1,6 +1,6 @@
 ---
 name: operator-scorecard
-description: Weekly plain-language synthesis of agent health + community growth + economic activity — answers "was this week worth it?" in one notification
+description: Plain-language synthesis of agent health + community growth + economic activity — answers "was it worth it?" in one notification
 var: ""
 tags: [meta, productivity]
 ---
@@ -41,26 +41,17 @@ No outbound HTTP. No `gh api` calls. Pure file scanning + arithmetic.
 
 ### 2. Collect agent-health signals
 
-a. **Latest skill-analytics article.** `LATEST_ANALYTICS=$(ls -1t articles/skill-analytics-*.md 2>/dev/null | head -1)`. If found AND its date suffix is within the window → parse the metadata line `*Window: ... · N runs across M skills · X% success · Y anomalies*` for `total_runs`, `distinct_skills`, `success_pct`, `anomaly_count`. If not found (skill-analytics didn't run this window, or isn't enabled in this fork): set all four to `null` and mark `agent_health_source=missing`.
+a. **Latest skill-analytics article.** `LATEST_ANALYTICS=$(ls -1t articles/skill-analytics-*.md 2>/dev/null | head -1)`. If found AND its date suffix is within the window → parse the metadata line `*Window: ... · N runs across M skills · X% success · Y anomalies*` for `total_runs`, `distinct_skills`, `success_pct`, `anomaly_count`. If not found (skill-analytics didn't run this window): set all four to `null` and mark `agent_health_source=missing`.
 
-b. **Heartbeat verdicts.** For every heartbeat run logged in the window, scan `memory/logs/YYYY-MM-DD.md` between `WINDOW_START_DATE` and today for `## Heartbeat` sections. Count occurrences of: `P0` / `P1` / `P2` / `P3` / `OK` markers. The simplest first-match wins per heartbeat block: an `OK` block (containing `HEARTBEAT_OK` and no P-flags) increments `heartbeat_ok`; any P-flag increments the matching `heartbeat_pX` counter and skips the OK count. Compute `heartbeat_total = heartbeat_ok + heartbeat_p0 + heartbeat_p1 + heartbeat_p2 + heartbeat_p3`. If `heartbeat_total == 0`, mark `heartbeat_source=missing`; otherwise `heartbeat_source=present`.
+b. **Heartbeat verdicts.** For every heartbeat run logged in the window, scan `memory/logs/YYYY-MM-DD.md` between `WINDOW_START_DATE` and today for `## Heartbeat` sections. Count occurrences of: `P0` / `P1` / `P2` / `P3` / `OK` markers. The simplest first-match wins per heartbeat block: an `OK` block (no P-flags) increments `heartbeat_ok`; any P-flag increments the matching `heartbeat_pX` counter and skips the OK count. If no heartbeat sections found, set counts to zero and mark `agent_health_source=partial`.
 
 c. **Open issues.** If `memory/issues/INDEX.md` exists and contains an `## Open` section with table rows, count rows. Otherwise `open_issues=0` and `issues_source=absent`.
 
-d. **Compute health verdict (paragraph 1).** Pick the first branch that applies:
-
-- **Branch A — skill-analytics present** (`agent_health_source != missing`):
-  - `OK` if `success_pct >= 90` AND `anomaly_count <= 1` AND `heartbeat_p0 == 0` AND `heartbeat_p1 == 0`
-  - `WATCH` if `success_pct >= 75` AND `heartbeat_p0 == 0` AND (`anomaly_count <= 3` OR `heartbeat_p1 <= 2`)
-  - `DEGRADED` otherwise
-
-- **Branch B — heartbeat-only fallback** (`agent_health_source == missing` AND `heartbeat_source == present`): use heartbeat history alone. This branch is the steady state on forks that don't enable `skill-analytics` — the daily heartbeat run is itself a fleet-health signal (it scans every scheduled skill against logs + Actions runs), so a week of clean heartbeats is a real OK, not insufficient data.
-  - `OK` if `heartbeat_p0 == 0` AND `heartbeat_p1 == 0` AND `heartbeat_ok >= 5` (most days clean across the window)
-  - `WATCH` if `heartbeat_p0 == 0` AND `heartbeat_p1 <= 2`
-  - `DEGRADED` otherwise
-  - Mark `agent_health_source=heartbeat-only` so downstream rendering (paragraph 1, notification line) adapts wording.
-
-- **Branch C — both missing** (`agent_health_source == missing` AND `heartbeat_source == missing`): emit `INSUFFICIENT_DATA` for this paragraph's verdict (don't pretend OK). Per step 5, an INSUFFICIENT_DATA paragraph degrades the rollup to WATCH, not DEGRADED.
+d. **Compute health verdict (paragraph 1):**
+- `OK` if `success_pct >= 90` AND `anomaly_count <= 1` AND `heartbeat_p0 == 0` AND `heartbeat_p1 == 0`
+- `WATCH` if `success_pct >= 75` AND `heartbeat_p0 == 0` AND (`anomaly_count <= 3` OR `heartbeat_p1 <= 2`)
+- `DEGRADED` otherwise
+- If `agent_health_source=missing`: emit `INSUFFICIENT_DATA` for this paragraph's verdict (don't pretend OK)
 
 ### 3. Collect community-growth signals
 
@@ -68,7 +59,7 @@ a. **Stars + forks delta.** Sum every `articles/repo-pulse-*.md` file with date 
 
 If the file format doesn't contain the canonical fields, fall back to scanning `memory/logs/*.md` for `## Repo Pulse` blocks (older format). If both fail for a given repo: `stars_added=null`, mark `growth_source=partial`.
 
-b. **New contributors.** Parse the most recent `articles/fork-contributor-leaderboard-*.md` if it falls in the window. Extract the count of rows in the `## Top Contributors` table whose `Change` column shows `NEW` or `↑NEW` (first-time appearance this week). If no leaderboard in window: `new_contributors=null`.
+b. **New contributors.** Parse the most recent `articles/contributor-leaderboard-*.md` if it falls in the window. Extract the count of rows in the `## Top Contributors` table whose `Change` column shows `NEW` or `↑NEW` (first-time appearance this week). If no leaderboard in window: `new_contributors=null`.
 
 c. **Notable mentions.** Scan `articles/repo-article-*.md` and `articles/project-lens-*.md` filenames in window for any title containing milestones-language (regex `(milestone|launch|hit \d+|featured|HN|Show HN|Hacker News)`). If found, capture up to 2 titles for the `Notable` line. Otherwise omit.
 
@@ -102,12 +93,6 @@ c. **Compute economic verdict (paragraph 3):**
 
 Path: `articles/operator-scorecard-${today}.md`. Overwrite if exists (idempotent same-day reruns).
 
-The `${health_paragraph}` placeholder in the template below resolves per branch from step 2d:
-
-- **Branch A — skill-analytics present:** `The fleet ran ${total_runs} times across ${distinct_skills} skills with a ${success_pct}% success rate. ${anomaly_count} anomaly flag(s) raised this week. Heartbeat issued ${heartbeat_ok} clean reports and ${heartbeat_p0+p1+p2+p3} flagged reports (P0=${heartbeat_p0} P1=${heartbeat_p1} P2=${heartbeat_p2} P3=${heartbeat_p3}). ${open_issues} open issue(s) in the tracker.`
-- **Branch B — heartbeat-only:** `Heartbeat issued ${heartbeat_ok} clean reports and ${heartbeat_p0+p1+p2+p3} flagged reports across ${heartbeat_total} runs in the window (P0=${heartbeat_p0} P1=${heartbeat_p1} P2=${heartbeat_p2} P3=${heartbeat_p3}). ${open_issues} open issue(s) in the tracker. (skill-analytics not enabled in this fork — verdict computed from heartbeat history alone.)`
-- **Branch C — both missing:** `No agent-health data this window: skill-analytics didn't run and no heartbeat sections were found in memory/logs/. Cannot compute a verdict.`
-
 ```markdown
 # Operator Scorecard — ${today}
 
@@ -117,7 +102,7 @@ The `${health_paragraph}` placeholder in the template below resolves per branch 
 
 ## Agent health
 
-${health_paragraph}
+The fleet ran ${total_runs} times across ${distinct_skills} skills with a ${success_pct}% success rate. ${anomaly_count} anomaly flag(s) raised this week. Heartbeat issued ${heartbeat_ok} clean reports and ${heartbeat_p0+p1+p2+p3} flagged reports (P0=${heartbeat_p0} P1=${heartbeat_p1} P2=${heartbeat_p2} P3=${heartbeat_p3}). ${open_issues} open issue(s) in the tracker.
 
 **Verdict:** ${health_verdict}
 
@@ -144,7 +129,7 @@ ${bullet list of up to 3 entries from MEMORY.md "Skills Built" rows where date i
 - repo-pulse: ${N daily articles in window}
 - tweet-allocator: ${N daily articles in window} · total: $${total_distributed}
 - token-report: ${article_path or "missing this window"}
-- fork-contributor-leaderboard: ${article_path or "no leaderboard run in window"}
+- contributor-leaderboard: ${article_path or "no leaderboard run in window"}
 
 ---
 *Companion to skill-analytics (per-skill ranking) and heartbeat (per-run pulse). This skill answers the operator-level question those two don't: "given everything that happened, was this week worth it?" Methodology: every number is sourced from another skill's article — this skill measures nothing itself.*
@@ -154,7 +139,7 @@ The "What was notable" section reads `memory/MEMORY.md` for rows in the `## Skil
 
 ### 7. Write the dashboard JSON spec
 
-Path: `dashboard/outputs/operator-scorecard.json`. Use the catalog components.
+Path: `apps/dashboard/outputs/operator-scorecard.json`. Use the catalog components.
 
 ```json
 {
@@ -217,7 +202,7 @@ Otherwise call `./notify`:
 *Operator Scorecard — ${today}*
 ${verdict_emoji} ${verdict_label} — ${one_line_summary}
 
-Agent health: ${health_one_liner}
+Agent health: ${success_pct}% across ${total_runs} runs (${anomaly_count} anomalies, ${heartbeat_ok} clean heartbeats)
 
 Community growth: +${total_stars_added}⭐ +${total_forks_added} forks across ${repo_count} repos${new_contributor_addendum}
 
@@ -231,11 +216,6 @@ Full: articles/operator-scorecard-${today}.md
 
 `notable_addendum`: if any "What was notable" bullet exists, prefix with `Notable:` and inline the first one only (cap at ~120 chars). If none, omit the line.
 
-`health_one_liner` resolves per branch from step 2d:
-- **Branch A:** `${success_pct}% across ${total_runs} runs (${anomaly_count} anomalies, ${heartbeat_ok} clean heartbeats)`
-- **Branch B:** `${heartbeat_ok} clean / ${heartbeat_p0+p1+p2+p3} flagged heartbeats across ${heartbeat_total} runs (skill-analytics not enabled)`
-- **Branch C:** `no data this window`
-
 Cap message at ~3500 chars (Telegram safe limit). The verdict + three lane lines are the priority — drop "Notable" first if exceeded.
 
 ### 9. Log to `memory/logs/${today}.md`
@@ -245,11 +225,11 @@ Cap message at ~3500 chars (Telegram safe limit). The verdict + three lane lines
 - **Skill**: operator-scorecard
 - **Window**: last ${WINDOW_DAYS}d (${WINDOW_HOURS}h)
 - **Verdict**: ${verdict_emoji} ${verdict_label}
-- **Agent health**: ${health_log_line}  (Branch A: `${success_pct}% success across ${total_runs} runs · ${anomaly_count} anomalies · ${heartbeat_p0+p1} flagged heartbeats · ${open_issues} open issues` · Branch B: `${heartbeat_ok}/${heartbeat_total} clean heartbeats · ${heartbeat_p0+p1} flagged · ${open_issues} open issues · skill-analytics not enabled` · Branch C: `INSUFFICIENT_DATA — neither skill-analytics nor heartbeat data found`)
+- **Agent health**: ${success_pct}% success across ${total_runs} runs · ${anomaly_count} anomalies · ${heartbeat_p0+p1} flagged heartbeats · ${open_issues} open issues
 - **Community growth**: +${total_stars_added}⭐ +${total_forks_added} forks · ${new_contributors} new contributors
 - **Economic activity**: $${total_distributed} in $AEON to ${recipient_count} recipients · token ${token_7d_pct}% 7d (${token_verdict})
 - **Article**: articles/operator-scorecard-${today}.md
-- **Dashboard**: dashboard/outputs/operator-scorecard.json
+- **Dashboard**: apps/dashboard/outputs/operator-scorecard.json
 - **Notification sent**: ${yes|no — dry-run|no — INSUFFICIENT_DATA}
 - **Status**: OPERATOR_SCORECARD_OK | OPERATOR_SCORECARD_QUIET | OPERATOR_SCORECARD_NO_DATA
 ```
@@ -269,7 +249,6 @@ Pure local file I/O — no curl, no `gh api`, no env-var-in-headers, no prefetch
 ## Constraints
 
 - **Synthesis-only.** Every number prints from a file another skill wrote. If a source file is missing, the matching lane reports `INSUFFICIENT_DATA` and the skill continues — never fabricate numbers to fill a gap.
-- **Heartbeat-only fallback is first-class.** Forks that don't enable `skill-analytics` (most aeon-agent forks) hit Branch B every run. That is not a degraded mode — heartbeat itself audits every scheduled skill against logs + Actions runs, so a window of clean heartbeats is a real OK signal. INSUFFICIENT_DATA is reserved for forks where heartbeat *also* hasn't run.
 - **Three-paragraph contract.** Agent health, community growth, economic activity. In that order. Adding a fourth lane is a separate skill, not a scope creep here.
 - **No issue filing.** Anomalies surface in the verdict; persistence and resolution belong to `skill-health`. This skill is read-only across `memory/issues/`.
 - **Worst-of-three rollup.** The overall verdict mirrors heartbeat's P-flag vocabulary so operators don't need to learn new terminology.

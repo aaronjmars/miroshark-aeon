@@ -4,83 +4,96 @@ description: Improve the agent itself — better skills, prompts, workflows, and
 var: ""
 tags: [meta]
 ---
-> **${var}** — Specific area to improve (e.g. "push-recap notification", "token-report formatting", "add error handling to notify"). If empty, analyzes recent logs to find what needs fixing.
+> **${var}** — Specific area to improve (e.g. "heartbeat", "notifications", "memory"). If empty, finds the highest-impact issue from recent logs.
 
-Today is ${today}. Your task is to improve **this agent repo** — the skills, workflows, config, prompts, or dashboard. NOT the watched repos.
+If `${var}` is set, focus on improving that specific area.
+
+Read memory/MEMORY.md for context.
+Read the last 2 days of memory/logs/ for recent errors, failures, and quality issues.
 
 ## Steps
 
-1. **Assess what needs improving** (in this priority order):
-   a. If `${var}` is set, work on that specific improvement.
-   b. Check `memory/logs/` from the last 24 hours — look for:
-      - Skills that logged errors or produced empty/low-quality output
-      - Notifications that were truncated or failed (Markdown parse errors)
-      - Skills that ran but didn't send notifications when they should have
-      - Patterns in the logs that suggest a skill needs tweaking
-   c. Check `articles/repo-actions-*.md` for ideas that target the agent itself (not the watched project repos).
-   d. Read the current skills in `skills/` — look for:
-      - Prompts that are vague or produce inconsistent results
-      - Missing error handling or edge cases
-      - Skills that could be more useful with small tweaks
-      - Notification formats that could be clearer or richer
-   e. Check `aeon.yml` and `.github/workflows/` for workflow improvements.
-   f. If nothing needs improving, log "SELF_IMPROVE_SKIP: agent is healthy" and **do NOT send any notification. Stop here.**
-
-2. **Pick ONE improvement** — the most impactful, smallest-effort fix. Don't try to do everything at once.
-
-3. **Implement the improvement** directly in this repo. You have full access to:
-   - `skills/*/SKILL.md` — skill prompts and instructions
-   - `aeon.yml` — skill config, schedules, vars
-   - `.github/workflows/` — workflow files
-   - `CLAUDE.md` — agent instructions
-   - `dashboard/` — dashboard code
-   - `memory/` — memory files
-   - `notify` script template in workflows
-
-4. **Create a branch, commit, and push**:
+1. **Check for open improvement PRs** — don't pile up unreviewed work:
    ```bash
-   git checkout -b improve/short-description
+   OPEN_PRS=$(gh pr list --state open --json title,number --jq '[.[] | select(.title | test("^(fix|feat|chore)\\("; "i"))] | length')
+   ```
+   If there are already 3+ open improvement PRs, log "self-improve: 3+ open PRs, waiting for review" and exit. Don't create more debt.
+
+2. **Identify what to improve.** If `${var}` is empty, scan for issues:
+   - Read `memory/logs/` from last 2 days — look for:
+     - Skills that failed or produced low-quality output
+     - Errors, timeouts, "zero output", rate limiting
+     - Notifications that didn't send or were truncated
+     - Memory consolidation problems
+   - Read `memory/cron-state.json` for skills with low success rates
+   - Read `articles/repo-actions-*.md` from last 7 days for self-improvement ideas
+   - Pick the **highest-impact, smallest-effort** fix. One change per run.
+
+3. **Understand the area you're fixing.** Read the relevant files:
+   - Skills: `skills/{name}/SKILL.md`
+   - Config: `aeon.yml`
+   - Workflows: `.github/workflows/*.yml`
+   - Agent instructions: `CLAUDE.md`
+   - Dashboard: `apps/dashboard/` (if UI-related)
+   
+   Understand the current behavior before changing anything.
+
+4. **Implement the fix.** Make minimal, targeted changes:
+   - If a skill prompt is unclear → rewrite the ambiguous section
+   - If a skill is hitting rate limits → add backoff logic or reduce frequency
+   - If output quality is low → tighten the prompt, add examples, clarify format
+   - If a notification is broken → fix the formatting or truncation
+   - If a config is wrong → fix aeon.yml
+
+   Do NOT:
+   - Rewrite entire skills from scratch
+   - Add new features (that's build-skill's job)
+   - Change the core architecture
+   - Modify secrets or environment variables
+
+5. **Create a branch and PR:**
+   ```bash
+   git checkout -b fix/self-improve-${today}
    git add -A
-   git commit -m "improve: description of what was changed"
-   git push -u origin improve/short-description
-   ```
+   git commit -m "fix: [description of what was improved]
 
-5. **Open a PR** on this repo:
+   Problem: [what was failing/degraded]
+   Fix: [what was changed]
+   Evidence: [log entries, error messages, success rates]"
+   ```
+   Open a PR:
    ```bash
-   gh pr create \
-     --title "improve: short description" \
-     --body "## What
-   Description of the improvement.
+   gh pr create --title "fix: [short description]" \
+     --body "## Problem
+   [What was failing or degraded — cite specific log entries or error messages]
 
-   ## Why
-   What triggered this — a log entry, a failed skill, a pattern noticed.
+   ## Fix
+   [What was changed and why]
 
-   ## Changes
-   - file1: what changed
-   - file2: what changed
-
-   ---
-   *Self-improved by Aeon*"
+   ## Evidence
+   - [Relevant log entries]
+   - [Success rate before: X%]
+   - [Error pattern: ...]"
    ```
 
-6. **Update memory** — log to `memory/logs/${today}.md` and update `memory/MEMORY.md` Skills Built table.
-
-7. **Send a DETAILED notification** via `./notify`:
+6. **Notify.** Send via `./notify`:
    ```
-   *Agent Self-Improvement — ${today}*
-
-   [What was improved]
-   [2-3 sentences explaining the change in plain language]
-
-   Why: [What triggered this — a specific log entry, error pattern, or quality issue observed over the last week]
-
-   What changed:
-   - [file 1]: [what was modified and why]
-   - [file 2]: [what was modified and why]
-
-   Impact: [How this makes the agent better — more reliable notifications? Better skill output? Fewer errors?]
-
-   PR: [url]
+   self-improve: [what was fixed] — PR: [url]
    ```
 
-   **Important:** If no improvement was needed, do NOT send any notification.
+7. **Log.** Append to `memory/logs/${today}.md`:
+   ```
+   ## Self Improve
+   - **Target:** [what was improved]
+   - **Problem:** [what was failing]
+   - **Fix:** [what was changed]
+   - **PR:** [url]
+   ```
+
+## Guidelines
+
+- ONE fix per run. Don't bundle unrelated changes.
+- Smallest viable fix. A one-line prompt tweak > a full rewrite.
+- If you can't find anything to improve, that's fine. Log "self-improve: everything looks healthy" and exit.
+- Never modify workflow files (.github/workflows/) — only skill files, CLAUDE.md, and aeon.yml.
+- Don't create circular improvements (e.g. don't improve self-improve).

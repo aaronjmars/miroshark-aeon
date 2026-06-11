@@ -1,150 +1,163 @@
 ---
 name: repo-pulse
-description: Daily report on new stars, forks, and traffic for watched repos — enriched with each new starrer/forker's profile (name, company, bio, location, followers)
+description: Report on new stars, forks, and releases for watched repos — with notable-stargazer enrichment and a one-line growth verdict
 var: ""
 tags: [dev]
 ---
-> **${var}** — Repo (owner/repo) to check. If empty, checks all watched repos.
+<!-- autoresearch: variation B — sharper output: /events primary input + notable-stargazer enrichment + QUIET/STEADY/ACTIVE/SURGE verdict -->
+> **${var}** — Repo (`owner/repo`) to check. If empty, checks all watched repos.
 
 ## Config
 
-This skill reads repos from `memory/watched-repos.md` but **skips agent/monitoring repos** (repos that contain "aeon-agent" or "miroshark-aeon" in their name). Only track the actual project repos — not the agent repos that run the skills.
+Reads repos from `memory/watched-repos.md`. Skip any repo whose name ends with `-aeon` or contains `aeon-agent` — those are agent repos, not project repos.
 
----
+If `${var}` is set and matches `owner/repo`, check only that repo.
 
-Read memory/MEMORY.md and the last 3 days of memory/logs/ for previous star/fork counts to calculate deltas.
-Read memory/watched-repos.md for the list of repos to track. Skip any repo whose name ends with "-aeon" or contains "aeon-agent" — those are agent repos, not project repos.
+## Context
+
+Read `memory/MEMORY.md` and the last **7 days** of `memory/logs/` for previous `stargazers_count` / `forks_count` per repo. Parse lines matching `**owner/repo**: stargazers_count=N, forks_count=M` to reconstruct a per-day series — you'll need it for the rolling-average baseline used in step 5.
 
 ## Steps
 
-1. **Fetch repo stats** for each watched repo:
-   ```bash
-   gh api repos/owner/repo --jq '{stargazers_count, forks_count, watchers_count, open_issues_count, subscribers_count}'
-   ```
+### 1. Compute the 24h cutoff FIRST
 
-   **Idempotency check:** After fetching, scan `memory/logs/${today}.md` for any prior `## Repo Pulse` section. If a prior section for this same repo already recorded identical `stargazers_count` AND identical `forks_count`, log `REPO_PULSE_DUPLICATE — same counts (stars=X, forks=Y) already reported earlier today` and **skip this repo** (do NOT send a notification). This prevents duplicate notifications when repo-pulse is re-triggered (by heartbeat, manual dispatch, or workflow retry) within the same UTC day with no new activity. If counts differ from any prior run today, continue normally — the delta from the true 24h cutoff is still the right thing to report.
+```bash
+CUTOFF=$(date -u -d '24 hours ago' +%Y-%m-%dT%H:%M:%SZ 2>/dev/null || date -u -v-24H +%Y-%m-%dT%H:%M:%SZ)
+export CUTOFF
+```
+All time filtering uses exactly this timestamp — never "today's date" or "since midnight".
 
-2. **Compute the 24h cutoff timestamp** FIRST — this is critical:
-   ```bash
-   CUTOFF=$(date -u -d '24 hours ago' +%Y-%m-%dT%H:%M:%SZ 2>/dev/null || date -u -v-24H +%Y-%m-%dT%H:%M:%SZ)
-   ```
-   Use this `$CUTOFF` for ALL time filtering below. Do NOT use "today's date" — use exactly 24 hours ago from now.
+### 2. Fetch current counts (1 call per repo)
 
-3. **Fetch the most recent stargazers** — efficiently, without downloading all pages:
-   ```bash
-   # Calculate the last page (100 per page) to avoid fetching all stargazers
-   STARS=$(gh api repos/owner/repo --jq '.stargazers_count')
-   LAST_PAGE=$(( (STARS + 99) / 100 ))
-   # Fetch only the last 2 pages (covers up to 200 most recent stars)
-   PREV_PAGE=$(( LAST_PAGE > 1 ? LAST_PAGE - 1 : 1 ))
-   gh api "repos/owner/repo/stargazers?per_page=100&page=$PREV_PAGE" -H "Accept: application/vnd.github.star+json" --jq '.[] | {user: .user.login, starred_at: .starred_at}'
-   gh api "repos/owner/repo/stargazers?per_page=100&page=$LAST_PAGE" -H "Accept: application/vnd.github.star+json" --jq '.[] | {user: .user.login, starred_at: .starred_at}'
-   ```
-   Combine the results from both pages, deduplicate by user, and keep only entries where `starred_at` >= `$CUTOFF` (24 hours ago). NOT "since midnight today" — since exactly 24 hours ago.
+```bash
+gh api repos/owner/repo --jq '{stargazers_count, forks_count, subscribers_count}'
+```
+If this call returns non-2xx (404, 403, rate limit), record `source=fail` with the reason and continue to the next repo. Do **not** abort the batch.
 
-   **Why not `--paginate`?** The stargazers API returns oldest-first. Using `--paginate` fetches ALL pages (O(N) API calls as stars grow). Fetching only the last 2 pages is O(1) and covers up to 200 recent stars — more than enough for 24h changes.
+### 3. Fetch recent events — primary input
 
-4. **Fetch recent forks** (sorted by newest):
-   ```bash
-   gh api "repos/owner/repo/forks?sort=newest&per_page=10" --jq '.[] | {owner: .owner.login, created_at: .created_at, full_name: .full_name}'
-   ```
-   Keep only forks where `created_at` >= `$CUTOFF`.
+One call per repo covers stargazers, forks, **and releases** for the last ~90 days, newest-first:
 
-5. **Determine if there's activity to report.** Check BOTH:
-   - **New stargazers from step 3**: any with `starred_at` >= the 24h cutoff
-   - **New forks from step 4**: any with `created_at` >= the 24h cutoff
+```bash
+gh api "repos/owner/repo/events?per_page=100" \
+  --jq '[.[] | select(.created_at >= env.CUTOFF) | {type, actor: .actor.login, created_at, tag: (.payload.release.tag_name // null), action: (.payload.action // null)}]'
+```
 
-   **Send a notification if ANY of these are true:**
-   - At least 1 new stargazer in the last 24h (unstars don't cancel this out)
-   - At least 1 new fork in the last 24h
-   - First run (no previous data in logs)
+Parse the filtered events:
+- `WatchEvent` → new stargazer (`actor`). Deduplicate by actor (GitHub only fires one per user).
+- `ForkEvent` → new fork. Fork URL = `github.com/{actor}/{repo}`.
+- `ReleaseEvent` with `action == "published"` → new release (`tag`).
 
-   Only log "REPO_PULSE_QUIET" and skip notification if ZERO new stargazers AND ZERO new forks since the 24h cutoff.
+Record `source=events` for this repo.
 
-5b. **Enrich new stargazers and forkers (profile lookup).** Before formatting the notification and article, look up *who* each new account is — a bare handle (`github.com/xyz123`) tells the operator nothing; `@ Vercel · 2.3k followers` tells them a launch is landing. For each new stargazer handle and each new fork owner from the 24h window, make one read-only call:
+**Why `/events` over paginated stargazers?** One call instead of two, and it captures forks + releases in the same response. Events API returns 300 events over 10 pages for up to 90 days — more than enough for a 24h window on typical repos.
 
-   ```bash
-   gh api users/$LOGIN --jq '{login, name, company, bio, location, blog, twitter_username, followers, public_repos, hireable, created_at}'
-   ```
+### 4. Fallback (rate limit or error)
 
-   Rules:
-   - **Cap at 25 new accounts per run** (stargazers + forkers combined). If there are more, enrich the first 25 in `starred_at` / `created_at` order and append a final `…and N more` entry un-enriched. Bounds both API calls and message length.
-   - **Skip empty fields** — most accounts have `null` company/bio/location. Omit a segment rather than printing a blank.
-   - **One-line summary per account**, joining the present fields with ` · ` in this order:
-     `${name or login} · @ ${company} · ${location} · ${followers}f · ${public_repos} repos · "${bio trimmed to ~80 chars}"`
-     Drop any segment whose source field is empty (e.g. no company → no `@ …` segment). Use `${twitter_username}` / `${blog}` only in the article, not the notification, to keep messages short.
-   - **Low-signal flag** — if `followers <= 2` AND `public_repos == 0` AND `created_at` is within the last 30 days, append ` ⚠ new/low-signal`. A soft fake-star tell that complements `star-milestone`'s burst check; annotate, don't suppress.
-   - **Sandbox note** — `gh api users/$LOGIN` is read-only and the `gh` CLI handles auth internally (no curl, no env-var headers), so it works in the Actions sandbox. If a lookup fails (deleted/renamed account), fall back to the bare handle for that entry and continue.
+If step 3 returns non-2xx, fall back to the stargazers two-last-pages technique (events emptiness is NOT a fallback trigger — empty genuinely means no activity):
 
-6. **Send notification** via `./notify`:
-   ```
-   *Repo Pulse — ${today}*
-   [owner/repo]
+```bash
+STARS=$(gh api repos/owner/repo --jq '.stargazers_count')
+LAST_PAGE=$(( (STARS + 99) / 100 ))
+PREV_PAGE=$(( LAST_PAGE > 1 ? LAST_PAGE - 1 : 1 ))
+gh api "repos/owner/repo/stargazers?per_page=100&page=$PREV_PAGE" \
+  -H "Accept: application/vnd.github.star+json" \
+  --jq '.[] | select(.starred_at >= env.CUTOFF) | {user: .user.login, starred_at}'
+gh api "repos/owner/repo/stargazers?per_page=100&page=$LAST_PAGE" \
+  -H "Accept: application/vnd.github.star+json" \
+  --jq '.[] | select(.starred_at >= env.CUTOFF) | {user: .user.login, starred_at}'
+```
+Deduplicate by user. Forks in the fallback path come from:
+```bash
+gh api "repos/owner/repo/forks?sort=newest&per_page=10" \
+  --jq '.[] | select(.created_at >= env.CUTOFF) | {owner: .owner.login, full_name, created_at}'
+```
+Record `source=stargazers-fallback` for this repo. Releases are skipped in fallback (not critical).
 
-   Stars: X total (+N new)
-   Forks: Y total (+N new)
+### 5. Enrich stargazers and compute the verdict
 
-   New stargazers:
-   - github.com/alice — Alice Chen · @ Vercel · San Francisco · 2.3k followers · 87 repos · "building dev tools"
-   - github.com/bob — @ Stripe · 480 followers
-   - github.com/carol — 4 followers · joined 6d ago ⚠ new/low-signal
+**Notable-stargazer lookup** — for each new stargazer in the 24h window, cap **10** lookups per repo to respect rate limits:
+```bash
+gh api users/{login} --jq '{login, followers, public_repos, bio}'
+```
+Mark as **notable** if `followers >= 100` OR `public_repos >= 20`. Logins ending in `[bot]` or `-bot` are never notable and are excluded from the handle list entirely.
 
-   New forks:
-   - github.com/dave/repo — Dave Kim · @ Acme · 1.1k followers
-   ```
+**Growth verdict** — reconstruct the last 7 days of `stargazers_count` from logs and compute per-day deltas. Let `avg7` = mean of the available daily deltas (use `avg7 = 1` if fewer than 3 days are logged). Let `today_stars` = new stargazers in the last 24h.
 
-   Format rules:
-   - **One enriched line per stargazer/forker** (from step 5b): `- github.com/${handle} — ${summary}`. The `github.com/${handle}` prefix MUST stay first; the profile summary follows after ` — `.
-   - If step 5b produced no summary for an account (all fields empty or lookup failed), fall back to the bare `- github.com/${handle}` line.
-   - Omit "New stargazers" section entirely if there are none
-   - Omit "New forks" section entirely if there are none
-   - Do NOT include traffic data, watchers, or open issues
+| Verdict | Rule (first matching row wins) |
+|---------|--------------------------------|
+| `SURGE` | `today_stars >= 10` OR `today_stars > 3 * avg7` |
+| `ACTIVE` | `today_stars > 1.5 * avg7` |
+| `STEADY` | `today_stars >= 1` OR any new fork OR any new release |
+| `QUIET` | zero stars, zero forks, zero releases in 24h |
 
-7. **Write the article** to `articles/repo-pulse-${today}.md` — this is the canonical structured artifact that downstream consumers (`operator-scorecard`, `thread-formatter`, `star-momentum-alert`, `show-hn-draft`, `skill-freshness`) read. Always write the file when at least one repo was fetched in this run, even when there are zero new stars and zero new forks — consumers need the counts row to verify "no activity" vs "no run". Overwrite on same-day reruns so the file always reflects the latest counts.
+Record the rule that fired so it shows up in the log.
 
-   Format (one `##` block per non-skipped repo, in the order they were processed):
+### 6. Decide whether to notify
 
-   ```markdown
-   # Repo Pulse — ${today}
+Send a notification if ANY of:
+- ≥1 new stargazer in the last 24h (unstars do not cancel this)
+- ≥1 new fork
+- ≥1 new release
+- First run for this repo (no previous count in logs)
 
-   ## aaronjmars/repo
+Otherwise print `REPO_PULSE_QUIET` and skip `./notify`.
 
-   - **stargazers_count:** X
-   - **forks_count:** Y
-   - **New stars (24h):** N
-   - **New forks (24h):** M
-   - **Notification sent:** yes/no
+### 7. Notification — via `./notify`
 
-   **New stargazers:**
-   - github.com/user1 — Alice Chen · @ Vercel · San Francisco · 2.3k followers · 87 repos · twitter.com/alice · "building dev tools"
-   - github.com/user2 — @ Stripe · 480 followers
+Format (omit any empty section entirely):
+```
+*Repo Pulse — ${today}* — [VERDICT]
+[owner/repo] — stars X (+N) · forks Y (+M) · releases +R
 
-   **New forks:**
-   - github.com/user1/repo — Dave Kim · @ Acme · 1.1k followers
-   ```
+Notable new stargazers:
+github.com/user1 (1.2k followers) | github.com/user2 (450 followers)
 
-   Format rules:
-   - The two key fields `stargazers_count` and `forks_count` MUST use the exact `**stargazers_count:** N` / `**forks_count:** N` markup (matches `operator-scorecard` step 3a parser).
-   - Each `**New stargazers:**` / `**New forks:**` bullet is `- github.com/${handle} — ${profile summary}` from step 5b (the fuller form including `twitter`/`blog`, with empty fields dropped and ` ⚠ new/low-signal` appended for low-signal accounts). The bare `github.com/${handle}` prefix MUST stay first so the handle is still parseable; if step 5b produced no summary, emit the bare handle line. Cap at the 25 enriched accounts; if more, append a final `- …and N more` bullet.
-   - The two delta fields `New stars (24h)` and `New forks (24h)` MUST use the exact `**New stars (24h):** N` / `**New forks (24h):** N` markup (same parser).
-   - Omit the `**New stargazers:**` block entirely if N == 0. Same for forks.
-   - For multi-repo runs, emit one `##` block per repo in fetch order; do not interleave fields across repos.
-   - Repos that were skipped via the step-1 idempotency gate (`REPO_PULSE_DUPLICATE`) appear in the article as a single-line `- **Status:** REPO_PULSE_DUPLICATE` row under the repo header — keep the counts on the same row as a courtesy for the parser, but omit the `New stargazers` / `New forks` lists (the earlier same-day run already covered them).
-   - If ALL repos in the run hit the idempotency gate, still write the file (overwrite) so the article date suffix advances and consumers can find today's file — the body is just the per-repo `REPO_PULSE_DUPLICATE` rows.
+Other new stargazers:
+github.com/user3 | github.com/user4
 
-8. **Log** to `memory/logs/${today}.md` — ALWAYS include the exact current counts so the next run can calculate deltas:
-   ```
-   ## Repo Pulse
-   - **aaronjmars/repo**: stargazers_count=X, forks_count=Y
-   - **New stars (24h):** N
-   - **New forks (24h):** N
-   - **Article:** articles/repo-pulse-${today}.md
-   - **Notification sent:** yes/no
-   ```
+New forks:
+github.com/user5/repo | github.com/user6/repo
 
-   If step 1's idempotency check skipped the repo, still log a short entry so the skip is visible in the record:
-   ```
-   ## Repo Pulse
-   - **aaronjmars/repo**: stargazers_count=X, forks_count=Y
-   - **Status:** REPO_PULSE_DUPLICATE (same counts as earlier run today — skipped notification)
-   ```
+New releases:
+v1.2.3 | v1.2.4
+
+Source: events
+```
+
+Rules:
+- `[VERDICT]` is uppercased, in square brackets, on the header line.
+- Handles joined by ` | ` on **one line** — never one per line.
+- Round follower counts: `<1000` → raw number, `1000+` → `1.2k` form.
+- Omit `Notable new stargazers`, `Other new stargazers`, `New forks`, `New releases`, or `Source` lines if they would be empty.
+- **Never include traffic, watchers, or open issues** — they don't belong in a pulse.
+- One message per repo if multiple repos have activity. Batch into a single message only when combined length stays under 1500 chars.
+
+### 8. Log to `memory/logs/${today}.md`
+
+Always include the exact current counts so tomorrow's run can compute deltas:
+```
+## Repo Pulse
+- **owner/repo**: stargazers_count=X, forks_count=Y, source=events
+- **New stars (24h):** N (verdict=ACTIVE, avg7=1.4)
+- **New forks (24h):** M
+- **New releases (24h):** R
+- **Notable stargazers:** user1(1200), user2(450)
+- **Notification sent:** yes
+```
+If the repo lookup failed, log:
+```
+- **owner/repo:** FAILED (<reason>) — counts unchanged
+```
+
+## Sandbox note
+
+- `gh api` handles auth internally; prefer it over curl.
+- `/repos/{owner}/{repo}/traffic/*` endpoints require **admin** permission and return 403 for the default workflow `GITHUB_TOKEN`. Do **not** attempt them from this skill.
+- If `gh api` fails on one repo, log the failure and continue — never abort the whole batch.
+
+## Constraints
+
+- A day with zero stars, zero forks, zero releases is `QUIET` — print `REPO_PULSE_QUIET` and do not notify.
+- Never promote a bot account to "notable", even if it clears the follower threshold.
+- Keep the verdict vocabulary fixed to `QUIET / STEADY / ACTIVE / SURGE` so downstream skills can grep for it.

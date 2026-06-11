@@ -153,7 +153,7 @@ if [[ ${#SKILL_NAMES[@]} -eq 0 ]]; then
 fi
 
 # Security scanning
-SCANNER="$(cd "$(dirname "$0")" && pwd)/skills/skill-security-scan/scan.sh"
+SCANNER="$(cd "$(dirname "$0")" && pwd)/skills/skill-scan/scan.sh"
 TRUSTED_FILE="$(cd "$(dirname "$0")" && pwd)/skills/security/trusted-sources.txt"
 FORCE_INSTALL=false
 
@@ -263,12 +263,10 @@ for skill in "${SKILL_NAMES[@]}"; do
   if ! grep -q "^  $skill:" "$AEON_YML" 2>/dev/null; then
     # Insert before the heartbeat entry (fallback section)
     if grep -q "heartbeat:" "$AEON_YML"; then
-      # Add as disabled skill before the fallback section
-      sed -i '' "/^  # --- Fallback/i\\
-\\  $skill:\\
-\\    enabled: false\\
-\\    schedule: \"0 12 * * *\"\\
-" "$AEON_YML"
+      # Cross-platform insert (awk works on both macOS and Linux, unlike sed -i)
+      awk -v entry="  $skill: { enabled: false, schedule: \"0 12 * * *\" }" \
+        '/^  # --- Fallback/ { print entry }  { print }' \
+        "$AEON_YML" > "${AEON_YML}.tmp" && mv "${AEON_YML}.tmp" "$AEON_YML"
       echo "    -> added to aeon.yml (disabled, schedule: 0 12 * * *)"
     fi
   else

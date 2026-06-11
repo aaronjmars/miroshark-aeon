@@ -15,7 +15,8 @@ on:
         default: '(config default)'
         options:
           - '(config default)'
-          - claude-opus-4-7
+          - claude-opus-4-8
+          - claude-fable-5
           - claude-sonnet-4-6
           - claude-haiku-4-5-20251001
           - gemini-3-pro
@@ -61,6 +62,11 @@ permissions:
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
   NODE_OPTIONS: '--no-deprecation'
+  # Fleet Watcher opt-in secrets — hoisted to workflow-level so that
+  # `if: env.FLEET_ENDPOINT != ''` in the preflight/postflight steps can
+  # actually see them. (Step-level env is NOT available in step `if:` clauses.)
+  FLEET_ENDPOINT: ${{ secrets.FLEET_ENDPOINT }}
+  FLEET_TOKEN:    ${{ secrets.FLEET_TOKEN }}
 
 concurrency:
   group: aeon-${{ inputs.skill || github.event.action || github.run_id }}
@@ -81,9 +87,15 @@ jobs:
 
       - name: Determine skill
         id: skill
+        env:
+          INPUT_SKILL: ${{ inputs.skill }}
         run: |
           if [ "${{ github.event_name }}" = "workflow_dispatch" ] || [ "${{ github.event_name }}" = "workflow_call" ]; then
-            echo "name=${{ inputs.skill }}" >> "$GITHUB_OUTPUT"
+            if [ -n "$INPUT_SKILL" ] && ! printf '%s' "$INPUT_SKILL" | grep -qE '^[a-zA-Z0-9_-]+$'; then
+              echo "::error::Invalid skill name: must match ^[a-zA-Z0-9_-]+$"
+              exit 1
+            fi
+            echo "name=$INPUT_SKILL" >> "$GITHUB_OUTPUT"
           elif [ "${{ github.event_name }}" = "issues" ]; then
             echo "name=feature" >> "$GITHUB_OUTPUT"
           fi
@@ -118,13 +130,15 @@ jobs:
 
       - name: Install Claude Code
         if: steps.work.outputs.mode != ''
-        run: npm install -g @anthropic-ai/claude-code
+        # Pinned for supply-chain safety — a freshly-published (or compromised)
+        # version is never pulled automatically. Bump deliberately after reviewing
+        # the release notes: https://github.com/anthropics/claude-code/releases
+        run: npm install -g @anthropic-ai/claude-code@2.1.168
 
       - name: Validate skill secrets
         if: steps.work.outputs.mode != ''
         env:
           XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
-          BANKR_API_KEY: ${{ secrets.BANKR_API_KEY }}
           COINGECKO_API_KEY: ${{ secrets.COINGECKO_API_KEY }}
           ALCHEMY_API_KEY: ${{ secrets.ALCHEMY_API_KEY }}
           REPLICATE_API_TOKEN: ${{ secrets.REPLICATE_API_TOKEN }}
@@ -137,7 +151,7 @@ jobs:
           SECRETS=$(grep -oE '\$\{?[A-Z][A-Z0-9_]{2,}\}?' "$SKILL_FILE" 2>/dev/null | \
             sed 's/[${}]//g' | \
             grep -E '_(API_KEY|KEY|TOKEN|SECRET|WEBHOOK_URL)$' | \
-            grep -vE '^(GITHUB_TOKEN|GH_TOKEN|ANTHROPIC_API_KEY|CLAUDE_CODE_OAUTH_TOKEN|BANKR_LLM_KEY|TELEGRAM_|DISCORD_|SLACK_)' | \
+            grep -vE '^(GITHUB_TOKEN|GH_TOKEN|ANTHROPIC_API_KEY|CLAUDE_CODE_OAUTH_TOKEN|BANKR_LLM_KEY|OPENROUTER_API_KEY|USEPOD_TOKEN|VENICE_API_KEY|SURPLUS_API_KEY|TELEGRAM_|DISCORD_|SLACK_)' | \
             sort -u) || true
 
           [ -z "$SECRETS" ] && exit 0
@@ -162,7 +176,6 @@ jobs:
         if: steps.work.outputs.mode != ''
         env:
           XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
-          BANKR_API_KEY: ${{ secrets.BANKR_API_KEY }}
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           REPLICATE_API_TOKEN: ${{ secrets.REPLICATE_API_TOKEN }}
           SKILL_VAR: ${{ inputs.var }}
@@ -181,13 +194,82 @@ jobs:
             ./"$script" "$SKILL" "$VAR" || echo "::notice::$(basename "$script") skipped or failed (non-fatal)"
           done
 
+      # ──────────────────────────────────────────────────────────────────────
+      # Fleet Watcher preflight (opt-in, fail-closed)
+      #
+      # If FLEET_ENDPOINT + FLEET_TOKEN repo secrets are set, ask the user's
+      # self-hosted Fleet Watcher control plane to ALLOW or BLOCK this skill
+      # before it runs. BLOCK = workflow exits non-zero, Claude never starts,
+      # no side-effects. ALLOW = audit ref is captured and passed to postflight.
+      #
+      # If the secrets are not set, this step no-ops — backward compatible
+      # with every existing AEON fork.
+      # ──────────────────────────────────────────────────────────────────────
+      - name: Fleet Watcher preflight
+        id: fleet_preflight
+        if: steps.work.outputs.mode != '' && env.FLEET_ENDPOINT != '' && env.FLEET_TOKEN != ''
+        env:
+          SKILL:     ${{ steps.skill.outputs.name }}
+          SKILL_VAR: ${{ inputs.var }}
+        run: |
+          set -euo pipefail
+          OP_ID="${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}-pre"
+          BODY=$(jq -n \
+            --arg skill  "$SKILL" \
+            --arg target "${SKILL_VAR:-}" \
+            --arg source "github-actions:${GITHUB_REPOSITORY}" \
+            --arg op     "$OP_ID" \
+            '{skill:$skill, target:$target, source:$source, clientOpId:$op, context:{runId:env.GITHUB_RUN_ID, attempt:env.GITHUB_RUN_ATTEMPT}}')
+          RESP=$(curl -sS -w "\n%{http_code}" -X POST "${FLEET_ENDPOINT}/api/aeon/preflight" \
+            -H "Authorization: Bearer ${FLEET_TOKEN}" \
+            -H "Content-Type: application/json" \
+            -d "$BODY")
+          HTTP=$(echo "$RESP" | tail -1)
+          BODY=$(echo "$RESP" | sed '$d')
+          if [ "$HTTP" != "200" ]; then
+            echo "::error::Fleet Watcher unreachable or returned $HTTP — failing closed."
+            echo "$BODY"
+            exit 1
+          fi
+          ALLOW=$(echo "$BODY" | jq -r '.allow')
+          REASON=$(echo "$BODY" | jq -r '.reason')
+          AUDIT_REF=$(echo "$BODY" | jq -r '.auditRef // ""')
+          REF=$(echo "$BODY" | jq -r '.ref // ""')
+          echo "audit_ref=$AUDIT_REF" >> "$GITHUB_OUTPUT"
+          echo "action_ref=$REF"     >> "$GITHUB_OUTPUT"
+          if [ "$ALLOW" != "true" ]; then
+            echo "::error::Fleet Watcher BLOCKED skill '$SKILL' — $REASON  (audit: $AUDIT_REF)"
+            exit 1
+          fi
+          echo "::notice::Fleet Watcher ALLOWED skill '$SKILL' (audit: $AUDIT_REF, ref: $REF)"
+
       - name: Run
         id: run
         if: steps.work.outputs.mode != ''
         env:
+          # Full secrets context — lets .mcp.json reference ANY repo secret as
+          # ${NAME} with no per-name env wiring. Consumed by the MCP preflight
+          # below, then unset before Claude runs so it never reaches skill code.
+          ALL_SECRETS: ${{ toJSON(secrets) }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          ANTHROPIC_BASE_URL: ${{ vars.ANTHROPIC_BASE_URL }}
           BANKR_LLM_KEY: ${{ secrets.BANKR_LLM_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          USEPOD_TOKEN: ${{ secrets.USEPOD_TOKEN }}
+          VENICE_API_KEY: ${{ secrets.VENICE_API_KEY }}
+          SURPLUS_API_KEY: ${{ secrets.SURPLUS_API_KEY }}
+          # Optional gateway model overrides + sidecar debug (defaults live in scripts/llm-gateway.sh)
+          OPENROUTER_MODEL: ${{ vars.OPENROUTER_MODEL }}
+          OPENROUTER_MODEL_SONNET: ${{ vars.OPENROUTER_MODEL_SONNET }}
+          OPENROUTER_MODEL_HAIKU: ${{ vars.OPENROUTER_MODEL_HAIKU }}
+          USEPOD_MODEL: ${{ vars.USEPOD_MODEL }}
+          USEPOD_MODEL_SONNET: ${{ vars.USEPOD_MODEL_SONNET }}
+          USEPOD_MODEL_HAIKU: ${{ vars.USEPOD_MODEL_HAIKU }}
+          VENICE_MODEL: ${{ vars.VENICE_MODEL }}
+          VENICE_CLEANCACHE: ${{ vars.VENICE_CLEANCACHE }}
+          SURPLUS_MODEL: ${{ vars.SURPLUS_MODEL }}
+          CCR_LOG: ${{ vars.CCR_LOG }}
           GITHUB_TOKEN: ${{ secrets.GH_GLOBAL || secrets.GITHUB_TOKEN }}
           GH_TOKEN: ${{ secrets.GH_GLOBAL || secrets.GITHUB_TOKEN }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
@@ -203,52 +285,49 @@ jobs:
           NOTIFY_EMAIL_FROM: ${{ vars.NOTIFY_EMAIL_FROM || 'aeon@notifications.aeon.bot' }}
           NOTIFY_EMAIL_SUBJECT_PREFIX: ${{ vars.NOTIFY_EMAIL_SUBJECT_PREFIX || '[Aeon]' }}
           XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
-          BANKR_API_KEY: ${{ secrets.BANKR_API_KEY }}
           COINGECKO_API_KEY: ${{ secrets.COINGECKO_API_KEY }}
           ALCHEMY_API_KEY: ${{ secrets.ALCHEMY_API_KEY }}
+          BANKR_API_KEY: ${{ secrets.BANKR_API_KEY }}
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           DEVTO_API_KEY: ${{ secrets.DEVTO_API_KEY }}
           NEYNAR_API_KEY: ${{ secrets.NEYNAR_API_KEY }}
+          NEYNAR_SIGNER_UUID: ${{ secrets.NEYNAR_SIGNER_UUID }}
           JSONRENDER_ENABLED: ${{ vars.JSONRENDER_ENABLED || 'true' }}
           SKILL_VAR: ${{ inputs.var }}
+          SKILL_NAME: ${{ steps.skill.outputs.name }}
+          INPUT_MODEL: ${{ inputs.model }}
         run: |
           TODAY=$(date -u +%Y-%m-%d)
-          SKILL_NAME="${{ steps.skill.outputs.name }}"
           export SKILL_NAME
           CONFIG_MODEL=$(grep -E '^model:' aeon.yml | sed 's/^model: *//' | tr -d ' ')
           # Check for per-skill model override in aeon.yml (extract quoted value, ignore comments)
           SKILL_MODEL=$(grep "^  ${SKILL_NAME}:" aeon.yml | sed -n 's/.*model: *"\([^"]*\)".*/\1/p')
-          INPUT_MODEL="${{ inputs.model }}"
           if [ -n "$INPUT_MODEL" ] && [ "$INPUT_MODEL" != "(config default)" ]; then
             MODEL="$INPUT_MODEL"
           elif [ -n "$SKILL_MODEL" ]; then
             MODEL="$SKILL_MODEL"
           else
-            MODEL="${CONFIG_MODEL:-claude-opus-4-7}"
+            MODEL="${CONFIG_MODEL:-claude-opus-4-8}"
           fi
           echo "Using model: $MODEL"
           echo "SKILL_MODEL=$MODEL" >> "$GITHUB_OUTPUT"
 
           # --- AI Gateway routing ---
-          GATEWAY=$(grep -A1 '^gateway:' aeon.yml | grep 'provider:' | sed 's/.*provider: *//' | tr -d ' "'"'" || echo "direct")
-          GATEWAY="${GATEWAY:-direct}"
-          echo "Gateway: $GATEWAY"
-
-          echo "GATEWAY=$GATEWAY" >> "$GITHUB_OUTPUT"
-
-          if [ "$GATEWAY" = "bankr" ]; then
-            if [ -z "${BANKR_LLM_KEY:-}" ]; then
-              echo "::error::gateway.provider=bankr but BANKR_LLM_KEY secret is not set"
-              exit 1
-            fi
-            export ANTHROPIC_BASE_URL="https://llm.bankr.bot"
-            export ANTHROPIC_AUTH_TOKEN="$BANKR_LLM_KEY"
-            unset ANTHROPIC_API_KEY
-            unset CLAUDE_CODE_OAUTH_TOKEN
-            echo "::notice::Routing through Bankr Gateway (https://llm.bankr.bot)"
+          # provider: auto → cascade through every provider whose key is set, in
+          # priority order, failing over to the next on ANY failure. An explicit
+          # provider pins a single one (no failover). Setup runs per-attempt in the
+          # run loop below, so a dead/credit-less provider is skipped, not fatal.
+          BASE_MODEL="$MODEL"
+          GW="${GITHUB_WORKSPACE}/scripts/llm-gateway.sh"
+          GATEWAY=$(grep -A1 '^gateway:' aeon.yml | grep 'provider:' | sed 's/.*provider:[[:space:]]*//' | sed "s/[\"' ]//g" || true)
+          GATEWAY="${GATEWAY:-auto}"
+          if [ "$GATEWAY" = "auto" ]; then
+            CANDIDATES=$(AEON_LIST_CANDIDATES=1 bash "$GW")
           else
-            echo "::notice::Using direct Anthropic API"
+            CANDIDATES="$GATEWAY"   # explicit pin → single provider, no failover
           fi
+          echo "Gateway: $GATEWAY  |  cascade order: $CANDIDATES"
+          echo "GATEWAY=${CANDIDATES%% *}" >> "$GITHUB_OUTPUT"   # provisional; overwritten with the winner below
 
           # Generate notify script in workspace (Claude calls: ./notify "message")
           # Messages are saved to .pending-notify/ for reliable post-run delivery
@@ -260,7 +339,22 @@ jobs:
           cat > ./notify << 'NOTIFY_SCRIPT'
           #!/usr/bin/env bash
           set -euo pipefail
-          MSG="$1"
+
+          # Usage:
+          #   ./notify "message"           — inline arg (short messages only; multi-line OK)
+          #   ./notify -f path/to/file.md  — read message from file (safe for any length/content)
+          #   ./notify --file path/to/file — same as -f
+          # Prefer -f for anything with embedded newlines: Claude's sandbox trips on
+          #   ./notify "$(cat file)" with "Unhandled node type: string".
+          if [ "${1:-}" = "-f" ] || [ "${1:-}" = "--file" ]; then
+            if [ -z "${2:-}" ] || [ ! -f "$2" ]; then
+              echo "notify: -f requires an existing file path" >&2
+              exit 2
+            fi
+            MSG=$(cat "$2")
+          else
+            MSG="${1:-}"
+          fi
 
           # Suppress obvious diagnostic probes (short messages containing test/trace/ping/debug/hello).
           # Claude sometimes issues these to verify the notify script works — they should not reach channels.
@@ -292,8 +386,7 @@ jobs:
           # Attempt immediate delivery (may fail in sandbox — post-run step retries)
           DELIVERED=false
 
-          # Telegram: 4096 char limit. Use HTML parse mode so single underscores
-          # in handles (e.g. miroshark_) don't get eaten by legacy Markdown.
+          # Telegram: 4096 char limit, strict Markdown parsing
           if [ -n "${TELEGRAM_BOT_TOKEN:-}" ] && [ -n "${TELEGRAM_CHAT_ID:-}" ]; then
             # Split $MSG into chunks ≤3900 chars (Telegram cap 4096, leaves room for
             # "[i/N]" suffix). Prefer paragraph (\n\n) then line (\n) boundaries,
@@ -332,31 +425,14 @@ jobs:
             while IFS= read -r TG_CHUNK_B64; do
               [ -z "$TG_CHUNK_B64" ] && continue
               TG_MSG=$(printf '%s' "$TG_CHUNK_B64" | base64 -d)
-              # Convert Markdown-ish (*bold*, [label](url)) to HTML. Escape &<> first.
-              TG_HTML=$(printf '%s' "$TG_MSG" | python3 -c '
-          import html, re, sys
-          t = sys.stdin.read()
-          links=[]; bolds=[]
-          t = re.sub(r"\[([^\]\n]+)\]\(([^)\n]+)\)",
-                     lambda m: (links.append((m.group(1), m.group(2))) or f"\x00L{len(links)-1}\x00"), t)
-          t = re.sub(r"\*([^*\n]+)\*",
-                     lambda m: (bolds.append(m.group(1)) or f"\x00B{len(bolds)-1}\x00"), t)
-          t = html.escape(t, quote=False)
-          for i, b in enumerate(bolds):
-              t = t.replace(f"\x00B{i}\x00", f"<b>{html.escape(b, quote=False)}</b>")
-          for i, (lbl, url) in enumerate(links):
-              t = t.replace(f"\x00L{i}\x00", f"<a href=\"{html.escape(url, quote=True)}\">{html.escape(lbl, quote=False)}</a>")
-          sys.stdout.write(t)
-          ')
               TG_RESULT=$(curl -s -w "\n%{http_code}" -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
                 -H "Content-Type: application/json" \
-                -d "$(jq -n --arg chat "$TELEGRAM_CHAT_ID" --arg text "$TG_HTML" '{chat_id: $chat, text: $text, parse_mode: "HTML"}')" 2>/dev/null) || true
+                -d "$(jq -n --arg chat "$TELEGRAM_CHAT_ID" --arg text "$TG_MSG" '{chat_id: $chat, text: $text, parse_mode: "Markdown"}')" 2>/dev/null) || true
               TG_HTTP=$(echo "$TG_RESULT" | tail -1)
               TG_OK=$(echo "$TG_RESULT" | sed '$d' | jq -r '.ok // false' 2>/dev/null || echo "false")
               if [ "$TG_HTTP" = "200" ] && [ "$TG_OK" = "true" ]; then
                 DELIVERED=true
               else
-                # Fallback: raw text, no parse mode. Telegram will auto-link URLs.
                 curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
                   -H "Content-Type: application/json" \
                   -d "$(jq -n --arg chat "$TELEGRAM_CHAT_ID" --arg text "$TG_MSG" '{chat_id: $chat, text: $text}')" > /dev/null 2>&1 && DELIVERED=true || true
@@ -396,8 +472,8 @@ jobs:
           fi
           # json-render channel — save raw message for post-run conversion
           if [ "${JSONRENDER_ENABLED:-false}" = "true" ] && [ -n "${SKILL_NAME:-}" ]; then
-            mkdir -p dashboard/outputs
-            echo "$MSG" > "dashboard/outputs/.pending-${SKILL_NAME}.md"
+            mkdir -p apps/dashboard/outputs
+            echo "$MSG" > "apps/dashboard/outputs/.pending-${SKILL_NAME}.md"
           fi
 
           # Remove pending file if immediate delivery succeeded (prevents double-send)
@@ -413,6 +489,38 @@ jobs:
           ALLOWED="$ALLOWED,Bash(mkdir:*),Bash(ls:*),Bash(cat:*),Bash(chmod:*)"
           ALLOWED="$ALLOWED,Bash(date:*),Bash(echo:*),Bash(node:*),Bash(npm:*),Bash(npx:*)"
           ALLOWED="$ALLOWED,Bash(head:*),Bash(tail:*),Bash(wc:*),Bash(sort:*),Bash(grep:*)"
+
+          # MCP (opt-in): when a project .mcp.json exists, load it for this run
+          # and allow each server's tools. No-op when the file is absent, so
+          # existing forks are unaffected. Any ${VAR} the config references is
+          # auto-resolved from this repo's secrets (ALL_SECRETS) — set the secret
+          # in the dashboard and it just works, no per-name workflow wiring. If a
+          # referenced secret genuinely isn't set, skip MCP with a warning rather
+          # than let Claude's config parse-failure break the whole skill run.
+          MCP_FLAGS=()
+          if [ -f .mcp.json ] && jq -e '.mcpServers' .mcp.json >/dev/null 2>&1; then
+            MCP_MISSING=""
+            # ALL_SECRETS is toJSON(secrets). Guard the empty case via a temp var —
+            # NOT the inline ${ALL_SECRETS:-{}} form: bash closes ${...} at the first
+            # '}', so the default is just '{' and a stray '}' gets appended to the
+            # value, corrupting the JSON (jq: parse error "Unmatched '}'").
+            SECRETS_JSON="${ALL_SECRETS:-}"; [ -z "$SECRETS_JSON" ] && SECRETS_JSON='{}'
+            for v in $(grep -oE '\$\{[A-Z_][A-Z0-9_]*\}' .mcp.json | sed -E 's/[${}]//g' | sort -u); do
+              [ -n "${!v:-}" ] && continue                                  # already in env (built-in)
+              val="$(jq -r --arg k "$v" '.[$k] // empty' <<<"$SECRETS_JSON")"
+              if [ -n "$val" ]; then export "$v=$val"; else MCP_MISSING="$MCP_MISSING $v"; fi
+            done
+            if [ -n "$MCP_MISSING" ]; then
+              echo "::warning::.mcp.json references secret(s) not set:${MCP_MISSING} — add them in the dashboard (Settings or the MCP tab); the next run picks them up. Skipping MCP this run."
+            else
+              for srv in $(jq -r '.mcpServers | keys[]' .mcp.json); do
+                ALLOWED="$ALLOWED,mcp__${srv}"
+              done
+              MCP_FLAGS=(--mcp-config .mcp.json --strict-mcp-config)
+              echo "MCP enabled: $(jq -r '.mcpServers | keys | join(", ")' .mcp.json)"
+            fi
+          fi
+          unset ALL_SECRETS   # drop the secrets blob before any skill/Claude code runs
 
           SKILL_NAME="${{ steps.skill.outputs.name }}"
           VAR="$SKILL_VAR"
@@ -437,14 +545,37 @@ jobs:
           Use this variable (override the default in the skill file):
           var=$VAR"
           fi
-          if ! CLAUDE_OUTPUT=$(echo "$PROMPT" | claude -p - \
-            --model "$MODEL" --allowedTools "$ALLOWED" \
-            --output-format json 2>&1); then
-            echo "::error::Claude CLI failed. Output: $CLAUDE_OUTPUT"
+          # Cascade: try each provider in priority order; on ANY failure fall over
+          # to the next. Each attempt runs in a subshell so provider setup (env +
+          # any claude-code-router sidecar) is isolated and torn down on exit. The
+          # gateway script's notices go to stderr (>&2) so only Claude's JSON is captured.
+          CLAUDE_OK=0
+          USED_GATEWAY=""
+          for cand in $CANDIDATES; do
+            echo "::notice::Routing attempt via '$cand'"
+            # No `set -e` here: the gateway script signals a hard setup failure with
+            # an explicit `exit 1` (which exits this subshell → fall over), and on
+            # success the subshell's status is Claude's own exit code. A benign
+            # non-zero from a trailing test in the gateway script is harmless — we
+            # only fall over on an explicit exit or a failed Claude call.
+            if CLAUDE_OUTPUT=$(
+              GATEWAY="$cand"
+              MODEL="$BASE_MODEL"
+              source "$GW" >&2
+              echo "$PROMPT" | claude -p - --model "$MODEL" --allowedTools "$ALLOWED" "${MCP_FLAGS[@]}" --output-format json 2>&1
+            ); then
+              USED_GATEWAY="$cand"; CLAUDE_OK=1; break
+            fi
+            echo "::warning::provider '$cand' failed — $(printf '%s' "$CLAUDE_OUTPUT" | tail -c 160 | tr '\n' ' ')"
+          done
+          if [ "$CLAUDE_OK" != "1" ]; then
+            echo "::error::All gateway providers failed ($CANDIDATES). Last output: $CLAUDE_OUTPUT"
             # Save error signature for quality tracking (cron-state step reads this)
             echo "$CLAUDE_OUTPUT" | tail -c 500 | tr '\n' ' ' | cut -c1-200 > /tmp/skill-error.txt
             exit 1
           fi
+          [ "$USED_GATEWAY" != "${CANDIDATES%% *}" ] && echo "::notice::Skill ran via fallback provider '$USED_GATEWAY'"
+          echo "GATEWAY=$USED_GATEWAY" >> "$GITHUB_OUTPUT"
 
           # Extract and print the text result so logs still show skill output
           RESULT_TEXT=$(echo "$CLAUDE_OUTPUT" | jq -r '.result // empty')
@@ -466,6 +597,52 @@ jobs:
           echo "SKILL_TOTAL_TOKENS=$TOTAL_TOKENS" >> "$GITHUB_OUTPUT"
 
           echo "::notice::Token usage — input: $INPUT_TOKENS, output: $OUTPUT_TOKENS, cache_read: $CACHE_READ, cache_creation: $CACHE_CREATION, total: $TOTAL_TOKENS"
+
+      # ──────────────────────────────────────────────────────────────────────
+      # Fleet Watcher postflight (opt-in, always-runs)
+      #
+      # Reports skill completion to the user's Fleet Watcher ledger. Runs even
+      # if the skill failed — failure is itself a signal Fleet wants to record
+      # for taint chain detection.
+      # ──────────────────────────────────────────────────────────────────────
+      - name: Fleet Watcher postflight
+        if: always() && steps.work.outputs.mode != '' && env.FLEET_ENDPOINT != '' && env.FLEET_TOKEN != ''
+        env:
+          SKILL:       ${{ steps.skill.outputs.name }}
+          RUN_OUTCOME: ${{ steps.run.outcome }}
+          AUDIT_REF:   ${{ steps.fleet_preflight.outputs.audit_ref }}
+        run: |
+          set -euo pipefail
+          case "$RUN_OUTCOME" in
+            success) STATUS="ok" ;;
+            failure) STATUS="error" ;;
+            skipped) STATUS="blocked" ;;
+            *)       STATUS="error" ;;
+          esac
+          OP_ID="${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}-post"
+          BODY=$(jq -n \
+            --arg skill   "$SKILL" \
+            --arg status  "$STATUS" \
+            --arg source  "github-actions:${GITHUB_REPOSITORY}" \
+            --arg summary "aeon skill '$SKILL' finished with outcome=$RUN_OUTCOME" \
+            --arg op      "$OP_ID" \
+            --arg audit   "$AUDIT_REF" \
+            '{skill:$skill, status:$status, source:$source, summary:$summary, clientOpId:$op, auditRef:$audit, metadata:{runId:env.GITHUB_RUN_ID, attempt:env.GITHUB_RUN_ATTEMPT, runUrl:("\(env.GITHUB_SERVER_URL)/\(env.GITHUB_REPOSITORY)/actions/runs/\(env.GITHUB_RUN_ID)")}}')
+          RESP=$(curl -sS -w "\n%{http_code}" -X POST "${FLEET_ENDPOINT}/api/aeon/postflight" \
+            -H "Authorization: Bearer ${FLEET_TOKEN}" \
+            -H "Content-Type: application/json" \
+            -d "$BODY" || true)
+          HTTP=$(echo "$RESP" | tail -1)
+          if [ "$HTTP" = "201" ]; then
+            EVENT_ID=$(echo "$RESP" | sed '$d' | jq -r '.eventId')
+            CHAINS=$(echo "$RESP" | sed '$d' | jq -r '.chainsDetected | length')
+            echo "::notice::Fleet Watcher recorded skill '$SKILL' (event $EVENT_ID, chains detected: $CHAINS)"
+            if [ "$CHAINS" -gt 0 ]; then
+              echo "::warning::Fleet Watcher detected $CHAINS new taint chain(s) — review at ${FLEET_ENDPOINT}/fleet"
+            fi
+          else
+            echo "::warning::Fleet Watcher postflight returned $HTTP (non-fatal)"
+          fi
 
       - name: Log token usage
         if: steps.work.outputs.mode != ''
@@ -501,7 +678,7 @@ jobs:
           SKILL="${{ steps.skill.outputs.name }}"
           mkdir -p .outputs
           # Save the notification message as a chain artifact
-          PENDING="dashboard/outputs/.pending-${SKILL}.md"
+          PENDING="apps/dashboard/outputs/.pending-${SKILL}.md"
           if [ -f "$PENDING" ]; then
             cp "$PENDING" ".outputs/${SKILL}.md"
           elif [ -f /tmp/skill-result.txt ] && [ -s /tmp/skill-result.txt ]; then
@@ -517,20 +694,31 @@ jobs:
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          ANTHROPIC_BASE_URL: ${{ vars.ANTHROPIC_BASE_URL }}
           BANKR_LLM_KEY: ${{ secrets.BANKR_LLM_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          USEPOD_TOKEN: ${{ secrets.USEPOD_TOKEN }}
+          VENICE_API_KEY: ${{ secrets.VENICE_API_KEY }}
+          SURPLUS_API_KEY: ${{ secrets.SURPLUS_API_KEY }}
+          OPENROUTER_MODEL: ${{ vars.OPENROUTER_MODEL }}
+          OPENROUTER_MODEL_SONNET: ${{ vars.OPENROUTER_MODEL_SONNET }}
+          OPENROUTER_MODEL_HAIKU: ${{ vars.OPENROUTER_MODEL_HAIKU }}
+          USEPOD_MODEL: ${{ vars.USEPOD_MODEL }}
+          USEPOD_MODEL_SONNET: ${{ vars.USEPOD_MODEL_SONNET }}
+          USEPOD_MODEL_HAIKU: ${{ vars.USEPOD_MODEL_HAIKU }}
+          VENICE_MODEL: ${{ vars.VENICE_MODEL }}
+          VENICE_CLEANCACHE: ${{ vars.VENICE_CLEANCACHE }}
+          SURPLUS_MODEL: ${{ vars.SURPLUS_MODEL }}
+          CCR_LOG: ${{ vars.CCR_LOG }}
         run: |
           SKILL="${{ steps.skill.outputs.name }}"
 
           # Skip analysis for meta skills (they don't produce scorable output)
-          case "$SKILL" in heartbeat|skill-health|reflect|memory-flush|self-review|cost-report) echo "Skipping analysis for meta skill"; exit 0;; esac
+          case "$SKILL" in heartbeat|skill-health|skill-analytics|reflect|memory-flush|self-review|cost-report) echo "Skipping analysis for meta skill"; exit 0;; esac
 
           # Route through gateway if configured
-          if [ "${{ steps.run.outputs.GATEWAY }}" = "bankr" ] && [ -n "${BANKR_LLM_KEY:-}" ]; then
-            export ANTHROPIC_BASE_URL="https://llm.bankr.bot"
-            export ANTHROPIC_AUTH_TOKEN="$BANKR_LLM_KEY"
-            unset ANTHROPIC_API_KEY
-            unset CLAUDE_CODE_OAUTH_TOKEN
-          fi
+          GATEWAY="${{ steps.run.outputs.GATEWAY }}"
+          source "${GITHUB_WORKSPACE}/scripts/llm-gateway.sh"
 
           # Read and truncate skill output for analysis
           OUTPUT=""
@@ -556,22 +744,35 @@ jobs:
 
           JSON format: {\"score\": N, \"assessment\": \"one line\", \"flags\": []}"
 
+          SCORE_MODEL="${ANTHROPIC_DEFAULT_HAIKU_MODEL:-claude-haiku-4-5-20251001}"
           if ! RAW=$(echo "$ANALYSIS_PROMPT" | claude -p - \
-            --model claude-haiku-4-5-20251001 --output-format json 2>&1); then
-            echo "::warning::Skill analysis failed (non-fatal)"
+            --model "$SCORE_MODEL" --output-format json 2>&1); then
+            echo "::warning::Skill analysis failed (non-fatal). Raw: $(printf '%s' "$RAW" | head -c 800 | tr '\n' ' ')"
             exit 0
           fi
 
           ANALYSIS_TEXT=$(echo "$RAW" | jq -r '.result // empty')
-          [ -z "$ANALYSIS_TEXT" ] && { echo "::warning::Empty analysis result"; exit 0; }
+          # Some gateway model slots return a successful-but-empty result for
+          # this call (seen twice on OpenRouter's haiku slug, while its opus
+          # slug always returns text). Retry once on the run's main model —
+          # llm-gateway.sh only sets MODEL here when the gateway remaps it.
+          if [ -z "$ANALYSIS_TEXT" ] && [ -n "${MODEL:-}" ] && [ "$MODEL" != "$SCORE_MODEL" ]; then
+            echo "::warning::Empty analysis result from ${SCORE_MODEL} — retrying with ${MODEL}. Raw: $(printf '%s' "$RAW" | head -c 800 | tr '\n' ' ')"
+            if RAW=$(echo "$ANALYSIS_PROMPT" | claude -p - --model "$MODEL" --output-format json 2>&1); then
+              ANALYSIS_TEXT=$(echo "$RAW" | jq -r '.result // empty')
+            fi
+          fi
+          if [ -z "$ANALYSIS_TEXT" ]; then echo "::warning::Empty analysis result. Raw: $(printf '%s' "$RAW" | head -c 800 | tr '\n' ' ')"; exit 0; fi
 
-          # Parse score from response (try direct JSON, then extract embedded JSON)
+          # Parse score: accept raw JSON, else strip code fences, flatten newlines,
+          # and grab the outermost {…} object — handles fenced / multi-line output
+          # from gateways like Bankr that the old line-based grep missed.
           if echo "$ANALYSIS_TEXT" | jq empty 2>/dev/null; then
             PARSED="$ANALYSIS_TEXT"
           else
-            PARSED=$(echo "$ANALYSIS_TEXT" | grep -o '{[^{}]*}' | head -1 || true)
+            PARSED=$(printf '%s' "$ANALYSIS_TEXT" | sed 's/```[a-zA-Z]*//g' | tr '\n' ' ' | grep -o '{.*}' | head -1 || true)
             if [ -z "$PARSED" ] || ! echo "$PARSED" | jq empty 2>/dev/null; then
-              echo "::warning::Could not parse analysis JSON"
+              echo "::warning::Could not parse analysis JSON. Raw: $(printf '%s' "$ANALYSIS_TEXT" | head -c 300 | tr '\n' ' ')"
               exit 0
             fi
           fi
@@ -618,20 +819,49 @@ jobs:
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          ANTHROPIC_BASE_URL: ${{ vars.ANTHROPIC_BASE_URL }}
           BANKR_LLM_KEY: ${{ secrets.BANKR_LLM_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          USEPOD_TOKEN: ${{ secrets.USEPOD_TOKEN }}
+          VENICE_API_KEY: ${{ secrets.VENICE_API_KEY }}
+          SURPLUS_API_KEY: ${{ secrets.SURPLUS_API_KEY }}
+          OPENROUTER_MODEL: ${{ vars.OPENROUTER_MODEL }}
+          OPENROUTER_MODEL_SONNET: ${{ vars.OPENROUTER_MODEL_SONNET }}
+          OPENROUTER_MODEL_HAIKU: ${{ vars.OPENROUTER_MODEL_HAIKU }}
+          USEPOD_MODEL: ${{ vars.USEPOD_MODEL }}
+          USEPOD_MODEL_SONNET: ${{ vars.USEPOD_MODEL_SONNET }}
+          USEPOD_MODEL_HAIKU: ${{ vars.USEPOD_MODEL_HAIKU }}
+          VENICE_MODEL: ${{ vars.VENICE_MODEL }}
+          VENICE_CLEANCACHE: ${{ vars.VENICE_CLEANCACHE }}
+          SURPLUS_MODEL: ${{ vars.SURPLUS_MODEL }}
+          CCR_LOG: ${{ vars.CCR_LOG }}
         run: |
-          if [ "${{ steps.run.outputs.GATEWAY }}" = "bankr" ] && [ -n "${BANKR_LLM_KEY:-}" ]; then
-            export ANTHROPIC_BASE_URL="https://llm.bankr.bot"
-            export ANTHROPIC_AUTH_TOKEN="$BANKR_LLM_KEY"
-            unset ANTHROPIC_API_KEY
-            unset CLAUDE_CODE_OAUTH_TOKEN
-          fi
-          for pending in dashboard/outputs/.pending-*.md; do
+          # GATEWAY may be empty when the Run step failed early — the script
+          # treats that as `direct`, matching the old inline behavior.
+          GATEWAY="${{ steps.run.outputs.GATEWAY }}"
+          source "${GITHUB_WORKSPACE}/scripts/llm-gateway.sh"
+          for pending in apps/dashboard/outputs/.pending-*.md; do
             [ -f "$pending" ] || continue
             SKILL=$(basename "$pending" .md | sed 's/^\.pending-//')
             echo "json-render: converting $SKILL..."
             ./notify-jsonrender "$SKILL" "$(cat "$pending")" && rm -f "$pending" || echo "json-render: $SKILL conversion failed (non-fatal)"
           done
+
+      # Sidecar gateway logs die with the VM — surface them in the job log on
+      # failure (set the CCR_LOG=true repo variable for request-level detail).
+      # Secrets in the output are auto-masked by the Actions runner. The ccr
+      # config.json is deliberately NOT printed (it embeds the provider key).
+      - name: Sidecar logs (on failure)
+        if: failure()
+        run: |
+          found=0
+          for f in "$HOME"/.claude-code-router/logs/*.log "$HOME"/.claude-code-router/*.log; do
+            [ -f "$f" ] || continue
+            found=1
+            echo "===== ${f} (last 200 lines) ====="
+            tail -n 200 "$f"
+          done
+          if [ "$found" -eq 0 ]; then echo "No claude-code-router logs found (gateway was not a sidecar provider, or it never started)."; fi
 
       - name: Send pending notifications
         if: steps.work.outputs.mode != '' && steps.run.outcome == 'success'
@@ -707,9 +937,11 @@ jobs:
         if: steps.work.outputs.mode != '' && steps.run.outcome == 'success'
         env:
           XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
-          BANKR_API_KEY: ${{ secrets.BANKR_API_KEY }}
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           REPLICATE_API_TOKEN: ${{ secrets.REPLICATE_API_TOKEN }}
+          DEVTO_API_KEY: ${{ secrets.DEVTO_API_KEY }}
+          NEYNAR_API_KEY: ${{ secrets.NEYNAR_API_KEY }}
+          NEYNAR_SIGNER_UUID: ${{ secrets.NEYNAR_SIGNER_UUID }}
         run: |
           # Run all scripts/postprocess-*.sh after Claude finishes.
           # Each script handles its own .pending-{service}/ directory
@@ -764,7 +996,7 @@ jobs:
                 CONFLICTED=$(git diff --name-only --diff-filter=U) || true
                 [ -z "$CONFLICTED" ] && break
                 for f in $CONFLICTED; do
-                  if [[ "$f" == memory/logs/* ]] || [[ "$f" == memory/topics/* ]] || [[ "$f" == memory/MEMORY.md ]] || [[ "$f" == memory/skill-health/* ]] || [[ "$f" == dashboard/outputs/* ]] || [[ "$f" == .outputs/* ]]; then
+                  if [[ "$f" == memory/logs/* ]] || [[ "$f" == memory/topics/* ]] || [[ "$f" == memory/MEMORY.md ]] || [[ "$f" == memory/skill-health/* ]] || [[ "$f" == apps/dashboard/outputs/* ]] || [[ "$f" == .outputs/* ]]; then
                     sed -i '/^<<<<<<< /d; /^=======/d; /^>>>>>>> /d' "$f"
                     git add "$f"
                   else

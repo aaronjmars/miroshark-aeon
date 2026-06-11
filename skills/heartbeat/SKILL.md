@@ -8,77 +8,162 @@ tags: [meta]
 
 If `${var}` is set, focus checks on that specific area.
 
-
 Read memory/MEMORY.md and the last 2 days of memory/logs/ for context.
 
-## Step 0: Compute today's day-of-week from the shell — do not infer it
+## Checks (in priority order)
 
-Before checking any schedules, run:
+### P0 — Failed & stuck skills (check first)
 
-```bash
-date -u +%A          # full name, e.g. "Wednesday"
-date -u +%u          # numeric, 1=Mon … 7=Sun
-date -u +%d          # day-of-month, e.g. "30"
+Read `memory/cron-state.json`. This file tracks every scheduled skill's state and quality metrics:
+```json
+{
+  "skill-name": {
+    "last_dispatch": "2026-04-06T12:00:00Z",
+    "last_status": "dispatched|success|failed",
+    "last_success": "2026-04-06T12:05:00Z",
+    "last_failed": "2026-04-05T12:03:00Z",
+    "total_runs": 10,
+    "total_successes": 8,
+    "total_failures": 2,
+    "consecutive_failures": 0,
+    "success_rate": 0.80,
+    "last_quality_score": 4,
+    "last_error": "error signature text"
+  }
+}
 ```
 
-Use the **shell-computed** day-of-week as the source of truth in every "is this skill scheduled today?" comparison below. **Do not infer the day-of-week from `${today}` or the YYYY-MM-DD date** — past heartbeat runs have hallucinated the wrong weekday from the date (Apr 29 2026 was logged as "Tuesday" when it was actually Wednesday, which then mis-classified `memory-flush`'s on-schedule Wed run as "off-schedule" because the skill thought Wed wasn't a memory-flush day). The shell value is deterministic; the inferred value is not.
+Flag these conditions:
+- **Failed skills**: any entry with `last_status: "failed"`. Report the skill name and when it failed.
+- **Stuck skills**: any entry with `last_status: "dispatched"` where `last_dispatch` is **>45 minutes ago**. The skill was dispatched but never reported back — likely hung or crashed before the state update step ran.
+- **API degradation**: any skill with `consecutive_failures >= 3`. This likely indicates an external API is down or rate-limiting. Report the skill, failure count, and `last_error`. If multiple skills share similar error signatures, flag the shared dependency.
+- **Chronic failures**: any skill with `success_rate < 0.5` (and `total_runs >= 5`). The skill is failing more than it succeeds.
+- **Self-check**: if heartbeat's own entry shows `last_success` is **>36 hours ago** (or missing), note that heartbeat itself may be unreliable.
 
-Anchor the heartbeat report header on the shell output: `Date: <%A> <Mon DD>, <YYYY> — <HH:MM> UTC`.
+### P1 — Stalled PRs & urgent issues
 
-Translate cron expressions before checking schedules:
-- Weekday (`0 N * * D`) — `D` is `0=Sun, 1=Mon, …, 6=Sat`. Compare against `date -u +%u` (which is `1=Mon … 7=Sun` — Sunday differs).
-- Every-other-day (`0 N */2 * *`) — when in doubt, ground-truth against the last 7 days of `cron-state.json` `last_dispatch` timestamps for that skill. Do **not** assume which parity (odd / even days-of-month) the cron resolves to without checking.
+- [ ] Any open PRs stalled > 24h? (use `gh pr list`)
+- [ ] Any GitHub issues labeled urgent? (use `gh issue list`)
 
-## Checks
+### P2 — Flagged memory items
 
-Check the following:
-- [ ] Any open PRs stalled > 24h? (use `gh pr list` to check)
-- [ ] Anything flagged in memory that needs follow-up?
-- [ ] Check recent GitHub issues for anything labeled urgent (use `gh issue list`)
-- [ ] Scan aeon.yml for enabled scheduled skills — cross-reference with today's log (`memory/logs/${today}.md`) to find any that haven't run when expected.
+- [ ] Anything flagged in memory/MEMORY.md that needs follow-up?
 
-  **Matching skill names to log entries:**
-  Skills log under human-readable `## Headers`, not their aeon.yml kebab-case names. To check if a skill ran, do a **case-insensitive match against `## ` header lines only** — `grep -iE '^## …'`, not a free-text substring search of the full file. Header-only matching matters for short skill names: substring-searching the whole file for `feature` matches body text like "added a feature" in push-recap, falsely concluding the `feature` skill ran on a day it actually failed and masking the outage. Build the regex by replacing hyphens in the kebab-case name with `[ -]?` so both `## Feature Built` and `## Self-Improve` are accepted. Examples:
-  - `token-report` → `^## token[ -]?report` (matches `## Token Report`, `## Token Report (Update)`)
-  - `push-recap` → `^## push[ -]?recap` (matches `## Push Recap`, `## Push Recap (MiroShark)`)
-  - `fetch-tweets` → `^## fetch[ -]?tweets` (matches `## Fetch Tweets — MIROSHARK`)
-  - `feature` → `^## feature\b` (matches `## Feature Built — ...`, `## feature skill run` — and **does not** match the bare word "feature" inside other sections' body text)
-  - `hyperstitions-ideas` → `^## hyperstitions` (matches `## Hyperstitions Ideas`)
-  - `memory-flush` → `^## memory[ -]?flush`
-  - `self-improve` → `^## (self[ -]?improve|agent self-improvement)` (matches `## Self-Improve — 2026-05-04`, `## Agent Self-Improvement`)
-  - `repo-pulse` → `^## repo[ -]?pulse`
-  - `repo-article` → `^## repo[ -]?article`
-  - `repo-actions` → `^## repo[ -]?actions`
-  - `project-lens` → `^## project[ -]?lens`
-  - `tweet-allocator` → `^## tweet[ -]?allocator`
-  - `weekly-shiplog` → `^## weekly[ -]?shiplog`
-  - `skill-leaderboard` → `^## skill[ -]?leaderboard`
+### P3 — Missing scheduled skills
 
-  **Timing rules (avoid false positives):**
-  - GitHub Actions cron has ±10 min jitter and skills take 5-15 min to complete.
-  - Only flag a skill as missing if its scheduled time was **more than 2 hours ago**.
-  - Also check `gh run list --workflow=aeon.yml --created=$(date -u +%Y-%m-%d) --json displayTitle,status,createdAt` — if the skill is currently `in_progress` or `queued` **and was created less than 2 hours ago**, don't flag it.
-  - **Stuck-run detection:** If a run has been `in_progress` for **more than 2 hours** (compare `createdAt` against current time), treat it as stuck. Flag it in the report as "stuck (in_progress > 2h)" and allow auto-trigger of a fresh run. Do NOT cancel the stuck run — just dispatch a new one alongside it.
-  - For day-of-week schedules (e.g. `0 20 * * 0` for Sundays), only check on the matching day.
+Read `aeon.yml` for enabled skills with schedules. Cross-reference with `memory/cron-state.json`:
+- If an enabled skill has **no entry at all** in the state file, it has never been dispatched by the scheduler.
+- If a skill's `last_success` is **>2x its schedule interval** old (e.g., a daily skill hasn't succeeded in >48h), flag it.
 
-Before sending any notification, grep the last 48h of logs for the same issue. If the same missing-skill or stalled-PR was already reported, skip it. Batch all findings into a single notification.
+Do NOT use `gh run list` for this — the state file is authoritative.
 
-If nothing needs attention, log "HEARTBEAT_OK" and end your response.
+## Dedup & notification
+
+Before sending any notification, grep memory/logs/ for the same item. If it appears in the last 48h of logs, skip it. Never notify about the same item twice.
+
+Batch all findings into a **single notification**, grouped by priority tier:
+```
+🔴 FAILED: skill-a (failed 2h ago), skill-b (stuck 1h ago)
+🟡 STALLED: PR #42 open 3 days
+🔵 MEMORY: follow-up on X flagged 2 days ago
+```
+
+## Public status page
+
+After the priority checks (even when everything is green — this step **always** runs), regenerate `docs/status.md` so the public GitHub Pages site reflects current fleet health.
+
+### Data sources
+- `memory/cron-state.json` — per-skill run state (authoritative)
+- `memory/issues/INDEX.md` — open issue table
+- `aeon.yml` — enabled skill list with schedules
+- Latest `articles/token-report-*.md` (most recent by filename date) — optional; powers the Token Pulse section. Skipped silently when no file exists.
+
+### Overall status
+Compute one of three overall states from the same signals used above:
+- `🔴 DEGRADED` — any P0 flag fired (failed skill, stuck skill, consecutive_failures ≥ 3, chronic failures with success_rate < 0.5, heartbeat self-check >36h stale)
+- `🟡 WATCH` — any P1/P2/P3 flag fired (stalled PRs, urgent issues, flagged memory items, skills >2x their schedule interval old) or any open issue with severity `critical` or `high`
+- `🟢 OK` — no flags at all
+
+### Format
+
+Write `docs/status.md` with Jekyll frontmatter so it renders as a gallery page:
+
+```markdown
+---
+layout: default
+title: "Status"
+permalink: /status/
+---
+
+# Agent Status
+
+**Overall:** 🟢 OK
+**Updated:** 2026-04-24 19:06 UTC
+**Open issues:** 0
+**Next scheduled run:** heartbeat at 20:00 UTC
+
+Auto-generated by the `heartbeat` skill on every run (3× daily at 08:00 / 14:00 / 20:00 UTC). If the Updated timestamp is more than ~8h stale, the agent is not running.
+
+## Token pulse
+
+| Token | Price | 24h | Liquidity | Volume (24h) | FDV |
+|-------|-------|-----|-----------|--------------|-----|
+| AEON | $0.0000032626 | -11.16% | $223.4K | $41.3K | $326.3K |
+
+_Source: `articles/token-report-2026-04-28.md` · verdict: SLIDING_
+
+## Skill health (last 7 days)
+
+| Skill | Last run | Status | Success rate | Consecutive failures |
+|-------|----------|--------|-------------:|---------------------:|
+| token-report | 2026-04-24 12:30 UTC | ✅ success | 100% | 0 |
+| fetch-tweets | 2026-04-24 06:53 UTC | ✅ success | 95% | 0 |
+| …           | …                    | …         | …    | … |
+
+## Open issues
+
+_(if INDEX.md has any open rows, render them here; otherwise: "No open issues.")_
+
+| ID | Title | Severity | Category | Detected |
+|----|-------|----------|----------|----------|
+| ISS-001 | … | medium | rate-limit | 2026-04-22 |
+
+---
+*Fork this repo and your copy inherits this page automatically — [how it works](/memory/).*
+```
+
+### Rules
+- Include **all** enabled skills from `aeon.yml` (not only those with recent runs). For skills with no entry in cron-state.json, show `—` for timestamp and `not yet run` in status.
+- Sort the skill table by last-run timestamp descending (most recent first); skills that have never run sink to the bottom.
+- Format timestamps as `YYYY-MM-DD HH:MM UTC` (strip seconds and the `Z`).
+- Success rate shows `total_successes / total_runs × 100` rounded to whole percent; display `—` when `total_runs == 0`.
+- Status column icons: `✅ success`, `❌ failed`, `⏳ dispatched` (if last_dispatch within 45min), `🕸 stuck` (if last_dispatch > 45min and last_status still dispatched), `—` (never run).
+- For the `Next scheduled run:` line, pick the enabled skill with the soonest upcoming cron time relative to now.
+- Dedup state: re-running heartbeat overwrites `docs/status.md` wholesale each time — do not append.
+- Never expose values from `.env`, secrets, or anything outside cron-state.json + issues/INDEX.md + aeon.yml + articles/token-report-*.md. This file is public.
+
+### Token pulse rules
+- Pick the **latest** `articles/token-report-*.md` by filename date (sort descending, take the first match).
+- **Staleness:** if the picked file's date is older than 24h relative to the heartbeat run timestamp, render `_No recent token data (latest report YYYY-MM-DD)._` in place of the table — do not lift stale figures into the table.
+- **No file at all:** omit the `## Token pulse` section entirely. The status page must still render cleanly with no token row.
+- **Token symbol:** read from `memory/MEMORY.md` "Tracked Token" table (first row, `Token` column). If the table is missing, render the heading as `## Token pulse` with the symbol column blank.
+- **Field extraction (regex, tolerant of both old `Value | 24h Change` and new `Now | 24h Δ` table layouts):**
+  - **Price:** first `| Price |` row → first `$` value in the row → strip whitespace.
+  - **24h:** same Price row → first `±?\d+(\.\d+)?%` token in the row (typically the second cell). Render as written, preserving sign. If absent, render `—`.
+  - **Liquidity:** first `| Liquidity |` row → first `$` value.
+  - **Volume (24h):** first row whose first cell matches `Volume\b.*24h` or `24h Volume` → first `$` value.
+  - **FDV:** first `| FDV |` row → first `$` value.
+  - For any field whose row or `$` value cannot be located, render `—` for that cell only — do not skip the section.
+- **Verdict line:** if the source article contains a `**Verdict:** LABEL` line, append `· verdict: LABEL` to the source line. If no Verdict line is present (older format), omit the suffix.
+- **Source link:** the trailing `_Source: ..._` line names the exact article file used so a reader can verify the numbers.
+
+The file lands on `main` through the workflow's auto-commit step — no explicit `git` commands needed in this skill.
+
+## Output
+
+If nothing needs attention, log "HEARTBEAT_OK" (plus the overall status page verdict, e.g. `HEARTBEAT_OK · STATUS_PAGE=OK`) and end your response.
 
 If something needs attention:
-1. **Auto-trigger missing skills** — for each skill confirmed missing (not just stalled PRs or issues), dispatch it if not already running:
-
-   **Dedup guard — check before dispatching:**
-   Before firing `gh workflow run` for a skill, check whether a run for that skill is already `queued` or `in_progress` **and was started less than 2 hours ago**:
-   ```bash
-   gh run list --workflow=aeon.yml --json displayTitle,status,createdAt --jq \
-     '.[] | select((.status == "queued" or .status == "in_progress") and ((now - (.createdAt | fromdateiso8601)) < 7200)) | .displayTitle'
-   ```
-   If the output contains the skill name (case-insensitive), **skip the dispatch** — the skill is already pending. Runs older than 2 hours are considered stuck and ignored by this guard (a fresh dispatch is allowed). Only dispatch skills that have no active-and-recent or queued run:
-   ```bash
-   gh workflow run aeon.yml -f skill="SKILL_NAME"
-   ```
-   Skip auto-trigger for: `heartbeat` itself, `memory-flush`, `self-improve`, `reflect`, `self-review` (meta/housekeeping skills). For all other confirmed-missing daily or weekly skills that pass the dedup check, dispatch them.
-
-2. Send a concise notification via `./notify` listing what was flagged, what was auto-triggered, and what was skipped (already queued/in-progress).
-3. Log the finding and action taken to memory/logs/${today}.md.
+1. Send a single concise notification via `./notify` (grouped by priority as above)
+2. Log the findings and actions taken to memory/logs/${today}.md
+3. Log one line with the status-page verdict, e.g. `STATUS_PAGE=DEGRADED — wrote docs/status.md`

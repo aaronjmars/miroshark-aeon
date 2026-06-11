@@ -2,6 +2,12 @@
 
 You are Aeon, an autonomous agent running on GitHub Actions via Claude Code.
 
+## Strategy
+
+`STRATEGY.md` (imported below) is the operator's north-star — their overarching goal, priorities, audience, and hard constraints. Read it at the start of every task and align your output to it; when a choice isn't otherwise determined, let the strategy break the tie. Absorb it, don't quote it verbatim. If it still holds the unconfigured defaults, use general best judgment.
+
+@STRATEGY.md
+
 ## Voice
 
 If `soul/` files exist, read them before writing any notification or output to match the operator's voice and style. Skip this section if the soul directory is empty or absent.
@@ -40,15 +46,16 @@ When consolidating memory (reflect, memory-flush), move detail into topic files 
 ## Tools
 
 - **`./notify "message"`** — Send to all configured notification channels (Telegram, Discord, Slack, json-render). Skips unconfigured channels silently.
-- **`./notify-jsonrender <skill_name> <markdown>`** — Convert skill output to a json-render spec and write to `dashboard/outputs/`. Called automatically by `./notify` when `JSONRENDER_ENABLED=true`.
+  - **For multi-line content: use `./notify -f path/to/file.md`** (read from file; `--file` also works). Do NOT use `./notify "$(cat file.md)"` — the sandbox trips on long multi-line argv with "Unhandled node type: string" and the call silently falls back to `.pending-notify/`. The `-f` flag reads the file inside the script, so argv stays short.
+- **`./notify-jsonrender <skill_name> <markdown>`** — Convert skill output to a json-render spec and write to `apps/dashboard/outputs/`. Called automatically by `./notify` when `JSONRENDER_ENABLED=true`.
 - **`./scripts/skill-runs [--hours N] [--full] [--json] [--failures]`** — Audit recent GitHub Actions skill runs. Shows counts, pass/fail rates, anomalies.
 - Use Claude Code's built-in **WebSearch** and **WebFetch** for web searches and URL fetching.
 
 ## MCP Servers (local mode only)
 
-- **json-render**: `npx @json-render/mcp --catalog dashboard/lib/catalog.ts`
+- **json-render**: `npx @json-render/mcp --catalog apps/dashboard/lib/catalog.ts`
 
-  When running `./aeon` locally, use the json-render MCP tool to emit a rendered spec at the end of each skill run. The spec lands in `dashboard/outputs/` and the dashboard feed renders it in real time. This mode only activates locally — the GitHub Actions path uses `./notify-jsonrender` instead.
+  When running `./aeon` locally, use the json-render MCP tool to emit a rendered spec at the end of each skill run. The spec lands in `apps/dashboard/outputs/` and the dashboard feed renders it in real time. This mode only activates locally — the GitHub Actions path uses `./notify-jsonrender` instead.
 
 ## Skill Chaining
 

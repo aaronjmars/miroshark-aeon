@@ -1,5 +1,5 @@
 name: Messages & Scheduler
-run-name: "${{ inputs.message && format('msg ({0}): {1}', inputs.source || 'user', inputs.message) || 'tick: schedule + poll' }}"
+run-name: "${{ inputs.message && format('msg ({0}): {1}', inputs.source || 'user', inputs.message) || (github.event_name == 'repository_dispatch' && github.event.action != 'cron-tick' && format('msg ({0}): {1}', github.event.action, github.event.client_payload.message)) || 'tick: schedule + poll' }}"
 
 on:
   schedule:
@@ -61,8 +61,12 @@ jobs:
           NOW_ISO=$(date -u +%FT%TZ)
           NOW_EPOCH=$(date -u +%s)
 
-          # Previous hour for catch-up (GitHub Actions cron can miss windows)
+          # Previous two hours for catch-up. GitHub Actions throttles the */5 tick
+          # to 71-97min gaps under load; a 1h lookback gives :40-:59 slots only
+          # ~65-80min of tolerance, so trailing-minute slots get dropped. A 2h
+          # lookback gives every slot >=120min of tolerance.
           PREV_HOUR=$(( (HOUR + 23) % 24 ))
+          PREV2_HOUR=$(( (HOUR + 22) % 24 ))
 
           # Cron field matcher — supports: *, N, N-M (ranges), N,M (lists), */N, N/step, N-M/step (steps)
           cron_match() {
@@ -118,21 +122,27 @@ jobs:
               CURRENT_SKILL=""
               continue
             fi
-            # Multi-line format
-            if [[ "$line" =~ ^\ \ ([a-zA-Z0-9_-]+):\ *$ ]]; then
+            # Multi-line format — covers both block-mapping (name: then 4-space
+            # fields) and split flow maps an editor/formatter may produce (name:
+            # then a lone "{", then deeper-indented "enabled:"/"schedule:" fields,
+            # then "}"). The optional trailing "{" also catches "name: {" on one
+            # line. Field regexes accept 3+ spaces so 4- and 6-space indents both
+            # parse — otherwise a reformatted *enabled* skill silently loses its
+            # schedule and is never dispatched (the default below is enabled=true).
+            if [[ "$line" =~ ^\ \ ([a-zA-Z0-9_-]+):\ *\{?\ *$ ]]; then
               CURRENT_SKILL="${BASH_REMATCH[1]}"
               SKILL_ORDER+=("$CURRENT_SKILL")
               SKILL_ENABLED["$CURRENT_SKILL"]="true"
               SKILL_SCHEDULE["$CURRENT_SKILL"]=""
               SKILL_VAR["$CURRENT_SKILL"]=""
             fi
-            if [[ "$line" =~ ^\ \ \ \ enabled:\ *false ]] && [ -n "$CURRENT_SKILL" ]; then
+            if [[ "$line" =~ ^\ \ \ +enabled:\ *false ]] && [ -n "$CURRENT_SKILL" ]; then
               SKILL_ENABLED["$CURRENT_SKILL"]="false"
             fi
-            if [[ "$line" =~ ^\ \ \ \ schedule:\ *\"([^\"]+)\" ]] && [ -n "$CURRENT_SKILL" ]; then
+            if [[ "$line" =~ ^\ \ \ +schedule:\ *\"([^\"]+)\" ]] && [ -n "$CURRENT_SKILL" ]; then
               SKILL_SCHEDULE["$CURRENT_SKILL"]="${BASH_REMATCH[1]}"
             fi
-            if [[ "$line" =~ ^\ \ \ \ var:\ *\"([^\"]+)\" ]] && [ -n "$CURRENT_SKILL" ]; then
+            if [[ "$line" =~ ^\ \ \ +var:\ *\"([^\"]+)\" ]] && [ -n "$CURRENT_SKILL" ]; then
               SKILL_VAR["$CURRENT_SKILL"]="${BASH_REMATCH[1]}"
             fi
           done < aeon.yml
@@ -172,22 +182,30 @@ jobs:
                 SHOULD_RUN=true
               fi
             fi
-            # Catch-up: schedule matched previous hour but was missed.
+            # Catch-up: schedule matched one of the previous two hours but was missed.
             # Only catch up when last dispatch predates the scheduled fire time —
-            # prevents the same skill from firing twice when a tick also lands in PREV_HOUR+1.
-            if [ "$SHOULD_RUN" = "false" ] && cron_match "$C_HOUR" "$PREV_HOUR"; then
-              if [[ "$C_MIN" =~ ^[0-9]+$ ]]; then
-                SCHED_EPOCH=$(date -u -d "$(date -u +%Y-%m-%d) ${PREV_HOUR}:$(printf '%02d' "$C_MIN"):00 UTC" +%s 2>/dev/null || echo 0)
-                [ "$LAST_DISPATCH_EPOCH" -lt "$SCHED_EPOCH" ] && SHOULD_RUN=true
-              else
-                SHOULD_RUN=true
-              fi
+            # prevents the same skill from firing twice when later ticks still match.
+            if [ "$SHOULD_RUN" = "false" ]; then
+              for CATCHUP_HOUR in "$PREV_HOUR" "$PREV2_HOUR"; do
+                cron_match "$C_HOUR" "$CATCHUP_HOUR" || continue
+                if [[ "$C_MIN" =~ ^[0-9]+$ ]]; then
+                  SCHED_EPOCH=$(date -u -d "$(date -u +%Y-%m-%d) ${CATCHUP_HOUR}:$(printf '%02d' "$C_MIN"):00 UTC" +%s 2>/dev/null || echo 0)
+                  # Lookback hour wrapped past midnight — scheduled fire was yesterday
+                  [ "$SCHED_EPOCH" -gt "$NOW_EPOCH" ] && SCHED_EPOCH=$((SCHED_EPOCH - 86400))
+                  [ "$LAST_DISPATCH_EPOCH" -lt "$SCHED_EPOCH" ] && SHOULD_RUN=true
+                else
+                  SHOULD_RUN=true
+                fi
+                [ "$SHOULD_RUN" = "true" ] && break
+              done
             fi
 
             [ "$SHOULD_RUN" = "false" ] && continue
 
             # --- Dedup: skip if dispatched recently ---
-            DEDUP_WINDOW=90
+            # 150 (was 90): must exceed the 2h catch-up lookback so schedules with
+            # non-numeric minute fields can't re-fire on successive ticks.
+            DEDUP_WINDOW=150
             if [[ "$C_MIN" == */* ]]; then
               INTERVAL="${C_MIN#*/}"
               DEDUP_WINDOW=$((INTERVAL * 2 + 5))
@@ -477,37 +495,51 @@ jobs:
         run: |
           MESSAGES='[]'
 
-          # --- Check aeon.yml messaging config ---
-          TG_POLLING=$(grep -A1 '^telegram:' aeon.yml 2>/dev/null | grep 'enabled:' | grep -c 'true' || echo 0)
-          DISCORD_POLLING=$(grep -A1 '^discord:' aeon.yml 2>/dev/null | grep 'enabled:' | grep -c 'true' || echo 0)
-          SLACK_POLLING=$(grep -A1 '^slack:' aeon.yml 2>/dev/null | grep 'enabled:' | grep -c 'true' || echo 0)
-
           # --- Telegram (collect ALL pending updates) ---
-          if [ "$TG_POLLING" -gt 0 ] && [ -n "${TELEGRAM_BOT_TOKEN:-}" ] && [ -n "${TELEGRAM_CHAT_ID:-}" ]; then
-            RESPONSE=$(curl -s "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/getUpdates?timeout=0&allowed_updates=%5B%22message%22%5D")
-            COUNT=$(echo "$RESPONSE" | jq '.result | length')
-            MAX_UPDATE_ID=""
+          if [ -n "${TELEGRAM_BOT_TOKEN:-}" ] && [ -n "${TELEGRAM_CHAT_ID:-}" ]; then
+            # A webhook and getUpdates are mutually exclusive: once a webhook is
+            # set (instant mode, see webhook/), getUpdates returns 409. Detect it
+            # and skip polling — the Worker delivers via repository_dispatch.
+            WEBHOOK_URL=$(curl -s "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/getWebhookInfo" | jq -r '.result.url // empty')
+            if [ -n "$WEBHOOK_URL" ]; then
+              echo "Telegram webhook active — skipping poll (instant mode delivers via repository_dispatch)"
+            else
+              RESPONSE=$(curl -s "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/getUpdates?timeout=0&allowed_updates=%5B%22message%22%5D")
+              COUNT=$(echo "$RESPONSE" | jq '.result | length')
+              MAX_UPDATE_ID=""
+              TG_MESSAGES='[]'
 
-            for ((i=0; i<COUNT; i++)); do
-              TEXT=$(echo "$RESPONSE" | jq -r ".result[$i].message.text // empty")
-              CHAT=$(echo "$RESPONSE" | jq -r ".result[$i].message.chat.id // empty")
-              UPDATE_ID=$(echo "$RESPONSE" | jq -r ".result[$i].update_id // empty")
+              for ((i=0; i<COUNT; i++)); do
+                TEXT=$(echo "$RESPONSE" | jq -r ".result[$i].message.text // empty")
+                CHAT=$(echo "$RESPONSE" | jq -r ".result[$i].message.chat.id // empty")
+                UPDATE_ID=$(echo "$RESPONSE" | jq -r ".result[$i].update_id // empty")
 
-              if [ -n "$TEXT" ] && [ "$CHAT" = "$TELEGRAM_CHAT_ID" ]; then
-                MESSAGES=$(echo "$MESSAGES" | jq --arg src "telegram" --arg txt "$TEXT" '. + [{source: $src, text: $txt}]')
-                echo "Telegram: $TEXT"
+                if [ -n "$TEXT" ] && [ "$CHAT" = "$TELEGRAM_CHAT_ID" ]; then
+                  TG_MESSAGES=$(echo "$TG_MESSAGES" | jq --arg src "telegram" --arg txt "$TEXT" '. + [{source: $src, text: $txt}]')
+                  echo "Telegram: $TEXT"
+                fi
+                MAX_UPDATE_ID="$UPDATE_ID"
+              done
+
+              # Acknowledge updates BEFORE queuing them for dispatch, and only
+              # enqueue once Telegram confirms the offset advanced (ok:true) — a
+              # re-poll then can't re-read them. If the ack fails, leave the
+              # messages pending for the next tick rather than dispatch updates
+              # that could be re-read and processed twice.
+              if [ -n "$MAX_UPDATE_ID" ]; then
+                ACK_OK=$(curl -s "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/getUpdates?offset=$((MAX_UPDATE_ID + 1))" | jq -r '.ok // false')
+                if [ "$ACK_OK" = "true" ]; then
+                  MESSAGES=$(echo "$MESSAGES" | jq --argjson tg "$TG_MESSAGES" '. + $tg')
+                else
+                  PENDING=$(echo "$TG_MESSAGES" | jq 'length')
+                  [ "$PENDING" -gt 0 ] && echo "::warning::Telegram offset ack failed — leaving $PENDING message(s) pending to avoid double-processing"
+                fi
               fi
-              MAX_UPDATE_ID="$UPDATE_ID"
-            done
-
-            # Acknowledge all updates at once
-            if [ -n "$MAX_UPDATE_ID" ]; then
-              curl -s "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/getUpdates?offset=$((MAX_UPDATE_ID + 1))" > /dev/null
             fi
           fi
 
           # --- Discord (collect ALL unprocessed messages) ---
-          if [ "$DISCORD_POLLING" -gt 0 ] && [ -n "${DISCORD_BOT_TOKEN:-}" ] && [ -n "${DISCORD_CHANNEL_ID:-}" ]; then
+          if [ -n "${DISCORD_BOT_TOKEN:-}" ] && [ -n "${DISCORD_CHANNEL_ID:-}" ]; then
             RESPONSE=$(curl -s -H "Authorization: Bot $DISCORD_BOT_TOKEN" \
               "https://discord.com/api/v10/channels/$DISCORD_CHANNEL_ID/messages?limit=10")
             COUNT=$(echo "$RESPONSE" | jq 'if type == "array" then length else 0 end')
@@ -528,7 +560,7 @@ jobs:
           fi
 
           # --- Slack (collect ALL unprocessed messages) ---
-          if [ "$SLACK_POLLING" -gt 0 ] && [ -n "${SLACK_BOT_TOKEN:-}" ] && [ -n "${SLACK_CHANNEL_ID:-}" ]; then
+          if [ -n "${SLACK_BOT_TOKEN:-}" ] && [ -n "${SLACK_CHANNEL_ID:-}" ]; then
             RESPONSE=$(curl -s -H "Authorization: Bearer $SLACK_BOT_TOKEN" \
               "https://slack.com/api/conversations.history?channel=$SLACK_CHANNEL_ID&limit=10")
             COUNT=$(echo "$RESPONSE" | jq '.messages | length')
@@ -539,7 +571,7 @@ jobs:
               BOT_ID=$(echo "$RESPONSE" | jq -r ".messages[$i].bot_id // empty")
               HAS_CHECK=$(echo "$RESPONSE" | jq -r ".messages[$i].reactions[]? | select(.name == \"white_check_mark\") | .name // empty")
 
-              if [ -n "$TEXT" ] && [ "$BOT_ID" = "null" ] && [ -z "$HAS_CHECK" ]; then
+              if [ -n "$TEXT" ] && [ -z "$BOT_ID" ] && [ -z "$HAS_CHECK" ]; then
                 curl -s -X POST -H "Authorization: Bearer $SLACK_BOT_TOKEN" \
                   -H "Content-Type: application/json" \
                   -d "$(jq -n --arg ch "$SLACK_CHANNEL_ID" --arg ts "$TS" \
@@ -619,14 +651,35 @@ jobs:
 
       - name: Install Claude Code
         if: steps.msg.outputs.source != ''
-        run: npm install -g @anthropic-ai/claude-code
+        # Pinned for supply-chain safety — keep in sync with aeon.yml's pin.
+        run: npm install -g @anthropic-ai/claude-code@2.1.168
 
       - name: Run
         id: run
         if: steps.msg.outputs.source != ''
         env:
+          # Full secrets context — lets .mcp.json reference ANY repo secret as
+          # ${NAME} with no per-name env wiring. Consumed by the MCP preflight
+          # below, then unset before Claude runs so it never reaches skill code.
+          ALL_SECRETS: ${{ toJSON(secrets) }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          ANTHROPIC_BASE_URL: ${{ vars.ANTHROPIC_BASE_URL }}
+          BANKR_LLM_KEY: ${{ secrets.BANKR_LLM_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          USEPOD_TOKEN: ${{ secrets.USEPOD_TOKEN }}
+          VENICE_API_KEY: ${{ secrets.VENICE_API_KEY }}
+          SURPLUS_API_KEY: ${{ secrets.SURPLUS_API_KEY }}
+          OPENROUTER_MODEL: ${{ vars.OPENROUTER_MODEL }}
+          OPENROUTER_MODEL_SONNET: ${{ vars.OPENROUTER_MODEL_SONNET }}
+          OPENROUTER_MODEL_HAIKU: ${{ vars.OPENROUTER_MODEL_HAIKU }}
+          USEPOD_MODEL: ${{ vars.USEPOD_MODEL }}
+          USEPOD_MODEL_SONNET: ${{ vars.USEPOD_MODEL_SONNET }}
+          USEPOD_MODEL_HAIKU: ${{ vars.USEPOD_MODEL_HAIKU }}
+          VENICE_MODEL: ${{ vars.VENICE_MODEL }}
+          VENICE_CLEANCACHE: ${{ vars.VENICE_CLEANCACHE }}
+          SURPLUS_MODEL: ${{ vars.SURPLUS_MODEL }}
+          CCR_LOG: ${{ vars.CCR_LOG }}
           GITHUB_TOKEN: ${{ secrets.GH_GLOBAL || secrets.GITHUB_TOKEN }}
           GH_TOKEN: ${{ secrets.GH_GLOBAL || secrets.GITHUB_TOKEN }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
@@ -645,7 +698,12 @@ jobs:
         run: |
           TODAY=$(date -u +%Y-%m-%d)
           CONFIG_MODEL=$(grep -E '^model:' aeon.yml | sed 's/^model: *//' | tr -d ' ')
-          MODEL="${CONFIG_MODEL:-claude-opus-4-7}"
+          MODEL="${CONFIG_MODEL:-claude-opus-4-8}"
+
+          # AI Gateway routing — same path as aeon.yml's Run steps
+          GATEWAY=$(grep -A1 '^gateway:' aeon.yml | grep 'provider:' | sed 's/.*provider:[[:space:]]*//' | sed "s/[\"' ]//g" || true)
+          GATEWAY="${GATEWAY:-auto}"
+          source "${GITHUB_WORKSPACE}/scripts/llm-gateway.sh"
 
           cat > ./notify << 'NOTIFY_SCRIPT'
           #!/usr/bin/env bash
@@ -676,6 +734,37 @@ jobs:
           ALLOWED="$ALLOWED,Bash(date:*),Bash(echo:*),Bash(node:*),Bash(npm:*),Bash(npx:*)"
           ALLOWED="$ALLOWED,Bash(head:*),Bash(tail:*),Bash(wc:*),Bash(sort:*),Bash(grep:*)"
 
+          # MCP (opt-in): when a project .mcp.json exists, load it for this run
+          # and allow each server's tools. No-op when the file is absent. Any
+          # ${VAR} the config references is auto-resolved from this repo's secrets
+          # (ALL_SECRETS) — set the secret in the dashboard and it just works, no
+          # per-name workflow wiring. If a referenced secret genuinely isn't set,
+          # skip MCP with a warning rather than break the run on a parse failure.
+          MCP_FLAGS=()
+          if [ -f .mcp.json ] && jq -e '.mcpServers' .mcp.json >/dev/null 2>&1; then
+            MCP_MISSING=""
+            # ALL_SECRETS is toJSON(secrets). Guard the empty case via a temp var —
+            # NOT the inline ${ALL_SECRETS:-{}} form: bash closes ${...} at the first
+            # '}', so the default is just '{' and a stray '}' gets appended to the
+            # value, corrupting the JSON (jq: parse error "Unmatched '}'").
+            SECRETS_JSON="${ALL_SECRETS:-}"; [ -z "$SECRETS_JSON" ] && SECRETS_JSON='{}'
+            for v in $(grep -oE '\$\{[A-Z_][A-Z0-9_]*\}' .mcp.json | sed -E 's/[${}]//g' | sort -u); do
+              [ -n "${!v:-}" ] && continue                                  # already in env (built-in)
+              val="$(jq -r --arg k "$v" '.[$k] // empty' <<<"$SECRETS_JSON")"
+              if [ -n "$val" ]; then export "$v=$val"; else MCP_MISSING="$MCP_MISSING $v"; fi
+            done
+            if [ -n "$MCP_MISSING" ]; then
+              echo "::warning::.mcp.json references secret(s) not set:${MCP_MISSING} — add them in the dashboard; the next run picks them up. Skipping MCP this run."
+            else
+              for srv in $(jq -r '.mcpServers | keys[]' .mcp.json); do
+                ALLOWED="$ALLOWED,mcp__${srv}"
+              done
+              MCP_FLAGS=(--mcp-config .mcp.json --strict-mcp-config)
+              echo "MCP enabled: $(jq -r '.mcpServers | keys | join(", ")' .mcp.json)"
+            fi
+          fi
+          unset ALL_SECRETS   # drop the secrets blob before any skill/Claude code runs
+
           SOURCE="$_MSG_SOURCE"
           MESSAGE="$_MSG_MESSAGE"
           PROMPT="Today is $TODAY. You received this message from the user on ${SOURCE}:
@@ -693,7 +782,7 @@ jobs:
           Always send your response back via ./notify so the user sees it."
           if ! CLAUDE_OUTPUT=$(echo "$PROMPT" | claude -p - \
             --model "$MODEL" --allowedTools "$ALLOWED" \
-            --output-format json 2>&1); then
+            "${MCP_FLAGS[@]}" --output-format json 2>&1); then
             echo "::error::Claude CLI failed. Output: $CLAUDE_OUTPUT"
             exit 1
           fi
@@ -713,6 +802,21 @@ jobs:
           echo "SKILL_TOTAL_TOKENS=$TOTAL_TOKENS" >> "$GITHUB_OUTPUT"
 
           echo "::notice::Token usage — input: $INPUT_TOKENS, output: $OUTPUT_TOKENS, cache_read: $CACHE_READ, cache_creation: $CACHE_CREATION, total: $TOTAL_TOKENS"
+
+      # Sidecar gateway logs die with the VM — surface them in the job log on
+      # failure (set the CCR_LOG=true repo variable for request-level detail).
+      # The ccr config.json is deliberately NOT printed (it embeds the provider key).
+      - name: Sidecar logs (on failure)
+        if: failure()
+        run: |
+          found=0
+          for f in "$HOME"/.claude-code-router/logs/*.log "$HOME"/.claude-code-router/*.log; do
+            [ -f "$f" ] || continue
+            found=1
+            echo "===== ${f} (last 200 lines) ====="
+            tail -n 200 "$f"
+          done
+          if [ "$found" -eq 0 ]; then echo "No claude-code-router logs found (gateway was not a sidecar provider, or it never started)."; fi
 
       - name: Log token usage
         if: steps.msg.outputs.source != ''
