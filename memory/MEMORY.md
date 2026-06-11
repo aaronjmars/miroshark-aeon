@@ -18,6 +18,7 @@ See `memory/watched-repos.md` — `aaronjmars/MiroShark`, `aaronjmars/miroshark-
 ## Recent Articles
 | Date | Title | Topic |
 |------|-------|-------|
+| 2026-06-11 | MiroShark is being rebuilt as a machine to read from, not a site to look at | API-surface pivot (5/8 PRs added JSON endpoints) |
 
 ## Recent Digests
 | Date | Type | Key Topics |
