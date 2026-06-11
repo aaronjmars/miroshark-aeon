@@ -1,0 +1,245 @@
+{
+  "root": "card_root",
+  "state": {},
+  "elements": {
+    "card_root": {
+      "type": "Card",
+      "props": {
+        "title": "heartbeat",
+        "description": "Scheduler health check (first run post-rebuild)"
+      },
+      "children": [
+        "alert_degraded",
+        "p0_section",
+        "separator1",
+        "p3_section",
+        "separator2",
+        "next_section"
+      ]
+    },
+    "alert_degraded": {
+      "type": "Alert",
+      "props": {
+        "title": "DEGRADED (first run post-rebuild)",
+        "type": "warning"
+      }
+    },
+    "p0_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "p0_badge",
+        "p0_text"
+      ]
+    },
+    "p0_badge": {
+      "type": "Badge",
+      "props": {
+        "text": "P0 self-check",
+        "variant": "outline"
+      }
+    },
+    "p0_text": {
+      "type": "Text",
+      "props": {
+        "text": "heartbeat has no prior success record — cron-state.json was reset during the 2026-06-11 template rebuild. Expected on first run; not an active failure.",
+        "variant": "body"
+      }
+    },
+    "separator1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "p3_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "p3_badge",
+        "p3_intro",
+        "skills_grid"
+      ]
+    },
+    "p3_badge": {
+      "type": "Badge",
+      "props": {
+        "text": "P3 UNSTARTED",
+        "variant": "outline"
+      }
+    },
+    "p3_intro": {
+      "type": "Text",
+      "props": {
+        "text": "15 enabled skills have no run history. All are pending first dispatch post-rebuild:",
+        "variant": "body"
+      }
+    },
+    "skills_grid": {
+      "type": "Grid",
+      "props": {
+        "columns": 3,
+        "gap": "sm"
+      },
+      "children": [
+        "skill_token_report",
+        "skill_push_recap",
+        "skill_repo_article",
+        "skill_repo_actions",
+        "skill_repo_pulse",
+        "skill_star_milestone",
+        "skill_star_momentum",
+        "skill_project_lens",
+        "skill_thread_formatter",
+        "skill_self_improve",
+        "skill_feature",
+        "skill_shiplog",
+        "skill_operator_scorecard",
+        "skill_memory_flush",
+        "skill_heartbeat"
+      ]
+    },
+    "skill_token_report": {
+      "type": "Badge",
+      "props": {
+        "text": "token-report",
+        "variant": "secondary"
+      }
+    },
+    "skill_push_recap": {
+      "type": "Badge",
+      "props": {
+        "text": "push-recap",
+        "variant": "secondary"
+      }
+    },
+    "skill_repo_article": {
+      "type": "Badge",
+      "props": {
+        "text": "repo-article",
+        "variant": "secondary"
+      }
+    },
+    "skill_repo_actions": {
+      "type": "Badge",
+      "props": {
+        "text": "repo-actions",
+        "variant": "secondary"
+      }
+    },
+    "skill_repo_pulse": {
+      "type": "Badge",
+      "props": {
+        "text": "repo-pulse",
+        "variant": "secondary"
+      }
+    },
+    "skill_star_milestone": {
+      "type": "Badge",
+      "props": {
+        "text": "star-milestone",
+        "variant": "secondary"
+      }
+    },
+    "skill_star_momentum": {
+      "type": "Badge",
+      "props": {
+        "text": "star-momentum",
+        "variant": "secondary"
+      }
+    },
+    "skill_project_lens": {
+      "type": "Badge",
+      "props": {
+        "text": "project-lens",
+        "variant": "secondary"
+      }
+    },
+    "skill_thread_formatter": {
+      "type": "Badge",
+      "props": {
+        "text": "thread-formatter",
+        "variant": "secondary"
+      }
+    },
+    "skill_self_improve": {
+      "type": "Badge",
+      "props": {
+        "text": "self-improve",
+        "variant": "secondary"
+      }
+    },
+    "skill_feature": {
+      "type": "Badge",
+      "props": {
+        "text": "feature",
+        "variant": "secondary"
+      }
+    },
+    "skill_shiplog": {
+      "type": "Badge",
+      "props": {
+        "text": "shiplog",
+        "variant": "secondary"
+      }
+    },
+    "skill_operator_scorecard": {
+      "type": "Badge",
+      "props": {
+        "text": "operator-scorecard",
+        "variant": "secondary"
+      }
+    },
+    "skill_memory_flush": {
+      "type": "Badge",
+      "props": {
+        "text": "memory-flush",
+        "variant": "secondary"
+      }
+    },
+    "skill_heartbeat": {
+      "type": "Badge",
+      "props": {
+        "text": "heartbeat",
+        "variant": "secondary"
+      }
+    },
+    "separator2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "next_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "next_heading",
+        "next_text"
+      ]
+    },
+    "next_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Next",
+        "level": "h3"
+      }
+    },
+    "next_text": {
+      "type": "Text",
+      "props": {
+        "text": "Watch for token-report and repo-pulse to land tomorrow (06:00 / 10:00 UTC) to confirm the scheduler is live.",
+        "variant": "body"
+      }
+    }
+  }
+}
