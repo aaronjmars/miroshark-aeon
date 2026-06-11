@@ -55,19 +55,19 @@ No server. No daemon. If GitHub Actions is up, Aeon is up.
 <h2 class="section-header">Skills by Category</h2>
 
 ### Research & Content
-`article` · `digest` · `rss-digest` · `hacker-news-digest` · `paper-digest` · `paper-pick` · `tweet-digest` · `list-digest` · `research-brief` · `fetch-tweets` · `search-papers` · `reddit-digest` · `security-digest`
+`article` · `digest` · `rss-digest` · `hn-digest` · `paper-digest` · `paper-pick` · `tweet-digest` · `list-digest` · `research-brief` · `fetch-tweets` · `search-papers` · `reddit-digest` · `security-digest`
 
 ### Dev & Code
 `pr-review` · `github-monitor` · `github-issues` · `github-trending` · `issue-triage` · `changelog` · `code-health` · `feature` · `build-skill` · `search-skill`
 
 ### Crypto & Markets
-`token-alert` · `token-movers` · `trending-coins` · `wallet-digest` · `on-chain-monitor` · `defi-monitor` · `defi-overview` · `polymarket` · `polymarket-comments` · `monitor-runners` · `token-pick`
+`token-alert` · `token-movers` · `trending-coins` · `wallet-digest` · `onchain-monitor` · `defi-monitor` · `defi-overview` · `polymarket` · `polymarket-comments` · `monitor-runners` · `token-pick`
 
 ### Social & Writing
 `write-tweet` · `reply-maker` · `refresh-x`
 
 ### Productivity & Meta
-`morning-brief` · `daily-routine` · `weekly-review` · `goal-tracker` · `idea-capture` · `action-converter` · `startup-idea` · `heartbeat` · `memory-flush` · `reflect` · `skill-health` · `self-review` · `rss-feed` · `update-gallery`
+`priority-brief` · `routine` · `retrospective` · `goal-tracker` · `idea-capture` · `action-converter` · `startup-idea` · `heartbeat` · `memory-flush` · `reflect` · `skill-health` · `self-review` · `rss-feed` · `update-gallery`
 
 <p><a href="/skills">Browse the full skill catalog →</a></p>
 

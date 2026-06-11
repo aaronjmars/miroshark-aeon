@@ -1,8 +1,9 @@
 ---
 name: Write Tweet
-description: Generate 10 tweet drafts across 5 size tiers (2 variations each) on a topic from today's outputs
+description: Generate 10 tweet drafts across 5 size tiers (2 variations each) on a topic from recent outputs
 var: ""
 tags: [social]
+requires: [XAI_API_KEY]
 ---
 > **${var}** — Topic or URL to write about (e.g. "prediction markets are broken", "https://arxiv.org/..."). If empty, auto-selects the most tweetable insight from today's logs.
 
@@ -173,3 +174,7 @@ Append to `memory/logs/${today}.md`:
 - **Best overall:** #[n] — [style] / [tier]
 - **Notification sent:** yes
 ```
+
+## Sandbox note
+
+The sandbox may block outbound curl. Use **WebFetch** as a fallback for any URL fetch. For auth-required APIs, use the pre-fetch/post-process pattern (see CLAUDE.md).

@@ -64,4 +64,8 @@ Steps:
    Change since last check: summary
    ```
 5. Log findings to memory/logs/${today}.md.
+## Sandbox note
+
+The sandbox may block outbound curl. Use **WebFetch** as a fallback for any URL fetch. For auth-required APIs, use the pre-fetch/post-process pattern (see CLAUDE.md).
+
 If no DeFi positions configured, log "DEFI_MONITOR_OK" and end.

@@ -1,6 +1,6 @@
 ---
 name: contributor-spotlight
-description: Weekly recognition post for one fork operator — converts fork-cohort cohort data into a named human moment (POWER fork callout with their work, stars, and skills enabled)
+description: Recognition post for one fork operator — converts fork-cohort cohort data into a named human moment (POWER fork callout with their work, stars, and skills enabled)
 var: ""
 tags: [meta, community]
 ---
@@ -10,7 +10,7 @@ Today is ${today}. Convert the most recent `fork-cohort` output into one named r
 
 ## Why this exists
 
-`fork-cohort` (PR #152) identifies POWER and ACTIVE forks weekly but produces a data table — not a recognition. `fork-contributor-leaderboard` ranks contributors by upstream PRs but doesn't see what's happening inside a fork. Neither closes the loop between *we have fork data* and *we do something social with it*.
+`fork-cohort` (PR #152) identifies POWER and ACTIVE forks weekly but produces a data table — not a recognition. `contributor-leaderboard` ranks contributors by upstream PRs but doesn't see what's happening inside a fork. Neither closes the loop between *we have fork data* and *we do something social with it*.
 
 contributor-spotlight is the social loop: one fork operator per week gets a named callout — their handle, their fork, the skills they enabled, their star count, a one-line "keep shipping" close. That's the flywheel — operators who feel seen attract other operators. This is also formatted to feed `thread-formatter` directly, so the post is a tweetable artifact, not just a Telegram blip.
 
@@ -87,6 +87,12 @@ gh api "repos/${FEATURED_FORK}" \
   --jq '{stars: .stargazers_count, forks: .forks_count, default_branch, created_at, pushed_at, description, html_url}' \
   > /tmp/contrib-repo.json 2>/dev/null || echo '{}' > /tmp/contrib-repo.json
 
+# Extract default_branch into a shell var — step 5 needs it to address the right ref.
+# Falls back to "main" when the API call failed (contrib-repo.json is "{}") or
+# when GitHub returned the field as null/missing.
+FORK_DEFAULT_BRANCH=$(jq -r '.default_branch // "main"' /tmp/contrib-repo.json)
+[ -z "$FORK_DEFAULT_BRANCH" ] || [ "$FORK_DEFAULT_BRANCH" = "null" ] && FORK_DEFAULT_BRANCH=main
+
 # Recent commit activity (last 30 days, default branch)
 SINCE=$(date -u -d "${today} - 30 days" +%Y-%m-%dT%H:%M:%SZ 2>/dev/null \
     || date -u -j -v-30d -f %Y-%m-%dT%H:%M:%SZ "${today}T00:00:00Z" +%Y-%m-%dT%H:%M:%SZ)
@@ -104,9 +110,12 @@ gh api "repos/${FEATURED_FORK}/stats/contributors" \
 ### 5. Identify the diverged work
 
 ```bash
-# Read the fork's aeon.yml to count enabled skills, and diff against parent's
+# Read the fork's aeon.yml to count enabled skills, and diff against parent's.
+# FORK_DEFAULT_BRANCH was extracted from contrib-repo.json in step 4 (falls back
+# to "main"). Without that ref the GitHub contents API used to silently 404 on
+# every fork that renamed its default branch — see Issue #184 (AntFleet H3).
 gh api "repos/${FEATURED_FORK}/contents/aeon.yml?ref=${FORK_DEFAULT_BRANCH}" \
-  --jq '.content' 2>/dev/null | base64 -d > /tmp/fork-aeon.yml || true
+  --jq '.content' 2>/dev/null | base64 -d > /tmp/fork-aeon.yml || echo '' > /tmp/fork-aeon.yml
 ```
 
 Extract the list of enabled skills (lines matching `enabled:\s*true` with the skill key on the same logical line). Pattern (loose, comment-skipping):
@@ -284,5 +293,5 @@ Uses `gh api` for all GitHub queries — handles auth internally, no env-var-in-
 ## Companion skills
 
 - **`fork-cohort`** (Sunday 19:00 UTC) — produces the source data this skill picks from. Run order matters: schedule contributor-spotlight one hour later (Sunday 20:00 UTC) so today's cohort is fresh.
-- **`fork-contributor-leaderboard`** (Sunday 17:30 UTC) — adjacent recognition skill ranked by upstream-PR contribution. Spotlight focuses on fork-internal work; leaderboard focuses on upstream-PR work. Together they cover both directions of the contributor flywheel.
+- **`contributor-leaderboard`** (Sunday 17:30 UTC) — adjacent recognition skill ranked by upstream-PR contribution. Spotlight focuses on fork-internal work; leaderboard focuses on upstream-PR work. Together they cover both directions of the contributor flywheel.
 - **`thread-formatter`** (when run after this skill) — can pick up the spotlight as the day's top event and reformat into a 5-tweet thread, turning the recognition into a tweetable artifact.

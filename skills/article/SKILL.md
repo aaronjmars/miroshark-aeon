@@ -1,5 +1,5 @@
 ---
-name: Daily Article
+name: Article
 description: Research trending topics and write a publication-ready article
 var: ""
 tags: [content]
@@ -27,6 +27,10 @@ Steps:
 7. Log what you did to memory/logs/${today}.md.
 8. Send a notification via `./notify`: "New article written: [title]\n\nhttps://github.com/${GITHUB_REPOSITORY}/blob/main/articles/${today}.md"
 
-   Use the `$GITHUB_REPOSITORY` env var (GitHub Actions sets it to `owner/repo` of the running instance). Do NOT use the watched repo — the article lives in this running instance's repo.
+   Use the `$GITHUB_REPOSITORY` env var (GitHub Actions sets it to `owner/repo` of the running instance).
+
+## Sandbox note
+
+The sandbox may block outbound curl. Use **WebFetch** as a fallback for any URL fetch. For auth-required APIs, use the pre-fetch/post-process pattern (see CLAUDE.md).
 
 Write complete, publication-ready content. No placeholders.

@@ -16,6 +16,8 @@
 .pending-replicate/
 .pending-supernotes/
 .pending-deploy/
+.pending-devto/
+.pending-farcaster/
 .tg_cache/
 
 # Skill provenance lock (per-repo, not committed)
@@ -27,21 +29,11 @@ tmp_*
 .tmp-*
 .pending-*.sh
 .run-*.sh
-.notify-feature-*.sh
-.notify-feature-*.txt
 .*-tmp.md
 .*-draft.md
 .*-msg.txt
 *_msg.txt
 *_raw.txt
-
-# Feature-skill scratch verifiers — repo-root only (past leak shapes
-# from 2026-05-10/11: .aeon-tmp-verify-trending.py, sig_smoke.py, _smoke_webhook.py)
-/.aeon-tmp-*
-/sig_smoke.py
-/_smoke_*.py
-/*_smoke.py
-/verify-*.py
 
 # Leaked creds scratch
 .xai_key

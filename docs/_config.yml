@@ -1,7 +1,7 @@
 title: "Aeon — Skill Gallery"
 description: "Public output showcase for Aeon, an autonomous AI agent running on GitHub Actions powered by Claude Code."
 baseurl: ""
-url: "https://aaronjmars.github.io/miroshark-aeon"
+url: "https://aaronjmars.github.io/aeon"
 
 # Build settings
 theme: minima
@@ -19,6 +19,7 @@ header_pages:
   - activity.md
   - memory.md
   - skills.md
+  - status.md
 
 # Permalinks
 permalink: /articles/:year/:month/:day/:title/
@@ -48,4 +49,4 @@ exclude:
 # Social links
 minima:
   social_links:
-    - { platform: github, user_url: "https://github.com/aaronjmars/miroshark-aeon" }
+    - { platform: github, user_url: "https://github.com/aaronjmars/aeon" }

@@ -1,6 +1,6 @@
 ---
 name: skill-analytics
-description: Weekly fleet-level skill-run analytics — ranks skills by 7d run count, surfaces success rates, exit-taxonomy distribution, and anomaly flags (significance-gated)
+description: Fleet-level skill-run analytics — ranks skills by 7d run count, surfaces success rates, exit-taxonomy distribution, and anomaly flags (significance-gated)
 var: ""
 tags: [meta]
 ---
@@ -110,7 +110,7 @@ Pick the strongest single claim, in priority:
 
 ### 9. Significance gate
 
-**Notify only if `anomaly_count >= 1`.** Silent run = correct (no anomalies in fleet) = no notification. Following the autoresearch-evolution / fork-skill-digest pattern: noisy skills break trust faster than missing pings.
+**Notify only if `anomaly_count >= 1`.** Silent run = correct (no anomalies in fleet) = no notification. Following the autoresearch-evolution / fork-digest pattern: noisy skills break trust faster than missing pings.
 
 If gate says skip, still write the article and JSON spec, and log `SKILL_ANALYTICS_QUIET` (no anomalies). The dashboard widget refreshes regardless; only the push notification is gated.
 
@@ -187,7 +187,7 @@ ${list of {skill, schedule} pairs OR "none — every enabled cron skill ran at l
 
 ### 11. Write the dashboard JSON spec
 
-Path: `dashboard/outputs/skill-analytics.json`. Use the catalog components (Card / Stack / Heading / Text / Badge / Table).
+Path: `apps/dashboard/outputs/skill-analytics.json`. Use the catalog components (Card / Stack / Heading / Text / Badge / Table).
 
 ```json
 {
@@ -289,7 +289,7 @@ Cap the message body at ~3500 chars (Telegram safe limit). Drop the "Top by runs
 - **Exit dominant**: ${exit_dominant_summary}
 - **Verdict**: ${verdict_line}
 - **Article**: articles/skill-analytics-${today}.md
-- **Dashboard**: dashboard/outputs/skill-analytics.json
+- **Dashboard**: apps/dashboard/outputs/skill-analytics.json
 - **Notification sent**: ${yes|no — quiet (no anomalies)}
 - **Status**: SKILL_ANALYTICS_OK | SKILL_ANALYTICS_QUIET | SKILL_ANALYTICS_NO_DATA
 ```

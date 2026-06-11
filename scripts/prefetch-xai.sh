@@ -9,20 +9,6 @@ set -euo pipefail
 
 SKILL="${1:-}"
 VAR="${2:-}"
-
-# If var not passed as argument, try reading it from aeon.yml
-if [ -z "$VAR" ] && [ -f "aeon.yml" ]; then
-  VAR=$(python3 -c "
-import re, sys
-skill = sys.argv[1]
-with open('aeon.yml') as f:
-    for line in f:
-        if line.strip().startswith(skill + ':'):
-            m = re.search(r'var:\s*\"([^\"]+)\"', line)
-            if m: print(m.group(1)); break
-" "$SKILL" 2>/dev/null || true)
-  [ -n "$VAR" ] && echo "xai-prefetch: read var from aeon.yml: ${VAR:0:60}..."
-fi
 TODAY=$(date -u +%Y-%m-%d)
 YESTERDAY=$(date -u -d "yesterday" +%Y-%m-%d 2>/dev/null || date -u -v-1d +%Y-%m-%d)
 THREE_DAYS_AGO=$(date -u -d "3 days ago" +%Y-%m-%d 2>/dev/null || date -u -v-3d +%Y-%m-%d)
@@ -90,6 +76,18 @@ xai_search() {
   if [ "$http_code" != "200" ]; then
     echo "::warning::xai-prefetch: FAILED $outfile (HTTP $http_code)"
     echo "::warning::xai-prefetch: response: $(echo "$response" | head -c 300)"
+    # Log persistent errors to memory so skills and health checks can see them
+    if [ "$http_code" = "429" ] || [ "$http_code" = "401" ] || [ "$http_code" = "403" ]; then
+      mkdir -p memory/logs
+      TODAY=$(date -u +%Y-%m-%d)
+      NOW=$(date -u +%H:%M)
+      ERROR_MSG=$(echo "$response" | jq -r '.error // .message // "unknown"' 2>/dev/null | head -c 200)
+      echo "" >> "memory/logs/${TODAY}.md"
+      echo "## XAI Prefetch Error ($NOW UTC)" >> "memory/logs/${TODAY}.md"
+      echo "- **Skill:** $SKILL" >> "memory/logs/${TODAY}.md"
+      echo "- **HTTP:** $http_code" >> "memory/logs/${TODAY}.md"
+      echo "- **Error:** $ERROR_MSG" >> "memory/logs/${TODAY}.md"
+    fi
     return 1
   fi
 
@@ -144,6 +142,27 @@ case "$SKILL" in
       "$THREE_DAYS_AGO"
     ;;
 
+  reply-maker)
+    if [ -z "$VAR" ]; then
+      echo "xai-prefetch: reply-maker has no var, skipping (skill falls back to memory logs + WebSearch)"
+      exit 0
+    fi
+    # Detect var shape: numeric → X list ID, @-prefixed → handle, anything else → topic
+    if echo "$VAR" | grep -Eq '^[0-9]+$'; then
+      xai_search "reply-maker.json" \
+        "Look at X list https://x.com/i/lists/${VAR}. Return the 12 most reply-worthy original posts (not retweets, not replies) by members of this list posted in the last 6 hours (between ${YESTERDAY} and ${TODAY}). Reply-worthy = has a take, claim, question, or framing worth engaging — NOT pure self-promo, breaking news without analysis, or threads already past 500 replies. For each: @handle, full tweet text, tweet URL, posted_at ISO timestamp, like/reply/retweet counts."
+    elif [ "${VAR#@}" != "$VAR" ]; then
+      ACCOUNT="${VAR#@}"
+      xai_search "reply-maker.json" \
+        "Search X for the 12 most reply-worthy original posts (not retweets, not replies) by @${ACCOUNT} between ${YESTERDAY} and ${TODAY}, prioritizing the last 6 hours. Reply-worthy = has a take, claim, question, or framing worth engaging — NOT pure self-promo, breaking news without analysis, or threads already past 500 replies. For each: @handle, full tweet text, tweet URL, posted_at ISO timestamp, like/reply/retweet counts." \
+        "$YESTERDAY" "$TODAY" \
+        "\"allowed_x_handles\": [\"${ACCOUNT}\"]"
+    else
+      xai_search "reply-maker.json" \
+        "Search X for 12 reply-worthy original posts on this topic: ${VAR}. Posted between ${YESTERDAY} and ${TODAY}, prioritizing the last 6 hours. Reply-worthy = has a take, claim, question, or framing worth engaging — NOT pure self-promo, breaking news without analysis, or threads already past 500 replies. Avoid threads already past 500 replies. For each: @handle, full tweet text, tweet URL, posted_at ISO timestamp, like/reply/retweet counts."
+    fi
+    ;;
+
   article)
     if [ -n "$VAR" ]; then
       xai_search "article-x.json" \
@@ -153,69 +172,28 @@ case "$SKILL" in
     fi
     ;;
 
-  token-report)
-    # Pre-fetch social sentiment for the tracked token. Inline curl with
-    # `$XAI_API_KEY` in headers fails in the sandbox, so the skill has been
-    # reporting "XAI_API_KEY not set — social data unavailable" every day
-    # despite the secret being configured. Prefetch writes cached results
-    # to `.xai-cache/token-report-social.json` + a `.token-report-social.symbol`
-    # sidecar so the skill can verify the cache matches the currently tracked
-    # token before consuming it.
-    #
-    # Token symbol is read from `memory/MEMORY.md` Tracked Token table; VAR is
-    # not used by token-report (contract override is rare; skill reads MEMORY.md).
-    rm -f .xai-cache/token-report-social.json .xai-cache/token-report-social.symbol
-
-    TOKEN_SYMBOL=""
-    if [ -f "memory/MEMORY.md" ]; then
-      TOKEN_SYMBOL=$(python3 -c "
-import re, sys
-try:
-    with open('memory/MEMORY.md') as f:
-        text = f.read()
-    # Match the first data row under '## Tracked Token' — skip the header/separator rows.
-    m = re.search(r'##\s+Tracked Token\s*\n(?:\|[^\n]*\n){2}\|\s*([A-Za-z0-9_\$]+)\s*\|', text)
-    if m: print(m.group(1).lstrip('\$'))
-except Exception: pass
-" 2>/dev/null || true)
-    fi
-
-    if [ -z "$TOKEN_SYMBOL" ]; then
-      echo "xai-prefetch: token-report — no token symbol found in memory/MEMORY.md, skipping social fetch"
+  fetch-tweets)
+    if [ -n "$VAR" ]; then
+      xai_search "fetch-tweets.json" \
+        "Search X for the latest tweets about: ${VAR} from ${YESTERDAY} to ${TODAY}. Return the 10 most interesting tweets. For each: @handle, full tweet text, date, engagement stats (likes, retweets, replies), and the direct link (https://x.com/username/status/ID)."
     else
-      xai_search "token-report-social.json" \
-        "Search X for tweets mentioning \$${TOKEN_SYMBOL} (the cashtag, with the \$ prefix) from ${YESTERDAY} to ${TODAY}. Return up to 5 substantive tweets. Apply these filters BEFORE picking results: (1) skip tweets with zero likes AND zero retweets — those are overwhelmingly bot/spam in low-cap cashtag streams; (2) skip tweets that are just a contract-address drop, 'vote for', 'fam drop', 'exclusive drop', or a link to an external clone domain (e.g. arbihunter.live, toknsite.live, toknsite.club, coinmarkettcap.fun, *.live/*.club farms); (3) skip duplicate-template spam (same wording across multiple handles posted within minutes). Prioritize the remaining tweets by substantive commentary about the project (team, tech, price thesis, partnerships, reactions to news). For each kept tweet: @handle, a one-line summary of the point being made, likes/retweets, and the direct link. Also note overall sentiment (bullish/bearish/mixed) in 1–2 sentences based ONLY on kept tweets. If no tweets pass the filters, return zero results and say so explicitly — do not fall back to including spam."
-      if [ -f ".xai-cache/token-report-social.json" ]; then
-        printf '%s' "$TOKEN_SYMBOL" > .xai-cache/token-report-social.symbol
-      fi
+      echo "xai-prefetch: fetch-tweets has no var, skipping"
     fi
     ;;
 
-  fetch-tweets)
-    if [ -n "$VAR" ]; then
-      # Drop any prior cache + query sidecar up front so a failed xai_search
-      # can't leave a stale hit from a previous run (e.g. a different $TOKEN var).
-      # Observed 2026-04-20: cache lingered with an old `$AEON OR ...` query
-      # while aeon.yml had already moved to `$MIROSHARK OR ...`, causing the
-      # skill to consume empty results and trigger redundant re-runs.
-      rm -f .xai-cache/fetch-tweets.json .xai-cache/fetch-tweets.query
-
-      if xai_search "fetch-tweets.json" \
-        "Search X for tweets matching this query: ${VAR} — strictly interpret OR operators. Date range: ${YESTERDAY} to ${TODAY}. IMPORTANT: only return tweets whose text actually contains at least one of the exact tokens from the query (the cashtag with the \$ prefix, the @ handle, or the URL). Do NOT return tweets that merely use the bare word 'aeon' or 'miroshark' without the \$ prefix — those are false positives about unrelated things (people named aeon, the word used casually, etc.). Return at least 10 matching tweets (more if available) — prioritize the most interesting, insightful, or highly-engaged posts but also include smaller accounts. For each tweet include: @handle, full tweet text, date posted, engagement stats (likes, retweets, replies), and the direct link (https://x.com/handle/status/ID). Return as a numbered list." \
-        "$YESTERDAY"; then
-        # Record the exact var used so the skill can verify the cache matches
-        # its current `${var}` before consuming Path A.
-        printf '%s' "$VAR" > .xai-cache/fetch-tweets.query
-      fi
-
-      # Post-filter: drop tweets whose text doesn't contain any required token.
-      # Guards against Grok returning bare-word matches despite the strict prompt.
-      if [ -f ".xai-cache/fetch-tweets.json" ] && [ -f "scripts/filter-xai-tweets.py" ]; then
-        python3 scripts/filter-xai-tweets.py .xai-cache/fetch-tweets.json "$VAR" \
-          || echo "::warning::xai-prefetch: post-filter failed (keeping raw output)"
-      fi
+  content-performance)
+    SEVEN_DAYS_AGO=$(date -u -d "7 days ago" +%Y-%m-%d 2>/dev/null || date -u -v-7d +%Y-%m-%d)
+    HANDLE="${VAR:-}"
+    if [ -z "$HANDLE" ] && [ -f soul/SOUL.md ]; then
+      HANDLE=$(grep -oE '@[A-Za-z0-9_]{2,15}' soul/SOUL.md | head -1 | tr -d '@')
+    fi
+    if [ -z "$HANDLE" ]; then
+      echo "xai-prefetch: content-performance — no handle (var empty, none found in soul/SOUL.md), skipping"
     else
-      echo "xai-prefetch: fetch-tweets has no var, skipping"
+      xai_search "content-performance.json" \
+        "Search X for all public tweets posted by @${HANDLE} between ${SEVEN_DAYS_AGO} and ${TODAY}. Include original tweets, replies, and quote tweets. For each tweet return: the full text (up to 150 chars), date posted (YYYY-MM-DD), like count, retweet count, quote tweet count, and reply count. Return up to 25 tweets sorted by total engagement (likes + retweets*2 + quotes*3) descending. If fewer tweets exist in the window, return all of them." \
+        "$SEVEN_DAYS_AGO" "$TODAY" \
+        "\"allowed_x_handles\": [\"${HANDLE}\"]"
     fi
     ;;
 

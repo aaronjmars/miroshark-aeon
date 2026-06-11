@@ -1,0 +1,12 @@
+name = "aeon-telegram-webhook"
+main = "src/worker.js"
+compatibility_date = "2025-01-01"
+
+# This Worker reads its config from environment variables / secrets, not from
+# this file. The "Deploy to Cloudflare" wizard prompts for them (declared in
+# .dev.vars.example); when deploying from a clone, set them via the CLI:
+#
+#   wrangler secret put TELEGRAM_BOT_TOKEN
+#   wrangler secret put TELEGRAM_CHAT_ID
+#   wrangler secret put GITHUB_REPO
+#   wrangler secret put GITHUB_TOKEN

@@ -1,0 +1,41 @@
+name: ci-capabilities-parity
+
+# Issue #301: the locked capabilities taxonomy lives in two places (three
+# counting the install-skill-pack header comment). This workflow fails any PR
+# that changes one side without the other, so drift can't ship silently.
+#
+# Runs on every PR or push that touches:
+#   - install-skill-pack            (ALLOWED_CAPABILITIES + header comment)
+#   - docs/CAPABILITIES.md          ("The taxonomy" table)
+#   - the parity script itself
+#   - this workflow file
+#
+# The check is also wired to workflow_dispatch so a maintainer can re-run it
+# against main without pushing a no-op change.
+
+on:
+  pull_request:
+    paths:
+      - 'install-skill-pack'
+      - 'docs/CAPABILITIES.md'
+      - 'scripts/check-capabilities-parity.sh'
+      - '.github/workflows/ci-capabilities-parity.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'install-skill-pack'
+      - 'docs/CAPABILITIES.md'
+      - 'scripts/check-capabilities-parity.sh'
+      - '.github/workflows/ci-capabilities-parity.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check capabilities taxonomy parity
+        run: bash scripts/check-capabilities-parity.sh

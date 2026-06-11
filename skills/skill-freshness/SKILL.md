@@ -14,7 +14,7 @@ The skill answers a question the existing health stack cannot: a chained skill t
 
 Aeon's reliability story has three layers — `heartbeat` (per-run pulse), `skill-analytics` (per-skill ranking over time), `skill-health` (per-skill failure detection) — and one gap. None of them catches the case where a producer skill's last successful run was N days ago and a downstream consumer is still happily reading the cached file as if it were fresh. The output of `tweet-allocator` looks normal. The output of `repo-pulse` looks normal. The aggregate verdict from `operator-scorecard` looks normal. The only signal something is wrong is that the upstream `articles/token-report-*.md` mtime drifted past its freshness window — and nobody is looking.
 
-This skill looks. It's a watchdog for **silent staleness**, not for failures. It does not duplicate `skill-health`'s job (which catches consecutive failures by reading run history) or `skill-update-check`'s job (which catches upstream SKILL.md drift in imported skills). Its scope is narrow: file-on-disk freshness vs the consumer that's about to read it.
+This skill looks. It's a watchdog for **silent staleness**, not for failures. It does not duplicate `skill-health`'s job (which catches consecutive failures by reading run history) or `skill-update`'s job (which catches upstream SKILL.md drift in imported skills). Its scope is narrow: file-on-disk freshness vs the consumer that's about to read it.
 
 ## Config
 
@@ -39,7 +39,6 @@ The threshold for a dependency depends on its path class:
 | Path class | Threshold | Rationale |
 |------------|-----------|-----------|
 | `articles/{skill}-*.md` | 28 hours | Daily skills run once per day; 28h gives a 4h grace window for clock skew + run delays. |
-| `articles/{skill}-*.md` produced by an every-N-day skill (day-of-month `*/N`) | `24 × N + 4` hours | Cadence + 4h grace. `*/2` → 52h (covers `repo-actions`, `self-improve`); `*/3` → 76h. |
 | `articles/{skill}-*.md` produced by a weekly skill (cron starts with `0 _ * * 0`-`6` only) | 8 days (192h) | Weekly producers have a 24h grace window. |
 | `.outputs/{skill}.md` (chain runner outputs) | 4 hours | Chain steps run minutes apart; a 4h-old `.outputs/` file is a stale chain run. |
 | `memory/topics/{name}.md` | 7 days (168h) | Topic files are reference material, edited on memory-flush cycles (~weekly). |
@@ -69,9 +68,8 @@ Per-class thresholds are computed at runtime — not hardcoded per dependency. T
 Parse `aeon.yml`. Build two maps:
 
 - `ENABLED` — set of skill names where `enabled: true`. (Skills with `enabled: false` are not audited as consumers — their dependencies don't matter until they're turned on. They CAN appear as producers though, and their freshness is still tracked since other consumers may depend on them.)
-- `PRODUCER_CADENCE` — map skill_name → `daily` | `every_Nd` | `weekly` | `on_demand` derived from the cron expression:
+- `PRODUCER_CADENCE` — map skill_name → `daily` | `weekly` | `on_demand` derived from the cron expression:
   - cron with `* * *` in days/months/weekdays → `daily`
-  - cron whose day-of-month field matches `^\*/(\d+)$` (e.g. `*/2`, `*/3`) → `every_Nd` where N is the step value. Today's `aeon.yml` uses `*/2` for `repo-actions` and `self-improve`; the regex handles any step.
   - cron whose weekday field matches `^[0-6]$` (single weekday) → `weekly`
   - `workflow_dispatch` or empty → `on_demand` (skipped from freshness audit; on-demand outputs have no expected cadence)
 
@@ -103,7 +101,7 @@ Each surviving reference becomes an **implicit** edge with the appropriate path 
 
 For every `articles/{producer}-${today}.md` reference (or the date-suffixed equivalent), resolve to the actual most-recent file on disk: `ls -1t articles/{producer}-*.md 2>/dev/null | head -1`. Record the resolved path AND the producer's expected cadence (from step 2's `PRODUCER_CADENCE` map).
 
-If no file matches the pattern at all, record as `MISSING` (only counted if the producer has cadence `daily`, `every_Nd`, or `weekly` — `on_demand` producers may legitimately have never run).
+If no file matches the pattern at all, record as `MISSING` (only counted if the producer has cadence `daily` or `weekly` — `on_demand` producers may legitimately have never run).
 
 ### 6. Score each dependency
 

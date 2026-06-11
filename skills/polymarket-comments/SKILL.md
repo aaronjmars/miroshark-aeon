@@ -9,6 +9,10 @@ tags: [crypto]
 Read memory/MEMORY.md for context.
 Read the last 2 days of memory/logs/ to avoid repeating data.
 
+## Sandbox note
+
+The sandbox may block curl. For every curl call below, if it fails or returns empty, use **WebFetch** for the same URL. All Polymarket APIs are public (no auth needed), so WebFetch works as a drop-in replacement.
+
 ## Steps
 
 ### 1. Fetch trending markets
@@ -25,6 +29,7 @@ Each market object contains: `id`, `question`, `slug`, `outcomePrices` (JSON arr
 Prioritize:
 - High volume + active trading (something is happening)
 - Controversial or polarizing questions (where comments will be spicy)
+- Markets with high engagement and controversy
 - Skip sports/esports games unless the line is wild
 - If `${var}` is set, filter to markets matching that topic
 

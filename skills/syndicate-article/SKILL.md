@@ -3,6 +3,7 @@ name: syndicate-article
 description: Cross-post articles to Dev.to and Farcaster with hook-driven copy and click-optimized metadata
 var: ""
 tags: [content, growth]
+requires: [DEVTO_API_KEY?, NEYNAR_API_KEY?, NEYNAR_SIGNER_UUID?]
 ---
 <!-- autoresearch: variation B — sharper output: hook-driven cast + CTR-optimized Dev.to card, with quality gate -->
 > **${var}** — Filename of a specific article to syndicate (e.g. `repo-article-2026-04-16.md`). If empty, syndicates the most recently written article.
@@ -100,7 +101,7 @@ Where `<slug>` matches `update-gallery`'s Jekyll post filename convention: title
 a. **Derive tags** (max 4, Dev.to hard limit) from the filename slug:
    - `repo-article`, `article` → `ai, github, automation, agents`
    - `token-report`, `token-alert`, `defi-overview`, `defi-monitor` → `crypto, defi, blockchain, trading`
-   - `changelog`, `push-recap`, `weekly-shiplog` → `opensource, devops, changelog, github`
+   - `changelog`, `push-recap`, `shiplog` → `opensource, devops, changelog, github`
    - `digest`, `rss-digest`, `hacker-news` → `news, tech, ai, digest`
    - `deep-research`, `research-brief`, `paper-pick` → `research, ai, machinelearning, papers`
    - `technical-explainer` → `tutorial, ai, explainer, programming`
