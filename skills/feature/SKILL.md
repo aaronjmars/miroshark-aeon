@@ -58,7 +58,7 @@ Today is ${today}. Your task is to build a new feature for the **watched repo** 
 
    Pick 2–4 keywords from the idea's name and intended functionality (e.g. "embed widget" → `embed`, `iframe`, `widget`; "per-round snapshot" → `round`, `snapshot`, `frame`). If a route, SPA path, OpenAPI entry, or documented feature already covers the same intent, **skip this idea and return to step 2 to pick the next candidate.** If ALL candidates from step 2 already exist, log `FEATURE_SKIP: all candidates already implemented` and stop — do not send a notification.
 
-   Brief evidence of the grep (what you searched, what you found) goes in the log entry from step 10.
+   Brief evidence of the grep (what you searched, what you found) goes in the log entry from step 11.
 
 7. **Decide auth posture UPFRONT — before writing any code.** Most repos default new endpoints behind auth by inheriting the wiring of their sibling endpoints (in MiroShark: `internal_auth_guard` auto-applies to all `/api/*` unless the route is in an explicit allow-list). That default is correct for write/mutation/private-read endpoints but wrong for *public-by-design* surfaces (status probes, capability catalogs, status-page body-matchers, integrator polling endpoints, discoverability registries). Past miss — **PR #149** (`/api/status.json`, 2026-06-05) shipped with default auth-guarded posture, drift-test caught the docs/code disagreement on CI, third squash review-commit had to actively *remove* `internal_auth_guard` from the route. The rewrite was free in retrospect but cost one CI cycle and one review-commit that should have been the initial design.
 
