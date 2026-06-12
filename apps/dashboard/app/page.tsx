@@ -12,14 +12,15 @@ import { TopBar } from '../components/TopBar'
 import { HQOverview } from '../components/HQOverview'
 import { SkillDetail } from '../components/SkillDetail'
 import { SecretsPanel } from '../components/SecretsPanel'
-import { StrategyPanel } from '../components/StrategyPanel'
+import { StrategyPanel, type StrategySources } from '../components/StrategyPanel'
+import { SoulPanel, type SoulFile, type SoulSources } from '../components/SoulPanel'
 import { McpPanel } from '../components/McpPanel'
 import { RightPanel } from '../components/RightPanel'
 import { ImportModal } from '../components/ImportModal'
 import { AuthModal } from '../components/AuthModal'
 
 export default function Dashboard() {
-  const [view, setView] = useState<'hq' | 'secrets' | 'strategy' | 'mcp'>('hq')
+  const [view, setView] = useState<'hq' | 'secrets' | 'strategy' | 'mcp' | 'soul'>('hq')
   const [selectedSkill, setSelectedSkill] = useState<string | null>(null)
   const [secretFocus, setSecretFocus] = useState<string | null>(null)
   // Shared with the sidebar's category chips — HQ category cards toggle it too.
@@ -53,11 +54,26 @@ export default function Dashboard() {
   const [strategy, setStrategy] = useState('')
   const [strategyLoaded, setStrategyLoaded] = useState(false)
   const [strategySaving, setStrategySaving] = useState(false)
+  const [strategyBuilding, setStrategyBuilding] = useState(false)
   const [mcpServers, setMcpServers] = useState<Record<string, Record<string, unknown>>>({})
   const [mcpLoaded, setMcpLoaded] = useState(false)
   const [mcpSaving, setMcpSaving] = useState(false)
+  const [soul, setSoul] = useState('')
+  const [soulStyle, setSoulStyle] = useState('')
+  const [soulLoaded, setSoulLoaded] = useState(false)
+  const [soulSaving, setSoulSaving] = useState(false)
+  const [soulBuilding, setSoulBuilding] = useState(false)
+  const [soulInstalling, setSoulInstalling] = useState<string | null>(null)
 
   const flash = (msg: string) => { setToast(msg); setTimeout(() => setToast(''), 3000) }
+  // Config writes auto-commit+push in local mode (no-op in hosted mode). Reflect
+  // the result: clear the "needs Sync" nudge on success, raise it only if the
+  // push failed (e.g. behind origin/main → resolve via the manual Sync button).
+  const flashSynced = (base: string, d: { synced?: boolean }) => {
+    const failed = d?.synced === false
+    setHasChanges(failed)
+    flash(failed ? `${base} · saved locally, not pushed` : base)
+  }
 
   // --- API ---
   const fetchData = useCallback(async () => {
@@ -72,22 +88,30 @@ export default function Dashboard() {
   useEffect(() => { setFeedLoading(true); fetch('/api/outputs').then(r => r.ok ? r.json() : { outputs: [] }).then(d => setOutputs(d.outputs || [])).finally(() => setFeedLoading(false)) }, [feedKey])
   useEffect(() => { if (view === 'strategy' && !strategyLoaded) { fetch('/api/strategy').then(r => r.ok ? r.json() : null).then(d => { if (d) { setStrategy(d.content || ''); setStrategyLoaded(true) } }).catch(() => {}) } }, [view, strategyLoaded])
   useEffect(() => { if (view === 'mcp' && !mcpLoaded) { fetch('/api/mcp').then(r => r.ok ? r.json() : null).then(d => { if (d) { setMcpServers(d.servers || {}); setMcpLoaded(true) } }).catch(() => {}) } }, [view, mcpLoaded])
+  useEffect(() => { if (view === 'soul' && !soulLoaded) { fetch('/api/soul').then(r => r.ok ? r.json() : null).then(d => { if (d) { setSoul(d.soul?.content || ''); setSoulStyle(d.style?.content || ''); setSoulLoaded(true) } }).catch(() => {}) } }, [view, soulLoaded])
 
-  const toggleSkill = async (n: string, en: boolean) => { setBusy(b => ({ ...b, [n]: true })); try { const r = await fetch('/api/skills', { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: n, enabled: en }) }); if (r.ok) { setSkills(s => s.map(sk => sk.name === n ? { ...sk, enabled: en } : sk)); flash(`${displayName(n)} ${en ? 'on duty' : 'off duty'}`); setHasChanges(true) } } finally { setBusy(b => ({ ...b, [n]: false })) } }
-  const runSkill = async (n: string, v?: string, sm?: string) => { setBusy(b => ({ ...b, [`r-${n}`]: true })); try { const r = await fetch(`/api/skills/${n}/run`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ var: v || '', model: sm || model }) }); if (r.ok) { flash(`${displayName(n)} started`); for (const d of [2000, 5000, 10000]) setTimeout(refreshRuns, d) } else { const d = await r.json(); flash(d.error || 'Failed') } } finally { setBusy(b => ({ ...b, [`r-${n}`]: false })) } }
-  const updateSchedule = async (n: string, s: string) => { try { const r = await fetch('/api/skills', { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: n, schedule: s }) }); if (r.ok) { setSkills(sk => sk.map(x => x.name === n ? { ...x, schedule: s } : x)); flash('Shift updated'); setHasChanges(true) } } catch {} }
-  const updateVar = async (n: string, v: string) => { try { const r = await fetch('/api/skills', { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: n, var: v }) }); if (r.ok) { setSkills(s => s.map(x => x.name === n ? { ...x, var: v } : x)); flash('Brief updated'); setHasChanges(true) } } catch {} }
-  const updateSkillModel = async (n: string, m: string) => { try { const r = await fetch('/api/skills', { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: n, skillModel: m }) }); if (r.ok) { setSkills(s => s.map(x => x.name === n ? { ...x, model: m } : x)); flash('Capability updated'); setHasChanges(true) } } catch {} }
-  const updateModel = async (m: string) => { setModel(m); try { await fetch('/api/skills', { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ model: m }) }); flash(`Default: ${MODELS.find(x => x.id === m)?.label}`); setHasChanges(true) } catch {} }
-  const deleteSkill = async (n: string) => { setBusy(b => ({ ...b, [`d-${n}`]: true })); try { const r = await fetch('/api/skills', { method: 'DELETE', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: n }) }); if (r.ok) { setSkills(s => s.filter(x => x.name !== n)); setSelectedSkill(null); flash(`${displayName(n)} removed`); setHasChanges(true) } } finally { setBusy(b => ({ ...b, [`d-${n}`]: false })) } }
+  const toggleSkill = async (n: string, en: boolean) => { setBusy(b => ({ ...b, [n]: true })); try { const r = await fetch('/api/skills', { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: n, enabled: en }) }); if (r.ok) { const d = await r.json().catch(() => ({})); setSkills(s => s.map(sk => sk.name === n ? { ...sk, enabled: en } : sk)); flashSynced(`${displayName(n)} ${en ? 'on duty' : 'off duty'}`, d) } } finally { setBusy(b => ({ ...b, [n]: false })) } }
+  const runSkill = async (n: string, v?: string, sm?: string) => { if (!secrets.some(s => s.isSet && AUTH_SECRETS.includes(s.name))) { flash('No provider key set — add one in Settings before running skills'); return } setBusy(b => ({ ...b, [`r-${n}`]: true })); try { const r = await fetch(`/api/skills/${n}/run`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ var: v || '', model: sm || model }) }); if (r.ok) { flash(`${displayName(n)} started`); for (const d of [2000, 5000, 10000]) setTimeout(refreshRuns, d) } else { const d = await r.json(); flash(d.error || 'Failed') } } finally { setBusy(b => ({ ...b, [`r-${n}`]: false })) } }
+  const updateSchedule = async (n: string, s: string) => { try { const r = await fetch('/api/skills', { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: n, schedule: s }) }); if (r.ok) { const d = await r.json().catch(() => ({})); setSkills(sk => sk.map(x => x.name === n ? { ...x, schedule: s } : x)); flashSynced('Shift updated', d) } } catch {} }
+  const updateVar = async (n: string, v: string) => { try { const r = await fetch('/api/skills', { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: n, var: v }) }); if (r.ok) { const d = await r.json().catch(() => ({})); setSkills(s => s.map(x => x.name === n ? { ...x, var: v } : x)); flashSynced('Brief updated', d) } } catch {} }
+  const updateSkillModel = async (n: string, m: string) => { try { const r = await fetch('/api/skills', { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: n, skillModel: m }) }); if (r.ok) { const d = await r.json().catch(() => ({})); setSkills(s => s.map(x => x.name === n ? { ...x, model: m } : x)); flashSynced('Capability updated', d) } } catch {} }
+  const updateModel = async (m: string) => { setModel(m); try { const r = await fetch('/api/skills', { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ model: m }) }); const d = await r.json().catch(() => ({})); flashSynced(`Default: ${MODELS.find(x => x.id === m)?.label}`, d) } catch {} }
+  const deleteSkill = async (n: string) => { setBusy(b => ({ ...b, [`d-${n}`]: true })); try { const r = await fetch('/api/skills', { method: 'DELETE', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: n }) }); if (r.ok) { const d = await r.json().catch(() => ({})); setSkills(s => s.filter(x => x.name !== n)); setSelectedSkill(null); flashSynced(`${displayName(n)} removed`, d) } } finally { setBusy(b => ({ ...b, [`d-${n}`]: false })) } }
   const syncToGithub = async () => { setSyncing(true); try { const r = await fetch('/api/sync', { method: 'POST' }); if (r.ok) { flash('Synced'); setHasChanges(false) } } finally { setSyncing(false) } }
-  const pullFromGithub = async () => { setPulling(true); try { const r = await fetch('/api/outputs', { method: 'POST' }); if (r.ok) { flash('Pulled'); setFeedKey(k => k + 1); fetchData() } } finally { setPulling(false) } }
+  // Pull rebases origin/main onto the working tree, so the whole dashboard can be
+  // stale afterward. Refetch core data + the feed, and drop cached panel state so
+  // strategy/soul/mcp/analytics reload from the freshly-pulled files.
+  const pullFromGithub = async () => { setPulling(true); try { const r = await fetch('/api/outputs', { method: 'POST' }); if (r.ok) { flash('Pulled — refreshing'); setAnalyticsData(null); setStrategyLoaded(false); setMcpLoaded(false); setSoulLoaded(false); setFeedKey(k => k + 1); await fetchData() } else { const d = await r.json().catch(() => ({} as { error?: string })); flash(d.error || 'Pull failed') } } finally { setPulling(false) } }
   const setupAuth = async (auth?: string | { key: string, baseUrl?: string, provider?: string }) => { setAuthLoading(true); try { const body = typeof auth === 'string' ? { key: auth } : (auth || {}); const r = await fetch('/api/auth', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }); if (r.ok) { flash('Authenticated'); setShowAuthModal(false); fetchData() } else { const d = await r.json().catch(() => ({} as { error?: string })); const msg = typeof d?.error === 'string' ? d.error : (auth ? 'Auth failed' : 'Auto-setup failed'); if (!auth) setShowAuthModal(true); flash(msg) } } finally { setAuthLoading(false) } }
   const saveSecret = async (n: string, value: string) => { setBusy(b => ({ ...b, [`sec-${n}`]: true })); try { const r = await fetch('/api/secrets', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: n, value }) }); if (r.ok) { setSecrets(s => { const e = s.some(x => x.name === n); if (e) return s.map(x => x.name === n ? { ...x, isSet: true } : x); return [...s, { name: n, group: 'Skill Keys', description: 'Custom', isSet: true }] }); flash(`${n} saved`) } } finally { setBusy(b => ({ ...b, [`sec-${n}`]: false })) } }
   const deleteSecret = async (n: string) => { setBusy(b => ({ ...b, [`sec-${n}`]: true })); try { const r = await fetch('/api/secrets', { method: 'DELETE', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: n }) }); if (r.ok) { setSecrets(s => s.map(x => x.name === n ? { ...x, isSet: false } : x)); flash(`${n} removed`) } } finally { setBusy(b => ({ ...b, [`sec-${n}`]: false })) } }
   const importSkill = async (files: UploadFile[], name?: string) => { const r = await fetch('/api/upload', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ files, name }) }); if (r.ok) { const d = await r.json(); flash(`${displayName(d.name)} hired`); fetchData() } }
-  const saveStrategy = async (content: string) => { setStrategySaving(true); try { const r = await fetch('/api/strategy', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ content }) }); if (r.ok) { setStrategy(content); flash('Strategy saved'); setHasChanges(true) } else { flash('Save failed') } } finally { setStrategySaving(false) } }
-  const saveMcp = async (servers: Record<string, Record<string, unknown>>) => { setMcpSaving(true); try { const r = await fetch('/api/mcp', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ servers }) }); if (r.ok) { setMcpServers(servers); flash('MCP servers saved'); setHasChanges(true) } else { flash('Save failed') } } finally { setMcpSaving(false) } }
+  const saveStrategy = async (content: string) => { setStrategySaving(true); try { const r = await fetch('/api/strategy', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ content }) }); if (r.ok) { const d = await r.json().catch(() => ({})); setStrategy(content); flashSynced('Strategy saved', d) } else { flash('Save failed') } } finally { setStrategySaving(false) } }
+  const buildStrategy = async (sources: StrategySources) => { setStrategyBuilding(true); try { const r = await fetch('/api/strategy/build', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ...sources, model }) }); if (r.ok) { flash('Strategy-builder started'); for (const d of [2000, 5000, 10000]) setTimeout(refreshRuns, d) } else { const d = await r.json().catch(() => ({} as { error?: string })); flash(d.error || 'Build failed to dispatch') } } finally { setStrategyBuilding(false) } }
+  const saveMcp = async (servers: Record<string, Record<string, unknown>>) => { setMcpSaving(true); try { const r = await fetch('/api/mcp', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ servers }) }); if (r.ok) { const d = await r.json().catch(() => ({})); setMcpServers(servers); flashSynced('MCP servers saved', d) } else { flash('Save failed') } } finally { setMcpSaving(false) } }
+  const saveSoul = async (file: SoulFile, content: string) => { setSoulSaving(true); try { const r = await fetch('/api/soul', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ file, content }) }); if (r.ok) { const d = await r.json().catch(() => ({})); if (file === 'soul') setSoul(content); else setSoulStyle(content); flashSynced(`${file === 'soul' ? 'SOUL.md' : 'STYLE.md'} saved`, d) } else { flash('Save failed') } } finally { setSoulSaving(false) } }
+  const buildSoul = async (sources: SoulSources) => { setSoulBuilding(true); try { const r = await fetch('/api/soul/build', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ...sources, model }) }); if (r.ok) { const label = sources.handle ? `@${sources.handle}` : sources.name || 'your links'; flash(`Soul-builder started for ${label}`); for (const d of [2000, 5000, 10000]) setTimeout(refreshRuns, d) } else { const d = await r.json().catch(() => ({} as { error?: string })); flash(d.error || 'Build failed to dispatch') } } finally { setSoulBuilding(false) } }
+  const installSoulExample = async (key: string) => { setSoulInstalling(key); try { const r = await fetch('/api/soul/examples', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ example: key }) }); if (r.ok) { const d = await r.json().catch(() => ({})); setSoul(d.soul || ''); setSoulStyle(d.style || ''); setSoulLoaded(true); flashSynced(`Installed ${key} soul`, d) } else { const d = await r.json().catch(() => ({} as { error?: string })); flash(d.error || 'Install failed') } } finally { setSoulInstalling(null) } }
 
   // Jump from a skill's API-keys panel straight to Settings → Access Keys,
   // scrolled to the chosen key with its input open and ready to paste.
@@ -134,10 +158,13 @@ export default function Dashboard() {
             <SecretsPanel secrets={secrets} skills={skills} busy={busy} repo={repo} focusKey={secretFocus} onFocusHandled={() => setSecretFocus(null)} onSave={saveSecret} onDelete={deleteSecret} onSelectSkill={(name) => { setSelectedSkill(name); setView('hq') }} onConnectClaude={() => setupAuth()} connecting={authLoading} />
           )}
           {view === 'strategy' && !selectedSkill && (
-            <StrategyPanel content={strategy} loading={!strategyLoaded} saving={strategySaving} onSave={saveStrategy} />
+            <StrategyPanel content={strategy} loading={!strategyLoaded} saving={strategySaving} building={strategyBuilding} onSave={saveStrategy} onBuild={buildStrategy} />
           )}
           {view === 'mcp' && !selectedSkill && (
             <McpPanel servers={mcpServers} loading={!mcpLoaded} saving={mcpSaving} secrets={secrets} busy={busy} onSave={saveMcp} onSetSecret={saveSecret} onDeleteSecret={deleteSecret} />
+          )}
+          {view === 'soul' && !selectedSkill && (
+            <SoulPanel soul={soul} style={soulStyle} loading={!soulLoaded} saving={soulSaving} building={soulBuilding} installing={soulInstalling} onSave={saveSoul} onBuild={buildSoul} onInstallExample={installSoulExample} />
           )}
           {view === 'hq' && !selectedSkill && (
             <HQOverview skills={skills} runs={runs} enabledCount={enabledCount} workingCount={workingCount} categoryFilter={categoryFilter} onCategoryClick={(key) => setCategoryFilter(categoryFilter === key ? null : key)} onViewRun={() => {}} />
