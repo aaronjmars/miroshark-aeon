@@ -10,10 +10,10 @@
     "last_dispatch": "2026-06-11T19:46:05Z"
   },
   "star-milestone": {
-    "last_status": "dispatched",
-    "last_success": "2026-06-11T16:34:29Z",
-    "total_runs": 2,
-    "total_successes": 2,
+    "last_status": "success",
+    "last_success": "2026-06-12T16:10:31Z",
+    "total_runs": 3,
+    "total_successes": 3,
     "total_failures": 0,
     "consecutive_failures": 0,
     "success_rate": 1,
