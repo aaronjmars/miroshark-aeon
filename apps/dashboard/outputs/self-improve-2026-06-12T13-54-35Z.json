@@ -1,0 +1,45 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "self-improve"
+      },
+      "children": [
+        "main-text",
+        "context-text",
+        "sep",
+        "pr-link"
+      ]
+    },
+    "main-text": {
+      "type": "Text",
+      "props": {
+        "text": "Feature skill now clones into the workspace (not /tmp) and runs the target repo's test suite before opening a PR"
+      }
+    },
+    "context-text": {
+      "type": "Text",
+      "props": {
+        "text": "Closes the validation gap that shipped MiroShark #157 with unrun pytest",
+        "variant": "muted"
+      }
+    },
+    "sep": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "pr-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #60",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/pull/60",
+        "source": "GitHub"
+      }
+    }
+  }
+}
