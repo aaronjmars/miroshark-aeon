@@ -35,9 +35,9 @@ Parse `memory/watched-repos.md` into a list of `owner/repo` entries.
 
 If `${var}` is set, restrict the list to **the first repo only** and use `${var}` as the feature spec for it.
 
-### 2. For each repo in the list, run steps 3–10 independently
+### 2. For each repo in the list, run steps 3–11 independently
 
-A failure on one repo must NOT stop the others — catch the failure, log it, continue. Use a fresh working directory per repo (e.g. `/tmp/feature-build-${repo-name}`).
+A failure on one repo must NOT stop the others — catch the failure, log it, continue. Use a fresh **workspace-relative** working directory per repo (e.g. `.feature-build/${repo-name}`). Do **not** clone into `/tmp` — the autonomous sandbox blocks code execution (pytest, npm test, etc.) under `/tmp`, which silently disables the validation step below. `.feature-build/` is gitignored so cloned repos never get committed into this repo.
 
 ### 3. Pick what to build for this repo
 
@@ -54,11 +54,11 @@ e. **If none of the above yields anything for this repo**, log `FEATURE_SKIP: <r
 
 ### 4. Clone the repo
 
-Into a per-repo temp directory:
+Into a per-repo workspace-relative directory (so the sandbox permits running the repo's tests):
 
 ```bash
-gh repo clone owner/repo /tmp/feature-build-${repo-name}
-cd /tmp/feature-build-${repo-name}
+gh repo clone owner/repo .feature-build/${repo-name}
+cd .feature-build/${repo-name}
 ```
 
 ### 5. Read the codebase
@@ -75,7 +75,22 @@ Read the area you'll modify in full before changing anything.
 
 Write clean, complete code. No TODOs or placeholders. Match the existing code style exactly — indentation, naming, patterns. Don't introduce new dependencies unless absolutely necessary. Don't refactor unrelated code — stay focused on one improvement.
 
-### 7. Branch and push
+### 7. Validate before shipping
+
+Run the repo's own test suite against your change from inside the clone (now workspace-relative, so the sandbox permits execution). Detect the toolchain and run the matching command, e.g.:
+
+```bash
+# Python
+pytest -q || python -m pytest -q
+# Node
+npm test --silent || npm run test
+```
+
+- If tests pass → proceed.
+- If tests **fail because of your change** → fix it before opening the PR. Do not ship a red diff.
+- If tests can't run at all (no suite, missing deps the sandbox can't install, or an environment block) → that's acceptable, but **state it explicitly** in the log and PR body (e.g. "validation: pytest could not run — relied on diff review + repo CI"). Never imply tests passed when they didn't run.
+
+### 8. Branch and push
 
 ```bash
 git checkout -b feat/<short-feature-name>
@@ -84,7 +99,7 @@ git commit -m "feat: <description of what was built>"
 git push -u origin feat/<short-feature-name>
 ```
 
-### 8. Open a PR
+### 9. Open a PR
 
 ```bash
 gh pr create -R owner/repo \
@@ -103,7 +118,7 @@ gh pr create -R owner/repo \
 *Built autonomously by Aeon*"
 ```
 
-### 9. Update memory
+### 10. Update memory
 
 Log what was built (per repo) to `memory/logs/${today}.md`. Include the repo name in every log line so per-repo history stays distinct:
 
@@ -113,10 +128,11 @@ Log what was built (per repo) to `memory/logs/${today}.md`. Include the repo nam
 - **Why:** <trigger>
 - **PR:** <url>
 - **Files:** <list>
+- **Validation:** <tests passed | tests could not run — reason>
 - FEATURE_OK
 ```
 
-### 10. Notify — one per successfully built feature
+### 11. Notify — one per successfully built feature
 
 For each repo with a shipped PR, send a separate `./notify` so the operator gets a detailed per-repo message. The notification should be rich enough that a reader understands exactly what was built, why it matters, and how it works WITHOUT clicking the PR link.
 
@@ -151,13 +167,15 @@ BAD (too short — do NOT do this):
 GOOD level of detail:
 > Per-section answers like the template above. A reader who never clicks the PR should still come away knowing what changed and why.
 
-### 11. Final wrap-up
+### 12. Final wrap-up
 
 After iterating every repo, end with a `## Summary` listing each watched repo and its outcome: PR url, skipped, or failed. If every repo was skipped, do NOT send a notification at all — just log the per-repo skip lines.
 
 ## Sandbox Note
 
 All GitHub operations go through `gh` CLI — handles auth internally via `GITHUB_TOKEN`. No env-var-authenticated curl from bash. The `./notify` call uses the standard fan-out pattern.
+
+**Clone path matters for validation:** the sandbox blocks code execution (pytest, `npm test`) under `/tmp`, so clone into the workspace-relative `.feature-build/${repo-name}` (gitignored) instead. That lets step 7's test run actually execute. If the sandbox still blocks a given command, treat it as "tests could not run" and say so — don't claim a pass.
 
 ## Environment Variables
 
