@@ -255,3 +255,9 @@ Each entry includes: signature keywords (for exclusion matching), the live path/
 - **Lives at:** `GET /api/simulation/<simulation_id>/chart.svg` — SVG belief/consensus chart (catalogued `chart_svg` in surfaces_catalog.py, type: visualization).
 - **Verified:** 2026-06-08 by `repo-actions` skill catalog audit (`memory/logs/2026-06-08.md`).
 - **Suggestion history:** Jun-08 (excluded — discovered in catalog).
+
+### Surface Catalog Type Filter
+- **Signature keywords:** `surfaces type filter`, `surface catalog filter`, `filter surfaces by type`, `surfaces.json?type`, `?type=`, `catalog type query`, `filter catalog by category`
+- **Lives at:** `GET /api/surfaces.json?type=<category>` — optional server-side category filter on the surface catalog (7 categories; case-insensitive; 400 on unknown value; per-category ETag). Implemented in `backend/app/api/surfaces.py` + `backend/app/services/surfaces_catalog.py` (`is_valid_surface_type`, `surface_type` param on `build_response_payload`/`catalog_etag`).
+- **Verified:** 2026-06-12 by `feature` skill — built and shipped this run (PR #157).
+- **Suggestion history:** Jun-12 (net-new build, not previously suggested).

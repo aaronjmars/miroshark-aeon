@@ -1,0 +1,162 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Surface catalog type filter"
+      },
+      "children": [
+        "stack_main"
+      ]
+    },
+    "stack_main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "text_header",
+        "separator_1",
+        "text_overview",
+        "separator_2",
+        "heading_why",
+        "text_why_1",
+        "text_why_2",
+        "separator_3",
+        "heading_built",
+        "text_built",
+        "separator_4",
+        "heading_how",
+        "text_how",
+        "separator_5",
+        "heading_next",
+        "text_next",
+        "separator_6",
+        "stack_pr"
+      ]
+    },
+    "text_header": {
+      "type": "Text",
+      "props": {
+        "text": "Feature Built — 2026-06-12 — aaronjmars/MiroShark",
+        "variant": "caption"
+      }
+    },
+    "separator_1": {
+      "type": "Separator",
+      "props": {}
+    },
+    "text_overview": {
+      "type": "Text",
+      "props": {
+        "text": "The `/api/surfaces.json` endpoint lists every machine-readable surface a MiroShark deployment exposes — its signals, exports, charts, feeds, badges. You can now ask it for just one kind. `GET /api/surfaces.json?type=analytics` returns only the analytics surfaces; `?type=export` only the data exports, and so on across the seven categories. Before, you got the whole list every time and had to filter it yourself."
+      }
+    },
+    "separator_2": {
+      "type": "Separator",
+      "props": {}
+    },
+    "heading_why": {
+      "type": "Heading",
+      "props": {
+        "text": "Why this matters",
+        "level": "h2"
+      }
+    },
+    "text_why_1": {
+      "type": "Text",
+      "props": {
+        "text": "The catalog exists so an integrator can discover what a deployment can do without reading docs. The code and FEATURES.md already told consumers to \"filter on type\" — but only client-side, by pulling the full catalog and running jq over it. A bot that only cares about, say, the Polymarket integration surface was downloading everything to find one row."
+      }
+    },
+    "text_why_2": {
+      "type": "Text",
+      "props": {
+        "text": "This turns that documented pattern into a real server-side filter, so a narrow poller transfers a fraction of the bytes and caches per category. It's a small, natural extension of the recent platform-JSON push (status.json, distribution.json, activity.json)."
+      }
+    },
+    "separator_3": {
+      "type": "Separator",
+      "props": {}
+    },
+    "heading_built": {
+      "type": "Heading",
+      "props": {
+        "text": "What was built",
+        "level": "h2"
+      }
+    },
+    "text_built": {
+      "type": "Text",
+      "props": {
+        "text": "backend/app/api/surfaces.py: reads and normalises `?type=`, returns 400 with the valid set on an unknown value, and threads the filter into the response and the ETag.\n\nbackend/app/services/surfaces_catalog.py: new `is_valid_surface_type()`; `build_response_payload()` and `catalog_etag()` now take an optional category, filtering the entries and recomputing `count`. No-argument behaviour is unchanged.\n\nbackend/openapi.yaml + docs/API.md + docs/FEATURES.md: document the new param, its category enum, and the 400 case.\n\nbackend/tests/test_unit_surfaces_catalog.py: 8 new tests, including one that proves the per-category counts sum to the full catalog (no surface dropped or double-counted)."
+      }
+    },
+    "separator_4": {
+      "type": "Separator",
+      "props": {}
+    },
+    "heading_how": {
+      "type": "Heading",
+      "props": {
+        "text": "How it works",
+        "level": "h2"
+      }
+    },
+    "text_how": {
+      "type": "Text",
+      "props": {
+        "text": "The filter is case-insensitive; an empty value is treated as absent, so every existing caller is unaffected — fully backward compatible. A filtered request carries its category in the ETag (`surfaces-v1-30-analytics`) so it never collides with the full-catalog response in a shared cache, and conditional If-None-Match GETs still short-circuit to 304. An unknown category returns 400 rather than an empty list, so a typo reads as a caller error, not a broken deployment. Pure stdlib and Flask — no new dependencies — mirroring the `?limit=` param already on activity.json and the 400-on-bad-input posture of the per-project stats endpoint."
+      }
+    },
+    "separator_5": {
+      "type": "Separator",
+      "props": {}
+    },
+    "heading_next": {
+      "type": "Heading",
+      "props": {
+        "text": "What's next",
+        "level": "h2"
+      }
+    },
+    "text_next": {
+      "type": "Text",
+      "props": {
+        "text": "The same per-category narrowing could extend to the ecosystem.json registry (filter integrators by category) if integrators ask for it."
+      }
+    },
+    "separator_6": {
+      "type": "Separator",
+      "props": {}
+    },
+    "stack_pr": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "text_pr_label",
+        "link_pr"
+      ]
+    },
+    "text_pr_label": {
+      "type": "Text",
+      "props": {
+        "text": "PR:",
+        "variant": "body"
+      }
+    },
+    "link_pr": {
+      "type": "Link",
+      "props": {
+        "label": "https://github.com/aaronjmars/MiroShark/pull/157",
+        "href": "https://github.com/aaronjmars/MiroShark/pull/157"
+      }
+    }
+  }
+}
