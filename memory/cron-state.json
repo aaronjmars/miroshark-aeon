@@ -74,5 +74,13 @@
     "consecutive_failures": 0,
     "success_rate": 1,
     "last_quality_score": 4
+  },
+  "repo-pulse": {
+    "last_dispatch": "2026-06-12T10:12:17Z",
+    "last_status": "dispatched"
+  },
+  "star-momentum": {
+    "last_dispatch": "2026-06-12T10:12:17Z",
+    "last_status": "dispatched"
   }
 }
