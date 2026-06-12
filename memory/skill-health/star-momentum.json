@@ -1,0 +1,14 @@
+{
+  "skill": "star-momentum",
+  "last_analyzed": "2026-06-12T10:14:25Z",
+  "quality_score": 4,
+  "assessment": "Skill ran successfully with clear analysis of data insufficiency; proper artifact creation and honest signal about why projection isn't possible yet",
+  "flags": [],
+  "avg_score": 4,
+  "history": [
+    {
+      "date": "2026-06-12",
+      "score": 4
+    }
+  ]
+}
