@@ -1,13 +1,15 @@
-*Push Recap — 2026-06-11*
-MIXED — Japanese README shipped to MiroShark; the Aeon agent rebuilt on a new template.
+*Push Recap — 2026-06-12*
+MiroShark — SHIPPING: /api/surfaces.json gains a ?type= category filter
 
 Shipped to users:
-• MiroShark now has a Japanese landing page — new `README.ja.md` (143 lines) + `日本語` switcher link on the English and Chinese READMEs (#156). First `*.ja.md` in the repo; no JP in-app UI promised.
+• `?type=<category>` on GET /api/surfaces.json (#157) — integrators fetch one category server-side instead of pulling the full catalog + jq; unknown value 400s with the valid set, full-catalog path unchanged
+• Filtered responses carry the category in their ETag (surfaces-v1-30-analytics) so they never collide with the full catalog in a shared cache
+• 8 new tests assert the filtered counts partition the full catalog and the no-filter call stays byte-identical
 
-Under the hood:
-• Aeon migrated its own repo onto the latest template (#57) and tuned config — default model → opus-4-8, gateway → auto (#58), star-milestone pinned back to sonnet-4-6 as a cost guard (#59), and the feature skill gained a hyperstition-deadline tiebreaker (#56). All internal — no product impact.
+Under the hood (aeon repo):
+• feature skill now clones in-workspace + runs tests before opening PRs (#60); inbound TG/Discord/Slack messaging disabled (outbound notify unaffected)
 
-Shape: 1 user-visible · 3 internal · 1 infra · 24 bot-filtered · 5 merged PRs
-Volume: +153/−6 across 7 files in authored diffs (excludes the one-time +50k/−151k rebuild commit)
+Shape: 1 user-visible · 1 internal · 1 infra · 32 bot-filtered · 2 merged PRs
+Volume: 14 files, +341/-41
 
-Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-06-11.md
+Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-06-12.md
