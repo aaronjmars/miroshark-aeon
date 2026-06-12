@@ -493,6 +493,11 @@ jobs:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
           SLACK_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID }}
         run: |
+          # Inbound message handling disabled (operator request, 2026-06-12).
+          # The scheduler tick above is unaffected — this only turns off
+          # collecting/dispatching inbound messages (Telegram/Discord/Slack).
+          # To re-enable: delete the next two lines.
+          echo "Inbound message handling is disabled."; exit 0
           MESSAGES='[]'
 
           # --- Telegram (collect ALL pending updates) ---
@@ -599,7 +604,10 @@ jobs:
           fi
 
   run:
-    if: github.event_name == 'repository_dispatch' || (github.event_name == 'workflow_dispatch' && inputs.message != '')
+    # Inbound message handling disabled (operator request, 2026-06-12).
+    # To re-enable, restore the original condition:
+    #   github.event_name == 'repository_dispatch' || (github.event_name == 'workflow_dispatch' && inputs.message != '')
+    if: false
     runs-on: ubuntu-latest
     timeout-minutes: 30
 
