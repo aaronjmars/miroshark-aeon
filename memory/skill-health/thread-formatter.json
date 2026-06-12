@@ -1,14 +1,18 @@
 {
   "skill": "thread-formatter",
-  "last_analyzed": "2026-06-11T17:52:03Z",
-  "quality_score": 4,
-  "assessment": "Substantive, well-structured thread formatting with specific API context, clear artifact creation, and successful notification dispatch; sandbox workaround handled gracefully",
+  "last_analyzed": "2026-06-12T18:09:16Z",
+  "quality_score": 5,
+  "assessment": "Excellent — substantive thread with strong signal detection, proper deduplication logic, verified constraint compliance (280-char tweets), complete artifact handling, and actionable output",
   "flags": [],
-  "avg_score": 4,
+  "avg_score": 4.5,
   "history": [
     {
       "date": "2026-06-11",
       "score": 4
+    },
+    {
+      "date": "2026-06-12",
+      "score": 5
     }
   ]
 }
