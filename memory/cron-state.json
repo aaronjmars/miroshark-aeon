@@ -63,5 +63,9 @@
     "consecutive_failures": 0,
     "success_rate": 1,
     "last_quality_score": 4
+  },
+  "token-report": {
+    "last_dispatch": "2026-06-12T07:04:59Z",
+    "last_status": "dispatched"
   }
 }
