@@ -1,0 +1,152 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "token-report"
+      },
+      "children": [
+        "heading",
+        "badge",
+        "summary",
+        "separator1",
+        "metrics-grid",
+        "separator2",
+        "chart-link"
+      ]
+    },
+    "heading": {
+      "type": "Heading",
+      "props": {
+        "text": "MiroShark — ACCUMULATING",
+        "level": "h2"
+      }
+    },
+    "badge": {
+      "type": "Badge",
+      "props": {
+        "text": "ACCUMULATING",
+        "variant": "secondary"
+      }
+    },
+    "summary": {
+      "type": "Text",
+      "props": {
+        "text": "Buyers outpace sellers 97-to-68 with 8 whale buys as price inches +2.83% — $58.3K in volume absorbed without a breakout.",
+        "variant": "body"
+      }
+    },
+    "separator1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "metrics-grid": {
+      "type": "Grid",
+      "props": {
+        "columns": 2,
+        "gap": "md"
+      },
+      "children": [
+        "stat-price",
+        "stat-liq",
+        "stat-vol",
+        "stat-vol-multi",
+        "stat-buys",
+        "stat-sells",
+        "stat-ratio",
+        "stat-whale-buys",
+        "stat-whales",
+        "stat-treasury"
+      ]
+    },
+    "stat-price": {
+      "type": "Stat",
+      "props": {
+        "label": "Price",
+        "value": "$0.000007568",
+        "delta": "+2.83%",
+        "trend": "up"
+      }
+    },
+    "stat-liq": {
+      "type": "Stat",
+      "props": {
+        "label": "Liquidity",
+        "value": "$409.7K"
+      }
+    },
+    "stat-vol": {
+      "type": "Stat",
+      "props": {
+        "label": "Volume (24h)",
+        "value": "$58.3K"
+      }
+    },
+    "stat-vol-multi": {
+      "type": "Stat",
+      "props": {
+        "label": "vs 7d Average",
+        "value": "1.6×"
+      }
+    },
+    "stat-buys": {
+      "type": "Stat",
+      "props": {
+        "label": "Buy Orders",
+        "value": "97"
+      }
+    },
+    "stat-sells": {
+      "type": "Stat",
+      "props": {
+        "label": "Sell Orders",
+        "value": "68"
+      }
+    },
+    "stat-ratio": {
+      "type": "Stat",
+      "props": {
+        "label": "Buy/Sell Ratio",
+        "value": "1.43"
+      }
+    },
+    "stat-whale-buys": {
+      "type": "Stat",
+      "props": {
+        "label": "Whale Buys",
+        "value": "8"
+      }
+    },
+    "stat-whales": {
+      "type": "Stat",
+      "props": {
+        "label": "Whale Accounts",
+        "value": "17"
+      }
+    },
+    "stat-treasury": {
+      "type": "Stat",
+      "props": {
+        "label": "Treasury",
+        "value": "6.0000 ETH"
+      }
+    },
+    "separator2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "chart-link": {
+      "type": "Link",
+      "props": {
+        "label": "View Chart on Geckoterminal",
+        "href": "https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209"
+      }
+    }
+  }
+}
