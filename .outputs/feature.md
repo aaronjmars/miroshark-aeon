@@ -1,21 +1,19 @@
-*Feature Built — 2026-06-12 — aaronjmars/MiroShark*
+*Feature Built — 2026-06-13 — aaronjmars/MiroShark* 🦈
 
-Surface catalog type filter
-The `/api/surfaces.json` endpoint lists every machine-readable surface a MiroShark deployment exposes — its signals, exports, charts, feeds, badges. You can now ask it for just one kind. `GET /api/surfaces.json?type=analytics` returns only the analytics surfaces; `?type=export` only the data exports, and so on across the seven categories. Before, you got the whole list every time and had to filter it yourself.
+SECURITY.md — responsible-disclosure policy
+MiroShark now has a front door for security reports. Instead of a stranger posting a vuln on a public issue for everyone to see, there's a private channel — GitHub's "Report a vulnerability" — plus a clear table of what's supported, how fast we respond, and how disclosure gets coordinated. Also bolted on an operator hardening checklist: don't expose Neo4j ports, set a real password, keep your LLM keys secret.
 
 Why this matters:
-The catalog exists so an integrator can discover what a deployment can do without reading docs. The code and FEATURES.md already told consumers to "filter on type" — but only client-side, by pulling the full catalog and running jq over it. A bot that only cares about, say, the Polymarket integration surface was downloading everything to find one row. This turns that documented pattern into a real server-side filter, so a narrow poller transfers a fraction of the bytes and caches per category. It's a small, natural extension of the recent platform-JSON push (status.json, distribution.json, activity.json).
+1,200+ stars, named production integrators (RevaultDrops, AntFleet, Capacitr), an AGPL engine running a Neo4j graph full of whatever docs you fed it — and zero private way to report a hole. This already bit us: the hardcoded Neo4j password (#88) got reported on a *public* issue because no private path existed. That's the exact pattern this file kills. It also lights up the GitHub Security tab.
 
 What was built:
-- backend/app/api/surfaces.py: reads and normalises `?type=`, returns 400 with the valid set on an unknown value, and threads the filter into the response and the ETag.
-- backend/app/services/surfaces_catalog.py: new `is_valid_surface_type()`; `build_response_payload()` and `catalog_etag()` now take an optional category, filtering the entries and recomputing `count`. No-argument behaviour is unchanged.
-- backend/openapi.yaml + docs/API.md + docs/FEATURES.md: document the new param, its category enum, and the 400 case.
-- backend/tests/test_unit_surfaces_catalog.py: 8 new tests, including one that proves the per-category counts sum to the full catalog (no surface dropped or double-counted).
+- SECURITY.md (new): private reporting via GitHub advisories, supported-versions table, 3-day ack / 7-day assessment SLA, coordinated-disclosure terms, operator hardening checklist, scope section. Cites #88 as the reason it exists.
+- README.md: one row in the docs table linking to SECURITY.md.
 
 How it works:
-The filter is case-insensitive; an empty value is treated as absent, so every existing caller is unaffected — fully backward compatible. A filtered request carries its category in the ETag (`surfaces-v1-30-analytics`) so it never collides with the full-catalog response in a shared cache, and conditional If-None-Match GETs still short-circuit to 304. An unknown category returns 400 rather than an empty list, so a typo reads as a caller error, not a broken deployment. Pure stdlib and Flask — no new dependencies — mirroring the `?limit=` param already on activity.json and the 400-on-bad-input posture of the per-project stats endpoint.
+Pure markdown — no code touched, so nothing in the engine moves and CI (pytest only) is unaffected. The reporting path leans on GitHub's native private vulnerability reporting, which is what actually populates the Security tab and lets us credit reporters in a published advisory. Picked it over an email address so there's no inbox to maintain or leak.
 
 What's next:
-The same per-category narrowing could extend to the ecosystem.json registry (filter integrators by category) if integrators ask for it.
+Repo-actions also flagged a CONTRIBUTING.md expansion and issue templates — both still open. The CI security-scan idea (pip-audit/bandit) is parked: the token can't push to .github/workflows. Trust infra first; lower the bar to a stranger's first run next.
 
-PR: https://github.com/aaronjmars/MiroShark/pull/157
+PR: https://github.com/aaronjmars/MiroShark/pull/158

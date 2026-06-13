@@ -261,3 +261,9 @@ Each entry includes: signature keywords (for exclusion matching), the live path/
 - **Lives at:** `GET /api/surfaces.json?type=<category>` — optional server-side category filter on the surface catalog (7 categories; case-insensitive; 400 on unknown value; per-category ETag). Implemented in `backend/app/api/surfaces.py` + `backend/app/services/surfaces_catalog.py` (`is_valid_surface_type`, `surface_type` param on `build_response_payload`/`catalog_etag`).
 - **Verified:** 2026-06-12 by `feature` skill — built and shipped this run (PR #157).
 - **Suggestion history:** Jun-12 (net-new build, not previously suggested).
+
+### Interactive API Docs UI (Swagger / Redoc)
+- **Signature keywords:** `api docs ui`, `redoc`, `swagger ui`, `interactive api docs`, `/api/docs`, `/api/openapi.json`, `serve openapi`, `browse endpoints in browser`, `api reference page`
+- **Lives at:** `GET /api/docs` — Swagger UI HTML page (MiroShark-branded, jsDelivr bundle) over `backend/openapi.yaml`. Companion routes `GET /api/openapi.yaml` (canonical) and `GET /api/openapi.json` (converted). Implemented in `backend/app/api/docs.py` on `docs_bp`. Linked from README docs table and `docs/API.md`.
+- **Verified:** 2026-06-13 by `feature` skill grep (`memory/logs/2026-06-13.md` — found existing `docs.py`; was repo-actions Jun-12 idea #4, which proposed a Redoc UI at `/api/docs` — already shipped as Swagger UI).
+- **Suggestion history:** Jun-12 #4 (excluded after discovery — already shipped under a different UI library).
