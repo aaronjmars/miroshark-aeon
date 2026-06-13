@@ -88,14 +88,14 @@
   },
   "star-momentum": {
     "last_dispatch": "2026-06-13T10:14:59Z",
-    "last_status": "dispatched",
-    "last_success": "2026-06-12T10:14:26Z",
-    "total_runs": 1,
-    "total_successes": 1,
+    "last_status": "success",
+    "last_success": "2026-06-13T10:17:27Z",
+    "total_runs": 2,
+    "total_successes": 2,
     "total_failures": 0,
     "consecutive_failures": 0,
     "success_rate": 1,
-    "last_quality_score": 4
+    "last_quality_score": 3
   },
   "feature": {
     "last_dispatch": "2026-06-12T11:31:09Z",
