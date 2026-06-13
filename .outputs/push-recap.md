@@ -1,15 +1,16 @@
-*Push Recap — 2026-06-12*
-MiroShark — SHIPPING: /api/surfaces.json gains a ?type= category filter
+*Push Recap — 2026-06-13*
+miroshark-aeon — SHIPPING the agent's own wiring. MiroShark product quiet today. ⭐
 
-Shipped to users:
-• `?type=<category>` on GET /api/surfaces.json (#157) — integrators fetch one category server-side instead of pulling the full catalog + jq; unknown value 400s with the valid set, full-catalog path unchanged
-• Filtered responses carry the category in their ETag (surfaces-v1-30-analytics) so they never collide with the full catalog in a shared cache
-• 8 new tests assert the filtered counts partition the full catalog and the no-filter call stays byte-identical
+shipped to users:
+• dashboard gets Soul + Strategy *builder* tabs — generate SOUL.md/STYLE.md & STRATEGY.md from a UI, not by hand (84b93b9: SoulPanel +306, 4 new API routes, 2 new skills)
+• README synced to document the new tabs, instance header kept (1abc27f)
 
-Under the hood (aeon repo):
-• feature skill now clones in-workspace + runs tests before opening PRs (#60); inbound TG/Discord/Slack messaging disabled (outbound notify unaffected)
+under the hood:
+• adopted Aaron's soul — every notification & article now speaks in his voice, not the neutral default (12b4af5)
+• STRATEGY.md rewritten from template defaults to the real mandate: stars + ecosystem + $MIROSHARK (3ee380b)
 
-Shape: 1 user-visible · 1 internal · 1 infra · 32 bot-filtered · 2 merged PRs
-Volume: 14 files, +341/-41
+shape: 2 user-visible · 2 internal · 0 infra · 27 bot-filtered · 0 merged PRs
+volume: ~1.8K lines of real change (+ a 102K-line raw X archive, data not code)
+note: 🦈 MiroShark itself shipped nothing in 24h — PR #158 (SECURITY.md) still open.
 
-Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-06-12.md
+full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-06-13.md

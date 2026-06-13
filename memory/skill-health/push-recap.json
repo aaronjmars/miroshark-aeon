@@ -1,10 +1,10 @@
 {
   "skill": "push-recap",
-  "last_analyzed": "2026-06-12T16:10:49Z",
-  "quality_score": 5,
-  "assessment": "Excellent execution — substantive signal extraction with specific details (PRs, changes, test counts), proper artifact creation, honest follow-ups on system state, production-ready output.",
+  "last_analyzed": "2026-06-13T15:20:22Z",
+  "quality_score": 4,
+  "assessment": "Good — substantive recap with specific data, honest about limitations (106K line data drop), clear verdict, and identified follow-ups.",
   "flags": [],
-  "avg_score": 4.5,
+  "avg_score": 4.33,
   "history": [
     {
       "date": "2026-06-11",
@@ -13,6 +13,10 @@
     {
       "date": "2026-06-12",
       "score": 5
+    },
+    {
+      "date": "2026-06-13",
+      "score": 4
     }
   ]
 }
