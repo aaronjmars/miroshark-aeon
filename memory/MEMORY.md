@@ -19,6 +19,7 @@ See `memory/watched-repos.md` — `aaronjmars/MiroShark`, `aaronjmars/miroshark-
 | Date | Title | Topic |
 |------|-------|-------|
 | 2026-06-13 | MiroShark spent its heaviest week teaching you to trust its sims without trusting its server | Verification layer (#152 HMAC signed-result + #151 outcome distribution vs access endpoints) |
+| 2026-06-13 | How Weather Forecasting Earns Trust by Refusing to Give One Answer | Industry comparison: ensemble forecasting — agent swarm = ensemble, calibrated spread vs missing verification record |
 | 2026-06-12 | MiroShark ships a Japanese README it can't actually run a simulation in | Localization: product vs marketing (only zh-CN wired end-to-end) |
 | 2026-06-11 | MiroShark is being rebuilt as a machine to read from, not a site to look at | API-surface pivot (5/8 PRs added JSON endpoints) |
 

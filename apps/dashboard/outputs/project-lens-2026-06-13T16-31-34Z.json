@@ -1,0 +1,50 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "project-lens"
+      },
+      "children": [
+        "heading_title",
+        "text_main",
+        "separator_1",
+        "storylink_article"
+      ]
+    },
+    "heading_title": {
+      "type": "Heading",
+      "props": {
+        "text": "How Weather Forecasting Earns Trust by Refusing to Give One Answer",
+        "level": "h2"
+      },
+      "children": []
+    },
+    "text_main": {
+      "type": "Text",
+      "props": {
+        "text": "weather forecasters stopped trying to be right. GenCast runs 50+ ensemble members and beat ECMWF on 97.2% of targets by being *calibrated* — when it says 70%, it's wrong 30% of the time. MiroShark is the same move with a different perturbation: each agent seeded from a real Nemotron census row, the belief spread shipped at /api/stats/distribution.json. the catch — meteorology has 40 years of verification proving its spread is honest; agent sims have the substrate (signed-result.json, the distribution endpoint) and not the record yet. that, not agent count, is what turns a demo into a forecaster. 🦈",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "separator_1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "storylink_article": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full Article: project-lens-2026-06-13",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-06-13.md",
+        "source": "GitHub"
+      },
+      "children": []
+    }
+  }
+}

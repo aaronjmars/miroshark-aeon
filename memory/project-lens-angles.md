@@ -22,3 +22,13 @@ Tracks angle categories and theses used, to avoid repeats within 14 days.
   - https://link.springer.com/article/10.1007/s10462-025-11412-6
   - https://arxiv.org/html/2602.07023
   - https://github.com/aaronjmars/MiroShark
+
+## 2026-06-13
+- Angle: Industry comparison (ensemble weather forecasting — GenCast / ECMWF AIFS)
+- Thesis: A swarm-of-agents forecaster earns trust the way ensemble weather models did — calibrated spread, not one number — but can't inherit meteorology's 40-year verification record; that, not agent count, separates a tool from a demo.
+- Title: How Weather Forecasting Earns Trust by Refusing to Give One Answer
+- Sources:
+  - https://en.wikipedia.org/wiki/Ensemble_forecasting
+  - https://deepmind.google/blog/gencast-predicts-weather-and-the-risks-of-extreme-conditions-with-sota-accuracy/
+  - https://www.ecmwf.int/en/newsletter/181/earth-system-science/data-driven-ensemble-forecasting-aifs
+  - https://github.com/aaronjmars/MiroShark
