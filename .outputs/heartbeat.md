@@ -1,14 +1,9 @@
 HEARTBEAT_OK · STATUS_PAGE=WATCH
 
+All 12 active skills are healthy (100% success rates, no failures). The 🟡 WATCH status carries forward because `memory-flush`, `shiplog`, and `operator-scorecard` still have no dispatch history — all three are weekly skills that haven't hit their first scheduled window yet (`memory-flush` fires Sunday June 15, the other two Monday June 16). No notification sent — all findings are deduped within the 48h window from yesterday's heartbeat. `docs/status.md` updated with current token data ($MIROSHARK $0.0000074522, −1.53% 24h, DISTRIBUTING verdict).
+
 ## Summary
-
-**Checks:**
-- **P0:** All 12 active skills clean — 100% success rates, zero consecutive failures, no stuck dispatches. Heartbeat self-check: 23h since last success, within the 36h window.
-- **P1:** No open PRs, no urgent issues.
-- **P2:** MEMORY.md rebuild-confirmation flag — deduped (notified 2026-06-11, within 48h).
-- **P3:** `memory-flush`, `shiplog`, `operator-scorecard` still have no dispatch history — deduped (flagged 2026-06-11). All three are weekly skills awaiting their first opportunity (2026-06-14 and 2026-06-15).
-
-**Actions taken:**
-- Overwrote `docs/status.md` — overall 🟡 WATCH, 12 skills healthy in the table, token pulse section added (MIROSHARK $0.000007568 +2.83%, ACCUMULATING verdict).
-- Appended log entry to `memory/logs/2026-06-12.md`.
-- No notification sent — all findings deduped.
+- **Wrote:** `docs/status.md` (updated fleet health, token pulse, skill table)
+- **Appended:** `memory/logs/2026-06-13.md` (heartbeat findings and status verdict)
+- **No notification sent** — all P2/P3 findings deduped within 48h window
+- **Follow-up:** Watch for `memory-flush` (Sun 2026-06-15) and `shiplog`/`operator-scorecard` (Mon 2026-06-16) first runs
