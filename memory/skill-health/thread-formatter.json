@@ -1,10 +1,10 @@
 {
   "skill": "thread-formatter",
-  "last_analyzed": "2026-06-12T18:09:16Z",
-  "quality_score": 5,
-  "assessment": "Excellent — substantive thread with strong signal detection, proper deduplication logic, verified constraint compliance (280-char tweets), complete artifact handling, and actionable output",
+  "last_analyzed": "2026-06-13T17:42:58Z",
+  "quality_score": 4,
+  "assessment": "Good — executed full pipeline (topic selection, dedup, article, notification, logging) with concrete outputs and character count validation",
   "flags": [],
-  "avg_score": 4.5,
+  "avg_score": 4.33,
   "history": [
     {
       "date": "2026-06-11",
@@ -13,6 +13,10 @@
     {
       "date": "2026-06-12",
       "score": 5
+    },
+    {
+      "date": "2026-06-13",
+      "score": 4
     }
   ]
 }

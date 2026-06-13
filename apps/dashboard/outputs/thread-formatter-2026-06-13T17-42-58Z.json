@@ -1,0 +1,177 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Thread: MiroShark Responsible Disclosure Policy",
+        "description": "PR #158 — 2026-06-13"
+      },
+      "children": [
+        "header_section",
+        "stats_section",
+        "separator_1",
+        "thread_points",
+        "separator_2",
+        "links_section"
+      ]
+    },
+    "header_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "topic_text"
+      ]
+    },
+    "topic_text": {
+      "type": "Text",
+      "props": {
+        "text": "Topic: MiroShark responsible disclosure policy — PR #158",
+        "variant": "muted"
+      }
+    },
+    "stats_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stat_stars",
+        "badge_license",
+        "integrators_text"
+      ]
+    },
+    "stat_stars": {
+      "type": "Stat",
+      "props": {
+        "label": "GitHub Stars",
+        "value": "1,268"
+      }
+    },
+    "badge_license": {
+      "type": "Badge",
+      "props": {
+        "text": "AGPL Licensed",
+        "variant": "outline"
+      }
+    },
+    "integrators_text": {
+      "type": "Text",
+      "props": {
+        "text": "Production integrators: RevaultDrops, AntFleet, Capacitr",
+        "variant": "body"
+      }
+    },
+    "separator_1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "thread_points": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "point_1",
+        "point_2",
+        "point_3",
+        "point_4",
+        "point_5"
+      ]
+    },
+    "point_1": {
+      "type": "Text",
+      "props": {
+        "text": "1/ someone reported a hardcoded Neo4j password in a public GitHub issue. not a security advisory. a public issue. MiroShark had no private channel for disclosure. PR #158 fixes that.",
+        "variant": "body"
+      }
+    },
+    "point_2": {
+      "type": "Text",
+      "props": {
+        "text": "2/ 1,268 stars. three production integrators — RevaultDrops, AntFleet, Capacitr — running it as AI infrastructure. AGPL licensed. and until today: no responsible disclosure policy. issue #88 appeared as a public GitHub issue because there was nowhere else to send it.",
+        "variant": "body"
+      }
+    },
+    "point_3": {
+      "type": "Text",
+      "props": {
+        "text": "3/ PR #158: SECURITY.md adds a private email channel and a 90-day coordinated disclosure window. researchers can report without going public immediately. maintainers get time to patch before a CVE lands cold.",
+        "variant": "body"
+      }
+    },
+    "point_4": {
+      "type": "Text",
+      "props": {
+        "text": "4/ three teams depending on MiroShark as infrastructure means the attack surface isn't just the repo — it's their production systems. SECURITY.md is table stakes. next hardcoded credential gets a 90-day fix window, not a public thread.",
+        "variant": "body"
+      }
+    },
+    "point_5": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "point_5_text",
+        "point_5_link"
+      ]
+    },
+    "point_5_text": {
+      "type": "Text",
+      "props": {
+        "text": "5/ security policy is live. PR, policy text, and README link at:",
+        "variant": "body"
+      }
+    },
+    "point_5_link": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/aaronjmars/MiroShark/pull/158",
+        "href": "https://github.com/aaronjmars/MiroShark/pull/158"
+      }
+    },
+    "separator_2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "links_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "link_pr",
+        "link_article"
+      ]
+    },
+    "link_pr": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #158: Responsible Disclosure Policy",
+        "href": "https://github.com/aaronjmars/MiroShark/pull/158",
+        "source": "GitHub"
+      }
+    },
+    "link_article": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Thread Article",
+        "href": "articles/thread-2026-06-13.md",
+        "source": "Local"
+      }
+    }
+  }
+}
