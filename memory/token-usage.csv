@@ -24,4 +24,4 @@ date,skill,model,input_tokens,output_tokens,cache_read,cache_creation
 2026-06-14,feature,claude-opus-4-8,2809,24208,3175966,116788
 2026-06-14,repo-actions,claude-sonnet-4-6,28,27774,1497102,68671
 2026-06-14,star-milestone,claude-sonnet-4-6,16,8296,534508,27719
-2026-06-14,repo-article,claude-opus-4-8,2529,19423,1559793,74786
+2026-06-14,project-lens,claude-opus-4-8,6193,23331,1301465,64267

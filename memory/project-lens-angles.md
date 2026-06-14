@@ -32,3 +32,14 @@ Tracks angle categories and theses used, to avoid repeats within 14 days.
   - https://deepmind.google/blog/gencast-predicts-weather-and-the-risks-of-extreme-conditions-with-sota-accuracy/
   - https://www.ecmwf.int/en/newsletter/181/earth-system-science/data-driven-ensemble-forecasting-aifs
   - https://github.com/aaronjmars/MiroShark
+
+## 2026-06-14
+- Angle: Philosophy / big ideas (Jevons paradox / induced demand — cheap simulation changes behavior, not budget)
+- Thesis: When crowd-simulation collapses from a $25k study to $1, the payoff isn't a cheaper answer but a changed behavior — you ask a thousand times — and MiroShark builds for that.
+- Title: When the Price of a Question Falls to a Dollar
+- Sources:
+  - https://a16z.com/llmflation-llm-inference-cost/
+  - https://epoch.ai/data-insights/llm-inference-price-trends
+  - https://arxiv.org/pdf/2603.06630
+  - https://www.driveresearch.com/market-research-company-blog/how-much-does-market-research-cost/
+  - https://github.com/aaronjmars/MiroShark

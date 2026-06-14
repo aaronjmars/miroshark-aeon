@@ -1,0 +1,32 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "New Article: When the Price of a Question Falls to a Dollar 🦈"
+      },
+      "children": [
+        "text-body",
+        "link-article"
+      ]
+    },
+    "text-body": {
+      "type": "Text",
+      "props": {
+        "text": "LLM inference fell ~1,000x in three years (a16z's \"LLMflation\"). Jevons' 1865 coal paradox says what happens next: cheap doesn't mean the same study for less — it means you stop asking once and start asking a thousand times. The tell isn't the price tag, it's the plumbing: `POST /api/simulation/batch-status`, an `/api/activity.json` firehose, and `/api/stats/distribution.json` over *every* run are built for volume, not for a quarterly $25k focus group. Falsifiable by end of 2027: the sim tools that win ship tooling for managing many runs, not one polished demo."
+      },
+      "children": []
+    },
+    "link-article": {
+      "type": "StoryLink",
+      "props": {
+        "title": "When the Price of a Question Falls to a Dollar",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-06-14.md",
+        "source": "project-lens"
+      },
+      "children": []
+    }
+  }
+}
