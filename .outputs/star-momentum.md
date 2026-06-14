@@ -1,14 +1,12 @@
 ## Summary
 
-**What ran:** `star-momentum` for 2026-06-13.
+**star-momentum — 2026-06-14 — STAR_MOMENTUM_NO_ALERTS**
 
-**Result:** `STAR_MOMENTUM_NO_ALERTS` — no notification sent.
+- **Repos audited**: 1 (`aaronjmars/MiroShark`; `miroshark-aeon` skipped — `-aeon` suffix)
+- **Verdict**: INSUFFICIENT_DATA — 3 data points in the 14-day window, need ≥4 for projection
+  - Series: 2026-06-11 → 1252, 2026-06-12 → 1266, 2026-06-13 → 1268 (today's repo-pulse hasn't run yet)
+  - Target: 1500⭐ (gap: 232); star-milestone has been projecting ~2026-07-29 at ~5/day
+- **Alerts sent**: 0 — no notification sent (silence = no signal)
+- **Files written**: `articles/star-momentum-2026-06-14.md`, `memory/topics/star-momentum-state.json` (updated `last_run_at`), `memory/logs/2026-06-14.md` (log block appended)
 
-**Repo audited:** `aaronjmars/MiroShark` (1 repo; `miroshark-aeon` filtered out as agent repo)
-
-**Why no alert:** Only 2 data points exist in the 14-day window (2026-06-11: 1252⭐, 2026-06-12: 1266⭐). The skill requires ≥4 to compute rolling averages and project a crossing date → verdict `INSUFFICIENT_DATA`. The series will become projectable after `repo-pulse` accumulates 2 more daily readings (~2026-06-15).
-
-**Files written/updated:**
-- `articles/star-momentum-2026-06-13.md` — per-repo projection report
-- `memory/topics/star-momentum-state.json` — `last_run_at` bumped to 2026-06-13
-- `memory/logs/2026-06-13.md` — log block appended
+Projection will unlock tomorrow once repo-pulse adds a 4th daily data point.
