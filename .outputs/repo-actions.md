@@ -1,13 +1,20 @@
-*Repo Action Ideas — aaronjmars/MiroShark — 2026-06-12*
-Five HIGH/MED ideas today — all anchored to real structural gaps; top pick closes the most embarrassing hole (no disclosure policy on a security-affected AGPL project with 1,266 stars and 3+ named integrators).
+Done. Here's a summary of what ran:
 
-Top pick: Add SECURITY.md with a responsible disclosure policy (Security, Small, Priority HIGH)
- → Gives operators and integrators a clear private-report path before the next issue #88-class vuln surfaces publicly.
+## Summary
 
-1. Add SECURITY.md with responsible disclosure policy (HIGH, Security, Small)
-2. Expand CONTRIBUTING.md from test-only stub to full contributor guide (HIGH, DX, Small)
-3. Add pip-audit + bandit security scan to tests.yml (HIGH, Security, Small)
-4. Serve Redoc UI at GET /api/docs from openapi.yaml (HIGH, DX, Medium)
-5. Add .github/ISSUE_TEMPLATE with bug + feature templates (MED, Community, Small)
+**Target:** aaronjmars/MiroShark (1,270 stars, 269 forks, pushed today)
 
-Full details: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-actions-2026-06-12.md
+**Mode:** REPO_ACTIONS_OK — 5 ideas cleared all gates from 10 candidates
+
+**Article written:** `articles/repo-actions-2026-06-14.md`
+
+**Top pick:** Review and merge PR #159 (community PR from dan-and: same-origin API fix + neo4j v5.26 bump) — 14/15, HIGH priority, Small effort. Merging it also sends a signal to the same contributor building websearch support in issue #160.
+
+**5 ideas this cycle:**
+1. **PR #159** — Review + merge dan-and's community chore PR (HIGH, 14/15)
+2. **ISSUE #160** — Post websearch integration spec (ENV-var interface for SearXNG + Firecrawl) to unblock the active fork contributor (HIGH, 13/15)
+3. **dependabot.yml** — Automate weekly Python + npm dep updates; `camel-ai==0.2.78` is an exact pin with no auto-update path (MED, 13/15)
+4. **CODE_OF_CONDUCT.md** — 14 ecosystem integrators + 1270 stars with no community governance document (MED, 12/15)
+5. **Loosen camel-ai exact pin** — Change `==0.2.78` → `>=0.2.78` to align with every other dep in the repo (MED, 12/15)
+
+**Carried over from 2026-06-12:** SECURITY.md top pick — PR #158 still open, unmerged.
