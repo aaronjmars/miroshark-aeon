@@ -1,16 +1,15 @@
-*Push Recap — 2026-06-13*
-miroshark-aeon — SHIPPING the agent's own wiring. MiroShark product quiet today. ⭐
+Done. Logged `PUSH_RECAP_QUIET` and stopped per the step-1 significance gate.
 
-shipped to users:
-• dashboard gets Soul + Strategy *builder* tabs — generate SOUL.md/STYLE.md & STRATEGY.md from a UI, not by hand (84b93b9: SoulPanel +306, 4 new API routes, 2 new skills)
-• README synced to document the new tabs, instance header kept (1abc27f)
+## Summary
 
-under the hood:
-• adopted Aaron's soul — every notification & article now speaks in his voice, not the neutral default (12b4af5)
-• STRATEGY.md rewritten from template defaults to the real mandate: stars + ecosystem + $MIROSHARK (3ee380b)
+Ran `push-recap` for 2026-06-14 across both watched repos. The day was genuinely quiet, so per the skill's significance gate I sent **no notification and wrote no article**.
 
-shape: 2 user-visible · 2 internal · 0 infra · 27 bot-filtered · 0 merged PRs
-volume: ~1.8K lines of real change (+ a 102K-line raw X archive, data not code)
-note: 🦈 MiroShark itself shipped nothing in 24h — PR #158 (SECURITY.md) still open.
+**What I found:**
+- **aaronjmars/MiroShark** (the in-lane product engine): **0 commits, 0 merged PRs** in the 24h window.
+- **aaronjmars/miroshark-aeon** (agent repo): **28 commits, all automated `chore(...)` cron auto-commits** by the `aeonframework` GH Actions identity (author == committer). Zero non-chore, zero hand-authored. Verified file contents — they touch only agent bookkeeping (`.outputs/`, `articles/`, `memory/`, `apps/dashboard/outputs/`), no product source, nothing user-visible.
 
-full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-06-13.md
+**Decision:** After bot-filtering the 28 automated chore commits, the meaningful set is empty across every watched repo → `PUSH_RECAP_QUIET`. Stop, send nothing — exactly the case the gate exists for so the channel stays high-signal.
+
+**Files modified:** `memory/logs/2026-06-14.md` (appended push-recap log entry with status, per-repo source status, and bot-filtered count for future-debugging clarity).
+
+**Follow-up:** none. MiroShark engine shipped nothing in the last 24h; PRs #158/#159/#162 remain the open product-side threads tracked by other skills.

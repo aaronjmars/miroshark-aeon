@@ -1,10 +1,10 @@
 {
   "skill": "push-recap",
-  "last_analyzed": "2026-06-13T15:20:22Z",
+  "last_analyzed": "2026-06-14T15:32:25Z",
   "quality_score": 4,
-  "assessment": "Good — substantive recap with specific data, honest about limitations (106K line data drop), clear verdict, and identified follow-ups.",
+  "assessment": "Successfully executed significance gate logic by filtering 28 automated chore commits, correctly determined no meaningful activity warranted notification, verified outputs with clear reasoning and proper logging.",
   "flags": [],
-  "avg_score": 4.33,
+  "avg_score": 4.25,
   "history": [
     {
       "date": "2026-06-11",
@@ -16,6 +16,10 @@
     },
     {
       "date": "2026-06-13",
+      "score": 4
+    },
+    {
+      "date": "2026-06-14",
       "score": 4
     }
   ]
