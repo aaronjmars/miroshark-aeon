@@ -1,0 +1,200 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "Repo Pulse — 2026-06-14",
+        "description": "aaronjmars/MiroShark"
+      },
+      "children": [
+        "badge",
+        "sep1",
+        "repo-stats",
+        "sep2",
+        "stargazers-section",
+        "sep3",
+        "forks-section",
+        "sep4",
+        "source"
+      ]
+    },
+    "badge": {
+      "type": "Badge",
+      "props": {
+        "text": "SURGE",
+        "variant": "default"
+      },
+      "children": []
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "repo-stats": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "lg"
+      },
+      "children": [
+        "stat-stars",
+        "stat-forks"
+      ]
+    },
+    "stat-stars": {
+      "type": "Stat",
+      "props": {
+        "label": "Stars",
+        "value": "1270",
+        "delta": "+4",
+        "trend": "up"
+      },
+      "children": []
+    },
+    "stat-forks": {
+      "type": "Stat",
+      "props": {
+        "label": "Forks",
+        "value": "269",
+        "delta": "+1",
+        "trend": "up"
+      },
+      "children": []
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "stargazers-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stargazers-heading",
+        "stargazers-list"
+      ]
+    },
+    "stargazers-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "New stargazers",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "stargazers-list": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "star1",
+        "star2",
+        "star3",
+        "star4"
+      ]
+    },
+    "star1": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Mreiffy",
+        "href": "https://github.com/Mreiffy"
+      },
+      "children": []
+    },
+    "star2": {
+      "type": "StoryLink",
+      "props": {
+        "title": "magatron02",
+        "href": "https://github.com/magatron02"
+      },
+      "children": []
+    },
+    "star3": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Privatize3774",
+        "href": "https://github.com/Privatize3774"
+      },
+      "children": []
+    },
+    "star4": {
+      "type": "StoryLink",
+      "props": {
+        "title": "KoOmaro",
+        "href": "https://github.com/KoOmaro"
+      },
+      "children": []
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "forks-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "forks-heading",
+        "forks-list"
+      ]
+    },
+    "forks-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "New forks",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "forks-list": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "fork1"
+      ]
+    },
+    "fork1": {
+      "type": "StoryLink",
+      "props": {
+        "title": "im-khang/MiroShark",
+        "href": "https://github.com/im-khang/MiroShark"
+      },
+      "children": []
+    },
+    "sep4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "source": {
+      "type": "Text",
+      "props": {
+        "text": "Source: events",
+        "variant": "muted"
+      },
+      "children": []
+    }
+  }
+}
