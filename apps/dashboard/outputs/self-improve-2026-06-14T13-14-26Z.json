@@ -1,0 +1,94 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "self-improve"
+      },
+      "children": [
+        "stack-main"
+      ]
+    },
+    "stack-main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "summary-text",
+        "separator-1",
+        "heading-solution",
+        "changes-list",
+        "separator-2",
+        "pr-link"
+      ]
+    },
+    "summary-text": {
+      "type": "Text",
+      "props": {
+        "text": "Fixed star-momentum data starvation",
+        "variant": "lead"
+      }
+    },
+    "separator-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading-solution": {
+      "type": "Heading",
+      "props": {
+        "text": "Changes",
+        "level": "h3"
+      }
+    },
+    "changes-list": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "change-1",
+        "change-2",
+        "change-3"
+      ]
+    },
+    "change-1": {
+      "type": "Text",
+      "props": {
+        "text": "Reads star-count lines from star-milestone too, not just repo-pulse"
+      }
+    },
+    "change-2": {
+      "type": "Text",
+      "props": {
+        "text": "Stops logging INSUFFICIENT_DATA after a history reset"
+      }
+    },
+    "change-3": {
+      "type": "Text",
+      "props": {
+        "text": "Survives single-day repo-pulse gaps"
+      }
+    },
+    "separator-2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "pr-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #61",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/pull/61",
+        "source": "GitHub"
+      }
+    }
+  }
+}
