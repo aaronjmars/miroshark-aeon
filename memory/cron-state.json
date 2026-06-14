@@ -10,7 +10,7 @@
     "last_dispatch": "2026-06-13T19:18:19Z"
   },
   "star-milestone": {
-    "last_status": "success",
+    "last_status": "dispatched",
     "last_success": "2026-06-13T15:19:03Z",
     "total_runs": 4,
     "total_successes": 4,
@@ -18,11 +18,11 @@
     "consecutive_failures": 0,
     "success_rate": 1,
     "last_quality_score": 4,
-    "last_dispatch": "2026-06-13T15:15:55Z"
+    "last_dispatch": "2026-06-14T15:30:09Z"
   },
   "push-recap": {
-    "last_dispatch": "2026-06-13T15:15:55Z",
-    "last_status": "success",
+    "last_dispatch": "2026-06-14T15:30:09Z",
+    "last_status": "dispatched",
     "last_success": "2026-06-13T15:20:58Z",
     "total_runs": 3,
     "total_successes": 3,
