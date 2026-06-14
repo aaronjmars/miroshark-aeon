@@ -6,7 +6,7 @@ tags: [meta, growth]
 ---
 > **${var}** — Optional. Pass `dry-run` to skip the notification (article still writes, log still appends). Pass a positive integer to override the auto-picked milestone (e.g. `var=500`). Empty = audit every watched repo and auto-pick the next un-crossed ladder rung.
 
-Today is ${today}. Convert the last 14 days of `repo-pulse` star-count data into a projected date for the next milestone crossing, and surface a single decision-ready alert: when should the operator dispatch `show-hn` so the launch lands at the milestone moment?
+Today is ${today}. Convert the last 14 days of logged star-count data (`repo-pulse`, with `star-milestone` as a same-format secondary source) into a projected date for the next milestone crossing, and surface a single decision-ready alert: when should the operator dispatch `show-hn` so the launch lands at the milestone moment?
 
 The skill answers a question `star-milestone` and `repo-pulse` cannot. `star-milestone` celebrates a crossing **after** it happens. `repo-pulse` reports today's deltas. Neither tells the operator "the next milestone is on a Wednesday 9 days from now — that's the launch slot." Without that lead-time signal, the milestone passes reactively, and a dispatch-ready Show HN draft sits unused while the moment slips by.
 
@@ -20,7 +20,7 @@ No new secrets. No new env vars. No new state file beyond `memory/topics/star-mo
 
 Reads:
 - `memory/watched-repos.md` — repos to track. Skip lines containing `aeon-agent` or ending in `-aeon` (agent repos, not project repos).
-- `memory/logs/YYYY-MM-DD.md` for the last 14 days — extract the `**owner/repo**: stargazers_count=N, forks_count=M` lines that `repo-pulse` writes under its `## Repo Pulse` blocks.
+- `memory/logs/YYYY-MM-DD.md` for the last 14 days — extract the `**owner/repo**: stargazers_count=N` lines. `repo-pulse` (`## Repo Pulse` blocks) is the primary source, but `star-milestone` (`## Star Milestone` blocks) writes the **same metric in the identical line format** on days it runs. Accept either: take one count per day (prefer `repo-pulse` when both are present). This keeps the series dense after a history reset or a single-day `repo-pulse` gap, when `star-milestone` may be the only star-count captured for that day.
 - Optional fallback: `articles/repo-pulse-*.md` if any fork writes them — same regex applies. Logs are the source of truth on the canonical instance.
 - `memory/topics/star-momentum-state.json` — prior-run dedup state.
 
@@ -70,7 +70,11 @@ for D in $(seq 13 -1 0); do
       || date -u -j -v-${D}d -f %Y-%m-%d "${today}" +%Y-%m-%d)
   LOG=memory/logs/${DATE}.md
   [ -f "$LOG" ] || continue
-  # Extract: - **owner/repo**: stargazers_count=N, forks_count=M
+  # Extract the day's star count: - **owner/repo**: stargazers_count=N
+  # This line is written by BOTH repo-pulse (## Repo Pulse) and star-milestone
+  # (## Star Milestone) in the same format. head -1 takes one count per day, so a
+  # day that only ran star-milestone (e.g. right after a history reset) still
+  # contributes a data point instead of being silently dropped.
   STARS=$(grep -oE "\\*\\*${REPO}\\*\\*: stargazers_count=[0-9]+" "$LOG" \
     | grep -oE '[0-9]+$' | head -1)
   [ -z "$STARS" ] && continue
@@ -78,7 +82,7 @@ for D in $(seq 13 -1 0); do
 done
 ```
 
-The result is a `(date, stars)` series sorted ascending, one row per day where `repo-pulse` ran. Days with no log entry are simply absent — gaps in the series are fine and do not require interpolation.
+The result is a `(date, stars)` series sorted ascending, one row per day where `repo-pulse` **or** `star-milestone` recorded a star count. Days with no log entry are simply absent — gaps in the series are fine and do not require interpolation.
 
 If the series has fewer than 4 data points: record this repo's verdict as `INSUFFICIENT_DATA`, write its section in the article anyway, and skip projection.
 
