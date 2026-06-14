@@ -1,10 +1,10 @@
 {
   "skill": "token-report",
-  "last_analyzed": "2026-06-13T06:59:04Z",
-  "quality_score": 4,
-  "assessment": "Substantive report with clear verdict, multi-source data integration, proper delta computation, and actionable whale/volume analysis",
+  "last_analyzed": "2026-06-14T07:14:24Z",
+  "quality_score": 5,
+  "assessment": "Excellent — complete execution with multi-source data validation, specific metrics, clear verdict, and proper state logging for continuity.",
   "flags": [],
-  "avg_score": 4,
+  "avg_score": 4.33,
   "history": [
     {
       "date": "2026-06-12",
@@ -13,6 +13,10 @@
     {
       "date": "2026-06-13",
       "score": 4
+    },
+    {
+      "date": "2026-06-14",
+      "score": 5
     }
   ]
 }
