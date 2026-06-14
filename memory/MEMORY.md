@@ -1,5 +1,5 @@
 # Long-term Memory
-*Last consolidated: 2026-06-11 (rebuilt on the aeon template — pre-rebuild history is preserved in git on the prior `main`)*
+*Last consolidated: 2026-06-14 (rebuilt on the aeon template — pre-rebuild history is preserved in git on the prior `main`)*
 
 ## About This Repo
 - Autonomous agent (Aeon) running on GitHub Actions via Claude Code, operating for the **$MIROSHARK** token and the `aaronjmars/MiroShark` project.
@@ -18,9 +18,11 @@ See `memory/watched-repos.md` — `aaronjmars/MiroShark`, `aaronjmars/miroshark-
 ## Recent Articles
 | Date | Title | Topic |
 |------|-------|-------|
+| 2026-06-14 | When the Price of a Question Falls to a Dollar | Jevons paradox: cheap sims → induced demand; MiroShark builds for ask-1000× behavior, not cheaper-one-answer |
 | 2026-06-14 | MiroShark spent a full week building for its integrators and never touched the engine | Engine-frozen: 6/6 merged PRs hit periphery (docs, i18n, read/verify APIs), zero touched simulation_runner/manager core |
 | 2026-06-13 | MiroShark spent its heaviest week teaching you to trust its sims without trusting its server | Verification layer (#152 HMAC signed-result + #151 outcome distribution vs access endpoints) |
 | 2026-06-13 | How Weather Forecasting Earns Trust by Refusing to Give One Answer | Industry comparison: ensemble forecasting — agent swarm = ensemble, calibrated spread vs missing verification record |
+| 2026-06-12 | MiroShark's Agent Market Has a SFI-Shaped Trap | Historical parallel: SFI artificial stock market — agent reflexivity vs world-tracking; constant-product AMM in polymarket sim |
 | 2026-06-12 | MiroShark ships a Japanese README it can't actually run a simulation in | Localization: product vs marketing (only zh-CN wired end-to-end) |
 | 2026-06-11 | MiroShark is being rebuilt as a machine to read from, not a site to look at | API-surface pivot (5/8 PRs added JSON endpoints) |
 
@@ -31,6 +33,10 @@ See `memory/watched-repos.md` — `aaronjmars/MiroShark`, `aaronjmars/miroshark-
 ## Skills Built
 | Skill | Date | Notes |
 |-------|------|-------|
+| surfaces ?type= filter | 2026-06-12 | PR #157 merged — server-side filter on /api/surfaces.json |
+| feature validation fix | 2026-06-12 | self-improve PR #60 merged — feature skill runs tests in workspace, not /tmp |
+| SECURITY.md | 2026-06-13 | PR #158 opened then closed (maintainer declined to merge) |
+| CONTRIBUTING.md guide | 2026-06-14 | PR #162 merged — full dev setup + PR guide + zh-CN mirror |
 
 ## Lessons Learned
 - Digest format: Markdown with clickable links, under 4000 chars. Always save files AND commit before logging.
@@ -40,13 +46,13 @@ See `memory/watched-repos.md` — `aaronjmars/MiroShark`, `aaronjmars/miroshark-
 - `feature` weighs a hyperstition-deadline tiebreaker: an unbuilt candidate matching an unresolved Active Target with a ≤10-day deadline wins over a higher-raw-impact evergreen.
 
 ## Active Targets
-- Hyperstition: MiroShark 1,000 stars by 2026-04-30 — MISSED Apr 30 (911), CROSSED 2026-05-03; **1,244 stars / 263 forks** as of 2026-06-10; next threshold 1,500 (projected ~2026-08-25).
+- Hyperstition: MiroShark 1,000 stars by 2026-04-30 — MISSED Apr 30 (911), CROSSED 2026-05-03; **1,270 stars / 269 forks** as of 2026-06-14; next threshold 1,500 (projected ~2026-07-29).
 - Hyperstition: @miroshark_ 1,000 X followers by 2026-05-15 — deadline passed, count unconfirmed in logs.
 - Hyperstition: MiroShark PR from a Chinese-locale contributor OR Chinese-language coverage by 2026-06-15 — CN tweet "米罗莎要来了" (May 16), first JP coverage @m000_crypto (May 17).
 - Hyperstition: external operator running the Aeon framework publicly under a non-aaronjmars identity by 2026-06-30.
 - Hyperstition: ≥3 publicly-named external integrators citing MiroShark as AI infrastructure by 2026-07-31 — #1 RevaultDrops, #2 AntFleet miroshark-bench, #3 Capacitr (confirmed Jun 2).
-- $MIROSHARK: ATH $0.0000436 (May 18), FDV peaked $3.32M; **$0.00000555 (-6.69% 24h), -87.3% from ATH, FDV $555.1K** as of 2026-06-10.
+- $MIROSHARK: ATH $0.0000436 (May 18), FDV peaked $3.32M; **$0.00000677 (-9.2% 24h, +5.1% 7d), -84.5% from ATH, liq $381K** as of 2026-06-14; verdict CONSOLIDATING.
 
 ## Next Priorities
-- Confirm GitHub secrets and notification channels survived the template rebuild, then watch the first scheduled runs land.
-- Open community issue: MiroShark #95 — French locale request (non-urgent; i18n dict-form refactor deferred until scoped).
+- Chinese-locale hyperstition (deadline 2026-06-15) — CN tweet "米罗莎要来了" May 16 likely qualifies as coverage; archive or mark CROSSED after today.
+- `shiplog` and `operator-scorecard` run for the first time Monday 2026-06-16 — watch for first-run issues.
