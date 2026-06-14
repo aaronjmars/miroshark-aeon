@@ -129,5 +129,9 @@
     "consecutive_failures": 0,
     "success_rate": 1,
     "last_quality_score": 4
+  },
+  "memory-flush": {
+    "last_dispatch": "2026-06-14T18:31:29Z",
+    "last_status": "dispatched"
   }
 }
