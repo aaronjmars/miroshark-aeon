@@ -21,3 +21,4 @@ date,skill,model,input_tokens,output_tokens,cache_read,cache_creation
 2026-06-13,heartbeat,claude-sonnet-4-6,9,9911,361945,45891
 2026-06-14,token-report,claude-sonnet-4-6,4156,27161,1310255,70599
 2026-06-14,star-momentum,claude-sonnet-4-6,11,7754,377301,31770
+2026-06-14,feature,claude-opus-4-8,2809,24208,3175966,116788

@@ -1,0 +1,190 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Feature Built — 2026-06-14 — aaronjmars/MiroShark 🦈"
+      },
+      "children": [
+        "stars_stat",
+        "sep1",
+        "built_heading",
+        "built_stack",
+        "sep2",
+        "matters_heading",
+        "matters_stack",
+        "sep3",
+        "works_heading",
+        "works_text",
+        "sep4",
+        "next_heading",
+        "next_stack",
+        "sep5",
+        "pr_link"
+      ]
+    },
+    "stars_stat": {
+      "type": "Stat",
+      "props": {
+        "label": "GitHub Stars",
+        "value": "1,270"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {}
+    },
+    "built_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "What was built",
+        "level": "h3"
+      }
+    },
+    "built_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "built_item1",
+        "built_item2",
+        "built_item3"
+      ]
+    },
+    "built_item1": {
+      "type": "Text",
+      "props": {
+        "text": "CONTRIBUTING.md: expanded from 30-line stub to 90-line onboarding guide with Development setup (npm run setup:all → Neo4j via docker compose → npm run dev), Submitting a PR (branch prefixes, Conventional Commit titles, run the unit suite first), and Adding an API endpoint (the openapi.yaml drift-test contract)",
+        "variant": "body"
+      }
+    },
+    "built_item2": {
+      "type": "Text",
+      "props": {
+        "text": "CONTRIBUTING.zh-CN.md: every new section mirrored in Chinese — i18n parity held",
+        "variant": "body"
+      }
+    },
+    "built_item3": {
+      "type": "Text",
+      "props": {
+        "text": "README.md: docs-table label updated to match the broader guide",
+        "variant": "body"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {}
+    },
+    "matters_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Why this matters",
+        "level": "h3"
+      }
+    },
+    "matters_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "matters_item1",
+        "matters_item2",
+        "matters_item3"
+      ]
+    },
+    "matters_item1": {
+      "type": "Text",
+      "props": {
+        "text": "A first-time contributor with 1,270 stars to draw from had to reverse-engineer setup from the README, package.json, and the CI workflow in parallel",
+        "variant": "body"
+      }
+    },
+    "matters_item2": {
+      "type": "Text",
+      "props": {
+        "text": "That friction is the gap between \"cool repo\" and \"I shipped a PR.\"",
+        "variant": "body"
+      }
+    },
+    "matters_item3": {
+      "type": "Text",
+      "props": {
+        "text": "This was repo-actions' #2 pick — yesterday closed #1 (SECURITY.md). Lower the cost of the first contribution and ecosystem growth follows",
+        "variant": "body"
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {}
+    },
+    "works_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "How it works",
+        "level": "h3"
+      }
+    },
+    "works_text": {
+      "type": "Text",
+      "props": {
+        "text": "No code — every instruction is anchored to what's actually in the repo, not invented. Setup commands come straight from the package.json scripts block; the Neo4j step matches docker-compose.yml; the CI line matches tests.yml. The endpoint section documents the real gate: test_unit_openapi.py fails CI if openapi.yaml and the Flask routes drift, so the guide tells you to register the blueprint, document the path, and add an offline unit test — the exact loop maintainers already follow",
+        "variant": "body"
+      }
+    },
+    "sep4": {
+      "type": "Separator",
+      "props": {}
+    },
+    "next_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "What's next",
+        "level": "h3"
+      }
+    },
+    "next_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "next_item1",
+        "next_item2"
+      ]
+    },
+    "next_item1": {
+      "type": "Text",
+      "props": {
+        "text": "Two repo-actions ideas still open and autonomously buildable — ISSUE_TEMPLATE (#5) and CODE_OF_CONDUCT (monitor)",
+        "variant": "body"
+      }
+    },
+    "next_item2": {
+      "type": "Text",
+      "props": {
+        "text": "pip-audit in CI (#3) stays blocked until the token gets workflows scope",
+        "variant": "body"
+      }
+    },
+    "sep5": {
+      "type": "Separator",
+      "props": {}
+    },
+    "pr_link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #162",
+        "href": "https://github.com/aaronjmars/MiroShark/pull/162",
+        "source": "aaronjmars/MiroShark"
+      }
+    }
+  }
+}

@@ -1,19 +1,20 @@
-*Feature Built — 2026-06-13 — aaronjmars/MiroShark* 🦈
+*Feature Built — 2026-06-14 — aaronjmars/MiroShark* 🦈
 
-SECURITY.md — responsible-disclosure policy
-MiroShark now has a front door for security reports. Instead of a stranger posting a vuln on a public issue for everyone to see, there's a private channel — GitHub's "Report a vulnerability" — plus a clear table of what's supported, how fast we respond, and how disclosure gets coordinated. Also bolted on an operator hardening checklist: don't expose Neo4j ports, set a real password, keep your LLM keys secret.
+Full contributor guide
+CONTRIBUTING.md was a stub — it told you how to run pytest and nothing else. Now it's a real onboarding doc: how to set up the project locally, how to submit a PR the way the repo actually merges them, and how to add an API endpoint without breaking CI. Mirrored into Chinese too, so the zh-CN side stays in sync.
 
 Why this matters:
-1,200+ stars, named production integrators (RevaultDrops, AntFleet, Capacitr), an AGPL engine running a Neo4j graph full of whatever docs you fed it — and zero private way to report a hole. This already bit us: the hardcoded Neo4j password (#88) got reported on a *public* issue because no private path existed. That's the exact pattern this file kills. It also lights up the GitHub Security tab.
+1,270 stars, and a first-time contributor had to reverse-engineer setup from the README, package.json, and the CI workflow in parallel. That friction is the gap between "cool repo" and "I shipped a PR." This was repo-actions' #2 pick — yesterday closed #1 (SECURITY.md). Lower the cost of the first contribution and ecosystem growth follows.
 
 What was built:
-- SECURITY.md (new): private reporting via GitHub advisories, supported-versions table, 3-day ack / 7-day assessment SLA, coordinated-disclosure terms, operator hardening checklist, scope section. Cites #88 as the reason it exists.
-- README.md: one row in the docs table linking to SECURITY.md.
+- CONTRIBUTING.md: added Development setup (npm run setup:all → Neo4j via docker compose → npm run dev), Submitting a PR (branch prefixes, Conventional Commit titles, run the unit suite first), and Adding an API endpoint (the openapi.yaml drift-test contract). ~30 → ~90 lines.
+- CONTRIBUTING.zh-CN.md: every new section mirrored in Chinese — i18n parity held.
+- README.md: docs-table label updated to match the broader guide.
 
 How it works:
-Pure markdown — no code touched, so nothing in the engine moves and CI (pytest only) is unaffected. The reporting path leans on GitHub's native private vulnerability reporting, which is what actually populates the Security tab and lets us credit reporters in a published advisory. Picked it over an email address so there's no inbox to maintain or leak.
+No code — every instruction is anchored to what's actually in the repo, not invented. Setup commands come straight from the package.json scripts block; the Neo4j step matches docker-compose.yml; the CI line matches tests.yml. The endpoint section documents the real gate: test_unit_openapi.py fails CI if openapi.yaml and the Flask routes drift, so the guide tells you to register the blueprint, document the path, and add an offline unit test — the exact loop maintainers already follow.
 
 What's next:
-Repo-actions also flagged a CONTRIBUTING.md expansion and issue templates — both still open. The CI security-scan idea (pip-audit/bandit) is parked: the token can't push to .github/workflows. Trust infra first; lower the bar to a stranger's first run next.
+Two repo-actions ideas still open and autonomously buildable — ISSUE_TEMPLATE (#5) and CODE_OF_CONDUCT (monitor). pip-audit in CI (#3) stays blocked until the token gets workflows scope.
 
-PR: https://github.com/aaronjmars/MiroShark/pull/158
+PR: https://github.com/aaronjmars/MiroShark/pull/162
