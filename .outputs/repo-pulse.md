@@ -1,10 +1,10 @@
-*Repo Pulse — 2026-06-14* — [SURGE]
-aaronjmars/MiroShark — stars 1270 (+4) · forks 269 (+1)
+*Repo Pulse — 2026-06-15* — [STEADY]
+aaronjmars/MiroShark — stars 1276 (+7) · forks 269
+
+Notable new stargazers:
+github.com/RLealz (24 repos)
 
 Other new stargazers:
-github.com/Mreiffy | github.com/magatron02 | github.com/Privatize3774 | github.com/KoOmaro
-
-New forks:
-github.com/im-khang/MiroShark
+github.com/azagarelz | github.com/RoJLD | github.com/Tojox20 | github.com/givenartwork | github.com/craftingman065 | github.com/AITactician
 
 Source: events

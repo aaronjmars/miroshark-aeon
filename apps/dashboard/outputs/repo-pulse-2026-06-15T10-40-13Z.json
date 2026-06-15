@@ -1,0 +1,217 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "Repo Pulse",
+        "description": "2026-06-15"
+      },
+      "children": [
+        "status-badge",
+        "separator1",
+        "repo-section",
+        "separator2",
+        "stargazers-section",
+        "separator3",
+        "source-section"
+      ]
+    },
+    "status-badge": {
+      "type": "Badge",
+      "props": {
+        "text": "STEADY",
+        "variant": "default"
+      },
+      "children": []
+    },
+    "separator1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "repo-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "repo-link",
+        "stats-stack"
+      ]
+    },
+    "repo-link": {
+      "type": "Link",
+      "props": {
+        "label": "aaronjmars/MiroShark",
+        "href": "https://github.com/aaronjmars/MiroShark"
+      },
+      "children": []
+    },
+    "stats-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "lg"
+      },
+      "children": [
+        "stat-stars",
+        "stat-forks"
+      ]
+    },
+    "stat-stars": {
+      "type": "Stat",
+      "props": {
+        "label": "Stars",
+        "value": "1276",
+        "delta": "+7",
+        "trend": "up"
+      },
+      "children": []
+    },
+    "stat-forks": {
+      "type": "Stat",
+      "props": {
+        "label": "Forks",
+        "value": "269"
+      },
+      "children": []
+    },
+    "separator2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "stargazers-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "notable-heading",
+        "notable-list",
+        "other-heading",
+        "other-list"
+      ]
+    },
+    "notable-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Notable new stargazers:",
+        "level": "h4"
+      },
+      "children": []
+    },
+    "notable-list": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "stargazer-rlealz"
+      ]
+    },
+    "stargazer-rlealz": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/RLealz (24 repos)",
+        "href": "https://github.com/RLealz"
+      },
+      "children": []
+    },
+    "other-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Other new stargazers:",
+        "level": "h4"
+      },
+      "children": []
+    },
+    "other-list": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "stargazer-azagarelz",
+        "stargazer-rojld",
+        "stargazer-tojox20",
+        "stargazer-givenartwork",
+        "stargazer-craftingman065",
+        "stargazer-aitactician"
+      ]
+    },
+    "stargazer-azagarelz": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/azagarelz",
+        "href": "https://github.com/azagarelz"
+      },
+      "children": []
+    },
+    "stargazer-rojld": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/RoJLD",
+        "href": "https://github.com/RoJLD"
+      },
+      "children": []
+    },
+    "stargazer-tojox20": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/Tojox20",
+        "href": "https://github.com/Tojox20"
+      },
+      "children": []
+    },
+    "stargazer-givenartwork": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/givenartwork",
+        "href": "https://github.com/givenartwork"
+      },
+      "children": []
+    },
+    "stargazer-craftingman065": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/craftingman065",
+        "href": "https://github.com/craftingman065"
+      },
+      "children": []
+    },
+    "stargazer-aitactician": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/AITactician",
+        "href": "https://github.com/AITactician"
+      },
+      "children": []
+    },
+    "separator3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "source-section": {
+      "type": "Text",
+      "props": {
+        "text": "Source: events",
+        "variant": "caption"
+      },
+      "children": []
+    }
+  }
+}
