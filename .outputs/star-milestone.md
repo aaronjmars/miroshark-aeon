@@ -2,21 +2,17 @@ Done. Here's the run summary:
 
 ## Summary
 
-**Repo checked:** `aaronjmars/MiroShark` (1270 ⭐) — `aaronjmars/miroshark-aeon` skipped (name ends in `-aeon`).
+**Repo checked:** `aaronjmars/MiroShark` (miroshark-aeon skipped — name ends in `-aeon`)
 
-**Outcome: STAR_MILESTONE_QUIET** — no new milestone to announce.
-- Highest threshold crossed: **1000** (already recorded as `bootstrap` on 2026-05-14)
-- Next threshold: **1500** — still 230 stars away
-- No notification sent (gate 5a: already recorded)
+**Current stars:** 1,278
 
-**Velocity snapshot:**
-- v7 = 36 stars/week
-- v30 = 125 stars/30 days
-- baseline ≈ 4.2/day
-- Last star: Jun 13 22:15 UTC (~15h ago)
+**Milestone logic:** Highest threshold ≤ 1278 is **1000** — already recorded as `(bootstrap)` on 2026-05-14. Gate 5a applies. No notification sent.
 
-At current pace (~4.2/day = 29/week), the 1500 threshold is ~55 days out, around early August — consistent with the `~2026-08-25` projection in MEMORY.md.
+**Velocity (for log):**
+- v7 = 43 | v30 = 125 | baseline = 4.2/day
+- days_since_last_star ≈ 0 (last star: 2026-06-15T13:28:11Z)
+- Next threshold: 1500 (222 stars away, projected ~2026-07-21 at v7 pace, ~2026-08-06 at baseline)
 
-**Auto-dispatch:** No rules configured in `milestone-dispatch.json` — nothing to fire.
+**Dispatch:** rules `{}` — no downstream skill to fire.
 
-**Log:** appended to `memory/logs/2026-06-14.md`.
+**Status:** `STAR_MILESTONE_QUIET` — logged to `memory/logs/2026-06-15.md`.
