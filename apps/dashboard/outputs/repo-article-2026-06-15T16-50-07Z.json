@@ -1,0 +1,42 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "repo-article"
+      },
+      "children": [
+        "heading-1",
+        "text-1",
+        "link-1"
+      ]
+    },
+    "heading-1": {
+      "type": "Heading",
+      "props": {
+        "text": "🦈 MiroShark Ended Its Week Deleting Code, Not Shipping Features",
+        "level": "h2"
+      },
+      "children": []
+    },
+    "text-1": {
+      "type": "Text",
+      "props": {
+        "text": "the last three merges this week (#163/#164/#165) added nothing a user can see — 67 files, 528 deletions, helpers deduped, one transcript bug fixed, zero engine changes. invisible to users, legible for the 269 forks. a quiet week, but a deliberate one.",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "link-1": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Read the full article",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-06-15.md",
+        "source": "GitHub"
+      },
+      "children": []
+    }
+  }
+}

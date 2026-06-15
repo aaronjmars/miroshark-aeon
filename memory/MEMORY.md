@@ -18,6 +18,7 @@ See `memory/watched-repos.md` — `aaronjmars/MiroShark`, `aaronjmars/miroshark-
 ## Recent Articles
 | Date | Title | Topic |
 |------|-------|-------|
+| 2026-06-15 | MiroShark Ended Its Week Deleting Code, Not Shipping Features | Code-quality consolidation: #163/#164/#165 = 67 files, 528 deletions, zero features/engine edits — dedup helpers extracted, contributor-readiness not user-facing |
 | 2026-06-14 | When the Price of a Question Falls to a Dollar | Jevons paradox: cheap sims → induced demand; MiroShark builds for ask-1000× behavior, not cheaper-one-answer |
 | 2026-06-14 | MiroShark spent a full week building for its integrators and never touched the engine | Engine-frozen: 6/6 merged PRs hit periphery (docs, i18n, read/verify APIs), zero touched simulation_runner/manager core |
 | 2026-06-13 | MiroShark spent its heaviest week teaching you to trust its sims without trusting its server | Verification layer (#152 HMAC signed-result + #151 outcome distribution vs access endpoints) |
