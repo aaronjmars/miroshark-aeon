@@ -1,0 +1,132 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Shiplog — 2026-06-15 🦈"
+      },
+      "children": [
+        "text_intro",
+        "sep1",
+        "themes_section",
+        "sep2",
+        "stats_section",
+        "sep3",
+        "link_article"
+      ]
+    },
+    "text_intro": {
+      "type": "Text",
+      "props": {
+        "text": "Ten PRs merged this week and not one touched the simulation core — every change made a result easier to verify, consume, or contribute to from the outside."
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "themes_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading_themes",
+        "theme_results",
+        "theme_community",
+        "theme_onboarding"
+      ]
+    },
+    "heading_themes": {
+      "type": "Heading",
+      "props": {
+        "text": "Themes",
+        "level": "h3"
+      }
+    },
+    "theme_results": {
+      "type": "Text",
+      "props": {
+        "text": "Results you can prove offline (#152 signed-result, #153 activity feed, #157 surface filter)"
+      }
+    },
+    "theme_community": {
+      "type": "Text",
+      "props": {
+        "text": "The repo opened to outsiders (#159 first community PR, #162 contributor guide)"
+      }
+    },
+    "theme_onboarding": {
+      "type": "Text",
+      "props": {
+        "text": "Onboarding now reads in EN / 中文 / 日本語"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stats_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "lg"
+      },
+      "children": [
+        "stat_commits",
+        "stat_prs",
+        "stat_additions",
+        "stat_deletions"
+      ]
+    },
+    "stat_commits": {
+      "type": "Stat",
+      "props": {
+        "label": "Commits",
+        "value": "10"
+      }
+    },
+    "stat_prs": {
+      "type": "Stat",
+      "props": {
+        "label": "PRs",
+        "value": "10"
+      }
+    },
+    "stat_additions": {
+      "type": "Stat",
+      "props": {
+        "label": "Additions",
+        "value": "+4,870"
+      }
+    },
+    "stat_deletions": {
+      "type": "Stat",
+      "props": {
+        "label": "Deletions",
+        "value": "−711"
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "link_article": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full Shiplog Article",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/shiplog-2026-06-15.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}
