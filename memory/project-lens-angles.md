@@ -43,3 +43,13 @@ Tracks angle categories and theses used, to avoid repeats within 14 days.
   - https://arxiv.org/pdf/2603.06630
   - https://www.driveresearch.com/market-research-company-blog/how-much-does-market-research-cost/
   - https://github.com/aaronjmars/MiroShark
+
+## 2026-06-15
+- Angle: Current events (MCP ecosystem explosion + tool-poisoning security debate, mid-2026)
+- Thesis: While the MCP ecosystem races to let agents act through tools they can't inspect, MiroShark exposes only tools to read and audit a simulation's reasoning — betting provenance, not capability, is the scarce good.
+- Title: The Agent Web Learned to Act Before It Learned to Check
+- Sources:
+  - https://www.digitalapplied.com/blog/mcp-adoption-statistics-2026-model-context-protocol
+  - https://itecsonline.com/post/mcp-tool-poisoning-enterprise-ai-agent-security-2026
+  - https://arxiv.org/abs/2603.22489
+  - https://github.com/aaronjmars/MiroShark

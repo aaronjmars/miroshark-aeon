@@ -1,5 +1,5 @@
-*New Article: When the Price of a Question Falls to a Dollar* 🦈
+*New Article: The Agent Web Learned to Act Before It Learned to Check*
 
-LLM inference fell ~1,000x in three years (a16z's "LLMflation"). Jevons' 1865 coal paradox says what happens next: cheap doesn't mean the same study for less — it means you stop asking once and start asking a thousand times. The tell isn't the price tag, it's the plumbing: `POST /api/simulation/batch-status`, an `/api/activity.json` firehose, and `/api/stats/distribution.json` over *every* run are built for volume, not for a quarterly $25k focus group. Falsifiable by end of 2027: the sim tools that win ship tooling for managing many runs, not one polished demo.
+The MCP ecosystem hit 10,000+ public servers and 97M monthly SDK downloads — and tool poisoning (72% attack success in benchmarks) is now its top security problem, because agents act on tool metadata they can't see. MiroShark's MCP server (`backend/mcp_server.py`) does the opposite: 8 read-only tools, not one runs a simulation. The tell is `get_reasoning_trace` (the report-agent's full ReACT chain) and `search_graph`'s `kinds=fact|belief|observation` filter — built for a caller that checks instead of trusts. The bet: provenance, not capability, is the scarce thing agents trade. 🦈
 
-Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-06-14.md
+Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-06-15.md

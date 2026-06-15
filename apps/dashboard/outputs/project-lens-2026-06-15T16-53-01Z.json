@@ -1,0 +1,152 @@
+{
+  "root": "card_root",
+  "state": {},
+  "elements": {
+    "card_root": {
+      "type": "Card",
+      "props": {
+        "title": "project-lens"
+      },
+      "children": [
+        "stack_main"
+      ]
+    },
+    "stack_main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading_article",
+        "sep_1",
+        "stats_section",
+        "alert_problem",
+        "stack_solution",
+        "sep_2",
+        "link_article"
+      ]
+    },
+    "heading_article": {
+      "type": "Heading",
+      "props": {
+        "text": "The Agent Web Learned to Act Before It Learned to Check",
+        "level": "h2"
+      },
+      "children": []
+    },
+    "sep_1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "stats_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "lg"
+      },
+      "children": [
+        "stat_servers",
+        "stat_downloads",
+        "stat_attack"
+      ]
+    },
+    "stat_servers": {
+      "type": "Stat",
+      "props": {
+        "label": "MCP Public Servers",
+        "value": "10,000+"
+      },
+      "children": []
+    },
+    "stat_downloads": {
+      "type": "Stat",
+      "props": {
+        "label": "Monthly SDK Downloads",
+        "value": "97M"
+      },
+      "children": []
+    },
+    "stat_attack": {
+      "type": "Stat",
+      "props": {
+        "label": "Tool Poisoning Attack Success",
+        "value": "72%"
+      },
+      "children": []
+    },
+    "alert_problem": {
+      "type": "Alert",
+      "props": {
+        "title": "Security Challenge",
+        "message": "Tool poisoning is now the MCP ecosystem's top security problem because agents act on tool metadata they can't see.",
+        "type": "warning"
+      },
+      "children": []
+    },
+    "stack_solution": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading_solution",
+        "text_approach",
+        "text_features",
+        "text_thesis"
+      ]
+    },
+    "heading_solution": {
+      "type": "Heading",
+      "props": {
+        "text": "MiroShark's Approach",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "text_approach": {
+      "type": "Text",
+      "props": {
+        "text": "MiroShark's MCP server (backend/mcp_server.py) inverts this security model: 8 read-only tools, none of which runs a simulation directly.",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "text_features": {
+      "type": "Text",
+      "props": {
+        "text": "Key features: get_reasoning_trace provides the report-agent's full ReACT chain, and search_graph filters by kinds=fact|belief|observation — built for a caller that checks instead of trusts.",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "text_thesis": {
+      "type": "Text",
+      "props": {
+        "text": "Core thesis: provenance, not capability, is the scarce thing agents trade. 🦈",
+        "variant": "lead"
+      },
+      "children": []
+    },
+    "sep_2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "link_article": {
+      "type": "StoryLink",
+      "props": {
+        "title": "The Agent Web Learned to Act Before It Learned to Check",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-06-15.md",
+        "source": "GitHub"
+      },
+      "children": []
+    }
+  }
+}
