@@ -1,0 +1,14 @@
+{
+  "skill": "operator-scorecard",
+  "last_analyzed": "2026-06-15T10:42:36Z",
+  "quality_score": 4,
+  "assessment": "Substantive scorecard with clear verdict and metrics, well-structured, but limited by missing data in 2/3 lanes and conditional degradation diagnosis",
+  "flags": [],
+  "avg_score": 4,
+  "history": [
+    {
+      "date": "2026-06-15",
+      "score": 4
+    }
+  ]
+}

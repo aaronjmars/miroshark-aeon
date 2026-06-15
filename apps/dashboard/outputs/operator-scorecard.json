@@ -1,0 +1,44 @@
+{
+  "version": "1",
+  "generated_at": "2026-06-15T10:30:00Z",
+  "skill": "operator-scorecard",
+  "title": "Operator Scorecard — 2026-06-15",
+  "spec": {
+    "type": "Stack",
+    "props": {"direction": "vertical", "gap": "md"},
+    "children": [
+      {"type": "Heading", "props": {"level": 2, "children": "Operator Scorecard — 2026-06-15"}},
+      {"type": "Alert", "props": {"variant": "destructive", "children": "DEGRADED — No community $AEON spend on record this week; tweet-allocator not yet running. Growth strong at +27⭐; fleet healthy."}},
+      {"type": "Grid", "props": {"columns": 3, "gap": "sm"}, "children": [
+        {"type": "Card", "props": {"children": [
+          {"type": "Text", "props": {"variant": "muted", "children": "Agent health"}},
+          {"type": "Heading", "props": {"level": 3, "children": "N/A"}},
+          {"type": "Text", "props": {"children": "N/A runs · N/A anomalies · skill-analytics missing"}}
+        ]}},
+        {"type": "Card", "props": {"children": [
+          {"type": "Text", "props": {"variant": "muted", "children": "Stars added"}},
+          {"type": "Heading", "props": {"level": 3, "children": "+27"}},
+          {"type": "Text", "props": {"children": "7 forks · new contributors N/A"}}
+        ]}},
+        {"type": "Card", "props": {"children": [
+          {"type": "Text", "props": {"variant": "muted", "children": "$AEON distributed"}},
+          {"type": "Heading", "props": {"level": 3, "children": "$0.00"}},
+          {"type": "Text", "props": {"children": "0 recipients · token −10.4% 7d"}}
+        ]}}
+      ]},
+      {"type": "Heading", "props": {"level": 3, "children": "Verdicts by lane"}},
+      {"type": "Table", "props": {
+        "columns": [
+          {"key": "lane", "header": "Lane"},
+          {"key": "verdict", "header": "Verdict"},
+          {"key": "headline", "header": "Headline"}
+        ],
+        "rows": [
+          {"lane": "Agent health", "verdict": "INSUFFICIENT_DATA", "headline": "skill-analytics never ran; heartbeat shows 100% success rate by Jun 12 (P0 was rebuild artifact)"},
+          {"lane": "Community growth", "verdict": "OK", "headline": "+27⭐ +7 forks (3-day partial data); SURGE on Jun 12 with 21 stars in 24h"},
+          {"lane": "Economic activity", "verdict": "DEGRADED", "headline": "$0.00 distributed — tweet-allocator not yet running; token −10.4% 7d CONSOLIDATING"}
+        ]
+      }}
+    ]
+  }
+}

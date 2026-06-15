@@ -29,4 +29,4 @@ date,skill,model,input_tokens,output_tokens,cache_read,cache_creation
 2026-06-14,memory-flush,claude-sonnet-4-6,15,10618,585771,33085
 2026-06-14,heartbeat,claude-sonnet-4-6,15,14874,777465,52172
 2026-06-15,token-report,claude-sonnet-4-6,27,30977,2227873,105139
-2026-06-15,shiplog,claude-opus-4-8,2521,17801,1377470,48092
+2026-06-15,operator-scorecard,claude-sonnet-4-6,19,13470,896983,43729
