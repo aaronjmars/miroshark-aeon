@@ -10,7 +10,7 @@
     "last_dispatch": "2026-06-14T19:00:33Z"
   },
   "star-milestone": {
-    "last_status": "success",
+    "last_status": "dispatched",
     "last_success": "2026-06-14T15:33:09Z",
     "total_runs": 5,
     "total_successes": 5,
@@ -18,11 +18,11 @@
     "consecutive_failures": 0,
     "success_rate": 1,
     "last_quality_score": 4,
-    "last_dispatch": "2026-06-14T15:30:09Z"
+    "last_dispatch": "2026-06-15T16:44:48Z"
   },
   "push-recap": {
-    "last_dispatch": "2026-06-14T15:30:09Z",
-    "last_status": "success",
+    "last_dispatch": "2026-06-15T16:44:48Z",
+    "last_status": "dispatched",
     "last_success": "2026-06-14T15:32:26Z",
     "total_runs": 4,
     "total_successes": 4,
@@ -32,8 +32,8 @@
     "last_quality_score": 4
   },
   "repo-article": {
-    "last_dispatch": "2026-06-14T16:07:41Z",
-    "last_status": "success",
+    "last_dispatch": "2026-06-15T16:44:48Z",
+    "last_status": "dispatched",
     "last_success": "2026-06-14T16:13:41Z",
     "total_runs": 4,
     "total_successes": 4,
@@ -43,8 +43,8 @@
     "last_quality_score": 4
   },
   "project-lens": {
-    "last_dispatch": "2026-06-14T16:07:41Z",
-    "last_status": "success",
+    "last_dispatch": "2026-06-15T16:44:48Z",
+    "last_status": "dispatched",
     "last_success": "2026-06-14T16:14:21Z",
     "total_runs": 4,
     "total_successes": 4,
