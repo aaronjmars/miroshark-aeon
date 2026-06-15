@@ -1,20 +1,21 @@
-*Feature Built — 2026-06-14 — aaronjmars/MiroShark* 🦈
+*Feature Built — 2026-06-15 — aaronjmars/MiroShark* 🦈
 
-Full contributor guide
-CONTRIBUTING.md was a stub — it told you how to run pytest and nothing else. Now it's a real onboarding doc: how to set up the project locally, how to submit a PR the way the repo actually merges them, and how to add an API endpoint without breaking CI. Mirrored into Chinese too, so the zh-CN side stays in sync.
+dependabot config — automated dependency updates across the whole repo
+
+MiroShark had no automated dep tooling. Added `.github/dependabot.yml` so the repo now watches every dependency surface — backend Python, both npm packages, the GitHub Actions, the Docker base image — and opens a PR when something's behind. nothing rots silently anymore.
 
 Why this matters:
-1,270 stars, and a first-time contributor had to reverse-engineer setup from the README, package.json, and the CI workflow in parallel. That friction is the gap between "cool repo" and "I shipped a PR." This was repo-actions' #2 pick — yesterday closed #1 (SECURITY.md). Lower the cost of the first contribution and ecosystem growth follows.
+`camel-ai==0.2.78` is exact-pinned in two files. exact pin = security patches never flow in, you find out when something breaks. but you can't just loosen it — the `tiktoken>=0.8.0` note in pyproject shows that stack is pinned on purpose for the py3.13 build. so the safe move isn't floating the pin, it's surfacing each update as its own reviewable, CI-tested PR. dependabot does exactly that. you stay in control of what lands.
 
 What was built:
-- CONTRIBUTING.md: added Development setup (npm run setup:all → Neo4j via docker compose → npm run dev), Submitting a PR (branch prefixes, Conventional Commit titles, run the unit suite first), and Adding an API endpoint (the openapi.yaml drift-test contract). ~30 → ~90 lines.
-- CONTRIBUTING.zh-CN.md: every new section mirrored in Chinese — i18n parity held.
-- README.md: docs-table label updated to match the broader guide.
+- `.github/dependabot.yml` (new): five update blocks — pip `/backend`, npm `/`, npm `/frontend`, github-actions `/`, docker `/`. weekly, monday.
+- noise control baked in: minor + patch updates grouped into one PR per ecosystem; majors open on their own so breaking changes get real scrutiny.
+- `chore:` commit prefix to match the repo's existing dep-bump convention; conservative PR limits per ecosystem.
 
 How it works:
-No code — every instruction is anchored to what's actually in the repo, not invented. Setup commands come straight from the package.json scripts block; the Neo4j step matches docker-compose.yml; the CI line matches tests.yml. The endpoint section documents the real gate: test_unit_openapi.py fails CI if openapi.yaml and the Flask routes drift, so the guide tells you to register the blueprint, document the path, and add an offline unit test — the exact loop maintainers already follow.
+standard Dependabot v2 schema. GitHub reads the config on push and runs each ecosystem on its schedule against the declared manifests. the `groups` blocks collapse the minor/patch churn into a single weekly PR per ecosystem — so a normal week is a handful of PRs, not dozens. zero runtime change; CI (backend pytest) is untouched.
 
 What's next:
-Two repo-actions ideas still open and autonomously buildable — ISSUE_TEMPLATE (#5) and CODE_OF_CONDUCT (monitor). pip-audit in CI (#3) stays blocked until the token gets workflows scope.
+first run will likely surface the camel-ai bump + a few npm/actions updates — each isolated and CI-gated for you to accept or skip. closes the dep-hygiene gap repo-actions flagged on 06-14.
 
-PR: https://github.com/aaronjmars/MiroShark/pull/162
+PR: https://github.com/aaronjmars/MiroShark/pull/166
