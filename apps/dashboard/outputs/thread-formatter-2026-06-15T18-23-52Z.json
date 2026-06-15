@@ -1,0 +1,86 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "Thread Draft — 2026-06-15",
+        "description": "Dependabot config — PR #166 on aaronjmars/MiroShark"
+      },
+      "children": [
+        "separator-1",
+        "point-1",
+        "point-2",
+        "point-3",
+        "point-4",
+        "point-5",
+        "separator-2",
+        "article-ref"
+      ]
+    },
+    "separator-1": {
+      "type": "Separator",
+      "props": {}
+    },
+    "point-1": {
+      "type": "Text",
+      "props": {
+        "text": "1/ MiroShark runs with `camel-ai==0.2.78` exact-pinned. no automated dep scanning. security patches in upstream packages only land if someone manually opens a PR. PR #166 changes this."
+      }
+    },
+    "point-2": {
+      "type": "Text",
+      "props": {
+        "text": "2/ the pin wasn't negligence — camel-ai and tiktoken have a build-compat constraint on Py3.13. loosen the version wrong and the backend breaks. so the pin stayed. which meant the entire dep tree was frozen in place."
+      }
+    },
+    "point-3": {
+      "type": "Text",
+      "props": {
+        "text": "3/ PR #166 is .github/dependabot.yml — 78 lines covering 5 ecosystems: pip /backend, npm /, npm /frontend, github-actions /, docker. minor + patch PRs grouped per ecosystem. majors open individually, CI-tested."
+      }
+    },
+    "point-4": {
+      "type": "Text",
+      "props": {
+        "text": "4/ 1,276 stars. 3 production integrators — RevaultDrops, AntFleet, Capacitr — running this as infrastructure. a dep vuln in the MiroShark tree is now their problem too. automated scanning is table stakes at this stage."
+      }
+    },
+    "point-5": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "point-5-text",
+        "point-5-link"
+      ]
+    },
+    "point-5-text": {
+      "type": "Text",
+      "props": {
+        "text": "5/ PR #166 is one YAML file. no new code, just automation finally turned on. 🦈"
+      }
+    },
+    "point-5-link": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/aaronjmars/MiroShark/pull/166",
+        "href": "https://github.com/aaronjmars/MiroShark/pull/166"
+      }
+    },
+    "separator-2": {
+      "type": "Separator",
+      "props": {}
+    },
+    "article-ref": {
+      "type": "Text",
+      "props": {
+        "text": "(article: articles/thread-2026-06-15.md)",
+        "variant": "muted"
+      }
+    }
+  }
+}
