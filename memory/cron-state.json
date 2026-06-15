@@ -142,7 +142,14 @@
   },
   "shiplog": {
     "last_dispatch": "2026-06-15T10:37:19Z",
-    "last_status": "dispatched"
+    "last_status": "success",
+    "last_success": "2026-06-15T10:43:16Z",
+    "total_runs": 1,
+    "total_successes": 1,
+    "total_failures": 0,
+    "consecutive_failures": 0,
+    "success_rate": 1,
+    "last_quality_score": 4
   },
   "operator-scorecard": {
     "last_dispatch": "2026-06-15T10:37:19Z",
