@@ -1,10 +1,10 @@
 {
   "skill": "token-report",
-  "last_analyzed": "2026-06-14T07:14:24Z",
-  "quality_score": 5,
-  "assessment": "Excellent — complete execution with multi-source data validation, specific metrics, clear verdict, and proper state logging for continuity.",
+  "last_analyzed": "2026-06-15T06:11:54Z",
+  "quality_score": 4,
+  "assessment": "Complete market analysis with substantive data, effective workarounds, multi-source validation, and clear verdict reasoning.",
   "flags": [],
-  "avg_score": 4.33,
+  "avg_score": 4.25,
   "history": [
     {
       "date": "2026-06-12",
@@ -17,6 +17,10 @@
     {
       "date": "2026-06-14",
       "score": 5
+    },
+    {
+      "date": "2026-06-15",
+      "score": 4
     }
   ]
 }

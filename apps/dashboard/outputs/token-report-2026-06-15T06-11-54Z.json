@@ -1,0 +1,179 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "$MIROSHARK — CONSOLIDATING"
+      },
+      "children": [
+        "insight",
+        "sep1",
+        "metrics_grid",
+        "sep2",
+        "buysells_section",
+        "sep3",
+        "whales_section",
+        "sep4",
+        "treasury",
+        "sep5",
+        "chart_link"
+      ]
+    },
+    "insight": {
+      "type": "Text",
+      "props": {
+        "text": "Three whale sells (totaling ~$4.5K) drove price −13.9% across 15 hours, but volume came in at only 0.78× the 7-day average — BREAKDOWN needs 2.0×. Third consecutive day of seller pressure since Jun 13.",
+        "variant": "lead"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {}
+    },
+    "metrics_grid": {
+      "type": "Grid",
+      "props": {
+        "columns": 3,
+        "gap": "md"
+      },
+      "children": [
+        "stat_price",
+        "stat_liq",
+        "stat_vol"
+      ]
+    },
+    "stat_price": {
+      "type": "Stat",
+      "props": {
+        "label": "Price",
+        "value": "$0.000005826",
+        "delta": "−13.9%",
+        "trend": "down"
+      }
+    },
+    "stat_liq": {
+      "type": "Stat",
+      "props": {
+        "label": "Liquidity",
+        "value": "$354.0K",
+        "delta": "−7.2%",
+        "trend": "down"
+      }
+    },
+    "stat_vol": {
+      "type": "Stat",
+      "props": {
+        "label": "Volume (24h)",
+        "value": "$20.7K",
+        "delta": "0.78× 7d avg"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {}
+    },
+    "buysells_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "lg"
+      },
+      "children": [
+        "stat_buys",
+        "stat_sells",
+        "stat_ratio"
+      ]
+    },
+    "stat_buys": {
+      "type": "Stat",
+      "props": {
+        "label": "Buys",
+        "value": "50"
+      }
+    },
+    "stat_sells": {
+      "type": "Stat",
+      "props": {
+        "label": "Sells",
+        "value": "53"
+      }
+    },
+    "stat_ratio": {
+      "type": "Stat",
+      "props": {
+        "label": "Buy/Sell Ratio",
+        "value": "0.94"
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {}
+    },
+    "whales_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "whales_heading",
+        "whales_table"
+      ]
+    },
+    "whales_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Whale Activity (3 Sells)",
+        "level": "h4"
+      }
+    },
+    "whales_table": {
+      "type": "Table",
+      "props": {
+        "columns": [
+          "Event",
+          "Amount"
+        ],
+        "rows": [
+          [
+            "Whale Sell 1",
+            "$1.8K"
+          ],
+          [
+            "Whale Sell 2",
+            "$1.4K"
+          ],
+          [
+            "Whale Sell 3",
+            "$1.4K"
+          ]
+        ]
+      }
+    },
+    "sep4": {
+      "type": "Separator",
+      "props": {}
+    },
+    "treasury": {
+      "type": "Stat",
+      "props": {
+        "label": "Treasury",
+        "value": "6.0000 ETH",
+        "delta": "±0.0000 24h"
+      }
+    },
+    "sep5": {
+      "type": "Separator",
+      "props": {}
+    },
+    "chart_link": {
+      "type": "Link",
+      "props": {
+        "label": "View Chart on GeckoTerminal",
+        "href": "https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209"
+      }
+    }
+  }
+}
