@@ -1,0 +1,38 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "self-improve"
+      },
+      "children": [
+        "content",
+        "separator",
+        "pr"
+      ]
+    },
+    "content": {
+      "type": "Text",
+      "props": {
+        "text": "Fixed feature skill's false claim that workspace-relative clones let pytest run — Python is sandbox-blocked regardless, so it now leans on repo CI as the validation gate.",
+        "variant": "body"
+      }
+    },
+    "separator": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "pr": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #63",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/pull/63",
+        "source": "GitHub"
+      }
+    }
+  }
+}
