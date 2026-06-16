@@ -1,18 +1,18 @@
-Done. Here's the run summary:
+Run complete. Here's what happened:
+
+**aaronjmars/MiroShark — 1290 stars**
+
+- **Highest threshold crossed**: 1000 — already recorded as bootstrap (2026-05-14). No new milestone.
+- **Next milestone**: 1500 stars (210 away, projected ~2026-07-14 at current pace)
+- **Velocity**: v7=52 · baseline=4.47/day · shape=ORGANIC (1.66× weekly baseline — healthy, steady growth)
+- **Today active**: 11 stars already logged on 2026-06-16 (last one at 16:30 UTC), days_since_last_star=0
+- **Notification**: none sent (gate 5a — already recorded)
+- **Dispatch**: none (rules map is empty)
 
 ## Summary
 
-**Repo checked:** `aaronjmars/MiroShark` (miroshark-aeon skipped — name ends in `-aeon`)
-
-**Current stars:** 1,278
-
-**Milestone logic:** Highest threshold ≤ 1278 is **1000** — already recorded as `(bootstrap)` on 2026-05-14. Gate 5a applies. No notification sent.
-
-**Velocity (for log):**
-- v7 = 43 | v30 = 125 | baseline = 4.2/day
-- days_since_last_star ≈ 0 (last star: 2026-06-15T13:28:11Z)
-- Next threshold: 1500 (222 stars away, projected ~2026-07-21 at v7 pace, ~2026-08-06 at baseline)
-
-**Dispatch:** rules `{}` — no downstream skill to fire.
-
-**Status:** `STAR_MILESTONE_QUIET` — logged to `memory/logs/2026-06-15.md`.
+- Checked `aaronjmars/MiroShark` (skipped `miroshark-aeon` per `-aeon` rule)
+- Current count: 1290 stars — threshold M=1000 already recorded as bootstrap, no new crossing
+- Velocity data computed from last two stargazer pages: v7=52, v30=134, baseline=4.47/day, shape=ORGANIC
+- Appended run log to `memory/logs/2026-06-16.md`
+- No notification sent, no milestone file changes needed, no dispatch triggered
