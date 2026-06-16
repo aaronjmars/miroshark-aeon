@@ -1,13 +1,13 @@
 {
   "heartbeat": {
-    "last_status": "success",
+    "last_status": "dispatched",
     "last_success": "2026-06-15T19:44:10Z",
     "total_runs": 6,
     "total_successes": 6,
     "total_failures": 0,
     "consecutive_failures": 0,
     "success_rate": 1,
-    "last_dispatch": "2026-06-15T19:40:41Z"
+    "last_dispatch": "2026-06-16T19:38:30Z"
   },
   "star-milestone": {
     "last_status": "success",
@@ -161,5 +161,9 @@
     "consecutive_failures": 0,
     "success_rate": 1,
     "last_quality_score": 4
+  },
+  "tweet-digest": {
+    "last_dispatch": "2026-06-16T19:38:30Z",
+    "last_status": "dispatched"
   }
 }
