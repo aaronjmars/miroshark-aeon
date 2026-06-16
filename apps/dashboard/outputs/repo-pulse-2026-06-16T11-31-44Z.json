@@ -1,0 +1,271 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "Repo Pulse",
+        "description": "2026-06-16 — [STEADY]"
+      },
+      "children": [
+        "repo-heading",
+        "stats-container",
+        "sep1",
+        "notable-section",
+        "sep2",
+        "other-section",
+        "sep3",
+        "forks-section",
+        "source"
+      ]
+    },
+    "repo-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "aaronjmars/MiroShark",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "stats-container": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "stars",
+        "forks"
+      ]
+    },
+    "stars": {
+      "type": "Stat",
+      "props": {
+        "label": "Stars",
+        "value": "1282",
+        "delta": "+6",
+        "trend": "up"
+      },
+      "children": []
+    },
+    "forks": {
+      "type": "Stat",
+      "props": {
+        "label": "Forks",
+        "value": "269",
+        "delta": "+1",
+        "trend": "up"
+      },
+      "children": []
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {},
+      "children": []
+    },
+    "notable-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "notable-heading",
+        "notable-list"
+      ]
+    },
+    "notable-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Notable new stargazers",
+        "level": "h4"
+      },
+      "children": []
+    },
+    "notable-list": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "notable-item-1",
+        "notable-item-2"
+      ]
+    },
+    "notable-item-1": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "notable-link-1",
+        "notable-badge-1"
+      ]
+    },
+    "notable-link-1": {
+      "type": "Link",
+      "props": {
+        "label": "vinzlercodes",
+        "href": "https://github.com/vinzlercodes"
+      },
+      "children": []
+    },
+    "notable-badge-1": {
+      "type": "Badge",
+      "props": {
+        "text": "20 repos",
+        "variant": "secondary"
+      },
+      "children": []
+    },
+    "notable-item-2": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "notable-link-2",
+        "notable-badge-2"
+      ]
+    },
+    "notable-link-2": {
+      "type": "Link",
+      "props": {
+        "label": "link82",
+        "href": "https://github.com/link82"
+      },
+      "children": []
+    },
+    "notable-badge-2": {
+      "type": "Badge",
+      "props": {
+        "text": "56 repos",
+        "variant": "secondary"
+      },
+      "children": []
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {},
+      "children": []
+    },
+    "other-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "other-heading",
+        "other-list"
+      ]
+    },
+    "other-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Other new stargazers",
+        "level": "h4"
+      },
+      "children": []
+    },
+    "other-list": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "other-1",
+        "other-2",
+        "other-3",
+        "other-4"
+      ]
+    },
+    "other-1": {
+      "type": "Link",
+      "props": {
+        "label": "4553n",
+        "href": "https://github.com/4553n"
+      },
+      "children": []
+    },
+    "other-2": {
+      "type": "Link",
+      "props": {
+        "label": "thesevenonetwo",
+        "href": "https://github.com/thesevenonetwo"
+      },
+      "children": []
+    },
+    "other-3": {
+      "type": "Link",
+      "props": {
+        "label": "YvesAlbuquerque",
+        "href": "https://github.com/YvesAlbuquerque"
+      },
+      "children": []
+    },
+    "other-4": {
+      "type": "Link",
+      "props": {
+        "label": "turfur44",
+        "href": "https://github.com/turfur44"
+      },
+      "children": []
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {},
+      "children": []
+    },
+    "forks-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "forks-heading",
+        "forks-list"
+      ]
+    },
+    "forks-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "New forks",
+        "level": "h4"
+      },
+      "children": []
+    },
+    "forks-list": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "fork-1"
+      ]
+    },
+    "fork-1": {
+      "type": "Link",
+      "props": {
+        "label": "jansenbriano/MiroShark",
+        "href": "https://github.com/jansenbriano/MiroShark"
+      },
+      "children": []
+    },
+    "source": {
+      "type": "Text",
+      "props": {
+        "text": "Source: events",
+        "variant": "muted"
+      },
+      "children": []
+    }
+  }
+}
