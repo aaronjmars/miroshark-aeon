@@ -1,0 +1,56 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "repo-article"
+      },
+      "children": [
+        "stack-main"
+      ]
+    },
+    "stack-main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading-main",
+        "text-thesis",
+        "separator-1",
+        "storylink-article"
+      ]
+    },
+    "heading-main": {
+      "type": "Heading",
+      "props": {
+        "text": "MiroShark's First Dependabot Wave Broke Its Own Engine on Day One 🦈",
+        "level": "h1"
+      }
+    },
+    "text-thesis": {
+      "type": "Text",
+      "props": {
+        "text": "Thesis: MiroShark's first Dependabot run merged 11 bumps today — the camel-ai 0.2.90 one (#176) silently broke the agent loop & Docker build, forcing two same-day hotfixes (#181, #182). The other 10 merged clean; the one touching the simulation runtime is the one that bled.",
+        "variant": "body"
+      }
+    },
+    "separator-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "storylink-article": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Read Full Article",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-06-16.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}

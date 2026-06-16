@@ -1,0 +1,105 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "Thread Draft — 2026-06-16",
+        "description": "cost.json endpoint — PR #179 on aaronjmars/MiroShark"
+      },
+      "children": [
+        "sep1",
+        "point1",
+        "point2",
+        "point3",
+        "point4",
+        "point5-stack",
+        "sep2",
+        "article-note"
+      ]
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "point1": {
+      "type": "Text",
+      "props": {
+        "text": "1/ MiroShark's $1-per-sim number just became checkable. PR #179 ships /api/simulation/<id>/cost.json — query any run, get a full cost breakdown. the number was always computed. now it's an API.",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "point2": {
+      "type": "Text",
+      "props": {
+        "text": "2/ the engine already priced every LLM call. run_summary.py walks the full call log, totals it, writes a markdown file. but that number lived in /tmp. there was no API path. you couldn't query it, pipe it, or display it. the $1 claim was real — just unverifiable from the outside.",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "point3": {
+      "type": "Text",
+      "props": {
+        "text": "3/ PR #179 uses the same MODEL_PRICING table run_summary.py already had. no new pricing logic. read-only route at /api/simulation/<id>/cost.json, 60s cache, is_estimate=true. a pricing_basis field makes the lower bound explicit. one real sim: $0.93.",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "point4": {
+      "type": "Text",
+      "props": {
+        "text": "4/ 1,290 stars. three production integrators running it as infrastructure. the cost number was always real — now it's auditable. you don't take an agent infra stack seriously until you can pull the bill.",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "point5-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "point5",
+        "pr-link"
+      ]
+    },
+    "point5": {
+      "type": "Text",
+      "props": {
+        "text": "5/ PR #179 — the $1 cost endpoint. 🦈",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "pr-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "aaronjmars/MiroShark#179",
+        "href": "https://github.com/aaronjmars/MiroShark/pull/179",
+        "source": "GitHub"
+      },
+      "children": []
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "article-note": {
+      "type": "Text",
+      "props": {
+        "text": "Article: articles/thread-2026-06-16.md",
+        "variant": "caption"
+      },
+      "children": []
+    }
+  }
+}

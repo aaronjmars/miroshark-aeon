@@ -1,14 +1,14 @@
-*Thread Draft — 2026-06-15*
-Topic: Dependabot config — PR #166 on aaronjmars/MiroShark
+*Thread Draft — 2026-06-16*
+Topic: cost.json endpoint — PR #179 on aaronjmars/MiroShark
 
-1/ MiroShark runs with `camel-ai==0.2.78` exact-pinned. no automated dep scanning. security patches in upstream packages only land if someone manually opens a PR. PR #166 changes this.
+1/ MiroShark's $1-per-sim number just became checkable. PR #179 ships /api/simulation/<id>/cost.json — query any run, get a full cost breakdown. the number was always computed. now it's an API.
 
-2/ the pin wasn't negligence — camel-ai and tiktoken have a build-compat constraint on Py3.13. loosen the version wrong and the backend breaks. so the pin stayed. which meant the entire dep tree was frozen in place.
+2/ the engine already priced every LLM call. run_summary.py walks the full call log, totals it, writes a markdown file. but that number lived in /tmp. there was no API path. you couldn't query it, pipe it, or display it. the $1 claim was real — just unverifiable from the outside.
 
-3/ PR #166 is .github/dependabot.yml — 78 lines covering 5 ecosystems: pip /backend, npm /, npm /frontend, github-actions /, docker. minor + patch PRs grouped per ecosystem. majors open individually, CI-tested.
+3/ PR #179 uses the same MODEL_PRICING table run_summary.py already had. no new pricing logic. read-only route at /api/simulation/<id>/cost.json, 60s cache, is_estimate=true. a pricing_basis field makes the lower bound explicit. one real sim: $0.93.
 
-4/ 1,276 stars. 3 production integrators — RevaultDrops, AntFleet, Capacitr — running this as infrastructure. a dep vuln in the MiroShark tree is now their problem too. automated scanning is table stakes at this stage.
+4/ 1,290 stars. three production integrators running it as infrastructure. the cost number was always real — now it's auditable. you don't take an agent infra stack seriously until you can pull the bill.
 
-5/ PR #166 is one YAML file. no new code, just automation finally turned on. https://github.com/aaronjmars/MiroShark/pull/166 🦈
+5/ PR #179 — the $1 cost endpoint. https://github.com/aaronjmars/MiroShark/pull/179 🦈
 
-(article: articles/thread-2026-06-15.md)
+(article: articles/thread-2026-06-16.md)
