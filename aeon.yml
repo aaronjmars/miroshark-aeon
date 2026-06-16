@@ -211,7 +211,7 @@ skills:
   launch-radar: { enabled: false, schedule: "30 10 * * 1", model: "claude-sonnet-4-6" } # Monday — scan PH/HN/GitHub Trending for launches matching the startup-idea backlog
   topic-momentum: { enabled: false, schedule: "30 6 * * 1", model: "claude-sonnet-4-6" } # Monday — content-gap scan: top 3 uncovered angles vs recent article history
   narrative-convergence: { enabled: false, schedule: "0 13 * * *", model: "claude-sonnet-4-6", var: "" } # daily 13:00 UTC — cross-skill convergence detector: entities/themes surfaced by 3+ independent skill categories in 48h = high-confidence write opportunities. Category map in memory/topics/signal-categories.md. Pass var to filter.
-  tweet-digest: { enabled: false, schedule: "0 17 * * *", var: "" } # daily — account-based digest of tracked X accounts; sibling to fetch-tweets/tweet-roundup
+  tweet-digest: { enabled: true, schedule: "0 17 * * *", var: "" } # daily — account-based digest of tracked X accounts (see memory/topics/tracked-accounts.yml); sibling to fetch-tweets/tweet-roundup
 
   # Dev & repo
   builder-map: { enabled: false, schedule: "0 10 * * 2", model: "claude-sonnet-4-6" } # Tuesday — who's building on watched repos (forks, ecosystem repos, announcements)

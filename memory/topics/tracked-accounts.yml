@@ -1,0 +1,6 @@
+# Accounts tracked by the tweet-digest skill (daily, 17:00 UTC).
+# Each run fetches the account's recent tweets, dedups against the last 2 days
+# of memory/logs/, themes them, and notifies. Handles are bare (no leading @).
+accounts:
+  - handle: miroshark_
+    why: our own X account — daily record of what this agent posted
