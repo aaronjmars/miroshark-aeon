@@ -77,7 +77,7 @@ Write clean, complete code. No TODOs or placeholders. Match the existing code st
 
 ### 7. Validate before shipping
 
-Run the repo's own test suite against your change from inside the clone (now workspace-relative, so the sandbox permits execution). Detect the toolchain and run the matching command, e.g.:
+Try to run the repo's own test suite against your change from inside the workspace-relative clone. Detect the toolchain and run the matching command, e.g.:
 
 ```bash
 # Python
@@ -86,9 +86,11 @@ pytest -q || python -m pytest -q
 npm test --silent || npm run test
 ```
 
+**Known limit:** in the autonomous (GitHub Actions) sandbox, **Python execution is blocked regardless of clone path** — `pytest` will not run even from `.feature-build/`. Don't burn multiple retries on it; attempt once, and if it's blocked treat the repo's own CI as the validation backstop (see below). Node/other toolchains may run; try them. This limit applies to the autonomous run, not local `./aeon`.
+
 - If tests pass → proceed.
 - If tests **fail because of your change** → fix it before opening the PR. Do not ship a red diff.
-- If tests can't run at all (no suite, missing deps the sandbox can't install, or an environment block) → that's acceptable, but **state it explicitly** in the log and PR body (e.g. "validation: pytest could not run — relied on diff review + repo CI"). Never imply tests passed when they didn't run.
+- If tests can't run at all (Python blocked by the sandbox, no suite, missing deps, or an environment block) → that's acceptable **only if the change is covered by the repo's own CI**. For Python repos this is the real gate: ensure any new test file is discovered by the repo's test runner and any new route/surface is registered where existing drift/contract tests will exercise it, so CI runs your change on push. **State explicitly** in the log and PR body that local tests could not run and why (e.g. "validation: pytest blocked by sandbox — relied on diff review + repo CI runs new test_unit_*.py on push"). Never imply tests passed when they didn't run.
 
 ### 8. Branch and push
 
@@ -175,7 +177,7 @@ After iterating every repo, end with a `## Summary` listing each watched repo an
 
 All GitHub operations go through `gh` CLI — handles auth internally via `GITHUB_TOKEN`. No env-var-authenticated curl from bash. The `./notify` call uses the standard fan-out pattern.
 
-**Clone path matters for validation:** the sandbox blocks code execution (pytest, `npm test`) under `/tmp`, so clone into the workspace-relative `.feature-build/${repo-name}` (gitignored) instead. That lets step 7's test run actually execute. If the sandbox still blocks a given command, treat it as "tests could not run" and say so — don't claim a pass.
+**Clone path matters for validation:** clone into the workspace-relative `.feature-build/${repo-name}` (gitignored), never `/tmp` — the sandbox blocks code execution under `/tmp` outright. Workspace-relative lets Node/other suites run, but **Python (`pytest`) stays blocked even there** in the autonomous run (confirmed across feature runs). So clone-path discipline does not rescue Python validation — for Python repos, lean on the target repo's CI (step 7) and say "tests could not run" honestly rather than claiming a pass.
 
 ## Environment Variables
 

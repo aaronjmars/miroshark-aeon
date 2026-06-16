@@ -1,1 +1,1 @@
-self-improve: feature skill now clones into the workspace (not /tmp) and runs the target repo's test suite before opening a PR — closes the validation gap that shipped MiroShark #157 with unrun pytest. PR: https://github.com/aaronjmars/miroshark-aeon/pull/60
+self-improve: fixed feature skill's false claim that workspace-relative clones let pytest run — Python is sandbox-blocked regardless, so it now leans on repo CI as the validation gate. PR: https://github.com/aaronjmars/miroshark-aeon/pull/63
