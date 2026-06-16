@@ -181,6 +181,32 @@ case "$SKILL" in
     fi
     ;;
 
+  tweet-digest)
+    # Account-based digest. If VAR is set, restrict to that single handle.
+    # Otherwise read every handle from memory/topics/tracked-accounts.yml.
+    # Writes one .xai-cache/tweet-digest-<handle>.json per account, matching the
+    # skill's Sandbox Note (skills/tweet-digest/SKILL.md).
+    CONFIG="memory/topics/tracked-accounts.yml"
+    HANDLES=""
+    if [ -n "$VAR" ]; then
+      HANDLES="${VAR#@}"
+    elif [ -f "$CONFIG" ]; then
+      HANDLES=$(grep -oE '^[[:space:]]*-[[:space:]]*handle:[[:space:]]*@?[A-Za-z0-9_]+' "$CONFIG" \
+        | sed -E 's/.*handle:[[:space:]]*@?//')
+    fi
+    if [ -z "$HANDLES" ]; then
+      echo "xai-prefetch: tweet-digest — no handles (var empty, config missing/empty), skipping"
+    else
+      for H in $HANDLES; do
+        H="${H#@}"
+        xai_search "tweet-digest-${H}.json" \
+          "Search X for the latest tweets from @${H} in the last 3 days (from ${THREE_DAYS_AGO} to ${TODAY}). Return the 5 most interesting or substantive tweets. For each: the full tweet text, date posted, and the direct link (https://x.com/${H}/status/ID). Skip retweets of others." \
+          "$THREE_DAYS_AGO" "$TODAY" \
+          "\"allowed_x_handles\": [\"${H}\"]"
+      done
+    fi
+    ;;
+
   content-performance)
     SEVEN_DAYS_AGO=$(date -u -d "7 days ago" +%Y-%m-%d 2>/dev/null || date -u -v-7d +%Y-%m-%d)
     HANDLE="${VAR:-}"

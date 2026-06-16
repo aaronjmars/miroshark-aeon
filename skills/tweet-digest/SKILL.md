@@ -46,6 +46,11 @@ Read `memory/MEMORY.md` for context and the last 2 days of `memory/logs/` to ded
 
 For each `handle` in the config (or just the one from `${var}` if set):
 
+**In the sandbox (GitHub Actions):** read the pre-fetched cache first —
+`.xai-cache/tweet-digest-<handle>.json`, written by `scripts/prefetch-xai.sh`
+before Claude starts. Only fall back to the live curl below when running outside
+the sandbox (no cache file present).
+
 ```bash
 curl -m 30 -s -X POST "https://api.x.ai/v1/responses" \
   -H "Content-Type: application/json" \
