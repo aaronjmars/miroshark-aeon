@@ -1,5 +1,5 @@
-*New Article: The Agent Web Learned to Act Before It Learned to Check*
+*New Article: Everyone Advertises a Price for AI. Almost Nobody Lets You Check the Bill.*
 
-The MCP ecosystem hit 10,000+ public servers and 97M monthly SDK downloads — and tool poisoning (72% attack success in benchmarks) is now its top security problem, because agents act on tool metadata they can't see. MiroShark's MCP server (`backend/mcp_server.py`) does the opposite: 8 read-only tools, not one runs a simulation. The tell is `get_reasoning_trace` (the report-agent's full ReACT chain) and `search_graph`'s `kinds=fact|belief|observation` filter — built for a caller that checks instead of trusts. The bet: provenance, not capability, is the scarce thing agents trade. 🦈
+The hidden cost of AI agents is the story of 2026 — a $20 plan that bills $347, agent loops burning 100x the tokens, inference priced below true cost. MiroShark just shipped the opposite move: `GET /api/simulation/<id>/cost.json` (PR #179), the per-run cost as machine-readable JSON. The tell is the design — `is_estimate: true`, untracked models count as $0, so the number is deliberately a *lower bound*. Most pricing rounds up to flatter the demo; this one rounds down so a skeptic can check it. 🦈
 
-Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-06-15.md
+Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-06-16.md

@@ -53,3 +53,13 @@ Tracks angle categories and theses used, to avoid repeats within 14 days.
   - https://itecsonline.com/post/mcp-tool-poisoning-enterprise-ai-agent-security-2026
   - https://arxiv.org/abs/2603.22489
   - https://github.com/aaronjmars/MiroShark
+
+## 2026-06-16
+- Angle: Technical deep-dive for non-technical readers (the per-sim cost.json endpoint's honest lower-bound design)
+- Thesis: While AI agents quietly turn a $20 budget into a $347 bill, MiroShark ships its per-run cost as a queryable lower bound — a pricing number engineered to be checked, not believed.
+- Title: Everyone Advertises a Price for AI. Almost Nobody Lets You Check the Bill.
+- Sources:
+  - https://aiempiremedia.com/the-hidden-cost-of-ai-agents-2026/
+  - https://leanopstech.com/blog/agentic-ai-cost-runaway-token-budget-2026/
+  - https://www.getmonetizely.com/blogs/the-economics-of-ai-first-b2b-saas-in-2026
+  - https://github.com/aaronjmars/MiroShark
