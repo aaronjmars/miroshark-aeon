@@ -1,0 +1,381 @@
+{
+  "root": "card-root",
+  "state": {},
+  "elements": {
+    "card-root": {
+      "type": "Card",
+      "props": {
+        "title": "Repo Action Ideas — aaronjmars/MiroShark — 2026-06-16"
+      },
+      "children": [
+        "summary",
+        "sep1",
+        "top-pick-section",
+        "sep2",
+        "actions-heading",
+        "action1",
+        "action2",
+        "action3",
+        "action4",
+        "action5",
+        "sep3",
+        "details-link"
+      ]
+    },
+    "summary": {
+      "type": "Text",
+      "props": {
+        "text": "A uniquely active day — three PRs merged before noon (websearch, frontend CI, cost.json) — leaving a clean proof gap in the README and four open major-version Dependabot PRs that each need a human eye before merging.",
+        "variant": "body"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "top-pick-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "top-pick-label",
+        "top-pick-title",
+        "top-pick-details"
+      ]
+    },
+    "top-pick-label": {
+      "type": "Heading",
+      "props": {
+        "text": "Top Pick",
+        "level": "h3"
+      }
+    },
+    "top-pick-title": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "tp-text",
+        "tp-badge-content",
+        "tp-badge-size",
+        "tp-badge-priority"
+      ]
+    },
+    "tp-text": {
+      "type": "Text",
+      "props": {
+        "text": "Wire cost.json callout in README Quickstart"
+      }
+    },
+    "tp-badge-content": {
+      "type": "Badge",
+      "props": {
+        "text": "Content/DX",
+        "variant": "secondary"
+      }
+    },
+    "tp-badge-size": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "secondary"
+      }
+    },
+    "tp-badge-priority": {
+      "type": "Badge",
+      "props": {
+        "text": "HIGH",
+        "variant": "destructive"
+      }
+    },
+    "top-pick-details": {
+      "type": "Text",
+      "props": {
+        "text": "Converts the \"$1 to simulate anything\" tagline from assertion to observable proof — one sentence in Quick start pointing to the queryable cost endpoint PR #179 merged hours ago.",
+        "variant": "body"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "actions-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Action Items",
+        "level": "h2"
+      }
+    },
+    "action1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "xs"
+      },
+      "children": [
+        "a1-title",
+        "a1-badges"
+      ]
+    },
+    "a1-title": {
+      "type": "Text",
+      "props": {
+        "text": "1. Wire cost.json callout in README Quickstart"
+      }
+    },
+    "a1-badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "a1-p",
+        "a1-c",
+        "a1-s"
+      ]
+    },
+    "a1-p": {
+      "type": "Badge",
+      "props": {
+        "text": "HIGH",
+        "variant": "destructive"
+      }
+    },
+    "a1-c": {
+      "type": "Badge",
+      "props": {
+        "text": "Content/DX",
+        "variant": "secondary"
+      }
+    },
+    "a1-s": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "secondary"
+      }
+    },
+    "action2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "xs"
+      },
+      "children": [
+        "a2-title",
+        "a2-badges"
+      ]
+    },
+    "a2-title": {
+      "type": "Text",
+      "props": {
+        "text": "2. Add French locale — README.fr.md + i18n to close issue #161"
+      }
+    },
+    "a2-badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "a2-p",
+        "a2-c",
+        "a2-s"
+      ]
+    },
+    "a2-p": {
+      "type": "Badge",
+      "props": {
+        "text": "HIGH",
+        "variant": "destructive"
+      }
+    },
+    "a2-c": {
+      "type": "Badge",
+      "props": {
+        "text": "Community/Content",
+        "variant": "secondary"
+      }
+    },
+    "a2-s": {
+      "type": "Badge",
+      "props": {
+        "text": "Medium",
+        "variant": "secondary"
+      }
+    },
+    "action3": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "xs"
+      },
+      "children": [
+        "a3-title",
+        "a3-badges"
+      ]
+    },
+    "a3-title": {
+      "type": "Text",
+      "props": {
+        "text": "3. Audit/resolve Dependabot PR #175: vue-router 4.6.3→5.1.0 MAJOR bump"
+      }
+    },
+    "a3-badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "a3-p",
+        "a3-c",
+        "a3-s"
+      ]
+    },
+    "a3-p": {
+      "type": "Badge",
+      "props": {
+        "text": "MED",
+        "variant": "outline"
+      }
+    },
+    "a3-c": {
+      "type": "Badge",
+      "props": {
+        "text": "DX/Security",
+        "variant": "secondary"
+      }
+    },
+    "a3-s": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "secondary"
+      }
+    },
+    "action4": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "xs"
+      },
+      "children": [
+        "a4-title",
+        "a4-badges"
+      ]
+    },
+    "a4-title": {
+      "type": "Text",
+      "props": {
+        "text": "4. Audit Dependabot PR #168: python 3.11→3.14 Docker three-version jump"
+      }
+    },
+    "a4-badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "a4-p",
+        "a4-c",
+        "a4-s"
+      ]
+    },
+    "a4-p": {
+      "type": "Badge",
+      "props": {
+        "text": "MED",
+        "variant": "outline"
+      }
+    },
+    "a4-c": {
+      "type": "Badge",
+      "props": {
+        "text": "Security/DX",
+        "variant": "secondary"
+      }
+    },
+    "a4-s": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "secondary"
+      }
+    },
+    "action5": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "xs"
+      },
+      "children": [
+        "a5-title",
+        "a5-badges"
+      ]
+    },
+    "a5-title": {
+      "type": "Text",
+      "props": {
+        "text": "5. Close issue #160 and document merged websearch env-var interface"
+      }
+    },
+    "a5-badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "a5-p",
+        "a5-c",
+        "a5-s"
+      ]
+    },
+    "a5-p": {
+      "type": "Badge",
+      "props": {
+        "text": "MED",
+        "variant": "outline"
+      }
+    },
+    "a5-c": {
+      "type": "Badge",
+      "props": {
+        "text": "Community/DX",
+        "variant": "secondary"
+      }
+    },
+    "a5-s": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "secondary"
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "details-link": {
+      "type": "Link",
+      "props": {
+        "label": "Full details",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-actions-2026-06-16.md"
+      }
+    }
+  }
+}

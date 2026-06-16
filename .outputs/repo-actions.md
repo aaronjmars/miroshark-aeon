@@ -1,20 +1,13 @@
-Done. Here's a summary of what ran:
+*Repo Action Ideas — aaronjmars/MiroShark — 2026-06-16*
+A uniquely active day — three PRs merged before noon (websearch, frontend CI, cost.json) — leaving a clean proof gap in the README and four open major-version Dependabot PRs that each need a human eye before merging.
 
-## Summary
+Top pick: Wire cost.json endpoint callout into README Quickstart (Content/DX, Small, Priority HIGH)
+ → Converts the "$1 to simulate anything" tagline from assertion to observable proof — one sentence in Quick start pointing to the queryable cost endpoint PR #179 merged hours ago.
 
-**Target:** aaronjmars/MiroShark (1,270 stars, 269 forks, pushed today)
+1. Wire cost.json callout in README Quickstart (HIGH, Content/DX, Small)
+2. Add French locale — README.fr.md + i18n to close issue #161 (HIGH, Community/Content, Medium)
+3. Audit/resolve Dependabot PR #175: vue-router 4.6.3→5.1.0 MAJOR bump (MED, DX/Security, Small)
+4. Audit Dependabot PR #168: python 3.11→3.14 Docker three-version jump (MED, Security/DX, Small)
+5. Close issue #160 and document merged websearch env-var interface (MED, Community/DX, Small)
 
-**Mode:** REPO_ACTIONS_OK — 5 ideas cleared all gates from 10 candidates
-
-**Article written:** `articles/repo-actions-2026-06-14.md`
-
-**Top pick:** Review and merge PR #159 (community PR from dan-and: same-origin API fix + neo4j v5.26 bump) — 14/15, HIGH priority, Small effort. Merging it also sends a signal to the same contributor building websearch support in issue #160.
-
-**5 ideas this cycle:**
-1. **PR #159** — Review + merge dan-and's community chore PR (HIGH, 14/15)
-2. **ISSUE #160** — Post websearch integration spec (ENV-var interface for SearXNG + Firecrawl) to unblock the active fork contributor (HIGH, 13/15)
-3. **dependabot.yml** — Automate weekly Python + npm dep updates; `camel-ai==0.2.78` is an exact pin with no auto-update path (MED, 13/15)
-4. **CODE_OF_CONDUCT.md** — 14 ecosystem integrators + 1270 stars with no community governance document (MED, 12/15)
-5. **Loosen camel-ai exact pin** — Change `==0.2.78` → `>=0.2.78` to align with every other dep in the repo (MED, 12/15)
-
-**Carried over from 2026-06-12:** SECURITY.md top pick — PR #158 still open, unmerged.
+Full details: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-actions-2026-06-16.md
