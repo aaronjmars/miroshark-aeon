@@ -169,7 +169,7 @@ skills:
   skill-leaderboard: { enabled: false, schedule: "0 17 * * 0", model: "claude-sonnet-4-6" } # Sunday — rank popular skills across forks
   contributor-leaderboard: { enabled: false, schedule: "30 17 * * 0", model: "claude-sonnet-4-6" } # Sunday — rank community contributors across forks and upstream PRs
   contributor-reward: { enabled: false, schedule: "30 9 * * 1", model: "claude-sonnet-4-6", var: "" } # Monday — turn Sunday's leaderboard into a tier-priced rewards plan in memory/distributions.yml; pass dry-run to preview
-  operator-scorecard: { enabled: true, schedule: "30 10 * * 1", model: "claude-sonnet-4-6", var: "" }
+  operator-scorecard: { enabled: false, schedule: "30 10 * * 1", model: "claude-sonnet-4-6", var: "" }
   followup-patrol: { enabled: false, schedule: "0 11 * * 2", model: "claude-sonnet-4-6", var: "" } # Tuesday 11:00 UTC — escalation audit: parses MEMORY.md follow-up/next-priorities section + issue tracker, ages items, alerts on CRITICAL/HIGH operator items (>21d/>14d). Catch-all for the open-loop backlog. Pass var to filter.
   fork-digest: { enabled: false, schedule: "30 18 * * 0", model: "claude-sonnet-4-6" } # Sunday — divergence digest: where the configured fleet disagrees with upstream defaults
   skill-gap: { enabled: false, schedule: "0 21 * * 0", model: "claude-sonnet-4-6", var: "" } # Sunday 21:00 UTC — per-fork table of upstream skills the fork hasn't adopted; gates on fork-cohort POWER+ACTIVE set when fresh, falls back to live API otherwise. Pass dry-run to skip notify, or owner/repo to override parent.
