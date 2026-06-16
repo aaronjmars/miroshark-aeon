@@ -1,10 +1,3 @@
-HEARTBEAT_OK · STATUS_PAGE=OK
+🟡 WATCH — heartbeat 2026-06-16 19:00 UTC
 
-All 15 enabled skills are healthy (100% success rates, zero consecutive failures). No stuck dispatches, no open PRs, no urgent issues. `shiplog` and `operator-scorecard` both completed their first Monday runs successfully today. `docs/status.md` regenerated to 🟢 OK with updated token pulse ($0.000005826, −13.9% 24h, CONSOLIDATING).
-
-## Summary
-
-- **P0/P1/P2/P3:** All clear — no flags fired.
-- **docs/status.md:** Rewritten to 🟢 OK, updated timestamps, token pulse from today's report, P3 note for shiplog/operator-scorecard removed (both ran).
-- **memory/logs/2026-06-15.md:** Heartbeat run appended.
-- **Notification:** None sent (everything green).
+🔵 MISSING (P3): tweet-digest is enabled (daily 17:00 UTC) but has no entry in memory/cron-state.json — never dispatched by the scheduler. Check that the workflow is picking it up, and that memory/topics/tracked-accounts.yml exists if required.

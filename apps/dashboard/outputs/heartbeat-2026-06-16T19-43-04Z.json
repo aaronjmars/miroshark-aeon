@@ -1,0 +1,48 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "heartbeat"
+      },
+      "children": [
+        "stack"
+      ]
+    },
+    "stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "timestamp",
+        "separator",
+        "alert"
+      ]
+    },
+    "timestamp": {
+      "type": "Text",
+      "props": {
+        "text": "🟡 WATCH — 2026-06-16 19:00 UTC",
+        "variant": "lead"
+      }
+    },
+    "separator": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "alert": {
+      "type": "Alert",
+      "props": {
+        "title": "Missing (P3) – tweet-digest",
+        "message": "tweet-digest is enabled (daily 17:00 UTC) but has no entry in memory/cron-state.json — never dispatched by the scheduler. Check that the workflow is picking it up, and that memory/topics/tracked-accounts.yml exists if required.",
+        "type": "warning"
+      }
+    }
+  }
+}
