@@ -1,0 +1,39 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "repo-article"
+      },
+      "children": [
+        "heading",
+        "thesis",
+        "storylink"
+      ]
+    },
+    "heading": {
+      "type": "Heading",
+      "props": {
+        "text": "🦈 MiroShark Shipped Its Agent Loop Untested for Two Months — Then a Dependency Bump Returned Zero Agents",
+        "level": "h2"
+      }
+    },
+    "thesis": {
+      "type": "Text",
+      "props": {
+        "text": "thesis: for ~2 months CI never ran the real agent loop. camel-ai 0.2.90 silently zeroed it — and `total_actions` was hardcoded to 0, so a dead run read identical to a healthy one. only after that did #183 add the first smoke test (+ #180 a frontend build gate). reactive, narrow, but it's the engine's first tripwire on the wire that snapped.",
+        "variant": "body"
+      }
+    },
+    "storylink": {
+      "type": "StoryLink",
+      "props": {
+        "title": "🦈 MiroShark Shipped Its Agent Loop Untested for Two Months — Then a Dependency Bump Returned Zero Agents",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-06-17.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}

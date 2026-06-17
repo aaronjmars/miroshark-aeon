@@ -1,5 +1,5 @@
-*MiroShark's First Dependabot Wave Broke Its Own Engine on Day One* 🦈
+🦈 *MiroShark Shipped Its Agent Loop Untested for Two Months — Then a Dependency Bump Returned Zero Agents*
 
-Thesis: MiroShark's first Dependabot run merged 11 bumps today — the camel-ai 0.2.90 one (#176) silently broke the agent loop & Docker build, forcing two same-day hotfixes (#181, #182). The other 10 merged clean; the one touching the simulation runtime is the one that bled.
+thesis: for ~2 months CI never ran the real agent loop. camel-ai 0.2.90 silently zeroed it — and `total_actions` was hardcoded to 0, so a dead run read identical to a healthy one. only after that did #183 add the first smoke test (+ #180 a frontend build gate). reactive, narrow, but it's the engine's first tripwire on the wire that snapped.
 
-Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-06-16.md
+Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-06-17.md
