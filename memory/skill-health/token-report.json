@@ -1,10 +1,12 @@
 {
   "skill": "token-report",
-  "last_analyzed": "2026-06-16T07:45:33Z",
+  "last_analyzed": "2026-06-17T07:45:32Z",
   "quality_score": 4,
-  "assessment": "Substantive, well-sourced token report with clear verdict and market analysis; one source failed but acknowledged",
-  "flags": [],
-  "avg_score": 4.2,
+  "assessment": "Substantive report with proper deltas and classification; treasury section missing due to API deprecation but transparently documented.",
+  "flags": [
+    "api_error"
+  ],
+  "avg_score": 4.17,
   "history": [
     {
       "date": "2026-06-12",
@@ -24,6 +26,10 @@
     },
     {
       "date": "2026-06-16",
+      "score": 4
+    },
+    {
+      "date": "2026-06-17",
       "score": 4
     }
   ]

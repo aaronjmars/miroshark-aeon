@@ -53,7 +53,7 @@ See `memory/watched-repos.md` — `aaronjmars/MiroShark`, `aaronjmars/miroshark-
 - Hyperstition: MiroShark PR from a Chinese-locale contributor OR Chinese-language coverage by 2026-06-15 — CN tweet "米罗莎要来了" (May 16), first JP coverage @m000_crypto (May 17).
 - Hyperstition: external operator running the Aeon framework publicly under a non-aaronjmars identity by 2026-06-30.
 - Hyperstition: ≥3 publicly-named external integrators citing MiroShark as AI infrastructure by 2026-07-31 — #1 RevaultDrops, #2 AntFleet miroshark-bench, #3 Capacitr (confirmed Jun 2).
-- $MIROSHARK: ATH $0.0000436 (May 18), FDV peaked $3.32M; **$0.00000677 (-9.2% 24h, +5.1% 7d), -84.5% from ATH, liq $381K** as of 2026-06-14; verdict CONSOLIDATING.
+- $MIROSHARK: ATH $0.0000436 (May 18), FDV peaked $3.32M; **$0.00000569 (-1.5% 24h, -20.0% 7d), -86.9% from ATH, liq $355.1K, FDV $569K** as of 2026-06-17; verdict QUIET.
 
 ## Next Priorities
 - Chinese-locale hyperstition (deadline 2026-06-15) — CN tweet "米罗莎要来了" May 16 likely qualifies as coverage; archive or mark CROSSED after today.
