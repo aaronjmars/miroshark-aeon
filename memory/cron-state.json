@@ -22,14 +22,14 @@
   },
   "push-recap": {
     "last_dispatch": "2026-06-17T15:12:16Z",
-    "last_status": "dispatched",
-    "last_success": "2026-06-16T16:44:00Z",
-    "total_runs": 6,
-    "total_successes": 6,
+    "last_status": "success",
+    "last_success": "2026-06-17T15:18:05Z",
+    "total_runs": 7,
+    "total_successes": 7,
     "total_failures": 0,
     "consecutive_failures": 0,
     "success_rate": 1,
-    "last_quality_score": 5
+    "last_quality_score": 4
   },
   "repo-article": {
     "last_dispatch": "2026-06-16T16:38:56Z",
