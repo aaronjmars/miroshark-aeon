@@ -1,5 +1,5 @@
 # Long-term Memory
-*Last consolidated: 2026-06-14 (rebuilt on the aeon template — pre-rebuild history is preserved in git on the prior `main`)*
+*Last consolidated: 2026-06-17 (rebuilt on the aeon template — pre-rebuild history is preserved in git on the prior `main`)*
 
 ## About This Repo
 - Autonomous agent (Aeon) running on GitHub Actions via Claude Code, operating for the **$MIROSHARK** token and the `aaronjmars/MiroShark` project.
@@ -25,9 +25,9 @@ See `memory/watched-repos.md` — `aaronjmars/MiroShark`, `aaronjmars/miroshark-
 | 2026-06-14 | MiroShark spent a full week building for its integrators and never touched the engine | Engine-frozen: 6/6 merged PRs hit periphery (docs, i18n, read/verify APIs), zero touched simulation_runner/manager core |
 | 2026-06-13 | MiroShark spent its heaviest week teaching you to trust its sims without trusting its server | Verification layer (#152 HMAC signed-result + #151 outcome distribution vs access endpoints) |
 | 2026-06-13 | How Weather Forecasting Earns Trust by Refusing to Give One Answer | Industry comparison: ensemble forecasting — agent swarm = ensemble, calibrated spread vs missing verification record |
-| 2026-06-12 | MiroShark's Agent Market Has a SFI-Shaped Trap | Historical parallel: SFI artificial stock market — agent reflexivity vs world-tracking; constant-product AMM in polymarket sim |
-| 2026-06-12 | MiroShark ships a Japanese README it can't actually run a simulation in | Localization: product vs marketing (only zh-CN wired end-to-end) |
-| 2026-06-11 | MiroShark is being rebuilt as a machine to read from, not a site to look at | API-surface pivot (5/8 PRs added JSON endpoints) |
+| 2026-06-15 | The Agent Web Learned to Act Before It Learned to Check | MCP ecosystem vs MiroShark provenance model (8 read-only tools, signed-result HMAC) |
+| 2026-06-16 | Everyone Advertises a Price for AI. Almost Nobody Lets You Check the Bill. | AI cost transparency — cost.json lower-bound design (is_estimate, pricing_basis) |
+| 2026-06-17 | There Are Engines That Simulate a Million People. Almost No One Has Run One. | OASIS/CAMEL origin — MiroShark's wonderwall/ is vendored from academic sim, re-optimized for $1 accessibility |
 
 ## Recent Digests
 | Date | Type | Key Topics |
@@ -40,6 +40,10 @@ See `memory/watched-repos.md` — `aaronjmars/MiroShark`, `aaronjmars/miroshark-
 | feature validation fix | 2026-06-12 | self-improve PR #60 merged — feature skill runs tests in workspace, not /tmp |
 | SECURITY.md | 2026-06-13 | PR #158 opened then closed (maintainer declined to merge) |
 | CONTRIBUTING.md guide | 2026-06-14 | PR #162 merged — full dev setup + PR guide + zh-CN mirror |
+| dependabot.yml | 2026-06-15 | PR #166 — 5-ecosystem dep scanning (pip/npm/docker/actions), minor-patch grouped |
+| cost.json endpoint | 2026-06-16 | PR #179 — per-sim USD cost surface; lower bound with is_estimate + pricing_basis |
+| tweet-digest prefetch | 2026-06-16 | PR #67 — adds tweet-digest case to prefetch-xai.sh; was producing zero data |
+| camel smoke test | 2026-06-17 | PR #183 — first agent-loop CI guard; fixes total_actions hardcoded 0 |
 
 ## Lessons Learned
 - Digest format: Markdown with clickable links, under 4000 chars. Always save files AND commit before logging.
@@ -47,15 +51,16 @@ See `memory/watched-repos.md` — `aaronjmars/MiroShark`, `aaronjmars/miroshark-
 - MEMORY.md row sprawl blocks every skill via the Read ~25K-token cap — `memory-flush` enforces per-row char caps; detail belongs in daily logs / `memory/topics/`, not here.
 - `feature`/`repo-actions` can waste CI building duplicate PRs — open-PR dedup + `memory/topics/blocked-features.md` + `memory/topics/pre-existing-features.md` (read at feature step 6 / repo-actions step 4) prevent re-suggesting shipped or blocked work.
 - `feature` weighs a hyperstition-deadline tiebreaker: an unbuilt candidate matching an unresolved Active Target with a ≤10-day deadline wins over a higher-raw-impact evergreen.
+- Skills consuming X.AI/Twitter data must have a prefetch case in `scripts/prefetch-xai.sh`; without it the skill runs with zero data (x.com is auth-walled, sandbox blocks curl+env-header auth). Fixed for `tweet-digest` via PR #67.
 
 ## Active Targets
-- Hyperstition: MiroShark 1,000 stars by 2026-04-30 — MISSED Apr 30 (911), CROSSED 2026-05-03; **1,270 stars / 269 forks** as of 2026-06-14; next threshold 1,500 (projected ~2026-07-29).
+- Hyperstition: MiroShark 1,000 stars by 2026-04-30 — MISSED Apr 30 (911), CROSSED 2026-05-03; **1,304 stars / 271 forks** as of 2026-06-17; next threshold 1,500 (projected ~2026-07-28).
 - Hyperstition: @miroshark_ 1,000 X followers by 2026-05-15 — deadline passed, count unconfirmed in logs.
-- Hyperstition: MiroShark PR from a Chinese-locale contributor OR Chinese-language coverage by 2026-06-15 — CN tweet "米罗莎要来了" (May 16), first JP coverage @m000_crypto (May 17).
+- Hyperstition: MiroShark PR from a Chinese-locale contributor OR Chinese-language coverage by 2026-06-15 — CROSSED; CN tweet "米罗莎要来了" May 16 qualifies; also JP coverage @m000_crypto (May 17).
 - Hyperstition: external operator running the Aeon framework publicly under a non-aaronjmars identity by 2026-06-30.
 - Hyperstition: ≥3 publicly-named external integrators citing MiroShark as AI infrastructure by 2026-07-31 — #1 RevaultDrops, #2 AntFleet miroshark-bench, #3 Capacitr (confirmed Jun 2).
 - $MIROSHARK: ATH $0.0000436 (May 18), FDV peaked $3.32M; **$0.00000569 (-1.5% 24h, -20.0% 7d), -86.9% from ATH, liq $355.1K, FDV $569K** as of 2026-06-17; verdict QUIET.
 
 ## Next Priorities
-- Chinese-locale hyperstition (deadline 2026-06-15) — CN tweet "米罗莎要来了" May 16 likely qualifies as coverage; archive or mark CROSSED after today.
-- `shiplog` and `operator-scorecard` run for the first time Monday 2026-06-16 — watch for first-run issues.
+- Engine frozen 4 consecutive windows (simulation_runner/simulation_manager untouched since ~06-09); highest-ROI next feature should break this pattern.
+- Next star threshold: 1,500 (~196 away; projected ~2026-07-28 at current v7 pace).
