@@ -63,3 +63,15 @@ Tracks angle categories and theses used, to avoid repeats within 14 days.
   - https://leanopstech.com/blog/agentic-ai-cost-runaway-token-budget-2026/
   - https://www.getmonetizely.com/blogs/the-economics-of-ai-first-b2b-saas-in-2026
   - https://github.com/aaronjmars/MiroShark
+
+## 2026-06-17
+- Angle: Ecosystem map (academic LLM social-simulation field — OASIS / AgentSociety / Concordia)
+- Thesis: MiroShark forked OASIS (camel-oasis → bundled wonderwall, camel-ai 0.2.90) — kept the swarm engine, dropped the field's validation rigor — betting the binding constraint was the front door, not fidelity.
+- Title: There Are Engines That Simulate a Million People. Almost No One Has Run One.
+- Sources:
+  - https://github.com/camel-ai/oasis
+  - https://arxiv.org/abs/2502.08691
+  - https://www.cooperativeai.com/post/google-deepmind-releases-concordia-library-v2-0
+  - https://link.springer.com/article/10.1007/s10462-025-11412-6
+  - https://arxiv.org/pdf/2510.13982
+  - https://arxiv.org/pdf/2411.10109
