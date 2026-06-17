@@ -1,0 +1,133 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "Thread Draft — 2026-06-17",
+        "description": "MiroShark i18n expansion — EN/中 → EN/中/DE/FR (PRs #184 + #185)"
+      },
+      "children": [
+        "content-separator",
+        "points-stack",
+        "footer-separator",
+        "footer-stack"
+      ]
+    },
+    "content-separator": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "points-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "point1",
+        "point2",
+        "point3",
+        "point4",
+        "point5-stack"
+      ]
+    },
+    "point1": {
+      "type": "Text",
+      "props": {
+        "text": "1/ MiroShark has shipped in two languages since launch. today that became four. EN, 中, DE, FR — the i18n layer went from a binary toggle to a proper N-locale system.",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "point2": {
+      "type": "Text",
+      "props": {
+        "text": "2/ the original i18n code was a two-state switch: zh or en. every call site returned one of two strings. no map, no fallback table. adding German meant touching every if-branch in both backend and frontend.",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "point3": {
+      "type": "Text",
+      "props": {
+        "text": "3/ PR #184 replaced the if-else with a keyword-override map. SUPPORTED grows from 2 locales to 4. LocaleToggle.vue goes from a flip to a full selector. adding a new language now means one map entry, not 50 call site edits.",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "point4": {
+      "type": "Text",
+      "props": {
+        "text": "4/ if you're simulating Twitter opinion dynamics and your agent fleet only speaks English and Mandarin, you're not simulating the internet. you're simulating a subset of it. PR #184 is the first step toward changing that.",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "point5-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "point5-text",
+        "point5-link",
+        "point5-emoji"
+      ]
+    },
+    "point5-text": {
+      "type": "Text",
+      "props": {
+        "text": "5/ PR #185 — French README + 4-locale language switcher.",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "point5-link": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/aaronjmars/MiroShark/pull/185",
+        "href": "https://github.com/aaronjmars/MiroShark/pull/185"
+      },
+      "children": []
+    },
+    "point5-emoji": {
+      "type": "Text",
+      "props": {
+        "text": "🦈",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "footer-separator": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "footer-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "article-link"
+      ]
+    },
+    "article-link": {
+      "type": "Link",
+      "props": {
+        "label": "Full article: articles/thread-2026-06-17.md",
+        "href": "articles/thread-2026-06-17.md"
+      },
+      "children": []
+    }
+  }
+}

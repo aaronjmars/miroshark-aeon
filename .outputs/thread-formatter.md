@@ -1,14 +1,14 @@
-*Thread Draft — 2026-06-16*
-Topic: cost.json endpoint — PR #179 on aaronjmars/MiroShark
+*Thread Draft — 2026-06-17*
+Topic: MiroShark i18n expansion — EN/中 → EN/中/DE/FR (PRs #184 + #185)
 
-1/ MiroShark's $1-per-sim number just became checkable. PR #179 ships /api/simulation/<id>/cost.json — query any run, get a full cost breakdown. the number was always computed. now it's an API.
+1/ MiroShark has shipped in two languages since launch. today that became four. EN, 中, DE, FR — the i18n layer went from a binary toggle to a proper N-locale system.
 
-2/ the engine already priced every LLM call. run_summary.py walks the full call log, totals it, writes a markdown file. but that number lived in /tmp. there was no API path. you couldn't query it, pipe it, or display it. the $1 claim was real — just unverifiable from the outside.
+2/ the original i18n code was a two-state switch: zh or en. every call site returned one of two strings. no map, no fallback table. adding German meant touching every if-branch in both backend and frontend.
 
-3/ PR #179 uses the same MODEL_PRICING table run_summary.py already had. no new pricing logic. read-only route at /api/simulation/<id>/cost.json, 60s cache, is_estimate=true. a pricing_basis field makes the lower bound explicit. one real sim: $0.93.
+3/ PR #184 replaced the if-else with a keyword-override map. SUPPORTED grows from 2 locales to 4. LocaleToggle.vue goes from a flip to a full selector. adding a new language now means one map entry, not 50 call site edits.
 
-4/ 1,290 stars. three production integrators running it as infrastructure. the cost number was always real — now it's auditable. you don't take an agent infra stack seriously until you can pull the bill.
+4/ if you're simulating Twitter opinion dynamics and your agent fleet only speaks English and Mandarin, you're not simulating the internet. you're simulating a subset of it. PR #184 is the first step toward changing that.
 
-5/ PR #179 — the $1 cost endpoint. https://github.com/aaronjmars/MiroShark/pull/179 🦈
+5/ PR #185 — French README + 4-locale language switcher. https://github.com/aaronjmars/MiroShark/pull/185 🦈
 
-(article: articles/thread-2026-06-16.md)
+(article: articles/thread-2026-06-17.md)
