@@ -84,7 +84,7 @@ skills:
 
   # --- Repo intelligence (3 PM UTC) ---
   push-recap: { enabled: true, schedule: "0 15 * * *" }
-  repo-article: { enabled: true, schedule: "0 16 * * *" }
+  repo-article: { enabled: true, schedule: "0 16 * * *", model: "claude-opus-4-8" }
   repo-actions: { enabled: true, schedule: "0 14 */2 * *" }
   repo-pulse: { enabled: true, schedule: "0 10 * * *" }
   star-milestone: { enabled: true, schedule: "15 15 * * *" }
@@ -131,7 +131,7 @@ skills:
   skill-health: { enabled: false, schedule: "0 18 * * *" }
   skill-analytics: { enabled: false, schedule: "30 18 * * 3" } # Wednesday — fleet-level skill-run analytics: ranked run counts, exit-taxonomy distribution, anomaly flags (significance-gated)
 
-  self-improve: { enabled: true, schedule: "0 13 */2 * *" }
+  self-improve: { enabled: true, schedule: "0 13 */2 * *", model: "claude-opus-4-8" }
   reflect: { enabled: false, schedule: "0 18 * * *" }
 
   action-converter: { enabled: false, schedule: "0 18 * * *" }
@@ -218,7 +218,7 @@ skills:
   pr-tracker: { enabled: false, schedule: "30 9 * * *" } # daily — status of cross-repo PRs opened by this instance (merge/stale/closed)
   pr-merge: { enabled: false, schedule: "45 9 * * *", var: "" } # daily 09:45 UTC — operator-facing morning digest of every open PR on the target repo (default aaronjmars/aeon), bucketed by touched-file risk tier (FAST_TRACK/SKILL_PASS/INFRA_REVIEW/SKILL_WARN_OR_BLOCK/CORE_REVIEW/UNKNOWN), each skill-PR scanned via skill-scan/scan.sh, gated re-notify on head SHA. var: dry-run [owner/repo]
   repo-revive: { enabled: false, schedule: "0 10 * * 6" } # Saturday — one targeted improvement to reactivate the top dormant watched repo
-  feature: { enabled: true, schedule: "0 11 * * *", var: "" }
+  feature: { enabled: true, schedule: "0 11 * * *", var: "", model: "claude-opus-4-8" }
 
   # Security
   disclosure-tracker: { enabled: false, schedule: "15 16 * * *" } # daily — audit pending disclosure queue, alert on aging CRITICAL/HIGH advisories
