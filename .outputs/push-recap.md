@@ -1,15 +1,13 @@
-*Push Recap — 2026-06-16* 🦈
-aaronjmars/MiroShark — MIXED: shipped two surfaces, then survived the dependency sweep that broke the engine.
+*Push Recap — 2026-06-17*
+MiroShark — SHIPPING: German/French i18n foundation + French README live; run-end logs stop reporting 0 actions.
 
-Shipped to users:
-• #178 SearXNG/Firecrawl web search — first community capability in weeks (dan-and). self-hosted runs no longer need a websearch-capable LLM. +1167/-55
-• #179 GET /api/simulation/<id>/cost.json — the "$1 to simulate" number, now queryable per run. priced off the same table as the report, is_estimate honest. +699/-25
-• #181 camel-ai 0.2.90 made every simulation do *zero* agent actions and still write a report — silent total failure CI can't see. 2-line fix. after: twitter 7 posts, reddit 5+22, polymarket 8 trades.
+shipped to users:
+• #184 — i18n goes from hardcoded en/zh to N locales. German + French land. t()/tr() rewritten to keyword overrides, English fallback, old two-arg calls untouched. (22 files, +230/−49)
+• #185 — French README + the nav switcher becomes a real 4-locale selector (EN/中/DE/FR). closes the FR entry-point gap #184 left.
+• #183 — the runner stopped lying. end-of-run log hardcoded total_actions=0 on every platform — even healthy runs. now logs real per-platform counts, with a camel smoke test gating it in CI so the next bad bump fails loud.
 
-Under the hood:
-• Aeon's own dependabot config (#166) unleashed 11 bumps. vite 7→8 and the camel-ai lockfile drift both broke the build same-day — fixed in #177/#182. #180 now builds the frontend on every PR.
+shape: 3 user-visible · 0 internal · 0 infra · 5 bot-filtered · 3 merged PRs
+volume: 29 files, +507/−56
+engine note: simulation_runner/manager untouched — 4th straight frozen window.
 
-Shape: 3 user-visible · 5 infra · 9 bot-filtered · 17 merged PRs
-Volume: 52 files, +3,386/-1,203
-
-Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-06-16.md
+full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-06-17.md

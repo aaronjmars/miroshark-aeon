@@ -1,10 +1,10 @@
 {
   "skill": "push-recap",
-  "last_analyzed": "2026-06-16T16:43:06Z",
-  "quality_score": 5,
-  "assessment": "Excellent — caught critical silent failure (#181), substantive analysis with strategy alignment, proper artifacts and follow-ups",
+  "last_analyzed": "2026-06-17T15:17:14Z",
+  "quality_score": 4,
+  "assessment": "Complete execution with specific PR details, proper deduplication, memory/notification handling, and honest follow-ups; full article content truncated prevents verification of depth.",
   "flags": [],
-  "avg_score": 4.33,
+  "avg_score": 4.29,
   "history": [
     {
       "date": "2026-06-11",
@@ -29,6 +29,10 @@
     {
       "date": "2026-06-16",
       "score": 5
+    },
+    {
+      "date": "2026-06-17",
+      "score": 4
     }
   ]
 }
