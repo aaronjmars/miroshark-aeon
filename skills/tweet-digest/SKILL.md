@@ -46,6 +46,11 @@ Read `memory/MEMORY.md` for context and the last 2 days of `memory/logs/` to ded
 
 For each `handle` in the config (or just the one from `${var}` if set):
 
+**In the sandbox (GitHub Actions):** read the pre-fetched cache first —
+`.xai-cache/tweet-digest-<handle>.json`, written by `scripts/prefetch-xai.sh`
+before Claude starts. Only fall back to the live curl below when running outside
+the sandbox (no cache file present).
+
 ```bash
 curl -m 30 -s -X POST "https://api.x.ai/v1/responses" \
   -H "Content-Type: application/json" \
@@ -93,7 +98,7 @@ Append to `memory/logs/${today}.md` with the tweet URLs reported (so the next ru
 
 ## Sandbox Note
 
-The X.AI API requires `Authorization: Bearer $XAI_API_KEY` — the sandbox blocks env-var expansion in curl headers. Use the **pre-fetch pattern** (see CLAUDE.md): create `scripts/prefetch-xai-tweet-digest.sh` to fetch each account's tweets into `.xai-cache/tweet-digest-<handle>.json` before Claude runs. The skill reads cached JSON if present, falls back to live curl only when running outside the sandbox.
+The X.AI API requires `Authorization: Bearer $XAI_API_KEY` — the sandbox blocks env-var expansion in curl headers. This skill uses the **pre-fetch pattern** (see CLAUDE.md): the `tweet-digest` case in `scripts/prefetch-xai.sh` loops the handles in `memory/topics/tracked-accounts.yml` and writes each account's tweets to `.xai-cache/tweet-digest-<handle>.json` before Claude runs (the workflow runs all `scripts/prefetch-*.sh` with `<skill> <var>` args). The skill reads cached JSON if present, falls back to live curl only when running outside the sandbox.
 
 ## Environment Variables
 
