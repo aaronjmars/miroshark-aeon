@@ -1,18 +1,12 @@
-Run complete. Here's what happened:
-
-**aaronjmars/MiroShark — 1290 stars**
-
-- **Highest threshold crossed**: 1000 — already recorded as bootstrap (2026-05-14). No new milestone.
-- **Next milestone**: 1500 stars (210 away, projected ~2026-07-14 at current pace)
-- **Velocity**: v7=52 · baseline=4.47/day · shape=ORGANIC (1.66× weekly baseline — healthy, steady growth)
-- **Today active**: 11 stars already logged on 2026-06-16 (last one at 16:30 UTC), days_since_last_star=0
-- **Notification**: none sent (gate 5a — already recorded)
-- **Dispatch**: none (rules map is empty)
+Run complete. Rules are empty and step 8 was never reached anyway (step 5a short-circuited before dispatch).
 
 ## Summary
 
-- Checked `aaronjmars/MiroShark` (skipped `miroshark-aeon` per `-aeon` rule)
-- Current count: 1290 stars — threshold M=1000 already recorded as bootstrap, no new crossing
-- Velocity data computed from last two stargazer pages: v7=52, v30=134, baseline=4.47/day, shape=ORGANIC
-- Appended run log to `memory/logs/2026-06-16.md`
-- No notification sent, no milestone file changes needed, no dispatch triggered
+**aaronjmars/MiroShark** — 1304 stars today.
+
+- Highest threshold crossed: **1000** — already recorded as `(bootstrap)` in `milestones.md`. Step 5a triggered: no action, no notification.
+- Next threshold: **1500** (~196 stars away).
+- Velocity: v7=66, v30=104, baseline ~3.5/day. At current pace, 1500 projected ~late July.
+- `miroshark-aeon` skipped (ends in `-aeon` per skill rule).
+- `milestone-dispatch.json` exists with empty rules — dispatch step not reached.
+- Log appended to `memory/logs/2026-06-17.md` with `STAR_MILESTONE_QUIET`.
