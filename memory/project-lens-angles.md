@@ -75,3 +75,14 @@ Tracks angle categories and theses used, to avoid repeats within 14 days.
   - https://link.springer.com/article/10.1007/s10462-025-11412-6
   - https://arxiv.org/pdf/2510.13982
   - https://arxiv.org/pdf/2411.10109
+
+## 2026-06-18
+- Angle: User story (DAO governance team needing pre-vote community signal without telegraphing their hand)
+- Thesis: Running a sim before a DAO vote — with a signed result published before the proposal — turns "we tested this" from a PR claim into a verifiable artifact, which is the only accountability property traditional market research has never had to provide.
+- Title: What to Do Before You Ask Your Community Anything
+- Sources:
+  - https://www.thefarnsworthgroup.com/blog/market-research-cost
+  - https://strategaresearch.com/generative-ai-in-market-research-the-2026-strategy-guide/
+  - https://blog.mean.ceo/the-solo-founder-ai-agent-stack-that-is-replacing-entire-startup-teams/
+  - https://github.com/aaronjmars/MiroShark/pull/152
+  - https://github.com/aaronjmars/MiroShark/commit/5643802

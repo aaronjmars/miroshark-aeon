@@ -1,5 +1,5 @@
-*New Article: There Are Engines That Simulate a Million People. Almost No One Has Run One.*
+*New Article: What to Do Before You Ask Your Community Anything*
 
-The academic LLM-simulation field — OASIS (a million agents), AgentSociety, DeepMind's Concordia — can model a society, but stays "confined to well-resourced institutions" with validation as its admitted central problem. The non-obvious part: MiroShark's engine `backend/wonderwall/` is a literal fork of OASIS (camel-oasis → bundled, pinned camel-ai 0.2.90), re-optimized for a $1 run instead of a million agents. Thesis: it kept the swarm engine and dropped the field's validation rigor — betting the binding constraint was always the front door, not fidelity. Forward call: by mid-2027 the cheap fork has the runs and no benchmark, the labs have the benchmark and no users.
+Governance teams face a structural trap: testing a proposal means surfacing it, and surfacing it changes the outcome. Traditional focus groups cost $7K–$20K per session and sell brand cover, not signal. This piece looks at what a DAO gets when it runs a $1 MiroShark sim before posting to Snapshot — specifically the signed-result endpoint (PR #152) that lets a team publish a verifiable hash of the predicted community reaction *before* the vote is announced, turning "we tested this" from a claim into a proof.
 
-Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-06-17.md
+Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-06-18.md
