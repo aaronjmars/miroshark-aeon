@@ -1,13 +1,14 @@
-*Push Recap — 2026-06-17*
-MiroShark — SHIPPING: German/French i18n foundation + French README live; run-end logs stop reporting 0 actions.
+*Push Recap — 2026-06-18*
+aaronjmars/MiroShark, aaronjmars/miroshark-aeon — SHIPPING — French (fr) prompt locale complete; sims no longer fall back to English
 
-shipped to users:
-• #184 — i18n goes from hardcoded en/zh to N locales. German + French land. t()/tr() rewritten to keyword overrides, English fallback, old two-arg calls untouched. (22 files, +230/−49)
-• #185 — French README + the nav switcher becomes a real 4-locale selector (EN/中/DE/FR). closes the FR entry-point gap #184 left.
-• #183 — the runner stopped lying. end-of-run log hardcoded total_actions=0 on every platform — even healthy runs. now logs real per-platform counts, with a camel smoke test gating it in CI so the next bad bump fails loud.
+Shipped to users:
+• #186 — FR prompts done: all 7 modules translated (persona gen, agent loop, ontology, NER, social sims, web enrichment, sim config) + CI gate. french-locale sims now speak French.
 
-shape: 3 user-visible · 0 internal · 0 infra · 5 bot-filtered · 3 merged PRs
-volume: 29 files, +507/−56
-engine note: simulation_runner/manager untouched — 4th straight frozen window.
+Under the hood:
+• aeon model reset — Sonnet 4-6 default, Opus 4.8 pinned on deep-reasoning skills; 78 redundant overrides cleaned up
+• #68 — treasury=fetch_fail fixed — BaseScan V1 deprecated 2026-06; now Base public RPC, no key required
 
-full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-06-17.md
+Shape: 1 user-visible · 0 internal · 4 infra · 34 bot-filtered · 2 merged PRs
+Volume: ~14 files, +735/−135 lines
+
+Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-06-18.md
