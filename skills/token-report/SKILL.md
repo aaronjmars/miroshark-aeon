@@ -69,13 +69,17 @@ WALLETS_FILE=".x402books/wallets.json"
 
 For each wallet line, query Base in this fallback order:
 
-1. **BaseScan (primary, no key required for low rate):**
+1. **Base public RPC (primary, no key required):**
    ```bash
-   curl -s "https://api.basescan.org/api?module=account&action=balance&address=ADDRESS&tag=latest"
+   curl -s -X POST "https://mainnet.base.org" \
+     -H "Content-Type: application/json" \
+     -d '{"jsonrpc":"2.0","id":1,"method":"eth_getBalance","params":["ADDRESS","latest"]}'
    ```
-   Response is JSON `{"status":"1","result":"<wei>"}`. Convert wei → ETH by dividing by 1e18. If `status != "1"` or the result is non-numeric, mark this wallet `eth=fetch_fail` and continue.
+   Response is JSON-RPC `{"jsonrpc":"2.0","id":1,"result":"0x<hex_wei>"}`. Convert hex → decimal → ÷1e18. If the response has no `result` field, or `result` is not a `0x` hex string, mark this wallet `eth=fetch_fail` and continue.
 
-2. **Alchemy (secondary, only if `ALCHEMY_API_KEY` is set AND BaseScan failed):**
+   > **Do NOT use the BaseScan REST API** (`api.basescan.org/api?module=account&action=balance`). Its V1 endpoint was deprecated 2026-06 — it now returns `{"status":"0","message":"NOTOK","result":"You are using a deprecated V1 endpoint…"}`, which silently produced `treasury=fetch_fail` 06-16→06-18. The Etherscan V2 multichain API (`api.etherscan.io/v2/api?chainid=8453`) requires a paid plan for Base, so it is not a viable replacement. The official Base public RPC above needs no key.
+
+2. **Alchemy (secondary, only if `ALCHEMY_API_KEY` is set AND the public RPC failed):**
    ```bash
    curl -s -X POST "https://base-mainnet.g.alchemy.com/v2/$ALCHEMY_API_KEY" \
      -H "Content-Type: application/json" \
@@ -83,7 +87,7 @@ For each wallet line, query Base in this fallback order:
    ```
    Response is JSON-RPC `{"jsonrpc":"2.0","id":1,"result":"0x<hex_wei>"}`. Convert hex → decimal → ÷1e18.
 
-3. **WebFetch fallback** (sandbox block on either curl): retry the same URL with **WebFetch** before declaring `fetch_fail`.
+3. **WebFetch fallback** (sandbox block on curl): retry the public-RPC request with **WebFetch** before declaring `fetch_fail`.
 
 Compute, per wallet:
 - `eth_balance` — decimal ETH, 4 decimals.
@@ -251,7 +255,7 @@ The `Treasury:` line is included ONLY when step 2b populated treasury_eth_total 
 
 ## Sandbox note
 
-The sandbox may block outbound curl. For any URL fetch that fails, retry with **WebFetch** as a fallback — GeckoTerminal, DexScreener, BaseScan, and api.x.ai are all public or token-auth'd via header, so no pre-fetch / post-process plumbing is needed.
+The sandbox may block outbound curl. For any URL fetch that fails, retry with **WebFetch** as a fallback — GeckoTerminal, DexScreener, the Base public RPC (`mainnet.base.org`), and api.x.ai are all public or token-auth'd via header, so no pre-fetch / post-process plumbing is needed.
 
 The Alchemy fallback in step 2b uses `$ALCHEMY_API_KEY` in the URL path (not in a header), so curl envvar expansion is safe here. If Alchemy is unset, skip silently — BaseScan + WebFetch are enough.
 
