@@ -257,7 +257,7 @@ The `Treasury:` line is included ONLY when step 2b populated treasury_eth_total 
 
 The sandbox may block outbound curl. For any URL fetch that fails, retry with **WebFetch** as a fallback — GeckoTerminal, DexScreener, the Base public RPC (`mainnet.base.org`), and api.x.ai are all public or token-auth'd via header, so no pre-fetch / post-process plumbing is needed.
 
-The Alchemy fallback in step 2b uses `$ALCHEMY_API_KEY` in the URL path (not in a header), so curl envvar expansion is safe here. If Alchemy is unset, skip silently — BaseScan + WebFetch are enough.
+The Alchemy fallback in step 2b uses `$ALCHEMY_API_KEY` in the URL path (not in a header), so curl envvar expansion is safe here. If Alchemy is unset, skip silently — the Base public RPC + WebFetch are enough.
 
 ## Constraints
 
