@@ -1,15 +1,19 @@
-*Repo Pulse — 2026-06-17* — [SURGE]
-aaronjmars/MiroShark — stars 1298 (+16) · forks 271 (+3)
+*Repo Pulse — 2026-06-18* — [SURGE]
+aaronjmars/MiroShark — stars 1308 (+10) · forks 272 (+1)
 
 Notable new stargazers:
-github.com/neomen — Yaroslav · 📍 Omsk · 61 repos
+github.com/mingrath — Mingrath Mekavichai · 📍 Bangkok · 🏢 CatWHOCode · 48 repos · 🌐 mingrath.com · 19 followers
+  "Building open-source tools for the Claude Code ecosystem | Vet turned developer"
+github.com/santipongth — Santipong · 📍 Thailand · 🏢 NECTEC · 73 repos · 🌐 https://santipongth.github.io/
+  "I currently work at NECTEC, Thailand. I focus on text mining, machine leaning, Information retrieval, natural language processing, and plagiarism detection."
+github.com/Nick-007 · 26 repos
+github.com/EmperorProtects — Karl Maratovich · 23 repos
+  "IT can do everything Its all about time n' money"
 
 Other new stargazers:
-github.com/kontroluzmani | github.com/kken0507 | github.com/kuerdy | github.com/coolbix | github.com/MarianQQQ | github.com/benjiworld | github.com/ya-developer | github.com/Megapixar86 | github.com/vladisl0th | github.com/yuyux9 | github.com/ashuuya | github.com/kyzzen | github.com/VanoKi | github.com/danteblank | github.com/MAY4VFX
+github.com/mondacode | github.com/Yanking1202 | github.com/Mr8888a998 | github.com/AgentScienceandResearch | github.com/moneymaker-ux | github.com/kontroluzmani
 
 New forks:
-github.com/CornellJamaal/MiroShark — 170 repos
-github.com/samiyouhub/MiroShark — 1 repos
-github.com/swapnasarit-byte/MiroShark — 3 repos
+github.com/Ela-El-maker/MiroShark — Ela · 114 repos · 16 followers
 
 Source: events
