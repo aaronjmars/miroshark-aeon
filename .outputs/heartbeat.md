@@ -1,3 +1,12 @@
 HEARTBEAT_OK · STATUS_PAGE=OK
 
-All 15 enabled skills are healthy (100% success rate, 0 consecutive failures, no stuck dispatches). No stalled PRs, no urgent issues, no flagged memory items, no missing scheduled skills. Yesterday's P3 flag (tweet-digest never run) is resolved — it ran successfully today at 17:39 UTC. `docs/status.md` updated to 🟢 OK, with the current token pulse (MIROSHARK QUIET at $0.00000569, −1.5% 24h) and the full 15-skill health table.
+## Summary
+
+All systems green. No notification sent.
+
+- **P0:** 15/15 enabled skills at 100% success rate, 0 failures, 0 stuck dispatches. Heartbeat self-check within 36h window.
+- **P1:** No open PRs, no urgent issues on either watched repo.
+- **P2:** No new actionable memory flags (engine-frozen + 1,500-star tracker items already in 48h logs, deduped).
+- **P3:** All enabled skills present in cron-state.json, none stale beyond 2× their schedule interval.
+
+**Status page** (`docs/status.md`) regenerated: 🟢 OK, token pulse updated to today's QUIET report ($0.000005192, −8.8% 24h), next run: token-report at 2026-06-19 06:00 UTC.
