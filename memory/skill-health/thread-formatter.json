@@ -1,10 +1,10 @@
 {
   "skill": "thread-formatter",
-  "last_analyzed": "2026-06-17T17:43:38Z",
+  "last_analyzed": "2026-06-18T18:05:49Z",
   "quality_score": 4,
-  "assessment": "Substantive and well-structured thread article selection with specific PRs, clear reasoning, and documented artifacts; output truncated so full quality unverified.",
+  "assessment": "Skill ran successfully with substantive output — identified valid topic, performed dedup analysis, wrote article, updated logs, and sent notification; minimal output format is appropriate for formatter task",
   "flags": [],
-  "avg_score": 4.14,
+  "avg_score": 4.13,
   "history": [
     {
       "date": "2026-06-11",
@@ -32,6 +32,10 @@
     },
     {
       "date": "2026-06-17",
+      "score": 4
+    },
+    {
+      "date": "2026-06-18",
       "score": 4
     }
   ]

@@ -55,4 +55,4 @@ date,skill,model,input_tokens,output_tokens,cache_read,cache_creation
 2026-06-18,self-improve,claude-opus-4-8,2382,12704,1210604,71052
 2026-06-18,push-recap,claude-sonnet-4-6,26,24449,1794245,78270
 2026-06-18,project-lens,claude-sonnet-4-6,19,17810,1093384,63003
-2026-06-18,tweet-digest,claude-sonnet-4-6,11,3748,476795,43076
+2026-06-18,thread-formatter,claude-sonnet-4-6,10,13270,482873,53770

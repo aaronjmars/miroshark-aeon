@@ -1,14 +1,14 @@
-*Thread Draft — 2026-06-17*
-Topic: MiroShark i18n expansion — EN/中 → EN/中/DE/FR (PRs #184 + #185)
+*Thread Draft — 2026-06-18*
+Topic: French prompt locale — PR #186 on aaronjmars/MiroShark
 
-1/ MiroShark has shipped in two languages since launch. today that became four. EN, 中, DE, FR — the i18n layer went from a binary toggle to a proper N-locale system.
+1/ FR locale was live in MiroShark for 24 hours and every sim still ran English. the UI flag was set. the prompts weren't translated. PR #186 closes that.
 
-2/ the original i18n code was a two-state switch: zh or en. every call site returned one of two strings. no map, no fallback table. adding German meant touching every if-branch in both backend and frontend.
+2/ the prompt layer is what agents actually read. 7 modules: web enrichment, NER, ontology, profile gen, sim config, graph tools, social sims. FR had an entry in SUPPORTED since PR #184. FR prompts were empty dicts. every agent fell back to English.
 
-3/ PR #184 replaced the if-else with a keyword-override map. SUPPORTED grows from 2 locales to 4. LocaleToggle.vue goes from a flip to a full selector. adding a new language now means one map entry, not 50 call site edits.
+3/ PR #186: 7 translated fr/ modules, mirroring every en/ key 1:1. new CI test — test_fr_has_no_missing_keys_relative_to_en — fails the build if any key is missing. no more silent fallbacks. the coverage gate runs on every push.
 
-4/ if you're simulating Twitter opinion dynamics and your agent fleet only speaks English and Mandarin, you're not simulating the internet. you're simulating a subset of it. PR #184 is the first step toward changing that.
+4/ simulation quality tracks with prompt language. if you're running a French political opinion sim and the agents are reasoning in English, the sim is subtly wrong. not wrong-result-wrong — wrong-premise-wrong. PR #186 means FR sims reason in French.
 
-5/ PR #185 — French README + 4-locale language switcher. https://github.com/aaronjmars/MiroShark/pull/185 🦈
+5/ PR #186 — French prompt locale. the part of i18n that actually matters. https://github.com/aaronjmars/MiroShark/pull/186 🦈
 
-(article: articles/thread-2026-06-17.md)
+(article: articles/thread-2026-06-18.md)

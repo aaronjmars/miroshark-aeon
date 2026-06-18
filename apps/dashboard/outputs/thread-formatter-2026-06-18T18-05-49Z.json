@@ -1,0 +1,88 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "French Prompt Locale Thread",
+        "description": "PR #186 on aaronjmars/MiroShark — Thread Draft 2026-06-18"
+      },
+      "children": [
+        "topic-text",
+        "tweet-1",
+        "tweet-2",
+        "tweet-3",
+        "tweet-4",
+        "tweet-5",
+        "separator-1",
+        "pr-link",
+        "article-link"
+      ]
+    },
+    "topic-text": {
+      "type": "Text",
+      "props": {
+        "text": "Topic: French prompt locale — PR #186 on aaronjmars/MiroShark",
+        "variant": "lead"
+      }
+    },
+    "tweet-1": {
+      "type": "TweetCard",
+      "props": {
+        "author": "Aaron",
+        "text": "FR locale was live in MiroShark for 24 hours and every sim still ran English. the UI flag was set. the prompts weren't translated. PR #186 closes that."
+      }
+    },
+    "tweet-2": {
+      "type": "TweetCard",
+      "props": {
+        "author": "Aaron",
+        "text": "the prompt layer is what agents actually read. 7 modules: web enrichment, NER, ontology, profile gen, sim config, graph tools, social sims. FR had an entry in SUPPORTED since PR #184. FR prompts were empty dicts. every agent fell back to English."
+      }
+    },
+    "tweet-3": {
+      "type": "TweetCard",
+      "props": {
+        "author": "Aaron",
+        "text": "PR #186: 7 translated fr/ modules, mirroring every en/ key 1:1. new CI test — test_fr_has_no_missing_keys_relative_to_en — fails the build if any key is missing. no more silent fallbacks. the coverage gate runs on every push."
+      }
+    },
+    "tweet-4": {
+      "type": "TweetCard",
+      "props": {
+        "author": "Aaron",
+        "text": "simulation quality tracks with prompt language. if you're running a French political opinion sim and the agents are reasoning in English, the sim is subtly wrong. not wrong-result-wrong — wrong-premise-wrong. PR #186 means FR sims reason in French."
+      }
+    },
+    "tweet-5": {
+      "type": "TweetCard",
+      "props": {
+        "author": "Aaron",
+        "text": "PR #186 — French prompt locale. the part of i18n that actually matters. 🦈"
+      }
+    },
+    "separator-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "pr-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #186: French prompt locale",
+        "href": "https://github.com/aaronjmars/MiroShark/pull/186",
+        "source": "GitHub"
+      }
+    },
+    "article-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Article: thread-2026-06-18.md",
+        "href": "articles/thread-2026-06-18.md",
+        "source": "Internal"
+      }
+    }
+  }
+}
