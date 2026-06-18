@@ -1,21 +1,20 @@
-*Feature Built — 2026-06-17 — aaronjmars/MiroShark*
+*Feature Built — 2026-06-18 — aaronjmars/MiroShark* 🦈
 
-French README + FR language switcher
+French prompt locale — now a real end-to-end language, not a label
 
-MiroShark now speaks French. Added README.fr.md — a full French translation of the project README — and wired Français into the language switcher across every README. A French-speaking builder landing on the repo now reads the whole pitch, quickstart, and docs map in their own language, and the in-app selector already had FR live from last week.
+MiroShark already showed "Français" in the language switcher, shipped a French README, and listed `fr` as supported in the backend. But the actual simulation prompts for French were empty stubs — so picking French silently gave you an English-prompted sim. This PR translates every prompt the engine uses into French, so a French user now gets a genuinely French simulation: French agents, French personas, French interviews.
 
 Why this matters:
-French was the most-requested locale nobody had built — issue #95 asked "would you accept a French PR?" and got closed only because Japanese shipped first; #161 still tracks the ask. PR #184 quietly added the fr/de i18n plumbing two days ago but left no front door: no README.fr.md, no language-row link, and a README still telling people to click an "EN/中 toggle" that's now a four-language selector. The zh-CN README seeded real Chinese coverage. This opens the same door for FR/BE/CA.
+French was the most-requested missing locale — two issues (#95, open #161) asked for it directly. The Chinese locale precedent already proved localization pulls in new ecosystem reach. The gap here was the worst kind: the product advertised French everywhere, then quietly degraded to English where it actually counts — inside the sim. Closing that makes the promise real.
 
 What was built:
-- README.fr.md (new): complete French translation — same images, code blocks, and doc links as the English README; prose and image alt-text translated. Language row marks Français current, links the other three.
-- README.md: added the Français link and rewrote the stale "Interface language" section to describe the real four-locale selector (English / 中文 / DE / FR).
-- README.zh-CN.md + README.ja.md: added the Français link so the locale is discoverable from every README.
+- 7 prompt modules translated under `locales/fr/`: web enrichment, NER/relation extraction, ontology design, persona generation, simulation config (timing/events/markets/agent behavior), the interview pipeline, and the Twitter/Reddit/Polymarket agent prompts
+- A CI coverage gate (`test_fr_has_no_missing_keys_relative_to_en`) that fails the build if any future English prompt ships without a French sibling — same guard zh-CN already has
 
 How it works:
-Pure docs — no code touched. The fr locale was already wired and tested via #184 (backend SUPPORTED tuple, frontend i18n.js, LocaleToggle.vue), so this just builds the human-facing entry point on top of plumbing that already exists. Structure mirrors README.ja.md exactly so the four READMEs stay parallel; every doc link reuses the already-passing English links, so CI has nothing new to break.
+The prompt registry keys on the exact locale code and falls back to English per-key, so the fix was pure data: mirror every English key 1:1 in French. JSON keys, type-name conventions, and `{placeholder}` tokens stay verbatim — only the human-language text changes — so nothing at the call sites moves. No English string was touched, so existing behavior is unchanged for everyone else.
 
 What's next:
-German (README.de.md) is the obvious next locale — de is already in SUPPORTED. And the zh/ja "Interface language" sections still describe the old EN/中 toggle, worth a follow-up sync.
+German (`de`) prompts are still stubs — same treatment would finish that locale too. And the new coverage gate could be extended to `de` once those land.
 
-PR: https://github.com/aaronjmars/MiroShark/pull/185
+PR: https://github.com/aaronjmars/MiroShark/pull/186

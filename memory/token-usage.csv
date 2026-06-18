@@ -50,3 +50,4 @@ date,skill,model,input_tokens,output_tokens,cache_read,cache_creation
 2026-06-17,heartbeat,claude-sonnet-4-6,131,7687,489010,46663
 2026-06-18,token-report,claude-sonnet-4-6,287,18616,1751416,67382
 2026-06-18,repo-pulse,claude-sonnet-4-6,19,13489,880618,45903
+2026-06-18,feature,claude-opus-4-8,3089,44758,4992560,118069
