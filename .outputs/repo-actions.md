@@ -1,13 +1,13 @@
-*Repo Action Ideas — aaronjmars/MiroShark — 2026-06-16*
-A uniquely active day — three PRs merged before noon (websearch, frontend CI, cost.json) — leaving a clean proof gap in the README and four open major-version Dependabot PRs that each need a human eye before merging.
+*Repo Action Ideas — aaronjmars/MiroShark — 2026-06-18*
+Top pick closes the last UI-exposed locale gap: DE is in the navbar, FR just landed, but German prompts are still English stubs and README.de.md doesn't exist.
 
-Top pick: Wire cost.json endpoint callout into README Quickstart (Content/DX, Small, Priority HIGH)
- → Converts the "$1 to simulate anything" tagline from assertion to observable proof — one sentence in Quick start pointing to the queryable cost endpoint PR #179 merged hours ago.
+Top pick: Complete German (DE) locale — prompt translations + README.de.md (Community/i18n, Medium, Priority HIGH)
+ → Closes the DE/FR symmetry gap: FR went from stubs to full locale in 48 hrs this week; DE is next.
 
-1. Wire cost.json callout in README Quickstart (HIGH, Content/DX, Small)
-2. Add French locale — README.fr.md + i18n to close issue #161 (HIGH, Community/Content, Medium)
-3. Audit/resolve Dependabot PR #175: vue-router 4.6.3→5.1.0 MAJOR bump (MED, DX/Security, Small)
-4. Audit Dependabot PR #168: python 3.11→3.14 Docker three-version jump (MED, Security/DX, Small)
-5. Close issue #160 and document merged websearch env-var interface (MED, Community/DX, Small)
+1. Complete German (DE) locale: prompts + README.de.md (HIGH, Community/i18n, Medium)
+2. Add .github/pull_request_template.md (MED, Community/DX, Small)
+3. Add tests.yml CI badge to README shield row (MED, Growth/DX, Small)
+4. Display cost.json data in the frontend completion UI (HIGH, DX/Feature, Small)
+5. Strengthen camel smoke test for silent engine output failures (HIGH, DX/Quality, Small)
 
-Full details: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-actions-2026-06-16.md
+Full details: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-actions-2026-06-18.md
