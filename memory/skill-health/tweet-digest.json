@@ -1,8 +1,8 @@
 {
   "skill": "tweet-digest",
-  "last_analyzed": "2026-06-17T17:38:39Z",
+  "last_analyzed": "2026-06-18T18:04:05Z",
   "quality_score": 4,
-  "assessment": "Good execution — substantive summary with specific tweet themes, proper dedup logic, clear logging; straightforward task completion without complexity or issues.",
+  "assessment": "Skill executed successfully with proper deduping, thematic curation, and domain-specific output; showed 3 fresh tweets grouped coherently with specific sim details.",
   "flags": [],
   "avg_score": 4,
   "history": [
@@ -12,6 +12,10 @@
     },
     {
       "date": "2026-06-17",
+      "score": 4
+    },
+    {
+      "date": "2026-06-18",
       "score": 4
     }
   ]

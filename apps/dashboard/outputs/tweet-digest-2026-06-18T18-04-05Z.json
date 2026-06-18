@@ -1,0 +1,98 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "Tweet Digest — 2026-06-18"
+      },
+      "children": [
+        "stack-main"
+      ]
+    },
+    "stack-main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading-theme1",
+        "tweet-1",
+        "link-1",
+        "separator-1",
+        "heading-theme2",
+        "tweet-2",
+        "link-2",
+        "tweet-3",
+        "link-3"
+      ]
+    },
+    "heading-theme1": {
+      "type": "Heading",
+      "props": {
+        "text": "Theme: press & credibility",
+        "level": "h2"
+      }
+    },
+    "tweet-1": {
+      "type": "TweetCard",
+      "props": {
+        "author": "miroshark",
+        "handle": "miroshark_",
+        "text": "landed in @hackernoon — reflexivity is why swarm sim beats surveys: what you forecast changes behavior, and the agents actually do that"
+      }
+    },
+    "link-1": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/miroshark_/status/2067289800646824163"
+      }
+    },
+    "separator-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading-theme2": {
+      "type": "Heading",
+      "props": {
+        "text": "Theme: World Cup sim series 🦈",
+        "level": "h2"
+      }
+    },
+    "tweet-2": {
+      "type": "TweetCard",
+      "props": {
+        "author": "miroshark",
+        "handle": "miroshark_",
+        "text": "Portugal vs Congo — models Ronaldo's physical decay at 41 against a high-intensity low-block with a live sub decision at 75'"
+      }
+    },
+    "link-2": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/miroshark_/status/2067231963132375348"
+      }
+    },
+    "tweet-3": {
+      "type": "TweetCard",
+      "props": {
+        "author": "miroshark",
+        "handle": "miroshark_",
+        "text": "England vs Croatia — simulates xG collapse from an early penalty miss, psychological decay round by round"
+      }
+    },
+    "link-3": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/miroshark_/status/2067256526679462192"
+      }
+    }
+  }
+}
