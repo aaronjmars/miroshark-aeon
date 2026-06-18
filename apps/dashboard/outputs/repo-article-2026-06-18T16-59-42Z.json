@@ -1,0 +1,88 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "🦈 repo-article",
+        "description": "MiroShark's Outside Contributors Are Fixing the Install, Not the Engine"
+      },
+      "children": [
+        "heading",
+        "thesis-intro",
+        "pr-breakdown",
+        "separator",
+        "article-link"
+      ]
+    },
+    "heading": {
+      "type": "Heading",
+      "props": {
+        "text": "MiroShark's Outside Contributors Are Fixing the Install, Not the Engine",
+        "level": "h2"
+      },
+      "children": []
+    },
+    "thesis-intro": {
+      "type": "Text",
+      "props": {
+        "text": "When strangers send MiroShark code, they fix how to run it—not the engine itself. This pattern reveals where the first $1 run actually breaks, not a gap in what it can imagine.",
+        "variant": "lead"
+      },
+      "children": []
+    },
+    "pr-breakdown": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stat-8-of-9",
+        "example-pr",
+        "stat-zero-core"
+      ]
+    },
+    "stat-8-of-9": {
+      "type": "Stat",
+      "props": {
+        "label": "External PRs touching deployment, self-hosting, or security",
+        "value": "8 of 9"
+      },
+      "children": []
+    },
+    "example-pr": {
+      "type": "Text",
+      "props": {
+        "text": "dan-and's #178 adds Ollama + self-hosted SearXNG/Firecrawl so local models can drive a sim",
+        "variant": "caption"
+      },
+      "children": []
+    },
+    "stat-zero-core": {
+      "type": "Stat",
+      "props": {
+        "label": "External PRs touching the swarm core",
+        "value": "0"
+      },
+      "children": []
+    },
+    "separator": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "article-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Read the full article",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-06-18.md",
+        "source": "GitHub"
+      },
+      "children": []
+    }
+  }
+}

@@ -18,6 +18,7 @@ See `memory/watched-repos.md` — `aaronjmars/MiroShark`, `aaronjmars/miroshark-
 ## Recent Articles
 | Date | Title | Topic |
 |------|-------|-------|
+| 2026-06-18 | MiroShark's Outside Contributors Are Fixing the Install, Not the Engine | Ecosystem/contributor signal: 8 of 9 external code PRs touch deployment/self-host/security (dan-and #178 SearXNG+Firecrawl+Ollama, #159 neo4j/same-origin; #106 Railway; #100 Aura; #89/#98 security), none touch swarm core (simulation_runner/manager) — the first-run gap, mapped by contributor behavior |
 | 2026-06-17 | MiroShark Shipped Its Agent Loop Untested for Two Months — Then a Dependency Bump Returned Zero Agents | CI/testing maturity: agent loop had no CI guard Apr→06-16; camel-ai 0.2.90 silently zeroed it (total_actions hardcoded 0 = dead run reads healthy) → #183 first camel smoke test + #180 frontend build, both reactive |
 | 2026-06-16 | MiroShark's First Dependabot Wave Broke Its Own Engine on Day One | Dependency fragility: 11 bumps merged 06-16; camel-ai 0.2.90 (#176) broke agent loop + Docker build → 2 same-day hotfixes #181/#182; pre-1.0 lib grouped as "minor-patch" |
 | 2026-06-15 | MiroShark Ended Its Week Deleting Code, Not Shipping Features | Code-quality consolidation: #163/#164/#165 = 67 files, 528 deletions, zero features/engine edits — dedup helpers extracted, contributor-readiness not user-facing |
