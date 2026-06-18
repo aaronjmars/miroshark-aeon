@@ -1,1 +1,1 @@
-self-improve: fixed feature skill's false claim that workspace-relative clones let pytest run — Python is sandbox-blocked regardless, so it now leans on repo CI as the validation gate. PR: https://github.com/aaronjmars/miroshark-aeon/pull/63
+self-improve: fixed token-report treasury fetch — BaseScan V1 API was deprecated (treasury=fetch_fail 06-16→06-18), swapped to the keyless Base public RPC. PR: https://github.com/aaronjmars/miroshark-aeon/pull/68

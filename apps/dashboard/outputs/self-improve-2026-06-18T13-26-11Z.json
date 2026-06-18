@@ -1,0 +1,69 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "self-improve",
+        "description": "Fixed token-report treasury fetch"
+      },
+      "children": [
+        "alert_fix",
+        "sep1",
+        "details_stack",
+        "sep2",
+        "pr_link"
+      ]
+    },
+    "alert_fix": {
+      "type": "Alert",
+      "props": {
+        "type": "success",
+        "title": "Treasury fetch fixed",
+        "message": "BaseScan V1 API was deprecated; swapped to keyless Base public RPC"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {}
+    },
+    "details_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "status_text",
+        "timeline_text"
+      ]
+    },
+    "status_text": {
+      "type": "Text",
+      "props": {
+        "text": "Status: treasury=fetch_fail",
+        "variant": "body"
+      }
+    },
+    "timeline_text": {
+      "type": "Text",
+      "props": {
+        "text": "Failure window: 06-16 → 06-18",
+        "variant": "caption"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {}
+    },
+    "pr_link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #68",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/pull/68",
+        "source": "GitHub"
+      }
+    }
+  }
+}
