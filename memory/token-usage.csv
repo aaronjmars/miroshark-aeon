@@ -60,3 +60,4 @@ date,skill,model,input_tokens,output_tokens,cache_read,cache_creation
 2026-06-19,token-report,claude-sonnet-4-6,20,24990,1855253,114576
 2026-06-19,feature,claude-opus-4-8,2960,26682,3985984,85128
 2026-06-19,push-recap,claude-sonnet-4-6,19,15481,952459,52988
+2026-06-19,star-milestone,claude-sonnet-4-6,23,11672,888010,33390

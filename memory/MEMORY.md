@@ -56,7 +56,7 @@ See `memory/watched-repos.md` — `aaronjmars/MiroShark`, `aaronjmars/miroshark-
 - Skills consuming X.AI/Twitter data must have a prefetch case in `scripts/prefetch-xai.sh`; without it the skill runs with zero data (x.com is auth-walled, sandbox blocks curl+env-header auth). Fixed for `tweet-digest` via PR #67.
 
 ## Active Targets
-- Hyperstition: MiroShark 1,000 stars by 2026-04-30 — MISSED Apr 30 (911), CROSSED 2026-05-03; **1,304 stars / 271 forks** as of 2026-06-17; next threshold 1,500 (projected ~2026-07-28).
+- Hyperstition: MiroShark 1,000 stars by 2026-04-30 — MISSED Apr 30 (911), CROSSED 2026-05-03; **1,314 stars / 275 forks** as of 2026-06-19; next threshold 1,500 (186 away; projected ~2026-07-11 at v7 pace, ~2026-07-28 at baseline).
 - Hyperstition: @miroshark_ 1,000 X followers by 2026-05-15 — deadline passed, count unconfirmed in logs.
 - Hyperstition: MiroShark PR from a Chinese-locale contributor OR Chinese-language coverage by 2026-06-15 — CROSSED; CN tweet "米罗莎要来了" May 16 qualifies; also JP coverage @m000_crypto (May 17).
 - Hyperstition: external operator running the Aeon framework publicly under a non-aaronjmars identity by 2026-06-30.
