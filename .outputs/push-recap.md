@@ -1,14 +1,15 @@
-*Push Recap — 2026-06-18*
-aaronjmars/MiroShark, aaronjmars/miroshark-aeon — SHIPPING — French (fr) prompt locale complete; sims no longer fall back to English
+*Push Recap — 2026-06-19*
+aaronjmars/MiroShark — SHIPPING — German locale live and suggest_scenarios hardened for any language
 
 Shipped to users:
-• #186 — FR prompts done: all 7 modules translated (persona gen, agent loop, ontology, NER, social sims, web enrichment, sim config) + CI gate. french-locale sims now speak French.
+• German (de) locale complete end-to-end — dan-and filled 8 empty prompt modules in backend/app/prompts/locales/de/ and fixed locale propagation across parallel profile/config threads; DE sims no longer fall back to English (#189)
+• suggest_scenarios can no longer return zero results from truncation — new json_repair.py does two-tier best-effort recovery (close brackets → parse; trim to last complete element → retry), consolidating 3 copy-pasted salvage blocks; valid suggestions are never silently dropped (#192)
+• Public embed widget now shows the sim cost as ~$X — cost.json pill lands in the meta row where strangers first encounter a MiroShark result; 403/404 swallowed so it never blocks (#190)
 
 Under the hood:
-• aeon model reset — Sonnet 4-6 default, Opus 4.8 pinned on deep-reasoning skills; 78 redundant overrides cleaned up
-• #68 — treasury=fetch_fail fixed — BaseScan V1 deprecated 2026-06; now Base public RPC, no key required
+• suggest_scenarios timeout 20→40s, max_tokens 700→1500 for verbose/local LLMs (#188)
 
-Shape: 1 user-visible · 0 internal · 4 infra · 34 bot-filtered · 2 merged PRs
-Volume: ~14 files, +735/−135 lines
+Shape: 4 user-visible · 0 internal · 0 infra · ~30 bot-filtered · 4 merged PRs
+Volume: ~58 files, +3264/−2095 lines
 
-Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-06-18.md
+Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-06-19.md
