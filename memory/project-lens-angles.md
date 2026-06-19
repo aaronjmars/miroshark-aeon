@@ -85,4 +85,14 @@ Tracks angle categories and theses used, to avoid repeats within 14 days.
   - https://strategaresearch.com/generative-ai-in-market-research-the-2026-strategy-guide/
   - https://blog.mean.ceo/the-solo-founder-ai-agent-stack-that-is-replacing-entire-startup-teams/
   - https://github.com/aaronjmars/MiroShark/pull/152
+
+## 2026-06-19
+- Angle: Contrarian take (academic critique of LLM simulation as validity argument; reframed as cost argument)
+- Thesis: The leading academic critique of LLM-agent simulation — "role-playing plausibility doesn't imply behavioral validity" — is a cost argument in disguise: you can't build calibration methodology for simulations you can only afford to run once.
+- Title: AI Simulation's Validity Problem Is a Price Problem in Disguise
+- Sources:
+  - https://arxiv.org/html/2603.00113v1
+  - https://arxiv.org/abs/2411.11581
+  - https://huggingface.co/blog/evaleval/eval-costs-bottleneck
+  - https://www.techtimes.com/articles/318586/20260617/meta-conscripts-6500-engineers-data-labelers-revolt-exposes-ai-training-ceiling.htm
   - https://github.com/aaronjmars/MiroShark/commit/5643802

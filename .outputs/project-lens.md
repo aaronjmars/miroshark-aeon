@@ -1,5 +1,5 @@
-*New Article: What to Do Before You Ask Your Community Anything*
+*New Article: AI Simulation's Validity Problem Is a Price Problem in Disguise*
 
-Governance teams face a structural trap: testing a proposal means surfacing it, and surfacing it changes the outcome. Traditional focus groups cost $7K–$20K per session and sell brand cover, not signal. This piece looks at what a DAO gets when it runs a $1 MiroShark sim before posting to Snapshot — specifically the signed-result endpoint (PR #152) that lets a team publish a verifiable hash of the predicted community reaction *before* the vote is announced, turning "we tested this" from a claim into a proof.
+An ICML position paper (Li & Tao, March 2026) argues AI agents aren't ready for social simulation because 'role-playing plausibility doesn't imply behavioral validity' — identifying five technical gaps the field needs to close. The contrarian read: those gaps require empirical calibration runs to close, and calibration requires iteration, and iteration requires a price you can afford. The same structural ceiling (compute cost as a quality bottleneck) that forced Meta to conscript 6,500 engineers as data labelers in June is preventing simulation science from building the evaluation protocols it needs. MiroShark's outcome-distribution (PR #151), signed-result (PR #152), and cost.json (PR #179) endpoints aren't accuracy claims — they're the cheapest available toolkit for running the calibration the critics say is missing.
 
-Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-06-18.md
+Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-06-19.md
