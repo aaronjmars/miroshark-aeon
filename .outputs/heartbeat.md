@@ -1,12 +1,11 @@
 HEARTBEAT_OK · STATUS_PAGE=OK
 
+All checks passed cleanly. `docs/status.md` updated with 15 healthy skills and today's CONSOLIDATING token data (+3.1%, $0.00000535); logged to `memory/logs/2026-06-19.md`. No notification sent — nothing needs attention.
+
 ## Summary
 
-All systems green. No notification sent.
-
-- **P0:** 15/15 enabled skills at 100% success rate, 0 failures, 0 stuck dispatches. Heartbeat self-check within 36h window.
-- **P1:** No open PRs, no urgent issues on either watched repo.
-- **P2:** No new actionable memory flags (engine-frozen + 1,500-star tracker items already in 48h logs, deduped).
-- **P3:** All enabled skills present in cron-state.json, none stale beyond 2× their schedule interval.
-
-**Status page** (`docs/status.md`) regenerated: 🟢 OK, token pulse updated to today's QUIET report ($0.000005192, −8.8% 24h), next run: token-report at 2026-06-19 06:00 UTC.
+- **P0**: All 15 enabled skills green — 100% success rates, 0 consecutive failures, no stuck dispatches. Heartbeat self-check within 36h window.
+- **P1**: 0 open PRs, 0 urgent issues.
+- **P2**: No new flagged memory items (engine-frozen + star-threshold deduped from prior 48h logs).
+- **P3**: All 15 enabled skills in cron-state.json, none stale >2× their interval.
+- **Status page**: Regenerated `docs/status.md` — 🟢 OK, token CONSOLIDATING, next run token-report at 2026-06-20 06:00 UTC.
