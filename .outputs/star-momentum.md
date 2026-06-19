@@ -1,16 +1,11 @@
-Done. No alert fires today.
-
 ## Summary
 
-**Repo:** `aaronjmars/MiroShark` — 1,298⭐, targeting 1,500⭐ (gap: 202)
+**star-momentum — 2026-06-19 — STAR_MOMENTUM_NO_ALERTS**
 
-**Projection:**
-- v7 pace: 7.67 stars/day → **27 days → 2026-07-15 (Wednesday)**
-- v3 pace: 9.33 stars/day → 22 days → 2026-07-10 (Friday)
-
-**Verdict: OUT_OF_WINDOW** — 27 days exceeds the 14-day ceiling. Wednesday is a valid Show HN day, so the alert will fire once the projection closes to ≤14 days. At current pace, that should happen in roughly 13 days (~July 1).
-
-**Files written:**
-- `articles/star-momentum-2026-06-18.md` — projection report
-- `memory/topics/star-momentum-state.json` — state updated with new projected_date_v7: 2026-07-15
-- `memory/logs/2026-06-18.md` — log block appended
+- **Repos audited**: 1 (`aaronjmars/MiroShark`; `miroshark-aeon` filtered as agent repo)
+- **Data series**: 7 points (2026-06-12→06-18), 6 normalized deltas
+- **Velocity**: v7 = 7.0/day · v3 = 10.67/day (pace accelerating — 3d avg is 52% above 7d avg)
+- **Projection (v7)**: 1500⭐ in ~28 days → 2026-07-17 (Friday) — **OUT_OF_WINDOW** (28 > 14d ceiling)
+- **Projection (v3)**: 1500⭐ in ~18 days → 2026-07-07 (Tuesday) — would be inside the window and on the right day; check again in ~4 days
+- **No notification sent** (no alert condition met)
+- **Files written**: `articles/star-momentum-2026-06-19.md`, `memory/topics/star-momentum-state.json`, `memory/logs/2026-06-19.md`
