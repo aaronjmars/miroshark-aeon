@@ -1,0 +1,207 @@
+{
+  "root": "card-root",
+  "state": {},
+  "elements": {
+    "card-root": {
+      "type": "Card",
+      "props": {
+        "title": "Repo Pulse",
+        "description": "2026-06-19 — [STEADY]"
+      },
+      "children": [
+        "heading-repo",
+        "stats-container",
+        "separator-1",
+        "heading-notable-stargazers",
+        "notable-stargazers-list",
+        "heading-other-stargazers",
+        "other-stargazers-list",
+        "separator-2",
+        "heading-forks",
+        "forks-list"
+      ]
+    },
+    "heading-repo": {
+      "type": "Heading",
+      "props": {
+        "text": "aaronjmars/MiroShark",
+        "level": "h2"
+      }
+    },
+    "stats-container": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "lg"
+      },
+      "children": [
+        "stat-stars",
+        "stat-forks"
+      ]
+    },
+    "stat-stars": {
+      "type": "Stat",
+      "props": {
+        "label": "Stars",
+        "value": "1314",
+        "delta": "+2",
+        "trend": "up"
+      }
+    },
+    "stat-forks": {
+      "type": "Stat",
+      "props": {
+        "label": "Forks",
+        "value": "275",
+        "delta": "+1",
+        "trend": "up"
+      }
+    },
+    "separator-1": {
+      "type": "Separator"
+    },
+    "heading-notable-stargazers": {
+      "type": "Heading",
+      "props": {
+        "text": "Notable new stargazers",
+        "level": "h3"
+      }
+    },
+    "notable-stargazers-list": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stargazer-drshutkot"
+      ]
+    },
+    "stargazer-drshutkot": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "link-drshutkot",
+        "badge-repos-drshutkot"
+      ]
+    },
+    "link-drshutkot": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/DrShutkot",
+        "href": "https://github.com/DrShutkot"
+      }
+    },
+    "badge-repos-drshutkot": {
+      "type": "Badge",
+      "props": {
+        "text": "25 repos",
+        "variant": "secondary"
+      }
+    },
+    "heading-other-stargazers": {
+      "type": "Heading",
+      "props": {
+        "text": "Other new stargazers",
+        "level": "h3"
+      }
+    },
+    "other-stargazers-list": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "link-xau-stu"
+      ]
+    },
+    "link-xau-stu": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/XAU-STU",
+        "href": "https://github.com/XAU-STU"
+      }
+    },
+    "separator-2": {
+      "type": "Separator"
+    },
+    "heading-forks": {
+      "type": "Heading",
+      "props": {
+        "text": "New forks",
+        "level": "h3"
+      }
+    },
+    "forks-list": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "fork-hellosimplerick"
+      ]
+    },
+    "fork-hellosimplerick": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "fork-link",
+        "fork-name",
+        "fork-location",
+        "fork-company",
+        "fork-repos",
+        "fork-quote"
+      ]
+    },
+    "fork-link": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/hellosimplerick",
+        "href": "https://github.com/hellosimplerick"
+      }
+    },
+    "fork-name": {
+      "type": "Text",
+      "props": {
+        "text": "Rick Segal",
+        "variant": "lead"
+      }
+    },
+    "fork-location": {
+      "type": "Text",
+      "props": {
+        "text": "📍 Vancouver Island, Canada",
+        "variant": "body"
+      }
+    },
+    "fork-company": {
+      "type": "Link",
+      "props": {
+        "label": "🏢 hellosimple.com",
+        "href": "https://www.hellosimple.com"
+      }
+    },
+    "fork-repos": {
+      "type": "Badge",
+      "props": {
+        "text": "26 repos",
+        "variant": "secondary"
+      }
+    },
+    "fork-quote": {
+      "type": "Text",
+      "props": {
+        "text": "\"Pro Bono tech work from Vancouver Island. 🇨🇦\"",
+        "variant": "muted"
+      }
+    }
+  }
+}
