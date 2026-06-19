@@ -1,0 +1,70 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "Tweet Digest — 2026-06-19"
+      },
+      "children": [
+        "stack-main"
+      ]
+    },
+    "stack-main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading-theme1",
+        "tweet1",
+        "separator1",
+        "heading-theme2",
+        "tweet2"
+      ]
+    },
+    "heading-theme1": {
+      "type": "Heading",
+      "props": {
+        "text": "Theme: Multilingual sims",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "tweet1": {
+      "type": "TweetCard",
+      "props": {
+        "author": "MiroShark",
+        "handle": "miroshark_",
+        "text": "simulations are now live in 16 languages — the full locale stack landed 🦈 — https://x.com/miroshark_/status/2067598399201841610"
+      },
+      "children": []
+    },
+    "separator1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "heading-theme2": {
+      "type": "Heading",
+      "props": {
+        "text": "Theme: x402 integration",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "tweet2": {
+      "type": "TweetCard",
+      "props": {
+        "author": "MiroShark",
+        "handle": "miroshark_",
+        "text": "sharing early takes on testing the x402 endpoint — agent-native micropayments get a public look — https://x.com/miroshark_/status/2066894771654717606"
+      },
+      "children": []
+    }
+  }
+}
