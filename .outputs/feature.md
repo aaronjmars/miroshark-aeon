@@ -1,20 +1,19 @@
-*Feature Built — 2026-06-18 — aaronjmars/MiroShark* 🦈
+*Feature Built — 2026-06-19 — aaronjmars/MiroShark* 🦈
 
-French prompt locale — now a real end-to-end language, not a label
-
-MiroShark already showed "Français" in the language switcher, shipped a French README, and listed `fr` as supported in the backend. But the actual simulation prompts for French were empty stubs — so picking French silently gave you an English-prompted sim. This PR translates every prompt the engine uses into French, so a French user now gets a genuinely French simulation: French agents, French personas, French interviews.
+Cost on the embed widget
+Every public MiroShark embed now shows what the run actually cost — a little `~$0.87` pill right next to the status and agent count. Share a sim in a tweet or a blog and the dollar figure rides along. The "$1" claim stops being a tagline and becomes a number you can read.
 
 Why this matters:
-French was the most-requested missing locale — two issues (#95, open #161) asked for it directly. The Chinese locale precedent already proved localization pulls in new ecosystem reach. The gap here was the worst kind: the product advertised French everywhere, then quietly degraded to English where it actually counts — inside the sim. Closing that makes the promise real.
+"simulate anything for ~$1" is the whole pitch, and until now nothing in the UI ever showed it. PR #179 already built the proof — a queryable cost.json with an honest lower-bound figure — but it had zero reach: you had to curl it. The embed is where a stranger first meets a MiroShark result, so that's where the price belongs. Repo-actions flagged this 06-18 (#4); the move was routing it to the surface where the publish gate actually lets it through.
 
 What was built:
-- 7 prompt modules translated under `locales/fr/`: web enrichment, NER/relation extraction, ontology design, persona generation, simulation config (timing/events/markets/agent behavior), the interview pipeline, and the Twitter/Reddit/Polymarket agent prompts
-- A CI coverage gate (`test_fr_has_no_missing_keys_relative_to_en`) that fails the build if any future English prompt ships without a French sibling — same guard zh-CN already has
+- frontend/src/api/simulation.js: new getSimulationCost() — fetches the cost.json share-surface blob, mirrors getReproduction, rejects cleanly on 403/404 so callers treat it as "nothing to show".
+- frontend/src/views/EmbedView.vue: fetches cost after the summary loads, only for completed runs, in its own try/catch so a $0 or unpublished run never breaks the widget. costLabel renders `~$X.XX`, collapses sub-cent runs to `<$0.01`, drops the pill when there's nothing. New embed-pill cost in the meta row with an EN/中文 tooltip.
 
 How it works:
-The prompt registry keys on the exact locale code and falls back to English per-key, so the fix was pure data: mirror every English key 1:1 in French. JSON keys, type-name conventions, and `{placeholder}` tokens stay verbatim — only the human-language text changes — so nothing at the call sites moves. No English string was touched, so existing behavior is unchanged for everyone else.
+The embed already pulled getEmbedSummary; cost is bolted on as a non-blocking extra. No backend touched — the figure stays single-sourced through cost_service → run_summary, so the embed and run_summary.md can never disagree. The pill reuses the existing pill styling (purple accent, tabular nums), so it looks native in light/dark and the compact preset. Validated with a clean `npm run build`; repo CI rebuilds the frontend on push.
 
 What's next:
-German (`de`) prompts are still stubs — same treatment would finish that locale too. And the new coverage gate could be extended to `de` once those land.
+Same pattern fits the in-app result view once the publish gate is solved there, and the gallery cards are the obvious follow-on. Note: the DE-locale top pick was already taken by dan-and's open PR #189 — built this instead.
 
-PR: https://github.com/aaronjmars/MiroShark/pull/186
+PR: https://github.com/aaronjmars/MiroShark/pull/190
