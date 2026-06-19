@@ -33,14 +33,14 @@
   },
   "repo-article": {
     "last_dispatch": "2026-06-19T16:14:59Z",
-    "last_status": "dispatched",
-    "last_success": "2026-06-18T17:00:08Z",
-    "total_runs": 8,
-    "total_successes": 8,
+    "last_status": "success",
+    "last_success": "2026-06-19T16:21:49Z",
+    "total_runs": 9,
+    "total_successes": 9,
     "total_failures": 0,
     "consecutive_failures": 0,
     "success_rate": 1,
-    "last_quality_score": 4
+    "last_quality_score": 5
   },
   "project-lens": {
     "last_dispatch": "2026-06-19T16:14:59Z",
