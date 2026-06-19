@@ -1,0 +1,66 @@
+{
+  "root": "card_root",
+  "state": {},
+  "elements": {
+    "card_root": {
+      "type": "Card",
+      "props": {
+        "title": "MiroShark's Engine Failed Quietly Twice This Week — and One Self-Hoster Found Both"
+      },
+      "children": [
+        "text_intro",
+        "text_context",
+        "bug1",
+        "bug2",
+        "text_impact",
+        "separator",
+        "story_link"
+      ]
+    },
+    "text_intro": {
+      "type": "Text",
+      "props": {
+        "text": "The worst bugs don't crash. They return HTTP 200 and nothing.",
+        "variant": "lead"
+      }
+    },
+    "text_context": {
+      "type": "Text",
+      "props": {
+        "text": "A self-hoster on local LLMs found two this week:"
+      }
+    },
+    "bug1": {
+      "type": "Text",
+      "props": {
+        "text": "suggest_scenarios handing back zero suggestions when a 700-token cap truncated its JSON (#192 ships json_repair.py to salvage it)"
+      }
+    },
+    "bug2": {
+      "type": "Text",
+      "props": {
+        "text": "agents quietly reverting to chinese mid-run (#189)"
+      }
+    },
+    "text_impact": {
+      "type": "Text",
+      "props": {
+        "text": "Both live off the default path — exactly where every new adopter lands."
+      }
+    },
+    "separator": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "story_link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Read the full article",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-06-19.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}
