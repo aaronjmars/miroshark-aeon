@@ -1,14 +1,14 @@
-*Thread Draft — 2026-06-18*
-Topic: French prompt locale — PR #186 on aaronjmars/MiroShark
+*Thread Draft — 2026-06-19*
+Topic: embed cost pill — PR #190
 
-1/ FR locale was live in MiroShark for 24 hours and every sim still ran English. the UI flag was set. the prompts weren't translated. PR #186 closes that.
+1/ MiroShark has been printing a $1 cost per sim since launch. nobody outside the API could see it. PR #190 puts the cost pill on the public embed.
 
-2/ the prompt layer is what agents actually read. 7 modules: web enrichment, NER, ontology, profile gen, sim config, graph tools, social sims. FR had an entry in SUPPORTED since PR #184. FR prompts were empty dicts. every agent fell back to English.
+2/ cost.json shipped 3 days ago — full breakdown at /api/simulation/<id>/cost.json, is_estimate flag, pricing_basis. it worked. the problem: it was behind an auth wall. the embed is public. cost.json wasn't.
 
-3/ PR #186: 7 translated fr/ modules, mirroring every en/ key 1:1. new CI test — test_fr_has_no_missing_keys_relative_to_en — fails the build if any key is missing. no more silent fallbacks. the coverage gate runs on every push.
+3/ PR #190 wires cost.json into EmbedView — the public view anyone hits without an account. getSimulationCost() fetches on complete, costLabel computed, ~$X pill in the meta row. build: clean.
 
-4/ simulation quality tracks with prompt language. if you're running a French political opinion sim and the agents are reasoning in English, the sim is subtly wrong. not wrong-result-wrong — wrong-premise-wrong. PR #186 means FR sims reason in French.
+4/ the $1 claim was always real. the engine prices every LLM call, totals it, writes it to cost.json. a number behind an API isn't a claim — it's a promise. now any stranger landing on a public embed sees the bill.
 
-5/ PR #186 — French prompt locale. the part of i18n that actually matters. https://github.com/aaronjmars/MiroShark/pull/186 🦈
+5/ PR #190 — cost pill on the public embed. https://github.com/aaronjmars/MiroShark/pull/190 🦈
 
-(article: articles/thread-2026-06-18.md)
+(article: articles/thread-2026-06-19.md)
