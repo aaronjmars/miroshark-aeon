@@ -1,13 +1,13 @@
-*Repo Action Ideas — aaronjmars/MiroShark — 2026-06-18*
-Top pick closes the last UI-exposed locale gap: DE is in the navbar, FR just landed, but German prompts are still English stubs and README.de.md doesn't exist.
+*Repo Action Ideas — aaronjmars/MiroShark — 2026-06-20*
+A freshly-filed bug and a silent first-run friction mismatch lead today's set — top pick closes the ThreadPoolExecutor locale-drop class confirmed in graph_tools hours after PR #194 fixed it in report_agent.
 
-Top pick: Complete German (DE) locale — prompt translations + README.de.md (Community/i18n, Medium, Priority HIGH)
- → Closes the DE/FR symmetry gap: FR went from stubs to full locale in 48 hrs this week; DE is next.
+Top pick: Fix graph_tools._fallback_interview locale drop (Bug Fix/i18n, Small, Priority HIGH)
+ → Non-English users (ZH/FR/DE/JA) get English output from graph_tools steps — same class as the report_agent fix merged today, confirmed by issue #195.
 
-1. Complete German (DE) locale: prompts + README.de.md (HIGH, Community/i18n, Medium)
-2. Add .github/pull_request_template.md (MED, Community/DX, Small)
-3. Add tests.yml CI badge to README shield row (MED, Growth/DX, Small)
-4. Display cost.json data in the frontend completion UI (HIGH, DX/Feature, Small)
-5. Strengthen camel smoke test for silent engine output failures (HIGH, DX/Quality, Small)
+1. Fix graph_tools._fallback_interview locale drop (HIGH, Bug Fix/i18n, Small)
+2. Fix README Node prereq: "Node 18+" vs package.json ">=22.0.0" (HIGH, DX, Small)
+3. Thinking token budget separation for reasoning-capable models (HIGH, Feature/Performance, Medium)
+4. Wire Japanese (JA) through full locale system: prompt modules + navbar (MED, Community/i18n, Medium)
+5. Add CHANGELOG.md from merged PRs since v0.1.0 (MED, Community/DX, Medium)
 
-Full details: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-actions-2026-06-18.md
+Full details: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-actions-2026-06-20.md
