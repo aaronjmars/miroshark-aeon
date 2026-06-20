@@ -96,3 +96,14 @@ Tracks angle categories and theses used, to avoid repeats within 14 days.
   - https://huggingface.co/blog/evaleval/eval-costs-bottleneck
   - https://www.techtimes.com/articles/318586/20260617/meta-conscripts-6500-engineers-data-labelers-revolt-exposes-ai-training-ceiling.htm
   - https://github.com/aaronjmars/MiroShark/commit/5643802
+
+## 2026-06-20
+- Angle: Historical parallel (RAND Cold War Games, 1954–1956 — MAD vs SSD realism experiment)
+- Thesis: RAND's 1955 discovery — that simulation outcomes depend on realism injection, not model sophistication — is the same architectural bet MiroShark makes with director_mode and grounded scenarios, now for $1 instead of a classified research budget.
+- Title: Why the 1955 Nuclear Wargame Never Went Nuclear
+- Sources:
+  - https://tnsr.org/2021/09/moral-choices-without-moral-language-1950s-political-military-wargaming-at-the-rand-corporation/
+  - https://spectrum.ieee.org/thunderforge-ai-wargames-dod
+  - https://www.labla.org/ai-war/the-pentagon-is-spending-13-4-billion-on-ai-heres-where-every-dollar-is-going/
+  - https://defensescoop.com/2025/08/13/air-force-wargaming-ai-saas-platform-rfi/
+- Note: All 8 angle categories were technically exhausted within 14 days (cadence exceeded rotation window); picked Historical parallel as the oldest single-use category (last used 06-12).

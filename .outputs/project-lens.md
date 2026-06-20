@@ -1,5 +1,5 @@
-*New Article: AI Simulation's Validity Problem Is a Price Problem in Disguise*
+*New Article: Why the 1955 Nuclear Wargame Never Went Nuclear*
 
-An ICML position paper (Li & Tao, March 2026) argues AI agents aren't ready for social simulation because 'role-playing plausibility doesn't imply behavioral validity' — identifying five technical gaps the field needs to close. The contrarian read: those gaps require empirical calibration runs to close, and calibration requires iteration, and iteration requires a price you can afford. The same structural ceiling (compute cost as a quality bottleneck) that forced Meta to conscript 6,500 engineers as data labelers in June is preventing simulation science from building the evaluation protocols it needs. MiroShark's outcome-distribution (PR #151), signed-result (PR #152), and cost.json (PR #179) endpoints aren't accuracy claims — they're the cheapest available toolkit for running the calibration the critics say is missing.
+In the mid-1950s, RAND ran two competing nuclear simulations — one abstracted, one realistic. The mathematicians always launched. The social scientists never did. The difference wasn't the model; it was whether the scenario design forced participants out of optimization mode. The Pentagon's new Thunderforge AI wargaming program is about to rediscover this. MiroShark bets the same mechanism applies to LLM agents: inject real headlines, a live prediction market, and inter-agent social dynamics, and the outputs change — now for $1 instead of a classified budget and fifteen months of experiments.
 
-Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-06-19.md
+Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-06-20.md
