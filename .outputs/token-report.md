@@ -1,9 +1,9 @@
 *$MIROSHARK — CONSOLIDATING*
 
-Price rebound +3.1% on thin volume (0.30× 7d avg) — one whale buy of $2.6K at 12:52 UTC provided the only conviction.
+-9.1% on 0.71× volume — buyers lifted the ratio (1.68 from 1.17) but couldn't hold price. SLIDING needs vol ≥1.0×, missed it.
 
-Price $0.00000535 (+3.1% 24h) | Liq $336.1K (+0.6%) | Vol $5.9K (0.30× 7d)
-Buys/Sells 35/30 (ratio 1.17) | Whales: 1
-Treasury: 6.0000 ETH
+Price $0.00000487 (-9.1% 24h) | Liq $322.3K (-4.1%) | Vol $8.1K (0.71× 7d)
+Buys/Sells 57/34 (ratio 1.68) | Whales: 0
+Treasury: 6.0000 ETH (±0.00 24h)
 
 Chart: https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209

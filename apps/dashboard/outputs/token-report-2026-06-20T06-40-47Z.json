@@ -1,0 +1,122 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "$MIROSHARK — CONSOLIDATING"
+      },
+      "children": [
+        "text_analysis",
+        "sep1",
+        "stats_section",
+        "sep2",
+        "data_table",
+        "sep3",
+        "chart_section"
+      ]
+    },
+    "text_analysis": {
+      "type": "Text",
+      "props": {
+        "text": "-9.1% on 0.71× volume — buyers lifted the ratio (1.68 from 1.17) but couldn't hold price. SLIDING needs vol ≥1.0×, missed it.",
+        "variant": "lead"
+      },
+      "children": []
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "stats_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "lg"
+      },
+      "children": [
+        "stat_price",
+        "stat_liq",
+        "stat_vol"
+      ]
+    },
+    "stat_price": {
+      "type": "Stat",
+      "props": {
+        "label": "Price",
+        "value": "$0.00000487",
+        "delta": "-9.1%",
+        "trend": "down"
+      },
+      "children": []
+    },
+    "stat_liq": {
+      "type": "Stat",
+      "props": {
+        "label": "Liq",
+        "value": "$322.3K",
+        "delta": "-4.1%",
+        "trend": "down"
+      },
+      "children": []
+    },
+    "stat_vol": {
+      "type": "Stat",
+      "props": {
+        "label": "Vol (0.71× 7d)",
+        "value": "$8.1K"
+      },
+      "children": []
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "data_table": {
+      "type": "Table",
+      "props": {
+        "columns": [
+          "Metric",
+          "Value"
+        ],
+        "rows": [
+          [
+            "Buys/Sells",
+            "57/34 (ratio 1.68)"
+          ],
+          [
+            "Whales",
+            "0"
+          ],
+          [
+            "Treasury",
+            "6.0000 ETH (±0.00 24h)"
+          ]
+        ]
+      },
+      "children": []
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "chart_section": {
+      "type": "Link",
+      "props": {
+        "label": "View Chart on GeckoTerminal",
+        "href": "https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209"
+      },
+      "children": []
+    }
+  }
+}

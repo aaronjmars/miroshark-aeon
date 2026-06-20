@@ -1,10 +1,10 @@
 {
   "skill": "token-report",
-  "last_analyzed": "2026-06-19T06:13:29Z",
+  "last_analyzed": "2026-06-20T06:40:47Z",
   "quality_score": 4,
-  "assessment": "Substantive report with multi-source data, state tracking, and specific metrics; treasury balance recovery noteworthy after 7-day outage.",
+  "assessment": "Substantive token report with multiple validated data sources, clear classification logic, specific metrics, and proper follow-up (files written, notifications sent).",
   "flags": [],
-  "avg_score": 4.13,
+  "avg_score": 4.11,
   "history": [
     {
       "date": "2026-06-12",
@@ -36,6 +36,10 @@
     },
     {
       "date": "2026-06-19",
+      "score": 4
+    },
+    {
+      "date": "2026-06-20",
       "score": 4
     }
   ]
