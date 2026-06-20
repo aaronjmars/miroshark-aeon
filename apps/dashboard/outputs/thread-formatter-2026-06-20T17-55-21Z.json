@@ -1,0 +1,104 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "Camel Agent Smoke Test Strengthened — PR #196",
+        "description": "Thread Draft | 2026-06-20 | aaronjmars/MiroShark"
+      },
+      "children": [
+        "stack-main"
+      ]
+    },
+    "stack-main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "tweet1",
+        "tweet2",
+        "tweet3",
+        "tweet4",
+        "tweet5",
+        "sep1",
+        "links"
+      ]
+    },
+    "tweet1": {
+      "type": "TweetCard",
+      "props": {
+        "author": "Aaron Mars",
+        "handle": "@aaronjmars",
+        "text": "a smoke test that passes on empty output isn't a smoke test. MiroShark's CI guard for camel agents only asserted response is not None. model returns empty messages — test says healthy. PR #196 is open."
+      }
+    },
+    "tweet2": {
+      "type": "TweetCard",
+      "props": {
+        "author": "Aaron Mars",
+        "handle": "@aaronjmars",
+        "text": "this failure class already happened once. camel-ai 0.2.90 bumped June 16, zeroed total_actions, dead run passed CI — took two same-day hotfixes to fix. PR #183 added the first agent-loop CI guard the next day. it checked: response is not None."
+      }
+    },
+    "tweet3": {
+      "type": "TweetCard",
+      "props": {
+        "author": "Aaron Mars",
+        "handle": "@aaronjmars",
+        "text": "PR #196: two new assertions. response.msgs must be non-empty. msgs[0].content must be a non-empty string. CI ran this against a live camel-ai+torch loop. camel-smoke job passed in 1m19s. all 4 checks green."
+      }
+    },
+    "tweet4": {
+      "type": "TweetCard",
+      "props": {
+        "author": "Aaron Mars",
+        "handle": "@aaronjmars",
+        "text": "MiroShark's engine is the swarm — camel agents reasoning across X + Reddit + a Polymarket AMM, round by round. if they return empty output, the sim is corrupt and you don't know it. this test is the gate. it runs on every push."
+      }
+    },
+    "tweet5": {
+      "type": "TweetCard",
+      "props": {
+        "author": "Aaron Mars",
+        "handle": "@aaronjmars",
+        "text": "PR #196 — open. tighter assertions on the agent loop's smoke test. https://github.com/aaronjmars/MiroShark/pull/196 🦈"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "links": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "link-pr",
+        "link-article"
+      ]
+    },
+    "link-pr": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #196: Tighter Smoke Test Assertions",
+        "href": "https://github.com/aaronjmars/MiroShark/pull/196",
+        "source": "GitHub"
+      }
+    },
+    "link-article": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Article: thread-2026-06-20.md",
+        "href": "articles/thread-2026-06-20.md"
+      }
+    }
+  }
+}

@@ -1,10 +1,10 @@
 {
   "skill": "thread-formatter",
-  "last_analyzed": "2026-06-19T17:53:33Z",
+  "last_analyzed": "2026-06-20T17:55:21Z",
   "quality_score": 4,
-  "assessment": "Structured completion with clear deliverables (article + log written, notification sent), reasoning shown, actionable output for operator; truncated view prevents full quality assessment",
+  "assessment": "Good — substantive thread with clear structure, dedup logic, specific technical details, and completed deliverables (articles, logs, notifications).",
   "flags": [],
-  "avg_score": 4.11,
+  "avg_score": 4.1,
   "history": [
     {
       "date": "2026-06-11",
@@ -40,6 +40,10 @@
     },
     {
       "date": "2026-06-19",
+      "score": 4
+    },
+    {
+      "date": "2026-06-20",
       "score": 4
     }
   ]
