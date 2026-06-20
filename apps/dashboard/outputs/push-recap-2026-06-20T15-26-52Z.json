@@ -1,0 +1,252 @@
+{
+  "root": "card-root",
+  "state": {},
+  "elements": {
+    "card-root": {
+      "type": "Card",
+      "props": {
+        "title": "Push Recap",
+        "description": "2026-06-20"
+      },
+      "children": [
+        "project-status",
+        "sep1",
+        "shipped-heading",
+        "commit-stack",
+        "sep2",
+        "shape-volume-section",
+        "sep3",
+        "recap-link"
+      ]
+    },
+    "project-status": {
+      "type": "Text",
+      "props": {
+        "text": "aaronjmars/MiroShark — SHIPPING — report-agent now generates multilingual sections without reverting to English mid-run",
+        "variant": "lead"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {}
+    },
+    "shipped-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Shipped to users:",
+        "level": "h3"
+      }
+    },
+    "commit-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "commit-header",
+        "commit-description"
+      ]
+    },
+    "commit-header": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "commit-hash",
+        "commit-file"
+      ]
+    },
+    "commit-hash": {
+      "type": "Badge",
+      "props": {
+        "text": "3e054f4",
+        "variant": "secondary"
+      }
+    },
+    "commit-file": {
+      "type": "Text",
+      "props": {
+        "text": "report_agent.py"
+      }
+    },
+    "commit-description": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "commit-desc-text",
+        "commit-meta"
+      ]
+    },
+    "commit-desc-text": {
+      "type": "Text",
+      "props": {
+        "text": "capture locale ContextVar before ThreadPoolExecutor, restore it inside each worker thread — parallel report sections no longer silently revert to English for non-English simulations"
+      }
+    },
+    "commit-meta": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "pr-badge",
+        "author-badge"
+      ]
+    },
+    "pr-badge": {
+      "type": "Badge",
+      "props": {
+        "text": "#194"
+      }
+    },
+    "author-badge": {
+      "type": "Badge",
+      "props": {
+        "text": "dan-and"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {}
+    },
+    "shape-volume-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "lg"
+      },
+      "children": [
+        "shape-subsection",
+        "volume-subsection"
+      ]
+    },
+    "shape-subsection": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "shape-heading",
+        "shape-metrics"
+      ]
+    },
+    "shape-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Shape",
+        "level": "h3"
+      }
+    },
+    "shape-metrics": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "lg"
+      },
+      "children": [
+        "shape-1",
+        "shape-2",
+        "shape-3",
+        "shape-4",
+        "shape-5"
+      ]
+    },
+    "shape-1": {
+      "type": "Stat",
+      "props": {
+        "label": "User-visible",
+        "value": "1"
+      }
+    },
+    "shape-2": {
+      "type": "Stat",
+      "props": {
+        "label": "Internal",
+        "value": "0"
+      }
+    },
+    "shape-3": {
+      "type": "Stat",
+      "props": {
+        "label": "Infra",
+        "value": "0"
+      }
+    },
+    "shape-4": {
+      "type": "Stat",
+      "props": {
+        "label": "Bot-filtered",
+        "value": "~30"
+      }
+    },
+    "shape-5": {
+      "type": "Stat",
+      "props": {
+        "label": "Merged PR",
+        "value": "1"
+      }
+    },
+    "volume-subsection": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "volume-heading",
+        "volume-metrics"
+      ]
+    },
+    "volume-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Volume",
+        "level": "h3"
+      }
+    },
+    "volume-metrics": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "lg"
+      },
+      "children": [
+        "volume-1",
+        "volume-2"
+      ]
+    },
+    "volume-1": {
+      "type": "Stat",
+      "props": {
+        "label": "Files",
+        "value": "1"
+      }
+    },
+    "volume-2": {
+      "type": "Stat",
+      "props": {
+        "label": "Changes",
+        "value": "+10/−8 lines"
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {}
+    },
+    "recap-link": {
+      "type": "Link",
+      "props": {
+        "label": "Full recap",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-06-20.md"
+      }
+    }
+  }
+}
