@@ -1,19 +1,18 @@
-*Feature Built — 2026-06-19 — aaronjmars/MiroShark* 🦈
+*Feature Built — 2026-06-20 — aaronjmars/MiroShark* 🦈
 
-Cost on the embed widget
-Every public MiroShark embed now shows what the run actually cost — a little `~$0.87` pill right next to the status and agent count. Share a sim in a tweet or a blog and the dollar figure rides along. The "$1" claim stops being a tagline and becomes a number you can read.
+Stronger camel agent smoke test
+The CI smoke test that guards MiroShark's agent loop now checks the agents actually *say something*, not just that the loop ran. Before, it asserted the response wasn't empty-handed at the object level. Now it asserts there's real text in there — at least one message, non-empty content.
 
 Why this matters:
-"simulate anything for ~$1" is the whole pitch, and until now nothing in the UI ever showed it. PR #179 already built the proof — a queryable cost.json with an honest lower-bound figure — but it had zero reach: you had to curl it. The embed is where a stranger first meets a MiroShark result, so that's where the price belongs. Repo-actions flagged this 06-18 (#4); the move was routing it to the surface where the publish gate actually lets it through.
+the camel-ai 0.2.90 break (#181) shipped a dead engine for ~2 months because a zero-action run read as healthy. #183 added the first smoke test and caught the *signature* break. but a quieter regression — a valid response carrying no output — would still slip through. this closes that gap before the next dependency bump opens it.
 
 What was built:
-- frontend/src/api/simulation.js: new getSimulationCost() — fetches the cost.json share-surface blob, mirrors getReproduction, rejects cleanly on 403/404 so callers treat it as "nothing to show".
-- frontend/src/views/EmbedView.vue: fetches cost after the summary loads, only for completed runs, in its own try/catch so a $0 or unpublished run never breaks the widget. costLabel renders `~$X.XX`, collapses sub-cent runs to `<$0.01`, drops the pill when there's nothing. New embed-pill cost in the meta row with an EN/中文 tooltip.
+- backend/tests/test_smoke_camel_agent.py: after the existing non-None check, assert `response.msgs` is non-empty and `response.msgs[0].content` is a real non-empty string. comment ties it to the #181 silent-failure class.
 
 How it works:
-The embed already pulled getEmbedSummary; cost is bolted on as a non-blocking extra. No backend touched — the figure stays single-sourced through cost_service → run_summary, so the embed and run_summary.md can never disagree. The pill reuses the existing pill styling (purple accent, tabular nums), so it looks native in light/dark and the compact preset. Validated with a clean `npm run build`; repo CI rebuilds the frontend on push.
+the test drives a real SocialAgent through camel's STUB model (no API key, no network) via astep(). STUB returns a fixed non-empty string, so a healthy loop passes and only the empty-output regression fails. runs in the existing camel-smoke CI job, which installs real camel-ai + torch on every PR — so this is exercised on push, not just in theory.
 
 What's next:
-Same pattern fits the in-app result view once the publish gate is solved there, and the gallery cards are the obvious follow-on. Note: the DE-locale top pick was already taken by dan-and's open PR #189 — built this instead.
+the agent loop now has a louder tripwire for the exact failure class that hid for two months. next dependency bump that quietly zeroes the engine fails red instead of shipping.
 
-PR: https://github.com/aaronjmars/MiroShark/pull/190
+PR: https://github.com/aaronjmars/MiroShark/pull/196

@@ -47,6 +47,7 @@ See `memory/watched-repos.md` — `aaronjmars/MiroShark`, `aaronjmars/miroshark-
 | tweet-digest prefetch | 2026-06-16 | PR #67 — adds tweet-digest case to prefetch-xai.sh; was producing zero data |
 | camel smoke test | 2026-06-17 | PR #183 — first agent-loop CI guard; fixes total_actions hardcoded 0 |
 | cost on embed widget | 2026-06-19 | PR #190 — `~$X` cost pill on public EmbedView; lands "$1" claim where strangers see sims (cost.json #179 had no UI reach) |
+| camel smoke test +content | 2026-06-20 | PR #196 — smoke test now asserts real agent output (non-empty msgs+content), not just non-None response; closes the silent-empty-output gap #183 left after #181 |
 
 ## Lessons Learned
 - Digest format: Markdown with clickable links, under 4000 chars. Always save files AND commit before logging.
