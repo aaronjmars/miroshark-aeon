@@ -1,5 +1,5 @@
-*MiroShark's Engine Failed Quietly Twice This Week — and One Self-Hoster Found Both*
+🦈 *MiroShark Spent Its Week Teaching the Swarm to Speak German — Not to Simulate Better*
 
-the worst bugs don't crash. they return HTTP 200 and nothing. a self-hoster on local LLMs found two this week — suggest_scenarios handing back zero suggestions when a 700-token cap truncated its JSON (#192 ships json_repair.py to salvage it), and agents quietly reverting to chinese mid-run (#189). both live off the default path — exactly where every new adopter lands.
+thesis: localization was the busiest workstream this week — 7 of 20 non-bot merged PRs added German/French locales or fixed the non-English LLM paths that quietly break a run. full de/ + fr/ prompt sets that didn't exist 7 days ago. and the swarm core? not touched once. translating prompts is the cheap part — keeping a verbose non-English model from timing out mid-sim is the real work.
 
-Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-06-19.md
+Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-06-20.md
