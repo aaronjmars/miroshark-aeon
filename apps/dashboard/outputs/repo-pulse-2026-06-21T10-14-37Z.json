@@ -1,0 +1,246 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Repo Pulse — 2026-06-21"
+      },
+      "children": [
+        "status_badge",
+        "repo_section",
+        "sep1",
+        "stargazers_section",
+        "sep2",
+        "forks_section",
+        "source_text"
+      ]
+    },
+    "status_badge": {
+      "type": "Badge",
+      "props": {
+        "text": "STEADY",
+        "variant": "secondary"
+      }
+    },
+    "repo_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "repo_link",
+        "stats_grid"
+      ]
+    },
+    "repo_link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "aaronjmars/MiroShark",
+        "href": "https://github.com/aaronjmars/MiroShark",
+        "source": "GitHub"
+      }
+    },
+    "stats_grid": {
+      "type": "Grid",
+      "props": {
+        "columns": 3,
+        "gap": "md"
+      },
+      "children": [
+        "stat_stars",
+        "stat_forks",
+        "stat_releases"
+      ]
+    },
+    "stat_stars": {
+      "type": "Stat",
+      "props": {
+        "label": "Stars",
+        "value": "1318",
+        "delta": "+2",
+        "trend": "up"
+      }
+    },
+    "stat_forks": {
+      "type": "Stat",
+      "props": {
+        "label": "Forks",
+        "value": "277",
+        "delta": "+1",
+        "trend": "up"
+      }
+    },
+    "stat_releases": {
+      "type": "Stat",
+      "props": {
+        "label": "Releases",
+        "value": "0",
+        "delta": "+0",
+        "trend": "neutral"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stargazers_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stargazers_heading",
+        "stargazers_list"
+      ]
+    },
+    "stargazers_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Notable new stargazers",
+        "level": "h3"
+      }
+    },
+    "stargazers_list": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stargazer_1",
+        "stargazer_2"
+      ]
+    },
+    "stargazer_1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "user_link_1",
+        "user_details_1"
+      ]
+    },
+    "user_link_1": {
+      "type": "Link",
+      "props": {
+        "label": "Jonathan Yee",
+        "href": "https://github.com/jonathanyee"
+      }
+    },
+    "user_details_1": {
+      "type": "Text",
+      "props": {
+        "text": "📍 Earth · 31 repos · 48 followers",
+        "variant": "caption"
+      }
+    },
+    "stargazer_2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "user_link_2",
+        "user_details_2",
+        "user_bio_2"
+      ]
+    },
+    "user_link_2": {
+      "type": "Link",
+      "props": {
+        "label": "lyknice23",
+        "href": "https://github.com/lyknice23"
+      }
+    },
+    "user_details_2": {
+      "type": "Text",
+      "props": {
+        "text": "📍 space · 39 repos · 🐦 @LyK_nice · 48 followers",
+        "variant": "caption"
+      }
+    },
+    "user_bio_2": {
+      "type": "Text",
+      "props": {
+        "text": "\"BLessED\"",
+        "variant": "muted"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "forks_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "forks_heading",
+        "forks_list"
+      ]
+    },
+    "forks_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "New forks",
+        "level": "h3"
+      }
+    },
+    "forks_list": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "fork_1"
+      ]
+    },
+    "fork_1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "fork_link_1",
+        "fork_details_1"
+      ]
+    },
+    "fork_link_1": {
+      "type": "StoryLink",
+      "props": {
+        "title": "rbenegas/MiroShark",
+        "href": "https://github.com/rbenegas/MiroShark",
+        "source": "GitHub"
+      }
+    },
+    "fork_details_1": {
+      "type": "Text",
+      "props": {
+        "text": "5 repos",
+        "variant": "caption"
+      }
+    },
+    "source_text": {
+      "type": "Text",
+      "props": {
+        "text": "Source: events",
+        "variant": "muted"
+      }
+    }
+  }
+}

@@ -1,11 +1,12 @@
-*Repo Pulse — 2026-06-20* — [STEADY]
-aaronjmars/MiroShark — stars 1315 (+1) · forks 276 (+1)
+*Repo Pulse — 2026-06-21* — [STEADY]
+aaronjmars/MiroShark — stars 1318 (+2) · forks 277 (+1) · releases +0
 
-Other new stargazers:
-github.com/elvis-nstar
+Notable new stargazers:
+github.com/jonathanyee — Jonathan Yee · 📍 Earth · 31 repos · 48 followers
+github.com/lyknice23 · 📍 space · 39 repos · 🐦 @LyK_nice · 48 followers
+  "BLessED"
 
 New forks:
-github.com/kevinpinscoe — Kevin P. Inscoe · 📍 Greeneville, TN · 🏢 ACS Technologies · 60 repos · 🌐 https://kevininscoe.com · 12 followers
-  "Software engineer/SRE/App Dev: Go, Python and Linux. Operating systems dev for 42 years—from DEC VAX/VMS in 1984 to modern cloud infrastructure."
+github.com/rbenegas/MiroShark · 5 repos
 
 Source: events
