@@ -1,0 +1,340 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Push Recap — 2026-06-21",
+        "description": "aaronjmars/MiroShark + miroshark-aeon — SHIPPING — graph_tools fallback interview localized for DE/FR/ZH users"
+      },
+      "children": [
+        "shipped_section",
+        "sep1",
+        "underthehood_section",
+        "sep2",
+        "metrics_section",
+        "sep3",
+        "full_recap"
+      ]
+    },
+    "shipped_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "shipped_heading",
+        "shipped_item"
+      ]
+    },
+    "shipped_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Shipped to users",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "shipped_item": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "shipped_commit",
+        "shipped_description"
+      ]
+    },
+    "shipped_commit": {
+      "type": "Badge",
+      "props": {
+        "text": "165118d",
+        "variant": "outline"
+      },
+      "children": []
+    },
+    "shipped_description": {
+      "type": "Text",
+      "props": {
+        "text": "graph_tools._fallback_interview now captures the active locale on the parent thread and re-applies it inside each ThreadPoolExecutor worker — non-English sessions (ZH/DE/FR) were silently getting English role-play prompts on the fallback path; fixed, with new EN/ZH/DE/FR registry keys and a locale-propagation test",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "underthehood_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "underthehood_heading",
+        "underthehood_item1",
+        "underthehood_item2"
+      ]
+    },
+    "underthehood_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Under the hood",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "underthehood_item1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "underthehood_item1_text",
+        "underthehood_item1_prs"
+      ]
+    },
+    "underthehood_item1_text": {
+      "type": "Text",
+      "props": {
+        "text": "repo-actions Gate 3 live: any idea claiming specific behavior in a code file now fetches and confirms the claim before shipping — false premises are dropped, not forwarded to the build",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "underthehood_item1_prs": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "pr69",
+        "pr70"
+      ]
+    },
+    "pr69": {
+      "type": "Badge",
+      "props": {
+        "text": "#69",
+        "variant": "outline"
+      },
+      "children": []
+    },
+    "pr70": {
+      "type": "Badge",
+      "props": {
+        "text": "#70",
+        "variant": "outline"
+      },
+      "children": []
+    },
+    "underthehood_item2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "underthehood_item2_text",
+        "underthehood_item2_pr"
+      ]
+    },
+    "underthehood_item2_text": {
+      "type": "Text",
+      "props": {
+        "text": "Camel smoke test now asserts non-empty model content, not just non-None response",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "underthehood_item2_pr": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "pr196"
+      ]
+    },
+    "pr196": {
+      "type": "Badge",
+      "props": {
+        "text": "#196",
+        "variant": "outline"
+      },
+      "children": []
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "metrics_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "lg"
+      },
+      "children": [
+        "shape_subsection",
+        "volume_subsection"
+      ]
+    },
+    "shape_subsection": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "shape_heading",
+        "shape_values"
+      ]
+    },
+    "shape_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Shape",
+        "level": "h4"
+      },
+      "children": []
+    },
+    "shape_values": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "shape_user",
+        "shape_internal",
+        "shape_infra",
+        "shape_filtered",
+        "shape_merged"
+      ]
+    },
+    "shape_user": {
+      "type": "Stat",
+      "props": {
+        "label": "User-visible",
+        "value": "1"
+      },
+      "children": []
+    },
+    "shape_internal": {
+      "type": "Stat",
+      "props": {
+        "label": "Internal",
+        "value": "2"
+      },
+      "children": []
+    },
+    "shape_infra": {
+      "type": "Stat",
+      "props": {
+        "label": "Infra",
+        "value": "2"
+      },
+      "children": []
+    },
+    "shape_filtered": {
+      "type": "Stat",
+      "props": {
+        "label": "Bot-filtered",
+        "value": "34"
+      },
+      "children": []
+    },
+    "shape_merged": {
+      "type": "Stat",
+      "props": {
+        "label": "Merged PRs",
+        "value": "5"
+      },
+      "children": []
+    },
+    "volume_subsection": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "volume_heading",
+        "volume_values"
+      ]
+    },
+    "volume_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Volume",
+        "level": "h4"
+      },
+      "children": []
+    },
+    "volume_values": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "volume_files",
+        "volume_added",
+        "volume_removed"
+      ]
+    },
+    "volume_files": {
+      "type": "Stat",
+      "props": {
+        "label": "Files",
+        "value": "~15"
+      },
+      "children": []
+    },
+    "volume_added": {
+      "type": "Stat",
+      "props": {
+        "label": "Added",
+        "value": "+343"
+      },
+      "children": []
+    },
+    "volume_removed": {
+      "type": "Stat",
+      "props": {
+        "label": "Removed",
+        "value": "−16"
+      },
+      "children": []
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "full_recap": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full recap",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-06-21.md",
+        "source": "GitHub"
+      },
+      "children": []
+    }
+  }
+}
