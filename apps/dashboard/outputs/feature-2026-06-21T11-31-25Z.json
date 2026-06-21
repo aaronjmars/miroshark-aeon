@@ -1,0 +1,212 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Feature Built — 2026-06-21 — aaronjmars/MiroShark",
+        "description": "Locale threading for the fallback interview path"
+      },
+      "children": [
+        "section_why",
+        "separator_1",
+        "section_built",
+        "separator_2",
+        "section_how",
+        "separator_3",
+        "section_next",
+        "separator_4",
+        "link_pr"
+      ]
+    },
+    "section_why": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "heading_why",
+        "text_why"
+      ]
+    },
+    "heading_why": {
+      "type": "Heading",
+      "props": {
+        "text": "Why this matters",
+        "level": "h3"
+      }
+    },
+    "text_why": {
+      "type": "Text",
+      "props": {
+        "text": "This is the exact same bug class that PR #194 fixed yesterday in the report agent — locale getting dropped when work hops onto a background thread. Aaron filed #195 the same day pointing at the next instance. ~4 of 5 active app locales were affected on this path. The \"$1 to simulate anything\" promise breaks the moment a German user gets English output — fixing it keeps the localization credible where it actually shows up."
+      }
+    },
+    "separator_1": {
+      "type": "Separator",
+      "props": {}
+    },
+    "section_built": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading_built",
+        "item_built_1",
+        "item_built_2",
+        "item_built_3"
+      ]
+    },
+    "heading_built": {
+      "type": "Heading",
+      "props": {
+        "text": "What was built",
+        "level": "h3"
+      }
+    },
+    "item_built_1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "text_built_1_file",
+        "text_built_1_desc"
+      ]
+    },
+    "text_built_1_file": {
+      "type": "Text",
+      "props": {
+        "text": "backend/app/services/graph_tools.py",
+        "variant": "lead"
+      }
+    },
+    "text_built_1_desc": {
+      "type": "Text",
+      "props": {
+        "text": "`_fallback_interview` now captures the active locale before spawning its thread pool and re-applies it inside each worker (Python ContextVars don't cross thread boundaries); `_interview_single_agent_llm` swapped its hardcoded-English role-play prompt for a registry lookup."
+      }
+    },
+    "item_built_2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "text_built_2_file",
+        "text_built_2_desc"
+      ]
+    },
+    "text_built_2_file": {
+      "type": "Text",
+      "props": {
+        "text": "backend/app/prompts/locales/{en,zh_CN,de,fr}/graph_tools.py",
+        "variant": "lead"
+      }
+    },
+    "text_built_2_desc": {
+      "type": "Text",
+      "props": {
+        "text": "New `interview_single_agent_roleplay` prompt, translated into all four locales."
+      }
+    },
+    "item_built_3": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "text_built_3_file",
+        "text_built_3_desc"
+      ]
+    },
+    "text_built_3_file": {
+      "type": "Text",
+      "props": {
+        "text": "backend/tests/test_unit_graph_tools_locale.py",
+        "variant": "lead"
+      }
+    },
+    "text_built_3_desc": {
+      "type": "Text",
+      "props": {
+        "text": "Regression test proving the worker's prompt comes out in zh-CN even though it runs on a pool thread."
+      }
+    },
+    "separator_2": {
+      "type": "Separator",
+      "props": {}
+    },
+    "section_how": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "heading_how",
+        "text_how"
+      ]
+    },
+    "heading_how": {
+      "type": "Heading",
+      "props": {
+        "text": "How it works",
+        "level": "h3"
+      }
+    },
+    "text_how": {
+      "type": "Text",
+      "props": {
+        "text": "Two defects compounded: locale was dropped across the ThreadPoolExecutor boundary, AND the worker built its role-play framing in hardcoded English — so even a correct locale couldn't change the output. The fix mirrors #194 exactly (capture + `use_locale` context manager) and moves the prompt into the locale registry, so the threaded-through locale actually selects the language. The new key rides the existing parity tests — any untranslated locale fails CI."
+      }
+    },
+    "separator_3": {
+      "type": "Separator",
+      "props": {}
+    },
+    "section_next": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "heading_next",
+        "text_next"
+      ]
+    },
+    "heading_next": {
+      "type": "Heading",
+      "props": {
+        "text": "What's next",
+        "level": "h3"
+      }
+    },
+    "text_next": {
+      "type": "Text",
+      "props": {
+        "text": "This closes the last known instance of the ThreadPoolExecutor locale-drop class flagged during #194 review. Worth a sweep for any other `executor.submit` sites that read locale, but the two filed cases (report_agent, graph_tools) are now both fixed."
+      }
+    },
+    "separator_4": {
+      "type": "Separator",
+      "props": {}
+    },
+    "link_pr": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #198: Locale threading for the fallback interview path",
+        "href": "https://github.com/aaronjmars/MiroShark/pull/198",
+        "source": "GitHub"
+      }
+    }
+  }
+}
