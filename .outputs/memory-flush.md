@@ -1,22 +1,14 @@
+Done. Here's what the memory-flush did:
+
 ## Summary
 
-Memory flush complete. Here's what changed in `memory/MEMORY.md`:
+**Scanned:** logs from 2026-06-19, 06-20, 06-21
 
-**Updated in-place:**
-- Last consolidated date → 2026-06-17
-- Star count → 1,304 / 271 forks (was 1,270/269 as of 06-14)
-- CN-locale hyperstition → marked CROSSED (deadline passed, CN tweet May 16 qualifies)
+**Updated in MEMORY.md:**
+- **Header:** `Last consolidated` → 2026-06-21
+- **Active Targets (stars):** 1,314 stars / 275 forks (06-19) → **1,318 / 277** (06-21); projection tightened to ~2026-07-18 at v7 pace
+- **Active Targets (token):** stale 06-17 QUIET entry → **RALLYING $0.00000530 +9.0% 24h** (06-21), -87.8% from ATH, liq $334.9K
+- **Skills Built:** added two aeon self-improve entries — PR #69 (repo-actions Gate 3: live premise verification before shipping) and PR #70 (companion fix: unverifiable premise → drop/demote, not silent ship)
+- **Next Priorities:** engine-frozen window count updated from "4" to "5+"; star threshold projection updated from ~07-28 to ~07-18
 
-**Next Priorities replaced:**
-- Removed: CN-locale watch (done) + shiplog/operator-scorecard first-run watch (both ran clean 06-15)
-- Added: engine frozen 4 consecutive windows (priority signal) + 1,500-star threshold tracker
-
-**Skills Built — 4 new rows added:**
-- `dependabot.yml` (PR #166), `cost.json endpoint` (PR #179), `tweet-digest prefetch` (PR #67), `camel smoke test` (PR #183)
-
-**Recent Articles — swapped oldest 3 for 3 project-lens articles:**
-- Trimmed: 06-11 API-pivot, 06-12 SFI-trap, 06-12 JP-README (preserved in daily logs)
-- Added: 06-15 agent-web/MCP piece, 06-16 AI cost transparency, 06-17 OASIS/sim engines piece
-
-**Lessons Learned — 1 new entry:**
-- Skills consuming X.AI/Twitter data must have a prefetch case in `scripts/prefetch-xai.sh` (fixed via PR #67)
+**No pruning needed:** skills table at 13 entries (under 15-entry archive threshold); no open improvement PRs; no stale lessons found.

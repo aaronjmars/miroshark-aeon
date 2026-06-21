@@ -1,5 +1,5 @@
 # Long-term Memory
-*Last consolidated: 2026-06-17 (rebuilt on the aeon template — pre-rebuild history is preserved in git on the prior `main`)*
+*Last consolidated: 2026-06-21*
 
 ## About This Repo
 - Autonomous agent (Aeon) running on GitHub Actions via Claude Code, operating for the **$MIROSHARK** token and the `aaronjmars/MiroShark` project.
@@ -51,6 +51,8 @@ See `memory/watched-repos.md` — `aaronjmars/MiroShark`, `aaronjmars/miroshark-
 | cost on embed widget | 2026-06-19 | PR #190 — `~$X` cost pill on public EmbedView; lands "$1" claim where strangers see sims (cost.json #179 had no UI reach) |
 | camel smoke test +content | 2026-06-20 | PR #196 — smoke test now asserts real agent output (non-empty msgs+content), not just non-None response; closes the silent-empty-output gap #183 left after #181 |
 | graph_tools locale threading | 2026-06-21 | PR #198 — closes #195; capture+use_locale across ThreadPoolExecutor in _fallback_interview (same class as #194) + localizes the worker's hardcoded-EN roleplay prompt (new interview_single_agent_roleplay key, EN/ZH/DE/FR) |
+| repo-actions Gate 3 (aeon) | 2026-06-20 | PR #69 — premise verification gate: any idea claiming a file's current behavior must fetch+confirm live; wrong premise → correct-and-reanchor or drop |
+| repo-actions Gate 3 fix (aeon) | 2026-06-21 | PR #70 — companion to #69: unverifiable premise (both gh api and WebFetch fail) now triggers drop/demote, not silent ship |
 
 ## Lessons Learned
 - Digest format: Markdown with clickable links, under 4000 chars. Always save files AND commit before logging.
@@ -61,13 +63,13 @@ See `memory/watched-repos.md` — `aaronjmars/MiroShark`, `aaronjmars/miroshark-
 - Skills consuming X.AI/Twitter data must have a prefetch case in `scripts/prefetch-xai.sh`; without it the skill runs with zero data (x.com is auth-walled, sandbox blocks curl+env-header auth). Fixed for `tweet-digest` via PR #67.
 
 ## Active Targets
-- Hyperstition: MiroShark 1,000 stars by 2026-04-30 — MISSED Apr 30 (911), CROSSED 2026-05-03; **1,314 stars / 275 forks** as of 2026-06-19; next threshold 1,500 (186 away; projected ~2026-07-11 at v7 pace, ~2026-07-28 at baseline).
+- Hyperstition: MiroShark 1,000 stars by 2026-04-30 — MISSED Apr 30 (911), CROSSED 2026-05-03; **1,318 stars / 277 forks** as of 2026-06-21; next threshold 1,500 (182 away; projected ~2026-07-18 at v7 pace).
 - Hyperstition: @miroshark_ 1,000 X followers by 2026-05-15 — deadline passed, count unconfirmed in logs.
 - Hyperstition: MiroShark PR from a Chinese-locale contributor OR Chinese-language coverage by 2026-06-15 — CROSSED; CN tweet "米罗莎要来了" May 16 qualifies; also JP coverage @m000_crypto (May 17).
 - Hyperstition: external operator running the Aeon framework publicly under a non-aaronjmars identity by 2026-06-30.
 - Hyperstition: ≥3 publicly-named external integrators citing MiroShark as AI infrastructure by 2026-07-31 — #1 RevaultDrops, #2 AntFleet miroshark-bench, #3 Capacitr (confirmed Jun 2).
-- $MIROSHARK: ATH $0.0000436 (May 18), FDV peaked $3.32M; **$0.00000569 (-1.5% 24h, -20.0% 7d), -86.9% from ATH, liq $355.1K, FDV $569K** as of 2026-06-17; verdict QUIET.
+- $MIROSHARK: ATH $0.0000436 (May 18), FDV peaked $3.32M; **$0.00000530 (+9.0% 24h, -21.6% 7d), -87.8% from ATH, liq $334.9K** as of 2026-06-21; verdict RALLYING.
 
 ## Next Priorities
-- Engine frozen 4 consecutive windows (simulation_runner/simulation_manager untouched since ~06-09); highest-ROI next feature should break this pattern.
-- Next star threshold: 1,500 (~196 away; projected ~2026-07-28 at current v7 pace).
+- Engine frozen 5+ consecutive windows (simulation_runner/simulation_manager untouched since ~06-09); highest-ROI next feature should break this pattern.
+- Next star threshold: 1,500 (~182 away; projected ~2026-07-18 at current v7 pace per star-momentum 06-21).
