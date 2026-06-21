@@ -1,0 +1,212 @@
+{
+  "root": "main-card",
+  "state": {},
+  "elements": {
+    "main-card": {
+      "type": "Card",
+      "props": {
+        "title": "Thread — 2026-06-21: graph_tools locale threading",
+        "description": "PR #198 on aaronjmars/MiroShark — i18n locale threading fix for graph_tools._fallback_interview"
+      },
+      "children": [
+        "metadata-stack",
+        "sep-1",
+        "tweets-stack",
+        "sep-2",
+        "counts-stack",
+        "sep-3",
+        "artifact-stack"
+      ]
+    },
+    "metadata-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "topic-heading",
+        "topic-text",
+        "score-stat",
+        "source-heading",
+        "source-text"
+      ]
+    },
+    "topic-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Topic",
+        "level": "h3"
+      }
+    },
+    "topic-text": {
+      "type": "Text",
+      "props": {
+        "text": "graph_tools locale threading — PR #198 on aaronjmars/MiroShark"
+      }
+    },
+    "score-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Score",
+        "value": "6"
+      }
+    },
+    "source-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Source events",
+        "level": "h3"
+      }
+    },
+    "source-text": {
+      "type": "Text",
+      "props": {
+        "text": "Feature — aaronjmars/MiroShark: i18n locale threading for graph_tools._fallback_interview (ThreadPoolExecutor ContextVar drop); PR #198 closes issue #195; files: graph_tools.py + 4 locale files + regression test. Push-recap-2026-06-21: PR #198 confirmed merged; SHIPPING verdict; \"graph_tools fallback interview now localized for DE/FR/ZH users\"",
+        "variant": "body"
+      }
+    },
+    "sep-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "tweets-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "tweet-1",
+        "tweet-2",
+        "tweet-3",
+        "tweet-4",
+        "tweet-5"
+      ]
+    },
+    "tweet-1": {
+      "type": "TweetCard",
+      "props": {
+        "author": "MiroShark",
+        "text": "MiroShark fixed the same concurrency bug for the fourth time in one week. a different call-site each time. the pattern: locale drops across ThreadPoolExecutor workers, agents revert to English. PR #198 closes the last known site."
+      }
+    },
+    "tweet-2": {
+      "type": "TweetCard",
+      "props": {
+        "author": "MiroShark",
+        "text": "python's contextvars.ContextVar doesn't cross thread pool boundaries by default. MiroShark stores the active locale in one (i18n.py:25). when _fallback_interview spawns workers via ThreadPoolExecutor, they lose it. output arrives in English."
+      }
+    },
+    "tweet-3": {
+      "type": "TweetCard",
+      "props": {
+        "author": "MiroShark",
+        "text": "PR #198: capture locale before the executor spawns, restore it inside each worker. new interview_single_agent_roleplay key in all four locale files (EN/ZH/DE/FR). regression test added. CI green."
+      }
+    },
+    "tweet-4": {
+      "type": "TweetCard",
+      "props": {
+        "author": "MiroShark",
+        "text": "DE/FR/ZH users can now run the full graph interview sim in their language. the broader bet: if a sim reverts to English mid-run, the result isn't a multilingual simulation — it's an English simulation with a costume. that's the class PR #198 closes."
+      }
+    },
+    "tweet-5": {
+      "type": "TweetCard",
+      "props": {
+        "author": "MiroShark",
+        "text": "PR #198 — graph_tools locale threading. https://github.com/aaronjmars/MiroShark/pull/198 🦈"
+      }
+    },
+    "sep-2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "counts-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "counts-heading",
+        "counts-table"
+      ]
+    },
+    "counts-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Character counts",
+        "level": "h3"
+      }
+    },
+    "counts-table": {
+      "type": "Table",
+      "props": {
+        "columns": [
+          "Tweet",
+          "Characters"
+        ],
+        "rows": [
+          [
+            "1",
+            "229"
+          ],
+          [
+            "2",
+            "241"
+          ],
+          [
+            "3",
+            "195"
+          ],
+          [
+            "4",
+            "249"
+          ],
+          [
+            "5",
+            "90"
+          ]
+        ]
+      }
+    },
+    "sep-3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "artifact-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "artifact-heading",
+        "artifact-link"
+      ]
+    },
+    "artifact-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Artifact",
+        "level": "h3"
+      }
+    },
+    "artifact-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #198 — graph_tools locale threading",
+        "href": "https://github.com/aaronjmars/MiroShark/pull/198",
+        "source": "GitHub"
+      }
+    }
+  }
+}
