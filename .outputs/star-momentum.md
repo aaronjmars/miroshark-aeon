@@ -1,12 +1,11 @@
+Done. No notification sent — the 1500-star milestone is projected for 2026-07-18 (Saturday), 27 days out, which is outside the 7–14 day Show HN dispatch window.
+
 ## Summary
 
-**star-momentum** ran cleanly — no notification fired.
-
-- **Repo audited**: `aaronjmars/MiroShark` (1 repo; `miroshark-aeon` filtered as `-aeon` infra)
-- **Current stars**: 1,314 | **Target**: 1,500 | **Gap**: 186
-- **v7 pace**: 6.86/day · **v3 pace**: 10.67/day
-- **Projected crossing (v7)**: 2026-07-18 (Saturday) — **28 days out**
-- **Verdict**: `OUT_OF_WINDOW` — 28 days exceeds the 7-14 day Show HN dispatch window; no alert sent
-- **Files written**: `articles/star-momentum-2026-06-20.md`, `memory/topics/star-momentum-state.json`, log appended to `memory/logs/2026-06-20.md`
-
-The 1,500-star milestone is tracking for mid-July. Check back when the window narrows to 7-14 days.
+- **Repos audited**: 1 (`aaronjmars/MiroShark`; `miroshark-aeon` filtered as agent repo)
+- **Current stars**: 1316 | **Target**: 1500 | **Gap**: 184
+- **v7 pace**: 6.86/day | **v3 pace**: 4.00/day (deceleration visible — peak was +14/day on June 16–17)
+- **Projected crossing (v7)**: 2026-07-18 (Saturday) — 27 days out
+- **Verdict**: `OUT_OF_WINDOW` — outside 7–14d window and lands on a Saturday (not Tue/Wed/Thu)
+- **Alert window opens**: ~2026-07-04 when days_remaining_v7 drops to ≤14
+- **Files written**: `articles/star-momentum-2026-06-21.md`, `memory/topics/star-momentum-state.json`, `memory/logs/2026-06-21.md`

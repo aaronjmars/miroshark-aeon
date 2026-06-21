@@ -1,10 +1,10 @@
 {
   "skill": "star-momentum",
-  "last_analyzed": "2026-06-20T10:19:26Z",
+  "last_analyzed": "2026-06-21T10:12:56Z",
   "quality_score": 4,
-  "assessment": "Substantive star tracking with multi-metric analysis, sound decision logic, and proper integration — correctly determined OUT_OF_WINDOW per dispatch criteria.",
+  "assessment": "Well-structured analysis with substantive metrics, clear decision logic, and actionable follow-up timing; concise but complete",
   "flags": [],
-  "avg_score": 3.89,
+  "avg_score": 3.9,
   "history": [
     {
       "date": "2026-06-12",
@@ -40,6 +40,10 @@
     },
     {
       "date": "2026-06-20",
+      "score": 4
+    },
+    {
+      "date": "2026-06-21",
       "score": 4
     }
   ]
