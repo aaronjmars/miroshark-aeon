@@ -1,5 +1,5 @@
-🦈 *MiroShark Spent Its Week Teaching the Swarm to Speak German — Not to Simulate Better*
+🦈 *MiroShark Has Fixed the Same Concurrency Bug Four Times — and Still Won't Fix It Once*
 
-thesis: localization was the busiest workstream this week — 7 of 20 non-bot merged PRs added German/French locales or fixed the non-English LLM paths that quietly break a run. full de/ + fr/ prompt sets that didn't exist 7 days ago. and the swarm core? not touched once. translating prompts is the cheap part — keeping a verbose non-English model from timing out mid-sim is the real work.
+thesis: locale is a ContextVar. ContextVars don't cross a ThreadPoolExecutor boundary — so a user's language silently drops to English mid-sim. #198 patched the fourth call-site by hand this week. the reusable fix already exists in the repo (trace_context.wrap_fn) — it's just wired for trace IDs, not locale. four hand-rolled copies of one wrapper. engine core still frozen.
 
-Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-06-20.md
+Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-06-21.md
