@@ -1,0 +1,227 @@
+{
+  "root": "card-token-report",
+  "state": {},
+  "elements": {
+    "card-token-report": {
+      "type": "Card",
+      "props": {
+        "title": "$MIROSHARK 🦈 — RALLYING"
+      },
+      "children": [
+        "narrative-section",
+        "sep-1",
+        "metrics-section",
+        "sep-2",
+        "trading-section",
+        "sep-3",
+        "treasury-section",
+        "sep-4",
+        "chart-section"
+      ]
+    },
+    "narrative-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "narrative-text"
+      ]
+    },
+    "narrative-text": {
+      "type": "Text",
+      "props": {
+        "text": "one spike hour at 14:00 UTC yesterday did most of it — $6K of volume, +11% open-to-high in 60 min. first positive 24h after a 7-day slide. still -21.6% 7d.",
+        "variant": "body"
+      }
+    },
+    "sep-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "metrics-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "metrics-heading",
+        "metrics-grid"
+      ]
+    },
+    "metrics-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Market Metrics",
+        "level": "h3"
+      }
+    },
+    "metrics-grid": {
+      "type": "Grid",
+      "props": {
+        "columns": 3,
+        "gap": "md"
+      },
+      "children": [
+        "stat-price",
+        "stat-liquidity",
+        "stat-volume",
+        "stat-7d-change"
+      ]
+    },
+    "stat-price": {
+      "type": "Stat",
+      "props": {
+        "label": "Price",
+        "value": "$0.00000530",
+        "delta": "+9.0%",
+        "trend": "up"
+      }
+    },
+    "stat-liquidity": {
+      "type": "Stat",
+      "props": {
+        "label": "Liquidity",
+        "value": "$334.9K",
+        "delta": "+3.9%",
+        "trend": "up"
+      }
+    },
+    "stat-volume": {
+      "type": "Stat",
+      "props": {
+        "label": "Volume (24h)",
+        "value": "$11.8K",
+        "delta": "1.05× avg",
+        "trend": "up"
+      }
+    },
+    "stat-7d-change": {
+      "type": "Stat",
+      "props": {
+        "label": "7-day Change",
+        "value": "-21.6%",
+        "trend": "down"
+      }
+    },
+    "sep-2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "trading-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "trading-heading",
+        "trading-grid"
+      ]
+    },
+    "trading-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Trading Activity",
+        "level": "h3"
+      }
+    },
+    "trading-grid": {
+      "type": "Grid",
+      "props": {
+        "columns": 2,
+        "gap": "md"
+      },
+      "children": [
+        "stat-buys-sells",
+        "stat-whales"
+      ]
+    },
+    "stat-buys-sells": {
+      "type": "Stat",
+      "props": {
+        "label": "Buys/Sells",
+        "value": "55/37",
+        "delta": "1.49× ratio",
+        "trend": "up"
+      }
+    },
+    "stat-whales": {
+      "type": "Stat",
+      "props": {
+        "label": "Whale Positions",
+        "value": "0"
+      }
+    },
+    "sep-3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "treasury-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "treasury-heading",
+        "stat-treasury"
+      ]
+    },
+    "treasury-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Treasury",
+        "level": "h3"
+      }
+    },
+    "stat-treasury": {
+      "type": "Stat",
+      "props": {
+        "label": "ETH Holdings",
+        "value": "6.0000 ETH",
+        "delta": "±0.0000 (24h)",
+        "trend": "neutral"
+      }
+    },
+    "sep-4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "chart-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "chart-heading",
+        "chart-link"
+      ]
+    },
+    "chart-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Chart",
+        "level": "h3"
+      }
+    },
+    "chart-link": {
+      "type": "Link",
+      "props": {
+        "label": "GeckoTerminal - Base Pool",
+        "href": "https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209"
+      }
+    }
+  }
+}
