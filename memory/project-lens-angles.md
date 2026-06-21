@@ -107,3 +107,14 @@ Tracks angle categories and theses used, to avoid repeats within 14 days.
   - https://www.labla.org/ai-war/the-pentagon-is-spending-13-4-billion-on-ai-heres-where-every-dollar-is-going/
   - https://defensescoop.com/2025/08/13/air-force-wargaming-ai-saas-platform-rfi/
 - Note: All 8 angle categories were technically exhausted within 14 days (cadence exceeded rotation window); picked Historical parallel as the oldest single-use category (last used 06-12).
+
+## 2026-06-21
+- Angle: Industry comparison (synthetic user research platforms — Semilattice, Aaru, Evidenza, Viewpoints.ai vs MiroShark's social simulation)
+- Thesis: Synthetic user platforms reach 85–90% fidelity on individual purchase intent by skipping social influence; MiroShark simulates that influence, betting crowd predictions are precisely where isolated-agent accuracy breaks down.
+- Title: AI Research Can Now Interview 1,000 People in an Hour. It Just Can't Put Them in a Room.
+- Sources:
+  - https://www.pymc-labs.com/blog-posts/synthetic-consumers-a-practical-guide
+  - https://aimultiple.com/synthetic-users
+  - https://arxiv.org/html/2512.22082v1
+  - https://github.com/aaronjmars/MiroShark
+- Note: All 8 angle categories again exhausted within 14 days; picked Industry comparison as oldest single-use category (last used 06-13, 8 days ago).
