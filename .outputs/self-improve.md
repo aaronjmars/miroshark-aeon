@@ -1,1 +1,1 @@
-self-improve: fixed token-report treasury fetch — BaseScan V1 API was deprecated (treasury=fetch_fail 06-16→06-18), swapped to the keyless Base public RPC. PR: https://github.com/aaronjmars/miroshark-aeon/pull/68
+self-improve: added a premise-verification gate to repo-actions — ideas claiming a code file's current behavior must now confirm it against the live file before they ship, so a wrong anchor (like the 06-20 smoke-test premise) can't propagate into a feature build. PR: https://github.com/aaronjmars/miroshark-aeon/pull/69

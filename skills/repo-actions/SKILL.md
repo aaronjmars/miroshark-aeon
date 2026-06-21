@@ -14,7 +14,7 @@ This skill reads repos from `memory/watched-repos.md`. Lines may be `owner/repo`
 
 ## Intent
 
-Produce 5 concrete, implementable action ideas anchored to **real current state** of the target repo (an open issue, a grep-able TODO, a specific file, a named dep at a known version, a missing CI/meta file, a stale PR). No generic "improve/enhance/clean up" filler. Each idea must pass four gates before it ships in the article.
+Produce 5 concrete, implementable action ideas anchored to **real current state** of the target repo (an open issue, a grep-able TODO, a specific file, a named dep at a known version, a missing CI/meta file, a stale PR). No generic "improve/enhance/clean up" filler. Each idea must pass five gates before it ships in the article.
 
 ---
 
@@ -122,7 +122,7 @@ Pull from these pools (draw ≥1 anchor from ≥3 distinct sources to avoid cate
 
 If `${var}` is set, drop candidates whose type doesn't match the filter (features → feature/integration; community → contributors/docs/examples; security → vulns/deps/SECURITY.md; dx → DX/onboarding/errors; performance → perf; content → blog/tutorial/demo; growth → directories/partnerships).
 
-### 5. Apply the four gates
+### 5. Apply the five gates
 
 For every candidate, compute:
 
@@ -132,7 +132,14 @@ For every candidate, compute:
 
 **Gate 2 — Novelty.** Compare fuzzy-ish (case-insensitive substring + verb+noun match) against `/tmp/repo-actions-recent-ideas.txt`. If hit → drop.
 
-**Gate 3 — Implementability.** Can `external-feature` execute this autonomously in 1–3 days without human design decisions, external approvals, or architectural debates? Checklist:
+**Gate 3 — Premise verification.** If the candidate asserts a claim about a code file's **current contents or behavior** (any `TODO:`/`FILE:`/`DEP:` anchor, or a "How" step that depends on what a file currently does — e.g. "the smoke test only asserts `response is not None`", "`simulation.py` caps `max_tokens` at 700", "`axios` is pinned to 0.21.4"), you must confirm that claim against the live file before the idea ships. Step 2 only fetched a fixed top-level file set, so anchored code files are otherwise unread and the premise is a guess.
+
+- Fetch the anchored file's current text: `gh api "repos/${TARGET}/contents/{path}" --jq '.content' | base64 -d` (or pull the blob via graphql `object(expression:"HEAD:{path}")`). On fetch failure, fall back to **WebFetch** of `https://github.com/${TARGET}/blob/HEAD/{path}`.
+- Confirm the specific claim is true in that file (line/symbol/value the anchor names actually exists and behaves as stated).
+- If the file or claim **contradicts** the premise → either **correct** the premise to match the real code (and re-anchor) or **drop** the candidate. Never ship an idea whose "How" steps would be written against code that doesn't exist as described — a wrong premise propagates into the downstream `feature` build (wasted CI, wrong PR).
+- Anchors that don't assert current behavior (`MISSING:path` = a file's absence, `ISSUE:#N`, `README:section`, `TAXONOMY:code`) skip this gate — absence/issue/section anchors are already verified by Step 2's metadata fetch.
+
+**Gate 4 — Implementability.** Can `external-feature` execute this autonomously in 1–3 days without human design decisions, external approvals, or architectural debates? Checklist:
 - ✅ Clear inputs/outputs
 - ✅ No new third-party accounts or paid services
 - ✅ No cross-repo coordination
@@ -143,7 +150,7 @@ For every candidate, compute:
 
 Ideas that fail implementability but are still worth surfacing go to a separate **Monitor** section (up to 3 items, not counted as one of the 5).
 
-**Gate 4 — Score (1–5 per dimension).**
+**Gate 5 — Score (1–5 per dimension).**
 - **Leverage** — impact if shipped (users reached / bug class eliminated / growth unlocked)
 - **Concreteness** — is the implementation path obvious from the anchor? (5 = acceptance criteria write themselves; 1 = "figure it out")
 - **Novelty** — not suggested in last 14 days and not overlapping with open PRs
@@ -254,6 +261,7 @@ Append to `memory/logs/${TODAY}.md`:
 - Anchor types: [ISSUE: N, TODO: M, MISSING: L, ...]
 - Dropped (filler): [count] — [top banned phrase if any]
 - Dropped (novelty): [count]
+- Dropped/corrected (false premise): [count] — [what the live file actually said, if any]
 - Dropped (implementability → Monitor): [count]
 - Carried over to tomorrow: [titles of the top pick if not closed]
 - Source status: gh=[...] code_search=[...] memory_topics=[...]
