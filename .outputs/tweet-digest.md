@@ -1,6 +1,7 @@
-*Tweet Digest — 2026-06-20*
+*Tweet Digest — 2026-06-21*
 
 *Theme: World Cup sims 🦈*
-@miroshark_: switzerland vs bosnia — sim tackles whether xhaka picks up a card — [link](https://x.com/miroshark_/status/2067593279995011490)
-@miroshark_: scotland vs morocco — 1-1 draw at 35%/35%, mcTominay/Doak counterattacks as the key variable — [link](https://x.com/miroshark_/status/2067941304152035393)
-@miroshark_: brazil vs haiti — expected dominance might land just 1-0, and the clean sheet is riskier than it looks — [link](https://x.com/miroshark_/status/2067948841123430660)
+@miroshark_: Day 1 sim — Netherlands vs Sweden — results in the thread — [link](https://x.com/miroshark_/status/2068354014513709481)
+@miroshark_: Day 2 sim — Germany vs Ivory Coast — results in the thread — [link](https://x.com/miroshark_/status/2068354219438928110)
+@miroshark_: Day 3 sim — Ecuador vs Curaçao — results in the thread — [link](https://x.com/miroshark_/status/2068354280424091788)
+@miroshark_: Day 4 sim — Tunisia vs Japan — results in the thread — [link](https://x.com/miroshark_/status/2068354614987014221)

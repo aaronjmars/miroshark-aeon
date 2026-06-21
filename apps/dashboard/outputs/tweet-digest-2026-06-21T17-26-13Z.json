@@ -1,0 +1,51 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Tweet Digest — 2026-06-21",
+        "description": "World Cup sims 🦈"
+      },
+      "children": [
+        "tweet_1",
+        "tweet_2",
+        "tweet_3",
+        "tweet_4"
+      ]
+    },
+    "tweet_1": {
+      "type": "TweetCard",
+      "props": {
+        "author": "miroshark_",
+        "handle": "miroshark_",
+        "text": "Day 1 sim — Netherlands vs Sweden — results in the thread — https://x.com/miroshark_/status/2068354014513709481"
+      }
+    },
+    "tweet_2": {
+      "type": "TweetCard",
+      "props": {
+        "author": "miroshark_",
+        "handle": "miroshark_",
+        "text": "Day 2 sim — Germany vs Ivory Coast — results in the thread — https://x.com/miroshark_/status/2068354219438928110"
+      }
+    },
+    "tweet_3": {
+      "type": "TweetCard",
+      "props": {
+        "author": "miroshark_",
+        "handle": "miroshark_",
+        "text": "Day 3 sim — Ecuador vs Curaçao — results in the thread — https://x.com/miroshark_/status/2068354280424091788"
+      }
+    },
+    "tweet_4": {
+      "type": "TweetCard",
+      "props": {
+        "author": "miroshark_",
+        "handle": "miroshark_",
+        "text": "Day 4 sim — Tunisia vs Japan — results in the thread — https://x.com/miroshark_/status/2068354614987014221"
+      }
+    }
+  }
+}
