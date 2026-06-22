@@ -50,7 +50,11 @@ WORK_DIR="/tmp/docs-sync-work"
 rm -rf "$WORK_DIR"
 gh repo clone "$WEBSITE_REPO" "$WORK_DIR" -- --depth 20
 cd "$WORK_DIR"
+git config user.name "aeonframework"
+git config user.email "aeonframework@proton.me"
 ```
+
+**Pin the commit identity in the clone.** A freshly cloned repo does NOT inherit the workflow's git identity, so without these two lines the commit author falls back to an improvised/unlinked email (past runs produced `aeon@miroshark-aeon.bot`, which links to no GitHub account). Always set it so every changelog commit + PR is attributed to the **@aeonframework** account (`aeonframework@proton.me`) — never anything else.
 
 If `app/changelog-data.ts` exists, read it and collect `PUBLISHED_PR_NUMBERS` (every PR number already in `CHANGELOG`). If it doesn't exist yet, this is a **bootstrap** run (see step 4) and nothing is published.
 

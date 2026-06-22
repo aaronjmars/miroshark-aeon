@@ -119,8 +119,8 @@ jobs:
       - name: Configure git identity
         if: steps.work.outputs.mode != ''
         run: |
-          git config user.name "aeonframework"
-          git config user.email "aeonframework@proton.me"
+          git config --global user.name "aeonframework"
+          git config --global user.email "aeonframework@proton.me"
 
       - name: Setup Node.js
         if: steps.work.outputs.mode != ''
