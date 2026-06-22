@@ -88,3 +88,4 @@ date,skill,model,input_tokens,output_tokens,cache_read,cache_creation
 2026-06-22,feature,claude-opus-4-8,5814,35275,4821882,103785
 2026-06-22,repo-actions,claude-sonnet-4-6,24,61217,2363916,134921
 2026-06-22,project-lens,claude-sonnet-4-6,1638,29222,1658013,83173
+2026-06-22,tweet-digest,claude-sonnet-4-6,11,5874,546989,52620

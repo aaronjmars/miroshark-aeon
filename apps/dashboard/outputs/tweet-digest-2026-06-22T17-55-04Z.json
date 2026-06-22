@@ -1,0 +1,41 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "Tweet Digest — 2026-06-22"
+      },
+      "children": [
+        "stack-main"
+      ]
+    },
+    "stack-main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading-longform",
+        "storylink-1"
+      ]
+    },
+    "heading-longform": {
+      "type": "Heading",
+      "props": {
+        "text": "Long-form",
+        "level": "h3"
+      }
+    },
+    "storylink-1": {
+      "type": "StoryLink",
+      "props": {
+        "title": "@miroshark_ published a new X article (Jun 21)",
+        "href": "https://x.com/miroshark_/status/2068781532790043049",
+        "source": "X"
+      }
+    }
+  }
+}

@@ -1,10 +1,13 @@
 {
   "skill": "tweet-digest",
-  "last_analyzed": "2026-06-21T17:26:13Z",
-  "quality_score": 4,
-  "assessment": "Skill completed successfully with proper workflow: cache read, dedup against history, fresh content filtered, notification sent, activity logged. Shows specific details and operational discipline.",
-  "flags": [],
-  "avg_score": 4,
+  "last_analyzed": "2026-06-22T17:55:04Z",
+  "quality_score": 3,
+  "assessment": "Skill executed correctly with proper deduplication and notification, but digest output was minimal (1 bare-link item with no accessible content) and limited utility",
+  "flags": [
+    "low_quality",
+    "generic_content"
+  ],
+  "avg_score": 3.86,
   "history": [
     {
       "date": "2026-06-16",
@@ -29,6 +32,10 @@
     {
       "date": "2026-06-21",
       "score": 4
+    },
+    {
+      "date": "2026-06-22",
+      "score": 3
     }
   ]
 }
