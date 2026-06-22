@@ -143,7 +143,6 @@ Use `--draft` when `draft` config is true (the default). Build the PR body from 
 *Docs Sync — ${today}*
 ${PRODUCT_REPO} → ${WEBSITE_REPO}
 N new PRs → changelog entry "<title>"
-PR: <url>
 ```
 
 ## 7. Log
