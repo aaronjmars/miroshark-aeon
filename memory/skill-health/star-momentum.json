@@ -1,10 +1,10 @@
 {
   "skill": "star-momentum",
-  "last_analyzed": "2026-06-21T10:12:56Z",
+  "last_analyzed": "2026-06-22T10:31:27Z",
   "quality_score": 4,
-  "assessment": "Well-structured analysis with substantive metrics, clear decision logic, and actionable follow-up timing; concise but complete",
+  "assessment": "Substantive trend analysis with concrete metrics, projections, and sound business logic",
   "flags": [],
-  "avg_score": 3.9,
+  "avg_score": 3.91,
   "history": [
     {
       "date": "2026-06-12",
@@ -44,6 +44,10 @@
     },
     {
       "date": "2026-06-21",
+      "score": 4
+    },
+    {
+      "date": "2026-06-22",
       "score": 4
     }
   ]
