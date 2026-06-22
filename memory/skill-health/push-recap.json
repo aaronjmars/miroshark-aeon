@@ -1,10 +1,10 @@
 {
   "skill": "push-recap",
-  "last_analyzed": "2026-06-21T15:24:31Z",
+  "last_analyzed": "2026-06-22T16:21:07Z",
   "quality_score": 4,
-  "assessment": "Substantive, well-structured recap with specific PRs, technical details, and clear shipping verdict; includes metrics and artifact references.",
+  "assessment": "Substantive recap with specific PR details, concrete data points, clear categorization, and completed deliverables tracking.",
   "flags": [],
-  "avg_score": 4.18,
+  "avg_score": 4.17,
   "history": [
     {
       "date": "2026-06-11",
@@ -48,6 +48,10 @@
     },
     {
       "date": "2026-06-21",
+      "score": 4
+    },
+    {
+      "date": "2026-06-22",
       "score": 4
     }
   ]
