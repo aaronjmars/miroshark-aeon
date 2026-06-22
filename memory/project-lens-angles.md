@@ -118,3 +118,14 @@ Tracks angle categories and theses used, to avoid repeats within 14 days.
   - https://arxiv.org/html/2512.22082v1
   - https://github.com/aaronjmars/MiroShark
 - Note: All 8 angle categories again exhausted within 14 days; picked Industry comparison as oldest single-use category (last used 06-13, 8 days ago).
+
+## 2026-06-22
+- Angle: Philosophy / big ideas (representative agent problem in macroeconomics; Ostrom's polycentric heterogeneity)
+- Thesis: Averaging N simulated personas gives you a representative agent — the same construct economists spent fifty years proving can't reproduce collective dynamics that heterogeneous populations actually produce.
+- Title: Economics Built Its Models on a Person Who Has Never Existed
+- Sources:
+  - https://academic.oup.com/ej/advance-article/doi/10.1093/ej/ueaf104/8323145
+  - https://centerforneweconomics.org/publications/polycentricity-complexity-and-the-commons/
+  - https://www.pymc-labs.com/blog-posts/synthetic-consumers-a-practical-guide
+  - https://github.com/aaronjmars/MiroShark
+- Note: All 8 angle categories exhausted within 14 days; picked Philosophy/big ideas as oldest single-use category (last used 06-14, 8 days ago).

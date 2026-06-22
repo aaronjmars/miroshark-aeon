@@ -1,0 +1,170 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Economics Built Its Models on a Person Who Has Never Existed",
+        "description": "project-lens: How MiroShark addresses the representative agent problem in simulation"
+      },
+      "children": [
+        "section_problem",
+        "separator1",
+        "section_solution",
+        "separator2",
+        "section_updates",
+        "separator3",
+        "link_article"
+      ]
+    },
+    "section_problem": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading_problem",
+        "text_theorem",
+        "text_ostrom",
+        "text_aggregate"
+      ]
+    },
+    "heading_problem": {
+      "type": "Heading",
+      "props": {
+        "text": "The Representative Agent Problem",
+        "level": "h2"
+      },
+      "children": []
+    },
+    "text_theorem": {
+      "type": "Text",
+      "props": {
+        "text": "The Sonnenschein-Mantel-Debreu theorem (1970s) proved you can't recover a population's distributional structure from its aggregate — what economists call the representative agent."
+      },
+      "children": []
+    },
+    "text_ostrom": {
+      "type": "Text",
+      "props": {
+        "text": "Elinor Ostrom's Nobel work showed the same thing in practice: Maine's lobster fishery runs on six officers for 6,800 fishermen precisely because governance adapted to heterogeneous actors rather than averaging over them."
+      },
+      "children": []
+    },
+    "text_aggregate": {
+      "type": "Text",
+      "props": {
+        "text": "The same architectural fork now exists in simulation: synthetic user tools interview N isolated personas and aggregate, producing a representative agent."
+      },
+      "children": []
+    },
+    "separator1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "section_solution": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading_solution",
+        "text_wonderwall",
+        "text_components",
+        "text_design"
+      ]
+    },
+    "heading_solution": {
+      "type": "Heading",
+      "props": {
+        "text": "MiroShark's Solution",
+        "level": "h2"
+      },
+      "children": []
+    },
+    "text_wonderwall": {
+      "type": "Text",
+      "props": {
+        "text": "MiroShark's wonderwall/ runs agents through a social layer where distributional dynamics become the observable output."
+      },
+      "children": []
+    },
+    "text_components": {
+      "type": "Text",
+      "props": {
+        "text": "Components: social_agent/, social_platform/, environment/, clock/"
+      },
+      "children": []
+    },
+    "text_design": {
+      "type": "Text",
+      "props": {
+        "text": "The distributional information that drives collective outcomes can't be recovered after it's averaged away — it has to be in the design."
+      },
+      "children": []
+    },
+    "separator2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "section_updates": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "heading_updates",
+        "update_commit",
+        "update_pr"
+      ]
+    },
+    "heading_updates": {
+      "type": "Heading",
+      "props": {
+        "text": "Recent Updates",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "update_commit": {
+      "type": "Text",
+      "props": {
+        "text": "Commit 165118d: Decoupled agent language locales"
+      },
+      "children": []
+    },
+    "update_pr": {
+      "type": "Text",
+      "props": {
+        "text": "PR #203: Added per-agent reasoning budgets"
+      },
+      "children": []
+    },
+    "separator3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "link_article": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Read Full Article",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-06-22.md",
+        "source": "MiroShark Aeon / project-lens"
+      },
+      "children": []
+    }
+  }
+}
