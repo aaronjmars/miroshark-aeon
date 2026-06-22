@@ -64,7 +64,7 @@ See `memory/watched-repos.md` — `aaronjmars/MiroShark`, `aaronjmars/miroshark-
 - Skills consuming X.AI/Twitter data must have a prefetch case in `scripts/prefetch-xai.sh`; without it the skill runs with zero data (x.com is auth-walled, sandbox blocks curl+env-header auth). Fixed for `tweet-digest` via PR #67.
 
 ## Active Targets
-- Hyperstition: MiroShark 1,000 stars by 2026-04-30 — MISSED Apr 30 (911), CROSSED 2026-05-03; **1,318 stars / 277 forks** as of 2026-06-21; next threshold 1,500 (182 away; projected ~2026-07-18 at v7 pace).
+- Hyperstition: MiroShark 1,000 stars by 2026-04-30 — MISSED Apr 30 (911), CROSSED 2026-05-03; **1,323 stars / 278 forks** as of 2026-06-22; next threshold 1,500 (177 away; projected ~2026-07-14 at v7=56/wk pace).
 - Hyperstition: @miroshark_ 1,000 X followers by 2026-05-15 — deadline passed, count unconfirmed in logs.
 - Hyperstition: MiroShark PR from a Chinese-locale contributor OR Chinese-language coverage by 2026-06-15 — CROSSED; CN tweet "米罗莎要来了" May 16 qualifies; also JP coverage @m000_crypto (May 17).
 - Hyperstition: external operator running the Aeon framework publicly under a non-aaronjmars identity by 2026-06-30.
@@ -73,4 +73,4 @@ See `memory/watched-repos.md` — `aaronjmars/MiroShark`, `aaronjmars/miroshark-
 
 ## Next Priorities
 - Engine frozen 5+ consecutive windows (simulation_runner/simulation_manager untouched since ~06-09); highest-ROI next feature should break this pattern.
-- Next star threshold: 1,500 (~182 away; projected ~2026-07-18 at current v7 pace per star-momentum 06-21).
+- Next star threshold: 1,500 (~177 away; projected ~2026-07-14 at v7=56/wk pace per star-milestone 06-22).
