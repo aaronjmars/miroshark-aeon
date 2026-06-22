@@ -29,6 +29,7 @@ tmp_*
 .tmp-*
 .pending-*.sh
 .run-*.sh
+.notify-*.md
 .*-tmp.md
 .*-draft.md
 .*-msg.txt
