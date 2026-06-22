@@ -1,12 +1,13 @@
-*Repo Pulse — 2026-06-21* — [STEADY]
-aaronjmars/MiroShark — stars 1318 (+2) · forks 277 (+1) · releases +0
+*Repo Pulse — 2026-06-22* — [STEADY]
+aaronjmars/MiroShark — stars 1321 (+3) · forks 278 (+1)
 
 Notable new stargazers:
-github.com/jonathanyee — Jonathan Yee · 📍 Earth · 31 repos · 48 followers
-github.com/lyknice23 · 📍 space · 39 repos · 🐦 @LyK_nice · 48 followers
-  "BLessED"
+github.com/Sundist — Sundisttt · 27 repos
+
+Other new stargazers:
+github.com/disCodeOri | github.com/Gaius510
 
 New forks:
-github.com/rbenegas/MiroShark · 5 repos
+github.com/shiblyrelyn — S M Shibly Rahman · 9 repos
 
-Source: events
+Source: stargazers-fallback
