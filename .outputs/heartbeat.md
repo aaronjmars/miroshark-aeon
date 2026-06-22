@@ -1,10 +1,10 @@
 HEARTBEAT_OK · STATUS_PAGE=OK
 
-All 15 enabled skills are at 100% success, no stuck or failed dispatches, heartbeat self-check within the 36h window. One open PR (#71 docs-sync, opened minutes ago) is too fresh to flag. `docs/status.md` has been regenerated with the RALLYING MIROSHARK token pulse (+9.0% 24h, $0.00000530).
+All clear. 16 enabled skills running at 100%, no failures, no stalls. PR #204 (the deprecated `mimo-v2-flash` model fix by external contributor tomer-liran) is ~4h old and not stalled. `docs/status.md` regenerated with updated token data (MIROSHARK CONSOLIDATING at $0.00000479, −9.7% 24h) and the full 16-skill health table.
 
 ## Summary
 
-- **P0–P3:** All clear. No flags fired.
-- **docs/status.md:** Updated — 🟢 OK, 15 skills ✅, MIROSHARK RALLYING +9.0%.
-- **Log:** Appended to `memory/logs/2026-06-21.md`.
-- **No notification sent** — nothing needs attention.
+- **P0/P1/P2/P3:** All clear — no flags fired
+- **docs/status.md:** Rewritten with 2026-06-22 19:00 UTC timestamp, current token pulse, and 16-skill health table sorted by last run
+- **memory/logs/2026-06-22.md:** Heartbeat entry appended
+- **No notification sent** — nothing warranted
