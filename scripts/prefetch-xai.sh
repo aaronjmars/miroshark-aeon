@@ -223,6 +223,27 @@ case "$SKILL" in
     fi
     ;;
 
+  token-report)
+    # Pre-fetch X sentiment for the tracked token (step 6 "Social sentiment").
+    # The skill's direct curl to api.x.ai fails in the sandbox (auth header +
+    # env-var expansion blocked), so Social Pulse was always xai=skip. Cache the
+    # response to .xai-cache/token-report-social.json for the skill to read.
+    SYMBOL=""
+    CONTRACT="$VAR"   # VAR may override with a contract address
+    if [ -z "$CONTRACT" ] && [ -f memory/MEMORY.md ]; then
+      ROW=$(awk -F'|' '/^## Tracked Token/{f=1;next} f && $0 ~ /0x[0-9a-fA-F]{6,}/{print; exit}' memory/MEMORY.md)
+      SYMBOL=$(echo "$ROW" | awk -F'|' '{gsub(/^[ \t]+|[ \t]+$/,"",$2); print $2}')
+      CONTRACT=$(echo "$ROW" | awk -F'|' '{gsub(/^[ \t]+|[ \t]+$/,"",$3); print $3}')
+    fi
+    if [ -z "$CONTRACT" ]; then
+      echo "xai-prefetch: token-report — no tracked token in MEMORY.md and no var, skipping"
+    else
+      if [ -n "$SYMBOL" ]; then QUERY="\$${SYMBOL} or ${CONTRACT}"; else QUERY="${CONTRACT}"; fi
+      xai_search "token-report-social.json" \
+        "Search X for ${QUERY} mentions in the last 24 hours with at least 10 likes. Return up to 5 notable tweets with @handle, engagement counts (likes/retweets/replies), and a one-line summary of the claim or vibe. Exclude obvious bots and generic shill posts."
+    fi
+    ;;
+
   vercel-projects)
     # Pre-fetch Vercel API data (requires auth — can't be done in sandbox)
     if [ -z "${VERCEL_TOKEN:-}" ]; then
