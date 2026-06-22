@@ -1,0 +1,201 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Feature Built — 2026-06-22 — aaronjmars/MiroShark"
+      },
+      "children": [
+        "subtitle",
+        "intro",
+        "sep1",
+        "why_section",
+        "sep2",
+        "what_section",
+        "sep3",
+        "how_section",
+        "sep4",
+        "next_section",
+        "sep5",
+        "pr_link"
+      ]
+    },
+    "subtitle": {
+      "type": "Text",
+      "props": {
+        "text": "Thinking budget, sized on its own",
+        "variant": "lead"
+      }
+    },
+    "intro": {
+      "type": "Text",
+      "props": {
+        "text": "MiroShark now lets you set how many tokens a reasoning model spends thinking — separately from the tokens it spends answering. Two new env knobs: LLM_REASONING_MAX_TOKENS (a hard token budget) and LLM_REASONING_EFFORT (low/medium/high). Set either and the model thinks inside that cap instead of bleeding into the response."
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {}
+    },
+    "why_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "why_heading",
+        "why_para1",
+        "why_para2"
+      ]
+    },
+    "why_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Why this matters",
+        "level": "h3"
+      }
+    },
+    "why_para1": {
+      "type": "Text",
+      "props": {
+        "text": "Right now one max_tokens pool covers both the thinking trace and the answer. On a reasoning model a long <think> quietly eats the response — the same truncation class that broke suggest_scenarios back in #187/#188. It was an open ask (#193). \"$1 to simulate anything\" only holds if cost is predictable, and you can't budget a run when thinking and answering share one untracked pool."
+      }
+    },
+    "why_para2": {
+      "type": "Text",
+      "props": {
+        "text": "This is the foundation for cost estimation to be trustworthy — you need to know what thinking costs up front."
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {}
+    },
+    "what_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "what_heading",
+        "what_items"
+      ]
+    },
+    "what_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "What was built",
+        "level": "h3"
+      }
+    },
+    "what_items": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "what_1",
+        "what_2",
+        "what_3",
+        "what_4"
+      ]
+    },
+    "what_1": {
+      "type": "Text",
+      "props": {
+        "text": "backend/app/config.py: LLM_REASONING_MAX_TOKENS (int) + LLM_REASONING_EFFORT (str) config"
+      }
+    },
+    "what_2": {
+      "type": "Text",
+      "props": {
+        "text": "backend/app/utils/llm_client.py: _resolve_reasoning_directive() picks the right reasoning directive; chat() sends it via extra_body"
+      }
+    },
+    "what_3": {
+      "type": "Text",
+      "props": {
+        "text": "backend/tests/test_unit_reasoning_config.py: offline tests for every precedence branch"
+      }
+    },
+    "what_4": {
+      "type": "Text",
+      "props": {
+        "text": ".env.example + docs/CONFIGURATION.md: both knobs documented"
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {}
+    },
+    "how_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "how_heading",
+        "how_text"
+      ]
+    },
+    "how_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "How it works",
+        "level": "h3"
+      }
+    },
+    "how_text": {
+      "type": "Text",
+      "props": {
+        "text": "Both knobs map to OpenRouter's unified reasoning field, so it's one code path across Anthropic, Gemini, and OpenAI o-series — a token budget maps to Anthropic's thinking.budget_tokens, effort maps to OpenAI's reasoning_effort. It extends the existing LLM_DISABLE_REASONING branch: a token count wins over effort, and setting either flips reasoning on even if disable is left at its default. Defaults don't move — unset means exactly today's behavior."
+      }
+    },
+    "sep4": {
+      "type": "Separator",
+      "props": {}
+    },
+    "next_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "next_heading",
+        "next_text"
+      ]
+    },
+    "next_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "What's next",
+        "level": "h3"
+      }
+    },
+    "next_text": {
+      "type": "Text",
+      "props": {
+        "text": "Wire it into the cost.json estimate so the thinking budget shows up in the per-sim cost surface — put the spend where strangers actually see it."
+      }
+    },
+    "sep5": {
+      "type": "Separator",
+      "props": {}
+    },
+    "pr_link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #203: Feature — Thinking budget, sized on its own",
+        "href": "https://github.com/aaronjmars/MiroShark/pull/203",
+        "source": "GitHub"
+      }
+    }
+  }
+}
