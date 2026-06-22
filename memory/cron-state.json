@@ -172,5 +172,9 @@
     "consecutive_failures": 0,
     "success_rate": 1,
     "last_quality_score": 4
+  },
+  "docs-sync": {
+    "last_dispatch": "2026-06-22T08:27:45Z",
+    "last_status": "dispatched"
   }
 }
