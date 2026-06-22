@@ -1,0 +1,61 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "self-improve"
+      },
+      "children": [
+        "content-stack"
+      ]
+    },
+    "content-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading",
+        "problem-text",
+        "solution-text",
+        "pr-link"
+      ]
+    },
+    "heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Social Pulse Sandbox Fix",
+        "level": "h2"
+      },
+      "children": []
+    },
+    "problem-text": {
+      "type": "Text",
+      "props": {
+        "text": "Social Pulse was silently skipped (xai=skip) every run because direct api.x.ai curl calls are sandbox-blocked.",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "solution-text": {
+      "type": "Text",
+      "props": {
+        "text": "Added a token-report prefetch case (mirrors tweet-digest/#67) to cache X sentiment before the sandbox runs.",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "pr-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #74: Add token-report prefetch",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/pull/74",
+        "source": "GitHub"
+      },
+      "children": []
+    }
+  }
+}
