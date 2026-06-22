@@ -1,11 +1,11 @@
-*Shiplog — 2026-06-15* 🦈
+*Shiplog — 2026-06-22*
 
-Ten PRs merged this week and not one touched the simulation core — every change made a result easier to verify, consume, or contribute to from the outside.
+This week the "$1 to simulate" claim got a face: every public embed now shows the actual cost of the run — and the locale-in-threads bug that was silently producing English in DE/FR/ZH sessions closed after four hand-patches.
 
 Themes:
-- Results you can prove offline (#152 signed-result, #153 activity feed, #157 surface filter)
-- The repo opened to outsiders (#159 first community PR, #162 contributor guide)
-- Onboarding now reads in EN / 中文 / 日本語
+- The "~$1" cost estimate landed where strangers actually see it
+- Simulations in German, French, and Chinese stopped reverting to English mid-run
+- Self-hosters with local LLMs got a web-search path
 
-10 commits · 10 PRs · +4,870 / −711
-https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/shiplog-2026-06-15.md
+42 commits · 38 PRs merged · +5,800 / −2,200 lines
+https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/shiplog-2026-06-22.md

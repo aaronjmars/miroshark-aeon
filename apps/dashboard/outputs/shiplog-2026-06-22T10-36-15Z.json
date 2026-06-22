@@ -1,0 +1,160 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Shiplog — 2026-06-22"
+      },
+      "children": [
+        "intro_text",
+        "separator1",
+        "themes_section",
+        "separator2",
+        "stats_section",
+        "separator3",
+        "link_section"
+      ]
+    },
+    "intro_text": {
+      "type": "Text",
+      "props": {
+        "text": "This week the \"$1 to simulate\" claim got a face: every public embed now shows the actual cost of the run — and the locale-in-threads bug that was silently producing English in DE/FR/ZH sessions closed after four hand-patches."
+      }
+    },
+    "separator1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "themes_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "themes_heading",
+        "theme1",
+        "theme2",
+        "theme3"
+      ]
+    },
+    "themes_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Themes",
+        "level": "h2"
+      }
+    },
+    "theme1": {
+      "type": "Text",
+      "props": {
+        "text": "The \"~$1\" cost estimate landed where strangers actually see it"
+      }
+    },
+    "theme2": {
+      "type": "Text",
+      "props": {
+        "text": "Simulations in German, French, and Chinese stopped reverting to English mid-run"
+      }
+    },
+    "theme3": {
+      "type": "Text",
+      "props": {
+        "text": "Self-hosters with local LLMs got a web-search path"
+      }
+    },
+    "separator2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stats_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stats_heading",
+        "stats_grid"
+      ]
+    },
+    "stats_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Stats",
+        "level": "h2"
+      }
+    },
+    "stats_grid": {
+      "type": "Grid",
+      "props": {
+        "columns": 2,
+        "gap": "md"
+      },
+      "children": [
+        "stat1",
+        "stat2",
+        "stat3",
+        "stat4"
+      ]
+    },
+    "stat1": {
+      "type": "Stat",
+      "props": {
+        "label": "Commits",
+        "value": "42"
+      }
+    },
+    "stat2": {
+      "type": "Stat",
+      "props": {
+        "label": "PRs Merged",
+        "value": "38"
+      }
+    },
+    "stat3": {
+      "type": "Stat",
+      "props": {
+        "label": "Lines Added",
+        "value": "+5,800"
+      }
+    },
+    "stat4": {
+      "type": "Stat",
+      "props": {
+        "label": "Lines Removed",
+        "value": "−2,200"
+      }
+    },
+    "separator3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "link_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "article_link"
+      ]
+    },
+    "article_link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full shiplog article",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/shiplog-2026-06-22.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}

@@ -1,14 +1,18 @@
 {
   "skill": "shiplog",
-  "last_analyzed": "2026-06-15T10:42:45Z",
-  "quality_score": 4,
-  "assessment": "Substantive, strategic shiplog with proper data gathering, honest observations, and clean execution—minor temp file cleanup issue and memory date inconsistency noted but don't impact quality.",
+  "last_analyzed": "2026-06-22T10:36:15Z",
+  "quality_score": 5,
+  "assessment": "Specific, substantive output with concrete PR citations, quantified metrics, and clear alignment to strategic goals (ship engine, prove credibility, track momentum)",
   "flags": [],
-  "avg_score": 4,
+  "avg_score": 4.5,
   "history": [
     {
       "date": "2026-06-15",
       "score": 4
+    },
+    {
+      "date": "2026-06-22",
+      "score": 5
     }
   ]
 }
