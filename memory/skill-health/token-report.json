@@ -1,10 +1,10 @@
 {
   "skill": "token-report",
-  "last_analyzed": "2026-06-21T07:33:36Z",
+  "last_analyzed": "2026-06-22T06:15:23Z",
   "quality_score": 4,
-  "assessment": "Substantive, well-sourced, and actionable — fetched multiple data sources, cross-validated (1.1% deviation), computed time-series deltas, delivered clear verdict with reasoning, and persisted memory state. Output truncation prevents full article verification, and OHLCV fallback suggests minor data gaps, but execution and analysis are solid.",
+  "assessment": "Well-executed market report with specific metrics, clear verdict, proper documentation and follow-up",
   "flags": [],
-  "avg_score": 4.1,
+  "avg_score": 4.09,
   "history": [
     {
       "date": "2026-06-12",
@@ -44,6 +44,10 @@
     },
     {
       "date": "2026-06-21",
+      "score": 4
+    },
+    {
+      "date": "2026-06-22",
       "score": 4
     }
   ]
