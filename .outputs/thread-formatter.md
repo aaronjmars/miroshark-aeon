@@ -1,29 +1,14 @@
-# Thread — 2026-06-21
+*Thread Draft — 2026-06-22*
+Topic: Thinking-token budget separation — PR #203
 
-**Topic:** graph_tools locale threading — PR #198 on aaronjmars/MiroShark
-**Score:** 6 (signals: new-feature-pr-on-watched-repo)
-**Source events:**
-- Feature — aaronjmars/MiroShark: i18n locale threading for graph_tools._fallback_interview (ThreadPoolExecutor ContextVar drop); PR #198 closes issue #195; files: graph_tools.py + 4 locale files + regression test
-- push-recap-2026-06-21: PR #198 confirmed merged; SHIPPING verdict; "graph_tools fallback interview now localized for DE/FR/ZH users"
+1/ MiroShark's reasoning models used one max_tokens value for both thinking trace and response. blow the budget — thinking trace wins, response arrives empty. PR #203 splits them.
 
----
+2/ reasoning models on OpenRouter use a single max_tokens value. on Anthropic-routed models, max_tokens caps the full payload: thinking trace + response. same token budget that already broke suggest_scenarios (#187) — one pool, two consumers, first one wins.
 
-## Tweet 1
-MiroShark fixed the same concurrency bug for the fourth time in one week. a different call-site each time. the pattern: locale drops across ThreadPoolExecutor workers, agents revert to English. PR #198 closes the last known site.
+3/ PR #203: two new env vars. LLM_REASONING_MAX_TOKENS caps the thinking trace (Anthropic's thinking.budget_tokens). LLM_REASONING_EFFORT sets effort level (OpenAI's reasoning_effort). both map to OpenRouter's unified reasoning field. 8 new unit tests.
 
-## Tweet 2
-python's contextvars.ContextVar doesn't cross thread pool boundaries by default. MiroShark stores the active locale in one (i18n.py:25). when _fallback_interview spawns workers via ThreadPoolExecutor, they lose it. output arrives in English.
+4/ this is the third truncation-class fix in MiroShark's recent history: suggest_scenarios (#187), locale ContextVar drops (#194/#198), now reasoning token budget. pattern: one shared pool, multiple consumers, no guardrail until it silently fails.
 
-## Tweet 3
-PR #198: capture locale before the executor spawns, restore it inside each worker. new interview_single_agent_roleplay key in all four locale files (EN/ZH/DE/FR). regression test added. CI green.
+5/ PR #203 — thinking-token budget for reasoning models. https://github.com/aaronjmars/MiroShark/pull/203 🦈
 
-## Tweet 4
-DE/FR/ZH users can now run the full graph interview sim in their language. the broader bet: if a sim reverts to English mid-run, the result isn't a multilingual simulation — it's an English simulation with a costume. that's the class PR #198 closes.
-
-## Tweet 5
-PR #198 — graph_tools locale threading. https://github.com/aaronjmars/MiroShark/pull/198 🦈
-
----
-
-**Character counts:** 1: 229 | 2: 241 | 3: 195 | 4: 249 | 5: 90
-**Artifact link:** https://github.com/aaronjmars/MiroShark/pull/198
+(article: articles/thread-2026-06-22.md)

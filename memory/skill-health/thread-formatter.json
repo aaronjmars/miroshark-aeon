@@ -1,10 +1,12 @@
 {
   "skill": "thread-formatter",
-  "last_analyzed": "2026-06-21T18:06:55Z",
+  "last_analyzed": "2026-06-22T17:58:10Z",
   "quality_score": 4,
-  "assessment": "Substantive, well-structured thread with clear technical explanation, proper novelty dedup, and proof of execution",
-  "flags": [],
-  "avg_score": 4.09,
+  "assessment": "Substantive output with well-structured article, memory logs, and notifications. Proactively flagged PR status discrepancy, but marked for operator verification before publishing.",
+  "flags": [
+    "stale_data"
+  ],
+  "avg_score": 4.08,
   "history": [
     {
       "date": "2026-06-11",
@@ -48,6 +50,10 @@
     },
     {
       "date": "2026-06-21",
+      "score": 4
+    },
+    {
+      "date": "2026-06-22",
       "score": 4
     }
   ]
