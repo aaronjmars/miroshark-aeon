@@ -1,13 +1,11 @@
-*Repo Pulse — 2026-06-22* — [STEADY]
-aaronjmars/MiroShark — stars 1321 (+3) · forks 278 (+1)
-
-Notable new stargazers:
-github.com/Sundist — Sundisttt · 27 repos
+*Repo Pulse — 2026-06-23* — [STEADY]
+aaronjmars/MiroShark — stars 1329 (+8) · forks 279 (+1)
 
 Other new stargazers:
-github.com/disCodeOri | github.com/Gaius510
+github.com/pedrobastosribeiro | github.com/wrayste | github.com/LostElysium | github.com/dariodinicuolo
 
 New forks:
-github.com/shiblyrelyn — S M Shibly Rahman · 9 repos
+github.com/tomer-liran/MiroShark — Tomer Liran · 📍 Frankfurt, Germany · 12 repos · 🐦 @tomerlrn
+  "CTO & Co-Founder at Bridge | Building the distribution layer between SaaS and AI BSc Computer Science, Aberystwyth University"
 
-Source: stargazers-fallback
+Source: events

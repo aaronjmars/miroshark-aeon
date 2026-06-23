@@ -1,0 +1,284 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Repo Pulse"
+      },
+      "children": [
+        "date_status",
+        "repo_section",
+        "sep1",
+        "stargazers_section",
+        "sep2",
+        "forks_section",
+        "sep3",
+        "source_text"
+      ]
+    },
+    "date_status": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "date_text",
+        "status_badge"
+      ]
+    },
+    "date_text": {
+      "type": "Text",
+      "props": {
+        "text": "2026-06-23",
+        "variant": "muted"
+      },
+      "children": []
+    },
+    "status_badge": {
+      "type": "Badge",
+      "props": {
+        "text": "STEADY",
+        "variant": "default"
+      },
+      "children": []
+    },
+    "repo_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "repo_link",
+        "stats_stack"
+      ]
+    },
+    "repo_link": {
+      "type": "Link",
+      "props": {
+        "label": "aaronjmars/MiroShark",
+        "href": "https://github.com/aaronjmars/MiroShark"
+      },
+      "children": []
+    },
+    "stats_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "lg"
+      },
+      "children": [
+        "stars_stat",
+        "forks_stat"
+      ]
+    },
+    "stars_stat": {
+      "type": "Stat",
+      "props": {
+        "label": "stars",
+        "value": "1329",
+        "delta": "+8",
+        "trend": "up"
+      },
+      "children": []
+    },
+    "forks_stat": {
+      "type": "Stat",
+      "props": {
+        "label": "forks",
+        "value": "279",
+        "delta": "+1",
+        "trend": "up"
+      },
+      "children": []
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "stargazers_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stargazers_heading",
+        "stargazers_list"
+      ]
+    },
+    "stargazers_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "New Stargazers",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "stargazers_list": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "star1",
+        "star2",
+        "star3",
+        "star4"
+      ]
+    },
+    "star1": {
+      "type": "Link",
+      "props": {
+        "label": "pedrobastosribeiro",
+        "href": "https://github.com/pedrobastosribeiro"
+      },
+      "children": []
+    },
+    "star2": {
+      "type": "Link",
+      "props": {
+        "label": "wrayste",
+        "href": "https://github.com/wrayste"
+      },
+      "children": []
+    },
+    "star3": {
+      "type": "Link",
+      "props": {
+        "label": "LostElysium",
+        "href": "https://github.com/LostElysium"
+      },
+      "children": []
+    },
+    "star4": {
+      "type": "Link",
+      "props": {
+        "label": "dariodinicuolo",
+        "href": "https://github.com/dariodinicuolo"
+      },
+      "children": []
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "forks_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "forks_heading",
+        "fork1"
+      ]
+    },
+    "forks_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "New Forks",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "fork1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "fork_repo_link",
+        "fork_person_details",
+        "fork_bio"
+      ]
+    },
+    "fork_repo_link": {
+      "type": "Link",
+      "props": {
+        "label": "tomer-liran/MiroShark",
+        "href": "https://github.com/tomer-liran/MiroShark"
+      },
+      "children": []
+    },
+    "fork_person_details": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "fork_name",
+        "fork_location",
+        "fork_repos",
+        "fork_twitter"
+      ]
+    },
+    "fork_name": {
+      "type": "Text",
+      "props": {
+        "text": "Tomer Liran",
+        "variant": "lead"
+      },
+      "children": []
+    },
+    "fork_location": {
+      "type": "Text",
+      "props": {
+        "text": "📍 Frankfurt, Germany",
+        "variant": "caption"
+      },
+      "children": []
+    },
+    "fork_repos": {
+      "type": "Text",
+      "props": {
+        "text": "12 repos",
+        "variant": "caption"
+      },
+      "children": []
+    },
+    "fork_twitter": {
+      "type": "Link",
+      "props": {
+        "label": "🐦 @tomerlrn",
+        "href": "https://twitter.com/tomerlrn"
+      },
+      "children": []
+    },
+    "fork_bio": {
+      "type": "Text",
+      "props": {
+        "text": "CTO & Co-Founder at Bridge | Building the distribution layer between SaaS and AI BSc Computer Science, Aberystwyth University",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "source_text": {
+      "type": "Text",
+      "props": {
+        "text": "Source: events",
+        "variant": "caption"
+      },
+      "children": []
+    }
+  }
+}
