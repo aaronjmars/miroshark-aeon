@@ -1,22 +1,20 @@
-*Feature Built — 2026-06-22 — aaronjmars/MiroShark* 🦈
+*Feature Built — 2026-06-23 — aaronjmars/MiroShark* 🦈
 
-Thinking budget, sized on its own
-
-MiroShark now lets you set how many tokens a reasoning model spends *thinking* — separately from the tokens it spends *answering*. Two new env knobs: `LLM_REASONING_MAX_TOKENS` (a hard token budget) and `LLM_REASONING_EFFORT` (low/medium/high). Set either and the model thinks inside that cap instead of bleeding into the response.
+cost CLI subcommand
+`python -m cli cost <sim_id>` now prints what a run actually cost, right in the terminal. One line: estimated dollars, total tokens, LLM call count — then a per-phase breakdown (graph build / simulation / report). The "$1 to simulate anything" claim, queryable from a script.
 
 Why this matters:
-Right now one `max_tokens` pool covers both the thinking trace and the answer. On a reasoning model a long `<think>` quietly eats the response — the same truncation class that broke suggest_scenarios back in #187/#188. It was an open ask (#193). "$1 to simulate anything" only holds if cost is predictable, and you can't budget a run when thinking and answering share one untracked pool.
+the cost number already existed — `/cost.json` since #179, the `~$0.92` pill on EmbedView since #190 — but neither was reachable from a script. integrators running pipelines (AntFleet miroshark-bench and friends) had no way to audit spend without scraping a webpage. cost observability is table stakes, and the headline promise should be checkable the same way you run the sim: from the command line.
 
 What was built:
-- backend/app/config.py: `LLM_REASONING_MAX_TOKENS` (int) + `LLM_REASONING_EFFORT` (str) config
-- backend/app/utils/llm_client.py: `_resolve_reasoning_directive()` picks the right reasoning directive; `chat()` sends it via `extra_body`
-- backend/tests/test_unit_reasoning_config.py: offline tests for every precedence branch
-- .env.example + docs/CONFIGURATION.md: both knobs documented
+- backend/cli.py: new `cmd_cost` + `cost` subparser, reusing the existing `_api` helper. prints `~$X` when the figure is an estimate (mirrors the embed pill), plus token/call totals and a per-phase cost table.
+- backend/tests/test_unit_cli.py: registers `cost` in the subcommand assertion + adds `test_cost_parses_positional`.
+- docs/CLI.md + docs/CLI.zh-CN.md: command, exit codes, lower-bound caveat — translations in sync.
 
 How it works:
-Both knobs map to OpenRouter's unified `reasoning` field, so it's one code path across Anthropic, Gemini, and OpenAI o-series — a token budget maps to Anthropic's `thinking.budget_tokens`, effort maps to OpenAI's `reasoning_effort`. It extends the existing `LLM_DISABLE_REASONING` branch: a token count wins over effort, and setting either flips reasoning on even if disable is left at its default. Defaults don't move — unset means exactly today's behavior.
+thin client, no new deps — argparse + urllib only, same as the rest of the CLI. it GETs `/cost.json`, which returns the payload directly on success and `{success:false}` on error. exit codes carry meaning: 0 done, 1 private/server error, 2 not-ready (404, no LLM calls yet) so a script can tell "still running" from "failed". honest by construction — the `~` says lower bound, because models off the price table count as $0. no new endpoint, so the openapi drift test stays green.
 
 What's next:
-Wire it into the cost.json estimate so the thinking budget shows up in the per-sim cost surface — put the spend where strangers actually see it.
+pairs naturally with a `wait` command for a full `ask → wait → cost → report` one-liner. validation note: Python exec is blocked in the build sandbox, so unit tests run on the repo's CI on push, not here.
 
-PR: https://github.com/aaronjmars/MiroShark/pull/203
+PR: https://github.com/aaronjmars/MiroShark/pull/208
