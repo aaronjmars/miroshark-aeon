@@ -98,3 +98,4 @@ date,skill,model,input_tokens,output_tokens,cache_read,cache_creation
 2026-06-23,push-recap,claude-sonnet-4-6,24,15294,1433663,60424
 2026-06-23,project-lens,claude-sonnet-4-6,14,16732,772951,64673
 2026-06-23,tweet-digest,claude-sonnet-4-6,18,6896,1045597,55529
+2026-06-23,thread-formatter,claude-sonnet-4-6,12,21423,598978,64624
