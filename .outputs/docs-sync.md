@@ -1,4 +1,4 @@
-*Docs Sync — 2026-06-22*
+*Docs Sync — 2026-06-23*
 aaronjmars/miroshark → aaronjmars/miroshark-website
-28 new PRs → changelog entry "Full DE/FR locales + engine hardening"
-Bootstrap: /changelog page, docs Recent changes section, nav links added
+7 new PRs → changelog entry "Model fix, rebrand, and code audit"
+PR: https://github.com/aaronjmars/miroshark-website/pull/59
