@@ -1,13 +1,19 @@
+Done. Here's the run summary:
+
 ## Summary
 
-**star-momentum** run complete for 2026-06-22.
+**Skill**: star-momentum | **Status**: STAR_MOMENTUM_NO_ALERTS
 
-- **Repo audited**: `aaronjmars/MiroShark` (1 repo; `miroshark-aeon` filtered as agent repo)
-- **Data series**: 11 points over 10 days (2026-06-11 → 2026-06-21), all 1-day intervals
-- **v7** = 6.86/day · **v3** = 3.33/day (recent 3-day deceleration: 6→1→3 stars)
-- **Gap to 1500**: 182 stars · **Projected crossing**: 2026-07-19 (Sunday, 27 days out)
-- **Verdict**: `OUT_OF_WINDOW` — 27 days exceeds the 14-day ceiling; no alert fires
-- **Files written**: `articles/star-momentum-2026-06-22.md`, `memory/topics/star-momentum-state.json` (projected_date_v7 updated to 2026-07-19), `memory/logs/2026-06-22.md` (log block appended)
-- **Notification**: none — `STAR_MOMENTUM_NO_ALERTS`
+**aaronjmars/MiroShark** — 1321⭐ → 1500⭐ target, verdict **OUT_OF_WINDOW**
 
-The pace is trending below the 7-day average (v3 = 3.33 vs v7 = 6.86), so the projection may push out further if the slow patch continues. Even when the window narrows into range, the projected Sunday landing will need to shift to a Tue/Wed/Thu before `show-hn` dispatch makes sense.
+| | |
+|---|---|
+| v7 pace | 6.4 stars/day |
+| v3 pace | 2.3 stars/day (slowing) |
+| Gap | 179 stars |
+| Projected crossing (v7) | 2026-07-21 (Tuesday) — **28 days out** |
+| Show HN window | Opens ~2026-07-07 when projection falls inside 7–14d |
+
+The 1500-star milestone is still 4 weeks away — outside the 14-day dispatch ceiling. No notification was sent. The window to act opens in roughly two weeks if pace holds. The v3 slowdown (2.3/day vs v7's 6.4) is a mild flag that the Jun 17 spike (+16) is inflating the 7-day average; if the recent 1–3 star/day cadence persists, the crossing slips toward September.
+
+**Files written**: `articles/star-momentum-2026-06-23.md`, `memory/topics/star-momentum-state.json` (projected_date_v7 updated 07-19→07-21), `memory/logs/2026-06-23.md` (log appended).
