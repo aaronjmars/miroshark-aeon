@@ -1,13 +1,10 @@
 {
   "skill": "tweet-digest",
-  "last_analyzed": "2026-06-22T17:55:04Z",
-  "quality_score": 3,
-  "assessment": "Skill executed correctly with proper deduplication and notification, but digest output was minimal (1 bare-link item with no accessible content) and limited utility",
-  "flags": [
-    "low_quality",
-    "generic_content"
-  ],
-  "avg_score": 3.86,
+  "last_analyzed": "2026-06-23T17:24:09Z",
+  "quality_score": 4,
+  "assessment": "Substantive digest with concrete results, proper deduplication, and clean system integration.",
+  "flags": [],
+  "avg_score": 3.88,
   "history": [
     {
       "date": "2026-06-16",
@@ -36,6 +33,10 @@
     {
       "date": "2026-06-22",
       "score": 3
+    },
+    {
+      "date": "2026-06-23",
+      "score": 4
     }
   ]
 }

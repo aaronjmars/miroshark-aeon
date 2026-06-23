@@ -1,0 +1,68 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Tweet Digest — 2026-06-23"
+      },
+      "children": [
+        "text_theme",
+        "stack_tweets"
+      ]
+    },
+    "text_theme": {
+      "type": "Text",
+      "props": {
+        "text": "Theme: World Cup match sims 🦈",
+        "variant": "lead"
+      }
+    },
+    "stack_tweets": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "tweet_1",
+        "tweet_2",
+        "tweet_3",
+        "tweet_4"
+      ]
+    },
+    "tweet_1": {
+      "type": "TweetCard",
+      "props": {
+        "author": "Miroshark",
+        "handle": "miroshark_",
+        "text": "Argentina vs Austria — day 1 of yesterday's 4-sim World Cup batch, full match report in the thread — https://x.com/miroshark_/status/2068969366549315784"
+      }
+    },
+    "tweet_2": {
+      "type": "TweetCard",
+      "props": {
+        "author": "Miroshark",
+        "handle": "miroshark_",
+        "text": "France vs Iraq — day 2 sim, full report in comments — https://x.com/miroshark_/status/2069076166674108726"
+      }
+    },
+    "tweet_3": {
+      "type": "TweetCard",
+      "props": {
+        "author": "Miroshark",
+        "handle": "miroshark_",
+        "text": "Norway vs Senegal — day 3 — https://x.com/miroshark_/status/2069081833107546318"
+      }
+    },
+    "tweet_4": {
+      "type": "TweetCard",
+      "props": {
+        "author": "Miroshark",
+        "handle": "miroshark_",
+        "text": "Jordan vs Algeria — day 4, wraps the batch — https://x.com/miroshark_/status/2069083285439877208"
+      }
+    }
+  }
+}
