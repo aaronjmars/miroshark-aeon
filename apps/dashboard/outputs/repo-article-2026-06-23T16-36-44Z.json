@@ -1,0 +1,38 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "MiroShark Stopped Marketing the $1 and Started Letting You Audit It"
+      },
+      "children": [
+        "thesis",
+        "separator",
+        "story_link"
+      ]
+    },
+    "thesis": {
+      "type": "Text",
+      "props": {
+        "text": "MiroShark turned \"$1 to simulate\" from a tagline into a number you can audit — three cost surfaces in eight days (cost.json #179, embed pill #190, CLI cost #208), each an honest lower bound.",
+        "variant": "body"
+      }
+    },
+    "separator": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "story_link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Read full article",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-article-2026-06-23.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}
