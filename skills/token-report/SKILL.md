@@ -187,7 +187,12 @@ Save to `articles/token-report-${today}.md`:
 
 ### 6. Social sentiment (conditional)
 
-If `XAI_API_KEY` is set:
+**In the sandbox (GitHub Actions):** read the pre-fetched cache first —
+`.xai-cache/token-report-social.json`, written by `scripts/prefetch-xai.sh`
+(the `token-report` case) before Claude starts. Do **not** curl `api.x.ai`
+directly from the skill: the sandbox blocks the `Authorization: Bearer $XAI_API_KEY`
+header (env-var expansion fails), so the live call below always errors here. Only
+fall back to it when running outside the sandbox (no cache file present).
 
 ```bash
 curl -s -X POST "https://api.x.ai/v1/responses" \
@@ -200,7 +205,15 @@ curl -s -X POST "https://api.x.ai/v1/responses" \
   }'
 ```
 
-If the response has fewer than 2 tweets that clear the engagement bar, skip the Social Pulse section and set `xai=skip` in the footer. On API error, set `xai=fail` and skip. If `XAI_API_KEY` is not set, set `xai=skip`.
+Parse the `x_search` result (cache or live response) for notable tweets. If it has
+fewer than 2 tweets that clear the engagement bar (≥10 likes), skip the Social Pulse
+section and set `xai=skip` in the footer. If the cache file is missing (`XAI_API_KEY`
+unset or prefetch skipped — e.g. no tracked token), set `xai=skip`. If the file or
+response is an API-error payload, set `xai=fail` and skip.
+
+**Sandbox note:** auth-required APIs can't be called from inside the skill. The
+workflow runs `scripts/prefetch-*.sh` with full env before Claude starts and caches
+the response to `.xai-cache/`. See CLAUDE.md → Sandbox Limitations (pre-fetch pattern).
 
 ### 7. Save article
 

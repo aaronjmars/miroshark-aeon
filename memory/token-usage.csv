@@ -90,6 +90,7 @@ date,skill,model,input_tokens,output_tokens,cache_read,cache_creation
 2026-06-22,project-lens,claude-sonnet-4-6,1638,29222,1658013,83173
 2026-06-22,thread-formatter,claude-sonnet-4-6,3682,21430,669122,64241
 2026-06-22,heartbeat,claude-sonnet-4-6,11,8277,505718,49034
+2026-06-22,self-improve,claude-opus-4-8,2686,22559,3091019,74171
 2026-06-23,token-report,claude-sonnet-4-6,21,20326,1183045,55521
 2026-06-23,docs-sync,claude-sonnet-4-6,27,10130,1360457,43655
 2026-06-23,repo-pulse,claude-sonnet-4-6,24,12988,1501960,60390
