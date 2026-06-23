@@ -129,3 +129,14 @@ Tracks angle categories and theses used, to avoid repeats within 14 days.
   - https://www.pymc-labs.com/blog-posts/synthetic-consumers-a-practical-guide
   - https://github.com/aaronjmars/MiroShark
 - Note: All 8 angle categories exhausted within 14 days; picked Philosophy/big ideas as oldest single-use category (last used 06-14, 8 days ago).
+
+## 2026-06-23
+- Angle: Current events (June 6 US AI directive mandating red-teaming; 80% of enterprises already reporting risky agent behavior)
+- Thesis: Mandatory red-teaming tests each agent in isolation; the failures that will surface at enterprise scale — compounded errors propagating across agent networks — require multi-agent simulation to detect, and that class of testing doesn't exist yet.
+- Title: The Most Dangerous AI Failure Mode Isn't in the Model. It's Between the Models.
+- Sources:
+  - https://www.helpnetsecurity.com/2026/03/03/enterprise-ai-agent-security-2026/
+  - https://www.raconteur.net/technology/autonomous-ai-agents-2026-the-new-rules-for-business-governance
+  - https://labs.cloudsecurityalliance.org/research/csa-research-note-nist-ai-agent-red-teaming-standards-202603/
+  - https://github.com/aaronjmars/MiroShark
+- Note: All 8 angle categories exhausted within 14 days; picked Current events as oldest single-use category (last used 06-15, 8 days ago).

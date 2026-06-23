@@ -1,0 +1,108 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "project-lens",
+        "description": "New Article: The Most Dangerous AI Failure Mode Isn't in the Model. It's Between the Models."
+      },
+      "children": [
+        "heading_article",
+        "stack_content"
+      ]
+    },
+    "heading_article": {
+      "type": "Heading",
+      "props": {
+        "text": "The Most Dangerous AI Failure Mode Isn't in the Model. It's Between the Models.",
+        "level": "h2"
+      },
+      "children": []
+    },
+    "stack_content": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "text_directive",
+        "text_redteaming",
+        "stats_container",
+        "text_cascade",
+        "text_solution",
+        "link_read"
+      ]
+    },
+    "text_directive": {
+      "type": "Text",
+      "props": {
+        "text": "The June 6 US AI directive mandated red-teaming for frontier models — but red-teaming tests agents in isolation.",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "text_redteaming": {
+      "type": "Text",
+      "props": {
+        "text": "Enterprise reporting:",
+        "variant": "lead"
+      },
+      "children": []
+    },
+    "stats_container": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "lg"
+      },
+      "children": [
+        "stat_enterprises",
+        "stat_visibility"
+      ]
+    },
+    "stat_enterprises": {
+      "type": "Stat",
+      "props": {
+        "label": "Enterprises report risky autonomous agent behaviors",
+        "value": "80%"
+      },
+      "children": []
+    },
+    "stat_visibility": {
+      "type": "Stat",
+      "props": {
+        "label": "Have visibility into what their agents are doing",
+        "value": "21%"
+      },
+      "children": []
+    },
+    "text_cascade": {
+      "type": "Text",
+      "props": {
+        "text": "The failure mode isn't in any single model; it's in the cascades that emerge when a hundred agents treat each other's outputs as trusted inputs.",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "text_solution": {
+      "type": "Text",
+      "props": {
+        "text": "MiroShark's multi-agent simulation layer — suggest_scenarios, director_mode, multi-round propagation — is the testing infrastructure that regulatory frameworks haven't required yet but will need to.",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "link_read": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Read: The Most Dangerous AI Failure Mode Isn't in the Model. It's Between the Models.",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-06-23.md",
+        "source": "project-lens-2026-06-23"
+      },
+      "children": []
+    }
+  }
+}
