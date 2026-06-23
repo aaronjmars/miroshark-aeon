@@ -1,10 +1,10 @@
 {
   "skill": "push-recap",
-  "last_analyzed": "2026-06-22T16:21:07Z",
+  "last_analyzed": "2026-06-23T15:41:18Z",
   "quality_score": 4,
-  "assessment": "Substantive recap with specific PR details, concrete data points, clear categorization, and completed deliverables tracking.",
+  "assessment": "Substantive, well-structured output with clear shipping signals, specific commit classifications, and actionable verdict aligned to strategy.",
   "flags": [],
-  "avg_score": 4.17,
+  "avg_score": 4.15,
   "history": [
     {
       "date": "2026-06-11",
@@ -52,6 +52,10 @@
     },
     {
       "date": "2026-06-22",
+      "score": 4
+    },
+    {
+      "date": "2026-06-23",
       "score": 4
     }
   ]
