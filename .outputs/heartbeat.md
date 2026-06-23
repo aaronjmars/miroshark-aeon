@@ -1,10 +1,10 @@
 HEARTBEAT_OK · STATUS_PAGE=OK
 
-All clear. 16 enabled skills running at 100%, no failures, no stalls. PR #204 (the deprecated `mimo-v2-flash` model fix by external contributor tomer-liran) is ~4h old and not stalled. `docs/status.md` regenerated with updated token data (MIROSHARK CONSOLIDATING at $0.00000479, −9.7% 24h) and the full 16-skill health table.
+All checks passed. No notification needed.
 
-## Summary
-
-- **P0/P1/P2/P3:** All clear — no flags fired
-- **docs/status.md:** Rewritten with 2026-06-22 19:00 UTC timestamp, current token pulse, and 16-skill health table sorted by last run
-- **memory/logs/2026-06-22.md:** Heartbeat entry appended
-- **No notification sent** — nothing warranted
+**Summary:**
+- **P0 (failed/stuck):** Clean — all 16 enabled skills at 100% success rate, 0 consecutive failures. Heartbeat self-check is ~24h stale (well under the 36h threshold).
+- **P1 (stalled PRs):** 3 open PRs on MiroShark (#212/#213/#214, all from dan-and), opened <1h ago — not stalled.
+- **P2 (memory flags):** Engine-frozen streak and star velocity noted in MEMORY.md; deduped from prior logs, no new notification.
+- **P3 (missing skills):** All 16 enabled skills running on schedule.
+- **Status page:** `docs/status.md` updated — 🟢 OK, MIROSHARK CONSOLIDATING at +2.95% / $0.00000493, 16 skills all green. Next run: token-report at 06:00 UTC June 24.
