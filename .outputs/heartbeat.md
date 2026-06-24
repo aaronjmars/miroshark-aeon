@@ -1,10 +1,11 @@
-HEARTBEAT_OK · STATUS_PAGE=OK
+HEARTBEAT_OK · STATUS_PAGE=WATCH
 
-All checks passed. No notification needed.
+## Summary
 
-**Summary:**
-- **P0 (failed/stuck):** Clean — all 16 enabled skills at 100% success rate, 0 consecutive failures. Heartbeat self-check is ~24h stale (well under the 36h threshold).
-- **P1 (stalled PRs):** 3 open PRs on MiroShark (#212/#213/#214, all from dan-and), opened <1h ago — not stalled.
-- **P2 (memory flags):** Engine-frozen streak and star velocity noted in MEMORY.md; deduped from prior logs, no new notification.
-- **P3 (missing skills):** All 16 enabled skills running on schedule.
-- **Status page:** `docs/status.md` updated — 🟢 OK, MIROSHARK CONSOLIDATING at +2.95% / $0.00000493, 16 skills all green. Next run: token-report at 06:00 UTC June 24.
+**Checks run:**
+- **P0 (failed/stuck skills):** All 16 enabled skills clean — no failures, no stuck dispatches, no consecutive failures, no chronic degradation. Heartbeat self-check within 36h window (~23h since last success).
+- **P1 (stalled PRs):** 3 open PRs on aaronjmars/MiroShark stalled >24h — #212 (perf/robustness), #213 (i18n), #214 (interview hang fix), all from dan-and. All already logged today via repo-actions → notification deduped, no new alert sent.
+- **P2 (memory flags):** Nothing new to surface beyond what's been logged today.
+- **P3 (missing skills):** All 16 enabled skills have cron-state entries and ran within expected windows.
+
+**Status page:** Wrote `docs/status.md` — **🟡 WATCH** (stalled PRs fire P1 flag) with updated token pulse (MIROSHARK $0.000004285 / −13.1% / BREAKDOWN from today's report) and full skill health table.
