@@ -1,0 +1,64 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "self-improve"
+      },
+      "children": [
+        "stack_main"
+      ]
+    },
+    "stack_main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "text_problem",
+        "text_solution",
+        "text_impact",
+        "separator",
+        "link_pr"
+      ]
+    },
+    "text_problem": {
+      "type": "Text",
+      "props": {
+        "text": "token-report's xai=skip footer flag was masking whether the X-sentiment prefetch actually works",
+        "variant": "lead"
+      }
+    },
+    "text_solution": {
+      "type": "Text",
+      "props": {
+        "text": "Split into xai=quiet (ran, low chatter) vs xai=skip (no data fetched)",
+        "variant": "body"
+      }
+    },
+    "text_impact": {
+      "type": "Text",
+      "props": {
+        "text": "5 days of ambiguous skips become a readable signal",
+        "variant": "body"
+      }
+    },
+    "separator": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "link_pr": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #75",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/pull/75",
+        "source": "GitHub"
+      }
+    }
+  }
+}
