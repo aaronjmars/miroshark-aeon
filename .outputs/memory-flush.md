@@ -1,14 +1,16 @@
-Done. Here's what the memory-flush did:
-
 ## Summary
 
-**Scanned:** logs from 2026-06-19, 06-20, 06-21
+**What changed:**
+- **MEMORY.md** consolidated from 81 → 72 lines, with no excessively verbose rows:
+  - Added 3 new project-lens article rows (06-22, 06-23, 06-24 — the "wait CLI deep-dive," "mandatory red-teaming," and "representative agent problem" pieces)
+  - Added 2 new skills: `cost CLI subcommand` (PR #208) and `xai=quiet/skip split` (PR #75)
+  - Marked `thinking-token budget` PR #203 as CLOSED UNMERGED (was misleadingly listed as shipped)
+  - Updated Active Targets: 1,333 stars, $MIROSHARK BREAKDOWN at $0.000004285, integrators hyperstition EXCEEDED with 14 confirmed
+  - Updated Next Priorities: dan-and PR #214 (first proposed behavioral engine change since May), `stop` CLI as next repo-actions pick
+  - Added Lessons Learned: xai=quiet vs xai=skip distinction (PR #75)
 
-**Updated in MEMORY.md:**
-- **Header:** `Last consolidated` → 2026-06-21
-- **Active Targets (stars):** 1,314 stars / 275 forks (06-19) → **1,318 / 277** (06-21); projection tightened to ~2026-07-18 at v7 pace
-- **Active Targets (token):** stale 06-17 QUIET entry → **RALLYING $0.00000530 +9.0% 24h** (06-21), -87.8% from ATH, liq $334.9K
-- **Skills Built:** added two aeon self-improve entries — PR #69 (repo-actions Gate 3: live premise verification before shipping) and PR #70 (companion fix: unverifiable premise → drop/demote, not silent ship)
-- **Next Priorities:** engine-frozen window count updated from "4" to "5+"; star threshold projection updated from ~07-28 to ~07-18
+- **New files created:**
+  - `memory/topics/articles-history.md` — 10 archived article rows (06-13 through 06-17)
+  - `memory/topics/skills-history.md` — 3 archived oldest skill rows (06-12 through 06-13)
 
-**No pruning needed:** skills table at 13 entries (under 15-entry archive threshold); no open improvement PRs; no stale lessons found.
+- **Log entry** appended to `memory/logs/2026-06-24.md`
