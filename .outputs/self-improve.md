@@ -1,1 +1,1 @@
-self-improve: token-report Social Pulse was silently xai=skip every run — direct api.x.ai curl is sandbox-blocked. Added a token-report prefetch case (mirrors tweet-digest/#67) so X sentiment is cached pre-sandbox. PR: https://github.com/aaronjmars/miroshark-aeon/pull/74
+self-improve: token-report's xai=skip footer flag was masking whether the X-sentiment prefetch actually works — split it into xai=quiet (ran, low chatter) vs xai=skip (no data fetched), so 5 days of ambiguous skips become a readable signal. PR: https://github.com/aaronjmars/miroshark-aeon/pull/75

@@ -1,10 +1,10 @@
 {
   "skill": "self-improve",
-  "last_analyzed": "2026-06-22T14:40:30Z",
+  "last_analyzed": "2026-06-24T13:07:55Z",
   "quality_score": 4,
-  "assessment": "Substantive root-cause diagnosis with specific fix applying proven pattern, well-documented changes, PR created, proper follow-up status. Sandbox prevented local validation but explicitly noted and compensated.",
+  "assessment": "Substantive self-improvement run—found real observability gap in token-report, traced root cause across 5 days of logs, implemented clean split-flag fix with clear verification path",
   "flags": [],
-  "avg_score": 4.4,
+  "avg_score": 4.33,
   "history": [
     {
       "date": "2026-06-12",
@@ -24,6 +24,10 @@
     },
     {
       "date": "2026-06-22",
+      "score": 4
+    },
+    {
+      "date": "2026-06-24",
       "score": 4
     }
   ]

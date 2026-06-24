@@ -177,7 +177,7 @@ Save to `articles/token-report-${today}.md`:
 ---
 *Chart: https://www.geckoterminal.com/base/pools/POOL_ADDRESS*
 *Contract: CONTRACT_ADDRESS | Chain: Base*
-*Sources: gt=ok · ds=[ok|fail|divergent] · xai=[ok|skip|fail] · treasury=[ok|skip|fetch_fail]*
+*Sources: gt=ok · ds=[ok|fail|divergent] · xai=[ok|quiet|skip|fail] · treasury=[ok|skip|fetch_fail]*
 ```
 
 **Section discipline:**
@@ -205,11 +205,28 @@ curl -s -X POST "https://api.x.ai/v1/responses" \
   }'
 ```
 
-Parse the `x_search` result (cache or live response) for notable tweets. If it has
-fewer than 2 tweets that clear the engagement bar (≥10 likes), skip the Social Pulse
-section and set `xai=skip` in the footer. If the cache file is missing (`XAI_API_KEY`
-unset or prefetch skipped — e.g. no tracked token), set `xai=skip`. If the file or
-response is an API-error payload, set `xai=fail` and skip.
+Parse the `x_search` result (cache or live response) for notable tweets. Set the
+footer flag by what actually happened, so a broken prefetch is distinguishable from
+a quiet market:
+
+- **`xai=ok`** — the cache is present/valid and ≥2 tweets clear the engagement bar
+  (≥10 likes). Write the Social Pulse section.
+- **`xai=quiet`** — the cache is present and valid but fewer than 2 tweets clear the
+  bar. The prefetch ran and XAI responded; chatter is genuinely low. Skip the section.
+- **`xai=skip`** — the cache file is missing (`XAI_API_KEY` unset, or prefetch skipped
+  — e.g. no tracked token). No data was fetched. Skip the section.
+- **`xai=fail`** — the cache file or response is an API-error payload. Skip the section.
+
+Reserve `xai=skip` for *no data fetched* — never use it for a successful-but-quiet
+fetch (use `xai=quiet`). This keeps the prefetch's health observable in the daily log:
+a run of `xai=skip` means the prefetch isn't producing a cache and needs fixing,
+whereas `xai=quiet` means it's working and the token is just quiet.
+
+Caveat: `prefetch-xai.sh` only writes the cache on HTTP 200, so an API error during
+prefetch (HTTP 429/401/403) leaves no cache file and also surfaces as `xai=skip`, not
+`xai=fail`. Before concluding the prefetch is misconfigured on a run of `xai=skip`,
+check the same daily log for a `## XAI Prefetch Error` block — that distinguishes a
+transient/rate-limited fetch from an unset key.
 
 **Sandbox note:** auth-required APIs can't be called from inside the skill. The
 workflow runs `scripts/prefetch-*.sh` with full env before Claude starts and caches
@@ -232,7 +249,7 @@ Append to `memory/logs/${today}.md`:
 - TREASURY_WALLET_STATE: addr=0x6797…e3a2 role=deployer eth=X.XXXX
 - 24h: ±X.X% | 7d: ±X.X% | 30d: ±X.X%
 - Article: articles/token-report-${today}.md
-- Sources: gt=ok ds=[ok|fail|divergent] xai=[ok|skip|fail] treasury=[ok|skip|fetch_fail]
+- Sources: gt=ok ds=[ok|fail|divergent] xai=[ok|quiet|skip|fail] treasury=[ok|skip|fetch_fail]
 ```
 
 The `TOKEN_REPORT_STATE:` line is a contract — step 3 of the next run parses it with a key=value split. Keep the keys, order, and numeric formats stable. No currency symbols, no thousands separators. The `TREASURY_WALLET_STATE:` lines (one per fetched wallet) feed step 2b's 24h delta — parse them with the same key=value split, keyed on `addr`. Omit `TREASURY_STATE` and `TREASURY_WALLET_STATE` lines entirely on `treasury=skip` runs so a wallets.json that disappears later doesn't leave stale balances in the log.
