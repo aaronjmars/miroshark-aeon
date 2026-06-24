@@ -1,20 +1,22 @@
-*Feature Built — 2026-06-23 — aaronjmars/MiroShark* 🦈
+*Feature Built — 2026-06-24 — aaronjmars/MiroShark* 🦈
 
-cost CLI subcommand
-`python -m cli cost <sim_id>` now prints what a run actually cost, right in the terminal. One line: estimated dollars, total tokens, LLM call count — then a per-phase breakdown (graph build / simulation / report). The "$1 to simulate anything" claim, queryable from a script.
+`wait` — the CLI now blocks until your sim finishes
+A new `miroshark wait <sim_id>` command. it sits on a simulation and polls until the run actually ends — then exits clean (0 = completed, 1 = failed/stopped, 2 = timed out). no more babysitting a status check in a shell loop.
 
 Why this matters:
-the cost number already existed — `/cost.json` since #179, the `~$0.92` pill on EmbedView since #190 — but neither was reachable from a script. integrators running pipelines (AntFleet miroshark-bench and friends) had no way to audit spend without scraping a webpage. cost observability is table stakes, and the headline promise should be checkable the same way you run the sim: from the command line.
+yesterday `cost` landed in the CLI (#208). but cost only means anything once a run is done — and `status` is just a single snapshot. so every integrator scripting MiroShark was hand-rolling the same `while not done: sleep` loop themselves. this kills that boilerplate. one blocking call, correct exit codes, and `wait → report` / `wait → cost` becomes a one-liner. the $1 sim is only useful if a stranger can drive it from a script — this closes part of that gap.
 
 What was built:
-- backend/cli.py: new `cmd_cost` + `cost` subparser, reusing the existing `_api` helper. prints `~$X` when the figure is an estimate (mirrors the embed pill), plus token/call totals and a per-phase cost table.
-- backend/tests/test_unit_cli.py: registers `cost` in the subcommand assertion + adds `test_cost_parses_positional`.
-- docs/CLI.md + docs/CLI.zh-CN.md: command, exit codes, lower-bound caveat — translations in sync.
+- `backend/cli.py`: new `cmd_wait` — polls `/run-status`, reads the real `runner_status` lifecycle (completed/failed/stopped straight from RunnerStatus), monotonic-clock deadline, sleep capped so a long `--interval` never overshoots `--timeout`. progress prints to stderr so stdout stays clean for `--json` piping.
+- `backend/tests/test_unit_cli.py`: `wait` added to the known-subcommand set + a new test asserting defaults (5s / 600s) and float overrides parse.
+- `docs/CLI.md` + `docs/CLI.zh-CN.md`: table row + a "wait" section — exit codes, stderr progress, the `list → wait → report` pipeline. zh kept in sync.
 
 How it works:
-thin client, no new deps — argparse + urllib only, same as the rest of the CLI. it GETs `/cost.json`, which returns the payload directly on success and `{success:false}` on error. exit codes carry meaning: 0 done, 1 private/server error, 2 not-ready (404, no LLM calls yet) so a script can tell "still running" from "failed". honest by construction — the `~` says lower bound, because models off the price table count as $0. no new endpoint, so the openapi drift test stays green.
+pure argparse + urllib, no new deps. it reuses the existing `_api` helper to GET `/api/simulation/<id>/run-status` on a loop, lowercases `runner_status`, and matches it against terminal sets pulled from the engine's own enum. `--interval` tunes poll frequency, `--timeout` caps the wait, and the deadline is checked after each poll so a finished run is caught before sleeping. no new HTTP surface, so the openapi drift test is untouched.
 
 What's next:
-pairs naturally with a `wait` command for a full `ask → wait → cost → report` one-liner. validation note: Python exec is blocked in the build sandbox, so unit tests run on the repo's CI on push, not here.
+this rounds out the scriptable CLI trio — `status` (snapshot), `wait` (block), `cost` (audit). the natural follow-on is a `run`/`start` command so the whole `ask → run → wait → report` chain lives in one tool instead of bouncing through the web UI for the sim_id.
 
-PR: https://github.com/aaronjmars/MiroShark/pull/208
+PR: https://github.com/aaronjmars/MiroShark/pull/215
+
+Validation: pytest blocked by the autonomous sandbox — relied on diff review; the backend-unit CI job runs test_unit_cli.py on push and gates the merge.

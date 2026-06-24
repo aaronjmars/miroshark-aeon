@@ -1,0 +1,213 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "Feature Built — 2026-06-24 — aaronjmars/MiroShark 🦈",
+        "description": "miroshark wait: block until your simulation finishes"
+      },
+      "children": [
+        "intro",
+        "sep1",
+        "why-section",
+        "sep2",
+        "built-section",
+        "sep3",
+        "how-section",
+        "sep4",
+        "next-section",
+        "sep5",
+        "pr-section",
+        "sep6",
+        "validation-section"
+      ]
+    },
+    "intro": {
+      "type": "Text",
+      "props": {
+        "text": "A new miroshark wait <sim_id> command. it sits on a simulation and polls until the run actually ends — then exits clean (0 = completed, 1 = failed/stopped, 2 = timed out). no more babysitting a status check in a shell loop.",
+        "variant": "lead"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "why-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "why-heading",
+        "why-text"
+      ]
+    },
+    "why-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Why this matters",
+        "level": "h3"
+      }
+    },
+    "why-text": {
+      "type": "Text",
+      "props": {
+        "text": "yesterday cost landed in the CLI (#208). but cost only means anything once a run is done — and status is just a single snapshot. so every integrator scripting MiroShark was hand-rolling the same while not done: sleep loop themselves. this kills that boilerplate. one blocking call, correct exit codes, and wait → report / wait → cost becomes a one-liner. the $1 sim is only useful if a stranger can drive it from a script — this closes part of that gap."
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "built-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "built-heading",
+        "built-item1",
+        "built-item2",
+        "built-item3"
+      ]
+    },
+    "built-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "What was built",
+        "level": "h3"
+      }
+    },
+    "built-item1": {
+      "type": "Text",
+      "props": {
+        "text": "backend/cli.py: new cmd_wait — polls /run-status, reads the real runner_status lifecycle (completed/failed/stopped straight from RunnerStatus), monotonic-clock deadline, sleep capped so a long --interval never overshoots --timeout. progress prints to stderr so stdout stays clean for --json piping."
+      }
+    },
+    "built-item2": {
+      "type": "Text",
+      "props": {
+        "text": "backend/tests/test_unit_cli.py: wait added to the known-subcommand set + a new test asserting defaults (5s / 600s) and float overrides parse."
+      }
+    },
+    "built-item3": {
+      "type": "Text",
+      "props": {
+        "text": "docs/CLI.md + docs/CLI.zh-CN.md: table row + a \"wait\" section — exit codes, stderr progress, the list → wait → report pipeline. zh kept in sync."
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "how-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "how-heading",
+        "how-text"
+      ]
+    },
+    "how-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "How it works",
+        "level": "h3"
+      }
+    },
+    "how-text": {
+      "type": "Text",
+      "props": {
+        "text": "pure argparse + urllib, no new deps. it reuses the existing _api helper to GET /api/simulation/<id>/run-status on a loop, lowercases runner_status, and matches it against terminal sets pulled from the engine's own enum. --interval tunes poll frequency, --timeout caps the wait, and the deadline is checked after each poll so a finished run is caught before sleeping. no new HTTP surface, so the openapi drift test is untouched."
+      }
+    },
+    "sep4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "next-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "next-heading",
+        "next-text"
+      ]
+    },
+    "next-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "What's next",
+        "level": "h3"
+      }
+    },
+    "next-text": {
+      "type": "Text",
+      "props": {
+        "text": "this rounds out the scriptable CLI trio — status (snapshot), wait (block), cost (audit). the natural follow-on is a run/start command so the whole ask → run → wait → report chain lives in one tool instead of bouncing through the web UI for the sim_id."
+      }
+    },
+    "sep5": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "pr-section": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #215: Wait command implementation",
+        "href": "https://github.com/aaronjmars/MiroShark/pull/215",
+        "source": "GitHub"
+      }
+    },
+    "sep6": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "validation-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "validation-heading",
+        "validation-text"
+      ]
+    },
+    "validation-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Validation",
+        "level": "h3"
+      }
+    },
+    "validation-text": {
+      "type": "Text",
+      "props": {
+        "text": "pytest blocked by the autonomous sandbox — relied on diff review; the backend-unit CI job runs test_unit_cli.py on push and gates the merge."
+      }
+    }
+  }
+}
