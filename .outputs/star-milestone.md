@@ -1,17 +1,10 @@
-Done. Here's the summary of what happened:
+No new milestone crossed — `aaronjmars/MiroShark` sits at **1,333 stars**, and the highest threshold (1,000) is already recorded as a bootstrap entry from 2026-05-14. No notification was sent.
 
 ## Summary
 
-**Skill:** `star-milestone` | **Date:** 2026-06-23
-
-**Repos checked:** `aaronjmars/MiroShark` (skipped `miroshark-aeon` — agent repo)
-
-**Result:** No announcement.
-
-- Current stars: **1,331** — highest threshold crossed is **1,000**, already recorded as `(bootstrap)` on 2026-05-14 (step 5a)
-- Next threshold: **1,500** — needs ~169 more stars
-- Velocity snapshot: v7=53 stars, baseline ~4.4/day → **ORGANIC** shape (1.7× baseline)
-- Dispatch: step 8 not reached; `milestone-dispatch.json` has empty rules anyway
-- Logged to `memory/logs/2026-06-23.md`
-
-At current pace (~7.6 stars/day), the 1,500-star milestone is projected around **2026-07-15** — consistent with the star-momentum estimate of 2026-07-21.
+- **Repo checked**: `aaronjmars/MiroShark` (skipped `miroshark-aeon` — agent repo)
+- **Current stars**: 1,333 | **Highest threshold**: 1,000 (already recorded)
+- **Velocity**: v7=39/wk · v30=146 · baseline=4.9/day · last star today
+- **Next milestone**: 1,500 stars (~167 away, projected ~2026-07-24)
+- **Status**: `STAR_MILESTONE_QUIET` — no new threshold crossed, no notification sent
+- **Log updated**: `memory/logs/2026-06-24.md`
