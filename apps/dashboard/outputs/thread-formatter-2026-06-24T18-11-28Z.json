@@ -1,0 +1,81 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Thread Draft — 2026-06-24",
+        "description": "Topic: wait CLI subcommand (PR #215 on aaronjmars/MiroShark)"
+      },
+      "children": [
+        "stack_main"
+      ]
+    },
+    "stack_main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "text_1",
+        "text_2",
+        "text_3",
+        "text_4",
+        "storylink_pr",
+        "sep_article",
+        "text_article"
+      ]
+    },
+    "text_1": {
+      "type": "Text",
+      "props": {
+        "text": "MiroShark just shipped `wait` — a blocking CLI call that returns when a sim terminates. exit 0 if completed, exit 1 if failed, exit 2 if timeout. that's the whole interface.",
+        "variant": "body"
+      }
+    },
+    "text_2": {
+      "type": "Text",
+      "props": {
+        "text": "before this, scripting a run end-to-end meant writing your own poll loop. `status` returns a snapshot. cost and report only make sense once a run terminates. so integrators were rolling `while not done: sleep(5)` before they could do anything downstream.",
+        "variant": "body"
+      }
+    },
+    "text_3": {
+      "type": "Text",
+      "props": {
+        "text": "PR #215: argparse + urllib, no new deps. polls `/run-status`, matches `runner_status` against terminal sets from the RunnerStatus enum. progress goes to stderr, stdout stays clean for `--json`. monotonic deadline, sleep capped to remaining time.",
+        "variant": "body"
+      }
+    },
+    "text_4": {
+      "type": "Text",
+      "props": {
+        "text": "the practical consequence: `python cli.py wait <id> && python cli.py cost <id>`. that's a composable pipeline. run a sim, wait for it, check what it cost — no dashboard, no webhook, no glue code. the $1 claim becomes auditable from a shell script.",
+        "variant": "body"
+      }
+    },
+    "storylink_pr": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #215 — wait CLI subcommand on MiroShark 🦈",
+        "href": "https://github.com/aaronjmars/MiroShark/pull/215",
+        "source": "GitHub"
+      }
+    },
+    "sep_article": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "text_article": {
+      "type": "Text",
+      "props": {
+        "text": "article: articles/thread-2026-06-24.md",
+        "variant": "caption"
+      }
+    }
+  }
+}

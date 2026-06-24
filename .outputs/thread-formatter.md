@@ -1,14 +1,14 @@
-*Thread Draft — 2026-06-23*
-Topic: cost CLI subcommand — PR #208 on aaronjmars/MiroShark
+*Thread Draft — 2026-06-24*
+Topic: wait CLI subcommand (PR #215 on aaronjmars/MiroShark)
 
-1/ $1 to simulate anything. PR #208 makes that checkable from a terminal. `python cli.py cost <sim_id>` — the sim's dollar cost, locally, no dashboard login.
+1/ MiroShark just shipped `wait` — a blocking CLI call that returns when a sim terminates. exit 0 if completed, exit 1 if failed, exit 2 if timeout. that's the whole interface.
 
-2/ three cost surfaces now in MiroShark. cost.json API landed June 16 (PR #179) — lower bound on what a sim spent, flagged as an estimate since not all models are tracked. PR #190 put that number in the embed pill on the public sim page.
+2/ before this, scripting a run end-to-end meant writing your own poll loop. `status` returns a snapshot. cost and report only make sense once a run terminates. so integrators were rolling `while not done: sleep(5)` before they could do anything downstream.
 
-3/ PR #208: `cmd_cost` in cli.py:201. the `~$` prefix mirrors the embed pill — both gate on `is_estimate`. exit code 2 when no cost recorded, so scripts can distinguish 'zero spend' from 'never ran'. 81 lines, 4 files.
+3/ PR #215: argparse + urllib, no new deps. polls `/run-status`, matches `runner_status` against terminal sets from the RunnerStatus enum. progress goes to stderr, stdout stays clean for `--json`. monotonic deadline, sleep capped to remaining time.
 
-4/ all three surfaces read the same cost.json — one source, one undercount. that's the constraint: untracked models log as $0, so the number is a floor, not the full bill. shipping that caveat explicitly, in every surface, is the honest version of the claim.
+4/ the practical consequence: `python cli.py wait <id> && python cli.py cost <id>`. that's a composable pipeline. run a sim, wait for it, check what it cost — no dashboard, no webhook, no glue code. the $1 claim becomes auditable from a shell script.
 
-5/ PR #208 — cost CLI subcommand on MiroShark. https://github.com/aaronjmars/MiroShark/pull/208 🦈
+5/ PR #215 — wait CLI subcommand on MiroShark. https://github.com/aaronjmars/MiroShark/pull/215 🦈
 
-(article: articles/thread-2026-06-23.md)
+(article: articles/thread-2026-06-24.md)
