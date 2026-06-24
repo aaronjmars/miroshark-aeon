@@ -222,6 +222,12 @@ fetch (use `xai=quiet`). This keeps the prefetch's health observable in the dail
 a run of `xai=skip` means the prefetch isn't producing a cache and needs fixing,
 whereas `xai=quiet` means it's working and the token is just quiet.
 
+Caveat: `prefetch-xai.sh` only writes the cache on HTTP 200, so an API error during
+prefetch (HTTP 429/401/403) leaves no cache file and also surfaces as `xai=skip`, not
+`xai=fail`. Before concluding the prefetch is misconfigured on a run of `xai=skip`,
+check the same daily log for a `## XAI Prefetch Error` block — that distinguishes a
+transient/rate-limited fetch from an unset key.
+
 **Sandbox note:** auth-required APIs can't be called from inside the skill. The
 workflow runs `scripts/prefetch-*.sh` with full env before Claude starts and caches
 the response to `.xai-cache/`. See CLAUDE.md → Sandbox Limitations (pre-fetch pattern).
