@@ -1,0 +1,397 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "Repo Action Ideas — aaronjmars/MiroShark — 2026-06-24"
+      },
+      "children": [
+        "intro-text",
+        "sep-1",
+        "context-text",
+        "sep-2",
+        "top-pick-section",
+        "sep-3",
+        "implementation-heading",
+        "ideas-stack",
+        "sep-4",
+        "details-link"
+      ]
+    },
+    "intro-text": {
+      "type": "Heading",
+      "props": {
+        "text": "Five implementable ideas this cycle",
+        "level": "h3"
+      }
+    },
+    "sep-1": {
+      "type": "Separator",
+      "props": {}
+    },
+    "context-text": {
+      "type": "Text",
+      "props": {
+        "text": "Top pick wires the only missing CLI-to-API path — `/stop` has been live since the SimulationRunner was built but has no CLI entry point, leaving automation scripts unable to cancel a stuck run even when `wait` (just shipped as #215) detects a timeout.",
+        "variant": "body"
+      }
+    },
+    "sep-2": {
+      "type": "Separator",
+      "props": {}
+    },
+    "top-pick-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "top-pick-title",
+        "top-pick-description",
+        "top-pick-badges"
+      ]
+    },
+    "top-pick-title": {
+      "type": "Heading",
+      "props": {
+        "text": "Top pick: Add `stop` CLI subcommand to cancel a running simulation",
+        "level": "h3"
+      }
+    },
+    "top-pick-description": {
+      "type": "Text",
+      "props": {
+        "text": "Completes the automation lifecycle: `wait || stop` cleanly kills a timed-out run without raw-curling the API.",
+        "variant": "lead"
+      }
+    },
+    "top-pick-badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "top-badge-priority",
+        "top-badge-category",
+        "top-badge-size"
+      ]
+    },
+    "top-badge-priority": {
+      "type": "Badge",
+      "props": {
+        "text": "Priority HIGH",
+        "variant": "destructive"
+      }
+    },
+    "top-badge-category": {
+      "type": "Badge",
+      "props": {
+        "text": "DX/Feature",
+        "variant": "secondary"
+      }
+    },
+    "top-badge-size": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "secondary"
+      }
+    },
+    "sep-3": {
+      "type": "Separator",
+      "props": {}
+    },
+    "implementation-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Implementation Ideas",
+        "level": "h3"
+      }
+    },
+    "ideas-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "idea-1",
+        "idea-2",
+        "idea-3",
+        "idea-4",
+        "idea-5"
+      ]
+    },
+    "idea-1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "idea-1-text",
+        "idea-1-badges"
+      ]
+    },
+    "idea-1-text": {
+      "type": "Text",
+      "props": {
+        "text": "1. Add `stop` CLI subcommand",
+        "variant": "lead"
+      }
+    },
+    "idea-1-badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "idea-1-priority",
+        "idea-1-category",
+        "idea-1-size"
+      ]
+    },
+    "idea-1-priority": {
+      "type": "Badge",
+      "props": {
+        "text": "HIGH",
+        "variant": "destructive"
+      }
+    },
+    "idea-1-category": {
+      "type": "Badge",
+      "props": {
+        "text": "DX/Feature",
+        "variant": "default"
+      }
+    },
+    "idea-1-size": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "default"
+      }
+    },
+    "idea-2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "idea-2-text",
+        "idea-2-badges"
+      ]
+    },
+    "idea-2-text": {
+      "type": "Text",
+      "props": {
+        "text": "2. Add LLM model fallback chain to survive OpenRouter deprecations",
+        "variant": "lead"
+      }
+    },
+    "idea-2-badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "idea-2-priority",
+        "idea-2-category",
+        "idea-2-size"
+      ]
+    },
+    "idea-2-priority": {
+      "type": "Badge",
+      "props": {
+        "text": "HIGH",
+        "variant": "destructive"
+      }
+    },
+    "idea-2-category": {
+      "type": "Badge",
+      "props": {
+        "text": "DX/Performance",
+        "variant": "default"
+      }
+    },
+    "idea-2-size": {
+      "type": "Badge",
+      "props": {
+        "text": "Medium",
+        "variant": "default"
+      }
+    },
+    "idea-3": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "idea-3-text",
+        "idea-3-badges"
+      ]
+    },
+    "idea-3-text": {
+      "type": "Text",
+      "props": {
+        "text": "3. Add `--lang` flag to `report` CLI for localized reports",
+        "variant": "lead"
+      }
+    },
+    "idea-3-badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "idea-3-priority",
+        "idea-3-category",
+        "idea-3-size"
+      ]
+    },
+    "idea-3-priority": {
+      "type": "Badge",
+      "props": {
+        "text": "MED",
+        "variant": "secondary"
+      }
+    },
+    "idea-3-category": {
+      "type": "Badge",
+      "props": {
+        "text": "DX/Feature",
+        "variant": "default"
+      }
+    },
+    "idea-3-size": {
+      "type": "Badge",
+      "props": {
+        "text": "Small",
+        "variant": "default"
+      }
+    },
+    "idea-4": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "idea-4-text",
+        "idea-4-badges"
+      ]
+    },
+    "idea-4-text": {
+      "type": "Text",
+      "props": {
+        "text": "4. Add Spanish (ES) locale across the full prompt system",
+        "variant": "lead"
+      }
+    },
+    "idea-4-badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "idea-4-priority",
+        "idea-4-category",
+        "idea-4-size"
+      ]
+    },
+    "idea-4-priority": {
+      "type": "Badge",
+      "props": {
+        "text": "MED",
+        "variant": "secondary"
+      }
+    },
+    "idea-4-category": {
+      "type": "Badge",
+      "props": {
+        "text": "Community/Growth",
+        "variant": "default"
+      }
+    },
+    "idea-4-size": {
+      "type": "Badge",
+      "props": {
+        "text": "Medium",
+        "variant": "default"
+      }
+    },
+    "idea-5": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "idea-5-text",
+        "idea-5-badges"
+      ]
+    },
+    "idea-5-text": {
+      "type": "Text",
+      "props": {
+        "text": "5. Add `--limit`/`--offset` to `list` CLI + server-side pagination",
+        "variant": "lead"
+      }
+    },
+    "idea-5-badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "idea-5-priority",
+        "idea-5-category",
+        "idea-5-size"
+      ]
+    },
+    "idea-5-priority": {
+      "type": "Badge",
+      "props": {
+        "text": "MED",
+        "variant": "secondary"
+      }
+    },
+    "idea-5-category": {
+      "type": "Badge",
+      "props": {
+        "text": "DX",
+        "variant": "default"
+      }
+    },
+    "idea-5-size": {
+      "type": "Badge",
+      "props": {
+        "text": "Medium",
+        "variant": "default"
+      }
+    },
+    "sep-4": {
+      "type": "Separator",
+      "props": {}
+    },
+    "details-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full details",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/repo-actions-2026-06-24.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}
