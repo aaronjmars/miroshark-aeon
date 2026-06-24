@@ -107,3 +107,4 @@ date,skill,model,input_tokens,output_tokens,cache_read,cache_creation
 2026-06-24,push-recap,claude-sonnet-4-6,18,13816,932994,52824
 2026-06-24,repo-actions,claude-sonnet-4-6,38,43220,2848304,92802
 2026-06-24,repo-article,claude-opus-4-8,2521,23455,1637390,102154
+2026-06-24,tweet-digest,claude-sonnet-4-6,14,4692,696325,46924

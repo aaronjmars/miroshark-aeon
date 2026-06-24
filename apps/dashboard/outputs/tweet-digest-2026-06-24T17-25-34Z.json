@@ -1,0 +1,46 @@
+{
+  "root": "card_root",
+  "state": {},
+  "elements": {
+    "card_root": {
+      "type": "Card",
+      "props": {
+        "title": "Tweet Digest — 2026-06-24"
+      },
+      "children": [
+        "theme_text",
+        "separator",
+        "tweet_card",
+        "tweet_link"
+      ]
+    },
+    "theme_text": {
+      "type": "Text",
+      "props": {
+        "text": "Theme: World Cup sims 🦈",
+        "variant": "lead"
+      }
+    },
+    "separator": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "tweet_card": {
+      "type": "TweetCard",
+      "props": {
+        "author": "miroshark_",
+        "handle": "miroshark_",
+        "text": "England 🏴󠁧󠁢󠁥󠁮󠁧󠁥 vs Ghana 🇬🇭 World Cup simulation posted Jun 23 — full report threaded below"
+      }
+    },
+    "tweet_link": {
+      "type": "Link",
+      "props": {
+        "label": "View thread",
+        "href": "https://x.com/miroshark_/status/2069446145365995554"
+      }
+    }
+  }
+}

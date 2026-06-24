@@ -1,10 +1,10 @@
 {
   "skill": "tweet-digest",
-  "last_analyzed": "2026-06-23T17:24:09Z",
+  "last_analyzed": "2026-06-24T17:25:34Z",
   "quality_score": 4,
-  "assessment": "Substantive digest with concrete results, proper deduplication, and clean system integration.",
+  "assessment": "Well-structured, complete execution with proper dedup against memory logs; identified and surfaced 1 fresh tweet, integrated caching correctly, logged for continuity",
   "flags": [],
-  "avg_score": 3.88,
+  "avg_score": 3.89,
   "history": [
     {
       "date": "2026-06-16",
@@ -36,6 +36,10 @@
     },
     {
       "date": "2026-06-23",
+      "score": 4
+    },
+    {
+      "date": "2026-06-24",
       "score": 4
     }
   ]
