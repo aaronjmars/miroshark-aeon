@@ -1,4 +1,4 @@
-*Docs Sync — 2026-06-23*
+*Docs Sync — 2026-06-24*
 aaronjmars/miroshark → aaronjmars/miroshark-website
-7 new PRs → changelog entry "Model fix, rebrand, and code audit"
-PR: https://github.com/aaronjmars/miroshark-website/pull/59
+4 new PRs → changelog entry "Thinking model robustness, JSON repair, and cost CLI"
+PR: https://github.com/aaronjmars/miroshark-website/pull/77
