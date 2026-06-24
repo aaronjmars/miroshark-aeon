@@ -1,0 +1,431 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "Push Recap — 2026-06-24",
+        "description": "aaronjmars/MiroShark — SHIPPING — wait subcommand and thinking-model robustness ship; automation pipeline complete"
+      },
+      "children": [
+        "shipped-section",
+        "sep1",
+        "under-hood-section",
+        "sep2",
+        "stats-section",
+        "recap-link"
+      ]
+    },
+    "shipped-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "shipped-heading",
+        "wait-feature",
+        "thinking-feature",
+        "cost-feature"
+      ]
+    },
+    "shipped-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Shipped to users",
+        "level": "h2"
+      },
+      "children": []
+    },
+    "wait-feature": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "wait-title",
+        "wait-desc",
+        "wait-files",
+        "wait-delta"
+      ]
+    },
+    "wait-title": {
+      "type": "Heading",
+      "props": {
+        "text": "`wait` CLI subcommand",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "wait-desc": {
+      "type": "Text",
+      "props": {
+        "text": "Blocks until a simulation reaches a terminal state (exit 0 completed / 1 failed+stopped / 2 timeout), eliminating hand-rolled poll loops — `wait \"$SIM\" && report \"$SIM\"` now just works",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "wait-files": {
+      "type": "Text",
+      "props": {
+        "text": "cli.py, 4 files total",
+        "variant": "caption"
+      },
+      "children": []
+    },
+    "wait-delta": {
+      "type": "Text",
+      "props": {
+        "text": "+121 / −1 lines",
+        "variant": "muted"
+      },
+      "children": []
+    },
+    "thinking-feature": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "thinking-title",
+        "thinking-desc",
+        "thinking-details",
+        "thinking-delta"
+      ]
+    },
+    "thinking-title": {
+      "type": "Heading",
+      "props": {
+        "text": "Thinking-model engine hardening (dan-and)",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "thinking-desc": {
+      "type": "Text",
+      "props": {
+        "text": "Robust thinking-model integration with token budgeting and repair",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "thinking-details": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "th-d1",
+        "th-d2",
+        "th-d3",
+        "th-d4"
+      ]
+    },
+    "th-d1": {
+      "type": "Text",
+      "props": {
+        "text": "llm_client.py pads max_tokens with THINKING_BUDGET_TOKENS",
+        "variant": "caption"
+      },
+      "children": []
+    },
+    "th-d2": {
+      "type": "Text",
+      "props": {
+        "text": "Strips unclosed <think> blocks, returns None on empty content for retries",
+        "variant": "caption"
+      },
+      "children": []
+    },
+    "th-d3": {
+      "type": "Text",
+      "props": {
+        "text": "json_repair.py fixes invalid escape sequences",
+        "variant": "caption"
+      },
+      "children": []
+    },
+    "th-d4": {
+      "type": "Text",
+      "props": {
+        "text": "6 call sites get repair_truncated=True; CAMEL sim runner uses combined token budget",
+        "variant": "caption"
+      },
+      "children": []
+    },
+    "thinking-delta": {
+      "type": "Text",
+      "props": {
+        "text": "9 files, +97 / −21 lines",
+        "variant": "muted"
+      },
+      "children": []
+    },
+    "cost-feature": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "cost-title",
+        "cost-desc",
+        "cost-files",
+        "cost-delta"
+      ]
+    },
+    "cost-title": {
+      "type": "Heading",
+      "props": {
+        "text": "`cost` CLI subcommand",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "cost-desc": {
+      "type": "Text",
+      "props": {
+        "text": "Surfaces per-run USD estimate at the terminal so \"$1 to simulate anything\" is verifiable from automation scripts, not only the embed widget",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "cost-files": {
+      "type": "Text",
+      "props": {
+        "text": "cli.py, docs, tests",
+        "variant": "caption"
+      },
+      "children": []
+    },
+    "cost-delta": {
+      "type": "Text",
+      "props": {
+        "text": "+81 / −1 lines",
+        "variant": "muted"
+      },
+      "children": []
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "under-hood-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "under-hood-heading",
+        "graph-fix"
+      ]
+    },
+    "under-hood-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Under the hood",
+        "level": "h2"
+      },
+      "children": []
+    },
+    "graph-fix": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "gf-title",
+        "gf-desc"
+      ]
+    },
+    "gf-title": {
+      "type": "Heading",
+      "props": {
+        "text": "Graph fan-out fix (#211)",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "gf-desc": {
+      "type": "Text",
+      "props": {
+        "text": "#209's total-failure fallback narrowed PanoramaSearch to 1 sub-query; restored the 4-way semantic default (participants / causes / development process)",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "stats-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "lg"
+      },
+      "children": [
+        "stats-heading",
+        "shape-group",
+        "volume-group"
+      ]
+    },
+    "stats-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Summary",
+        "level": "h2"
+      },
+      "children": []
+    },
+    "shape-group": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "shape-label",
+        "shape-grid"
+      ]
+    },
+    "shape-label": {
+      "type": "Text",
+      "props": {
+        "text": "Shape",
+        "variant": "lead"
+      },
+      "children": []
+    },
+    "shape-grid": {
+      "type": "Grid",
+      "props": {
+        "columns": 5,
+        "gap": "md"
+      },
+      "children": [
+        "stat1",
+        "stat2",
+        "stat3",
+        "stat4",
+        "stat5"
+      ]
+    },
+    "stat1": {
+      "type": "Stat",
+      "props": {
+        "label": "User-visible",
+        "value": "5"
+      },
+      "children": []
+    },
+    "stat2": {
+      "type": "Stat",
+      "props": {
+        "label": "Internal",
+        "value": "2"
+      },
+      "children": []
+    },
+    "stat3": {
+      "type": "Stat",
+      "props": {
+        "label": "Infra",
+        "value": "0"
+      },
+      "children": []
+    },
+    "stat4": {
+      "type": "Stat",
+      "props": {
+        "label": "Bot-filtered",
+        "value": "~40"
+      },
+      "children": []
+    },
+    "stat5": {
+      "type": "Stat",
+      "props": {
+        "label": "Merged PRs",
+        "value": "7"
+      },
+      "children": []
+    },
+    "volume-group": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "volume-label",
+        "volume-grid"
+      ]
+    },
+    "volume-label": {
+      "type": "Text",
+      "props": {
+        "text": "Volume (MiroShark product commits)",
+        "variant": "lead"
+      },
+      "children": []
+    },
+    "volume-grid": {
+      "type": "Grid",
+      "props": {
+        "columns": 3,
+        "gap": "md"
+      },
+      "children": [
+        "stat-files",
+        "stat-add",
+        "stat-rem"
+      ]
+    },
+    "stat-files": {
+      "type": "Stat",
+      "props": {
+        "label": "Files",
+        "value": "19"
+      },
+      "children": []
+    },
+    "stat-add": {
+      "type": "Stat",
+      "props": {
+        "label": "Added",
+        "value": "+308"
+      },
+      "children": []
+    },
+    "stat-rem": {
+      "type": "Stat",
+      "props": {
+        "label": "Removed",
+        "value": "−25"
+      },
+      "children": []
+    },
+    "recap-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full recap",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-06-24.md",
+        "source": "GitHub"
+      },
+      "children": []
+    }
+  }
+}

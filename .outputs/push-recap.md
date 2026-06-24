@@ -1,15 +1,15 @@
-*Push Recap — 2026-06-23*
-aaronjmars/MiroShark — SHIPPING — `cost` CLI lands; deprecated mimo-v2-flash default swapped to mimo-v2.5
+*Push Recap — 2026-06-24*
+aaronjmars/MiroShark — SHIPPING — wait subcommand and thinking-model robustness ship; automation pipeline complete
 
 Shipped to users:
-• `cef787b` — `python backend/cli.py cost <sim_id>` now prints `~$X.XXXX (tokens, calls)` with per-phase breakdown; the "$1 claim" is scriptable from automation pipelines
-• `ec707cd` — default model switched from deprecated `xiaomi/mimo-v2-flash` to `xiaomi/mimo-v2.5` in config.py, settings.py Cloud preset, run_summary.py pricing, and all deploy templates — clean installs no longer 404 on first run
-• `fc69fb4` — hero chip on Home.vue updated to "Your first result in under 10 minutes"; OpenRouter attribution headers now point to miroshark.xyz; "Universal Swarm Intelligence Engine" tagline retired
+• `wait` CLI subcommand blocks until a simulation reaches a terminal state (exit 0 completed / 1 failed+stopped / 2 timeout), eliminating hand-rolled poll loops — `wait "$SIM" && report "$SIM"` now just works (cli.py, 4 files, +121/−1)
+• Thinking-model engine hardening (dan-and): `llm_client.py` pads `max_tokens` with `THINKING_BUDGET_TOKENS`, strips unclosed `<think>` blocks, returns `None` on empty content so retries fire; `json_repair.py` fixes invalid escape sequences; 6 call sites get `repair_truncated=True`; CAMEL sim runner gets the combined token budget (9 files, +97/−21)
+• `cost` CLI subcommand surfaces per-run USD estimate at the terminal so "$1 to simulate anything" is verifiable from automation scripts, not only the embed widget (cli.py, docs, tests, +81/−1)
 
 Under the hood:
-• `6cf32a8` — 680 lines removed: SimulationIPCServer + GraphBuilderService async paths deleted, 5 per-channel notify services collapsed into shared _notify_base.py, simulation_runner.py fan-out consolidated (−359 lines)
+• Graph fan-out fix (#211): #209's total-failure fallback narrowed PanoramaSearch to 1 sub-query; restored the 4-way semantic default (participants / causes / development process)
 
-Shape: 3 user-visible · 1 internal · 0 infra · 0 bot-filtered · 4 merged PRs
-Volume: 55 files, +620/−1219 lines
+Shape: 5 user-visible · 2 internal · 0 infra · ~40 bot-filtered · 7 merged PRs
+Volume: 19 files, +308/−25 lines (MiroShark product commits)
 
-Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-06-23.md
+Full recap: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/push-recap-2026-06-24.md
