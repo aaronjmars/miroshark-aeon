@@ -140,3 +140,15 @@ Tracks angle categories and theses used, to avoid repeats within 14 days.
   - https://labs.cloudsecurityalliance.org/research/csa-research-note-nist-ai-agent-red-teaming-standards-202603/
   - https://github.com/aaronjmars/MiroShark
 - Note: All 8 angle categories exhausted within 14 days; picked Current events as oldest single-use category (last used 06-15, 8 days ago).
+
+## 2026-06-24
+- Angle: Technical deep-dive for non-technical readers (the `wait` CLI subcommand — blocking exit-code interface vs webhook callbacks for async AI APIs)
+- Thesis: The right async contract for shell-script and CI integrators is an exit code, not a webhook — and if most integrations are built from server-side code rather than scripts, the bet was wrong.
+- Title: When Your Async API Can't Block, Someone Else Writes the Polling Loop
+- Sources:
+  - https://jannikreinhard.com/2026/02/22/why-cli-tools-are-beating-mcp-for-ai-agents/
+  - https://bugfree.ai/knowledge-hub/webhook-vs-polling-system-design-tradeoffs
+  - https://agnost.ai/blog/long-running-tasks-mcp/
+  - https://medium.com/@nile.bits/webhooks-vs-polling-431294f5af8a
+  - https://github.com/aaronjmars/MiroShark
+- Note: All 8 angle categories exhausted within 14 days; picked Technical deep-dive as oldest single-use category (last used 06-16, 8 days ago).
