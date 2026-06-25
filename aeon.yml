@@ -27,7 +27,7 @@ skills:
   github-issues: { enabled: false, schedule: "0 9 * * *" }
   github-trending: { enabled: false, schedule: "0 9 * * *" }
   github-releases: { enabled: false, schedule: "30 9 * * *" } # track new releases from watched repos
-  docs-sync: { enabled: true, schedule: "0 8 * * *", var: "" } # daily (8am UTC) — turn the product repo's newly-merged PRs into a changelog entry on the marketing site, via a draft PR on the website repo. Config (product_repo/website_repo) in memory/docs-sync.md; override with var "product->website". Idempotent by PR number, bounded to a lookback window. Requires GH_GLOBAL (cross-repo write).
+  docs-sync: { enabled: true, schedule: "0 8 */3 * *", var: "" } # daily (8am UTC) — turn the product repo's newly-merged PRs into a changelog entry on the marketing site, via a draft PR on the website repo. Config (product_repo/website_repo) in memory/docs-sync.md; override with var "product->website". Idempotent by PR number, bounded to a lookback window. Requires GH_GLOBAL (cross-repo write).
   huggingface-trending: { enabled: false, schedule: "30 9 * * *", var: "" } # daily — curated trending HF models/datasets/spaces with "why notable" lines, momentum tags, and bucket clustering. Set var to one of {models, datasets, spaces} to scope.
 
   # --- Midday (12 PM UTC) ---
@@ -84,13 +84,13 @@ skills:
   reg-monitor: { enabled: false, schedule: "0 14 * * 3" } # regulatory developments tracker
 
   # --- Repo intelligence (3 PM UTC) ---
-  push-recap: { enabled: true, schedule: "0 15 * * *" }
-  repo-article: { enabled: true, schedule: "0 16 * * *", model: "claude-opus-4-8" }
-  repo-actions: { enabled: true, schedule: "0 14 */2 * *" }
-  repo-pulse: { enabled: true, schedule: "0 10 * * *" }
-  star-milestone: { enabled: true, schedule: "15 15 * * *" }
-  star-momentum: { enabled: true, schedule: "10 10 * * *", var: "" }
-  project-lens: { enabled: true, schedule: "0 16 * * *" }
+  push-recap: { enabled: false, schedule: "0 15 * * *" }
+  repo-article: { enabled: false, schedule: "0 16 * * *", model: "claude-opus-4-8" }
+  repo-actions: { enabled: false, schedule: "0 14 */2 * *" }
+  repo-pulse: { enabled: true, schedule: "0 10 */2 * *" }
+  star-milestone: { enabled: false, schedule: "15 15 * * *" }
+  star-momentum: { enabled: false, schedule: "10 10 * * *", var: "" }
+  project-lens: { enabled: false, schedule: "0 16 * * *" }
   repo-scanner: { enabled: false, schedule: "0 15 * * 0", var: "" } # catalog all GitHub repos — set var to username
 
   # --- Late afternoon (4 PM UTC) ---
@@ -119,7 +119,7 @@ skills:
 
   # --- Feed generation (5:30 PM UTC, after content skills) ---
   rss-feed: { enabled: false, schedule: "30 17 * * *" }
-  thread-formatter: { enabled: true, schedule: "30 17 * * *", var: "" }
+  thread-formatter: { enabled: false, schedule: "30 17 * * *", var: "" }
 
   # --- Gallery update (Sunday 6 PM UTC, after content week) ---
   update-gallery: { enabled: false, schedule: "0 18 * * 0" }
@@ -132,7 +132,7 @@ skills:
   skill-health: { enabled: false, schedule: "0 18 * * *" }
   skill-analytics: { enabled: false, schedule: "30 18 * * 3" } # Wednesday — fleet-level skill-run analytics: ranked run counts, exit-taxonomy distribution, anomaly flags (significance-gated)
 
-  self-improve: { enabled: true, schedule: "0 13 */2 * *", model: "claude-opus-4-8" }
+  self-improve: { enabled: false, schedule: "0 13 */2 * *", model: "claude-opus-4-8" }
   reflect: { enabled: false, schedule: "0 18 * * *" }
 
   action-converter: { enabled: false, schedule: "0 18 * * *" }
@@ -166,7 +166,7 @@ skills:
   fleet-control: { enabled: false, schedule: "0 9,15 * * *" } # fleet health checks twice daily, dispatch via var
   fleet-scorecard: { enabled: false, schedule: "0 13 * * *" } # daily 13:00 UTC — fleet-wide scorecard (self + every non-archived repo in memory/instances.json): runs, tokens (OpenRouter shape), est. cost, reliability, day-over-day deltas + alerts. Reads scripts/prefetch-fleet-scorecard.sh output.
   retrospective: { enabled: false, schedule: "0 19 * * 1" }
-  shiplog: { enabled: true, schedule: "0 9 * * 1" }
+  shiplog: { enabled: true, schedule: "0 9 * * 1,4" }
   skill-leaderboard: { enabled: false, schedule: "0 17 * * 0" } # Sunday — rank popular skills across forks
   contributor-leaderboard: { enabled: false, schedule: "30 17 * * 0" } # Sunday — rank community contributors across forks and upstream PRs
   contributor-reward: { enabled: false, schedule: "30 9 * * 1", var: "" } # Monday — turn Sunday's leaderboard into a tier-priced rewards plan in memory/distributions.yml; pass dry-run to preview
@@ -219,7 +219,7 @@ skills:
   pr-tracker: { enabled: false, schedule: "30 9 * * *" } # daily — status of cross-repo PRs opened by this instance (merge/stale/closed)
   pr-merge: { enabled: false, schedule: "45 9 * * *", var: "" } # daily 09:45 UTC — operator-facing morning digest of every open PR on the target repo (default aaronjmars/aeon), bucketed by touched-file risk tier (FAST_TRACK/SKILL_PASS/INFRA_REVIEW/SKILL_WARN_OR_BLOCK/CORE_REVIEW/UNKNOWN), each skill-PR scanned via skill-scan/scan.sh, gated re-notify on head SHA. var: dry-run [owner/repo]
   repo-revive: { enabled: false, schedule: "0 10 * * 6" } # Saturday — one targeted improvement to reactivate the top dormant watched repo
-  feature: { enabled: true, schedule: "0 11 * * *", var: "", model: "claude-opus-4-8" }
+  feature: { enabled: false, schedule: "0 11 * * *", var: "", model: "claude-opus-4-8" }
 
   # Security
   disclosure-tracker: { enabled: false, schedule: "15 16 * * *" } # daily — audit pending disclosure queue, alert on aging CRITICAL/HIGH advisories
@@ -242,7 +242,7 @@ skills:
   frequency-guard: { enabled: false, schedule: "0 23 * * *" } # daily — watchdog for capped skills exceeding their per-day run limit
   config-validator: { enabled: false, schedule: "30 16 * * 0" } # Sunday — lint aeon.yml + workflow for structural invariants (checkout order, dup keys, missing files)
   janitor: { enabled: false, schedule: "30 5 * * 0" } # Sunday — clean stale .notify-*, .pending-notify-temp/, expired .outputs/ artifacts
-  memory-flush: { enabled: true, schedule: "0 18 * * 0,3" }
+  memory-flush: { enabled: true, schedule: "0 18 * * 0" }
   memory-dedupe: { enabled: false, schedule: "10 6 2/2 * *" } # every other day — collapse duplicate section rows + duplicate H2 headings in MEMORY.md
   self-review: { enabled: false, schedule: "30 19 * * 0" } # Sunday — audit what the agent did, what failed, what to improve
   signal-verdict: { enabled: false, schedule: "0 8 * * 1" } # Monday — verify tracker skills produce citable signals; surface uncited trackers
