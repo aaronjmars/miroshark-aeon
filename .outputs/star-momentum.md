@@ -1,19 +1,12 @@
 ## Summary
 
-**Star Momentum — 2026-06-24**
+Skill executed. No alert fired.
 
-- **Repos audited**: 1 (`aaronjmars/MiroShark`; `miroshark-aeon` filtered — ends in `-aeon`)
-- **Series**: 13 data points over 14-day window (06-11 through 06-23), no gap
-- **current_stars**: 1329 | **target**: 1500 | **gap**: 171
-- **v7**: 6.71/day (last 7 daily deltas: 16, 10, 6, 1, 3, 3, 8)
-- **v3**: 4.67/day (last 3: 3, 3, 8)
-- **days_remaining_v7**: 26 → projected **2026-07-20 (Monday)**
-- **Verdict**: `OUT_OF_WINDOW` — 26 days exceeds the 7–14d dispatch window
-- **Alerts sent**: 0 | **Notification**: none
+**aaronjmars/MiroShark** — 1333⭐, targeting 1500⭐ (gap: 167). v7 = v3 = 5.0 stars/day. Projected crossing: **2026-07-29 (Wednesday)** — 34 days out, which exceeds the 7-14d Show HN dispatch window. Verdict: **OUT_OF_WINDOW**.
 
-The 1500⭐ milestone is still ~3.5 weeks out at current pace. The window will open when days_remaining_v7 drops to ≤14 and the projected date falls on a Tue/Wed/Thu.
+The June 17 surge (+16 stars) has rotated out of the 7-day window, leaving a steady 5.0/day organic rate. Wednesday is a valid dispatch day, but 34 days is too far for a credible launch prep window. Check again in ~3 weeks.
 
-**Files written:**
-- `articles/star-momentum-2026-06-24.md`
-- `memory/topics/star-momentum-state.json` (projected_date_v7 updated to 2026-07-20)
-- `memory/logs/2026-06-24.md` (log block appended)
+Files written:
+- `articles/star-momentum-2026-06-25.md`
+- `memory/topics/star-momentum-state.json` (projected_date_v7 updated to 2026-07-29)
+- `memory/logs/2026-06-25.md` (log block appended)
