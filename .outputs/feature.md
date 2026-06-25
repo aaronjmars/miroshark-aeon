@@ -1,22 +1,21 @@
-*Feature Built — 2026-06-24 — aaronjmars/MiroShark* 🦈
+*Feature Built — 2026-06-25 — aaronjmars/MiroShark* ⭐🦈
 
-`wait` — the CLI now blocks until your sim finishes
-A new `miroshark wait <sim_id>` command. it sits on a simulation and polls until the run actually ends — then exits clean (0 = completed, 1 = failed/stopped, 2 = timed out). no more babysitting a status check in a shell loop.
+stop CLI subcommand
+
+`wait` could block on a running sim, but it couldn't kill one. now it can. `python -m cli stop sim_abc123` cancels a running simulation from the command line and prints `sim_abc123 stopped`. the missing half of the automation loop is in.
 
 Why this matters:
-yesterday `cost` landed in the CLI (#208). but cost only means anything once a run is done — and `status` is just a single snapshot. so every integrator scripting MiroShark was hand-rolling the same `while not done: sleep` loop themselves. this kills that boilerplate. one blocking call, correct exit codes, and `wait → report` / `wait → cost` becomes a one-liner. the $1 sim is only useful if a stranger can drive it from a script — this closes part of that gap.
+shipped `wait` yesterday (#215) — it blocks a script until a run reaches a terminal state. great, until a run hangs or blows past its timeout. then you were stuck: no CLI way out, integrators raw-curling `/api/simulation/stop` to cancel. the endpoint already existed; the CLI just never asked. this was the repo-actions top pick for today (score 14/15) precisely because it closes that gap.
 
 What was built:
-- `backend/cli.py`: new `cmd_wait` — polls `/run-status`, reads the real `runner_status` lifecycle (completed/failed/stopped straight from RunnerStatus), monotonic-clock deadline, sleep capped so a long `--interval` never overshoots `--timeout`. progress prints to stderr so stdout stays clean for `--json` piping.
-- `backend/tests/test_unit_cli.py`: `wait` added to the known-subcommand set + a new test asserting defaults (5s / 600s) and float overrides parse.
-- `docs/CLI.md` + `docs/CLI.zh-CN.md`: table row + a "wait" section — exit codes, stderr progress, the `list → wait → report` pipeline. zh kept in sync.
+- backend/cli.py: `cmd_stop()` POSTs `{simulation_id}` to `/api/simulation/stop`, prints `<sim_id> <runner_status>` on success, dies on error; `--json` for the raw payload. registered the `stop` subparser; added the `wait || stop` idiom to the module docstring.
+- backend/tests/test_unit_cli.py: `test_stop_parses_positional` + `stop` added to the known-subcommand set — offline, no network.
+- docs/CLI.md + docs/CLI.zh-CN.md: command-table row + a Stop section documenting the recovery pattern.
 
 How it works:
-pure argparse + urllib, no new deps. it reuses the existing `_api` helper to GET `/api/simulation/<id>/run-status` on a loop, lowercases `runner_status`, and matches it against terminal sets pulled from the engine's own enum. `--interval` tunes poll frequency, `--timeout` caps the wait, and the deadline is checked after each poll so a finished run is caught before sleeping. no new HTTP surface, so the openapi drift test is untouched.
+mirrors the existing `publish`/`cost` commands exactly — pure-stdlib argparse + urllib, zero new deps. the `/stop` endpoint settles the run on `stopped`, so cmd_stop just echoes whatever runner_status the server reports. this completes the lifecycle: `python -m cli wait "$SIM" --timeout 600 || python -m cli stop "$SIM"` — bound a run, cancel it if it overruns. validation: sandbox blocks python so pytest couldn't run locally; the new unit tests run on the repo's CI on push.
 
 What's next:
-this rounds out the scriptable CLI trio — `status` (snapshot), `wait` (block), `cost` (audit). the natural follow-on is a `run`/`start` command so the whole `ask → run → wait → report` chain lives in one tool instead of bouncing through the web UI for the sim_id.
+the CLI automation surface is getting complete — ask → wait → stop → cost → report all scriptable now. next repo-actions candidates lean into the same lifecycle (list pagination, localized report flag).
 
-PR: https://github.com/aaronjmars/MiroShark/pull/215
-
-Validation: pytest blocked by the autonomous sandbox — relied on diff review; the backend-unit CI job runs test_unit_cli.py on push and gates the merge.
+PR: https://github.com/aaronjmars/MiroShark/pull/216
