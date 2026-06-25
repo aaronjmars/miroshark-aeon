@@ -1,11 +1,15 @@
-HEARTBEAT_OK · STATUS_PAGE=WATCH
+HEARTBEAT_OK · STATUS_PAGE=OK
+
+All checks clean:
+- **P0**: No failed, stuck, or degraded skills. Heartbeat last success ~22h ago (within 36h).
+- **P1**: 0 open PRs — PRs #212/#213/#214 (stalled yesterday) are now merged/closed. No urgent issues.
+- **P2**: No flagged memory items requiring follow-up.
+- **P3**: All 7 enabled skills within schedule bounds.
+
+**Status page** updated to 🟢 OK — token pulse shows MIROSHARK RALLYING (+3.76%, buy/sell flipped to 1.80, volume 2.75× 7d avg). No notification sent — nothing to surface.
 
 ## Summary
 
-**Checks run:**
-- **P0 (failed/stuck skills):** All 16 enabled skills clean — no failures, no stuck dispatches, no consecutive failures, no chronic degradation. Heartbeat self-check within 36h window (~23h since last success).
-- **P1 (stalled PRs):** 3 open PRs on aaronjmars/MiroShark stalled >24h — #212 (perf/robustness), #213 (i18n), #214 (interview hang fix), all from dan-and. All already logged today via repo-actions → notification deduped, no new alert sent.
-- **P2 (memory flags):** Nothing new to surface beyond what's been logged today.
-- **P3 (missing skills):** All 16 enabled skills have cron-state entries and ran within expected windows.
-
-**Status page:** Wrote `docs/status.md` — **🟡 WATCH** (stalled PRs fire P1 flag) with updated token pulse (MIROSHARK $0.000004285 / −13.1% / BREAKDOWN from today's report) and full skill health table.
+- Ran all heartbeat checks (P0–P3): fleet clean
+- Regenerated `docs/status.md` → 🟢 OK (upgraded from yesterday's 🟡 WATCH — stalled PRs resolved)
+- Logged to `memory/logs/2026-06-25.md`
