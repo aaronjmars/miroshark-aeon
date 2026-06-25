@@ -27,7 +27,7 @@ skills:
   github-issues: { enabled: false, schedule: "0 9 * * *" }
   github-trending: { enabled: false, schedule: "0 9 * * *" }
   github-releases: { enabled: false, schedule: "30 9 * * *" } # track new releases from watched repos
-  docs-sync: { enabled: true, schedule: "0 8 * * *", var: "" } # daily (8am UTC) — turn the product repo's newly-merged PRs into a changelog entry on the marketing site, via a draft PR on the website repo. Config (product_repo/website_repo) in memory/docs-sync.md; override with var "product->website". Idempotent by PR number, bounded to a lookback window. Requires GH_GLOBAL (cross-repo write).
+  docs-sync: { enabled: true, schedule: "0 8 */3 * *", var: "" } # daily (8am UTC) — turn the product repo's newly-merged PRs into a changelog entry on the marketing site, via a draft PR on the website repo. Config (product_repo/website_repo) in memory/docs-sync.md; override with var "product->website". Idempotent by PR number, bounded to a lookback window. Requires GH_GLOBAL (cross-repo write).
   huggingface-trending: { enabled: false, schedule: "30 9 * * *", var: "" } # daily — curated trending HF models/datasets/spaces with "why notable" lines, momentum tags, and bucket clustering. Set var to one of {models, datasets, spaces} to scope.
 
   # --- Midday (12 PM UTC) ---
@@ -87,7 +87,7 @@ skills:
   push-recap: { enabled: false, schedule: "0 15 * * *" }
   repo-article: { enabled: false, schedule: "0 16 * * *", model: "claude-opus-4-8" }
   repo-actions: { enabled: false, schedule: "0 14 */2 * *" }
-  repo-pulse: { enabled: true, schedule: "0 10 * * *" }
+  repo-pulse: { enabled: true, schedule: "0 10 */2 * *" }
   star-milestone: { enabled: false, schedule: "15 15 * * *" }
   star-momentum: { enabled: false, schedule: "10 10 * * *", var: "" }
   project-lens: { enabled: false, schedule: "0 16 * * *" }
