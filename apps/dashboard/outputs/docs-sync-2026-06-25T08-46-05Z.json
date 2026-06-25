@@ -1,0 +1,53 @@
+{
+  "root": "docs-sync-card",
+  "state": {},
+  "elements": {
+    "docs-sync-card": {
+      "type": "Card",
+      "props": {
+        "title": "Docs Sync",
+        "description": "2026-06-25"
+      },
+      "children": [
+        "main-stack"
+      ]
+    },
+    "main-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "sync-text",
+        "pr-stat",
+        "pr-link"
+      ]
+    },
+    "sync-text": {
+      "type": "Text",
+      "props": {
+        "text": "aaronjmars/miroshark → aaronjmars/miroshark-website",
+        "variant": "muted"
+      },
+      "children": []
+    },
+    "pr-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "New PRs",
+        "value": "1"
+      },
+      "children": []
+    },
+    "pr-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Wait subcommand: block until simulation finishes",
+        "href": "https://github.com/aaronjmars/miroshark-website/pull/78",
+        "source": "GitHub PR #78"
+      },
+      "children": []
+    }
+  }
+}

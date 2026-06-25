@@ -1,4 +1,4 @@
-*Docs Sync — 2026-06-24*
+*Docs Sync — 2026-06-25*
 aaronjmars/miroshark → aaronjmars/miroshark-website
-4 new PRs → changelog entry "Thinking model robustness, JSON repair, and cost CLI"
-PR: https://github.com/aaronjmars/miroshark-website/pull/77
+1 new PR → changelog entry "Wait subcommand: block until simulation finishes"
+PR: https://github.com/aaronjmars/miroshark-website/pull/78
