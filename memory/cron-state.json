@@ -175,8 +175,8 @@
     "last_quality_score": 4
   },
   "docs-sync": {
-    "last_dispatch": "2026-06-24T08:42:25Z",
-    "last_status": "success",
+    "last_dispatch": "2026-06-25T08:42:27Z",
+    "last_status": "dispatched",
     "last_success": "2026-06-24T08:47:45Z",
     "total_runs": 3,
     "total_successes": 3,
