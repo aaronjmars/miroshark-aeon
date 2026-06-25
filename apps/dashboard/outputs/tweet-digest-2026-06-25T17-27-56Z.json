@@ -1,0 +1,186 @@
+{
+  "root": "card-root",
+  "state": {},
+  "elements": {
+    "card-root": {
+      "type": "Card",
+      "props": {
+        "title": "Tweet Digest — 2026-06-25"
+      },
+      "children": [
+        "stack-main"
+      ]
+    },
+    "stack-main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "lg"
+      },
+      "children": [
+        "heading-theme1",
+        "stack-theme1",
+        "separator-1",
+        "heading-theme2",
+        "stack-theme2"
+      ]
+    },
+    "heading-theme1": {
+      "type": "Heading",
+      "props": {
+        "text": "Theme: MiroShark Sim launch",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "stack-theme1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "tweet1-wrapper",
+        "tweet2-wrapper"
+      ]
+    },
+    "tweet1-wrapper": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet1-card",
+        "tweet1-link"
+      ]
+    },
+    "tweet1-card": {
+      "type": "TweetCard",
+      "props": {
+        "author": "miroshark_",
+        "handle": "miroshark_",
+        "text": "launched MiroShark Sim — simulate from prompt, article URL, or doc; Privy sign-in, Base x402-native, credit card top-up"
+      },
+      "children": []
+    },
+    "tweet1-link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/miroshark_/status/2069788925988569358"
+      },
+      "children": []
+    },
+    "tweet2-wrapper": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet2-card",
+        "tweet2-link"
+      ]
+    },
+    "tweet2-card": {
+      "type": "TweetCard",
+      "props": {
+        "author": "miroshark_",
+        "handle": "miroshark_",
+        "text": "each sim ships a deep report, knowledge graph, impactful posts, belief drift & prediction market trajectories — plus a live simulation feed 🦈"
+      },
+      "children": []
+    },
+    "tweet2-link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/miroshark_/status/2069788931218923540"
+      },
+      "children": []
+    },
+    "separator-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "heading-theme2": {
+      "type": "Heading",
+      "props": {
+        "text": "Theme: ecosystem & x402",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "stack-theme2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "tweet3-wrapper",
+        "tweet4-wrapper"
+      ]
+    },
+    "tweet3-wrapper": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet3-card",
+        "tweet3-link"
+      ]
+    },
+    "tweet3-card": {
+      "type": "TweetCard",
+      "props": {
+        "author": "miroshark_",
+        "handle": "miroshark_",
+        "text": "@bankrbot ran the first ever sim through the x402 endpoint"
+      },
+      "children": []
+    },
+    "tweet3-link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/miroshark_/status/2069835555316044263"
+      },
+      "children": []
+    },
+    "tweet4-wrapper": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet4-card",
+        "tweet4-link"
+      ]
+    },
+    "tweet4-card": {
+      "type": "TweetCard",
+      "props": {
+        "author": "miroshark_",
+        "handle": "miroshark_",
+        "text": "x402 endpoint open to any integrator — add it to your site, PM, or trading bot & earn from the affiliation system"
+      },
+      "children": []
+    },
+    "tweet4-link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/miroshark_/status/2069788933341298926"
+      },
+      "children": []
+    }
+  }
+}
