@@ -1,0 +1,218 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "Repo Pulse — 2026-06-26"
+      },
+      "children": [
+        "badge-active",
+        "repo-link",
+        "stats-group",
+        "sep-1",
+        "stargazers-heading",
+        "stargazers-list",
+        "sep-2",
+        "forks-heading",
+        "forks-list",
+        "sep-3",
+        "source-text"
+      ]
+    },
+    "badge-active": {
+      "type": "Badge",
+      "props": {
+        "text": "ACTIVE",
+        "variant": "default"
+      },
+      "children": []
+    },
+    "repo-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "aaronjmars/MiroShark",
+        "href": "https://github.com/aaronjmars/MiroShark"
+      },
+      "children": []
+    },
+    "stats-group": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "stat-stars",
+        "stat-forks"
+      ]
+    },
+    "stat-stars": {
+      "type": "Stat",
+      "props": {
+        "label": "Stars",
+        "value": "1337",
+        "delta": "+4",
+        "trend": "up"
+      },
+      "children": []
+    },
+    "stat-forks": {
+      "type": "Stat",
+      "props": {
+        "label": "Forks",
+        "value": "281",
+        "delta": "+3",
+        "trend": "up"
+      },
+      "children": []
+    },
+    "sep-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "stargazers-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "New Stargazers",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "stargazers-list": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "star-1",
+        "star-2",
+        "star-3"
+      ]
+    },
+    "star-1": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/rayshawnp-cell",
+        "href": "https://github.com/rayshawnp-cell"
+      },
+      "children": []
+    },
+    "star-2": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/JoaoBarsant",
+        "href": "https://github.com/JoaoBarsant"
+      },
+      "children": []
+    },
+    "star-3": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/yeeyeee1738-ux",
+        "href": "https://github.com/yeeyeee1738-ux"
+      },
+      "children": []
+    },
+    "sep-2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "forks-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "New Forks",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "forks-list": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "fork-1",
+        "fork-2"
+      ]
+    },
+    "fork-1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "fork-1-link",
+        "fork-1-repos"
+      ]
+    },
+    "fork-1-link": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/onyekaLT",
+        "href": "https://github.com/onyekaLT"
+      },
+      "children": []
+    },
+    "fork-1-repos": {
+      "type": "Text",
+      "props": {
+        "text": "48 repos",
+        "variant": "caption"
+      },
+      "children": []
+    },
+    "fork-2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "fork-2-link",
+        "fork-2-info"
+      ]
+    },
+    "fork-2-link": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/kaleho",
+        "href": "https://github.com/kaleho"
+      },
+      "children": []
+    },
+    "fork-2-info": {
+      "type": "Text",
+      "props": {
+        "text": "Raymond Kaleho · 37 repos",
+        "variant": "caption"
+      },
+      "children": []
+    },
+    "sep-3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "source-text": {
+      "type": "Text",
+      "props": {
+        "text": "Source: events",
+        "variant": "muted"
+      },
+      "children": []
+    }
+  }
+}
