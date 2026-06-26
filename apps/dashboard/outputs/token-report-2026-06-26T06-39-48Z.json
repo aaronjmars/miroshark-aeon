@@ -1,0 +1,109 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "$MIROSHARK — CONSOLIDATING"
+      },
+      "children": [
+        "narrative_text",
+        "sep1",
+        "metrics_grid",
+        "sep2",
+        "chart_link"
+      ]
+    },
+    "narrative_text": {
+      "type": "Text",
+      "props": {
+        "text": "Yesterday's RALLYING gave way — buy cluster at 20:30 UTC absorbed by sustained selling, buy/sell ratio flipped from 1.80 to 0.69. Price -0.80%, no whale entries.",
+        "variant": "lead"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "metrics_grid": {
+      "type": "Grid",
+      "props": {
+        "columns": 3,
+        "gap": "md"
+      },
+      "children": [
+        "stat_price",
+        "stat_liq",
+        "stat_vol",
+        "stat_ratio",
+        "stat_whales",
+        "stat_treasury"
+      ]
+    },
+    "stat_price": {
+      "type": "Stat",
+      "props": {
+        "label": "Price",
+        "value": "$0.000004410",
+        "delta": "-0.80%",
+        "trend": "down"
+      }
+    },
+    "stat_liq": {
+      "type": "Stat",
+      "props": {
+        "label": "Liquidity",
+        "value": "$290.4K",
+        "delta": "-2.64%",
+        "trend": "down"
+      }
+    },
+    "stat_vol": {
+      "type": "Stat",
+      "props": {
+        "label": "Volume",
+        "value": "$7.7K",
+        "delta": "0.57× 7d"
+      }
+    },
+    "stat_ratio": {
+      "type": "Stat",
+      "props": {
+        "label": "Buys/Sells",
+        "value": "0.69",
+        "delta": "33/48"
+      }
+    },
+    "stat_whales": {
+      "type": "Stat",
+      "props": {
+        "label": "Whales",
+        "value": "0"
+      }
+    },
+    "stat_treasury": {
+      "type": "Stat",
+      "props": {
+        "label": "Treasury",
+        "value": "6.0000 ETH",
+        "delta": "±0.00 24h"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "chart_link": {
+      "type": "Link",
+      "props": {
+        "label": "View Chart on GeckoTerminal",
+        "href": "https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209"
+      }
+    }
+  }
+}
