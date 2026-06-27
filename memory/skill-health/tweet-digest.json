@@ -1,10 +1,10 @@
 {
   "skill": "tweet-digest",
-  "last_analyzed": "2026-06-26T17:27:48Z",
+  "last_analyzed": "2026-06-27T17:15:39Z",
   "quality_score": 4,
-  "assessment": "Completed task substantively: processed tweets, deduped against history, identified theme, notified, and logged properly. Clear methodology with specific data points.",
+  "assessment": "Substantive, well-structured output showing full workflow—dedup logic, fresh content identified, organized by theme, proper logging and notification completed.",
   "flags": [],
-  "avg_score": 3.82,
+  "avg_score": 3.83,
   "history": [
     {
       "date": "2026-06-16",
@@ -48,6 +48,10 @@
     },
     {
       "date": "2026-06-26",
+      "score": 4
+    },
+    {
+      "date": "2026-06-27",
       "score": 4
     }
   ]

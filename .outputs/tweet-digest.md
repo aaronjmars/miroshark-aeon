@@ -1,5 +1,8 @@
-*Tweet Digest — 2026-06-26*
+*Tweet Digest — 2026-06-27*
 
-*Theme: x402 monetization & integrator reach*
-@miroshark_: x402-native affiliate model — any integrator earns 50% of every sim run revenue, open to websites, prediction markets, trading bots — [link](https://x.com/miroshark_/status/2069788928517751158)
-@miroshark_: pitched the sim endpoint at trading & market scenario use cases, inviting runs via x402 — [link](https://x.com/miroshark_/status/2070166119172681762)
+*Theme: sports simulation*
+@miroshark_: World Cup sim of the day — France vs Norway 🇫🇷🇳🇴, TikTok + sim report in the comments. — [link](https://x.com/miroshark_/status/2070537542131155129)
+
+*Theme: distribution*
+@miroshark_: TikTok channel live — first post up. — [link](https://x.com/miroshark_/status/2070139441675473172)
+@miroshark_: sim is live, try it now 🦈 — [link](https://x.com/miroshark_/status/2069799336053969401)
