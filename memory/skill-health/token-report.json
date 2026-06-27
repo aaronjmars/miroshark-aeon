@@ -1,10 +1,10 @@
 {
   "skill": "token-report",
-  "last_analyzed": "2026-06-26T06:39:47Z",
+  "last_analyzed": "2026-06-27T06:10:47Z",
   "quality_score": 4,
-  "assessment": "Substantive output with multi-source data validation, specific metrics, clear methodology, and proper state tracking.",
+  "assessment": "Substantive report with specific metrics, whale transaction details, multi-timeframe context, and clear verdict; well-structured and actionable.",
   "flags": [],
-  "avg_score": 4.07,
+  "avg_score": 4.06,
   "history": [
     {
       "date": "2026-06-12",
@@ -64,6 +64,10 @@
     },
     {
       "date": "2026-06-26",
+      "score": 4
+    },
+    {
+      "date": "2026-06-27",
       "score": 4
     }
   ]
