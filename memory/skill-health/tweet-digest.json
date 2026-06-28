@@ -1,10 +1,10 @@
 {
   "skill": "tweet-digest",
-  "last_analyzed": "2026-06-27T17:15:39Z",
+  "last_analyzed": "2026-06-28T17:05:35Z",
   "quality_score": 4,
-  "assessment": "Substantive, well-structured output showing full workflow—dedup logic, fresh content identified, organized by theme, proper logging and notification completed.",
+  "assessment": "Good execution with smart deduplication logic and appropriate notification suppression.",
   "flags": [],
-  "avg_score": 3.83,
+  "avg_score": 3.85,
   "history": [
     {
       "date": "2026-06-16",
@@ -52,6 +52,10 @@
     },
     {
       "date": "2026-06-27",
+      "score": 4
+    },
+    {
+      "date": "2026-06-28",
       "score": 4
     }
   ]
