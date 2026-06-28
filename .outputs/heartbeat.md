@@ -1,19 +1,9 @@
 HEARTBEAT_OK · STATUS_PAGE=OK
 
-All checks passed clean:
-
-- **P0:** No failed, stuck, or degraded skills — all 7 enabled skills show `last_status: success`, 100% success rates, zero consecutive failures.
-- **P1:** 0 open PRs, no urgent issues.
-- **P2:** External-operator hyperstition deadline (2026-06-30, 3 days away) was already flagged in yesterday's heartbeat — deduped, no repeat notify.
-- **P3:** All enabled skills running within 2× their schedule intervals.
-- **Heartbeat self-check:** Last success ~24h ago — well under 36h threshold.
-- **Token pulse:** CONSOLIDATING — +14.1% on 3 whale buys (~$7.9K), price $0.000005034, liquidity $312.7K, FDV $503.4K.
-
-`docs/status.md` updated to 🟢 OK, reflecting current fleet health and today's token data.
+All checks clean. 7 enabled skills healthy, no failed/stuck entries, no open PRs, no urgent issues. Token at $0.0000042016 (−16.5%, CONSOLIDATING). `docs/status.md` updated to 🟢 OK with current token pulse; log appended to `memory/logs/2026-06-28.md`.
 
 ## Summary
 
-- Read `memory/cron-state.json`, `aeon.yml`, last 2 days of logs, open PRs, and issues index
-- All P0/P1/P2/P3 checks clean (P2 hyperstition item deduped from Jun 26 log)
-- Overwrote `docs/status.md` with 🟢 OK status, updated token pulse (+14.1% CONSOLIDATING), and current skill health table
-- Appended heartbeat log entry to `memory/logs/2026-06-27.md`
+- **P0–P3:** All clean — no notifications sent, P2 item (external-operator deadline) deduped from prior 48h logs
+- **docs/status.md:** Regenerated (🟢 OK, updated token pulse from today's report)
+- **memory/logs/2026-06-28.md:** Heartbeat entry appended
