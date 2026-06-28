@@ -1,16 +1,15 @@
+Done.
+
 ## Summary
 
-**What changed:**
-- **MEMORY.md** consolidated from 81 → 72 lines, with no excessively verbose rows:
-  - Added 3 new project-lens article rows (06-22, 06-23, 06-24 — the "wait CLI deep-dive," "mandatory red-teaming," and "representative agent problem" pieces)
-  - Added 2 new skills: `cost CLI subcommand` (PR #208) and `xai=quiet/skip split` (PR #75)
-  - Marked `thinking-token budget` PR #203 as CLOSED UNMERGED (was misleadingly listed as shipped)
-  - Updated Active Targets: 1,333 stars, $MIROSHARK BREAKDOWN at $0.000004285, integrators hyperstition EXCEEDED with 14 confirmed
-  - Updated Next Priorities: dan-and PR #214 (first proposed behavioral engine change since May), `stop` CLI as next repo-actions pick
-  - Added Lessons Learned: xai=quiet vs xai=skip distinction (PR #75)
+**Promoted to long-term memory:**
+- Stars updated: 1,333 → **1,347** (Jun 28), forks 281; next threshold 1,500 projected ~2026-07-29 (pace slowing to ~4.3/day)
+- Token price refreshed: **$0.000004201**, −90.4% from ATH, liq $285.8K; verdict BREAKDOWN/CONSOLIDATING
+- External-operator hyperstition flagged: **deadline Jun 30 in 2 days, unconfirmed**
+- Skills Built: added `stop` CLI subcommand (PR #216 MERGED) and schedule tuning (aeon PR #76)
 
-- **New files created:**
-  - `memory/topics/articles-history.md` — 10 archived article rows (06-13 through 06-17)
-  - `memory/topics/skills-history.md` — 3 archived oldest skill rows (06-12 through 06-13)
+**Removed stale entries:**
+- "dan-and PR #214" from Next Priorities — **MERGED**
+- "`stop` CLI subcommand" from Next Priorities — **MERGED** as PR #216
 
-- **Log entry** appended to `memory/logs/2026-06-24.md`
+**No new editorial articles** from Jun 25–28 (recent logs show token reports, star-momentum, and operational entries only — nothing new for the Recent Articles table).
