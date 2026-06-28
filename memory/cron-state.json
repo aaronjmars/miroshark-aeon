@@ -133,10 +133,10 @@
   },
   "memory-flush": {
     "last_dispatch": "2026-06-28T18:04:54Z",
-    "last_status": "dispatched",
-    "last_success": "2026-06-24T18:21:08Z",
-    "total_runs": 4,
-    "total_successes": 4,
+    "last_status": "success",
+    "last_success": "2026-06-28T18:07:30Z",
+    "total_runs": 5,
+    "total_successes": 5,
     "total_failures": 0,
     "consecutive_failures": 0,
     "success_rate": 1
