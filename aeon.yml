@@ -262,6 +262,17 @@ skills:
   # Social
   mention-radar: { enabled: false, schedule: "25 7 2/2 * *", var: "" } # every other day — external web/social mentions of the operator's projects (discovery/confusion/friction/competitor taxonomy + engagement opportunities). var: comma-separated project names; falls back to MEMORY.md / memory/topics/projects.md
 
+
+  # --- Synced from aeon (2026-06-29): catalog parity, all disabled ---
+  bd-radar: { enabled: false, schedule: "20 7 * * *" }
+  beamr-route: { enabled: false, schedule: "workflow_dispatch" }
+  ctrl: { enabled: false, schedule: "workflow_dispatch" }
+  disclosure-emailer: { enabled: false, schedule: "0 13 * * *" }
+  inbox-triage: { enabled: false, schedule: "30 11 * * *" }
+  install-skill: { enabled: false, schedule: "workflow_dispatch" }
+  phylax-audit: { enabled: false, schedule: "workflow_dispatch" }
+  product-pulse: { enabled: false, schedule: "15 7 * * *" }
+
   # --- Fallback (must be last) ---
   heartbeat: { enabled: true, schedule: "0 19 * * *" }
 
