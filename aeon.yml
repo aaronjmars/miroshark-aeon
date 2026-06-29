@@ -268,6 +268,7 @@ skills:
   phylax-audit: { enabled: false, schedule: "workflow_dispatch" }
   product-pulse: { enabled: false, schedule: "15 7 * * *" }
 
+  send-email: { enabled: false, schedule: "workflow_dispatch", var: "" } # on-demand — compose + send a 1:1 email to a named recipient via Resend (general sibling of disclosure-emailer). var: "to=… | subject=… | about=…"
   # --- Fallback (must be last) ---
   heartbeat: { enabled: true, schedule: "0 19 * * *" }
 
