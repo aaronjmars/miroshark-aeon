@@ -175,6 +175,7 @@ jobs:
       - name: Run pre-fetch scripts
         if: steps.work.outputs.mode != ''
         env:
+          GH_READ_PAT: ${{ secrets.GH_READ_PAT }}
           XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           REPLICATE_API_TOKEN: ${{ secrets.REPLICATE_API_TOKEN }}
@@ -936,6 +937,15 @@ jobs:
       - name: Run post-process scripts
         if: steps.work.outputs.mode != '' && steps.run.outcome == 'success'
         env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          RESEND_FROM: ${{ secrets.RESEND_FROM }}
+          RESEND_REPLY_TO: ${{ secrets.RESEND_REPLY_TO }}
+          RESEND_CC: ${{ vars.RESEND_CC }}
+          DISCLOSURE_EMAIL_PAUSED: ${{ vars.DISCLOSURE_EMAIL_PAUSED }}
+          DISCLOSURE_EMAIL_MAX_PER_RUN: ${{ vars.DISCLOSURE_EMAIL_MAX_PER_RUN }}
+          DISCLOSURE_EMAIL_DAILY_CAP: ${{ vars.DISCLOSURE_EMAIL_DAILY_CAP }}
+          DISCLOSURE_EMAIL_MAX_ATTEMPTS: ${{ vars.DISCLOSURE_EMAIL_MAX_ATTEMPTS }}
+          DISCLOSURE_EMAIL_COOLDOWN_DAYS: ${{ vars.DISCLOSURE_EMAIL_COOLDOWN_DAYS }}
           XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           REPLICATE_API_TOKEN: ${{ secrets.REPLICATE_API_TOKEN }}
