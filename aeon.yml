@@ -266,6 +266,8 @@ skills:
   product-pulse: { enabled: false, schedule: "15 7 * * *" }
 
   send-email: { enabled: false, schedule: "workflow_dispatch", var: "" } # on-demand — compose + send a 1:1 email to a named recipient via Resend (general sibling of disclosure-emailer). var: "to=… | subject=… | about=…"
+  daily-shiplog: { enabled: false, schedule: "0 23 * * *", var: "" } # daily 23:00 UTC — 24h ship recap across GitHub (+ optional X/traction) → digest + ready-to-post shiplog. Config: memory/products.md. Sibling of shiplog.
+  idea-forge: { enabled: false, schedule: "0 9 * * 1", var: "" } # Monday 09:00 UTC — weekly business-idea engine: zeitgeist × capability surface (memory/products.md + skills + STRATEGY.md) → 3-5 scored wedges.
   # --- Fallback (must be last) ---
   heartbeat: { enabled: true, schedule: "0 19 * * *" }
 
