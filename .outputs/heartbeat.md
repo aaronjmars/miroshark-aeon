@@ -1,9 +1,10 @@
 HEARTBEAT_OK · STATUS_PAGE=OK
 
-All checks clean. 7 enabled skills healthy, no failed/stuck entries, no open PRs, no urgent issues. Token at $0.0000042016 (−16.5%, CONSOLIDATING). `docs/status.md` updated to 🟢 OK with current token pulse; log appended to `memory/logs/2026-06-28.md`.
+All checks clean. No notification sent. `docs/status.md` updated with today's token data (MIROSHARK CONSOLIDATING at $0.000004106, −2.3%) and current skill health — all 7 enabled skills green.
 
 ## Summary
 
-- **P0–P3:** All clean — no notifications sent, P2 item (external-operator deadline) deduped from prior 48h logs
-- **docs/status.md:** Regenerated (🟢 OK, updated token pulse from today's report)
-- **memory/logs/2026-06-28.md:** Heartbeat entry appended
+- **P0–P3**: All clear. No failed, stuck, or degraded skills. 0 open PRs, 0 open issues.
+- **P2 dedup**: External-operator hyperstition deadline (Jun 30) was in the Jun 28 log — within 48h window, skipped.
+- **docs/status.md**: Regenerated with 🟢 OK, updated token pulse from `token-report-2026-06-29.md`, and current skill health table sorted by most recent run.
+- **memory/logs/2026-06-29.md**: Heartbeat log entry appended.
