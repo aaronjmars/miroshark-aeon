@@ -1,11 +1,10 @@
-*Shiplog — 2026-06-22*
+*Shiplog — 2026-06-29*
 
-This week the "$1 to simulate" claim got a face: every public embed now shows the actual cost of the run — and the locale-in-threads bug that was silently producing English in DE/FR/ZH sessions closed after four hand-patches.
+Three CLI subcommands shipped in five days and for the first time a complete simulation lifecycle — start, wait, cost, stop — is scriptable end-to-end; a returning external contributor fixed three separate reliability failures that thinking models and slow local LLMs had been exposing.
 
 Themes:
-- The "~$1" cost estimate landed where strangers actually see it
-- Simulations in German, French, and Chinese stopped reverting to English mid-run
-- Self-hosters with local LLMs got a web-search path
+- CLI gains start-to-stop automation
+- Dan-and hardens the engine for thinking models and slow LLMs
 
-42 commits · 38 PRs merged · +5,800 / −2,200 lines
-https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/shiplog-2026-06-22.md
+17 commits · 17 PRs · +1,200 / −1,340
+https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/shiplog-2026-06-29.md

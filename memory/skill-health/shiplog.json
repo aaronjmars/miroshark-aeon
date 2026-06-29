@@ -1,10 +1,10 @@
 {
   "skill": "shiplog",
-  "last_analyzed": "2026-06-22T10:36:15Z",
-  "quality_score": 5,
-  "assessment": "Specific, substantive output with concrete PR citations, quantified metrics, and clear alignment to strategic goals (ship engine, prove credibility, track momentum)",
+  "last_analyzed": "2026-06-29T10:24:51Z",
+  "quality_score": 4,
+  "assessment": "Substantive shiplog with concrete metrics, PR references, and clear themes; completed as stated with verification evidence (article written, committed, notification sent).",
   "flags": [],
-  "avg_score": 4.5,
+  "avg_score": 4.33,
   "history": [
     {
       "date": "2026-06-15",
@@ -13,6 +13,10 @@
     {
       "date": "2026-06-22",
       "score": 5
+    },
+    {
+      "date": "2026-06-29",
+      "score": 4
     }
   ]
 }

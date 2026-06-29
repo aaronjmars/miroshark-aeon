@@ -1,0 +1,133 @@
+{
+  "root": "card-shiplog",
+  "state": {},
+  "elements": {
+    "card-shiplog": {
+      "type": "Card",
+      "props": {
+        "title": "Shiplog",
+        "description": "2026-06-29"
+      },
+      "children": [
+        "stack-main"
+      ]
+    },
+    "stack-main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "text-intro",
+        "sep-1",
+        "heading-themes",
+        "stack-themes",
+        "sep-2",
+        "heading-metrics",
+        "stack-metrics",
+        "sep-3",
+        "link-article"
+      ]
+    },
+    "text-intro": {
+      "type": "Text",
+      "props": {
+        "text": "Three CLI subcommands shipped in five days and for the first time a complete simulation lifecycle — start, wait, cost, stop — is scriptable end-to-end; a returning external contributor fixed three separate reliability failures that thinking models and slow local LLMs had been exposing.",
+        "variant": "body"
+      }
+    },
+    "sep-1": {
+      "type": "Separator",
+      "props": {}
+    },
+    "heading-themes": {
+      "type": "Heading",
+      "props": {
+        "text": "Themes",
+        "level": "h3"
+      }
+    },
+    "stack-themes": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "text-theme-1",
+        "text-theme-2"
+      ]
+    },
+    "text-theme-1": {
+      "type": "Text",
+      "props": {
+        "text": "CLI gains start-to-stop automation",
+        "variant": "body"
+      }
+    },
+    "text-theme-2": {
+      "type": "Text",
+      "props": {
+        "text": "Dan-and hardens the engine for thinking models and slow LLMs",
+        "variant": "body"
+      }
+    },
+    "sep-2": {
+      "type": "Separator",
+      "props": {}
+    },
+    "heading-metrics": {
+      "type": "Heading",
+      "props": {
+        "text": "Metrics",
+        "level": "h3"
+      }
+    },
+    "stack-metrics": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "lg"
+      },
+      "children": [
+        "stat-commits",
+        "stat-prs",
+        "stat-changes"
+      ]
+    },
+    "stat-commits": {
+      "type": "Stat",
+      "props": {
+        "label": "Commits",
+        "value": "17"
+      }
+    },
+    "stat-prs": {
+      "type": "Stat",
+      "props": {
+        "label": "PRs",
+        "value": "17"
+      }
+    },
+    "stat-changes": {
+      "type": "Stat",
+      "props": {
+        "label": "Changes",
+        "value": "+1,200 / −1,340"
+      }
+    },
+    "sep-3": {
+      "type": "Separator",
+      "props": {}
+    },
+    "link-article": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full article on GitHub",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/shiplog-2026-06-29.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}
