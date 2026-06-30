@@ -1,0 +1,75 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "Docs Sync"
+      },
+      "children": [
+        "date-info",
+        "separator1",
+        "sync-repos",
+        "separator2",
+        "pr-activity",
+        "separator3",
+        "pr-link"
+      ]
+    },
+    "date-info": {
+      "type": "Text",
+      "props": {
+        "text": "2026-06-30",
+        "variant": "muted"
+      }
+    },
+    "separator1": {
+      "type": "Separator"
+    },
+    "sync-repos": {
+      "type": "Text",
+      "props": {
+        "text": "aaronjmars/miroshark → aaronjmars/miroshark-website"
+      }
+    },
+    "separator2": {
+      "type": "Separator"
+    },
+    "pr-activity": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "pr-count",
+        "changelog"
+      ]
+    },
+    "pr-count": {
+      "type": "Text",
+      "props": {
+        "text": "4 new PRs"
+      }
+    },
+    "changelog": {
+      "type": "Badge",
+      "props": {
+        "text": "Docker, Actions, and frontend dependency bumps",
+        "variant": "secondary"
+      }
+    },
+    "separator3": {
+      "type": "Separator"
+    },
+    "pr-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Pull Request #84",
+        "href": "https://github.com/aaronjmars/miroshark-website/pull/84",
+        "source": "miroshark-website"
+      }
+    }
+  }
+}
