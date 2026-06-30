@@ -4,6 +4,8 @@ Config for the product-aware skills: `bd-radar` and `product-pulse`.
 One `##` block per product (format matches each skill's Config section).
 `aeon-vitalik` is intentionally excluded (being retired).
 
+**scouts:** @buildonbase, @Base_Insights, @BaseHubHB, @PremierBase   <!-- ecosystem recap/ranking accounts the shiplog skill scans for product mentions (parity with aaeron) -->
+
 ## Aeon
 - repos: aaronjmars/aeon (public), aaronjmars/aeon-website (private), aaronjmars/aeon-agent (public, automation), aaronjmars/miroshark-aeon (public, automation), aaronjmars/aeon-nur (private, automation), aaronjmars/aeon-vuln (private, automation), aaronjmars/aeon-serv (private, automation)
 - handles: @aeonframework, @aaronjmars
