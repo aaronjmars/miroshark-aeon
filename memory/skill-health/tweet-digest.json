@@ -1,12 +1,10 @@
 {
   "skill": "tweet-digest",
-  "last_analyzed": "2026-06-29T17:24:10Z",
-  "quality_score": 3,
-  "assessment": "Skill executed correctly: fetched cache, applied dedup logic, avoided redundant notifications, logged activity. Limited value since no new content found; cache is 3 days old.",
-  "flags": [
-    "stale_data"
-  ],
-  "avg_score": 3.79,
+  "last_analyzed": "2026-06-30T17:19:34Z",
+  "quality_score": 4,
+  "assessment": "Skill ran successfully with proper structure, dedup, and logging. Well-executed routine task on available sample.",
+  "flags": [],
+  "avg_score": 3.8,
   "history": [
     {
       "date": "2026-06-16",
@@ -63,6 +61,10 @@
     {
       "date": "2026-06-29",
       "score": 3
+    },
+    {
+      "date": "2026-06-30",
+      "score": 4
     }
   ]
 }
