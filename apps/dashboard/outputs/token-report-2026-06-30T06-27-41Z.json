@@ -1,0 +1,172 @@
+{
+  "root": "main_card",
+  "state": {},
+  "elements": {
+    "main_card": {
+      "type": "Card",
+      "props": {
+        "title": "$MIROSHARK — CONSOLIDATING"
+      },
+      "children": [
+        "summary_text",
+        "sep1",
+        "price_heading",
+        "metrics_stack",
+        "sep2",
+        "trading_heading",
+        "trading_stack",
+        "sep3",
+        "treasury_heading",
+        "eth_stat",
+        "sep4",
+        "chart_link"
+      ]
+    },
+    "summary_text": {
+      "type": "Text",
+      "props": {
+        "text": "Sell flow 2.5:1 (35 sells, 14 buys) on 0.66× average volume; price off 7.56%"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "price_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Market Metrics",
+        "level": "h3"
+      }
+    },
+    "metrics_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "price_stat",
+        "liq_stat",
+        "vol_stat"
+      ]
+    },
+    "price_stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Price (24h)",
+        "value": "$0.000003795",
+        "delta": "-7.56%",
+        "trend": "down"
+      }
+    },
+    "liq_stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Liquidity",
+        "value": "$273.1K",
+        "delta": "-2.55%",
+        "trend": "down"
+      }
+    },
+    "vol_stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Volume (7d avg 0.66×)",
+        "value": "$10.3K"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "trading_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Trading Activity",
+        "level": "h3"
+      }
+    },
+    "trading_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "buys_stat",
+        "sells_stat",
+        "ratio_stat",
+        "whales_stat"
+      ]
+    },
+    "buys_stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Buys",
+        "value": "14"
+      }
+    },
+    "sells_stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Sells",
+        "value": "35"
+      }
+    },
+    "ratio_stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Ratio (yesterday 1.48)",
+        "value": "0.40",
+        "trend": "down"
+      }
+    },
+    "whales_stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Whales",
+        "value": "0"
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "treasury_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Treasury",
+        "level": "h3"
+      }
+    },
+    "eth_stat": {
+      "type": "Stat",
+      "props": {
+        "label": "ETH (24h)",
+        "value": "6.0000",
+        "delta": "+0.00%",
+        "trend": "neutral"
+      }
+    },
+    "sep4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "chart_link": {
+      "type": "Link",
+      "props": {
+        "label": "View Chart on GeckoTerminal",
+        "href": "https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209"
+      }
+    }
+  }
+}
