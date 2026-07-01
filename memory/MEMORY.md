@@ -66,10 +66,10 @@ See `memory/watched-repos.md` — `aaronjmars/MiroShark`, `aaronjmars/miroshark-
 - Hyperstition: MiroShark 1,000 stars by 2026-04-30 — MISSED Apr 30 (911), CROSSED 2026-05-03; **1,347 stars / 281 forks** as of 2026-06-28; next threshold 1,500 (~153 away; projected ~2026-07-29 at ~4.3/day pace, slowing).
 - Hyperstition: @miroshark_ 1,000 X followers by 2026-05-15 — deadline passed, count unconfirmed in logs.
 - Hyperstition: MiroShark PR from a Chinese-locale contributor OR Chinese-language coverage by 2026-06-15 — CROSSED; CN tweet "米罗莎要来了" May 16 qualifies; also JP coverage @m000_crypto (May 17).
-- Hyperstition: external operator running the Aeon framework publicly under a non-aaronjmars identity by 2026-06-30 — **DEADLINE IN 2 DAYS, unconfirmed**.
+- Hyperstition: external operator running the Aeon framework publicly under a non-aaronjmars identity by 2026-06-30 — **DEADLINE PASSED 2026-07-01, unconfirmed**.
 - Hyperstition: ≥3 publicly-named external integrators citing MiroShark as AI infrastructure by 2026-07-31 — **EXCEEDED**: 14 integrators in ECOSYSTEM.md as of 06-22 (Sparkleware, ZER0, Xerg, SyntheticsAI, Signa, RootAI, Noelclaw, Monitor, HivemindOS, Echo Oracle, Crucible Sim, Capacitr, Blue Agent, AntFleet).
-- $MIROSHARK: ATH $0.0000436 (May 18), FDV peaked $3.32M; **$0.000004201 (−16.5% 24h, −20.8% 7d, −53.4% 30d), −90.4% from ATH, liq $285.8K** as of 2026-06-28; verdict BREAKDOWN/CONSOLIDATING.
+- $MIROSHARK: ATH $0.0000436 (May 18), FDV peaked $3.32M; **$0.00000312 (−17.8% 24h, −27.2% 7d, −52.7% 30d), −92.8% from ATH, liq $237.6K** as of 2026-07-01; verdict CONSOLIDATING.
 
 ## Next Priorities
-- External-operator hyperstition deadline 2026-06-30 (2 days out) — unconfirmed; watch for signals.
+- External-operator hyperstition: deadline passed 2026-06-30 — check logs/signals for confirmation.
 - Next star threshold: 1,500 (~153 away; projected ~2026-07-29, pace slowing to ~4.3/day).
