@@ -1,0 +1,240 @@
+{
+  "root": "card-shiplog",
+  "state": {},
+  "elements": {
+    "card-shiplog": {
+      "type": "Card",
+      "props": {
+        "title": "miroshark + aeon shiplog ⭐🦈 june 25 → jul 2"
+      },
+      "children": [
+        "summary",
+        "sep1",
+        "shipped-heading",
+        "achievements-stack",
+        "sep2",
+        "traction-heading",
+        "traction-stack",
+        "sep3",
+        "article-link"
+      ]
+    },
+    "summary": {
+      "type": "Text",
+      "props": {
+        "text": "shipped ~87 PRs this window. the bytes:",
+        "variant": "lead"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {}
+    },
+    "shipped-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Shipped",
+        "level": "h2"
+      }
+    },
+    "achievements-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "achievement-1",
+        "achievement-2",
+        "achievement-3",
+        "achievement-4",
+        "achievement-5",
+        "achievement-6",
+        "achievement-7",
+        "achievement-8",
+        "achievement-9"
+      ]
+    },
+    "achievement-1": {
+      "type": "Text",
+      "props": {
+        "text": "Farcaster mini app: /sim is live in Warpcast — Privy wallet, cast-share, Base checkout, embedded custody. 12 PRs in one day to get the edge cases right. @miroshark_",
+        "variant": "body"
+      }
+    },
+    "achievement-2": {
+      "type": "Text",
+      "props": {
+        "text": "Builder codes: drop your Base builder code into the x402 endpoint, earn 50% net profit per sim you drive. @CTRL_automation went live on it. @miroshark_ @base",
+        "variant": "body"
+      }
+    },
+    "achievement-3": {
+      "type": "Text",
+      "props": {
+        "text": "Aeon hardening: capability tiers (read-only flag blocks commits/pushes), issues-as-state, votable health — all on by default. @aeonframework",
+        "variant": "body"
+      }
+    },
+    "achievement-4": {
+      "type": "Text",
+      "props": {
+        "text": "Sonnet 5 same-day: Claude Sonnet 5 dropped, Aeon had it live in one PR by end of day. @aeonframework",
+        "variant": "body"
+      }
+    },
+    "achievement-5": {
+      "type": "Text",
+      "props": {
+        "text": "Telegram: slash commands, quick-reply buttons, deep links. Aeon is interactive without leaving the app. @aeonframework",
+        "variant": "body"
+      }
+    },
+    "achievement-6": {
+      "type": "Text",
+      "props": {
+        "text": "Skill consolidation: 187 → 102 skills (85 merges → 49 hubs). Leaner surface, same capability. @aeonframework",
+        "variant": "body"
+      }
+    },
+    "achievement-7": {
+      "type": "Text",
+      "props": {
+        "text": "Grok build: adding Grok CLI as harness #6. Anthropic API / OpenRouter / Venice / Bankr / Usepod / Grok. @aeonframework",
+        "variant": "body"
+      }
+    },
+    "achievement-8": {
+      "type": "Text",
+      "props": {
+        "text": "Bankr one-click install: @bankrbot launched a console, Aeon skills install in one click. @aeonframework",
+        "variant": "body"
+      }
+    },
+    "achievement-9": {
+      "type": "Text",
+      "props": {
+        "text": "Security: vuln-scanner landed fixes in UAD (8.1k⭐) + DevSpace (2.5k⭐). Alibaba marquee stands.",
+        "variant": "body"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {}
+    },
+    "traction-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Traction",
+        "level": "h2"
+      }
+    },
+    "traction-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stat-miroshark",
+        "stat-aeon",
+        "x402-header",
+        "stat-x402-runs",
+        "stat-x402-buyers",
+        "stat-x402-volume",
+        "text-x402-context",
+        "text-basehub",
+        "text-base-insights",
+        "text-ctrl-automation"
+      ]
+    },
+    "stat-miroshark": {
+      "type": "Stat",
+      "props": {
+        "label": "Miroshark",
+        "value": "1,353 ⭐",
+        "delta": "+16",
+        "trend": "up"
+      }
+    },
+    "stat-aeon": {
+      "type": "Stat",
+      "props": {
+        "label": "Aeon",
+        "value": "561 ⭐",
+        "delta": "+8",
+        "trend": "up"
+      }
+    },
+    "x402-header": {
+      "type": "Text",
+      "props": {
+        "text": "x402 Simulations (paid runs):",
+        "variant": "lead"
+      }
+    },
+    "stat-x402-runs": {
+      "type": "Stat",
+      "props": {
+        "label": "Paid runs",
+        "value": "174"
+      }
+    },
+    "stat-x402-buyers": {
+      "type": "Stat",
+      "props": {
+        "label": "Buyers",
+        "value": "34"
+      }
+    },
+    "stat-x402-volume": {
+      "type": "Stat",
+      "props": {
+        "label": "Volume",
+        "value": "$174",
+        "delta": "+87%",
+        "trend": "up"
+      }
+    },
+    "text-x402-context": {
+      "type": "Text",
+      "props": {
+        "text": "Previous week: 93 paid runs, 21 buyers",
+        "variant": "caption"
+      }
+    },
+    "text-basehub": {
+      "type": "Text",
+      "props": {
+        "text": "BaseHubHB (58k followers): Aeon ranked #1 top AI project this week — Blockworks 40/40 transparency filing",
+        "variant": "body"
+      }
+    },
+    "text-base-insights": {
+      "type": "Text",
+      "props": {
+        "text": "Base_Insights (22k followers): Aeon = leading tier, Miroshark = early tier (June Base ecosystem list)",
+        "variant": "body"
+      }
+    },
+    "text-ctrl-automation": {
+      "type": "Text",
+      "props": {
+        "text": "CTRL_automation live on Miroshark x402",
+        "variant": "body"
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {}
+    },
+    "article-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full Shiplog Article",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/shiplog-2026-07-02.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}
