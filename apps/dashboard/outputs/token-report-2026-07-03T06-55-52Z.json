@@ -1,0 +1,99 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "$MIROSHARK — CONSOLIDATING",
+        "description": "Price held at $0.000003390 (+1.0% from yesterday's run) in a thin session — volume $6.3K (0.57× 7d avg), sellers dominated 80 vs 49 buys, no whale prints. Liquidity edged up 3.3% to $264.1K."
+      },
+      "children": [
+        "sep1",
+        "stats-grid",
+        "sep2",
+        "chart-link"
+      ]
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {}
+    },
+    "stats-grid": {
+      "type": "Grid",
+      "props": {
+        "columns": 3,
+        "gap": "md"
+      },
+      "children": [
+        "stat-price",
+        "stat-liq",
+        "stat-vol",
+        "stat-ratio",
+        "stat-whales",
+        "stat-treasury"
+      ]
+    },
+    "stat-price": {
+      "type": "Stat",
+      "props": {
+        "label": "Price (24h)",
+        "value": "$0.000003390",
+        "delta": "+1.0%",
+        "trend": "up"
+      }
+    },
+    "stat-liq": {
+      "type": "Stat",
+      "props": {
+        "label": "Liquidity",
+        "value": "$264.1K",
+        "delta": "+3.3%",
+        "trend": "up"
+      }
+    },
+    "stat-vol": {
+      "type": "Stat",
+      "props": {
+        "label": "Volume",
+        "value": "$6.3K",
+        "delta": "0.57× 7d avg"
+      }
+    },
+    "stat-ratio": {
+      "type": "Stat",
+      "props": {
+        "label": "Buys/Sells",
+        "value": "0.61",
+        "delta": "49/80"
+      }
+    },
+    "stat-whales": {
+      "type": "Stat",
+      "props": {
+        "label": "Whale Prints",
+        "value": "0"
+      }
+    },
+    "stat-treasury": {
+      "type": "Stat",
+      "props": {
+        "label": "Treasury (ETH)",
+        "value": "6.0000",
+        "delta": "+0.0000",
+        "trend": "neutral"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {}
+    },
+    "chart-link": {
+      "type": "Link",
+      "props": {
+        "label": "Chart",
+        "href": "https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209"
+      }
+    }
+  }
+}
