@@ -1,0 +1,74 @@
+{
+  "root": "card-root",
+  "state": {},
+  "elements": {
+    "card-root": {
+      "type": "Card",
+      "props": {
+        "title": "Tweet Digest — 2026-07-03"
+      },
+      "children": [
+        "stack-main"
+      ]
+    },
+    "stack-main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading-wc",
+        "storylink-1",
+        "storylink-2",
+        "separator-1",
+        "heading-eco",
+        "storylink-3"
+      ]
+    },
+    "heading-wc": {
+      "type": "Heading",
+      "props": {
+        "text": "World Cup Sims",
+        "level": "h2"
+      }
+    },
+    "storylink-1": {
+      "type": "StoryLink",
+      "props": {
+        "title": "simulated the last Ronaldo-Modric dance — Portugal 🇵🇹 vs Croatia 🇭🇷, WC match, full TikTok clip + report linked",
+        "href": "https://x.com/miroshark_/status/2072697339613970613",
+        "source": "@miroshark_"
+      }
+    },
+    "storylink-2": {
+      "type": "StoryLink",
+      "props": {
+        "title": "full sim report live on x402",
+        "href": "https://x.com/miroshark_/status/2072697457033572457",
+        "source": "@miroshark_"
+      }
+    },
+    "separator-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading-eco": {
+      "type": "Heading",
+      "props": {
+        "text": "Ecosystem",
+        "level": "h2"
+      }
+    },
+    "storylink-3": {
+      "type": "StoryLink",
+      "props": {
+        "title": "market sims now running directly on @CTRL_automation — distribution expanding 🦈",
+        "href": "https://x.com/miroshark_/status/2072753230925254940",
+        "source": "@miroshark_"
+      }
+    }
+  }
+}
