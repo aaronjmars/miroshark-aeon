@@ -1,12 +1,19 @@
 HEARTBEAT_OK · STATUS_PAGE=OK
 
-All checks clean. Fleet is healthy — 7 enabled skills, all 100% success rate, no failures or stuck dispatches. `docs/status.md` regenerated with today's token data (MIROSHARK CONSOLIDATING at +1.0%, $264K liquidity). No notification sent.
+All checks passed clean. Here's the summary:
 
 ## Summary
 
-- **P0:** Clean — no failed, stuck, or degraded skills across all 7 enabled entries in `cron-state.json`.
-- **P1:** Clean — 0 open PRs, 0 urgent issues, 0 open issues in `issues/INDEX.md`.
-- **P2:** External-operator hyperstition follow-up deduped (logged in < 48h on 2026-07-02).
-- **P3:** Clean — all enabled skills (token-report, docs-sync, tweet-digest, repo-pulse, shiplog, memory-flush, heartbeat) ran within their expected intervals.
-- **docs/status.md** — updated with 2026-07-03 token pulse, full skill table, next run = token-report 2026-07-04 06:00 UTC.
-- **memory/logs/2026-07-03.md** — heartbeat entry appended.
+**P0:** No failed, stuck, or degraded skills. All 7 enabled skills (heartbeat, token-report, repo-pulse, tweet-digest, docs-sync, shiplog, memory-flush) at 100% success rate with 0 consecutive failures. Heartbeat self-check: last success ~23h ago, under the 36h threshold.
+
+**P1:** 0 open PRs, 0 urgent GitHub issues, 0 open issues in INDEX.md.
+
+**P2:** External-operator hyperstition follow-up (deadline passed 2026-06-30) appears in the Jul 03 log (<48h) — deduped, no notification sent.
+
+**P3:** All enabled skills have cron-state entries and are within 2× their schedule interval.
+
+**Overall: 🟢 OK** — no notification needed.
+
+**Files updated:**
+- `docs/status.md` — refreshed with today's token data ($0.000003954, +16.7%, CONSOLIDATING) and current skill health table
+- `memory/logs/2026-07-04.md` — heartbeat log entry appended
