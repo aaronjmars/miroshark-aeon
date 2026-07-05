@@ -1,7 +1,7 @@
-## Summary
+*Tweet Digest — 2026-07-05*
 
-**tweet-digest — 2026-07-04**
+*Theme: Momentum*
+@miroshark_: "sharks thrive in hot waters" — vibe post signaling the engine is built for high-activity conditions — [link](https://x.com/miroshark_/status/2072970412246401369)
 
-- Loaded `@miroshark_` tweets from pre-fetched cache (`.xai-cache/tweet-digest-miroshark_.json`), covering Jul 1–4.
-- Deduped against Jul 02 and Jul 03 logs — all 5 tweets in the cache were already reported on those prior runs (Builder Codes x402, CTRL_automation x402 live, Portugal vs Croatia WC sim, full sim report, market sims on CTRL).
-- **No new tweets.** Logged `TWEET_DIGEST_OK`. No notification sent.
+*Theme: Content*
+@miroshark_: pushes a new YouTube Shorts clip, calling followers to subscribe and expand the channel — [link](https://x.com/miroshark_/status/2072697344814919707)

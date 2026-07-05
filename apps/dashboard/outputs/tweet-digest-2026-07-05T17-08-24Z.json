@@ -1,0 +1,109 @@
+{
+  "root": "card-root",
+  "state": {},
+  "elements": {
+    "card-root": {
+      "type": "Card",
+      "props": {
+        "title": "Tweet Digest — 2026-07-05"
+      },
+      "children": [
+        "stack-main"
+      ]
+    },
+    "stack-main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading-momentum",
+        "stack-momentum",
+        "separator-1",
+        "heading-content",
+        "stack-content"
+      ]
+    },
+    "heading-momentum": {
+      "type": "Heading",
+      "props": {
+        "text": "Momentum",
+        "level": "h2"
+      }
+    },
+    "stack-momentum": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-1",
+        "text-1",
+        "link-1"
+      ]
+    },
+    "tweet-1": {
+      "type": "TweetCard",
+      "props": {
+        "author": "miroshark",
+        "handle": "miroshark_",
+        "text": "sharks thrive in hot waters"
+      }
+    },
+    "text-1": {
+      "type": "Text",
+      "props": {
+        "text": "vibe post signaling the engine is built for high-activity conditions",
+        "variant": "caption"
+      }
+    },
+    "link-1": {
+      "type": "Link",
+      "props": {
+        "label": "View on X",
+        "href": "https://x.com/miroshark_/status/2072970412246401369"
+      }
+    },
+    "separator-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading-content": {
+      "type": "Heading",
+      "props": {
+        "text": "Content",
+        "level": "h2"
+      }
+    },
+    "stack-content": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-2",
+        "link-2"
+      ]
+    },
+    "tweet-2": {
+      "type": "TweetCard",
+      "props": {
+        "author": "miroshark",
+        "handle": "miroshark_",
+        "text": "pushes a new YouTube Shorts clip, calling followers to subscribe and expand the channel"
+      }
+    },
+    "link-2": {
+      "type": "Link",
+      "props": {
+        "label": "View on X",
+        "href": "https://x.com/miroshark_/status/2072697344814919707"
+      }
+    }
+  }
+}
