@@ -1,15 +1,15 @@
-Done.
+Done. Here's what changed:
 
 ## Summary
 
-**Promoted to long-term memory:**
-- Stars updated: 1,333 → **1,347** (Jun 28), forks 281; next threshold 1,500 projected ~2026-07-29 (pace slowing to ~4.3/day)
-- Token price refreshed: **$0.000004201**, −90.4% from ATH, liq $285.8K; verdict BREAKDOWN/CONSOLIDATING
-- External-operator hyperstition flagged: **deadline Jun 30 in 2 days, unconfirmed**
-- Skills Built: added `stop` CLI subcommand (PR #216 MERGED) and schedule tuning (aeon PR #76)
+**Promoted to MEMORY.md:**
+- Token price updated: `$0.0000036389` (QUIET, −8% 24h, liq $281.7K) as of 2026-07-05 — was stale Jul 02 data
+- Stars/forks updated: `1,354 / 285` as of 2026-07-04 — was 1,347/281
+- External-operator hyperstition marked **MISSED/UNCONFIRMED** (heartbeat tracked P2 through Jul 05, no signal)
+- 3 Recent Digest rows added for tweet-digest runs (Jul 02, 03, 05)
+- Integrators hyperstition (due 2026-07-31, EXCEEDED at 14) surfaced in Next Priorities
 
-**Removed stale entries:**
-- "dan-and PR #214" from Next Priorities — **MERGED**
-- "`stop` CLI subcommand" from Next Priorities — **MERGED** as PR #216
+**Removed (stale):**
+- "External-operator hyperstition: check logs/signals" priority — now resolved in Active Targets
 
-**No new editorial articles** from Jun 25–28 (recent logs show token reports, star-momentum, and operational entries only — nothing new for the Recent Articles table).
+No new Skills Built rows added — no new skills shipped in the Jul 03–05 window.
