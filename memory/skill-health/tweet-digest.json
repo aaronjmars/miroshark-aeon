@@ -1,10 +1,10 @@
 {
   "skill": "tweet-digest",
-  "last_analyzed": "2026-07-05T17:08:24Z",
-  "quality_score": 3,
-  "assessment": "Completed task adequately—found 2 new tweets, deduped against history, logged and notified—but lacks analytical depth or strategic insight.",
+  "last_analyzed": "2026-07-06T17:13:24Z",
+  "quality_score": 4,
+  "assessment": "Correctly deduplicated tweet and logged result per spec; clean execution with clear reasoning",
   "flags": [],
-  "avg_score": 3.8,
+  "avg_score": 3.81,
   "history": [
     {
       "date": "2026-06-16",
@@ -85,6 +85,10 @@
     {
       "date": "2026-07-05",
       "score": 3
+    },
+    {
+      "date": "2026-07-06",
+      "score": 4
     }
   ]
 }
