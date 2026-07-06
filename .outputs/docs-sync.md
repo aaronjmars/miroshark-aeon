@@ -1,4 +1,4 @@
-*Docs Sync — 2026-07-03*
-aaronjmars/miroshark → aaronjmars/miroshark-website
-2 new PRs → changelog entry "New default models across all agent slots"
-PR: https://github.com/aaronjmars/miroshark-website/pull/109
+*Docs Sync — 2026-07-06*
+aaronjmars/MiroShark → aaronjmars/miroshark-website
+10 new PRs → changelog entry "French i18n, CVE sweep, multi-model compatibility"
+PR: https://github.com/aaronjmars/miroshark-website/pull/110

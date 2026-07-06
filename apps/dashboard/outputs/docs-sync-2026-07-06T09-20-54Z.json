@@ -1,0 +1,84 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "Docs Sync",
+        "description": "2026-07-06"
+      },
+      "children": [
+        "repos",
+        "sep1",
+        "activity",
+        "sep2",
+        "pr_link"
+      ]
+    },
+    "repos": {
+      "type": "Text",
+      "props": {
+        "text": "aaronjmars/MiroShark → aaronjmars/miroshark-website"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {}
+    },
+    "activity": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "prs_stat",
+        "changelog_section"
+      ]
+    },
+    "prs_stat": {
+      "type": "Stat",
+      "props": {
+        "label": "New PRs created",
+        "value": "10"
+      }
+    },
+    "changelog_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "changelog_title",
+        "changelog_items"
+      ]
+    },
+    "changelog_title": {
+      "type": "Heading",
+      "props": {
+        "text": "Changelog entry",
+        "level": "h4"
+      }
+    },
+    "changelog_items": {
+      "type": "Text",
+      "props": {
+        "text": "French i18n, CVE sweep, multi-model compatibility"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {}
+    },
+    "pr_link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Pull Request #110",
+        "href": "https://github.com/aaronjmars/miroshark-website/pull/110",
+        "source": "GitHub"
+      }
+    }
+  }
+}
