@@ -1,10 +1,10 @@
 {
   "skill": "tweet-digest",
-  "last_analyzed": "2026-07-06T17:13:24Z",
+  "last_analyzed": "2026-07-07T17:13:43Z",
   "quality_score": 4,
-  "assessment": "Correctly deduplicated tweet and logged result per spec; clean execution with clear reasoning",
+  "assessment": "Substantive, well-structured output—fetched 4 new tweets on core strategy topic (World Cup sim), proper deduplication, correct notification and logging integration, recent data (same day), but output shown is summary only—full digest content not visible to assess depth.",
   "flags": [],
-  "avg_score": 3.81,
+  "avg_score": 3.82,
   "history": [
     {
       "date": "2026-06-16",
@@ -88,6 +88,10 @@
     },
     {
       "date": "2026-07-06",
+      "score": 4
+    },
+    {
+      "date": "2026-07-07",
       "score": 4
     }
   ]

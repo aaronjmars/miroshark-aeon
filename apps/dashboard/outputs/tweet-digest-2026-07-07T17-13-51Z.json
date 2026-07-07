@@ -1,0 +1,113 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Tweet Digest — 2026-07-07"
+      },
+      "children": [
+        "section_1",
+        "separator_1",
+        "section_2"
+      ]
+    },
+    "section_1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading_1",
+        "tweets_1"
+      ]
+    },
+    "heading_1": {
+      "type": "Heading",
+      "props": {
+        "text": "World Cup Sims 🦈",
+        "level": "h3"
+      }
+    },
+    "tweets_1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "tweet_1",
+        "tweet_2"
+      ]
+    },
+    "tweet_1": {
+      "type": "TweetCard",
+      "props": {
+        "author": "Miroshark",
+        "handle": "miroshark_",
+        "text": "Spain vs Portugal 🇪🇸🇵🇹 World Cup sim live — who wins? full report in thread"
+      }
+    },
+    "tweet_2": {
+      "type": "TweetCard",
+      "props": {
+        "author": "Miroshark",
+        "handle": "miroshark_",
+        "text": "full sim report served via x402.miroshark.xyz"
+      }
+    },
+    "separator_1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "section_2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading_2",
+        "tweets_2"
+      ]
+    },
+    "heading_2": {
+      "type": "Heading",
+      "props": {
+        "text": "Content / Social",
+        "level": "h3"
+      }
+    },
+    "tweets_2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "tweet_3",
+        "tweet_4"
+      ]
+    },
+    "tweet_3": {
+      "type": "TweetCard",
+      "props": {
+        "author": "Miroshark",
+        "handle": "miroshark_",
+        "text": "pushing YouTube Shorts"
+      }
+    },
+    "tweet_4": {
+      "type": "TweetCard",
+      "props": {
+        "author": "Miroshark",
+        "handle": "miroshark_",
+        "text": "TikTok presence running"
+      }
+    }
+  }
+}
