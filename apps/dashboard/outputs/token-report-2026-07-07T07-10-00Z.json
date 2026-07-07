@@ -1,0 +1,185 @@
+{
+  "root": "card-report",
+  "state": {},
+  "elements": {
+    "card-report": {
+      "type": "Card",
+      "props": {
+        "title": "$MIROSHARK Token Report"
+      },
+      "children": [
+        "heading-status",
+        "text-narrative",
+        "sep-1",
+        "heading-metrics",
+        "grid-stats",
+        "sep-2",
+        "heading-trading",
+        "stack-trading",
+        "sep-3",
+        "link-chart"
+      ]
+    },
+    "heading-status": {
+      "type": "Heading",
+      "props": {
+        "text": "$MIROSHARK — CONSOLIDATING",
+        "level": "h2"
+      },
+      "children": []
+    },
+    "text-narrative": {
+      "type": "Text",
+      "props": {
+        "text": "Price slipped −4.5% to $0.00000326 on below-average volume (0.55× 7d avg); buy/sell ratio flipped to 2.42 vs yesterday's 0.82, with 3 whale trades (sell/buy/sell pattern around $1K each) pointing to position churn rather than conviction.",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "sep-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "heading-metrics": {
+      "type": "Heading",
+      "props": {
+        "text": "Market Data",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "grid-stats": {
+      "type": "Grid",
+      "props": {
+        "columns": 2,
+        "gap": "md"
+      },
+      "children": [
+        "stat-price",
+        "stat-liq",
+        "stat-vol",
+        "stat-ratio",
+        "stat-treasury",
+        "stat-whales"
+      ]
+    },
+    "stat-price": {
+      "type": "Stat",
+      "props": {
+        "label": "Price (24h)",
+        "value": "$0.00000326",
+        "delta": "-4.5%",
+        "trend": "down"
+      },
+      "children": []
+    },
+    "stat-liq": {
+      "type": "Stat",
+      "props": {
+        "label": "Liquidity (24h)",
+        "value": "$264.2K",
+        "delta": "-3.2%",
+        "trend": "down"
+      },
+      "children": []
+    },
+    "stat-vol": {
+      "type": "Stat",
+      "props": {
+        "label": "Volume (vs 7d avg)",
+        "value": "$5.0K",
+        "delta": "-45%",
+        "trend": "down"
+      },
+      "children": []
+    },
+    "stat-ratio": {
+      "type": "Stat",
+      "props": {
+        "label": "Buy/Sell Ratio",
+        "value": "2.42",
+        "delta": "+195%",
+        "trend": "up"
+      },
+      "children": []
+    },
+    "stat-treasury": {
+      "type": "Stat",
+      "props": {
+        "label": "Treasury",
+        "value": "6.0000 ETH",
+        "delta": "+0.0000"
+      },
+      "children": []
+    },
+    "stat-whales": {
+      "type": "Stat",
+      "props": {
+        "label": "Whale Trades",
+        "value": "3"
+      },
+      "children": []
+    },
+    "sep-2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "heading-trading": {
+      "type": "Heading",
+      "props": {
+        "text": "Trade Flow",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "stack-trading": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "text-buys-sells",
+        "text-whale-pattern"
+      ]
+    },
+    "text-buys-sells": {
+      "type": "Text",
+      "props": {
+        "text": "Buys: 29 | Sells: 12",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "text-whale-pattern": {
+      "type": "Text",
+      "props": {
+        "text": "Whale pattern: Sell/Buy/Sell (~$1K each)",
+        "variant": "caption"
+      },
+      "children": []
+    },
+    "sep-3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "link-chart": {
+      "type": "StoryLink",
+      "props": {
+        "title": "View on GeckoTerminal",
+        "href": "https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209",
+        "source": "GeckoTerminal"
+      },
+      "children": []
+    }
+  }
+}
