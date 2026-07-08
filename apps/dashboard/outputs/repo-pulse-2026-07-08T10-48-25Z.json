@@ -1,0 +1,158 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Repo Pulse — 2026-07-08"
+      },
+      "children": [
+        "status_badge",
+        "repo_link",
+        "stats_section",
+        "separator1",
+        "stargazers_section",
+        "separator2",
+        "source_text"
+      ]
+    },
+    "status_badge": {
+      "type": "Badge",
+      "props": {
+        "text": "STEADY",
+        "variant": "default"
+      }
+    },
+    "repo_link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "aaronjmars/MiroShark",
+        "href": "https://github.com/aaronjmars/MiroShark"
+      }
+    },
+    "stats_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "stat_stars",
+        "stat_forks"
+      ]
+    },
+    "stat_stars": {
+      "type": "Stat",
+      "props": {
+        "label": "Stars",
+        "value": "1356",
+        "delta": "+1",
+        "trend": "up"
+      }
+    },
+    "stat_forks": {
+      "type": "Stat",
+      "props": {
+        "label": "Forks",
+        "value": "286",
+        "delta": "+0",
+        "trend": "neutral"
+      }
+    },
+    "separator1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stargazers_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stargazers_heading",
+        "stargazer_card"
+      ]
+    },
+    "stargazers_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Notable new stargazers:",
+        "level": "h3"
+      }
+    },
+    "stargazer_card": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "stargazer_profile_link",
+        "stargazer_name",
+        "stargazer_location",
+        "stargazer_repos",
+        "stargazer_website",
+        "stargazer_bio"
+      ]
+    },
+    "stargazer_profile_link": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/yash936936",
+        "href": "https://github.com/yash936936"
+      }
+    },
+    "stargazer_name": {
+      "type": "Text",
+      "props": {
+        "text": "Yash Malik",
+        "variant": "lead"
+      }
+    },
+    "stargazer_location": {
+      "type": "Text",
+      "props": {
+        "text": "📍 Delhi NCR",
+        "variant": "body"
+      }
+    },
+    "stargazer_repos": {
+      "type": "Text",
+      "props": {
+        "text": "31 repos",
+        "variant": "caption"
+      }
+    },
+    "stargazer_website": {
+      "type": "Link",
+      "props": {
+        "label": "https://personal-portfolio-yashmalik.vercel.app/",
+        "href": "https://personal-portfolio-yashmalik.vercel.app/"
+      }
+    },
+    "stargazer_bio": {
+      "type": "Text",
+      "props": {
+        "text": "Hi, I'm Yash Malik — a tech enthusiast passionate about intelligent systems and full-stack development.",
+        "variant": "body"
+      }
+    },
+    "separator2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "source_text": {
+      "type": "Text",
+      "props": {
+        "text": "Source: events",
+        "variant": "muted"
+      }
+    }
+  }
+}
