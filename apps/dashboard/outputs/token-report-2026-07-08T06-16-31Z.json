@@ -1,0 +1,123 @@
+{
+  "root": "card-token-report",
+  "state": {},
+  "elements": {
+    "card-token-report": {
+      "type": "Card",
+      "props": {
+        "title": "$MIROSHARK — SLIDING"
+      },
+      "children": [
+        "narrative",
+        "separator-1",
+        "metrics-grid",
+        "separator-2",
+        "chart-link"
+      ]
+    },
+    "narrative": {
+      "type": "Text",
+      "props": {
+        "text": "Price dropped 9.3% to $0.000002956 as sells dominated every hourly window — zero buys in the last hour, 9 sells. Two whale buys from yesterday (~$1K each at $0.0000033–34) failed to hold as support.",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "separator-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "metrics-grid": {
+      "type": "Grid",
+      "props": {
+        "columns": 3,
+        "gap": "md"
+      },
+      "children": [
+        "price-stat",
+        "liquidity-stat",
+        "volume-stat",
+        "buys-sells-stat",
+        "whales-stat",
+        "treasury-stat"
+      ]
+    },
+    "price-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Price",
+        "value": "$0.000002956",
+        "delta": "-9.3%",
+        "trend": "down"
+      },
+      "children": []
+    },
+    "liquidity-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Liquidity",
+        "value": "$251.3K",
+        "delta": "-4.9%",
+        "trend": "down"
+      },
+      "children": []
+    },
+    "volume-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Volume",
+        "value": "$11.2K",
+        "delta": "1.3x 7d avg",
+        "trend": "up"
+      },
+      "children": []
+    },
+    "buys-sells-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Buys/Sells",
+        "value": "25/28",
+        "delta": "0.89 ratio",
+        "trend": "down"
+      },
+      "children": []
+    },
+    "whales-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Whales",
+        "value": "2",
+        "trend": "neutral"
+      },
+      "children": []
+    },
+    "treasury-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Treasury",
+        "value": "6.0000 ETH",
+        "delta": "±0.00 24h",
+        "trend": "neutral"
+      },
+      "children": []
+    },
+    "separator-2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "chart-link": {
+      "type": "Link",
+      "props": {
+        "label": "View Chart on GeckoTerminal",
+        "href": "https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209"
+      },
+      "children": []
+    }
+  }
+}
