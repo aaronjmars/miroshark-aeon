@@ -1,0 +1,55 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "Docs Sync",
+        "description": "2026-07-09"
+      },
+      "children": [
+        "stack-content"
+      ]
+    },
+    "stack-content": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "text-repos",
+        "text-prs",
+        "text-changelog",
+        "link-pr"
+      ]
+    },
+    "text-repos": {
+      "type": "Text",
+      "props": {
+        "text": "aaronjmars/miroshark → aaronjmars/miroshark-website"
+      }
+    },
+    "text-prs": {
+      "type": "Text",
+      "props": {
+        "text": "3 new PRs"
+      }
+    },
+    "text-changelog": {
+      "type": "Text",
+      "props": {
+        "text": "Changelog entry: French coverage at 87%, social agent fixes"
+      }
+    },
+    "link-pr": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #133",
+        "href": "https://github.com/aaronjmars/miroshark-website/pull/133",
+        "source": "miroshark-website"
+      }
+    }
+  }
+}
