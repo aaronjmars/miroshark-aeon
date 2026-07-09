@@ -1,10 +1,10 @@
 {
   "skill": "tweet-digest",
-  "last_analyzed": "2026-07-08T17:06:03Z",
-  "quality_score": 3,
-  "assessment": "Skill executed correctly with proper deduping and logging; no new tweets to report is a valid outcome",
+  "last_analyzed": "2026-07-09T17:31:37Z",
+  "quality_score": 4,
+  "assessment": "Substantive execution: specific artifacts, concrete numbers (5→2 new tweets), clear dedup logic applied, notification sent, logs updated for future runs",
   "flags": [],
-  "avg_score": 3.78,
+  "avg_score": 3.79,
   "history": [
     {
       "date": "2026-06-16",
@@ -97,6 +97,10 @@
     {
       "date": "2026-07-08",
       "score": 3
+    },
+    {
+      "date": "2026-07-09",
+      "score": 4
     }
   ]
 }

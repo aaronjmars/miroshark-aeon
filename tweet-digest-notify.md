@@ -1,7 +1,5 @@
-*Tweet Digest — 2026-07-05*
+*Tweet Digest — 2026-07-09*
 
-*Theme: Momentum*
-@miroshark_: "sharks thrive in hot waters" — vibe post signaling the engine is built for high-activity conditions — [link](https://x.com/miroshark_/status/2072970412246401369)
-
-*Theme: Content*
-@miroshark_: pushes a new YouTube Shorts clip, calling followers to subscribe and expand the channel — [link](https://x.com/miroshark_/status/2072697344814919707)
+*Theme: Distribution / Mini App Launch*
+@miroshark\_: MiroShark mini app just landed on Farcaster — simulate anything with dozens of agents in minutes, now live — [link](https://x.com/miroshark_/status/2074832364505559097)
+@miroshark\_: Farcaster mini app direct link — [farcaster.xyz/miniapps/miroshark](https://x.com/miroshark_/status/2074832407807561893)

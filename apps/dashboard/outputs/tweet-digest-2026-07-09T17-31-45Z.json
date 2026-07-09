@@ -1,0 +1,59 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Tweet Digest — 2026-07-09"
+      },
+      "children": [
+        "text_theme",
+        "separator_1",
+        "stack_tweets"
+      ]
+    },
+    "text_theme": {
+      "type": "Text",
+      "props": {
+        "text": "Theme: Distribution / Mini App Launch",
+        "variant": "lead"
+      },
+      "children": []
+    },
+    "separator_1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "stack_tweets": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "tweet_1",
+        "tweet_2"
+      ]
+    },
+    "tweet_1": {
+      "type": "TweetCard",
+      "props": {
+        "author": "miroshark_",
+        "text": "MiroShark mini app just landed on Farcaster — simulate anything with dozens of agents in minutes, now live — https://x.com/miroshark_/status/2074832364505559097"
+      },
+      "children": []
+    },
+    "tweet_2": {
+      "type": "TweetCard",
+      "props": {
+        "author": "miroshark_",
+        "text": "Farcaster mini app direct link — farcaster.xyz/miniapps/miroshark — https://x.com/miroshark_/status/2074832407807561893"
+      },
+      "children": []
+    }
+  }
+}
