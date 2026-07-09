@@ -1,0 +1,133 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "$MIROSHARK — CONSOLIDATING"
+      },
+      "children": [
+        "text_narrative",
+        "separator_1",
+        "heading_metrics",
+        "stack_metrics",
+        "separator_2",
+        "link_chart"
+      ]
+    },
+    "text_narrative": {
+      "type": "Text",
+      "props": {
+        "text": "five whale sells ($1.1K–$1.4K each) pushed price down −28.9% while 69 smaller buys couldn't absorb the exit. vol at 1.81× the 7-day mean — elevated but just short of the 2× that would've printed a breakdown.",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "separator_1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "heading_metrics": {
+      "type": "Heading",
+      "props": {
+        "text": "Key Metrics",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "stack_metrics": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stat_price",
+        "stat_liquidity",
+        "stat_volume",
+        "stat_buysells",
+        "stat_whales",
+        "stat_treasury"
+      ]
+    },
+    "stat_price": {
+      "type": "Stat",
+      "props": {
+        "label": "Price (24h)",
+        "value": "$0.000002101",
+        "delta": "-28.9%",
+        "trend": "down"
+      },
+      "children": []
+    },
+    "stat_liquidity": {
+      "type": "Stat",
+      "props": {
+        "label": "Liquidity (24h)",
+        "value": "$213.1K",
+        "delta": "-15.2%",
+        "trend": "down"
+      },
+      "children": []
+    },
+    "stat_volume": {
+      "type": "Stat",
+      "props": {
+        "label": "Volume (24h)",
+        "value": "$15.3K",
+        "delta": "1.81× 7d mean",
+        "trend": "neutral"
+      },
+      "children": []
+    },
+    "stat_buysells": {
+      "type": "Stat",
+      "props": {
+        "label": "Buys / Sells",
+        "value": "69 / 22",
+        "delta": "3.14× ratio",
+        "trend": "neutral"
+      },
+      "children": []
+    },
+    "stat_whales": {
+      "type": "Stat",
+      "props": {
+        "label": "Whale Sells",
+        "value": "5",
+        "delta": "$1.1K–$1.4K each",
+        "trend": "neutral"
+      },
+      "children": []
+    },
+    "stat_treasury": {
+      "type": "Stat",
+      "props": {
+        "label": "Treasury",
+        "value": "6.0000 ETH",
+        "delta": "+0.00 (24h)",
+        "trend": "neutral"
+      },
+      "children": []
+    },
+    "separator_2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "link_chart": {
+      "type": "Link",
+      "props": {
+        "label": "View Chart on GeckoTerminal",
+        "href": "https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209"
+      },
+      "children": []
+    }
+  }
+}
