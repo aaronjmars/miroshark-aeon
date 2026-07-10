@@ -1,10 +1,10 @@
 {
   "skill": "token-report",
-  "last_analyzed": "2026-07-09T07:06:31Z",
+  "last_analyzed": "2026-07-10T07:05:20Z",
   "quality_score": 4,
-  "assessment": "Well-structured token report with specific metrics, multi-source validation, and actionable market classification; substantive but primarily technical/observational",
+  "assessment": "Substantive multi-dimensional analysis with specific metrics, verified sources, clear verdict, and proper outputs; truncation limits full assessment.",
   "flags": [],
-  "avg_score": 4.04,
+  "avg_score": 4.03,
   "history": [
     {
       "date": "2026-06-12",
@@ -116,6 +116,10 @@
     },
     {
       "date": "2026-07-09",
+      "score": 4
+    },
+    {
+      "date": "2026-07-10",
       "score": 4
     }
   ]
