@@ -1,0 +1,282 @@
+{
+  "root": "main_card",
+  "state": {},
+  "elements": {
+    "main_card": {
+      "type": "Card",
+      "props": {
+        "title": "Repo Pulse",
+        "description": "2026-07-10"
+      },
+      "children": [
+        "repo_header",
+        "stats_section",
+        "sep1",
+        "stargazers_section",
+        "sep2",
+        "forks_section",
+        "sep3",
+        "source_footer"
+      ]
+    },
+    "repo_header": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "repo_link",
+        "status_badge"
+      ]
+    },
+    "repo_link": {
+      "type": "Link",
+      "props": {
+        "label": "aaronjmars/MiroShark",
+        "href": "https://github.com/aaronjmars/MiroShark"
+      }
+    },
+    "status_badge": {
+      "type": "Badge",
+      "props": {
+        "text": "STEADY",
+        "variant": "default"
+      }
+    },
+    "stats_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "lg"
+      },
+      "children": [
+        "stars_stat",
+        "forks_stat"
+      ]
+    },
+    "stars_stat": {
+      "type": "Stat",
+      "props": {
+        "label": "stars",
+        "value": "1358",
+        "delta": "+1",
+        "trend": "up"
+      }
+    },
+    "forks_stat": {
+      "type": "Stat",
+      "props": {
+        "label": "forks",
+        "value": "287",
+        "delta": "+1",
+        "trend": "up"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stargazers_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stargazers_heading",
+        "stargazer_nacho"
+      ]
+    },
+    "stargazers_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Notable new stargazers",
+        "level": "h3"
+      }
+    },
+    "stargazer_nacho": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "nacho_profile_line",
+        "nacho_bio_text",
+        "nacho_details_line"
+      ]
+    },
+    "nacho_profile_line": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "nacho_profile_link",
+        "nacho_name_text",
+        "nacho_location_badge"
+      ]
+    },
+    "nacho_profile_link": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/NachoOFC",
+        "href": "https://github.com/NachoOFC"
+      }
+    },
+    "nacho_name_text": {
+      "type": "Text",
+      "props": {
+        "text": "Nacho",
+        "variant": "body"
+      }
+    },
+    "nacho_location_badge": {
+      "type": "Badge",
+      "props": {
+        "text": "📍 Chile",
+        "variant": "secondary"
+      }
+    },
+    "nacho_bio_text": {
+      "type": "Text",
+      "props": {
+        "text": "ingeniero informático, Puerto Varas, Chile, trabajando en AST Networks",
+        "variant": "muted"
+      }
+    },
+    "nacho_details_line": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "nacho_repos_badge",
+        "nacho_orgs_stack",
+        "nacho_portfolio_link",
+        "nacho_followers_badge"
+      ]
+    },
+    "nacho_repos_badge": {
+      "type": "Badge",
+      "props": {
+        "text": "32 repos",
+        "variant": "outline"
+      }
+    },
+    "nacho_orgs_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "nacho_org1",
+        "nacho_org2",
+        "nacho_org3"
+      ]
+    },
+    "nacho_org1": {
+      "type": "Badge",
+      "props": {
+        "text": "@CodeBrosSystems",
+        "variant": "secondary"
+      }
+    },
+    "nacho_org2": {
+      "type": "Badge",
+      "props": {
+        "text": "@Laboratorio-nacho",
+        "variant": "secondary"
+      }
+    },
+    "nacho_org3": {
+      "type": "Badge",
+      "props": {
+        "text": "@Github",
+        "variant": "secondary"
+      }
+    },
+    "nacho_portfolio_link": {
+      "type": "Link",
+      "props": {
+        "label": "Portfolio",
+        "href": "https://nachoportafolio.me/"
+      }
+    },
+    "nacho_followers_badge": {
+      "type": "Badge",
+      "props": {
+        "text": "624 followers",
+        "variant": "outline"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "forks_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "forks_heading",
+        "fork_item_1"
+      ]
+    },
+    "forks_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "New forks",
+        "level": "h3"
+      }
+    },
+    "fork_item_1": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "fork_link",
+        "fork_repos_badge"
+      ]
+    },
+    "fork_link": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/Syanhlu/MiroShark",
+        "href": "https://github.com/Syanhlu/MiroShark"
+      }
+    },
+    "fork_repos_badge": {
+      "type": "Badge",
+      "props": {
+        "text": "4 repos",
+        "variant": "outline"
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "source_footer": {
+      "type": "Text",
+      "props": {
+        "text": "Source: events",
+        "variant": "caption"
+      }
+    }
+  }
+}
