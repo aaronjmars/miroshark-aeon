@@ -1,0 +1,14 @@
+{
+  "skill": "token-movers",
+  "last_analyzed": "2026-07-10T18:41:32Z",
+  "quality_score": 4,
+  "assessment": "Substantive, well-structured output with specific metrics, clear verdict, and complete deliverables; specific data points (price, volume, liquidity, whale activity, buy/sell ratios) indicate real analysis rather than boilerplate",
+  "flags": [],
+  "avg_score": 4,
+  "history": [
+    {
+      "date": "2026-07-10",
+      "score": 4
+    }
+  ]
+}
