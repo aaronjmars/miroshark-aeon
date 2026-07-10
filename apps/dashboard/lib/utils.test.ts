@@ -1,12 +1,12 @@
 /**
- * Tests for apps/dashboard/lib/utils.ts — cron parsing, display names, and time helpers.
+ * Tests for apps/dashboard/lib/utils.ts - cron parsing, display names, and time helpers.
  *
  * Run with:  node --import tsx --test apps/dashboard/lib/utils.test.ts
  */
 import { describe, it } from "node:test";
 import { strict as assert } from "node:assert";
 
-import { displayName, initials, parseCron, cronLabel, buildCron, timeAgo, getSkillStatus, localToUtc24 } from "./utils";
+import { displayName, initials, parseCron, cronLabel, buildCron, timeAgo, getSkillStatus, localToUtc24, slugify } from "./utils";
 import type { Run } from "./types";
 
 // ── displayName ──────────────────────────────────────────────────────
@@ -57,6 +57,28 @@ describe("initials", () => {
   it("is case insensitive for output", () => {
     // initials returns uppercase regardless of input
     assert.equal(initials("test-skill"), "TS");
+  });
+});
+
+// ── slugify ───────────────────────────────────────────────────────────
+
+describe("slugify", () => {
+  it("lowercases and hyphenates", () => {
+    assert.equal(slugify("Fleet Scorecard"), "fleet-scorecard");
+  });
+
+  it("collapses non-alphanumeric runs into a single hyphen", () => {
+    assert.equal(slugify("a  --  b__c"), "a-b-c");
+  });
+
+  it("trims leading and trailing hyphens", () => {
+    assert.equal(slugify("  Hello! "), "hello");
+    assert.equal(slugify("--x--"), "x");
+  });
+
+  it("returns empty string for input with no alphanumerics", () => {
+    assert.equal(slugify("!!!"), "");
+    assert.equal(slugify(""), "");
   });
 });
 
@@ -163,7 +185,7 @@ describe("buildCron", () => {
 
   it("builds a daily cron with specific days", () => {
     const cron = buildCron("time", 9, "m", 9, 0, "AM", [1, 3, 5]);
-    // 9 AM local — we just verify the cron structure
+    // 9 AM local - we just verify the cron structure
     assert.ok(cron.includes("*"));
     assert.ok(cron.includes("1,3,5"));
   });
@@ -223,15 +245,15 @@ describe("getSkillStatus", () => {
     assert.equal(result.color, "red");
   });
 
-  it("returns On duty for enabled skill with no matching runs", () => {
+  it("returns Enabled for enabled skill with no matching runs", () => {
     const result = getSkillStatus("test", true, []);
-    assert.equal(result.label, "On duty");
+    assert.equal(result.label, "Enabled");
     assert.equal(result.color, "green");
   });
 
-  it("returns Off duty for disabled skill with no matching runs", () => {
+  it("returns Disabled for disabled skill with no matching runs", () => {
     const result = getSkillStatus("test", false, []);
-    assert.equal(result.label, "Off duty");
+    assert.equal(result.label, "Disabled");
     assert.equal(result.color, "gray");
   });
 });

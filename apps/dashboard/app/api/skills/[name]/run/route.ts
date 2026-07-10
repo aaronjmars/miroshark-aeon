@@ -1,9 +1,10 @@
 import { NextResponse } from 'next/server'
-import { execFileSync } from 'child_process'
-import { resolve } from 'path'
+import { errorResponse } from '@/lib/http'
+import { runSkill } from '@/lib/run-skill'
 
-const REPO_ROOT = resolve(process.cwd(), '..', '..')
-
+// The name validation, var/model sanitization, install-skill PR-permission
+// guarantee, and gh dispatch live in lib/run-skill.ts so `aeon skills run` and
+// this route dispatch identically.
 export async function POST(
   request: Request,
   { params }: { params: Promise<{ name: string }> },
@@ -11,33 +12,22 @@ export async function POST(
   try {
     const { name } = await params
 
-    // Validate skill name to prevent injection
-    if (!/^[a-z][a-z0-9-]*$/.test(name)) {
-      return NextResponse.json({ error: 'Invalid skill name' }, { status: 400 })
-    }
-
-    // Read optional var and model from request body
     let skillVar = ''
     let model = ''
     try {
       const body = await request.json() as { var?: string; model?: string }
-      if (body.var && typeof body.var === 'string') {
-        skillVar = body.var.replace(/[^a-zA-Z0-9_ .\-/#@]/g, '')
-      }
-      if (body.model && typeof body.model === 'string') {
-        model = body.model.replace(/[^a-zA-Z0-9_\-]/g, '')
-      }
+      if (typeof body.var === 'string') skillVar = body.var
+      if (typeof body.model === 'string') model = body.model
     } catch { /* no body is fine */ }
 
-    const args = ['workflow', 'run', 'aeon.yml', '-f', `skill=${name}`]
-    if (skillVar) args.push('-f', `var=${skillVar}`)
-    if (model) args.push('-f', `model=${model}`)
-
-    execFileSync('gh', args, { stdio: 'pipe', cwd: REPO_ROOT })
-
+    runSkill(name, { var: skillVar, model })
     return NextResponse.json({ ok: true })
   } catch (error: unknown) {
-    const msg = error instanceof Error ? error.message : 'Failed to trigger run'
-    return NextResponse.json({ error: msg }, { status: 500 })
+    const msg = error instanceof Error ? error.message : ''
+    // An invalid skill name is a client error, not a dispatch failure.
+    if (/Invalid skill name/.test(msg)) {
+      return NextResponse.json({ error: msg }, { status: 400 })
+    }
+    return errorResponse(error, 'Failed to trigger run')
   }
 }

@@ -1,1 +1,0 @@
-self-improve: token-report's xai=skip footer flag was masking whether the X-sentiment prefetch actually works — split it into xai=quiet (ran, low chatter) vs xai=skip (no data fetched), so 5 days of ambiguous skips become a readable signal. PR: https://github.com/aaronjmars/miroshark-aeon/pull/75

@@ -1,5 +1,7 @@
 ---
+type: Skill
 name: PM Manipulation
+category: crypto
 description: Detect suspected manipulation on prediction markets over the past 3 days by cross-referencing price/volume/comment anomalies with multilingual local-press coverage
 tags: [crypto, research, security]
 ---
@@ -23,9 +25,9 @@ Read `memory/topics/prediction-markets.md` if it exists for an optional `## Plat
 
 The keyword filter and locale table below are starting points — the operator can edit `memory/topics/prediction-markets.md` to add `## Keywords` and `## Locales` sections that override the defaults.
 
-## Sandbox note
+## Network note
 
-curl may fail in the sandbox. For every curl call, if it fails or returns empty, use **WebFetch** for the same URL. The Polymarket APIs above are public (no auth). For news searches, prefer **WebSearch** with locale-specific queries — it routes through the sandbox cleanly.
+`curl` works — there is no network sandbox. For every curl call, if it fails or returns empty, use **WebFetch** as a fallback for a flaky public GET. The Polymarket APIs above are public (no auth). For news searches, prefer **WebSearch** with locale-specific queries — a built-in Claude tool that needs no curl.
 
 ## Steps
 
@@ -174,7 +176,7 @@ scanned: N markets · flagged: M · suspicious: K · high-conf: J
 --- CLEAN (scanned but no flags) ---
 N markets, no anomalies above threshold.
 
-read it: articles/pm-manipulation-${today}.md
+read it: output/articles/pm-manipulation-${today}.md
 MSG
 ```
 
@@ -182,7 +184,7 @@ Keep the notification under 3500 chars. If it exceeds, drop the CLEAN section an
 
 ### 7. Save the full report
 
-Write the unabridged report to `articles/pm-manipulation-${today}.md`:
+Write the unabridged report to `output/articles/pm-manipulation-${today}.md`:
 
 ```markdown
 # PM Manipulation Watch — ${today}
@@ -242,7 +244,7 @@ Append to `memory/logs/${today}.md`:
 
 ## Guidelines
 
-- **Past 3 days only.** Older windows belong to `pm-intel` or one-off audits. Recency matters — manipulation is a near-term phenomenon, and stale signal turns this skill into noise.
+- **Past 3 days only.** Older windows belong to one-off audits. Recency matters — manipulation is a near-term phenomenon, and stale signal turns this skill into noise.
 - **Multilingual is the differentiator.** A pure English scan is just a worse `monitor-polymarket`. The signal lives in coverage gaps between languages.
 - **No accusations.** Use words like "suspected", "consistent with", "anomalous", "asymmetric coverage". Never name actors as manipulators without direct evidence.
 - **Translate inline.** When quoting non-English press, give the original phrase + English gloss. Never paraphrase a foreign source as if it were English.

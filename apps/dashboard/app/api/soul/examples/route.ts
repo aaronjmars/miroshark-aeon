@@ -1,5 +1,8 @@
 import { NextResponse } from 'next/server'
 import { getRemoteDirectory, getRemoteFileContent, createFile, commitAndPush } from '@/lib/github'
+import { errorResponse, syncFields } from '@/lib/http'
+import { displayName } from '@/lib/utils'
+import type { SoulExample, SoulExamplesResponse } from '@/lib/types'
 
 // One-click install of a ready-made soul from the soul.md examples gallery into
 // the operator's own repo. GET lists the available example people; POST copies
@@ -8,25 +11,21 @@ const SOURCE_REPO = 'aaronjmars/soul.md'
 
 // Short blurbs for the known examples; unknown ones still list with just a name.
 const BLURBS: Record<string, string> = {
-  karpathy: 'AI researcher & educator — builds from scratch, Software 2.0',
-  'garry-tan': 'YC president — founder-first, optimistic, direct',
-  steipete: 'Indie Apple-platform dev — sharp, technical, opinionated',
-  'vivian-balakrishnan': "Singapore's foreign minister — measured, statesmanlike",
-}
-
-function humanize(slug: string): string {
-  return slug.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')
+  karpathy: 'AI researcher & educator - builds from scratch, Software 2.0',
+  'garry-tan': 'YC president - founder-first, optimistic, direct',
+  steipete: 'Indie Apple-platform dev - sharp, technical, opinionated',
+  'vivian-balakrishnan': "Singapore's foreign minister - measured, statesmanlike",
 }
 
 export async function GET() {
   try {
     const entries = await getRemoteDirectory(SOURCE_REPO, 'examples')
-    const examples = entries
+    const examples: SoulExample[] = entries
       .filter(e => e.type === 'dir' && !e.name.startsWith('_') && !e.name.startsWith('.'))
-      .map(d => ({ key: d.name, label: humanize(d.name), blurb: BLURBS[d.name] || '' }))
-    return NextResponse.json({ examples })
+      .map(d => ({ key: d.name, label: displayName(d.name), blurb: BLURBS[d.name] || '' }))
+    return NextResponse.json({ examples } satisfies SoulExamplesResponse)
   } catch {
-    return NextResponse.json({ examples: [] })
+    return NextResponse.json({ examples: [] } satisfies SoulExamplesResponse)
   }
 }
 
@@ -53,9 +52,8 @@ export async function POST(request: Request) {
     if (good) { await createFile('soul/examples/good-outputs.md', good, msg); paths.push('soul/examples/good-outputs.md') }
 
     const sync = commitAndPush(paths, msg)
-    return NextResponse.json({ ok: true, soul, style: style || '', synced: sync.synced, ...(sync.reason ? { syncError: sync.reason } : {}) })
+    return NextResponse.json({ ok: true, soul, style: style || '', ...syncFields(sync) })
   } catch (error: unknown) {
-    const msg = error instanceof Error ? error.message : 'Failed to install example'
-    return NextResponse.json({ error: msg }, { status: 500 })
+    return errorResponse(error, 'Failed to install example')
   }
 }

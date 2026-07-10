@@ -1,6 +1,8 @@
 ---
+type: Skill
 name: narrative-convergence
-description: Cross-skill signal detector — finds entities or themes surfaced independently by 3+ different skill categories within 48h and surfaces them as high-confidence write opportunities
+category: core
+description: Cross-skill signal detector - finds entities or themes surfaced independently by 3+ different skill categories within 48h and surfaces them as high-confidence write opportunities
 var: ""
 tags: [content, meta, intelligence]
 ---
@@ -26,14 +28,14 @@ The signal-category map is **operator-editable** and lives in `memory/topics/sig
 # Signal Categories
 
 ## Housekeeping (excluded — no external signals)
-config-validator, janitor, frequency-guard, batch-health, heartbeat, memory-flush,
-memory-dedupe, skill-evals, skill-health, skill-repair, self-review, reflect,
-spend-monitor, cost-report, fleet-scorecard, fleet-control, repo-scanner, narrative-convergence
+config-validator, janitor, frequency-guard, heartbeat, memory-flush,
+memory-dedupe, skill-health, skill-repair, self-improve,
+cost-report, fleet-scorecard, fleet-control, repo-scanner, narrative-convergence
 
 ## Signal categories (skill → category)
 | Category | Skills |
 |----------|--------|
-| market | market-context, token-pick, token-movers, rwa-pulse, defi-monitor |
+| market | market-context, token-pick, token-movers, rwa-pulse, defi-overview |
 | social | tweet-roundup, list-digest, narrative-tracker, remix-tweets, refresh-x |
 | ecosystem | github-issues, github-trending, project-lens, builder-map, external-feature, milestone-tracker |
 | sector | mcp-pulse, compute-pulse, x402-monitor, agent-displacement, pm-pulse |
@@ -46,7 +48,7 @@ spend-monitor, cost-report, fleet-scorecard, fleet-control, repo-scanner, narrat
 
 ### 1. Identify which outputs to read
 
-List `.outputs/*.md` with the Glob tool. Exclude the **Housekeeping** skills from `signal-categories.md` — they carry no external signal.
+List `output/.chains/*.md` with the Glob tool. Exclude the **Housekeeping** skills from `signal-categories.md` — they carry no external signal.
 
 Map each remaining output file to its category using the table in `signal-categories.md`. Any signal skill not listed in the table goes into an `other` category (so newly-added skills still count toward convergence, just without a named lane).
 
@@ -69,7 +71,7 @@ Build an entity/theme map:
 }
 ```
 
-Also read memory logs from the last 2 days (Glob `memory/logs/*.md`, take the 2 most recent). From each log, extract entities/themes mentioned in specific skill run entries and add them to the map with their source skill. Every skill appends a log entry, so the signal map can be reconstructed from logs alone when `.outputs/` is sparse.
+Also read memory logs from the last 2 days (Glob `memory/logs/*.md`, take the 2 most recent). From each log, extract entities/themes mentioned in specific skill run entries and add them to the map with their source skill. Every skill appends a log entry, so the signal map can be reconstructed from logs alone when `output/.chains/` is sparse.
 
 ### 3. Score convergence signals
 
@@ -95,11 +97,11 @@ Rank descending by score. Take top 5 (or fewer if <5 clear signals).
 
 ### 4. Check against recent article coverage
 
-Glob `articles/*.md`, filter to the last 14 days. For each top signal:
+Glob `output/articles/*.md`, filter to the last 14 days. For each top signal:
 - If an article covered this entity/theme in the last 7 days: suppress it (−10, effectively dropping it).
 - If covered 8–14 days ago: note "recently covered" as a caveat.
 
-Update the final ranking after suppression. (If no `articles/` dir exists, skip this step.)
+Update the final ranking after suppression. (If no `output/articles/` dir exists, skip this step.)
 
 ### 5. Develop write opportunities
 
@@ -183,8 +185,8 @@ If skipped: `NARRATIVE_CONVERGENCE_SKIP: <reason>`.
 
 ## Required Env Vars
 
-None. All reads from local `.outputs/`, `memory/`, and `articles/` dirs.
+None. All reads from local `output/.chains/`, `memory/`, and `output/articles/` dirs.
 
-## Sandbox Note
+## Network Note
 
-No network calls required. All data comes from local files written by other skills. If `.outputs/` is sparse (e.g. first morning run before skills have written), fall back to reading the last 3 memory logs directly — every skill appends a log entry, so the signal map can be reconstructed from logs alone. The only outbound call is `./notify`, which is already sandbox-safe.
+No network calls required. All data comes from local files written by other skills. If `output/.chains/` is sparse (e.g. first morning run before skills have written), fall back to reading the last 3 memory logs directly — every skill appends a log entry, so the signal map can be reconstructed from logs alone. The only outbound call is `./notify`, which works reliably.

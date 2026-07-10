@@ -9,6 +9,11 @@ const GITHUB_API = 'https://api.github.com'
 interface GitHubContentFile { content: string; sha: string; encoding: string }
 interface GitHubContentEntry { name: string; type: 'file' | 'dir' | 'symlink' | 'submodule'; path: string }
 
+// Outcome of the local-mode git commit+push. `reason` is set only when the push
+// failed (surfaced to the UI as `syncError`). Distinct from the wire-level
+// SyncResult in lib/types.ts, which is the client-facing JSON response body.
+export interface CommitResult { synced: boolean; reason?: string }
+
 export function isLocal() {
   return !process.env.GITHUB_TOKEN || !process.env.GITHUB_REPO
 }
@@ -16,14 +21,14 @@ export function isLocal() {
 /**
  * Local-mode auto-sync. After a dashboard edit writes a file to disk, stage
  * exactly those paths, commit, and push so the change lands on GitHub
- * immediately — otherwise scheduled runs (which read committed `main`) never see
+ * immediately - otherwise scheduled runs (which read committed `main`) never see
  * it. Hosted mode already commits through the Contents API, so this is a no-op
  * there. Best-effort and never throws: the file is already saved locally, so a
  * failed push degrades to { synced: false } (surfaced to the UI) rather than
  * failing the request. Only the given paths are committed, so unrelated
  * working-tree changes are left untouched.
  */
-export function commitAndPush(paths: string[], message: string): { synced: boolean; reason?: string } {
+export function commitAndPush(paths: string[], message: string): CommitResult {
   if (isLocal() === false) return { synced: true } // hosted mode: edit already committed via API
   const git = (...args: string[]) =>
     execFileSync('git', args, { stdio: 'pipe', cwd: REPO_ROOT }).toString().trim()
@@ -68,6 +73,13 @@ function authHeaders(token: string) {
   }
 }
 
+// Parse a GitHub "list contents" response into its entry array. A 404 and a
+// non-array body (i.e. a single file, not a directory) both yield [] — an
+// absent-or-not-a-directory path is not an error for callers that list.
+async function parseContentsList(res: Response, path: string): Promise<GitHubContentEntry[]> {
+  return parseContentsList(res, path)
+}
+
 // --- Unified interface: local filesystem or GitHub API ---
 
 export async function getFileContent(path: string): Promise<{ content: string; sha: string }> {
@@ -109,6 +121,9 @@ export async function updateFile(path: string, content: string, sha: string, _me
 }
 
 export async function createFile(path: string, content: string, message: string): Promise<unknown> {
+  if (path.startsWith('/') || path.includes('..')) {
+    throw new Error(`invalid path: ${path}`)
+  }
   if (isLocal()) {
     const fullPath = join(REPO_ROOT, path)
     await mkdir(join(fullPath, '..'), { recursive: true })
@@ -120,7 +135,7 @@ export async function createFile(path: string, content: string, message: string)
     const existing = await getFileContent(path)
     return updateFile(path, content, existing.sha, message)
   } catch {
-    // File doesn't exist — create it
+    // File doesn't exist - create it
   }
   const res = await fetch(`${GITHUB_API}/repos/${repo}/contents/${path}`, {
     method: 'PUT',
@@ -133,6 +148,31 @@ export async function createFile(path: string, content: string, message: string)
   })
   if (!res.ok) throw new Error(`GitHub API ${res.status}: failed to create ${path}`)
   return res.json()
+}
+
+/**
+ * Write a file, updating it in place when it already exists and creating it
+ * otherwise, then sync via commitAndPush. Returns commitAndPush's result
+ * ({ synced, reason }) so routes can spread it - best-effort/local-mode-only,
+ * never throws from the sync step.
+ */
+export async function saveFile(
+  path: string,
+  content: string,
+  opts: { updateMsg: string; createMsg: string },
+): Promise<CommitResult> {
+  let sha: string | undefined
+  try {
+    sha = (await getFileContent(path)).sha
+  } catch {
+    // File doesn't exist yet - create it
+  }
+  if (sha) {
+    await updateFile(path, content, sha, opts.updateMsg)
+  } else {
+    await createFile(path, content, opts.createMsg)
+  }
+  return commitAndPush([path], sha ? opts.updateMsg : opts.createMsg)
 }
 
 export async function getDirectory(path: string): Promise<Array<{ name: string; type: string; path: string }>> {
@@ -154,35 +194,30 @@ export async function getDirectory(path: string): Promise<Array<{ name: string; 
     headers: authHeaders(token),
     cache: 'no-store',
   })
-  if (!res.ok) return []
-  const data = (await res.json()) as GitHubContentEntry[] | GitHubContentFile
-  return Array.isArray(data) ? data : []
+  return parseContentsList(res, path)
 }
 
 // --- Remote repo helpers (for importing skills) ---
 
+function remoteAuthHeaders(): Record<string, string> {
+  return {
+    Accept: 'application/vnd.github+json',
+    ...(process.env.GITHUB_TOKEN ? { Authorization: `Bearer ${process.env.GITHUB_TOKEN}` } : {}),
+  }
+}
+
 export async function getRemoteDirectory(remoteRepo: string, path: string): Promise<Array<{ name: string; type: string }>> {
   // Always uses GitHub API (remote repo)
-  const headers: Record<string, string> = { Accept: 'application/vnd.github+json' }
-  if (process.env.GITHUB_TOKEN) {
-    headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`
-  }
   const url = path
     ? `${GITHUB_API}/repos/${remoteRepo}/contents/${path}`
     : `${GITHUB_API}/repos/${remoteRepo}/contents`
-  const res = await fetch(url, { headers, cache: 'no-store' })
-  if (!res.ok) return []
-  const data = (await res.json()) as GitHubContentEntry[] | GitHubContentFile
-  return Array.isArray(data) ? data : []
+  const res = await fetch(url, { headers: remoteAuthHeaders(), cache: 'no-store' })
+  return parseContentsList(res, path)
 }
 
 export async function getRemoteFileContent(remoteRepo: string, path: string): Promise<string | null> {
-  const headers: Record<string, string> = { Accept: 'application/vnd.github+json' }
-  if (process.env.GITHUB_TOKEN) {
-    headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`
-  }
   const res = await fetch(`${GITHUB_API}/repos/${remoteRepo}/contents/${path}`, {
-    headers,
+    headers: remoteAuthHeaders(),
     cache: 'no-store',
   })
   if (!res.ok) return null

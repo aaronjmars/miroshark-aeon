@@ -1,9 +1,9 @@
 import { NextResponse } from 'next/server'
 import { getFileContent, updateFile, createFile, commitAndPush } from '@/lib/github'
+import { errorResponse, syncResult } from '@/lib/http'
+import type { McpServers } from '@/lib/types'
 
 const FILE = '.mcp.json'
-
-type McpServers = Record<string, unknown>
 
 export async function GET() {
   try {
@@ -12,8 +12,10 @@ export async function GET() {
     try {
       const parsed = JSON.parse(content) as { mcpServers?: McpServers }
       servers = parsed.mcpServers ?? {}
-    } catch {
-      // Malformed JSON — return raw so the operator can see/fix it.
+    } catch (e) {
+      // Malformed JSON - return raw so the operator can see/fix it, and log so
+      // the broken file isn't indistinguishable from an empty server list.
+      console.warn(`[mcp] .mcp.json is not valid JSON; returning raw for repair: ${e instanceof Error ? e.message : e}`)
     }
     return NextResponse.json({ exists: true, servers, sha, raw: content })
   } catch {
@@ -40,9 +42,8 @@ export async function PUT(request: Request) {
       await createFile(FILE, content, 'chore: add .mcp.json from dashboard')
     }
     const sync = commitAndPush([FILE], 'chore: update .mcp.json from dashboard')
-    return NextResponse.json({ ok: true, synced: sync.synced, ...(sync.reason ? { syncError: sync.reason } : {}) })
+    return NextResponse.json(syncResult(sync))
   } catch (error: unknown) {
-    const msg = error instanceof Error ? error.message : 'Unknown error'
-    return NextResponse.json({ error: msg }, { status: 500 })
+    return errorResponse(error, 'Unknown error')
   }
 }

@@ -1,6 +1,13 @@
 'use client'
 
 import { useState } from 'react'
+import { GATEWAY_REGISTRY } from '@/lib/gateway-registry'
+
+// LLM-gateway domains derive from the single registry so a new provider doesn't
+// need a hand-added row here.
+const GATEWAY_DOMAINS: Record<string, string> = Object.fromEntries(
+  Object.values(GATEWAY_REGISTRY).map((p) => [p.secretName, p.domain] as [string, string]),
+)
 
 // Maps each credential / group to the brand domain whose logo we show. Logos
 // come from DuckDuckGo's privacy-respecting favicon service (no domain list
@@ -9,14 +16,12 @@ import { useState } from 'react'
 // service has no favicon (or the request fails) we fall back to a glyph or a
 // monochrome initials badge so every row still carries a mark.
 const DOMAINS: Record<string, string> = {
-  // Core — auth + LLM gateways
+  // Core - Claude-native auth (LLM-gateway domains spread in from the registry)
   CLAUDE_CODE_OAUTH_TOKEN: 'claude.ai',
   ANTHROPIC_API_KEY: 'anthropic.com',
-  BANKR_LLM_KEY: 'bankr.bot',
-  OPENROUTER_API_KEY: 'openrouter.ai',
-  USEPOD_TOKEN: 'usepod.ai',
-  VENICE_API_KEY: 'venice.ai',
-  SURPLUS_API_KEY: 'surplusintelligence.ai',
+  // Grok Build (grok CLI) X-account OAuth session — same brand as XAI_API_KEY.
+  GROK_CREDENTIALS: 'x.ai',
+  ...GATEWAY_DOMAINS,
   // Channels
   TELEGRAM_BOT_TOKEN: 'telegram.org',
   TELEGRAM_CHAT_ID: 'telegram.org',
@@ -26,7 +31,6 @@ const DOMAINS: Record<string, string> = {
   SLACK_BOT_TOKEN: 'slack.com',
   SLACK_CHANNEL_ID: 'slack.com',
   SLACK_WEBHOOK_URL: 'slack.com',
-  SENDGRID_API_KEY: 'sendgrid.com',
   // Skill keys
   XAI_API_KEY: 'x.ai',
   COINGECKO_API_KEY: 'coingecko.com',
@@ -37,18 +41,15 @@ const DOMAINS: Record<string, string> = {
   VERCEL_TOKEN: 'vercel.com',
   REPLICATE_API_TOKEN: 'replicate.com',
   RESEND_API_KEY: 'resend.com',
-  LIQUIDPAD_API_KEY: 'liquidpad.site',
   ADMANAGE_API_KEY: 'admanage.ai',
-  SUPERNOTES_API_KEY: 'supernotes.app',
-  CONGRESS_GOV_API_KEY: 'congress.gov',
-  DEVTO_API_KEY: 'dev.to',
-  NEYNAR_API_KEY: 'neynar.com',
-  NEYNAR_SIGNER_UUID: 'neynar.com',
   GH_GLOBAL: 'github.com',
   BASE_RPC_URL: 'base.org',
+  // Observability
+  LANGFUSE_PUBLIC_KEY: 'langfuse.com',
+  LANGFUSE_SECRET_KEY: 'langfuse.com',
 }
 
-// Non-brand entries — no logo exists, so show a meaningful glyph instead.
+// Non-brand entries - no logo exists, so show a meaningful glyph instead.
 const GLYPHS: Record<string, 'mail' | 'key'> = {
   NOTIFY_EMAIL_TO: 'mail',
 }
@@ -56,11 +57,16 @@ const GLYPHS: Record<string, 'mail' | 'key'> = {
 // Explicit logo overrides for services whose favicon is wrong/outdated. Vendored
 // into public/icons so they don't depend on a third-party host staying up.
 const ICON_URLS: Record<string, string> = {
-  NEYNAR_API_KEY: '/icons/neynar.jpg',
-  NEYNAR_SIGNER_UUID: '/icons/neynar.jpg',
 }
 
-// Heroicons (outline) paths — match the stroke icons used elsewhere in the UI.
+// Same idea, keyed by DOMAIN — applies to group headers (which pass `domain`
+// directly) as well as any credential resolving to that domain. Langfuse's
+// favicon-service icon renders as a generic mark, so we vendor the real logo.
+const DOMAIN_ICON_URLS: Record<string, string> = {
+  'langfuse.com': '/icons/langfuse.svg',
+}
+
+// Heroicons (outline) paths - match the stroke icons used elsewhere in the UI.
 const GLYPH_PATHS: Record<'mail' | 'key', string> = {
   mail: 'M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75',
   key: 'M15.75 5.25a3 3 0 0 1 3 3m3 0a6 6 0 0 1-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1 1 21.75 8.25z',
@@ -88,9 +94,11 @@ export function ServiceIcon({ name, domain, glyph, className = '' }: ServiceIcon
   const [failed, setFailed] = useState(false)
   const resolvedDomain = domain ?? (name ? DOMAINS[name] : undefined)
   const resolvedGlyph = glyph ?? (name ? GLYPHS[name] : undefined)
-  // Explicit override wins over the domain favicon.
+  // Explicit override wins over the domain favicon; a vendored domain logo wins
+  // over the favicon service.
   const explicitSrc = name ? ICON_URLS[name] : undefined
-  const src = explicitSrc ?? (resolvedDomain ? faviconUrl(resolvedDomain) : undefined)
+  const domainSrc = resolvedDomain ? (DOMAIN_ICON_URLS[resolvedDomain] ?? faviconUrl(resolvedDomain)) : undefined
+  const src = explicitSrc ?? domainSrc
 
   // Light chip backing so dark/filled marks (GitHub, Base, x.AI…) stay legible
   // against the near-black UI. Logos sit grayscale-and-calm, lifting to full

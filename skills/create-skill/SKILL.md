@@ -1,5 +1,7 @@
 ---
+type: Skill
 name: Create Skill
+category: evolution
 description: Generate a complete new skill from a one-line prompt and ship it as a PR
 var: ""
 tags: [dev, meta]
@@ -66,12 +68,14 @@ Today is ${today}. Your task is to generate a complete, production-ready skill f
    - **Steps** — 4-8 numbered, following the standard pattern: read context → fetch/search → process/analyze → write output → log → notify.
    - **Schedule suggestion** — choose a cron slot. Read existing schedules in `aeon.yml`; avoid co-scheduling at the same minute as heavy skills (article, repo-scanner, deep-research, telegram-digest) unless the new skill is lightweight (<30s expected). Prefer a `:30` minute offset if the natural hour is already crowded.
    - **Model** — default `claude-opus-4-7`. Pick `claude-sonnet-4-6` if the skill is high-frequency aggregation/digestion (cost optimization). Document the choice in the PR body.
+   - **Category** — the pack the skill joins. Pick one: `research` `dev` `crypto` `onchain-security` `social` `productivity` `meta`. (`core` and `fleet` are curated in `packs.config.json`, not chosen here.) If none fits, omit it and the skill lands in the **Lab** catch-all for later triage. See `docs/skill-packs.md`.
 
 6. **Write the SKILL.md draft** at `skills/{skill-name}/SKILL.md` with this exact structure:
 
    ```markdown
    ---
    name: {Display Name}
+   category: {category}
    description: {One-sentence description starting with a verb}
    var: ""
    tags: [{tags}]
@@ -95,9 +99,9 @@ Today is ${today}. Your task is to generate a complete, production-ready skill f
    N. **Notify.** Send via `./notify`:
    {Output format template — specify ≤4000 chars, clickable URLs}
 
-   ## Sandbox note
+   ## Network note
 
-   {WebFetch fallback or pre-fetch/post-process pattern based on auth needs}
+   {How this skill reaches the network — ./secretcurl with an {ENV_NAME} placeholder for auth'd APIs, gh api for GitHub, curl + WebFetch fallback for public}
    ```
 
    Hard rules for the generated content:
@@ -108,18 +112,18 @@ Today is ${today}. Your task is to generate a complete, production-ready skill f
    - Fallback behavior defined for every optional secret.
    - Use only `${var}` and `${today}` template variables — no other invented variables.
    - No TODOs, no placeholders, no "fill in later".
-   - Mandatory `## Sandbox note` section.
+   - Mandatory `## Network note` section (accurate model — see the `## Network note` in this skill for the canonical wording; there is no network sandbox).
 
 7. **Quality enforcement (self-edit pass).** Score the draft 1-5 across:
 
    | Criterion | What to check |
    |-----------|---------------|
-   | Frontmatter complete | `name`, `description`, `var`, `tags` present and well-formed |
+   | Frontmatter complete | `name`, `category`, `description`, `var`, `tags` present and well-formed |
    | Var doc | Single `>` block-quote line; if-empty behavior defined |
    | API calls complete | Curl + headers + jq, not pseudo-code |
    | Fallback behavior | Graceful degradation for every optional secret |
    | Output spec | Char limits, clickable URLs, format template explicit |
-   | Sandbox note | Present and matches the auth pattern of the API used |
+   | Network note | Present and matches the auth pattern of the API used (`./secretcurl` for auth'd, `gh api` for GitHub, WebFetch fallback for public) |
 
    Any criterion <4 → rewrite that section once. Still <4 after one rewrite → exit `CREATE_SKILL_VALIDATION_FAILED` with a notify listing failed criteria. **Do not ship a low-quality skill.**
 
@@ -129,7 +133,7 @@ Today is ${today}. Your task is to generate a complete, production-ready skill f
    - Every `${...}` template variable resolves to `${var}` or `${today}`.
    - At least one `./notify` invocation appears in the body.
    - At least one `memory/logs/${today}.md` write appears.
-   - `## Sandbox note` section exists.
+   - `## Network note` section exists.
 
    Any failure → delete the partial file and any other writes, exit `CREATE_SKILL_VALIDATION_FAILED` with a notify listing the failed checks. No partial state.
 
@@ -184,7 +188,7 @@ Today is ${today}. Your task is to generate a complete, production-ready skill f
     | API calls | X/5 |
     | Fallback behavior | X/5 |
     | Output spec | X/5 |
-    | Sandbox note | X/5 |
+    | Network note | X/5 |
 
     ## Trigger manually
     Workflow dispatch with `skill={skill-name}` and `var={example-var}`.
@@ -200,7 +204,7 @@ Today is ${today}. Your task is to generate a complete, production-ready skill f
     - Created: skills/{skill-name}/SKILL.md
     - Registered in aeon.yml: schedule={cron}, model={model}
     - Required secrets: {list or "none"}
-    - Quality scores: F/V/A/Fb/O/S = X/X/X/X/X/X
+    - Quality scores: F/V/A/Fb/O/N = X/X/X/X/X/X
     - PR: {url}
     - Exit: CREATE_SKILL_OK (or CREATE_SKILL_NEW_SECRET_REQUIRED)
     ```
@@ -226,9 +230,9 @@ Today is ${today}. Your task is to generate a complete, production-ready skill f
 | `CREATE_SKILL_INSUFFICIENT_RESEARCH` | Couldn't confirm ≥1 working data source after WebSearch + WebFetch | Notify with what was tried; stop |
 | `CREATE_SKILL_VALIDATION_FAILED` | Quality enforcement or post-write checks failed | Delete partial files; revert aeon.yml; notify with failed criteria; stop |
 
-## Sandbox note
+## Network note
 
-The sandbox may block outbound `curl`. Use **WebFetch** as a fallback for any URL fetch during research. For auth-required APIs the new skill will call, design pre-fetch (`scripts/prefetch-*.sh`) or post-process (`.pending-*/` + `scripts/postprocess-*.sh`) patterns into the generated SKILL.md (see CLAUDE.md).
+There is no network sandbox — `curl` works, with **WebFetch** as the fallback for a flaky public GET during research. For an auth'd API the new skill will call, route it through `./secretcurl` with a `{ENV_NAME}` placeholder (the key injected via the skill's `requires:`), and `gh api` for GitHub. **Irreversible side-effects** (email, spend, on-chain writes, deploys) run **in-run** via `./secretcurl` as the skill's final, fail-closed action — there is no deferred/postprocess step, and never defer a read (see CLAUDE.md).
 
 ## Constraints
 

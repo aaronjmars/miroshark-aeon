@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
 
-import { normalizeAuthConfig } from './auth-provider.mjs'
+import { normalizeAuthConfig } from './auth-provider.ts'
 
 test('stores Anthropic-compatible API keys in ANTHROPIC_API_KEY', () => {
   const config = normalizeAuthConfig({
@@ -104,6 +104,22 @@ test('routes UsePod tokens via explicit provider selection', () => {
   assert.equal(config.method, 'usepod')
   assert.equal(config.gateway, 'usepod')
   assert.equal(config.baseUrl, '')
+})
+
+test('routes xAI keys to XAI_API_KEY via the grok gateway by prefix', () => {
+  const config = normalizeAuthConfig({ key: 'xai-abc123' })
+
+  assert.equal(config.secretName, 'XAI_API_KEY')
+  assert.equal(config.method, 'grok')
+  assert.equal(config.gateway, 'grok')
+  assert.equal(config.baseUrl, '')
+})
+
+test('routes xAI keys via explicit grok provider selection', () => {
+  const config = normalizeAuthConfig({ key: 'any-xai-key', provider: 'grok' })
+
+  assert.equal(config.secretName, 'XAI_API_KEY')
+  assert.equal(config.gateway, 'grok')
 })
 
 test('rejects gateway keys with a custom base URL', () => {

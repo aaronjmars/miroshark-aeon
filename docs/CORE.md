@@ -1,11 +1,12 @@
 ---
+type: Reference
 layout: default
 title: The Core
 ---
 
 # The Core
 
-The `core` category is the load-bearing set — the 15 skills that make Aeon autonomous rather than just scheduled. Everything else in the catalog is a workload; these are the machine. They group into three clusters: **self-evolution & self-healing**, **fleet / self-replication**, and **autonomous real-world action**.
+The skills below are the load-bearing set — the ~15 that make Aeon autonomous rather than just scheduled. Everything else in the catalog is a workload; these are the machine. They group into three clusters: **self-evolution & self-healing**, **fleet / self-replication**, and **autonomous real-world action**. At the dashboard level these now span two default-visible packs — **Core** (fleet coordination, self-config, liveness) and **Evolution** (the self-improvement loop) — plus a few autonomous-action skills filed under **Dev** and **Crypto**. The clustering here is conceptual; a skill's pack is set by its `category:` (see [skill-packs.md](./skill-packs.md)).
 
 If you're building a derivative architecture, this is the set to keep and validate first. It doesn't need to be 100% identical — but each skill below earns its place with a specific mechanism, and those mechanisms are what to preserve.
 
@@ -36,7 +37,7 @@ That comment is why you can see it already ran across the library: `skill-repair
 
 ### [`skill-health`](../skills/skill-health/SKILL.md) — the detector · daily 18:00
 
-Audits every enabled skill from `cron-state.json` + per-run Haiku quality scores (`memory/skill-health/*.json`) + a `skill-runs` fallback for sandbox-blocked runs. Classifies each as CRITICAL / DEGRADED / FLAPPING / WARNING / HEALTHY / NO-DATA via first-matching-rule, computes a severity score, and detects **systemic patterns** (≥2 skills sharing an API host or error signature).
+Audits every enabled skill from `cron-state.json` + per-run Haiku quality scores (`memory/skill-health/*.json`) + a `skill-runs` fallback for runs that crashed before writing state. Classifies each as CRITICAL / DEGRADED / FLAPPING / WARNING / HEALTHY / NO-DATA via first-matching-rule, computes a severity score, and detects **systemic patterns** (≥2 skills sharing an API host or error signature).
 
 It files issues into `memory/issues/ISS-NNN.md`, resolves them when a skill recovers (drops it from `affected_skills`, flips status to resolved), and notifies only on state change. It won't touch the issue tracker unless the operator has opted in by creating `INDEX.md`.
 
@@ -48,12 +49,6 @@ Phases: PREFLIGHT → TRIAGE → DIAGNOSE → REPAIR → VERIFY → LOG, with a 
 - Guards against looping: 24h per-skill cooldown (tracked in `skill-repair-history.json`), and caps itself at 3 repair PRs/day.
 - Builds a diagnostic dossier, applies the fix, opens a PR, and verifies. `dry-run:NAME` diagnoses without writing.
 
-### [`skill-evals`](../skills/skill-evals/SKILL.md) — the regression catcher · Sun 06:00
-
-Runs an assertion manifest (`evals.json`) against each skill's latest output: empty / stale file checks, word-count floors, required / forbidden regex patterns, numeric range checks, and a quality cross-check against `skill-health/*.json`.
-
-The lede is the **diff vs. the previous run** — each skill classified NEW_FAIL / FIXED / STILL_FAIL / NEW_PASS / STABLE, so it catches quality degradation *between* runs rather than just snapshotting. Files issues for every NEW_FAIL, runs a coverage audit (`eval-audit`) to surface enabled skills with no eval spec, and queues concrete fixes.
-
 ### [`self-improve`](../skills/self-improve/SKILL.md) — broad self-tuning · every other day
 
 Reads the last 2 days of logs + `cron-state.json` for the highest-impact, smallest fix (failing skills, timeouts, truncated notifications, low-quality output), makes **one** minimal targeted change (tighten a prompt, add backoff, fix a config), and opens a PR with Problem / Fix / Evidence.
@@ -62,7 +57,9 @@ Backpressure: if 3+ improvement PRs are already open, it exits without creating 
 
 ### How the loop closes
 
-`skill-health` / `skill-evals` **detect** → file issue → `skill-repair` **fixes** → PR → merge → cron-state recovers → `skill-health` **resolves** the issue. `CLAUDE.md` codifies the contract: **health skills file issues, repair skills close them.**
+`skill-health` **detects** → file issue → `skill-repair` **fixes** → PR → merge → cron-state recovers → `skill-health` **resolves** the issue. `CLAUDE.md` codifies the contract: **the health skill files issues, repair skills close them.**
+
+**Votable health** runs alongside this loop. Whenever a skill regresses (Haiku score 1–2 or a failure flag), the run appends a `⚠️ Regression …` comment to a per-skill GitHub Issue titled `health: <skill>` — silent on clean runs, so no spam. A human 👍/👎 on that issue sets repair priority (`health_triage.prioritize` ranks open items by votes, then severity), so `self-improve` / `skill-repair` fix what people care about and what's worst, first. On by default; disable with the repo variable `HEALTH_ISSUES=0`. State can optionally ride an append-only Issue too (opt-in via `STATE_BACKEND`; the default is a self-contained committed file) — see [Durable state](https://github.com/aaronjmars/aeon#durable-state-without-the-churn).
 
 ---
 
@@ -82,23 +79,23 @@ Three modes via `var`: **Health Check** (default), **Status** (`status`), **Disp
 
 Dispatch mode lets the parent trigger a skill on one child — or all healthy / degraded children at once. State-change-gated notify; bails on missing `gh` auth or low rate limit.
 
-### [`fleet-scorecard`](../skills/fleet-scorecard/SKILL.md) — fleet economics · daily 13:00
+### [`fleet-control`](../skills/fleet-control/SKILL.md) `scorecard` — fleet economics · twice daily (09:00 / 15:00)
 
-Discovers the fleet at runtime (self + every non-archived instance — never hardcoded). All data is gathered by `scripts/prefetch-fleet-scorecard.sh` *outside* the sandbox, so the skill just reads `/tmp/fleet-scorecard/*` and writes the report — no network needed.
+The **scorecard view** of `fleet-control` (run with `var: scorecard`; folded in the former standalone `fleet-scorecard`). Discovers the fleet at runtime (self + every non-archived instance — never hardcoded). Data is gathered **in-run** by `node scripts/fleet-scorecard.mjs`, which fetches each repo's runs + token usage from the GitHub API and computes the tables into `/tmp/fleet-scorecard/*`; it reads `GH_READ_PAT` (declared in the skill's `requires:`) from `process.env` so it can reach private fleet members without a secret ever hitting a command line.
 
 Aggregates runs / failures / generations / tokens / est. cost / cache discount (tokens in OpenRouter shape, cached ⊆ prompt), builds an Alerts block (any skill with ≥25% fail rate over 14d, cost spikes > 1.5× median daily delta, failure jumps > 10), writes `memory/scorecard.md` and appends a trend row to `scorecard-history.csv`.
 
-### [`contributor-reward`](../skills/contributor-reward/SKILL.md) → [`distribute-tokens`](../skills/distribute-tokens/SKILL.md) — the pay-your-contributors flywheel
+### [`distribute-tokens`](../skills/distribute-tokens/SKILL.md) — the pay-your-contributors flywheel
 
-`contributor-reward` (Mon 09:30) reads the latest fork-contributor leaderboard, scores each contributor against a tier table (rank 1 = 25 USDC … rank 5 = 5, +5 first-PR bonus tracked once-ever per login, eligibility floor score ≥10 + must have an @handle), and writes the plan into `memory/distributions.yml` with a one-command run line. It deliberately **stops short of sending** — keeping a human-visible git diff as the audit trail.
+`distribute-tokens` owns the whole flywheel as two phases you can run alone or chained (`var`: empty/`<label>` = send, `plan:` = plan only, `all:` = plan-then-send). The **plan phase** computes a contributor ranking live from the repo's merged PRs via the GitHub API (no input file or upstream skill), scores each contributor against a tier table (rank 1 = 25 USDC … rank 5 = 5, +5 first-PR bonus tracked once-ever per login, eligibility floor score ≥10 + must have an @handle), and writes the plan into `memory/distributions.yml` with a one-command run line. It deliberately **stops short of sending** — keeping a human-visible git diff as the audit trail. (This phase folded in the former standalone `contributor-reward` skill.)
 
-`distribute-tokens` then does the actual on-chain send via the Bankr Wallet API with serious money-safety engineering: two-phase RESOLVE → EXECUTE (validate config / key / balance, resolve @handles → addresses, build plan; then send), per-recipient idempotency key + txHash so nothing double-sends across re-runs, dry-run mode, and recovery from partial runs. Wallet API for transfers only; read-only keys → 403 guard.
+The **send phase** (the default, empty `var`) does the actual on-chain send via the Bankr Wallet API with serious money-safety engineering: two-phase RESOLVE → EXECUTE (validate config / key / balance, resolve @handles → addresses, build plan; then send), per-recipient idempotency key + txHash so nothing double-sends across re-runs, dry-run mode, and recovery from partial runs. Wallet API for transfers only; read-only keys → 403 guard.
 
 ---
 
 ## 🤖 Autonomous real-world action
 
-### [`external-feature`](../skills/external-feature/SKILL.md) / [`feature`](../skills/feature/SKILL.md) — ships code to watched repos unprompted
+### [`feature`](../skills/feature/SKILL.md) — ships code to watched repos unprompted
 
 **Input:** `owner/repo`, `owner/repo#N`, or empty (auto-pick)
 
@@ -114,7 +111,7 @@ Hard rules: one enhancement per run, never push to main, no unrelated refactors,
 
 Scans `memory/topics/` and recent logs for a prototype-worthy signal, scores candidates on leverage / concreteness / novelty (must clear 9/15 or it exits `DEPLOY_PROTOTYPE_EMPTY`). Commits to a shape (slug, tagline, primary action, static-vs-API-vs-Next), then writes the files into `.pending-deploy/files/` against a strict quality bar: self-contained, sub-1s load, mobile-first, OG tags, real data from public no-auth endpoints (no lorem), light / dark via `prefers-color-scheme`, no secrets.
 
-Runs pre-flight checks (≤20 files, ≤4MB, slug regex, greps for leaked tokens and for TODO / placeholder), writes a prototype record + `prototypes.md` row. The actual GitHub-repo-create + Vercel deploy is handled by `scripts/postprocess-deploy.sh` (reads `.pending-deploy/`, uses `VERCEL_TOKEN` / `GH_GLOBAL`) — the skill flags `DEPLOY_PROTOTYPE_NO_POSTPROCESS` if that script is missing.
+Runs pre-flight checks (≤20 files, ≤4MB, slug regex, greps for leaked tokens and for TODO / placeholder), writes a prototype record + `prototypes.md` row, then deploys **in-run** as its final fail-closed action: the Vercel deployment via `./secretcurl` (`{VERCEL_TOKEN}`) plus an optional `gh` source mirror (ambient `GH_GLOBAL`). No `VERCEL_TOKEN` → build-only (`DEPLOY_PROTOTYPE_NO_TOKEN`); a failed API call → `DEPLOY_PROTOTYPE_DEPLOY_FAILED` with `.pending-deploy/` kept for retry.
 
 ### [`vuln-scanner`](../skills/vuln-scanner/SKILL.md) — finds real vulns and discloses responsibly
 

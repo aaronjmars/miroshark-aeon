@@ -1,11 +1,12 @@
 ---
+type: Reference
 layout: default
 title: Skill Capabilities Taxonomy
 ---
 
 # Skill Capabilities Taxonomy
 
-A **capability** is a self-declared blast-radius hint that a skill carries in its pack manifest. Capabilities surface at install time (`./install-skill-pack` and `./install-skill-pack --list`) so an operator can glance at what a pack can do — read-only? touches the chain? sends Slack? — before approving a `community` pack on a live agent.
+A **capability** is a self-declared blast-radius hint that a skill carries in its pack manifest. Capabilities surface at install time (`bin/install-skill-pack` and `bin/install-skill-pack --list`) so an operator can glance at what a pack can do — read-only? touches the chain? sends Slack? — before approving a `community` pack on a live agent.
 
 Capabilities are **not** a gate. The trust boundary is still the operator + the security scanner + `trusted-sources.txt`. A skill that omits `capabilities` installs as before. A skill that declares them gets the listing surface for free.
 
@@ -59,7 +60,7 @@ When in doubt, declare more than less. The listing surface only widens the opera
 }
 ```
 
-The pack-level field is the **union** of every skill's capabilities — kept in sync with the per-skill declarations so `./install-skill-pack --list` can summarise without fetching every pack tarball.
+The pack-level field is the **union** of every skill's capabilities — kept in sync with the per-skill declarations so `bin/install-skill-pack --list` can summarise without fetching every pack tarball.
 
 See [community-skill-packs.md](community-skill-packs.md) for the full schema reference for both files.
 
@@ -67,13 +68,30 @@ See [community-skill-packs.md](community-skill-packs.md) for the full schema ref
 
 ## Validation
 
-`./install-skill-pack` runs strict allow-list validation when a manifest declares `capabilities`:
+`bin/install-skill-pack` runs strict allow-list validation when a manifest declares `capabilities`:
 
 - Each value must match one of the six listed above (case-sensitive, exact match).
 - Unknown values abort the install with an error message naming the invalid value and pointing at this file.
 - An empty array (`"capabilities": []`) is treated as "not declared" — equivalent to omitting the field. A skill that genuinely does nothing externally should declare `["read_only"]` so the surface shows the intent.
 
 No runtime gating — the install proceeds for any allow-listed combination. Capabilities are documentation, not a sandbox.
+
+---
+
+## Runtime enforcement: the `mode:` write tier
+
+`capabilities` (above) is a documentation surface — it never blocks a run. The one capability axis Aeon **does** enforce at runtime is *write* access, declared per skill in SKILL.md frontmatter:
+
+```yaml
+mode: read-only   # read repo + fetch web + ./notify; no repo mutation
+mode: write       # default — full Write / Edit / git / gh / python3
+```
+
+A `read-only` skill runs with a restricted Claude Code `--allowedTools` set (`Write`, `Edit`, `Bash(git:*)`, `Bash(gh:*)` are dropped), so it **physically cannot** commit, push, edit code, or open a PR — the runtime counterpart of declaring `read_only` above. A post-run guard records the skill's run-log on its behalf and reverts any code/config a shell redirection slipped through, while preserving its real output (memory, `output/`). `write` is the default and a strict superset (it adds `python3`). Resolution and the exact tool sets live in [`scripts/skill_mode.sh`](../scripts/skill_mode.sh).
+
+The same `mode:` maps onto the **Grok Build harness** (`harness: grok`) via `scripts/skill_mode.sh grok-args`: `read-only` → a read-only allowlist (no `Edit`, no `git`/`gh`/`python`) under `--sandbox read-only`; `write` adds `Edit` + `Bash(git *)`/`Bash(gh *)`/`python`. Enforcement is that allowlist plus, for `read-only`, the sandbox: grok runs headless (`grok -p`), so any tool that isn't allow-listed and isn't a read-class fast-path has no approval prompt and is refused — the same blast radius as Claude Code's `-p` allowlist. (We pass `--permission-mode dontAsk` too, but grok currently wires that flag only for `bypassPermissions`; the allowlist + sandbox are what actually gate the run.) The post-run guard is harness-agnostic and still applies as defense-in-depth.
+
+Rule of thumb: a skill that declares `capabilities: [read_only, sends_notifications]` should also carry `mode: read-only` — the documentation surface and the runtime gate should agree.
 
 ---
 

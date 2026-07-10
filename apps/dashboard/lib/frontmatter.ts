@@ -1,19 +1,35 @@
-export interface SkillKeyRef {
-  key: string       // env-var name, e.g. "XAI_API_KEY"
-  optional: boolean // true when the skill degrades gracefully without it (declared with a trailing `?`)
-}
-
-export interface SkillMcpRef {
-  slug: string      // MCP server slug from the catalog, e.g. "base"
-  optional: boolean // true when the skill works better with it but doesn't require it (trailing `?`)
-}
+import type { SkillKeyRef, SkillMcpRef } from './types'
 
 export interface Frontmatter {
   name: string
+  category: string
   description: string
   tags: string[]
   requires: SkillKeyRef[]
   mcp: SkillMcpRef[]
+}
+
+// The categories a skill's frontmatter may declare. A skill's category IS its
+// pack (one grouping) — set this one line to file a skill into a pack. `lab`
+// (category `other`) is the catch-all and isn't author-selectable.
+export const SKILL_CATEGORIES = ['core', 'evolution', 'basics', 'dev', 'crypto', 'productivity'] as const
+
+// Insert or replace the frontmatter `category:` line. Returns content unchanged
+// when there's no `--- ... ---` block. Mirrors the backfill: replace in place if
+// present, else add right after `name:` (or at the top of the block).
+export function setFrontmatterCategory(content: string, category: string): string {
+  const m = content.match(/^(---\s*\n)([\s\S]*?)(\n---)/)
+  if (!m) return content
+  const [, open, body, close] = m
+  const lines = body.split('\n')
+  const ci = lines.findIndex(l => /^category:/.test(l))
+  if (ci !== -1) {
+    lines[ci] = `category: ${category}`
+  } else {
+    const ni = lines.findIndex(l => /^name:/.test(l))
+    lines.splice(ni === -1 ? 0 : ni + 1, 0, `category: ${category}`)
+  }
+  return open + lines.join('\n') + close + content.slice(m[0].length)
 }
 
 // Parse a SKILL.md's leading `--- ... ---` block. When `description:` is absent,
@@ -22,6 +38,7 @@ export function parseFrontmatter(content: string): Frontmatter {
   const block = content.match(/^---\s*\n([\s\S]*?)\n---/)?.[1] ?? ''
 
   const name = unquote(block.match(/name:\s*(.+)/)?.[1] ?? '')
+  const category = unquote(block.match(/^category:\s*(.+)/m)?.[1] ?? '')
 
   let description = unquote(block.match(/description:\s*(.+)/)?.[1] ?? '')
   if (!description) {
@@ -37,7 +54,7 @@ export function parseFrontmatter(content: string): Frontmatter {
   const tags = parseList(block.match(/tags:\s*\[([^\]]*)\]/)?.[1])
 
   // `requires:` declares the third-party credentials a skill needs to function.
-  // Format mirrors `tags:` — an inline list of env-var names. A trailing `?`
+  // Format mirrors `tags:` - an inline list of env-var names. A trailing `?`
   // marks a key as optional (the skill still runs without it, just degraded /
   // rate-limited). Names reference the central credential registry surfaced in
   // the dashboard's Settings → Access Keys vault.
@@ -60,7 +77,7 @@ export function parseFrontmatter(content: string): Frontmatter {
     })
     .filter(r => /^[a-z][a-z0-9-]+$/.test(r.slug))
 
-  return { name, description, tags, requires, mcp }
+  return { name, category, description, tags, requires, mcp }
 }
 
 function parseList(inner: string | undefined): string[] {

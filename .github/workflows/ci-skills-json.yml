@@ -1,0 +1,67 @@
+name: ci-skills-json
+
+# Proposal #455: catalog/skills.json is the canonical catalog (dashboard, bin/add-skill,
+# and downstream consumers all read it). It must be regenerated from
+# skills/*/SKILL.md via bin/generate-skills-json. This workflow fails any PR that
+# changes a generator input without committing the regenerated manifest, so
+# catalog drift can't ship silently (cf. #456, #445).
+#
+# Note: the catalog is deliberately decoupled from aeon.yml — schedules are
+# per-deployment operator config and are NOT mirrored into skills.json, so this
+# gate does not trigger on (and never false-fails over) aeon.yml schedule edits.
+#
+# Same shape/permissions as ci-capabilities-parity.yml (Issue #301).
+#
+# The comparison normalizes out three non-semantic fields so the gate enforces
+# only real catalog drift (category / name / description / requires / etc.) —
+# the #454/#456 class — and never false-fails on git/clock churn:
+#   - `generated` — a fresh UTC timestamp on every run.
+#   - per-skill `sha` and `updated` — derived from `git log`, so they change each
+#     time a skill PR is squash-merged (the squash rewrites the commit). Without
+#     normalizing them, every squash-merge would false-fail the *next* skills PR.
+# fetch-depth: 0 is retained so the generator still resolves full per-skill
+# history; these git-derived values are normalized out of the diff regardless.
+
+on:
+  pull_request:
+    paths:
+      - 'skills/**'
+      - 'bin/generate-skills-json'
+      - 'catalog/skills.json'
+  push:
+    branches: [main]
+    paths:
+      - 'skills/**'
+      - 'bin/generate-skills-json'
+      - 'catalog/skills.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0          # full history for the generator; git-derived fields are normalized out of the diff
+      - name: Regenerate skills.json and diff (ignoring timestamp + per-skill sha/updated)
+        run: |
+          set -euo pipefail
+          # Blank the generated timestamp and the per-skill git-derived sha/updated
+          # (which churn on every squash-merge) before comparing — the gate only
+          # enforces semantic catalog fields.
+          norm() {
+            sed -E -e 's/"generated":"[^"]*"/"generated":""/' \
+                   -e 's/"sha":"[^"]*"/"sha":""/g' \
+                   -e 's/"updated":"[^"]*"/"updated":""/g' "$1"
+          }
+          norm catalog/skills.json > /tmp/skills.committed.json
+          bin/generate-skills-json
+          norm catalog/skills.json > /tmp/skills.regenerated.json
+          if ! diff -u /tmp/skills.committed.json /tmp/skills.regenerated.json; then
+            echo "::error::skills.json is stale — run bin/generate-skills-json and commit the result (the 'generated' timestamp and per-skill sha/updated are ignored by this check)."
+            exit 1
+          fi
+          echo "skills-json: OK — committed manifest matches a fresh regen (timestamp + per-skill sha/updated aside)."

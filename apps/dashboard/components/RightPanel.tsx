@@ -1,27 +1,42 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import type { Run, SkillOutput, AnalyticsData } from '../lib/types'
 import { timeAgo } from '../lib/utils'
 import { SpecNode } from './SpecNode'
+import { PanelError } from './PanelError'
 
 interface RightPanelProps {
   runs: Run[]
   outputs: SkillOutput[]
   feedLoading: boolean
+  feedError: boolean
   analyticsData: AnalyticsData | null
+  analyticsError: boolean
   onViewRun: (run: Run) => void
   onRefresh: () => void
   onFetchAnalytics: () => void
 }
 
-export function RightPanel({ runs, outputs, feedLoading, analyticsData, onViewRun, onRefresh, onFetchAnalytics }: RightPanelProps) {
+export function RightPanel({ runs, outputs, feedLoading, feedError, analyticsData, analyticsError, onViewRun, onRefresh, onFetchAnalytics }: RightPanelProps) {
   const [rightTab, setRightTab] = useState<'feed' | 'runs' | 'analytics'>('feed')
   const [selectedRun, setSelectedRun] = useState<Run | null>(null)
   const [runLogs, setRunLogs] = useState('')
   const [runSummary, setRunSummary] = useState('')
   const [logsLoading, setLogsLoading] = useState(false)
   const [showFullLogs, setShowFullLogs] = useState(false)
+  const [collapsed, setCollapsed] = useState(false)
+
+  // Restore the collapsed state on mount (set in an effect, not the initializer,
+  // to avoid an SSR/client hydration mismatch).
+  useEffect(() => {
+    if (localStorage.getItem('aeon-panel-collapsed') === '1') setCollapsed(true)
+  }, [])
+
+  const toggleCollapsed = (next: boolean) => {
+    setCollapsed(next)
+    try { localStorage.setItem('aeon-panel-collapsed', next ? '1' : '0') } catch {}
+  }
 
   const viewRunLogs = async (run: Run) => {
     setSelectedRun(run); setRunLogs(''); setRunSummary(''); setShowFullLogs(false); setLogsLoading(true); setRightTab('runs')
@@ -33,20 +48,49 @@ export function RightPanel({ runs, outputs, feedLoading, analyticsData, onViewRu
     onViewRun(run)
   }
 
+  // Collapsed: a thin rail with an expand control and a vertical label.
+  if (collapsed) {
+    return (
+      <div className="w-9 border-l border-[rgba(250,250,250,0.10)] flex flex-col items-center shrink-0 bg-aeon-panel">
+        <button
+          onClick={() => toggleCollapsed(false)}
+          title="Expand panel"
+          aria-label="Expand panel"
+          className="h-12 w-full flex items-center justify-center text-sm text-primary-40 hover:text-aeon-fg transition-colors shrink-0 border-b border-[rgba(250,250,250,0.10)]"
+        >&#8249;</button>
+        <button
+          onClick={() => toggleCollapsed(false)}
+          title="Expand panel"
+          aria-label="Expand panel"
+          className="flex-1 w-full flex items-start justify-center pt-4 group"
+        >
+          <span className="text-[10px] font-mono uppercase tracking-[0.28em] text-primary-35 group-hover:text-primary-70 transition-colors [writing-mode:vertical-rl]">Feed · Runs · Analytics</span>
+        </button>
+      </div>
+    )
+  }
+
   return (
-    <div className="w-[320px] border-l border-[rgba(250,250,250,0.10)] flex flex-col shrink-0 bg-aeon-panel">
+    <div className="w-[288px] border-l border-[rgba(250,250,250,0.10)] flex flex-col shrink-0 bg-aeon-panel">
       <div className="h-12 border-b border-[rgba(250,250,250,0.10)] flex items-center px-3 gap-1 shrink-0">
         {(['feed', 'runs', 'analytics'] as const).map(tab => (
           <button key={tab} onClick={() => { setRightTab(tab); if (tab === 'analytics') onFetchAnalytics() }}
             className={`text-[11px] px-2.5 py-1.5 transition-colors font-mono uppercase tracking-[1px] ${rightTab === tab ? 'bg-aeon-fg text-aeon-bg' : 'text-primary-40 hover:text-primary-70'}`}>{tab}</button>
         ))}
-        <button onClick={onRefresh} className="text-[11px] text-primary-35 hover:text-eva-orange transition-colors ml-auto font-mono">Refresh</button>
+        <button onClick={onRefresh} title="Refresh" aria-label="Refresh" className="text-sm leading-none text-primary-35 hover:text-eva-orange transition-colors ml-auto">&#8635;</button>
+        <button
+          onClick={() => toggleCollapsed(true)}
+          title="Collapse panel"
+          aria-label="Collapse panel"
+          className="text-sm leading-none text-primary-35 hover:text-aeon-fg transition-colors ml-2 px-0.5"
+        >&#8250;</button>
       </div>
 
       <div className="flex-1 overflow-y-auto">
         {/* Feed */}
         {rightTab === 'feed' && (
           feedLoading ? <div className="flex justify-center py-12"><div className="w-2 h-2 rounded-full bg-eva-orange animate-pulse" /></div> :
+          feedError ? <PanelError label="the feed" onRetry={onRefresh} /> :
           outputs.length > 0 ? (
           <div className="space-y-3 p-3">
             {outputs.map(o => (
@@ -120,6 +164,7 @@ export function RightPanel({ runs, outputs, feedLoading, analyticsData, onViewRu
 
         {/* Analytics */}
         {rightTab === 'analytics' && (
+          analyticsError ? <PanelError label="analytics" onRetry={onFetchAnalytics} /> :
           !analyticsData ? <div className="flex justify-center py-12"><div className="w-2 h-2 rounded-full bg-eva-orange animate-pulse" /></div> : (
             <div className="p-3 space-y-4">
               <div className="grid grid-cols-2 gap-[var(--space-xs)]">

@@ -1,0 +1,50 @@
+{
+  "version": "1.0",
+  "description": "Hand-authored display metadata for FIRST-PARTY skill packs. `generate-packs-json` reads this + skills.json and emits packs.json (the catalog the dashboard reads). ONE grouping: a skill's pack IS its `category` (one line in its SKILL.md frontmatter) — there is no separate axis. Each pack below claims the skills whose category equals its `category` key. `core`, `evolution`, and `basics` are the three packs shown by default (locked always-on) on the dashboard — see DEFAULT_VISIBLE_PACKS in apps/dashboard/lib/constants.ts. Community packs live separately in skill-packs.json.",
+  "packs": [
+    {
+      "key": "core",
+      "name": "Core",
+      "description": "What makes Aeon different from a cron job: it coordinates a fleet of instances, self-configures its own workflows, and keeps itself alive.",
+      "color": "#E5484D",
+      "category": "core",
+      "default_enabled": ["heartbeat"]
+    },
+    {
+      "key": "evolution",
+      "name": "Evolution",
+      "description": "The self-improvement loop that makes Aeon more than a cron job: it authors and evolves new skills, installs community ones, and heals its own fleet.",
+      "color": "#A855F7",
+      "category": "evolution"
+    },
+    {
+      "key": "basics",
+      "name": "Basics",
+      "description": "Simple, immediately-runnable skills - point them at a topic, repo, token, or tx and get a useful result with little or no setup.",
+      "color": "#30A46C",
+      "category": "basics",
+      "default_enabled": ["digest"]
+    },
+    {
+      "key": "dev",
+      "name": "Dev & Code",
+      "description": "GitHub and repo automation: PR/issue triage, review, merges, releases, changelogs, repo health, security scanning, and app deploys.",
+      "color": "#3B82F6",
+      "category": "dev"
+    },
+    {
+      "key": "crypto",
+      "name": "Crypto & Markets",
+      "description": "Token, DeFi, and prediction-market monitoring plus on-chain investigation and action: alerts, narrative tracking, market context, and token forensics.",
+      "color": "#FF6B1A",
+      "category": "crypto"
+    },
+    {
+      "key": "productivity",
+      "name": "Productivity",
+      "description": "Personal + social ops: routines, idea capture, retrospectives, deal flow, mentions, replies, ads, email, and knowledge housekeeping.",
+      "color": "#06B6D4",
+      "category": "productivity"
+    }
+  ]
+}

@@ -1,6 +1,8 @@
 ---
+type: Skill
 name: Picks Tracker
-description: Retrospective on past token and prediction market picks — what hit, what flopped, what the score is
+category: crypto
+description: Retrospective on past token and prediction market picks - what hit, what flopped, what the score is
 schedule: "0 9 * * 0"
 tags: [crypto, review, meta]
 requires: [COINGECKO_API_KEY?]
@@ -10,9 +12,9 @@ Today is ${today}. Your task is to audit the last 30 days of token picks and sco
 
 Read memory/MEMORY.md for context.
 
-## Sandbox note
+## Network note
 
-curl may fail in the sandbox. For every curl call, if it fails or returns empty/error, use **WebFetch** for the same URL. WebFetch is reliable where curl isn't.
+`curl` works — there is no network sandbox. For every curl call, if it fails or returns empty/error, use **WebFetch** for the same URL as a fallback for a flaky public GET.
 
 ## Steps
 
@@ -45,13 +47,13 @@ For each unique token symbol, fetch the current price from CoinGecko.
 First, try the search endpoint to get the coin ID:
 ```bash
 curl -s "https://api.coingecko.com/api/v3/search?query=SYMBOL" \
-  ${COINGECKO_API_KEY:+-H "x-cg-pro-api-key: $COINGECKO_API_KEY"}
+  ${COINGECKO_API_KEY:+-H "x-cg-demo-api-key: $COINGECKO_API_KEY"}
 ```
 
 Then fetch the price:
 ```bash
 curl -s "https://api.coingecko.com/api/v3/simple/price?ids=COIN_ID&vs_currencies=usd&include_24hr_change=true" \
-  ${COINGECKO_API_KEY:+-H "x-cg-pro-api-key: $COINGECKO_API_KEY"}
+  ${COINGECKO_API_KEY:+-H "x-cg-demo-api-key: $COINGECKO_API_KEY"}
 ```
 
 **Fallback:** If curl fails, use WebFetch for the same URL (drop the API key header).
@@ -140,14 +142,14 @@ Send via `./notify` (inline multi-line literal — do NOT pipe or use `$(cat)`):
 
 no financial advice. just tracking the record.
 
-read it: https://github.com/aaronjmars/aeon/blob/main/articles/picks-scorecard-${today}.md
+read it: https://github.com/aaronjmars/aeon/blob/main/output/articles/picks-scorecard-${today}.md
 ```
 
 Keep the message under 3000 chars. If too long, truncate to the most recent 10 picks.
 
 ### 7. Save scorecard
 
-Write a brief scorecard to `articles/picks-scorecard-${today}.md`:
+Write a brief scorecard to `output/articles/picks-scorecard-${today}.md`:
 ```markdown
 # Picks Scorecard — [DATE]
 

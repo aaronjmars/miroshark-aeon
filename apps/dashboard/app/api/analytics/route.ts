@@ -3,6 +3,7 @@ import { execFileSync } from 'child_process'
 import { resolve } from 'path'
 import { readFileSync } from 'fs'
 import { REPO_ROOT, ghArgsRepo } from '@/lib/gh'
+import { errorResponse } from '@/lib/http'
 import type { SkillMetrics, Insight, GhRunJson } from '@/lib/types'
 
 type RunRecord = Pick<GhRunJson, 'name' | 'status' | 'conclusion' | 'createdAt' | 'updatedAt'>
@@ -27,7 +28,6 @@ export async function GET() {
       bySkill.get(skill)!.push(run)
     }
 
-    // Compute per-skill metrics
     const skills: SkillMetrics[] = []
     for (const [name, runs] of bySkill) {
       const sorted = runs.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
@@ -37,7 +37,6 @@ export async function GET() {
       const inProgress = sorted.filter(r => r.status === 'in_progress').length
       const total = sorted.length
 
-      // Calculate average duration for completed runs
       let avgDurationMin: number | null = null
       const completedRuns = sorted.filter(r => r.conclusion && r.createdAt && r.updatedAt)
       if (completedRuns.length > 0) {
@@ -47,7 +46,6 @@ export async function GET() {
         avgDurationMin = Math.round((totalMs / completedRuns.length / 60000) * 10) / 10
       }
 
-      // Calculate streak
       let streak = 0
       if (sorted.length > 0) {
         const first = sorted[0].conclusion
@@ -75,7 +73,6 @@ export async function GET() {
       })
     }
 
-    // Sort by total runs descending
     skills.sort((a, b) => b.total - a.total)
 
     // Generate insights
@@ -146,7 +143,6 @@ export async function GET() {
       }
     }
 
-    // Overall stats
     const totalRuns = skills.reduce((s, sk) => s + sk.total, 0)
     const totalSuccess = skills.reduce((s, sk) => s + sk.success, 0)
     const totalFailure = skills.reduce((s, sk) => s + sk.failure, 0)
@@ -167,7 +163,6 @@ export async function GET() {
       },
     })
   } catch (error: unknown) {
-    const msg = error instanceof Error ? error.message : 'Failed to load analytics'
-    return NextResponse.json({ error: msg }, { status: 500 })
+    return errorResponse(error, 'Failed to load analytics')
   }
 }

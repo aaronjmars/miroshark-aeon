@@ -1,6 +1,8 @@
 ---
+type: Skill
 name: Spawn Instance
-description: Clone this Aeon agent into a new GitHub repo — fork, configure skills, validate, register in fleet
+category: core
+description: Clone this Aeon agent into a new GitHub repo - fork, configure skills, validate, and register in the fleet
 var: ""
 tags: [dev]
 ---
@@ -72,7 +74,7 @@ Read `memory/instances.json`. If it doesn't exist, create it with `{"instances":
       "purpose": "monitor DeFi protocols and token movements",
       "created": "2026-04-20",
       "status": "pending_secrets",
-      "skills_enabled": ["token-movers", "defi-monitor", "heartbeat"],
+      "skills_enabled": ["token-movers", "defi-overview", "heartbeat"],
       "parent": "OWNER/aeon"
     }
   ]
@@ -111,7 +113,7 @@ For each skill, parse the frontmatter `description:` and `tags:` lines. Classify
 Rules:
 - **Cap at 8** content skills. Rank by keyword density in description against purpose; tie-break by name.
 - **Always include `heartbeat`** if the file `skills/heartbeat/SKILL.md` exists (health monitoring).
-- If the purpose doesn't match any theme, fall back to `[priority-brief, reflect, heartbeat]` (filtered against existence).
+- If the purpose doesn't match any theme, fall back to `[reflect, heartbeat]` (filtered against existence).
 - **Validate every candidate** — drop any skill where `skills/${skill}/SKILL.md` doesn't exist; log each drop as `SPAWN_DROPPED_SKILL: ${skill}`.
 - If the final list is empty (no content skills survive), exit `SPAWN_NO_SKILLS`, notify, and **stop**.
 
@@ -354,9 +356,9 @@ Target: ${OWNER}/${REPO_NAME}
 Recovery: ${one-line recovery instruction}
 ```
 
-## Sandbox note
+## Network note
 
-This skill runs entirely through `gh` CLI, which handles auth and does not require bash env-var expansion in curl headers (no sandbox issues). No WebFetch fallback needed. If `gh` is missing or unauthenticated, the pre-flight step fails with `SPAWN_API_ERROR`.
+This skill runs entirely through `gh` CLI, which handles auth internally, so no bare `$SECRET` ever lands on the command line for the Bash permission layer to refuse. No WebFetch fallback needed. If `gh` is missing or unauthenticated, the pre-flight step fails with `SPAWN_API_ERROR`.
 
 ## Constraints
 

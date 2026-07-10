@@ -1,10 +1,12 @@
 ---
+type: Skill
 name: idea-pipeline
-description: Execution-gap audit — cross-references the startup idea backlog against shipped skills, prototypes, and cross-repo PRs. Surfaces the top 3 ideas to build next based on narrative fit and operator fit.
+category: productivity
+description: Execution-gap audit - cross-references the startup idea backlog against shipped skills, prototypes, and cross-repo PRs, surfacing the top 3 ideas to build next by narrative and operator fit.
 var: ""
 tags: [meta, creative]
 ---
-> **${var}** — Optional theme filter (e.g. "crypto", "AI agents", "consumer"). If empty, scans all ideas.
+> **${var}** — Optional theme filter (e.g. "crypto", "AI agents", "consumer"). If empty, scans all ideas. A `pick:<id|name>` value (from the "build next?" force-reply — e.g. `pick:2` or `pick:Onchain reputation`) instead marks that idea as chosen-to-build in the backlog and ends, skipping the audit — see step 0.
 
 Today is ${today}. Read `memory/MEMORY.md` before starting. If `soul/SOUL.md` + `soul/STYLE.md` exist and are populated, read them to ground "operator fit" scoring; otherwise score on the idea's general buildability and timing alone.
 
@@ -13,6 +15,22 @@ Today is ${today}. Read `memory/MEMORY.md` before starting. If `soul/SOUL.md` + 
 `idea-validator` evaluates ideas. Nothing tracks execution. Backlogs of dozens of ideas accumulate — some validated, most unscreened — with zero visibility into which ones have been acted on vs which are rotting. This skill gives that view: pipeline size, execution rate, and the 3 ideas closest to being buildable right now.
 
 ## Steps
+
+### 0. Force-reply interception — `pick:<idea>` (run FIRST, before anything else)
+
+Before any other work, inspect `${var}`. If it **starts with `pick:`**, this run is the operator answering the "which idea to build next?" force-reply — do **not** run the normal audit. Handle it and end:
+
+1. Strip the prefix: `sel="${var#pick:}"`, then trim surrounding whitespace. The remainder may contain colons/spaces — keep them.
+2. If `sel` is empty, send a plain re-ask (no force-reply) and end: `./notify "Which idea should I mark as next to build? Reply with its name or backlog number."`
+3. Read the shared backlog `memory/topics/startup-ideas.md`. If it's missing or has no idea rows, `./notify "No idea backlog yet — nothing to mark. Run idea-forge generate to fill it first."` and end.
+4. Resolve `sel` to exactly one idea row in the table (columns `| date | name | one-liner | fit | T+F+E |`):
+   - **By name (preferred):** case-insensitive exact match on the `name` cell; else fuzzy — the row whose name shares the most significant words with `sel`, or where `sel` is a substring of the name (or vice-versa). Require one clear best match.
+   - **By number:** if `sel` is a bare integer N and no name matches, take the Nth data row (1-based, in file order).
+   - If nothing matches, or two rows tie with no clear winner, send a plain re-ask listing 3–5 candidate names and end: `./notify "Couldn't find an idea matching \"<sel>\". Reply with the exact name or backlog number. Candidates: <name1>, <name2>, <name3>."`
+5. **Mark it chosen-to-build** — the shared marking convention (identical in idea-forge): append ` ✓ selected ${today}` to the end of that row's `name` cell, keeping the table pipes intact. If the cell already carries a `✓ selected` marker, leave it (idempotent) — it's already queued.
+6. Confirm with a short `./notify` (keep it clean — no `test`/`trace`/`ping`/`debug` substrings): `./notify "Marked \"<idea name>\" as next to build — flagged in the backlog. Run /feature or /deploy-prototype on it when you're ready."` Do not auto-dispatch any skill — marking chosen is the safe action.
+7. Log to `memory/logs/${today}.md` under a `## Idea Pipeline` heading: `- IDEA_PIPELINE_PICK: marked "<idea name>" as chosen-to-build (from a pick: reply)`.
+8. **End the run.** Do not proceed to step 1 or run the audit.
 
 ### 1. Load the idea backlog
 
@@ -99,7 +117,7 @@ Sort descending. Pick top 3. For each pick, in step 7's `Why now:` line, name th
 
 ### 7. Format and write the report
 
-Write to `articles/idea-pipeline-${today}.md`:
+Write to `output/articles/idea-pipeline-${today}.md`:
 
 ```markdown
 # Idea Pipeline — ${today}
@@ -171,6 +189,20 @@ build this week:
 
 Keep under 3000 chars.
 
+### 9b. Offer a "build next?" follow-up (force-reply)
+
+If **at least one** idea was surfaced under "Build This Week", offer the operator a one-tap way to pick which to build — as a **separate** `./notify` after the digest (a digest and a force-reply prompt can't share one Telegram message). Skip the offer entirely on a run that surfaced no picks.
+
+Dedup to once per day: scan the last ~2 days of `memory/logs/` for `FORCE_REPLY_OFFERED: idea-pipeline::pick`; if present, skip this offer. Otherwise send:
+
+```bash
+./notify "Which of these should I mark as next to build? Reply with the idea's number or name." \
+  --force-reply --placeholder "idea # or name" \
+  --context "idea-pipeline::pick"
+```
+
+Then record the `FORCE_REPLY_OFFERED: idea-pipeline::pick` marker in step 10. A `pick:` reply routes back to this skill and is handled by step 0.
+
 ### 10. Log to memory
 
 Append to `memory/logs/${today}.md`:
@@ -185,6 +217,8 @@ Append to `memory/logs/${today}.md`:
 - **Ecosystem feed:** [available / unavailable] — [N underserved categories, M adjacent verticals] (from builder-map ecosystem.md, last run [date])
 - **Filter:** [var value or "none"]
 - **Notification:** sent
+- **Force-reply offer:** [offered / skipped — already offered in last 2 days / skipped — no picks]
+- FORCE_REPLY_OFFERED: idea-pipeline::pick   ← include this exact line ONLY when the offer was actually sent (it's the once/day dedup marker)
 - IDEA_PIPELINE_OK
 ```
 
@@ -192,6 +226,6 @@ Append to `memory/logs/${today}.md`:
 
 None. Uses local file reads and `gh` CLI (authenticated via GITHUB_TOKEN in workflow).
 
-## Sandbox Note
+## Network Note
 
 No external network calls in the main logic. `gh pr list` uses the `gh` CLI which handles auth internally (no curl + token pattern needed). WebSearch not required — narrative context comes from `memory/topics/market-context.md` if a `market-context` skill has populated it.

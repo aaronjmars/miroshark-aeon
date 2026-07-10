@@ -1,5 +1,7 @@
 ---
+type: Skill
 name: Search Skills
+category: evolution
 description: Search the open agent skills ecosystem for skills that fill a real gap and install them via the native add-skill path
 var: ""
 tags: [meta]
@@ -8,7 +10,7 @@ tags: [meta]
 
 > **${var}** — Capability to search for (e.g. `rss`, `gas alert`, `farcaster`). If empty, derives a query from concrete repo gaps (failing skills, open issues, non-template priorities). If no gap can be derived, abort as `SEARCH_SKILL_NO_GAP` — silent, log-only.
 
-Today is ${today}. Your task is to find an external skill that fills a **real** gap in this repo, install it via `./add-skill` (so `skills.lock` + `aeon.yml` + the trust-gated security scan all fire), and notify **only** when something was installed or surfaces as a strong recommendation. Silence on no-gap / empty-result runs is correct — it prevents training the operator to ignore this channel.
+Today is ${today}. Your task is to find an external skill that fills a **real** gap in this repo, install it via `bin/add-skill` (so `skills.lock` + `aeon.yml` + the trust-gated security scan all fire), and notify **only** when something was installed or surfaces as a strong recommendation. Silence on no-gap / empty-result runs is correct — it prevents training the operator to ignore this channel.
 
 ## Steps
 
@@ -42,13 +44,13 @@ Run queries across all three surfaces; collect every (skill-name, source-repo, d
 
 a. **CLI search** — `npx skills find "${query}"`. If the command errors, hangs past 30s, or returns zero parseable rows, mark `npx=fail` and continue; do not retry.
 
-b. **Curated indexes** via `./add-skill <repo> --list` (iterate in this order):
-   - `./add-skill vercel-labs/agent-skills --list`
-   - `./add-skill anthropics/skills --list`
-   - `./add-skill BankrBot/skills --list`
-   - `./add-skill aaronjmars/aeon --list` (this repo's inventory — informational, cannot re-install; any hit here signals a duplicate and confirms gap fit is probably wrong)
+b. **Curated indexes** via `bin/add-skill <repo> --list` (iterate in this order):
+   - `bin/add-skill vercel-labs/agent-skills --list`
+   - `bin/add-skill anthropics/skills --list`
+   - `bin/add-skill BankrBot/skills --list`
+   - `bin/add-skill aaronjmars/aeon --list` (this repo's inventory — informational, cannot re-install; any hit here signals a duplicate and confirms gap fit is probably wrong)
 
-   `./add-skill --list` prints lines in the shape `  <name>  <description>` plus an `(installed)` marker for duplicates — parse those.
+   `bin/add-skill --list` prints lines in the shape `  <name>  <description>` plus an `(installed)` marker for duplicates — parse those.
 
 c. **skills.sh directory** — `WebFetch` `https://skills.sh/search?q=<url-encoded-query>` as a best-effort surface. If the page structure doesn't yield parseable GitHub-sourced results, mark `skills.sh=fail` and continue.
 
@@ -59,7 +61,7 @@ For every candidate that survived step 2, apply these **hard gates**. Fail any �
 - **Gate 1 — fills named gap.** Candidate's description plainly names the capability from step 1. Tangentially-related is not enough.
 - **Gate 2 — runtime compatible.** Runs with what we have: `gh` / `curl` / `WebFetch` / `jq` / stdlib. Needs only env vars already referenced in `aeon.yml` (do not recommend skills that require `docker`, `kubectl`, a paid-only API, or secrets we can't set). When in doubt, WebFetch the SKILL.md to confirm.
 - **Gate 3 — not archived / abandoned.** Source repo pushed within the last 180 days: `gh api repos/{owner}/{repo} --jq '.pushed_at'`. If unreachable, drop.
-- **Gate 4 — trust classification.** If `owner` or `owner/repo` appears in `skills/security/trusted-sources.txt` → mark **TRUSTED**. Otherwise → **UNTRUSTED** (install will require `./add-skill` to invoke `skills/skill-scan/scan.sh`, and we route to OK_CANDIDATES rather than auto-install).
+- **Gate 4 — trust classification.** If `owner` or `owner/repo` appears in `skills/security/trusted-sources.txt` → mark **TRUSTED**. Otherwise → **UNTRUSTED** (install will require `bin/add-skill` to invoke `scripts/skill-scan.sh`, and we route to OK_CANDIDATES rather than auto-install).
 
 Surviving candidates get a 1-5 score on three axes:
 
@@ -76,22 +78,22 @@ Surviving candidates get a 1-5 score on three axes:
 - Top-3 empty → **SEARCH_SKILL_EMPTY**. Log. Do NOT notify.
 - Top candidate `gap_fit <= 3` OR `sum < 10` → **SEARCH_SKILL_OK_CANDIDATES** (weak matches only). Notify the list, do NOT install.
 - Top candidate `gap_fit == 5` AND `sum >= 12` AND source is **TRUSTED** → **SEARCH_SKILL_OK_INSTALLED**. Install it in step 6, notify.
-- Top candidate strong but **UNTRUSTED** → **SEARCH_SKILL_OK_CANDIDATES**. Notify with the exact `./add-skill` command so the operator can install manually after review. Do NOT auto-install untrusted sources.
+- Top candidate strong but **UNTRUSTED** → **SEARCH_SKILL_OK_CANDIDATES**. Notify with the exact `bin/add-skill` command so the operator can install manually after review. Do NOT auto-install untrusted sources.
 
 **Install at most one skill per run**, no matter how many candidates tie at the top. Keeps each PR reviewable and prevents runaway installs.
 
 ### 6. Install (only when exit == OK_INSTALLED)
 
 ```bash
-./add-skill <source-repo> <skill-name>
+bin/add-skill <source-repo> <skill-name>
 ```
 
 This is the **only** supported install path for this skill. Do NOT use `npx skills add -g` — it installs to `~/.claude/skills/`, which is ephemeral on GitHub Actions runners and bypasses:
 - `skills.lock` provenance (commit SHA, source path, import time)
 - `aeon.yml` scheduling entry (appended disabled, operator flips `enabled: true` when ready)
-- `trusted-sources.txt` + `skills/skill-scan/scan.sh` gate on untrusted repos
+- `trusted-sources.txt` + `scripts/skill-scan.sh` gate on untrusted repos
 
-If `./add-skill` exits non-zero (security scan fail, skill not found in repo, tarball fetch fail), downgrade exit mode to **SEARCH_SKILL_OK_CANDIDATES** and include the failure reason + the manual `./add-skill ... --force` command in the notify (only suggest `--force` when the scan failure was benign — never for unreviewed third-party code).
+If `bin/add-skill` exits non-zero (security scan fail, skill not found in repo, tarball fetch fail), downgrade exit mode to **SEARCH_SKILL_OK_CANDIDATES** and include the failure reason + the manual `bin/add-skill ... --force` command in the notify (only suggest `--force` when the scan failure was benign — never for unreviewed third-party code).
 
 Commit `skills/<name>/`, `skills.lock`, and `aeon.yml` changes on a branch `search-skill/<name>` and open a PR rather than pushing to main (per CLAUDE.md). The PR body should quote the candidate's description, the gap it fills, and the scores.
 
@@ -119,7 +121,7 @@ Gap: <one-line gap description>
 Candidates (not auto-installed):
 - <name> — <owner/repo> (gap-fit X/5, sum Y/15, <TRUSTED|UNTRUSTED|WEAK>) — <one-sentence why>
 - <name> — <owner/repo> (...)
-Manual install: ./add-skill <owner/repo> <name>
+Manual install: bin/add-skill <owner/repo> <name>
 
 Sources: npx=<ok|fail> vercel=<N> anthropics=<N> bankr=<N> skills.sh=<ok|fail>
 ```
@@ -139,18 +141,18 @@ Append:
 - **Notified:** <yes|no>
 ```
 
-## Sandbox note
+## Network note
 
-The sandbox may block outbound `curl` and `npx`. Fallbacks:
+`curl` works — there is no network sandbox. But `npx` may not be in the `--allowedTools` allowlist (a permission gate, not a network block), and a public GET can be flaky, so keep fallbacks ready:
 
-- If `npx skills find` hangs or errors, mark `npx=fail` and rely on `./add-skill --list` + WebFetch of skills.sh — neither requires `npx`.
-- `./add-skill` uses `curl` internally for GitHub tarballs. If tarball fetch fails, WebFetch the tarball URL directly as a last resort — only for the single winning candidate, not for pre-fetching every catalog.
+- If `npx skills find` hangs or errors, mark `npx=fail` and rely on `bin/add-skill --list` + WebFetch of skills.sh — neither requires `npx`.
+- `bin/add-skill` uses `curl` internally for GitHub tarballs. If tarball fetch fails, WebFetch the tarball URL directly as a last resort — only for the single winning candidate, not for pre-fetching every catalog.
 - `gh api` uses `GITHUB_TOKEN` already provided by the workflow — no new secrets needed.
 
 ## Constraints
 
-- **Never install UNTRUSTED sources automatically.** UNTRUSTED always routes to OK_CANDIDATES with a manual `./add-skill` command in the notify.
+- **Never install UNTRUSTED sources automatically.** UNTRUSTED always routes to OK_CANDIDATES with a manual `bin/add-skill` command in the notify.
 - **At most one install per run.** Even on a tie at the top, pick the highest gap-fit and stop.
-- **Never use `npx skills add` for installs.** Search only. Install goes through `./add-skill`.
+- **Never use `npx skills add` for installs.** Search only. Install goes through `bin/add-skill`.
 - **Silent on NO_GAP / EMPTY / ERROR.** Do not notify, do not create articles. Log only.
-- **Do not advance `skills.lock`** for existing entries — that is `skill-update`'s job. This skill only creates new entries (via `./add-skill`).
+- **Do not advance `skills.lock`** for existing entries — that is `skill-update`'s job. This skill only creates new entries (via `bin/add-skill`).

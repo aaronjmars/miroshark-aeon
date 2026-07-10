@@ -1,6 +1,8 @@
 ---
+type: Skill
 name: strategy-builder
-description: Draft STRATEGY.md from a goal — read the operator's brief (goal text, repo, links) plus the repo README + memory, then write a tight north-star/priorities/audience/constraints strategy that every skill reads on every run.
+category: core
+description: Draft STRATEGY.md from a goal - read the operator's brief (goal, repo, links) plus the repo README and memory, then write a tight north-star/priorities/audience/constraints strategy.
 schedule: "workflow_dispatch"
 commits: true
 permissions:
@@ -39,7 +41,7 @@ Read whatever's available and merge — more grounding makes a sharper strategy:
 
 - **Goal text** — the operator's own words. This is the spine; weight it highest.
 - **Current `STRATEGY.md`** — read it. If it's already customised (no `unconfigured defaults` line), you're **refining**, not nuking: keep what still holds, sharpen the rest.
-- **Repo (`repo=` or, if absent, this repo)** — read `README.md`, `SHOWCASE.md` if present, and the top of `memory/MEMORY.md` (current goals / active topics). Use `gh api repos/<owner>/<repo>/readme --jq '.content' | base64 -d` for an external repo, or read the local files for this repo. What is actually being built and shipped tells you the real north-star.
+- **Repo (`repo=` or, if absent, this repo)** — read `README.md`, `docs/SHOWCASE.md` if present, and the top of `memory/MEMORY.md` (current goals / active topics). Use `gh api repos/<owner>/<repo>/readme --jq '.content' | base64 -d` for an external repo, or read the local files for this repo. What is actually being built and shipped tells you the real north-star.
 - **Links (`links=`)** — **WebFetch** each (product page, site, deck) for the value prop, audience, and stage.
 
 ### 2. Synthesize the strategy
@@ -134,9 +136,9 @@ Append to `memory/logs/${today}.md`:
 - **No placeholders** in the committed file. It must read as finished. (Bracketed `[your X]` is fine *only* where the operator must personalise a proper noun — prefer to fill it from context if you can.)
 - **Refine, don't trash.** If a real strategy already exists, preserve what holds; the prior version is in git history regardless.
 
-## Sandbox note
+## Network note
 
-All inputs are local file reads, `gh api` (auth handled by the workflow's `GITHUB_TOKEN` — no env-var-in-headers curl), or built-in **WebFetch** for links (bypasses the sandbox). No third-party API key required. Notifications use `./notify -f`.
+All inputs are local file reads, `gh api` (auth handled internally by the workflow's `GITHUB_TOKEN`, so no secret ever lands on the command line), or built-in **WebFetch** for links (a Claude tool that runs outside the Bash permission layer). No third-party API key required. Notifications use `./notify -f`.
 
 ## Edge cases
 

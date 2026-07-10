@@ -1,6 +1,9 @@
 ---
+type: Skill
+mode: read-only
 name: Token Pick
-description: One token recommendation and one prediction market pick — scored, quantified, with a skip branch when signals are weak
+category: crypto
+description: One token recommendation and one prediction market pick - scored, quantified, with a skip branch when signals are weak
 var: ""
 tags: [crypto]
 requires: [COINGECKO_API_KEY?]
@@ -24,11 +27,11 @@ Produce ONE token call and ONE prediction-market call per day, each with a numer
 ```bash
 # Trending coins
 curl -s "https://api.coingecko.com/api/v3/search/trending" \
-  ${COINGECKO_API_KEY:+-H "x-cg-pro-api-key: $COINGECKO_API_KEY"}
+  ${COINGECKO_API_KEY:+-H "x-cg-demo-api-key: $COINGECKO_API_KEY"}
 
 # Top 250 by market cap with 24h and 7d changes
 curl -s "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=false&price_change_percentage=24h,7d" \
-  ${COINGECKO_API_KEY:+-H "x-cg-pro-api-key: $COINGECKO_API_KEY"}
+  ${COINGECKO_API_KEY:+-H "x-cg-demo-api-key: $COINGECKO_API_KEY"}
 
 # BTC + ETH 24h/7d for relative-strength benchmark (extract from the markets call above; no extra request needed)
 
@@ -132,6 +135,20 @@ sources: cg=ok|fail, dex=ok|fail, poly=ok|fail
 
 If all sources failed, send `TOKEN_PICK_NO_DATA` with the source-status line — do not invent picks from cached intuition.
 
+### 6c. Offer a deep-dive (force-reply — normal-day only)
+
+Only after a **normal-day** send (6a) — never on the skip-day (6b) or the no-data path (weak signals → no pick, so no offer). This skill is `read-only`, so it can't run the deep report itself; instead it offers to hand off to **token-movers** (write mode), which owns the single-token deep report and the `deep-dive:` handler. Because `force_reply` and inline buttons can't share one message, send this as a SEPARATE `./notify` AFTER the 6a pick:
+
+```bash
+./notify "Want a deeper report on a token? Reply with a ticker or contract." \
+  --force-reply --placeholder "e.g. WIF" \
+  --context "token-movers::deep-dive"
+```
+
+The `token-movers::deep-dive` marker routes the operator's reply to **token-movers** as `var="deep-dive:<their text>"`; token-movers strips the `deep-dive:` prefix and produces the single-token deep report.
+
+**Dedup.** token-pick runs once daily, so one offer per run is already once-per-day. Being `read-only`, it can't write a `FORCE_REPLY_OFFERED` marker — but it already reads recent logs, so if today's log already carries a `FORCE_REPLY_OFFERED: deep-dive` line (e.g. token-movers offered earlier today), SKIP this offer to avoid double-nagging.
+
 ### 7. Log to `memory/logs/${today}.md`
 
 ```
@@ -149,9 +166,9 @@ Append symbol + market question on a single line for easy grep next-day dedup, e
 TOKEN_PICK_DEDUP: SYMBOL | "Will X happen by Y?"
 ```
 
-## Sandbox note
+## Network note
 
-The sandbox may block outbound curl. Use **WebFetch** as a fallback for any URL fetch (CoinGecko, DexScreener, Polymarket all work without auth). For auth-required APIs, use the pre-fetch/post-process pattern (see CLAUDE.md). On total source failure, send the no-data notification rather than silent fail.
+There is no network sandbox — `curl` works, with **WebFetch** as the fallback for any URL fetch (CoinGecko, DexScreener, Polymarket all work without auth). For an auth'd API, call `./secretcurl` with a `{ENV_NAME}` placeholder (the key is injected via `requires:`). On total source failure, send the no-data notification rather than silent fail.
 
 ## Environment Variables
 - `COINGECKO_API_KEY` — CoinGecko API key (optional, increases rate limits)

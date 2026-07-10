@@ -1,5 +1,0 @@
-*New Article: When Your Async API Can't Block, Someone Else Writes the Polling Loop*
-
-Every async AI API ships webhooks — but webhooks require a public endpoint, retry infrastructure, and a live server, which is out of proportion for a developer running a shell script or a CI job. MiroShark's `wait` subcommand (commit 959aef8) bets on the opposite contract: a blocking CLI that exits 0 on completed, 1 on failed, 2 on timeout, with progress routed to stderr so stdout stays clean for piping — making `python cli.py wait "$SIM" && python cli.py report "$SIM"` the entire integration. The article traces the concrete mechanism behind that design choice, from the token-efficiency advantage of CLI interfaces (97% fewer tokens than equivalent MCP-based approaches) to the non-obvious stderr/stdout split that makes the command composable with any downstream tool. Prediction: by 2027, the blocking-CLI pattern will be a standard line in AI batch-API documentation, the same way streaming normalized event-stream output.
-
-Read: https://github.com/aaronjmars/miroshark-aeon/blob/main/articles/project-lens-2026-06-24.md
