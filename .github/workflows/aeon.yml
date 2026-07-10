@@ -1,4 +1,4 @@
-name: Aeon
+name: Aeon · Skill Runner
 run-name: "skill: ${{ inputs.skill || 'feature' }}${{ inputs.var && format(' ({0})', inputs.var) || '' }}"
 
 on:
@@ -13,17 +13,29 @@ on:
         required: false
         type: choice
         default: '(config default)'
+        # Keep in sync with the dashboard's MODELS/GROK_MODELS (apps/dashboard/lib/
+        # constants.ts): the dashboard dispatches `-f model=<id>` and this is a
+        # `choice` input, so any id it offers that's missing here is rejected with
+        # HTTP 422 at dispatch time.
         options:
           - '(config default)'
           - claude-opus-4-8
+          - claude-opus-4-7
           - claude-fable-5
+          - claude-sonnet-5
           - claude-sonnet-4-6
           - claude-haiku-4-5-20251001
-          - gemini-3-pro
-          - gemini-3-flash
-          - gpt-5.2
-          - kimi-k2.5
-          - qwen3-coder
+          - grok-composer-2.5-fast
+          - grok-build
+      harness:
+        description: 'Agent harness'
+        required: false
+        type: choice
+        default: '(config default)'
+        options:
+          - '(config default)'
+          - claude
+          - grok
       var:
         description: 'Variable (e.g. AI, bitcoin, owner/repo)'
         required: false
@@ -42,6 +54,10 @@ on:
         description: 'Model override'
         required: false
         type: string
+      harness:
+        description: 'Agent harness override (claude | grok)'
+        required: false
+        type: string
       var:
         description: 'Variable'
         required: false
@@ -55,8 +71,10 @@ on:
 
 permissions:
   contents: write
+  id-token: write        # mint the OIDC token that signs skill-run attestations
+  attestations: write    # write the attestation to the repo's attestation store
   pull-requests: write
-  issues: read
+  issues: write   # write (was read) for Issues-as-state append (§3) + votable health Issues (§7); harmless when STATE_BACKEND / HEALTH_ISSUES unset
   actions: read
 
 env:
@@ -119,8 +137,8 @@ jobs:
       - name: Configure git identity
         if: steps.work.outputs.mode != ''
         run: |
-          git config --global user.name "aeonframework"
-          git config --global user.email "aeonframework@proton.me"
+          git config user.name "aeonframework"
+          git config user.email "aeonframework@proton.me"
 
       - name: Setup Node.js
         if: steps.work.outputs.mode != ''
@@ -128,12 +146,28 @@ jobs:
         with:
           node-version: '22'
 
+      - name: Cache Claude Code (npm)
+        if: steps.work.outputs.mode != ''
+        # ~/.npm is npm's content-addressable download cache — reusing it lets the
+        # pinned install run fully offline. Version is baked into the key (immutable,
+        # ~100% hit after the first run of a version, shared with messages.yml). The
+        # restore-keys prefix degrades gracefully on a version bump. Keep the version
+        # in the key in sync with the pin below.
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: claude-code-${{ runner.os }}-2.1.168
+          restore-keys: |
+            claude-code-${{ runner.os }}-
+
       - name: Install Claude Code
         if: steps.work.outputs.mode != ''
         # Pinned for supply-chain safety — a freshly-published (or compromised)
         # version is never pulled automatically. Bump deliberately after reviewing
         # the release notes: https://github.com/anthropics/claude-code/releases
-        run: npm install -g @anthropic-ai/claude-code@2.1.168
+        # (--prefer-offline uses the cached tarball above; keep the pin and the
+        # cache key version in sync.)
+        run: npm install -g @anthropic-ai/claude-code@2.1.168 --prefer-offline
 
       - name: Validate skill secrets
         if: steps.work.outputs.mode != ''
@@ -142,7 +176,6 @@ jobs:
           COINGECKO_API_KEY: ${{ secrets.COINGECKO_API_KEY }}
           ALCHEMY_API_KEY: ${{ secrets.ALCHEMY_API_KEY }}
           REPLICATE_API_TOKEN: ${{ secrets.REPLICATE_API_TOKEN }}
-          SUPERNOTES_API_KEY: ${{ secrets.SUPERNOTES_API_KEY }}
         run: |
           SKILL_FILE="skills/${{ steps.skill.outputs.name }}/SKILL.md"
           [ ! -f "$SKILL_FILE" ] && exit 0
@@ -171,29 +204,6 @@ jobs:
           [ ${#OPTIONAL[@]} -gt 0 ] && echo "::notice::Optional secrets not set: ${OPTIONAL[*]} (skill will use fallbacks)"
           [ ${#MISSING[@]} -gt 0 ] && echo "::warning::Secrets not set: ${MISSING[*]} — skill may fail or produce incomplete results"
           exit 0
-
-      - name: Run pre-fetch scripts
-        if: steps.work.outputs.mode != ''
-        env:
-          GH_READ_PAT: ${{ secrets.GH_READ_PAT }}
-          XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-          REPLICATE_API_TOKEN: ${{ secrets.REPLICATE_API_TOKEN }}
-          SKILL_VAR: ${{ inputs.var }}
-        run: |
-          # Run all scripts/prefetch-*.sh before Claude starts (outside sandbox).
-          # Each script receives the skill name and var as arguments.
-          # Scripts should check their own env vars and exit 0 if not configured.
-          # SKILL_VAR comes through env (not template interpolation) so embedded
-          # $TOKEN / $VAR references in the user input aren't eaten by bash.
-          SKILL="${{ steps.skill.outputs.name }}"
-          VAR="$SKILL_VAR"
-          for script in scripts/prefetch-*.sh; do
-            [ -f "$script" ] || continue
-            chmod +x "$script"
-            echo "Running $(basename "$script")..."
-            ./"$script" "$SKILL" "$VAR" || echo "::notice::$(basename "$script") skipped or failed (non-fatal)"
-          done
 
       # ──────────────────────────────────────────────────────────────────────
       # Fleet Watcher preflight (opt-in, fail-closed)
@@ -244,6 +254,35 @@ jobs:
           fi
           echo "::notice::Fleet Watcher ALLOWED skill '$SKILL' (audit: $AUDIT_REF, ref: $REF)"
 
+      # Materialize cron state (Issues backend, opt-in) — hardening §3 reader cutover.
+      # With STATE_BACKEND=issues, runs APPEND immutable events to a pinned Issue
+      # (conflict-free, no commit/rebase). But readers (heartbeat, skill-health
+      # …) still read memory/cron-state.json — so before the skill runs,
+      # fold the Issue's events back into that file: readers work UNCHANGED and see a
+      # fresh projection, not stale committed state. Commit results drops the projection
+      # afterward so it isn't committed. No-op when STATE_BACKEND is unset.
+      - name: Materialize cron state (Issues backend)
+        if: steps.work.outputs.mode != '' && vars.STATE_BACKEND == 'issues'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if GH_REPO="$GITHUB_REPOSITORY" bash scripts/state_store.sh materialize "aeon:cron-state" memory/cron-state.json; then
+            echo "cron-state projected from the Issues backend; readers see fresh state"
+          else
+            echo "::warning::could not materialize cron-state from the Issue; readers use the committed file"
+          fi
+
+      - name: Stage vuln-scanner tools
+        # Purpose-built binary staging for vuln-scanner's scan arm — NOT a network
+        # workaround (there is no network sandbox). Installs semgrep/trufflehog/
+        # osv-scanner/slither and appends /tmp/bin to the PATH file so the scanner
+        # bare-names resolve in the later claude -p step and its per-call fresh shells
+        # (an in-run `export PATH` doesn't survive between Claude's Bash calls).
+        # Execution is separately gated by the write-tier grant in scripts/skill_mode.sh.
+        # Best-effort: the script self-guards to vuln-scanner and never fails the run.
+        if: steps.work.outputs.mode != '' && steps.skill.outputs.name == 'vuln-scanner'
+        run: bash scripts/stage-vuln-scanner.sh "${{ steps.skill.outputs.name }}"
+
       - name: Run
         id: run
         if: steps.work.outputs.mode != ''
@@ -268,9 +307,17 @@ jobs:
           USEPOD_MODEL_SONNET: ${{ vars.USEPOD_MODEL_SONNET }}
           USEPOD_MODEL_HAIKU: ${{ vars.USEPOD_MODEL_HAIKU }}
           VENICE_MODEL: ${{ vars.VENICE_MODEL }}
+          VENICE_BASE_URL: ${{ vars.VENICE_BASE_URL }}
           VENICE_CLEANCACHE: ${{ vars.VENICE_CLEANCACHE }}
           SURPLUS_MODEL: ${{ vars.SURPLUS_MODEL }}
           CCR_LOG: ${{ vars.CCR_LOG }}
+          # Optional Langfuse observability — set both keys to stream Claude Code's
+          # run to Langfuse as a trace (scripts/langfuse-otel.sh; no-op when unset).
+          LANGFUSE_PUBLIC_KEY: ${{ secrets.LANGFUSE_PUBLIC_KEY }}
+          LANGFUSE_SECRET_KEY: ${{ secrets.LANGFUSE_SECRET_KEY }}
+          LANGFUSE_HOST: ${{ vars.LANGFUSE_HOST }}
+          LANGFUSE_TRACING: ${{ vars.LANGFUSE_TRACING }}
+          LANGFUSE_LOG_CONTENT: ${{ vars.LANGFUSE_LOG_CONTENT }}
           GITHUB_TOKEN: ${{ secrets.GH_GLOBAL || secrets.GITHUB_TOKEN }}
           GH_TOKEN: ${{ secrets.GH_GLOBAL || secrets.GITHUB_TOKEN }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
@@ -281,22 +328,37 @@ jobs:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
           SLACK_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID }}
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-          SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
           NOTIFY_EMAIL_TO: ${{ secrets.NOTIFY_EMAIL_TO }}
           NOTIFY_EMAIL_FROM: ${{ vars.NOTIFY_EMAIL_FROM || 'aeon@notifications.aeon.bot' }}
           NOTIFY_EMAIL_SUBJECT_PREFIX: ${{ vars.NOTIFY_EMAIL_SUBJECT_PREFIX || '[Aeon]' }}
-          XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
-          COINGECKO_API_KEY: ${{ secrets.COINGECKO_API_KEY }}
-          ALCHEMY_API_KEY: ${{ secrets.ALCHEMY_API_KEY }}
-          BANKR_API_KEY: ${{ secrets.BANKR_API_KEY }}
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-          DEVTO_API_KEY: ${{ secrets.DEVTO_API_KEY }}
-          NEYNAR_API_KEY: ${{ secrets.NEYNAR_API_KEY }}
-          NEYNAR_SIGNER_UUID: ${{ secrets.NEYNAR_SIGNER_UUID }}
+          GROK_CREDENTIALS: ${{ secrets.GROK_CREDENTIALS }}
+          # Send caps + audit CC for the IN-RUN email senders (send-email + vuln-scanner
+          # Arm C). RESEND_API_KEY / RESEND_FROM / RESEND_REPLY_TO are per-skill secrets
+          # injected via `requires:`; these are non-secret repo vars, bound here so the
+          # in-run send (and its fail-closed caps) can read them. Unset => sensible
+          # defaults in the skill (daily cap 1, cooldown 7d, not paused).
+          RESEND_CC: ${{ vars.RESEND_CC }}
+          DISCLOSURE_EMAIL_PAUSED: ${{ vars.DISCLOSURE_EMAIL_PAUSED }}
+          DISCLOSURE_EMAIL_MAX_PER_RUN: ${{ vars.DISCLOSURE_EMAIL_MAX_PER_RUN }}
+          DISCLOSURE_EMAIL_DAILY_CAP: ${{ vars.DISCLOSURE_EMAIL_DAILY_CAP }}
+          DISCLOSURE_EMAIL_MAX_ATTEMPTS: ${{ vars.DISCLOSURE_EMAIL_MAX_ATTEMPTS }}
+          DISCLOSURE_EMAIL_COOLDOWN_DAYS: ${{ vars.DISCLOSURE_EMAIL_COOLDOWN_DAYS }}
+          # Per-skill least privilege: skill-facing API keys are NO LONGER injected
+          # statically for every skill. Each skill now receives ONLY the keys it
+          # declares in its `requires:` frontmatter — resolved from ALL_SECRETS in the
+          # Run step below (see the "Injected declared secrets" loop). Removed from the
+          # shared env: XAI_API_KEY, COINGECKO_API_KEY, ALCHEMY_API_KEY, BANKR_API_KEY,
+          # VERCEL_TOKEN. Model-gateway / GITHUB_TOKEN / GROK / LANGFUSE stay (infra).
+          BEAMR_GATEWAY_URL: ${{ secrets.BEAMR_GATEWAY_URL }}
+          BEAMR_PAYER_KEY: ${{ secrets.BEAMR_PAYER_KEY }}
+          BEAMR_NETWORK: ${{ vars.BEAMR_NETWORK }}
+          BEAMR_MAX_PAY_USDC: ${{ vars.BEAMR_MAX_PAY_USDC }}
           JSONRENDER_ENABLED: ${{ vars.JSONRENDER_ENABLED || 'true' }}
           SKILL_VAR: ${{ inputs.var }}
           SKILL_NAME: ${{ steps.skill.outputs.name }}
           INPUT_MODEL: ${{ inputs.model }}
+          INPUT_HARNESS: ${{ inputs.harness }}
+          INPUT_CHAIN_CTX: ${{ inputs.chain_context_file }}
         run: |
           TODAY=$(date -u +%Y-%m-%d)
           export SKILL_NAME
@@ -308,27 +370,59 @@ jobs:
           elif [ -n "$SKILL_MODEL" ]; then
             MODEL="$SKILL_MODEL"
           else
-            MODEL="${CONFIG_MODEL:-claude-opus-4-8}"
+            MODEL="${CONFIG_MODEL:-claude-sonnet-4-6}"
           fi
-          echo "Using model: $MODEL"
+
+          # --- Harness resolution (which agent CLI runs the skill) ---
+          # Same 3-tier precedence as model: workflow_dispatch input → per-skill
+          # `harness:` in aeon.yml → top-level `harness:` → claude (default).
+          CONFIG_HARNESS=$(grep -E '^harness:' aeon.yml | sed 's/^harness: *//' | tr -d ' ')
+          SKILL_HARNESS=$(grep "^  ${SKILL_NAME}:" aeon.yml | sed -n 's/.*harness: *"\([^"]*\)".*/\1/p')
+          if [ -n "${INPUT_HARNESS:-}" ] && [ "$INPUT_HARNESS" != "(config default)" ]; then
+            HARNESS="$INPUT_HARNESS"
+          elif [ -n "$SKILL_HARNESS" ]; then
+            HARNESS="$SKILL_HARNESS"
+          else
+            HARNESS="${CONFIG_HARNESS:-claude}"
+          fi
+          if [ "$HARNESS" != "grok" ]; then HARNESS="claude"; fi   # unknown value → safe default (use `if`, not `&&`, under set -e)
+          # On the grok harness a claude-* model id is meaningless — fall back to
+          # grok's default (grok-composer-2.5-fast) unless an explicit grok model
+          # was chosen. run-grok.sh omits --model for a non-grok value as a safety net.
+          if [ "$HARNESS" = "grok" ]; then
+            case "$MODEL" in claude-*|"") MODEL="grok-composer-2.5-fast" ;; esac
+          fi
+          echo "Using harness: $HARNESS  |  model: $MODEL"
           echo "SKILL_MODEL=$MODEL" >> "$GITHUB_OUTPUT"
+          echo "HARNESS=$HARNESS" >> "$GITHUB_OUTPUT"   # read by the post-run scorer / feed-convert steps
 
           # --- AI Gateway routing ---
           # provider: auto → cascade through every provider whose key is set, in
           # priority order, failing over to the next on ANY failure. An explicit
           # provider pins a single one (no failover). Setup runs per-attempt in the
           # run loop below, so a dead/credit-less provider is skipped, not fatal.
+          # The Grok Build harness has its own auth and does NOT use the gateway.
           BASE_MODEL="$MODEL"
           GW="${GITHUB_WORKSPACE}/scripts/llm-gateway.sh"
-          GATEWAY=$(grep -A1 '^gateway:' aeon.yml | grep 'provider:' | sed 's/.*provider:[[:space:]]*//' | sed "s/[\"' ]//g" || true)
-          GATEWAY="${GATEWAY:-auto}"
-          if [ "$GATEWAY" = "auto" ]; then
-            CANDIDATES=$(AEON_LIST_CANDIDATES=1 bash "$GW")
+          # Optional Langfuse OTEL tracing — sourced after the gateway in each
+          # claude attempt below. Self-gates on LANGFUSE_* and never fails the run.
+          LF="${GITHUB_WORKSPACE}/scripts/langfuse-otel.sh"
+          if [ "$HARNESS" = "grok" ]; then
+            # Set the post-run scorer's routing hint: route its `claude -p` scoring
+            # call to xAI (Anthropic-compatible) when an API key is present, else
+            # direct (scoring then just no-ops gracefully if no Anthropic creds).
+            if [ -n "${XAI_API_KEY:-}" ]; then echo "GATEWAY=grok" >> "$GITHUB_OUTPUT"; else echo "GATEWAY=direct" >> "$GITHUB_OUTPUT"; fi
           else
-            CANDIDATES="$GATEWAY"   # explicit pin → single provider, no failover
+            GATEWAY=$(grep -A1 '^gateway:' aeon.yml | grep 'provider:' | sed 's/.*provider:[[:space:]]*//' | sed "s/[\"' ]//g" || true)
+            GATEWAY="${GATEWAY:-auto}"
+            if [ "$GATEWAY" = "auto" ]; then
+              CANDIDATES=$(AEON_LIST_CANDIDATES=1 bash "$GW")
+            else
+              CANDIDATES="$GATEWAY"   # explicit pin → single provider, no failover
+            fi
+            echo "Gateway: $GATEWAY  |  cascade order: $CANDIDATES"
+            echo "GATEWAY=${CANDIDATES%% *}" >> "$GITHUB_OUTPUT"   # provisional; overwritten with the winner below
           fi
-          echo "Gateway: $GATEWAY  |  cascade order: $CANDIDATES"
-          echo "GATEWAY=${CANDIDATES%% *}" >> "$GITHUB_OUTPUT"   # provisional; overwritten with the winner below
 
           # Generate notify script in workspace (Claude calls: ./notify "message")
           # Messages are saved to .pending-notify/ for reliable post-run delivery
@@ -337,159 +431,27 @@ jobs:
           mkdir -p .pending-notify
           : > .notify-sent-hashes
 
-          cat > ./notify << 'NOTIFY_SCRIPT'
-          #!/usr/bin/env bash
-          set -euo pipefail
+          # notify / notify-jsonrender are the committed scripts/*.sh (testable; see scripts/tests/).
+          cp scripts/notify.sh ./notify
+          cp scripts/notify-jsonrender.sh ./notify-jsonrender
+          chmod +x ./notify ./notify-jsonrender
+          # secretcurl: generic auth'd curl that substitutes {ENV_KEY} placeholders
+          # internally, so a secret never lands on the agent's Bash command line
+          # (the permission analyzer blocks $SECRET expansions). Allow-listed in
+          # scripts/skill_mode.sh as Bash(./secretcurl:*).
+          cp scripts/secretcurl.sh ./secretcurl
+          chmod +x ./secretcurl
 
-          # Usage:
-          #   ./notify "message"           — inline arg (short messages only; multi-line OK)
-          #   ./notify -f path/to/file.md  — read message from file (safe for any length/content)
-          #   ./notify --file path/to/file — same as -f
-          # Prefer -f for anything with embedded newlines: Claude's sandbox trips on
-          #   ./notify "$(cat file)" with "Unhandled node type: string".
-          if [ "${1:-}" = "-f" ] || [ "${1:-}" = "--file" ]; then
-            if [ -z "${2:-}" ] || [ ! -f "$2" ]; then
-              echo "notify: -f requires an existing file path" >&2
-              exit 2
-            fi
-            MSG=$(cat "$2")
-          else
-            MSG="${1:-}"
-          fi
-
-          # Suppress obvious diagnostic probes (short messages containing test/trace/ping/debug/hello).
-          # Claude sometimes issues these to verify the notify script works — they should not reach channels.
-          MSG_LEN=${#MSG}
-          if [ "$MSG_LEN" -lt 120 ]; then
-            MSG_LOWER=$(printf '%s' "$MSG" | tr '[:upper:]' '[:lower:]')
-            case "$MSG_LOWER" in
-              *test*|*trace*|*ping*|*debug*|hello|hi)
-                echo "notify: suppressing trace/test message ($MSG_LEN chars): $MSG" >&2
-                exit 0
-                ;;
-            esac
-          fi
-
-          # Dedup within this workflow run — same message never sent twice even if ./notify is called again
-          HASH=$(printf '%s' "$MSG" | sha256sum | awk '{print $1}')
-          HASH_FILE=".notify-sent-hashes"
-          touch "$HASH_FILE" 2>/dev/null || true
-          if [ -f "$HASH_FILE" ] && grep -qxF "$HASH" "$HASH_FILE" 2>/dev/null; then
-            echo "notify: duplicate message (hash ${HASH:0:8}), skipping" >&2
-            exit 0
-          fi
-          printf '%s\n' "$HASH" >> "$HASH_FILE" 2>/dev/null || true
-
-          # Always save to .pending-notify/ for post-run delivery (sandbox fallback)
-          TS=$(date -u +%s)
-          echo "$MSG" > ".pending-notify/${TS}.md"
-
-          # Attempt immediate delivery (may fail in sandbox — post-run step retries)
-          DELIVERED=false
-
-          # Telegram: 4096 char limit, strict Markdown parsing
-          if [ -n "${TELEGRAM_BOT_TOKEN:-}" ] && [ -n "${TELEGRAM_CHAT_ID:-}" ]; then
-            # Split $MSG into chunks ≤3900 chars (Telegram cap 4096, leaves room for
-            # "[i/N]" suffix). Prefer paragraph (\n\n) then line (\n) boundaries,
-            # hard-split only if a single paragraph/line exceeds the limit.
-            # Chunks emitted one per line as base64 to preserve embedded newlines.
-            TG_CHUNKS_B64=$(printf '%s' "$MSG" | python3 -c '
-          import sys, base64
-          LIMIT = 3900
-          text = sys.stdin.read()
-          def pack(parts, sep):
-              out, cur = [], ""
-              for p in parts:
-                  glue = sep if cur else ""
-                  if len(cur) + len(glue) + len(p) <= LIMIT:
-                      cur += glue + p
-                  else:
-                      if cur:
-                          out.append(cur); cur = ""
-                      if len(p) > LIMIT and sep == "\n\n":
-                          out.extend(pack(p.split("\n"), "\n"))
-                      elif len(p) > LIMIT:
-                          while len(p) > LIMIT:
-                              out.append(p[:LIMIT]); p = p[LIMIT:]
-                          cur = p
-                      else:
-                          cur = p
-              if cur:
-                  out.append(cur)
-              return out
-          chunks = [text] if len(text) <= LIMIT else pack(text.split("\n\n"), "\n\n")
-          N = len(chunks)
-          for i, c in enumerate(chunks):
-              suffix = f"\n\n[{i+1}/{N}]" if N > 1 else ""
-              sys.stdout.write(base64.b64encode((c + suffix).encode()).decode() + "\n")
-          ')
-            while IFS= read -r TG_CHUNK_B64; do
-              [ -z "$TG_CHUNK_B64" ] && continue
-              TG_MSG=$(printf '%s' "$TG_CHUNK_B64" | base64 -d)
-              TG_RESULT=$(curl -s -w "\n%{http_code}" -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
-                -H "Content-Type: application/json" \
-                -d "$(jq -n --arg chat "$TELEGRAM_CHAT_ID" --arg text "$TG_MSG" '{chat_id: $chat, text: $text, parse_mode: "Markdown"}')" 2>/dev/null) || true
-              TG_HTTP=$(echo "$TG_RESULT" | tail -1)
-              TG_OK=$(echo "$TG_RESULT" | sed '$d' | jq -r '.ok // false' 2>/dev/null || echo "false")
-              if [ "$TG_HTTP" = "200" ] && [ "$TG_OK" = "true" ]; then
-                DELIVERED=true
-              else
-                curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
-                  -H "Content-Type: application/json" \
-                  -d "$(jq -n --arg chat "$TELEGRAM_CHAT_ID" --arg text "$TG_MSG" '{chat_id: $chat, text: $text}')" > /dev/null 2>&1 && DELIVERED=true || true
-              fi
-              # Preserve chunk ordering in the Telegram channel
-              sleep 0.3
-            done <<< "$TG_CHUNKS_B64"
-          fi
-
-          if [ -n "${DISCORD_WEBHOOK_URL:-}" ]; then
-            curl -sf -X POST "$DISCORD_WEBHOOK_URL" \
-              -H "Content-Type: application/json" \
-              -d "$(jq -n --arg text "$MSG" '{content: $text}')" > /dev/null && DELIVERED=true || true
-          fi
-          if [ -n "${SLACK_WEBHOOK_URL:-}" ]; then
-            curl -sf -X POST "$SLACK_WEBHOOK_URL" \
-              -H "Content-Type: application/json" \
-              -d "$(jq -n --arg text "$MSG" '{text: $text}')" > /dev/null && DELIVERED=true || true
-          fi
-          # Email via SendGrid
-          if [ -n "${SENDGRID_API_KEY:-}" ] && [ -n "${NOTIFY_EMAIL_TO:-}" ]; then
-            FROM="${NOTIFY_EMAIL_FROM:-aeon@notifications.aeon.bot}"
-            PREFIX="${NOTIFY_EMAIL_SUBJECT_PREFIX:-[Aeon]}"
-            SUBJECT="$PREFIX ${SKILL_NAME:-notification}"
-            HTML_BODY=$(printf '%s' "$MSG" | sed 's/&/\&amp;/g; s/</\&lt;/g; s/>/\&gt;/g')
-            HTML_BODY="<html><body><pre style=\"font-family:monospace;white-space:pre-wrap;\">${HTML_BODY}</pre></body></html>"
-            curl -sf -X POST "https://api.sendgrid.com/v3/mail/send" \
-              -H "Authorization: Bearer ${SENDGRID_API_KEY}" \
-              -H "Content-Type: application/json" \
-              -d "$(jq -n \
-                --arg from "$FROM" \
-                --arg to "$NOTIFY_EMAIL_TO" \
-                --arg subject "$SUBJECT" \
-                --arg html "$HTML_BODY" \
-                --arg text "$MSG" \
-                '{personalizations:[{to:[{email:$to}]}],from:{email:$from},subject:$subject,content:[{type:"text/plain",value:$text},{type:"text/html",value:$html}]}')" > /dev/null 2>&1 || true
-          fi
-          # json-render channel — save raw message for post-run conversion
-          if [ "${JSONRENDER_ENABLED:-false}" = "true" ] && [ -n "${SKILL_NAME:-}" ]; then
-            mkdir -p apps/dashboard/outputs
-            echo "$MSG" > "apps/dashboard/outputs/.pending-${SKILL_NAME}.md"
-          fi
-
-          # Remove pending file if immediate delivery succeeded (prevents double-send)
-          if [ "$DELIVERED" = "true" ]; then
-            rm -f ".pending-notify/${TS}.md"
-          fi
-          NOTIFY_SCRIPT
-          chmod +x ./notify
-
-          ALLOWED="Read,Write,Edit,Glob,Grep,WebFetch,WebSearch"
-          ALLOWED="$ALLOWED,Bash(curl:*),Bash(gh:*),Bash(git:*),Bash(jq:*)"
-          ALLOWED="$ALLOWED,Bash(./notify:*),Bash(./notify-jsonrender:*)"
-          ALLOWED="$ALLOWED,Bash(mkdir:*),Bash(ls:*),Bash(cat:*),Bash(chmod:*)"
-          ALLOWED="$ALLOWED,Bash(date:*),Bash(echo:*),Bash(node:*),Bash(npm:*),Bash(npx:*)"
-          ALLOWED="$ALLOWED,Bash(head:*),Bash(tail:*),Bash(wc:*),Bash(sort:*),Bash(grep:*)"
+          # Capability tier (hardening §6): the toolset is resolved per-skill from
+          # scripts/skill_mode.sh. Default is `write` (backward compatible — a superset
+          # of the previous static list, additionally granting Bash(python3/python:*)
+          # the helper scripts need). A skill with `mode: read-only` frontmatter gets a
+          # toolset with no Write/Edit/git/gh, so it physically cannot mutate the repo;
+          # the post-run read-only guard reverts any stray redirected writes.
+          SKILL_MODE=$(bash scripts/skill_mode.sh mode "${{ steps.skill.outputs.name }}")
+          ALLOWED=$(bash scripts/skill_mode.sh allowed-tools "$SKILL_MODE")
+          echo "SKILL_MODE=$SKILL_MODE" >> "$GITHUB_ENV"
+          echo "Capability mode: $SKILL_MODE"
 
           # MCP (opt-in): when a project .mcp.json exists, load it for this run
           # and allow each server's tools. No-op when the file is absent, so
@@ -498,6 +460,9 @@ jobs:
           # in the dashboard and it just works, no per-name workflow wiring. If a
           # referenced secret genuinely isn't set, skip MCP with a warning rather
           # than let Claude's config parse-failure break the whole skill run.
+          # The MCP_FLAGS/ALLOWED additions below are the CLAUDE path; the exported
+          # ${VAR}s are harness-agnostic and also feed grok, which reads .mcp.json
+          # natively and expands them (run-grok.sh only adds the MCPTool allows).
           MCP_FLAGS=()
           if [ -f .mcp.json ] && jq -e '.mcpServers' .mcp.json >/dev/null 2>&1; then
             MCP_MISSING=""
@@ -521,13 +486,44 @@ jobs:
               echo "MCP enabled: $(jq -r '.mcpServers | keys | join(", ")' .mcp.json)"
             fi
           fi
+
+          # Per-skill least-privilege secrets: inject ONLY the keys this skill
+          # declares in its `requires:` frontmatter (both required and `?` works-better
+          # tiers). Same resolve-from-ALL_SECRETS shape as the MCP loop above. A skill
+          # sees nothing else from the secret store — so an injected read skill has
+          # only its own (capped) keys to leak. Optional key with no secret set → not
+          # exported, skill degrades to its public path (unchanged behaviour).
+          SECRETS_JSON="${ALL_SECRETS:-}"; [ -z "$SECRETS_JSON" ] && SECRETS_JSON='{}'
+          INJECTED=""
+          while IFS= read -r key; do
+            [ -z "$key" ] && continue
+            [ -n "${!key:-}" ] && continue                     # already in env (infra) — leave it
+            val="$(jq -r --arg k "$key" '.[$k] // empty' <<<"$SECRETS_JSON")"
+            [ -n "$val" ] && { export "$key=$val"; INJECTED="$INJECTED $key"; }
+          done < <(bash scripts/skill_requires.sh "$SKILL_NAME" 2>/dev/null)
+          [ -n "$INJECTED" ] && echo "::notice::Injected declared secrets for ${SKILL_NAME}:${INJECTED}"
+
           unset ALL_SECRETS   # drop the secrets blob before any skill/Claude code runs
 
           SKILL_NAME="${{ steps.skill.outputs.name }}"
           VAR="$SKILL_VAR"
 
-          # Build prompt — inject chain context if running as part of a chain
-          CHAIN_CTX="${{ inputs.chain_context_file }}"
+          # Build prompt — inject chain context if running as part of a chain.
+          # env-bound (passed via env:, not expanded into this run: block) +
+          # path-contained: the context file
+          # must be a chain-runner artifact under output/.chains/, never an
+          # arbitrary path — otherwise cat would read any file on the runner (e.g.
+          # /proc/self/environ, secrets) into the prompt/logs. (GHSA-cqvj-gr78-24mc)
+          CHAIN_CTX="$INPUT_CHAIN_CTX"
+          if [ -n "$CHAIN_CTX" ]; then
+            case "$CHAIN_CTX" in
+              *..*) echo "::error::chain_context_file must not contain '..'"; exit 1 ;;
+            esac
+            case "$CHAIN_CTX" in
+              output/.chains/*) : ;;
+              *) echo "::error::chain_context_file must be under output/.chains/"; exit 1 ;;
+            esac
+          fi
           if [ -n "$CHAIN_CTX" ] && [ -f "$CHAIN_CTX" ]; then
             CONTEXT=$(cat "$CHAIN_CTX")
             PROMPT="Today is $TODAY.
@@ -546,37 +542,65 @@ jobs:
           Use this variable (override the default in the skill file):
           var=$VAR"
           fi
-          # Cascade: try each provider in priority order; on ANY failure fall over
-          # to the next. Each attempt runs in a subshell so provider setup (env +
-          # any claude-code-router sidecar) is isolated and torn down on exit. The
-          # gateway script's notices go to stderr (>&2) so only Claude's JSON is captured.
+          # Harness split: the grok path is a single guarded branch; the entire
+          # claude cascade below is unchanged. Both set CLAUDE_OUTPUT to a JSON
+          # envelope with .result / .usage.*, so everything downstream is shared.
           CLAUDE_OK=0
-          USED_GATEWAY=""
-          for cand in $CANDIDATES; do
-            echo "::notice::Routing attempt via '$cand'"
-            # No `set -e` here: the gateway script signals a hard setup failure with
-            # an explicit `exit 1` (which exits this subshell → fall over), and on
-            # success the subshell's status is Claude's own exit code. A benign
-            # non-zero from a trailing test in the gateway script is harmless — we
-            # only fall over on an explicit exit or a failed Claude call.
+          if [ "$HARNESS" = "grok" ]; then
+            # --- Grok Build harness ---
+            # run-grok.sh installs/pins the grok CLI, restores the X-account OAuth
+            # session (or uses XAI_API_KEY), maps SKILL_MODE to grok's permission
+            # flags, discovers .mcp.json natively + allows its tools, runs `grok -p`,
+            # and emits the SAME normalized JSON envelope Claude Code's
+            # --output-format json produces. Its stdout is the JSON; diagnostics go
+            # to stderr (the step log), so capture stdout only.
+            # Opt-in per-skill run knobs (effort/max_turns/best_of_n/verify) come
+            # from SKILL.md frontmatter → GROK_* env for run-grok.sh to map to flags.
+            eval "$(bash "${GITHUB_WORKSPACE}/scripts/skill_mode.sh" grok-run-env "$SKILL_NAME")"
             if CLAUDE_OUTPUT=$(
-              GATEWAY="$cand"
-              MODEL="$BASE_MODEL"
-              source "$GW" >&2
-              echo "$PROMPT" | claude -p - --model "$MODEL" --allowedTools "$ALLOWED" "${MCP_FLAGS[@]}" --output-format json 2>&1
+              export MODEL="$BASE_MODEL" SKILL_MODE
+              echo "$PROMPT" | bash "${GITHUB_WORKSPACE}/scripts/run-grok.sh"
             ); then
-              USED_GATEWAY="$cand"; CLAUDE_OK=1; break
+              CLAUDE_OK=1
             fi
-            echo "::warning::provider '$cand' failed — $(printf '%s' "$CLAUDE_OUTPUT" | tail -c 160 | tr '\n' ' ')"
-          done
-          if [ "$CLAUDE_OK" != "1" ]; then
-            echo "::error::All gateway providers failed ($CANDIDATES). Last output: $CLAUDE_OUTPUT"
-            # Save error signature for quality tracking (cron-state step reads this)
-            echo "$CLAUDE_OUTPUT" | tail -c 500 | tr '\n' ' ' | cut -c1-200 > /tmp/skill-error.txt
-            exit 1
+            if [ "$CLAUDE_OK" != "1" ]; then
+              echo "::error::grok harness failed. Last output: $(printf '%s' "$CLAUDE_OUTPUT" | tail -c 200 | tr '\n' ' ')"
+              printf '%s' "$CLAUDE_OUTPUT" | tail -c 500 | tr '\n' ' ' | cut -c1-200 > /tmp/skill-error.txt
+              exit 1
+            fi
+          else
+            # Cascade: try each provider in priority order; on ANY failure fall over
+            # to the next. Each attempt runs in a subshell so provider setup (env +
+            # any claude-code-router sidecar) is isolated and torn down on exit. The
+            # gateway script's notices go to stderr (>&2) so only Claude's JSON is captured.
+            USED_GATEWAY=""
+            for cand in $CANDIDATES; do
+              echo "::notice::Routing attempt via '$cand'"
+              # No `set -e` here: the gateway script signals a hard setup failure with
+              # an explicit `exit 1` (which exits this subshell → fall over), and on
+              # success the subshell's status is Claude's own exit code. A benign
+              # non-zero from a trailing test in the gateway script is harmless — we
+              # only fall over on an explicit exit or a failed Claude call.
+              if CLAUDE_OUTPUT=$(
+                GATEWAY="$cand"
+                MODEL="$BASE_MODEL"
+                source "$GW" >&2
+                source "$LF" >&2   # optional Langfuse tracing (no-op unless LANGFUSE_* set)
+                echo "$PROMPT" | claude -p - --model "$MODEL" --allowedTools "$ALLOWED" "${MCP_FLAGS[@]}" --output-format json 2>&1
+              ); then
+                USED_GATEWAY="$cand"; CLAUDE_OK=1; break
+              fi
+              echo "::warning::provider '$cand' failed — $(printf '%s' "$CLAUDE_OUTPUT" | tail -c 160 | tr '\n' ' ')"
+            done
+            if [ "$CLAUDE_OK" != "1" ]; then
+              echo "::error::All gateway providers failed ($CANDIDATES). Last output: $CLAUDE_OUTPUT"
+              # Save error signature for quality tracking (cron-state step reads this)
+              echo "$CLAUDE_OUTPUT" | tail -c 500 | tr '\n' ' ' | cut -c1-200 > /tmp/skill-error.txt
+              exit 1
+            fi
+            [ "$USED_GATEWAY" != "${CANDIDATES%% *}" ] && echo "::notice::Skill ran via fallback provider '$USED_GATEWAY'"
+            echo "GATEWAY=$USED_GATEWAY" >> "$GITHUB_OUTPUT"
           fi
-          [ "$USED_GATEWAY" != "${CANDIDATES%% *}" ] && echo "::notice::Skill ran via fallback provider '$USED_GATEWAY'"
-          echo "GATEWAY=$USED_GATEWAY" >> "$GITHUB_OUTPUT"
 
           # Extract and print the text result so logs still show skill output
           RESULT_TEXT=$(echo "$CLAUDE_OUTPUT" | jq -r '.result // empty')
@@ -596,6 +620,10 @@ jobs:
           echo "SKILL_CACHE_READ_TOKENS=$CACHE_READ" >> "$GITHUB_OUTPUT"
           echo "SKILL_CACHE_CREATION_TOKENS=$CACHE_CREATION" >> "$GITHUB_OUTPUT"
           echo "SKILL_TOTAL_TOKENS=$TOTAL_TOKENS" >> "$GITHUB_OUTPUT"
+          # Session id → lets the post-run "Under the hood" step locate this run's
+          # transcript (~/.claude/projects/*/<id>.jsonl) and tally tool actions.
+          # Empty on the grok harness (no Claude transcript) — the step then no-ops.
+          echo "SESSION_ID=$(echo "$CLAUDE_OUTPUT" | jq -r '.session_id // empty')" >> "$GITHUB_OUTPUT"
 
           echo "::notice::Token usage — input: $INPUT_TOKENS, output: $OUTPUT_TOKENS, cache_read: $CACHE_READ, cache_creation: $CACHE_CREATION, total: $TOTAL_TOKENS"
 
@@ -663,6 +691,24 @@ jobs:
           echo "| Cache creation | $CACHE_CREATION |" >> "$GITHUB_STEP_SUMMARY"
           echo "| **Total** | **$TOTAL** |" >> "$GITHUB_STEP_SUMMARY"
 
+      # "Under the hood" — tally the tool actions Claude actually took this run
+      # (Read/Edit/Grep/Bash + network/exec breakdown), from its session transcript.
+      # Renders a table into the Actions run summary and appends a one-line footer to
+      # today's memory log so the record lives in git. Never fails the run.
+      - name: Under the hood (tool actions)
+        if: steps.work.outputs.mode != '' && steps.run.outcome == 'success' && steps.run.outputs.SESSION_ID != ''
+        env:
+          SESSION_ID: ${{ steps.run.outputs.SESSION_ID }}
+          SKILL_NAME: ${{ steps.skill.outputs.name }}
+        run: |
+          bash scripts/run-actions-summary.sh --md "" "$SESSION_ID" >> "$GITHUB_STEP_SUMMARY" || true
+          LINE=$(bash scripts/run-actions-summary.sh --line "" "$SESSION_ID" || true)
+          if [ -n "$LINE" ]; then
+            echo "::notice::$LINE"
+            TODAY=$(date -u +%Y-%m-%d); mkdir -p memory/logs
+            printf '\n### %s — under the hood\n- %s\n' "$SKILL_NAME" "$LINE" >> "memory/logs/${TODAY}.md"
+          fi
+
       - name: Track token costs
         if: steps.work.outputs.mode != '' && steps.run.outcome == 'success'
         run: |
@@ -677,17 +723,116 @@ jobs:
         if: steps.work.outputs.mode != '' && steps.run.outcome == 'success'
         run: |
           SKILL="${{ steps.skill.outputs.name }}"
-          mkdir -p .outputs
+          mkdir -p output/.chains
           # Save the notification message as a chain artifact
           PENDING="apps/dashboard/outputs/.pending-${SKILL}.md"
           if [ -f "$PENDING" ]; then
-            cp "$PENDING" ".outputs/${SKILL}.md"
+            cp "$PENDING" "output/.chains/${SKILL}.md"
           elif [ -f /tmp/skill-result.txt ] && [ -s /tmp/skill-result.txt ]; then
-            cp /tmp/skill-result.txt ".outputs/${SKILL}.md"
+            cp /tmp/skill-result.txt "output/.chains/${SKILL}.md"
           else
-            echo "_No output captured._" > ".outputs/${SKILL}.md"
+            echo "_No output captured._" > "output/.chains/${SKILL}.md"
           fi
-          echo "::notice::Skill output captured to .outputs/${SKILL}.md ($(wc -c < ".outputs/${SKILL}.md") bytes)"
+          echo "::notice::Skill output captured to output/.chains/${SKILL}.md ($(wc -c < "output/.chains/${SKILL}.md") bytes)"
+
+      - name: Resolve attestation gate
+        id: attest-gate
+        if: steps.work.outputs.mode != '' && steps.run.outcome == 'success'
+        env:
+          ATTEST_ENABLED: ${{ vars.ATTEST_ENABLED || 'false' }}
+          JSONRENDER_ENABLED: ${{ vars.JSONRENDER_ENABLED || 'true' }}
+          SKILL_NAME: ${{ steps.skill.outputs.name }}
+        run: |
+          set -euo pipefail
+          ATTEST=false
+
+          # Tier 0 — global kill switch (repo var, default OFF so forks opt in).
+          if [ "${ATTEST_ENABLED}" = "true" ]; then
+            SKILL="${SKILL_NAME}"
+
+            # Tier 1 — per-skill override in aeon.yml (operator config, one line,
+            # no skill file touched). Same grep idiom as model:/harness:, but with
+            # ERE alternation (sed -nE) so (true|false) is portable across BSD/GNU sed.
+            SKILL_ATTEST=$(grep "^  ${SKILL}:" aeon.yml \
+              | sed -nE 's/.*attest:[[:space:]]*(true|false).*/\1/p' || true)
+
+            # Tier 2 — SKILL.md frontmatter (author intent, travels with the skill).
+            FM_ATTEST=$(awk '/^---$/{n++; next}
+              n==1 && /^attest:/{
+                v=$0; sub(/^attest:[ \t]*/,"",v); sub(/[ \t]*#.*$/,"",v);
+                gsub(/^[ \t"]+|[ \t"]+$/,"",v); print v; exit
+              }' "skills/${SKILL}/SKILL.md" 2>/dev/null || true)
+
+            # Tier 3 — default policy: attest runs whose output is PUBLISHED to the
+            # json-render feed (the trust boundary that actually benefits).
+            PUBLISHED=false
+            if [ "${JSONRENDER_ENABLED}" = "true" ] \
+               && [ -f "apps/dashboard/outputs/.pending-${SKILL}.md" ]; then
+              PUBLISHED=true
+            fi
+
+            if [ "$SKILL_ATTEST" = "false" ]; then
+              ATTEST=false                       # explicit operator opt-out wins
+            elif [ "$SKILL_ATTEST" = "true" ] || [ "$FM_ATTEST" = "true" ] \
+                 || [ "$PUBLISHED" = "true" ]; then
+              ATTEST=true
+            fi
+          fi
+
+          echo "attest=$ATTEST" >> "$GITHUB_OUTPUT"
+          echo "::notice::attestation gate for ${SKILL_NAME}: attest=$ATTEST"
+
+      - name: Build run manifest
+        id: manifest
+        if: steps.attest-gate.outputs.attest == 'true'
+        env:
+          SKILL_NAME: ${{ steps.skill.outputs.name }}
+          SKILL_MODEL: ${{ steps.run.outputs.SKILL_MODEL }}
+        run: |
+          set -euo pipefail
+          # Attest an IMMUTABLE, run-scoped snapshot — never the shared
+          # output/.chains/${SKILL}.md. That shared path is rewritten by concurrent
+          # runs and the commit step's conflict resolver marker-strips output/* on a
+          # rebase conflict, so its committed bytes can differ from what we attest
+          # (breaking `gh attestation verify`). A ${GITHUB_RUN_ID}-scoped path is
+          # unique to this run: no other run touches it, so committed == attested.
+          SKILL="${SKILL_NAME}"
+          SRC="output/.chains/${SKILL}.md"
+          MODE="$(bash scripts/skill_mode.sh mode "$SKILL")"
+          DIGEST="$(sha256sum "$SRC" | cut -d' ' -f1)"
+          mkdir -p output/.attest
+          SNAPSHOT="output/.attest/${SKILL}-${GITHUB_RUN_ID}.md"
+          MANIFEST="output/.attest/${SKILL}-${GITHUB_RUN_ID}.json"
+          cp "$SRC" "$SNAPSHOT"
+          jq -n \
+            --arg skill   "$SKILL" \
+            --arg model   "$SKILL_MODEL" \
+            --arg mode    "$MODE" \
+            --arg trigger "${GITHUB_EVENT_NAME:-}" \
+            --arg commit  "${GITHUB_SHA:-}" \
+            --arg run_id  "${GITHUB_RUN_ID:-}" \
+            --arg path    "$SNAPSHOT" \
+            --arg sha     "$DIGEST" \
+            '{skill:$skill, model:$model, mode:$mode, trigger:$trigger,
+              commit:$commit, run_id:$run_id,
+              output:{path:$path, sha256:$sha}}' > "$MANIFEST"
+          echo "snapshot=$SNAPSHOT" >> "$GITHUB_OUTPUT"
+          echo "manifest=$MANIFEST" >> "$GITHUB_OUTPUT"
+          echo "::notice::run manifest for ${SKILL}: model=${SKILL_MODEL} mode=${MODE} snapshot=${SNAPSHOT} sha256=${DIGEST}"
+
+      - name: Attest skill execution
+        if: steps.attest-gate.outputs.attest == 'true'
+        # Pinned to the current major per this repo's supply-chain convention
+        # (checkout@v7, setup-node@v6). Latest major confirmed at:
+        # https://github.com/actions/attest-build-provenance/releases
+        # Multi-subject: one attestation over both run-scoped artifacts (the output
+        # snapshot and its manifest). Both paths are ${GITHUB_RUN_ID}-unique, so the
+        # committed bytes always match what was attested.
+        uses: actions/attest-build-provenance@v4
+        with:
+          subject-path: |
+            ${{ steps.manifest.outputs.snapshot }}
+            ${{ steps.manifest.outputs.manifest }}
 
       - name: Analyze skill output
         id: analyze
@@ -701,6 +846,8 @@ jobs:
           USEPOD_TOKEN: ${{ secrets.USEPOD_TOKEN }}
           VENICE_API_KEY: ${{ secrets.VENICE_API_KEY }}
           SURPLUS_API_KEY: ${{ secrets.SURPLUS_API_KEY }}
+          XAI_API_KEY: ${{ secrets.XAI_API_KEY }}   # grok scorer: API-key auth path
+          GROK_CREDENTIALS: ${{ secrets.GROK_CREDENTIALS }}   # grok scorer: X-account OAuth (restored by run-grok.sh)
           OPENROUTER_MODEL: ${{ vars.OPENROUTER_MODEL }}
           OPENROUTER_MODEL_SONNET: ${{ vars.OPENROUTER_MODEL_SONNET }}
           OPENROUTER_MODEL_HAIKU: ${{ vars.OPENROUTER_MODEL_HAIKU }}
@@ -708,18 +855,31 @@ jobs:
           USEPOD_MODEL_SONNET: ${{ vars.USEPOD_MODEL_SONNET }}
           USEPOD_MODEL_HAIKU: ${{ vars.USEPOD_MODEL_HAIKU }}
           VENICE_MODEL: ${{ vars.VENICE_MODEL }}
+          VENICE_BASE_URL: ${{ vars.VENICE_BASE_URL }}
           VENICE_CLEANCACHE: ${{ vars.VENICE_CLEANCACHE }}
           SURPLUS_MODEL: ${{ vars.SURPLUS_MODEL }}
           CCR_LOG: ${{ vars.CCR_LOG }}
+          LANGFUSE_PUBLIC_KEY: ${{ secrets.LANGFUSE_PUBLIC_KEY }}
+          LANGFUSE_SECRET_KEY: ${{ secrets.LANGFUSE_SECRET_KEY }}
+          LANGFUSE_HOST: ${{ vars.LANGFUSE_HOST }}
+          LANGFUSE_TRACING: ${{ vars.LANGFUSE_TRACING }}
+          LANGFUSE_LOG_CONTENT: ${{ vars.LANGFUSE_LOG_CONTENT }}
         run: |
           SKILL="${{ steps.skill.outputs.name }}"
 
           # Skip analysis for meta skills (they don't produce scorable output)
           case "$SKILL" in heartbeat|skill-health|skill-analytics|reflect|memory-flush|self-review|cost-report) echo "Skipping analysis for meta skill"; exit 0;; esac
 
-          # Route through gateway if configured
-          GATEWAY="${{ steps.run.outputs.GATEWAY }}"
-          source "${GITHUB_WORKSPACE}/scripts/llm-gateway.sh"
+          HARNESS="${{ steps.run.outputs.HARNESS }}"
+          # Route the scorer's claude call through the gateway (claude harness only).
+          # On grok we score via run-grok.sh below and don't touch the gateway, so
+          # skip the source entirely — otherwise it prints "Using direct Anthropic
+          # API" noise on a grok-only repo.
+          if [ "$HARNESS" != "grok" ]; then
+            GATEWAY="${{ steps.run.outputs.GATEWAY }}"
+            source "${GITHUB_WORKSPACE}/scripts/llm-gateway.sh"
+            AEON_OTEL_COMPONENT=scorer source "${GITHUB_WORKSPACE}/scripts/langfuse-otel.sh"
+          fi
 
           # Read and truncate skill output for analysis
           OUTPUT=""
@@ -746,7 +906,22 @@ jobs:
           JSON format: {\"score\": N, \"assessment\": \"one line\", \"flags\": []}"
 
           SCORE_MODEL="${ANTHROPIC_DEFAULT_HAIKU_MODEL:-claude-haiku-4-5-20251001}"
-          if ! RAW=$(echo "$ANALYSIS_PROMPT" | claude -p - \
+          if [ "$HARNESS" = "grok" ]; then
+            # Score through the SAME harness the skill ran on. A grok-only repo has
+            # no Claude credentials, so `claude -p` would just print "Not logged in";
+            # run-grok.sh reuses the run's X-account/API-key auth and emits the same
+            # {result,usage} envelope. MODEL= → grok's default (grok-composer-2.5-fast,
+            # the only grok model that completes in CI). Its notices go to stderr.
+            # NB: we deliberately do NOT pass grok's --json-schema here — composer
+            # doesn't populate structured output (it leaves .structuredOutput null),
+            # and the ANALYSIS_PROMPT already asks for a {score,assessment,flags}
+            # object, so the robust parse below handles composer's JSON text fine.
+            if ! RAW=$(echo "$ANALYSIS_PROMPT" | MODEL= SKILL_MODE=read-only \
+                bash "${GITHUB_WORKSPACE}/scripts/run-grok.sh" 2>/dev/null); then
+              echo "::notice::Skill scoring skipped — grok scorer unavailable (non-fatal)"
+              exit 0
+            fi
+          elif ! RAW=$(echo "$ANALYSIS_PROMPT" | claude -p - \
             --model "$SCORE_MODEL" --output-format json 2>&1); then
             echo "::warning::Skill analysis failed (non-fatal). Raw: $(printf '%s' "$RAW" | head -c 800 | tr '\n' ' ')"
             exit 0
@@ -757,13 +932,14 @@ jobs:
           # this call (seen twice on OpenRouter's haiku slug, while its opus
           # slug always returns text). Retry once on the run's main model —
           # llm-gateway.sh only sets MODEL here when the gateway remaps it.
-          if [ -z "$ANALYSIS_TEXT" ] && [ -n "${MODEL:-}" ] && [ "$MODEL" != "$SCORE_MODEL" ]; then
+          # (claude harness only; grok already used its default.)
+          if [ "$HARNESS" != "grok" ] && [ -z "$ANALYSIS_TEXT" ] && [ -n "${MODEL:-}" ] && [ "$MODEL" != "$SCORE_MODEL" ]; then
             echo "::warning::Empty analysis result from ${SCORE_MODEL} — retrying with ${MODEL}. Raw: $(printf '%s' "$RAW" | head -c 800 | tr '\n' ' ')"
             if RAW=$(echo "$ANALYSIS_PROMPT" | claude -p - --model "$MODEL" --output-format json 2>&1); then
               ANALYSIS_TEXT=$(echo "$RAW" | jq -r '.result // empty')
             fi
           fi
-          if [ -z "$ANALYSIS_TEXT" ]; then echo "::warning::Empty analysis result. Raw: $(printf '%s' "$RAW" | head -c 800 | tr '\n' ' ')"; exit 0; fi
+          if [ -z "$ANALYSIS_TEXT" ]; then echo "::notice::Empty analysis result — skipping score (non-fatal)."; exit 0; fi
 
           # Parse score: accept raw JSON, else strip code fences, flatten newlines,
           # and grab the outermost {…} object — handles fenced / multi-line output
@@ -788,6 +964,7 @@ jobs:
           fi
 
           echo "QUALITY_SCORE=$SCORE" >> "$GITHUB_OUTPUT"
+          echo "FLAGS=$FLAGS" >> "$GITHUB_OUTPUT"   # consumed by the votable-health step (§7)
 
           # Write skill health file with rolling history
           mkdir -p memory/skill-health
@@ -816,7 +993,10 @@ jobs:
           echo "::notice::Skill quality — $SKILL: score=$SCORE, avg=$AVG — $ASSESSMENT"
 
       - name: Convert feed outputs
-        if: steps.work.outputs.mode != '' && vars.JSONRENDER_ENABLED != 'false'
+        # Skipped on the grok harness: notify-jsonrender renders via `claude -p`, so
+        # on a grok-only repo (no Claude auth) it can only no-op with noise. The
+        # jsonrender feed is a Claude-Code-side feature.
+        if: steps.work.outputs.mode != '' && vars.JSONRENDER_ENABLED != 'false' && steps.run.outputs.HARNESS != 'grok'
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
@@ -833,14 +1013,21 @@ jobs:
           USEPOD_MODEL_SONNET: ${{ vars.USEPOD_MODEL_SONNET }}
           USEPOD_MODEL_HAIKU: ${{ vars.USEPOD_MODEL_HAIKU }}
           VENICE_MODEL: ${{ vars.VENICE_MODEL }}
+          VENICE_BASE_URL: ${{ vars.VENICE_BASE_URL }}
           VENICE_CLEANCACHE: ${{ vars.VENICE_CLEANCACHE }}
           SURPLUS_MODEL: ${{ vars.SURPLUS_MODEL }}
           CCR_LOG: ${{ vars.CCR_LOG }}
+          LANGFUSE_PUBLIC_KEY: ${{ secrets.LANGFUSE_PUBLIC_KEY }}
+          LANGFUSE_SECRET_KEY: ${{ secrets.LANGFUSE_SECRET_KEY }}
+          LANGFUSE_HOST: ${{ vars.LANGFUSE_HOST }}
+          LANGFUSE_TRACING: ${{ vars.LANGFUSE_TRACING }}
+          LANGFUSE_LOG_CONTENT: ${{ vars.LANGFUSE_LOG_CONTENT }}
         run: |
           # GATEWAY may be empty when the Run step failed early — the script
           # treats that as `direct`, matching the old inline behavior.
           GATEWAY="${{ steps.run.outputs.GATEWAY }}"
           source "${GITHUB_WORKSPACE}/scripts/llm-gateway.sh"
+          AEON_OTEL_COMPONENT=feed source "${GITHUB_WORKSPACE}/scripts/langfuse-otel.sh"
           for pending in apps/dashboard/outputs/.pending-*.md; do
             [ -f "$pending" ] || continue
             SKILL=$(basename "$pending" .md | sed 's/^\.pending-//')
@@ -871,7 +1058,7 @@ jobs:
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-          SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           NOTIFY_EMAIL_TO: ${{ secrets.NOTIFY_EMAIL_TO }}
           NOTIFY_EMAIL_FROM: ${{ vars.NOTIFY_EMAIL_FROM || 'aeon@notifications.aeon.bot' }}
           NOTIFY_EMAIL_SUBJECT_PREFIX: ${{ vars.NOTIFY_EMAIL_SUBJECT_PREFIX || '[Aeon]' }}
@@ -931,44 +1118,54 @@ jobs:
                 -H "Content-Type: application/json" \
                 -d "$(jq -n --arg text "$MSG" '{text: $text}')" > /dev/null 2>&1 || true
             fi
+            # Email (Resend) — same key as the vuln-disclosure sender
+            if [ -n "${RESEND_API_KEY:-}" ] && [ -n "${NOTIFY_EMAIL_TO:-}" ]; then
+              EMAIL_FROM="${NOTIFY_EMAIL_FROM:-aeon@notifications.aeon.bot}"
+              EMAIL_SUBJECT="${NOTIFY_EMAIL_SUBJECT_PREFIX:-[Aeon]} ${SKILL_NAME:-notification}"
+              EMAIL_HTML=$(printf '%s' "$MSG" | sed 's/&/\&amp;/g; s/</\&lt;/g; s/>/\&gt;/g')
+              EMAIL_HTML="<html><body><pre style=\"font-family:monospace;white-space:pre-wrap;\">${EMAIL_HTML}</pre></body></html>"
+              curl -sf -X POST "https://api.resend.com/emails" \
+                -H "Authorization: Bearer ${RESEND_API_KEY}" \
+                -H "Content-Type: application/json" \
+                -d "$(jq -n --arg from "$EMAIL_FROM" --arg to "$NOTIFY_EMAIL_TO" --arg subject "$EMAIL_SUBJECT" \
+                      --arg html "$EMAIL_HTML" --arg text "$MSG" \
+                      '{from:$from, to:[$to], subject:$subject, html:$html, text:$text}')" > /dev/null 2>&1 || true
+            fi
           done
           rm -rf .pending-notify
 
-      - name: Run post-process scripts
-        if: steps.work.outputs.mode != '' && steps.run.outcome == 'success'
-        env:
-          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
-          RESEND_FROM: ${{ secrets.RESEND_FROM }}
-          RESEND_REPLY_TO: ${{ secrets.RESEND_REPLY_TO }}
-          RESEND_CC: ${{ vars.RESEND_CC }}
-          DISCLOSURE_EMAIL_PAUSED: ${{ vars.DISCLOSURE_EMAIL_PAUSED }}
-          DISCLOSURE_EMAIL_MAX_PER_RUN: ${{ vars.DISCLOSURE_EMAIL_MAX_PER_RUN }}
-          DISCLOSURE_EMAIL_DAILY_CAP: ${{ vars.DISCLOSURE_EMAIL_DAILY_CAP }}
-          DISCLOSURE_EMAIL_MAX_ATTEMPTS: ${{ vars.DISCLOSURE_EMAIL_MAX_ATTEMPTS }}
-          DISCLOSURE_EMAIL_COOLDOWN_DAYS: ${{ vars.DISCLOSURE_EMAIL_COOLDOWN_DAYS }}
-          XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-          REPLICATE_API_TOKEN: ${{ secrets.REPLICATE_API_TOKEN }}
-          DEVTO_API_KEY: ${{ secrets.DEVTO_API_KEY }}
-          NEYNAR_API_KEY: ${{ secrets.NEYNAR_API_KEY }}
-          NEYNAR_SIGNER_UUID: ${{ secrets.NEYNAR_SIGNER_UUID }}
+      - name: Read-only capability guard
+        if: steps.work.outputs.mode != '' && env.SKILL_MODE == 'read-only'
         run: |
-          # Run all scripts/postprocess-*.sh after Claude finishes.
-          # Each script handles its own .pending-{service}/ directory
-          # and checks its own env vars. Exit 0 if nothing to do.
-          for script in scripts/postprocess-*.sh; do
-            [ -f "$script" ] || continue
-            chmod +x "$script"
-            echo "Running $(basename "$script")..."
-            ./"$script" || echo "::notice::$(basename "$script") failed (non-fatal)"
-          done
+          # read-only skills (mode: read-only) get no Write/Edit/git/gh, so they can't
+          # mutate the repo. Two jobs here: (1) record the run-log entry on their behalf
+          # (they couldn't), (2) revert any code/config that slipped through a shell
+          # redirection. State/memory and output/ (incl. .chains/) are preserved for the commit step.
+          SKILL="${{ steps.skill.outputs.name }}"
+          TODAY=$(date -u +%Y-%m-%d)
+          mkdir -p memory/logs
+          printf '\n## %s (read-only)\nRan %s UTC.\n' "$SKILL" "$(date -u +%FT%TZ)" >> "memory/logs/${TODAY}.md"
+          CODE_PATHS="skills .github apps/mcp-server apps/webhook apps/dashboard/app apps/dashboard/lib apps/dashboard/components scripts docs catalog bin *.md *.json *.yml aeon"
+          git checkout -- $CODE_PATHS 2>/dev/null || true
+          git clean -fd -- skills scripts docs .github bin catalog 2>/dev/null || true
+          echo "read-only guard: logged run + reverted code/config writes for $SKILL"
 
       - name: Commit results
         if: steps.work.outputs.mode != ''
+        env:
+          STATE_BACKEND: ${{ vars.STATE_BACKEND }}
         run: |
           git config user.name "aeonframework"
           git config user.email "aeonframework@proton.me"
-          rm -f ./notify .notify-sent-hashes  # Remove generated notify script + dedup log before committing
+          rm -f ./notify ./notify-jsonrender .notify-sent-hashes  # Remove generated notify scripts + dedup log before committing
+
+          # Issues-as-state (hardening §3): cron-state.json was materialized from the
+          # pinned Issue for this run's readers — it's a projection, not source of truth.
+          # Drop the working-tree change so it isn't committed (that churn is exactly
+          # what the Issues backend exists to avoid). No-op when STATE_BACKEND is unset.
+          if [ "${STATE_BACKEND:-}" = "issues" ]; then
+            git checkout -- memory/cron-state.json 2>/dev/null || rm -f memory/cron-state.json
+          fi
 
           CURRENT_BRANCH=$(git branch --show-current)
           LABEL="${{ steps.work.outputs.label }}"
@@ -980,9 +1177,19 @@ jobs:
             git diff --staged --quiet || git commit -m "chore($LABEL): auto-commit $(date +%Y-%m-%d)"
             git push --force-with-lease -u origin "$CURRENT_BRANCH" || true
 
-            # Switch back to main and cherry-pick memory/log changes if any
-            git checkout main
-            git pull --rebase origin main || true
+            # Switch back to main to record memory/log changes. main is only
+            # guaranteed present when the run STARTED on main (the normal
+            # scheduled / Run-now path). A run dispatched against a non-main ref
+            # gets a single-branch checkout with no local main, so `checkout main`
+            # would fail the step under `set -e` (and a blind rebase would
+            # conflict). The feature branch is already pushed above — just stop.
+            if git show-ref --verify --quiet refs/heads/main; then
+              git checkout main
+              git pull --rebase origin main || true
+            else
+              echo "main not present locally (non-main dispatch) — feature branch pushed, nothing to record on main"
+              exit 0
+            fi
           fi
 
           # Commit any remaining changes on main
@@ -1006,7 +1213,7 @@ jobs:
                 CONFLICTED=$(git diff --name-only --diff-filter=U) || true
                 [ -z "$CONFLICTED" ] && break
                 for f in $CONFLICTED; do
-                  if [[ "$f" == memory/logs/* ]] || [[ "$f" == memory/topics/* ]] || [[ "$f" == memory/MEMORY.md ]] || [[ "$f" == memory/skill-health/* ]] || [[ "$f" == apps/dashboard/outputs/* ]] || [[ "$f" == .outputs/* ]]; then
+                  if [[ "$f" == memory/logs/* ]] || [[ "$f" == memory/topics/* ]] || [[ "$f" == memory/MEMORY.md ]] || [[ "$f" == memory/skill-health/* ]] || [[ "$f" == apps/dashboard/outputs/* ]] || [[ "$f" == output/* ]]; then
                     sed -i '/^<<<<<<< /d; /^=======/d; /^>>>>>>> /d' "$f"
                     git add "$f"
                   else
@@ -1034,6 +1241,9 @@ jobs:
 
       - name: Update cron state
         if: always() && steps.skill.outputs.name != ''
+        env:
+          STATE_BACKEND: ${{ vars.STATE_BACKEND }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           SKILL="${{ steps.skill.outputs.name }}"
           RUN_OUTCOME="${{ steps.run.outcome }}"
@@ -1052,6 +1262,33 @@ jobs:
           ERROR_SIG=""
           if [ "$CRON_STATUS" = "failed" ] && [ -f /tmp/skill-error.txt ]; then
             ERROR_SIG=$(cat /tmp/skill-error.txt)
+          fi
+
+          # Issues-as-state (hardening §3). STATE_BACKEND tri-state:
+          #   file   (DEFAULT) — self-contained: commit cron-state.json only, no Issue
+          #                      writes. Best for fork-and-forget; the debt-model scheduler
+          #                      self-heals the occasional commit race (a lost write just
+          #                      re-fires next tick), so there is no silent-drop risk.
+          #   dual             — opt-in dual-write transition: append the run event to the
+          #                      pinned state Issue AND keep committing the file, building
+          #                      the Issue ledger up so a later `issues` flip is seamless.
+          #   issues           — append + SKIP the file-commit/rebase loop (churn-free).
+          #                      Needs the pre-run materialize; for high-volume operators
+          #                      who also run a ledger-compaction pass.
+          # Append failures never lose data: in dual/issues the file path still records
+          # the run (issues mode only exits early on a SUCCESSFUL append).
+          BACKEND="${STATE_BACKEND:-file}"
+          if [ "$BACKEND" != "file" ]; then
+            EVENT=$(jq -cn --arg s "$SKILL" --arg st "$CRON_STATUS" --arg ts "$NOW_ISO" \
+              --argjson q "${QUALITY_SCORE:-0}" --arg err "$ERROR_SIG" \
+              '{skill:$s,status:$st,ts:$ts,quality_score:$q,error:$err}')
+            ISSUE=$(GH_REPO="$GITHUB_REPOSITORY" bash scripts/state_store.sh ensure "aeon:cron-state" 2>/dev/null || true)
+            if [ -n "$ISSUE" ] && GH_REPO="$GITHUB_REPOSITORY" bash scripts/state_store.sh append "$ISSUE" "$EVENT"; then
+              echo "cron state appended to issue #$ISSUE (backend=$BACKEND)"
+              if [ "$BACKEND" = "issues" ]; then echo "(issues mode: skipping file commit + rebase)"; exit 0; fi
+            else
+              echo "::warning::Issues-as-state append failed (backend=$BACKEND); file path records this run"
+            fi
           fi
 
           # Function: apply quality metrics update to STATE
@@ -1102,7 +1339,15 @@ jobs:
             fi
           }
 
-          # Ensure we're on main with latest
+          # Ensure we're on main with latest. main is only present locally when the
+          # run started on main; a non-main-ref dispatch has a single-branch checkout
+          # with no local main, and rebasing that divergent branch onto origin/main
+          # leaves unmerged files that break the commit below (exit 128). This step
+          # is non-fatal by design, so skip cleanly when main isn't here.
+          if ! git show-ref --verify --quiet refs/heads/main; then
+            echo "main not present locally (non-main dispatch) — skipping cron-state commit"
+            exit 0
+          fi
           git checkout main 2>/dev/null || true
           git pull --rebase origin main 2>/dev/null || true
 
@@ -1149,3 +1394,35 @@ jobs:
             sleep "$i"
           done
           echo "::warning::Failed to commit cron state (non-fatal)"
+
+      # Votable health Issues (hardening §7) — ON by default; opt out with HEALTH_ISSUES=0.
+      # On a regression (low score / failure flag / failed run) post to the skill's
+      # per-skill health Issue; humans 👍/👎 it to set repair priority. Silent on clean
+      # runs (no Issue spam), so a healthy fleet creates zero issues.
+      - name: Health regression to votable Issue
+        if: always() && steps.skill.outputs.name != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # §7 is default-ON; disable only with repo var HEALTH_ISSUES=0. The toggle is
+          # checked HERE in bash, NOT in the step `if:`. A GitHub Actions `if:` comparison
+          # like `vars.HEALTH_ISSUES != '0'` does numeric coercion, and an UNSET var (null)
+          # coerces to 0 — so `!= '0'` is FALSE when unset, silently skipping the step by
+          # default (the opposite of "default-on"). Bash string comparison has no such trap.
+          if [ "${{ vars.HEALTH_ISSUES }}" = "0" ]; then echo "votable health disabled (HEALTH_ISSUES=0)"; exit 0; fi
+          SKILL="${{ steps.skill.outputs.name }}"
+          SCORE="${{ steps.analyze.outputs.QUALITY_SCORE }}"; [ -z "$SCORE" ] && SCORE=0
+          FLAGS='${{ steps.analyze.outputs.FLAGS }}'; [ -z "$FLAGS" ] && FLAGS='[]'
+          if [ "${{ steps.run.outcome }}" != "success" ]; then SCORE=1; FLAGS='["run_failed"]'; fi
+          REC=$(jq -cn --arg s "$SKILL" --argjson sc "$SCORE" --argjson fl "$FLAGS" '{skill:$s,score:$sc,flags:$fl}')
+          NEEDS=$(printf '%s' "$REC" | python3 -c "import sys,json; sys.path.insert(0,'scripts'); import health_triage as h; print('yes' if h.needs_comment(json.load(sys.stdin)) else 'no')" 2>/dev/null || echo no)
+          if [ "$NEEDS" = "yes" ]; then
+            ISSUE=$(GH_REPO="$GITHUB_REPOSITORY" bash scripts/health_issue.sh ensure "$SKILL" 2>/dev/null || true)
+            if [ -n "$ISSUE" ]; then
+              GH_REPO="$GITHUB_REPOSITORY" bash scripts/health_issue.sh comment "$ISSUE" \
+                "⚠️ Regression — score $SCORE, flags $FLAGS ($(date -u +%FT%TZ)). 👍/👎 to set repair priority." \
+                && echo "health regression -> issue #$ISSUE"
+            fi
+          else
+            echo "no regression for $SKILL; health issue silent"
+          fi

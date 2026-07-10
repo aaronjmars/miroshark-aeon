@@ -1,4 +1,5 @@
 ---
+type: Reference
 name: articles-history
 description: Archived repo-article and project-lens entries rotated out of MEMORY.md Recent Articles table
 metadata:

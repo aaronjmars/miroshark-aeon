@@ -1,26 +1,28 @@
 ---
+type: Skill
 name: Price Alert
-description: Fire when the tracked token does something — new ATH, sharp 1h move, or operator-set target crossed. Silent on normal days.
+category: basics
+description: Fire when the tracked token does something - new ATH, sharp 1h move, or operator-set target crossed. Silent on normal days.
 var: ""
 tags: [crypto]
 ---
-> **${var}** — Optional. Pass one or more `target_price` levels (comma-separated USD numbers, scientific notation allowed) to fire a one-time alert when the price crosses any of them. Empty = only ATH and sharp-move gates run. Pass `dry-run` to skip notify (state still updates).
+> **${var}** — Optional. Pass one or more `target_price` levels (comma-separated USD numbers, scientific notation allowed) to fire a one-time alert when the price crosses any of them. Empty = only ATH and sharp-move gates run. Pass `dry-run` to skip notify (state still updates). Pass `set-target:<price>` — the shape the Telegram force-reply sends (step 7) — to register a target and get a one-line confirmation.
 
-Today is ${today}. `token-report` produces a daily verdict at a fixed hour. `repo-pulse` reports star/fork deltas once a day. Neither tells the operator "the price just hit a new high" or "the token moved 28% in the last hour" — both are events that warrant attention the moment they happen, not 14 hours later in the daily digest. This skill closes that window.
+Today is ${today}. `repo-pulse` reports star/fork deltas once a day, and the other scheduled digests run at fixed hours. None of them tell the operator "the price just hit a new high" or "the token moved 28% in the last hour" — both are events that warrant attention the moment they happen, not 14 hours later in a daily digest. This skill closes that window.
 
 ## Why this exists
 
-The daily token-report is a calm summary. Real moves need real-time signal. Three classes of move are worth a same-day ping:
+Scheduled daily digests are calm summaries. Real moves need real-time signal. Three classes of move are worth a same-day ping:
 - **New all-time high.** The single most narrative-shaping price event a token can have. Worth marking on the timeline regardless of size.
 - **Sharp 1h moves (±20%).** Either a buyer wave or a liquidation cascade — both change what the operator does next (post about it, watch for follow-through, check the chart).
 - **Operator-set target crossings.** The operator may want to know when price clears $X (often a personal stretch goal or a level tied to a tweet/launch). One alert per target per direction.
 
-Everything else is noise the daily report handles.
+Everything else is noise not worth a same-day ping.
 
 ## Config
 
 Reads:
-- `memory/MEMORY.md` "Tracked Token" section — same contract/chain the token-report skill uses. If absent, exit silently.
+- `memory/MEMORY.md` "Tracked Token" section — the tracked token's contract/chain. If absent, exit silently.
 - `memory/topics/price-alert-state.json` — last-known ATH, last-alert timestamps per event type, target-crossing history. Created with defaults on first run.
 
 Writes:
@@ -28,7 +30,7 @@ Writes:
 - `memory/logs/${today}.md` — one log block per run, even on `OK`.
 - Notification via `./notify` — only when a gate fires.
 
-No new secrets. Uses keyless DexScreener; falls back to WebFetch when curl is sandbox-blocked.
+No new secrets. Uses keyless DexScreener; falls back to WebFetch when a public `curl` GET is flaky (there is no network sandbox).
 
 ## State schema
 
@@ -67,11 +69,12 @@ Key invariants:
 
 ### 1. Parse var
 
-- If `${var}` matches `^dry-run` → `MODE=dry-run`. Strip the prefix; remainder (if any) is treated as targets.
+- If `${var}` starts with `set-target:` → set `FROM_REPLY=1`, `MODE=execute`. Strip the `set-target:` prefix (`${var#set-target:}`); the remainder is the target(s) list, parsed exactly like the comma-split below. This is the shape `scripts/telegram-route.sh` sends when the operator replies to the step-7 force-reply prompt. The run proceeds normally (register the target, don't fire on first observation) and closes the loop with a confirmation in step 7.
+- Else if `${var}` matches `^dry-run` → `MODE=dry-run`. Strip the prefix; remainder (if any) is treated as targets.
 - Otherwise `MODE=execute`.
 - Split the remainder on `,` (commas) and strip whitespace.
 - For each token: if it parses as a positive float (scientific notation OK, e.g. `5e-6`), include it. Reject zero / negative / non-numeric tokens and log `PRICE_ALERT_BAD_TARGET: ${token}` — continue with the surviving targets.
-- If after filtering the remainder was non-empty but yielded zero valid targets → log `PRICE_ALERT_BAD_VAR: ${var}` and exit (no notify).
+- If after filtering the remainder was non-empty but yielded zero valid targets → log `PRICE_ALERT_BAD_VAR: ${var}` and exit. Normally no notify — **but if `FROM_REPLY=1`**, first close the loop with `./notify "Couldn't read \"${var#set-target:}\" as a price. Reply with a number like 0.000005."` (a force-reply always deserves an acknowledgement).
 - If the remainder was empty, `TARGETS=()` is fine — ATH and sharp-move gates still run.
 
 ### 2. Resolve tracked token
@@ -193,6 +196,29 @@ If `MODE == dry-run`: build the messages, log the planned notifications, but ski
 
 Cap each message at ~2500 chars; price-alert messages are short by nature and shouldn't approach this.
 
+#### Send the alert
+
+Build each firing gate's message to a file and send it with `./notify -f alert.md` (one send per
+gate). State still advances even on a deduped run, so the dedup clocks stay correct.
+
+#### Set-a-target follow-up (force-reply)
+
+Buttons and force_reply can't share one message, so this is a **separate** send. After a genuine
+**ATH** alert (post-baseline, not a deduped repeat), and only when no un-hit operator target
+currently sits above `CURRENT_PRICE` (don't nag operators who already queued one), offer to capture
+the next level:
+
+```bash
+./notify "New high — want an alert when $SYMBOL clears a level above this? Reply with a price." \
+  --force-reply --placeholder "e.g. 0.000005" \
+  --context "price-alert::set-target"
+```
+
+The reply routes back as `var=set-target:<price>` (handled in step 1). On that run, once the target
+is registered (step 6, first-observation — no cross alert), close the loop with a one-line
+confirmation: `./notify "Target set: \$<price> for $SYMBOL — I'll alert you when it crosses."`
+(Send it only when a *new* target was actually registered this run.)
+
 ### 8. Persist state
 
 Rewrite `memory/topics/price-alert-state.json` atomically:
@@ -249,9 +275,9 @@ The status field carries the *highest-priority* gate fired this run, or the most
 | `PRICE_ALERT_BAD_VAR` | `${var}` had non-empty, non-`dry-run` text but yielded zero valid targets | No |
 | `PRICE_ALERT_STATE_CORRUPT` | jq validation failed after write; restored from `.bak` | No |
 
-## Sandbox note
+## Network note
 
-DexScreener is keyless and public — curl works in unrestricted runners. The sandbox may block outbound curl on GitHub Actions; in that case the **WebFetch fallback** kicks in (built-in Claude tool, sandbox-safe, prompt: `"Return the raw JSON body verbatim."`). No prefetch script needed: there's no env-var-in-headers, and the URL doesn't change between runs. Notify uses the postprocess-notify pattern already wired up via `./notify`.
+DexScreener is keyless and public — `curl` works; there is no network sandbox. If a public `curl` GET is flaky, the **WebFetch fallback** kicks in (built-in Claude tool, prompt: `"Return the raw JSON body verbatim."`). There's no auth header, and the URL doesn't change between runs. Notify goes through `./notify`, which stages to `.pending-notify/`; the workflow re-delivers any messages that failed to send after the run — no extra script needed.
 
 ## Constraints
 
@@ -262,5 +288,5 @@ DexScreener is keyless and public — curl works in unrestricted runners. The sa
 - **Liquid-pool selection only.** The deepest-liquidity pair on the configured chain wins. Don't compute prices from blended pool averages — the deepest pool's `priceUsd` is the canonical mark.
 - **State writes are atomic + validated.** Every state write goes through a tmpfile + `jq empty` validation step. Corrupt writes restore from `.bak`.
 - **Read-only across `memory/logs/`.** This skill never modifies past log files. It only appends to today's.
-- **Targets are absolute USD, not percentages.** This avoids ambiguity ("20% from where?"). If operators want move-from-now alerts they have token-report and the sharp-move gate.
+- **Targets are absolute USD, not percentages.** This avoids ambiguity ("20% from where?"). If operators want move-from-now alerts they have the sharp-move gate.
 - **Idempotent under same-minute reruns.** Same-minute reruns with identical price input produce identical state and zero new notifications (every gate dedup-suppressed).

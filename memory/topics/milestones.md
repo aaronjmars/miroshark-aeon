@@ -1,3 +1,6 @@
+---
+type: Reference
+---
 # Star Milestones
 
 ## aaronjmars/MiroShark

@@ -1,3 +1,6 @@
+---
+type: Reference
+---
 # Pre-Existing Features
 
 Ideas that the `repo-actions` skill should NOT regenerate because they have been verified as **already shipped** on the watched repo (under a different name, path, or surface). Sibling registry to `blocked-features.md` — that one is for architecturally-blocked ideas; this one is for ideas where the work is already done.

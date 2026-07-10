@@ -1,7 +1,8 @@
 ---
+type: Skill
 name: CTRL
 category: crypto
-description: Build on-chain automation workflows on Base via CTRL. Use for recurring or triggered actions — DCA, price-gated swaps, launchpad sniping, whale-follow — that should run autonomously after a single wallet signature. The wallet signs once (EIP-5792 batch), and the CTRL keeper executes every trigger after, bounded by per-swap and per-day caps the user pre-authorized.
+description: Build on-chain automation on Base via CTRL - DCA, price-gated swaps, launchpad sniping, or whale-follow that run autonomously after one EIP-5792 wallet signature, bounded by preset caps.
 var: ""
 tags: [crypto, automation, base, defi]
 capabilities: [external_api, writes_external_host, onchain_writes, sends_notifications]
@@ -204,7 +205,7 @@ Notify the user with the returned `signUrl` — they sign one transaction and th
 
 This skill uses CTRL's **anonymous REST API** (`/api/mcp/*`, no key) — the canonical surface for wallet-native agents, since the wallet signature at activate-time is the trust boundary. CTRL also runs a key-gated JSON-RPC MCP server at the same base for desktop clients (Cursor, Claude Desktop) where tool execution needs an `sk_ctrl_` key; both drive identical workflows. For an aeon skill, stick with REST.
 
-## Sandbox note
+## Network note
 
 `/api/mcp/block-catalog`, `/api/mcp/workflows` (POST), `/api/mcp/vault-status`, and `/api/mcp/execution-logs` are public over HTTPS with no auth headers. `/api/mcp/activate/<id>` is NOT public — never try to call it from the agent; it requires a wallet-authenticated session and is what the landing page invokes for the user.
 

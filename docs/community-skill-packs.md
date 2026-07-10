@@ -1,4 +1,5 @@
 ---
+type: Reference
 layout: default
 title: Community Skill Packs
 ---
@@ -7,17 +8,17 @@ title: Community Skill Packs
 
 A **skill pack** is a third-party collection of Aeon skills that lives in its own GitHub repo. Packs let domain experts ship curated bundles (financial intelligence, on-chain analysis, devops, niche research workflows) without fighting Aeon's core release cadence.
 
-This page documents the **install protocol** — the `skills-pack.json` manifest format and the `./install-skill-pack` CLI that consumes it.
+This page documents the **install protocol** — the `skills-pack.json` manifest format and the `bin/install-skill-pack` CLI that consumes it.
 
 ---
 
 ## Browse the registry
 
 ```bash
-./install-skill-pack --list
+bin/install-skill-pack --list
 ```
 
-Prints every pack declared in `skill-packs.json` (at the Aeon repo root) — repo, skill count, trust badge, one-line description. Trusted-source packs are marked with `*` (security scan skipped, format check still runs). The script reads the local `skill-packs.json` when present and falls back to fetching the file from `https://raw.githubusercontent.com/aaronjmars/aeon/main/skill-packs.json` when it isn't.
+Prints every pack declared in `catalog/skill-packs.json` — repo, skill count, trust badge, one-line description. Trusted-source packs are marked with `*` (security scan skipped, format check still runs). The script reads the local `catalog/skill-packs.json` when present and falls back to fetching the file from `https://raw.githubusercontent.com/aaronjmars/aeon/main/catalog/skill-packs.json` when it isn't.
 
 Trusted AntFleet packs currently expose both `pr-review-antfleet` for
 installed repos with channel drawdown and `pr-review-antfleet-x402` for
@@ -26,7 +27,7 @@ public repos with x402 pay-per-call USDC.
 ## One-command install
 
 ```bash
-./install-skill-pack baseddevoloper/aeon-skill-pack-vvvkernel
+bin/install-skill-pack AntFleet/aeon-skills
 ```
 
 That single command:
@@ -40,7 +41,7 @@ That single command:
 7. Adds catalog rows to `skills.json`
 8. Inserts entries into `aeon.yml` (disabled by default — operator must enable explicitly)
 
-Run `./install-skill-pack --help` for the full flag list.
+Run `bin/install-skill-pack --help` for the full flag list.
 
 ---
 
@@ -149,7 +150,7 @@ With this manifest:
 An operator installs the pack with:
 
 ```bash
-./install-skill-pack acme/aeon-research-pack
+bin/install-skill-pack acme/aeon-research-pack
 ```
 
 The two skills land in `skills/arxiv-watcher` and `skills/citation-graph`, with rows added to `skills.json`, entries appended to `aeon.yml` (disabled), and provenance recorded in `skills.lock`. The operator then sets `enabled: true` on whichever skills they want scheduled.
@@ -158,7 +159,7 @@ The two skills land in `skills/arxiv-watcher` and `skills/citation-graph`, with 
 
 ## Trust model
 
-`install-skill-pack` runs the same security scanner as `./add-skill` (`skills/skill-scan/scan.sh`). Behavior:
+`install-skill-pack` runs the same security scanner as `bin/add-skill` (`scripts/skill-scan.sh`). Behavior:
 
 - **Trusted source** (listed in `skills/security/trusted-sources.txt` as either `owner` or `owner/repo`) — the deep content scan is skipped. Format validation still applies.
 - **Untrusted source, clean scan** — install proceeds.
@@ -175,13 +176,14 @@ The operator is always the trust boundary. The install script does not auto-trus
 3. Skills follow Aeon's `SKILL.md` conventions (frontmatter `name:`, `description:`, etc.).
 4. `skills-pack.json` declares every skill the pack intends to install. Skills present in `skills/` but missing from the manifest are not installed.
 5. Optional but encouraged: a `README.md` that names each skill, explains scheduling assumptions, and lists any required environment variables.
-6. Open a PR against `aaronjmars/aeon` that does **two** things in one diff: adds a row to the **Community Skill Packs** table in the project README, AND adds a matching entry to `skill-packs.json` (the machine-readable registry — see schema below).
+6. Run `./scripts/validate-pack.sh /path/to/your-pack-dir` (from an Aeon checkout) to pre-flight the pack locally — it runs the same structural invariants `install-skill-pack` enforces (valid `skills-pack.json`, clean slugs, no `..` in paths, present per-skill `SKILL.md`, locked-taxonomy capabilities) and exits non-zero on any blocking error. Add `--path <subdir>` if `skills-pack.json` is nested.
+7. Open a PR against `aaronjmars/aeon` that does **two** things in one diff: adds a row to the **Community Skill Packs** table in the project README, AND adds a matching entry to `catalog/skill-packs.json` (the machine-readable registry — see schema below).
 
 ---
 
 ## skill-packs.json (community registry)
 
-`skill-packs.json` at the Aeon repo root is the machine-readable mirror of the README's Community Skill Packs table. `./install-skill-pack --list` reads it; future tooling (dashboards, third-party indexers) can read it without scraping the README.
+`catalog/skill-packs.json` is the machine-readable mirror of the README's Community Skill Packs table. `bin/install-skill-pack --list` reads it; future tooling (dashboards, third-party indexers) can read it without scraping the README.
 
 ### Registry schema
 
@@ -221,13 +223,13 @@ The operator is always the trust boundary. The install script does not auto-trus
 | `category` | string | optional | Same vocabulary as per-skill category. |
 | `trust_level` | string | optional | `trusted` (also requires the source in `skills/security/trusted-sources.txt`) or `community`. Default `community`. Listing here is a discovery hint — the actual scan-bypass behaviour is decided by the trusted-sources file. |
 | `skills[]` | array | **required** | Slugs the pack ships. Mirror the pack's own `skills-pack.json`. |
-| `secrets_required` | string[] | optional | Aggregated list of env vars the pack's skills declare as required. Drives the `./install-skill-pack --list --no-secrets` filter, which hides any pack with a non-empty `secrets_required`. Keep this in sync with the union of `skills[].secrets_required` in the pack's own `skills-pack.json`. |
-| `capabilities` | string[] | optional | Aggregated blast-radius hints across the pack's skills. **Locked taxonomy** — see [docs/CAPABILITIES.md](CAPABILITIES.md) for the six allowed values and how to choose. List-only metadata: surfaces as `[caps: ...]` on `./install-skill-pack --list` and is taxonomy-validated at print time; not read by install (per-skill `skills[].capabilities` in the pack's own `skills-pack.json` is the source of truth at install time). Keep this in sync with the union of `skills[].capabilities`. |
+| `secrets_required` | string[] | optional | Aggregated list of env vars the pack's skills declare as required. Drives the `bin/install-skill-pack --list --no-secrets` filter, which hides any pack with a non-empty `secrets_required`. Keep this in sync with the union of `skills[].secrets_required` in the pack's own `skills-pack.json`. |
+| `capabilities` | string[] | optional | Aggregated blast-radius hints across the pack's skills. **Locked taxonomy** — see [docs/CAPABILITIES.md](CAPABILITIES.md) for the six allowed values and how to choose. List-only metadata: surfaces as `[caps: ...]` on `bin/install-skill-pack --list` and is taxonomy-validated at print time; not read by install (per-skill `skills[].capabilities` in the pack's own `skills-pack.json` is the source of truth at install time). Keep this in sync with the union of `skills[].capabilities`. |
 
 ### Why two files (README table + skill-packs.json)?
 
 - The README table is for humans browsing GitHub.
-- `skill-packs.json` is for tooling: `./install-skill-pack --list`, dashboard widgets, third-party crawlers, future package-resolver tooling.
+- `skill-packs.json` is for tooling: `bin/install-skill-pack --list`, dashboard widgets, third-party crawlers, future package-resolver tooling.
 
 Pack maintainers update both in the same PR so the two surfaces stay in lockstep.
 

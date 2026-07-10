@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "ignoreDeprecations": "6.0",
+    "types": ["node"],
+    "typeRoots": ["./node_modules/@types", "../dashboard/node_modules/@types"],
+    "baseUrl": ".",
+    "paths": {
+      "yaml": ["./node_modules/yaml"],
+      "yaml/*": ["./node_modules/yaml/*"]
+    }
+  },
+  "include": ["src/**/*.ts", "../dashboard/lib/**/*.ts"]
+}

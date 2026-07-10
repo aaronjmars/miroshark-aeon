@@ -9,16 +9,15 @@
 # Claude Code local state
 .claude/
 
-# Caches (regenerated per run)
-.xai-cache/
-.bankr-cache/
-.pending-notify/
-.pending-replicate/
-.pending-supernotes/
-.pending-deploy/
-.pending-devto/
-.pending-farcaster/
+# Caches — prefetch scripts write these, skills read them; regenerated every run
+# (.xai-cache, .treasury-cache, .star-cache, .github-releases-cache, …)
+.*-cache/
 .tg_cache/
+
+# Working scratch dirs some skills stage during a run, then clean up:
+# .pending-notify (notify re-delivery), .pending-deploy (deploy-prototype build),
+# plus .pending-notify-temp where skills stage notify bodies for `./notify -f`
+.pending-*/
 
 # Skill provenance lock (per-repo, not committed)
 skills.lock
@@ -29,7 +28,6 @@ tmp_*
 .tmp-*
 .pending-*.sh
 .run-*.sh
-.notify-*.md
 .*-tmp.md
 .*-draft.md
 .*-msg.txt
@@ -50,4 +48,3 @@ node_modules/
 # Stale artifacts
 .external-work
 .vuln-scan/
-.feature-build/

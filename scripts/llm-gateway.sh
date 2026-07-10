@@ -6,17 +6,22 @@
 # call in the same shell. Place at: scripts/llm-gateway.sh
 #
 # Inputs already present in the step environment:
-#   $GATEWAY                    auto | direct | bankr | openrouter | usepod | surplus | venice
+#   $GATEWAY                    auto | direct | bankr | openrouter | usepod | surplus | venice | grok
 #                               (auto = resolve at run time from which secrets are set)
 #   $MODEL                      aeon's resolved model id (may be rewritten here)
 #   <PROVIDER> secret           the secret for the selected gateway (see below)
 #   vars.ANTHROPIC_BASE_URL     optional Anthropic-compatible endpoint (direct path)
 #
 # Two routing tiers:
-#   NATIVE (no proxy): bankr, openrouter, usepod  -> set base URL + auth, done.
+#   NATIVE (no proxy): bankr, openrouter, usepod, grok  -> set base URL + auth, done.
 #   SIDECAR (wrapper): surplus, venice            -> start claude-code-router on
 #                                                    127.0.0.1 to translate
 #                                                    Anthropic <-> OpenAI.
+#
+# NOTE: `grok` here is the GATEWAY path — Claude Code (`claude -p`) pointed at
+# xAI's Anthropic-compatible API. It is distinct from the grok CLI *harness*
+# (harness: grok in aeon.yml → scripts/run-grok.sh), which runs the grok binary
+# itself and never sources this file.
 #
 # NOTE: do not add `set -e/-u` here — this file is sourced and must not change
 # the caller's shell options. A hard config error calls `exit 1`, which fails
@@ -132,13 +137,14 @@ aeon_present() {  # is the secret for provider $1 set?
     usepod)     [ -n "${USEPOD_TOKEN:-}" ] ;;
     venice)     [ -n "${VENICE_API_KEY:-}" ] ;;
     surplus)    [ -n "${SURPLUS_API_KEY:-}" ] ;;
+    grok)       [ -n "${XAI_API_KEY:-}" ] ;;
     *) false ;;
   esac
 }
 if [ -z "${GATEWAY:-}" ] || [ "${GATEWAY}" = "auto" ]; then
   # Ordered list of every provider whose secret is set (priority via GATEWAY_ORDER).
   AEON_CANDIDATES=""
-  for provider in ${GATEWAY_ORDER:-claude anthropic openrouter bankr usepod venice surplus}; do
+  for provider in ${GATEWAY_ORDER:-claude anthropic openrouter bankr usepod venice surplus grok}; do
     if aeon_present "$provider"; then AEON_CANDIDATES="${AEON_CANDIDATES:+$AEON_CANDIDATES }$provider"; fi
   done
   [ -z "$AEON_CANDIDATES" ] && AEON_CANDIDATES="direct"
@@ -169,7 +175,7 @@ case "${GATEWAY:-direct}" in
     fi
     ;;
 
-  bankr)  # NATIVE — unchanged from aeon's existing behavior
+  bankr)  # NATIVE — Bankr Gateway (Anthropic-compatible base URL)
     require_secret BANKR_LLM_KEY
     export ANTHROPIC_BASE_URL="https://llm.bankr.bot"
     export ANTHROPIC_AUTH_TOKEN="$BANKR_LLM_KEY"
@@ -204,25 +210,64 @@ case "${GATEWAY:-direct}" in
     echo "::notice::Routing through UsePod (Anthropic-native marketplace)"
     ;;
 
-  surplus)  # SIDECAR — OpenAI-compatible; carries Opus 4.8
-    require_secret SURPLUS_API_KEY
-    start_ccr_sidecar surplus \
-      "https://www.surplusintelligence.ai/api/inference/v1/chat/completions" \
-      "$SURPLUS_API_KEY" "${SURPLUS_MODEL:-claude-opus-4.8}"
-    echo "::notice::Routing through Surplus via claude-code-router (${SURPLUS_MODEL:-claude-opus-4.8})"
+  grok)  # NATIVE — xAI's Anthropic-compatible API (Claude Code → api.x.ai)
+    require_secret XAI_API_KEY
+    # xAI's REST API is Anthropic-SDK-compatible; Claude Code appends
+    # /v1/messages to ANTHROPIC_BASE_URL. Override the base with the repo var
+    # XAI_ANTHROPIC_BASE_URL if xAI's Anthropic surface moves.
+    export ANTHROPIC_BASE_URL="${XAI_ANTHROPIC_BASE_URL:-https://api.x.ai}"
+    export ANTHROPIC_AUTH_TOKEN="$XAI_API_KEY"   # Bearer; API_KEY must be blank
+    unset ANTHROPIC_API_KEY CLAUDE_CODE_OAUTH_TOKEN
+    # Pin every model slot to a grok coding model (GROK_MODEL overrides).
+    grok_model="${GROK_MODEL:-grok-build-0.1}"
+    export ANTHROPIC_DEFAULT_OPUS_MODEL="$grok_model"
+    export ANTHROPIC_DEFAULT_SONNET_MODEL="$grok_model"
+    export ANTHROPIC_DEFAULT_HAIKU_MODEL="$grok_model"
+    MODEL="$grok_model"
+    echo "::notice::Routing through xAI (Anthropic-compatible) as ${grok_model} @ ${ANTHROPIC_BASE_URL}"
     ;;
 
-  venice)  # SIDECAR — OpenAI-compatible; tops out ~Opus 4.6 (dash format)
+  surplus)  # SIDECAR — OpenAI-compatible (dot-form ids); carries the full catalog
+    require_secret SURPLUS_API_KEY
+    # The sidecar pins ONE model across every ccr slot, so derive it from aeon's
+    # resolved $MODEL (the UI / aeon.yml choice) instead of hardcoding one. Surplus
+    # uses dot-form ids: drop any trailing -YYYYMMDD date, then convert each
+    # <digit>-<digit> to <digit>.<digit>. SURPLUS_MODEL overrides; opus-4.8 is the
+    # fallback when $MODEL is unset.
+    surplus_model="${SURPLUS_MODEL:-$(printf '%s' "${MODEL:-claude-opus-4-8}" | sed -E 's/-[0-9]{8}$//; s/([0-9])-([0-9])/\1.\2/g')}"
+    start_ccr_sidecar surplus \
+      "https://www.surplusintelligence.ai/api/inference/v1/chat/completions" \
+      "$SURPLUS_API_KEY" "$surplus_model"
+    echo "::notice::Routing through Surplus via claude-code-router (${surplus_model})"
+    ;;
+
+  venice)  # SIDECAR — OpenAI-compatible (dash-form ids); tops out ~Opus 4.6
     require_secret VENICE_API_KEY
     # Set VENICE_CLEANCACHE=1 to add the cleancache transformer (1h TTL, avoids
     # the shared 4-block prompt-cache limit) if you hit cache errors.
+    # The sidecar pins ONE model, so track aeon's $MODEL — but Venice's catalog
+    # caps at ~Opus 4.6, so a newer $MODEL (opus 4.7/4.8, fable) would 404. Derive
+    # only for models Venice is known to carry (dash-form, date suffix stripped);
+    # anything else keeps the safe opus-4-6 default. VENICE_MODEL overrides.
+    # (Confirm/extend the allowlist when Venice is live-validated.)
+    # VENICE_BASE_URL (repo variable) points the sidecar at any Venice-compatible
+    # endpoint — a self-hosted relay, a billing proxy, a regional mirror — same
+    # override pattern as VENICE_MODEL. Defaults to Venice's public API.
+    venice_model="${VENICE_MODEL:-}"
+    if [ -z "$venice_model" ]; then
+      m="$(printf '%s' "${MODEL:-}" | sed -E 's/-[0-9]{8}$//')"
+      case "$m" in
+        claude-opus-4-6|claude-sonnet-4-6|claude-haiku-4-5) venice_model="$m" ;;
+        *) venice_model="claude-opus-4-6" ;;
+      esac
+    fi
     start_ccr_sidecar venice \
-      "https://api.venice.ai/api/v1/chat/completions" \
-      "$VENICE_API_KEY" "${VENICE_MODEL:-claude-opus-4-6}" "${VENICE_CLEANCACHE:+cleancache}"
-    echo "::notice::Routing through Venice via claude-code-router (${VENICE_MODEL:-claude-opus-4-6})"
+      "${VENICE_BASE_URL:-https://api.venice.ai/api/v1/chat/completions}" \
+      "$VENICE_API_KEY" "$venice_model" "${VENICE_CLEANCACHE:+cleancache}"
+    echo "::notice::Routing through Venice via claude-code-router (${venice_model} @ ${VENICE_BASE_URL:-https://api.venice.ai/api/v1/chat/completions})"
     ;;
 
-  direct|"")  # NATIVE — Anthropic API or an Anthropic-compatible endpoint. Unchanged.
+  direct|"")  # NATIVE — Anthropic API or an Anthropic-compatible endpoint
     if [ -n "${ANTHROPIC_BASE_URL:-}" ]; then
       echo "::notice::Using Anthropic-compatible API at ${ANTHROPIC_BASE_URL}"
     else

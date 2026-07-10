@@ -1,9 +1,11 @@
 ---
+type: Skill
 name: Deploy Prototype
+category: dev
 description: Generate a small app or tool and deploy it live to Vercel via API
 var: ""
 tags: [dev, build]
-requires: [VERCEL_TOKEN, GH_GLOBAL]
+requires: [VERCEL_TOKEN?, GH_GLOBAL?]
 ---
 <!-- autoresearch: variation B — sharper output via prototype quality bar + self-check + signal-anchored record -->
 
@@ -22,7 +24,7 @@ Today is ${today}. Your task is to ship a small, self-contained prototype that s
 2. **Pick what to build (if `${var}` is empty or vague).**
 
    Scan these sources, in order, for prototype-worthy signals:
-   - `articles/` — last 7 entries by mtime: any claim, finding, or dataset that would be more useful as an interactive page?
+   - `output/articles/` — last 7 entries by mtime: any claim, finding, or dataset that would be more useful as an interactive page?
    - `memory/topics/*.md` — running narratives; pick one with a live data source (prices, feeds, markets)
    - `memory/logs/${today}.md` and the two prior days — skill outputs flagged as interesting
    - `memory/MEMORY.md` → "Next Priorities" and "Recent Articles"
@@ -30,7 +32,7 @@ Today is ${today}. Your task is to ship a small, self-contained prototype that s
    Score each candidate 1-5 on:
    - **Leverage** — does an interactive version beat the static write-up?
    - **Concreteness** — is the spec obvious in one sentence? (if no, reject)
-   - **Novelty** — haven't shipped this in the last 14 days (check `articles/prototype-*.md` by mtime and any `memory/topics/prototypes.md`)
+   - **Novelty** — haven't shipped this in the last 14 days (check `output/articles/prototype-*.md` by mtime and any `memory/topics/prototypes.md`)
 
    Pick the highest-total candidate. If no candidate reaches 9/15, skip building and exit as `DEPLOY_PROTOTYPE_EMPTY` (step 9).
 
@@ -76,7 +78,7 @@ Today is ${today}. Your task is to ship a small, self-contained prototype that s
    }
    ```
    - `framework`: `null` for static; `"nextjs"`, `"svelte"`, etc. when used.
-   - The extra fields (`tagline`, `signal_source`, `primary_action`) are for the prototype record and downstream dashboards; the postprocess script may ignore them.
+   - The extra fields (`tagline`, `signal_source`, `primary_action`) are for the prototype record and downstream dashboards; the deploy step may ignore them.
 
 6. **Build the Vercel deploy payload.** Write `.pending-deploy/payload.json`:
    ```json
@@ -101,16 +103,16 @@ Today is ${today}. Your task is to ship a small, self-contained prototype that s
    - Slug matches `^aeon-prototype-[a-z0-9][a-z0-9-]{2,49}$`.
    - Grep every file for: `VERCEL_TOKEN`, `GH_GLOBAL`, `ANTHROPIC_API_KEY`, `sk-ant-`, `sk-`, `ghp_`, `xoxb-`, `xai-`. Any hit → abort and rewrite the offending file without the value.
    - Grep every file for literal `TODO`, `FIXME`, `lorem ipsum`, `placeholder`. Any hit → fix in place before proceeding.
-   - If `scripts/postprocess-deploy.sh` does not exist, continue but flag `DEPLOY_PROTOTYPE_NO_POSTPROCESS` in the notify (operator needs to know deploys won't happen automatically).
+   - If `VERCEL_TOKEN` is unset, the build still completes but the live deploy in step 8 is skipped (you'll exit `DEPLOY_PROTOTYPE_NO_TOKEN` there) — the pre-flight itself doesn't fail on a missing token.
 
-7. **Save the prototype record.** Write to `articles/prototype-${today}.md`. If a file with that name already exists (second run in the same day), append `-02`, `-03`, etc.
+7. **Save the prototype record.** Write to `output/articles/prototype-${today}.md`. If a file with that name already exists (second run in the same day), append `-02`, `-03`, etc.
    ```markdown
    # Prototype: <Name>
 
    **Built:** ${today}
    **Tagline:** <tagline from meta.json>
    **Status:** Pending deploy
-   **Live URL:** _(filled by postprocess-deploy.sh on successful deploy)_
+   **Live URL:** _(filled in-run in step 8 once the Vercel deploy returns its URL)_
 
    ## Signal
    What triggered this: one paragraph. Link the source article/log/topic (`signal_source` from meta.json).
@@ -133,35 +135,65 @@ Today is ${today}. Your task is to ship a small, self-contained prototype that s
    ```
    | date | slug | tagline | signal_source | live_url |
    |------|------|---------|---------------|----------|
-   | 2026-04-20 | aeon-prototype-foo | ... | articles/... | _pending_ |
+   | 2026-04-20 | aeon-prototype-foo | ... | output/articles/... | _pending_ |
    ```
 
-8. **Notify.** Send via `./notify` (one of these, depending on outcome):
-   - Built + will deploy: `built: <slug> — <tagline>. deploying to vercel…`
-   - Built but postprocess missing: `built: <slug> — <tagline>. ⚠ scripts/postprocess-deploy.sh not found — deploy will not run automatically`
-   - No signal worth shipping: handled in step 9.
+8. **Deploy live (in-run).** The deploy is the skill's irreversible action, so it runs **in-run** as the final step — behind the step-6 pre-flight — not deferred to any post-run script.
 
-9. **Exit modes.** End the run with one of these, logged in `memory/logs/${today}.md` under `### deploy-prototype`:
-   - `DEPLOY_PROTOTYPE_OK` — prototype built, payload valid, postprocess script present.
-   - `DEPLOY_PROTOTYPE_NO_POSTPROCESS` — prototype built and valid, but `scripts/postprocess-deploy.sh` missing; operator action needed.
-   - `DEPLOY_PROTOTYPE_EMPTY` — no candidate cleared the quality threshold in step 2. Log the top candidate and its score so the next run can reconsider. `./notify "deploy-prototype: no candidate cleared threshold today — top was <slug> (<score>/15)"`.
-   - `DEPLOY_PROTOTYPE_VALIDATION_FAILED` — a pre-flight check in step 6 failed and couldn't be fixed automatically. Leave `.pending-deploy/` in place, log the failure reason, notify the operator.
+   If `VERCEL_TOKEN` is unset → skip the deploy, leave `.pending-deploy/` in place, and exit `DEPLOY_PROTOTYPE_NO_TOKEN` (step 10). The build still succeeded; the operator just needs to add the token and re-run.
 
-10. **Log.** Append to `memory/logs/${today}.md`:
+   Otherwise POST the inline deployment built in step 6. Write the key as the literal `{VERCEL_TOKEN}` placeholder so `./secretcurl` substitutes it internally — a bare `$VERCEL_TOKEN` on the command line is refused by the Bash permission layer, and plain `curl` must not carry the token:
+   ```bash
+   HTTP=$(./secretcurl -sS -o .pending-deploy/deploy-resp.json -w '%{http_code}' \
+     -X POST "https://api.vercel.com/v13/deployments" \
+     -H "Authorization: Bearer {VERCEL_TOKEN}" \
+     -H "Content-Type: application/json" \
+     --data @.pending-deploy/payload.json)
+   echo "http=$HTTP"
+   ```
+   - **`http` 200/201:** read the deployment host from the response (`.url` in `deploy-resp.json`) and form the live URL `https://<url>`. Backfill it into the step-7 record (`**Status:** Live`, `**Live URL:** https://…`) and the `memory/topics/prototypes.md` row (replace `_pending_`). Exit `DEPLOY_PROTOTYPE_OK` (step 10).
+   - **Any non-2xx / `--max-time` timeout / 200 with empty body:** print the real reason (`http=<code>` / `timeout` / `empty`), keep `.pending-deploy/` for a retry, and exit `DEPLOY_PROTOTYPE_DEPLOY_FAILED` (step 10). Never mark the record Live on a failed deploy.
+
+   **Optional source mirror (best-effort, non-fatal).** If `GH_GLOBAL` is set, also publish the source to GitHub. `gh` already authenticates as `GH_GLOBAL` in-run (it's the ambient `GH_TOKEN`), so no secret goes on the command line:
+   ```bash
+   if [ -n "${GH_GLOBAL:-}" ]; then
+     ( cd .pending-deploy/files && git init -q && git add -A \
+       && git -c user.name=aeon -c user.email=aeon@users.noreply.github.com commit -qm "prototype: <slug>" \
+       && gh repo create "<slug>" --public --source=. --push ) \
+       || echo "::notice::source mirror skipped (non-fatal)"
+   fi
+   ```
+   A mirror failure never fails the run — the live Vercel URL is the deliverable.
+
+9. **Notify.** Send via `./notify` (one of these, depending on outcome):
+   - Deployed: `shipped: <slug> — <tagline>. live: <url>`
+   - Built, token missing: `built: <slug> — <tagline>. ⚠ VERCEL_TOKEN unset — not deployed. add it and re-run.`
+   - Deploy failed: `built: <slug> — <tagline>. ✗ vercel deploy failed (<reason>) — .pending-deploy kept for retry.`
+   - No signal worth shipping: handled in step 10.
+
+10. **Exit modes.** End the run with one of these, logged in `memory/logs/${today}.md` under `### deploy-prototype`:
+    - `DEPLOY_PROTOTYPE_OK` — prototype built, validated, and deployed live.
+    - `DEPLOY_PROTOTYPE_NO_TOKEN` — built and valid, but `VERCEL_TOKEN` unset; deploy skipped, operator action needed.
+    - `DEPLOY_PROTOTYPE_DEPLOY_FAILED` — built and valid, but the Vercel API call failed; `.pending-deploy/` kept for retry.
+    - `DEPLOY_PROTOTYPE_EMPTY` — no candidate cleared the quality threshold in step 2. Log the top candidate and its score so the next run can reconsider. `./notify "deploy-prototype: no candidate cleared threshold today — top was <slug> (<score>/15)"`.
+    - `DEPLOY_PROTOTYPE_VALIDATION_FAILED` — a pre-flight check in step 6 failed and couldn't be fixed automatically. Leave `.pending-deploy/` in place, log the failure reason, notify the operator.
+
+11. **Log.** Append to `memory/logs/${today}.md`:
     ```
     ### deploy-prototype
     - Exit: DEPLOY_PROTOTYPE_<MODE>
     - Slug: aeon-prototype-<slug> (or — if empty)
+    - Live URL: <url or —>
     - Signal: <signal_source>
     - Notes: <anything the next run should know>
     ```
 
 ## Environment Variables
 
-- `VERCEL_TOKEN` — Required for the deploy (used by `scripts/postprocess-deploy.sh`, not by Claude).
-- `GH_GLOBAL` — Required for GitHub repo creation in the postprocess step.
+- `VERCEL_TOKEN` — the live Vercel deploy in step 8. Used **in-run** via `./secretcurl` (the `{VERCEL_TOKEN}` placeholder). Without it, the build succeeds but the deploy is skipped (`DEPLOY_PROTOTYPE_NO_TOKEN`).
+- `GH_GLOBAL` — the optional GitHub source mirror in step 8. Used ambiently by `gh` (it's the run's `GH_TOKEN`); a missing token just skips the mirror.
 
-Neither is needed during Claude's in-sandbox run. Do not read them, do not embed them in any file.
+Both are declared optional (`?`) so the skill degrades gracefully: no `VERCEL_TOKEN` → build-only; no `GH_GLOBAL` → deploy without the source mirror. Never read the token values directly and never embed them in any deployed file (step 6 greps for them).
 
 ## Guidelines
 
@@ -170,8 +202,8 @@ Neither is needed during Claude's in-sandbox run. Do not read them, do not embed
 - Max ~5 files (enforced at 20 in pre-flight).
 - Descriptive slugs. `aeon-prototype-market-heatmap`, not `aeon-prototype-1`.
 - Never hardcode secrets. If a public-auth endpoint isn't enough for the idea, drop the idea.
-- The actual GitHub repo creation, push, and Vercel deploy happen in `scripts/postprocess-deploy.sh` outside the sandbox. Your job: write files and metadata correctly so that script can run unattended.
+- The Vercel deploy (and the optional GitHub source mirror) happen **in-run** in step 8 via `./secretcurl` / `gh` — an irreversible side-effect run as the skill's final, fail-closed action. Build the files, metadata, and payload correctly in steps 4–6 so that final call goes clean.
 
-## Sandbox note
+## Network note
 
-All the skill's work happens inside the sandbox — file writes and notify only. No outbound network required during Claude's run. The deploy step runs post-sandbox from `scripts/postprocess-deploy.sh`, which reads `.pending-deploy/` and uses `VERCEL_TOKEN` + `GH_GLOBAL` directly. If that script is missing, flag it in the notify (exit mode `DEPLOY_PROTOTYPE_NO_POSTPROCESS`) — the skill still succeeds at its file-writing job, but the operator needs to add the postprocess script for deploys to actually happen.
+Steps 1–7 are local — file writes and notify only. Step 8's deploy is the one outbound side-effect and it runs **in-run**: the Vercel deployment via `./secretcurl` with the `{VERCEL_TOKEN}` placeholder (a bare `$VERCEL_TOKEN` on the command line is refused by the Bash permission layer, so never use plain `curl` for it), and the optional GitHub mirror via `gh` (authenticated ambiently as `GH_GLOBAL`). There is no deferred/postprocess step — the deploy is the skill's final, fail-closed action: on any non-2xx it exits `DEPLOY_PROTOTYPE_DEPLOY_FAILED` and keeps `.pending-deploy/` for a retry.

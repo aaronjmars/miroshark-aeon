@@ -1,6 +1,8 @@
 ---
+type: Skill
 name: PR Triage
-description: First-touch triage for external pull requests — verdict + label + welcoming comment within minutes of open
+category: dev
+description: First-touch triage for external pull requests - verdict, label, and a welcoming comment within minutes of open
 var: ""
 tags: [dev]
 ---
@@ -101,7 +103,7 @@ Score the PR against four checks. Every check is observable from the diff + meta
 
 | Check | Pass condition |
 |---|---|
-| **Scope** | Touches only `skills/`, `docs/`, `examples/`, `images/`, `assets/`, `README.md`, `SHOWCASE.md`, `CLAUDE.md`. Touching `.github/workflows/`, `aeon` (root binary), `scripts/`, `apps/mcp-server/`, `apps/a2a-server/`, `apps/dashboard/lib/` requires a maintainer. |
+| **Scope** | Touches only `skills/`, `docs/`, `output/`, `catalog/`, `README.md`, `CLAUDE.md`. Touching `.github/workflows/`, `aeon` (root binary), `bin/`, `scripts/`, `apps/mcp-server/`, `apps/dashboard/lib/` requires a maintainer. |
 | **Format** | If a `skills/<name>/SKILL.md` is added or modified, the file has YAML frontmatter with `name`, `description`, `var`, `tags` keys. (Skip this check when no SKILL.md is touched.) |
 | **Originality** | If a new skill is added, its directory name does not already exist on `main`. Cross-check via `gh api repos/owner/repo/contents/skills` once per run. |
 | **Size** | `additions + deletions ≤ 500` lines, OR labelled `large-ok` by a maintainer. |
@@ -110,7 +112,7 @@ Verdict assignment (first match wins, in this order):
 
 - **OUT-OF-SCOPE** — Scope check fails AND the touched paths are protected (`.github/workflows/`, `aeon`, `scripts/prefetch-*`, `scripts/postprocess-*`). External contributors cannot ship workflow / runtime changes; redirect them to file an issue.
 - **NEEDS-CHANGES** — Format check fails (SKILL.md missing required frontmatter), OR Originality check fails (skill name collides), OR PR body is empty AND additions > 50.
-- **DEFER** — Size check fails (>500 lines without `large-ok`), OR PR is marked as RFC / proposal-only in the body, OR the PR depends on an external service that requires a secret the maintainer has not provisioned (mentions of `*_API_KEY` in added code without a corresponding `scripts/prefetch-*.sh`).
+- **DEFER** — Size check fails (>500 lines without `large-ok`), OR PR is marked as RFC / proposal-only in the body, OR the PR depends on an external service that requires a secret the maintainer has not provisioned (mentions of `*_API_KEY` in added code without declaring it in the skill's `requires:`).
 - **ACCEPTED** — Otherwise. The PR passes every rubric check; ready for `pr-review` to take a depth pass.
 
 ### 6. Post the triage comment
@@ -233,9 +235,9 @@ Terminal log lines:
 - Every repo failed data fetch → `PR_TRIAGE_ERROR source-status=<...>` (no notification)
 - `gh` unavailable entirely → `PR_TRIAGE_ERROR gh-unavailable` and exit
 
-## Sandbox note
+## Network note
 
-Use `gh` CLI for all GitHub operations — it handles auth internally and bypasses the curl env-var-expansion sandbox issue. If `gh` errors at the repo level, record `fail — <reason>` in source status and skip that repo; do not abort the whole run. WebFetch cannot substitute for write operations (auth required); a fully unavailable `gh` is a hard exit.
+Use `gh` CLI for all GitHub operations — it handles auth internally, so no bare `$SECRET` ever lands on the command line for the Bash permission layer to refuse. If `gh` errors at the repo level, record `fail — <reason>` in source status and skip that repo; do not abort the whole run. WebFetch cannot substitute for write operations (auth required); a fully unavailable `gh` is a hard exit.
 
 ## Constraints
 

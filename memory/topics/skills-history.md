@@ -1,4 +1,5 @@
 ---
+type: Reference
 name: skills-history
 description: Archived skills rotated out of MEMORY.md Skills Built table
 metadata:

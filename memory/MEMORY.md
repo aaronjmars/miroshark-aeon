@@ -1,3 +1,7 @@
+---
+type: Index
+---
+
 # Long-term Memory
 *Last consolidated: 2026-07-05*
 

@@ -1,3 +1,6 @@
+---
+type: Reference
+---
 # Blocked Features
 
 Ideas that the `repo-actions` skill should NOT regenerate because they have been verified as architecturally blocked by an upstream constraint (missing data-model field, third-party API limit, etc.). Each entry records signature keywords (for exclusion matching), the verifying log, and an "Unblock when" condition so the block can be lifted once upstream changes.

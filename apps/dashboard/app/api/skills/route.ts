@@ -1,86 +1,30 @@
 import { NextResponse } from 'next/server'
-import { execSync } from 'child_process'
-import { resolve } from 'path'
-import { getFileContent, getDirectory, updateFile, commitAndPush } from '@/lib/github'
+import { errorResponse, syncResult } from '@/lib/http'
+import { getFileContent, updateFile, commitAndPush } from '@/lib/github'
 import {
-  parseConfig,
   updateSkillInConfig,
   updateModelInConfig,
+  updateHarnessInConfig,
   updateJsonrenderInConfig,
   removeSkillFromConfig,
 } from '@/lib/config'
+import { HARNESSES } from '@/lib/types'
+import type { Harness } from '@/lib/types'
 import { deleteDirectory } from '@/lib/github'
-import { parseFrontmatter } from '@/lib/frontmatter'
-import type { Skill } from '@/lib/types'
-
-function getRepoSlug(): string {
-  if (process.env.GITHUB_REPO) return process.env.GITHUB_REPO
-  try {
-    const url = execSync('git remote get-url origin', { stdio: 'pipe', cwd: resolve(process.cwd(), '..', '..') }).toString().trim()
-    const m = url.match(/github\.com[/:]([\w.-]+\/[\w.-]+?)(?:\.git)?$/)
-    return m ? m[1] : ''
-  } catch {
-    return ''
-  }
-}
+import type { CommitResult } from '@/lib/github'
+import { getSkills } from '@/lib/skills'
 
 export async function GET() {
   try {
-    const [configResult, skillDirs] = await Promise.all([
-      getFileContent('aeon.yml'),
-      getDirectory('skills'),
-    ])
-    const config = parseConfig(configResult.content)
-    const dirNames = skillDirs.filter(d => d.type === 'dir').map(d => d.name)
-
-    // Canonical slug → category map from the generated catalog (skills.json).
-    // Falls back to 'meta' for any skill not yet in the catalog.
-    const categoryBySlug: Record<string, string> = {}
-    try {
-      const { content: catalogRaw } = await getFileContent('skills.json')
-      const catalog = JSON.parse(catalogRaw) as { skills?: Array<{ slug: string; category: string }> }
-      for (const s of catalog.skills ?? []) categoryBySlug[s.slug] = s.category
-    } catch { /* catalog optional — categories default to meta */ }
-
-    const meta = await Promise.all(
-      dirNames.map(async (name) => {
-        try {
-          const { content } = await getFileContent(`skills/${name}/SKILL.md`)
-          const { description, tags, requires, mcp } = parseFrontmatter(content)
-          return { name, description, tags, requires, mcp, found: true }
-        } catch {
-          // No SKILL.md → this is a support/data dir (e.g. skills/security/), not a skill.
-          return { name, description: '', tags: [] as string[], requires: [], mcp: [], found: false }
-        }
-      }),
-    )
-
-    const skills: Skill[] = meta
-      .filter(m => m.found)
-      .map(m => ({
-        name: m.name,
-        description: m.description,
-        tags: m.tags,
-        requires: m.requires,
-        mcp: m.mcp,
-        category: categoryBySlug[m.name] || 'meta',
-        enabled: config.skills[m.name]?.enabled ?? false,
-        schedule: config.skills[m.name]?.schedule || '0 12 * * *',
-        var: config.skills[m.name]?.var || '',
-        model: config.skills[m.name]?.model || '',
-      }))
-
-    const repo = getRepoSlug()
-    return NextResponse.json({ skills, model: config.model, gateway: config.gateway, repo, jsonrenderEnabled: config.jsonrenderEnabled })
+    return NextResponse.json(await getSkills())
   } catch (error: unknown) {
-    const msg = error instanceof Error ? error.message : 'Unknown error'
-    return NextResponse.json({ error: msg }, { status: 500 })
+    return errorResponse(error, 'Unknown error')
   }
 }
 
 export async function PATCH(request: Request) {
   try {
-    const { name, enabled, schedule, var: skillVar, model, skillModel, jsonrenderEnabled } = await request.json() as { name?: string; enabled?: boolean; schedule?: string; var?: string; model?: string; skillModel?: string; jsonrenderEnabled?: boolean }
+    const { name, enabled, schedule, var: skillVar, model, skillModel, harness, skillHarness, jsonrenderEnabled } = await request.json() as { name?: string; enabled?: boolean; schedule?: string; var?: string; model?: string; skillModel?: string; harness?: string; skillHarness?: string; jsonrenderEnabled?: boolean }
     const { content, sha } = await getFileContent('aeon.yml')
     let updated = content
 
@@ -92,30 +36,37 @@ export async function PATCH(request: Request) {
       updated = updateModelInConfig(updated, model)
     }
 
-    if (name && (typeof enabled === 'boolean' || typeof schedule === 'string' || typeof skillVar === 'string' || typeof skillModel === 'string')) {
+    // Top-level harness switch (claude | grok). Ignore unknown values.
+    if (typeof harness === 'string' && HARNESSES.includes(harness as Harness)) {
+      updated = updateHarnessInConfig(updated, harness as Harness)
+    }
+
+    if (name && (typeof enabled === 'boolean' || typeof schedule === 'string' || typeof skillVar === 'string' || typeof skillModel === 'string' || typeof skillHarness === 'string')) {
       updated = updateSkillInConfig(updated, name, {
         ...(typeof enabled === 'boolean' ? { enabled } : {}),
         ...(typeof schedule === 'string' && schedule ? { schedule } : {}),
         ...(typeof skillVar === 'string' ? { var: skillVar } : {}),
         ...(typeof skillModel === 'string' ? { model: skillModel } : {}),
+        ...(typeof skillHarness === 'string' ? { harness: skillHarness } : {}),
       })
     }
 
-    let sync: { synced: boolean; reason?: string } = { synced: true }
+    let sync: CommitResult = { synced: true }
     if (updated !== content) {
       const msg = model
         ? `chore: set model to ${model}`
-        : typeof jsonrenderEnabled === 'boolean'
-          ? `chore: ${jsonrenderEnabled ? 'enable' : 'disable'} json-render channel`
-          : `chore: update ${name} config`
+        : harness
+          ? `chore: set harness to ${harness}`
+          : typeof jsonrenderEnabled === 'boolean'
+            ? `chore: ${jsonrenderEnabled ? 'enable' : 'disable'} json-render channel`
+            : `chore: update ${name} config`
       await updateFile('aeon.yml', updated, sha, msg)
       sync = commitAndPush(['aeon.yml'], msg)
     }
 
-    return NextResponse.json({ ok: true, synced: sync.synced, ...(sync.reason ? { syncError: sync.reason } : {}) })
+    return NextResponse.json(syncResult(sync))
   } catch (error: unknown) {
-    const msg = error instanceof Error ? error.message : 'Unknown error'
-    return NextResponse.json({ error: msg }, { status: 500 })
+    return errorResponse(error, 'Unknown error')
   }
 }
 
@@ -128,20 +79,28 @@ export async function DELETE(request: Request) {
 
     await deleteDirectory(`skills/${name}`, `chore: delete ${name} skill`)
 
+    let configUpdated = true
+    let configError: string | undefined
     try {
       const { content, sha } = await getFileContent('aeon.yml')
       const updated = removeSkillFromConfig(content, name)
       if (updated !== content) {
         await updateFile('aeon.yml', updated, sha, `chore: remove ${name} from config`)
       }
-    } catch { /* config cleanup is best-effort */ }
+    } catch (e: unknown) {
+      // The aeon.yml write is a real GitHub-API/file-IO boundary that can throw;
+      // the skill dir is already deleted, so don't fail the request - but surface
+      // it instead of swallowing it silently and reporting a clean removal.
+      configUpdated = false
+      configError = e instanceof Error ? e.message : 'Failed to update aeon.yml'
+      console.error(`skills DELETE: failed to remove ${name} from aeon.yml:`, e)
+    }
 
     // One commit for both the removed skill dir and the aeon.yml cleanup.
     const sync = commitAndPush(['aeon.yml', `skills/${name}`], `chore: remove ${name} skill`)
 
-    return NextResponse.json({ ok: true, synced: sync.synced, ...(sync.reason ? { syncError: sync.reason } : {}) })
+    return NextResponse.json({ ...syncResult(sync), configUpdated, ...(configError ? { configError } : {}) })
   } catch (error: unknown) {
-    const msg = error instanceof Error ? error.message : 'Unknown error'
-    return NextResponse.json({ error: msg }, { status: 500 })
+    return errorResponse(error, 'Unknown error')
   }
 }

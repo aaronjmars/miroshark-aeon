@@ -1,5 +1,7 @@
 ---
+type: Skill
 name: Action Converter
+category: basics
 description: 5 concrete real-life actions, leverage-scored against open loops with specificity and anti-fluff gates
 var: ""
 tags: [meta]
@@ -13,7 +15,7 @@ Read the last 7 days of `memory/logs/` for recent activity, patterns, and what's
 Read `memory/topics/` (every file) for active threads.
 Read `memory/cron-state.json` for failing or stuck skills.
 Read `memory/watched-repos.md` for repos under attention.
-Read `articles/` (last 7 days, filenames only — peek at the 2 most recent for theme).
+Read `output/articles/` (last 7 days, filenames only — peek at the 2 most recent for theme).
 If `soul/SOUL.md` exists, read it for identity, voice, focus areas.
 Run `gh pr list --state open --limit 20 --json number,title,createdAt,isDraft,reviewDecision,headRefName 2>/dev/null` to get open PRs (used to anchor "ship" / "review" / "merge" loops).
 
@@ -88,7 +90,7 @@ Order the 5 actions by descending quality score, then by descending urgency.
 
 ### 6. Send via `./notify`
 
-Use this exact format. Telegram-MD friendly. **No leading spaces on any line** (Telegram renders indents as code blocks).
+Use this exact format (`./notify` renders the Markdown per-channel — just write it cleanly):
 
 ```
 *5 Actions — ${today}*
@@ -143,8 +145,8 @@ Append:
 
 Carrying loops forward in the log is what powers the 14-day novelty check and lets the next run see what's been deferred.
 
-## Sandbox note
+## Network note
 
-`gh pr list` works in the GitHub Actions sandbox via the `gh` CLI (handles auth internally). If `gh` is unavailable or returns empty, treat the open-PR loop source as `prs=0` and continue — do not block the whole run.
+`gh pr list` works in a GitHub Actions run via the `gh` CLI (handles auth internally, so no token touches the command line). If `gh` is unavailable or returns empty, treat the open-PR loop source as `prs=0` and continue — do not block the whole run.
 
 No outbound HTTP is required. All inputs are local files and `gh`. No new env vars.
