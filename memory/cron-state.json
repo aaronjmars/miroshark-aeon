@@ -184,5 +184,13 @@
     "consecutive_failures": 0,
     "success_rate": 1,
     "last_quality_score": 3
+  },
+  "token-movers": {
+    "last_dispatch": "2026-07-10T18:34:04Z",
+    "last_status": "dispatched"
+  },
+  "fetch-tweets": {
+    "last_dispatch": "2026-07-10T18:34:04Z",
+    "last_status": "dispatched"
   }
 }
