@@ -48,3 +48,10 @@ node_modules/
 # Stale artifacts
 .external-work
 .vuln-scan/
+
+# Runtime artifacts the runner drops at the repo root each run — the auto-commit
+# does `git add -A`, which sweeps them into a chore commit if they aren't ignored.
+# `secretcurl` is the auth shim regenerated from scripts/secretcurl.sh every run;
+# `notify-token-report.md` is a stray token-movers digest (skill now writes /tmp).
+/secretcurl
+/notify-token-report.md
