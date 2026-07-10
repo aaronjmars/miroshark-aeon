@@ -1,5 +1,5 @@
-*Tweet Digest — 2026-07-09*
+*Tweet Digest — 2026-07-10*
 
-*Theme: Distribution / Mini App Launch*
-@miroshark\_: MiroShark mini app just landed on Farcaster — simulate anything with dozens of agents in minutes, now live — [link](https://x.com/miroshark_/status/2074832364505559097)
-@miroshark\_: Farcaster mini app direct link — [farcaster.xyz/miniapps/miroshark](https://x.com/miroshark_/status/2074832407807561893)
+*Theme: World Cup / Civil Unrest Simulation*
+@miroshark_: simulating tonight's France vs Morocco World Cup match clashes in Paris — agentic report dropped to French police & interior ministry accounts — [link](https://x.com/miroshark_/status/2075211451573121231)
+@miroshark_: two sims now live — clashes scenario + the match itself 🦈 — [link](https://x.com/miroshark_/status/2075216795783320043)
