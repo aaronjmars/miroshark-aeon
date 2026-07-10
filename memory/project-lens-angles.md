@@ -1,3 +1,6 @@
+---
+type: Reference
+---
 # Project Lens — Angle History
 
 Tracks angle categories and theses used, to avoid repeats within 14 days.

@@ -16,9 +16,10 @@ skills:
   auto-merge: { enabled: false, schedule: "0 14 * * *" } # merge green PRs daily at 2 PM UTC; max 3 per run
   github-monitor: { enabled: false, schedule: "0 9 * * *", var: "" } # watch your repos. var: empty=combined monitor (PRs/issues/releases) | issues | releases | prs | owner/repo (folds in github-issues/github-releases/pr-tracker)
   github-trending: { enabled: false, schedule: "0 9 * * *", var: "" } # trending repos + Hugging Face Hub. var: empty=GitHub | <lang> | hf | hf:{models,datasets,spaces}
+  repo-pulse: { enabled: true, schedule: "0 10 */2 * *" } # (ported custom, no template equiv) new stars/forks/releases for watched repos + stargazer/forker profile enrichment + QUIET/STEADY/ACTIVE/SURGE growth verdict. Feeds operator-scorecard/price-alert/write-tweet. Reads memory/watched-repos.md.
 
   # --- Midday (12 PM UTC) ---
-  token-movers: { enabled: false, schedule: "0 12 * * *", var: "" } # market-movers scan + single-token deep report. var: empty=movers (CoinGecko) | geckoterminal[:chain]=on-chain runners | category:<slug> | <address|symbol|token:sym>=single-token report. Optional COINGECKO/ALCHEMY/XAI/BASE_RPC keys.
+  token-movers: { enabled: true, schedule: "0 6 * * *", var: "token" } # market-movers scan + single-token deep report. var: empty=movers (CoinGecko) | geckoterminal[:chain]=on-chain runners | category:<slug> | <address|symbol|token:sym>=single-token report. Optional COINGECKO/ALCHEMY/XAI/BASE_RPC keys.
   onchain-monitor: { enabled: false, schedule: "0 12 * * *" }
   distribute-tokens: { enabled: false, schedule: "workflow_dispatch", var: "" } # on-demand contributor rewards. var: empty/<label>=distribute (send) | plan[:week]=compute reward plan | all[:week]=plan+send | dry-run (folds in contributor-reward). BANKR_API_KEY for send.
   defi-overview: { enabled: false, schedule: "0 12 * * *", var: "" } # one-pass DeFi read: tracked-protocol positions + macro context (regime verdict, movers, yields, fees, F&G, prediction markets; refreshes memory/topics/market-context.md). var: empty=full | positions[:label] | macro | <chain/protocol focus>. Optional COINGECKO_API_KEY.
@@ -43,7 +44,7 @@ skills:
   # --- Repo intelligence (3 PM UTC) ---
 
   # --- Late afternoon (4 PM UTC) ---
-  changelog: { enabled: false, schedule: "0 16 * * *", var: "" } # changelog from recent commits/PRs. var: empty/owner/repo=in-repo | push-to:owner/website-repo=cross-repo changelog PR (needs GH_GLOBAL)
+  changelog: { enabled: true, schedule: "0 8 */3 * *", var: "push-to:aaronjmars/miroshark-website" } # (was docs-sync) cross-repo changelog PR: product=aaronjmars/miroshark (from memory/docs-sync.md) -> website=aaronjmars/miroshark-website. needs GH_GLOBAL
   vuln-scanner: { enabled: false, schedule: "0 16 * * 6", var: "" } # security scan + disclose. var: empty/owner/repo=scan | resubmit[:owner/repo]=PVR re-submit | disclose=queue armed emails (folds in pvr-watchlist/disclosure-emailer). RESEND_* for email.
   deploy-prototype: { enabled: false, schedule: "workflow_dispatch", var: "" } # on-demand — build app and deploy to Vercel
   base-mcp: { enabled: false, schedule: "workflow_dispatch", var: "" } # on-demand — Base Account access via the Base MCP server (mcp.base.org)
@@ -56,7 +57,7 @@ skills:
   okf-ingest: { enabled: false, schedule: "workflow_dispatch", var: "" } # on-demand — fetch+validate+QUARANTINE an EXTERNAL OKF bundle into memory/topics/ingested + open a PR (untrusted content; needs scripts/prefetch-okf.sh). var: git-url | owner/repo[#subdir]
 
   # --- X / social (5 PM UTC) ---
-  fetch-tweets: { enabled: false, schedule: "0 17 * * *", var: "" } # curate X/Twitter. var: keyword:<q> | topic:<t> | account:<handle> (empty=digest tracked accounts) | list:<ids>[|topic] | agent-buzz[:<t>]. Optional XAI_API_KEY.
+  fetch-tweets: { enabled: true, schedule: "0 17 * * *", var: "account:" } # (was tweet-digest) account-based digest of tracked X accounts from memory/topics/tracked-accounts.yml. curate X/Twitter. var: keyword:<q> | topic:<t> | account:<handle> (empty=digest tracked accounts) | list:<ids>[|topic] | agent-buzz[:<t>]. Optional XAI_API_KEY.
   reply-maker: { enabled: false, schedule: "0 17 * * *", var: "" } # draft X replies. var: empty=discover reply-worthy tweets | @handle | <listID> | <topic> | from-logs (reply to flagged log opportunities). Optional XAI_API_KEY.
 
   # --- Content distribution (runs 30 min after article-generating skills) ---
@@ -76,7 +77,7 @@ skills:
   fork-fleet: { enabled: false, schedule: "0 10 * * 1", var: "" } # fork divergence: code (unique commits/skills) + config (aeon.yml vs upstream defaults; folds in fork-digest). var: empty=both | code | config | fork=owner/repo | repo=owner/repo
   spawn-instance: { enabled: false, schedule: "workflow_dispatch", var: "" } # on-demand — var: "name: purpose"
   fleet-control: { enabled: false, schedule: "0 9,15 * * *", var: "" } # managed child instances. var: empty=health check | status | dispatch <inst|*> <skill> [var=…] | scorecard (fleet-wide runs/tokens/cost/reliability; folds in fleet-scorecard)
-  shiplog: { enabled: false, schedule: "0 9 * * 1" } # everything shipped SINCE THE LAST RUN (memory/state/shiplog-last.json) — cross-repo PRs/commits, security fixes merged into others' repos, star deltas, X/ecosystem traction → digest article + ready-to-post shiplog in the operator's voice. Cadence-agnostic: this schedule just sets frequency (daily/weekly/on-demand). Config: memory/products.md + memory/watched-repos.md. Optional XAI_API_KEY (X traction) + GH_GLOBAL (cross-repo reach). var: since:DATE | days:N | dry-run | owner/repo | <theme>.
+  shiplog: { enabled: true, schedule: "0 9 * * 1,4" } # everything shipped SINCE THE LAST RUN (memory/state/shiplog-last.json) — cross-repo PRs/commits, security fixes merged into others' repos, star deltas, X/ecosystem traction → digest article + ready-to-post shiplog in the operator's voice. Cadence-agnostic: this schedule just sets frequency (daily/weekly/on-demand). Config: memory/products.md + memory/watched-repos.md. Optional XAI_API_KEY (X traction) + GH_GLOBAL (cross-repo reach). var: since:DATE | days:N | dry-run | owner/repo | <theme>.
   operator-scorecard: { enabled: false, schedule: "30 10 * * 1", var: "" } # Monday — weekly plain-language scorecard: agent health + community growth + economic activity (worst-of-three OK/WATCH/DEGRADED verdict). var: empty=scorecard (7d) | dry-run=no notify | N=window N hours | ops[ DATE]=end-of-day ops recap (shipped/failed/follow-up) | push[ owner/repo]=diff-deep-dive push recap (folds in ops-recap + push-recap)
 
   # --- Paid ads (AdManage.ai) ---
@@ -124,14 +125,14 @@ skills:
   # Product / ops (config: memory/products.md)
 
   # Self-maintenance / meta
-  memory-flush: { enabled: false, schedule: "30 23 * * *" } # daily — promote important recent log entries into MEMORY.md
+  memory-flush: { enabled: true, schedule: "0 18 * * 0" } # weekly (Sun) — promote important recent log entries into MEMORY.md
 
   # Utilities / on-demand
 
   send-email: { enabled: false, schedule: "workflow_dispatch", var: "" } # on-demand — compose + send a 1:1 email to a named recipient via Resend (general sibling of disclosure-emailer). var: "to=… | subject=… | about=…"
   idea-forge: { enabled: false, schedule: "0 9 * * 1", var: "" } # weekly business-idea engine. var: empty/generate=timing-scored wedges | validate[:theme]=viability screen | memo[:theme]=2 evidence-backed memos
   # --- Fallback (must be last) ---
-  heartbeat: { enabled: true, schedule: "0 8 * * *", var: "" } # ambient fleet-health check (default) — surfaces anything worth attention. var: empty=ambient check | <area>=ambient focused on that area | brief[:<area>]=priority brief (3 things to focus on, why now, what moved; folds in priority-brief)
+  heartbeat: { enabled: true, schedule: "0 19 * * *", var: "" } # ambient fleet-health check (default) — surfaces anything worth attention. var: empty=ambient check | <area>=ambient focused on that area | brief[:<area>]=priority brief (3 things to focus on, why now, what moved; folds in priority-brief)
 
 # Reactive triggers — event-driven skill dispatch based on cron-state.json conditions.
 # Skills with schedule: "reactive" are never cron-matched. Instead, the scheduler
@@ -215,7 +216,7 @@ channels:
 # Messaging integration
 # Polls for messages every 5 minutes on Telegram/Discord/Slack.
 telegram:
-  enabled: true
+  enabled: false
 
 # Observability (optional) — no config lives here; it's credential-driven.
 # Set the repo secrets LANGFUSE_PUBLIC_KEY + LANGFUSE_SECRET_KEY and every
