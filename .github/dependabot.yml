@@ -42,6 +42,13 @@ updates:
       dashboard:
         patterns:
           - "*"
+    ignore:
+      # Next.js 16.2.x can't use the TypeScript 7 native compiler — `next build`
+      # aborts at the type-check step ("required package(s) not installed").
+      # Skip 7.x until Next adds TS 7 support; 6.x updates still flow. (mcp-server
+      # builds with raw `tsc`, which works under TS 7, so it is NOT ignored there.)
+      - dependency-name: "typescript"
+        versions: ["7.x"]
 
   # MCP server — exposes Aeon skills as Claude tools.
   - package-ecosystem: "npm"
