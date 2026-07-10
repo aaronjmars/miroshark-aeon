@@ -1,0 +1,97 @@
+{
+  "root": "card_root",
+  "state": {},
+  "elements": {
+    "card_root": {
+      "type": "Card",
+      "props": {
+        "title": "Tweet Digest — 2026-07-10"
+      },
+      "children": [
+        "theme_label",
+        "separator_1",
+        "tweet_1_stack",
+        "separator_2",
+        "tweet_2_stack"
+      ]
+    },
+    "theme_label": {
+      "type": "Text",
+      "props": {
+        "text": "Theme: Content",
+        "variant": "muted"
+      },
+      "children": []
+    },
+    "separator_1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "tweet_1_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet_1_card",
+        "tweet_1_link"
+      ]
+    },
+    "tweet_1_card": {
+      "type": "TweetCard",
+      "props": {
+        "author": "MiroShark",
+        "handle": "miroshark_",
+        "text": "kicked off the MiroShark blog — new content channel, starts with an intro piece"
+      },
+      "children": []
+    },
+    "tweet_1_link": {
+      "type": "Link",
+      "props": {
+        "label": "link",
+        "href": "https://x.com/miroshark_/status/2075485857469939842"
+      },
+      "children": []
+    },
+    "separator_2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "tweet_2_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet_2_card",
+        "tweet_2_link"
+      ]
+    },
+    "tweet_2_card": {
+      "type": "TweetCard",
+      "props": {
+        "author": "MiroShark",
+        "handle": "miroshark_",
+        "text": "teased the France-Morocco clash sim before posting results"
+      },
+      "children": []
+    },
+    "tweet_2_link": {
+      "type": "Link",
+      "props": {
+        "label": "link",
+        "href": "https://x.com/miroshark_/status/2075211457151545599"
+      },
+      "children": []
+    }
+  }
+}
