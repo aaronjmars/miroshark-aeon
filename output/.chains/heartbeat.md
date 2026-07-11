@@ -1,15 +1,13 @@
-Fleet is clean. Nothing needs attention — no notification sent.
+Fleet is healthy — no notification needed.
 
 ## Summary
 
-**Heartbeat ambient check — 2026-07-10 (third run today)**
+**Ambient heartbeat check — 2026-07-11 19:07 UTC**
 
-- **P0:** All 7 enabled skills healthy. No failures, stuck skills, or degradation.
+- **P0:** All 7 enabled skills healthy. No failed, stuck, or degraded skills. Heartbeat self-check OK (last success ~23h ago, under 36h threshold).
 - **P1:** No open PRs, no urgent issues.
-- **P2:** No flagged memory items needing follow-up.
+- **P2:** No newly flagged memory items.
 - **P3:** All enabled skills within 2× their schedule interval.
-- **Token pulse:** MIROSHARK at $0.000002470 (+17.5% 24h), verdict CONSOLIDATING.
-- **Files updated:** `docs/status.md` (🟢 OK), `memory/logs/2026-07-10.md` (log appended).
-- **Notification:** none — clean run.
+- **Overall: 🟢 OK**
 
-`HEARTBEAT_OK · STATUS_PAGE=OK`
+**Status page updated** (`docs/status.md`) — token pulse refreshed with today's MIROSHARK data: $0.000002307, −6.6% 24h, CONSOLIDATING. Log appended to `memory/logs/2026-07-11.md`. No notification sent (nothing needs attention).
