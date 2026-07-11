@@ -1,0 +1,46 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "Tweet Digest — 2026-07-11"
+      },
+      "children": [
+        "badge-theme",
+        "separator-1",
+        "tweet-1",
+        "link-tweet"
+      ]
+    },
+    "badge-theme": {
+      "type": "Badge",
+      "props": {
+        "text": "Security Warning",
+        "variant": "destructive"
+      }
+    },
+    "separator-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "tweet-1": {
+      "type": "TweetCard",
+      "props": {
+        "author": "miroshark",
+        "handle": "miroshark_",
+        "text": "heads up on scammers targeting the community — verify any account claiming to be Miroshark before sending funds or DMs"
+      }
+    },
+    "link-tweet": {
+      "type": "Link",
+      "props": {
+        "label": "View Tweet",
+        "href": "https://x.com/miroshark_/status/2075660689004261482"
+      }
+    }
+  }
+}

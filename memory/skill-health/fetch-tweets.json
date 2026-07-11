@@ -1,13 +1,17 @@
 {
   "skill": "fetch-tweets",
-  "last_analyzed": "2026-07-10T18:37:45Z",
+  "last_analyzed": "2026-07-11T17:17:03Z",
   "quality_score": 4,
-  "assessment": "Substantive execution with specific tweet IDs, successful API call, proper deduplication, and clear categorization",
+  "assessment": "Skill executed properly: fetched tweets via API (http=200), performed dedup against 2-day history, identified 1 new security warning, sent themed notification, logged entry. Substantive and well-structured.",
   "flags": [],
   "avg_score": 4,
   "history": [
     {
       "date": "2026-07-10",
+      "score": 4
+    },
+    {
+      "date": "2026-07-11",
       "score": 4
     }
   ]
