@@ -1,4 +1,9 @@
-*Tweet Digest — 2026-07-11*
+ℹ️ Tweet Digest
 
-*Theme: Security Warning*
-x.com/miroshark_: heads up on scammers targeting the community — verify any account claiming to be Miroshark before sending funds or DMs — [link](https://x.com/miroshark_/status/2075660689004261482)
+*Tweet Digest — 2026-07-12*
+
+*Product / Website*
+x.com/miroshark_: drops a new website section 🦈 — [link](https://x.com/miroshark_/status/2076033274862841863)
+
+*Simulation*
+x.com/miroshark_: threads two live sim links in the France vs Morocco World Cup thread — clash sim + match sim — [link](https://x.com/miroshark_/status/2075216795783320043)

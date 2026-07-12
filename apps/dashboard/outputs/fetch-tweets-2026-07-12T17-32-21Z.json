@@ -1,0 +1,91 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Tweet Digest",
+        "description": "2026-07-12"
+      },
+      "children": [
+        "stack_main"
+      ]
+    },
+    "stack_main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "section_product",
+        "separator_1",
+        "section_simulation"
+      ]
+    },
+    "section_product": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "heading_product",
+        "tweet_product"
+      ]
+    },
+    "heading_product": {
+      "type": "Heading",
+      "props": {
+        "text": "Product / Website",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "tweet_product": {
+      "type": "TweetCard",
+      "props": {
+        "author": "miroshark_",
+        "handle": "miroshark_",
+        "text": "drops a new website section 🦈 — [link](https://x.com/miroshark_/status/2076033274862841863)"
+      },
+      "children": []
+    },
+    "separator_1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "section_simulation": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "heading_simulation",
+        "tweet_simulation"
+      ]
+    },
+    "heading_simulation": {
+      "type": "Heading",
+      "props": {
+        "text": "Simulation",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "tweet_simulation": {
+      "type": "TweetCard",
+      "props": {
+        "author": "miroshark_",
+        "handle": "miroshark_",
+        "text": "threads two live sim links in the France vs Morocco World Cup thread — clash sim + match sim — [link](https://x.com/miroshark_/status/2075216795783320043)"
+      },
+      "children": []
+    }
+  }
+}
