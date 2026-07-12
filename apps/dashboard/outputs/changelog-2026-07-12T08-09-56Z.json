@@ -1,0 +1,94 @@
+{
+  "root": "card_changelog",
+  "state": {},
+  "elements": {
+    "card_changelog": {
+      "type": "Card",
+      "props": {
+        "title": "Changelog"
+      },
+      "children": [
+        "date_text",
+        "repos_section",
+        "separator1",
+        "entry_section",
+        "pr_link"
+      ]
+    },
+    "date_text": {
+      "type": "Text",
+      "props": {
+        "text": "2026-07-12",
+        "variant": "muted"
+      }
+    },
+    "repos_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "from_repo",
+        "arrow",
+        "to_repo"
+      ]
+    },
+    "from_repo": {
+      "type": "Badge",
+      "props": {
+        "text": "aaronjmars/miroshark"
+      }
+    },
+    "arrow": {
+      "type": "Text",
+      "props": {
+        "text": "→"
+      }
+    },
+    "to_repo": {
+      "type": "Badge",
+      "props": {
+        "text": "aaronjmars/miroshark-website"
+      }
+    },
+    "separator1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "entry_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "entry_count",
+        "entry_title"
+      ]
+    },
+    "entry_count": {
+      "type": "Text",
+      "props": {
+        "text": "1 new PR → changelog entry",
+        "variant": "caption"
+      }
+    },
+    "entry_title": {
+      "type": "Text",
+      "props": {
+        "text": "Python backend dependency maintenance"
+      }
+    },
+    "pr_link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #139",
+        "href": "https://github.com/aaronjmars/miroshark-website/pull/139",
+        "source": "GitHub"
+      }
+    }
+  }
+}
