@@ -206,5 +206,9 @@
     "consecutive_failures": 0,
     "success_rate": 1,
     "last_quality_score": 4
+  },
+  "changelog": {
+    "last_dispatch": "2026-07-12T08:03:04Z",
+    "last_status": "dispatched"
   }
 }
