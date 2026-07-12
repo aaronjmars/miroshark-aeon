@@ -1,8 +1,8 @@
 {
   "skill": "token-movers",
-  "last_analyzed": "2026-07-11T06:42:19Z",
+  "last_analyzed": "2026-07-12T06:22:02Z",
   "quality_score": 4,
-  "assessment": "Substantive token tracking with specific metrics (price delta, volume, buy/sell ratio, whale trades, liquidity trends) and clear verdict; proper file outputs created.",
+  "assessment": "Substantive, well-structured token report with specific metrics, multi-timeframe trends, and clear verdict; proper file outputs and notifications.",
   "flags": [],
   "avg_score": 4,
   "history": [
@@ -12,6 +12,10 @@
     },
     {
       "date": "2026-07-11",
+      "score": 4
+    },
+    {
+      "date": "2026-07-12",
       "score": 4
     }
   ]

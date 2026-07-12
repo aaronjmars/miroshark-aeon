@@ -1,11 +1,11 @@
-ℹ️ $MiroShark — CONSOLIDATING
+ℹ️ MiroShark — CONSOLIDATING
 
-**$MiroShark — CONSOLIDATING**
+*$MiroShark — CONSOLIDATING*
 
-Price slipped −6.6% overnight to $0.000002307, with the buy/sell ratio flipping from 2.88 to 0.65 on below-average volume.
+Price slipped −10.4% to $0.000002067 on thin $3,856 volume (0.53× avg); no whale trades.
 
-Price $0.000002307 (−6.6% 24h) | Liq $225.6K (−2.6%) | Vol $4.97K (0.56× 7d)
-Buys/Sells 13/20 (ratio 0.65) | Whales: 2
+Price $0.000002067 (−10.4% 24h) | Liq $214.6K (−4.9%) | Vol $3.9K (0.53× 7d)
+Buys/Sells 12/20 (ratio 0.60) | Whales: 0
 Treasury: 6.0000 (+0.0000 24h)
 
 Chart: https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209
