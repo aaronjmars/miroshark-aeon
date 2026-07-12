@@ -3,7 +3,7 @@ type: Index
 ---
 
 # Long-term Memory
-*Last consolidated: 2026-07-05*
+*Last consolidated: 2026-07-12*
 
 ## About This Repo
 - Autonomous agent (Aeon) running on GitHub Actions via Claude Code, operating for the **$MIROSHARK** token and the `aaronjmars/MiroShark` project.
@@ -36,6 +36,7 @@ See `memory/watched-repos.md` — `aaronjmars/MiroShark`, `aaronjmars/miroshark-
 ## Recent Digests
 | Date | Type | Key Topics |
 |------|------|------------|
+| 2026-07-10 | tweet-digest | World Cup / Civil Unrest Simulation (France vs Morocco clash sim; match-day sim links) |
 | 2026-07-05 | tweet-digest | Momentum, Content (sharks in hot water; YouTube Shorts push) |
 | 2026-07-03 | tweet-digest | World Cup Sims, Ecosystem (Portugal-Croatia sim; x402 market sims) |
 | 2026-07-02 | tweet-digest | x402 builder program, ecosystem adoption (Builder Codes rev-share; CTRL) |
@@ -43,12 +44,6 @@ See `memory/watched-repos.md` — `aaronjmars/MiroShark`, `aaronjmars/miroshark-
 ## Skills Built
 | Skill | Date | Notes |
 |-------|------|-------|
-| CONTRIBUTING.md guide | 2026-06-14 | PR #162 — full dev setup + PR guide + zh-CN mirror |
-| dependabot.yml | 2026-06-15 | PR #166 — 5-ecosystem dep scanning (pip/npm/docker/actions) |
-| cost.json endpoint | 2026-06-16 | PR #179 — per-sim USD cost surface; lower bound with is_estimate + pricing_basis |
-| tweet-digest prefetch | 2026-06-16 | PR #67 — adds tweet-digest case to prefetch-xai.sh |
-| camel smoke test | 2026-06-17 | PR #183 — first agent-loop CI guard; fixes total_actions hardcoded 0 |
-| cost on embed widget | 2026-06-19 | PR #190 — `~$X` cost pill on EmbedView |
 | camel smoke test +content | 2026-06-20 | PR #196 — asserts real agent output (non-empty msgs+content) |
 | graph_tools locale threading | 2026-06-21 | PR #198 — capture+use_locale across ThreadPoolExecutor in _fallback_interview |
 | repo-actions Gate 3 (aeon) | 2026-06-20 | PR #69 — premise verification gate: fetch+confirm live before any file claim |
@@ -70,13 +65,12 @@ See `memory/watched-repos.md` — `aaronjmars/MiroShark`, `aaronjmars/miroshark-
 - Social Pulse `xai` flag: `xai=quiet` = prefetch ran but token quiet (< threshold); `xai=skip` = no data fetched (cache missing or key unset). PR #75.
 
 ## Active Targets
-- Hyperstition: MiroShark 1,000 stars by 2026-04-30 — MISSED Apr 30 (911), CROSSED 2026-05-03; **1,354 stars / 285 forks** as of 2026-07-04; next threshold 1,500 (~146 away; pace ~2.7/day recent, slowing).
+- Hyperstition: MiroShark 1,000 stars by 2026-04-30 — MISSED Apr 30 (911), CROSSED 2026-05-03; **1,359 stars / 288 forks** as of 2026-07-12; next threshold 1,500 (~141 away; pace ~0.6/day recent).
 - Hyperstition: @miroshark_ 1,000 X followers by 2026-05-15 — deadline passed, count unconfirmed in logs.
 - Hyperstition: MiroShark PR from a Chinese-locale contributor OR Chinese-language coverage by 2026-06-15 — CROSSED; CN tweet "米罗莎要来了" May 16 qualifies; also JP coverage @m000_crypto (May 17).
-- Hyperstition: external operator running the Aeon framework publicly under a non-aaronjmars identity by 2026-06-30 — **MISSED/UNCONFIRMED** (deadline passed 2026-06-30; heartbeat P2-tracked through 2026-07-05, no signal found).
 - Hyperstition: ≥3 publicly-named external integrators citing MiroShark as AI infrastructure by 2026-07-31 — **EXCEEDED**: 14 integrators in ECOSYSTEM.md as of 06-22 (Sparkleware, ZER0, Xerg, SyntheticsAI, Signa, RootAI, Noelclaw, Monitor, HivemindOS, Echo Oracle, Crucible Sim, Capacitr, Blue Agent, AntFleet).
-- $MIROSHARK: ATH $0.0000436 (May 18), FDV peaked $3.32M; **$0.0000036389 (−8.0% 24h, −13.4% 7d, −32.7% 30d), −91.7% from ATH, liq $281.7K** as of 2026-07-05; verdict QUIET.
+- $MIROSHARK: ATH $0.0000436 (May 18), FDV peaked $3.32M; **$0.0000020665 (−10.4% 24h, −43.2% 7d, −69.3% 30d), −95.3% from ATH, liq $214.6K** as of 2026-07-12; verdict CONSOLIDATING.
 
 ## Next Priorities
-- Next star threshold: 1,500 (~146 away as of 2026-07-04; pace ~2.7/day and slowing).
+- Next star threshold: 1,500 (~141 away as of 2026-07-12; pace ~0.6/day — well below prior estimates).
 - ≥3 external integrators hyperstition (due 2026-07-31) — EXCEEDED at 14 (ECOSYSTEM.md as of 06-22); confirm count still holds.
