@@ -7,6 +7,6 @@
 #   owner/repo      — trusts only this specific repo
 
 aaronjmars
-aaronjmars/aeon
+aeonfun/aeon
 aaronjmars/aeon-agent
 AntFleet/aeon-skills
