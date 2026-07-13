@@ -1,8 +1,8 @@
 {
   "skill": "token-movers",
-  "last_analyzed": "2026-07-12T06:22:02Z",
+  "last_analyzed": "2026-07-13T06:36:13Z",
   "quality_score": 4,
-  "assessment": "Substantive, well-structured token report with specific metrics, multi-timeframe trends, and clear verdict; proper file outputs and notifications.",
+  "assessment": "Substantive token data report with clear verdict, specific metrics, and proper state tracking; actionable follow-up guidance on volume regime shift.",
   "flags": [],
   "avg_score": 4,
   "history": [
@@ -16,6 +16,10 @@
     },
     {
       "date": "2026-07-12",
+      "score": 4
+    },
+    {
+      "date": "2026-07-13",
       "score": 4
     }
   ]

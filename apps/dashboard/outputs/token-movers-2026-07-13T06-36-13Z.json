@@ -1,0 +1,162 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "$MIROSHARK — QUIET"
+      },
+      "children": [
+        "text_narrative",
+        "sep1",
+        "grid_metrics",
+        "sep2",
+        "stack_activity",
+        "sep3",
+        "stack_periods",
+        "sep4",
+        "link_chart"
+      ]
+    },
+    "text_narrative": {
+      "type": "Text",
+      "props": {
+        "text": "Volume at 0.33× the 7-day average ($2.4K on 7 buys / 10 sells) — quietest session in recent days; price -1.35% on minimal flow.",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "grid_metrics": {
+      "type": "Grid",
+      "props": {
+        "columns": 3,
+        "gap": "md"
+      },
+      "children": [
+        "stat_price",
+        "stat_liq",
+        "stat_vol"
+      ]
+    },
+    "stat_price": {
+      "type": "Stat",
+      "props": {
+        "label": "Price",
+        "value": "$0.000002039",
+        "delta": "-1.35%",
+        "trend": "down"
+      },
+      "children": []
+    },
+    "stat_liq": {
+      "type": "Stat",
+      "props": {
+        "label": "Liquidity",
+        "value": "$213.1K",
+        "delta": "-0.69%",
+        "trend": "down"
+      },
+      "children": []
+    },
+    "stat_vol": {
+      "type": "Stat",
+      "props": {
+        "label": "Volume (24h)",
+        "value": "$2.4K",
+        "delta": "0.33× 7d avg"
+      },
+      "children": []
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "stack_activity": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "text_buysells",
+        "text_whales"
+      ]
+    },
+    "text_buysells": {
+      "type": "Text",
+      "props": {
+        "text": "Buys/Sells: 7/10 (ratio 0.70)",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "text_whales": {
+      "type": "Text",
+      "props": {
+        "text": "Whales: 0",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "stack_periods": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "text_7d",
+        "text_30d"
+      ]
+    },
+    "text_7d": {
+      "type": "Text",
+      "props": {
+        "text": "7d: -40.3%",
+        "variant": "caption"
+      },
+      "children": []
+    },
+    "text_30d": {
+      "type": "Text",
+      "props": {
+        "text": "30d: ~-64.0%",
+        "variant": "caption"
+      },
+      "children": []
+    },
+    "sep4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "link_chart": {
+      "type": "Link",
+      "props": {
+        "label": "View Chart on GeckoTerminal",
+        "href": "https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209"
+      },
+      "children": []
+    }
+  }
+}
