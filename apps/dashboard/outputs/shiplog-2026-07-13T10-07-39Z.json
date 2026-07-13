@@ -1,0 +1,157 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "aeon ⭐🦈 shiplog — Jul 9 → 13"
+      },
+      "children": [
+        "intro_text",
+        "shipped_heading",
+        "shipped_items",
+        "sep1",
+        "traction_heading",
+        "traction_content",
+        "sep2",
+        "star_decoration",
+        "article_link"
+      ]
+    },
+    "intro_text": {
+      "type": "Text",
+      "props": {
+        "text": "shipped 36 PRs this window. the bytes:",
+        "variant": "lead"
+      }
+    },
+    "shipped_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Shipped",
+        "level": "h3"
+      }
+    },
+    "shipped_items": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "item1",
+        "item2",
+        "item3",
+        "item4",
+        "item5"
+      ]
+    },
+    "item1": {
+      "type": "Text",
+      "props": {
+        "text": "aeon v0.1.0 live: first stable release after 70 partners. grok + multi-harness, OKF, skill attestation, langfuse opt-in ⭐"
+      }
+    },
+    "item2": {
+      "type": "Text",
+      "props": {
+        "text": "retire postprocess: irreversible sends now fire in-run via secretcurl. one failure surface, not two."
+      }
+    },
+    "item3": {
+      "type": "Text",
+      "props": {
+        "text": "README halved (733 → 596 lines): CHANGELOG seeded, community packs listed — first: AgentLink"
+      }
+    },
+    "item4": {
+      "type": "Text",
+      "props": {
+        "text": "miroshark-aeon migrated onto v0.1.0 template: agent repo ate its own cooking. state preserved, clean slate."
+      }
+    },
+    "item5": {
+      "type": "Text",
+      "props": {
+        "text": "quality pass: scorer fix, /tmp routing for transient writes, mcp CLI error surfacing, color tokens unified"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "traction_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Traction",
+        "level": "h3"
+      }
+    },
+    "traction_content": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "traction_item1",
+        "traction_item2",
+        "traction_item3",
+        "traction_item4"
+      ]
+    },
+    "traction_item1": {
+      "type": "Text",
+      "props": {
+        "text": "@aeonframework in \"Leading\" tier — @Base_Insights (22k) Base Ecosystem Tier List Jul 9"
+      }
+    },
+    "traction_item2": {
+      "type": "Stat",
+      "props": {
+        "label": "aeon",
+        "value": "574 ⭐",
+        "delta": "+3",
+        "trend": "up"
+      }
+    },
+    "traction_item3": {
+      "type": "Stat",
+      "props": {
+        "label": "MiroShark",
+        "value": "1,360 ⭐",
+        "delta": "+3",
+        "trend": "up"
+      }
+    },
+    "traction_item4": {
+      "type": "Text",
+      "props": {
+        "text": "@tryskopos building cross-chain DeFi on aeon — spotlighted by @aeonframework"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "star_decoration": {
+      "type": "Text",
+      "props": {
+        "text": "⭐"
+      }
+    },
+    "article_link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full shiplog article",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/output/articles/shiplog-2026-07-13.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}
