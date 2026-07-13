@@ -1,0 +1,138 @@
+{
+  "root": "card-root",
+  "state": {},
+  "elements": {
+    "card-root": {
+      "type": "Card",
+      "props": {
+        "title": "Tweet Digest — 2026-07-13"
+      },
+      "children": [
+        "section-new-surfaces",
+        "separator-1",
+        "section-pitch"
+      ]
+    },
+    "section-new-surfaces": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading-new-surfaces",
+        "tweet-1-stack",
+        "tweet-2-stack"
+      ]
+    },
+    "heading-new-surfaces": {
+      "type": "Heading",
+      "props": {
+        "text": "New Surfaces",
+        "level": "h2"
+      }
+    },
+    "tweet-1-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-1",
+        "link-1"
+      ]
+    },
+    "tweet-1": {
+      "type": "TweetCard",
+      "props": {
+        "author": "miroshark_",
+        "handle": "miroshark_",
+        "text": "now live on the Base App — drop in any trade idea, headline, or question and dozens of agents simulate it out 🦈"
+      }
+    },
+    "link-1": {
+      "type": "Link",
+      "props": {
+        "label": "View on Twitter",
+        "href": "https://x.com/miroshark_/status/2076665633756864732"
+      }
+    },
+    "tweet-2-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-2",
+        "link-2"
+      ]
+    },
+    "tweet-2": {
+      "type": "TweetCard",
+      "props": {
+        "author": "miroshark_",
+        "handle": "miroshark_",
+        "text": "blog section launched, kicking off with an introductory article — new content surface for the engine"
+      }
+    },
+    "link-2": {
+      "type": "Link",
+      "props": {
+        "label": "View on Twitter",
+        "href": "https://x.com/miroshark_/status/2075485857469939842"
+      }
+    },
+    "separator-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "section-pitch": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading-pitch",
+        "tweet-3-stack"
+      ]
+    },
+    "heading-pitch": {
+      "type": "Heading",
+      "props": {
+        "text": "The Pitch",
+        "level": "h2"
+      }
+    },
+    "tweet-3-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-3",
+        "link-3"
+      ]
+    },
+    "tweet-3": {
+      "type": "TweetCard",
+      "props": {
+        "author": "miroshark_",
+        "handle": "miroshark_",
+        "text": "clearest distillation yet — LLMs predict the next word, not the next week; MiroShark spawns everyone with a stake in the scenario as an agent, they post/argue/bet, 10 minutes later you get a report"
+      }
+    },
+    "link-3": {
+      "type": "Link",
+      "props": {
+        "label": "View on Twitter",
+        "href": "https://x.com/miroshark_/status/2076679218499403965"
+      }
+    }
+  }
+}
