@@ -1,15 +1,8 @@
-Fleet is clean. All checks passed:
-
-- **P0**: No failed, stuck, or degraded skills. All 7 enabled skills healthy.
-- **P1**: No open PRs or urgent issues.
-- **P2**: No flagged memory items.
-- **P3**: All skills within 2× their schedule interval.
-
-`docs/status.md` regenerated with today's token pulse (MIROSHARK $0.000002039, −1.35% 24h, QUIET). No notification sent — nothing needs attention.
-
-**HEARTBEAT_OK · STATUS_PAGE=OK**
+Fleet is clean. All checks passed — no failures, no stuck skills, no open PRs/issues. `docs/status.md` regenerated with MIROSHARK at $0.000002138 (+5.96%, verdict: RALLYING). Log appended. `HEARTBEAT_OK · STATUS_PAGE=OK`.
 
 ## Summary
-- **Wrote**: `docs/status.md` (🟢 OK, token pulse from 2026-07-13 report)
-- **Appended**: `memory/logs/2026-07-13.md` under `### heartbeat` (mode: ambient)
-- **No notification**: clean run, all tiers green
+
+- **P0–P3:** All clear. 6 enabled skills healthy, no consecutive failures, no stalled PRs or issues.
+- **docs/status.md:** Regenerated — 🟢 OK, token pulse updated from today's report (RALLYING), repo-pulse removed (now disabled in aeon.yml).
+- **memory/logs/2026-07-14.md:** Appended `### heartbeat` entry with ambient mode results.
+- No notification sent (nothing needs attention).
