@@ -1,9 +1,9 @@
-**$MIROSHARK — QUIET**
+*$MiroShark — RALLYING*
 
-Volume at 0.33× the 7-day average ($2.4K on 7 buys / 10 sells) — quietest session in recent days; price -1.35% on minimal flow.
+Price up +5.96% 24h on 1.30× average volume ($8.9K) — first above-average-volume up session since early July. Gains were front-loaded; late session saw a sell cluster ($544/$269/$267) with buy/sell count at 12/56.
 
-Price $0.000002039 (-1.35% 24h) | Liq $213.1K (-0.69%) | Vol $2.4K (0.33× 7d)
-Buys/Sells 7/10 (ratio 0.70) | Whales: 0
-7d: -40.3% | 30d: ~-64.0%
+Price $0.000002138 (+5.96% 24h) | Liq $216.8K (+1.70%) | Vol $8.9K (1.30× 7d)
+Buys/Sells 12/56 (ratio 0.21) | Whales: 0
+7d: −34.4% | 30d: −62.3%
 
 Chart: https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209
