@@ -1,10 +1,7 @@
-ℹ️ Tweet Digest
+Done. All 3 tweets fetched from `miroshark_` (via X.AI API, http=200) were already in the seen set from the Jul 12–13 logs — no new signal, no notification sent. Log entry appended to `memory/logs/2026-07-14.md` with status `TWEET_DIGEST_OK`.
 
-*Tweet Digest — 2026-07-13*
-
-*Theme: New Surfaces*
-x.com/miroshark_: now live on the Base App — drop in any trade idea, headline, or question and dozens of agents simulate it out 🦈 — [link](https://x.com/miroshark_/status/2076665633756864732)
-x.com/miroshark_: blog section launched, kicking off with an introductory article — new content surface for the engine — [link](https://x.com/miroshark_/status/2075485857469939842)
-
-*Theme: The Pitch*
-x.com/miroshark_: clearest distillation yet — LLMs predict the next word, not the next week; MiroShark spawns everyone with a stake in the scenario as an agent, they post/argue/bet, 10 minutes later you get a report — [link](https://x.com/miroshark_/status/2076679218499403965)
+## Summary
+- **Source:** `account:` (empty arg) → all-tracked-accounts mode, single handle `miroshark_`
+- **Fetch:** X.AI API (`grok-4-1-fast` + `x_search`), http=200, 3 tweets returned
+- **Dedup:** all 3 already in SEEN_URLS (Jul 12 & Jul 13 logs) — 0 new
+- **Action:** no notification (clean run per spec); logged to `memory/logs/2026-07-14.md`
