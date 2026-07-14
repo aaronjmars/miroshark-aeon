@@ -1,0 +1,190 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Repo Pulse"
+      },
+      "children": [
+        "stack_main"
+      ]
+    },
+    "stack_main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "text_meta",
+        "heading_repo",
+        "stack_stats",
+        "separator_1",
+        "heading_stargazers",
+        "stack_stargazers",
+        "separator_2",
+        "heading_forks",
+        "stack_forks",
+        "separator_3",
+        "text_source"
+      ]
+    },
+    "text_meta": {
+      "type": "Text",
+      "props": {
+        "text": "2026-07-14",
+        "variant": "caption"
+      },
+      "children": []
+    },
+    "heading_repo": {
+      "type": "Heading",
+      "props": {
+        "text": "aaronjmars/MiroShark",
+        "level": "h2"
+      },
+      "children": []
+    },
+    "stack_stats": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "lg"
+      },
+      "children": [
+        "stat_stars",
+        "stat_forks",
+        "badge_status"
+      ]
+    },
+    "stat_stars": {
+      "type": "Stat",
+      "props": {
+        "label": "Stars",
+        "value": "1364",
+        "delta": "+2",
+        "trend": "up"
+      },
+      "children": []
+    },
+    "stat_forks": {
+      "type": "Stat",
+      "props": {
+        "label": "Forks",
+        "value": "290",
+        "delta": "+1",
+        "trend": "up"
+      },
+      "children": []
+    },
+    "badge_status": {
+      "type": "Badge",
+      "props": {
+        "text": "STEADY",
+        "variant": "default"
+      },
+      "children": []
+    },
+    "separator_1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "heading_stargazers": {
+      "type": "Heading",
+      "props": {
+        "text": "New Stargazers",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "stack_stargazers": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "link_nutter77",
+        "link_zoodsood_stargazer"
+      ]
+    },
+    "link_nutter77": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/nutter77-fossmc",
+        "href": "https://github.com/nutter77-fossmc"
+      },
+      "children": []
+    },
+    "link_zoodsood_stargazer": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/zoodsood",
+        "href": "https://github.com/zoodsood"
+      },
+      "children": []
+    },
+    "separator_2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "heading_forks": {
+      "type": "Heading",
+      "props": {
+        "text": "New Forks",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "stack_forks": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "link_fork_zoodsood",
+        "text_fork_repos"
+      ]
+    },
+    "link_fork_zoodsood": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/zoodsood",
+        "href": "https://github.com/zoodsood"
+      },
+      "children": []
+    },
+    "text_fork_repos": {
+      "type": "Text",
+      "props": {
+        "text": "— 17 repos",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "separator_3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "text_source": {
+      "type": "Text",
+      "props": {
+        "text": "Source: events",
+        "variant": "caption"
+      },
+      "children": []
+    }
+  }
+}
