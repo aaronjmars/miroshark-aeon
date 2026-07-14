@@ -16,7 +16,7 @@ skills:
   auto-merge: { enabled: false, schedule: "0 14 * * *" } # merge green PRs daily at 2 PM UTC; max 3 per run
   github-monitor: { enabled: false, schedule: "0 9 * * *", var: "" } # watch your repos. var: empty=combined monitor (PRs/issues/releases) | issues | releases | prs | owner/repo (folds in github-issues/github-releases/pr-tracker)
   github-trending: { enabled: false, schedule: "0 9 * * *", var: "" } # trending repos + Hugging Face Hub. var: empty=GitHub | <lang> | hf | hf:{models,datasets,spaces}
-  repo-pulse: { enabled: true, schedule: "0 10 */2 * *" } # (ported custom, no template equiv) new stars/forks/releases for watched repos + stargazer/forker profile enrichment + QUIET/STEADY/ACTIVE/SURGE growth verdict. Feeds operator-scorecard/price-alert/write-tweet. Reads memory/watched-repos.md.
+  repo-pulse: { enabled: false, schedule: "0 10 */2 * *" } # (ported custom, no template equiv) new stars/forks/releases for watched repos + stargazer/forker profile enrichment + QUIET/STEADY/ACTIVE/SURGE growth verdict. Feeds operator-scorecard/price-alert/write-tweet. Reads memory/watched-repos.md.
 
   # --- Midday (12 PM UTC) ---
   token-movers: { enabled: true, schedule: "0 6 * * *", var: "token" } # market-movers scan + single-token deep report. var: empty=movers (CoinGecko) | geckoterminal[:chain]=on-chain runners | category:<slug> | <address|symbol|token:sym>=single-token report. Optional COINGECKO/ALCHEMY/XAI/BASE_RPC keys.
