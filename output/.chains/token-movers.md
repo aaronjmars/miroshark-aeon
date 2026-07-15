@@ -1,9 +1,10 @@
-*$MiroShark — RALLYING*
+⚠️ MiroShark — SLIDING
 
-Price up +5.96% 24h on 1.30× average volume ($8.9K) — first above-average-volume up session since early July. Gains were front-loaded; late session saw a sell cluster ($544/$269/$267) with buy/sell count at 12/56.
+**$MiroShark — SLIDING**
 
-Price $0.000002138 (+5.96% 24h) | Liq $216.8K (+1.70%) | Vol $8.9K (1.30× 7d)
-Buys/Sells 12/56 (ratio 0.21) | Whales: 0
-7d: −34.4% | 30d: −62.3%
+Two whale sells ($2,386 + $2,164) hit the Uniswap V4 pool at 07:44–07:50 UTC Jul 14, compressing price −9.93% from yesterday's close. Selling wave has since cleared — today's session running 16 buys vs 9 sells.
+
+Price $0.000001925 (−9.93% 24h) | Liq $214.6K (−1.0%) | Vol $7.7K (~1.5× 7d)
+Buys/Sells 16/9 (ratio 1.78 vs 0.21 yest) | Whales: 2
 
 Chart: https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209
