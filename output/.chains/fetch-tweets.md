@@ -1,7 +1,8 @@
-Done. All 3 tweets fetched from `miroshark_` (via X.AI API, http=200) were already in the seen set from the Jul 12–13 logs — no new signal, no notification sent. Log entry appended to `memory/logs/2026-07-14.md` with status `TWEET_DIGEST_OK`.
+Log written. No notification sent — all 2 fetched tweets from `@miroshark_` were already reported on July 13. `TWEET_DIGEST_OK` (clean run, no new signal).
 
 ## Summary
-- **Source:** `account:` (empty arg) → all-tracked-accounts mode, single handle `miroshark_`
-- **Fetch:** X.AI API (`grok-4-1-fast` + `x_search`), http=200, 3 tweets returned
-- **Dedup:** all 3 already in SEEN_URLS (Jul 12 & Jul 13 logs) — 0 new
-- **Action:** no notification (clean run per spec); logged to `memory/logs/2026-07-14.md`
+
+- **Branch:** `account (all tracked)` — `memory/topics/tracked-accounts.yml` has one account: `miroshark_`
+- **Fetch:** XAI API (`http=200`) returned 2 substantive tweets, both from July 13
+- **Dedup:** Both URLs already in SEEN_URLS (logged 2026-07-13); 0 new
+- **Action:** No notification sent (silence beats filler); log appended to `memory/logs/2026-07-15.md` under `### fetch-tweets`
