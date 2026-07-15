@@ -1,0 +1,57 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "Changelog (push-to) — 2026-07-15",
+        "description": "aaronjmars/miroshark → aaronjmars/miroshark-website"
+      },
+      "children": [
+        "stack"
+      ]
+    },
+    "stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "prcount",
+        "entry",
+        "separator",
+        "prlink"
+      ]
+    },
+    "prcount": {
+      "type": "Stat",
+      "props": {
+        "label": "New PRs",
+        "value": "3"
+      }
+    },
+    "entry": {
+      "type": "Heading",
+      "props": {
+        "text": "GitHub org migration + frontend security patches",
+        "level": "h3"
+      }
+    },
+    "separator": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "prlink": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #143",
+        "href": "https://github.com/aaronjmars/miroshark-website/pull/143",
+        "source": "aaronjmars/miroshark-website"
+      }
+    }
+  }
+}
