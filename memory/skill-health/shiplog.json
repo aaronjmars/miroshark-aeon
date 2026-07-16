@@ -1,10 +1,10 @@
 {
   "skill": "shiplog",
-  "last_analyzed": "2026-07-13T10:07:39Z",
+  "last_analyzed": "2026-07-16T09:26:31Z",
   "quality_score": 4,
-  "assessment": "Well-executed shiplog collection with specific metrics, multiple data sources (PRs, stars, social signals), and all expected deliverables produced",
+  "assessment": "Substantive, well-structured shiplog with quantified metrics, specific project updates, and proper state tracking; article and notifications delivered as expected.",
   "flags": [],
-  "avg_score": 4.29,
+  "avg_score": 4.25,
   "history": [
     {
       "date": "2026-06-15",
@@ -32,6 +32,10 @@
     },
     {
       "date": "2026-07-13",
+      "score": 4
+    },
+    {
+      "date": "2026-07-16",
       "score": 4
     }
   ]

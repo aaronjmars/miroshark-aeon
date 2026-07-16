@@ -1,20 +1,22 @@
-✅ aeon v0.1.0 shiplog
+✅ shiplog jul 13→16
 
-aeon ⭐🦈 shiplog — Jul 9 → 13
+aeon ⭐ + miroshark 🦈 shiplog · jul 13 → 16
 
-shipped 36 PRs this window. the bytes:
+shipped ~26 PRs + 14 commits this window. the bytes:
 
-- **aeon v0.1.0 live**: first stable release after 70 partners. grok + multi-harness, OKF, skill attestation, langfuse opt-in ⭐
-- **retire postprocess**: irreversible sends now fire in-run via secretcurl. one failure surface, not two.
-- **README halved** (733 → 596 lines): CHANGELOG seeded, community packs listed — first: AgentLink
-- **miroshark-aeon migrated onto v0.1.0 template**: agent repo ate its own cooking. state preserved, clean slate.
-- **quality pass**: scorer fix, /tmp routing for transient writes, mcp CLI error surfacing, color tokens unified
+- **orgs go live**: aeonfun/aeon + MiroShark/MiroShark now on their own GitHub orgs. IP on-chain at `base:0xbf8e8f0e8866a7052f948c16508644347c57aba3`. everything migrated.
+- **mcp oauth, durable**: aeon now handles rotating-token providers. one-click connect for glim. robinhood mechanics documented (#730–733).
+- **grok 4.5 live**: support shipped same day as xAI launch. x_search moved to grok-4.3. ⭐
+- **minitor is now an aeon front-end**: Aeon column → pin skill runs, watch output live. ⭐
+- **miroshark on @base app**: listed on the Base app 🦈. new visibility vector, zero friction.
+- **hackerone drop**: found a high-severity issue using @aeonframework. already secured @google, @vercel, @alibaba & more. reporting it. 🤷‍♂️
 
 traction:
-- @aeonframework in "Leading" tier — @Base_Insights (22k) Base Ecosystem Tier List Jul 9
-- aeon 574 ⭐ (+3) · MiroShark 1,360 ⭐ (+3)
-- @tryskopos building cross-chain DeFi on aeon — spotlighted by @aeonframework
+- miroshark 1,365 ⭐ (+5 this window) · 290 forks
+- aeon 576 ⭐ (+2 this window)
+- @Base_Insights (22K) listed @miroshark_ in their "early" watchlist
+- aeon org announcement: 38 likes · 7 RTs · base listing: 22 likes · hackerone post: 45 likes · 3 RTs
 
-⭐
+⭐🦈
 
-https://github.com/aaronjmars/miroshark-aeon/blob/main/output/articles/shiplog-2026-07-13.md
+https://github.com/aaronjmars/miroshark-aeon/blob/main/output/articles/shiplog-2026-07-16.md

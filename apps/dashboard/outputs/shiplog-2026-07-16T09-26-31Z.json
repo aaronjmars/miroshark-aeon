@@ -1,0 +1,178 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "shiplog jul 13→16"
+      },
+      "children": [
+        "subtitle",
+        "summary",
+        "separator1",
+        "shipped-heading",
+        "shipped-list",
+        "separator2",
+        "traction-heading",
+        "traction-metrics",
+        "separator3",
+        "signoff",
+        "article-link"
+      ]
+    },
+    "subtitle": {
+      "type": "Text",
+      "props": {
+        "text": "aeon ⭐ + miroshark 🦈 shiplog · jul 13 → 16",
+        "variant": "lead"
+      }
+    },
+    "summary": {
+      "type": "Text",
+      "props": {
+        "text": "shipped ~26 PRs + 14 commits this window. the bytes:"
+      }
+    },
+    "separator1": {
+      "type": "Separator"
+    },
+    "shipped-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Shipped",
+        "level": "h3"
+      }
+    },
+    "shipped-list": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "item-1",
+        "item-2",
+        "item-3",
+        "item-4",
+        "item-5",
+        "item-6"
+      ]
+    },
+    "item-1": {
+      "type": "Text",
+      "props": {
+        "text": "orgs go live: aeonfun/aeon + MiroShark/MiroShark now on their own GitHub orgs. IP on-chain at base:0xbf8e8f0e8866a7052f948c16508644347c57aba3. everything migrated."
+      }
+    },
+    "item-2": {
+      "type": "Text",
+      "props": {
+        "text": "mcp oauth, durable: aeon now handles rotating-token providers. one-click connect for glim. robinhood mechanics documented (#730–733)."
+      }
+    },
+    "item-3": {
+      "type": "Text",
+      "props": {
+        "text": "grok 4.5 live: support shipped same day as xAI launch. x_search moved to grok-4.3. ⭐"
+      }
+    },
+    "item-4": {
+      "type": "Text",
+      "props": {
+        "text": "minitor is now an aeon front-end: Aeon column → pin skill runs, watch output live. ⭐"
+      }
+    },
+    "item-5": {
+      "type": "Text",
+      "props": {
+        "text": "miroshark on @base app: listed on the Base app 🦈. new visibility vector, zero friction."
+      }
+    },
+    "item-6": {
+      "type": "Text",
+      "props": {
+        "text": "hackerone drop: found a high-severity issue using @aeonframework. already secured @google, @vercel, @alibaba & more. reporting it. 🤷‍♂️"
+      }
+    },
+    "separator2": {
+      "type": "Separator"
+    },
+    "traction-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Traction",
+        "level": "h3"
+      }
+    },
+    "traction-metrics": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stat-miroshark-stars",
+        "stat-miroshark-forks",
+        "stat-aeon-stars",
+        "traction-text-1",
+        "traction-text-2"
+      ]
+    },
+    "stat-miroshark-stars": {
+      "type": "Stat",
+      "props": {
+        "label": "miroshark ⭐",
+        "value": "1,365",
+        "delta": "+5",
+        "trend": "up"
+      }
+    },
+    "stat-miroshark-forks": {
+      "type": "Stat",
+      "props": {
+        "label": "miroshark forks",
+        "value": "290"
+      }
+    },
+    "stat-aeon-stars": {
+      "type": "Stat",
+      "props": {
+        "label": "aeon ⭐",
+        "value": "576",
+        "delta": "+2",
+        "trend": "up"
+      }
+    },
+    "traction-text-1": {
+      "type": "Text",
+      "props": {
+        "text": "@Base_Insights (22K) listed @miroshark_ in their \"early\" watchlist"
+      }
+    },
+    "traction-text-2": {
+      "type": "Text",
+      "props": {
+        "text": "aeon org announcement: 38 likes · 7 RTs · base listing: 22 likes · hackerone post: 45 likes · 3 RTs"
+      }
+    },
+    "separator3": {
+      "type": "Separator"
+    },
+    "signoff": {
+      "type": "Text",
+      "props": {
+        "text": "⭐🦈",
+        "variant": "caption"
+      }
+    },
+    "article-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full shiplog article",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/output/articles/shiplog-2026-07-16.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}
