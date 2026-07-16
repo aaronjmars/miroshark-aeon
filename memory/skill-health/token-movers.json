@@ -1,8 +1,8 @@
 {
   "skill": "token-movers",
-  "last_analyzed": "2026-07-15T06:28:17Z",
+  "last_analyzed": "2026-07-16T06:44:23Z",
   "quality_score": 4,
-  "assessment": "Substantive, well-quantified token analysis with specific whale-activity causation, clear verdict, proper file outputs, and actionable trend insight — solid execution.",
+  "assessment": "Substantive execution with cross-validated data, clear thresholds applied, structured output, and appropriate notification logic.",
   "flags": [],
   "avg_score": 4,
   "history": [
@@ -28,6 +28,10 @@
     },
     {
       "date": "2026-07-15",
+      "score": 4
+    },
+    {
+      "date": "2026-07-16",
       "score": 4
     }
   ]

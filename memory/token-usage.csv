@@ -202,3 +202,4 @@ date,skill,model,input_tokens,output_tokens,cache_read,cache_creation
 2026-07-15,changelog,claude-sonnet-4-6,26,9466,1369270,47798
 2026-07-15,fetch-tweets,claude-sonnet-4-6,15,4144,854905,55195
 2026-07-15,heartbeat,claude-sonnet-4-6,11,8842,437801,59394
+2026-07-16,token-movers,claude-sonnet-4-6,16,15838,815975,54705
