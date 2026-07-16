@@ -327,9 +327,6 @@ Either way the installer reads the pack's `skills-pack.json` manifest, runs the 
 
 ---
 
-## Star History
-
-
 Support the project : 0xbf8e8f0e8866a7052f948c16508644347c57aba3
 
 ---
