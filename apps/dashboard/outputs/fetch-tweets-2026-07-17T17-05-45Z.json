@@ -1,0 +1,100 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "Tweet Digest — 2026-07-17"
+      },
+      "children": [
+        "stack"
+      ]
+    },
+    "stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "theme",
+        "separator",
+        "tweet_section"
+      ]
+    },
+    "theme": {
+      "type": "Badge",
+      "props": {
+        "text": "Theme: Brand presence",
+        "variant": "default"
+      }
+    },
+    "separator": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "tweet_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "context_text",
+        "tweet_card",
+        "metadata"
+      ]
+    },
+    "context_text": {
+      "type": "Text",
+      "props": {
+        "text": "Sole post from @miroshark_ — standalone 🦈, no text",
+        "variant": "body"
+      }
+    },
+    "tweet_card": {
+      "type": "TweetCard",
+      "props": {
+        "author": "miroshark_",
+        "handle": "miroshark_",
+        "text": "🦈"
+      }
+    },
+    "metadata": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "timestamp_text",
+        "status_text",
+        "post_link"
+      ]
+    },
+    "timestamp_text": {
+      "type": "Text",
+      "props": {
+        "text": "Posted 12:48 UTC",
+        "variant": "caption"
+      }
+    },
+    "status_text": {
+      "type": "Text",
+      "props": {
+        "text": "Account active, minimal output day",
+        "variant": "caption"
+      }
+    },
+    "post_link": {
+      "type": "Link",
+      "props": {
+        "label": "View post",
+        "href": "https://x.com/miroshark_/status/2078099645981413447"
+      }
+    }
+  }
+}
