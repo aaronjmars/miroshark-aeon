@@ -44,7 +44,12 @@ skills:
   # --- Repo intelligence (3 PM UTC) ---
 
   # --- Late afternoon (4 PM UTC) ---
-  changelog: { enabled: true, schedule: "0 8 */3 * *", var: "push-to:aaronjmars/miroshark-website" } # (was docs-sync) cross-repo changelog PR: product=aaronjmars/miroshark (from memory/docs-sync.md) -> website=aaronjmars/miroshark-website. needs GH_GLOBAL
+  changelog:
+    {
+      enabled: true,
+      schedule: "0 8 */3 * *",
+      var: "push-to:aaronjmars/miroshark-website"
+    } # (was docs-sync) cross-repo changelog PR: product=aaronjmars/miroshark (from memory/docs-sync.md) -> website=aaronjmars/miroshark-website. needs GH_GLOBAL
   vuln-scanner: { enabled: false, schedule: "0 16 * * 6", var: "" } # security scan + disclose. var: empty/owner/repo=scan | resubmit[:owner/repo]=PVR re-submit | disclose=queue armed emails (folds in pvr-watchlist/disclosure-emailer). RESEND_* for email.
   deploy-prototype: { enabled: false, schedule: "workflow_dispatch", var: "" } # on-demand — build app and deploy to Vercel
   base-mcp: { enabled: false, schedule: "workflow_dispatch", var: "" } # on-demand — Base Account access via the Base MCP server (mcp.base.org)
