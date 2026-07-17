@@ -1,0 +1,163 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "$MiroShark — CONSOLIDATING",
+        "description": "Three whale sells (~$3.7K total) cascaded from Jul 16 evening into Jul 17 morning, flipping buy/sell ratio from 1.83 to 0.59 and dragging price down 20.49%."
+      },
+      "children": [
+        "metrics-stack"
+      ]
+    },
+    "metrics-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "price-stat",
+        "liquidity-stat",
+        "volume-stat",
+        "buys-sells-stat",
+        "separator1",
+        "whales-heading",
+        "whales-table",
+        "separator2",
+        "trend-heading",
+        "trend-7d",
+        "trend-30d",
+        "separator3",
+        "note-text",
+        "chart-link"
+      ]
+    },
+    "price-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Price",
+        "value": "$0.000001661",
+        "delta": "−20.49%",
+        "trend": "down"
+      }
+    },
+    "liquidity-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Liquidity",
+        "value": "$198.4K",
+        "delta": "−12.56%",
+        "trend": "down"
+      }
+    },
+    "volume-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Volume",
+        "value": "$7.1K",
+        "delta": "1.48× 7d avg"
+      }
+    },
+    "buys-sells-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Buys/Sells",
+        "value": "10/17",
+        "delta": "ratio 0.59"
+      }
+    },
+    "separator1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "whales-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Whale Sells",
+        "level": "h3"
+      }
+    },
+    "whales-table": {
+      "type": "Table",
+      "props": {
+        "columns": [
+          "Amount",
+          "Price",
+          "Time"
+        ],
+        "rows": [
+          [
+            "$1,566",
+            "$0.00000192",
+            "Jul 16 16:48 UTC"
+          ],
+          [
+            "$1,014",
+            "$0.00000184",
+            "Jul 16 23:29 UTC"
+          ],
+          [
+            "$1,087",
+            "$0.00000177",
+            "Jul 17 00:16 UTC"
+          ]
+        ]
+      }
+    },
+    "separator2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "trend-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Trend",
+        "level": "h3"
+      }
+    },
+    "trend-7d": {
+      "type": "Stat",
+      "props": {
+        "label": "7d",
+        "value": "−32.74%",
+        "trend": "down"
+      }
+    },
+    "trend-30d": {
+      "type": "Stat",
+      "props": {
+        "label": "30d",
+        "value": "−68.56%",
+        "delta": "(~OHLCV)",
+        "trend": "down"
+      }
+    },
+    "separator3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "note-text": {
+      "type": "Text",
+      "props": {
+        "text": "@sparklewarefun posted today about an AI agent self-funding a MiroShark compute run via USDC — ecosystem usage signal.",
+        "variant": "muted"
+      }
+    },
+    "chart-link": {
+      "type": "Link",
+      "props": {
+        "label": "Chart",
+        "href": "https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209"
+      }
+    }
+  }
+}
