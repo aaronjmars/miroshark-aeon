@@ -1,10 +1,10 @@
 {
   "skill": "fetch-tweets",
-  "last_analyzed": "2026-07-17T17:05:45Z",
-  "quality_score": 3,
-  "assessment": "Executed successfully; fetched and logged 1 tweet with proper deduping and notification; minor stray temp files from tool allowlist limitations",
+  "last_analyzed": "2026-07-18T17:14:00Z",
+  "quality_score": 4,
+  "assessment": "Skill ran successfully with HTTP 200, correctly determined no new tweets, made appropriate notification decision, and logged activity properly.",
   "flags": [],
-  "avg_score": 3.75,
+  "avg_score": 3.78,
   "history": [
     {
       "date": "2026-07-10",
@@ -37,6 +37,10 @@
     {
       "date": "2026-07-17",
       "score": 3
+    },
+    {
+      "date": "2026-07-18",
+      "score": 4
     }
   ]
 }
