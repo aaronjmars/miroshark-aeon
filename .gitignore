@@ -49,18 +49,22 @@ node_modules/
 .external-work
 .vuln-scan/
 
-# Runtime artifacts the runner drops at the repo root each run — the auto-commit
-# does `git add -A`, which sweeps them into a chore commit if they aren't ignored.
-# `secretcurl` is the auth shim regenerated from scripts/secretcurl.sh every run;
-# `notify-token-report.md` is a stray token-movers digest (skill now writes /tmp).
+# Runtime artifacts the runner drops in-tree each run — the auto-commit does
+# `git add -A`, which sweeps them into a chore commit unless they're ignored.
+# `secretcurl` is the auth shim regenerated from scripts/secretcurl.sh every run.
 /secretcurl
-/notify-token-report.md
 
-# Stray notify-body payloads that leak INTO a validated OKF root (memory/) via
-# `git add -A`. Skills stage a digest body for `./notify -f`, then the auto-commit
-# sweeps it in; inside memory/ it fails ci-okf (§9 needs a `type:` frontmatter).
-# These are transient — a notify body is never a memory concept. (cf. the stray
-# tweet-digest-notify.md that broke ci-okf; the tweet-digest skill merged into
-# fetch-tweets, which now delivers via ./notify → .pending-notify/.)
-memory/*-notify.md
-memory/notify-*.md
+# Notify bodies — skills stage a digest for `./notify -f` (→ /tmp or
+# .pending-notify/); any copy left in-tree is transient junk, never durable state.
+# Un-anchored so it also catches the dated (notify-token-report-YYYY-MM-DD.md),
+# output/ (changelog-notify.md), and dotfile (.repo-pulse-notify.md) forms — and
+# inside a validated OKF root (memory/) a notify body would break ci-okf, since
+# §9 needs a `type:` frontmatter it never carries. A notify body is not a concept.
+*-notify.md
+.*-notify.md
+notify-*.md
+
+# xai API request/response scratch — the shiplog/fetch-tweets skills write these
+# to /tmp; committed copies (root or memory/) are pure `git add -A` leaks, never
+# read from in-tree. (cf. the token-movers xai-payload.json that leaked to root.)
+xai-*.json
