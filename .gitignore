@@ -55,3 +55,12 @@ node_modules/
 # `notify-token-report.md` is a stray token-movers digest (skill now writes /tmp).
 /secretcurl
 /notify-token-report.md
+
+# Stray notify-body payloads that leak INTO a validated OKF root (memory/) via
+# `git add -A`. Skills stage a digest body for `./notify -f`, then the auto-commit
+# sweeps it in; inside memory/ it fails ci-okf (§9 needs a `type:` frontmatter).
+# These are transient — a notify body is never a memory concept. (cf. the stray
+# tweet-digest-notify.md that broke ci-okf; the tweet-digest skill merged into
+# fetch-tweets, which now delivers via ./notify → .pending-notify/.)
+memory/*-notify.md
+memory/notify-*.md
