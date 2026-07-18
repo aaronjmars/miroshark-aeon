@@ -1,10 +1,13 @@
 HEARTBEAT_OK · STATUS_PAGE=OK
 
-All P0–P3 checks clean. Fleet is healthy — 6 enabled skills, all succeeded within their normal windows. `docs/status.md` updated with today's token data (MIROSHARK at $0.000001661, −20.49% 24h, CONSOLIDATING from whale sells). No notification sent — nothing to surface.
-
 ## Summary
 
-- **Checks:** P0 clean (no failed/stuck/degraded skills), P1 clean (no open PRs or urgent issues), P2 clean, P3 clean
-- **Status page updated:** `docs/status.md` — 🟢 OK, token pulse CONSOLIDATING (−20.49% 24h)
-- **Log appended:** `memory/logs/2026-07-17.md` under `### heartbeat`
-- **No notification sent** (nothing needs attention)
+**Ambient check — 2026-07-18, all clear.**
+
+- **P0**: All 6 enabled skills healthy (heartbeat, token-movers, fetch-tweets, changelog, shiplog, memory-flush). No failures, no stuck skills, no degradation.
+- **P1**: No open PRs, no urgent issues.
+- **P2**: No flagged memory items.
+- **P3**: All skills within 2× their schedule interval.
+- **Token pulse**: MIROSHARK $0.000001633 (−1.7% 24h, CONSOLIDATING) — third straight session of below-average volume, one whale sell, no directional commitment.
+- **Status page**: `docs/status.md` regenerated → 🟢 OK, next scheduled run: token-movers at 06:00 UTC 2026-07-19.
+- **Notification**: suppressed — nothing needs attention.
