@@ -1,1 +1,0 @@
-{"model":"grok-3-fast","messages":[{"role":"user","content":"Search X for MiroShark or MIROSHARK token mentions in the last 24 hours with at least 10 likes. Return up to 5 notable tweets with @handle, engagement counts, and a one-line summary. Exclude obvious bots and generic shill posts."}]}
