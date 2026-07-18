@@ -1,5 +1,3 @@
-ℹ️ MiroShark Token Report
-
 **$MiroShark — CONSOLIDATING**
 
 Price slipped 1.7% on below-average volume; buy flow flipped positive but no whale accumulation confirmed direction.
