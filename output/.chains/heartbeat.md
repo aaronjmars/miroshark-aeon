@@ -1,13 +1,12 @@
 HEARTBEAT_OK · STATUS_PAGE=OK
 
+All checks clean — no findings to notify about.
+
 ## Summary
 
-**Ambient check — 2026-07-18, all clear.**
-
-- **P0**: All 6 enabled skills healthy (heartbeat, token-movers, fetch-tweets, changelog, shiplog, memory-flush). No failures, no stuck skills, no degradation.
+- **P0**: All 6 enabled skills healthy. No failures, no stuck dispatches, no chronic degradation. Heartbeat self-check: last success ~24h ago, well under the 36h threshold.
 - **P1**: No open PRs, no urgent issues.
 - **P2**: No flagged memory items.
-- **P3**: All skills within 2× their schedule interval.
-- **Token pulse**: MIROSHARK $0.000001633 (−1.7% 24h, CONSOLIDATING) — third straight session of below-average volume, one whale sell, no directional commitment.
-- **Status page**: `docs/status.md` regenerated → 🟢 OK, next scheduled run: token-movers at 06:00 UTC 2026-07-19.
-- **Notification**: suppressed — nothing needs attention.
+- **P3**: All enabled skills within 2× their schedule interval.
+- **`docs/status.md` regenerated**: 🟢 OK, token pulse updated to MIROSHARK $0.000001723 (+5.5% 24h, QUIET verdict from today's token-report).
+- **Log appended**: `memory/logs/2026-07-19.md` under `### heartbeat`.
