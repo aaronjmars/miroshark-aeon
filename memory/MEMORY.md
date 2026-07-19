@@ -3,7 +3,7 @@ type: Index
 ---
 
 # Long-term Memory
-*Last consolidated: 2026-07-12*
+*Last consolidated: 2026-07-19*
 
 ## About This Repo
 - Autonomous agent (Aeon) running on GitHub Actions via Claude Code, operating for the **$MIROSHARK** token and the `aaronjmars/MiroShark` project.
@@ -69,7 +69,7 @@ See `memory/watched-repos.md` — `aaronjmars/MiroShark`, `aaronjmars/miroshark-
 - Hyperstition: @miroshark_ 1,000 X followers by 2026-05-15 — deadline passed, count unconfirmed in logs.
 - Hyperstition: MiroShark PR from a Chinese-locale contributor OR Chinese-language coverage by 2026-06-15 — CROSSED; CN tweet "米罗莎要来了" May 16 qualifies; also JP coverage @m000_crypto (May 17).
 - Hyperstition: ≥3 publicly-named external integrators citing MiroShark as AI infrastructure by 2026-07-31 — **EXCEEDED**: 14 integrators in ECOSYSTEM.md as of 06-22 (Sparkleware, ZER0, Xerg, SyntheticsAI, Signa, RootAI, Noelclaw, Monitor, HivemindOS, Echo Oracle, Crucible Sim, Capacitr, Blue Agent, AntFleet).
-- $MIROSHARK: ATH $0.0000436 (May 18), FDV peaked $3.32M; **$0.0000020665 (−10.4% 24h, −43.2% 7d, −69.3% 30d), −95.3% from ATH, liq $214.6K** as of 2026-07-12; verdict CONSOLIDATING.
+- $MIROSHARK: ATH $0.0000436 (May 18), FDV peaked $3.32M; **$0.000001723 (+5.5% 24h, −16.6% 7d, −66.0% 30d), −96.1% from ATH, liq $203K** as of 2026-07-19; verdict QUIET (was CONSOLIDATING).
 
 ## Next Priorities
 - Next star threshold: 1,500 (~141 away as of 2026-07-12; pace ~0.6/day — well below prior estimates).
