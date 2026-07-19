@@ -1,0 +1,147 @@
+{
+  "root": "card-root",
+  "state": {},
+  "elements": {
+    "card-root": {
+      "type": "Card",
+      "props": {
+        "title": "$MIROSHARK — QUIET"
+      },
+      "children": [
+        "intro-text",
+        "sep-1",
+        "stack-current-metrics",
+        "sep-2",
+        "stack-performance",
+        "sep-3",
+        "chart-link"
+      ]
+    },
+    "intro-text": {
+      "type": "Text",
+      "props": {
+        "text": "Price ticked +5.5% to $0.000001723 on just $1.2K volume — 0.24× the 7-day average — with zero whale activity.",
+        "variant": "lead"
+      },
+      "children": []
+    },
+    "sep-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "stack-current-metrics": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "price-stat",
+        "liq-stat",
+        "vol-stat",
+        "ratio-stat",
+        "whales-stat"
+      ]
+    },
+    "price-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Price (24h)",
+        "value": "$0.000001723",
+        "delta": "+5.5%",
+        "trend": "up"
+      },
+      "children": []
+    },
+    "liq-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Liquidity",
+        "value": "$203.1K",
+        "delta": "+3.1%",
+        "trend": "up"
+      },
+      "children": []
+    },
+    "vol-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Volume (24h)",
+        "value": "$1.2K",
+        "delta": "0.24× 7d avg"
+      },
+      "children": []
+    },
+    "ratio-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Buy/Sell Ratio",
+        "value": "2.40",
+        "delta": "12/5"
+      },
+      "children": []
+    },
+    "whales-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Whale Activity",
+        "value": "0"
+      },
+      "children": []
+    },
+    "sep-2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "stack-performance": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "perf-7d",
+        "perf-30d"
+      ]
+    },
+    "perf-7d": {
+      "type": "Stat",
+      "props": {
+        "label": "7d Performance",
+        "value": "-16.6%",
+        "trend": "down"
+      },
+      "children": []
+    },
+    "perf-30d": {
+      "type": "Stat",
+      "props": {
+        "label": "30d Performance",
+        "value": "-66.0%",
+        "trend": "down"
+      },
+      "children": []
+    },
+    "sep-3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "chart-link": {
+      "type": "Link",
+      "props": {
+        "label": "View Chart on GeckoTerminal",
+        "href": "https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209"
+      },
+      "children": []
+    }
+  }
+}
