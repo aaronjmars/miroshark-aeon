@@ -1,0 +1,89 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Tweet Digest — 2026-07-19"
+      },
+      "children": [
+        "theme",
+        "item_1",
+        "item_2"
+      ]
+    },
+    "theme": {
+      "type": "Text",
+      "props": {
+        "text": "Theme: World Cup Final Sim 🦈",
+        "variant": "lead"
+      },
+      "children": []
+    },
+    "item_1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "tweet_1",
+        "link_tweet_1"
+      ]
+    },
+    "tweet_1": {
+      "type": "TweetCard",
+      "props": {
+        "author": "Miroshark",
+        "handle": "miroshark_",
+        "text": "what happens when both Messi & Yamal get red-carded in the final — posted the sim & full breakdown"
+      },
+      "children": []
+    },
+    "link_tweet_1": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/miroshark_/status/2078796041176993807"
+      },
+      "children": []
+    },
+    "item_2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "text_sim_report",
+        "link_sim_report",
+        "link_thread"
+      ]
+    },
+    "text_sim_report": {
+      "type": "Text",
+      "props": {
+        "text": "sim report:",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "link_sim_report": {
+      "type": "Link",
+      "props": {
+        "label": "x402.miroshark.xyz/share/sim_b612441b7991",
+        "href": "https://x402.miroshark.xyz/share/sim_b612441b7991"
+      },
+      "children": []
+    },
+    "link_thread": {
+      "type": "Link",
+      "props": {
+        "label": "View thread",
+        "href": "https://x.com/miroshark_/status/2078796043416666377"
+      },
+      "children": []
+    }
+  }
+}
