@@ -1,0 +1,155 @@
+{
+  "root": "root-card",
+  "state": {},
+  "elements": {
+    "root-card": {
+      "type": "Card",
+      "props": {
+        "title": "miroshark + aeon shiplog ⭐🦈",
+        "description": "jul 16 → jul 20"
+      },
+      "children": [
+        "main-stack"
+      ]
+    },
+    "main-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading-shipped",
+        "stat-shipped",
+        "text-adk",
+        "text-defillama",
+        "text-swarm",
+        "text-mcps",
+        "text-site",
+        "text-soul",
+        "sep-1",
+        "heading-traction",
+        "stat-miroshark",
+        "text-miroshark-pace",
+        "stat-aeon",
+        "text-x-posts",
+        "text-world-cup",
+        "sep-2",
+        "link-article"
+      ]
+    },
+    "heading-shipped": {
+      "type": "Heading",
+      "props": {
+        "text": "shipped",
+        "level": "h2"
+      }
+    },
+    "stat-shipped": {
+      "type": "Stat",
+      "props": {
+        "value": "23 PRs + 21 commits"
+      }
+    },
+    "text-adk": {
+      "type": "Text",
+      "props": {
+        "text": "adk live: aeon developer kit — embed agents in any site. your users bring their own github-owned aeon, import skills, run & schedule from your product. @aeonframework"
+      }
+    },
+    "text-defillama": {
+      "type": "Text",
+      "props": {
+        "text": "defillama listed: aeon + miroshark + miroshark-x402 fees now tracked. 3 adapters merged into @DefiLlama in one afternoon."
+      }
+    },
+    "text-swarm": {
+      "type": "Text",
+      "props": {
+        "text": "fine-tuning the swarm: training a custom Qwen3.5-9B on 4k real tweets reformatted as miroshark tool-calls. SFT done, ~50% better output. DPO next. 🦈"
+      }
+    },
+    "text-mcps": {
+      "type": "Text",
+      "props": {
+        "text": "new mcps: robinhood-mcp + glim-mcp + executor cloud wired into the skill catalog ⭐"
+      }
+    },
+    "text-site": {
+      "type": "Text",
+      "props": {
+        "text": "miroshark site got shader-driven page transitions. the vibe is right."
+      }
+    },
+    "text-soul": {
+      "type": "Text",
+      "props": {
+        "text": "ansem (@blknoiz06) soul example landed in soul.md"
+      }
+    },
+    "sep-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading-traction": {
+      "type": "Heading",
+      "props": {
+        "text": "traction",
+        "level": "h2"
+      }
+    },
+    "stat-miroshark": {
+      "type": "Stat",
+      "props": {
+        "label": "MiroShark",
+        "value": "1,394 ⭐",
+        "delta": "+29",
+        "trend": "up"
+      }
+    },
+    "text-miroshark-pace": {
+      "type": "Text",
+      "props": {
+        "text": "this window: pace was 0.6/day, this week ran 7.25/day",
+        "variant": "caption"
+      }
+    },
+    "stat-aeon": {
+      "type": "Stat",
+      "props": {
+        "label": "aeon",
+        "value": "577 ⭐",
+        "delta": "+1",
+        "trend": "up"
+      }
+    },
+    "text-x-posts": {
+      "type": "Text",
+      "props": {
+        "text": "best x posts: minitor showcase 34 likes + adk drop 23 likes (@aeonframework)"
+      }
+    },
+    "text-world-cup": {
+      "type": "Text",
+      "props": {
+        "text": "miroshark world cup final sim: messi + yamal both red-carded — the chaos sim people asked for"
+      }
+    },
+    "sep-2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "link-article": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full shiplog article",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/output/articles/shiplog-2026-07-20.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}

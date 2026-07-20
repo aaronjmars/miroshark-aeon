@@ -1,22 +1,22 @@
-✅ shiplog jul 13→16
+✅ shiplog jul 16→20
 
-aeon ⭐ + miroshark 🦈 shiplog · jul 13 → 16
+miroshark + aeon shiplog ⭐🦈  jul 16 → jul 20
 
-shipped ~26 PRs + 14 commits this window. the bytes:
+shipped 23 PRs + 21 commits. the bytes:
 
-- **orgs go live**: aeonfun/aeon + MiroShark/MiroShark now on their own GitHub orgs. IP on-chain at `base:0xbf8e8f0e8866a7052f948c16508644347c57aba3`. everything migrated.
-- **mcp oauth, durable**: aeon now handles rotating-token providers. one-click connect for glim. robinhood mechanics documented (#730–733).
-- **grok 4.5 live**: support shipped same day as xAI launch. x_search moved to grok-4.3. ⭐
-- **minitor is now an aeon front-end**: Aeon column → pin skill runs, watch output live. ⭐
-- **miroshark on @base app**: listed on the Base app 🦈. new visibility vector, zero friction.
-- **hackerone drop**: found a high-severity issue using @aeonframework. already secured @google, @vercel, @alibaba & more. reporting it. 🤷‍♂️
+- adk live: aeon developer kit — embed agents in any site. your users bring their own github-owned aeon, import skills, run & schedule from your product. @aeonframework
+- defillama listed: aeon + miroshark + miroshark-x402 fees now tracked. 3 adapters merged into @DefiLlama in one afternoon.
+- fine-tuning the swarm: training a custom Qwen3.5-9B on 4k real tweets reformatted as miroshark tool-calls. SFT done, ~50% better output. DPO next. 🦈
+- new mcps: robinhood-mcp + glim-mcp + executor cloud wired into the skill catalog ⭐
+- miroshark site got shader-driven page transitions. the vibe is right.
+- ansem (@blknoiz06) soul example landed in soul.md
 
 traction:
-- miroshark 1,365 ⭐ (+5 this window) · 290 forks
-- aeon 576 ⭐ (+2 this window)
-- @Base_Insights (22K) listed @miroshark_ in their "early" watchlist
-- aeon org announcement: 38 likes · 7 RTs · base listing: 22 likes · hackerone post: 45 likes · 3 RTs
+- MiroShark 1,394 ⭐ (+29 this window — pace was 0.6/day, this week ran 7.25/day)
+- aeon 577 ⭐ (+1)
+- best x post: minitor showcase 34 likes + adk drop 23 likes (@aeonframework)
+- miroshark world cup final sim: messi + yamal both red-carded — the chaos sim people asked for
+
+https://github.com/aaronjmars/miroshark-aeon/blob/main/output/articles/shiplog-2026-07-20.md
 
 ⭐🦈
-
-https://github.com/aaronjmars/miroshark-aeon/blob/main/output/articles/shiplog-2026-07-16.md
