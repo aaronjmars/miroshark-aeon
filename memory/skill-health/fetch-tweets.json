@@ -1,10 +1,10 @@
 {
   "skill": "fetch-tweets",
-  "last_analyzed": "2026-07-19T17:21:46Z",
+  "last_analyzed": "2026-07-20T17:17:30Z",
   "quality_score": 4,
-  "assessment": "Skill completed successfully; fetched 2 fresh tweets with dedup working, sent notification, logged to memory—structured output with specific URLs and dates.",
+  "assessment": "Substantive, well-structured skill execution: API fetch succeeded (http=200), deduplication logic applied with specific reasoning, 1 fresh tweet identified and notified, memory updated.",
   "flags": [],
-  "avg_score": 3.8,
+  "avg_score": 3.82,
   "history": [
     {
       "date": "2026-07-10",
@@ -44,6 +44,10 @@
     },
     {
       "date": "2026-07-19",
+      "score": 4
+    },
+    {
+      "date": "2026-07-20",
       "score": 4
     }
   ]
