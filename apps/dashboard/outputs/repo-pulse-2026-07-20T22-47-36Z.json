@@ -1,0 +1,800 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "Repo Pulse — 2026-07-20",
+        "description": "SURGE"
+      },
+      "children": [
+        "heading-repo",
+        "section-stats",
+        "separator1",
+        "section-stargazers",
+        "separator2",
+        "section-forks"
+      ]
+    },
+    "heading-repo": {
+      "type": "Heading",
+      "props": {
+        "text": "aaronjmars/MiroShark",
+        "level": "h2"
+      },
+      "children": []
+    },
+    "section-stats": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "stat-stars",
+        "stat-forks"
+      ]
+    },
+    "stat-stars": {
+      "type": "Stat",
+      "props": {
+        "label": "Stars",
+        "value": "1,401",
+        "delta": "+37",
+        "trend": "up"
+      },
+      "children": []
+    },
+    "stat-forks": {
+      "type": "Stat",
+      "props": {
+        "label": "Forks",
+        "value": "296",
+        "delta": "+7",
+        "trend": "up"
+      },
+      "children": []
+    },
+    "separator1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "section-stargazers": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "lg"
+      },
+      "children": [
+        "heading-stargazers",
+        "stack-enriched",
+        "heading-other-stargazers",
+        "grid-other-stargazers"
+      ]
+    },
+    "heading-stargazers": {
+      "type": "Heading",
+      "props": {
+        "text": "Notable new stargazers (enriched 15 of 37)",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "stack-enriched": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "profile-cliftonz",
+        "profile-yachoukh",
+        "profile-asg5704",
+        "profile-kinged007",
+        "profile-aziegenawone"
+      ]
+    },
+    "profile-cliftonz": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "link-cliftonz",
+        "text-cliftonz-meta"
+      ]
+    },
+    "link-cliftonz": {
+      "type": "Link",
+      "props": {
+        "label": "Zac Clifton (Cliftonz)",
+        "href": "https://github.com/Cliftonz"
+      },
+      "children": []
+    },
+    "text-cliftonz-meta": {
+      "type": "Text",
+      "props": {
+        "text": "📍 Louisville, Kentucky · 🏢 Sale Sage · 56 repos · 53 followers · LinkedIn: https://www.linkedin.com/in/zacclifton/",
+        "variant": "caption"
+      },
+      "children": []
+    },
+    "profile-yachoukh": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "link-yachoukh",
+        "text-yachoukh-meta"
+      ]
+    },
+    "link-yachoukh": {
+      "type": "Link",
+      "props": {
+        "label": "Youssef Achoukhi (yachoukh)",
+        "href": "https://github.com/yachoukh"
+      },
+      "children": []
+    },
+    "text-yachoukh-meta": {
+      "type": "Text",
+      "props": {
+        "text": "📍 Antwerp, Belgium · 🏢 Microsoft · 96 repos",
+        "variant": "caption"
+      },
+      "children": []
+    },
+    "profile-asg5704": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "link-asg5704",
+        "text-asg5704-meta",
+        "text-asg5704-bio"
+      ]
+    },
+    "link-asg5704": {
+      "type": "Link",
+      "props": {
+        "label": "Alexander Garcia (asg5704)",
+        "href": "https://github.com/asg5704"
+      },
+      "children": []
+    },
+    "text-asg5704-meta": {
+      "type": "Text",
+      "props": {
+        "text": "📍 DMV · 🏢 Wilcore · 20 repos · 14 followers · https://alexandergarcia.dev",
+        "variant": "caption"
+      },
+      "children": []
+    },
+    "text-asg5704-bio": {
+      "type": "Text",
+      "props": {
+        "text": "Front-End Engineer @ Wilcore",
+        "variant": "muted"
+      },
+      "children": []
+    },
+    "profile-kinged007": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "link-kinged007",
+        "text-kinged007-meta"
+      ]
+    },
+    "link-kinged007": {
+      "type": "Link",
+      "props": {
+        "label": "kinged007",
+        "href": "https://github.com/kinged007"
+      },
+      "children": []
+    },
+    "text-kinged007-meta": {
+      "type": "Text",
+      "props": {
+        "text": "91 repos · 12 followers",
+        "variant": "caption"
+      },
+      "children": []
+    },
+    "profile-aziegenawone": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "link-aziegenawone",
+        "text-aziegenawone-meta"
+      ]
+    },
+    "link-aziegenawone": {
+      "type": "Link",
+      "props": {
+        "label": "aziegenawone",
+        "href": "https://github.com/aziegenawone"
+      },
+      "children": []
+    },
+    "text-aziegenawone-meta": {
+      "type": "Text",
+      "props": {
+        "text": "22 repos",
+        "variant": "caption"
+      },
+      "children": []
+    },
+    "heading-other-stargazers": {
+      "type": "Heading",
+      "props": {
+        "text": "Other new stargazers",
+        "level": "h4"
+      },
+      "children": []
+    },
+    "grid-other-stargazers": {
+      "type": "Grid",
+      "props": {
+        "columns": 4,
+        "gap": "sm"
+      },
+      "children": [
+        "link-hirowa",
+        "link-zoedeptokyo",
+        "link-vatevstoil",
+        "link-saskel",
+        "link-eyeinthesky6",
+        "link-dotsource",
+        "link-sameergadge",
+        "link-firstfiveeight",
+        "link-drj3kl",
+        "link-kpinney",
+        "link-c1490b-code",
+        "link-chileanman",
+        "link-baladithyab",
+        "link-kinnujan",
+        "link-beyondeye",
+        "link-undeadlol1",
+        "link-nicumicle",
+        "link-veridian69",
+        "link-marslauncher",
+        "link-sput",
+        "link-juniorklawa",
+        "link-pg-pedro",
+        "link-askmetoo",
+        "link-wcvessels",
+        "link-kekropian",
+        "link-ch3ckmat3",
+        "link-gcz10",
+        "link-raziqgit",
+        "link-benizz0",
+        "link-enuno",
+        "link-sandrovespucci-im",
+        "link-middlesun"
+      ]
+    },
+    "link-hirowa": {
+      "type": "Link",
+      "props": {
+        "label": "hirowa",
+        "href": "https://github.com/hirowa"
+      },
+      "children": []
+    },
+    "link-zoedeptokyo": {
+      "type": "Link",
+      "props": {
+        "label": "ZoeDepthTokyo",
+        "href": "https://github.com/ZoeDepthTokyo"
+      },
+      "children": []
+    },
+    "link-vatevstoil": {
+      "type": "Link",
+      "props": {
+        "label": "vatevstoil",
+        "href": "https://github.com/vatevstoil"
+      },
+      "children": []
+    },
+    "link-saskel": {
+      "type": "Link",
+      "props": {
+        "label": "saskel",
+        "href": "https://github.com/saskel"
+      },
+      "children": []
+    },
+    "link-eyeinthesky6": {
+      "type": "Link",
+      "props": {
+        "label": "eyeinthesky6",
+        "href": "https://github.com/eyeinthesky6"
+      },
+      "children": []
+    },
+    "link-dotsource": {
+      "type": "Link",
+      "props": {
+        "label": "dotsource",
+        "href": "https://github.com/dotsource"
+      },
+      "children": []
+    },
+    "link-sameergadge": {
+      "type": "Link",
+      "props": {
+        "label": "SameerGadge",
+        "href": "https://github.com/SameerGadge"
+      },
+      "children": []
+    },
+    "link-firstfiveeight": {
+      "type": "Link",
+      "props": {
+        "label": "firstfiveeight",
+        "href": "https://github.com/firstfiveeight"
+      },
+      "children": []
+    },
+    "link-drj3kl": {
+      "type": "Link",
+      "props": {
+        "label": "drj3kl",
+        "href": "https://github.com/drj3kl"
+      },
+      "children": []
+    },
+    "link-kpinney": {
+      "type": "Link",
+      "props": {
+        "label": "kPinney",
+        "href": "https://github.com/kPinney"
+      },
+      "children": []
+    },
+    "link-c1490b-code": {
+      "type": "Link",
+      "props": {
+        "label": "c1490b-code",
+        "href": "https://github.com/c1490b-code"
+      },
+      "children": []
+    },
+    "link-chileanman": {
+      "type": "Link",
+      "props": {
+        "label": "chileanman",
+        "href": "https://github.com/chileanman"
+      },
+      "children": []
+    },
+    "link-baladithyab": {
+      "type": "Link",
+      "props": {
+        "label": "baladithyab",
+        "href": "https://github.com/baladithyab"
+      },
+      "children": []
+    },
+    "link-kinnujan": {
+      "type": "Link",
+      "props": {
+        "label": "kinnujan",
+        "href": "https://github.com/kinnujan"
+      },
+      "children": []
+    },
+    "link-beyondeye": {
+      "type": "Link",
+      "props": {
+        "label": "beyondeye",
+        "href": "https://github.com/beyondeye"
+      },
+      "children": []
+    },
+    "link-undeadlol1": {
+      "type": "Link",
+      "props": {
+        "label": "Undeadlol1",
+        "href": "https://github.com/Undeadlol1"
+      },
+      "children": []
+    },
+    "link-nicumicle": {
+      "type": "Link",
+      "props": {
+        "label": "nicumicle",
+        "href": "https://github.com/nicumicle"
+      },
+      "children": []
+    },
+    "link-veridian69": {
+      "type": "Link",
+      "props": {
+        "label": "veridian69",
+        "href": "https://github.com/veridian69"
+      },
+      "children": []
+    },
+    "link-marslauncher": {
+      "type": "Link",
+      "props": {
+        "label": "Marslauncher",
+        "href": "https://github.com/Marslauncher"
+      },
+      "children": []
+    },
+    "link-sput": {
+      "type": "Link",
+      "props": {
+        "label": "Sput",
+        "href": "https://github.com/Sput"
+      },
+      "children": []
+    },
+    "link-juniorklawa": {
+      "type": "Link",
+      "props": {
+        "label": "juniorklawa",
+        "href": "https://github.com/juniorklawa"
+      },
+      "children": []
+    },
+    "link-pg-pedro": {
+      "type": "Link",
+      "props": {
+        "label": "pg-pedro",
+        "href": "https://github.com/pg-pedro"
+      },
+      "children": []
+    },
+    "link-askmetoo": {
+      "type": "Link",
+      "props": {
+        "label": "askmetoo",
+        "href": "https://github.com/askmetoo"
+      },
+      "children": []
+    },
+    "link-wcvessels": {
+      "type": "Link",
+      "props": {
+        "label": "wcvessels",
+        "href": "https://github.com/wcvessels"
+      },
+      "children": []
+    },
+    "link-kekropian": {
+      "type": "Link",
+      "props": {
+        "label": "kekropian",
+        "href": "https://github.com/kekropian"
+      },
+      "children": []
+    },
+    "link-ch3ckmat3": {
+      "type": "Link",
+      "props": {
+        "label": "ch3ckmat3",
+        "href": "https://github.com/ch3ckmat3"
+      },
+      "children": []
+    },
+    "link-gcz10": {
+      "type": "Link",
+      "props": {
+        "label": "gcz10",
+        "href": "https://github.com/gcz10"
+      },
+      "children": []
+    },
+    "link-raziqgit": {
+      "type": "Link",
+      "props": {
+        "label": "RaziqGit",
+        "href": "https://github.com/RaziqGit"
+      },
+      "children": []
+    },
+    "link-benizz0": {
+      "type": "Link",
+      "props": {
+        "label": "benizz0",
+        "href": "https://github.com/benizz0"
+      },
+      "children": []
+    },
+    "link-enuno": {
+      "type": "Link",
+      "props": {
+        "label": "enuno",
+        "href": "https://github.com/enuno"
+      },
+      "children": []
+    },
+    "link-sandrovespucci-im": {
+      "type": "Link",
+      "props": {
+        "label": "sandrovespucci-im",
+        "href": "https://github.com/sandrovespucci-im"
+      },
+      "children": []
+    },
+    "link-middlesun": {
+      "type": "Link",
+      "props": {
+        "label": "middlesun",
+        "href": "https://github.com/middlesun"
+      },
+      "children": []
+    },
+    "separator2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "section-forks": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "lg"
+      },
+      "children": [
+        "heading-forks",
+        "stack-forks"
+      ]
+    },
+    "heading-forks": {
+      "type": "Heading",
+      "props": {
+        "text": "New forks",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "stack-forks": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "fork-eyeinthesky6",
+        "fork-niklas-schmidt",
+        "fork-matemorotz",
+        "fork-c1490b",
+        "fork-kain205",
+        "fork-veridian69",
+        "fork-kekropian"
+      ]
+    },
+    "fork-eyeinthesky6": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "link-fork-eyeinthesky6",
+        "text-fork-eyeinthesky6-meta",
+        "text-fork-eyeinthesky6-bio"
+      ]
+    },
+    "link-fork-eyeinthesky6": {
+      "type": "Link",
+      "props": {
+        "label": "eyeinthesky6/MiroShark",
+        "href": "https://github.com/eyeinthesky6/MiroShark"
+      },
+      "children": []
+    },
+    "text-fork-eyeinthesky6-meta": {
+      "type": "Text",
+      "props": {
+        "text": "Jai · 🏢 Fractional AI Co-Founder · 18 repos · 🐦 @eyeinthesky · https://jaithakur.in",
+        "variant": "caption"
+      },
+      "children": []
+    },
+    "text-fork-eyeinthesky6-bio": {
+      "type": "Text",
+      "props": {
+        "text": "AI/Product/Ops operator & fractional AI co-founder. 19 yrs in fintech, payments & startups — building practical AI workflow systems.",
+        "variant": "muted"
+      },
+      "children": []
+    },
+    "fork-niklas-schmidt": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "link-fork-niklas-schmidt",
+        "text-fork-niklas-schmidt-meta"
+      ]
+    },
+    "link-fork-niklas-schmidt": {
+      "type": "Link",
+      "props": {
+        "label": "Niklas-Schmidt/MiroShark",
+        "href": "https://github.com/Niklas-Schmidt/MiroShark"
+      },
+      "children": []
+    },
+    "text-fork-niklas-schmidt-meta": {
+      "type": "Text",
+      "props": {
+        "text": "Dr. Niklas J.R.M. Schmidt · 📍 Vienna, Austria · 🏢 WOLF THEISS Attorneys at Law · 34 repos · https://www.wolftheiss.com/lawyer/niklas-schmidt/",
+        "variant": "caption"
+      },
+      "children": []
+    },
+    "fork-matemorotz": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "link-fork-matemorotz",
+        "text-fork-matemorotz-meta"
+      ]
+    },
+    "link-fork-matemorotz": {
+      "type": "Link",
+      "props": {
+        "label": "matemorotz/MiroShark",
+        "href": "https://github.com/matemorotz/MiroShark"
+      },
+      "children": []
+    },
+    "text-fork-matemorotz-meta": {
+      "type": "Text",
+      "props": {
+        "text": "69 repos",
+        "variant": "caption"
+      },
+      "children": []
+    },
+    "fork-c1490b": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "link-fork-c1490b",
+        "text-fork-c1490b-meta",
+        "text-fork-c1490b-bio"
+      ]
+    },
+    "link-fork-c1490b": {
+      "type": "Link",
+      "props": {
+        "label": "c1490b-code/MiroShark",
+        "href": "https://github.com/c1490b-code/MiroShark"
+      },
+      "children": []
+    },
+    "text-fork-c1490b-meta": {
+      "type": "Text",
+      "props": {
+        "text": "Christopher Holmes · 39 repos",
+        "variant": "caption"
+      },
+      "children": []
+    },
+    "text-fork-c1490b-bio": {
+      "type": "Text",
+      "props": {
+        "text": "Here!",
+        "variant": "muted"
+      },
+      "children": []
+    },
+    "fork-kain205": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "link-fork-kain205",
+        "text-fork-kain205-meta"
+      ]
+    },
+    "link-fork-kain205": {
+      "type": "Link",
+      "props": {
+        "label": "kain205/MiroShark",
+        "href": "https://github.com/kain205/MiroShark"
+      },
+      "children": []
+    },
+    "text-fork-kain205-meta": {
+      "type": "Text",
+      "props": {
+        "text": "Nguyen Binh Thanh · 🏢 aa · 43 repos",
+        "variant": "caption"
+      },
+      "children": []
+    },
+    "fork-veridian69": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "link-fork-veridian69",
+        "text-fork-veridian69-meta"
+      ]
+    },
+    "link-fork-veridian69": {
+      "type": "Link",
+      "props": {
+        "label": "veridian69/MiroShark",
+        "href": "https://github.com/veridian69/MiroShark"
+      },
+      "children": []
+    },
+    "text-fork-veridian69-meta": {
+      "type": "Text",
+      "props": {
+        "text": "Jon Kowszun · 32 repos",
+        "variant": "caption"
+      },
+      "children": []
+    },
+    "fork-kekropian": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "link-fork-kekropian",
+        "text-fork-kekropian-meta"
+      ]
+    },
+    "link-fork-kekropian": {
+      "type": "Link",
+      "props": {
+        "label": "kekropian/MiroShark",
+        "href": "https://github.com/kekropian/MiroShark"
+      },
+      "children": []
+    },
+    "text-fork-kekropian-meta": {
+      "type": "Text",
+      "props": {
+        "text": "Kekrops · 2 repos",
+        "variant": "caption"
+      },
+      "children": []
+    }
+  }
+}
