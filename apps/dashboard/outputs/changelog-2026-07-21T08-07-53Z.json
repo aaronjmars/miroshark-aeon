@@ -1,0 +1,49 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "Changelog (push-to) — 2026-07-21"
+      },
+      "children": [
+        "stack"
+      ]
+    },
+    "stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "repos",
+        "change",
+        "pr"
+      ]
+    },
+    "repos": {
+      "type": "Text",
+      "props": {
+        "text": "aaronjmars/miroshark → aaronjmars/miroshark-website",
+        "variant": "muted"
+      }
+    },
+    "change": {
+      "type": "Text",
+      "props": {
+        "text": "6 new PRs → changelog entry: Docs badge across all locales + badge copy polish",
+        "variant": "body"
+      }
+    },
+    "pr": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #149",
+        "href": "https://github.com/aaronjmars/miroshark-website/pull/149",
+        "source": "GitHub"
+      }
+    }
+  }
+}
