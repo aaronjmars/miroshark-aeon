@@ -1,10 +1,15 @@
 HEARTBEAT_OK · STATUS_PAGE=OK
 
-All 6 enabled skills are healthy with zero failures. `docs/status.md` updated — MIROSHARK at $0.000001728 (+0.3% 24h), verdict QUIET; next scheduled run is token-movers at 06:00 UTC tomorrow.
+All checks clean. Fleet is fully healthy:
+- **P0:** 7 skills running — no failures, no stuck, no degradation
+- **P1:** No open PRs, no urgent issues
+- **P2:** No flagged memory items
+- **P3:** All skills within 2× their schedule intervals
+
+Status page updated at `docs/status.md` with today's token pulse (MIROSHARK $0.0000017550, +1.58%, CONSOLIDATING). No notification sent — nothing needs attention.
 
 ## Summary
-
-- **P0–P3:** All clear. No failed/stuck/degraded skills, no open PRs, no urgent issues, no overdue scheduled skills.
-- **Status page:** `docs/status.md` regenerated with 🟢 OK verdict, fresh token pulse from today's report.
-- **Log:** Appended `### heartbeat` entry to `memory/logs/2026-07-20.md`.
-- **No notification sent** — nothing needs operator attention.
+- Read `memory/cron-state.json`, `memory/MEMORY.md`, recent logs (2026-07-20, 2026-07-21)
+- Ran P0–P3 checks: all clean
+- Regenerated `docs/status.md` with current fleet state and token-report-2026-07-21.md pulse
+- Appended `### heartbeat` entry to `memory/logs/2026-07-21.md`
