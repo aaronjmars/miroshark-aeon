@@ -1,10 +1,10 @@
 {
   "skill": "fetch-tweets",
-  "last_analyzed": "2026-07-21T17:28:03Z",
+  "last_analyzed": "2026-07-22T17:26:37Z",
   "quality_score": 4,
-  "assessment": "Complete, well-structured execution: fetched tweets, correctly deduped against prior logs, made the right call to suppress notification on clean run, and logged the result.",
+  "assessment": "Successful fetch with proper deduplication, identified 2 fresh tweets on strategic signal (DefiLlama listing + protocol transparency messaging), correctly logged and notified.",
   "flags": [],
-  "avg_score": 3.83,
+  "avg_score": 3.85,
   "history": [
     {
       "date": "2026-07-10",
@@ -52,6 +52,10 @@
     },
     {
       "date": "2026-07-21",
+      "score": 4
+    },
+    {
+      "date": "2026-07-22",
       "score": 4
     }
   ]

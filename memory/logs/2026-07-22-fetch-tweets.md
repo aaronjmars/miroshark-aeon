@@ -1,3 +1,7 @@
+---
+type: Log
+---
+
 *Tweet Digest — 2026-07-22*
 
 *Theme: Transparency & tokenomics*

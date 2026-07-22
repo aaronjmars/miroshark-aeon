@@ -1,0 +1,33 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Tweet Digest — 2026-07-22",
+        "description": "Theme: Transparency & tokenomics"
+      },
+      "children": [
+        "tweet_1",
+        "tweet_2"
+      ]
+    },
+    "tweet_1": {
+      "type": "TweetCard",
+      "props": {
+        "author": "miroshark_",
+        "handle": "miroshark_",
+        "text": "DefiLlama added $MIROSHARK — responds with a pointer to the protocol page for anyone who wants to audit tokenomics directly. https://x.com/miroshark_/status/2079838786872050075"
+      }
+    },
+    "tweet_2": {
+      "type": "TweetCard",
+      "props": {
+        "author": "miroshark_",
+        "handle": "miroshark_",
+        "text": "Standalone follow-up: \"Transparency is not negotiable for us 👊\" https://x.com/miroshark_/status/2079839330827210798"
+      }
+    }
+  }
+}
