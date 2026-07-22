@@ -1,15 +1,15 @@
 HEARTBEAT_OK · STATUS_PAGE=OK
 
-All checks clean. Fleet is fully healthy:
-- **P0:** 7 skills running — no failures, no stuck, no degradation
-- **P1:** No open PRs, no urgent issues
-- **P2:** No flagged memory items
-- **P3:** All skills within 2× their schedule intervals
+All clear. Fleet is healthy:
+- **P0** — 7 enabled skills, all `✅ success`. No failed, stuck, or degraded skills.
+- **P1** — No open PRs, no urgent issues.
+- **P2** — No flagged memory items.
+- **P3** — All skills within 2× their schedule interval.
 
-Status page updated at `docs/status.md` with today's token pulse (MIROSHARK $0.0000017550, +1.58%, CONSOLIDATING). No notification sent — nothing needs attention.
+Token pulse updated to today's data: MIROSHARK at $0.0000016956 (−3.4% 24h), verdict **SLIDING**. `docs/status.md` regenerated.
 
 ## Summary
-- Read `memory/cron-state.json`, `memory/MEMORY.md`, recent logs (2026-07-20, 2026-07-21)
-- Ran P0–P3 checks: all clean
-- Regenerated `docs/status.md` with current fleet state and token-report-2026-07-21.md pulse
-- Appended `### heartbeat` entry to `memory/logs/2026-07-21.md`
+- **Checked:** cron-state.json (7 enabled skills, all healthy), PRs, issues, memory flags, schedule intervals
+- **Written:** `docs/status.md` — 🟢 OK, token pulse from today's report, next run token-movers 06:00 UTC tomorrow
+- **Logged:** `memory/logs/2026-07-22.md` under `### heartbeat` (mode: ambient)
+- **Notification:** none — clean run
