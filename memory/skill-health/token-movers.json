@@ -1,8 +1,8 @@
 {
   "skill": "token-movers",
-  "last_analyzed": "2026-07-21T06:26:14Z",
+  "last_analyzed": "2026-07-22T07:09:22Z",
   "quality_score": 4,
-  "assessment": "Well-structured token momentum report with specific data points, whale alerts, and state tracking for comparison.",
+  "assessment": "Substantive, well-sourced token report with clear verdict (SLIDING) and specific metrics; proper multi-source validation and skip-state documentation.",
   "flags": [],
   "avg_score": 4,
   "history": [
@@ -52,6 +52,10 @@
     },
     {
       "date": "2026-07-21",
+      "score": 4
+    },
+    {
+      "date": "2026-07-22",
       "score": 4
     }
   ]

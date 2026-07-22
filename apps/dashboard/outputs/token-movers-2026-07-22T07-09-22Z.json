@@ -1,0 +1,110 @@
+{
+  "root": "card-root",
+  "state": {},
+  "elements": {
+    "card-root": {
+      "type": "Card",
+      "props": {
+        "title": "$MiroShark — SLIDING",
+        "description": "Price slipped 3.4% on sell-dominant flow (14:11 sells:buys) with volume tracking its 7d average — no panic, just steady drip selling."
+      },
+      "children": [
+        "metrics-grid",
+        "separator-1",
+        "flow-line",
+        "separator-2",
+        "chart-link"
+      ]
+    },
+    "metrics-grid": {
+      "type": "Grid",
+      "props": {
+        "columns": 3,
+        "gap": "md"
+      },
+      "children": [
+        "price-stat",
+        "liq-stat",
+        "vol-stat"
+      ]
+    },
+    "separator-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "flow-line": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "lg"
+      },
+      "children": [
+        "buys-sells-text",
+        "whales-text"
+      ]
+    },
+    "separator-2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "price-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Price",
+        "value": "$0.0000016956",
+        "delta": "-3.4%",
+        "trend": "down"
+      },
+      "children": []
+    },
+    "liq-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Liquidity",
+        "value": "$204.6K",
+        "delta": "-1.9%",
+        "trend": "down"
+      },
+      "children": []
+    },
+    "vol-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Volume",
+        "value": "$3.7K",
+        "delta": "1.0x 7d",
+        "trend": "neutral"
+      },
+      "children": []
+    },
+    "buys-sells-text": {
+      "type": "Text",
+      "props": {
+        "text": "Buys/Sells: 11/14 (ratio 0.79)"
+      },
+      "children": []
+    },
+    "whales-text": {
+      "type": "Text",
+      "props": {
+        "text": "Whales: 0"
+      },
+      "children": []
+    },
+    "chart-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Price Chart",
+        "href": "https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209",
+        "source": "GeckoTerminal"
+      },
+      "children": []
+    }
+  }
+}
