@@ -1,0 +1,111 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "$MiroShark — RALLYING"
+      },
+      "children": [
+        "text_narrative",
+        "stats_grid",
+        "separator_1",
+        "info_section",
+        "link_chart"
+      ]
+    },
+    "text_narrative": {
+      "type": "Text",
+      "props": {
+        "text": "Volume doubled the 7d average ($7.9K, 2.1×) and price recovered +4.3% from yesterday's −3.4% slide.",
+        "variant": "lead"
+      },
+      "children": []
+    },
+    "stats_grid": {
+      "type": "Grid",
+      "props": {
+        "columns": 3,
+        "gap": "md"
+      },
+      "children": [
+        "stat_price",
+        "stat_liq",
+        "stat_vol"
+      ]
+    },
+    "stat_price": {
+      "type": "Stat",
+      "props": {
+        "label": "Price",
+        "value": "$0.000001769",
+        "delta": "+4.3%",
+        "trend": "up"
+      },
+      "children": []
+    },
+    "stat_liq": {
+      "type": "Stat",
+      "props": {
+        "label": "Liquidity",
+        "value": "$208.9K",
+        "delta": "+2.1%",
+        "trend": "up"
+      },
+      "children": []
+    },
+    "stat_vol": {
+      "type": "Stat",
+      "props": {
+        "label": "Volume (24h)",
+        "value": "$7.9K",
+        "delta": "2.1× 7d avg",
+        "trend": "up"
+      },
+      "children": []
+    },
+    "separator_1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "info_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "buys_sells_text",
+        "whales_text"
+      ]
+    },
+    "buys_sells_text": {
+      "type": "Text",
+      "props": {
+        "text": "Buys/Sells: 20/22 (ratio 0.91)",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "whales_text": {
+      "type": "Text",
+      "props": {
+        "text": "Whales: 0",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "link_chart": {
+      "type": "Link",
+      "props": {
+        "label": "View on GeckoTerminal",
+        "href": "https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209"
+      },
+      "children": []
+    }
+  }
+}

@@ -1,8 +1,8 @@
 {
   "skill": "token-movers",
-  "last_analyzed": "2026-07-22T07:09:22Z",
+  "last_analyzed": "2026-07-23T06:13:50Z",
   "quality_score": 4,
-  "assessment": "Substantive, well-sourced token report with clear verdict (SLIDING) and specific metrics; proper multi-source validation and skip-state documentation.",
+  "assessment": "Substantive token analysis with specific metrics, data validation via sanity check, and actionable verdict; well-structured output with proper artifacts; abbreviations (GT/DS) lack definition in summary",
   "flags": [],
   "avg_score": 4,
   "history": [
@@ -56,6 +56,10 @@
     },
     {
       "date": "2026-07-22",
+      "score": 4
+    },
+    {
+      "date": "2026-07-23",
       "score": 4
     }
   ]
