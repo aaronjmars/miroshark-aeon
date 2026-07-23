@@ -1,10 +1,10 @@
 {
   "skill": "fetch-tweets",
-  "last_analyzed": "2026-07-22T17:26:37Z",
+  "last_analyzed": "2026-07-23T17:10:15Z",
   "quality_score": 4,
-  "assessment": "Successful fetch with proper deduplication, identified 2 fresh tweets on strategic signal (DefiLlama listing + protocol transparency messaging), correctly logged and notified.",
+  "assessment": "Well-executed dedup task with correct no-op decision; proper API interaction, memory checking, and logging",
   "flags": [],
-  "avg_score": 3.85,
+  "avg_score": 3.86,
   "history": [
     {
       "date": "2026-07-10",
@@ -56,6 +56,10 @@
     },
     {
       "date": "2026-07-22",
+      "score": 4
+    },
+    {
+      "date": "2026-07-23",
       "score": 4
     }
   ]

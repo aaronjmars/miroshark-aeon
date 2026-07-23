@@ -1,5 +1,9 @@
-*Tweet Digest — 2026-07-22*
+All 3 tweets from @miroshark_ (July 20–22) were already reported in the last 2 days of logs. No new content — no notification sent. Status: `TWEET_DIGEST_OK`.
 
-*Theme: Transparency & tokenomics*
-@miroshark_: DefiLlama added $MIROSHARK — responds with a pointer to the protocol page for anyone who wants to audit tokenomics directly. — [link](https://x.com/miroshark_/status/2079838786872050075)
-@miroshark_: Standalone follow-up: "Transparency is not negotiable for us 👊" — [link](https://x.com/miroshark_/status/2079839330827210798)
+## Summary
+
+- **Source**: `account:` (empty ARG) → all-tracked-accounts mode → `miroshark_`
+- **Fetch**: XAI API `http=200`, 3 candidates returned
+- **Dedup**: all 3 URLs already in SEEN_URLS from the 2026-07-22 log
+- **Action**: no notification (silence beats filler)
+- **Log**: appended `### fetch-tweets` entry to `memory/logs/2026-07-23.md`
