@@ -1,22 +1,22 @@
-✅ shiplog jul 16→20
+✅ Shiplog Jul 20→23
 
-miroshark + aeon shiplog ⭐🦈  jul 16 → jul 20
+miroshark + aeon shiplog ⭐🦈 jul 20 → jul 23
 
-shipped 23 PRs + 21 commits. the bytes:
+shipped 41 PRs + 26 commits this window. the bytes:
 
-- adk live: aeon developer kit — embed agents in any site. your users bring their own github-owned aeon, import skills, run & schedule from your product. @aeonframework
-- defillama listed: aeon + miroshark + miroshark-x402 fees now tracked. 3 adapters merged into @DefiLlama in one afternoon.
-- fine-tuning the swarm: training a custom Qwen3.5-9B on 4k real tweets reformatted as miroshark tool-calls. SFT done, ~50% better output. DPO next. 🦈
-- new mcps: robinhood-mcp + glim-mcp + executor cloud wired into the skill catalog ⭐
-- miroshark site got shader-driven page transitions. the vibe is right.
-- ansem (@blknoiz06) soul example landed in soul.md
+- security sweep: 8 repos patched — CVE-2026-13311 (shell-quote into MiroShark), CVE-2026-59950 (mcp), 2x sharp/libvips CVEs in aeon, opendia auth bypass closed, adm-zip, agent-credit safety checks, tweazy cleared 11 alerts. fleet scanner does what audits can't.
+- cleanup wave: dead code + legacy paths removed in MiroShark, aeon, tweazy, opendia, soul.md, miroshark-website. simultaneous fleet-wide. fast is a feature.
+- secured-watch skill: aeon now watches itself for new vuln surface on a 2-day cadence 👀
+- miroshark website: pinned contents rail + x402 subsections. docs navigable now.
+- repo-pulse: all repos + aeonfun org stacked into one notification.
+- $MIROSHARK on DefiLlama — full tokenomics live.
 
 traction:
-- MiroShark 1,394 ⭐ (+29 this window — pace was 0.6/day, this week ran 7.25/day)
-- aeon 577 ⭐ (+1)
-- best x post: minitor showcase 34 likes + adk drop 23 likes (@aeonframework)
-- miroshark world cup final sim: messi + yamal both red-carded — the chaos sim people asked for
-
-https://github.com/aaronjmars/miroshark-aeon/blob/main/output/articles/shiplog-2026-07-20.md
+- aaronjmars/MiroShark 1,415 ⭐ (+21 this window)
+- aeonfun/aeon 578 ⭐ (+1)
+- @aeonframework ADK post: 48 likes · 5 RTs
+- @aeonframework "which agentic framework": 44 likes · 8 RTs
 
 ⭐🦈
+
+https://github.com/aaronjmars/miroshark-aeon/blob/main/output/articles/shiplog-2026-07-23.md
