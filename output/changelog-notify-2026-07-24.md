@@ -1,5 +1,3 @@
-ℹ️ Changelog sync
-
 *Changelog (push-to) — 2026-07-24*
 aaronjmars/miroshark → aaronjmars/miroshark-website
 3 new PRs → changelog entry "Two CVE patches + dead code sweep"

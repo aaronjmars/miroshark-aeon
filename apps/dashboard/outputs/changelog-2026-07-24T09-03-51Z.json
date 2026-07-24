@@ -1,0 +1,55 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "ℹ️ Changelog sync"
+      },
+      "children": [
+        "stack_content"
+      ]
+    },
+    "stack_content": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "text_meta",
+        "text_source",
+        "text_summary",
+        "link_pr"
+      ]
+    },
+    "text_meta": {
+      "type": "Text",
+      "props": {
+        "text": "Changelog (push-to) — 2026-07-24",
+        "variant": "caption"
+      }
+    },
+    "text_source": {
+      "type": "Text",
+      "props": {
+        "text": "aaronjmars/miroshark → aaronjmars/miroshark-website",
+        "variant": "muted"
+      }
+    },
+    "text_summary": {
+      "type": "Text",
+      "props": {
+        "text": "3 new PRs → changelog entry: Two CVE patches + dead code sweep"
+      }
+    },
+    "link_pr": {
+      "type": "Link",
+      "props": {
+        "label": "PR #168",
+        "href": "https://github.com/aaronjmars/miroshark-website/pull/168"
+      }
+    }
+  }
+}
