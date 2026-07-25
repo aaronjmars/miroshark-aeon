@@ -1,0 +1,205 @@
+{
+  "root": "card-heartbeat",
+  "state": {},
+  "elements": {
+    "card-heartbeat": {
+      "type": "Card",
+      "props": {
+        "title": "⚠️ Heartbeat — 2026-07-25"
+      },
+      "children": [
+        "alert-watch",
+        "sep-1",
+        "section-p0",
+        "sep-2",
+        "section-memory",
+        "sep-3",
+        "section-issue",
+        "sep-4",
+        "section-price"
+      ]
+    },
+    "alert-watch": {
+      "type": "Alert",
+      "props": {
+        "title": "🟡 WATCH — 2026-07-25 fleet check",
+        "type": "warning"
+      }
+    },
+    "sep-1": {
+      "type": "Separator",
+      "props": {}
+    },
+    "section-p0": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "text-p0",
+        "badge-skills"
+      ]
+    },
+    "text-p0": {
+      "type": "Text",
+      "props": {
+        "text": "✅ P0 — all 7 skills healthy. No failures, no stuck runs."
+      }
+    },
+    "badge-skills": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "badge-token-movers",
+        "badge-fetch-tweets",
+        "badge-changelog",
+        "badge-shiplog",
+        "badge-repo-pulse",
+        "badge-memory-flush",
+        "badge-heartbeat"
+      ]
+    },
+    "badge-token-movers": {
+      "type": "Badge",
+      "props": {
+        "text": "token-movers"
+      }
+    },
+    "badge-fetch-tweets": {
+      "type": "Badge",
+      "props": {
+        "text": "fetch-tweets"
+      }
+    },
+    "badge-changelog": {
+      "type": "Badge",
+      "props": {
+        "text": "changelog"
+      }
+    },
+    "badge-shiplog": {
+      "type": "Badge",
+      "props": {
+        "text": "shiplog"
+      }
+    },
+    "badge-repo-pulse": {
+      "type": "Badge",
+      "props": {
+        "text": "repo-pulse"
+      }
+    },
+    "badge-memory-flush": {
+      "type": "Badge",
+      "props": {
+        "text": "memory-flush"
+      }
+    },
+    "badge-heartbeat": {
+      "type": "Badge",
+      "props": {
+        "text": "heartbeat"
+      }
+    },
+    "sep-2": {
+      "type": "Separator",
+      "props": {}
+    },
+    "section-memory": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "text-memory-deadline",
+        "text-memory-detail"
+      ]
+    },
+    "text-memory-deadline": {
+      "type": "Text",
+      "props": {
+        "text": "🔵 MEMORY: Integrators hyperstition deadline in 6 days (2026-07-31)",
+        "variant": "lead"
+      }
+    },
+    "text-memory-detail": {
+      "type": "Text",
+      "props": {
+        "text": "14 integrators counted Jun 22 (ECOSYSTEM.md); confirm the count still holds before deadline passes.",
+        "variant": "caption"
+      }
+    },
+    "sep-3": {
+      "type": "Separator",
+      "props": {}
+    },
+    "section-issue": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "text-issue-header",
+        "link-github-117",
+        "text-issue-detail"
+      ]
+    },
+    "text-issue-header": {
+      "type": "Text",
+      "props": {
+        "text": "ℹ️ ISSUE",
+        "variant": "lead"
+      }
+    },
+    "link-github-117": {
+      "type": "Link",
+      "props": {
+        "label": "GitHub #117",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/issues/117"
+      }
+    },
+    "text-issue-detail": {
+      "type": "Text",
+      "props": {
+        "text": "Machine-managed health thread for fetch-tweets (quality score 2 this run vs 4 norm; skill itself succeeded ✅)"
+      }
+    },
+    "sep-4": {
+      "type": "Separator",
+      "props": {}
+    },
+    "section-price": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stat-miroshark",
+        "badge-consolidating"
+      ]
+    },
+    "stat-miroshark": {
+      "type": "Stat",
+      "props": {
+        "label": "$MIROSHARK",
+        "value": "$0.000001712",
+        "delta": "+1.1%",
+        "trend": "up"
+      }
+    },
+    "badge-consolidating": {
+      "type": "Badge",
+      "props": {
+        "text": "CONSOLIDATING",
+        "variant": "outline"
+      }
+    }
+  }
+}
