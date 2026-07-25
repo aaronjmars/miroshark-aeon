@@ -1,8 +1,8 @@
 {
   "skill": "token-movers",
-  "last_analyzed": "2026-07-24T07:06:19Z",
+  "last_analyzed": "2026-07-25T06:43:23Z",
   "quality_score": 4,
-  "assessment": "Good — delivered specific metrics, clear verdict with supporting analysis, tracked data sources, and created output files; fulfills the skill's core mission of tracking $MIROSHARK momentum.",
+  "assessment": "Substantive, well-sourced token report with specific metrics, cross-validation (DexScreener sanity check), whale activity detail, and proper artifacts (article, log, notification).",
   "flags": [],
   "avg_score": 4,
   "history": [
@@ -64,6 +64,10 @@
     },
     {
       "date": "2026-07-24",
+      "score": 4
+    },
+    {
+      "date": "2026-07-25",
       "score": 4
     }
   ]

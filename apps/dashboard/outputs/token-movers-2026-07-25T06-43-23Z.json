@@ -1,0 +1,109 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "$MiroShark — CONSOLIDATING"
+      },
+      "children": [
+        "narrative",
+        "separator_1",
+        "stats_stack",
+        "separator_2",
+        "link_chart"
+      ]
+    },
+    "narrative": {
+      "type": "Text",
+      "props": {
+        "text": "+1.1% tick off yesterday's floor on 0.89× average volume; a $1,032 whale buy at 23:18 UTC drove 34% of the day's $3K volume.",
+        "variant": "lead"
+      },
+      "children": []
+    },
+    "separator_1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "stats_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stat_price",
+        "stat_liq",
+        "stat_vol",
+        "stat_ratio",
+        "stat_whales"
+      ]
+    },
+    "stat_price": {
+      "type": "Stat",
+      "props": {
+        "label": "Price",
+        "value": "$0.000001712",
+        "delta": "+1.1%",
+        "trend": "up"
+      },
+      "children": []
+    },
+    "stat_liq": {
+      "type": "Stat",
+      "props": {
+        "label": "Liquidity",
+        "value": "$201.8K",
+        "delta": "−0.9%",
+        "trend": "down"
+      },
+      "children": []
+    },
+    "stat_vol": {
+      "type": "Stat",
+      "props": {
+        "label": "Volume (24h)",
+        "value": "$3.1K",
+        "delta": "0.89× 7d avg"
+      },
+      "children": []
+    },
+    "stat_ratio": {
+      "type": "Stat",
+      "props": {
+        "label": "Buy/Sell Ratio",
+        "value": "1.00",
+        "delta": "9 buys / 9 sells"
+      },
+      "children": []
+    },
+    "stat_whales": {
+      "type": "Stat",
+      "props": {
+        "label": "Whale Transactions",
+        "value": "1"
+      },
+      "children": []
+    },
+    "separator_2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "link_chart": {
+      "type": "Link",
+      "props": {
+        "label": "View Chart on GeckoTerminal",
+        "href": "https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209"
+      },
+      "children": []
+    }
+  }
+}
