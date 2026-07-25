@@ -1,0 +1,74 @@
+{
+  "root": "card-root",
+  "state": {},
+  "elements": {
+    "card-root": {
+      "type": "Card",
+      "props": {
+        "title": "Tweet Digest — 2026-07-25",
+        "description": "Theme: Transparency & Tokenomics"
+      },
+      "children": [
+        "stack-main"
+      ]
+    },
+    "stack-main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "tweet1",
+        "link-defillama",
+        "link-tweet1",
+        "separator1",
+        "tweet2",
+        "link-tweet2"
+      ]
+    },
+    "tweet1": {
+      "type": "TweetCard",
+      "props": {
+        "author": "miroshark_",
+        "handle": "miroshark_",
+        "text": "DefiLlama listed $MIROSHARK — full tokenomics now public at defillama.com/protocol/miroshark"
+      }
+    },
+    "link-defillama": {
+      "type": "Link",
+      "props": {
+        "label": "defillama.com/protocol/miroshark",
+        "href": "https://defillama.com/protocol/miroshark"
+      }
+    },
+    "link-tweet1": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/miroshark_/status/2079838786872050075"
+      }
+    },
+    "separator1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "tweet2": {
+      "type": "TweetCard",
+      "props": {
+        "author": "miroshark_",
+        "handle": "miroshark_",
+        "text": "transparency is non-negotiable — standalone affirmation, posted right after the listing"
+      }
+    },
+    "link-tweet2": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/miroshark_/status/2079839330827210798"
+      }
+    }
+  }
+}

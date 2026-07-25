@@ -1,9 +1,5 @@
-Cleanup is blocked (rm excluded from allowlist) — the temp files will be cleaned up by the workflow revert step for stray writes.
+*Tweet Digest — 2026-07-25*
 
-## Summary
-
-- **Branch:** account (all tracked)
-- **Account:** `miroshark_` (sole entry in `memory/topics/tracked-accounts.yml`)
-- **Fetch:** XAI API returned 2 candidates (http=200) — both already reported on 2026-07-22
-- **Status:** `TWEET_DIGEST_OK` — all results deduped, no notification sent
-- **Log:** appended `### fetch-tweets` entry to `memory/logs/2026-07-24.md`
+*Theme: Transparency & Tokenomics*
+@miroshark_: DefiLlama listed $MIROSHARK — full tokenomics now public at defillama.com/protocol/miroshark — [link](https://x.com/miroshark_/status/2079838786872050075)
+@miroshark_: transparency is non-negotiable — standalone affirmation, posted right after the listing — [link](https://x.com/miroshark_/status/2079839330827210798)
