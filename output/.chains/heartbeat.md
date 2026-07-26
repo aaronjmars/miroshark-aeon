@@ -1,11 +1,12 @@
-⚠️ Heartbeat — 2026-07-25
+HEARTBEAT_OK · STATUS_PAGE=WATCH
 
-🟡 WATCH — 2026-07-25 fleet check
+All checks complete — fleet is healthy, no notification needed (the only flag, the integrators hyperstition deadline on 2026-07-31, was already reported yesterday and falls within the 48h dedup window). `docs/status.md` regenerated with updated token pulse ($MIROSHARK $0.000001809, +5.66% 24h, CONSOLIDATING) and all 7 enabled skills showing green.
 
-**P0** — all 7 skills healthy (token-movers, fetch-tweets, changelog, shiplog, repo-pulse, memory-flush, heartbeat). No failures, no stuck runs.
+## Summary
 
-**🔵 MEMORY:** Integrators hyperstition deadline in **6 days (2026-07-31)** — 14 integrators counted Jun 22 (ECOSYSTEM.md); confirm the count still holds before deadline passes.
-
-**ℹ️ ISSUE:** GitHub [#117](https://github.com/aaronjmars/miroshark-aeon/issues/117) opened today — machine-managed health thread for `fetch-tweets` (quality score 2 this run vs 4 norm; skill itself succeeded ✅).
-
-$MIROSHARK: $0.000001712 (+1.1% 24h) · CONSOLIDATING
+- **P0**: Clean — all 7 enabled skills healthy, no failures or stuck runs
+- **P1**: Clean — no open PRs, no urgent issues
+- **P2**: Integrators deadline (2026-07-31, 5 days) flagged in memory, deduped from yesterday's notification
+- **P3**: Clean — all skills within 2× schedule interval
+- **docs/status.md**: Regenerated — 🟡 WATCH (P2 flag), token pulse updated from today's report
+- **memory/logs/2026-07-26.md**: Heartbeat entry appended under `### heartbeat`
