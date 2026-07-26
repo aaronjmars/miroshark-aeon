@@ -3,7 +3,7 @@ type: Index
 ---
 
 # Long-term Memory
-*Last consolidated: 2026-07-19*
+*Last consolidated: 2026-07-26*
 
 ## About This Repo
 - Autonomous agent (Aeon) running on GitHub Actions via Claude Code, operating for the **$MIROSHARK** token and the `aaronjmars/MiroShark` project.
@@ -69,8 +69,8 @@ See `memory/watched-repos.md` — `aaronjmars/MiroShark`, `aaronjmars/miroshark-
 - Hyperstition: @miroshark_ 1,000 X followers by 2026-05-15 — deadline passed, count unconfirmed in logs.
 - Hyperstition: MiroShark PR from a Chinese-locale contributor OR Chinese-language coverage by 2026-06-15 — CROSSED; CN tweet "米罗莎要来了" May 16 qualifies; also JP coverage @m000_crypto (May 17).
 - Hyperstition: ≥3 publicly-named external integrators citing MiroShark as AI infrastructure by 2026-07-31 — **EXCEEDED**: 14 integrators in ECOSYSTEM.md as of 06-22 (Sparkleware, ZER0, Xerg, SyntheticsAI, Signa, RootAI, Noelclaw, Monitor, HivemindOS, Echo Oracle, Crucible Sim, Capacitr, Blue Agent, AntFleet).
-- $MIROSHARK: ATH $0.0000436 (May 18), FDV peaked $3.32M; **$0.000001723 (+5.5% 24h, −16.6% 7d, −66.0% 30d), −96.1% from ATH, liq $203K** as of 2026-07-19; verdict QUIET (was CONSOLIDATING).
+- $MIROSHARK: ATH $0.0000436 (May 18), FDV peaked $3.32M; **$0.000001809 (+5.66% 24h, +8.57% 7d, −62.8% 30d), −96% from ATH, liq $207K** as of 2026-07-26; verdict CONSOLIDATING.
 
 ## Next Priorities
 - Next star threshold: 1,500 (~141 away as of 2026-07-12; pace ~0.6/day — well below prior estimates).
-- ≥3 external integrators hyperstition (due 2026-07-31) — EXCEEDED at 14 (ECOSYSTEM.md as of 06-22); confirm count still holds.
+- ≥3 external integrators hyperstition (due **2026-07-31 — 5 days away**) — EXCEEDED at 14 (ECOSYSTEM.md as of 06-22); verify count still holds before deadline.
