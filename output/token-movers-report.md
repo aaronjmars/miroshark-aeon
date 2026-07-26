@@ -1,5 +1,3 @@
-ℹ️ MiroShark Token Report
-
 *$MiroShark — CONSOLIDATING*
 
 Price up +5.7% off yesterday on 0.59× average volume — retail-driven tick with no whale participation.

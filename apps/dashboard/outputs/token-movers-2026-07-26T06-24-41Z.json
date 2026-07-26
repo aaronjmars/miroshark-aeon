@@ -1,0 +1,141 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "MiroShark Token Report"
+      },
+      "children": [
+        "status_badge",
+        "status_text",
+        "sep1",
+        "metrics_section",
+        "sep2",
+        "returns_section",
+        "sep3",
+        "chart_link"
+      ]
+    },
+    "status_badge": {
+      "type": "Badge",
+      "props": {
+        "text": "CONSOLIDATING",
+        "variant": "default"
+      }
+    },
+    "status_text": {
+      "type": "Text",
+      "props": {
+        "text": "Price up +5.7% off yesterday on 0.59× average volume — retail-driven tick with no whale participation.",
+        "variant": "body"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "metrics_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "price_stat",
+        "liq_stat",
+        "vol_stat",
+        "buysells_text",
+        "whales_stat"
+      ]
+    },
+    "price_stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Price",
+        "value": "$0.000001809",
+        "delta": "+5.66%",
+        "trend": "up"
+      }
+    },
+    "liq_stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Liquidity",
+        "value": "$206.9K",
+        "delta": "+2.53%",
+        "trend": "up"
+      }
+    },
+    "vol_stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Volume",
+        "value": "$2.0K",
+        "delta": "0.59× 7d avg"
+      }
+    },
+    "buysells_text": {
+      "type": "Text",
+      "props": {
+        "text": "Buys/Sells: 7/8 (ratio 0.88)"
+      }
+    },
+    "whales_stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Whales",
+        "value": "0"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "returns_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "returns_7d",
+        "returns_30d"
+      ]
+    },
+    "returns_7d": {
+      "type": "Stat",
+      "props": {
+        "label": "7d",
+        "value": "+8.6%",
+        "trend": "up"
+      }
+    },
+    "returns_30d": {
+      "type": "Stat",
+      "props": {
+        "label": "30d",
+        "value": "−62.8%",
+        "trend": "down"
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "chart_link": {
+      "type": "Link",
+      "props": {
+        "label": "View Chart on GeckoTerminal",
+        "href": "https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209"
+      }
+    }
+  }
+}
