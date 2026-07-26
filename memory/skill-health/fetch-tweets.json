@@ -1,13 +1,10 @@
 {
   "skill": "fetch-tweets",
-  "last_analyzed": "2026-07-25T17:06:55Z",
-  "quality_score": 2,
-  "assessment": "Skill executed correctly (http=200, dedup, notify, log), but re-reported 3-day-old tweets from July 22 due to dedup window expiration—no new signal.",
-  "flags": [
-    "stale_data",
-    "low_quality"
-  ],
-  "avg_score": 3.69,
+  "last_analyzed": "2026-07-26T17:08:50Z",
+  "quality_score": 4,
+  "assessment": "Skill executed successfully with proper API authentication, correct deduplication logic, and appropriate no-op handling; clearly summarized and properly logged.",
+  "flags": [],
+  "avg_score": 3.71,
   "history": [
     {
       "date": "2026-07-10",
@@ -72,6 +69,10 @@
     {
       "date": "2026-07-25",
       "score": 2
+    },
+    {
+      "date": "2026-07-26",
+      "score": 4
     }
   ]
 }
