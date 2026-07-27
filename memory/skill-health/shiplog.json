@@ -1,10 +1,10 @@
 {
   "skill": "shiplog",
-  "last_analyzed": "2026-07-23T09:09:02Z",
+  "last_analyzed": "2026-07-27T10:32:54Z",
   "quality_score": 4,
-  "assessment": "Substantive shiplog summary with specific metrics (41 PRs, 26 commits, named CVEs, star counts, social engagement) and strategic alignment; well-structured; demonstrates cross-repo coordination. Truncated output limits full assessment.",
+  "assessment": "Substantive shiplog with specific shipped items, quantified metrics, cross-repo tracking, and artifact generation—well-structured and action-oriented.",
   "flags": [],
-  "avg_score": 4.2,
+  "avg_score": 4.18,
   "history": [
     {
       "date": "2026-06-15",
@@ -44,6 +44,10 @@
     },
     {
       "date": "2026-07-23",
+      "score": 4
+    },
+    {
+      "date": "2026-07-27",
       "score": 4
     }
   ]

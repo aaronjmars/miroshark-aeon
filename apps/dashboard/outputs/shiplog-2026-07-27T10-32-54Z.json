@@ -1,0 +1,187 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "Miroshark + Aeon Shiplog Jul 23→27"
+      },
+      "children": [
+        "main-stack"
+      ]
+    },
+    "main-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "header",
+        "pr-count",
+        "sep1",
+        "x402aff-section",
+        "aeon-section",
+        "security-section",
+        "solana-section",
+        "sep2",
+        "traction-heading",
+        "miroshark-stat",
+        "aeon-thread-text",
+        "closing-emoji",
+        "article-link"
+      ]
+    },
+    "header": {
+      "type": "Heading",
+      "props": {
+        "text": "miroshark + aeon shiplog ⭐🦈 jul 23 → jul 27",
+        "level": "h2"
+      }
+    },
+    "pr-count": {
+      "type": "Text",
+      "props": {
+        "text": "67 PRs across 12 repos in 4 days. the bytes:",
+        "variant": "lead"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {}
+    },
+    "x402aff-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "x402aff-text",
+        "x402aff-link"
+      ]
+    },
+    "x402aff-text": {
+      "type": "Text",
+      "props": {
+        "text": "x402aff v0.1.1: pip install x402aff. on npm. live permissionless claims dashboard. /sim routes 10% to builder splits. 34 PRs to take this from internal splitter to a published kit."
+      }
+    },
+    "x402aff-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "MiroShark/x402aff",
+        "href": "https://github.com/MiroShark/x402aff",
+        "source": "GitHub"
+      }
+    },
+    "aeon-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "aeon-text",
+        "aeon-link"
+      ]
+    },
+    "aeon-text": {
+      "type": "Text",
+      "props": {
+        "text": "aeon goes multi-harness: codex, pi, vibe, kimi alongside claude code. claude 5 sonnet as default. aeon-doctor static linter ships. ⭐"
+      }
+    },
+    "aeon-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "aeonfun/aeon",
+        "href": "https://github.com/aeonfun/aeon",
+        "source": "GitHub"
+      }
+    },
+    "security-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "security-text"
+      ]
+    },
+    "security-text": {
+      "type": "Text",
+      "props": {
+        "text": "security sweep: 10 fixes across 8 repos — torch CVE in MiroShark, path-traversal in minitor, next.js HIGH in aeon + miroshark-website, fast-uri/sharp/brace-expansion across tweazy, magi, web3-research-mcp, blank-page-prototyping 🦈"
+      }
+    },
+    "solana-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "solana-text",
+        "solana-link"
+      ]
+    },
+    "solana-text": {
+      "type": "Text",
+      "props": {
+        "text": "solana foundation: open in solana-foundation/pay-skills — aaronjmars/miroshark as a provider (not merged yet)"
+      }
+    },
+    "solana-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #200",
+        "href": "https://github.com/solana-foundation/pay-skills/pull/200",
+        "source": "GitHub"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {}
+    },
+    "traction-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "traction:",
+        "level": "h3"
+      }
+    },
+    "miroshark-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "MiroShark",
+        "value": "1,416 ⭐",
+        "delta": "+1",
+        "trend": "up"
+      }
+    },
+    "aeon-thread-text": {
+      "type": "Text",
+      "props": {
+        "text": "aeon thread landed: 17 likes, 5 RTs — \"exo is asking what an agent should be made of. aeon is asking what an agent should do today.\""
+      }
+    },
+    "closing-emoji": {
+      "type": "Text",
+      "props": {
+        "text": "⭐🦈",
+        "variant": "muted"
+      }
+    },
+    "article-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full Shiplog Article",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/output/articles/shiplog-2026-07-27.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}
