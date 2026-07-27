@@ -1,0 +1,585 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "Repo Pulse"
+      },
+      "children": [
+        "header-stack",
+        "separator-1",
+        "stats-section",
+        "separator-2",
+        "notable-stargazers-section",
+        "separator-3",
+        "other-stargazers-section",
+        "separator-4",
+        "forks-section"
+      ]
+    },
+    "header-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "date-text",
+        "status-badge"
+      ]
+    },
+    "date-text": {
+      "type": "Text",
+      "props": {
+        "text": "2026-07-27"
+      }
+    },
+    "status-badge": {
+      "type": "Badge",
+      "props": {
+        "text": "STEADY",
+        "variant": "secondary"
+      }
+    },
+    "separator-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stats-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "repo-link",
+        "stats-stack"
+      ]
+    },
+    "repo-link": {
+      "type": "Link",
+      "props": {
+        "label": "aaronjmars/MiroShark",
+        "href": "https://github.com/aaronjmars/MiroShark"
+      }
+    },
+    "stats-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "lg"
+      },
+      "children": [
+        "stars-stat",
+        "forks-stat"
+      ]
+    },
+    "stars-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "stars",
+        "value": "1416",
+        "delta": "+22",
+        "trend": "up"
+      }
+    },
+    "forks-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "forks",
+        "value": "298",
+        "delta": "+3",
+        "trend": "up"
+      }
+    },
+    "separator-2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "notable-stargazers-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "notable-heading",
+        "stargazer-1",
+        "stargazer-2",
+        "stargazer-3",
+        "stargazer-4"
+      ]
+    },
+    "notable-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Notable new stargazers",
+        "level": "h3"
+      }
+    },
+    "stargazer-1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "sg1-link",
+        "sg1-stats",
+        "sg1-website",
+        "sg1-bio"
+      ]
+    },
+    "sg1-link": {
+      "type": "Link",
+      "props": {
+        "label": "Ben Holland",
+        "href": "https://github.com/benjholla"
+      }
+    },
+    "sg1-stats": {
+      "type": "Text",
+      "props": {
+        "text": "78 repos · 192 followers",
+        "variant": "caption"
+      }
+    },
+    "sg1-website": {
+      "type": "Link",
+      "props": {
+        "label": "🌐 https://ben-holland.com",
+        "href": "https://ben-holland.com"
+      }
+    },
+    "sg1-bio": {
+      "type": "Text",
+      "props": {
+        "text": "Ben is a software security researcher looking to meet interesting people with interesting ideas.",
+        "variant": "body"
+      }
+    },
+    "stargazer-2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "sg2-link",
+        "sg2-stats",
+        "sg2-twitter",
+        "sg2-bio"
+      ]
+    },
+    "sg2-link": {
+      "type": "Link",
+      "props": {
+        "label": "Mike Hutu",
+        "href": "https://github.com/Mikehutu"
+      }
+    },
+    "sg2-stats": {
+      "type": "Text",
+      "props": {
+        "text": "37 repos",
+        "variant": "caption"
+      }
+    },
+    "sg2-twitter": {
+      "type": "Link",
+      "props": {
+        "label": "🐦 @MichaelHutu",
+        "href": "https://twitter.com/MichaelHutu"
+      }
+    },
+    "sg2-bio": {
+      "type": "Text",
+      "props": {
+        "text": "An AI enthusiast focused mainly on AI agents related tech.",
+        "variant": "body"
+      }
+    },
+    "stargazer-3": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "sg3-link",
+        "sg3-info",
+        "sg3-website",
+        "sg3-bio"
+      ]
+    },
+    "sg3-link": {
+      "type": "Link",
+      "props": {
+        "label": "Abdullah almaimoun",
+        "href": "https://github.com/Ars3bod"
+      }
+    },
+    "sg3-info": {
+      "type": "Text",
+      "props": {
+        "text": "📍 Saudi Arabia - Riyadh · 34 repos",
+        "variant": "caption"
+      }
+    },
+    "sg3-website": {
+      "type": "Link",
+      "props": {
+        "label": "🌐 www.af-nm.com",
+        "href": "https://www.af-nm.com"
+      }
+    },
+    "sg3-bio": {
+      "type": "Text",
+      "props": {
+        "text": "a Software Developer with huge interest.",
+        "variant": "body"
+      }
+    },
+    "stargazer-4": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "sg4-link",
+        "sg4-info"
+      ]
+    },
+    "sg4-link": {
+      "type": "Link",
+      "props": {
+        "label": "aharonamir",
+        "href": "https://github.com/aharonamir"
+      }
+    },
+    "sg4-info": {
+      "type": "Text",
+      "props": {
+        "text": "🏢 Huawei · 33 repos",
+        "variant": "caption"
+      }
+    },
+    "separator-3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "other-stargazers-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "other-heading",
+        "other-description",
+        "other-links-stack"
+      ]
+    },
+    "other-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Other new stargazers",
+        "level": "h3"
+      }
+    },
+    "other-description": {
+      "type": "Text",
+      "props": {
+        "text": "(enriched 15 of 22)",
+        "variant": "caption"
+      }
+    },
+    "other-links-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "other-link-1",
+        "other-link-2",
+        "other-link-3",
+        "other-link-4",
+        "other-link-5",
+        "other-link-6",
+        "other-link-7",
+        "other-link-8",
+        "other-link-9",
+        "other-link-10",
+        "other-link-11",
+        "other-link-12",
+        "other-link-13",
+        "other-link-14",
+        "other-link-15",
+        "other-link-16",
+        "other-link-17",
+        "other-link-18"
+      ]
+    },
+    "other-link-1": {
+      "type": "Link",
+      "props": {
+        "label": "YAY885",
+        "href": "https://github.com/YAY885"
+      }
+    },
+    "other-link-2": {
+      "type": "Link",
+      "props": {
+        "label": "srd6347",
+        "href": "https://github.com/srd6347"
+      }
+    },
+    "other-link-3": {
+      "type": "Link",
+      "props": {
+        "label": "drranaahsanali1",
+        "href": "https://github.com/drranaahsanali1"
+      }
+    },
+    "other-link-4": {
+      "type": "Link",
+      "props": {
+        "label": "reillykw",
+        "href": "https://github.com/reillykw"
+      }
+    },
+    "other-link-5": {
+      "type": "Link",
+      "props": {
+        "label": "mehedihassanome",
+        "href": "https://github.com/mehedihassanome"
+      }
+    },
+    "other-link-6": {
+      "type": "Link",
+      "props": {
+        "label": "fraenkDUS",
+        "href": "https://github.com/fraenkDUS"
+      }
+    },
+    "other-link-7": {
+      "type": "Link",
+      "props": {
+        "label": "cohen272",
+        "href": "https://github.com/cohen272"
+      }
+    },
+    "other-link-8": {
+      "type": "Link",
+      "props": {
+        "label": "Exh0dus",
+        "href": "https://github.com/Exh0dus"
+      }
+    },
+    "other-link-9": {
+      "type": "Link",
+      "props": {
+        "label": "mikejury",
+        "href": "https://github.com/mikejury"
+      }
+    },
+    "other-link-10": {
+      "type": "Link",
+      "props": {
+        "label": "T33R0",
+        "href": "https://github.com/T33R0"
+      }
+    },
+    "other-link-11": {
+      "type": "Link",
+      "props": {
+        "label": "lucascrlsn",
+        "href": "https://github.com/lucascrlsn"
+      }
+    },
+    "other-link-12": {
+      "type": "Link",
+      "props": {
+        "label": "SufficientDaikon",
+        "href": "https://github.com/SufficientDaikon"
+      }
+    },
+    "other-link-13": {
+      "type": "Link",
+      "props": {
+        "label": "hirowa",
+        "href": "https://github.com/hirowa"
+      }
+    },
+    "other-link-14": {
+      "type": "Link",
+      "props": {
+        "label": "aziegenawone",
+        "href": "https://github.com/aziegenawone"
+      }
+    },
+    "other-link-15": {
+      "type": "Link",
+      "props": {
+        "label": "ZoeDepthTokyo",
+        "href": "https://github.com/ZoeDepthTokyo"
+      }
+    },
+    "other-link-16": {
+      "type": "Link",
+      "props": {
+        "label": "vatevstoil",
+        "href": "https://github.com/vatevstoil"
+      }
+    },
+    "other-link-17": {
+      "type": "Link",
+      "props": {
+        "label": "saskel",
+        "href": "https://github.com/saskel"
+      }
+    },
+    "other-link-18": {
+      "type": "Link",
+      "props": {
+        "label": "Cliftonz",
+        "href": "https://github.com/Cliftonz"
+      }
+    },
+    "separator-4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "forks-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "forks-heading",
+        "fork-1",
+        "fork-2",
+        "fork-3"
+      ]
+    },
+    "forks-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "New forks",
+        "level": "h3"
+      }
+    },
+    "fork-1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "fork1-link",
+        "fork1-info"
+      ]
+    },
+    "fork1-link": {
+      "type": "Link",
+      "props": {
+        "label": "nb213",
+        "href": "https://github.com/binyangzhu000-sudo"
+      }
+    },
+    "fork1-info": {
+      "type": "Text",
+      "props": {
+        "text": "240 repos",
+        "variant": "caption"
+      }
+    },
+    "fork-2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "fork2-link",
+        "fork2-info"
+      ]
+    },
+    "fork2-link": {
+      "type": "Link",
+      "props": {
+        "label": "no0ktheali3n",
+        "href": "https://github.com/no0ktheali3n"
+      }
+    },
+    "fork2-info": {
+      "type": "Text",
+      "props": {
+        "text": "120 repos",
+        "variant": "caption"
+      }
+    },
+    "fork-3": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "fork3-link",
+        "fork3-info",
+        "fork3-website",
+        "fork3-twitter",
+        "fork3-bio"
+      ]
+    },
+    "fork3-link": {
+      "type": "Link",
+      "props": {
+        "label": "Jai",
+        "href": "https://github.com/eyeinthesky6"
+      }
+    },
+    "fork3-info": {
+      "type": "Text",
+      "props": {
+        "text": "🏢 Fractional AI Co-Founder · 19 repos",
+        "variant": "caption"
+      }
+    },
+    "fork3-website": {
+      "type": "Link",
+      "props": {
+        "label": "🌐 https://jaithakur.in",
+        "href": "https://jaithakur.in"
+      }
+    },
+    "fork3-twitter": {
+      "type": "Link",
+      "props": {
+        "label": "🐦 @eyeinthesky",
+        "href": "https://twitter.com/eyeinthesky"
+      }
+    },
+    "fork3-bio": {
+      "type": "Text",
+      "props": {
+        "text": "AI/Product/Ops operator & fractional AI co-founder. 19 yrs in fintech, payments & startups — building practical AI workflow systems.",
+        "variant": "body"
+      }
+    }
+  }
+}
