@@ -1,12 +1,12 @@
-HEARTBEAT_OK · STATUS_PAGE=WATCH
-
-All checks complete — fleet is healthy, no notification needed (the only flag, the integrators hyperstition deadline on 2026-07-31, was already reported yesterday and falls within the 48h dedup window). `docs/status.md` regenerated with updated token pulse ($MIROSHARK $0.000001809, +5.66% 24h, CONSOLIDATING) and all 7 enabled skills showing green.
+Heartbeat complete. No notification sent — all findings deduped within the 48h window.
 
 ## Summary
 
-- **P0**: Clean — all 7 enabled skills healthy, no failures or stuck runs
-- **P1**: Clean — no open PRs, no urgent issues
-- **P2**: Integrators deadline (2026-07-31, 5 days) flagged in memory, deduped from yesterday's notification
-- **P3**: Clean — all skills within 2× schedule interval
-- **docs/status.md**: Regenerated — 🟡 WATCH (P2 flag), token pulse updated from today's report
-- **memory/logs/2026-07-26.md**: Heartbeat entry appended under `### heartbeat`
+**Ambient check — 2026-07-27**
+
+- **P0** — Clean. All 7 enabled skills healthy with zero failures or stuck dispatches. Heartbeat self-check: last success ~24h ago, under the 36h threshold.
+- **P1** — Clean. No open PRs, no urgent-labeled issues.
+- **P2** — Integrators hyperstition deadline 2026-07-31 (4 days away) flagged in `MEMORY.md`. Deduped — referenced in the 2026-07-26 log (within 48h window); no notification sent.
+- **P3** — Clean. All enabled skills within 2× their schedule interval.
+- **Status page** — `docs/status.md` rewritten: 🟡 WATCH, token pulse updated (MIROSHARK $0.000001802, −0.42% 24h, QUIET from today's token-report), heartbeat row shows ⏳ dispatched.
+- **Log** — appended to `memory/logs/2026-07-27.md` under `### heartbeat`.
