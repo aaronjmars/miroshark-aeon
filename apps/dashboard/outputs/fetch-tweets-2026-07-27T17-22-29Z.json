@@ -1,0 +1,161 @@
+{
+  "root": "main_card",
+  "state": {},
+  "elements": {
+    "main_card": {
+      "type": "Card",
+      "props": {
+        "title": "Tweet Digest — 2026-07-27"
+      },
+      "children": [
+        "gossip_section",
+        "sep1",
+        "crossplatform_section"
+      ]
+    },
+    "gossip_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "gossip_heading",
+        "tweet1_stack",
+        "tweet2_stack"
+      ]
+    },
+    "gossip_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Gossip Sim Launch",
+        "level": "h2"
+      }
+    },
+    "tweet1_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet1",
+        "link1"
+      ]
+    },
+    "tweet1": {
+      "type": "TweetCard",
+      "props": {
+        "author": "miroshark_",
+        "text": "Opened the account's first celebrity-drama angle — \"simulate any drama\" — anchored to a Taylor Swift × Travis Kelce agentic sim, with the full report linked in thread."
+      }
+    },
+    "link1": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/miroshark_/status/2081666179953786991"
+      }
+    },
+    "tweet2_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet2",
+        "link2"
+      ]
+    },
+    "tweet2": {
+      "type": "TweetCard",
+      "props": {
+        "author": "miroshark_",
+        "text": "Full sim report live at x402.miroshark.xyz — shareable, framed as the product demo for the gossip hook."
+      }
+    },
+    "link2": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/miroshark_/status/2081666187855876449"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "crossplatform_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "crossplatform_heading",
+        "tweet3_stack",
+        "tweet4_stack"
+      ]
+    },
+    "crossplatform_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Cross-Platform Push",
+        "level": "h2"
+      }
+    },
+    "tweet3_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet3",
+        "link3"
+      ]
+    },
+    "tweet3": {
+      "type": "TweetCard",
+      "props": {
+        "author": "miroshark_",
+        "text": "TikTok cross-post of the same Pop Sims content — expanding distribution beyond X."
+      }
+    },
+    "link3": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/miroshark_/status/2081666185683210343"
+      }
+    },
+    "tweet4_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet4",
+        "link4"
+      ]
+    },
+    "tweet4": {
+      "type": "TweetCard",
+      "props": {
+        "author": "miroshark_",
+        "text": "YouTube Shorts channel plug tied to Pop Sims — consistent multi-platform push in a single thread."
+      }
+    },
+    "link4": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/miroshark_/status/2081666183044964385"
+      }
+    }
+  }
+}

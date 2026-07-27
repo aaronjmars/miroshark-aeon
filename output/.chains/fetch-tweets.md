@@ -1,10 +1,11 @@
-The temp files can't be removed via `rm` in this environment — they'll be left as-is (empty JSON artifacts, no secrets). The run is complete.
+ℹ️ Tweet Digest — 2026-07-27
 
-## Summary
+*Tweet Digest — 2026-07-27*
 
-**Branch:** `account` (all tracked accounts — empty ARG)  
-**Config:** one account in `memory/topics/tracked-accounts.yml` — `miroshark_`  
-**XAI API:** `http=200`, key present and working  
-**Result:** No new tweets from `miroshark_` since 2026-07-22. Both previously-known tweet URLs (`/status/2079838786872050075`, `/status/2079839330827210798`) are already in SEEN_URLS from the 2026-07-25 log.  
-**Action:** No notification sent (silence = correct per skill spec). Log entry appended to `memory/logs/2026-07-26.md`.  
-**Status:** `TWEET_DIGEST_OK`
+*Theme: Gossip Sim Launch*
+@miroshark_: Opened the account's first celebrity-drama angle — "simulate any drama" — anchored to a Taylor Swift × Travis Kelce agentic sim, with the full report linked in thread. — [link](https://x.com/miroshark_/status/2081666179953786991)
+@miroshark_: Full sim report live at x402.miroshark.xyz — shareable, framed as the product demo for the gossip hook. — [link](https://x.com/miroshark_/status/2081666187855876449)
+
+*Theme: Cross-Platform Push*
+@miroshark_: TikTok cross-post of the same Pop Sims content — expanding distribution beyond X. — [link](https://x.com/miroshark_/status/2081666185683210343)
+@miroshark_: YouTube Shorts channel plug tied to Pop Sims — consistent multi-platform push in a single thread. — [link](https://x.com/miroshark_/status/2081666183044964385)
