@@ -1,8 +1,8 @@
 {
   "skill": "token-movers",
-  "last_analyzed": "2026-07-26T06:24:40Z",
+  "last_analyzed": "2026-07-27T06:28:59Z",
   "quality_score": 4,
-  "assessment": "Substantive daily token report with specific metrics, proper thresholds applied, data validation, and state logging for delta tracking.",
+  "assessment": "Competent execution—collected concrete metrics, applied decision logic (QUIET skip rule with clear thresholds), tracked state for deltas, wrote usable output files.",
   "flags": [],
   "avg_score": 4,
   "history": [
@@ -72,6 +72,10 @@
     },
     {
       "date": "2026-07-26",
+      "score": 4
+    },
+    {
+      "date": "2026-07-27",
       "score": 4
     }
   ]
