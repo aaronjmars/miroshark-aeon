@@ -1,6 +1,4 @@
-ℹ️ Changelog sync
-
-*Changelog (push-to) — 2026-07-24*
+*Changelog (push-to) — 2026-07-27*
 aaronjmars/miroshark → aaronjmars/miroshark-website
-3 new PRs → changelog entry "Two CVE patches + dead code sweep"
-[PR #168](https://github.com/aaronjmars/miroshark-website/pull/168)
+2 new PRs → changelog entry "PyTorch + setuptools security patches"
+PR: https://github.com/aaronjmars/miroshark-website/pull/178

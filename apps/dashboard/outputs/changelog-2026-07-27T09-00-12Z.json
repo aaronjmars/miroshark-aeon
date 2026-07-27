@@ -1,0 +1,88 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "Changelog",
+        "description": "2026-07-27"
+      },
+      "children": [
+        "stack-content"
+      ]
+    },
+    "stack-content": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "repo-info",
+        "sep1",
+        "summary",
+        "entry-section",
+        "sep2",
+        "pr-link"
+      ]
+    },
+    "repo-info": {
+      "type": "Text",
+      "props": {
+        "text": "aaronjmars/miroshark → aaronjmars/miroshark-website",
+        "variant": "muted"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "summary": {
+      "type": "Text",
+      "props": {
+        "text": "2 new PRs added to changelog"
+      }
+    },
+    "entry-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "entry-label",
+        "entry-badge"
+      ]
+    },
+    "entry-label": {
+      "type": "Text",
+      "props": {
+        "text": "Entry:",
+        "variant": "caption"
+      }
+    },
+    "entry-badge": {
+      "type": "Badge",
+      "props": {
+        "text": "PyTorch + setuptools security patches"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "pr-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "View PR #178",
+        "href": "https://github.com/aaronjmars/miroshark-website/pull/178",
+        "source": "GitHub"
+      }
+    }
+  }
+}
