@@ -1,12 +1,10 @@
 {
   "skill": "fetch-tweets",
-  "last_analyzed": "2026-07-27T17:22:29Z",
+  "last_analyzed": "2026-07-28T17:35:29Z",
   "quality_score": 3,
-  "assessment": "Skill completed successfully — fetched tweets (http=200), identified themes, sent notification, logged activity. Functional but analysis is surface-level.",
-  "flags": [
-    "low_quality"
-  ],
-  "avg_score": 3.67,
+  "assessment": "Completed task adequately—fetched tweets successfully, applied deduplication and threshold logic correctly, made appropriate no-notification decision, logged findings.",
+  "flags": [],
+  "avg_score": 3.63,
   "history": [
     {
       "date": "2026-07-10",
@@ -78,6 +76,10 @@
     },
     {
       "date": "2026-07-27",
+      "score": 3
+    },
+    {
+      "date": "2026-07-28",
       "score": 3
     }
   ]

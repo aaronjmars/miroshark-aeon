@@ -1,11 +1,12 @@
-ℹ️ Tweet Digest — 2026-07-27
+Done. Here's the run summary:
 
-*Tweet Digest — 2026-07-27*
+## Summary
 
-*Theme: Gossip Sim Launch*
-@miroshark_: Opened the account's first celebrity-drama angle — "simulate any drama" — anchored to a Taylor Swift × Travis Kelce agentic sim, with the full report linked in thread. — [link](https://x.com/miroshark_/status/2081666179953786991)
-@miroshark_: Full sim report live at x402.miroshark.xyz — shareable, framed as the product demo for the gossip hook. — [link](https://x.com/miroshark_/status/2081666187855876449)
+**Skill:** `fetch-tweets` | **Mode:** `account (all tracked)` | **Source:** `account:` (empty arg → all tracked accounts)
 
-*Theme: Cross-Platform Push*
-@miroshark_: TikTok cross-post of the same Pop Sims content — expanding distribution beyond X. — [link](https://x.com/miroshark_/status/2081666185683210343)
-@miroshark_: YouTube Shorts channel plug tied to Pop Sims — consistent multi-platform push in a single thread. — [link](https://x.com/miroshark_/status/2081666183044964385)
+**Accounts tracked:** `miroshark_` (sole entry in `memory/topics/tracked-accounts.yml`)
+
+**Fetch:** XAI API `http=200`, 5 tweets returned. 4 already in SEEN_URLS from yesterday's gossip sim thread. 1 new tweet found:
+- [Jul 28] Prediction markets research angle — `https://x.com/miroshark_/status/2082107376828551629`
+
+**Decision:** 1 surviving tweet is below the 3-tweet threshold for notification. Status: `REFRESH_X_NO_NEW`. Log written to `memory/logs/2026-07-28.md`, no notification sent. The new URL is recorded in the log for tomorrow's dedup.
