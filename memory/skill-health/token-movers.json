@@ -1,8 +1,8 @@
 {
   "skill": "token-movers",
-  "last_analyzed": "2026-07-28T06:53:29Z",
+  "last_analyzed": "2026-07-29T07:03:09Z",
   "quality_score": 4,
-  "assessment": "Substantive report with clear verdict (CONSOLIDATING), contextual metrics (price, volume ratios, trade balance, liquidity trends), data quality flags, and proper file generation",
+  "assessment": "Substantive token analysis with specific metrics, cross-validation (DexScreener, xai sentiment), proper state logging, and all deliverables completed; output truncated so full report depth unverified.",
   "flags": [],
   "avg_score": 4,
   "history": [
@@ -80,6 +80,10 @@
     },
     {
       "date": "2026-07-28",
+      "score": 4
+    },
+    {
+      "date": "2026-07-29",
       "score": 4
     }
   ]
