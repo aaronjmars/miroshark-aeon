@@ -1,12 +1,8 @@
-Done. Here's the run summary:
+ℹ️ Tweet Digest — 2026-07-29
 
-## Summary
+*Tweet Digest — 2026-07-29*
 
-**Skill:** `fetch-tweets` | **Mode:** `account (all tracked)` | **Source:** `account:` (empty arg → all tracked accounts)
-
-**Accounts tracked:** `miroshark_` (sole entry in `memory/topics/tracked-accounts.yml`)
-
-**Fetch:** XAI API `http=200`, 5 tweets returned. 4 already in SEEN_URLS from yesterday's gossip sim thread. 1 new tweet found:
-- [Jul 28] Prediction markets research angle — `https://x.com/miroshark_/status/2082107376828551629`
-
-**Decision:** 1 surviving tweet is below the 3-tweet threshold for notification. Status: `REFRESH_X_NO_NEW`. Log written to `memory/logs/2026-07-28.md`, no notification sent. The new URL is recorded in the log for tomorrow's dedup.
+*Theme: OpenAI Rogue Agent Sim*
+x.com/miroshark_: Drops a thread simulating the OpenAI rogue-agent incident — the teaser framing ("hit again") positions it as a recurring narrative MiroShark can model. [link](https://x.com/miroshark_/status/2082499158917697765)
+x.com/miroshark_: Full sim report published at x402.miroshark.xyz — live proof-of-concept that the engine can turn a real AI incident into a shareable simulation. [link](https://x.com/miroshark_/status/2082499165389513118)
+x.com/miroshark_: YouTube Shorts CTA appended to the thread — cross-platform push alongside the sim drop. [link](https://x.com/miroshark_/status/2082499163464323355)

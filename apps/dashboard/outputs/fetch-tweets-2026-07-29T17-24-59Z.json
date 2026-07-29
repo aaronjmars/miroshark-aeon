@@ -1,0 +1,112 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Tweet Digest — 2026-07-29",
+        "description": "Theme: OpenAI Rogue Agent Sim"
+      },
+      "children": [
+        "stack_tweets"
+      ]
+    },
+    "stack_tweets": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "tweet1_group",
+        "tweet2_group",
+        "tweet3_group"
+      ]
+    },
+    "tweet1_group": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweetcard_1",
+        "link_1"
+      ]
+    },
+    "tweetcard_1": {
+      "type": "TweetCard",
+      "props": {
+        "author": "MiroShark",
+        "handle": "miroshark_",
+        "text": "Drops a thread simulating the OpenAI rogue-agent incident — the teaser framing (\"hit again\") positions it as a recurring narrative MiroShark can model."
+      },
+      "children": []
+    },
+    "link_1": {
+      "type": "Link",
+      "props": {
+        "label": "View on X",
+        "href": "https://x.com/miroshark_/status/2082499158917697765"
+      },
+      "children": []
+    },
+    "tweet2_group": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweetcard_2",
+        "link_2"
+      ]
+    },
+    "tweetcard_2": {
+      "type": "TweetCard",
+      "props": {
+        "author": "MiroShark",
+        "handle": "miroshark_",
+        "text": "Full sim report published at x402.miroshark.xyz — live proof-of-concept that the engine can turn a real AI incident into a shareable simulation."
+      },
+      "children": []
+    },
+    "link_2": {
+      "type": "Link",
+      "props": {
+        "label": "View on X",
+        "href": "https://x.com/miroshark_/status/2082499165389513118"
+      },
+      "children": []
+    },
+    "tweet3_group": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweetcard_3",
+        "link_3"
+      ]
+    },
+    "tweetcard_3": {
+      "type": "TweetCard",
+      "props": {
+        "author": "MiroShark",
+        "handle": "miroshark_",
+        "text": "YouTube Shorts CTA appended to the thread — cross-platform push alongside the sim drop."
+      },
+      "children": []
+    },
+    "link_3": {
+      "type": "Link",
+      "props": {
+        "label": "View on X",
+        "href": "https://x.com/miroshark_/status/2082499163464323355"
+      },
+      "children": []
+    }
+  }
+}

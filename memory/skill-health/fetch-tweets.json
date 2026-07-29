@@ -1,10 +1,10 @@
 {
   "skill": "fetch-tweets",
-  "last_analyzed": "2026-07-28T17:35:29Z",
-  "quality_score": 3,
-  "assessment": "Completed task adequately—fetched tweets successfully, applied deduplication and threshold logic correctly, made appropriate no-notification decision, logged findings.",
+  "last_analyzed": "2026-07-29T17:24:59Z",
+  "quality_score": 4,
+  "assessment": "Successful tweet fetch with proper dedup logic, clean API execution (http=200), substantive digest sent, and correct logging — a well-executed task delivery.",
   "flags": [],
-  "avg_score": 3.63,
+  "avg_score": 3.65,
   "history": [
     {
       "date": "2026-07-10",
@@ -81,6 +81,10 @@
     {
       "date": "2026-07-28",
       "score": 3
+    },
+    {
+      "date": "2026-07-29",
+      "score": 4
     }
   ]
 }
