@@ -159,14 +159,12 @@ def check(config):
             m["total_supply"] = (ts_raw / (10 ** decimals)) if ts_raw else None
             meta[key] = m
         m = meta[key]
-        px = m["price_usd"]
         rpc = BASE_RPC if chain == "base" else SOL_RPC
         for w in config["wallets"]:
             if w["chain"] != chain:
                 continue
             row = {"symbol": symbol, "chain": chain, "contract": contract,
-                   "wallet": w["address"], "label": w.get("label", ""),
-                   "price_usd": px}
+                   "wallet": w["address"], "label": w.get("label", "")}
             try:
                 if chain == "base":
                     raw = erc20_balance(rpc, contract, w["address"])
@@ -176,35 +174,27 @@ def check(config):
                     row["error"] = "unsupported chain"
                     rows.append(row)
                     continue
-                amount = raw / (10 ** decimals)
-                row["amount"] = amount
-                row["usd"] = (amount * px) if px is not None else None
+                row["amount"] = raw / (10 ** decimals)
             except Exception as e:
                 row["error"] = str(e)[:120]
             rows.append(row)
-    # Totals per symbol + % of supply held. 7d/30d growth is measured in token
-    # amount and computed by the skill from prior snapshots (memory/logs) — not here.
+    # Totals per symbol + % of supply held. No dollar value is reported. 7d/30d
+    # growth is measured in token amount and computed by the skill from prior
+    # snapshots (memory/logs) — not here.
     per_symbol = {}
-    grand_usd = 0.0
-    have_usd = False
     for r in rows:
         if "amount" not in r:
             continue
         m = meta[(r["chain"], r["contract"].lower())]
         s = per_symbol.setdefault(r["symbol"], {
-            "amount": 0.0, "usd": 0.0, "price_usd": m["price_usd"],
-            "total_supply": m["total_supply"], "meta_error": m.get("meta_error"),
+            "amount": 0.0, "total_supply": m["total_supply"],
+            "meta_error": m.get("meta_error"),
         })
         s["amount"] += r["amount"]
-        if r.get("usd") is not None:
-            s["usd"] += r["usd"]
-            grand_usd += r["usd"]
-            have_usd = True
     for sym, s in per_symbol.items():
         supply = s["total_supply"]
         s["pct_supply"] = (s["amount"] / supply * 100.0) if supply else None
-    return {"rows": rows, "per_symbol": per_symbol,
-            "grand_usd": grand_usd if have_usd else None}
+    return {"rows": rows, "per_symbol": per_symbol}
 
 
 def main():
