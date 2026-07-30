@@ -189,8 +189,8 @@ case "${GATEWAY:-direct}" in
     export ANTHROPIC_AUTH_TOKEN="$OPENROUTER_API_KEY"       # Bearer; API_KEY must be blank
     unset ANTHROPIC_API_KEY CLAUDE_CODE_OAUTH_TOKEN
     # Map EVERY model slot Claude Code uses to OpenRouter slugs (opus/sonnet/haiku).
-    export ANTHROPIC_DEFAULT_OPUS_MODEL="${OPENROUTER_MODEL:-anthropic/claude-opus-4.8}"
-    export ANTHROPIC_DEFAULT_SONNET_MODEL="${OPENROUTER_MODEL_SONNET:-anthropic/claude-sonnet-4.6}"
+    export ANTHROPIC_DEFAULT_OPUS_MODEL="${OPENROUTER_MODEL:-anthropic/claude-opus-5}"
+    export ANTHROPIC_DEFAULT_SONNET_MODEL="${OPENROUTER_MODEL_SONNET:-anthropic/claude-sonnet-5}"
     export ANTHROPIC_DEFAULT_HAIKU_MODEL="${OPENROUTER_MODEL_HAIKU:-anthropic/claude-haiku-4.5}"
     MODEL="$ANTHROPIC_DEFAULT_OPUS_MODEL"
     echo "::notice::Routing through OpenRouter (Anthropic-native) as ${MODEL}"
@@ -234,7 +234,7 @@ case "${GATEWAY:-direct}" in
     # uses dot-form ids: drop any trailing -YYYYMMDD date, then convert each
     # <digit>-<digit> to <digit>.<digit>. SURPLUS_MODEL overrides; opus-4.8 is the
     # fallback when $MODEL is unset.
-    surplus_model="${SURPLUS_MODEL:-$(printf '%s' "${MODEL:-claude-opus-4-8}" | sed -E 's/-[0-9]{8}$//; s/([0-9])-([0-9])/\1.\2/g')}"
+    surplus_model="${SURPLUS_MODEL:-$(printf '%s' "${MODEL:-claude-opus-5}" | sed -E 's/-[0-9]{8}$//; s/([0-9])-([0-9])/\1.\2/g')}"
     start_ccr_sidecar surplus \
       "https://www.surplusintelligence.ai/api/inference/v1/chat/completions" \
       "$SURPLUS_API_KEY" "$surplus_model"
@@ -257,8 +257,8 @@ case "${GATEWAY:-direct}" in
     if [ -z "$venice_model" ]; then
       m="$(printf '%s' "${MODEL:-}" | sed -E 's/-[0-9]{8}$//')"
       case "$m" in
-        claude-opus-4-6|claude-sonnet-4-6|claude-haiku-4-5) venice_model="$m" ;;
-        *) venice_model="claude-opus-4-6" ;;
+        claude-opus-5|claude-sonnet-5|claude-opus-4-6|claude-sonnet-4-6|claude-haiku-4-5) venice_model="$m" ;;
+        *) venice_model="claude-opus-5" ;;
       esac
     fi
     start_ccr_sidecar venice \
