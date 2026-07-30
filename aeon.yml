@@ -2,7 +2,7 @@
 #
 # Enable skills by setting enabled: true. Multiple skills at the same time run in parallel.
 # Set var: "value" to pass a default parameter to the skill.
-# Set model: "claude-sonnet-4-6" per skill to override the default model (cost optimization).
+# Set model: "claude-sonnet-5" per skill to override the default model (cost optimization).
 # Set harness: "grok" per skill to run it through the Grok Build CLI instead of the
 # default Claude Code harness (see the top-level `harness:` key below).
 
@@ -185,7 +185,7 @@ chains:
 # (Grok harness models: grok-composer-2.5-fast — fast single-agent default;
 #  grok-build — reasoning/multi-agent coding model, run with --no-subagents in CI.
 #  Use the bare CLI id `grok-build`, not the API id `grok-build-0.1`.)
-model: claude-sonnet-4-6
+model: claude-sonnet-5
 
 # Agent harness — which coding-agent CLI runs your skills.
 #   claude (default) — Claude Code (`claude -p`); uses the AI Gateway below.
