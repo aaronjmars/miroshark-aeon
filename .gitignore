@@ -68,3 +68,14 @@ notify-*.md
 # to /tmp; committed copies (root or memory/) are pure `git add -A` leaks, never
 # read from in-tree. (cf. the token-movers xai-payload.json that leaked to root.)
 xai-*.json
+
+# --- output/ root run scratch (changelog push-to-website + skill digests) ---
+# canon keeps output/ root clean (articles/, .chains/, images/ only)
+output/changelog-*
+output/pr-body-*.md
+output/push_*.py
+output/repo-pulse-*.md
+output/token-movers-report.md
+# canon parity: json-render staging file
+.pending-*.md
+apps/dashboard/outputs/.pending-*.md
