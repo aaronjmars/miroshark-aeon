@@ -37,8 +37,9 @@ if an instance should report both.
 hold, measured against this skill's own prior snapshots (`HOLDINGS_STATE:` lines in
 `memory/logs`). There is no price-history fetch — the skill builds its own history,
 one snapshot per run. On the first runs the 7d/30d fields are simply absent (no
-snapshot that far back yet) and fill in as the log accumulates: after ~7 daily runs
-the 7d figure appears, after ~30 the 30d figure.
+snapshot that far back yet) and fill in as the log accumulates: once a snapshot
+~7 days back exists the 7d figure appears, ~30 days back the 30d figure. This skill
+runs weekly, so 7d lands on the second run and 30d after ~4-5 runs.
 
 Note: on-chain `totalSupply()` reverts on the DERC20 aeon contract, so total supply
 comes from GeckoTerminal (`total_supply`, 100,000,000,000 aeon).
