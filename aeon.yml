@@ -20,6 +20,7 @@ skills:
 
   # --- Midday (12 PM UTC) ---
   token-movers: { enabled: true, schedule: "0 6 * * *", var: "token" } # market-movers scan + single-token deep report. var: empty=movers (CoinGecko) | geckoterminal[:chain]=on-chain runners | category:<slug> | <address|symbol|token:sym>=single-token report. Optional COINGECKO/ALCHEMY/XAI/BASE_RPC keys.
+  holdings: { enabled: true, schedule: "0 8 * * *" } # daily 08:00 UTC — your wallet holdings of aeon/MiroShark (memory/holdings.json): amount, % of supply, USD value, and 7d/30d amount growth from own snapshots. Keyless public RPC + GeckoTerminal; optional BASE_RPC_URL/SOLANA_RPC_URL.
   onchain-monitor: { enabled: false, schedule: "0 12 * * *" }
   distribute-tokens: { enabled: false, schedule: "workflow_dispatch", var: "" } # on-demand contributor rewards. var: empty/<label>=distribute (send) | plan[:week]=compute reward plan | all[:week]=plan+send | dry-run (folds in contributor-reward). BANKR_API_KEY for send.
   defi-overview: { enabled: false, schedule: "0 12 * * *", var: "" } # one-pass DeFi read: tracked-protocol positions + macro context (regime verdict, movers, yields, fees, F&G, prediction markets; refreshes memory/topics/market-context.md). var: empty=full | positions[:label] | macro | <chain/protocol focus>. Optional COINGECKO_API_KEY.

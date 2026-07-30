@@ -1,0 +1,12 @@
+{
+  "wallets": [
+    {"address": "0xf1e958db7d1e4c074377946018ad645db4fb158e", "label": "aeon-safe", "chain": "base"},
+    {"address": "0x67976cebb5266b50a08c0dcb676e03baf305e3a2", "label": "aeon-deployer", "chain": "base"},
+    {"address": "0x7753a770285b39308c426742be81eee2f6e80dc1", "label": "mish-safe", "chain": "base"},
+    {"address": "0x6cab485fc28ec70d3845113b704d4824e4d2b24f", "label": "mish-deployer", "chain": "base"}
+  ],
+  "tokens": [
+    {"symbol": "aeon", "contract": "0xbf8e8f0e8866a7052f948c16508644347c57aba3", "chain": "base", "decimals": 18},
+    {"symbol": "MiroShark", "contract": "0xd7bc6a05a56655FB2052F742B012d1DFD66e1BA3", "chain": "base", "decimals": 18}
+  ]
+}
