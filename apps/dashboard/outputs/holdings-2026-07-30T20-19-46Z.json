@@ -1,0 +1,42 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "holdings",
+        "description": "MiroShark holdings flat"
+      },
+      "children": [
+        "stack"
+      ]
+    },
+    "stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stat",
+        "text-supply"
+      ]
+    },
+    "stat": {
+      "type": "Stat",
+      "props": {
+        "label": "MiroShark Holdings",
+        "value": "10.70B",
+        "trend": "neutral"
+      }
+    },
+    "text-supply": {
+      "type": "Text",
+      "props": {
+        "text": "10.70% of supply",
+        "variant": "caption"
+      }
+    }
+  }
+}
