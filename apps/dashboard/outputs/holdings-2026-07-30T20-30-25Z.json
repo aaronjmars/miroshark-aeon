@@ -1,0 +1,42 @@
+{
+  "root": "card_holdings",
+  "state": {},
+  "elements": {
+    "card_holdings": {
+      "type": "Card",
+      "props": {
+        "title": "MiroShark Holdings"
+      },
+      "children": [
+        "stack_holdings"
+      ]
+    },
+    "stack_holdings": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "stat_amount",
+        "stat_percent"
+      ]
+    },
+    "stat_amount": {
+      "type": "Stat",
+      "props": {
+        "value": "10.70B",
+        "label": "Holdings",
+        "trend": "neutral"
+      }
+    },
+    "stat_percent": {
+      "type": "Stat",
+      "props": {
+        "value": "10.70%",
+        "label": "Supply Share",
+        "trend": "neutral"
+      }
+    }
+  }
+}
