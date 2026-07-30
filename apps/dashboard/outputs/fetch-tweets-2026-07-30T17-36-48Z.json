@@ -1,0 +1,87 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "Tweet Digest"
+      },
+      "children": [
+        "date",
+        "theme1_heading",
+        "tweet1",
+        "link1",
+        "separator1",
+        "theme2_heading",
+        "tweet2",
+        "link2"
+      ]
+    },
+    "date": {
+      "type": "Text",
+      "props": {
+        "text": "2026-07-30",
+        "variant": "caption"
+      },
+      "children": []
+    },
+    "theme1_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "simulation demos",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "tweet1": {
+      "type": "TweetCard",
+      "props": {
+        "author": "MiroShark",
+        "handle": "miroshark_",
+        "text": "gossip sim drop — MiroShark can simulate any celebrity drama; Taylor Swift & Travis Kelce example in thread"
+      },
+      "children": []
+    },
+    "link1": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/miroshark_/status/2081666179953786991"
+      },
+      "children": []
+    },
+    "separator1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "theme2_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "prediction markets",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "tweet2": {
+      "type": "TweetCard",
+      "props": {
+        "author": "MiroShark",
+        "handle": "miroshark_",
+        "text": "surfaces research showing prediction markets' accuracy edge depends on a specific condition — not unconditional"
+      },
+      "children": []
+    },
+    "link2": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/miroshark_/status/2082107376828551629"
+      },
+      "children": []
+    }
+  }
+}
