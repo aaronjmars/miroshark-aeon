@@ -1,0 +1,208 @@
+{
+  "root": "card_holdings",
+  "state": {},
+  "elements": {
+    "card_holdings": {
+      "type": "Card",
+      "props": {
+        "title": "Holdings"
+      },
+      "children": [
+        "stat_total",
+        "separator_1",
+        "stack_holdings"
+      ]
+    },
+    "stat_total": {
+      "type": "Stat",
+      "props": {
+        "value": "$90,155.48"
+      },
+      "children": []
+    },
+    "separator_1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "stack_holdings": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "lg"
+      },
+      "children": [
+        "holding_aeon",
+        "holding_miroshark"
+      ]
+    },
+    "holding_aeon": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "heading_aeon",
+        "grid_aeon_stats",
+        "stack_aeon_status"
+      ]
+    },
+    "heading_aeon": {
+      "type": "Heading",
+      "props": {
+        "text": "aeon",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "grid_aeon_stats": {
+      "type": "Grid",
+      "props": {
+        "columns": 3,
+        "gap": "md"
+      },
+      "children": [
+        "stat_aeon_amount",
+        "stat_aeon_pct",
+        "stat_aeon_value"
+      ]
+    },
+    "stat_aeon_amount": {
+      "type": "Stat",
+      "props": {
+        "label": "Amount",
+        "value": "12.82B"
+      },
+      "children": []
+    },
+    "stat_aeon_pct": {
+      "type": "Stat",
+      "props": {
+        "label": "% of Supply",
+        "value": "12.82%"
+      },
+      "children": []
+    },
+    "stat_aeon_value": {
+      "type": "Stat",
+      "props": {
+        "label": "Value",
+        "value": "$71,952.93"
+      },
+      "children": []
+    },
+    "stack_aeon_status": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "badge_aeon_7d",
+        "badge_aeon_30d"
+      ]
+    },
+    "badge_aeon_7d": {
+      "type": "Badge",
+      "props": {
+        "text": "7d building",
+        "variant": "outline"
+      },
+      "children": []
+    },
+    "badge_aeon_30d": {
+      "type": "Badge",
+      "props": {
+        "text": "30d building",
+        "variant": "outline"
+      },
+      "children": []
+    },
+    "holding_miroshark": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "heading_miroshark",
+        "grid_miroshark_stats",
+        "stack_miroshark_status"
+      ]
+    },
+    "heading_miroshark": {
+      "type": "Heading",
+      "props": {
+        "text": "MiroShark",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "grid_miroshark_stats": {
+      "type": "Grid",
+      "props": {
+        "columns": 3,
+        "gap": "md"
+      },
+      "children": [
+        "stat_miroshark_amount",
+        "stat_miroshark_pct",
+        "stat_miroshark_value"
+      ]
+    },
+    "stat_miroshark_amount": {
+      "type": "Stat",
+      "props": {
+        "label": "Amount",
+        "value": "10.70B"
+      },
+      "children": []
+    },
+    "stat_miroshark_pct": {
+      "type": "Stat",
+      "props": {
+        "label": "% of Supply",
+        "value": "10.70%"
+      },
+      "children": []
+    },
+    "stat_miroshark_value": {
+      "type": "Stat",
+      "props": {
+        "label": "Value",
+        "value": "$18,202.55"
+      },
+      "children": []
+    },
+    "stack_miroshark_status": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "badge_miroshark_7d",
+        "badge_miroshark_30d"
+      ]
+    },
+    "badge_miroshark_7d": {
+      "type": "Badge",
+      "props": {
+        "text": "7d building",
+        "variant": "outline"
+      },
+      "children": []
+    },
+    "badge_miroshark_30d": {
+      "type": "Badge",
+      "props": {
+        "text": "30d building",
+        "variant": "outline"
+      },
+      "children": []
+    }
+  }
+}
