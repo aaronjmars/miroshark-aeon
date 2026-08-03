@@ -142,8 +142,8 @@
     "success_rate": 1
   },
   "shiplog": {
-    "last_dispatch": "2026-07-27T10:24:57Z",
-    "last_status": "success",
+    "last_dispatch": "2026-08-03T09:02:51Z",
+    "last_status": "dispatched",
     "last_success": "2026-07-27T10:33:56Z",
     "total_runs": 11,
     "total_successes": 11,
@@ -208,8 +208,8 @@
     "last_quality_score": 4
   },
   "changelog": {
-    "last_dispatch": "2026-07-27T08:57:06Z",
-    "last_status": "success",
+    "last_dispatch": "2026-08-03T09:02:51Z",
+    "last_status": "dispatched",
     "last_success": "2026-07-27T09:00:57Z",
     "total_runs": 6,
     "total_successes": 6,
@@ -219,7 +219,7 @@
     "last_quality_score": 4
   },
   "holdings": {
-    "last_status": "success",
+    "last_status": "dispatched",
     "last_success": "2026-07-30T20:30:39Z",
     "total_runs": 3,
     "total_successes": 3,
@@ -227,6 +227,6 @@
     "consecutive_failures": 0,
     "success_rate": 1,
     "last_quality_score": 4,
-    "last_dispatch": "2026-07-30T20:28:20Z"
+    "last_dispatch": "2026-08-03T09:02:51Z"
   }
 }
