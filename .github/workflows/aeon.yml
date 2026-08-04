@@ -80,11 +80,6 @@ permissions:
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
   NODE_OPTIONS: '--no-deprecation'
-  # Fleet Watcher opt-in secrets — hoisted to workflow-level so that
-  # `if: env.FLEET_ENDPOINT != ''` in the preflight/postflight steps can
-  # actually see them. (Step-level env is NOT available in step `if:` clauses.)
-  FLEET_ENDPOINT: ${{ secrets.FLEET_ENDPOINT }}
-  FLEET_TOKEN:    ${{ secrets.FLEET_TOKEN }}
 
 concurrency:
   group: aeon-${{ inputs.skill || github.event.action || github.run_id }}
@@ -205,54 +200,6 @@ jobs:
           [ ${#MISSING[@]} -gt 0 ] && echo "::warning::Secrets not set: ${MISSING[*]} — skill may fail or produce incomplete results"
           exit 0
 
-      # ──────────────────────────────────────────────────────────────────────
-      # Fleet Watcher preflight (opt-in, fail-closed)
-      #
-      # If FLEET_ENDPOINT + FLEET_TOKEN repo secrets are set, ask the user's
-      # self-hosted Fleet Watcher control plane to ALLOW or BLOCK this skill
-      # before it runs. BLOCK = workflow exits non-zero, Claude never starts,
-      # no side-effects. ALLOW = audit ref is captured and passed to postflight.
-      #
-      # If the secrets are not set, this step no-ops — backward compatible
-      # with every existing AEON fork.
-      # ──────────────────────────────────────────────────────────────────────
-      - name: Fleet Watcher preflight
-        id: fleet_preflight
-        if: steps.work.outputs.mode != '' && env.FLEET_ENDPOINT != '' && env.FLEET_TOKEN != ''
-        env:
-          SKILL:     ${{ steps.skill.outputs.name }}
-          SKILL_VAR: ${{ inputs.var }}
-        run: |
-          set -euo pipefail
-          OP_ID="${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}-pre"
-          BODY=$(jq -n \
-            --arg skill  "$SKILL" \
-            --arg target "${SKILL_VAR:-}" \
-            --arg source "github-actions:${GITHUB_REPOSITORY}" \
-            --arg op     "$OP_ID" \
-            '{skill:$skill, target:$target, source:$source, clientOpId:$op, context:{runId:env.GITHUB_RUN_ID, attempt:env.GITHUB_RUN_ATTEMPT}}')
-          RESP=$(curl -sS -w "\n%{http_code}" -X POST "${FLEET_ENDPOINT}/api/aeon/preflight" \
-            -H "Authorization: Bearer ${FLEET_TOKEN}" \
-            -H "Content-Type: application/json" \
-            -d "$BODY")
-          HTTP=$(echo "$RESP" | tail -1)
-          BODY=$(echo "$RESP" | sed '$d')
-          if [ "$HTTP" != "200" ]; then
-            echo "::error::Fleet Watcher unreachable or returned $HTTP — failing closed."
-            echo "$BODY"
-            exit 1
-          fi
-          ALLOW=$(echo "$BODY" | jq -r '.allow')
-          REASON=$(echo "$BODY" | jq -r '.reason')
-          AUDIT_REF=$(echo "$BODY" | jq -r '.auditRef // ""')
-          REF=$(echo "$BODY" | jq -r '.ref // ""')
-          echo "audit_ref=$AUDIT_REF" >> "$GITHUB_OUTPUT"
-          echo "action_ref=$REF"     >> "$GITHUB_OUTPUT"
-          if [ "$ALLOW" != "true" ]; then
-            echo "::error::Fleet Watcher BLOCKED skill '$SKILL' — $REASON  (audit: $AUDIT_REF)"
-            exit 1
-          fi
-          echo "::notice::Fleet Watcher ALLOWED skill '$SKILL' (audit: $AUDIT_REF, ref: $REF)"
 
       # Materialize cron state (Issues backend, opt-in) — hardening §3 reader cutover.
       # With STATE_BACKEND=issues, runs APPEND immutable events to a pinned Issue
@@ -287,10 +234,13 @@ jobs:
         id: run
         if: steps.work.outputs.mode != ''
         env:
-          # Full secrets context — lets .mcp.json reference ANY repo secret as
-          # ${NAME} with no per-name env wiring. Consumed by the MCP preflight
-          # below, then unset before Claude runs so it never reaches skill code.
-          ALL_SECRETS: ${{ toJSON(secrets) }}
+          # Secrets available to .mcp.json ${NAME} refs + per-skill `requires:`
+          # injection. Built from explicit named secrets rather than the whole
+          # secrets context, so the workflow declares exactly which secrets it
+          # reads. Add a name here (and set it in the dashboard) to expose it.
+          # Consumed by the MCP/requires loops below, then unset before Claude runs.
+          ALL_SECRETS: >-
+            {"CLAUDE_CODE_OAUTH_TOKEN":${{ toJSON(secrets.CLAUDE_CODE_OAUTH_TOKEN) }},"GH_GLOBAL":${{ toJSON(secrets.GH_GLOBAL) }},"XAI_API_KEY":${{ toJSON(secrets.XAI_API_KEY) }},"LANGFUSE_PUBLIC_KEY":${{ toJSON(secrets.LANGFUSE_PUBLIC_KEY) }},"LANGFUSE_SECRET_KEY":${{ toJSON(secrets.LANGFUSE_SECRET_KEY) }},"TELEGRAM_BOT_TOKEN":${{ toJSON(secrets.TELEGRAM_BOT_TOKEN) }},"TELEGRAM_CHAT_ID":${{ toJSON(secrets.TELEGRAM_CHAT_ID) }}}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           ANTHROPIC_BASE_URL: ${{ vars.ANTHROPIC_BASE_URL }}
@@ -466,7 +416,8 @@ jobs:
           MCP_FLAGS=()
           if [ -f .mcp.json ] && jq -e '.mcpServers' .mcp.json >/dev/null 2>&1; then
             MCP_MISSING=""
-            # ALL_SECRETS is toJSON(secrets). Guard the empty case via a temp var —
+            # ALL_SECRETS is a JSON object of the workflow's declared secrets.
+            # Guard the empty case via a temp var —
             # NOT the inline ${ALL_SECRETS:-{}} form: bash closes ${...} at the first
             # '}', so the default is just '{' and a stray '}' gets appended to the
             # value, corrupting the JSON (jq: parse error "Unmatched '}'").
@@ -626,52 +577,6 @@ jobs:
           echo "SESSION_ID=$(echo "$CLAUDE_OUTPUT" | jq -r '.session_id // empty')" >> "$GITHUB_OUTPUT"
 
           echo "::notice::Token usage — input: $INPUT_TOKENS, output: $OUTPUT_TOKENS, cache_read: $CACHE_READ, cache_creation: $CACHE_CREATION, total: $TOTAL_TOKENS"
-
-      # ──────────────────────────────────────────────────────────────────────
-      # Fleet Watcher postflight (opt-in, always-runs)
-      #
-      # Reports skill completion to the user's Fleet Watcher ledger. Runs even
-      # if the skill failed — failure is itself a signal Fleet wants to record
-      # for taint chain detection.
-      # ──────────────────────────────────────────────────────────────────────
-      - name: Fleet Watcher postflight
-        if: always() && steps.work.outputs.mode != '' && env.FLEET_ENDPOINT != '' && env.FLEET_TOKEN != ''
-        env:
-          SKILL:       ${{ steps.skill.outputs.name }}
-          RUN_OUTCOME: ${{ steps.run.outcome }}
-          AUDIT_REF:   ${{ steps.fleet_preflight.outputs.audit_ref }}
-        run: |
-          set -euo pipefail
-          case "$RUN_OUTCOME" in
-            success) STATUS="ok" ;;
-            failure) STATUS="error" ;;
-            skipped) STATUS="blocked" ;;
-            *)       STATUS="error" ;;
-          esac
-          OP_ID="${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}-post"
-          BODY=$(jq -n \
-            --arg skill   "$SKILL" \
-            --arg status  "$STATUS" \
-            --arg source  "github-actions:${GITHUB_REPOSITORY}" \
-            --arg summary "aeon skill '$SKILL' finished with outcome=$RUN_OUTCOME" \
-            --arg op      "$OP_ID" \
-            --arg audit   "$AUDIT_REF" \
-            '{skill:$skill, status:$status, source:$source, summary:$summary, clientOpId:$op, auditRef:$audit, metadata:{runId:env.GITHUB_RUN_ID, attempt:env.GITHUB_RUN_ATTEMPT, runUrl:("\(env.GITHUB_SERVER_URL)/\(env.GITHUB_REPOSITORY)/actions/runs/\(env.GITHUB_RUN_ID)")}}')
-          RESP=$(curl -sS -w "\n%{http_code}" -X POST "${FLEET_ENDPOINT}/api/aeon/postflight" \
-            -H "Authorization: Bearer ${FLEET_TOKEN}" \
-            -H "Content-Type: application/json" \
-            -d "$BODY" || true)
-          HTTP=$(echo "$RESP" | tail -1)
-          if [ "$HTTP" = "201" ]; then
-            EVENT_ID=$(echo "$RESP" | sed '$d' | jq -r '.eventId')
-            CHAINS=$(echo "$RESP" | sed '$d' | jq -r '.chainsDetected | length')
-            echo "::notice::Fleet Watcher recorded skill '$SKILL' (event $EVENT_ID, chains detected: $CHAINS)"
-            if [ "$CHAINS" -gt 0 ]; then
-              echo "::warning::Fleet Watcher detected $CHAINS new taint chain(s) — review at ${FLEET_ENDPOINT}/fleet"
-            fi
-          else
-            echo "::warning::Fleet Watcher postflight returned $HTTP (non-fatal)"
-          fi
 
       - name: Log token usage
         if: steps.work.outputs.mode != ''
