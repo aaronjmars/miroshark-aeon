@@ -1,0 +1,94 @@
+{
+  "root": "card_holdings",
+  "state": {},
+  "elements": {
+    "card_holdings": {
+      "type": "Card",
+      "props": {
+        "title": "Holdings — MiroShark"
+      },
+      "children": [
+        "stack_main"
+      ]
+    },
+    "stack_main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "lg"
+      },
+      "children": [
+        "row_primary",
+        "row_changes"
+      ]
+    },
+    "row_primary": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "stat_holdings",
+        "sep1",
+        "stat_supply"
+      ]
+    },
+    "stat_holdings": {
+      "type": "Stat",
+      "props": {
+        "value": "10.72B",
+        "label": "Holdings"
+      }
+    },
+    "sep1": {
+      "type": "Text",
+      "props": {
+        "text": "·",
+        "variant": "muted"
+      }
+    },
+    "stat_supply": {
+      "type": "Stat",
+      "props": {
+        "value": "10.72%",
+        "label": "of supply"
+      }
+    },
+    "row_changes": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "stat_7d",
+        "sep2",
+        "text_30d"
+      ]
+    },
+    "stat_7d": {
+      "type": "Stat",
+      "props": {
+        "label": "7d",
+        "value": "+26.19M",
+        "delta": "+0.24%",
+        "trend": "up"
+      }
+    },
+    "sep2": {
+      "type": "Text",
+      "props": {
+        "text": "·",
+        "variant": "muted"
+      }
+    },
+    "text_30d": {
+      "type": "Text",
+      "props": {
+        "text": "30d building",
+        "variant": "muted"
+      }
+    }
+  }
+}
