@@ -1,16 +1,9 @@
-HEARTBEAT_OK · STATUS_PAGE=WATCH
+🚨 Heartbeat: fleet stuck
 
-**Ambient check complete — 2026-07-30:**
+🔴 FLEET STUCK — 7/8 enabled skills dispatched but never completed since ~2026-07-30/31 (5+ days): repo-pulse, memory-flush, shiplog, token-movers, fetch-tweets, changelog, holdings. Each shows a fresh dispatch (08-02/08-03) but `last_success` stuck days earlier — success rates are still 100% historically, so this looks like the outcome-write step (or the scheduler's git commit-back) broke fleet-wide, not per-skill bugs. No `memory/logs/` file has been written since 2026-07-30, confirming nothing has actually completed since.
 
-- **P0:** All 7 enabled skills healthy — no failures, stuck, or degradation.
-- **P1:** No open PRs; issue #117 ("health: fetch-tweets") open but not labeled urgent.
-- **P2:** Integrators hyperstition deadline (2026-07-31) is tomorrow — DEDUPED (in yesterday's log), no re-notification.
-- **P3:** All enabled skills within 2× their schedule interval.
-- **Token pulse:** MIROSHARK $0.000001656 (−1.95% 24h) · CONSOLIDATING
-- **Status page** written to `docs/status.md` — 🟡 WATCH.
+🟡 heartbeat self-check: last success 2026-07-30T19:18 UTC (~4 days stale). Its own 08-03 19:00 UTC scheduled dispatch is missing from cron-state.json entirely.
 
-## Summary
+🔵 P1/P2 clean — 0 open PRs, issue #117 (fetch-tweets health) open but not urgent, nothing new flagged in memory.
 
-- Updated `docs/status.md` with today's fleet state (🟡 WATCH — P2 flag: integrators deadline tomorrow)
-- Appended `### heartbeat` log entry to `memory/logs/2026-07-30.md`
-- No notification sent (all findings deduped within 48h window)
+Status page → 🔴 DEGRADED (docs/status.md updated). Worth checking the GitHub Actions run history directly — the scheduler workflow itself may need a look.

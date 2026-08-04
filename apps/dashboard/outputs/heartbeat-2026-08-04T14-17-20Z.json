@@ -1,0 +1,303 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Heartbeat: Fleet Stuck",
+        "description": "Fleet-wide dispatch failure across 7 core skills"
+      },
+      "children": [
+        "alert_main",
+        "separator_1",
+        "section_skills",
+        "separator_2",
+        "section_details",
+        "separator_3",
+        "section_heartbeat",
+        "separator_4",
+        "section_health",
+        "separator_5",
+        "section_actions"
+      ]
+    },
+    "alert_main": {
+      "type": "Alert",
+      "props": {
+        "title": "🔴 FLEET STUCK",
+        "message": "7/8 enabled skills dispatched but never completed since ~2026-07-30/31 (5+ days): repo-pulse, memory-flush, shiplog, token-movers, fetch-tweets, changelog, holdings.",
+        "type": "error"
+      }
+    },
+    "separator_1": {
+      "type": "Separator",
+      "props": {}
+    },
+    "section_skills": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading_skills",
+        "skills_grid"
+      ]
+    },
+    "heading_skills": {
+      "type": "Heading",
+      "props": {
+        "text": "Affected Skills (7)",
+        "level": "h3"
+      }
+    },
+    "skills_grid": {
+      "type": "Grid",
+      "props": {
+        "columns": 4,
+        "gap": "sm"
+      },
+      "children": [
+        "skill_1",
+        "skill_2",
+        "skill_3",
+        "skill_4",
+        "skill_5",
+        "skill_6",
+        "skill_7"
+      ]
+    },
+    "skill_1": {
+      "type": "Badge",
+      "props": {
+        "text": "repo-pulse",
+        "variant": "destructive"
+      }
+    },
+    "skill_2": {
+      "type": "Badge",
+      "props": {
+        "text": "memory-flush",
+        "variant": "destructive"
+      }
+    },
+    "skill_3": {
+      "type": "Badge",
+      "props": {
+        "text": "shiplog",
+        "variant": "destructive"
+      }
+    },
+    "skill_4": {
+      "type": "Badge",
+      "props": {
+        "text": "token-movers",
+        "variant": "destructive"
+      }
+    },
+    "skill_5": {
+      "type": "Badge",
+      "props": {
+        "text": "fetch-tweets",
+        "variant": "destructive"
+      }
+    },
+    "skill_6": {
+      "type": "Badge",
+      "props": {
+        "text": "changelog",
+        "variant": "destructive"
+      }
+    },
+    "skill_7": {
+      "type": "Badge",
+      "props": {
+        "text": "holdings",
+        "variant": "destructive"
+      }
+    },
+    "separator_2": {
+      "type": "Separator",
+      "props": {}
+    },
+    "section_details": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading_details",
+        "detail_1",
+        "detail_2",
+        "detail_3",
+        "detail_4",
+        "detail_5"
+      ]
+    },
+    "heading_details": {
+      "type": "Heading",
+      "props": {
+        "text": "Investigation Summary",
+        "level": "h3"
+      }
+    },
+    "detail_1": {
+      "type": "Text",
+      "props": {
+        "text": "Each skill shows fresh dispatch (08-02/08-03) but last_success stuck days earlier.",
+        "variant": "body"
+      }
+    },
+    "detail_2": {
+      "type": "Text",
+      "props": {
+        "text": "Success rates remain 100% historically, indicating this is not per-skill bugs.",
+        "variant": "body"
+      }
+    },
+    "detail_3": {
+      "type": "Text",
+      "props": {
+        "text": "Root cause hypothesis: outcome-write step or scheduler's git commit-back broke fleet-wide.",
+        "variant": "body"
+      }
+    },
+    "detail_4": {
+      "type": "Text",
+      "props": {
+        "text": "No memory/logs/ file has been written since 2026-07-30, confirming nothing has actually completed.",
+        "variant": "body"
+      }
+    },
+    "detail_5": {
+      "type": "Text",
+      "props": {
+        "text": "docs/status.md updated to 🔴 DEGRADED.",
+        "variant": "body"
+      }
+    },
+    "separator_3": {
+      "type": "Separator",
+      "props": {}
+    },
+    "section_heartbeat": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading_heartbeat",
+        "hb_status_1",
+        "hb_status_2"
+      ]
+    },
+    "heading_heartbeat": {
+      "type": "Heading",
+      "props": {
+        "text": "🟡 Heartbeat Self-Check",
+        "level": "h3"
+      }
+    },
+    "hb_status_1": {
+      "type": "Stat",
+      "props": {
+        "label": "Last Success",
+        "value": "2026-07-30T19:18 UTC",
+        "delta": "~4 days stale",
+        "trend": "down"
+      }
+    },
+    "hb_status_2": {
+      "type": "Text",
+      "props": {
+        "text": "08-03 19:00 UTC scheduled dispatch is missing from cron-state.json entirely.",
+        "variant": "body"
+      }
+    },
+    "separator_4": {
+      "type": "Separator",
+      "props": {}
+    },
+    "section_health": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading_health",
+        "health_1",
+        "health_2",
+        "health_3"
+      ]
+    },
+    "heading_health": {
+      "type": "Heading",
+      "props": {
+        "text": "🔵 Health Status",
+        "level": "h3"
+      }
+    },
+    "health_1": {
+      "type": "Text",
+      "props": {
+        "text": "P1/P2 clean — 0 open PRs",
+        "variant": "body"
+      }
+    },
+    "health_2": {
+      "type": "Text",
+      "props": {
+        "text": "Issue #117 (fetch-tweets health) open but not urgent",
+        "variant": "body"
+      }
+    },
+    "health_3": {
+      "type": "Text",
+      "props": {
+        "text": "Nothing new flagged in memory",
+        "variant": "body"
+      }
+    },
+    "separator_5": {
+      "type": "Separator",
+      "props": {}
+    },
+    "section_actions": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading_actions",
+        "action_1",
+        "action_2"
+      ]
+    },
+    "heading_actions": {
+      "type": "Heading",
+      "props": {
+        "text": "Recommended Next Steps",
+        "level": "h3"
+      }
+    },
+    "action_1": {
+      "type": "Text",
+      "props": {
+        "text": "Check the GitHub Actions run history directly — the scheduler workflow itself may need investigation.",
+        "variant": "body"
+      }
+    },
+    "action_2": {
+      "type": "Text",
+      "props": {
+        "text": "Investigate outcome-write step and scheduler's git commit-back process — likely cause of fleet-wide breakage.",
+        "variant": "body"
+      }
+    }
+  }
+}
