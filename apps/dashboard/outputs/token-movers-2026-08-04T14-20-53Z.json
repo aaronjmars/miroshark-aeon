@@ -1,0 +1,195 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "MiroShark Token Report"
+      },
+      "children": [
+        "stack_root"
+      ]
+    },
+    "stack_root": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "badge_consolidating",
+        "text_narrative",
+        "sep1",
+        "heading_price",
+        "grid_metrics",
+        "sep2",
+        "heading_activity",
+        "grid_activity",
+        "sep3",
+        "heading_social",
+        "text_social",
+        "sep4",
+        "heading_chart",
+        "link_chart"
+      ]
+    },
+    "badge_consolidating": {
+      "type": "Badge",
+      "props": {
+        "text": "CONSOLIDATING"
+      }
+    },
+    "text_narrative": {
+      "type": "Text",
+      "props": {
+        "text": "Retracing −21.8% off Saturday's parabolic spike (Aug 2: $0.0000017→$0.0000033 on $205K volume) — still +47.9% over 7d, but today's $37.2K volume is only 0.8× the now pump-inflated weekly average.",
+        "variant": "body"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading_price": {
+      "type": "Heading",
+      "props": {
+        "text": "Price & Metrics",
+        "level": "h2"
+      }
+    },
+    "grid_metrics": {
+      "type": "Grid",
+      "props": {
+        "columns": 3,
+        "gap": "md"
+      },
+      "children": [
+        "stat_price",
+        "stat_liq",
+        "stat_vol"
+      ]
+    },
+    "stat_price": {
+      "type": "Stat",
+      "props": {
+        "label": "Price (24h)",
+        "value": "$0.000002561",
+        "delta": "-21.8%",
+        "trend": "down"
+      }
+    },
+    "stat_liq": {
+      "type": "Stat",
+      "props": {
+        "label": "Liquidity (vs 5d ago)",
+        "value": "$243.2K",
+        "delta": "+19.2%",
+        "trend": "up"
+      }
+    },
+    "stat_vol": {
+      "type": "Stat",
+      "props": {
+        "label": "Volume (24h / 0.8× 7d avg)",
+        "value": "$37.2K"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading_activity": {
+      "type": "Heading",
+      "props": {
+        "text": "Activity",
+        "level": "h2"
+      }
+    },
+    "grid_activity": {
+      "type": "Grid",
+      "props": {
+        "columns": 4,
+        "gap": "md"
+      },
+      "children": [
+        "stat_buys",
+        "stat_sells",
+        "stat_ratio",
+        "stat_whales"
+      ]
+    },
+    "stat_buys": {
+      "type": "Stat",
+      "props": {
+        "label": "Buys",
+        "value": "104"
+      }
+    },
+    "stat_sells": {
+      "type": "Stat",
+      "props": {
+        "label": "Sells",
+        "value": "97"
+      }
+    },
+    "stat_ratio": {
+      "type": "Stat",
+      "props": {
+        "label": "B/S Ratio",
+        "value": "1.07"
+      }
+    },
+    "stat_whales": {
+      "type": "Stat",
+      "props": {
+        "label": "Whales",
+        "value": "10"
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading_social": {
+      "type": "Heading",
+      "props": {
+        "text": "Social & Context",
+        "level": "h2"
+      }
+    },
+    "text_social": {
+      "type": "Text",
+      "props": {
+        "text": "Chatter riding the spike (Base trending, \"+96%\" callouts) plus one unverified \"$200M raise\" claim about a competitor — no verifiable news.",
+        "variant": "body"
+      }
+    },
+    "sep4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading_chart": {
+      "type": "Heading",
+      "props": {
+        "text": "Chart",
+        "level": "h2"
+      }
+    },
+    "link_chart": {
+      "type": "Link",
+      "props": {
+        "label": "GeckoTerminal Chart",
+        "href": "https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209"
+      }
+    }
+  }
+}

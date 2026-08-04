@@ -1,10 +1,10 @@
 {
   "skill": "token-movers",
-  "last_analyzed": "2026-07-30T06:42:31Z",
-  "quality_score": 4,
-  "assessment": "Substantive token analysis with multi-source data validation, clear verdict, specific metrics (22/9 buy/sell ratio, $204K liquidity), identified whale sell driver, and state tracking for continuity.",
+  "last_analyzed": "2026-08-04T14:20:53Z",
+  "quality_score": 5,
+  "assessment": "Excellent — substantive multi-source analysis, proactively flagged reporting gap, cross-validated data, clear verdict with specific thresholds, strategically aligned.",
   "flags": [],
-  "avg_score": 4,
+  "avg_score": 4.05,
   "history": [
     {
       "date": "2026-07-10",
@@ -89,6 +89,10 @@
     {
       "date": "2026-07-30",
       "score": 4
+    },
+    {
+      "date": "2026-08-04",
+      "score": 5
     }
   ]
 }
