@@ -1,13 +1,13 @@
 {
   "heartbeat": {
-    "last_status": "success",
+    "last_status": "dispatched",
     "last_success": "2026-08-04T14:18:24Z",
     "total_runs": 54,
     "total_successes": 54,
     "total_failures": 0,
     "consecutive_failures": 0,
     "success_rate": 1,
-    "last_dispatch": "2026-08-03T19:33:04Z"
+    "last_dispatch": "2026-08-04T19:12:41Z"
   },
   "star-milestone": {
     "last_status": "success",
