@@ -187,14 +187,14 @@
   },
   "token-movers": {
     "last_dispatch": "2026-08-05T06:26:48Z",
-    "last_status": "dispatched",
-    "last_success": "2026-08-04T14:21:42Z",
-    "total_runs": 22,
-    "total_successes": 22,
+    "last_status": "success",
+    "last_success": "2026-08-05T06:35:18Z",
+    "total_runs": 23,
+    "total_successes": 23,
     "total_failures": 0,
     "consecutive_failures": 0,
     "success_rate": 1,
-    "last_quality_score": 5
+    "last_quality_score": 4
   },
   "fetch-tweets": {
     "last_dispatch": "2026-08-04T17:13:24Z",
