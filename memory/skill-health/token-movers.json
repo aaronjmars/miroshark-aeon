@@ -1,10 +1,10 @@
 {
   "skill": "token-movers",
-  "last_analyzed": "2026-08-04T14:20:53Z",
-  "quality_score": 5,
-  "assessment": "Excellent — substantive multi-source analysis, proactively flagged reporting gap, cross-validated data, clear verdict with specific thresholds, strategically aligned.",
+  "last_analyzed": "2026-08-05T06:34:18Z",
+  "quality_score": 4,
+  "assessment": "Substantive, well-sourced report with cross-validated data and proper verdict; executed completely with good handling of edge cases despite minor sandbox friction.",
   "flags": [],
-  "avg_score": 4.05,
+  "avg_score": 4.04,
   "history": [
     {
       "date": "2026-07-10",
@@ -93,6 +93,10 @@
     {
       "date": "2026-08-04",
       "score": 5
+    },
+    {
+      "date": "2026-08-05",
+      "score": 4
     }
   ]
 }

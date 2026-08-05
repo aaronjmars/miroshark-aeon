@@ -1,0 +1,101 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "Token Report"
+      },
+      "children": [
+        "status-badge",
+        "description",
+        "metrics-section",
+        "chart-link"
+      ]
+    },
+    "status-badge": {
+      "type": "Badge",
+      "props": {
+        "text": "$MiroShark — CONSOLIDATING",
+        "variant": "secondary"
+      },
+      "children": []
+    },
+    "description": {
+      "type": "Text",
+      "props": {
+        "text": "Price +20.5% vs yesterday's close, but volume is only 0.6× a 7d average still inflated by last week's pump — the move lacks confirming participation.",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "metrics-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "price-stat",
+        "liquidity-stat",
+        "volume-stat",
+        "buys-sells",
+        "whales-stat"
+      ]
+    },
+    "price-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Price (24h)",
+        "value": "$0.000003087",
+        "delta": "+20.5%",
+        "trend": "up"
+      },
+      "children": []
+    },
+    "liquidity-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Liquidity",
+        "value": "$269.9K",
+        "delta": "+11.0%",
+        "trend": "up"
+      },
+      "children": []
+    },
+    "volume-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Volume",
+        "value": "$29.1K",
+        "delta": "0.6× 7d avg"
+      },
+      "children": []
+    },
+    "buys-sells": {
+      "type": "Text",
+      "props": {
+        "text": "Buys/Sells: 71/69 (ratio 1.03)",
+        "variant": "caption"
+      },
+      "children": []
+    },
+    "whales-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Whales",
+        "value": "5"
+      },
+      "children": []
+    },
+    "chart-link": {
+      "type": "Link",
+      "props": {
+        "label": "Chart on GeckoTerminal",
+        "href": "https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209"
+      },
+      "children": []
+    }
+  }
+}
