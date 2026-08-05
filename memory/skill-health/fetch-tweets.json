@@ -1,10 +1,10 @@
 {
   "skill": "fetch-tweets",
-  "last_analyzed": "2026-08-04T17:16:29Z",
+  "last_analyzed": "2026-08-05T17:08:00Z",
   "quality_score": 4,
-  "assessment": "Completed fetch-tweets correctly; API call succeeded, result properly interpreted (0 tweets = quiet account), followed notification rule appropriately, and logged cleanly.",
+  "assessment": "Skill executed cleanly — found and reported 1 new tweet, properly deduplicated, sent notifications, and logged correctly",
   "flags": [],
-  "avg_score": 3.68,
+  "avg_score": 3.7,
   "history": [
     {
       "date": "2026-07-10",
@@ -92,6 +92,10 @@
     },
     {
       "date": "2026-08-04",
+      "score": 4
+    },
+    {
+      "date": "2026-08-05",
       "score": 4
     }
   ]

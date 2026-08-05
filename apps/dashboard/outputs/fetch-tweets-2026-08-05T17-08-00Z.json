@@ -1,0 +1,24 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "Tweet Digest — 2026-08-05",
+        "description": "Theme: prediction markets thesis"
+      },
+      "children": [
+        "tweet-1"
+      ]
+    },
+    "tweet-1": {
+      "type": "TweetCard",
+      "props": {
+        "author": "miroshark_",
+        "handle": "@miroshark_",
+        "text": "naming what people actually want to bet on — elections, celebrity breakups, product launches — not abstract macro questions — [link](https://x.com/miroshark_/status/2084990993896526006)"
+      }
+    }
+  }
+}
