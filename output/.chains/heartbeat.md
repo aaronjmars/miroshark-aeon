@@ -1,9 +1,19 @@
-No notification sent — the stuck-skill findings (repo-pulse, changelog, shiplog, memory-flush) are unchanged from yesterday evening's report and deduped within the 48h window; token-movers/fetch-tweets/holdings remain recovered.
+Log entry appended and status page regenerated. Per the skill's dedup rule, no notification was sent since all findings (repo-pulse/changelog/shiplog/memory-flush stuck) were already reported in yesterday's log within 48h.
 
 ## Summary
-- Ran heartbeat's **ambient check** branch (default, empty `${var}`).
-- P0: repo-pulse, changelog, shiplog, memory-flush are still stuck (same dispatch timestamps as 08-04's report, no new evidence) — deduped, no re-notification. Heartbeat self-check clean (~24h since last success). token-movers/fetch-tweets/holdings confirmed still recovered.
-- P1/P2 clean: 0 open PRs, issue #117 open-but-not-urgent, nothing new flagged in MEMORY.md.
-- Regenerated `docs/status.md` (still 🔴 DEGRADED — same 4 stuck skills; token pulse refreshed to today's report: MIROSHARK $0.000003087, +20.5% 24h, CONSOLIDATING).
-- Appended `### heartbeat` entry to `memory/logs/2026-08-05.md` with `mode: ambient` and `STATUS_PAGE=DEGRADED`.
-- Follow-up: repo-pulse/changelog/shiplog/memory-flush have now been stuck for 3+ days with no redispatch — worth investigating the scheduler/outcome-write path directly rather than waiting for another heartbeat cycle to re-flag it.
+
+Ran the heartbeat skill in **ambient check** mode (default, `${var}` empty — the live scheduled path).
+
+**Findings:**
+- **P0:** `repo-pulse`, `changelog`, `shiplog`, `memory-flush` remain stuck (same dispatch timestamps as 08-05, no redispatch/success since) — deduped, no new notification.
+- **P1:** 0 open PRs; issue #117 (fetch-tweets health) still open but stale/not urgent, not heartbeat's call.
+- **P2:** nothing new flagged.
+- **P3:** folds into P0, unchanged.
+- Self-check clean (heartbeat's own last success ~28h ago, under the 36h threshold).
+- Token pulse refreshed: MIROSHARK $0.000002476 (-19.8% 24h), verdict CONSOLIDATING, driven by 3 whale sells.
+
+**Files modified:**
+- `docs/status.md` — regenerated (🔴 DEGRADED, updated token pulse and skill table timestamps).
+- `memory/logs/2026-08-06.md` — appended `### heartbeat` entry (`mode: ambient`).
+
+No notification sent — all findings were already reported within the last 48h and nothing crossed a new flag threshold.
