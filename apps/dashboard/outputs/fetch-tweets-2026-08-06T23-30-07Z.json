@@ -1,0 +1,48 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "Tweet Digest"
+      },
+      "children": [
+        "subtitle",
+        "theme-text",
+        "tweet1",
+        "tweet2"
+      ]
+    },
+    "subtitle": {
+      "type": "Text",
+      "props": {
+        "text": "Tweet Digest — 2026-08-06",
+        "variant": "caption"
+      }
+    },
+    "theme-text": {
+      "type": "Text",
+      "props": {
+        "text": "Theme: x402 agentic market listing",
+        "variant": "lead"
+      }
+    },
+    "tweet1": {
+      "type": "TweetCard",
+      "props": {
+        "author": "miroshark_",
+        "handle": "@miroshark_",
+        "text": "miroshark's x402 endpoint is now listed on the agentic market page, alongside claude, tripadvisor & coinmarketcap — [link](https://x.com/miroshark_/status/2085271134786756863)"
+      }
+    },
+    "tweet2": {
+      "type": "TweetCard",
+      "props": {
+        "author": "miroshark_",
+        "handle": "@miroshark_",
+        "text": "followed up with the exact npx command to run an x402 pay call against the live endpoint — [link](https://x.com/miroshark_/status/2085271138704212364)"
+      }
+    }
+  }
+}

@@ -1,10 +1,10 @@
 {
   "skill": "fetch-tweets",
-  "last_analyzed": "2026-08-05T17:08:00Z",
+  "last_analyzed": "2026-08-06T23:30:07Z",
   "quality_score": 4,
-  "assessment": "Skill executed cleanly — found and reported 1 new tweet, properly deduplicated, sent notifications, and logged correctly",
+  "assessment": "Skill executed correctly: fetched tweets via API, deduplicated against prior runs, grouped into theme, and sent digest notification with proper logging.",
   "flags": [],
-  "avg_score": 3.7,
+  "avg_score": 3.71,
   "history": [
     {
       "date": "2026-07-10",
@@ -96,6 +96,10 @@
     },
     {
       "date": "2026-08-05",
+      "score": 4
+    },
+    {
+      "date": "2026-08-06",
       "score": 4
     }
   ]

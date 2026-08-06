@@ -1,4 +1,7 @@
-*Tweet Digest — 2026-08-05*
+ℹ️ Tweet Digest
 
-*Theme: prediction markets thesis*
-@miroshark_: naming what people actually want to bet on — elections, celebrity breakups, product launches — not abstract macro questions — [link](https://x.com/miroshark_/status/2084990993896526006)
+*Tweet Digest — 2026-08-06*
+
+*Theme: x402 agentic market listing*
+@miroshark_: miroshark's x402 endpoint is now listed on the agentic market page, alongside claude, tripadvisor & coinmarketcap — [link](https://x.com/miroshark_/status/2085271134786756863)
+@miroshark_: followed up with the exact npx command to run an x402 pay call against the live endpoint — [link](https://x.com/miroshark_/status/2085271138704212364)
