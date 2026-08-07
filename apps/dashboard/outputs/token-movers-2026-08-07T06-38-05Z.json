@@ -1,0 +1,136 @@
+{
+  "root": "card_root",
+  "state": {},
+  "elements": {
+    "card_root": {
+      "type": "Card",
+      "props": {
+        "title": "$MiroShark — DISTRIBUTING"
+      },
+      "children": [
+        "text_insight",
+        "separator1",
+        "grid_prices",
+        "separator2",
+        "heading_flow",
+        "text_flow_detail",
+        "progress_buy_ratio",
+        "separator3",
+        "heading_whales",
+        "text_whales",
+        "separator4",
+        "link_chart"
+      ]
+    },
+    "text_insight": {
+      "type": "Text",
+      "props": {
+        "text": "Price is flat (+2.2% 24h) but flow flipped sell-heavy — 9 buys vs 22 sells (ratio 0.41, down from yesterday's 0.93).",
+        "variant": "lead"
+      }
+    },
+    "separator1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "grid_prices": {
+      "type": "Grid",
+      "props": {
+        "columns": 3,
+        "gap": "md"
+      },
+      "children": [
+        "stat_price",
+        "stat_liq",
+        "stat_vol"
+      ]
+    },
+    "stat_price": {
+      "type": "Stat",
+      "props": {
+        "label": "Price",
+        "value": "$0.000002532",
+        "delta": "+2.2%",
+        "trend": "up"
+      }
+    },
+    "stat_liq": {
+      "type": "Stat",
+      "props": {
+        "label": "Liquidity",
+        "value": "$251.3K",
+        "delta": "+1.9%",
+        "trend": "up"
+      }
+    },
+    "stat_vol": {
+      "type": "Stat",
+      "props": {
+        "label": "Volume",
+        "value": "$5.4K",
+        "delta": "0.11× 7d avg"
+      }
+    },
+    "separator2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading_flow": {
+      "type": "Heading",
+      "props": {
+        "text": "Flow (Buy/Sell)",
+        "level": "h3"
+      }
+    },
+    "text_flow_detail": {
+      "type": "Text",
+      "props": {
+        "text": "9 buys | 22 sells | Ratio 0.41 (down from 0.93)"
+      }
+    },
+    "progress_buy_ratio": {
+      "type": "Progress",
+      "props": {
+        "value": 29,
+        "max": 100,
+        "label": "Buy %"
+      }
+    },
+    "separator3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading_whales": {
+      "type": "Heading",
+      "props": {
+        "text": "Whales",
+        "level": "h3"
+      }
+    },
+    "text_whales": {
+      "type": "Text",
+      "props": {
+        "text": "3 whales: 2 buy / 1 sell"
+      }
+    },
+    "separator4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "link_chart": {
+      "type": "Link",
+      "props": {
+        "label": "View Chart on GeckoTerminal",
+        "href": "https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209"
+      }
+    }
+  }
+}

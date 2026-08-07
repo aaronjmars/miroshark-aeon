@@ -1,8 +1,8 @@
 {
   "skill": "token-movers",
-  "last_analyzed": "2026-08-06T06:44:30Z",
+  "last_analyzed": "2026-08-07T06:38:05Z",
   "quality_score": 4,
-  "assessment": "Substantive token analysis with cross-validated data sources, quantified metrics, and proper framework compliance; routine monitoring executed well but without exceptional insight.",
+  "assessment": "Well-executed routine run with data validation, cross-source verification, proper state persistence, and transparent gap documentation.",
   "flags": [],
   "avg_score": 4.04,
   "history": [
@@ -100,6 +100,10 @@
     },
     {
       "date": "2026-08-06",
+      "score": 4
+    },
+    {
+      "date": "2026-08-07",
       "score": 4
     }
   ]
