@@ -1,0 +1,1 @@
+{"model":"grok-4-1-fast","input":[{"role":"user","content":"Search X for the latest tweets from:miroshark_ in the last 3 days. Return the 5 most interesting or substantive tweets. For each: full text, date, direct link (https://x.com/miroshark_/status/ID). Skip retweets of others."}],"tools":[{"type":"x_search"}]}
