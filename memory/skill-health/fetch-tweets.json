@@ -1,10 +1,10 @@
 {
   "skill": "fetch-tweets",
-  "last_analyzed": "2026-08-07T17:08:46Z",
-  "quality_score": 3,
-  "assessment": "Completed task adequately — fetched correctly, deduped properly, logged result; no new tweets met threshold (legitimate no-op), per spec.",
+  "last_analyzed": "2026-08-08T17:09:19Z",
+  "quality_score": 4,
+  "assessment": "Clean execution — fetched tweets, properly deduplicated against prior logs, correctly suppressed notification per signal-only rule, and logged status. No new findings this run, but task completed soundly.",
   "flags": [],
-  "avg_score": 3.68,
+  "avg_score": 3.69,
   "history": [
     {
       "date": "2026-07-10",
@@ -105,6 +105,10 @@
     {
       "date": "2026-08-07",
       "score": 3
+    },
+    {
+      "date": "2026-08-08",
+      "score": 4
     }
   ]
 }
