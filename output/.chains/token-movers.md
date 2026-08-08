@@ -1,8 +1,12 @@
-*$MiroShark — DISTRIBUTING*
+ℹ️ MiroShark Token Report
 
-Price is flat (+2.2% 24h) but flow flipped sell-heavy — 9 buys vs 22 sells (ratio 0.41, down from yesterday's 0.93).
+*$MiroShark — ACCUMULATING*
 
-Price $0.000002532 (+2.2% 24h) | Liq $251.3K (+1.9%) | Vol $5.4K (0.11× 7d)
-Buys/Sells 9/22 (ratio 0.41) | Whales: 3 (2 buy / 1 sell)
+Flat price (-0.9% 24h) but buy pressure flipped positive — 13 buys vs 10 sells (ratio 1.30, yest 0.41), with the day's only whale trade a $1.49K buy.
+
+Price $0.000002510 (-0.9% 24h) | Liq $250.3K (-0.4%) | Vol $5.7K (0.12x 7d)
+Buys/Sells 13/10 (ratio 1.30) | Whales: 1
 
 Chart: https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209
+
+🔗 https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209

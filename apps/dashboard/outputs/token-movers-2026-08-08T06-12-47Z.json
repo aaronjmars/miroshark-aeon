@@ -1,0 +1,118 @@
+{
+  "root": "card-root",
+  "state": {},
+  "elements": {
+    "card-root": {
+      "type": "Card",
+      "props": {
+        "title": "MiroShark Token Report"
+      },
+      "children": [
+        "badge-status",
+        "text-summary",
+        "separator-1",
+        "heading-metrics",
+        "stack-metrics",
+        "separator-2",
+        "link-chart"
+      ]
+    },
+    "badge-status": {
+      "type": "Badge",
+      "props": {
+        "text": "$MiroShark — ACCUMULATING",
+        "variant": "default"
+      }
+    },
+    "text-summary": {
+      "type": "Text",
+      "props": {
+        "text": "Flat price (-0.9% 24h) but buy pressure flipped positive — 13 buys vs 10 sells (ratio 1.30, yest 0.41), with the day's only whale trade a $1.49K buy.",
+        "variant": "body"
+      }
+    },
+    "separator-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading-metrics": {
+      "type": "Heading",
+      "props": {
+        "text": "Key Metrics",
+        "level": "h3"
+      }
+    },
+    "stack-metrics": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stat-price",
+        "stat-liq",
+        "stat-vol",
+        "stat-buys-sells",
+        "stat-whales"
+      ]
+    },
+    "stat-price": {
+      "type": "Stat",
+      "props": {
+        "label": "Price",
+        "value": "$0.000002510",
+        "delta": "-0.9%",
+        "trend": "down"
+      }
+    },
+    "stat-liq": {
+      "type": "Stat",
+      "props": {
+        "label": "Liquidity",
+        "value": "$250.3K",
+        "delta": "-0.4%",
+        "trend": "down"
+      }
+    },
+    "stat-vol": {
+      "type": "Stat",
+      "props": {
+        "label": "Volume",
+        "value": "$5.7K",
+        "delta": "0.12x 7d avg"
+      }
+    },
+    "stat-buys-sells": {
+      "type": "Stat",
+      "props": {
+        "label": "Buy/Sell Ratio",
+        "value": "1.30",
+        "delta": "+0.89 from yesterday (0.41)",
+        "trend": "up"
+      }
+    },
+    "stat-whales": {
+      "type": "Stat",
+      "props": {
+        "label": "Whale Trades",
+        "value": "1",
+        "delta": "$1.49K buy"
+      }
+    },
+    "separator-2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "link-chart": {
+      "type": "Link",
+      "props": {
+        "label": "View Chart on GeckoTerminal",
+        "href": "https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209"
+      }
+    }
+  }
+}
