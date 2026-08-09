@@ -1,10 +1,9 @@
-## Summary
+ℹ️ Tweet Digest
 
-Ran `fetch-tweets` skill with `source:account`, `ARG` empty → all-tracked-accounts sub-mode.
+*Tweet Digest — 2026-08-09*
 
-- Read `memory/topics/tracked-accounts.yml` — 1 tracked handle: `miroshark_`.
-- Fetched via X.AI `x_search` (`Path A`, HTTP 200) — 3 substantive original tweets in the last 3 days (x402/agentic-market listing, `awal x402 pay` CLI snippet, prediction-markets thesis tweet).
-- Deduped against prior logs: all 3 URLs were already reported in the 08-05 and 08-06 `fetch-tweets` log entries — 0 new tweets, so per the skill's "notify only on signal" rule, **no notification was sent**.
-- Logged the run (`status: TWEET_DIGEST_OK`) to `memory/logs/2026-08-08.md` and committed (`369537c`).
-
-No follow-up needed — this was a clean, all-duplicate run.
+*Theme: x402 launch on agentic.market*
+@miroshark_: announces the x402 endpoint is now listed on agentic.market, name-checking @claudeai, @Tripadvisor & @CoinMarketCap as fellow listings — [link](https://x.com/miroshark_/status/2085271134786756863)
+@miroshark_: drops the exact `npx awal x402 pay` command to run the sim engine straight through x402 — [link](https://x.com/miroshark_/status/2085271138704212364)
+@miroshark_: posts a demo of running the sim engine via the x402 framework — [link](https://x.com/miroshark_/status/2086482585669042238)
+@miroshark_: links the x402 section of the miroshark docs — [link](https://x.com/miroshark_/status/2086482588323987940)
