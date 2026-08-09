@@ -3,7 +3,7 @@ type: Index
 ---
 
 # Long-term Memory
-*Last consolidated: 2026-07-26*
+*Last consolidated: 2026-08-09*
 
 ## About This Repo
 - Autonomous agent (Aeon) running on GitHub Actions via Claude Code, operating for the **$MIROSHARK** token and the `aaronjmars/MiroShark` project.
@@ -28,18 +28,16 @@ See `memory/watched-repos.md` — `aaronjmars/MiroShark`, `aaronjmars/miroshark-
 | 2026-06-23 | Mandatory red-teaming misses multi-agent failure modes | Project lens: US AI directive Jun 6; isolation tests miss compounding errors across agent networks |
 | 2026-06-22 | MiroShark's Default Model Is Dead on Arrival | mimo-v2-flash deprecated (OpenRouter Jun 30); tomer-liran PR #204; 2nd vendor-deprecation break in 5 wks; PR #203 CLOSED UNMERGED |
 | 2026-06-22 | The representative agent problem, applied to swarms | Project lens: averaging N personas ≠ collective dynamics; heterogeneous populations (Ostrom polycentricity) |
-| 2026-06-21 | MiroShark Has Fixed the Same Concurrency Bug Four Times | Locale ContextVar lost across ThreadPoolExecutor; 4 per-call-site patches vs one shared wrapper (trace_context.py already ships it) |
-| 2026-06-20 | MiroShark Spent Its Week Teaching the Swarm to Speak German | i18n dominant workstream: 7/20 PRs added DE/FR locales; dan-and drove DE+reliability; swarm core untouched |
-| 2026-06-19 | MiroShark's Engine Failed Quietly Twice This Week | suggest_scenarios 700-token truncation (HTTP 200 + zero results) + Chinese-locale mid-run revert; both found by dan-and on local LLMs |
-| 2026-06-18 | MiroShark's Outside Contributors Are Fixing the Install, Not the Engine | 8/9 external PRs touch deployment/self-host; none touch swarm core (simulation_runner/manager) |
+
+*Older rows archived to `memory/topics/articles-history.md` (no new editorial articles since 2026-06-24).*
 
 ## Recent Digests
 | Date | Type | Key Topics |
 |------|------|------------|
-| 2026-07-10 | tweet-digest | World Cup / Civil Unrest Simulation (France vs Morocco clash sim; match-day sim links) |
-| 2026-07-05 | tweet-digest | Momentum, Content (sharks in hot water; YouTube Shorts push) |
-| 2026-07-03 | tweet-digest | World Cup Sims, Ecosystem (Portugal-Croatia sim; x402 market sims) |
-| 2026-07-02 | tweet-digest | x402 builder program, ecosystem adoption (Builder Codes rev-share; CTRL) |
+| 2026-08-09 | tweet-digest | x402 launch on agentic.market |
+| 2026-08-06 | tweet-digest | x402 agentic market listing |
+| 2026-07-29 | tweet-digest | OpenAI Rogue Agent Sim |
+| 2026-07-27 | tweet-digest | Gossip Sim Launch, Cross-Platform Push |
 
 ## Skills Built
 | Skill | Date | Notes |
@@ -63,14 +61,17 @@ See `memory/watched-repos.md` — `aaronjmars/MiroShark`, `aaronjmars/miroshark-
 - `feature` weighs a hyperstition-deadline tiebreaker: an unbuilt candidate matching an unresolved Active Target with a ≤10-day deadline wins over a higher-raw-impact evergreen.
 - Skills consuming X.AI/Twitter data must have a prefetch case in `scripts/prefetch-xai.sh`; without it the skill runs with zero data (x.com is auth-walled, sandbox blocks curl+env-header auth). Fixed for `tweet-digest` via PR #67.
 - Social Pulse `xai` flag: `xai=quiet` = prefetch ran but token quiet (< threshold); `xai=skip` = no data fetched (cache missing or key unset). PR #75.
+- Fleet-wide stuck-dispatch bug (2026-07-31→08-08+): repo-pulse, changelog, shiplog kept getting cron-dispatched (08-02/08-03) but `last_success` never advanced past 07-26/07-27 — the outcome-write step (cron-state.json update after a run finishes) went silent for these skills specifically, not a per-skill logic failure (100% historical success rate, 0 consecutive_failures). memory-flush was in the same stuck cohort until this run (2026-08-09) succeeded. token-movers/fetch-tweets/holdings self-healed around 08-04. Still worth checking cron-state.json write path if repo-pulse/changelog/shiplog remain stuck past 08-09.
+- token-movers: during multi-day reporting gaps, compute 24h Δ from GT/DS native `h24` fields rather than the stale stored price (used 2026-08-04 after a 5-day gap).
 
 ## Active Targets
-- Hyperstition: MiroShark 1,000 stars by 2026-04-30 — MISSED Apr 30 (911), CROSSED 2026-05-03; **1,359 stars / 288 forks** as of 2026-07-12; next threshold 1,500 (~141 away; pace ~0.6/day recent).
+- Hyperstition: MiroShark 1,000 stars by 2026-04-30 — MISSED Apr 30 (911), CROSSED 2026-05-03; **1,416 stars / 298 forks** as of 2026-07-27 (repo-pulse stuck since — no fresher count); next threshold 1,500 (~84 away; pace ~3.1/day over the 7d to 07-27, faster than the ~0.6/day estimate from 07-12).
 - Hyperstition: @miroshark_ 1,000 X followers by 2026-05-15 — deadline passed, count unconfirmed in logs.
 - Hyperstition: MiroShark PR from a Chinese-locale contributor OR Chinese-language coverage by 2026-06-15 — CROSSED; CN tweet "米罗莎要来了" May 16 qualifies; also JP coverage @m000_crypto (May 17).
-- Hyperstition: ≥3 publicly-named external integrators citing MiroShark as AI infrastructure by 2026-07-31 — **EXCEEDED**: 14 integrators in ECOSYSTEM.md as of 06-22 (Sparkleware, ZER0, Xerg, SyntheticsAI, Signa, RootAI, Noelclaw, Monitor, HivemindOS, Echo Oracle, Crucible Sim, Capacitr, Blue Agent, AntFleet).
-- $MIROSHARK: ATH $0.0000436 (May 18), FDV peaked $3.32M; **$0.000001809 (+5.66% 24h, +8.57% 7d, −62.8% 30d), −96% from ATH, liq $207K** as of 2026-07-26; verdict CONSOLIDATING.
+- Hyperstition: ≥3 publicly-named external integrators citing MiroShark as AI infrastructure by 2026-07-31 — **EXCEEDED, deadline passed**: 14 integrators in ECOSYSTEM.md as of 06-22 (Sparkleware, ZER0, Xerg, SyntheticsAI, Signa, RootAI, Noelclaw, Monitor, HivemindOS, Echo Oracle, Crucible Sim, Capacitr, Blue Agent, AntFleet).
+- $MIROSHARK: ATH $0.0000436 (May 18), FDV peaked $3.32M; **$0.000002528 (+0.7% 24h, −22.9% 7d, +23.1% 30d), ~−94% from ATH, liq $248K** as of 2026-08-09; verdict CONSOLIDATING. Volatile month: dipped to ~$0.0000017 (07-27→07-30), parabolic spike to $0.00000328 on 08-02, retraced since.
+- MIROSHARK team/treasury holdings: 10.72% of supply (10.72B tokens) as of 2026-08-04, tracked daily via `holdings` skill (30d trend still building).
 
 ## Next Priorities
-- Next star threshold: 1,500 (~141 away as of 2026-07-12; pace ~0.6/day — well below prior estimates).
-- ≥3 external integrators hyperstition (due **2026-07-31 — 5 days away**) — EXCEEDED at 14 (ECOSYSTEM.md as of 06-22); verify count still holds before deadline.
+- Next star threshold: 1,500 (~84 away as of 2026-07-27; pace ~3.1/day — confirm with a fresh repo-pulse run once unstuck).
+- Diagnose the fleet-wide stuck-dispatch bug: repo-pulse, changelog, shiplog have had no successful run since 07-26/07-27 despite continued cron dispatch through 08-08 — see Lessons Learned. Check if they've self-healed like memory-flush did today; if not, this blocks changelog/shiplog output and stargazer-driven notifications.

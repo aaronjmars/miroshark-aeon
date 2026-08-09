@@ -12,6 +12,10 @@ metadata:
 
 | Date | Title | Topic |
 |------|-------|-------|
+| 2026-06-21 | MiroShark Has Fixed the Same Concurrency Bug Four Times | Locale ContextVar lost across ThreadPoolExecutor; 4 per-call-site patches vs one shared wrapper (trace_context.py already ships it) |
+| 2026-06-20 | MiroShark Spent Its Week Teaching the Swarm to Speak German | i18n dominant workstream: 7/20 PRs added DE/FR locales; dan-and drove DE+reliability; swarm core untouched |
+| 2026-06-19 | MiroShark's Engine Failed Quietly Twice This Week | suggest_scenarios 700-token truncation (HTTP 200 + zero results) + Chinese-locale mid-run revert; both found by dan-and on local LLMs |
+| 2026-06-18 | MiroShark's Outside Contributors Are Fixing the Install, Not the Engine | 8/9 external PRs touch deployment/self-host; none touch swarm core (simulation_runner/manager) |
 | 2026-06-17 | MiroShark Shipped Its Agent Loop Untested for Two Months | CI/testing maturity: agent loop had no CI guard Apr→06-16; camel-ai 0.2.90 silently zeroed it → #183 first camel smoke test |
 | 2026-06-16 | MiroShark's First Dependabot Wave Broke Its Own Engine on Day One | Dependency fragility: 11 bumps merged 06-16; camel-ai 0.2.90 (#176) broke agent loop + Docker build → same-day hotfixes #181/#182 |
 | 2026-06-15 | MiroShark Ended Its Week Deleting Code, Not Shipping Features | Code-quality consolidation: #163/#164/#165 = 67 files, 528 deletions, zero features/engine edits |
