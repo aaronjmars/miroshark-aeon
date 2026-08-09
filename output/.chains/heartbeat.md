@@ -1,8 +1,12 @@
-Ambient heartbeat check complete. All P0–P3 findings (repo-pulse, changelog, shiplog, memory-flush still stuck) are unchanged from yesterday's run and already reported within the last 48h, so no notification was sent. `docs/status.md` was regenerated with fresh token pulse (ACCUMULATING, $0.000002510) and current skill health.
-
 ## Summary
-- Read `memory/MEMORY.md`, last 2 days of logs, `memory/cron-state.json`, `aeon.yml`, GitHub PRs/issues, `memory/issues/INDEX.md`.
-- Findings: same 4 stuck skills as 08-07 (repo-pulse, changelog, shiplog, memory-flush) — no new dispatch, deduped, no notification sent. Heartbeat self-check clean (~24h since last success, under 36h threshold). No stalled PRs, no urgent issues, no new memory flags.
-- Regenerated `docs/status.md`: Overall 🔴 DEGRADED (unchanged verdict, same stuck skills), token pulse refreshed to 2026-08-08 (MIROSHARK $0.000002510, -0.9% 24h, ACCUMULATING), skill health table updated, next scheduled run = token-movers 06:00 UTC (2026-08-09).
-- Appended `### heartbeat` entry to `memory/logs/2026-08-08.md` (mode: ambient) with findings and `STATUS_PAGE=DEGRADED`.
-- Follow-up needed: repo-pulse/changelog/shiplog/memory-flush have been stuck since Aug 2–3 with no redispatch — worth investigating the scheduler for these (not heartbeat's remit to fix).
+
+Ran the **ambient heartbeat check** (default `${var}`, the daily 08:00... actually 19:00 UTC scheduled path):
+
+- **P0:** `repo-pulse`, `changelog`, `shiplog` remain stuck (dispatched 2026-08-03, no success since 2026-07-27) — deduped, no new notification (reported <48h ago in the 08-08 log). Good news: `memory-flush` self-healed (succeeded 2026-08-09T18:12:38Z) and dropped off the stuck list.
+- **P1:** 0 open PRs; issue #117 (fetch-tweets health) still open but non-urgent and stale.
+- **P2/P3:** clean, folds into the same known P0 item.
+- Regenerated `docs/status.md`: overall **🔴 DEGRADED** (3 skills still stuck), token pulse refreshed to today's report (MIROSHARK $0.000002528, +0.7% 24h, CONSOLIDATING), skill table updated, next scheduled run = token-movers at 06:00 UTC 2026-08-10.
+- Appended findings to `memory/logs/2026-08-09.md` under `### heartbeat`.
+- **No notification sent** — all findings deduped against the prior run; nothing crossed a new flag threshold.
+
+Files modified: `docs/status.md`, `memory/logs/2026-08-09.md`. No follow-up needed beyond the already-tracked stuck-dispatch investigation in `memory/MEMORY.md`.
