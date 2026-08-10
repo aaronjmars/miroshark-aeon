@@ -1,8 +1,8 @@
 *$MIROSHARK — CONSOLIDATING*
 
-Price fell 19.8% on thin volume (0.25× 7d avg) — three whale sells ($4.3K/$1.2K/$1.0K) drove the move, but no volume confirmation for a breakdown call.
+Price +7.4% but volume just 0.28x average — too thin to confirm a breakout; whale flow net-buy ($2.68K buy vs $1.04K sell).
 
-Price $0.000002476 (-19.8% 24h) | Liq $246.7K (-8.6%) | Vol $12.2K (0.25× 7d)
-Buys/Sells 25/27 (ratio 0.93) | Whales: 3 (all sells)
+Price $0.000002715 (+7.4% 24h) | Liq $257.7K (+3.7%) | Vol $5.5K (0.28x 7d)
+Buys/Sells 14/13 (ratio 1.08) | Whales: 2
 
 Chart: https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209
