@@ -1,0 +1,717 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "Repo Pulse",
+        "description": "2026-08-10 · Repository activity snapshot"
+      },
+      "children": [
+        "header-section",
+        "repo-stats",
+        "sep1",
+        "stargazers-section",
+        "sep2",
+        "forks-section"
+      ]
+    },
+    "header-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "status-badge"
+      ]
+    },
+    "status-badge": {
+      "type": "Badge",
+      "props": {
+        "text": "STEADY",
+        "variant": "default"
+      }
+    },
+    "repo-stats": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "repo-link",
+        "stats-grid",
+        "enrichment-note"
+      ]
+    },
+    "repo-link": {
+      "type": "Link",
+      "props": {
+        "label": "aaronjmars/MiroShark",
+        "href": "https://github.com/aaronjmars/MiroShark"
+      }
+    },
+    "stats-grid": {
+      "type": "Grid",
+      "props": {
+        "columns": 3,
+        "gap": "md"
+      },
+      "children": [
+        "stat-stars",
+        "stat-forks",
+        "stat-releases"
+      ]
+    },
+    "stat-stars": {
+      "type": "Stat",
+      "props": {
+        "label": "Stars",
+        "value": "1429",
+        "delta": "+17",
+        "trend": "up"
+      }
+    },
+    "stat-forks": {
+      "type": "Stat",
+      "props": {
+        "label": "Forks",
+        "value": "298",
+        "delta": "+1",
+        "trend": "up"
+      }
+    },
+    "stat-releases": {
+      "type": "Stat",
+      "props": {
+        "label": "Releases",
+        "value": "0",
+        "delta": "+0",
+        "trend": "neutral"
+      }
+    },
+    "enrichment-note": {
+      "type": "Text",
+      "props": {
+        "text": "Enriched 15 of 17 new stargazers",
+        "variant": "caption"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stargazers-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "notable-heading",
+        "notable-list",
+        "other-heading",
+        "other-list"
+      ]
+    },
+    "notable-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Notable New Stargazers",
+        "level": "h3"
+      }
+    },
+    "notable-list": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stargazer-1",
+        "stargazer-2",
+        "stargazer-3",
+        "stargazer-4",
+        "stargazer-5",
+        "stargazer-6",
+        "stargazer-7",
+        "stargazer-8"
+      ]
+    },
+    "stargazer-1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "star1-link",
+        "star1-meta"
+      ]
+    },
+    "star1-link": {
+      "type": "Link",
+      "props": {
+        "label": "Makul · github.com/Makul666",
+        "href": "https://github.com/Makul666"
+      }
+    },
+    "star1-meta": {
+      "type": "Text",
+      "props": {
+        "text": "29 repos",
+        "variant": "caption"
+      }
+    },
+    "stargazer-2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "star2-link",
+        "star2-meta"
+      ]
+    },
+    "star2-link": {
+      "type": "Link",
+      "props": {
+        "label": "Michael Halagan · github.com/mhalagan",
+        "href": "https://github.com/mhalagan"
+      }
+    },
+    "star2-meta": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "star2-location",
+        "star2-repos"
+      ]
+    },
+    "star2-location": {
+      "type": "Badge",
+      "props": {
+        "text": "Minneapolis",
+        "variant": "outline"
+      }
+    },
+    "star2-repos": {
+      "type": "Text",
+      "props": {
+        "text": "59 repos",
+        "variant": "caption"
+      }
+    },
+    "stargazer-3": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "star3-link",
+        "star3-badges",
+        "star3-links"
+      ]
+    },
+    "star3-link": {
+      "type": "Link",
+      "props": {
+        "label": "Pingmedia · github.com/ping-media",
+        "href": "https://github.com/ping-media"
+      }
+    },
+    "star3-badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "star3-location",
+        "star3-org",
+        "star3-repos"
+      ]
+    },
+    "star3-location": {
+      "type": "Badge",
+      "props": {
+        "text": "Agra",
+        "variant": "outline"
+      }
+    },
+    "star3-org": {
+      "type": "Badge",
+      "props": {
+        "text": "Pingmedia Tech Solutions Pvt. Ltd.",
+        "variant": "outline"
+      }
+    },
+    "star3-repos": {
+      "type": "Text",
+      "props": {
+        "text": "21 repos",
+        "variant": "caption"
+      }
+    },
+    "star3-links": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "star3-website",
+        "star3-twitter"
+      ]
+    },
+    "star3-website": {
+      "type": "Link",
+      "props": {
+        "label": "pingmedia.in",
+        "href": "https://pingmedia.in"
+      }
+    },
+    "star3-twitter": {
+      "type": "Link",
+      "props": {
+        "label": "@PINGMEDIAIN",
+        "href": "https://twitter.com/PINGMEDIAIN"
+      }
+    },
+    "stargazer-4": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "star4-link",
+        "star4-meta",
+        "star4-bio"
+      ]
+    },
+    "star4-link": {
+      "type": "Link",
+      "props": {
+        "label": "Kohnnn · github.com/Kitkitkittt",
+        "href": "https://github.com/Kitkitkittt"
+      }
+    },
+    "star4-meta": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "star4-location",
+        "star4-repos"
+      ]
+    },
+    "star4-location": {
+      "type": "Badge",
+      "props": {
+        "text": "Vietnam",
+        "variant": "outline"
+      }
+    },
+    "star4-repos": {
+      "type": "Text",
+      "props": {
+        "text": "42 repos",
+        "variant": "caption"
+      }
+    },
+    "star4-bio": {
+      "type": "Text",
+      "props": {
+        "text": "📈🔎@ 🇻🇳🧢💚",
+        "variant": "caption"
+      }
+    },
+    "stargazer-5": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "star5-link",
+        "star5-meta",
+        "star5-bio"
+      ]
+    },
+    "star5-link": {
+      "type": "Link",
+      "props": {
+        "label": "Tionne Smith · github.com/electricwolfemarshmallowhypertext",
+        "href": "https://github.com/electricwolfemarshmallowhypertext"
+      }
+    },
+    "star5-meta": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "star5-location",
+        "star5-org",
+        "star5-repos",
+        "star5-followers"
+      ]
+    },
+    "star5-location": {
+      "type": "Badge",
+      "props": {
+        "text": "Dallas, TX",
+        "variant": "outline"
+      }
+    },
+    "star5-org": {
+      "type": "Badge",
+      "props": {
+        "text": "Electric Wolfe Marshmallow Hypertext™",
+        "variant": "outline"
+      }
+    },
+    "star5-repos": {
+      "type": "Text",
+      "props": {
+        "text": "85 repos",
+        "variant": "caption"
+      }
+    },
+    "star5-followers": {
+      "type": "Text",
+      "props": {
+        "text": "10 followers",
+        "variant": "caption"
+      }
+    },
+    "star5-bio": {
+      "type": "Link",
+      "props": {
+        "label": "Creative Technologist | Forward Deployed AI Engineer",
+        "href": "https://coexi.ai/"
+      }
+    },
+    "stargazer-6": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "star6-link",
+        "star6-meta"
+      ]
+    },
+    "star6-link": {
+      "type": "Link",
+      "props": {
+        "label": "Maurizio Casciano · github.com/MaurizioCasciano",
+        "href": "https://github.com/MaurizioCasciano"
+      }
+    },
+    "star6-meta": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "star6-repos",
+        "star6-followers"
+      ]
+    },
+    "star6-repos": {
+      "type": "Text",
+      "props": {
+        "text": "1152 repos",
+        "variant": "caption"
+      }
+    },
+    "star6-followers": {
+      "type": "Text",
+      "props": {
+        "text": "37 followers",
+        "variant": "caption"
+      }
+    },
+    "stargazer-7": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "star7-link",
+        "star7-meta"
+      ]
+    },
+    "star7-link": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/rakou",
+        "href": "https://github.com/rakou"
+      }
+    },
+    "star7-meta": {
+      "type": "Text",
+      "props": {
+        "text": "26 repos",
+        "variant": "caption"
+      }
+    },
+    "stargazer-8": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "star8-link",
+        "star8-meta"
+      ]
+    },
+    "star8-link": {
+      "type": "Link",
+      "props": {
+        "label": "Naveen Pandian · github.com/Neurvinch",
+        "href": "https://github.com/Neurvinch"
+      }
+    },
+    "star8-meta": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "star8-repos",
+        "star8-website",
+        "star8-followers"
+      ]
+    },
+    "star8-repos": {
+      "type": "Text",
+      "props": {
+        "text": "169 repos",
+        "variant": "caption"
+      }
+    },
+    "star8-website": {
+      "type": "Link",
+      "props": {
+        "label": "portfolio",
+        "href": "https://portfolio-main-five-gamma.vercel.app/"
+      }
+    },
+    "star8-followers": {
+      "type": "Text",
+      "props": {
+        "text": "50 followers",
+        "variant": "caption"
+      }
+    },
+    "other-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Other New Stargazers",
+        "level": "h4"
+      }
+    },
+    "other-list": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "other1",
+        "other2",
+        "other3",
+        "other4",
+        "other5",
+        "other6",
+        "other7",
+        "other8"
+      ]
+    },
+    "other1": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/Bessieres",
+        "href": "https://github.com/Bessieres"
+      }
+    },
+    "other2": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/QuantumriderAGI",
+        "href": "https://github.com/QuantumriderAGI"
+      }
+    },
+    "other3": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/kaimeg445",
+        "href": "https://github.com/kaimeg445"
+      }
+    },
+    "other4": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/cuphongvn-del",
+        "href": "https://github.com/cuphongvn-del"
+      }
+    },
+    "other5": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/ccuetoh",
+        "href": "https://github.com/ccuetoh"
+      }
+    },
+    "other6": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/jeremyko11",
+        "href": "https://github.com/jeremyko11"
+      }
+    },
+    "other7": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/tejeirodelrio",
+        "href": "https://github.com/tejeirodelrio"
+      }
+    },
+    "other8": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/Battlefield-Art",
+        "href": "https://github.com/Battlefield-Art"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "forks-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "forks-heading",
+        "fork-1"
+      ]
+    },
+    "forks-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "New Forks",
+        "level": "h3"
+      }
+    },
+    "fork-1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "fork1-link",
+        "fork1-meta",
+        "fork1-contact"
+      ]
+    },
+    "fork1-link": {
+      "type": "Link",
+      "props": {
+        "label": "forneus-technologies/MiroShark · Oleksandr Lushpihan",
+        "href": "https://github.com/forneus-technologies/MiroShark"
+      }
+    },
+    "fork1-meta": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "fork1-location",
+        "fork1-org",
+        "fork1-repos"
+      ]
+    },
+    "fork1-location": {
+      "type": "Badge",
+      "props": {
+        "text": "Poland",
+        "variant": "outline"
+      }
+    },
+    "fork1-org": {
+      "type": "Badge",
+      "props": {
+        "text": "Forneus Technologies",
+        "variant": "outline"
+      }
+    },
+    "fork1-repos": {
+      "type": "Text",
+      "props": {
+        "text": "144 repos",
+        "variant": "caption"
+      }
+    },
+    "fork1-contact": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "fork1-website",
+        "fork1-twitter",
+        "fork1-description"
+      ]
+    },
+    "fork1-website": {
+      "type": "Link",
+      "props": {
+        "label": "forneus.io",
+        "href": "https://forneus.io"
+      }
+    },
+    "fork1-twitter": {
+      "type": "Link",
+      "props": {
+        "label": "@ForneusIO",
+        "href": "https://twitter.com/ForneusIO"
+      }
+    },
+    "fork1-description": {
+      "type": "Text",
+      "props": {
+        "text": "The Neural & Sovereign Defense. We don't build apps. We build absolute digital fortresses and autonomous defense systems. Welcome to the fut…",
+        "variant": "caption"
+      }
+    }
+  }
+}
