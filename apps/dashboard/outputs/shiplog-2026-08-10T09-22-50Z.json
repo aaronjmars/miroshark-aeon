@@ -1,0 +1,256 @@
+{
+  "root": "card_root",
+  "state": {},
+  "elements": {
+    "card_root": {
+      "type": "Card",
+      "props": {
+        "title": "✅ Shiplog: Jul 27 → Aug 10"
+      },
+      "children": [
+        "text_subtitle",
+        "text_overview",
+        "heading_achievements",
+        "stack_achievements",
+        "separator_1",
+        "heading_traction",
+        "stack_traction",
+        "text_gap",
+        "separator_2",
+        "link_full"
+      ]
+    },
+    "text_subtitle": {
+      "type": "Text",
+      "props": {
+        "text": "miroshark + aeon shiplog ⭐🦈 jul 27 → aug 10",
+        "variant": "lead"
+      }
+    },
+    "text_overview": {
+      "type": "Text",
+      "props": {
+        "text": "144 PRs, 157 commits in 14 days. the bytes:"
+      }
+    },
+    "heading_achievements": {
+      "type": "Heading",
+      "props": {
+        "text": "Key Achievements",
+        "level": "h3"
+      }
+    },
+    "stack_achievements": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "achievement_1",
+        "achievement_2",
+        "achievement_3",
+        "achievement_4"
+      ]
+    },
+    "achievement_1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "text_contrib",
+        "badge_count",
+        "badge_security",
+        "badge_atlas",
+        "text_mentions_1"
+      ]
+    },
+    "text_contrib": {
+      "type": "Text",
+      "props": {
+        "text": "7 external contributors landed 11 PRs this window — including a security fix (alexverify, aeon skill-scan calibration) and an Atlas Cloud provider preset (binyangzhu000-sudo, MiroShark core, 1432 tests passing). ecosystem growth, not just stars."
+      }
+    },
+    "badge_count": {
+      "type": "Badge",
+      "props": {
+        "text": "7 contributors + 11 PRs",
+        "variant": "secondary"
+      }
+    },
+    "badge_security": {
+      "type": "Badge",
+      "props": {
+        "text": "Security Fix",
+        "variant": "destructive"
+      }
+    },
+    "badge_atlas": {
+      "type": "Badge",
+      "props": {
+        "text": "Atlas Cloud Provider",
+        "variant": "secondary"
+      }
+    },
+    "text_mentions_1": {
+      "type": "Text",
+      "props": {
+        "text": "@aeonframework @miroshark_",
+        "variant": "muted"
+      }
+    },
+    "achievement_2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "heading_x402",
+        "text_x402",
+        "badge_version"
+      ]
+    },
+    "heading_x402": {
+      "type": "Heading",
+      "props": {
+        "text": "x402aff Release",
+        "level": "h4"
+      }
+    },
+    "text_x402": {
+      "type": "Text",
+      "props": {
+        "text": "hits 0.2.0: splits factory pinned, python/TS ports now agree on \"is this claimable,\" claim-undeployed-splits shipped. MiroShark/x402aff"
+      }
+    },
+    "badge_version": {
+      "type": "Badge",
+      "props": {
+        "text": "v0.2.0",
+        "variant": "default"
+      }
+    },
+    "achievement_3": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "heading_readme",
+        "text_readme"
+      ]
+    },
+    "heading_readme": {
+      "type": "Heading",
+      "props": {
+        "text": "README Visual Rebuild",
+        "level": "h4"
+      }
+    },
+    "text_readme": {
+      "type": "Text",
+      "props": {
+        "text": "both READMEs got the full visual rebuild — animated heroes, pill nav, contributors banners, head-to-head comparisons. ~33 PRs combined"
+      }
+    },
+    "achievement_4": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "heading_security",
+        "text_security"
+      ]
+    },
+    "heading_security": {
+      "type": "Heading",
+      "props": {
+        "text": "Security",
+        "level": "h4"
+      }
+    },
+    "text_security": {
+      "type": "Text",
+      "props": {
+        "text": "sandbox read-only enforced on every harness, an injection-suppression gap closed, fast-uri GHSA patched on the site — no external-org flex this window, naming the gap"
+      }
+    },
+    "separator_1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading_traction": {
+      "type": "Heading",
+      "props": {
+        "text": "Traction",
+        "level": "h3"
+      }
+    },
+    "stack_traction": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stat_miroshark",
+        "stat_aeon",
+        "text_featured"
+      ]
+    },
+    "stat_miroshark": {
+      "type": "Stat",
+      "props": {
+        "label": "MiroShark Stars",
+        "value": "1,429",
+        "delta": "+13",
+        "trend": "up"
+      }
+    },
+    "stat_aeon": {
+      "type": "Stat",
+      "props": {
+        "label": "Aeon Stars",
+        "value": "640",
+        "delta": "+63",
+        "trend": "up"
+      }
+    },
+    "text_featured": {
+      "type": "Text",
+      "props": {
+        "text": "Featured by @BaseHubHB (57.9K followers) + @Base_Insights (21.9K followers) on Base \"Early\"/trending lists"
+      }
+    },
+    "text_gap": {
+      "type": "Alert",
+      "props": {
+        "title": "Gap",
+        "message": "no operator post about Miroshark specifically landed this window despite the x402aff release",
+        "type": "warning"
+      }
+    },
+    "separator_2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "link_full": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full Shiplog (Jul 27 - Aug 10)",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/output/articles/shiplog-2026-08-10.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}

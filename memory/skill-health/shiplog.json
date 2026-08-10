@@ -1,10 +1,10 @@
 {
   "skill": "shiplog",
-  "last_analyzed": "2026-07-27T10:32:54Z",
+  "last_analyzed": "2026-08-10T09:22:50Z",
   "quality_score": 4,
-  "assessment": "Substantive shiplog with specific shipped items, quantified metrics, cross-repo tracking, and artifact generation—well-structured and action-oriented.",
+  "assessment": "Substantive 14-day digest with concrete metrics (144 PRs, 7 external contributors, +76 stars), honest gap flagging, and ready-to-post output. Well-executed reporting against strategy.",
   "flags": [],
-  "avg_score": 4.18,
+  "avg_score": 4.17,
   "history": [
     {
       "date": "2026-06-15",
@@ -48,6 +48,10 @@
     },
     {
       "date": "2026-07-27",
+      "score": 4
+    },
+    {
+      "date": "2026-08-10",
       "score": 4
     }
   ]

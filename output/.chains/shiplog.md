@@ -1,18 +1,20 @@
-✅ Miroshark + Aeon Shiplog Jul 23→27
+✅ Shiplog: Jul 27 → Aug 10
 
-miroshark + aeon shiplog ⭐🦈 jul 23 → jul 27
+miroshark + aeon shiplog ⭐🦈 jul 27 → aug 10
 
-67 PRs across 12 repos in 4 days. the bytes:
+144 PRs, 157 commits in 14 days. the bytes:
 
-- **x402aff v0.1.1**: `pip install x402aff`. on npm. live permissionless claims dashboard. /sim routes 10% to builder splits. 34 PRs to take this from internal splitter to a published kit. [MiroShark/x402aff](https://github.com/MiroShark/x402aff)
-- **aeon goes multi-harness**: codex, pi, vibe, kimi alongside claude code. claude 5 sonnet as default. aeon-doctor static linter ships. [aeonfun/aeon](https://github.com/aeonfun/aeon) ⭐
-- **security sweep**: 10 fixes across 8 repos — torch CVE in MiroShark, path-traversal in minitor, next.js HIGH in aeon + miroshark-website, fast-uri/sharp/brace-expansion across tweazy, magi, web3-research-mcp, blank-page-prototyping 🦈
-- **solana foundation**: [PR #200](https://github.com/solana-foundation/pay-skills/pull/200) open in solana-foundation/pay-skills — aaronjmars/miroshark as a provider (not merged yet)
+- 7 external contributors landed 11 PRs this window — including a security fix (alexverify, aeon skill-scan calibration) and an Atlas Cloud provider preset (binyangzhu000-sudo, MiroShark core, 1432 tests passing). ecosystem growth, not just stars. @aeonframework @miroshark_
+- x402aff hits 0.2.0: splits factory pinned, python/TS ports now agree on "is this claimable," claim-undeployed-splits shipped. MiroShark/x402aff
+- both READMEs got the full visual rebuild — animated heroes, pill nav, contributors banners, head-to-head comparisons. ~33 PRs combined
+- security: sandbox read-only enforced on every harness, an injection-suppression gap closed, fast-uri GHSA patched on the site — no external-org flex this window, naming the gap
 
 traction:
-- MiroShark 1,416 ⭐ (+1 this window)
-- aeon thread landed: 17 likes, 5 RTs — "exo is asking what an agent should be made of. aeon is asking what an agent should do today."
+- MiroShark 1,429 ⭐ (+13 this window)
+- aeon 640 ⭐ (+63 this window)
+- featured by @BaseHubHB (57.9K) + @Base_Insights (21.9K) on Base "Early"/trending lists
+- gap: no operator post about Miroshark specifically landed this window despite the x402aff release
 
 ⭐🦈
 
-https://github.com/aaronjmars/miroshark-aeon/blob/main/output/articles/shiplog-2026-07-27.md
+https://github.com/aaronjmars/miroshark-aeon/blob/main/output/articles/shiplog-2026-08-10.md
