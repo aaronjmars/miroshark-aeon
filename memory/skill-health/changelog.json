@@ -1,8 +1,8 @@
 {
   "skill": "changelog",
-  "last_analyzed": "2026-07-27T09:00:12Z",
+  "last_analyzed": "2026-08-10T08:45:54Z",
   "quality_score": 4,
-  "assessment": "Substantive and well-executed: identified 2 new PRs, wrote a specific changelog entry, opened a draft PR with link, followed proper aeon framework patterns (branch+PR, log appended, notification sent)",
+  "assessment": "Substantive, well-verified changelog run — fetched 17 PRs, classified and prepended real entry to website repo, passed tsc/lint checks, opened draft PR. Clear recovery from prior stuck-dispatch bug.",
   "flags": [],
   "avg_score": 4,
   "history": [
@@ -28,6 +28,10 @@
     },
     {
       "date": "2026-07-27",
+      "score": 4
+    },
+    {
+      "date": "2026-08-10",
       "score": 4
     }
   ]
