@@ -1,12 +1,17 @@
+Fleet is fully healthy — no notification needed per the "nothing needs attention" rule.
+
 ## Summary
 
-Ran the **ambient heartbeat check** (default `${var}`, the daily 08:00... actually 19:00 UTC scheduled path):
+Ran the heartbeat skill in **ambient check** mode (default, `${var}` empty — the live scheduled path).
 
-- **P0:** `repo-pulse`, `changelog`, `shiplog` remain stuck (dispatched 2026-08-03, no success since 2026-07-27) — deduped, no new notification (reported <48h ago in the 08-08 log). Good news: `memory-flush` self-healed (succeeded 2026-08-09T18:12:38Z) and dropped off the stuck list.
-- **P1:** 0 open PRs; issue #117 (fetch-tweets health) still open but non-urgent and stale.
-- **P2/P3:** clean, folds into the same known P0 item.
-- Regenerated `docs/status.md`: overall **🔴 DEGRADED** (3 skills still stuck), token pulse refreshed to today's report (MIROSHARK $0.000002528, +0.7% 24h, CONSOLIDATING), skill table updated, next scheduled run = token-movers at 06:00 UTC 2026-08-10.
-- Appended findings to `memory/logs/2026-08-09.md` under `### heartbeat`.
-- **No notification sent** — all findings deduped against the prior run; nothing crossed a new flag threshold.
+**Findings:**
+- **P0 clean:** all 8 enabled skills (heartbeat, fetch-tweets, repo-pulse, shiplog, changelog, holdings, token-movers, memory-flush) show `last_status: success`, 100% success rate, 0 consecutive failures. The multi-day stuck-dispatch bug affecting repo-pulse/changelog/shiplog (since 07-31) is now **fully resolved** — all three ran successfully today.
+- **P1 clean:** 0 open PRs; 1 open issue (#117, not urgent).
+- **P2/P3 clean:** nothing flagged, no missing scheduled skills.
+- Overall status flipped from yesterday's 🔴 DEGRADED to **🟢 OK**.
 
-Files modified: `docs/status.md`, `memory/logs/2026-08-09.md`. No follow-up needed beyond the already-tracked stuck-dispatch investigation in `memory/MEMORY.md`.
+**Files changed:**
+- `docs/status.md` — regenerated: overall 🟢 OK, refreshed skill table (all 8 enabled skills, sorted by last run), token pulse updated to today's report ($0.000002715, +7.4% 24h, CONSOLIDATING).
+- `memory/logs/2026-08-10.md` — appended `### heartbeat` entry (mode: ambient) documenting the full recovery and clean P0–P3 checks.
+
+No notification sent — nothing needs attention (a clean recovery run is signal-free per the heartbeat spec).
