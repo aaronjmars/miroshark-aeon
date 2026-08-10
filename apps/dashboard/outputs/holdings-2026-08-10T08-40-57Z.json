@@ -1,0 +1,77 @@
+{
+  "root": "card_holdings",
+  "state": {},
+  "elements": {
+    "card_holdings": {
+      "type": "Card",
+      "props": {
+        "title": "Holdings"
+      },
+      "children": [
+        "stack_all"
+      ]
+    },
+    "stack_all": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "lg"
+      },
+      "children": [
+        "row1",
+        "row2"
+      ]
+    },
+    "row1": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "lg"
+      },
+      "children": [
+        "stat_holdings",
+        "text_supply"
+      ]
+    },
+    "stat_holdings": {
+      "type": "Stat",
+      "props": {
+        "value": "11.09B"
+      }
+    },
+    "text_supply": {
+      "type": "Text",
+      "props": {
+        "text": "11.09% of supply",
+        "variant": "body"
+      }
+    },
+    "row2": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "lg"
+      },
+      "children": [
+        "stat_7d_change",
+        "text_30d_status"
+      ]
+    },
+    "stat_7d_change": {
+      "type": "Stat",
+      "props": {
+        "label": "7d",
+        "value": "+366.43M",
+        "delta": "+3.42%",
+        "trend": "up"
+      }
+    },
+    "text_30d_status": {
+      "type": "Text",
+      "props": {
+        "text": "30d building",
+        "variant": "muted"
+      }
+    }
+  }
+}
