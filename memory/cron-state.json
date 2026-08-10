@@ -219,10 +219,10 @@
     "last_quality_score": 4
   },
   "holdings": {
-    "last_status": "dispatched",
-    "last_success": "2026-08-04T15:12:03Z",
-    "total_runs": 4,
-    "total_successes": 4,
+    "last_status": "success",
+    "last_success": "2026-08-10T08:41:45Z",
+    "total_runs": 5,
+    "total_successes": 5,
     "total_failures": 0,
     "consecutive_failures": 0,
     "success_rate": 1,
