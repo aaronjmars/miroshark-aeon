@@ -1,10 +1,10 @@
 {
   "skill": "token-movers",
-  "last_analyzed": "2026-08-10T06:45:21Z",
+  "last_analyzed": "2026-08-11T06:08:50Z",
   "quality_score": 4,
-  "assessment": "Substantive findings with cross-source validation, clear verdict, proper documentation—well-executed routine analysis without surprising insights",
+  "assessment": "Substantive token report with multi-source data, cross-checks, specific metrics, verified quality by operator",
   "flags": [],
-  "avg_score": 4.04,
+  "avg_score": 4.03,
   "history": [
     {
       "date": "2026-07-10",
@@ -116,6 +116,10 @@
     },
     {
       "date": "2026-08-10",
+      "score": 4
+    },
+    {
+      "date": "2026-08-11",
       "score": 4
     }
   ]
