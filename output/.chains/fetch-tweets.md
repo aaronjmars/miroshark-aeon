@@ -1,7 +1,10 @@
-*Tweet Digest — 2026-08-10*
+## Summary
 
-*Theme: bankr x reddit feature*
-@miroshark_: got a partner highlight on r/Bankr_Bot — bankr's community running the shoutout — [link](https://x.com/miroshark_/status/2086695212986802391)
+Ran `fetch-tweets` with `source:account`, empty `ARG` → all-tracked-accounts sub-mode (only `miroshark_` is configured in `memory/topics/tracked-accounts.yml`).
 
-*Theme: swarm sim vs single-agent research*
-@miroshark_: dropped receipts on why chain-of-thought loses to swarms on social scenarios — multi-agent hit 87.5% consistency with observed human behavior and 90-95% strategy completeness, single-agent CoT only 50%/65% — the gap is the whole pitch for parallel actor agents over one model narrating everyone — [link](https://x.com/miroshark_/status/2086824329258414533)
+- Queried the X.AI API (`grok-4-1-fast` + `x_search`) for `miroshark_`'s last 3 days of tweets — HTTP 200, 5 candidates returned (bankr×Reddit feature mentions + x402 launch posts).
+- Deduped against the last 2 days of `memory/logs/` (08-09, 08-10): **all 5 candidates were already reported** in those prior runs — 0 new tweets survived.
+- Per skill spec (`TWEET_DIGEST_OK` with zero notable tweets → no notification), sent nothing.
+- Logged the run under `### fetch-tweets` in `memory/logs/2026-08-11.md` (status `TWEET_DIGEST_OK`, 0 kept / 5 deduped) for skill-health tracking.
+
+No follow-up needed — clean, all-duplicate run.
