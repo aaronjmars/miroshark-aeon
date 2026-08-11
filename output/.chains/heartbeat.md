@@ -1,17 +1,16 @@
-Fleet is fully healthy — no notification needed per the "nothing needs attention" rule.
+HEARTBEAT_OK · STATUS_PAGE=OK
 
 ## Summary
+Ran the heartbeat skill's ambient check (empty `${var}`, the live scheduled path). Fleet is fully healthy:
+- **P0:** All 8 enabled skills (heartbeat, repo-pulse, token-movers, holdings, fetch-tweets, shiplog, memory-flush, changelog) show 100% success rate, 0 consecutive failures, no stuck/failed entries.
+- **P1:** 0 open PRs; issue #117 (fetch-tweets health, non-urgent) still open, unchanged from prior reports.
+- **P2/P3:** Nothing flagged in MEMORY.md; no skill overdue vs. its schedule.
+- Token pulse fresh (today's report): MIROSHARK $0.000002586, -4.7% 24h, CONSOLIDATING.
 
-Ran the heartbeat skill in **ambient check** mode (default, `${var}` empty — the live scheduled path).
+Since this matches yesterday's all-clear with no new signal, per the dedup rule **no notification was sent**.
 
-**Findings:**
-- **P0 clean:** all 8 enabled skills (heartbeat, fetch-tweets, repo-pulse, shiplog, changelog, holdings, token-movers, memory-flush) show `last_status: success`, 100% success rate, 0 consecutive failures. The multi-day stuck-dispatch bug affecting repo-pulse/changelog/shiplog (since 07-31) is now **fully resolved** — all three ran successfully today.
-- **P1 clean:** 0 open PRs; 1 open issue (#117, not urgent).
-- **P2/P3 clean:** nothing flagged, no missing scheduled skills.
-- Overall status flipped from yesterday's 🔴 DEGRADED to **🟢 OK**.
+**Files modified:**
+- `docs/status.md` — regenerated with today's timestamp, fresh token pulse, and updated skill-health table (🟢 OK).
+- `memory/logs/2026-08-11.md` — appended `### heartbeat` entry (mode: ambient).
 
-**Files changed:**
-- `docs/status.md` — regenerated: overall 🟢 OK, refreshed skill table (all 8 enabled skills, sorted by last run), token pulse updated to today's report ($0.000002715, +7.4% 24h, CONSOLIDATING).
-- `memory/logs/2026-08-10.md` — appended `### heartbeat` entry (mode: ambient) documenting the full recovery and clean P0–P3 checks.
-
-No notification sent — nothing needs attention (a clean recovery run is signal-free per the heartbeat spec).
+No follow-up actions needed.
