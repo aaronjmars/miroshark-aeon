@@ -1,10 +1,10 @@
 {
   "skill": "fetch-tweets",
-  "last_analyzed": "2026-08-11T17:08:24Z",
-  "quality_score": 4,
-  "assessment": "Skill executed cleanly with proper API call, correct dedup logic, and appropriate decision to suppress notification per spec — well-structured run with no errors.",
+  "last_analyzed": "2026-08-12T17:15:43Z",
+  "quality_score": 3,
+  "assessment": "Successfully executed fetch-tweets skill; correctly identified all tweets as duplicates and suppressed unnecessary notification per design.",
   "flags": [],
-  "avg_score": 3.72,
+  "avg_score": 3.7,
   "history": [
     {
       "date": "2026-07-10",
@@ -121,6 +121,10 @@
     {
       "date": "2026-08-11",
       "score": 4
+    },
+    {
+      "date": "2026-08-12",
+      "score": 3
     }
   ]
 }
