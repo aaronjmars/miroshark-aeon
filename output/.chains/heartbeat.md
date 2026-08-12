@@ -1,16 +1,14 @@
-HEARTBEAT_OK · STATUS_PAGE=OK
+Fleet is clean — nothing needs attention, so per the skill's rules no notification is sent (a healthy fleet report would just be noise).
 
 ## Summary
-Ran the heartbeat skill's ambient check (empty `${var}`, the live scheduled path). Fleet is fully healthy:
-- **P0:** All 8 enabled skills (heartbeat, repo-pulse, token-movers, holdings, fetch-tweets, shiplog, memory-flush, changelog) show 100% success rate, 0 consecutive failures, no stuck/failed entries.
-- **P1:** 0 open PRs; issue #117 (fetch-tweets health, non-urgent) still open, unchanged from prior reports.
-- **P2/P3:** Nothing flagged in MEMORY.md; no skill overdue vs. its schedule.
-- Token pulse fresh (today's report): MIROSHARK $0.000002586, -4.7% 24h, CONSOLIDATING.
+Ran the heartbeat skill's ambient check (default, empty `${var}`) for 2026-08-12:
+- **P0:** All 8 enabled skills healthy — 100% success rate, 0 consecutive failures, no stuck/failed dispatches.
+- **P1:** 0 open PRs, 0 urgent issues across `miroshark-aeon` and `aaronjmars/MiroShark`.
+- **P2/P3:** Nothing flagged in memory; no missing/overdue scheduled skills.
+- **Verdict:** 🟢 OK
 
-Since this matches yesterday's all-clear with no new signal, per the dedup rule **no notification was sent**.
+Files modified:
+- `docs/status.md` — regenerated with today's fleet health table, token pulse (MIROSHARK $0.000002576, -0.4% 24h, QUIET), and next-run pointer (token-movers, 06:00 UTC 2026-08-13).
+- `memory/logs/2026-08-12.md` — appended `### heartbeat` entry (`mode: ambient`, `HEARTBEAT_OK · STATUS_PAGE=OK`).
 
-**Files modified:**
-- `docs/status.md` — regenerated with today's timestamp, fresh token pulse, and updated skill-health table (🟢 OK).
-- `memory/logs/2026-08-11.md` — appended `### heartbeat` entry (mode: ambient).
-
-No follow-up actions needed.
+No notification sent — nothing needs attention. No follow-up actions needed.
