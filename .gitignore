@@ -68,6 +68,11 @@ notify-*.md
 # to /tmp; committed copies (root or memory/) are pure `git add -A` leaks, never
 # read from in-tree. (cf. the token-movers xai-payload.json that leaked to root.)
 xai-*.json
+# Leading-dot xai variants + tmp- (hyphen) root scratch that the patterns above
+# miss: `tmp_*` only matches an underscore, and `xai-*.json` only a leading `xai-`.
+# shiplog/tokenmetrics/notify skills write these to /tmp; committed copies leak.
+/.xai-*
+/tmp-*
 
 # --- output/ root run scratch (changelog push-to-website + skill digests) ---
 # canon keeps output/ root clean (articles/, .chains/, images/ only)
