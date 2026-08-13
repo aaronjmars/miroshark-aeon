@@ -1,0 +1,119 @@
+{
+  "root": "main-card",
+  "state": {},
+  "elements": {
+    "main-card": {
+      "type": "Card",
+      "props": {
+        "title": "$MIROSHARK — SLIDING",
+        "description": "Down 5.7% to $0.000002429 on 1.6x average volume — real flow, not a dead-liquidity wobble."
+      },
+      "children": [
+        "stats-section",
+        "separator-1",
+        "trading-section",
+        "separator-2",
+        "chart-section"
+      ]
+    },
+    "stats-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "price-stat",
+        "liquidity-stat",
+        "volume-stat"
+      ]
+    },
+    "price-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Price (24h)",
+        "value": "$0.000002429",
+        "delta": "-5.7%",
+        "trend": "down"
+      },
+      "children": []
+    },
+    "liquidity-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Liquidity",
+        "value": "$243.0K",
+        "delta": "-2.5%",
+        "trend": "down"
+      },
+      "children": []
+    },
+    "volume-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Volume (1.6× 7d avg)",
+        "value": "$5.8K"
+      },
+      "children": []
+    },
+    "separator-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "trading-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "buys-sells-text",
+        "whales-text"
+      ]
+    },
+    "buys-sells-text": {
+      "type": "Text",
+      "props": {
+        "text": "Buys/Sells: 10/12 (ratio 0.83)",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "whales-text": {
+      "type": "Text",
+      "props": {
+        "text": "Whales: 0",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "separator-2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "chart-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "chart-link"
+      ]
+    },
+    "chart-link": {
+      "type": "Link",
+      "props": {
+        "label": "View on GeckoTerminal",
+        "href": "https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209"
+      },
+      "children": []
+    }
+  }
+}
