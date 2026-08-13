@@ -1,14 +1,12 @@
-Good — `.tmp/` is gitignored, so those files won't be committed. Only `memory/logs/2026-08-12.md` needs staging.
-
 ## Summary
 
-Ran `fetch-tweets` with `var=account:` (empty arg → **account, all tracked accounts** branch).
+Ran `skills/fetch-tweets/SKILL.md` with `var=account:` (empty arg → **account, all tracked accounts** sub-mode).
 
-- Loaded `memory/topics/tracked-accounts.yml` — one tracked handle: `miroshark_`.
-- Fetched via X.AI `x_search` (Path A, HTTP 200) — 5 candidate tweets from the last 3 days.
-- Deduped against the last 2 days of logs (2026-08-10/11): all 5 candidates (bankr/reddit partner feature + x402 launch posts) were already reported on 08-09/08-10 — nothing new.
-- Status: `TWEET_DIGEST_OK`, 0 kept / 5 deduped → **no notification sent** (per skill rule: only notify on new/notable tweets).
-- Logged the run under `### fetch-tweets` in `memory/logs/2026-08-12.md`.
+- Read `memory/topics/tracked-accounts.yml`: 1 tracked handle — `miroshark_`.
+- Fetched via X.AI API (Path A, `http=200`) — `search from:miroshark_` last 3 days.
+- Got 3 candidates, all from Aug 10 (the bankr/reddit partner-feature posts) — all 3 already reported+notified on 2026-08-10 and deduped every day since (08-11, 08-12). 0 new tweets survived dedup.
+- Status: `TWEET_DIGEST_OK`, 0 kept — per skill rules, **no notification sent** (nothing new to report).
 
-**Files modified:** `memory/logs/2026-08-12.md` (uncommitted — let me know if you want it committed).
-**Follow-up:** none — this was a clean, all-duplicate run; `miroshark_` hasn't posted anything new since 08-10.
+**Files modified:** `memory/logs/2026-08-13.md` — appended `### fetch-tweets` log entry.
+
+No follow-up needed; next scheduled run will re-check for fresh posts.
