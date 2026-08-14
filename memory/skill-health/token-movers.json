@@ -1,15 +1,11 @@
 {
   "skill": "token-movers",
-  "last_analyzed": "2026-08-13T06:28:52Z",
+  "last_analyzed": "2026-08-14T06:27:10Z",
   "quality_score": 4,
-  "assessment": "Good — substantive token monitoring with specific metrics, clear verdict, and proper comparative context across multiple dimensions (price, volume, liquidity, whale activity, social signals).",
+  "assessment": "Substantive, well-sourced execution: fetched multi-source data (GT/DS/X.AI), cross-validated within 1.2%, computed deltas against stored state, flagged edge cases explicitly, generated report and notifications, committed to main cleanly.",
   "flags": [],
   "avg_score": 4.03,
   "history": [
-    {
-      "date": "2026-07-11",
-      "score": 4
-    },
     {
       "date": "2026-07-12",
       "score": 4
@@ -124,6 +120,10 @@
     },
     {
       "date": "2026-08-13",
+      "score": 4
+    },
+    {
+      "date": "2026-08-14",
       "score": 4
     }
   ]
