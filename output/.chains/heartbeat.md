@@ -1,15 +1,14 @@
-Heartbeat ambient check complete — fleet is fully healthy, no notification needed (per dedup rules, same all-clear as yesterday).
+Fleet is fully healthy — no notification needed (all-clear, same as prior days).
 
 ## Summary
-Ran the heartbeat skill's **ambient check** (default `${var}`, live scheduled path):
-- **P0:** All 8 enabled skills (heartbeat, repo-pulse, token-movers, holdings, fetch-tweets, shiplog, memory-flush, changelog) show `success`, 0 consecutive failures, 100% success rate. No stuck/failed skills.
+Ran the heartbeat skill (ambient check, default `${var}`):
+- **P0:** all 8 enabled skills (heartbeat, repo-pulse, token-movers, holdings, fetch-tweets, shiplog, memory-flush, changelog) show `success`, 0 consecutive failures, 100% success rate — no stuck/failed skills.
 - **P1:** 0 open PRs, 0 urgent issues across `aaronjmars/miroshark-aeon` and `aaronjmars/MiroShark`.
-- **P2:** Nothing new flagged in MEMORY.md.
-- **P3:** No missing dispatches or stale schedules.
-- **Token pulse:** MIROSHARK $0.000002429, -5.7% 24h, SLIDING (from today's fresh `token-report-2026-08-13.md`).
+- **P2/P3:** nothing flagged in MEMORY.md; no skill overdue vs. its schedule.
+- Token pulse refreshed from `output/articles/token-report-2026-08-14.md`: MIROSHARK $0.000002015, -17.1% 24h, CONSOLIDATING (sharpest single-day drop in recent logs, but volume 1.98x avg just missed the 2.0x BREAKDOWN threshold).
 
 **Files modified:**
-- `docs/status.md` — regenerated (🟢 OK, updated 2026-08-13 19:15 UTC)
-- `memory/logs/2026-08-13.md` — appended `### heartbeat` entry
+- `docs/status.md` — regenerated status page (🟢 OK, next run: token-movers 06:00 UTC tomorrow)
+- `memory/logs/2026-08-14.md` — appended `### heartbeat` entry (`mode: ambient`)
 
-No notification sent — nothing needs attention, and it matches yesterday's all-clear per dedup rules. No follow-up actions needed.
+No notification sent — nothing needed attention, and this is a repeat of the same all-clear pattern from prior days (dedup rule).
