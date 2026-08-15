@@ -1,14 +1,15 @@
-Fleet is fully healthy — no notification needed (all-clear, same as prior days).
-
 ## Summary
-Ran the heartbeat skill (ambient check, default `${var}`):
-- **P0:** all 8 enabled skills (heartbeat, repo-pulse, token-movers, holdings, fetch-tweets, shiplog, memory-flush, changelog) show `success`, 0 consecutive failures, 100% success rate — no stuck/failed skills.
-- **P1:** 0 open PRs, 0 urgent issues across `aaronjmars/miroshark-aeon` and `aaronjmars/MiroShark`.
-- **P2/P3:** nothing flagged in MEMORY.md; no skill overdue vs. its schedule.
-- Token pulse refreshed from `output/articles/token-report-2026-08-14.md`: MIROSHARK $0.000002015, -17.1% 24h, CONSOLIDATING (sharpest single-day drop in recent logs, but volume 1.98x avg just missed the 2.0x BREAKDOWN threshold).
+
+Ran the heartbeat skill's **ambient check** (default, empty `${var}`) for 2026-08-15.
+
+**Findings: all clear, no notification sent.**
+- **P0:** All 8 enabled skills (heartbeat, repo-pulse, token-movers, holdings, fetch-tweets, shiplog, memory-flush, changelog) at 100% success rate, 0 consecutive failures, no stuck/failed entries. Heartbeat's own self-check is well under the 36h staleness threshold.
+- **P1:** 0 open PRs and 0 urgent issues across `aaronjmars/miroshark-aeon` and `aaronjmars/MiroShark`.
+- **P2:** Nothing new flagged in `memory/MEMORY.md`.
+- **P3:** No enabled skill missing a dispatch or exceeding 2x its schedule interval.
 
 **Files modified:**
-- `docs/status.md` — regenerated status page (🟢 OK, next run: token-movers 06:00 UTC tomorrow)
-- `memory/logs/2026-08-14.md` — appended `### heartbeat` entry (`mode: ambient`)
+- `docs/status.md` — regenerated with fresh data (Overall 🟢 OK, updated 2026-08-15 19:12 UTC, token pulse from today's `token-report-2026-08-15.md`: $0.000002025, +0.5% 24h, QUIET verdict, next scheduled run = token-movers 06:00 UTC 08-16).
+- `memory/logs/2026-08-15.md` — appended `### heartbeat` entry (`mode: ambient`) with the checks and `HEARTBEAT_OK · STATUS_PAGE=OK`.
 
-No notification sent — nothing needed attention, and this is a repeat of the same all-clear pattern from prior days (dedup rule).
+No follow-up actions needed.
