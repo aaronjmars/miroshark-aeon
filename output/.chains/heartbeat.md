@@ -1,15 +1,9 @@
+Ambient fleet check complete — fleet is fully healthy.
+
 ## Summary
-
-Ran the heartbeat skill's **ambient check** (default, empty `${var}`) for 2026-08-15.
-
-**Findings: all clear, no notification sent.**
-- **P0:** All 8 enabled skills (heartbeat, repo-pulse, token-movers, holdings, fetch-tweets, shiplog, memory-flush, changelog) at 100% success rate, 0 consecutive failures, no stuck/failed entries. Heartbeat's own self-check is well under the 36h staleness threshold.
-- **P1:** 0 open PRs and 0 urgent issues across `aaronjmars/miroshark-aeon` and `aaronjmars/MiroShark`.
-- **P2:** Nothing new flagged in `memory/MEMORY.md`.
-- **P3:** No enabled skill missing a dispatch or exceeding 2x its schedule interval.
-
-**Files modified:**
-- `docs/status.md` — regenerated with fresh data (Overall 🟢 OK, updated 2026-08-15 19:12 UTC, token pulse from today's `token-report-2026-08-15.md`: $0.000002025, +0.5% 24h, QUIET verdict, next scheduled run = token-movers 06:00 UTC 08-16).
-- `memory/logs/2026-08-15.md` — appended `### heartbeat` entry (`mode: ambient`) with the checks and `HEARTBEAT_OK · STATUS_PAGE=OK`.
+- **P0–P3**: all clean. 8 enabled skills (heartbeat, repo-pulse, token-movers, holdings, fetch-tweets, shiplog, memory-flush, changelog) all `success`, 0 consecutive failures, 100% success rate. No stuck/failed skills, no stalled PRs, no urgent issues (1 open non-urgent issue in `aaronjmars/MiroShark`, #240), nothing flagged in memory.
+- **Regenerated** `docs/status.md`: Overall 🟢 OK, updated with today's token pulse (MIROSHARK $0.000002138, +5.6% 24h, QUIET) and refreshed skill-health table.
+- **Logged** findings under `### heartbeat` in `memory/logs/2026-08-16.md`.
+- **No notification sent** — nothing needed attention, consistent with the recent all-clear pattern.
 
 No follow-up actions needed.
