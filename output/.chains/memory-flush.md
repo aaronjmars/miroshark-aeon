@@ -1,12 +1,23 @@
+OKF validation passes. Memory flush complete.
+
 ## Summary
 
-Ran the `memory-flush` skill. Since the last consolidation was 2026-07-26 (13 days stale), I scanned all daily logs from 2026-07-27 through 2026-08-09 rather than just the last 3 days.
+Executed the `memory-flush` skill (no topic filter — flushed all recent activity):
+
+**Read:** `memory/MEMORY.md`, last 3 days of logs (2026-08-14/15/16), plus a targeted check of `holdings` logs back to 08-04 to catch an unpromoted data point.
+
+**Promoted:**
+- $MIROSHARK Active Target refreshed to 2026-08-16 data ($0.000002138, +5.6%/−15.4%/+28.7% 24h/7d/30d, ~−95% from ATH, verdict QUIET) — noting the 08-14 −17.1% breakdown and subsequent cooldown.
+- Holdings figure updated 10.72% → 11.09% of supply (08-04 → 08-10 data that had never been promoted).
+
+**Pruned:**
+- The resolved "fleet-wide stuck-dispatch bug (07-31→08-08)" Lessons Learned entry — confirmed recovered a week ago with no recurrence.
+- Its dangling cross-references in Active Targets and Next Priorities.
+
+**No changes needed:** no open improvement PRs in either repo (nothing to remove from that section, which didn't exist anyway); no new Recent Articles/Digests rows (no editorial content, no notable tweets 08-11→08-16); Skills Built table unchanged (no PRs merged this window).
 
 **Files modified:**
-- `memory/MEMORY.md` — updated consolidation date; refreshed $MIROSHARK price/verdict (now $0.000002528, CONSOLIDATING, ~−94% from ATH) and star count (1,416/298 forks, next threshold 1,500); closed out the ≥3-integrators hyperstition as exceeded/deadline-passed; added a new holdings-tracking line (10.72% of supply); added 2 new Lessons Learned entries (the fleet-wide stuck-dispatch bug affecting repo-pulse/changelog/shiplog, and token-movers' h24-fallback technique for reporting gaps); added a Next Priorities item to diagnose the stuck-dispatch bug; refreshed the Recent Digests table with 4 newer tweet themes; archived 4 stale Recent Articles rows.
-- `memory/topics/articles-history.md` — received the 4 archived article rows (06-18 → 06-21).
-- `memory/logs/2026-08-09.md` — logged what was promoted/pruned.
+- `memory/MEMORY.md` — targeted edits (75 lines, down from 77)
+- `memory/logs/2026-08-16.md` — logged the flush under `### memory-flush`
 
-**Notable finding surfaced during the flush:** repo-pulse, changelog, and shiplog have had no successful run since 2026-07-26/07-27 despite continued cron dispatch through 08-08 (an outcome-write step going silent, not a per-skill failure). memory-flush was in the same stuck cohort until this run succeeded today. Worth a human check if those three are still stuck.
-
-No open PRs existed to reconcile, and nothing was fully stale-and-removable beyond what's noted above.
+OKF validation passes (`node scripts/okf-validate.mjs` → OK).
