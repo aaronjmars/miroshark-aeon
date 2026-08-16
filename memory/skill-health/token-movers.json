@@ -1,15 +1,11 @@
 {
   "skill": "token-movers",
-  "last_analyzed": "2026-08-15T06:17:38Z",
-  "quality_score": 4,
-  "assessment": "Substantive monitoring report with quantified findings ($0.000002025, $940 vol, $225.2K liquidity), cross-validation (DexScreener, X.AI), proper verdict classification (QUIET), state tracking for deltas, and clean memory/notification integration.",
+  "last_analyzed": "2026-08-16T06:05:05Z",
+  "quality_score": 3,
+  "assessment": "Completed analysis and artifact creation (article, logs) but failed to deliver the primary notification due to permission blocks.",
   "flags": [],
-  "avg_score": 4.03,
+  "avg_score": 4,
   "history": [
-    {
-      "date": "2026-07-13",
-      "score": 4
-    },
     {
       "date": "2026-07-14",
       "score": 4
@@ -125,6 +121,10 @@
     {
       "date": "2026-08-15",
       "score": 4
+    },
+    {
+      "date": "2026-08-16",
+      "score": 3
     }
   ]
 }
