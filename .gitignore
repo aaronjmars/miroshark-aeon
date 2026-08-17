@@ -6,18 +6,33 @@
 .env.local
 .env.*.local
 
-# Claude Code local state
-.claude/
+# Claude Code local state — ignored, EXCEPT the shipped operator skill
+# (`.claude/skills/aeon/` gives every fork the `/aeon` setup skill; see docs/aeon-setup.md)
+.claude/*
+!.claude/skills/
+.claude/skills/*
+!.claude/skills/aeon/
 
-# Caches — prefetch scripts write these, skills read them; regenerated every run
-# (.xai-cache, .treasury-cache, .star-cache, .github-releases-cache, …)
+# Cache dirs skills create at run time; regenerated every run
 .*-cache/
-.tg_cache/
 
 # Working scratch dirs some skills stage during a run, then clean up:
 # .pending-notify (notify re-delivery), .pending-deploy (deploy-prototype build),
 # plus .pending-notify-temp where skills stage notify bodies for `./notify -f`
 .pending-*/
+# ...and the FILE form. The trailing slash above matches directories only, so the
+# json-render staging file (.pending-<skill>.md) was tracked and committed; a later
+# read-only run that could not overwrite it had the previous run's digest published
+# as its own. It now lives outside the repo ($AEON_PENDING_DIR); this is the guard
+# against it coming back.
+.pending-*.md
+apps/dashboard/outputs/.pending-*.md
+
+# deploy-uni-hook stages its key-safe runner + chain registry at the repo root
+# (like ./notify / ./secretcurl) from skills/deploy-uni-hook/templates/; these are
+# run-time copies, not sources, so they must never be committed.
+/hook-deploy.sh
+/chains.tsv
 
 # Skill provenance lock (per-repo, not committed)
 skills.lock
@@ -25,18 +40,11 @@ skills.lock
 # Scratch / temp files
 tmp_*
 *.tmp
-.tmp-*
-.pending-*.sh
-.run-*.sh
 .*-tmp.md
 .*-draft.md
 .*-msg.txt
 *_msg.txt
 *_raw.txt
-
-# Leaked creds scratch
-.xai_key
-.ghtoken
 
 # Python bytecode
 __pycache__/
@@ -45,42 +53,9 @@ __pycache__/
 # Node
 node_modules/
 
-# Stale artifacts
-.external-work
-.vuln-scan/
+# remotion skill: render outputs + the working storyboard are runtime-only
+skills/remotion/project/out/
+skills/remotion/project/props.json
 
-# Runtime artifacts the runner drops in-tree each run — the auto-commit does
-# `git add -A`, which sweeps them into a chore commit unless they're ignored.
-# `secretcurl` is the auth shim regenerated from scripts/secretcurl.sh every run.
-/secretcurl
-
-# Notify bodies — skills stage a digest for `./notify -f` (→ /tmp or
-# .pending-notify/); any copy left in-tree is transient junk, never durable state.
-# Un-anchored so it also catches the dated (notify-token-report-YYYY-MM-DD.md),
-# output/ (changelog-notify.md), and dotfile (.repo-pulse-notify.md) forms — and
-# inside a validated OKF root (memory/) a notify body would break ci-okf, since
-# §9 needs a `type:` frontmatter it never carries. A notify body is not a concept.
-*-notify.md
-.*-notify.md
-notify-*.md
-
-# xai API request/response scratch — the shiplog/fetch-tweets skills write these
-# to /tmp; committed copies (root or memory/) are pure `git add -A` leaks, never
-# read from in-tree. (cf. the token-movers xai-payload.json that leaked to root.)
-xai-*.json
-# Leading-dot xai variants + tmp- (hyphen) root scratch that the patterns above
-# miss: `tmp_*` only matches an underscore, and `xai-*.json` only a leading `xai-`.
-# shiplog/tokenmetrics/notify skills write these to /tmp; committed copies leak.
-/.xai-*
-/tmp-*
-
-# --- output/ root run scratch (changelog push-to-website + skill digests) ---
-# canon keeps output/ root clean (articles/, .chains/, images/ only)
-output/changelog-*
-output/pr-body-*.md
-output/push_*.py
-output/repo-pulse-*.md
-output/token-movers-report.md
-# canon parity: json-render staging file
-.pending-*.md
-apps/dashboard/outputs/.pending-*.md
+# eyebrow local snapshot cache (content-addressed; not committed)
+.eyebrow/

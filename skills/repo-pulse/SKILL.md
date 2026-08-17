@@ -1,12 +1,15 @@
 ---
-type: Skill
-name: Repo Pulse
-category: dev
+name: repo-pulse
 description: Report on new stars, forks, and releases for watched repos - with profile enrichment (name, location, company, bio, follower count) for every new stargazer and forker, plus a one-line growth verdict.
-var: ""
-tags: [dev, meta, github]
-commits: false
-permissions: []
+metadata:
+  title: Repo Pulse
+  category: dev
+  var: ""
+  tags:
+    - dev
+    - meta
+    - github
+  mode: write
 ---
 <!-- autoresearch: variation B — sharper output: /events primary input + notable-stargazer enrichment + QUIET/STEADY/ACTIVE/SURGE verdict -->
 > **${var}** — Repo (`owner/repo`) to check. If empty, checks all watched repos.

@@ -19,7 +19,7 @@ updates:
       interval: "monthly"
     open-pull-requests-limit: 5
     assignees:
-      - "aaronjmars"
+      - "aeonfun"
     commit-message:
       prefix: "chore(actions)"
     groups:
@@ -34,7 +34,7 @@ updates:
       interval: "monthly"
     open-pull-requests-limit: 5
     assignees:
-      - "aaronjmars"
+      - "aeonfun"
     commit-message:
       prefix: "chore(deps)"
       prefix-development: "chore(deps-dev)"
@@ -42,13 +42,14 @@ updates:
       dashboard:
         patterns:
           - "*"
+    # Hold TypeScript on the 6.x line. TS 7 (the native/Go port) ships a different
+    # package layout that Next.js 16's build-time TS integration doesn't recognize
+    # yet: `next build` crashes ("The 'id' argument must be of type string") even
+    # though `tsc --noEmit` passes. Minor/patch bumps within 6.x still flow through.
+    # Revisit once Next.js ships TS7 support.
     ignore:
-      # Next.js 16.2.x can't use the TypeScript 7 native compiler — `next build`
-      # aborts at the type-check step ("required package(s) not installed").
-      # Skip 7.x until Next adds TS 7 support; 6.x updates still flow. (mcp-server
-      # builds with raw `tsc`, which works under TS 7, so it is NOT ignored there.)
       - dependency-name: "typescript"
-        versions: ["7.x"]
+        update-types: ["version-update:semver-major"]
 
   # MCP server — exposes Aeon skills as Claude tools.
   - package-ecosystem: "npm"
@@ -57,12 +58,28 @@ updates:
       interval: "monthly"
     open-pull-requests-limit: 5
     assignees:
-      - "aaronjmars"
+      - "aeonfun"
     commit-message:
       prefix: "chore(deps)"
       prefix-development: "chore(deps-dev)"
     groups:
       mcp-server:
+        patterns:
+          - "*"
+
+  # CLI — non-interactive control of an Aeon repo; shares apps/dashboard/lib.
+  - package-ecosystem: "npm"
+    directory: "/apps/cli"
+    schedule:
+      interval: "monthly"
+    open-pull-requests-limit: 5
+    assignees:
+      - "aeonfun"
+    commit-message:
+      prefix: "chore(deps)"
+      prefix-development: "chore(deps-dev)"
+    groups:
+      cli:
         patterns:
           - "*"
 
@@ -73,7 +90,7 @@ updates:
       interval: "monthly"
     open-pull-requests-limit: 5
     assignees:
-      - "aaronjmars"
+      - "aeonfun"
     commit-message:
       prefix: "chore(deps)"
       prefix-development: "chore(deps-dev)"

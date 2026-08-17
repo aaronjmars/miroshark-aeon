@@ -1,11 +1,15 @@
 ---
-type: Skill
-name: Article
-category: basics
+name: article
 description: Write a publication-ready article in one of three angles - a trending long-form piece, a watched-repo thesis, or a project-through-a-lens essay. Optional Replicate hero image with --visual.
-var: ""
-tags: [content, dev]
-requires: [REPLICATE_API_TOKEN?]
+metadata:
+  title: Article
+  category: basics
+  var: ""
+  tags:
+    - content
+    - dev
+  requires:
+    - REPLICATE_API_TOKEN?
 ---
 > **${var}** — Selector: `[angle:arg] [--visual]`. The **angle** prefix picks the article type; append **`--visual`** (or `visual`) anywhere to also generate a Replicate hero image.
 >
@@ -15,7 +19,7 @@ requires: [REPLICATE_API_TOKEN?]
 > - **`lens:<topic>`** → `lens` project-through-a-lens essay framed by that lens (e.g. `lens:unix philosophy`). Bare `lens:` auto-selects the lens.
 > - **`--visual`** appended to any of the above → after the body is written, generate a Replicate hero image (optional `REPLICATE_API_TOKEN`; ships text-only if absent).
 >
-> Examples: `""`, `"entropy trajectory reasoning --visual"`, `"repo:aaronjmars/aeon"`, `"repo:roadmap"`, `"lens:regulation wave --visual"`.
+> Examples: `""`, `"entropy trajectory reasoning --visual"`, `"repo:aeonfun/aeon"`, `"repo:roadmap"`, `"lens:regulation wave --visual"`.
 
 Today is ${today}. Write a high-quality, publication-ready article. No placeholders.
 
@@ -200,7 +204,7 @@ From the commit list, find the most-frequently-touched files. Read the top 2–3
 ### Phase 2 — Thesis
 
 Write one **falsifiable claim** in ≤25 words. The claim must be disprovable by specific evidence — not a vibe.
-- Good: "aaronjmars/aeon is pivoting from scheduled digests to reactive skill chains — 4 of 7 merged PRs this week added or consumed `output/.chains/*.md` contracts."
+- Good: "aeonfun/aeon is pivoting from scheduled digests to reactive skill chains — 4 of 7 merged PRs this week added or consumed `output/.chains/*.md` contracts."
 - Bad: "Aeon is an interesting agent framework." (not falsifiable)
 
 If an angle is forced (from `arg`), the thesis must relate to it (e.g. angle `architecture` → an architectural claim). If no angle is forced, pick the one with the strongest evidence from: shipping velocity shift, architectural pivot, community growth inflection, roadmap commitment, deprecation/scope cut, performance or scale milestone.
@@ -476,7 +480,7 @@ Runs **only when `visual = true`**, after the article body is written and saved,
 
 4. **Persist locally** — Replicate CDN URLs expire. Download and commit (the CDN URL carries no secret, so plain `curl` is fine):
    ```bash
-   mkdir -p images
+   mkdir -p output/images
    IMAGE_URL=<extracted from response.output>
    EXT=$(echo "$IMAGE_URL" | grep -oE '\.(jpg|jpeg|png|webp)' | tail -1)
    EXT="${EXT:-.jpg}"

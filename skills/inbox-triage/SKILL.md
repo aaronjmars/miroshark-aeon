@@ -1,11 +1,15 @@
 ---
-type: Skill
-name: Inbox Triage
-category: dev
+name: inbox-triage
 description: Daily GitHub notification inbox triage - surfaces aging vuln PR replies, security advisories, review requests, and mentions that need action
-var: ""
-tags: [github, security, meta]
-schedule: "30 11 * * *"
+metadata:
+  title: Inbox Triage
+  category: dev
+  var: ""
+  tags:
+    - github
+    - security
+    - meta
+  schedule: "30 11 * * *"
 ---
 
 Today is ${today}. Read `memory/MEMORY.md` before starting.
@@ -180,7 +184,7 @@ If nothing meets the threshold: skip notification. Log that no notification was 
 Append to `memory/logs/${today}.md`:
 
 ```markdown
-## Inbox Triage
+### inbox-triage
 - **Scanned:** {N} notifications
 - **Security:** {N}
 - **Vuln replies:** {N total} ({N_critical} critical, {N_aging} aging, {N_fresh} fresh)
@@ -193,7 +197,7 @@ Append to `memory/logs/${today}.md`:
 
 If skipped:
 ```markdown
-## Inbox Triage
+### inbox-triage
 - INBOX_TRIAGE_SKIP: {reason}
 ```
 

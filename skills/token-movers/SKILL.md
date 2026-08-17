@@ -1,13 +1,21 @@
 ---
-type: Skill
-name: Token Movers
-category: basics
+name: token-movers
 description: Crypto market scanner and single-token analyst - movers scans top winners/losers/trending or on-chain runners with pump-risk flags; single-token produces a verdict-first deep report for one token.
-var: ""
-tags: [crypto]
-mode: write
-requires: [COINGECKO_API_KEY?, ALCHEMY_API_KEY?, XAI_API_KEY?, BASE_RPC_URL?]
-capabilities: [external_api, sends_notifications]
+metadata:
+  title: Token Movers
+  category: basics
+  var: ""
+  tags:
+    - crypto
+  mode: write
+  requires:
+    - COINGECKO_API_KEY?
+    - ALCHEMY_API_KEY?
+    - XAI_API_KEY?
+    - BASE_RPC_URL?
+  capabilities:
+    - external_api
+    - sends_notifications
 ---
 <!-- autoresearch: variation B — consolidated hub. Folds monitor-runners (GeckoTerminal on-chain runner scan w/ composite Runner Score) and token-report (verdict-first single-token deep report) behind a source + mode selector. Movers = broad market scan (CoinGecko winners/losers/trending OR GeckoTerminal runners); single-token = deep per-token report. Sharper output everywhere: enrich, score, flag pump risk, lead with the verdict. -->
 
@@ -580,7 +588,7 @@ Save to `output/articles/token-report-${today}.md`:
 If `XAI_API_KEY` is set:
 
 ```bash
-jq -n '{model:"grok-4-1-fast", input:[{role:"user",content:"Search X for TOKEN_SYMBOL or CONTRACT_ADDRESS mentions in the last 24 hours with at least 10 likes. Return up to 5 notable tweets with @handle, engagement counts, and a one-line summary of the claim or vibe. Exclude obvious bots and generic shill posts."}], tools:[{type:"x_search"}]}' > /tmp/xai-tm-payload.json
+jq -n '{model:"grok-4.6", input:[{role:"user",content:"Search X for TOKEN_SYMBOL or CONTRACT_ADDRESS mentions in the last 24 hours with at least 10 likes. Return up to 5 notable tweets with @handle, engagement counts, and a one-line summary of the claim or vibe. Exclude obvious bots and generic shill posts."}], tools:[{type:"x_search"}]}' > /tmp/xai-tm-payload.json
 ./secretcurl -s -X POST "https://api.x.ai/v1/responses" \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer {XAI_API_KEY}" \

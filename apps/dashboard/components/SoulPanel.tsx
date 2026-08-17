@@ -4,10 +4,9 @@ import { useState, useEffect } from 'react'
 import { Scramble } from './ui/Animated'
 import { SOUL_SCAFFOLD, STYLE_SCAFFOLD, ARCHETYPES } from '../lib/soul-templates'
 import { editorCls, panelInputCls } from '../lib/utils'
-import type { SoulSources, SoulExample } from '../lib/types'
+import type { SoulSources, SoulExample, SoulExamplesResponse } from '../lib/types'
 
 export type SoulFile = 'soul' | 'style'
-export type { SoulSources }
 
 interface SoulPanelProps {
   soul: string
@@ -21,7 +20,7 @@ interface SoulPanelProps {
   onInstallExample: (key: string) => void
 }
 
-const EXAMPLES_URL = 'https://github.com/aaronjmars/soul.md/tree/main/examples'
+const EXAMPLES_URL = 'https://github.com/aeonfun/soul.md/tree/main/examples'
 
 // Strip HTML comments, headings and whitespace - what's left is real authored
 // content. Empty ⇒ still the scaffold, so badge it "template".
@@ -46,7 +45,7 @@ export function SoulPanel({ soul, style, loading, saving, building, installing, 
   useEffect(() => { setSoulDraft(soul) }, [soul])
   useEffect(() => { setStyleDraft(style) }, [style])
   // Ready-made souls from the soul.md gallery - installable into soul/ in one click.
-  useEffect(() => { fetch('/api/soul/examples').then(r => r.ok ? r.json() : { examples: [] }).then(d => setExamples(d.examples || [])).catch(() => {}) }, [])
+  useEffect(() => { fetch('/api/soul/examples').then(r => r.ok ? r.json() as Promise<SoulExamplesResponse> : { examples: [] }).then(d => setExamples(d.examples || [])).catch(() => {}) }, [])
 
   const installExample = (ex: SoulExample) => {
     if (installing) return
@@ -176,8 +175,8 @@ export function SoulPanel({ soul, style, loading, saving, building, installing, 
           </div>
           <span className="flex-1 h-px bg-[rgba(250,250,250,0.10)]" />
           {blank
-            ? <span className="text-[10px] font-mono uppercase tracking-[0.18em] text-eva-orange">empty</span>
-            : <span className="text-[10px] font-mono uppercase tracking-[0.18em] text-eva-green">configured</span>}
+            ? <span className="text-[10px] font-mono uppercase tracking-[0.18em] text-aeon-red">empty</span>
+            : <span className="text-[10px] font-mono uppercase tracking-[0.18em] text-aeon-green">configured</span>}
           <button
             onClick={() => setShowTemplates(v => !v)}
             className="btn-mini cursor-target"

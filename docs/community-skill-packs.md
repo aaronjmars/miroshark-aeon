@@ -1,5 +1,4 @@
 ---
-type: Reference
 layout: default
 title: Community Skill Packs
 ---
@@ -18,7 +17,7 @@ This page documents the **install protocol** — the `skills-pack.json` manifest
 bin/install-skill-pack --list
 ```
 
-Prints every pack declared in `catalog/skill-packs.json` — repo, skill count, trust badge, one-line description. Trusted-source packs are marked with `*` (security scan skipped, format check still runs). The script reads the local `catalog/skill-packs.json` when present and falls back to fetching the file from `https://raw.githubusercontent.com/aaronjmars/aeon/main/catalog/skill-packs.json` when it isn't.
+Prints every pack declared in `catalog/skill-packs.json` — repo, skill count, trust badge, one-line description. Trusted-source packs are marked with `*` (security scan skipped, format check still runs). The script reads the local `catalog/skill-packs.json` when present and falls back to fetching the file from `https://raw.githubusercontent.com/aeonfun/aeon/main/catalog/skill-packs.json` when it isn't.
 
 Trusted AntFleet packs currently expose both `pr-review-antfleet` for
 installed repos with channel drawdown and `pr-review-antfleet-x402` for
@@ -85,7 +84,7 @@ The manifest lives at the pack root (or under `--path <subdir>` if the pack is n
 | `homepage` | string | optional | Project page, docs, or Twitter handle. |
 | `skills[]` | array | **required** | At least one entry. |
 | `skills[].slug` | string | **required** | Aeon skill slug. Must match `[A-Za-z0-9_-]+`. Used as the directory name under `skills/`. |
-| `skills[].path` | string | optional | Path inside the pack repo (relative). Defaults to `skills/<slug>`. May not contain `..`. |
+| `skills[].path` | string | optional | Path to the skill's **directory** inside the pack repo (relative). Defaults to `skills/<slug>`. May not contain `..`. A path ending in `/SKILL.md` is accepted and its parent directory used, but write the directory. |
 | `skills[].description` | string | optional | Falls back to the SKILL.md frontmatter `description:`. |
 | `skills[].category` | string | optional | One of `research`, `dev`, `crypto`, `social`, `productivity`. Defaults to `research` in `skills.json`. |
 | `skills[].schedule` | string | optional | Cron string written into `aeon.yml`. Default `0 12 * * *`. |
@@ -174,10 +173,16 @@ The operator is always the trust boundary. The install script does not auto-trus
 1. Repo is public with a clear license file.
 2. Each skill has a `SKILL.md` in `skills/<slug>/SKILL.md`.
 3. Skills follow Aeon's `SKILL.md` conventions (frontmatter `name:`, `description:`, etc.).
+   Include a **`category:`** from Aeon's vocabulary - `core`, `evolution`,
+   `basics`, `dev`, `crypto`, `productivity`. Installed skills are grouped under
+   the dashboard's **Installed** pack regardless, but the category is what the
+   catalog records and what the operator sees; a missing or invented one shows
+   up as `other`. The pack's own `skills[].category` is metadata for the
+   installer - the `SKILL.md` frontmatter is what `skills.json` reads.
 4. `skills-pack.json` declares every skill the pack intends to install. Skills present in `skills/` but missing from the manifest are not installed.
 5. Optional but encouraged: a `README.md` that names each skill, explains scheduling assumptions, and lists any required environment variables.
 6. Run `./scripts/validate-pack.sh /path/to/your-pack-dir` (from an Aeon checkout) to pre-flight the pack locally — it runs the same structural invariants `install-skill-pack` enforces (valid `skills-pack.json`, clean slugs, no `..` in paths, present per-skill `SKILL.md`, locked-taxonomy capabilities) and exits non-zero on any blocking error. Add `--path <subdir>` if `skills-pack.json` is nested.
-7. Open a PR against `aaronjmars/aeon` that does **two** things in one diff: adds a row to the **Community Skill Packs** table in the project README, AND adds a matching entry to `catalog/skill-packs.json` (the machine-readable registry — see schema below).
+7. Open a PR against `aeonfun/aeon` that does **two** things in one diff: adds a row to the **Community Skill Packs** table in the project README, AND adds a matching entry to `catalog/skill-packs.json` (the machine-readable registry — see schema below).
 
 ---
 
@@ -233,8 +238,54 @@ The operator is always the trust boundary. The install script does not auto-trus
 
 Pack maintainers update both in the same PR so the two surfaces stay in lockstep.
 
+### CI validates both (run it before you open the PR)
+
+`ci-skill-packs` gates every PR that touches the registry or the README:
+
+```bash
+node scripts/validate-skill-packs.mjs
+```
+
+It fails the PR on registry shape (unparseable JSON, a `repo` that isn't
+`owner/repo`, an empty or duplicated `skills[]`, a `trust_level` outside
+`trusted|community`, a capability outside the [locked taxonomy](CAPABILITIES.md),
+a `secrets_required` entry that isn't an env var name) and on README parity (an
+entry with no table row or a row with no entry, a skill count that disagrees with
+`skills[]`, a `--path` flag that disagrees with the registry's `path`, and the
+`N community skill packs` counter in the README's Proof of work section).
+
+Two things to know:
+
+- **`trust_level: trusted` must be earned.** `--list` prints its trust badge from
+  this registry, but the installer decides the real scan bypass from
+  `skills/security/trusted-sources.txt`. A `trusted` entry that isn't in that
+  file advertises "security scan skipped" without ever getting it, so the gate
+  rejects it. Community packs use `trust_level: community`.
+- **A subdirectory pack needs its `--path` in the README row.** If your registry
+  entry sets `path`, the table row has to show the matching
+  (`` `--path <dir>` ``) flag — otherwise the command a reader copies out of the
+  README installs the wrong subtree.
+
+Missing recommended fields (`name`, `description`, `author`) and unrecognised
+fields warn rather than fail.
+
 ---
 
 ## Listed packs
 
-See the [Community Skill Packs section](https://github.com/aaronjmars/aeon#community-skill-packs) in the main README for the current registry.
+Community skill packs live in their own repos and install as one bundle. The authoritative registry is [`catalog/skill-packs.json`](../catalog/skill-packs.json); the human-readable list:
+
+| Pack | Skills | Description |
+|------|--------|-------------|
+| [aeon-skills](https://github.com/AntFleet/aeon-skills) | 2 | Two-model-consensus PR review (Opus 4.7 + GPT-5), x402 pay-per-call for public repos. |
+| [aeon-skill-pack-liquidpad](https://github.com/liquidpadbot/aeon-skill-pack-liquidpad) | 4 | Track LiquidPad on Base: burn alerts, launches, digest, fee accrual. |
+| [aeon-skill-pack-mythosforge](https://github.com/ryjin111/aeon-skill-pack-mythosforge) | 5 | Read-only MythosForge monitoring: ops/jury/payout health and proof-of-creation integrity on Base. |
+| [signa](https://github.com/codexvritra/signa) (`--path aeon-skills`) | 20 | Wallet-signed cross-platform agent messaging, encrypted rooms, and x402 bounded-spend mandates. |
+| [Atrium Skills](https://github.com/Atrium-Hermes/aeon-atrium-skills) | 3 | Publish, rent, and earn from agent skills on Atrium, the onchain skill marketplace on Base. |
+| [aeon-skill-pack-mneme](https://github.com/mnemedb/aeon-skill-pack-mneme) | 8 | Persistent memory layer: vector recall, entity graph, and Base chain streams. One key, zero infra. |
+| [clawhunter-skills](https://github.com/clawhunter/clawhunter-skills) | 2 | Aggregates and AI-triages crypto bounties across venues; paid research/create tools settle via x402. |
+| [Polymarket Trader by Simmer](https://github.com/SpartanLabsXyz/aeon-skill-pack-polymarket/tree/main/aeon-skill-pack) (`--path aeon-skill-pack`) | 3 | Signal, discovery, and real order-placing on Polymarket (simulate-by-default, live opt-in). |
+| [Charon for AEON](https://github.com/CharonAI-code/charon/tree/main/skills/aeon) (`--path skills/aeon`) | 2 | Repo-local policy enforcement for AEON runs, with natural-language policy management. |
+| [aeon-skill-pack-agentlink](https://github.com/techdigger/aeon-skill-pack-agentlink) | 1 | Verified, human-backed on-chain identity on Base via AgentLink. Read-only, on-demand. |
+| [AI2Human Create Task](https://github.com/richard7463/ai2human-aeon-skill-pack) | 1 | Route a blocked human step to AI2Human: dispatch human execution, then follow the proof, verify, settle loop before USDC payout. |
+| [aeon-skill-pack-skim](https://github.com/JessieJanie/aeon-skill-pack-skim) | 1 | Pay-per-call clean web reads via Skim x402: any URL to markdown ~4x smaller than raw HTML, $0.002 USDC on Base, no API key. |

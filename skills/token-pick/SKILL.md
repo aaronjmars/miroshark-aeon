@@ -1,13 +1,18 @@
 ---
-type: Skill
-mode: read-only
-name: Token Pick
-category: crypto
+name: token-pick
 description: One token recommendation and one prediction market pick - scored, quantified, with a skip branch when signals are weak
-var: ""
-tags: [crypto]
-requires: [COINGECKO_API_KEY?]
-capabilities: [external_api, sends_notifications]
+metadata:
+  title: Token Pick
+  mode: read-only
+  category: crypto
+  var: ""
+  tags:
+    - crypto
+  requires:
+    - COINGECKO_API_KEY?
+  capabilities:
+    - external_api
+    - sends_notifications
 ---
 <!-- autoresearch: variation B — sharper output via signal scoring, edge calculation, conviction tiers, and a skip-day branch -->
 
@@ -152,7 +157,7 @@ The `token-movers::deep-dive` marker routes the operator's reply to **token-move
 ### 7. Log to `memory/logs/${today}.md`
 
 ```
-## Token Pick
+### token-pick
 - **Token:** SYMBOL — $price (±X% 24h) — tier HIGH/MEDIUM/SKIP — score X/10
 - **Token thesis:** [one line, including catalyst]
 - **Market:** "Question?" — YES X¢ — tier HIGH/MEDIUM/SKIP — edge Xpp

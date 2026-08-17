@@ -1,79 +1,16 @@
 'use client'
 
 import { useState } from 'react'
-import { GATEWAY_REGISTRY } from '@/lib/gateway-registry'
+import { resolveServiceMark, type ServiceGlyph, type ServiceMarkQuery } from '@/lib/service-icons'
 
-// LLM-gateway domains derive from the single registry so a new provider doesn't
-// need a hand-added row here.
-const GATEWAY_DOMAINS: Record<string, string> = Object.fromEntries(
-  Object.values(GATEWAY_REGISTRY).map((p) => [p.secretName, p.domain] as [string, string]),
-)
-
-// Maps each credential / group to the brand domain whose logo we show. Logos
-// come from DuckDuckGo's privacy-respecting favicon service (no domain list
-// leaked to Google) and are rendered grayscale-by-default, lifting to full
-// colour on row hover so they stay calm against the monochrome shell. When a
-// service has no favicon (or the request fails) we fall back to a glyph or a
-// monochrome initials badge so every row still carries a mark.
-const DOMAINS: Record<string, string> = {
-  // Core - Claude-native auth (LLM-gateway domains spread in from the registry)
-  CLAUDE_CODE_OAUTH_TOKEN: 'claude.ai',
-  ANTHROPIC_API_KEY: 'anthropic.com',
-  // Grok Build (grok CLI) X-account OAuth session — same brand as XAI_API_KEY.
-  GROK_CREDENTIALS: 'x.ai',
-  ...GATEWAY_DOMAINS,
-  // Channels
-  TELEGRAM_BOT_TOKEN: 'telegram.org',
-  TELEGRAM_CHAT_ID: 'telegram.org',
-  DISCORD_BOT_TOKEN: 'discord.com',
-  DISCORD_CHANNEL_ID: 'discord.com',
-  DISCORD_WEBHOOK_URL: 'discord.com',
-  SLACK_BOT_TOKEN: 'slack.com',
-  SLACK_CHANNEL_ID: 'slack.com',
-  SLACK_WEBHOOK_URL: 'slack.com',
-  // Skill keys
-  XAI_API_KEY: 'x.ai',
-  COINGECKO_API_KEY: 'coingecko.com',
-  ALCHEMY_API_KEY: 'alchemy.com',
-  ETHERSCAN_API_KEY: 'etherscan.io',
-  BASESCAN_KEY: 'basescan.org',
-  BANKR_API_KEY: 'bankr.bot',
-  VERCEL_TOKEN: 'vercel.com',
-  REPLICATE_API_TOKEN: 'replicate.com',
-  RESEND_API_KEY: 'resend.com',
-  ADMANAGE_API_KEY: 'admanage.ai',
-  GH_GLOBAL: 'github.com',
-  BASE_RPC_URL: 'base.org',
-  // Observability
-  LANGFUSE_PUBLIC_KEY: 'langfuse.com',
-  LANGFUSE_SECRET_KEY: 'langfuse.com',
-}
-
-// Non-brand entries - no logo exists, so show a meaningful glyph instead.
-const GLYPHS: Record<string, 'mail' | 'key'> = {
-  NOTIFY_EMAIL_TO: 'mail',
-}
-
-// Explicit logo overrides for services whose favicon is wrong/outdated. Vendored
-// into public/icons so they don't depend on a third-party host staying up.
-const ICON_URLS: Record<string, string> = {
-}
-
-// Same idea, keyed by DOMAIN — applies to group headers (which pass `domain`
-// directly) as well as any credential resolving to that domain. Langfuse's
-// favicon-service icon renders as a generic mark, so we vendor the real logo.
-const DOMAIN_ICON_URLS: Record<string, string> = {
-  'langfuse.com': '/icons/langfuse.svg',
-}
+// Renders the mark lib/service-icons.ts resolves: brand logo, glyph, or an
+// initials badge. Which mark a credential gets lives there, not here.
 
 // Heroicons (outline) paths - match the stroke icons used elsewhere in the UI.
-const GLYPH_PATHS: Record<'mail' | 'key', string> = {
+const GLYPH_PATHS: Record<ServiceGlyph, string> = {
   mail: 'M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75',
   key: 'M15.75 5.25a3 3 0 0 1 3 3m3 0a6 6 0 0 1-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1 1 21.75 8.25z',
-}
-
-function faviconUrl(domain: string): string {
-  return `https://icons.duckduckgo.com/ip3/${domain}.ico`
+  server: 'M21.75 17.25v-.228a4.5 4.5 0 0 0-.12-1.03l-2.268-9.64a3.375 3.375 0 0 0-3.285-2.602H7.923a3.375 3.375 0 0 0-3.285 2.602l-2.268 9.64a4.5 4.5 0 0 0-.12 1.03v.228m19.5 0a3 3 0 0 1-3 3H5.25a3 3 0 0 1-3-3m19.5 0a3 3 0 0 0-3-3H5.25a3 3 0 0 0-3 3m16.5 0h.008v.008h-.008v-.008Zm-3 0h.008v.008h-.008v-.008Z',
 }
 
 function initials(name: string): string {
@@ -81,24 +18,13 @@ function initials(name: string): string {
   return (clean.slice(0, 2) || '?').toUpperCase()
 }
 
-interface ServiceIconProps {
-  // A credential / group name resolved against the maps above…
-  name?: string
-  // …or pass a domain / glyph directly (used for group headers).
-  domain?: string
-  glyph?: 'mail' | 'key'
+interface ServiceIconProps extends ServiceMarkQuery {
   className?: string
 }
 
 export function ServiceIcon({ name, domain, glyph, className = '' }: ServiceIconProps) {
   const [failed, setFailed] = useState(false)
-  const resolvedDomain = domain ?? (name ? DOMAINS[name] : undefined)
-  const resolvedGlyph = glyph ?? (name ? GLYPHS[name] : undefined)
-  // Explicit override wins over the domain favicon; a vendored domain logo wins
-  // over the favicon service.
-  const explicitSrc = name ? ICON_URLS[name] : undefined
-  const domainSrc = resolvedDomain ? (DOMAIN_ICON_URLS[resolvedDomain] ?? faviconUrl(resolvedDomain)) : undefined
-  const src = explicitSrc ?? domainSrc
+  const { src, glyph: resolvedGlyph } = resolveServiceMark({ name, domain, glyph })
 
   // Light chip backing so dark/filled marks (GitHub, Base, x.AI…) stay legible
   // against the near-black UI. Logos sit grayscale-and-calm, lifting to full

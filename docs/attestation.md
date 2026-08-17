@@ -1,7 +1,3 @@
----
-type: Reference
----
-
 # Skill-execution attestation
 
 Aeon can produce **verifiable provenance for skill runs** using
@@ -140,7 +136,7 @@ in `aeon.yml` always wins.
 With the global switch on but no per-skill override, the **default policy attests
 only runs whose output crossed the trust boundary** — i.e. runs that
 **published to the json-render feed**. Concretely, the gate checks for
-`apps/dashboard/outputs/.pending-${SKILL}.md`, which is written **only when a
+`$AEON_PENDING_DIR/.pending-${SKILL}.md` (outside the repo), which is written **only when a
 skill actually calls `./notify`** (with `JSONRENDER_ENABLED` on, its default).
 
 **This is deliberate.** Each attestation is a Sigstore signing plus a permanent,

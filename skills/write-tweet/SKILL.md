@@ -1,11 +1,15 @@
 ---
-type: Skill
-name: Write Tweet
-category: basics
+name: write-tweet
 description: Multi-format tweet studio - standalone drafts (10 across 5 size tiers), a 5-10 tweet thread, or 10 remixes of past tweets, selected via ${var}
-var: ""
-tags: [social, content]
-requires: [XAI_API_KEY?]
+metadata:
+  title: Write Tweet
+  category: basics
+  var: ""
+  tags:
+    - social
+    - content
+  requires:
+    - XAI_API_KEY?
 ---
 > **${var}** — `[format] [argument]`. Pick one of three formats, then pass its argument. Empty ⇒ **drafts** (standalone tweet drafts). `thread …` ⇒ a multi-tweet **thread**. `remix …` ⇒ **remix** of your past tweets. `revise:<instruction>` ⇒ **revise** the last saved draft (the Telegram force-reply shape, e.g. `revise:make it punchier`). See Selector below.
 
@@ -75,7 +79,7 @@ If the topic needs fresher context, use WebSearch to verify or expand.
 
 If `XAI_API_KEY` is set, search X for what people are already saying about the topic. A direct `curl` to the X.AI Responses API is the **primary** path for this X read (see **Fetching**; set the Bash tool `timeout` ≥180000):
 ```bash
-jq -n '{model:"grok-4-1-fast", input:[{role:"user",content:"Search X for what people are saying about TOPIC in the last 24 hours. Return the 5 most notable tweets with @handle and summary."}], tools:[{type:"x_search"}]}' > /tmp/xai-wt-payload.json
+jq -n '{model:"grok-4.6", input:[{role:"user",content:"Search X for what people are saying about TOPIC in the last 24 hours. Return the 5 most notable tweets with @handle and summary."}], tools:[{type:"x_search"}]}' > /tmp/xai-wt-payload.json
 HTTP=$(./secretcurl -s -o /tmp/xai-wt.json -w '%{http_code}' --max-time 150 -X POST "https://api.x.ai/v1/responses" \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer {XAI_API_KEY}" \
@@ -187,7 +191,7 @@ After all 10, add a one-line pick for **best overall** and **best per tier**.
 
 ## Notify (drafts)
 
-Send the drafts via `./notify`:
+Send the drafts via `./notify` — write the body to `/tmp/wt-drafts.md` first, then `./notify -f /tmp/wt-drafts.md` (keeps the long body off argv and out of the repo root):
 ```
 tweet drafts: [topic]
 
@@ -352,7 +356,7 @@ The payoff. The implication, the action, or the reframe. Should feel like the po
 
 ## Notify (thread)
 
-Send via `./notify`:
+Send via `./notify` — write the thread body to `/tmp/wt-thread.md` first, then `./notify -f /tmp/wt-thread.md` (keeps the long body off argv and out of the repo root):
 ```
 thread: [topic — 3-5 words]
 
@@ -425,7 +429,7 @@ Each query must request for every tweet: full text, date posted, engagement stat
 # Replace HANDLE with the resolved handle. Set the Bash tool timeout ≥180000 (see Fetching).
 Q1_PROMPT="Search X for original tweets (exclude replies, retweets, quote tweets) posted by @HANDLE from ${FROM_DATE} to ${TO_DATE}. I want OPINION/TAKE posts — tweets that state a view, principle, or observation (not news announcements, not project updates, not single-link posts). Return up to 15. For each: full tweet text, date (YYYY-MM-DD), likes, retweets, replies, direct link https://x.com/HANDLE/status/ID. Format as numbered list."
 jq -n --arg p "$Q1_PROMPT" --arg fd "$FROM_DATE" --arg td "$TO_DATE" \
-  '{model:"grok-4-1-fast", input:[{role:"user",content:$p}], tools:[{type:"x_search", allowed_x_handles:["HANDLE"], from_date:$fd, to_date:$td}]}' \
+  '{model:"grok-4.6", input:[{role:"user",content:$p}], tools:[{type:"x_search", allowed_x_handles:["HANDLE"], from_date:$fd, to_date:$td}]}' \
   > /tmp/xai-wt-q1-payload.json
 HTTP=$(./secretcurl -s -o /tmp/xai-wt-q1.json -w '%{http_code}' --max-time 150 -X POST "https://api.x.ai/v1/responses" \
   -H "Content-Type: application/json" \
@@ -503,7 +507,7 @@ Track drops in the log (step 7). If you drop more than 3, emit `REMIX_TWEETS_DEG
 
 Lead with a one-line **batch verdict** summarizing strategy spread (e.g., "3 sharpens, 2 flips, 2 updates, 2 concretizes, 1 escalate"). Keep the whole message ≤4000 chars. No leading indentation.
 
-Send via `./notify`:
+Send via `./notify` — write the message body to `/tmp/wt-remix.md` first, then `./notify -f /tmp/wt-remix.md` (keeps the long body off argv and out of the repo root):
 ```
 *Remix Tweets — ${today}*
 Batch: [one-line strategy spread]. Drops: N.
@@ -620,7 +624,7 @@ Append **one** entry to `memory/logs/${today}.md` under a single `### write-twee
 
 ## Fetching
 
-`XAI_API_KEY` is **injected into this skill's environment** (declared in `requires:`). It is present and valid. **The primary way to fetch X/Twitter context — the DRAFTS "what people are saying" search and the REMIX tweet pull — is a direct `curl` to `https://api.x.ai/v1/responses` with `Authorization: Bearer {XAI_API_KEY}`, model `grok-4-1-fast`, and `"tools":[{"type":"x_search"}]`.** There is no network sandbox blocking this; earlier versions of this skill claimed there was — that is stale and wrong. Just make the call.
+`XAI_API_KEY` is **injected into this skill's environment** (declared in `requires:`). It is present and valid. **The primary way to fetch X/Twitter context — the DRAFTS "what people are saying" search and the REMIX tweet pull — is a direct `curl` to `https://api.x.ai/v1/responses` with `Authorization: Bearer {XAI_API_KEY}`, model `grok-4.6`, and `"tools":[{"type":"x_search"}]`.** There is no network sandbox blocking this; earlier versions of this skill claimed there was — that is stale and wrong. Just make the call.
 
 **You MUST attempt the direct curl before any fallback.** The rules:
 

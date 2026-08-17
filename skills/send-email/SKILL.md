@@ -1,11 +1,18 @@
 ---
-type: Skill
-name: Send Email
-category: productivity
+name: send-email
 description: Compose and send a one-off email to a named recipient via Resend - written in the operator's voice, then sent in-run through the shared send caps with an operator audit copy
-var: ""
-requires: [RESEND_API_KEY?, RESEND_FROM?, RESEND_REPLY_TO?]
-tags: [productivity, email, outreach]
+metadata:
+  title: Send Email
+  category: productivity
+  var: ""
+  requires:
+    - RESEND_API_KEY?
+    - RESEND_FROM?
+    - RESEND_REPLY_TO?
+  tags:
+    - productivity
+    - email
+    - outreach
 ---
 > **${var}** — who to email and why, e.g. `to=jane@acme.com | subject=Intro | about=propose a 20-min call on X`. Freeform also works ("email jane@acme.com to follow up on yesterday's demo"). `cc=` is optional. The reply-shape `revise:<instruction>` (Telegram force-reply, e.g. `revise:make it warmer`) refines the **last composed draft for review only — it never sends**.
 
@@ -39,7 +46,7 @@ This is **not** a bulk or cold-outreach tool. One deliberate recipient per run, 
      --force-reply --placeholder "e.g. make it warmer" \
      --context "send-email::revise"
    ```
-7. **Log** `- SEND_EMAIL_REVISED (draft re-staged for review, not sent)` under a `## Send Email` heading in `memory/logs/${today}.md`, then **end the run**.
+7. **Log** `- SEND_EMAIL_REVISED (draft re-staged for review, not sent)` under a `### send-email` heading in `memory/logs/${today}.md`, then **end the run**.
 
 Otherwise (no `revise:` prefix), run the normal flow:
 
@@ -108,7 +115,7 @@ The send is the skill's **final** action and is **fail-closed**: apply every che
 
 6. **Log** to `memory/logs/${today}.md`:
    ```
-   ## Send Email
+   ### send-email
    - **To:** <to>  (cc: <cc>)
    - **Subject:** <subject>
    - **Why:** <one line>

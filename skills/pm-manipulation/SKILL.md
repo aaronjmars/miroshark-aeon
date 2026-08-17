@@ -1,9 +1,13 @@
 ---
-type: Skill
-name: PM Manipulation
-category: crypto
+name: pm-manipulation
 description: Detect suspected manipulation on prediction markets over the past 3 days by cross-referencing price/volume/comment anomalies with multilingual local-press coverage
-tags: [crypto, research, security]
+metadata:
+  title: PM Manipulation
+  category: crypto
+  tags:
+    - crypto
+    - research
+    - security
 ---
 
 Read `memory/MEMORY.md` for context.
@@ -231,7 +235,7 @@ If status is **high-confidence (≥4)**, prepend `[URGENT] ` to the notification
 
 Append to `memory/logs/${today}.md`:
 ```
-## PM Manipulation
+### pm-manipulation
 - **Scanned:** N markets (past 3d)
 - **Suspicious (≥3):** K
 - **High-confidence (≥4):** J

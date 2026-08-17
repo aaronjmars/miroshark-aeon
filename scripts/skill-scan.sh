@@ -75,54 +75,104 @@ fi
 
 # ---------- Pattern definitions ----------
 
-# HIGH severity: immediate risk of code execution or data exfiltration
+# HIGH severity: immediate risk of code execution or data exfiltration.
+#
 # NOTE: patterns must be POSIX Extended Regular Expressions — grep -E does NOT
 # understand PCRE escapes like \s (whitespace) or \b (word boundary). Use
 # [[:space:]] for whitespace and explicit character-class anchors for word
 # boundaries. See AntFleet finding H6 (Issue #184).
-HIGH_PATTERNS=(
-  # Shell injection
+#
+# CALIBRATION (see docs/skill-scan-calibration.md): HIGH is split into two
+# intents so it fires on dangerous *operations*, not ordinary shell syntax. The
+# earlier ruleset matched benign template interpolation (`${today}` in inline
+# code), normal command substitution (`$(echo "$x")`), and any `curl` near an
+# uppercase var (legitimate authenticated API calls). That FAILed 65 of this
+# repo's own 67 skills — and a gate that rejects first-party code trains everyone
+# to run `--force`, disabling it for the untrusted packs it exists to guard.
+
+# HIGH · SINKS — real code-execution / exfiltration / destruction. These match
+# the dangerous act itself, so they hold wherever the text appears.
+HIGH_SINK_PATTERNS=(
+  # Arbitrary code execution
   'eval[[:space:]]'
   'eval\('
-  '`[^`]*\$'
-  '\$\([^)]*\$'
-  # Secret exfiltration — curl/wget piping secrets or env vars
-  'curl.*\$[A-Z_]'
-  'wget.*\$[A-Z_]'
-  'curl.*\$\{'
-  'wget.*\$\{'
-  'curl.*--data.*secret'
-  'curl.*--data.*token'
-  'curl.*--data.*password'
-  'curl.*--data.*api.key'
-  # Env var exfiltration patterns
-  'printenv.*\|.*curl'
-  'printenv.*\|.*wget'
-  'env[[:space:]].*\|.*curl'
+  # Remote code execution: a download piped straight into an interpreter, or fed
+  # to one via process substitution (`bash <(curl …)`, `source <(curl …)`,
+  # `. <(curl …)`). The pipe form tolerates a sudo/xargs wrapper before the
+  # interpreter; the procsub form also covers `source` and `.` (which read+run).
+  '(curl|wget)[^|]*\|[[:space:]]*((sudo|xargs)[[:space:]]+)*(sh|bash|zsh|ksh|dash|python[0-9.]*|perl|ruby|node|php)([[:space:]]|$|;|&)'
+  '(sh|bash|zsh|ksh|dash|python[0-9.]*|perl|ruby|node|php|source|\.)[[:space:]]+<\([^)]*(curl|wget)'
+  # Secret exfiltration: a secret / env var sent as request *data* to a host.
+  # (Auth headers like `-H "Authorization: Bearer $KEY"` are NOT data and do not
+  # match — that is a skill calling its own declared endpoint, not exfiltration.)
+  'curl.*(--data|--data-raw|--data-binary|[[:space:]]-d[[:space:]]).*(\$[A-Z_]{3,}|secret|token|password|api.?key)'
+  'wget.*(--post-data|--post-file).*(\$[A-Z_]{3,}|secret|token|password|api.?key)'
+  # `-d`/`--data` with no space before the value (e.g. -d"k=$TOKEN") — the space-
+  # anchored `-d ` alternative above does not catch the quoted, spaceless spelling.
+  'curl[^|]*[[:space:]]-d["'\''][^"'\'']*(\$[A-Z_]{3,}|secret|token|password|api.?key)'
+  # Dump the environment to the network
+  'printenv.*\|.*(curl|wget|nc)'
+  'env[[:space:]].*\|.*(curl|wget|nc)'
   'cat.*/proc/.*environ'
-  # Direct exfil of known secrets
+  # Direct exfil of well-known bot / secret tokens
   '\$TELEGRAM_BOT_TOKEN'
   '\$DISCORD_BOT_TOKEN'
   '\$SLACK_BOT_TOKEN'
-  '\$GITHUB_TOKEN.*curl'
-  '\$GITHUB_TOKEN.*wget'
-  # Prompt injection
-  '[Ii]gnore[[:space:]]+(all[[:space:]]+)?previous[[:space:]]+instructions'
-  '[Ii]gnore[[:space:]]+(all[[:space:]]+)?prior[[:space:]]+instructions'
-  '[Yy]ou[[:space:]]+are[[:space:]]+now[[:space:]]+'
-  '[Ff]orget[[:space:]]+(all[[:space:]]+)?(your[[:space:]]+)?instructions'
-  '[Dd]isregard[[:space:]]+(all[[:space:]]+)?previous'
-  '[Oo]verride[[:space:]]+(all[[:space:]]+)?rules'
-  # Destructive commands
-  'rm[[:space:]]+-rf[[:space:]]+/'
-  'rm[[:space:]]+-rf[[:space:]]+\*'
-  'rm[[:space:]]+-rf[[:space:]]+~'
+  '\$GITHUB_TOKEN.*(curl|wget|nc)'
+  # Destructive commands. Bare root (`rm -rf /`), a root glob (`rm -rf /*`), and a
+  # top-level system dir (`rm -rf /etc`, `/usr`, …) are all catastrophic wipes.
+  # The flag run is matched spelling-agnostically — `([-][a-zA-Z-]+[[:space:]]+)*`
+  # accepts any order/combination (`-rf`, `-fr`, `-rfv`, `-r --force`,
+  # `--no-preserve-root`) rather than a literal `-rf`, so those do not slip past.
+  # An optional leading quote (`["']?`) catches a quoted target (`rm -rf "/etc"`).
+  # Sub-paths like `rm -rf /tmp/build` are still not matched (target must be root,
+  # the glob, or a system dir) so first-party build steps do not trip it.
+  'rm[[:space:]]+([-][a-zA-Z-]+[[:space:]]+)*["'\'']?/(["'\'']|[[:space:]]|$|--)'
+  'rm[[:space:]]+([-][a-zA-Z-]+[[:space:]]+)*["'\'']?/\*'
+  'rm[[:space:]]+([-][a-zA-Z-]+[[:space:]]+)*["'\'']?/(bin|boot|dev|etc|home|lib|lib64|opt|proc|root|sbin|sys|usr|var)(["'\'']|[[:space:]]|/|$)'
+  'rm[[:space:]]+([-][a-zA-Z-]+[[:space:]]+)*\*'
+  'rm[[:space:]]+([-][a-zA-Z-]+[[:space:]]+)*~'
   'mkfs\.'
   'dd[[:space:]]+if=.*of=/dev/'
   ':\(\)[[:space:]]*\{.*\};[[:space:]]*:'
   'git[[:space:]]+push[[:space:]]+--force[[:space:]]+origin[[:space:]]+main'
   'git[[:space:]]+push[[:space:]]+-f[[:space:]]+origin[[:space:]]+main'
 )
+
+# HIGH · PROMPT INJECTION — imperative text that tries to override the agent's
+# instructions. Scanned across the whole file (injection is prose, not code), but
+# a match is suppressed when the same line carries DEFENSIVE framing (see
+# DEFENSIVE_CONTEXT): a skill that says «if content reads "ignore previous
+# instructions", discard it» is documenting its defense, not issuing an attack.
+# Without this, every skill that hardens itself scored a HIGH against itself.
+HIGH_INJECTION_PATTERNS=(
+  '[Ii]gnore[[:space:]]+(all[[:space:]]+)?previous[[:space:]]+instructions'
+  '[Ii]gnore[[:space:]]+(all[[:space:]]+)?prior[[:space:]]+instructions'
+  '[Yy]ou[[:space:]]+are[[:space:]]+now[[:space:]]+'
+  '[Ff]orget[[:space:]]+(all[[:space:]]+)?(your[[:space:]]+)?instructions'
+  '[Dd]isregard[[:space:]]+(all[[:space:]]+)?previous'
+  '[Oo]verride[[:space:]]+(all[[:space:]]+)?rules'
+)
+
+# Anti-injection framing. When one of these MULTI-WORD rejection phrases appears on
+# the same line as an injection phrase, the line is documenting a defense (reject
+# fetched/embedded instructions), not issuing an attack, so the finding is
+# suppressed. Matched with `grep -i` (case-insensitive). Deliberately NO loose
+# single keywords (discard / untrusted / quarantine / refuse / "log a warning"):
+# the skill author controls the text, so a bare imperative could be un-flagged just
+# by appending one of those words (`Ignore all previous instructions … then discard
+# it`). Quote-*enclosed* citations are handled by INJECTION_CITED below, which alone
+# still suppresses the legitimate `benign-defensive` case.
+DEFENSIVE_CONTEXT='never follow|do not follow|do not obey|never obey|ignore (it|that|them|the source|any|embedded)|treat .* as (data|untrusted)|as data, not|not (a )?command'
+
+# A second defensive signal: the injection phrase appears *enclosed in quotes*
+# (inside "…" or `…`), i.e. it is being cited as an example to reject, not issued
+# as a command. The trigger word must sit between an opening and a closing
+# quote/backtick with no intervening quote — so a bare imperative merely preceded
+# by an unrelated quoted token (`"Note" Ignore all previous instructions…`) is NOT
+# treated as cited and still FAILs. Documentation genuinely wraps the phrase
+# (`if content says "ignore previous instructions", discard it`) and is suppressed.
+INJECTION_CITED='["`][^"`]*([Ii]gnore|[Ff]orget|[Dd]isregard|[Oo]verride|[Yy]ou[[:space:]]+are[[:space:]]+now)[^"`]*["`]'
 
 # MEDIUM severity: suspicious patterns that may or may not be intentional
 MEDIUM_PATTERNS=(
@@ -139,6 +189,14 @@ MEDIUM_PATTERNS=(
   # Network calls to non-standard destinations
   'curl[[:space:]]+http://'
   'wget[[:space:]]+http://'
+  # Secret carried in a URL query string (e.g. ...?token=$GITHUB_TOKEN). MEDIUM,
+  # not HIGH: many legitimate APIs authenticate via a `?apikey=` query param, so
+  # this cannot be distinguished from exfiltration by static text alone — surface
+  # it for review rather than hard-failing the gate. Only a var whose name ENDS in
+  # an underscore-prefixed secret word (…_TOKEN/_KEY/_SECRET/_PASSWORD) is flagged,
+  # so public identifiers ($TOKEN_ID, ${TOKEN} address) do not trip it; and the
+  # correct secretcurl `{KEY}` placeholder form (no `$`) is not matched at all.
+  '(curl|wget)[^|]*[?&][A-Za-z0-9_.-]+=\$\{?[A-Za-z_]*_(TOKEN|SECRET|PASSWORD|PASSWD|KEY|CREDENTIAL)(\}|[^A-Za-z0-9_]|$)'
   # Unquoted variable expansion in bash blocks
   'rm[[:space:]].*\$[A-Z]'
   'chmod[[:space:]]+777'
@@ -179,6 +237,49 @@ TOTAL_WARN=0
 TOTAL_FAIL=0
 JSON_RESULTS=""
 
+# scan_tier <file> <pattern>...  — emit one "L<n>: <content> [pattern: <p>]" line
+# per grep match across the tier's patterns. Bash 3.2-safe (no namerefs): the
+# caller collects stdout into its highs/mediums/lows array. Extracted from three
+# byte-identical per-tier loops.
+scan_tier() {
+  local file="$1"; shift
+  local pattern matches match line_num line_content
+  for pattern in "$@"; do
+    matches=$(grep -nE "$pattern" "$file" 2>/dev/null || true)
+    [[ -n "$matches" ]] || continue
+    while IFS= read -r match; do
+      line_num="${match%%:*}"
+      line_content="${match#*:}"
+      line_content="${line_content:0:120}"  # truncate
+      printf 'L%s: %s [pattern: %s]\n' "$line_num" "$line_content" "$pattern"
+    done <<< "$matches"
+  done
+}
+
+# scan_prose <file> <pattern>...  — like scan_tier, but suppresses a match when
+# its line also carries anti-injection framing (DEFENSIVE_CONTEXT). Used for the
+# prompt-injection tier so a skill documenting its own defense doesn't FAIL
+# itself. Same "L<n>: <content> [pattern: <p>]" output contract as scan_tier.
+scan_prose() {
+  local file="$1"; shift
+  local pattern matches match line_num line_content
+  for pattern in "$@"; do
+    matches=$(grep -nE "$pattern" "$file" 2>/dev/null || true)
+    [[ -n "$matches" ]] || continue
+    while IFS= read -r match; do
+      line_num="${match%%:*}"
+      line_content="${match#*:}"
+      # Defensive framing (keyword) or a cited/quoted phrase → not an attack. Skip.
+      if printf '%s' "$line_content" | grep -qiE "$DEFENSIVE_CONTEXT" \
+         || printf '%s' "$line_content" | grep -qE "$INJECTION_CITED"; then
+        continue
+      fi
+      line_content="${line_content:0:120}"  # truncate
+      printf 'L%s: %s [pattern: %s]\n' "$line_num" "$line_content" "$pattern"
+    done <<< "$matches"
+  done
+}
+
 scan_file() {
   local file="$1"
   local skill_name
@@ -192,51 +293,15 @@ scan_file() {
   local content
   content=$(cat "$file")
 
-  local highs=()
-  local mediums=()
-  local lows=()
-
-  # Check HIGH patterns
-  for pattern in "${HIGH_PATTERNS[@]}"; do
-    local matches
-    matches=$(grep -nE "$pattern" "$file" 2>/dev/null || true)
-    if [[ -n "$matches" ]]; then
-      while IFS= read -r match; do
-        local line_num="${match%%:*}"
-        local line_content="${match#*:}"
-        line_content="${line_content:0:120}"  # truncate
-        highs+=("L${line_num}: ${line_content} [pattern: ${pattern}]")
-      done <<< "$matches"
-    fi
-  done
-
-  # Check MEDIUM patterns
-  for pattern in "${MEDIUM_PATTERNS[@]}"; do
-    local matches
-    matches=$(grep -nE "$pattern" "$file" 2>/dev/null || true)
-    if [[ -n "$matches" ]]; then
-      while IFS= read -r match; do
-        local line_num="${match%%:*}"
-        local line_content="${match#*:}"
-        line_content="${line_content:0:120}"
-        mediums+=("L${line_num}: ${line_content} [pattern: ${pattern}]")
-      done <<< "$matches"
-    fi
-  done
-
-  # Check LOW patterns
-  for pattern in "${LOW_PATTERNS[@]}"; do
-    local matches
-    matches=$(grep -nE "$pattern" "$file" 2>/dev/null || true)
-    if [[ -n "$matches" ]]; then
-      while IFS= read -r match; do
-        local line_num="${match%%:*}"
-        local line_content="${match#*:}"
-        line_content="${line_content:0:120}"
-        lows+=("L${line_num}: ${line_content} [pattern: ${pattern}]")
-      done <<< "$matches"
-    fi
-  done
+  # Collect matches per tier via scan_tier. Arrays start empty; a tier with no
+  # matches stays empty (0 elements) — preserved for the Bash-3.2 ${#arr[@]} gates below.
+  local highs=() mediums=() lows=() _line
+  # HIGH is two tiers: operational sinks (scan_tier) + prompt injection
+  # (scan_prose, which drops defensive framing). Both feed the same highs array.
+  while IFS= read -r _line; do highs+=("$_line");   done < <(scan_tier  "$file" "${HIGH_SINK_PATTERNS[@]}")
+  while IFS= read -r _line; do highs+=("$_line");   done < <(scan_prose "$file" "${HIGH_INJECTION_PATTERNS[@]}")
+  while IFS= read -r _line; do mediums+=("$_line"); done < <(scan_tier "$file" "${MEDIUM_PATTERNS[@]}")
+  while IFS= read -r _line; do lows+=("$_line");    done < <(scan_tier "$file" "${LOW_PATTERNS[@]}")
 
   # Determine result
   local status="PASS"

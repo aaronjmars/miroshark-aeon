@@ -8,17 +8,19 @@
 #
 # Default is `write` for backward compatibility: most skills legitimately write
 # (create-skill, article, reflect…), so read-only is opt-in per SKILL.md.
-# Enforcement is by allowedTools:
-# read-only drops Write,Edit,Bash(git:*),Bash(gh:*) so the skill physically can't
-# commit/push/edit. A post-run guard in the workflow reverts any stray writes that
-# slipped through redirections, as defense-in-depth.
+#
+# This script decides the TIER. It is not, by itself, the enforcement — see
+# docs/CAPABILITIES.md for the full picture. The allowedTools string below is one
+# of three layers: the tier also reaches `run-harness --mode`, which write-locks
+# the workspace with an OS sandbox (harness-adapter/lib/sandbox.sh) on every
+# harness, and a post-run guard in the workflow reverts anything that still
+# landed. The allowlist alone was never sufficient — a shell redirection routes
+# around it, and only claude and pi consume it at all.
 #
 # Usage:
 #   scripts/skill_mode.sh mode <skill-name>     -> prints read-only | write
 #   scripts/skill_mode.sh allowed-tools <mode>  -> prints the --allowedTools string
-#   scripts/skill_mode.sh grok-args <mode>      -> prints grok CLI permission flags,
-#                                                  one argv token per line (for the
-#                                                  Grok Build harness; see run-grok.sh)
+#   scripts/skill_mode.sh grok-run-env <skill>  -> prints `export GROK_*=…` lines
 set -euo pipefail
 
 # Tools every tier gets: read, search, notify, and read-only/local shell helpers.
@@ -47,17 +49,27 @@ WRITE_TOOLS="Write,Edit,Bash(gh:*),Bash(git:*),Bash(python3:*),Bash(python:*)"
 # a live-test showed the run logging that denial as "Blocked by sandbox". These are
 # read-only static-analysis tools (no repo/network mutation of their own).
 WRITE_TOOLS="$WRITE_TOOLS,Bash(semgrep:*),Bash(osv-scanner:*),Bash(trufflehog:*),Bash(slither:*)"
+# cargo (vuln-scanner Arm A, step A3.5 — dynamic testing). Staged by
+# scripts/stage-vuln-scanner.sh (nightly toolchain + cargo-fuzz, workflow step,
+# same reason as Foundry below — the sandbox denies toolchain installs in-run).
+# Unlike the scanners above, this is not narrow: `cargo fuzz run` compiles and
+# executes the cloned repo's own code, and `cargo` itself is a much wider surface
+# than a single-purpose analyzer. Accepted deliberately — see A3.5 in
+# skills/vuln-scanner/SKILL.md for the trust-boundary reasoning. The skill only
+# reaches for it when the clone already ships fuzz/fuzz_targets; the guard lives
+# in the skill, not here.
+WRITE_TOOLS="$WRITE_TOOLS,Bash(cargo:*)"
+# Foundry bare-names + the key-safe runner for deploy-uni-hook. Foundry is staged by
+# scripts/stage-deploy-uni-hook.sh (the sandbox denies in-run installs); the skill then
+# builds/simulates/broadcasts by bare name. `./hook-deploy.sh` hides the deployer key
+# from the command line (secretcurl pattern). Without this grant the invocation is denied.
+WRITE_TOOLS="$WRITE_TOOLS,Bash(forge:*),Bash(cast:*),Bash(./hook-deploy.sh:*)"
 
 resolve_mode() {
-  local skill="$1" f="skills/$1/SKILL.md" m=""
-  if [ -f "$f" ]; then
-    # value after 'mode:', stripping an inline '# comment', quotes, and surrounding ws
-    m=$(awk '/^---$/{n++; next}
-             n==1 && /^mode:/{
-               v=$0; sub(/^mode:[ \t]*/,"",v); sub(/[ \t]*#.*$/,"",v);
-               gsub(/^[ \t"]+|[ \t"]+$/,"",v); print v; exit
-             }' "$f")
-  fi
+  # `mode:` frontmatter scalar via the shared _fm reader (strips inline comment,
+  # quotes, and surrounding ws); absent file/field -> "" -> the write default.
+  local m
+  m=$(_fm "$1" mode)
   case "$m" in
     read-only|readonly|read_only) echo "read-only" ;;
     write|"")                     echo "write" ;;
@@ -68,67 +80,28 @@ resolve_mode() {
 # Write tier = base tools + the repo-mutation tools.
 write_tools() { echo "$BASE_TOOLS,$WRITE_TOOLS"; }
 
-# --- Grok Build harness permission mapping ----------------------------------
-# The grok CLI uses a DIFFERENT permission grammar from Claude Code's
-# --allowedTools: `--allow`/`--deny` rules over categories
-# Bash/Edit/Read/Grep/Write/MCPTool/WebFetch, plus a `--permission-mode`.
-# Bash rules use a space-glob — `Bash(git *)` — not Claude's colon `Bash(git:*)`.
+# --- Why there is no grok permission mapping here ---------------------------
+# There used to be a `grok-args` subcommand that emitted grok's own permission
+# grammar (`--allow 'Bash(git *)'` rules plus `--sandbox read-only`) as this
+# script's grok-side mirror of allowedTools. It is DELETED, not merely unused,
+# and it should not come back in that shape — both halves of it were wrong:
 #
-# Permission mode: we pass `--permission-mode bypassPermissions` — the ONE mode
-# grok actually wires headlessly (per grok's permissions docs + our testing). It
-# APPROVES every tool call instead of refusing ones we didn't explicitly allowlist.
-# That is deliberate and load-bearing: skills are authored for Claude Code and WILL
-# reach for tools we never pre-listed (a `gh api` read, a Claude built-in). Under
-# the old refuse-a-non-allowlisted-tool behavior (headless `dontAsk`), grok aborted
-# the ENTIRE turn — stopReason=Cancelled, empty/partial output — which is exactly
-# how Claude-authored skills failed on grok. Approving-all makes grok DEGRADE like
-# Claude (a missing/failed tool returns an error the model routes around) instead
-# of Cancelling. Paired with the --rules compat preamble in run-grok.sh.
+#   * The `--allow` rules never gated anything. grok aborts its ENTIRE turn on a
+#     denied tool (stopReason=Cancelled) rather than degrading, and skills are
+#     authored for Claude Code, so they reach for tools no allowlist predicted.
+#     harness-adapter/adapters/grok.sh therefore runs --permission-mode
+#     bypassPermissions and carries NO allowlist and NO --deny rules, on purpose.
+#   * grok's own `--sandbox read-only` is silently ignored on grok 0.2.101 (writes
+#     still land) and nest-conflicts with the wrapper sandbox.
 #
-# Consequence: the `--allow` rules below are now ADVISORY (additive grants, redundant
-# under bypass) — kept only to document each tier's intended capability, NOT as the
-# guard. The REAL guarantee that a read-only skill can't mutate is grok's OS-level
-# `--sandbox read-only` profile (added below) plus the workflow's post-run stray-write
-# revert. NEVER add `--deny` rules here: a denied tool can re-trigger the very
-# turn-abort we are removing.
-#
-# We still mirror the SAME capability intent as BASE_TOOLS / WRITE_TOOLS above, so
-# the intent reads identically on either harness: read-only documents no Edit and no
-# git/gh/python; write adds them.
-#
-# Output: one argv token per line, so run-grok.sh can read it with
-#   mapfile -t GROK_ARGS < <(skill_mode.sh grok-args "$MODE")
-# and pass "${GROK_ARGS[@]}" straight through (a Bash rule's embedded space is
-# preserved because each whole line becomes one array element).
-
-# Bash command globs allowed on every tier (mirror BASE_TOOLS' Bash(...:*) set).
-GROK_BASE_BASH="curl jq ./notify ./notify-jsonrender mkdir ls cat chmod date echo node npm npx head tail wc sort grep"
-# Additional Bash command globs for the write tier (mirror WRITE_TOOLS).
-GROK_WRITE_BASH="gh git python3 python semgrep osv-scanner trufflehog slither"
-
-grok_args() {
-  local mode="$1"
-  # bypassPermissions = approve every tool call (the one mode grok wires headlessly),
-  # so a Claude-authored skill reaching for a non-allowlisted tool degrades instead of
-  # Cancelling the turn. The allow rules below are advisory; --sandbox + the post-run
-  # revert are the read-only guard. See the block comment above.
-  printf '%s\n' --permission-mode bypassPermissions
-  if [ "$mode" = "read-only" ]; then
-    printf '%s\n' --sandbox read-only
-  fi
-  # Advisory grants (redundant under bypass) that document each tier's capability:
-  # read/search/web everywhere; Edit + git/gh/python added on the write tier below.
-  printf '%s\n' --allow Read --allow Grep --allow WebFetch
-  local cmd
-  for cmd in $GROK_BASE_BASH; do printf '%s\n' --allow "Bash($cmd *)"; done
-  if [ "$mode" != "read-only" ]; then
-    printf '%s\n' --allow Edit
-    for cmd in $GROK_WRITE_BASH; do printf '%s\n' --allow "Bash($cmd *)"; done
-  fi
-}
+# So read-only on grok — as on all six harnesses — is enforced by the dispatcher's
+# OS sandbox (harness-adapter/lib/sandbox.sh: bwrap / sandbox-exec write-locks the
+# workspace) plus the workflow's post-run revert. Nothing about that is expressible
+# in this file, which is why the mapping is gone instead of rewritten.
 
 # --- Grok Build run-shaping: frontmatter -> GROK_* env -----------------------
-# Map optional per-skill frontmatter to the env vars run-grok.sh reads, so a
+# Map optional per-skill frontmatter to the env vars harness-adapter's grok
+# adapter reads, so a
 # skill can opt into grok's newer headless features without any workflow change:
 #
 #   effort: high            # low|medium|high|xhigh|max  -> --effort
@@ -137,9 +110,10 @@ grok_args() {
 #   best_of_n: 3            # run N ways, keep the best   -> --best-of-n
 #   verify: true            # append a self-check loop    -> --check
 #
-# Output is `export GROK_X=...` lines for exactly the fields present (so unset
-# fields fall through to run-grok.sh's defaults, and the scorer's own
-# GROK_JSON_SCHEMA is never clobbered). aeon.yml's grok branch evals this.
+# Output is `export GROK_X=...` lines for exactly the fields present, so unset
+# fields fall through to the adapter's defaults. aeon.yml's grok branch evals this.
+# (This note used to reserve GROK_JSON_SCHEMA for the scorer. The scorer never
+# set it and now goes schema-less deliberately, so the knob is gone.)
 # read one frontmatter scalar (first '---' block), stripping inline # comment,
 # quotes and surrounding whitespace. Prints nothing if absent.
 _fm() {
@@ -147,8 +121,12 @@ _fm() {
   [ -f "$f" ] || return 0
   awk -v k="$key" '
     /^---$/{n++; next}
-    n==1 && $0 ~ "^"k":" {
-      v=$0; sub("^"k":[ \t]*","",v); sub(/[ \t]*#.*$/,"",v);
+    n!=1{next}
+    /^[^ \t]/{inmeta=0}
+    /^metadata:/{inmeta=1}
+    # legacy top-level scalar, or the Agent Skills spec form nested under metadata:
+    $0 ~ "^"k":" || (inmeta && $0 ~ "^[ \t]+"k":") {
+      v=$0; sub("^[ \t]*"k":[ \t]*","",v); sub(/[ \t]*#.*$/,"",v);
       gsub(/^[ \t"'"'"']+|[ \t"'"'"']+$/,"",v); print v; exit
     }' "$f"
 }
@@ -168,11 +146,6 @@ case "${1:-}" in
       read-only|readonly|read_only) echo "$BASE_TOOLS" ;;
       *)                            write_tools ;;
     esac ;;
-  grok-args)
-    case "${2:-write}" in
-      read-only|readonly|read_only) grok_args read-only ;;
-      *)                            grok_args write ;;
-    esac ;;
   grok-run-env)  grok_run_env "${2:?skill name required}" ;;
-  *) echo "usage: skill_mode.sh {mode <skill>|allowed-tools <mode>|grok-args <mode>|grok-run-env <skill>}" >&2; exit 2 ;;
+  *) echo "usage: skill_mode.sh {mode <skill>|allowed-tools <mode>|grok-run-env <skill>}" >&2; exit 2 ;;
 esac

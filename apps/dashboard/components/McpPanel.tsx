@@ -3,13 +3,27 @@
 import { useState, useEffect } from 'react'
 import { Scramble } from './ui/Animated'
 import { inputCls } from '../lib/utils'
-import { MCP_CATALOG } from '../lib/mcp-catalog'
-import type { Secret, McpServer, McpServers } from '../lib/types'
+import { MCP_CATALOG, tokenVar } from '../lib/mcp-catalog'
+import type { Secret, McpServer, McpServers, McpAuthResponse, Harness } from '../lib/types'
 
 // One-click starters - public HTTP MCP servers that install with no token.
 const FEATURED = MCP_CATALOG
 
+// Pi rejects MCP as a design decision — its adapter warns and skips every server
+// (`pi does not support MCP by design`), so a server wired here would silently
+// no-op at run time. The controls are disabled and the operator is told to switch
+// harness. Keep in sync with harness-adapter/adapters/pi.sh.
+//
+// This gate used to target CODEX, on the belief that `codex exec` auto-denied
+// every tool call (openai/codex#24135). Re-measured live 2026-07-27 on codex-cli
+// 0.144.6: codex calls MCP tools fine, and the real fault was ours — the adapter
+// emitted `headers`/`env` as JSON objects where codex wants TOML inline tables,
+// which crashed config load before the model started. Fixed in
+// harness-adapter/lib/mcp-translate.sh; codex is a supported MCP harness now.
+const MCP_DISABLED_MSG = "Pi does not support MCP - it rejects MCP servers by design, so any server configured here is skipped at run time. Switch the harness to claude, grok, codex, kimi or vibe to use MCP."
+
 interface McpPanelProps {
+  harness: Harness
   servers: McpServers
   loading: boolean
   saving: boolean
@@ -18,6 +32,7 @@ interface McpPanelProps {
   onSave: (servers: McpServers) => void
   onSetSecret: (name: string, value: string) => void
   onDeleteSecret: (name: string) => void
+  onGoToSecret: (name: string) => void
 }
 
 // The ${VAR} secret references a server needs at runtime.
@@ -32,7 +47,7 @@ function refsOf(server: McpServer): string[] {
 function describe(server: McpServer): string {
   if (typeof server.url === 'string') return server.url
   if (typeof server.command === 'string') {
-    const args = Array.isArray(server.args) ? ' ' + (server.args as string[]).join(' ') : ''
+    const args = Array.isArray(server.args) ? ' ' + server.args.join(' ') : ''
     return server.command + args
   }
   return '-'
@@ -43,7 +58,11 @@ function transportOf(server: McpServer): string {
   return typeof server.command === 'string' ? 'stdio' : 'http'
 }
 
-export function McpPanel({ servers, loading, saving, secrets, busy, onSave, onSetSecret, onDeleteSecret }: McpPanelProps) {
+export function McpPanel({ harness, servers, loading, saving, secrets, busy, onSave, onSetSecret, onDeleteSecret, onGoToSecret }: McpPanelProps) {
+  // Pi skips MCP entirely (see MCP_DISABLED_MSG): grey out every MCP action so a
+  // run isn't configured to use tools it will silently skip.
+  const mcpDisabled = harness === 'pi'
+
   const [draft, setDraft] = useState<McpServers>(servers)
   useEffect(() => { setDraft(servers) }, [servers])
 
@@ -66,10 +85,17 @@ export function McpPanel({ servers, loading, saving, secrets, busy, onSave, onSe
   const [command, setCommand] = useState('npx')
   const [args, setArgs] = useState('')
 
+  // OAuth connect (featured servers flagged `oauth`): the dashboard drives the
+  // browser flow server-side (POST /api/mcp-auth), which captures the tokens as
+  // secrets and returns the server descriptor to add. Per-slug busy + error.
+  const [oauthBusy, setOauthBusy] = useState<string | null>(null)
+  const [oauthError, setOauthError] = useState('')
+
   // The operator never types a secret name. They paste the bearer token (which
-  // IS the secret); we derive the env-var to store it under from the server name.
+  // IS the secret); tokenVar (lib/mcp-catalog) derives the env-var to store it
+  // under from the server name - the same derivation the OAuth flow and the
+  // Access Keys MCP group use, so all three agree on what a server's creds are called.
   const slugify = (s: string) => s.trim().toLowerCase().replace(/[^a-z0-9_-]/g, '-').replace(/^-+|-+$/g, '')
-  const tokenVar = (slug: string) => 'MCP_' + slug.toUpperCase().replace(/[^A-Z0-9_]/g, '_') + '_TOKEN'
 
   const dirty = JSON.stringify(draft) !== JSON.stringify(servers)
   const names = Object.keys(draft)
@@ -113,12 +139,39 @@ export function McpPanel({ servers, loading, saving, secrets, busy, onSave, onSe
   const isFeaturedInstalled = (url: string) => Object.values(draft).some(s => s.url === url)
   const installFeatured = (f: typeof FEATURED[number]) => {
     if (isFeaturedInstalled(f.url)) return
+    if (f.oauth) { connectOAuth(f); return }
     const slug = draft[f.slug] ? `${f.slug}-mcp` : f.slug
     const server: McpServer = { type: f.transport ?? 'http', url: f.url }
     if (f.authSecret) server.headers = { Authorization: `Bearer \${${f.authSecret}}` }
     const next = { ...draft, [slug]: server }
     setDraft(next)
     onSave(next)
+  }
+
+  // Run the browser OAuth flow for a featured server, then add the returned
+  // descriptor via the normal save path. The tokens are captured + stored
+  // server-side; the panel never sees them.
+  const connectOAuth = async (f: typeof FEATURED[number]) => {
+    const slug = draft[f.slug] ? `${f.slug}-mcp` : f.slug
+    setOauthBusy(f.slug); setOauthError('')
+    try {
+      const res = await fetch('/api/mcp-auth', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ slug, url: f.url, name: f.name, scopes: f.oauthScopes, clientId: f.oauthClientId }),
+      })
+      const data = await res.json().catch(() => ({})) as McpAuthResponse
+      if (!res.ok || !data.ok) throw new Error(data.error || `Connect failed (${res.status})`)
+      if (!data.server) throw new Error('Connect returned no server descriptor')
+      const next = { ...draft, [slug]: data.server }
+      setDraft(next)
+      onSave(next)
+      if (data.warning) setOauthError(`Connected, but: ${data.warning}`)
+    } catch (e) {
+      setOauthError(e instanceof Error ? e.message : 'OAuth connect failed')
+    } finally {
+      setOauthBusy(null)
+    }
   }
 
   const removeServer = (n: string) => {
@@ -150,6 +203,15 @@ export function McpPanel({ servers, loading, saving, secrets, busy, onSave, onSe
         </div>
       </section>
 
+      {mcpDisabled && (
+        <div className="border border-aeon-red/40 bg-aeon-panel px-[var(--space-md)] py-[var(--space-sm)]">
+          <p className="text-[10px] font-mono uppercase tracking-[0.14em] text-aeon-red mb-1.5">⚠ MCP is unavailable on the Pi harness</p>
+          <p className="text-[11px] text-primary-40 leading-relaxed">
+            {MCP_DISABLED_MSG} You can still view your servers below, but the actions are disabled until you switch harness in the top bar.
+          </p>
+        </div>
+      )}
+
       <section className="border-t border-[rgba(250,250,250,0.10)] pt-6">
         <div className="flex items-center gap-3 mb-4">
           <span className="font-display text-[13px] tracking-[0.18em] text-aeon-red uppercase">Featured</span>
@@ -168,14 +230,32 @@ export function McpPanel({ servers, loading, saving, secrets, busy, onSave, onSe
                   <div className="text-[11px] text-primary-40 font-mono truncate">{f.url}</div>
                 </div>
                 {installed ? (
-                  <span className="text-[10px] font-mono uppercase tracking-[0.14em] text-eva-green shrink-0">✓ installed</span>
+                  <span className="text-[10px] font-mono uppercase tracking-[0.14em] text-aeon-green shrink-0">✓ installed</span>
                 ) : (
-                  <button onClick={() => installFeatured(f)} disabled={saving} className="btn-mini-go shrink-0">Install</button>
+                  <button onClick={() => installFeatured(f)} disabled={saving || oauthBusy === f.slug || mcpDisabled} className="btn-mini-go shrink-0" title={mcpDisabled ? MCP_DISABLED_MSG : f.oauth ? 'Opens your browser to authorize, then stores the tokens' : undefined}>
+                    {oauthBusy === f.slug ? 'Connecting…' : f.oauth ? 'Connect' : 'Install'}
+                  </button>
                 )}
               </div>
             )
           })}
         </div>
+        {oauthError && <p className="mt-3 text-[11px] font-mono text-aeon-red">{oauthError}</p>}
+        {/* Secrets-PAT setup section. OAuth providers rotate their refresh token
+            on every run; the runner can only save each rotation back if a
+            secrets-write PAT is set. Without one, an OAuth MCP server works for
+            exactly one run after Connect and then its auth breaks. Shown until
+            GH_SECRETS_PAT (or repo-wide GH_GLOBAL) exists; hidden once set. */}
+        {!(isSecretSet('GH_SECRETS_PAT') || isSecretSet('GH_GLOBAL')) && (
+          <div className="mt-3 border border-[rgba(250,250,250,0.10)] bg-aeon-panel px-[var(--space-md)] py-[var(--space-sm)]">
+            <p className="text-[10px] font-mono uppercase tracking-[0.14em] text-aeon-red mb-1.5">⚠ OAuth MCP servers won&apos;t keep working without a secrets PAT</p>
+            <p className="text-[11px] text-primary-40 leading-relaxed">
+              Providers rotate their refresh token on every run, and the runner needs a secrets-write credential to save each rotation — without it a Connected server works once, then its auth breaks. To set it up: create a fine-grained PAT at <a href="https://github.com/settings/personal-access-tokens" target="_blank" rel="noopener noreferrer" className="text-primary-70 underline decoration-dotted underline-offset-2 hover:text-aeon-fg transition-colors">github.com/settings/personal-access-tokens</a>, add this repo under <span className="text-primary-70">Repository access</span>, grant <span className="text-primary-70">Secrets: Read and write</span>, and save it as{' '}
+              <button onClick={() => onGoToSecret('GH_SECRETS_PAT')} title="Open in Settings to set this key" className="text-aeon-red-alert underline decoration-dotted underline-offset-2 hover:text-aeon-fg transition-colors">GH_SECRETS_PAT</button>
+              {' '}in Settings. Already Connected a server? Re-connect it once after adding the PAT.
+            </p>
+          </div>
+        )}
       </section>
 
       <section className="border-t border-[rgba(250,250,250,0.10)] pt-6">
@@ -209,15 +289,15 @@ export function McpPanel({ servers, loading, saving, secrets, busy, onSave, onSe
                               const pending = !!busy[`sec-${r}`]
                               return (
                                 <div key={r} className="flex items-center gap-2">
-                                  <span className={`text-[10px] font-mono border px-1.5 py-0.5 shrink-0 ${ok ? 'text-eva-green border-eva-green/30' : 'text-eva-orange border-eva-orange/30'}`}>${'{'}{r}{'}'}</span>
+                                  <span className={`text-[10px] font-mono border px-1.5 py-0.5 shrink-0 ${ok ? 'text-aeon-green border-aeon-green/30' : 'text-aeon-red border-aeon-red/30'}`}>${'{'}{r}{'}'}</span>
                                   {ok ? (
-                                    <span className="text-[10px] font-mono text-eva-green">✓ set</span>
+                                    <span className="text-[10px] font-mono text-aeon-green">✓ set</span>
                                   ) : pending ? (
                                     <span className="text-[10px] font-mono text-primary-40">setting…</span>
                                   ) : (
                                     <>
-                                      <input type="password" value={secretDraft[r] ?? ''} onChange={e => setSecretDraft(d => ({ ...d, [r]: e.target.value }))} onKeyDown={e => e.key === 'Enter' && saveRowSecret(r)} placeholder="paste bearer token - saved to GitHub & wired in" className="flex-1 min-w-0 bg-aeon-bg border border-[rgba(250,250,250,0.10)] px-2 py-1 text-[11px] font-mono text-primary-100 outline-none focus:border-eva-orange transition-colors cursor-target" />
-                                      <button onClick={() => saveRowSecret(r)} disabled={!(secretDraft[r] ?? '').trim()} className="btn-mini-go shrink-0">Set</button>
+                                      <input type="password" value={secretDraft[r] ?? ''} onChange={e => setSecretDraft(d => ({ ...d, [r]: e.target.value }))} onKeyDown={e => e.key === 'Enter' && saveRowSecret(r)} placeholder="paste bearer token - saved to GitHub & wired in" className="flex-1 min-w-0 bg-aeon-bg border border-[rgba(250,250,250,0.10)] px-2 py-1 text-[11px] font-mono text-primary-100 outline-none focus:border-aeon-red transition-colors cursor-target" />
+                                      <button onClick={() => saveRowSecret(r)} disabled={!(secretDraft[r] ?? '').trim() || mcpDisabled} title={mcpDisabled ? MCP_DISABLED_MSG : undefined} className="btn-mini-go shrink-0">Set</button>
                                     </>
                                   )}
                                 </div>
@@ -268,21 +348,21 @@ export function McpPanel({ servers, loading, saving, secrets, busy, onSave, onSe
                   </div>
                 </div>
               ) : (
-                <button onClick={() => setAdding(true)} className="w-full text-sm font-mono uppercase tracking-[0.14em] text-primary-60 border border-dashed border-[rgba(250,250,250,0.16)] py-3.5 hover:text-eva-orange hover:border-eva-orange/40 transition-colors">+ Add server</button>
+                <button onClick={() => setAdding(true)} disabled={mcpDisabled} title={mcpDisabled ? MCP_DISABLED_MSG : undefined} className="w-full text-sm font-mono uppercase tracking-[0.14em] text-primary-60 border border-dashed border-[rgba(250,250,250,0.16)] py-3.5 hover:text-aeon-red hover:border-aeon-red/40 transition-colors disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:text-primary-60 disabled:hover:border-[rgba(250,250,250,0.16)]">+ Add server</button>
               )}
             </div>
 
             {/* Footer: secrets reminder + save */}
             {allRefs.some(r => !isSecretSet(r)) && (
               <p className="mt-5 text-[11px] text-primary-40 leading-relaxed">
-                <span className="text-eva-orange">Secrets:</span> paste each unset token in the box on its server above - it saves straight to GitHub
+                <span className="text-aeon-red">Secrets:</span> paste each unset token in the box on its server above - it saves straight to GitHub
                 and the runner wires it into every run automatically. Until set, runs skip MCP rather than fail.
               </p>
             )}
             <div className="flex items-center justify-end mt-4">
               <div className="flex items-center gap-2">
                 {dirty && <button onClick={() => setDraft(servers)} className="btn-mini">Revert</button>}
-                <button onClick={() => onSave(draft)} disabled={!dirty || saving} className="btn-mini-go">
+                <button onClick={() => onSave(draft)} disabled={!dirty || saving || mcpDisabled} title={mcpDisabled ? MCP_DISABLED_MSG : undefined} className="btn-mini-go">
                   {saving ? 'Saving…' : 'Save'}
                 </button>
               </div>

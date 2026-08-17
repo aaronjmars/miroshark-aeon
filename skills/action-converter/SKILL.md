@@ -1,10 +1,12 @@
 ---
-type: Skill
-name: Action Converter
-category: basics
+name: action-converter
 description: 5 concrete real-life actions, leverage-scored against open loops with specificity and anti-fluff gates
-var: ""
-tags: [meta]
+metadata:
+  title: Action Converter
+  category: basics
+  var: ""
+  tags:
+    - meta
 ---
 <!-- autoresearch: variation B — sharper output via specificity gates, leverage scoring, banned-phrase lint, open-loop anchoring, empty-state taxonomy -->
 
@@ -133,7 +135,7 @@ Notification rules:
 
 Append:
 ```
-## Action Converter
+### action-converter
 - **Mode:** OK | BOOTSTRAP | THIN | NO_CONTEXT
 - **Focus:** <var or "general">
 - **Shape:** <today's shape line>

@@ -1,9 +1,10 @@
 // Output helpers shared by every command. A single `--json` switch flips all
 // human rendering to machine-parseable JSON so the CLI drops into scripts.
 
+import { ghAvailable } from '../../dashboard/lib/gh.ts'
+
 let jsonMode = false
 export function setJsonMode(on: boolean) { jsonMode = on }
-export function isJsonMode() { return jsonMode }
 
 let dryRun = false
 export function setDryRun(on: boolean) { dryRun = on }
@@ -31,6 +32,10 @@ export function emit(data: unknown, human: () => void) {
 
 // Print a left-aligned column table. `headers` label the columns; each row is a
 // string per column. Column widths size to the widest cell (header included).
+export function truncate(s: string, n: number) {
+  return s.length > n ? s.slice(0, n - 1) + '…' : s
+}
+
 export function table(headers: string[], rows: string[][]) {
   const widths = headers.map((h, i) =>
     Math.max(h.length, ...rows.map(r => stripAnsi(r[i] ?? '').length)))
@@ -56,4 +61,10 @@ export function fail(message: string, code = 1): never {
     console.error(c.red('error: ') + message)
   }
   process.exit(code)
+}
+
+// Guard for every command that shells out to `gh`. Sites that need to say what
+// specifically failed (e.g. `secrets ls`) keep their own `fail(...)` message.
+export function requireGh(): void {
+  if (!ghAvailable()) fail('GitHub CLI not authenticated. Run: gh auth login')
 }
