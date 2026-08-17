@@ -564,12 +564,20 @@ jobs:
           OUTPUT_TOKENS=$(echo "$CLAUDE_OUTPUT" | jq '.usage.output_tokens // 0')
           CACHE_READ=$(echo "$CLAUDE_OUTPUT" | jq '.usage.cache_read_input_tokens // 0')
           CACHE_CREATION=$(echo "$CLAUDE_OUTPUT" | jq '.usage.cache_creation_input_tokens // 0')
+          # Per-lifetime write split, present on Anthropic responses beside the
+          # aggregate above. The CSV keeps only the aggregate; the trace sidecar
+          # below needs the split because a 1h write bills at 2x where a 5m write
+          # bills at 1.25x, and the lifetime cannot be inferred from the total.
+          CACHE_5M=$(echo "$CLAUDE_OUTPUT" | jq '.usage.cache_creation.ephemeral_5m_input_tokens // 0')
+          CACHE_1H=$(echo "$CLAUDE_OUTPUT" | jq '.usage.cache_creation.ephemeral_1h_input_tokens // 0')
           TOTAL_TOKENS=$((INPUT_TOKENS + OUTPUT_TOKENS))
 
           echo "SKILL_INPUT_TOKENS=$INPUT_TOKENS" >> "$GITHUB_OUTPUT"
           echo "SKILL_OUTPUT_TOKENS=$OUTPUT_TOKENS" >> "$GITHUB_OUTPUT"
           echo "SKILL_CACHE_READ_TOKENS=$CACHE_READ" >> "$GITHUB_OUTPUT"
           echo "SKILL_CACHE_CREATION_TOKENS=$CACHE_CREATION" >> "$GITHUB_OUTPUT"
+          echo "SKILL_CACHE_5M_TOKENS=$CACHE_5M" >> "$GITHUB_OUTPUT"
+          echo "SKILL_CACHE_1H_TOKENS=$CACHE_1H" >> "$GITHUB_OUTPUT"
           echo "SKILL_TOTAL_TOKENS=$TOTAL_TOKENS" >> "$GITHUB_OUTPUT"
           # Session id → lets the post-run "Under the hood" step locate this run's
           # transcript (~/.claude/projects/*/<id>.jsonl) and tally tool actions.
@@ -623,6 +631,29 @@ jobs:
             echo "date,skill,model,input_tokens,output_tokens,cache_read,cache_creation" > "$CSV"
           fi
           echo "$(date -u +%Y-%m-%d),${{ steps.skill.outputs.name }},${{ steps.run.outputs.SKILL_MODEL }},${{ steps.run.outputs.SKILL_INPUT_TOKENS }},${{ steps.run.outputs.SKILL_OUTPUT_TOKENS }},${{ steps.run.outputs.SKILL_CACHE_READ_TOKENS }},${{ steps.run.outputs.SKILL_CACHE_CREATION_TOKENS }}" >> "$CSV"
+
+          # cacheeconomics trace sidecar: one line per run, in the tool's
+          # normalized-trace schema. Additive to the CSV above, which is
+          # unchanged. It carries three things the daily-aggregate CSV cannot:
+          # the 5m/1h write split (so writes price by real lifetime and
+          # reconcile against an invoice), a full ISO timestamp (so inter-run
+          # cadence findings can run), and the run id as the session (so a
+          # model bump on one day is not misread as a mid-session model switch).
+          # Empty token outputs coerce to 0; a non-Claude harness therefore
+          # writes an all-zero row, which the analyzer drops as non-analysable.
+          I="${{ steps.run.outputs.SKILL_INPUT_TOKENS }}"
+          R="${{ steps.run.outputs.SKILL_CACHE_READ_TOKENS }}"
+          M5="${{ steps.run.outputs.SKILL_CACHE_5M_TOKENS }}"
+          H1="${{ steps.run.outputs.SKILL_CACHE_1H_TOKENS }}"
+          jq -cn \
+            --arg ts "$(date -u +%FT%TZ)" \
+            --arg model "${{ steps.run.outputs.SKILL_MODEL }}" \
+            --arg skill "${{ steps.skill.outputs.name }}" \
+            --arg run "${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" \
+            --argjson i "${I:-0}" --argjson r "${R:-0}" \
+            --argjson m5 "${M5:-0}" --argjson h1 "${H1:-0}" \
+            '{request_id:("run_"+$run),sent_at:$ts,model:$model,agent:$skill,session:$run,target_id:"anthropic/direct",status:200,usage:{input_tokens:$i,cache_read_input_tokens:$r,cache_creation:{ephemeral_5m_input_tokens:$m5,ephemeral_1h_input_tokens:$h1}}}' \
+            >> memory/token-trace.jsonl
 
       - name: Capture skill output
         if: steps.work.outputs.mode != '' && steps.run.outcome == 'success'
