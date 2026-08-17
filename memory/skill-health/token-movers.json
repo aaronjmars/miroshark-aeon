@@ -1,15 +1,11 @@
 {
   "skill": "token-movers",
-  "last_analyzed": "2026-08-16T06:05:05Z",
-  "quality_score": 3,
-  "assessment": "Completed analysis and artifact creation (article, logs) but failed to deliver the primary notification due to permission blocks.",
+  "last_analyzed": "2026-08-17T06:05:34Z",
+  "quality_score": 4,
+  "assessment": "Substantive single-token analysis with cross-validated data, clear BREAKOUT classification, and actionable metrics on accumulation pattern",
   "flags": [],
   "avg_score": 4,
   "history": [
-    {
-      "date": "2026-07-14",
-      "score": 4
-    },
     {
       "date": "2026-07-15",
       "score": 4
@@ -125,6 +121,10 @@
     {
       "date": "2026-08-16",
       "score": 3
+    },
+    {
+      "date": "2026-08-17",
+      "score": 4
     }
   ]
 }
