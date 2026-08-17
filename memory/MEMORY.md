@@ -64,7 +64,7 @@ See `memory/watched-repos.md` — `aaronjmars/MiroShark`, `aaronjmars/miroshark-
 - token-movers: during multi-day reporting gaps, compute 24h Δ from GT/DS native `h24` fields rather than the stale stored price (used 2026-08-04 after a 5-day gap).
 
 ## Active Targets
-- Hyperstition: MiroShark 1,000 stars by 2026-04-30 — MISSED Apr 30 (911), CROSSED 2026-05-03; **1,429 stars / 298 forks** as of 2026-08-10; next threshold 1,500 (~71 away; avg4w=19.0/week — STEADY, cooled off the 07-27 SURGE).
+- Hyperstition: MiroShark 1,000 stars by 2026-04-30 — MISSED Apr 30 (911), CROSSED 2026-05-03; **1,430 stars / 298 forks** as of 2026-08-17; next threshold 1,500 (~70 away; avg4w≈10.75/week — STEADY, no surge).
 - Hyperstition: @miroshark_ 1,000 X followers by 2026-05-15 — deadline passed, count unconfirmed in logs.
 - Hyperstition: MiroShark PR from a Chinese-locale contributor OR Chinese-language coverage by 2026-06-15 — CROSSED; CN tweet "米罗莎要来了" May 16 qualifies; also JP coverage @m000_crypto (May 17).
 - Hyperstition: ≥3 publicly-named external integrators citing MiroShark as AI infrastructure by 2026-07-31 — **EXCEEDED, deadline passed**: 14 integrators in ECOSYSTEM.md as of 06-22 (Sparkleware, ZER0, Xerg, SyntheticsAI, Signa, RootAI, Noelclaw, Monitor, HivemindOS, Echo Oracle, Crucible Sim, Capacitr, Blue Agent, AntFleet).
@@ -72,4 +72,4 @@ See `memory/watched-repos.md` — `aaronjmars/MiroShark`, `aaronjmars/miroshark-
 - MIROSHARK team/treasury holdings: 11.09% of supply (11.09B tokens) as of 2026-08-10 (up from 10.72% on 08-04), tracked via `holdings` skill (30d trend still building).
 
 ## Next Priorities
-- Next star threshold: 1,500 (~71 away as of 2026-08-10; awaiting next repo-pulse run for a fresh count).
+- Next star threshold: 1,500 (~70 away as of 2026-08-17; STEADY, avg4w≈10.75/week — no SURGE signal this run).

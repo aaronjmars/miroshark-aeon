@@ -308,3 +308,4 @@ date,skill,model,input_tokens,output_tokens,cache_read,cache_creation
 2026-08-17,token-movers,claude-sonnet-5,2557,14173,2622412,61093
 2026-08-17,changelog,claude-sonnet-5,2571,15442,3406521,68104
 2026-08-17,shiplog,claude-sonnet-5,3139,31623,5645368,85883
+2026-08-17,repo-pulse,claude-sonnet-5,2559,18304,2260469,52174

@@ -1,0 +1,299 @@
+{
+  "root": "card-root",
+  "state": {},
+  "elements": {
+    "card-root": {
+      "type": "Card",
+      "props": {
+        "title": "Repo Pulse",
+        "description": "2026-08-17 — STEADY"
+      },
+      "children": [
+        "repo-header",
+        "metrics-stack",
+        "separator1",
+        "notable-stargazers-section",
+        "separator2",
+        "other-stargazers-section",
+        "separator3",
+        "forks-section",
+        "separator4",
+        "source-note"
+      ]
+    },
+    "repo-header": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/aaronjmars/MiroShark",
+        "href": "https://github.com/aaronjmars/MiroShark"
+      }
+    },
+    "metrics-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "stars-stat",
+        "forks-stat",
+        "releases-stat"
+      ]
+    },
+    "stars-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Stars",
+        "value": "1430",
+        "delta": "+2",
+        "trend": "up"
+      }
+    },
+    "forks-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Forks",
+        "value": "298",
+        "delta": "+2",
+        "trend": "up"
+      }
+    },
+    "releases-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Releases",
+        "value": "0",
+        "delta": "+0",
+        "trend": "neutral"
+      }
+    },
+    "separator1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "notable-stargazers-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "notable-heading",
+        "stargazer-card"
+      ]
+    },
+    "notable-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Notable New Stargazers",
+        "level": "h3"
+      }
+    },
+    "stargazer-card": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "stargazer-link",
+        "stargazer-name",
+        "stargazer-location",
+        "stargazer-company",
+        "stargazer-repos",
+        "stargazer-linkedin",
+        "stargazer-bio"
+      ]
+    },
+    "stargazer-link": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/chitoan1992",
+        "href": "https://github.com/chitoan1992"
+      }
+    },
+    "stargazer-name": {
+      "type": "Text",
+      "props": {
+        "text": "ToanDang",
+        "variant": "lead"
+      }
+    },
+    "stargazer-location": {
+      "type": "Text",
+      "props": {
+        "text": "📍 Da Nang",
+        "variant": "body"
+      }
+    },
+    "stargazer-company": {
+      "type": "Text",
+      "props": {
+        "text": "🏢 Paradox",
+        "variant": "body"
+      }
+    },
+    "stargazer-repos": {
+      "type": "Text",
+      "props": {
+        "text": "51 repos",
+        "variant": "body"
+      }
+    },
+    "stargazer-linkedin": {
+      "type": "Link",
+      "props": {
+        "label": "🌐 www.linkedin.com/in/dang-tran-chi-toan",
+        "href": "https://www.linkedin.com/in/dang-tran-chi-toan"
+      }
+    },
+    "stargazer-bio": {
+      "type": "Text",
+      "props": {
+        "text": "🚀 Fullstack Developer | NLP Engineer | Team Leader 🚀 Passionate about empowering AI for a brighter tomorrow! 🌟 Leading teams, building innov…",
+        "variant": "caption"
+      }
+    },
+    "separator2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "other-stargazers-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "other-heading",
+        "other-stargazer-list"
+      ]
+    },
+    "other-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Other New Stargazers",
+        "level": "h3"
+      }
+    },
+    "other-stargazer-list": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "impeppy-link"
+      ]
+    },
+    "impeppy-link": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/impeppy",
+        "href": "https://github.com/impeppy"
+      }
+    },
+    "separator3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "forks-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "forks-heading",
+        "forks-list"
+      ]
+    },
+    "forks-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "New Forks",
+        "level": "h3"
+      }
+    },
+    "forks-list": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "fork1-stack",
+        "fork2-stack"
+      ]
+    },
+    "fork1-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "fork1-link",
+        "fork1-info"
+      ]
+    },
+    "fork1-link": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/Marc-oss-hub/MiroShark",
+        "href": "https://github.com/Marc-oss-hub/MiroShark"
+      }
+    },
+    "fork1-info": {
+      "type": "Text",
+      "props": {
+        "text": "109 repos",
+        "variant": "caption"
+      }
+    },
+    "fork2-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "fork2-link",
+        "fork2-info"
+      ]
+    },
+    "fork2-link": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/q-qp-p/MiroShark",
+        "href": "https://github.com/q-qp-p/MiroShark"
+      }
+    },
+    "fork2-info": {
+      "type": "Text",
+      "props": {
+        "text": "694 repos",
+        "variant": "caption"
+      }
+    },
+    "separator4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "source-note": {
+      "type": "Text",
+      "props": {
+        "text": "Source: events",
+        "variant": "muted"
+      }
+    }
+  }
+}
