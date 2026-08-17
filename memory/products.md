@@ -17,7 +17,7 @@ One `##` block per product (format matches each skill's Config section).
 - surface: the most autonomous agent framework — skills + MCP + soul, runs unattended on GitHub Actions with no approval loops; self-evolving on fork.
 
 ## Miroshark
-- repos: aaronjmars/MiroShark (public), aaronjmars/MiroShark-x402 (private), aaronjmars/miroshark-website (private), aaronjmars/miroshark-bench (private)
+- repos: MiroShark/MiroShark (public, renamed from aaronjmars/MiroShark — org transfer, old path redirects), MiroShark/x402aff (public), aaronjmars/MiroShark-x402 (private), aaronjmars/miroshark-website (private), aaronjmars/miroshark-bench (private)
 - handles: @miroshark_, @aaronjmars
 - terms: "Miroshark", "MiroShark", "swarm simulation", "simulate anything", "swarm intelligence engine"
 - surface: universal swarm intelligence engine — spawns hundreds of agents to simulate anything for ~$1 in under 10 minutes, x402-metered.

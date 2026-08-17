@@ -1,0 +1,211 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "miroshark shiplog 🦈 aug 10 → aug 17"
+      },
+      "children": [
+        "stack_main"
+      ]
+    },
+    "stack_main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "lg"
+      },
+      "children": [
+        "shipped_stats",
+        "sep1",
+        "contributions_section",
+        "sep2",
+        "traction_section",
+        "sep3",
+        "gap_alert",
+        "link_article"
+      ]
+    },
+    "shipped_stats": {
+      "type": "Stat",
+      "props": {
+        "label": "Shipped this window",
+        "value": "9 PRs + 38 commits"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "contributions_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "contrib_heading",
+        "contributor_highlight",
+        "security_patches",
+        "other_work"
+      ]
+    },
+    "contrib_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Contributions",
+        "level": "h3"
+      }
+    },
+    "contributor_highlight": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "contrib_text1",
+        "contrib_badge",
+        "contrib_text2"
+      ]
+    },
+    "contrib_text1": {
+      "type": "Text",
+      "props": {
+        "text": "A stranger shipped 190+ models: first-time contributor Marc-oss-hub added an OrcaRouter cloud preset to MiroShark core, unprompted.",
+        "variant": "body"
+      }
+    },
+    "contrib_badge": {
+      "type": "Badge",
+      "props": {
+        "text": "Ecosystem growth",
+        "variant": "secondary"
+      }
+    },
+    "contrib_text2": {
+      "type": "Text",
+      "props": {
+        "text": "@miroshark_",
+        "variant": "caption"
+      }
+    },
+    "security_patches": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "sec_text1",
+        "sec_badge"
+      ]
+    },
+    "sec_text1": {
+      "type": "Text",
+      "props": {
+        "text": "3 dependency-security patches landed (nanoid ×2, js-yaml/dompurify) — all in-house, no external-org flex this window, naming the gap",
+        "variant": "body"
+      }
+    },
+    "sec_badge": {
+      "type": "Badge",
+      "props": {
+        "text": "Security",
+        "variant": "default"
+      }
+    },
+    "other_work": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "other_text1",
+        "other_badge"
+      ]
+    },
+    "other_text1": {
+      "type": "Text",
+      "props": {
+        "text": "The README visual rebuild from last window finally merged, plus a CI fix caught an openai 3.0 dependency conflict before it broke installs",
+        "variant": "body"
+      }
+    },
+    "other_badge": {
+      "type": "Badge",
+      "props": {
+        "text": "Maintenance",
+        "variant": "default"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "traction_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "traction_heading",
+        "stars_stat",
+        "base_featured"
+      ]
+    },
+    "traction_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Traction",
+        "level": "h3"
+      }
+    },
+    "stars_stat": {
+      "type": "Stat",
+      "props": {
+        "label": "MiroShark GitHub Stars",
+        "value": "1,430",
+        "delta": "+1",
+        "trend": "up"
+      }
+    },
+    "base_featured": {
+      "type": "Text",
+      "props": {
+        "text": "Featured by @Base_Insights (21.9K) on Base's recurring \"Early\" watchlist",
+        "variant": "body"
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "gap_alert": {
+      "type": "Alert",
+      "props": {
+        "title": "Gap",
+        "message": "No operator post about Miroshark landed this window despite the OrcaRouter contribution",
+        "type": "info"
+      }
+    },
+    "link_article": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full shiplog article",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/output/articles/shiplog-2026-08-17.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}
