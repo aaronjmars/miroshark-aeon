@@ -1,15 +1,13 @@
+The PR is confirmed as a draft against `main`. Task complete.
+
 ## Summary
 
-Ran the `changelog` skill in **Branch B (push-to)** mode with `var=push-to:aaronjmars/miroshark-website`. Config resolved from `memory/docs-sync.md` (product: `aaronjmars/miroshark`, website: `aaronjmars/miroshark-website`, matching the var override exactly).
+Ran the `changelog` skill in **push-to mode** (`var: push-to:aaronjmars/miroshark-website`), syncing merged PRs from `aaronjmars/miroshark` to the website's changelog.
 
-**What happened:**
-- Fetched merged PRs on `aaronjmars/miroshark` in the last 7 days (since 2026-08-03): 17 PRs, none previously published (checked against `PUBLISHED_PR_NUMBERS` in the website's `app/changelog-data.ts`).
-- Classified: 13 README/marketing visual-overhaul PRs + 2 ecosystem-catalog fixes as substantive highlights, 2 dependabot bumps rolled into a single maintenance line.
-- Prepended one new `ChangelogEntry` ("README visual rebuild + animated hero", dated 2026-08-10) to `app/changelog-data.ts` — the only file touched.
-- Verified `npx tsc --noEmit` (clean) and `npm run lint` (0 errors, pre-existing warnings only) on the website repo before pushing.
-- Branched (`aeon/changelog-2026-08-10`), committed, pushed, and opened a **draft PR**: https://github.com/aaronjmars/miroshark-website/pull/211
-- Logged the run under `### changelog` in `memory/logs/2026-08-10.md` (skill is silent — no `./notify` call, per spec).
+- **Window:** 2026-08-10 → 2026-08-17 (first push-to run since the last entry, no gap in coverage)
+- **New PRs found:** 6, none previously published — `aaronjmars/miroshark-website` PR [#213](https://github.com/aaronjmars/miroshark-website/pull/213) (draft)
+- **Entry:** "OrcaRouter cloud preset + security & CI fixes" — new OrcaRouter cloud preset (external contributor Marc-oss-hub, #287), a nanoid security patch (#286), an httpx pin fixing an openai-3.0.0-triggered dependency break (#288), plus a maintenance rollup of 3 dependabot bumps (#283–#285)
+- **Files modified:** `app/changelog-data.ts` in the website repo (branch `aeon/changelog-2026-08-17`); `memory/logs/2026-08-17.md` in this repo (silent log entry, per skill contract — no `./notify` call on this skill)
+- **Note:** couldn't run `npx tsc`/`npm run build` on the cloned website repo because the sandbox blocks `cd` outside the primary working directory; flagged this in the PR body. `node --check` confirmed no syntax errors in the edited file.
 
-**Notable:** this is the first successful `changelog` run since the fleet-wide stuck-dispatch bug (last success 07-26/07-27) — it appears to have self-healed, matching what `memory-flush` did on 08-09. Worth a mention in the next `heartbeat`/`memory-flush` pass to drop `changelog` off the stuck list.
-
-**Follow-up needed:** none from this skill — the PR is a draft awaiting human review/merge on the website repo.
+Follow-up: the operator should review and merge PR #213 to publish.
