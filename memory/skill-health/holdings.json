@@ -1,8 +1,8 @@
 {
   "skill": "holdings",
-  "last_analyzed": "2026-08-10T08:40:57Z",
+  "last_analyzed": "2026-08-17T08:21:48Z",
   "quality_score": 4,
-  "assessment": "Skill executed flawlessly: fetched real on-chain data, computed 7d growth (+3.42%), tracked state for future runs, wrote article, committed properly. Transparent about 30d limitation.",
+  "assessment": "Well-executed skill run — fetched live data from Base RPC and GeckoTerminal, produced specific holdings metrics (11.13B, +0.38% 7d growth), created article and log entries, sent notification; transparent about 30d data still accumulating.",
   "flags": [],
   "avg_score": 4,
   "history": [
@@ -24,6 +24,10 @@
     },
     {
       "date": "2026-08-10",
+      "score": 4
+    },
+    {
+      "date": "2026-08-17",
       "score": 4
     }
   ]
