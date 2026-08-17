@@ -1,15 +1,11 @@
 {
   "skill": "fetch-tweets",
-  "last_analyzed": "2026-08-16T17:08:49Z",
+  "last_analyzed": "2026-08-17T17:40:46Z",
   "quality_score": 4,
-  "assessment": "Skill executed cleanly — fetched current data from tracked account, correctly identified no notable activity, and followed its no-notify rule for empty results with proper logging.",
+  "assessment": "Skill ran successfully, fetched data via API, correctly handled no-tweets result, logged appropriately per spec—substantive and well-structured.",
   "flags": [],
   "avg_score": 3.7,
   "history": [
-    {
-      "date": "2026-07-14",
-      "score": 4
-    },
     {
       "date": "2026-07-15",
       "score": 4
@@ -124,6 +120,10 @@
     },
     {
       "date": "2026-08-16",
+      "score": 4
+    },
+    {
+      "date": "2026-08-17",
       "score": 4
     }
   ]
