@@ -1,0 +1,69 @@
+{
+  "root": "root_card",
+  "state": {},
+  "elements": {
+    "root_card": {
+      "type": "Card",
+      "props": {
+        "title": "Tweet Digest"
+      },
+      "children": [
+        "date_heading",
+        "theme1_heading",
+        "tweet1",
+        "separator1",
+        "theme2_heading",
+        "tweet2"
+      ]
+    },
+    "date_heading": {
+      "type": "Text",
+      "props": {
+        "text": "2026-08-18",
+        "variant": "muted"
+      },
+      "children": []
+    },
+    "theme1_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "forecasting calibration research",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "tweet1": {
+      "type": "TweetCard",
+      "props": {
+        "author": "miroshark_",
+        "handle": "@miroshark_",
+        "text": "five recent papers converge on the same gap — practitioners using LLMs to forecast events have no reliable signal for good vs. noisy output; ensemble disagreement and source count are proxies for model strength, not trust — https://x.com/miroshark_/status/2089754897382048196"
+      },
+      "children": []
+    },
+    "separator1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "theme2_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "press pickup",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "tweet2": {
+      "type": "TweetCard",
+      "props": {
+        "author": "miroshark_",
+        "handle": "@miroshark_",
+        "text": "reshared @Amrit_Mirch's piece — \"a market gives you a number, a simulation gives you the path\" — https://x.com/miroshark_/status/2089639408836210997"
+      },
+      "children": []
+    }
+  }
+}

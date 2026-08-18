@@ -1,5 +1,3 @@
-ℹ️ Tweet Digest
-
 *Tweet Digest — 2026-08-18*
 
 *Theme: forecasting calibration research*
