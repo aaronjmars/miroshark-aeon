@@ -1,0 +1,118 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "Token Report — MIROSHARK"
+      },
+      "children": [
+        "alert-breakdown",
+        "separator-1",
+        "stats-primary",
+        "separator-2",
+        "stats-secondary",
+        "separator-3",
+        "chart-link"
+      ]
+    },
+    "alert-breakdown": {
+      "type": "Alert",
+      "props": {
+        "type": "warning",
+        "title": "$MiroShark — BREAKDOWN",
+        "message": "Price fell 15.1% to $0.000002025 on $16.6K volume (4.3x the 7d avg) — the sharpest down-day since 08-14, with whale flow flipping bearish: 4 sells ($7.7K) vs 1 buy ($1.0K)."
+      }
+    },
+    "separator-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stats-primary": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "lg"
+      },
+      "children": [
+        "stat-price",
+        "stat-liquidity",
+        "stat-volume"
+      ]
+    },
+    "stat-price": {
+      "type": "Stat",
+      "props": {
+        "label": "Price",
+        "value": "$0.000002025",
+        "delta": "-15.1% (24h)",
+        "trend": "down"
+      }
+    },
+    "stat-liquidity": {
+      "type": "Stat",
+      "props": {
+        "label": "Liquidity",
+        "value": "$223.9K",
+        "delta": "-7.0%",
+        "trend": "down"
+      }
+    },
+    "stat-volume": {
+      "type": "Stat",
+      "props": {
+        "label": "Volume (24h)",
+        "value": "$16.6K",
+        "delta": "4.3x 7d avg"
+      }
+    },
+    "separator-2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stats-secondary": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "lg"
+      },
+      "children": [
+        "stat-buysells",
+        "stat-whales"
+      ]
+    },
+    "stat-buysells": {
+      "type": "Stat",
+      "props": {
+        "label": "Buys/Sells",
+        "value": "2.11",
+        "delta": "40 buys / 19 sells"
+      }
+    },
+    "stat-whales": {
+      "type": "Stat",
+      "props": {
+        "label": "Whale Count",
+        "value": "5"
+      }
+    },
+    "separator-3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "chart-link": {
+      "type": "Link",
+      "props": {
+        "label": "View Chart (Gecko Terminal)",
+        "href": "https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209"
+      }
+    }
+  }
+}

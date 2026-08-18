@@ -1,15 +1,11 @@
 {
   "skill": "token-movers",
-  "last_analyzed": "2026-08-17T06:05:34Z",
+  "last_analyzed": "2026-08-18T06:09:53Z",
   "quality_score": 4,
-  "assessment": "Substantive single-token analysis with cross-validated data, clear BREAKOUT classification, and actionable metrics on accumulation pattern",
+  "assessment": "Substantive, well-sourced token report with clear verdict and detailed whale-flow analysis backed by cross-validated data (GeckoTerminal, DexScreener). Proper skip conditions logged and methodology transparent.",
   "flags": [],
   "avg_score": 4,
   "history": [
-    {
-      "date": "2026-07-15",
-      "score": 4
-    },
     {
       "date": "2026-07-16",
       "score": 4
@@ -124,6 +120,10 @@
     },
     {
       "date": "2026-08-17",
+      "score": 4
+    },
+    {
+      "date": "2026-08-18",
       "score": 4
     }
   ]

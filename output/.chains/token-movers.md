@@ -1,10 +1,10 @@
-ℹ️ Token Movers
+⚠️ Token Report — MIROSHARK
 
-*$MiroShark — BREAKOUT*
+*$MiroShark — BREAKDOWN*
 
-Price up 11.5% on 2.2x average volume, buy flow flipping to 3:1.
+Price fell 15.1% to $0.000002025 on $16.6K volume (4.3x the 7d avg) — the sharpest down-day since 08-14, with whale flow flipping bearish: 4 sells ($7.7K) vs 1 buy ($1.0K).
 
-Price $0.000002385 (+11.5% 24h) | Liq $240.8K (+5.7%) | Vol $7.7K (2.2× 7d)
-Buys/Sells 30/10 (ratio 3.00) | Whales: 0
+Price $0.000002025 (-15.1% 24h) | Liq $223.9K (-7.0%) | Vol $16.6K (4.3x 7d)
+Buys/Sells 40/19 (ratio 2.11) | Whales: 5
 
 Chart: https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209
