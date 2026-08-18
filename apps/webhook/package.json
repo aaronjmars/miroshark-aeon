@@ -28,7 +28,7 @@
     }
   },
   "devDependencies": {
-    "wrangler": "4.115.0"
+    "wrangler": "4.123.0"
   },
   "dependencies": {
     "@microlabs/otel-cf-workers": "^1.0.0-rc.52",
