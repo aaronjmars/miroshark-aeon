@@ -134,7 +134,7 @@ skills:
   idea-forge: { enabled: false, schedule: "0 9 * * 1", var: "" } # weekly business-idea engine. var: empty/generate=timing-scored wedges | validate[:theme]=viability screen | memo[:theme]=2 evidence-backed memos
   # --- Framework skills synced from canon (2026-08-17); all disabled, enable as needed ---
   aeon-doctor: { enabled: false, schedule: "0 15 * * 1", var: "" } # weekly Mon 15:00 UTC - static config-correctness linter; read-only, notifies only on problems. var: empty=whole config | <skill>
-  aeon-update: { enabled: false, schedule: "0 11 * * 1", var: "" } # weekly Mon 11:00 UTC - pull upstream framework changes (canon) into this instance as a PR; 3-way merge, never clobbers operator config. var: empty=sync | report | repo=owner/name | reset=fork-point
+  aeon-update: { enabled: true, schedule: "0 11 * * 1", var: "" } # weekly Mon 11:00 UTC - pull upstream framework changes (canon) into this instance as a PR; 3-way merge, never clobbers operator config. var: empty=sync | report | repo=owner/name | reset=fork-point
   glim-mcp: { enabled: false, schedule: "workflow_dispatch", var: "" } # on-demand - live-data research via glim.sh MCP (OAuth Connect in dashboard). var: research question, append --deep
   robinhood-mcp: { enabled: false, schedule: "workflow_dispatch", var: "" } # on-demand - Robinhood Agentic Trading via MCP (OAuth Connect). var: empty=portfolio | orders[:N] | trade:<explicit one-order>
   executor-mcp: { enabled: false, schedule: "workflow_dispatch", var: "" } # on-demand - run a task through the Executor Cloud tool catalog (OAuth Connect). var: the task
