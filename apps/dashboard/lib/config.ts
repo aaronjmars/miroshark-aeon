@@ -47,15 +47,15 @@ export function parseConfig(raw: string): AeonConfig {
     }
   }
 
-  const model = String(doc.get('model') ?? 'claude-sonnet-4-6')
+  const model = String(doc.get('model') ?? 'claude-sonnet-5')
   const harnessRaw = String(doc.get('harness') ?? 'claude')
-  const harness: Harness = HARNESSES.includes(harnessRaw as Harness) ? (harnessRaw as Harness) : 'claude'
+  const harness: Harness = HARNESSES.find(h => h === harnessRaw) ?? 'claude'
 
   let gateway: GatewayConfig = { provider: 'auto' }
   const gatewayNode = doc.get('gateway')
   if (isMap(gatewayNode)) {
     const provider = String(getMapValue(gatewayNode, 'provider') ?? 'auto')
-    gateway = { provider: GATEWAY_PROVIDERS.includes(provider as GatewayProvider) ? (provider as GatewayProvider) : 'auto' }
+    gateway = { provider: GATEWAY_PROVIDERS.find(p => p === provider) ?? 'auto' }
   }
 
   let jsonrenderEnabled = false
@@ -106,9 +106,10 @@ export function updateSkillInConfig(
     }
   }
   if (typeof updates.harness === 'string') {
-    // Only `grok` is worth pinning per-skill; anything else (incl. 'claude')
-    // clears the override so the skill inherits the top-level default.
-    if (updates.harness === 'grok') {
+    // Pin any non-default harness (grok/codex/pi/vibe/kimi) per-skill; `claude`
+    // (the top-level default) clears the override so the skill inherits it. This
+    // lets one skill run on a different harness than the repo default.
+    if (updates.harness && updates.harness !== 'claude') {
       skillNode.set('harness', updates.harness)
     } else {
       skillNode.delete('harness')
@@ -184,7 +185,6 @@ export function addSkillToConfig(
   const skillsNode = doc.get('skills')
   if (!isMap(skillsNode)) return raw
 
-  // Check if already exists
   if (skillsNode.has(name)) return raw
 
   // Build the new skill entry as a flow mapping to match existing style
@@ -192,9 +192,17 @@ export function addSkillToConfig(
     enabled: config.enabled ?? false,
     schedule: config.schedule ?? '0 12 * * *',
   })
-  // Set flow style to match inline format
   if (isMap(entry)) {
     entry.flow = true
+    // Force the cron to a double-quoted scalar. `0 12 * * *` is a perfectly
+    // valid plain YAML string, but the scheduler parses aeon.yml with a bash
+    // regex that REQUIRES the quotes:
+    //   [[ "$INLINE" =~ schedule:\ *\"([^\"]+)\" ]]   (.github/workflows/scheduler.yml)
+    // An unquoted cron leaves SKILL_SCHEDULE empty, and the empty-schedule
+    // guard then skips the skill — so it silently never fires. Every
+    // hand-written entry is quoted; generated ones must match.
+    const sched = entry.get('schedule', true)
+    if (isScalar(sched)) sched.type = 'QUOTE_DOUBLE'
   }
 
   // Find the fallback skill (heartbeat, last entry) and insert before it
@@ -211,6 +219,31 @@ export function addSkillToConfig(
   }
 
   return doc.toString()
+}
+
+/**
+ * Create the skill's entry if it's missing, then apply `updates` to it.
+ *
+ * `updateSkillInConfig` deliberately no-ops on an unknown skill (it returns
+ * `raw` unchanged), which is right for a blind edit but wrong for the
+ * enable/schedule/set path: skills are enumerated from disk, so a freshly
+ * created `skills/<name>/SKILL.md` has no aeon.yml entry yet and every attempt
+ * to turn it on silently did nothing — while the read path reported it as
+ * merely "disabled", because a missing entry defaults to `enabled: false`.
+ *
+ * Callers must confirm the skill exists on disk first; this will happily
+ * create an entry for a typo'd name.
+ */
+export function upsertSkillInConfig(
+  raw: string,
+  name: string,
+  updates: Partial<SkillConfig>,
+): string {
+  // addSkillToConfig is a no-op when the entry already exists, so composing the
+  // two is safe unconditionally. Seeding it with `updates` means a create lands
+  // the right enabled/schedule immediately rather than writing the defaults and
+  // overwriting them on the next line.
+  return updateSkillInConfig(addSkillToConfig(raw, name, updates), name, updates)
 }
 
 // --- Helpers ---

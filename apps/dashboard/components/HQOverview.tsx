@@ -1,9 +1,8 @@
 'use client'
 
-import { useRef } from 'react'
 import type { Skill, Run } from '../lib/types'
 import { packGroups } from '../lib/constants'
-import { timeAgo } from '../lib/utils'
+import { timeAgo, runStatusColor, runStatusGlyph } from '../lib/utils'
 import { Scramble, Flip, VelocityMarquee } from './ui/Animated'
 import { Section } from './ui/Section'
 
@@ -14,13 +13,10 @@ interface HQOverviewProps {
   workingCount: number
   categoryFilter: string | null
   onCategoryClick: (key: string) => void
-  onViewRun: (run: Run) => void
   onOpenPacks: () => void
 }
 
-export function HQOverview({ skills, runs, enabledCount, workingCount, categoryFilter, onCategoryClick, onViewRun, onOpenPacks }: HQOverviewProps) {
-  const spotRef = useRef<HTMLUListElement>(null)
-
+export function HQOverview({ skills, runs, enabledCount, workingCount, categoryFilter, onCategoryClick, onOpenPacks }: HQOverviewProps) {
   const onMove = (e: React.MouseEvent<HTMLUListElement>) => {
     const card = (e.target as HTMLElement).closest('li')
     if (!card) return
@@ -35,8 +31,8 @@ export function HQOverview({ skills, runs, enabledCount, workingCount, categoryF
 
   const stats: { label: string; value: number; tone?: string }[] = [
     { label: 'Team', value: skills.length },
-    { label: 'Enabled', value: enabledCount, tone: 'text-eva-green' },
-    { label: 'Working', value: workingCount, tone: 'text-eva-orange' },
+    { label: 'Enabled', value: enabledCount, tone: 'text-aeon-green' },
+    { label: 'Working', value: workingCount, tone: 'text-aeon-red' },
     { label: 'Packs', value: cats.length },
   ]
 
@@ -73,7 +69,6 @@ export function HQOverview({ skills, runs, enabledCount, workingCount, categoryF
 
       <Section label="Packs">
         <ul
-          ref={spotRef}
           onMouseMove={onMove}
           className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-[rgba(250,250,250,0.10)] border border-[rgba(250,250,250,0.10)]"
         >
@@ -127,17 +122,14 @@ export function HQOverview({ skills, runs, enabledCount, workingCount, categoryF
       <Section label="Recent activity">
         <div className="border border-[rgba(250,250,250,0.10)] divide-y divide-[rgba(250,250,250,0.08)]">
           {runs.slice(0, 8).map(run => (
-            <button
+            <div
               key={run.id}
-              onClick={() => onViewRun(run)}
-              className="w-full flex items-center gap-4 px-5 py-3 hover:bg-aeon-panel transition-colors text-left group"
+              className="w-full flex items-center gap-4 px-5 py-3 text-left group"
             >
-              <span className={`text-sm w-4 shrink-0 ${run.conclusion === 'success' ? 'text-eva-green' : run.conclusion === 'failure' ? 'text-eva-red' : run.status === 'in_progress' ? 'text-eva-orange' : 'text-primary-35'}`}>
-                {run.conclusion === 'success' ? '✓' : run.conclusion === 'failure' ? '✗' : run.status === 'in_progress' ? '◌' : '·'}
-              </span>
-              <span className="text-xs text-primary-70 truncate flex-1 font-mono group-hover:text-aeon-fg transition-colors">{run.workflow}</span>
+              <span className={`text-sm w-4 shrink-0 ${runStatusColor(run)}`}>{runStatusGlyph(run)}</span>
+              <span className="text-xs text-primary-70 truncate flex-1 font-mono">{run.workflow}</span>
               <span className="text-[10px] text-primary-35 font-mono tabular-nums uppercase tracking-[0.14em]">{timeAgo(run.created_at)}</span>
-            </button>
+            </div>
           ))}
           {!runs.length && (
             <div className="px-6 py-12 text-center">

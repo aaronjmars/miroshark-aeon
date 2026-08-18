@@ -1,10 +1,12 @@
 ---
-type: Skill
-name: Skill Health
-category: evolution
+name: skill-health
 description: Fleet skill observability with two views - health audits per-skill metrics and files/resolves issues in memory/issues/; analytics ranks the fleet by 7d runs, success rates, and anomaly flags.
-var: ""
-tags: [meta]
+metadata:
+  title: Skill Health
+  category: evolution
+  var: ""
+  tags:
+    - meta
 ---
 > **${var}** — View selector.
 > - **empty** → health check across all scheduled skills (default).
@@ -331,7 +333,7 @@ Path: `output/articles/skill-analytics-${today}.md`. Overwrite if it exists (ide
 
 | Flag | Skill | Detail | Action |
 |------|-------|--------|--------|
-| 🔴 SILENT | name | scheduled `<cron>` but zero runs in window | check workflow / scheduler |
+| 🔴 SILENT | name | scheduled `<cron>` but zero runs in window | run **aeon-doctor** — zero-runs-despite-schedule is usually a static config bug (unquoted `schedule:`, dup key) it can't be seen in run data |
 | 🔴 ALL_FAIL | name | N/N failed | investigate root cause |
 | 🟠 CONSECUTIVE_FAILURES | name | N-run streak (last_error: "...") | see health view for filed issue |
 | 🟠 LOW_SUCCESS | name | N% over M runs | review failures |
@@ -374,6 +376,8 @@ Path: `output/articles/skill-analytics-${today}.md`. Overwrite if it exists (ide
 ## Silent scheduled skills (enabled, zero runs)
 
 ${list of {skill, schedule} pairs OR "none — every enabled cron skill ran at least once."}
+
+> **Root-cause pointer:** an enabled cron skill with *zero* runs is most often a **static config** fault the run data can't reveal — an unquoted `schedule:` the scheduler regex silently skips, a duplicate `aeon.yml` key, or an entry pointing at a missing `SKILL.md`. That class is `aeon-doctor`'s job; dispatch it (`./aeon skills run aeon-doctor`) to pinpoint the cause instead of guessing at the scheduler.
 
 ## Source status
 

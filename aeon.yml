@@ -28,7 +28,6 @@ skills:
   # --- Hound onchain investigation (on-demand; var = address / tx hash) ---
   investigation-report: { enabled: false, schedule: "workflow_dispatch", var: "" } # var: <token-address> [--checks=rug,contract,deployer,holders,honeypot,lp] [--depth=quick|deep] — composite investigation (folds in rug-scan/contract-audit/deployer-trace/holder-concentration/honeypot-check/lp-lock). read-only
   tx-explain: { enabled: false, schedule: "workflow_dispatch", var: "" } # var: tx hash — plain-English decode
-  ctrl: { enabled: false, schedule: "workflow_dispatch", var: "" } # var: natural-language workflow (e.g. "DCA 0.005 ETH into USDC weekly") — compiles a trigger→action graph into a CTRL V3 vault on Base via the live /api/mcp REST API, hands the user a one-shot signUrl. Agent never signs; the wallet signs an EIP-5792 batch once, the keeper executes after under per-swap/per-day caps. Operator-initiated only. No API key needed (anonymous create; wallet signature is the trust boundary).
 
   monitor-polymarket: { enabled: false, schedule: "30 12 * * *", var: "" } # prediction-market monitor (Polymarket + Kalshi) — 24h moves, volume, comments, conviction alerts. var: empty=both | polymarket | kalshi | polymarket:<slug> | kalshi:<ticker>
   token-pick: { enabled: false, schedule: "0 12 * * *" }
@@ -57,10 +56,6 @@ skills:
   autoresearch: { enabled: false, schedule: "workflow_dispatch", var: "" } # on-demand — set var to skill name to evolve
   create-skill: { enabled: false, schedule: "workflow_dispatch", var: "" } # one-shot skill creator — set var to a description prompt
   install-skill: { enabled: false, schedule: "workflow_dispatch", var: "" } # on-demand — install a community skill pack and open a PR; var: owner/repo [skill...]
-
-  # --- Knowledge / OKF (memory/topics is a native OKF bundle; see docs/OKF.md) ---
-  okf-export: { enabled: false, schedule: "workflow_dispatch", var: "" } # one-shot backfill — add type: frontmatter to existing memory/topics notes + open a PR. var: empty=all | <file.md>|<subdir>
-  okf-ingest: { enabled: false, schedule: "workflow_dispatch", var: "" } # on-demand — fetch+validate+QUARANTINE an EXTERNAL OKF bundle into memory/topics/ingested + open a PR (untrusted content; needs scripts/prefetch-okf.sh). var: git-url | owner/repo[#subdir]
 
   # --- X / social (5 PM UTC) ---
   fetch-tweets: { enabled: true, schedule: "0 17 * * *", var: "account:" } # (was tweet-digest) account-based digest of tracked X accounts from memory/topics/tracked-accounts.yml. curate X/Twitter. var: keyword:<q> | topic:<t> | account:<handle> (empty=digest tracked accounts) | list:<ids>[|topic] | agent-buzz[:<t>]. Optional XAI_API_KEY.
@@ -137,6 +132,21 @@ skills:
 
   send-email: { enabled: false, schedule: "workflow_dispatch", var: "" } # on-demand — compose + send a 1:1 email to a named recipient via Resend (general sibling of disclosure-emailer). var: "to=… | subject=… | about=…"
   idea-forge: { enabled: false, schedule: "0 9 * * 1", var: "" } # weekly business-idea engine. var: empty/generate=timing-scored wedges | validate[:theme]=viability screen | memo[:theme]=2 evidence-backed memos
+  # --- Framework skills synced from canon (2026-08-17); all disabled, enable as needed ---
+  aeon-doctor: { enabled: false, schedule: "0 15 * * 1", var: "" } # weekly Mon 15:00 UTC - static config-correctness linter; read-only, notifies only on problems. var: empty=whole config | <skill>
+  aeon-update: { enabled: false, schedule: "0 11 * * 1", var: "" } # weekly Mon 11:00 UTC - pull upstream framework changes (canon) into this instance as a PR; 3-way merge, never clobbers operator config. var: empty=sync | report | repo=owner/name | reset=fork-point
+  glim-mcp: { enabled: false, schedule: "workflow_dispatch", var: "" } # on-demand - live-data research via glim.sh MCP (OAuth Connect in dashboard). var: research question, append --deep
+  robinhood-mcp: { enabled: false, schedule: "workflow_dispatch", var: "" } # on-demand - Robinhood Agentic Trading via MCP (OAuth Connect). var: empty=portfolio | orders[:N] | trade:<explicit one-order>
+  executor-mcp: { enabled: false, schedule: "workflow_dispatch", var: "" } # on-demand - run a task through the Executor Cloud tool catalog (OAuth Connect). var: the task
+  finance-district-mcp: { enabled: false, schedule: "workflow_dispatch", var: "" } # on-demand - multichain non-custodial agent wallet via Finance District MCP (OAuth Connect). var: empty=wallet brief | swap/pay instructions
+  taskmarket-delegate: { enabled: false, schedule: "workflow_dispatch", var: "" } # on-demand - TaskMarket agent-worker market. var: browse[:q] | create "<t>" "<d>" [reward] | submit <id> <msg>. Writes need TASKMARKET_API_KEY.
+  pack-submit: { enabled: false, schedule: "workflow_dispatch", var: "" } # on-demand - publish a local skill as a community pack + registry PR. var: skill-slug [--repo o/r] [--no-register] [--dry-run]
+  you-web-search: { enabled: false, schedule: "workflow_dispatch", var: "" } # on-demand - high-quality web search via You.com API (YDC_API_KEY). var: search query
+  deploy-uni-hook: { enabled: false, schedule: "workflow_dispatch", harness: "claude", model: "claude-opus-4-8", var: "" } # generate+audit+simulate+deploy a Uniswap v4 hook. var: [arm:][template:dynamic|noop|skim] [chain:base-sepolia] <brief>. Dry-run by default; arm: broadcasts (needs HOOK_DEPLOYER_PRIVATE_KEY burner). Opus-pinned.
+  hunter-22: { enabled: false, schedule: "0 10 * * *", var: "" } # daily bounty scan against ClawHunter free discovery API; discovery only, no wallet. Dedup via memory/topics/hunter-22-seen.json
+  seo-audit: { enabled: false, schedule: "0 13 * * *", var: "" } # daily on-page + technical SEO audit. var: comma-separated origins (empty = no-op). PAGESPEED_API_KEY folds in Core Web Vitals
+  posthog-errors: { enabled: false, schedule: "0 15 * * 1", var: "" } # weekly cross-project PostHog error digest (needs PostHog MCP connected). var: empty=all/7d | Nd | project substrings
+
   # --- Fallback (must be last) ---
   heartbeat: { enabled: true, schedule: "0 19 * * *", var: "" } # ambient fleet-health check (default) — surfaces anything worth attention. var: empty=ambient check | <area>=ambient focused on that area | brief[:<area>]=priority brief (3 things to focus on, why now, what moved; folds in priority-brief)
 

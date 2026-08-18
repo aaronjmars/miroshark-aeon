@@ -1,11 +1,13 @@
 ---
-type: Skill
 name: fork-fleet
-category: core
 description: Fork divergence monitor - tracks where the fleet's active forks diverge in CODE (unique commits, new/modified skills) and CONFIG (enable/var/model/schedule vs upstream), gated on real change.
-var: ""
-tags: [dev, meta]
-cron: "0 10 * * 1"
+metadata:
+  category: core
+  var: ""
+  tags:
+    - dev
+    - meta
+  cron: "0 10 * * 1"
 ---
 > **${var}** — Divergence scope selector; space-separated tokens, order-independent, all optional:
 > - **scope** (`code` | `config` | `both`, default `both`) — which divergence dimension to run.
@@ -350,7 +352,7 @@ For each CONFIGURED fork:
 - `category_lean`: dict `{tag -> count_of_enabled_skills_with_that_tag}` (using UPSTREAM_TAGS for upstream skills the fork enables; fork-only skills counted under tag `"fork-only"`)
 - `dominant_category`: tag with max count, or `"mixed"` if no tag holds >40% of total enabled count
 
-Rank forks by `total_overrides` desc. Top 5 = "heaviest customizers" — surface with dominant category and a one-line synthesis (e.g. `"owner/aeon — content-heavy: 14 article/digest skills enabled, 3 model overrides to claude-sonnet-4-6"`). The fingerprint is **descriptive only** — never recommend changes to individual forks.
+Rank forks by `total_overrides` desc. Top 5 = "heaviest customizers" — surface with dominant category and a one-line synthesis (e.g. `"owner/aeon — content-heavy: 14 article/digest skills enabled, 3 model overrides to claude-sonnet-5"`). The fingerprint is **descriptive only** — never recommend changes to individual forks.
 
 ### B7. Config week-over-week delta
 
@@ -421,7 +423,7 @@ Assemble this block (it becomes **Part 2** of the combined article):
 ## Fleet consensus on alternative settings
 
 ### Model overrides
-${MODEL_CONSENSUS entries: "skill X — N forks → claude-sonnet-4-6 (40% of configured)" OR "none this week"}
+${MODEL_CONSENSUS entries: "skill X — N forks → claude-sonnet-5 (40% of configured)" OR "none this week"}
 
 ### Var hotspots
 ${VAR_HOTSPOT entries: "skill X — N forks set var to '${value}'" OR "none this week"}

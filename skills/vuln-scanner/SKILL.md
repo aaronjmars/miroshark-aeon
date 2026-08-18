@@ -1,12 +1,21 @@
 ---
-type: Skill
-name: Vuln Scanner
-category: dev
+name: vuln-scanner
 description: Audit trending repos for real security vulnerabilities and disclose responsibly - scan and route findings (PVR / dependency PR), re-submit queued advisories, and send armed email disclosures
-var: ""
-tags: [dev, security, meta]
-depends_on: [github-trending]
-requires: [GH_GLOBAL?, RESEND_API_KEY?, RESEND_FROM?, RESEND_REPLY_TO?]
+metadata:
+  title: Vuln Scanner
+  category: dev
+  var: ""
+  tags:
+    - dev
+    - security
+    - meta
+  depends_on:
+    - github-trending
+  requires:
+    - GH_GLOBAL?
+    - RESEND_API_KEY?
+    - RESEND_FROM?
+    - RESEND_REPLY_TO?
 ---
 <!-- autoresearch: variation B — responsible-disclosure-first: private reports for code vulns, public PRs only for already-disclosed dep CVEs -->
 
@@ -138,10 +147,26 @@ else
 fi
 
 # --- Dependencies: osv-scanner (unified CVE DB across ecosystems) ---
+# osv-scanner v2 (what `releases/latest` now installs, 2.4.x) moved scanning under the
+# `scan source` subcommand. The v1 bare form (`osv-scanner --recursive .`) still works on
+# 2.x, so try v2 first and fall back to v1 only if v2 wrote NOTHING (keyed on emptiness,
+# NOT exit code - osv exits 1 when it FINDS vulns, which must not read as a syntax error).
+# `--no-ignore` is REQUIRED: v2 `scan source` respects .gitignore by default, so a target
+# repo that gitignores its (committed) lockfile - common for libraries/tools - yields the
+# misleading "No package sources found" (exit 128) and zero dependency coverage. A shipped-
+# but-gitignored lockfile still describes real deps, so a security scan must read it. It is
+# a no-op when lockfiles are tracked.
 if command -v osv-scanner >/dev/null 2>&1; then
-  osv-scanner --format=json --recursive . \
-    > /tmp/vuln-scan/osv.json 2>/dev/null || true
+  osv-scanner scan source --recursive --no-ignore --format=json . > /tmp/vuln-scan/osv.json 2>/dev/null; OSV_RC=$?
+  [ -s /tmp/vuln-scan/osv.json ] || { osv-scanner --format=json --recursive --no-ignore . > /tmp/vuln-scan/osv.json 2>/dev/null; OSV_RC=$?; }
+  # Classify: exit 128 = "No package sources found" = the repo has no lockfiles/manifests
+  # to scan. That is a clean N/A (nothing to do), NOT a scan failure - osv writes an EMPTY
+  # file in that case, so `[ -s ]` alone would mislabel it `fail`. Distinguish the states:
+  if [ -s /tmp/vuln-scan/osv.json ]; then OSV_STATUS=ok        # ran; results present (0 or N dep CVEs)
+  elif [ "${OSV_RC:-}" = 128 ];   then OSV_STATUS=none         # ran; no dependency lockfiles -> n/a
+  else                                 OSV_STATUS=fail; fi      # genuine tool error
 else
+  OSV_STATUS=skipped
   echo "VULN_SCANNER_SKIPPED: osv-scanner not available"
 fi
 
@@ -153,12 +178,153 @@ fi
 # Record what succeeded (empty output ≠ clean, could be tool failure)
 echo "semgrep=$([ -s /tmp/vuln-scan/semgrep.json ] && echo ok || echo fail)" >  /tmp/vuln-scan/sources.txt
 echo "trufflehog=$([ -s /tmp/vuln-scan/trufflehog.json ] && echo ok || echo fail)" >> /tmp/vuln-scan/sources.txt
-echo "osv=$([ -s /tmp/vuln-scan/osv.json ] && echo ok || echo fail)"              >> /tmp/vuln-scan/sources.txt
+echo "osv=${OSV_STATUS:-fail}"                                                    >> /tmp/vuln-scan/sources.txt
 ```
+
+### A3.5. Dynamic testing: fuzz it if it already ships a harness
+
+Static tools never execute the target's code, so they can't catch a bug that only
+shows up on a specific malformed input. Some repos already carry their own fuzz
+harnesses (`cargo fuzz`) for exactly this. If the clone has one, run it — this is
+a different technique from A3, not a better version of it, and it finds a
+different class of bug.
+
+**Scope, on purpose:** Rust + `cargo fuzz` only, for this pass. `stage-vuln-scanner.sh`
+installs a nightly toolchain and `cargo-fuzz` for every run (bounded, ~1-2 min:
+the runner already has stable Rust) so this step never needs an in-run install —
+it degrades to a skip exactly like a missing scanner does. Other ecosystems have
+their own fuzzers (libFuzzer/AFL for C/C++, go-fuzz, atheris for Python, Trident
+for Solana/Anchor) — worth adding the same way later, each gated on its own
+`command -v` guard, but out of scope here.
+
+**This is a real trade-off, not a free scanner:** semgrep/trufflehog/osv-scanner
+only read the target's files. This *compiles and runs* the target's own code
+(and whatever it pulls in) inside the sandboxed run. That's the same trust
+boundary any CI system already accepts when it builds a repo's test suite — the
+runner is ephemeral and only holds this skill's own scoped secrets — but it's a
+step up from A3, so it only activates when the repo hands you a harness rather
+than probing for one, and it never touches the network beyond what cloning the
+repo already did.
+
+```bash
+if [ -d fuzz/fuzz_targets ] && command -v cargo-fuzz >/dev/null 2>&1; then
+  mkdir -p /tmp/vuln-scan/fuzz
+  # Seed real inputs where they exist — an empty corpus rarely gets a mutator
+  # past a magic-byte header, so this is the difference between a shallow run
+  # and one that reaches real parsing logic.
+  for target in $(cargo fuzz list 2>/dev/null); do
+    if [ -d "tests/fixtures" ]; then
+      mkdir -p "fuzz/corpus/$target"
+      find tests/fixtures -iname "*.${target}" -exec cp {} "fuzz/corpus/$target/" \; 2>/dev/null
+    fi
+  done
+
+  # Bounded: a handful of targets, ~90s each. This is a smoke test for "does
+  # anything crash immediately," not a real fuzzing campaign — a real one runs
+  # for hours and belongs to the maintainer's own CI, not a weekly scan.
+  #
+  # This step compiles and runs the target's own code (and every dependency's
+  # build.rs) with network open. Scrub this skill's own secrets from the
+  # env first — a malicious target could otherwise exfiltrate them at compile
+  # time via a build script:
+  n=0
+  for target in $(cargo fuzz list 2>/dev/null); do
+    [ "$n" -ge 8 ] && break
+    n=$((n + 1))
+    env -u GH_TOKEN -u GH_GLOBAL -u RESEND_API_KEY -u RESEND_FROM -u RESEND_REPLY_TO \
+      cargo +nightly fuzz run "$target" -- -max_total_time=90 \
+      > "/tmp/vuln-scan/fuzz/${target}.log" 2>&1 || true
+  done
+  echo "fuzz=$([ -n "$(ls /tmp/vuln-scan/fuzz 2>/dev/null)" ] && echo ok || echo fail)" >> /tmp/vuln-scan/sources.txt
+else
+  echo "VULN_SCANNER_SKIPPED: no fuzz/fuzz_targets or cargo-fuzz unavailable"
+fi
+```
+
+A crash artifact lands at `fuzz/artifacts/<target>/crash-*`. Reproduce it clean
+before it counts as anything: `env -u GH_TOKEN -u GH_GLOBAL -u RESEND_API_KEY -u RESEND_FROM -u RESEND_REPLY_TO cargo fuzz run <target> fuzz/artifacts/<target>/crash-*`
+(same secret-scrubbing as the run above — this also compiles and executes the
+target's code) and read the actual panic message and call stack, not just the
+"deadly signal" summary line.
+
+**Root-cause it before routing it** — a crash under `fuzz/` can mean three
+different things, and they route differently:
+
+1. **The panic is in the target's own code.** Route it exactly like any other
+   code vulnerability (A5 table) — PVR if the repo has a channel, out-of-band
+   contact otherwise.
+2. **The panic is in a dependency**, reached through the target's own call path
+   (check the stack trace — if the crashing frame's crate isn't the one you
+   cloned, this is it). This happened on the one real run so far: fuzzing
+   `firecrawl/anydoc`'s `xlsx` target surfaced a crash inside `calamine`, not in
+   anydoc's own code. Report and, if the fix is small and matches the
+   dependency's own existing conventions, fix it **in the dependency's repo**,
+   not the original target — the target's only actionable next step is bumping
+   a version once one exists. A dependency panic is DoS-only (Rust panics
+   safely; this is not a memory-safety finding) and, absent a published CVE
+   already covering it, the fix usually is the disclosure: small, obvious,
+   reviewable, no exploit chain to redact. A PR is the appropriate channel for
+   that case even without PVR on the dependency's repo — same logic as A5's
+   dependency-CVE row, just for a bug you found instead of one already public.
+3. **The panic is in the harness itself**, not the parser (an assertion the
+   fuzz target's own author wrote, a fixture format mismatch, an `unwrap()` on
+   setup code outside the code path being fuzzed). Not a finding — drop it,
+   same as a scanner false positive.
+
+### A3.6. Agentic logic audit (what SAST and fuzzing both miss)
+
+Semgrep matches syntactic patterns and has weak dataflow reachability on custom code; fuzzing (A3.5) only reaches what a harness already drives. Both are blind to **authorization, business-logic, and multi-step trust-boundary** bugs. That whole class is what an agentic reviewer catches - and here **you are the agentic scanner**. Do the source-to-sink reasoning the tools can't, over this repo's real entrypoints. This pass runs on every scan (unlike A3.5, which only fires when the repo ships a fuzz harness) and produces *candidates*, not verdicts - everything still goes through A4 triage (the model surfacing a finding is not evidence it is real).
+
+**Bounded so it can't run away on run time.** Size the repo first, then set the entrypoint review budget `N` from it - deep-review the **top-N highest-exposure** entrypoints only, and note the rest in the A7 report as reviewed-but-not-deep so coverage stays honest:
+
+```bash
+# Cheap size probe (excludes the usual noise dirs). Drives the review budget below.
+CODE_FILES=$(find . -type f \( -name '*.js' -o -name '*.ts' -o -name '*.jsx' -o -name '*.tsx' \
+  -o -name '*.py' -o -name '*.go' -o -name '*.rs' -o -name '*.sol' -o -name '*.rb' \
+  -o -name '*.java' -o -name '*.php' \) \
+  -not -path '*/node_modules/*' -not -path '*/vendor/*' -not -path '*/dist/*' \
+  -not -path '*/build/*' -not -path '*/.git/*' 2>/dev/null | wc -l | tr -d ' ')
+if   [ "${CODE_FILES:-0}" -le 300 ];  then N=15   # small repo - review broadly
+elif [ "${CODE_FILES:-0}" -le 1500 ]; then N=10
+else                                       N=6; fi # large repo - top exposure only
+echo "agentic-budget: CODE_FILES=$CODE_FILES N=$N"
+```
+
+**0. Frame the threat model first (one paragraph, before you enumerate).** State what this app is, the 2-3 things an attacker most wants from it (RCE, auth bypass / IDOR, secret/data exfil, SSRF into internal infra), and its trust boundaries (who is authenticated where, what input is server- vs user-controlled). This targets the ranking in step 2 so the top-`N` budget lands on what actually matters, not just the first entrypoints you find. Keep it to a few lines; it is the plan, not a deliverable.
+
+**1. Build the entrypoint inventory** - every place untrusted input enters. Grep + read to enumerate; record `file:symbol` and a `kind` for each:
+
+- HTTP / route handlers, API endpoints, GraphQL resolvers, webhook receivers
+- CLI arg + env parsing
+- Deserializers (JSON / YAML / pickle / XML), file uploads, path handling (traversal)
+- Template rendering / HTML construction (XSS), SQL / NoSQL query building (injection)
+- `exec` / `spawn` / `system` / `eval` sinks + subprocess with string interpolation (RCE)
+- Auth / session / token / crypto code (authz bypass, IDOR, weak crypto)
+- Outbound network clients + redirect handling (SSRF, open redirect)
+
+**2. Rank by exposure, deep-review the top N.** Order entrypoints by attack surface **against the step-0 threat model** (unauthenticated + reachable + dangerous-sink, weighted toward what the attacker most wants, first). For the top `N`: trace source-to-sink - what the attacker controls, where it flows, the sink, and the guard (if any) between. Write the one-sentence attacker-control claim (the A4 bar). Prioritize reachable **production** paths; ignore tests/examples/docs. Note entrypoints past `N` in the A7 report as not-deep-reviewed - do not silently drop them.
+
+**3. Emit candidates** in the same shape the tool outputs feed A4. Write one JSON array (may be `[]`) to `/tmp/vuln-scan/agentic.json` with the **Write** tool:
+
+```json
+[
+  {"file":"src/api/user.ts","line":88,"severity":"high","category":"idor",
+   "claim":"unauthenticated GET /user/:id returns any user's record - no owner check"}
+]
+```
+
+```bash
+# after writing /tmp/vuln-scan/agentic.json, record the source status:
+echo "agentic=ok" >> /tmp/vuln-scan/sources.txt   # 0 candidates on a reviewed surface is still `ok`;
+                                                  # use `agentic=skipped` only if the repo is unreadable/opaque
+                                                  # (minified-only, generated, no source you can reason about)
+```
+
+**Optional - codex-security as an extra source.** If `OPENAI_API_KEY` is present **and** `npx` is allow-listed and the CLI is staged, `npx @openai/codex-security scan . --json` produces an independent agentic `findings.json`; merge its findings into `/tmp/vuln-scan/agentic.json` and record `codex=ok`. **Off by default** - it needs Node 22.13+, model credits, and an allow-listed `npx`; the Claude-native pass above is the baseline and needs no new infra. (Verify the subcommand/flags against the installed version first - it is early 0.1.x and churns.)
 
 ### A4. Triage — read every finding before trusting it
 
-A scanner hit is a candidate, not a vulnerability. For each candidate:
+A scanner hit - or a candidate from the A3.6 agentic pass - is a candidate, not a vulnerability. Merge the array in `/tmp/vuln-scan/agentic.json` (if present) into the tool findings, then for each candidate:
 
 1. **Open the file at the reported line** and read the surrounding 30–50 lines.
 2. **Write one sentence** describing what an attacker controls and what they achieve. If you can't, discard it.
@@ -184,6 +350,8 @@ This is the core of the scan arm. Pick the channel by finding type:
 | **Code vulnerability** (Semgrep ERROR/WARNING, verified exploitable) | **PVR** (GitHub private advisory) | Unpatched code flaw — public disclosure creates a zero-day |
 | **Verified leaked secret** (TruffleHog verified) | **PVR** + tell maintainer to rotate | Publishing the file/line in a public PR tells attackers where to look |
 | **Smart-contract issue** (Slither high/medium) | **PVR** | On-chain exploitation is often immediate and irreversible |
+| **Fuzz crash in the target's own code** | **PVR** | Same as any other code vulnerability — see A3.5 |
+| **Fuzz crash in a dependency** | **Public PR to the dependency's repo** (fix, not just a report, if it's small and matches their conventions) | DoS-only, no exploit chain to redact — see A3.5 case 2 |
 | **No PVR enabled AND no SECURITY.md** | **Private issue** to maintainer if possible, else skip and log | No safe channel = do no harm |
 
 #### A5a. Public PR (dependency CVEs only)
@@ -336,13 +504,13 @@ Use `./notify`. One paragraph. Lead with the verdict.
 *Vuln Scanner — <repo>*
 <N> confirmed findings (<severity-summary>).
 Disclosed via: <PVR: advisory #123 | public PR #45 | skipped (no channel)>
-Scanners: semgrep=<ok|fail>, trufflehog=<ok|fail>, osv=<ok|fail>.
+Scanners: semgrep=<ok|fail>, trufflehog=<ok|fail>, osv=<ok|fail>, fuzz=<ok|fail|skip>.
 ```
 
 If the audit was clean:
 ```
 *Vuln Scanner — <repo>*
-Clean audit. <M> candidates reviewed, 0 confirmed. Scanners: semgrep=ok, trufflehog=ok, osv=ok.
+Clean audit. <M> candidates reviewed, 0 confirmed. Scanners: semgrep=ok, trufflehog=ok, osv=ok, fuzz=skip, agentic=ok.
 ```
 
 Then log per the **Log** section below with `Mode: scan`.
@@ -511,7 +679,7 @@ A `.md` file in `memory/pending-disclosures/` is eligible iff:
    plausible email (`^[^@\s]+@[^@\s]+\.[^@\s]+$`).
 3. **Still pending:** `status:` is one of `pending-operator-send`, `auto-send-ready`,
    `pending`, or blank. Anything else (`email-sent`, `email-failed`, `hold`, `sent`,
-   `submitted`, `withdrawn`, `superseded-upstream`) → **skip**. (`email-failed` means
+   `submitted`, `withdrawn`, `superseded-upstream`, `contact-unverified`) → **skip**. (`email-failed` means
    the sender gave up after repeated failures — leave it for the operator.)
 4. **Sendable body present:** the email body can be cleanly isolated (see step C3).
 5. **Not already sent:** no row in `memory/email-log.json` matches this draft
@@ -588,6 +756,15 @@ sending. Only `./secretcurl`, `jq`, `python3`, `grep`, `date`, `echo`, `mkdir`, 
 **Per draft (stop the loop once `BUDGET` sends have gone out):**
 4. **Dedup / status.** Skip if `slug` (repo with `/`→`-`) is already a row in `memory/email-log.json`, or the draft's own `status:` is already `email-sent`/`email-failed`.
 5. **Recipient sanity.** `to` must match `^[^@[:space:]]+@[^@[:space:]]+\.[^@[:space:]]+$` (`grep -qE`) — else skip + warn.
+5b. **Deliverability (MX/A), fail-closed.** A syntactically valid address can still be a dead or mistyped domain. Before an autonomous send, confirm the recipient **domain can actually receive mail** at the DNS level (port-25 SMTP probing is blocked on hosted runners, so verify over DNS-over-HTTPS - a plain GET, so `./secretcurl` passes the placeholder-free URL straight through):
+   ```bash
+   DOMAIN="${TO#*@}"
+   DNS=$(./secretcurl -sS --max-time 10 "https://dns.google/resolve?name=${DOMAIN}&type=MX")
+   MXN=$(echo "$DNS" | jq -r '[.Answer[]? | select(.type==15)] | length' 2>/dev/null)
+   ```
+   - `MXN >= 1` (domain publishes MX) → **verified, proceed.**
+   - `MXN == 0`: retry once against Cloudflare (`./secretcurl -sS --max-time 10 -H 'accept: application/dns-json' "https://cloudflare-dns.com/dns-query?name=${DOMAIN}&type=MX"`). Still none → look up an A record (`&type=A`, `.type==1`): a domain with an A but no MX still accepts mail at that host (RFC 5321 §5.1), so treat a resolvable A as deliverable.
+   - **No MX and no A, or both lookups error / time out → do NOT send (fail closed).** Flip the draft to `status: contact-unverified` and add a `deliverability: no-mx` frontmatter line so it drops out of the eligible set and surfaces to the operator; do not consume the budget.
 6. **Cooldown.** If this `to` was emailed within `${DISCLOSURE_EMAIL_COOLDOWN_DAYS:-7}` days (latest `.to`→`.sent_at` in the ledger, `python3` datetime diff) → skip, leave queued, retry after the window. A cooled-down draft does **not** consume the budget — move to the next.
 7. **Secret tripwire.** If subject+body match `grep -qE '(sk-[A-Za-z0-9]{20}|re_[A-Za-z0-9]{8}[A-Za-z0-9_]{12}|gh[pousr]_[A-Za-z0-9]{20}|AKIA[0-9A-Z]{16}|AIza[0-9A-Za-z_-]{20}|-----BEGIN [A-Z ]*PRIVATE KEY-----)'` → **do not send**, log `BLOCKED: possible secret in body`, leave for operator review.
 8. **Build cc** = the draft's `cc` (array or comma-string) + `$RESEND_CC` (operator audit copy), minus blanks and the `to`, deduped (`jq`).
@@ -665,7 +842,7 @@ specific bullets.
 - Target: owner/repo (stars, language)
 - Candidates: N | Confirmed: M
 - Channels used: PVR (x), public PR (y), skipped (z)
-- Scanner status: semgrep=ok trufflehog=ok osv=ok
+- Scanner status: semgrep=ok trufflehog=ok osv=ok fuzz=ok|fail|skip agentic=ok|skip
 - Advisory/PR links: [...]
 ```
 
@@ -696,6 +873,8 @@ specific bullets.
 2. **Execute** — non-interactive `claude -p` runs under an `--allowedTools` allowlist, so any command not on it is **denied** ("requires approval") with no human to approve. The scanner *bare names* (`semgrep`, `osv-scanner`, `trufflehog`, `slither`) must be listed in the **write tier** of `scripts/skill_mode.sh` for bare invocation to be permitted; if a name is missing it's denied and that scanner is skipped (the scan arm degrades to manual code review — a denial reads as "requires approval", **not** a network/sandbox block). This is why step A3 puts `/tmp/bin` on `PATH` and calls each tool by bare name (`semgrep …`, not `/tmp/bin/semgrep …`) — an absolute-path invocation would not match the allowlist pattern.
 
 This two-part fix resolves ISS-001 (binaries installed *and* runnable). If any scanner binary is still missing at runtime, log `VULN_SCANNER_SKIPPED: <tool> not available`, record `tool=fail` in `sources.txt`, and continue with the remaining scanners rather than aborting the whole run. An all-scanners-fail run must report **error**, not **clean**.
+
+**A3.5 (fuzz)** follows the same two-part shape, but staging happens in the workflow step, not in-run: `scripts/stage-vuln-scanner.sh` installs a nightly Rust toolchain and `cargo-fuzz` before `claude -p` starts (the sandbox denies toolchain installs in-run, same reason `deploy-uni-hook` stages Foundry the same way — see `scripts/stage-deploy-uni-hook.sh`). Staging is unconditional (same tolerance as slither above — the target isn't known yet at staging time), so it always installs; only *use* is conditional on the clone actually shipping `fuzz/fuzz_targets`. Execution needs `Bash(cargo:*)` in the write tier of `scripts/skill_mode.sh` — broader than the single-purpose scanner grants, because `cargo fuzz` dispatches through the `cargo` binary itself, which also compiles the target's own code (and its build scripts). **This means the target's build scripts run with this skill's own secrets (`GH_GLOBAL`/`GH_TOKEN`, `RESEND_API_KEY`, `RESEND_FROM`, `RESEND_REPLY_TO`) live in the environment and network open — A3.5 scrubs them with `env -u` immediately before both the fuzz run and the crash-reproduction command, and nowhere else in this skill needs that scrub**, since only this step executes the target's own code. If either staging half is missing, the `command -v cargo-fuzz` guard in A3.5 skips cleanly.
 
 **Arm B (re-submit).** `gh api` uses the `GH_TOKEN` env var internally (the workflow wires `GH_GLOBAL` in). If `gh api` fails, use the `curl` fallback in step B2. No outbound auth-required calls except `gh api`.
 
@@ -733,8 +912,9 @@ General network rules: `curl` works, with **WebFetch** as the fallback for a pla
 - **Don't scan the same repo twice in 30 days** (`memory/vuln-scanned.json`).
 - **Never post exploit chains publicly.** PoCs go in the private advisory, not in a GitHub comment.
 - **Be deferential in disclosure language** — you're offering help, not grading homework.
-- **Public PRs are only for dependency bumps** addressing already-disclosed CVEs. Everything else is private.
+- **Public PRs are only for dependency bumps** addressing already-disclosed CVEs, or a fuzz-found bug fixed directly in the dependency that owns it (A3.5 case 2) — everything else is private.
 - **All-scanners-failed ≠ clean.** Report it as an error and do not publish anything.
+- **Fuzzing only activates when the repo already ships a harness.** This skill doesn't write fuzz targets from scratch — that's real engineering work specific to the target's parsing logic, not something to improvise inside a weekly scan. If `fuzz/fuzz_targets` isn't there, `A3.5` skips, same as a missing scanner.
 
 **Disclose (Arm C):**
 - **The arming flag is sacred.** Never queue a draft without `auto_send: true`. If a

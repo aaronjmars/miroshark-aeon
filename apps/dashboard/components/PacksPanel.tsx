@@ -5,6 +5,7 @@ import type { Pack, CommunityPack, Skill } from '../lib/types'
 import { displayName } from '../lib/utils'
 import { FIRST_PARTY_KEYS, DEFAULT_VISIBLE_PACKS } from '../lib/constants'
 import { Section } from './ui/Section'
+import { SkillGlyph, hasSkillGlyph } from './ui/SkillGlyph'
 
 interface PacksPanelProps {
   firstParty: Pack[]
@@ -27,8 +28,8 @@ function installArg(pack: CommunityPack): string {
 }
 
 function trustTone(level?: string): string {
-  if (level === 'trusted') return 'text-eva-green border-eva-green/40 bg-eva-green/10'
-  if (level === 'community') return 'text-eva-amber border-eva-amber/40 bg-eva-amber/10'
+  if (level === 'trusted') return 'text-aeon-green border-aeon-green/40 bg-aeon-green/10'
+  if (level === 'community') return 'text-aeon-amber border-aeon-amber/40 bg-aeon-amber/10'
   return 'text-primary-40 border-[rgba(250,250,250,0.18)]'
 }
 
@@ -69,9 +70,9 @@ export function PacksPanel({ firstParty, community, skills, enabledPacks, loadin
 
   const stats = [
     { label: 'Packs', value: visiblePacks.length },
-    { label: 'Enabled', value: packsOn, tone: 'text-eva-green' },
+    { label: 'Enabled', value: packsOn, tone: 'text-aeon-green' },
     { label: 'Skills', value: totalSkills },
-    { label: 'Enabled', value: onDuty, tone: 'text-eva-green' },
+    { label: 'Enabled', value: onDuty, tone: 'text-aeon-green' },
   ]
 
   if (loading) {
@@ -145,7 +146,7 @@ export function PacksPanel({ firstParty, community, skills, enabledPacks, loadin
         </div>
         <dl className="relative z-10 grid grid-cols-2 sm:grid-cols-4 border-t border-[rgba(250,250,250,0.10)]">
           {stats.map((s, i) => (
-            <div key={s.label} className={`px-6 py-5 ${i < stats.length - 1 ? 'border-r border-[rgba(250,250,250,0.10)]' : ''}`}>
+            <div key={i} className={`px-6 py-5 ${i < stats.length - 1 ? 'border-r border-[rgba(250,250,250,0.10)]' : ''}`}>
               <dt className="text-[10px] font-mono uppercase tracking-[0.22em] text-primary-35 mb-2">{s.label}</dt>
               <dd className={`font-display leading-none ${s.tone || 'text-aeon-fg'}`} style={{ fontSize: 'clamp(28px, 3vw, 44px)' }}>{s.value}</dd>
             </div>
@@ -174,7 +175,7 @@ export function PacksPanel({ firstParty, community, skills, enabledPacks, loadin
                       </div>
                       <div className="text-[11px] text-primary-40 font-mono mt-1 uppercase tracking-[0.14em]">
                         {pack.total} skill{pack.total === 1 ? '' : 's'}
-                        {pack.enabled > 0 && <span className="text-eva-green"> · {pack.enabled} enabled</span>}
+                        {pack.enabled > 0 && <span className="text-aeon-green"> · {pack.enabled} enabled</span>}
                       </div>
                     </div>
                   </div>
@@ -185,7 +186,7 @@ export function PacksPanel({ firstParty, community, skills, enabledPacks, loadin
                       onClick={() => onTogglePack(pack.key)}
                       disabled={isLocked}
                       title={isCommunity ? 'Skills you installed are always shown' : isDefaultVisible ? 'Shown by default - always on' : on ? 'Hide this pack’s skills from the dashboard' : 'Reveal this pack’s skills across the sidebar and HQ'}
-                      className={`text-[10px] font-mono uppercase tracking-[0.14em] px-3 py-1.5 border transition-colors cursor-target disabled:cursor-default ${on ? 'text-eva-green border-eva-green/50 bg-eva-green/10' : 'text-primary-50 border-[rgba(250,250,250,0.18)] hover:text-primary-100 hover:border-[rgba(250,250,250,0.3)]'}`}
+                      className={`text-[10px] font-mono uppercase tracking-[0.14em] px-3 py-1.5 border transition-colors cursor-target disabled:cursor-default ${on ? 'text-aeon-green border-aeon-green/50 bg-aeon-green/10' : 'text-primary-50 border-[rgba(250,250,250,0.18)] hover:text-primary-100 hover:border-[rgba(250,250,250,0.3)]'}`}
                     >
                       {isLocked ? 'Always on' : on ? '✓ Enabled' : 'Enable pack'}
                     </button>
@@ -208,12 +209,14 @@ export function PacksPanel({ firstParty, community, skills, enabledPacks, loadin
                             onClick={() => onToggleSkill(s.slug, !s.enabled)}
                             disabled={sb}
                             title={s.enabled ? 'Disable skill' : 'Enable skill'}
-                            className={`text-[9px] font-mono uppercase tracking-[0.14em] px-1.5 py-0.5 border shrink-0 w-9 text-center transition-colors cursor-target disabled:opacity-50 ${s.enabled ? 'text-eva-green border-eva-green/40 hover:bg-eva-green/10' : 'text-primary-40 border-[rgba(250,250,250,0.16)] hover:text-primary-70'}`}
+                            className={`text-[9px] font-mono uppercase tracking-[0.14em] px-1.5 py-0.5 border shrink-0 w-9 text-center transition-colors cursor-target disabled:opacity-50 ${s.enabled ? 'text-aeon-green border-aeon-green/40 hover:bg-aeon-green/10' : 'text-primary-40 border-[rgba(250,250,250,0.16)] hover:text-primary-70'}`}
                           >
                             {sb ? '…' : s.enabled ? 'on' : 'off'}
                           </button>
                           <button onClick={() => onSelectSkill(s.slug)} className="flex items-center gap-2.5 flex-1 min-w-0 text-left cursor-target">
-                            <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ backgroundColor: s.enabled ? pack.color : 'rgba(250,250,250,0.18)' }} />
+                            {hasSkillGlyph(s.slug)
+                              ? <span className="shrink-0 inline-flex" style={{ color: s.enabled ? pack.color : 'rgba(250,250,250,0.4)' }} aria-hidden="true"><SkillGlyph slug={s.slug} className="w-4 h-4" /></span>
+                              : <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ backgroundColor: s.enabled ? pack.color : 'rgba(250,250,250,0.18)' }} />}
                             <span className="text-xs text-primary-100 truncate">{displayName(s.slug)}</span>
                           </button>
                         </div>
@@ -247,12 +250,12 @@ export function PacksPanel({ firstParty, community, skills, enabledPacks, loadin
                 <p className="text-xs text-primary-70 leading-relaxed line-clamp-3">{pack.description}</p>
                 <div className="text-[10px] font-mono uppercase tracking-[0.14em] text-primary-40">
                   {pack.skills.length} skill{pack.skills.length === 1 ? '' : 's'}
-                  {installed && <span className="text-eva-green"> · {pack.installedCount} installed</span>}
+                  {installed && <span className="text-aeon-green"> · {pack.installedCount} installed</span>}
                 </div>
                 {(pack.secrets_required?.length || pack.capabilities?.length) ? (
                   <div className="flex flex-wrap gap-1">
                     {pack.secrets_required?.map(sec => (
-                      <span key={sec} className="text-[9px] font-mono px-1.5 py-0.5 border border-eva-amber/30 text-eva-amber">{sec}</span>
+                      <span key={sec} className="text-[9px] font-mono px-1.5 py-0.5 border border-aeon-amber/30 text-aeon-amber">{sec}</span>
                     ))}
                     {pack.capabilities?.map(cap => (
                       <span key={cap} className="text-[9px] font-mono px-1.5 py-0.5 border border-[rgba(250,250,250,0.14)] text-primary-40">{cap}</span>
@@ -274,13 +277,13 @@ export function PacksPanel({ firstParty, community, skills, enabledPacks, loadin
                     className="shrink-0 px-2 py-1.5 border border-[rgba(250,250,250,0.12)] text-primary-50 hover:text-primary-100 hover:border-[rgba(250,250,250,0.22)] transition-colors cursor-target"
                   >
                     {copied === pack.repo ? (
-                      <span className="text-[10px] font-mono uppercase tracking-[0.14em] text-eva-green">copied</span>
+                      <span className="text-[10px] font-mono uppercase tracking-[0.14em] text-aeon-green">copied</span>
                     ) : (
                       <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25" /></svg>
                     )}
                   </button>
                   {pack.homepage && (
-                    <a href={pack.homepage} target="_blank" rel="noopener noreferrer" className="shrink-0 text-[10px] font-mono uppercase tracking-[0.14em] text-primary-50 hover:text-eva-orange transition-colors cursor-target">site ↗</a>
+                    <a href={pack.homepage} target="_blank" rel="noopener noreferrer" className="shrink-0 text-[10px] font-mono uppercase tracking-[0.14em] text-primary-50 hover:text-aeon-red transition-colors cursor-target">site ↗</a>
                   )}
                 </div>
               </div>

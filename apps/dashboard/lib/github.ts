@@ -73,11 +73,24 @@ function authHeaders(token: string) {
   }
 }
 
+// Authenticated GET against the repo's "contents" endpoint. Uncached: the
+// dashboard reads config it may have just written.
+function contentsGet(path: string): Promise<Response> {
+  const { token, repo } = getConfig()
+  return fetch(`${GITHUB_API}/repos/${repo}/contents/${path}`, {
+    headers: authHeaders(token),
+    cache: 'no-store',
+  })
+}
+
 // Parse a GitHub "list contents" response into its entry array. A 404 and a
 // non-array body (i.e. a single file, not a directory) both yield [] — an
 // absent-or-not-a-directory path is not an error for callers that list.
 async function parseContentsList(res: Response, path: string): Promise<GitHubContentEntry[]> {
-  return parseContentsList(res, path)
+  if (res.status === 404) return []
+  if (!res.ok) throw new Error(`GitHub API ${res.status}: failed to list ${path}`)
+  const body = await res.json()
+  return Array.isArray(body) ? (body as GitHubContentEntry[]) : []
 }
 
 // --- Unified interface: local filesystem or GitHub API ---
@@ -87,11 +100,7 @@ export async function getFileContent(path: string): Promise<{ content: string; s
     const content = await readFile(join(REPO_ROOT, path), 'utf-8')
     return { content, sha: '' }
   }
-  const { token, repo } = getConfig()
-  const res = await fetch(`${GITHUB_API}/repos/${repo}/contents/${path}`, {
-    headers: authHeaders(token),
-    cache: 'no-store',
-  })
+  const res = await contentsGet(path)
   if (!res.ok) throw new Error(`GitHub API ${res.status}: failed to read ${path}`)
   const data = (await res.json()) as GitHubContentFile
   return {
@@ -100,10 +109,10 @@ export async function getFileContent(path: string): Promise<{ content: string; s
   }
 }
 
-export async function updateFile(path: string, content: string, sha: string, _message: string): Promise<unknown> {
+export async function updateFile(path: string, content: string, sha: string, _message: string): Promise<void> {
   if (isLocal()) {
     await writeFile(join(REPO_ROOT, path), content, 'utf-8')
-    return { ok: true }
+    return
   }
   const { token, repo } = getConfig()
   const res = await fetch(`${GITHUB_API}/repos/${repo}/contents/${path}`, {
@@ -117,10 +126,9 @@ export async function updateFile(path: string, content: string, sha: string, _me
     cache: 'no-store',
   })
   if (!res.ok) throw new Error(`GitHub API ${res.status}: failed to update ${path}`)
-  return res.json()
 }
 
-export async function createFile(path: string, content: string, message: string): Promise<unknown> {
+export async function createFile(path: string, content: string, message: string): Promise<void> {
   if (path.startsWith('/') || path.includes('..')) {
     throw new Error(`invalid path: ${path}`)
   }
@@ -128,7 +136,7 @@ export async function createFile(path: string, content: string, message: string)
     const fullPath = join(REPO_ROOT, path)
     await mkdir(join(fullPath, '..'), { recursive: true })
     await writeFile(fullPath, content, 'utf-8')
-    return { ok: true }
+    return
   }
   const { token, repo } = getConfig()
   try {
@@ -147,7 +155,6 @@ export async function createFile(path: string, content: string, message: string)
     cache: 'no-store',
   })
   if (!res.ok) throw new Error(`GitHub API ${res.status}: failed to create ${path}`)
-  return res.json()
 }
 
 /**
@@ -189,12 +196,7 @@ export async function getDirectory(path: string): Promise<Array<{ name: string; 
       return []
     }
   }
-  const { token, repo } = getConfig()
-  const res = await fetch(`${GITHUB_API}/repos/${repo}/contents/${path}`, {
-    headers: authHeaders(token),
-    cache: 'no-store',
-  })
-  return parseContentsList(res, path)
+  return parseContentsList(await contentsGet(path), path)
 }
 
 // --- Remote repo helpers (for importing skills) ---

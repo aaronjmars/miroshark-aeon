@@ -1,13 +1,18 @@
 ---
-type: Skill
 name: holdings
-category: crypto
-description: Report your wallet holdings of the instance's token — amount held, % of total supply, and 7d/30d amount growth, via public RPC (no dollar value)
-var: ""
-tags: [crypto]
-mode: write
-requires: [BASE_RPC_URL?, SOLANA_RPC_URL?]
-capabilities: [external_api]
+description: Report your wallet holdings of the instance's token - amount held, % of total supply, and 7d/30d amount growth, via public RPC (no dollar value)
+metadata:
+  title: Holdings
+  category: crypto
+  var: ""
+  tags:
+    - crypto
+  mode: write
+  requires:
+    - BASE_RPC_URL?
+    - SOLANA_RPC_URL?
+  capabilities:
+    - external_api
 ---
 
 > **${var}** — Optional single wallet address to check (Base `0x…` or Solana). If empty, uses every wallet in `memory/holdings.json`.

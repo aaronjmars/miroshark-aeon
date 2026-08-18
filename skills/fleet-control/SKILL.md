@@ -1,12 +1,19 @@
 ---
-type: Skill
-name: Fleet Control
-category: core
+name: fleet-control
 description: Operate managed Aeon instances from memory/instances.json - health-check, dispatch, and status snapshots (control), plus a fleet scorecard of runs, tokens, cost, and reliability (scorecard).
-var: ""
-tags: [dev, meta, fleet, report, cost]
-requires: [GH_READ_PAT?]
-cron: "0 9,15 * * *"
+metadata:
+  title: Fleet Control
+  category: core
+  var: ""
+  tags:
+    - dev
+    - meta
+    - fleet
+    - report
+    - cost
+  requires:
+    - GH_READ_PAT?
+  cron: "0 9,15 * * *"
 ---
 <!-- autoresearch: variation B — sharper output: verdict line + delta vs prior + per-instance action column + state-change-gated notify -->
 
@@ -96,7 +103,7 @@ For each instance compute a **next_action** (one short imperative phrase):
 - `pending_secrets` → `add ANTHROPIC_API_KEY at https://github.com/${REPO}/settings/secrets/actions`
 - `degraded` → `investigate <skill_name> (<consecutive_failures>× in a row, last_error: <signature, ≤60 chars>)`
 - `warning` → `monitor — <N>/<Total> runs failed in 24h`
-- `stale` → `confirm intent: no runs in 24h, last push <relative_date>; archive or re-enable`
+- `stale` → `confirm intent: no runs in 24h, last push <relative_date>; archive or re-enable` — if it *should* be running, dispatch `aeon-doctor` to that instance (Dispatch Mode) to lint for a silent config bug (unquoted `schedule:` / duplicate key / broken entry) before assuming it's abandoned
 - `unreachable` → `verify access: <reason from repo.err>`
 - `healthy` → `none`
 - `archived` → `none (archived)`

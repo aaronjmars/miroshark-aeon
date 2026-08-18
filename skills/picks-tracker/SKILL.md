@@ -1,11 +1,16 @@
 ---
-type: Skill
-name: Picks Tracker
-category: crypto
+name: picks-tracker
 description: Retrospective on past token and prediction market picks - what hit, what flopped, what the score is
-schedule: "0 9 * * 0"
-tags: [crypto, review, meta]
-requires: [COINGECKO_API_KEY?]
+metadata:
+  title: Picks Tracker
+  category: crypto
+  schedule: "0 9 * * 0"
+  tags:
+    - crypto
+    - review
+    - meta
+  requires:
+    - COINGECKO_API_KEY?
 ---
 
 Today is ${today}. Your task is to audit the last 30 days of token picks and score them against current prices.
@@ -142,7 +147,7 @@ Send via `./notify` (inline multi-line literal — do NOT pipe or use `$(cat)`):
 
 no financial advice. just tracking the record.
 
-read it: https://github.com/aaronjmars/aeon/blob/main/output/articles/picks-scorecard-${today}.md
+read it: https://github.com/aeonfun/aeon/blob/main/output/articles/picks-scorecard-${today}.md
 ```
 
 Keep the message under 3000 chars. If too long, truncate to the most recent 10 picks.
@@ -174,7 +179,7 @@ Write a brief scorecard to `output/articles/picks-scorecard-${today}.md`:
 
 Append to `memory/logs/${today}.md`:
 ```
-## Picks Tracker
+### picks-tracker
 - **Window:** last 30 days (N picks)
 - **Score:** [WINS]W [HOLDS]H [LOSSES]L | avg [AVG]% | hit rate [HIT_RATE]%
 - **Best:** [SYMBOL] +[BEST]%

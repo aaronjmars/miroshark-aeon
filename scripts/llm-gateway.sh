@@ -20,7 +20,7 @@
 #
 # NOTE: `grok` here is the GATEWAY path — Claude Code (`claude -p`) pointed at
 # xAI's Anthropic-compatible API. It is distinct from the grok CLI *harness*
-# (harness: grok in aeon.yml → scripts/run-grok.sh), which runs the grok binary
+# (harness: grok in aeon.yml → harness-adapter/adapters/grok.sh), which runs the grok binary
 # itself and never sources this file.
 #
 # NOTE: do not add `set -e/-u` here — this file is sourced and must not change
@@ -189,10 +189,17 @@ case "${GATEWAY:-direct}" in
     export ANTHROPIC_AUTH_TOKEN="$OPENROUTER_API_KEY"       # Bearer; API_KEY must be blank
     unset ANTHROPIC_API_KEY CLAUDE_CODE_OAUTH_TOKEN
     # Map EVERY model slot Claude Code uses to OpenRouter slugs (opus/sonnet/haiku).
-    export ANTHROPIC_DEFAULT_OPUS_MODEL="${OPENROUTER_MODEL:-anthropic/claude-opus-5}"
+    export ANTHROPIC_DEFAULT_OPUS_MODEL="${OPENROUTER_MODEL:-anthropic/claude-opus-4.8}"
     export ANTHROPIC_DEFAULT_SONNET_MODEL="${OPENROUTER_MODEL_SONNET:-anthropic/claude-sonnet-5}"
     export ANTHROPIC_DEFAULT_HAIKU_MODEL="${OPENROUTER_MODEL_HAIKU:-anthropic/claude-haiku-4.5}"
     MODEL="$ANTHROPIC_DEFAULT_OPUS_MODEL"
+    # App attribution: HTTP-Referer + X-Title make aeon's OpenRouter traffic show
+    # up on openrouter.ai's public app leaderboard. Claude Code forwards
+    # ANTHROPIC_CUSTOM_HEADERS (one "Name: Value" per line) to the upstream even on
+    # a third-party gateway base URL. Override per fork with the repo vars
+    # OPENROUTER_SITE_URL / OPENROUTER_APP_TITLE.
+    export ANTHROPIC_CUSTOM_HEADERS="HTTP-Referer: ${OPENROUTER_SITE_URL:-https://aeon.fun}
+X-Title: ${OPENROUTER_APP_TITLE:-Aeon}"
     echo "::notice::Routing through OpenRouter (Anthropic-native) as ${MODEL}"
     ;;
 
@@ -218,8 +225,13 @@ case "${GATEWAY:-direct}" in
     export ANTHROPIC_BASE_URL="${XAI_ANTHROPIC_BASE_URL:-https://api.x.ai}"
     export ANTHROPIC_AUTH_TOKEN="$XAI_API_KEY"   # Bearer; API_KEY must be blank
     unset ANTHROPIC_API_KEY CLAUDE_CODE_OAUTH_TOKEN
-    # Pin every model slot to a grok coding model (GROK_MODEL overrides).
-    grok_model="${GROK_MODEL:-grok-build-0.1}"
+    # Pin every model slot to a grok coding model. Defaults to grok-4.5, xAI's current
+    # flagship and the same id the grok harness offers (GROK_MODELS in the dashboard's
+    # constants.ts), so the gateway and CLI paths name the same model. GROK_MODEL
+    # overrides: the older coding ids (grok-build-0.1, grok-composer-2.5-fast,
+    # grok-4.3) are api.x.ai model strings that still work here, even though the grok
+    # CLI rejects them on an X-account OAuth login.
+    grok_model="${GROK_MODEL:-grok-4.5}"
     export ANTHROPIC_DEFAULT_OPUS_MODEL="$grok_model"
     export ANTHROPIC_DEFAULT_SONNET_MODEL="$grok_model"
     export ANTHROPIC_DEFAULT_HAIKU_MODEL="$grok_model"
@@ -234,22 +246,23 @@ case "${GATEWAY:-direct}" in
     # uses dot-form ids: drop any trailing -YYYYMMDD date, then convert each
     # <digit>-<digit> to <digit>.<digit>. SURPLUS_MODEL overrides; opus-4.8 is the
     # fallback when $MODEL is unset.
-    surplus_model="${SURPLUS_MODEL:-$(printf '%s' "${MODEL:-claude-opus-5}" | sed -E 's/-[0-9]{8}$//; s/([0-9])-([0-9])/\1.\2/g')}"
+    surplus_model="${SURPLUS_MODEL:-$(printf '%s' "${MODEL:-claude-opus-4-8}" | sed -E 's/-[0-9]{8}$//; s/([0-9])-([0-9])/\1.\2/g')}"
     start_ccr_sidecar surplus \
       "https://www.surplusintelligence.ai/api/inference/v1/chat/completions" \
       "$SURPLUS_API_KEY" "$surplus_model"
     echo "::notice::Routing through Surplus via claude-code-router (${surplus_model})"
     ;;
 
-  venice)  # SIDECAR — OpenAI-compatible (dash-form ids); tops out ~Opus 4.6
+  venice)  # SIDECAR — OpenAI-compatible (dash-form ids); carries Opus 4.8, no haiku
     require_secret VENICE_API_KEY
     # Set VENICE_CLEANCACHE=1 to add the cleancache transformer (1h TTL, avoids
     # the shared 4-block prompt-cache limit) if you hit cache errors.
-    # The sidecar pins ONE model, so track aeon's $MODEL — but Venice's catalog
-    # caps at ~Opus 4.6, so a newer $MODEL (opus 4.7/4.8, fable) would 404. Derive
-    # only for models Venice is known to carry (dash-form, date suffix stripped);
-    # anything else keeps the safe opus-4-6 default. VENICE_MODEL overrides.
-    # (Confirm/extend the allowlist when Venice is live-validated.)
+    # The sidecar pins ONE model, so track aeon's $MODEL. Venice names models with
+    # aeon's own dash-form ids, so the picker's ids pass straight through (date
+    # suffix stripped) when Venice carries them. It carries NO haiku at all, so
+    # haiku, and anything else off-catalog, falls back to sonnet-5 rather than
+    # 404ing on a model Venice never had. VENICE_MODEL overrides.
+    # Allowlist verified against api.venice.ai/api/v1/models on 2026-07-24.
     # VENICE_BASE_URL (repo variable) points the sidecar at any Venice-compatible
     # endpoint — a self-hosted relay, a billing proxy, a regional mirror — same
     # override pattern as VENICE_MODEL. Defaults to Venice's public API.
@@ -257,8 +270,8 @@ case "${GATEWAY:-direct}" in
     if [ -z "$venice_model" ]; then
       m="$(printf '%s' "${MODEL:-}" | sed -E 's/-[0-9]{8}$//')"
       case "$m" in
-        claude-opus-5|claude-sonnet-5|claude-opus-4-6|claude-sonnet-4-6|claude-haiku-4-5) venice_model="$m" ;;
-        *) venice_model="claude-opus-5" ;;
+        claude-opus-4-8|claude-sonnet-5) venice_model="$m" ;;
+        *) venice_model="claude-sonnet-5" ;;
       esac
     fi
     start_ccr_sidecar venice \

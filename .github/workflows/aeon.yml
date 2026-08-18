@@ -13,20 +13,31 @@ on:
         required: false
         type: choice
         default: '(config default)'
-        # Keep in sync with the dashboard's MODELS/GROK_MODELS (apps/dashboard/lib/
-        # constants.ts): the dashboard dispatches `-f model=<id>` and this is a
-        # `choice` input, so any id it offers that's missing here is rejected with
-        # HTTP 422 at dispatch time.
+        # Keep in sync with the dashboard's MODELS/GROK_MODELS/CODEX_MODELS/
+        # VIBE_MODELS/PI_MODELS/KIMI_MODELS (apps/dashboard/lib/constants.ts): the
+        # dashboard dispatches `-f model=<id>` and this is a `choice` input, so any id
+        # it offers that's missing here is rejected with HTTP 422 at dispatch time.
+        # Each harness runs its own native family: codex uses openai/* ids; kimi
+        # moonshotai/*; vibe mistralai/mistral-medium-3-5 (default) + deepseek/
+        # deepseek-v4-flash; pi deepseek/deepseek-v4-flash (default) + deepseek-v4-pro.
+        # "Resolve harness" forwards them verbatim as the harness model.
         options:
           - '(config default)'
-          - claude-opus-4-8
-          - claude-opus-4-7
-          - claude-fable-5
           - claude-sonnet-5
-          - claude-sonnet-4-6
+          - claude-opus-4-8
           - claude-haiku-4-5-20251001
-          - grok-composer-2.5-fast
-          - grok-build
+          - grok-4.5
+          - openai/gpt-5-mini
+          - openai/gpt-5.1-codex-mini
+          - openai/gpt-5.3-codex
+          - openai/gpt-5.6-luna
+          - openai/gpt-5.6-terra
+          - mistralai/mistral-medium-3-5
+          - deepseek/deepseek-v4-flash
+          - deepseek/deepseek-v4-pro
+          - moonshotai/kimi-k2.5
+          - moonshotai/kimi-k3
+          - moonshotai/kimi-k2.7-code
       harness:
         description: 'Agent harness'
         required: false
@@ -36,6 +47,10 @@ on:
           - '(config default)'
           - claude
           - grok
+          - codex
+          - pi
+          - vibe
+          - kimi
       var:
         description: 'Variable (e.g. AI, bitcoin, owner/repo)'
         required: false
@@ -55,7 +70,7 @@ on:
         required: false
         type: string
       harness:
-        description: 'Agent harness override (claude | grok)'
+        description: 'Agent harness override (claude | grok | codex | pi | vibe | kimi)'
         required: false
         type: string
       var:
@@ -80,6 +95,11 @@ permissions:
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
   NODE_OPTIONS: '--no-deprecation'
+  # Fleet Watcher opt-in secrets — hoisted to workflow-level so that
+  # `if: env.FLEET_ENDPOINT != ''` in the preflight/postflight steps can
+  # actually see them. (Step-level env is NOT available in step `if:` clauses.)
+  FLEET_ENDPOINT: ${{ secrets.FLEET_ENDPOINT }}
+  FLEET_TOKEN:    ${{ secrets.FLEET_TOKEN }}
 
 concurrency:
   group: aeon-${{ inputs.skill || github.event.action || github.run_id }}
@@ -164,6 +184,132 @@ jobs:
         # cache key version in sync.)
         run: npm install -g @anthropic-ai/claude-code@2.1.168 --prefer-offline
 
+      # ──────────────────────────────────────────────────────────────────────
+      # Harness swap: resolve the harness HERE, not in "Run"
+      #
+      # Upstream resolves it inline in the Run step, which is fine when the only
+      # two values are claude (installed above) and grok (run-grok.sh installs
+      # itself). The four added harnesses need a CLI installed first, and an
+      # install step cannot read a value that does not exist yet.
+      #
+      # Gating the install on `inputs.harness` instead would silently break every
+      # CRON run: a cron carries no dispatch input, so a repo that sets
+      # `harness: codex` in aeon.yml would install nothing and fail inside Run.
+      # Resolution therefore moves up here and "Run" consumes this output.
+      #
+      # The resolution logic itself is upstream's, moved verbatim — same 3-tier
+      # precedence, same greps — so behaviour for claude/grok is unchanged.
+      # ──────────────────────────────────────────────────────────────────────
+      - name: Resolve harness
+        id: harness
+        if: steps.work.outputs.mode != ''
+        env:
+          INPUT_HARNESS: ${{ inputs.harness }}
+          INPUT_MODEL: ${{ inputs.model }}
+          SKILL_NAME: ${{ steps.skill.outputs.name }}
+          HARNESS_MODEL: ${{ vars.HARNESS_MODEL }}
+          # Native-auth secrets — used ONLY to detect which provider each harness
+          # should run on (native login/key > OpenRouter). Never echoed.
+          CODEX_AUTH: ${{ secrets.CODEX_AUTH }}
+          KIMI_AUTH: ${{ secrets.KIMI_AUTH }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          MOONSHOT_API_KEY: ${{ secrets.MOONSHOT_API_KEY }}
+          MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ANTHROPIC_OAUTH_TOKEN: ${{ secrets.ANTHROPIC_OAUTH_TOKEN }}
+          # grok's native auth (X-account OAuth capture > xAI key), so its AUTH_MODE
+          # is detected like the other harnesses instead of defaulting to openrouter.
+          GROK_CREDENTIALS: ${{ secrets.GROK_CREDENTIALS }}
+          XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
+        run: |
+          # The resolution itself lives in scripts/resolve-harness.sh so that every
+          # surface that launches an agent decides identically. It used to be ~100
+          # lines inline here, which is exactly why messages.yml could only ever
+          # support claude/grok: it had no way to compute AUTH_MODE or MODEL_ARG.
+          # It prints KEY=VALUE lines (HARNESS / AUTH_MODE / HARNESS_MODEL /
+          # MODEL_ARG) and its human-readable summary to stderr.
+          bash scripts/resolve-harness.sh "$SKILL_NAME" >> "$GITHUB_OUTPUT"
+
+      # Install/stage the harness CLI for every harness except claude (which is
+      # installed above and needs no per-provider auth). grok is included now:
+      # the run itself goes through `run-harness grok`, so grok's CLI + auth must
+      # be staged here just like the other adapter harnesses. It reuses
+      # `run-grok.sh setup` — the single source of truth for grok's pin and the
+      # GROK_CREDENTIALS/XAI_API_KEY restore — so nothing is duplicated.
+      # bubblewrap is what harness-adapter/lib/sandbox.sh uses to make read-only
+      # mean "the workspace physically cannot be written" on Linux. This used to
+      # live inside "Install harness CLI", which skips claude entirely and skipped
+      # grok by name — so those two had no sandbox available even when asked for
+      # one, and run-harness would have degraded to "read-only is advisory" with
+      # only a stderr notice. Now every harness gets it, so --mode read-only means
+      # the same thing on all six.
+      - name: Install bubblewrap (read-only sandbox)
+        if: steps.work.outputs.mode != ''
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq && sudo apt-get install -y -qq bubblewrap
+          # Ubuntu 24.04 (including GitHub's ubuntu-latest) restricts unprivileged
+          # user namespaces via AppArmor, so bwrap dies with 'setting up uid map:
+          # Permission denied' and run-harness fails CLOSED on every read-only
+          # skill. Measured on this runner 2026-07-21. Re-enable them for the job.
+          sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0 || true
+          bwrap --dev-bind / / --ro-bind /tmp /tmp true && echo 'bwrap: userns OK' || echo '::warning::bwrap still blocked'
+
+      - name: Install harness CLI
+        if: steps.harness.outputs.HARNESS != '' && steps.harness.outputs.HARNESS != 'claude'
+        env:
+          H: ${{ steps.harness.outputs.HARNESS }}
+          HM: ${{ steps.harness.outputs.HARNESS_MODEL }}
+          AUTH_MODE: ${{ steps.harness.outputs.AUTH_MODE }}
+          # grok auth (staged via run-grok.sh setup): captured X-account OAuth or key.
+          GROK_CREDENTIALS: ${{ secrets.GROK_CREDENTIALS }}
+          XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
+          # secrets-write PAT so run-grok.sh setup can PERSIST a rotated grok refresh
+          # token back to GROK_CREDENTIALS - the durable-OAuth-past-6h fix (run-grok.sh §2b).
+          GH_SECRETS_PAT: ${{ secrets.GH_SECRETS_PAT }}
+          GH_GLOBAL: ${{ secrets.GH_GLOBAL }}
+          # Optional: seconds-before-expiry that triggers the grok OAuth refresh
+          # (run-grok.sh §2b, default 1800). Set a large value as a repo variable to
+          # force a refresh + persist every run (handy to verify durability in CI).
+          GROK_OAUTH_SKEW: ${{ vars.GROK_OAUTH_SKEW }}
+          # Provider credentials. Whichever is set decided AUTH_MODE in "Resolve
+          # harness"; here we either RESTORE it (the ChatGPT/Moonshot OAuth
+          # captures, which a local `aeon auth --harness …` stored) or write it
+          # into the harness's config (provider keys). Everything lands in the
+          # runner's ephemeral $HOME and is never echoed.
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          CODEX_AUTH: ${{ secrets.CODEX_AUTH }}
+          KIMI_AUTH: ${{ secrets.KIMI_AUTH }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          MOONSHOT_API_KEY: ${{ secrets.MOONSHOT_API_KEY }}
+          MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+          # Tier-2 harness tracing gates the otel-cli install below on these.
+          LANGFUSE_PUBLIC_KEY: ${{ secrets.LANGFUSE_PUBLIC_KEY }}
+          LANGFUSE_SECRET_KEY: ${{ secrets.LANGFUSE_SECRET_KEY }}
+          OTEL_EXPORTER_OTLP_ENDPOINT: ${{ vars.OTEL_EXPORTER_OTLP_ENDPOINT }}
+        run: |
+          set -euo pipefail
+          # The install recipes live in scripts/install-harness.sh so messages.yml
+          # can stage the same six. Each workflow keeps its own `env:` block above,
+          # because `secrets.*` only resolves inside a workflow — but the logic,
+          # which is the part that drifted last time, is shared.
+          bash scripts/install-harness.sh "$H"
+          # Stage otel-cli for Tier-2 harness spans (no-op unless telemetry is on).
+          bash scripts/install-otel-cli.sh
+
+      # Stage the Buzz CLI so ./notify can deliver to the Buzz channel. The script
+      # self-gates: it is an instant no-op unless BUZZ_PRIVATE_KEY is set, so every
+      # non-Buzz operator pays nothing. Set BUZZ_CLI_URL (repo var) to a prebuilt
+      # binary to skip the from-source cargo build.
+      - name: Stage Buzz CLI
+        env:
+          BUZZ_PRIVATE_KEY: ${{ secrets.BUZZ_PRIVATE_KEY }}
+          BUZZ_CLI_URL: ${{ vars.BUZZ_CLI_URL }}
+          BUZZ_CLI_REF: ${{ vars.BUZZ_CLI_REF }}
+        run: |
+          set -euo pipefail
+          bash scripts/install-buzz-cli.sh
+
       - name: Validate skill secrets
         if: steps.work.outputs.mode != ''
         env:
@@ -196,10 +342,58 @@ jobs:
             fi
           done <<< "$SECRETS"
 
-          [ ${#OPTIONAL[@]} -gt 0 ] && echo "::notice::Optional secrets not set: ${OPTIONAL[*]} (skill will use fallbacks)"
+          [ ${#OPTIONAL[@]} -gt 0 ] && echo "::debug::Optional secrets not set: ${OPTIONAL[*]} (skill will use fallbacks)"
           [ ${#MISSING[@]} -gt 0 ] && echo "::warning::Secrets not set: ${MISSING[*]} — skill may fail or produce incomplete results"
           exit 0
 
+      # ──────────────────────────────────────────────────────────────────────
+      # Fleet Watcher preflight (opt-in, fail-closed)
+      #
+      # If FLEET_ENDPOINT + FLEET_TOKEN repo secrets are set, ask the user's
+      # self-hosted Fleet Watcher control plane to ALLOW or BLOCK this skill
+      # before it runs. BLOCK = workflow exits non-zero, Claude never starts,
+      # no side-effects. ALLOW = audit ref is captured and passed to postflight.
+      #
+      # If the secrets are not set, this step no-ops — backward compatible
+      # with every existing AEON fork.
+      # ──────────────────────────────────────────────────────────────────────
+      - name: Fleet Watcher preflight
+        id: fleet_preflight
+        if: steps.work.outputs.mode != '' && env.FLEET_ENDPOINT != '' && env.FLEET_TOKEN != ''
+        env:
+          SKILL:     ${{ steps.skill.outputs.name }}
+          SKILL_VAR: ${{ inputs.var }}
+        run: |
+          set -euo pipefail
+          OP_ID="${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}-pre"
+          BODY=$(jq -n \
+            --arg skill  "$SKILL" \
+            --arg target "${SKILL_VAR:-}" \
+            --arg source "github-actions:${GITHUB_REPOSITORY}" \
+            --arg op     "$OP_ID" \
+            '{skill:$skill, target:$target, source:$source, clientOpId:$op, context:{runId:env.GITHUB_RUN_ID, attempt:env.GITHUB_RUN_ATTEMPT}}')
+          RESP=$(curl -sS -w "\n%{http_code}" -X POST "${FLEET_ENDPOINT}/api/aeon/preflight" \
+            -H "Authorization: Bearer ${FLEET_TOKEN}" \
+            -H "Content-Type: application/json" \
+            -d "$BODY")
+          HTTP=$(echo "$RESP" | tail -1)
+          BODY=$(echo "$RESP" | sed '$d')
+          if [ "$HTTP" != "200" ]; then
+            echo "::error::Fleet Watcher unreachable or returned $HTTP — failing closed."
+            echo "$BODY"
+            exit 1
+          fi
+          ALLOW=$(echo "$BODY" | jq -r '.allow')
+          REASON=$(echo "$BODY" | jq -r '.reason')
+          AUDIT_REF=$(echo "$BODY" | jq -r '.auditRef // ""')
+          REF=$(echo "$BODY" | jq -r '.ref // ""')
+          echo "audit_ref=$AUDIT_REF" >> "$GITHUB_OUTPUT"
+          echo "action_ref=$REF"     >> "$GITHUB_OUTPUT"
+          if [ "$ALLOW" != "true" ]; then
+            echo "::error::Fleet Watcher BLOCKED skill '$SKILL' — $REASON  (audit: $AUDIT_REF)"
+            exit 1
+          fi
+          echo "::notice::Fleet Watcher ALLOWED skill '$SKILL' (audit: $AUDIT_REF, ref: $REF)"
 
       # Materialize cron state (Issues backend, opt-in) — hardening §3 reader cutover.
       # With STATE_BACKEND=issues, runs APPEND immutable events to a pinned Issue
@@ -224,28 +418,113 @@ jobs:
         # workaround (there is no network sandbox). Installs semgrep/trufflehog/
         # osv-scanner/slither and appends /tmp/bin to the PATH file so the scanner
         # bare-names resolve in the later claude -p step and its per-call fresh shells
-        # (an in-run `export PATH` doesn't survive between Claude's Bash calls).
+        # (an in-run `export PATH` doesn't survive between Claude's Bash calls). Also
+        # installs a nightly Rust toolchain + cargo-fuzz for step A3.5 (dynamic
+        # testing) — unconditionally, like slither, since the scan target isn't known
+        # until Arm A runs; the skill's own command -v guard makes it a no-op when
+        # the picked repo doesn't ship its own fuzz/fuzz_targets.
         # Execution is separately gated by the write-tier grant in scripts/skill_mode.sh.
         # Best-effort: the script self-guards to vuln-scanner and never fails the run.
         if: steps.work.outputs.mode != '' && steps.skill.outputs.name == 'vuln-scanner'
         run: bash scripts/stage-vuln-scanner.sh "${{ steps.skill.outputs.name }}"
+
+      - name: Stage deploy-uni-hook toolchain
+        # Installs Foundry + a pre-built Uniswap v4 project (v4 libs + templates) for
+        # the deploy-uni-hook skill, appends ~/.foundry/bin to the PATH file so
+        # forge/cast resolve in the later claude -p step (the sandbox denies in-run
+        # toolchain installs, and an in-run `export PATH` doesn't survive Claude's
+        # per-call shells), and copies the key-safe ./hook-deploy.sh + chains.tsv to
+        # the repo root. In-run tool use is separately gated by the write-tier grant
+        # in scripts/skill_mode.sh. Best-effort: self-guards to the skill, never fails.
+        if: steps.work.outputs.mode != '' && steps.skill.outputs.name == 'deploy-uni-hook'
+        run: bash scripts/stage-deploy-uni-hook.sh "${{ steps.skill.outputs.name }}"
+
+      - name: Cache remotion toolchain
+        # The remotion skill renders MP4s with a bundled Remotion project. Its
+        # node_modules (incl. node_modules/.remotion, the ~90 MB chrome-headless-shell)
+        # is the slow part of staging. Cache it keyed on the lockfile so a warm run
+        # skips both `npm ci` and the browser download. The browser version is tied
+        # to the pinned remotion version in package-lock.json, so the lock hash is a
+        # sufficient key; bump the -vN salt to force-bust. Only restores/saves for
+        # the remotion skill (path is empty for every other skill = cheap no-op).
+        if: steps.work.outputs.mode != '' && steps.skill.outputs.name == 'remotion'
+        uses: actions/cache@v6
+        with:
+          path: skills/remotion/project/node_modules
+          key: remotion-${{ runner.os }}-v1-${{ hashFiles('skills/remotion/project/package-lock.json') }}
+          restore-keys: |
+            remotion-${{ runner.os }}-v1-
+
+      - name: Stage remotion toolchain
+        # Installs the headless-chrome system libs (apt), the project's node deps
+        # (from the ~/.npm + node_modules caches), and ensures chrome-headless-shell
+        # is present — all BEFORE claude -p, because apt needs root and the sandbox
+        # can't install system libraries in-run. The agent then only writes a
+        # storyboard props.json and runs `npx remotion render`. Best-effort:
+        # self-guards to the skill, never fails the run.
+        if: steps.work.outputs.mode != '' && steps.skill.outputs.name == 'remotion'
+        run: bash scripts/stage-remotion.sh "${{ steps.skill.outputs.name }}"
+
+      - name: Stage weekly-aeoncard rasterizer
+        # weekly-aeoncard renders an SVG card and needs a rasterizer to also emit a PNG
+        # for inline Telegram delivery (sendPhoto). apt needs root and the agent
+        # allowlist blocks in-run pip/apt, so install librsvg2-bin (rsvg-convert) here —
+        # render_card.py's fallback picks it up. Best-effort: never fails the run; without
+        # it the skill degrades to the SVG + a text notify.
+        if: steps.work.outputs.mode != '' && steps.skill.outputs.name == 'weekly-aeoncard'
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq librsvg2-bin || true
+
+      # Single-source standing instructions. AGENTS.md is the full, self-contained
+      # mirror of CLAUDE.md (operating manual + @STRATEGY.md inlined) that the
+      # non-claude harnesses read — they load instruction files verbatim and don't
+      # expand Claude Code @imports. A run must load EXACTLY ONE of the two: claude
+      # reads CLAUDE.md natively, every other harness reads AGENTS.md. Some harnesses
+      # (grok) natively discover BOTH files in the checkout, and codex's native doc
+      # IS AGENTS.md — so hide the file this run must not use. The move goes to
+      # $RUNNER_TEMP (outside the tree, so git never sees it) and is undone by
+      # "Restore standing instructions" before any later step commits.
+      - name: Single-source standing instructions
+        id: singlesrc
+        if: steps.work.outputs.mode != ''
+        env:
+          HARNESS: ${{ steps.harness.outputs.HARNESS }}
+        run: |
+          [ -n "$HARNESS" ] || { echo "no harness resolved — leaving both files"; exit 0; }
+          if [ "$HARNESS" = "claude" ]; then HIDE="AGENTS.md"; KEPT="CLAUDE.md"; else HIDE="CLAUDE.md"; KEPT="AGENTS.md"; fi
+          if [ -f "$HIDE" ]; then
+            mv "$HIDE" "$RUNNER_TEMP/$HIDE.singlesrc"
+            echo "hidden=$HIDE" >> "$GITHUB_OUTPUT"
+            echo "::notice::single-source: $HARNESS reads $KEPT; hid $HIDE for this run"
+          fi
 
       - name: Run
         id: run
         if: steps.work.outputs.mode != ''
         env:
           # Secrets available to .mcp.json ${NAME} refs + per-skill `requires:`
-          # injection. Built from explicit named secrets rather than the whole
-          # secrets context, so the workflow declares exactly which secrets it
-          # reads. Add a name here (and set it in the dashboard) to expose it.
+          # injection. Built from an explicit allowlist of named secrets rather
+          # than the whole secrets context: GitHub's public-repo malicious-
+          # workflow scanner HOLDS (action_required) any run that serializes the
+          # entire secret store via toJSON(secrets). This list must cover EVERY
+          # secret named in a skill's `requires:` frontmatter or a .mcp.json ${VAR}
+          # ref — the loops below jq-resolve from this blob, so a missing key is
+          # silently not injected. To expose a NEW secret to MCP/requires, add its
+          # name here (and set it in the dashboard).
           # Consumed by the MCP/requires loops below, then unset before Claude runs.
           ALL_SECRETS: >-
-            {"CLAUDE_CODE_OAUTH_TOKEN":${{ toJSON(secrets.CLAUDE_CODE_OAUTH_TOKEN) }},"GH_GLOBAL":${{ toJSON(secrets.GH_GLOBAL) }},"XAI_API_KEY":${{ toJSON(secrets.XAI_API_KEY) }},"LANGFUSE_PUBLIC_KEY":${{ toJSON(secrets.LANGFUSE_PUBLIC_KEY) }},"LANGFUSE_SECRET_KEY":${{ toJSON(secrets.LANGFUSE_SECRET_KEY) }},"TELEGRAM_BOT_TOKEN":${{ toJSON(secrets.TELEGRAM_BOT_TOKEN) }},"TELEGRAM_CHAT_ID":${{ toJSON(secrets.TELEGRAM_CHAT_ID) }}}
+            {"ADMANAGE_API_KEY":${{ toJSON(secrets.ADMANAGE_API_KEY) }},"ALCHEMY_API_KEY":${{ toJSON(secrets.ALCHEMY_API_KEY) }},"ANTHROPIC_API_KEY":${{ toJSON(secrets.ANTHROPIC_API_KEY) }},"ANTHROPIC_OAUTH_TOKEN":${{ toJSON(secrets.ANTHROPIC_OAUTH_TOKEN) }},"BANKR_API_KEY":${{ toJSON(secrets.BANKR_API_KEY) }},"BANKR_LLM_KEY":${{ toJSON(secrets.BANKR_LLM_KEY) }},"BASESCAN_API_KEY":${{ toJSON(secrets.BASESCAN_API_KEY) }},"BASE_RPC_URL":${{ toJSON(secrets.BASE_RPC_URL) }},"BEAMR_GATEWAY_URL":${{ toJSON(secrets.BEAMR_GATEWAY_URL) }},"BEAMR_PAYER_KEY":${{ toJSON(secrets.BEAMR_PAYER_KEY) }},"CLAUDE_CODE_OAUTH_TOKEN":${{ toJSON(secrets.CLAUDE_CODE_OAUTH_TOKEN) }},"CODEX_AUTH":${{ toJSON(secrets.CODEX_AUTH) }},"COINGECKO_API_KEY":${{ toJSON(secrets.COINGECKO_API_KEY) }},"DISCORD_BOT_TOKEN":${{ toJSON(secrets.DISCORD_BOT_TOKEN) }},"DISCORD_CHANNEL_ID":${{ toJSON(secrets.DISCORD_CHANNEL_ID) }},"DISCORD_WEBHOOK_URL":${{ toJSON(secrets.DISCORD_WEBHOOK_URL) }},"ETHERSCAN_API_KEY":${{ toJSON(secrets.ETHERSCAN_API_KEY) }},"FLEET_ENDPOINT":${{ toJSON(secrets.FLEET_ENDPOINT) }},"FLEET_TOKEN":${{ toJSON(secrets.FLEET_TOKEN) }},"GH_GLOBAL":${{ toJSON(secrets.GH_GLOBAL) }},"GH_READ_PAT":${{ toJSON(secrets.GH_READ_PAT) }},"GH_SECRETS_PAT":${{ toJSON(secrets.GH_SECRETS_PAT) }},"GITHUB_TOKEN":${{ toJSON(secrets.GITHUB_TOKEN) }},"GROK_CREDENTIALS":${{ toJSON(secrets.GROK_CREDENTIALS) }},"HOOK_DEPLOYER_PRIVATE_KEY":${{ toJSON(secrets.HOOK_DEPLOYER_PRIVATE_KEY) }},"HOOK_MAINNET_OK":${{ toJSON(secrets.HOOK_MAINNET_OK) }},"KIMI_AUTH":${{ toJSON(secrets.KIMI_AUTH) }},"LANGFUSE_PUBLIC_KEY":${{ toJSON(secrets.LANGFUSE_PUBLIC_KEY) }},"LANGFUSE_SECRET_KEY":${{ toJSON(secrets.LANGFUSE_SECRET_KEY) }},"MISTRAL_API_KEY":${{ toJSON(secrets.MISTRAL_API_KEY) }},"MOONSHOT_API_KEY":${{ toJSON(secrets.MOONSHOT_API_KEY) }},"NOTIFY_EMAIL_TO":${{ toJSON(secrets.NOTIFY_EMAIL_TO) }},"OPENAI_API_KEY":${{ toJSON(secrets.OPENAI_API_KEY) }},"OPENROUTER_API_KEY":${{ toJSON(secrets.OPENROUTER_API_KEY) }},"PAGESPEED_API_KEY":${{ toJSON(secrets.PAGESPEED_API_KEY) }},"REPLICATE_API_TOKEN":${{ toJSON(secrets.REPLICATE_API_TOKEN) }},"RESEND_API_KEY":${{ toJSON(secrets.RESEND_API_KEY) }},"RESEND_FROM":${{ toJSON(secrets.RESEND_FROM) }},"RESEND_REPLY_TO":${{ toJSON(secrets.RESEND_REPLY_TO) }},"SLACK_BOT_TOKEN":${{ toJSON(secrets.SLACK_BOT_TOKEN) }},"SLACK_CHANNEL_ID":${{ toJSON(secrets.SLACK_CHANNEL_ID) }},"SLACK_WEBHOOK_URL":${{ toJSON(secrets.SLACK_WEBHOOK_URL) }},"SOLANA_RPC_URL":${{ toJSON(secrets.SOLANA_RPC_URL) }},"SURPLUS_API_KEY":${{ toJSON(secrets.SURPLUS_API_KEY) }},"TELEGRAM_BOT_TOKEN":${{ toJSON(secrets.TELEGRAM_BOT_TOKEN) }},"TELEGRAM_CHAT_ID":${{ toJSON(secrets.TELEGRAM_CHAT_ID) }},"USEPOD_TOKEN":${{ toJSON(secrets.USEPOD_TOKEN) }},"VENICE_API_KEY":${{ toJSON(secrets.VENICE_API_KEY) }},"VERCEL_TOKEN":${{ toJSON(secrets.VERCEL_TOKEN) }},"XAI_API_KEY":${{ toJSON(secrets.XAI_API_KEY) }},"YDC_API_KEY":${{ toJSON(secrets.YDC_API_KEY) }}}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           ANTHROPIC_BASE_URL: ${{ vars.ANTHROPIC_BASE_URL }}
           BANKR_LLM_KEY: ${{ secrets.BANKR_LLM_KEY }}
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          # Native harness-provider keys — read at run time by the api-key auth
+          # paths (codex→OpenAI, pi→Anthropic/OpenAI, vibe→Mistral). The OAuth
+          # captures need nothing here: their creds are already on disk from install.
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          ANTHROPIC_OAUTH_TOKEN: ${{ secrets.ANTHROPIC_OAUTH_TOKEN }}
+          MOONSHOT_API_KEY: ${{ secrets.MOONSHOT_API_KEY }}
+          MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
           USEPOD_TOKEN: ${{ secrets.USEPOD_TOKEN }}
           VENICE_API_KEY: ${{ secrets.VENICE_API_KEY }}
           SURPLUS_API_KEY: ${{ secrets.SURPLUS_API_KEY }}
@@ -268,6 +547,12 @@ jobs:
           LANGFUSE_HOST: ${{ vars.LANGFUSE_HOST }}
           LANGFUSE_TRACING: ${{ vars.LANGFUSE_TRACING }}
           LANGFUSE_LOG_CONTENT: ${{ vars.LANGFUSE_LOG_CONTENT }}
+          # Optional raw OTLP target for the non-claude harnesses (Tier-2 gen_ai
+          # spans, harness-adapter/lib/otel-span.sh). When Langfuse keys are set
+          # instead, langfuse-otel.sh derives the endpoint — leave these unset.
+          OTEL_EXPORTER_OTLP_ENDPOINT: ${{ vars.OTEL_EXPORTER_OTLP_ENDPOINT }}
+          OTEL_EXPORTER_OTLP_HEADERS: ${{ secrets.OTEL_EXPORTER_OTLP_HEADERS }}
+          OTEL_SERVICE_NAME: ${{ vars.OTEL_SERVICE_NAME }}
           GITHUB_TOKEN: ${{ secrets.GH_GLOBAL || secrets.GITHUB_TOKEN }}
           GH_TOKEN: ${{ secrets.GH_GLOBAL || secrets.GITHUB_TOKEN }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
@@ -278,6 +563,12 @@ jobs:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
           SLACK_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID }}
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          # Buzz channel (Block's Nostr-relay workspace). ./notify signs + publishes
+          # via the buzz CLI staged by "Stage Buzz CLI"; the channel no-ops without
+          # BUZZ_PRIVATE_KEY. BUZZ_RELAY_URL is a var (defaults to localhost in the CLI).
+          BUZZ_PRIVATE_KEY: ${{ secrets.BUZZ_PRIVATE_KEY }}
+          BUZZ_CHANNEL_ID: ${{ secrets.BUZZ_CHANNEL_ID }}
+          BUZZ_RELAY_URL: ${{ vars.BUZZ_RELAY_URL }}
           NOTIFY_EMAIL_TO: ${{ secrets.NOTIFY_EMAIL_TO }}
           NOTIFY_EMAIL_FROM: ${{ vars.NOTIFY_EMAIL_FROM || 'aeon@notifications.aeon.bot' }}
           NOTIFY_EMAIL_SUBJECT_PREFIX: ${{ vars.NOTIFY_EMAIL_SUBJECT_PREFIX || '[Aeon]' }}
@@ -307,7 +598,9 @@ jobs:
           SKILL_VAR: ${{ inputs.var }}
           SKILL_NAME: ${{ steps.skill.outputs.name }}
           INPUT_MODEL: ${{ inputs.model }}
-          INPUT_HARNESS: ${{ inputs.harness }}
+          RESOLVED_HARNESS: ${{ steps.harness.outputs.HARNESS }}
+          RH_MODEL_ARG: ${{ steps.harness.outputs.MODEL_ARG }}
+          RH_HARNESS_MODEL: ${{ steps.harness.outputs.HARNESS_MODEL }}
           INPUT_CHAIN_CTX: ${{ inputs.chain_context_file }}
         run: |
           TODAY=$(date -u +%Y-%m-%d)
@@ -324,25 +617,25 @@ jobs:
           fi
 
           # --- Harness resolution (which agent CLI runs the skill) ---
-          # Same 3-tier precedence as model: workflow_dispatch input → per-skill
-          # `harness:` in aeon.yml → top-level `harness:` → claude (default).
-          CONFIG_HARNESS=$(grep -E '^harness:' aeon.yml | sed 's/^harness: *//' | tr -d ' ')
-          SKILL_HARNESS=$(grep "^  ${SKILL_NAME}:" aeon.yml | sed -n 's/.*harness: *"\([^"]*\)".*/\1/p')
-          if [ -n "${INPUT_HARNESS:-}" ] && [ "$INPUT_HARNESS" != "(config default)" ]; then
-            HARNESS="$INPUT_HARNESS"
-          elif [ -n "$SKILL_HARNESS" ]; then
-            HARNESS="$SKILL_HARNESS"
-          else
-            HARNESS="${CONFIG_HARNESS:-claude}"
-          fi
-          if [ "$HARNESS" != "grok" ]; then HARNESS="claude"; fi   # unknown value → safe default (use `if`, not `&&`, under set -e)
+          # Resolved in the "Resolve harness" step above, which had to run before
+          # "Install harness CLI". Same 3-tier precedence as model, moved verbatim.
+          HARNESS="$RESOLVED_HARNESS"
           # On the grok harness a claude-* model id is meaningless — fall back to
-          # grok's default (grok-composer-2.5-fast) unless an explicit grok model
-          # was chosen. run-grok.sh omits --model for a non-grok value as a safety net.
+          # grok's current default (grok-4.5) unless an explicit grok model was
+          # chosen. The grok adapter omits --model for a non-grok value as a safety net.
           if [ "$HARNESS" = "grok" ]; then
-            case "$MODEL" in claude-*|"") MODEL="grok-composer-2.5-fast" ;; esac
+            case "$MODEL" in claude-*|"") MODEL="grok-4.5" ;; esac
           fi
-          echo "Using harness: $HARNESS  |  model: $MODEL"
+          # Banner must name the model that ACTUALLY runs. For claude/grok that is
+          # $MODEL (their native id). For the adapter harnesses (codex/pi/vibe/kimi)
+          # $MODEL still carries the config-default claude id, which never runs —
+          # the real model is the resolved harness model (HARNESS_MODEL from
+          # "Resolve harness"). Fall back to $MODEL if that output is somehow empty.
+          case "$HARNESS" in
+            claude|grok) BANNER_MODEL="$MODEL" ;;
+            *)           BANNER_MODEL="${RH_HARNESS_MODEL:-$MODEL}" ;;
+          esac
+          echo "Using harness: $HARNESS  |  model: $BANNER_MODEL"
           echo "SKILL_MODEL=$MODEL" >> "$GITHUB_OUTPUT"
           echo "HARNESS=$HARNESS" >> "$GITHUB_OUTPUT"   # read by the post-run scorer / feed-convert steps
 
@@ -357,11 +650,13 @@ jobs:
           # Optional Langfuse OTEL tracing — sourced after the gateway in each
           # claude attempt below. Self-gates on LANGFUSE_* and never fails the run.
           LF="${GITHUB_WORKSPACE}/scripts/langfuse-otel.sh"
-          if [ "$HARNESS" = "grok" ]; then
-            # Set the post-run scorer's routing hint: route its `claude -p` scoring
-            # call to xAI (Anthropic-compatible) when an API key is present, else
-            # direct (scoring then just no-ops gracefully if no Anthropic creds).
-            if [ -n "${XAI_API_KEY:-}" ]; then echo "GATEWAY=grok" >> "$GITHUB_OUTPUT"; else echo "GATEWAY=direct" >> "$GITHUB_OUTPUT"; fi
+          if [ "$HARNESS" != "claude" ]; then
+            # The run-harness harnesses carry their own auth (staged in "Install
+            # harness CLI") and never touch the gateway. The scorer routes through
+            # run-harness too, so there is no `claude -p` call left to hint at —
+            # emit the output only so it is always defined. Both readers of
+            # steps.run.outputs.GATEWAY are gated on HARNESS == 'claude'.
+            echo "GATEWAY=$HARNESS" >> "$GITHUB_OUTPUT"
           else
             GATEWAY=$(grep -A1 '^gateway:' aeon.yml | grep 'provider:' | sed 's/.*provider:[[:space:]]*//' | sed "s/[\"' ]//g" || true)
             GATEWAY="${GATEWAY:-auto}"
@@ -374,12 +669,20 @@ jobs:
             echo "GATEWAY=${CANDIDATES%% *}" >> "$GITHUB_OUTPUT"   # provisional; overwritten with the winner below
           fi
 
-          # Generate notify script in workspace (Claude calls: ./notify "message")
-          # Messages are saved to .pending-notify/ for reliable post-run delivery
-          # (sandbox may block outbound curl during Claude's run)
-          # Pre-create .pending-notify/ so the sandbox doesn't block Claude's first write into it
-          mkdir -p .pending-notify
-          : > .notify-sent-hashes
+          # Generate notify script in workspace (the agent calls: ./notify "message").
+          # Undelivered messages queue under $AEON_PENDING_DIR for post-run re-delivery.
+          # notify's staging area, OUTSIDE the workspace. A read-only skill runs
+          # under an OS sandbox that mounts the repo read-only, so queues kept in
+          # the workspace can't be written; and the json-render staging file was
+          # being committed (.gitignore ignores `.pending-*/` dirs, not
+          # `.pending-*.md`), which let a sandboxed run republish the PREVIOUS
+          # run's digest as its own. Exported to $GITHUB_ENV so the post-run
+          # capture / feed / re-delivery steps read from the same place.
+          AEON_PENDING_DIR="${RUNNER_TEMP:-/tmp}/aeon-pending"
+          mkdir -p "$AEON_PENDING_DIR/notify-queue"
+          : > "$AEON_PENDING_DIR/notify-sent-hashes"
+          echo "AEON_PENDING_DIR=$AEON_PENDING_DIR" >> "$GITHUB_ENV"
+          export AEON_PENDING_DIR
 
           # notify / notify-jsonrender are the committed scripts/*.sh (testable; see scripts/tests/).
           cp scripts/notify.sh ./notify
@@ -412,12 +715,18 @@ jobs:
           # than let Claude's config parse-failure break the whole skill run.
           # The MCP_FLAGS/ALLOWED additions below are the CLAUDE path; the exported
           # ${VAR}s are harness-agnostic and also feed grok, which reads .mcp.json
-          # natively and expands them (run-grok.sh only adds the MCPTool allows).
+          # natively and expands them (the adapter adds --trust + MCPTool allows).
           MCP_FLAGS=()
           if [ -f .mcp.json ] && jq -e '.mcpServers' .mcp.json >/dev/null 2>&1; then
+            # MCP OAuth (durable): mint a fresh access token from any captured refresh
+            # token (MCP_<SLUG>_OAUTH secret) and export MCP_<SLUG>_TOKEN BEFORE the
+            # ${VAR} loop, so its "already in env" check keeps the live token over the
+            # stored (stale) one. Sourced; never fails the run. See mcp-oauth-refresh.sh.
+            if [ -f "${GITHUB_WORKSPACE}/scripts/mcp-oauth-refresh.sh" ]; then
+              source "${GITHUB_WORKSPACE}/scripts/mcp-oauth-refresh.sh" || true
+            fi
             MCP_MISSING=""
-            # ALL_SECRETS is a JSON object of the workflow's declared secrets.
-            # Guard the empty case via a temp var —
+            # ALL_SECRETS is toJSON(secrets). Guard the empty case via a temp var —
             # NOT the inline ${ALL_SECRETS:-{}} form: bash closes ${...} at the first
             # '}', so the default is just '{' and a stray '}' gets appended to the
             # value, corrupting the JSON (jq: parse error "Unmatched '}'").
@@ -493,64 +802,120 @@ jobs:
           Use this variable (override the default in the skill file):
           var=$VAR"
           fi
-          # Harness split: the grok path is a single guarded branch; the entire
-          # claude cascade below is unchanged. Both set CLAUDE_OUTPUT to a JSON
-          # envelope with .result / .usage.*, so everything downstream is shared.
+          # Unified execution: EVERY harness runs through the harness-adapter
+          # (harness-adapter/run-harness), which speaks one Claude-Code-shaped
+          # contract — prompt on stdin, a normalized {result,usage{...},session_id}
+          # envelope on stdout, diagnostics on stderr — so everything downstream
+          # (.result/.usage jq, scoring, token accounting) is identical for all six.
+          # There is no longer a native `claude -p` or `run-grok.sh` run path; the
+          # two features those paths carried are preserved AROUND the adapter call:
+          #   * claude  — wrapped in the multi-provider gateway cascade below, so it
+          #               keeps 8-provider failover + Langfuse tracing.
+          #   * grok    — GROK_* run-knobs from frontmatter (adapters/grok.sh maps them).
+          # ALL six now run read-only under the wrapper OS sandbox (bwrap). claude and
+          # grok used to pass --no-sandbox because ./notify needed to write its queue
+          # inside the workspace; that queue moved to $AEON_PENDING_DIR, so the reason
+          # is gone. It mattered most on grok, whose adapter runs
+          # --permission-mode bypassPermissions and never applied an allowlist: with
+          # the sandbox off, a read-only grok skill had NO runtime enforcement at all
+          # and could write anywhere in the repo (measured — it created a file on
+          # request). The post-run guard reverted it after the fact; now the write is
+          # refused outright.
           CLAUDE_OK=0
-          if [ "$HARNESS" = "grok" ]; then
-            # --- Grok Build harness ---
-            # run-grok.sh installs/pins the grok CLI, restores the X-account OAuth
-            # session (or uses XAI_API_KEY), maps SKILL_MODE to grok's permission
-            # flags, discovers .mcp.json natively + allows its tools, runs `grok -p`,
-            # and emits the SAME normalized JSON envelope Claude Code's
-            # --output-format json produces. Its stdout is the JSON; diagnostics go
-            # to stderr (the step log), so capture stdout only.
-            # Opt-in per-skill run knobs (effort/max_turns/best_of_n/verify) come
-            # from SKILL.md frontmatter → GROK_* env for run-grok.sh to map to flags.
-            eval "$(bash "${GITHUB_WORKSPACE}/scripts/skill_mode.sh" grok-run-env "$SKILL_NAME")"
-            if CLAUDE_OUTPUT=$(
-              export MODEL="$BASE_MODEL" SKILL_MODE
-              echo "$PROMPT" | bash "${GITHUB_WORKSPACE}/scripts/run-grok.sh"
-            ); then
-              CLAUDE_OK=1
-            fi
-            if [ "$CLAUDE_OK" != "1" ]; then
-              echo "::error::grok harness failed. Last output: $(printf '%s' "$CLAUDE_OUTPUT" | tail -c 200 | tr '\n' ' ')"
-              printf '%s' "$CLAUDE_OUTPUT" | tail -c 500 | tr '\n' ' ' | cut -c1-200 > /tmp/skill-error.txt
-              exit 1
-            fi
-          else
-            # Cascade: try each provider in priority order; on ANY failure fall over
-            # to the next. Each attempt runs in a subshell so provider setup (env +
-            # any claude-code-router sidecar) is isolated and torn down on exit. The
-            # gateway script's notices go to stderr (>&2) so only Claude's JSON is captured.
+          RH="${GITHUB_WORKSPACE}/harness-adapter/run-harness"
+          RH_ARGS=(--mode "$SKILL_MODE" --allowed-tools "$ALLOWED" --timeout 900)
+          # Pass --mcp-config only when the MCP preflight actually ENABLED MCP (every
+          # required ${VAR} resolved) — MCP_FLAGS is set to the flags in that case and
+          # left empty otherwise, so it doubles as the "MCP on" gate. run-harness does
+          # its own ${VAR} expansion + per-harness translation from the same file.
+          if [ "${#MCP_FLAGS[@]}" -gt 0 ]; then RH_ARGS+=(--mcp-config .mcp.json); fi
+
+          if [ "$HARNESS" = "claude" ]; then
+            # Cascade: try each provider in priority order; fall over on ANY failure.
+            # Each attempt is an isolated subshell that sets up its provider env (+
+            # optional Langfuse), THEN runs `run-harness claude` (which invokes
+            # `claude -p` under that env). Gateway/Langfuse notices go to the step
+            # log (>&2); only run-harness's stdout envelope is captured. A hard
+            # gateway setup failure `exit 1`s the subshell → this attempt fails →
+            # fall over, exactly as the old inline `claude -p` cascade did.
             USED_GATEWAY=""
             for cand in $CANDIDATES; do
               echo "::notice::Routing attempt via '$cand'"
-              # No `set -e` here: the gateway script signals a hard setup failure with
-              # an explicit `exit 1` (which exits this subshell → fall over), and on
-              # success the subshell's status is Claude's own exit code. A benign
-              # non-zero from a trailing test in the gateway script is harmless — we
-              # only fall over on an explicit exit or a failed Claude call.
               if CLAUDE_OUTPUT=$(
                 GATEWAY="$cand"
                 MODEL="$BASE_MODEL"
                 source "$GW" >&2
                 source "$LF" >&2   # optional Langfuse tracing (no-op unless LANGFUSE_* set)
-                echo "$PROMPT" | claude -p - --model "$MODEL" --allowedTools "$ALLOWED" "${MCP_FLAGS[@]}" --output-format json 2>&1
+                echo "$PROMPT" | bash "$RH" claude --model "$MODEL" "${RH_ARGS[@]}" 2>/tmp/harness-stderr.txt
               ); then
                 USED_GATEWAY="$cand"; CLAUDE_OK=1; break
               fi
-              echo "::warning::provider '$cand' failed — $(printf '%s' "$CLAUDE_OUTPUT" | tail -c 160 | tr '\n' ' ')"
+              echo "::warning::provider '$cand' failed — $(tail -c 160 /tmp/harness-stderr.txt 2>/dev/null | tr '\n' ' ')"
             done
             if [ "$CLAUDE_OK" != "1" ]; then
-              echo "::error::All gateway providers failed ($CANDIDATES). Last output: $CLAUDE_OUTPUT"
+              echo "::error::All gateway providers failed ($CANDIDATES). Last: $(tail -c 200 /tmp/harness-stderr.txt 2>/dev/null | tr '\n' ' ')"
               # Save error signature for quality tracking (cron-state step reads this)
-              echo "$CLAUDE_OUTPUT" | tail -c 500 | tr '\n' ' ' | cut -c1-200 > /tmp/skill-error.txt
+              tail -c 500 /tmp/harness-stderr.txt 2>/dev/null | tr '\n' ' ' | cut -c1-200 > /tmp/skill-error.txt
               exit 1
             fi
             [ "$USED_GATEWAY" != "${CANDIDATES%% *}" ] && echo "::notice::Skill ran via fallback provider '$USED_GATEWAY'"
             echo "GATEWAY=$USED_GATEWAY" >> "$GITHUB_OUTPUT"
+          else
+            # grok / codex / pi / vibe / kimi — one run-harness call each.
+            RH_MODEL_ARGS=()
+            if [ "$HARNESS" = "grok" ]; then
+              # Per-skill run-knobs (effort/max_turns/best_of_n/verify) → GROK_* env,
+              # consumed by adapters/grok.sh — the same frontmatter mapping the
+              # native path used. SKILL_MODEL was already set to grok's model above.
+              eval "$(bash "${GITHUB_WORKSPACE}/scripts/skill_mode.sh" grok-run-env "$SKILL_NAME")"
+              # BASE_MODEL is grok-4.5 or an explicit grok id (forced above); pass
+              # only a real grok id — the adapter falls back to grok's default
+              # otherwise. (BASE_MODEL, not MODEL: identical here, but MODEL is the
+              # var the claude cascade rewrites in a subshell, so referencing it here
+              # would trip a spurious shellcheck SC2031.)
+              case "$BASE_MODEL" in grok-*) RH_MODEL_ARGS=(--model "$BASE_MODEL") ;; esac
+            else
+              # RH_MODEL_ARG is decided in "Resolve harness" (empty = let the
+              # harness's staged config choose). Never aeon's BASE_MODEL: that is
+              # always a claude-*/grok-* id these CLIs cannot resolve.
+              if [ -n "${RH_MODEL_ARG:-}" ]; then RH_MODEL_ARGS=(--model "$RH_MODEL_ARG"); fi
+              # Re-emit SKILL_MODEL with what ACTUALLY ran. It was written above from
+              # BASE_MODEL, before the harness was applied — leaving it would file
+              # these tokens under a model that never ran in memory/token-usage.csv,
+              # and put a false model into the run manifest that attestation signs.
+              # Later writes to $GITHUB_OUTPUT win, so this corrects every consumer.
+              EFFECTIVE_MODEL="${RH_MODEL_ARG:-$HARNESS-default}"   # no spaces: the notice is parsed by field
+              echo "SKILL_MODEL=$EFFECTIVE_MODEL" >> "$GITHUB_OUTPUT"
+              echo "::notice::effective model for $HARNESS: $EFFECTIVE_MODEL"
+            fi
+
+            # Tier-2 harness tracing: export the OTLP env (Langfuse keys or a raw
+            # endpoint) so harness-adapter/lib/otel-span.sh emits a gen_ai span
+            # for this non-claude harness. claude self-traces and sources $LF in
+            # its own cascade above; here it is component=harness. No-op unless
+            # telemetry is configured, and `|| true` so it never fails the run.
+            AEON_OTEL_COMPONENT=harness source "$LF" >&2 || true
+            if CLAUDE_OUTPUT=$(echo "$PROMPT" | bash "$RH" "$HARNESS" "${RH_MODEL_ARGS[@]}" "${RH_ARGS[@]}" 2>/tmp/harness-stderr.txt); then
+              CLAUDE_OK=1
+            fi
+            # run-harness's diagnostics are the only signal when a harness stalls;
+            # surface them in the step log either way, not just on failure.
+            tail -c 4000 /tmp/harness-stderr.txt >&2 || true
+            # harness-adapter/lib/envelope.sh's wrap_raw_output turns output the
+            # adapter could not parse into a schema-valid SUCCESS envelope and
+            # exits 0, so the run lands here green and the blob below becomes the
+            # skill's published deliverable. That is being measured before it is
+            # turned into a hard failure (see the comment on that function), so
+            # promote its marker to a ::warning:: - countable from the Actions API
+            # without downloading logs. When the count is known, make it fatal.
+            if grep -q 'rh-wrap-fallback:' /tmp/harness-stderr.txt 2>/dev/null; then
+              echo "::warning::$HARNESS output was unparseable and wrapped as success. This run is GREEN but its output may be junk: $(grep -m1 'rh-wrap-fallback:' /tmp/harness-stderr.txt | tr -d '\r')"
+            fi
+            if [ "$CLAUDE_OK" != "1" ]; then
+              echo "::error::run-harness $HARNESS failed: $(tail -c 200 /tmp/harness-stderr.txt | tr '\n' ' ')"
+              tail -c 500 /tmp/harness-stderr.txt | tr '\n' ' ' | cut -c1-200 > /tmp/skill-error.txt
+              exit 1
+            fi
           fi
 
           # Extract and print the text result so logs still show skill output
@@ -564,20 +929,12 @@ jobs:
           OUTPUT_TOKENS=$(echo "$CLAUDE_OUTPUT" | jq '.usage.output_tokens // 0')
           CACHE_READ=$(echo "$CLAUDE_OUTPUT" | jq '.usage.cache_read_input_tokens // 0')
           CACHE_CREATION=$(echo "$CLAUDE_OUTPUT" | jq '.usage.cache_creation_input_tokens // 0')
-          # Per-lifetime write split, present on Anthropic responses beside the
-          # aggregate above. The CSV keeps only the aggregate; the trace sidecar
-          # below needs the split because a 1h write bills at 2x where a 5m write
-          # bills at 1.25x, and the lifetime cannot be inferred from the total.
-          CACHE_5M=$(echo "$CLAUDE_OUTPUT" | jq '.usage.cache_creation.ephemeral_5m_input_tokens // 0')
-          CACHE_1H=$(echo "$CLAUDE_OUTPUT" | jq '.usage.cache_creation.ephemeral_1h_input_tokens // 0')
           TOTAL_TOKENS=$((INPUT_TOKENS + OUTPUT_TOKENS))
 
           echo "SKILL_INPUT_TOKENS=$INPUT_TOKENS" >> "$GITHUB_OUTPUT"
           echo "SKILL_OUTPUT_TOKENS=$OUTPUT_TOKENS" >> "$GITHUB_OUTPUT"
           echo "SKILL_CACHE_READ_TOKENS=$CACHE_READ" >> "$GITHUB_OUTPUT"
           echo "SKILL_CACHE_CREATION_TOKENS=$CACHE_CREATION" >> "$GITHUB_OUTPUT"
-          echo "SKILL_CACHE_5M_TOKENS=$CACHE_5M" >> "$GITHUB_OUTPUT"
-          echo "SKILL_CACHE_1H_TOKENS=$CACHE_1H" >> "$GITHUB_OUTPUT"
           echo "SKILL_TOTAL_TOKENS=$TOTAL_TOKENS" >> "$GITHUB_OUTPUT"
           # Session id → lets the post-run "Under the hood" step locate this run's
           # transcript (~/.claude/projects/*/<id>.jsonl) and tally tool actions.
@@ -585,6 +942,66 @@ jobs:
           echo "SESSION_ID=$(echo "$CLAUDE_OUTPUT" | jq -r '.session_id // empty')" >> "$GITHUB_OUTPUT"
 
           echo "::notice::Token usage — input: $INPUT_TOKENS, output: $OUTPUT_TOKENS, cache_read: $CACHE_READ, cache_creation: $CACHE_CREATION, total: $TOTAL_TOKENS"
+
+      # Undo "Single-source standing instructions" so the working tree matches HEAD
+      # before any capture/guard/commit step runs. always(): the file must come back
+      # even if Run failed or timed out. The move is a plain rename back — it touches
+      # only the one file that was hidden, so it can't clobber skill outputs.
+      - name: Restore standing instructions
+        if: always()
+        env:
+          HIDDEN: ${{ steps.singlesrc.outputs.hidden }}
+        run: |
+          if [ -n "$HIDDEN" ] && [ -f "$RUNNER_TEMP/$HIDDEN.singlesrc" ]; then
+            mv "$RUNNER_TEMP/$HIDDEN.singlesrc" "$HIDDEN"
+            echo "restored $HIDDEN"
+          fi
+
+      # ──────────────────────────────────────────────────────────────────────
+      # Fleet Watcher postflight (opt-in, always-runs)
+      #
+      # Reports skill completion to the user's Fleet Watcher ledger. Runs even
+      # if the skill failed — failure is itself a signal Fleet wants to record
+      # for taint chain detection.
+      # ──────────────────────────────────────────────────────────────────────
+      - name: Fleet Watcher postflight
+        if: always() && steps.work.outputs.mode != '' && env.FLEET_ENDPOINT != '' && env.FLEET_TOKEN != ''
+        env:
+          SKILL:       ${{ steps.skill.outputs.name }}
+          RUN_OUTCOME: ${{ steps.run.outcome }}
+          AUDIT_REF:   ${{ steps.fleet_preflight.outputs.audit_ref }}
+        run: |
+          set -euo pipefail
+          case "$RUN_OUTCOME" in
+            success) STATUS="ok" ;;
+            failure) STATUS="error" ;;
+            skipped) STATUS="blocked" ;;
+            *)       STATUS="error" ;;
+          esac
+          OP_ID="${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}-post"
+          BODY=$(jq -n \
+            --arg skill   "$SKILL" \
+            --arg status  "$STATUS" \
+            --arg source  "github-actions:${GITHUB_REPOSITORY}" \
+            --arg summary "aeon skill '$SKILL' finished with outcome=$RUN_OUTCOME" \
+            --arg op      "$OP_ID" \
+            --arg audit   "$AUDIT_REF" \
+            '{skill:$skill, status:$status, source:$source, summary:$summary, clientOpId:$op, auditRef:$audit, metadata:{runId:env.GITHUB_RUN_ID, attempt:env.GITHUB_RUN_ATTEMPT, runUrl:("\(env.GITHUB_SERVER_URL)/\(env.GITHUB_REPOSITORY)/actions/runs/\(env.GITHUB_RUN_ID)")}}')
+          RESP=$(curl -sS -w "\n%{http_code}" -X POST "${FLEET_ENDPOINT}/api/aeon/postflight" \
+            -H "Authorization: Bearer ${FLEET_TOKEN}" \
+            -H "Content-Type: application/json" \
+            -d "$BODY" || true)
+          HTTP=$(echo "$RESP" | tail -1)
+          if [ "$HTTP" = "201" ]; then
+            EVENT_ID=$(echo "$RESP" | sed '$d' | jq -r '.eventId')
+            CHAINS=$(echo "$RESP" | sed '$d' | jq -r '.chainsDetected | length')
+            echo "::notice::Fleet Watcher recorded skill '$SKILL' (event $EVENT_ID, chains detected: $CHAINS)"
+            if [ "$CHAINS" -gt 0 ]; then
+              echo "::warning::Fleet Watcher detected $CHAINS new taint chain(s) — review at ${FLEET_ENDPOINT}/fleet"
+            fi
+          else
+            echo "::warning::Fleet Watcher postflight returned $HTTP (non-fatal)"
+          fi
 
       - name: Log token usage
         if: steps.work.outputs.mode != ''
@@ -609,7 +1026,16 @@ jobs:
       # Renders a table into the Actions run summary and appends a one-line footer to
       # today's memory log so the record lives in git. Never fails the run.
       - name: Under the hood (tool actions)
-        if: steps.work.outputs.mode != '' && steps.run.outcome == 'success' && steps.run.outputs.SESSION_ID != ''
+        # The HARNESS gate is load-bearing, not defensive. run-actions-summary.sh
+        # falls back to the NEWEST transcript under ~/.claude/projects when the
+        # session id does not resolve, and the run-harness harnesses emit a session
+        # id of their own — so without this gate a codex/pi/vibe/kimi run gets
+        # ANOTHER run's tool calls attributed to it and committed to memory/logs/.
+        # Verified on a real runner: the run logged `session_id present=YES
+        # harness=pi` while this step correctly skipped.
+        # (For claude-only repos this is a no-op: SESSION_ID != '' already implied
+        # the claude harness upstream.)
+        if: steps.work.outputs.mode != '' && steps.run.outcome == 'success' && steps.run.outputs.SESSION_ID != '' && steps.run.outputs.HARNESS == 'claude'
         env:
           SESSION_ID: ${{ steps.run.outputs.SESSION_ID }}
           SKILL_NAME: ${{ steps.skill.outputs.name }}
@@ -632,36 +1058,13 @@ jobs:
           fi
           echo "$(date -u +%Y-%m-%d),${{ steps.skill.outputs.name }},${{ steps.run.outputs.SKILL_MODEL }},${{ steps.run.outputs.SKILL_INPUT_TOKENS }},${{ steps.run.outputs.SKILL_OUTPUT_TOKENS }},${{ steps.run.outputs.SKILL_CACHE_READ_TOKENS }},${{ steps.run.outputs.SKILL_CACHE_CREATION_TOKENS }}" >> "$CSV"
 
-          # cacheeconomics trace sidecar: one line per run, in the tool's
-          # normalized-trace schema. Additive to the CSV above, which is
-          # unchanged. It carries three things the daily-aggregate CSV cannot:
-          # the 5m/1h write split (so writes price by real lifetime and
-          # reconcile against an invoice), a full ISO timestamp (so inter-run
-          # cadence findings can run), and the run id as the session (so a
-          # model bump on one day is not misread as a mid-session model switch).
-          # Empty token outputs coerce to 0; a non-Claude harness therefore
-          # writes an all-zero row, which the analyzer drops as non-analysable.
-          I="${{ steps.run.outputs.SKILL_INPUT_TOKENS }}"
-          R="${{ steps.run.outputs.SKILL_CACHE_READ_TOKENS }}"
-          M5="${{ steps.run.outputs.SKILL_CACHE_5M_TOKENS }}"
-          H1="${{ steps.run.outputs.SKILL_CACHE_1H_TOKENS }}"
-          jq -cn \
-            --arg ts "$(date -u +%FT%TZ)" \
-            --arg model "${{ steps.run.outputs.SKILL_MODEL }}" \
-            --arg skill "${{ steps.skill.outputs.name }}" \
-            --arg run "${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" \
-            --argjson i "${I:-0}" --argjson r "${R:-0}" \
-            --argjson m5 "${M5:-0}" --argjson h1 "${H1:-0}" \
-            '{request_id:("run_"+$run),sent_at:$ts,model:$model,agent:$skill,session:$run,target_id:"anthropic/direct",status:200,usage:{input_tokens:$i,cache_read_input_tokens:$r,cache_creation:{ephemeral_5m_input_tokens:$m5,ephemeral_1h_input_tokens:$h1}}}' \
-            >> memory/token-trace.jsonl
-
       - name: Capture skill output
         if: steps.work.outputs.mode != '' && steps.run.outcome == 'success'
         run: |
           SKILL="${{ steps.skill.outputs.name }}"
           mkdir -p output/.chains
           # Save the notification message as a chain artifact
-          PENDING="apps/dashboard/outputs/.pending-${SKILL}.md"
+          PENDING="${AEON_PENDING_DIR:-${RUNNER_TEMP:-/tmp}/aeon-pending}/.pending-${SKILL}.md"
           if [ -f "$PENDING" ]; then
             cp "$PENDING" "output/.chains/${SKILL}.md"
           elif [ -f /tmp/skill-result.txt ] && [ -s /tmp/skill-result.txt ]; then
@@ -693,9 +1096,13 @@ jobs:
               | sed -nE 's/.*attest:[[:space:]]*(true|false).*/\1/p' || true)
 
             # Tier 2 — SKILL.md frontmatter (author intent, travels with the skill).
+            # Accepts legacy top-level `attest:` or the Agent Skills spec form
+            # nested under `metadata:` (indented).
             FM_ATTEST=$(awk '/^---$/{n++; next}
-              n==1 && /^attest:/{
-                v=$0; sub(/^attest:[ \t]*/,"",v); sub(/[ \t]*#.*$/,"",v);
+              n!=1{next}
+              /^[^ \t]/{im=0} /^metadata:/{im=1}
+              /^attest:/ || (im && /^[ \t]+attest:/){
+                v=$0; sub(/^[ \t]*attest:[ \t]*/,"",v); sub(/[ \t]*#.*$/,"",v);
                 gsub(/^[ \t"]+|[ \t"]+$/,"",v); print v; exit
               }' "skills/${SKILL}/SKILL.md" 2>/dev/null || true)
 
@@ -703,7 +1110,7 @@ jobs:
             # json-render feed (the trust boundary that actually benefits).
             PUBLISHED=false
             if [ "${JSONRENDER_ENABLED}" = "true" ] \
-               && [ -f "apps/dashboard/outputs/.pending-${SKILL}.md" ]; then
+               && [ -f "${AEON_PENDING_DIR:-${RUNNER_TEMP:-/tmp}/aeon-pending}/.pending-${SKILL}.md" ]; then
               PUBLISHED=true
             fi
 
@@ -716,7 +1123,12 @@ jobs:
           fi
 
           echo "attest=$ATTEST" >> "$GITHUB_OUTPUT"
-          echo "::notice::attestation gate for ${SKILL_NAME}: attest=$ATTEST"
+          # Only surface the gate when it's actually ON — attest=false is the quiet
+          # default and doesn't need a per-run notice. (if-block, not `[ ] &&`, so a
+          # false condition can't fail this step as its final command under set -e.)
+          if [ "$ATTEST" = "true" ]; then
+            echo "::notice::attestation gate active for ${SKILL_NAME} — signing run provenance"
+          fi
 
       - name: Build run manifest
         id: manifest
@@ -759,7 +1171,7 @@ jobs:
       - name: Attest skill execution
         if: steps.attest-gate.outputs.attest == 'true'
         # Pinned to the current major per this repo's supply-chain convention
-        # (checkout@v7, setup-node@v6). Latest major confirmed at:
+        # (checkout@v7, setup-node@v7). Latest major confirmed at:
         # https://github.com/actions/attest-build-provenance/releases
         # Multi-subject: one attestation over both run-scoped artifacts (the output
         # snapshot and its manifest). Both paths are ${GITHUB_RUN_ID}-unique, so the
@@ -779,11 +1191,19 @@ jobs:
           ANTHROPIC_BASE_URL: ${{ vars.ANTHROPIC_BASE_URL }}
           BANKR_LLM_KEY: ${{ secrets.BANKR_LLM_KEY }}
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          # Native harness-provider keys — read at run time by the api-key auth
+          # paths (codex→OpenAI, pi→Anthropic/OpenAI, vibe→Mistral). The OAuth
+          # captures need nothing here: their creds are already on disk from install.
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          ANTHROPIC_OAUTH_TOKEN: ${{ secrets.ANTHROPIC_OAUTH_TOKEN }}
+          MOONSHOT_API_KEY: ${{ secrets.MOONSHOT_API_KEY }}
+          MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
           USEPOD_TOKEN: ${{ secrets.USEPOD_TOKEN }}
           VENICE_API_KEY: ${{ secrets.VENICE_API_KEY }}
           SURPLUS_API_KEY: ${{ secrets.SURPLUS_API_KEY }}
           XAI_API_KEY: ${{ secrets.XAI_API_KEY }}   # grok scorer: API-key auth path
           GROK_CREDENTIALS: ${{ secrets.GROK_CREDENTIALS }}   # grok scorer: X-account OAuth (restored by run-grok.sh)
+          RH_MODEL_ARG: ${{ steps.harness.outputs.MODEL_ARG }}   # run-harness scorer: same --model the run used
           OPENROUTER_MODEL: ${{ vars.OPENROUTER_MODEL }}
           OPENROUTER_MODEL_SONNET: ${{ vars.OPENROUTER_MODEL_SONNET }}
           OPENROUTER_MODEL_HAIKU: ${{ vars.OPENROUTER_MODEL_HAIKU }}
@@ -808,10 +1228,12 @@ jobs:
 
           HARNESS="${{ steps.run.outputs.HARNESS }}"
           # Route the scorer's claude call through the gateway (claude harness only).
-          # On grok we score via run-grok.sh below and don't touch the gateway, so
-          # skip the source entirely — otherwise it prints "Using direct Anthropic
-          # API" noise on a grok-only repo.
-          if [ "$HARNESS" != "grok" ]; then
+          # Every other harness scores through ITSELF below and doesn't touch the
+          # gateway, so skip the source entirely — otherwise it prints "Using
+          # direct Anthropic API" noise on a repo with no Anthropic creds.
+          # (Was `!= grok`; with only claude/grok upstream the two are identical,
+          # so this is a no-op there and correct for the added harnesses.)
+          if [ "$HARNESS" = "claude" ]; then
             GATEWAY="${{ steps.run.outputs.GATEWAY }}"
             source "${GITHUB_WORKSPACE}/scripts/llm-gateway.sh"
             AEON_OTEL_COMPONENT=scorer source "${GITHUB_WORKSPACE}/scripts/langfuse-otel.sh"
@@ -846,24 +1268,38 @@ jobs:
           JSON format: {\"score\": N, \"assessment\": \"one line\", \"flags\": []}"
 
           SCORE_MODEL="${ANTHROPIC_DEFAULT_HAIKU_MODEL:-claude-haiku-4-5-20251001}"
-          if [ "$HARNESS" = "grok" ]; then
-            # Score through the SAME harness the skill ran on. A grok-only repo has
-            # no Claude credentials, so `claude -p` would just print "Not logged in";
-            # run-grok.sh reuses the run's X-account/API-key auth and emits the same
-            # {result,usage} envelope. MODEL= → grok's default (grok-composer-2.5-fast,
-            # the only grok model that completes in CI). Its notices go to stderr.
-            # NB: we deliberately do NOT pass grok's --json-schema here — composer
-            # doesn't populate structured output (it leaves .structuredOutput null),
-            # and the ANALYSIS_PROMPT already asks for a {score,assessment,flags}
-            # object, so the robust parse below handles composer's JSON text fine.
-            if ! RAW=$(echo "$ANALYSIS_PROMPT" | MODEL= SKILL_MODE=read-only \
-                bash "${GITHUB_WORKSPACE}/scripts/run-grok.sh" 2>/dev/null); then
-              echo "::notice::Skill scoring skipped — grok scorer unavailable (non-fatal)"
-              exit 0
-            fi
-          elif ! RAW=$(echo "$ANALYSIS_PROMPT" | claude -p - \
-            --model "$SCORE_MODEL" --output-format json 2>&1); then
-            echo "::warning::Skill analysis failed (non-fatal). Raw: $(printf '%s' "$RAW" | head -c 800 | tr '\n' ' ')"
+          # Score through the SAME harness the skill ran on, ALWAYS via the
+          # harness-adapter — no native `claude -p` / `run-grok.sh` path remains.
+          # A repo authed for only one harness has no Claude creds, so a direct
+          # `claude -p` here would print "Not logged in" and every run would go
+          # unscored (skill-health / skill-analytics / cron-state quality signals
+          # silently empty while the workflow stays green — the silent-no-op class).
+          # read-only + --no-sandbox: scoring is a single text call needing no tools
+          # or workspace, so the wrapper sandbox would only add a failure mode; any
+          # stray write is reverted by the "Read-only capability guard" step.
+          # --timeout 300 = half the run guard. No --json-schema: ANALYSIS_PROMPT
+          # already asks for a {score,assessment,flags} object and the robust parse
+          # below is tuned for that (composer/pi/vibe/kimi lack a native schema flag).
+          RH="${GITHUB_WORKSPACE}/harness-adapter/run-harness"
+          SCORE_ARGS=(--mode read-only --no-sandbox --timeout 300)
+          case "$HARNESS" in
+            claude)
+              # Runs under the gateway env sourced above; SCORE_MODEL is the cheap
+              # scoring model (haiku by default).
+              SCORE_ARGS+=(--model "$SCORE_MODEL") ;;
+            grok)
+              # Pin grok-4.5 — the only model the X-account (GROK_CREDENTIALS) login
+              # exposes. grok-composer-2.5-fast was a phantom id: the grok CLI rejects
+              # it with "unknown model id" (verified live, run 29944263287), so pinning
+              # it made every grok scorer call fail-then-fall-back. Scoring is one short
+              # text call, so grok-4.5's cost is pennies.
+              SCORE_ARGS+=(--model grok-4.5) ;;
+            *)
+              # RH_MODEL_ARG is the same --model the run used (empty = harness default).
+              [ -n "${RH_MODEL_ARG:-}" ] && SCORE_ARGS+=(--model "$RH_MODEL_ARG") ;;
+          esac
+          if ! RAW=$(echo "$ANALYSIS_PROMPT" | bash "$RH" "$HARNESS" "${SCORE_ARGS[@]}" 2>/dev/null); then
+            echo "::notice::Skill scoring skipped — $HARNESS scorer unavailable (non-fatal)"
             exit 0
           fi
 
@@ -872,10 +1308,10 @@ jobs:
           # this call (seen twice on OpenRouter's haiku slug, while its opus
           # slug always returns text). Retry once on the run's main model —
           # llm-gateway.sh only sets MODEL here when the gateway remaps it.
-          # (claude harness only; grok already used its default.)
-          if [ "$HARNESS" != "grok" ] && [ -z "$ANALYSIS_TEXT" ] && [ -n "${MODEL:-}" ] && [ "$MODEL" != "$SCORE_MODEL" ]; then
+          # (claude harness only; every other harness already used its own model.)
+          if [ "$HARNESS" = "claude" ] && [ -z "$ANALYSIS_TEXT" ] && [ -n "${MODEL:-}" ] && [ "$MODEL" != "$SCORE_MODEL" ]; then
             echo "::warning::Empty analysis result from ${SCORE_MODEL} — retrying with ${MODEL}. Raw: $(printf '%s' "$RAW" | head -c 800 | tr '\n' ' ')"
-            if RAW=$(echo "$ANALYSIS_PROMPT" | claude -p - --model "$MODEL" --output-format json 2>&1); then
+            if RAW=$(echo "$ANALYSIS_PROMPT" | bash "$RH" claude --model "$MODEL" --mode read-only --no-sandbox --timeout 300 2>/dev/null); then
               ANALYSIS_TEXT=$(echo "$RAW" | jq -r '.result // empty')
             fi
           fi
@@ -933,16 +1369,28 @@ jobs:
           echo "::notice::Skill quality — $SKILL: score=$SCORE, avg=$AVG — $ASSESSMENT"
 
       - name: Convert feed outputs
-        # Skipped on the grok harness: notify-jsonrender renders via `claude -p`, so
-        # on a grok-only repo (no Claude auth) it can only no-op with noise. The
-        # jsonrender feed is a Claude-Code-side feature.
-        if: steps.work.outputs.mode != '' && vars.JSONRENDER_ENABLED != 'false' && steps.run.outputs.HARNESS != 'grok'
+        # Claude harness only: notify-jsonrender renders via `claude -p`, so on a
+        # repo with no Claude auth it can only no-op with noise. The jsonrender
+        # feed is a Claude-Code-side feature.
+        # Was `!= grok`, which is identical upstream (claude/grok only) but would
+        # have let the four added harnesses through into a `claude -p` they cannot
+        # authenticate. Unlike scoring, this one is NOT worth routing through
+        # run-harness: it is a rendering convenience, not a quality signal, and
+        # skipping it costs the run nothing.
+        if: steps.work.outputs.mode != '' && vars.JSONRENDER_ENABLED != 'false' && steps.run.outputs.HARNESS == 'claude'
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           ANTHROPIC_BASE_URL: ${{ vars.ANTHROPIC_BASE_URL }}
           BANKR_LLM_KEY: ${{ secrets.BANKR_LLM_KEY }}
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          # Native harness-provider keys — read at run time by the api-key auth
+          # paths (codex→OpenAI, pi→Anthropic/OpenAI, vibe→Mistral). The OAuth
+          # captures need nothing here: their creds are already on disk from install.
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          ANTHROPIC_OAUTH_TOKEN: ${{ secrets.ANTHROPIC_OAUTH_TOKEN }}
+          MOONSHOT_API_KEY: ${{ secrets.MOONSHOT_API_KEY }}
+          MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
           USEPOD_TOKEN: ${{ secrets.USEPOD_TOKEN }}
           VENICE_API_KEY: ${{ secrets.VENICE_API_KEY }}
           SURPLUS_API_KEY: ${{ secrets.SURPLUS_API_KEY }}
@@ -968,7 +1416,7 @@ jobs:
           GATEWAY="${{ steps.run.outputs.GATEWAY }}"
           source "${GITHUB_WORKSPACE}/scripts/llm-gateway.sh"
           AEON_OTEL_COMPONENT=feed source "${GITHUB_WORKSPACE}/scripts/langfuse-otel.sh"
-          for pending in apps/dashboard/outputs/.pending-*.md; do
+          for pending in "${AEON_PENDING_DIR:-${RUNNER_TEMP:-/tmp}/aeon-pending}"/.pending-*.md; do
             [ -f "$pending" ] || continue
             SKILL=$(basename "$pending" .md | sed 's/^\.pending-//')
             echo "json-render: converting $SKILL..."
@@ -1004,16 +1452,17 @@ jobs:
           NOTIFY_EMAIL_SUBJECT_PREFIX: ${{ vars.NOTIFY_EMAIL_SUBJECT_PREFIX || '[Aeon]' }}
           SKILL_NAME: ${{ steps.skill.outputs.name }}
         run: |
-          # Re-deliver any .pending-notify/ messages that failed during sandbox.
+          # Re-deliver any queued messages that failed to send during the run.
+          Q="${AEON_PENDING_DIR:-${RUNNER_TEMP:-/tmp}/aeon-pending}/notify-queue"
           # Skip messages whose hash was already sent by ./notify inline,
           # and skip short test/trace probes that shouldn't reach channels.
-          if [ ! -d .pending-notify ] || [ -z "$(ls -A .pending-notify/*.md 2>/dev/null)" ]; then
+          if [ ! -d "$Q" ] || [ -z "$(ls -A "$Q"/*.md 2>/dev/null)" ]; then
             echo "No pending notifications"
             exit 0
           fi
-          HASH_FILE=".notify-sent-hashes"
+          HASH_FILE="${AEON_PENDING_DIR:-${RUNNER_TEMP:-/tmp}/aeon-pending}/notify-sent-hashes"
           touch "$HASH_FILE"
-          for pending in .pending-notify/*.md; do
+          for pending in "$Q"/*.md; do
             [ -f "$pending" ] || continue
             MSG=$(cat "$pending")
 
@@ -1072,7 +1521,7 @@ jobs:
                       '{from:$from, to:[$to], subject:$subject, html:$html, text:$text}')" > /dev/null 2>&1 || true
             fi
           done
-          rm -rf .pending-notify
+          rm -rf "$Q"
 
       - name: Read-only capability guard
         if: steps.work.outputs.mode != '' && env.SKILL_MODE == 'read-only'
@@ -1087,7 +1536,14 @@ jobs:
           printf '\n## %s (read-only)\nRan %s UTC.\n' "$SKILL" "$(date -u +%FT%TZ)" >> "memory/logs/${TODAY}.md"
           CODE_PATHS="skills .github apps/mcp-server apps/webhook apps/dashboard/app apps/dashboard/lib apps/dashboard/components scripts docs catalog bin *.md *.json *.yml aeon"
           git checkout -- $CODE_PATHS 2>/dev/null || true
-          git clean -fd -- skills scripts docs .github bin catalog 2>/dev/null || true
+          # Same path set as CODE_PATHS above. `git checkout` only reverts EDITS to
+          # TRACKED files - it cannot remove a file the run CREATED. The clean list
+          # used to cover 6 of those paths, so a new untracked file elsewhere (e.g.
+          # apps/dashboard/lib/x.ts, or a brand-new top-level dir) survived the guard
+          # and was committed by `git add -A` below. No -x, so gitignored build
+          # artifacts (node_modules, .next) are untouched; memory/ and output/ are in
+          # neither list and still commit by design.
+          git clean -fd -- $CODE_PATHS 2>/dev/null || true
           echo "read-only guard: logged run + reverted code/config writes for $SKILL"
 
       - name: Commit results
@@ -1097,7 +1553,7 @@ jobs:
         run: |
           git config user.name "aeonframework"
           git config user.email "aeonframework@proton.me"
-          rm -f ./notify ./notify-jsonrender .notify-sent-hashes  # Remove generated notify scripts + dedup log before committing
+          rm -f ./notify ./notify-jsonrender  # Remove generated notify scripts before committing
 
           # Issues-as-state (hardening §3): cron-state.json was materialized from the
           # pinned Issue for this run's readers — it's a projection, not source of truth.

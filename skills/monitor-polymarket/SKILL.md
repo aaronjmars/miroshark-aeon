@@ -1,11 +1,14 @@
 ---
-type: Skill
-mode: read-only
-name: Monitor Prediction Markets
-category: crypto
+name: monitor-polymarket
 description: Monitor Polymarket and/or Kalshi prediction markets for 24h price moves, volume changes, fresh comments, and high-conviction alerts
-var: ""
-tags: [crypto, research]
+metadata:
+  title: Monitor Prediction Markets
+  mode: read-only
+  category: crypto
+  var: ""
+  tags:
+    - crypto
+    - research
 ---
 > **${var}** — Platform selector with an optional single-market override:
 > - **empty** (`""`) — run **both** platforms from their watchlists.
@@ -319,20 +322,20 @@ If the combined report exceeds the budget, trim in this order: (1) drop Kalshi's
 
 # Log
 
-Append to `memory/logs/${today}.md` under a single `## Monitor Prediction Markets` heading, with a bullet group for **each platform that ran**:
+Append to `memory/logs/${today}.md` under a single `### monitor-polymarket` heading, with a bullet group for **each platform that ran**:
 
 ```
-## Monitor Prediction Markets
+### monitor-polymarket
 - **Platform(s):** both | polymarket | kalshi   (selector: `${var}`)
 
-### Polymarket        (only if the Polymarket branch ran)
+#### Polymarket        (only if the Polymarket branch ran)
 - **Events monitored:** N
 - **Markets tracked:** N (M open, K closed)
 - **Biggest mover:** "[question]" — X% → Y% (+/-Zpp)
 - **Alert markets (>5pp move):** [list or "none"]
 - **Top comment:** "[excerpt]"
 
-### Kalshi            (only if the Kalshi branch ran)
+#### Kalshi            (only if the Kalshi branch ran)
 - **Events monitored:** N (watchlist=W, discovered=D)
 - **Markets tracked:** N (M open, K skipped)
 - **Top mover:** "[title]" — X% → Y% (Δpp, move_score=S, vol=$V, spread=Sp)

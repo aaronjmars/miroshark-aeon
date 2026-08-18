@@ -1,10 +1,12 @@
 ---
-type: Skill
-name: Search Skills
-category: evolution
+name: search-skill
 description: Search the open agent skills ecosystem for skills that fill a real gap and install them via the native add-skill path
-var: ""
-tags: [meta]
+metadata:
+  title: Search Skills
+  category: evolution
+  var: ""
+  tags:
+    - meta
 ---
 <!-- autoresearch: variation B — sharper output + native install path + hard gates + silent skips -->
 
@@ -48,7 +50,7 @@ b. **Curated indexes** via `bin/add-skill <repo> --list` (iterate in this order)
    - `bin/add-skill vercel-labs/agent-skills --list`
    - `bin/add-skill anthropics/skills --list`
    - `bin/add-skill BankrBot/skills --list`
-   - `bin/add-skill aaronjmars/aeon --list` (this repo's inventory — informational, cannot re-install; any hit here signals a duplicate and confirms gap fit is probably wrong)
+   - `bin/add-skill aeonfun/aeon --list` (this repo's inventory — informational, cannot re-install; any hit here signals a duplicate and confirms gap fit is probably wrong)
 
    `bin/add-skill --list` prints lines in the shape `  <name>  <description>` plus an `(installed)` marker for duplicates — parse those.
 
@@ -131,7 +133,7 @@ Sources: npx=<ok|fail> vercel=<N> anthropics=<N> bankr=<N> skills.sh=<ok|fail>
 Append:
 
 ```
-## search-skill
+### search-skill
 - **Mode:** SEARCH_SKILL_<OK_INSTALLED|OK_CANDIDATES|NO_GAP|EMPTY|ERROR>
 - **Query:** "<query>" (source: <var|cron-state|issues|priorities|logs>)
 - **Catalogs:** npx=<ok|fail>, vercel=<N>, anthropics=<N>, bankr=<N>, skills.sh=<ok|fail>

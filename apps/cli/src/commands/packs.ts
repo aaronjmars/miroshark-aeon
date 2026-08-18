@@ -1,7 +1,6 @@
 import { getPacks } from '../../../dashboard/lib/packs.ts'
 import { runSkill, buildSkillRunArgs } from '../../../dashboard/lib/run-skill.ts'
-import { ghAvailable } from '../../../dashboard/lib/gh.ts'
-import { emit, table, c, fail, isDryRun } from '../output.ts'
+import { emit, table, c, fail, isDryRun, requireGh, truncate } from '../output.ts'
 
 const USAGE = `aeon packs — skill packs (first-party + community)
 
@@ -51,12 +50,8 @@ function install(args: string[]) {
     return emit({ dryRun: true, var: varArg, command: ['gh', ...ghArgs] }, () =>
       console.log(c.yellow('dry-run: ') + 'gh ' + ghArgs.join(' ')))
   }
-  if (!ghAvailable()) fail('GitHub CLI not authenticated. Run: gh auth login')
+  requireGh()
   runSkill('install-skill', { var: varArg })
   emit({ ok: true, installing: varArg }, () =>
     console.log(c.green('✓ ') + `dispatched install-skill for "${varArg}" — it opens an auto-merging PR; watch \`aeon runs ls\``))
-}
-
-function truncate(s: string, n: number) {
-  return s.length > n ? s.slice(0, n - 1) + '…' : s
 }

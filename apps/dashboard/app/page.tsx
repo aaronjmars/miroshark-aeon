@@ -5,9 +5,10 @@ import type {
   Skill, Run, Secret, SkillOutput, GatewayProvider, Harness, UploadFile, AnalyticsData,
   SkillsResponse, RunsResponse, SecretsResponse, SyncStatusResponse, McpResponse,
   OutputsResponse, StrategyResponse, SoulResponse, SyncResult, SoulExampleResponse,
-  UploadResponse, ErrorResponse, PacksResponse, McpServers,
+  UploadResponse, ErrorResponse, PacksResponse, McpServers, SoulSources, StrategySources,
+  DashboardView,
 } from '../lib/types'
-import { postJson, putJson, patchJson, del, scheduleRunRefresh } from '../lib/api-client'
+import { getJson, postJson, putJson, patchJson, del, scheduleRunRefresh } from '../lib/api-client'
 import { MODELS, authSecretsForHarness, PACK_BY_KEY, FIRST_PARTY_KEYS, DEFAULT_VISIBLE_PACKS, HARNESSES, modelsForHarness } from '../lib/constants'
 import { displayName } from '../lib/utils'
 import TargetCursor from '../components/ui/TargetCursor'
@@ -18,18 +19,20 @@ import { TopBar } from '../components/TopBar'
 import { HQOverview } from '../components/HQOverview'
 import { SkillDetail } from '../components/SkillDetail'
 import { SecretsPanel } from '../components/SecretsPanel'
-import { StrategyPanel, type StrategySources } from '../components/StrategyPanel'
-import { SoulPanel, type SoulFile, type SoulSources } from '../components/SoulPanel'
+import { StrategyPanel } from '../components/StrategyPanel'
+import { SoulPanel, type SoulFile } from '../components/SoulPanel'
 import { McpPanel } from '../components/McpPanel'
 import { PacksPanel } from '../components/PacksPanel'
 import { RightPanel } from '../components/RightPanel'
 import { ImportModal } from '../components/ImportModal'
 import { AuthModal } from '../components/AuthModal'
 import { GrokAuthModal } from '../components/GrokAuthModal'
+import { HarnessAuthModal } from '../components/HarnessAuthModal'
+import { HARNESS_AUTH } from '../lib/harness-auth'
 import { PanelError } from '../components/PanelError'
 
 export default function Dashboard() {
-  const [view, setView] = useState<'hq' | 'packs' | 'secrets' | 'strategy' | 'mcp' | 'soul'>('hq')
+  const [view, setView] = useState<DashboardView>('hq')
   const [selectedSkill, setSelectedSkill] = useState<string | null>(null)
   const [secretFocus, setSecretFocus] = useState<string | null>(null)
   // Shared with the sidebar's category chips - HQ category cards toggle it too.
@@ -39,7 +42,11 @@ export default function Dashboard() {
   const [skills, setSkills] = useState<Skill[]>([])
   const [runs, setRuns] = useState<Run[]>([])
   const [secrets, setSecrets] = useState<Secret[]>([])
-  const [model, setModel] = useState('claude-sonnet-4-6')
+  // Did the last /api/secrets read succeed? Distinguishes "no key set" from
+  // "couldn't read the vault" (GitHub API 503 / gh not authenticated) so the
+  // run-gate can't blame a missing key when the truth is an unreadable vault.
+  const [secretsReadOk, setSecretsReadOk] = useState(false)
+  const [model, setModel] = useState('claude-sonnet-5')
   const [harness, setHarness] = useState<Harness>('claude')
   const [gateway, setGateway] = useState<GatewayProvider>('auto')
   const [repo, setRepo] = useState('')
@@ -72,6 +79,7 @@ export default function Dashboard() {
   const [showImport, setShowImport] = useState(false)
   const [authLoading, setAuthLoading] = useState(false)
   const [grokLoading, setGrokLoading] = useState(false)
+  const [harnessAuthLoading, setHarnessAuthLoading] = useState(false)
   const [showAuthModal, setShowAuthModal] = useState(false)
 
   const [strategy, setStrategy] = useState('')
@@ -103,12 +111,17 @@ export default function Dashboard() {
 
   // --- API ---
   const fetchData = useCallback(async () => {
-    try { const [sr, rr, secr] = await Promise.all([fetch('/api/skills'), fetch('/api/runs'), fetch('/api/secrets')]); if (sr.ok) { const d = await sr.json() as SkillsResponse; setSkills(d.skills); if (d.model) setModel(d.model); if (d.harness) setHarness(d.harness); if (d.gateway?.provider) setGateway(d.gateway.provider); if (d.repo) setRepo(d.repo) }; if (rr.ok) setRuns((await rr.json() as RunsResponse).runs); if (secr.ok) { const d = await secr.json() as SecretsResponse; if (d.secrets) setSecrets(d.secrets) } } catch (e: unknown) { setError(e instanceof Error ? e.message : 'Failed to connect') } finally { setLoading(false) }
+    try { const [sr, rr, secr] = await Promise.all([fetch('/api/skills'), fetch('/api/runs'), fetch('/api/secrets')]); if (sr.ok) { const d = await sr.json() as SkillsResponse; setSkills(d.skills); if (d.model) setModel(d.model); if (d.harness) setHarness(d.harness); if (d.gateway?.provider) setGateway(d.gateway.provider); if (d.repo) setRepo(d.repo) }; if (rr.ok) setRuns((await rr.json() as RunsResponse).runs); if (secr.ok) { const d = await secr.json() as SecretsResponse; if (d.secrets) { setSecrets(d.secrets); setSecretsReadOk(true) } } else { setSecretsReadOk(false) } } catch (e: unknown) { setError(e instanceof Error ? e.message : 'Failed to connect') } finally { setLoading(false) }
     try { const r = await fetch('/api/sync'); if (r.ok) { const d = await r.json() as SyncStatusResponse; setHasChanges(d.hasChanges); if (typeof d.behind === 'number') setBehind(d.behind) } } catch {}
     // Preload MCP servers so each skill's "MCP servers" panel can show install state.
     try { const r = await fetch('/api/mcp'); if (r.ok) { const d = await r.json() as McpResponse; setMcpServers(d.servers || {}); setMcpLoaded(true) } } catch {}
   }, [])
   const refreshRuns = useCallback(async () => { try { const r = await fetch('/api/runs'); if (r.ok) setRuns((await r.json() as RunsResponse).runs) } catch {} }, [])
+  // Optimistically mark a just-saved secret as set. We know it's set (the write
+  // succeeded), so reflect it even before the follow-up /api/secrets read lands -
+  // and flag the vault readable so the run-gate stops blaming a missing key when
+  // that read is flaky (the GitHub-503 case behind #878).
+  const markSecretSet = (name: string, group = 'Skill Keys') => { setSecrets(s => s.some(x => x.name === name) ? s.map(x => x.name === name ? { ...x, isSet: true } : x) : [...s, { name, group, description: 'Custom', isSet: true }]); setSecretsReadOk(true) }
   useEffect(() => { fetchData() }, [fetchData])
   // Restore the operator's enabled-pack selection from a prior visit, scoped to
   // THIS repo (Core is always on). Per-repo keying so testing multiple forks on
@@ -121,22 +134,22 @@ export default function Dashboard() {
     let saved: string[] = []
     try {
       const raw = localStorage.getItem(`aeon.enabledPacks:${repo}`)
-      if (raw) { const arr = JSON.parse(raw); if (Array.isArray(arr)) saved = arr.filter((k: unknown): k is string => typeof k === 'string') }
+      if (raw) { const arr: unknown = JSON.parse(raw); if (Array.isArray(arr)) saved = arr.filter((k: unknown): k is string => typeof k === 'string') }
     } catch {}
     setEnabledPacks(Array.from(new Set([...DEFAULT_VISIBLE_PACKS, ...saved])))
   }, [repo])
   useEffect(() => { const id = setInterval(refreshRuns, 10_000); return () => clearInterval(id) }, [refreshRuns])
-  useEffect(() => { setFeedLoading(true); setFeedError(false); fetch('/api/outputs').then(r => r.ok ? r.json() as Promise<OutputsResponse> : Promise.reject(new Error(`HTTP ${r.status}`))).then(d => setOutputs(d.outputs || [])).catch(() => setFeedError(true)).finally(() => setFeedLoading(false)) }, [feedKey])
-  useEffect(() => { if (view === 'strategy' && !strategyLoaded) { fetch('/api/strategy').then(r => r.ok ? r.json() as Promise<StrategyResponse> : Promise.reject(new Error(`HTTP ${r.status}`))).then(d => { setStrategy(d.content || ''); setStrategyLoaded(true) }).catch(() => { setStrategyError(true); setStrategyLoaded(true) }) } }, [view, strategyLoaded])
-  useEffect(() => { if (view === 'mcp' && !mcpLoaded) { fetch('/api/mcp').then(r => r.ok ? r.json() as Promise<McpResponse> : Promise.reject(new Error(`HTTP ${r.status}`))).then(d => { setMcpServers(d.servers || {}); setMcpLoaded(true) }).catch(() => { setMcpError(true); setMcpLoaded(true) }) } }, [view, mcpLoaded])
-  useEffect(() => { if (view === 'soul' && !soulLoaded) { fetch('/api/soul').then(r => r.ok ? r.json() as Promise<SoulResponse> : Promise.reject(new Error(`HTTP ${r.status}`))).then(d => { setSoul(d.soul?.content || ''); setSoulStyle(d.style?.content || ''); setSoulLoaded(true) }).catch(() => { setSoulError(true); setSoulLoaded(true) }) } }, [view, soulLoaded])
-  useEffect(() => { if (view === 'packs' && !packsLoaded) { fetch('/api/packs').then(r => r.ok ? r.json() as Promise<PacksResponse> : Promise.reject(new Error(`HTTP ${r.status}`))).then(d => { setPacks(d); setPacksLoaded(true) }).catch(() => { setPacksError(true); setPacksLoaded(true) }) } }, [view, packsLoaded])
+  useEffect(() => { setFeedLoading(true); setFeedError(false); getJson<OutputsResponse>('/api/outputs').then(d => setOutputs(d.outputs || [])).catch(() => setFeedError(true)).finally(() => setFeedLoading(false)) }, [feedKey])
+  useEffect(() => { if (view === 'strategy' && !strategyLoaded) { getJson<StrategyResponse>('/api/strategy').then(d => { setStrategy(d.content || ''); setStrategyLoaded(true) }).catch(() => { setStrategyError(true); setStrategyLoaded(true) }) } }, [view, strategyLoaded])
+  useEffect(() => { if (view === 'mcp' && !mcpLoaded) { getJson<McpResponse>('/api/mcp').then(d => { setMcpServers(d.servers || {}); setMcpLoaded(true) }).catch(() => { setMcpError(true); setMcpLoaded(true) }) } }, [view, mcpLoaded])
+  useEffect(() => { if (view === 'soul' && !soulLoaded) { getJson<SoulResponse>('/api/soul').then(d => { setSoul(d.soul?.content || ''); setSoulStyle(d.style?.content || ''); setSoulLoaded(true) }).catch(() => { setSoulError(true); setSoulLoaded(true) }) } }, [view, soulLoaded])
+  useEffect(() => { if (view === 'packs' && !packsLoaded) { getJson<PacksResponse>('/api/packs').then(d => { setPacks(d); setPacksLoaded(true) }).catch(() => { setPacksError(true); setPacksLoaded(true) }) } }, [view, packsLoaded])
   // Reset the main content scroll to the top whenever the active view or the
   // selected skill changes, so each screen (Soul, Strategy, a skill, …) opens at the top.
   useEffect(() => { mainScrollRef.current?.scrollTo({ top: 0 }) }, [view, selectedSkill])
 
   const toggleSkill = async (n: string, en: boolean) => { setBusy(b => ({ ...b, [n]: true })); try { const { ok, data } = await patchJson<SyncResult>('/api/skills', { name: n, enabled: en }); if (ok) { setSkills(s => s.map(sk => sk.name === n ? { ...sk, enabled: en } : sk)); flashSynced(`${displayName(n)} ${en ? 'enabled' : 'disabled'}`, data) } else { flash(`${displayName(n)} update failed`) } } catch { flash('Network error') } finally { setBusy(b => ({ ...b, [n]: false })) } }
-  const runSkill = async (n: string, v?: string, sm?: string) => { if (!secrets.some(s => s.isSet && authSecretsForHarness(harness).includes(s.name))) { flash('No provider key set - add one in Settings before running skills'); return } setBusy(b => ({ ...b, [`r-${n}`]: true })); try { const { ok, data } = await postJson<ErrorResponse>(`/api/skills/${n}/run`, { var: v || '', model: sm || model }); if (ok) { flash(`${displayName(n)} started`); scheduleRunRefresh(refreshRuns) } else { flash(data.error || 'Failed') } } finally { setBusy(b => ({ ...b, [`r-${n}`]: false })) } }
+  const runSkill = async (n: string, v?: string, sm?: string) => { if (!secrets.some(s => s.isSet && authSecretsForHarness(harness).includes(s.name))) { flash(secretsReadOk ? 'No provider key set - add one in Settings before running skills' : "Couldn't read repo secrets - GitHub API error or gh not authenticated. Retry, or run `gh auth login`."); return } setBusy(b => ({ ...b, [`r-${n}`]: true })); try { const { ok, data } = await postJson<ErrorResponse>(`/api/skills/${n}/run`, { var: v || '', model: sm || model }); if (ok) { flash(`${displayName(n)} started`); scheduleRunRefresh(refreshRuns) } else { flash(data.error || 'Failed') } } finally { setBusy(b => ({ ...b, [`r-${n}`]: false })) } }
   const updateSchedule = async (n: string, s: string) => { try { const { ok, data } = await patchJson<SyncResult>('/api/skills', { name: n, schedule: s }); if (ok) { setSkills(sk => sk.map(x => x.name === n ? { ...x, schedule: s } : x)); flashSynced('Schedule updated', data) } } catch { flash('Network error') } }
   const updateVar = async (n: string, v: string) => { try { const { ok, data } = await patchJson<SyncResult>('/api/skills', { name: n, var: v }); if (ok) { setSkills(s => s.map(x => x.name === n ? { ...x, var: v } : x)); flashSynced('Brief updated', data) } } catch { flash('Network error') } }
   const updateSkillModel = async (n: string, m: string) => { try { const { ok, data } = await patchJson<SyncResult>('/api/skills', { name: n, skillModel: m }); if (ok) { setSkills(s => s.map(x => x.name === n ? { ...x, model: m } : x)); flashSynced('Capability updated', data) } } catch { flash('Network error') } }
@@ -144,7 +157,7 @@ export default function Dashboard() {
   // Switch the agent harness. If the current model doesn't belong to the new
   // harness's model set, snap it to that harness's default so the picker + runs
   // stay coherent (persisted in the same PATCH round-trip).
-  const updateHarness = async (h: string) => { const hh = (h === 'grok' ? 'grok' : 'claude') as Harness; setHarness(hh); const list = modelsForHarness(hh); const nextModel = list.some(x => x.id === model) ? undefined : list[0]?.id; if (nextModel) setModel(nextModel); try { const { data } = await patchJson<SyncResult>('/api/skills', { harness: hh, ...(nextModel ? { model: nextModel } : {}) }); flashSynced(`Harness: ${HARNESSES.find(x => x.id === hh)?.label || hh}`, data) } catch { flash('Network error') } }
+  const updateHarness = async (h: string) => { const hh: Harness = HARNESSES.find(x => x.id === h)?.id ?? 'claude'; setHarness(hh); const list = modelsForHarness(hh); const nextModel = list.some(x => x.id === model) ? undefined : list[0]?.id; if (nextModel) setModel(nextModel); try { const { data } = await patchJson<SyncResult>('/api/skills', { harness: hh, ...(nextModel ? { model: nextModel } : {}) }); flashSynced(`Harness: ${HARNESSES.find(x => x.id === hh)?.label || hh}`, data) } catch { flash('Network error') } }
   const deleteSkill = async (n: string) => { setBusy(b => ({ ...b, [`d-${n}`]: true })); try { const { ok, data } = await del<SyncResult>('/api/skills', { name: n }); if (ok) { setSkills(s => s.filter(x => x.name !== n)); setSelectedSkill(null); flashSynced(`${displayName(n)} removed`, data) } else { flash(`${displayName(n)} removal failed`) } } catch { flash('Network error') } finally { setBusy(b => ({ ...b, [`d-${n}`]: false })) } }
   const syncToGithub = async () => { setSyncing(true); try { const { ok } = await postJson('/api/sync'); if (ok) { flash('Synced'); setHasChanges(false) } else { flash('Sync failed') } } catch { flash('Network error') } finally { setSyncing(false) } }
   // Pull rebases origin/main onto the working tree, so the whole dashboard can be
@@ -154,8 +167,12 @@ export default function Dashboard() {
   const setupAuth = async (auth?: string | { key: string, baseUrl?: string, provider?: string }) => { setAuthLoading(true); try { const body = typeof auth === 'string' ? { key: auth } : (auth || {}); const { ok, data } = await postJson<ErrorResponse>('/api/auth', body); if (ok) { flash('Authenticated'); setShowAuthModal(false); fetchData() } else { const msg = typeof data?.error === 'string' ? data.error : (auth ? 'Auth failed' : 'Auto-setup failed'); if (!auth) setShowAuthModal(true); flash(msg) } } finally { setAuthLoading(false) } }
   // Connect the grok harness: no arg captures the local X-account OAuth session
   // (GROK_CREDENTIALS); a key stores XAI_API_KEY instead.
-  const setupGrokAuth = async (payload?: { key: string }) => { setGrokLoading(true); try { const { ok, data } = await postJson<ErrorResponse & { harness?: Harness; synced?: boolean }>('/api/grok-auth', payload || {}); if (ok) { if (data?.harness === 'grok') { setHarness('grok'); flashSynced('X account connected - harness set to grok', data) } else { flash(payload?.key ? 'XAI_API_KEY saved' : 'X account connected') } setShowAuthModal(false); fetchData() } else { flash(typeof data?.error === 'string' ? data.error : 'Grok connect failed') } } finally { setGrokLoading(false) } }
-  const saveSecret = async (n: string, value: string) => { setBusy(b => ({ ...b, [`sec-${n}`]: true })); try { const { ok } = await postJson('/api/secrets', { name: n, value }); if (ok) { setSecrets(s => { const e = s.some(x => x.name === n); if (e) return s.map(x => x.name === n ? { ...x, isSet: true } : x); return [...s, { name: n, group: 'Skill Keys', description: 'Custom', isSet: true }] }); flash(`${n} saved`) } } finally { setBusy(b => ({ ...b, [`sec-${n}`]: false })) } }
+  const setupGrokAuth = async (payload?: { key: string }) => { setGrokLoading(true); try { const { ok, data } = await postJson<ErrorResponse & { harness?: Harness; synced?: boolean }>('/api/grok-auth', payload || {}); if (ok) { if (data?.harness === 'grok') { setHarness('grok'); flashSynced('X account connected - harness set to grok', data) } else { if (payload?.key) markSecretSet('XAI_API_KEY'); flash(payload?.key ? 'XAI_API_KEY saved' : 'X account connected') } setShowAuthModal(false); fetchData() } else { flash(typeof data?.error === 'string' ? data.error : 'Grok connect failed') } } finally { setGrokLoading(false) } }
+  // Native auth for codex/pi/vibe/kimi (the /api/harness-auth parallel to grok):
+  // no arg = OAuth capture (codex→ChatGPT, kimi→device), which also switches the
+  // repo to that harness; {key} = a provider key stored under its own secret.
+  const setupHarnessAuth = async (targetHarness: string, payload?: { key: string }) => { setHarnessAuthLoading(true); try { const { ok, data } = await postJson<ErrorResponse & { harness?: Harness; method?: string; secret?: string; synced?: boolean }>('/api/harness-auth', { harness: targetHarness, ...(payload || {}) }); if (ok) { if (data?.method === 'oauth' && data?.harness) { setHarness(data.harness); flashSynced(`${data.harness} connected - harness set`, data) } else { if (data?.secret) markSecretSet(data.secret); flash(`${data?.secret || 'Key'} saved`) } setShowAuthModal(false); fetchData() } else { flash(typeof data?.error === 'string' ? data.error : 'Connect failed') } } finally { setHarnessAuthLoading(false) } }
+  const saveSecret = async (n: string, value: string) => { setBusy(b => ({ ...b, [`sec-${n}`]: true })); try { const { ok } = await postJson('/api/secrets', { name: n, value }); if (ok) { markSecretSet(n); flash(`${n} saved`) } } finally { setBusy(b => ({ ...b, [`sec-${n}`]: false })) } }
   const deleteSecret = async (n: string) => { setBusy(b => ({ ...b, [`sec-${n}`]: true })); try { const { ok } = await del('/api/secrets', { name: n }); if (ok) { setSecrets(s => s.map(x => x.name === n ? { ...x, isSet: false } : x)); flash(`${n} removed`) } } finally { setBusy(b => ({ ...b, [`sec-${n}`]: false })) } }
   const importSkill = async (files: UploadFile[], name?: string, category?: string) => { const { ok, data } = await postJson<UploadResponse>('/api/upload', { files, name, category }); if (ok) { flash(`${displayName(data.name)} added`); fetchData() } }
   // Enable/disable a pack's *visibility* (not its skills). Core is always on.
@@ -213,7 +230,7 @@ export default function Dashboard() {
 
       <LeftSidebar
         view={view} setView={(v) => { setView(v); setSelectedSkill(null) }}
-        selectedSkill={selectedSkill} setSelectedSkill={setSelectedSkill}
+        selectedSkill={selectedSkill}
         skills={visibleSkills} runs={runs} secrets={secrets} repo={repo} harness={harness}
         enabledCount={enabledCount} workingCount={workingCount}
         categoryFilter={categoryFilter} setCategoryFilter={setCategoryFilter}
@@ -232,7 +249,7 @@ export default function Dashboard() {
 
         <div ref={mainScrollRef} className="flex-1 overflow-y-auto p-[var(--space-lg)]">
           {view === 'secrets' && !selectedSkill && (
-            <SecretsPanel secrets={secrets} skills={skills} busy={busy} repo={repo} harness={harness} focusKey={secretFocus} onFocusHandled={() => setSecretFocus(null)} onSave={saveSecret} onDelete={deleteSecret} onSelectSkill={(name) => { setSelectedSkill(name); setView('hq') }} onConnectClaude={() => setupAuth()} connecting={authLoading} onConnectGrok={() => setupGrokAuth()} grokConnecting={grokLoading} />
+            <SecretsPanel secrets={secrets} skills={skills} busy={busy} repo={repo} harness={harness} focusKey={secretFocus} onFocusHandled={() => setSecretFocus(null)} onSave={saveSecret} onDelete={deleteSecret} onSelectSkill={(name) => { setSelectedSkill(name); setView('hq') }} onConnectClaude={() => setupAuth()} connecting={authLoading} onConnectGrok={() => setupGrokAuth()} grokConnecting={grokLoading} onConnectHarness={(h) => setupHarnessAuth(h)} harnessConnecting={harnessAuthLoading} />
           )}
           {view === 'strategy' && !selectedSkill && (
             strategyError
@@ -242,7 +259,7 @@ export default function Dashboard() {
           {view === 'mcp' && !selectedSkill && (
             mcpError
               ? <PanelError label="MCP servers" onRetry={() => { setMcpError(false); setMcpLoaded(false) }} />
-              : <McpPanel servers={mcpServers} loading={!mcpLoaded} saving={mcpSaving} secrets={secrets} busy={busy} onSave={saveMcp} onSetSecret={saveSecret} onDeleteSecret={deleteSecret} />
+              : <McpPanel harness={harness} servers={mcpServers} loading={!mcpLoaded} saving={mcpSaving} secrets={secrets} busy={busy} onSave={saveMcp} onSetSecret={saveSecret} onDeleteSecret={deleteSecret} onGoToSecret={goToSecret} />
           )}
           {view === 'soul' && !selectedSkill && (
             soulError
@@ -250,7 +267,7 @@ export default function Dashboard() {
               : <SoulPanel soul={soul} style={soulStyle} loading={!soulLoaded} saving={soulSaving} building={soulBuilding} installing={soulInstalling} onSave={saveSoul} onBuild={buildSoul} onInstallExample={installSoulExample} />
           )}
           {view === 'hq' && !selectedSkill && (
-            <HQOverview skills={visibleSkills} runs={runs} enabledCount={enabledCount} workingCount={workingCount} categoryFilter={categoryFilter} onCategoryClick={(key) => setCategoryFilter(categoryFilter === key ? null : key)} onViewRun={() => {}} onOpenPacks={() => setView('packs')} />
+            <HQOverview skills={visibleSkills} runs={runs} enabledCount={enabledCount} workingCount={workingCount} categoryFilter={categoryFilter} onCategoryClick={(key) => setCategoryFilter(categoryFilter === key ? null : key)} onOpenPacks={() => setView('packs')} />
           )}
           {view === 'packs' && !selectedSkill && (
             packsError
@@ -263,7 +280,6 @@ export default function Dashboard() {
               onToggle={toggleSkill} onRun={runSkill} onDelete={deleteSkill}
               onUpdateSchedule={updateSchedule} onUpdateVar={updateVar} onUpdateModel={updateSkillModel}
               onGoToSecret={goToSecret} onGoToMcp={goToMcp}
-              onViewRun={() => {}}
             />
           )}
         </div>
@@ -271,14 +287,17 @@ export default function Dashboard() {
 
       <RightPanel
         runs={runs} outputs={outputs} feedLoading={feedLoading} feedError={feedError} analyticsData={analyticsData} analyticsError={analyticsError}
-        onViewRun={() => {}}
         onRefresh={() => { fetchData(); setFeedKey(k => k + 1); setAnalyticsData(null); setAnalyticsError(false) }}
-        onFetchAnalytics={() => { if (!analyticsData) { setAnalyticsError(false); fetch('/api/analytics').then(r => r.ok ? r.json() as Promise<AnalyticsData> : Promise.reject(new Error(`HTTP ${r.status}`))).then(d => setAnalyticsData(d)).catch(() => setAnalyticsError(true)) } }}
+        onFetchAnalytics={() => { if (!analyticsData) { setAnalyticsError(false); getJson<AnalyticsData>('/api/analytics').then(d => setAnalyticsData(d)).catch(() => setAnalyticsError(true)) } }}
       />
 
       {showImport && <ImportModal onClose={() => setShowImport(false)} onImport={importSkill} />}
       {showAuthModal && (harness === 'grok'
-        ? <GrokAuthModal loading={grokLoading} onClose={() => setShowAuthModal(false)} onGrokAuth={(p) => setupGrokAuth(p)} />
+        ? <GrokAuthModal loading={grokLoading} onClose={() => setShowAuthModal(false)} onGrokAuth={(p) => setupGrokAuth(p)}
+            patSet={secrets.some(s => s.isSet && (s.name === 'GH_SECRETS_PAT' || s.name === 'GH_GLOBAL'))}
+            onGoToSecret={(n) => { setShowAuthModal(false); goToSecret(n) }} />
+        : HARNESS_AUTH[harness]
+        ? <HarnessAuthModal harness={harness} loading={harnessAuthLoading} onClose={() => setShowAuthModal(false)} onHarnessAuth={(p) => setupHarnessAuth(harness, p)} />
         : <AuthModal loading={authLoading} onClose={() => setShowAuthModal(false)} onAuth={(auth) => setupAuth(auth)} />)}
     </div>
   )
