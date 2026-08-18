@@ -7,7 +7,7 @@ permalink: /status/
 # Agent Status
 
 **Overall:** 🟢 OK
-**Updated:** 2026-08-18 19:14 UTC
+**Updated:** 2026-08-18 20:42 UTC
 **Open issues:** 0
 **Next scheduled run:** token-movers at 06:00 UTC (2026-08-19)
 
@@ -29,9 +29,9 @@ _Source: `output/articles/token-report-2026-08-18.md` · verdict: BREAKDOWN_
 
 | Skill | Last run | Status | Success rate | Consecutive failures |
 |-------|----------|--------|-------------:|---------------------:|
+| heartbeat | 2026-08-18 19:13 UTC | ✅ success | 100% | 0 |
 | fetch-tweets | 2026-08-18 17:02 UTC | ✅ success | 100% | 0 |
 | token-movers | 2026-08-18 06:03 UTC | ✅ success | 100% | 0 |
-| heartbeat | 2026-08-17 19:08 UTC | ⏳ dispatched | 100% | 0 |
 | repo-pulse | 2026-08-17 10:03 UTC | ✅ success | 100% | 0 |
 | shiplog | 2026-08-17 09:02 UTC | ✅ success | 100% | 0 |
 | changelog | 2026-08-17 08:20 UTC | ✅ success | 100% | 0 |
