@@ -1,0 +1,15 @@
+{
+  "name": "aeon",
+  "description": "Aeon's Claude Code plugins - install the operator console for setting up and running an Aeon agent instance.",
+  "owner": {
+    "name": "Aeon Inc",
+    "url": "https://github.com/aeonfun"
+  },
+  "plugins": [
+    {
+      "name": "aeon",
+      "source": "./plugin",
+      "description": "Operator console for running an Aeon agent instance from Claude Code."
+    }
+  ]
+}
