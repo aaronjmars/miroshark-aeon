@@ -142,7 +142,14 @@ skills:
   taskmarket-delegate: { enabled: false, schedule: "workflow_dispatch", var: "" } # on-demand - TaskMarket agent-worker market. var: browse[:q] | create "<t>" "<d>" [reward] | submit <id> <msg>. Writes need TASKMARKET_API_KEY.
   pack-submit: { enabled: false, schedule: "workflow_dispatch", var: "" } # on-demand - publish a local skill as a community pack + registry PR. var: skill-slug [--repo o/r] [--no-register] [--dry-run]
   you-web-search: { enabled: false, schedule: "workflow_dispatch", var: "" } # on-demand - high-quality web search via You.com API (YDC_API_KEY). var: search query
-  deploy-uni-hook: { enabled: false, schedule: "workflow_dispatch", harness: "claude", model: "claude-opus-4-8", var: "" } # generate+audit+simulate+deploy a Uniswap v4 hook. var: [arm:][template:dynamic|noop|skim] [chain:base-sepolia] <brief>. Dry-run by default; arm: broadcasts (needs HOOK_DEPLOYER_PRIVATE_KEY burner). Opus-pinned.
+  deploy-uni-hook:
+    {
+      enabled: false,
+      schedule: "workflow_dispatch",
+      harness: "claude",
+      model: "claude-opus-4-8",
+      var: ""
+    } # generate+audit+simulate+deploy a Uniswap v4 hook. var: [arm:][template:dynamic|noop|skim] [chain:base-sepolia] <brief>. Dry-run by default; arm: broadcasts (needs HOOK_DEPLOYER_PRIVATE_KEY burner). Opus-pinned.
   hunter-22: { enabled: false, schedule: "0 10 * * *", var: "" } # daily bounty scan against ClawHunter free discovery API; discovery only, no wallet. Dedup via memory/topics/hunter-22-seen.json
   seo-audit: { enabled: false, schedule: "0 13 * * *", var: "" } # daily on-page + technical SEO audit. var: comma-separated origins (empty = no-op). PAGESPEED_API_KEY folds in Core Web Vitals
   posthog-errors: { enabled: false, schedule: "0 15 * * 1", var: "" } # weekly cross-project PostHog error digest (needs PostHog MCP connected). var: empty=all/7d | Nd | project substrings
