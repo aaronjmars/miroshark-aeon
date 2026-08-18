@@ -1,0 +1,80 @@
+{
+  "root": "root_card",
+  "state": {},
+  "elements": {
+    "root_card": {
+      "type": "Card",
+      "props": {
+        "title": "Holdings — MiroShark"
+      },
+      "children": [
+        "main_stack"
+      ]
+    },
+    "main_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "holdings_grid",
+        "separator1",
+        "change_stat",
+        "status_badge"
+      ]
+    },
+    "holdings_grid": {
+      "type": "Grid",
+      "props": {
+        "columns": 2,
+        "gap": "md"
+      },
+      "children": [
+        "holdings_stat",
+        "supply_stat"
+      ]
+    },
+    "holdings_stat": {
+      "type": "Stat",
+      "props": {
+        "value": "11.15B",
+        "label": "Holdings"
+      },
+      "children": []
+    },
+    "supply_stat": {
+      "type": "Stat",
+      "props": {
+        "value": "11.15%",
+        "label": "Of supply"
+      },
+      "children": []
+    },
+    "separator1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "change_stat": {
+      "type": "Stat",
+      "props": {
+        "value": "61.86M",
+        "label": "7d Change",
+        "delta": "+0.56%",
+        "trend": "up"
+      },
+      "children": []
+    },
+    "status_badge": {
+      "type": "Badge",
+      "props": {
+        "text": "30d building",
+        "variant": "outline"
+      },
+      "children": []
+    }
+  }
+}
