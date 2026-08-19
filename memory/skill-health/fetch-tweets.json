@@ -1,15 +1,11 @@
 {
   "skill": "fetch-tweets",
-  "last_analyzed": "2026-08-18T17:08:34Z",
+  "last_analyzed": "2026-08-19T17:12:22Z",
   "quality_score": 4,
-  "assessment": "Fetched and delivered 2 themed tweets successfully; clean execution with proper logging and dedup.",
+  "assessment": "Skill executed cleanly: fetched 3 tweets, correctly deduped 2 known ones, evaluated 1 new tweet against quality threshold, made sound decision not to notify on bare one-word reply. Proper logging. Legitimate no-op is correct outcome, not a failure.",
   "flags": [],
-  "avg_score": 3.7,
+  "avg_score": 3.73,
   "history": [
-    {
-      "date": "2026-07-16",
-      "score": 3
-    },
     {
       "date": "2026-07-17",
       "score": 3
@@ -124,6 +120,10 @@
     },
     {
       "date": "2026-08-18",
+      "score": 4
+    },
+    {
+      "date": "2026-08-19",
       "score": 4
     }
   ]
