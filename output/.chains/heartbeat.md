@@ -1,16 +1,22 @@
-Fleet is fully healthy — nothing needs attention, so no notification per dedup rules.
+## Fleet health check — 2026-08-19
 
-## Ambient fleet-health check — 2026-08-18 (4th run today)
+**Overall status: 🟢 OK** — nothing needs attention this run.
 
-- **P0 (failed/stuck skills):** clean. All 9 enabled skills show `last_status: success`, 0 consecutive failures, 100% success rate. No stuck or failed entries. Heartbeat self-check: last success ~45m ago, well under the 36h threshold.
-- **P1 (stalled PRs/urgent issues):** clean. 0 open PRs/issues in `aaronjmars/miroshark-aeon`; `MiroShark/MiroShark` has 0 open PRs and 1 open non-urgent issue (#240, open since 2026-07-06, unchanged).
-- **P2 (flagged memory items):** clean, nothing new in MEMORY.md.
-- **P3 (missing scheduled skills):** clean. All cron-tracked skills within 2x their schedule interval. `aeon-update` still awaiting its first scheduled slot (2026-08-24 Monday).
-- **Note (informational only):** `holdings` produced a second article today (`holdings-2026-08-18.md`) outside its weekly Monday cadence, but its `cron-state.json` entry still shows `last_success: 2026-08-17` — looks like a manual/on-demand dispatch whose outcome didn't get written back to cron-state. Not a health flag since the run succeeded; worth a look if it recurs.
-- **Token pulse:** MIROSHARK $0.000002025, -15.1% 24h, BREAKDOWN verdict — unchanged from the 20:42 UTC run earlier today.
-- **Status page:** `docs/status.md` regenerated, still 🟢 OK, timestamp refreshed to 21:28 UTC.
+**P0 — Skills:** All 9 enabled skills (heartbeat, repo-pulse, token-movers, holdings, fetch-tweets, shiplog, memory-flush, changelog, aeon-update) show clean state. All cron-tracked entries report `last_status: success`, 0 consecutive failures, 100% success rate. `aeon-update` has no completed run yet — expected, its first scheduled slot is 2026-08-24 (Mon 11:00 UTC). No stuck or failed skills.
 
-`HEARTBEAT_OK · STATUS_PAGE=OK` — no notification sent (nothing new since the prior 3 runs today, all already logged).
+**Self-check:** heartbeat's own `last_success` is 2026-08-18T21:29:28Z (~21.5h ago) — well under the 36h staleness threshold.
+
+**P1 — PRs/issues:** 0 open PRs in either `aaronjmars/miroshark-aeon` or `aaronjmars/MiroShark`. 1 open issue in MiroShark/MiroShark (#240, "offline huggingface-models for air-gapped environments", no urgent label, open since 2026-07-06) — unchanged from prior days, not urgent.
+
+**P2 — Memory:** Nothing new flagged in MEMORY.md needing follow-up.
+
+**P3 — Schedule coverage:** All cron-tracked skills well within 2x their interval (daily skills <24h old, weekly skills 2-3 days old).
+
+**Token pulse:** Latest report (2026-08-19, same-day fresh) — MIROSHARK $0.000001911, -5.6% 24h, liquidity $219.8K, volume $13.3K, FDV $191.1K. Verdict: **SLIDING** — second straight red day following yesterday's BREAKDOWN; buy/sell ratio cooling (1.42 vs yesterday's 2.11), whale flow balanced rather than directional.
+
+**Status page:** `docs/status.md` regenerated — Updated timestamp refreshed to 19:02 UTC, token pulse table updated to SLIDING, skill table resorted with today's fetch-tweets/token-movers runs on top. Overall verdict remains 🟢 OK.
+
+No notification sent (nothing needs attention).
 
 ## Summary
-Ran the heartbeat skill's ambient check (default, empty `${var}`). All P0–P3 checks clean, identical to the last run 46 minutes ago; only the `docs/status.md` `Updated` timestamp changed. Modified `docs/status.md` and appended a `### heartbeat` entry to `memory/logs/2026-08-18.md`. No PR, no notification needed — no follow-up actions required beyond the informational holdings state-tracking note above.
+Ran the heartbeat ambient fleet check (empty `${var}`). All P0–P3 checks clean, fleet fully healthy. Updated `docs/status.md` with fresh token pulse (SLIDING) and skill-run data, and appended a `### heartbeat` log entry to `memory/logs/2026-08-19.md`. No follow-up actions needed.
