@@ -1,15 +1,11 @@
 {
   "skill": "token-movers",
-  "last_analyzed": "2026-08-20T06:16:56Z",
+  "last_analyzed": "2026-08-20T14:33:15Z",
   "quality_score": 4,
-  "assessment": "Substantive, well-structured token report with specific metrics, clear verdict (BREAKOUT), and actionable trend analysis; gracefully handled data source limitation",
+  "assessment": "Substantive, well-structured market analysis with sophisticated risk flagging and pattern recognition; delivered complete actionable digest with proper sourcing and clear follow-up status.",
   "flags": [],
   "avg_score": 4,
   "history": [
-    {
-      "date": "2026-07-18",
-      "score": 4
-    },
     {
       "date": "2026-07-19",
       "score": 4
@@ -120,6 +116,10 @@
     },
     {
       "date": "2026-08-19",
+      "score": 4
+    },
+    {
+      "date": "2026-08-20",
       "score": 4
     },
     {
