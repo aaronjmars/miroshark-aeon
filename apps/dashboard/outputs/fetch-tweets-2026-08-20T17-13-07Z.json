@@ -1,0 +1,106 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "Tweet Digest — 2026-08-20"
+      },
+      "children": [
+        "separator-1",
+        "stack-tweet-1",
+        "separator-2",
+        "stack-tweet-2"
+      ]
+    },
+    "separator-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "stack-tweet-1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "badge-theme-1",
+        "tweet-card-1",
+        "link-tweet-1"
+      ]
+    },
+    "badge-theme-1": {
+      "type": "Badge",
+      "props": {
+        "text": "community coverage",
+        "variant": "outline"
+      },
+      "children": []
+    },
+    "tweet-card-1": {
+      "type": "TweetCard",
+      "props": {
+        "author": "Miroshark",
+        "handle": "miroshark_",
+        "text": "reshared and thanked @Amrit_Mirch for a Medium essay framing the thesis — \"a market gives you a number, a simulation gives you the path\""
+      },
+      "children": []
+    },
+    "link-tweet-1": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/miroshark_/status/2089639408836210997"
+      },
+      "children": []
+    },
+    "separator-2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "stack-tweet-2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "badge-theme-2",
+        "tweet-card-2",
+        "link-tweet-2"
+      ]
+    },
+    "badge-theme-2": {
+      "type": "Badge",
+      "props": {
+        "text": "new content drop",
+        "variant": "outline"
+      },
+      "children": []
+    },
+    "tweet-card-2": {
+      "type": "TweetCard",
+      "props": {
+        "author": "Miroshark",
+        "handle": "miroshark_",
+        "text": "posted a new X longform article (content not retrievable — x.com is auth-walled)"
+      },
+      "children": []
+    },
+    "link-tweet-2": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/miroshark_/status/2089754897382048196"
+      },
+      "children": []
+    }
+  }
+}
