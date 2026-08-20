@@ -1,0 +1,124 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "MIROSHARK — BREAKOUT",
+        "description": "$MiroShark Token Movement"
+      },
+      "children": [
+        "intro",
+        "sep1",
+        "metrics",
+        "sep2",
+        "details",
+        "sep3",
+        "chart"
+      ]
+    },
+    "intro": {
+      "type": "Text",
+      "props": {
+        "text": "Price up 29.9% on 4.2x average volume; liquidity grew 21.9% alongside the move — but whale trades (≥$1K) were net-sell, and momentum has already flattened (h1 +0.3%, h6 -2.5%).",
+        "variant": "lead"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "metrics": {
+      "type": "Grid",
+      "props": {
+        "columns": 3,
+        "gap": "lg"
+      },
+      "children": [
+        "price",
+        "liquidity",
+        "volume"
+      ]
+    },
+    "price": {
+      "type": "Stat",
+      "props": {
+        "label": "Price (24h)",
+        "value": "$0.000002483",
+        "delta": "+29.9%",
+        "trend": "up"
+      }
+    },
+    "liquidity": {
+      "type": "Stat",
+      "props": {
+        "label": "Liquidity",
+        "value": "$268.0K",
+        "delta": "+21.9%",
+        "trend": "up"
+      }
+    },
+    "volume": {
+      "type": "Stat",
+      "props": {
+        "label": "Volume (4.2× 7d avg)",
+        "value": "$32.0K"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "details": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "momentum",
+        "trades",
+        "whales"
+      ]
+    },
+    "momentum": {
+      "type": "Text",
+      "props": {
+        "text": "Momentum: h1 +0.3%, h6 -2.5%",
+        "variant": "body"
+      }
+    },
+    "trades": {
+      "type": "Text",
+      "props": {
+        "text": "Buys/Sells: 92/81 (ratio 1.14)",
+        "variant": "body"
+      }
+    },
+    "whales": {
+      "type": "Text",
+      "props": {
+        "text": "Whale Trades (≥$1K): 3 — net-sell",
+        "variant": "body"
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "chart": {
+      "type": "Link",
+      "props": {
+        "label": "View Chart on Gecko Terminal",
+        "href": "https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209"
+      }
+    }
+  }
+}
