@@ -1,0 +1,40 @@
+# Aeon
+
+> Aeon is an autonomous agent framework. It runs your own skills on a schedule in GitHub Actions, keeps state in git-committed memory, and dispatches every run through one harness adapter that works across six coding-agent CLIs (Claude Code, Codex, Grok, Kimi, Pi, Vibe). Skills are Markdown with a spec-form frontmatter; a least-privilege `requires:` -> dashboard vault contract wires secrets. This repo is an Aeon instance.
+
+Repo: https://github.com/aaronjmars/miroshark-aeon
+Framework: https://github.com/aeonfun/aeon
+Site: https://aeon.fun
+
+## Core entry points
+
+- [AGENTS.md](https://raw.githubusercontent.com/aaronjmars/miroshark-aeon/main/AGENTS.md): Start here. The instance operating manual an Aeon agent reads at runtime - how Aeon works, strategy, voice/soul hierarchy, memory, tools, capability mode, skill chaining, notifications, network/secrets, security.
+- [CLAUDE.md](https://raw.githubusercontent.com/aaronjmars/miroshark-aeon/main/CLAUDE.md): The same operating manual, Claude Code loads it automatically.
+- [STRATEGY.md](https://raw.githubusercontent.com/aaronjmars/miroshark-aeon/main/STRATEGY.md): The instance north-star: priorities, audience, hard constraints, what to optimize for and avoid.
+- [aeon.yml](https://raw.githubusercontent.com/aaronjmars/miroshark-aeon/main/aeon.yml): The GitHub Actions workflow that dispatches every scheduled run. What runs, when, and with which secrets.
+
+## Setup and configuration
+
+- [docs/aeon-setup.md](https://raw.githubusercontent.com/aaronjmars/miroshark-aeon/main/docs/aeon-setup.md): The setup skill - get an instance running from scratch.
+- [docs/CONFIGURATION.md](https://raw.githubusercontent.com/aaronjmars/miroshark-aeon/main/docs/CONFIGURATION.md): Configuration and advanced reference.
+- [docs/CORE.md](https://raw.githubusercontent.com/aaronjmars/miroshark-aeon/main/docs/CORE.md): The Core - the run loop and engine internals.
+- [docs/CAPABILITIES.md](https://raw.githubusercontent.com/aaronjmars/miroshark-aeon/main/docs/CAPABILITIES.md): Skill capabilities taxonomy - read-only vs write vs capability mode.
+
+## Skills and packs
+
+- [catalog/skills.json](https://raw.githubusercontent.com/aaronjmars/miroshark-aeon/main/catalog/skills.json): Machine-readable catalog of every bundled skill - slug, description, category, requires, mcp, install command.
+- [docs/skill-packs.md](https://raw.githubusercontent.com/aaronjmars/miroshark-aeon/main/docs/skill-packs.md): Skill packs - opt-in bundles so a fork only runs the handful of skills it wants.
+- [docs/community-skill-packs.md](https://raw.githubusercontent.com/aaronjmars/miroshark-aeon/main/docs/community-skill-packs.md): Publish and install community skill packs.
+
+## Harnesses and integrations
+
+- [docs/harnesses.md](https://raw.githubusercontent.com/aaronjmars/miroshark-aeon/main/docs/harnesses.md): Advanced harness behavior across the six supported coding-agent CLIs.
+- [harness-adapter/README.md](https://raw.githubusercontent.com/aaronjmars/miroshark-aeon/main/harness-adapter/README.md): The single dispatch path that translates one tool grammar to every harness.
+- [docs/mcp-oauth.md](https://raw.githubusercontent.com/aaronjmars/miroshark-aeon/main/docs/mcp-oauth.md): Durable dashboard OAuth for OAuth-gated MCP servers.
+
+## Install as a plugin
+
+Aeon ships the operator console as a plugin for Claude Code and Codex.
+
+- Claude Code: `/plugin marketplace add aaronjmars/miroshark-aeon` then `/plugin install aeon@aeon`
+- Codex: `codex plugin marketplace add aaronjmars/miroshark-aeon` then `codex plugin add aeon@aeon`
