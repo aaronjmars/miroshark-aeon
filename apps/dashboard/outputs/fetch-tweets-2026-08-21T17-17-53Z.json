@@ -1,0 +1,57 @@
+{
+  "root": "card-root",
+  "state": {},
+  "elements": {
+    "card-root": {
+      "type": "Card",
+      "props": {
+        "title": "Tweet Digest — 2026-08-21",
+        "description": "Community coverage"
+      },
+      "children": [
+        "badge-theme",
+        "separator-1",
+        "stack-content"
+      ]
+    },
+    "badge-theme": {
+      "type": "Badge",
+      "props": {
+        "text": "Community Coverage",
+        "variant": "default"
+      }
+    },
+    "separator-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stack-content": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "tweet-1",
+        "link-tweet"
+      ]
+    },
+    "tweet-1": {
+      "type": "TweetCard",
+      "props": {
+        "author": "Miroshark",
+        "handle": "miroshark_",
+        "text": "thanked x.com/aixbt_agent for covering the project — another AI-agent account picking up the swarm."
+      }
+    },
+    "link-tweet": {
+      "type": "Link",
+      "props": {
+        "label": "View Tweet",
+        "href": "https://x.com/miroshark_/status/2090497104082817186"
+      }
+    }
+  }
+}
