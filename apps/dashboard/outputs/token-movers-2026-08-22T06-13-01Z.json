@@ -1,0 +1,91 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "✅ MIROSHARK Token Report"
+      },
+      "children": [
+        "heading-breakout",
+        "text-main",
+        "separator-1",
+        "stats-table",
+        "separator-2",
+        "chart-link"
+      ]
+    },
+    "heading-breakout": {
+      "type": "Heading",
+      "props": {
+        "text": "$MIROSHARK — BREAKOUT",
+        "level": "h2"
+      }
+    },
+    "text-main": {
+      "type": "Text",
+      "props": {
+        "text": "Price +44.0% in 24h on 11.6x average volume, liquidity up 19.2% alongside it — not a thin pump.",
+        "variant": "lead"
+      }
+    },
+    "separator-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stats-table": {
+      "type": "Table",
+      "props": {
+        "columns": [
+          "Metric",
+          "Value",
+          "Change"
+        ],
+        "rows": [
+          [
+            "Price",
+            "$0.000003546",
+            "+44.0% (24h)"
+          ],
+          [
+            "Liquidity",
+            "$335.1K",
+            "+19.2%"
+          ],
+          [
+            "Volume",
+            "$161.4K",
+            "11.6× (7d avg)"
+          ],
+          [
+            "Buy/Sell Orders",
+            "253/160",
+            "Ratio: 1.58"
+          ],
+          [
+            "Whale Wallets",
+            "31",
+            "—"
+          ]
+        ]
+      }
+    },
+    "separator-2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "chart-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "GeckoTerminal Chart",
+        "href": "https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209",
+        "source": "GeckoTerminal"
+      }
+    }
+  }
+}
