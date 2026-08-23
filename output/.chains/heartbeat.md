@@ -1,18 +1,18 @@
-All checks are clean, nothing needs attention. No notification sent per the skill's rules (a clean run stays silent).
+Ambient fleet check complete — everything's healthy, no notification sent (per the skill's "notify only on signal" rule).
 
-## Ambient fleet health check — 2026-08-22 19:10 UTC
+## Heartbeat — Ambient Fleet Check (2026-08-23)
 
-**P0 — Failed & stuck skills:** clean. All 9 enabled skills (heartbeat, repo-pulse, token-movers, holdings, fetch-tweets, shiplog, memory-flush, changelog, aeon-update) show `last_status: success`, 0 consecutive failures, 100% success rate. `aeon-update` has no completed run yet — warming up (next slot Mon 2026-08-24 11:00 UTC), not a flag. Heartbeat's own self-check: last success ~24h ago, under the 36h threshold.
+**Overall status: 🟢 OK**
 
-**P1 — Stalled PRs & urgent issues:** clean. 0 open PRs in `aaronjmars/miroshark-aeon` or `aaronjmars/MiroShark`; 0 issues labeled urgent.
+- **P0 (failed/stuck skills):** Clean. All 9 enabled skills (heartbeat, repo-pulse, token-movers, holdings, fetch-tweets, shiplog, memory-flush, changelog, aeon-update) at `last_status: success`, 0 consecutive failures, 100% success rate. `aeon-update` has no completed run yet (never dispatched; first slot Mon 2026-08-24 11:00 UTC) — normal warming-up, not a flag. Heartbeat's own last success was ~24h ago, under the 36h staleness threshold.
+- **P1 (stalled PRs/urgent issues):** Clean. 0 open PRs and 0 urgent-labeled issues across `aaronjmars/miroshark-aeon` and `MiroShark/MiroShark`.
+- **P2 (flagged memory items):** Clean. Nothing outstanding in MEMORY.md.
+- **P3 (missing scheduled skills):** Clean. All cron-tracked skills within their expected schedule interval.
+- **Token pulse:** MIROSHARK at $0.000003446, **-2.8% 24h** (ACCUMULATING verdict) — a cooldown after Aug 22's 44% breakout, still +61.1% 7d / +103.5% 30d. Buy/sell ratio 1.57, liquidity down 3.8% to $322.2K (still above pre-breakout baseline), but whale dollar flow skewed 77% to sells despite the buy-leaning transaction count.
 
-**P2 — Flagged memory items:** clean. Nothing new flagged in MEMORY.md.
-
-**P3 — Missing scheduled skills:** clean. All cron-tracked skills well within 2x their schedule interval.
-
-**Token pulse:** MIROSHARK is in **BREAKOUT** — $0.000003546, +44.0% 24h on 11.6x average volume, liquidity +19.2% to $335.1K alongside the move (not thinning), buy/sell ratio 1.58. Second, larger leg on top of the Aug 20 breakout; no single identifiable catalyst in available sources per today's token-report.
-
-**Status page:** `docs/status.md` regenerated — 🟢 OK, updated 19:10 UTC, token pulse table refreshed, skill table resorted, next scheduled run = token-movers 06:00 UTC 2026-08-23.
+**Files changed:**
+- `docs/status.md` — regenerated (verdict ACCUMULATING, updated timestamp 19:09 UTC, skill table resorted, next run = token-movers 06:00 UTC 2026-08-24)
+- `memory/logs/2026-08-23.md` — appended `### heartbeat` findings entry
 
 ## Summary
-Ran the heartbeat ambient check (empty `${var}`, the live scheduled path). All P0–P3 checks came back clean — no fleet-health issues to report. Updated `docs/status.md` (overall 🟢 OK, token pulse refreshed to BREAKOUT +44.0%) and appended the `### heartbeat` entry to `memory/logs/2026-08-22.md`. No notification sent, per the "notify only on signal" rule. No follow-up actions needed.
+Ran the ambient heartbeat check: fleet is fully healthy (no failed/stuck skills, no stalled PRs/urgent issues, no flagged memory items), so no notification was sent per the "signal only" rule. Updated the public status page and logged findings. Next scheduled run is token-movers at 06:00 UTC tomorrow (2026-08-24).
