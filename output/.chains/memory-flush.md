@@ -1,23 +1,19 @@
-OKF validation passes. Memory flush complete.
+Committed. Memory flush for the 2026-08-16 → 2026-08-23 window is complete.
 
 ## Summary
 
-Executed the `memory-flush` skill (no topic filter — flushed all recent activity):
+Ran `memory-flush` over the 8 in-window logs (2026-08-16 → 2026-08-23) and updated `memory/MEMORY.md`:
 
-**Read:** `memory/MEMORY.md`, last 3 days of logs (2026-08-14/15/16), plus a targeted check of `holdings` logs back to 08-04 to catch an unpromoted data point.
+- **Repo rename**: `aaronjmars/MiroShark` → `MiroShark/MiroShark` (own org, 08-17) reflected in About This Repo and Watched Repos.
+- **Stars**: 1,430 → 1,431 as of 08-18; next threshold 1,500 (~69 away, no surge).
+- **$MIROSHARK**: rewrote the Active Target — price roughly doubled off the 08-19 SLIDING low into a 08-22 BREAKOUT (+44%, 11.6x volume), now ACCUMULATING as of 08-23 (+61.1% 7d, +103.5% 30d, no confirmed catalyst).
+- **Holdings**: 11.09% → 11.15% of supply as of 08-18.
+- **Skills Built**: added `aeon-update` (PR #135, weekly canon sync, first run 08-24).
+- **Recent Digests**: added the 08-18 tweet-digest (forecasting-calibration research + unprompted Medium press pickup) — the only notable fetch-tweets content in the window.
+- **Lessons Learned**: added the shell `>` redirection sandbox-block finding from shiplog (08-18).
+- Checked for stale Open Improvement PRs (none in either repo) and stale Next Priorities (none found) — no pruning needed beyond that check.
+- Log rotation (deterministic, via `scripts/memory_prep.py`) archived July's daily logs into `memory/logs/archive/2026-07.md`.
+- Logged the run to `memory/logs/2026-08-23.md` and stamped the watermark (`memory/memory-flush-state.json` + MEMORY.md mirror) to 2026-08-23.
+- Committed directly to `main` as `0fffc11` (memory consolidation, not a code change).
 
-**Promoted:**
-- $MIROSHARK Active Target refreshed to 2026-08-16 data ($0.000002138, +5.6%/−15.4%/+28.7% 24h/7d/30d, ~−95% from ATH, verdict QUIET) — noting the 08-14 −17.1% breakdown and subsequent cooldown.
-- Holdings figure updated 10.72% → 11.09% of supply (08-04 → 08-10 data that had never been promoted).
-
-**Pruned:**
-- The resolved "fleet-wide stuck-dispatch bug (07-31→08-08)" Lessons Learned entry — confirmed recovered a week ago with no recurrence.
-- Its dangling cross-references in Active Targets and Next Priorities.
-
-**No changes needed:** no open improvement PRs in either repo (nothing to remove from that section, which didn't exist anyway); no new Recent Articles/Digests rows (no editorial content, no notable tweets 08-11→08-16); Skills Built table unchanged (no PRs merged this window).
-
-**Files modified:**
-- `memory/MEMORY.md` — targeted edits (75 lines, down from 77)
-- `memory/logs/2026-08-16.md` — logged the flush under `### memory-flush`
-
-OKF validation passes (`node scripts/okf-validate.mjs` → OK).
+No follow-up actions needed; next flush will pick up from the 2026-08-23 watermark.
