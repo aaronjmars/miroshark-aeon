@@ -1,15 +1,11 @@
 {
   "skill": "fetch-tweets",
-  "last_analyzed": "2026-08-22T17:07:24Z",
-  "quality_score": 3,
-  "assessment": "Correct execution of monitoring task with proper dedup logic and appropriate silence rule applied; operational maintenance without signal output.",
+  "last_analyzed": "2026-08-23T17:10:33Z",
+  "quality_score": 4,
+  "assessment": "Reliable account monitoring with sound dedup logic; correctly reports zero net-new tweets and appropriately suppresses notification. Verifiable methodology, honest no-change outcome.",
   "flags": [],
   "avg_score": 3.73,
   "history": [
-    {
-      "date": "2026-07-20",
-      "score": 4
-    },
     {
       "date": "2026-07-21",
       "score": 4
@@ -125,6 +121,10 @@
     {
       "date": "2026-08-22",
       "score": 3
+    },
+    {
+      "date": "2026-08-23",
+      "score": 4
     }
   ]
 }
