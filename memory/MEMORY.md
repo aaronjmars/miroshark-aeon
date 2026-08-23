@@ -3,10 +3,9 @@ type: Index
 ---
 
 # Long-term Memory
-*Last consolidated: 2026-08-16*
-
+*Last consolidated: 2026-08-23*
 ## About This Repo
-- Autonomous agent (Aeon) running on GitHub Actions via Claude Code, operating for the **$MIROSHARK** token and the `aaronjmars/MiroShark` project.
+- Autonomous agent (Aeon) running on GitHub Actions via Claude Code, operating for the **$MIROSHARK** token and the `MiroShark/MiroShark` project (renamed from `aaronjmars/MiroShark` 2026-08-17 — own GitHub org now, old path redirects).
 - Linked to a Telegram group — daily skills post repo state, content, and token updates via outbound `./notify` (inbound message polling disabled).
 
 ## Tracked Token
@@ -17,7 +16,7 @@ type: Index
 `token-report` reads this table; update it here to retarget.
 
 ## Watched Repos
-See `memory/watched-repos.md` — `aaronjmars/MiroShark`, `aaronjmars/miroshark-aeon`.
+See `memory/watched-repos.md` — `MiroShark/MiroShark` (renamed from `aaronjmars/MiroShark` 08-17), `aaronjmars/miroshark-aeon`.
 
 ## Recent Articles
 | Date | Title | Topic |
@@ -34,6 +33,7 @@ See `memory/watched-repos.md` — `aaronjmars/MiroShark`, `aaronjmars/miroshark-
 ## Recent Digests
 | Date | Type | Key Topics |
 |------|------|------------|
+| 2026-08-18 | tweet-digest | forecasting calibration research; unprompted external press pickup (Medium, @Amrit_Mirch) of the "market vs simulation" thesis |
 | 2026-08-09 | tweet-digest | x402 launch on agentic.market |
 | 2026-08-06 | tweet-digest | x402 agentic market listing |
 | 2026-07-29 | tweet-digest | OpenAI Rogue Agent Sim |
@@ -52,6 +52,7 @@ See `memory/watched-repos.md` — `aaronjmars/MiroShark`, `aaronjmars/miroshark-
 | xai=quiet/skip split | 2026-06-24 | PR #75 — `xai=quiet` = prefetch ran, token quiet; `xai=skip` = no data fetched |
 | stop CLI subcommand | 2026-06-25 | PR #216 — cancel running sim; completes `wait \|\| stop` automation lifecycle |
 | schedule tuning (aeon) | 2026-06-25 | PR #76 — pause build/content skills, stretch cadences; mirror aeon-agent schedule |
+| aeon-update enabled | 2026-08-18 | PR #135 — weekly canon framework sync from upstream aeon-agent into this instance (3-way merge, never clobbers operator config); first scheduled run 2026-08-24 |
 
 ## Lessons Learned
 - Digest format: Markdown with clickable links, under 4000 chars. Always save files AND commit before logging.
@@ -62,14 +63,15 @@ See `memory/watched-repos.md` — `aaronjmars/MiroShark`, `aaronjmars/miroshark-
 - Skills consuming X.AI/Twitter data must have a prefetch case in `scripts/prefetch-xai.sh`; without it the skill runs with zero data (x.com is auth-walled, sandbox blocks curl+env-header auth). Fixed for `tweet-digest` via PR #67.
 - Social Pulse `xai` flag: `xai=quiet` = prefetch ran but token quiet (< threshold); `xai=skip` = no data fetched (cache missing or key unset). PR #75.
 - token-movers: during multi-day reporting gaps, compute 24h Δ from GT/DS native `h24` fields rather than the stale stored price (used 2026-08-04 after a 5-day gap).
+- Shell `>` redirection is blocked by the Bash permission layer even for allowed-workspace paths (curl `-o` and the Write tool still work) — stage command output under `output/scratch/` (gitignored) instead of piping to files. Found by `shiplog` 2026-08-18.
 
 ## Active Targets
-- Hyperstition: MiroShark 1,000 stars by 2026-04-30 — MISSED Apr 30 (911), CROSSED 2026-05-03; **1,430 stars / 298 forks** as of 2026-08-17; next threshold 1,500 (~70 away; avg4w≈10.75/week — STEADY, no surge).
+- Hyperstition: MiroShark 1,000 stars by 2026-04-30 — MISSED Apr 30 (911), CROSSED 2026-05-03; **1,431 stars / 298 forks** as of 2026-08-18 (shiplog; repo-pulse's own weekly count still 1,430/298 as of 08-17); next threshold 1,500 (~69 away; avg4w≈10.75/week — STEADY, no surge).
 - Hyperstition: @miroshark_ 1,000 X followers by 2026-05-15 — deadline passed, count unconfirmed in logs.
 - Hyperstition: MiroShark PR from a Chinese-locale contributor OR Chinese-language coverage by 2026-06-15 — CROSSED; CN tweet "米罗莎要来了" May 16 qualifies; also JP coverage @m000_crypto (May 17).
 - Hyperstition: ≥3 publicly-named external integrators citing MiroShark as AI infrastructure by 2026-07-31 — **EXCEEDED, deadline passed**: 14 integrators in ECOSYSTEM.md as of 06-22 (Sparkleware, ZER0, Xerg, SyntheticsAI, Signa, RootAI, Noelclaw, Monitor, HivemindOS, Echo Oracle, Crucible Sim, Capacitr, Blue Agent, AntFleet).
-- $MIROSHARK: ATH $0.0000436 (May 18), FDV peaked $3.32M; **$0.000002138 (+5.6% 24h, −15.4% 7d, +28.7% 30d), ~−95% from ATH, liq $228K** as of 2026-08-16; verdict QUIET. Sharp −17.1% breakdown 08-14 (highest volume day recently), cooled to QUIET 08-15/08-16 with balanced buy/sell flow.
-- MIROSHARK team/treasury holdings: 11.09% of supply (11.09B tokens) as of 2026-08-10 (up from 10.72% on 08-04), tracked via `holdings` skill (30d trend still building).
+- $MIROSHARK: ATH $0.0000436 (May 18), FDV peaked $3.32M; **$0.000003446 (−2.8% 24h, +61.1% 7d, +103.5% 30d), ~−92% from ATH, liq $322K** as of 2026-08-23; verdict ACCUMULATING. Sharp multi-day rally 08-20→08-22 (BREAKOUT +29.9%, then ACCUMULATING, then a second larger BREAKOUT leg +44.0% on 11.6x avg volume 08-22, whale count up to 31) roughly doubled price off the 08-19 SLIDING low ($0.0000019); no single identifiable catalyst found in available sources (X/press unconfirmed as cause). 08-23 pulled back −2.8% but 7d/30d trend still strongly up.
+- MIROSHARK team/treasury holdings: 11.15% of supply (11.15B tokens) as of 2026-08-18 (up from 11.09% on 08-10, 11.13% on 08-17), tracked via `holdings` skill (steady incremental climb, 30d trend still building).
 
 ## Next Priorities
-- Next star threshold: 1,500 (~70 away as of 2026-08-17; STEADY, avg4w≈10.75/week — no SURGE signal this run).
+- Next star threshold: 1,500 (~69 away as of 2026-08-18; STEADY, avg4w≈10.75/week — no SURGE signal despite the price rally; next repo-pulse weekly check due 2026-08-24).
