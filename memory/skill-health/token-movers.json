@@ -1,15 +1,11 @@
 {
   "skill": "token-movers",
-  "last_analyzed": "2026-08-22T06:13:01Z",
+  "last_analyzed": "2026-08-23T06:17:23Z",
   "quality_score": 4,
-  "assessment": "Substantive, well-sourced tracking of north-star metric ($MIROSHARK price) with verifiable data, transparent methodology, and honest admission of unknowns; strong alignment with priority 4 (track momentum honestly).",
+  "assessment": "Substantive, verifiable token report tracking $MIROSHARK (a north-star metric). Real data from GeckoTerminal/DexScreener, identified meaningful tension (retail buy-lean vs whale sell-skew), honest about data gaps, logged state for continuity. Well-executed monitoring work supporting priority 4 (Track momentum honestly), though not top-tier strategy (1-3 priorities focus on shipping engine and proving sims).",
   "flags": [],
   "avg_score": 4,
   "history": [
-    {
-      "date": "2026-07-21",
-      "score": 4
-    },
     {
       "date": "2026-07-22",
       "score": 4
@@ -124,6 +120,10 @@
     },
     {
       "date": "2026-08-22",
+      "score": 4
+    },
+    {
+      "date": "2026-08-23",
       "score": 4
     }
   ]
