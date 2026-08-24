@@ -1,0 +1,58 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Holdings"
+      },
+      "children": [
+        "stack_content"
+      ]
+    },
+    "stack_content": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "text_subtitle",
+        "stat_total",
+        "stat_7d",
+        "badge_status"
+      ]
+    },
+    "text_subtitle": {
+      "type": "Text",
+      "props": {
+        "text": "Holdings — MiroShark",
+        "variant": "muted"
+      }
+    },
+    "stat_total": {
+      "type": "Stat",
+      "props": {
+        "label": "11.28% of supply",
+        "value": "11.28B"
+      }
+    },
+    "stat_7d": {
+      "type": "Stat",
+      "props": {
+        "label": "7 day change",
+        "value": "+146.04M",
+        "delta": "+1.31%",
+        "trend": "up"
+      }
+    },
+    "badge_status": {
+      "type": "Badge",
+      "props": {
+        "text": "30d building",
+        "variant": "secondary"
+      }
+    }
+  }
+}
