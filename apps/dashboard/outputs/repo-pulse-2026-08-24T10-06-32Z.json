@@ -1,0 +1,417 @@
+{
+  "root": "card-repo-pulse",
+  "state": {},
+  "elements": {
+    "card-repo-pulse": {
+      "type": "Card",
+      "props": {
+        "title": "Repo Pulse",
+        "description": "Repo Pulse — 2026-08-24 — [ACTIVE]"
+      },
+      "children": [
+        "stack-main"
+      ]
+    },
+    "stack-main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "repo-stats-line",
+        "sep1",
+        "heading-notable",
+        "stack-notable-stargazers",
+        "sep2",
+        "heading-other",
+        "stack-other-stargazers",
+        "sep3",
+        "text-source"
+      ]
+    },
+    "repo-stats-line": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "lg"
+      },
+      "children": [
+        "link-repo",
+        "stack-stats"
+      ]
+    },
+    "link-repo": {
+      "type": "StoryLink",
+      "props": {
+        "title": "MiroShark/MiroShark",
+        "href": "https://github.com/aaronjmars/MiroShark",
+        "source": "GitHub"
+      }
+    },
+    "stack-stats": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "stat-stars",
+        "stat-forks",
+        "stat-releases"
+      ]
+    },
+    "stat-stars": {
+      "type": "Stat",
+      "props": {
+        "label": "stars",
+        "value": "1437",
+        "delta": "+7",
+        "trend": "up"
+      }
+    },
+    "stat-forks": {
+      "type": "Stat",
+      "props": {
+        "label": "forks",
+        "value": "298",
+        "delta": "+0",
+        "trend": "neutral"
+      }
+    },
+    "stat-releases": {
+      "type": "Stat",
+      "props": {
+        "label": "releases",
+        "value": "0",
+        "delta": "+0",
+        "trend": "neutral"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading-notable": {
+      "type": "Heading",
+      "props": {
+        "text": "Notable new stargazers",
+        "level": "h3"
+      }
+    },
+    "stack-notable-stargazers": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stargazer-alkaidynamics",
+        "stargazer-mladen5000",
+        "stargazer-emmanikea",
+        "stargazer-sisodias"
+      ]
+    },
+    "stargazer-alkaidynamics": {
+      "type": "Card",
+      "props": {},
+      "children": [
+        "card-alkaidynamics-content"
+      ]
+    },
+    "card-alkaidynamics-content": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "alkaidynamics-header",
+        "alkaidynamics-meta",
+        "alkaidynamics-bio"
+      ]
+    },
+    "alkaidynamics-header": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "link-alkaidynamics",
+        "badge-alkaidynamics-name"
+      ]
+    },
+    "link-alkaidynamics": {
+      "type": "Link",
+      "props": {
+        "label": "AlkaiDynamics",
+        "href": "https://github.com/AlkaiDynamics"
+      }
+    },
+    "badge-alkaidynamics-name": {
+      "type": "Badge",
+      "props": {
+        "text": "Morgan Sherer",
+        "variant": "secondary"
+      }
+    },
+    "alkaidynamics-meta": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "badge-alkaidynamics-location",
+        "badge-alkaidynamics-company",
+        "badge-alkaidynamics-repos",
+        "badge-alkaidynamics-followers"
+      ]
+    },
+    "badge-alkaidynamics-location": {
+      "type": "Badge",
+      "props": {
+        "text": "📍 The Desert",
+        "variant": "outline"
+      }
+    },
+    "badge-alkaidynamics-company": {
+      "type": "Badge",
+      "props": {
+        "text": "🏢 Alkai Morphos Dynamics (MorphIQ)",
+        "variant": "outline"
+      }
+    },
+    "badge-alkaidynamics-repos": {
+      "type": "Badge",
+      "props": {
+        "text": "29 repos",
+        "variant": "outline"
+      }
+    },
+    "badge-alkaidynamics-followers": {
+      "type": "Badge",
+      "props": {
+        "text": "153 followers",
+        "variant": "outline"
+      }
+    },
+    "alkaidynamics-bio": {
+      "type": "Text",
+      "props": {
+        "text": "Just trying to make my life and the world a better place while both battling and utilizing extreme neurodivergence.",
+        "variant": "caption"
+      }
+    },
+    "stargazer-mladen5000": {
+      "type": "Card",
+      "props": {},
+      "children": [
+        "card-mladen5000-content"
+      ]
+    },
+    "card-mladen5000-content": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "mladen5000-header",
+        "mladen5000-meta",
+        "mladen5000-bio"
+      ]
+    },
+    "mladen5000-header": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "link-mladen5000",
+        "badge-mladen5000-name"
+      ]
+    },
+    "link-mladen5000": {
+      "type": "Link",
+      "props": {
+        "label": "mladen5000",
+        "href": "https://github.com/mladen5000"
+      }
+    },
+    "badge-mladen5000-name": {
+      "type": "Badge",
+      "props": {
+        "text": "Mladen Rasic",
+        "variant": "secondary"
+      }
+    },
+    "mladen5000-meta": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "badge-mladen5000-repos",
+        "badge-mladen5000-followers"
+      ]
+    },
+    "badge-mladen5000-repos": {
+      "type": "Badge",
+      "props": {
+        "text": "42 repos",
+        "variant": "outline"
+      }
+    },
+    "badge-mladen5000-followers": {
+      "type": "Badge",
+      "props": {
+        "text": "25 followers",
+        "variant": "outline"
+      }
+    },
+    "mladen5000-bio": {
+      "type": "Text",
+      "props": {
+        "text": "Jack of all traders developer of none",
+        "variant": "caption"
+      }
+    },
+    "stargazer-emmanikea": {
+      "type": "Card",
+      "props": {},
+      "children": [
+        "card-emmanikea-content"
+      ]
+    },
+    "card-emmanikea-content": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "link-emmanikea",
+        "badge-emmanikea-repos"
+      ]
+    },
+    "link-emmanikea": {
+      "type": "Link",
+      "props": {
+        "label": "emmanikea",
+        "href": "https://github.com/emmanikea"
+      }
+    },
+    "badge-emmanikea-repos": {
+      "type": "Badge",
+      "props": {
+        "text": "41 repos",
+        "variant": "outline"
+      }
+    },
+    "stargazer-sisodias": {
+      "type": "Card",
+      "props": {},
+      "children": [
+        "card-sisodias-content"
+      ]
+    },
+    "card-sisodias-content": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "link-sisodias",
+        "badge-sisodias-repos"
+      ]
+    },
+    "link-sisodias": {
+      "type": "Link",
+      "props": {
+        "label": "sisodias",
+        "href": "https://github.com/sisodias"
+      }
+    },
+    "badge-sisodias-repos": {
+      "type": "Badge",
+      "props": {
+        "text": "25 repos",
+        "variant": "outline"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading-other": {
+      "type": "Heading",
+      "props": {
+        "text": "Other new stargazers",
+        "level": "h3"
+      }
+    },
+    "stack-other-stargazers": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "link-tyabra",
+        "link-mc-azdaja",
+        "link-tngstn",
+        "link-bad3uddin"
+      ]
+    },
+    "link-tyabra": {
+      "type": "Link",
+      "props": {
+        "label": "TyAbra",
+        "href": "https://github.com/TyAbra"
+      }
+    },
+    "link-mc-azdaja": {
+      "type": "Link",
+      "props": {
+        "label": "mc-azdaja",
+        "href": "https://github.com/mc-azdaja"
+      }
+    },
+    "link-tngstn": {
+      "type": "Link",
+      "props": {
+        "label": "tngstn",
+        "href": "https://github.com/tngstn"
+      }
+    },
+    "link-bad3uddin": {
+      "type": "Link",
+      "props": {
+        "label": "bad3uddin",
+        "href": "https://github.com/bad3uddin"
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "text-source": {
+      "type": "Text",
+      "props": {
+        "text": "Source: events",
+        "variant": "muted"
+      }
+    }
+  }
+}
