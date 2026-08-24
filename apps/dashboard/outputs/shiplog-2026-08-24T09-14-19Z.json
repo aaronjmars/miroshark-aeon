@@ -1,0 +1,225 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Miroshark Shiplog Aug 18–24",
+        "description": "Weekly development update"
+      },
+      "children": [
+        "heading_period",
+        "core_message",
+        "sep1",
+        "stack_updates",
+        "sep2",
+        "stack_traction",
+        "sep3",
+        "link_full"
+      ]
+    },
+    "heading_period": {
+      "type": "Heading",
+      "props": {
+        "text": "Aug 18 → Aug 24",
+        "level": "h2"
+      },
+      "children": []
+    },
+    "core_message": {
+      "type": "Text",
+      "props": {
+        "text": "Core engine shipped nothing this window — second window in a row. Naming it straight, not softening it. The bytes came from one layer out.",
+        "variant": "lead"
+      },
+      "children": []
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "stack_updates": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "update_payment",
+        "update_website",
+        "update_ecosystem",
+        "update_security"
+      ]
+    },
+    "update_payment": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "heading_payment",
+        "text_payment_details"
+      ]
+    },
+    "heading_payment": {
+      "type": "Heading",
+      "props": {
+        "text": "x402 Payment Layer",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "text_payment_details": {
+      "type": "Text",
+      "props": {
+        "text": "Load-bearing compat fixes: legacy X-PAYMENT header support, v2-challenge mirror for old clients, Solana version cap so SVM actually loads"
+      },
+      "children": []
+    },
+    "update_website": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "heading_website",
+        "text_website_details"
+      ]
+    },
+    "heading_website": {
+      "type": "Heading",
+      "props": {
+        "text": "Website Agent-Discovery Pass",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "text_website_details": {
+      "type": "Text",
+      "props": {
+        "text": "Continued: markdown 404s, live rate-limit headers, MCP server, API versioning"
+      },
+      "children": []
+    },
+    "update_ecosystem": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "heading_ecosystem",
+        "text_ecosystem_details"
+      ]
+    },
+    "heading_ecosystem": {
+      "type": "Heading",
+      "props": {
+        "text": "Base Ecosystem Recognition",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "text_ecosystem_details": {
+      "type": "Text",
+      "props": {
+        "text": "Featured in Base ecosystem \"Early\" tier ranking by @Base_Insights (21.9K followers) — unprompted"
+      },
+      "children": []
+    },
+    "update_security": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "heading_security",
+        "text_security_details"
+      ]
+    },
+    "heading_security": {
+      "type": "Heading",
+      "props": {
+        "text": "Security",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "text_security_details": {
+      "type": "Text",
+      "props": {
+        "text": "Action-pinning + secret-env hardening landed in-house, no external flex to claim"
+      },
+      "children": []
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "stack_traction": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading_traction",
+        "stat_stars",
+        "alert_prs"
+      ]
+    },
+    "heading_traction": {
+      "type": "Heading",
+      "props": {
+        "text": "Traction",
+        "level": "h2"
+      },
+      "children": []
+    },
+    "stat_stars": {
+      "type": "Stat",
+      "props": {
+        "label": "MiroShark GitHub Stars",
+        "value": "1,437",
+        "delta": "+6",
+        "trend": "up"
+      },
+      "children": []
+    },
+    "alert_prs": {
+      "type": "Alert",
+      "props": {
+        "title": "Critical Gap",
+        "message": "Zero PRs on MiroShark/MiroShark itself for two straight windows — flagging it, not hiding it",
+        "type": "warning"
+      },
+      "children": []
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "link_full": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full Shiplog Article",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/output/articles/shiplog-2026-08-24.md",
+        "source": "GitHub"
+      },
+      "children": []
+    }
+  }
+}

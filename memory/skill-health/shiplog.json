@@ -1,10 +1,10 @@
 {
   "skill": "shiplog",
-  "last_analyzed": "2026-08-18T22:19:40Z",
+  "last_analyzed": "2026-08-24T09:14:18Z",
   "quality_score": 4,
-  "assessment": "Substantive shiplog digest with specific metrics (23 PRs, 41 commits, 1,431 stars), honest tracking of distribution progress vs. engine feature gaps, clear state advancement, and proper technical documentation of discovered workarounds.",
+  "assessment": "Substantive, honest tracking of momentum across repos; surfaces critical core stagnation (two consecutive windows of zero shipped PRs), verifiable metrics, and actionable follow-up.",
   "flags": [],
-  "avg_score": 4.14,
+  "avg_score": 4.13,
   "history": [
     {
       "date": "2026-06-15",
@@ -60,6 +60,10 @@
     },
     {
       "date": "2026-08-18",
+      "score": 4
+    },
+    {
+      "date": "2026-08-24",
       "score": 4
     }
   ]
