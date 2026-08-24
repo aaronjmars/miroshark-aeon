@@ -1,18 +1,31 @@
-Ambient fleet check complete — everything's healthy, no notification sent (per the skill's "notify only on signal" rule).
+## Heartbeat — Ambient Fleet Check (2026-08-24 14:39 UTC)
 
-## Heartbeat — Ambient Fleet Check (2026-08-23)
+**Overall status: 🟢 OK** — nothing needs attention.
 
-**Overall status: 🟢 OK**
+### P0 — Skill health
+All 9 enabled skills (heartbeat, repo-pulse, token-movers, holdings, fetch-tweets, shiplog, memory-flush, changelog, aeon-update) report `last_status: success`, 0 consecutive failures, 100% success rate. No stuck or failed dispatches. Heartbeat's own self-check is clean (last success ~19.5h ago, well under the 36h staleness threshold).
 
-- **P0 (failed/stuck skills):** Clean. All 9 enabled skills (heartbeat, repo-pulse, token-movers, holdings, fetch-tweets, shiplog, memory-flush, changelog, aeon-update) at `last_status: success`, 0 consecutive failures, 100% success rate. `aeon-update` has no completed run yet (never dispatched; first slot Mon 2026-08-24 11:00 UTC) — normal warming-up, not a flag. Heartbeat's own last success was ~24h ago, under the 36h staleness threshold.
-- **P1 (stalled PRs/urgent issues):** Clean. 0 open PRs and 0 urgent-labeled issues across `aaronjmars/miroshark-aeon` and `MiroShark/MiroShark`.
-- **P2 (flagged memory items):** Clean. Nothing outstanding in MEMORY.md.
-- **P3 (missing scheduled skills):** Clean. All cron-tracked skills within their expected schedule interval.
-- **Token pulse:** MIROSHARK at $0.000003446, **-2.8% 24h** (ACCUMULATING verdict) — a cooldown after Aug 22's 44% breakout, still +61.1% 7d / +103.5% 30d. Buy/sell ratio 1.57, liquidity down 3.8% to $322.2K (still above pre-breakout baseline), but whale dollar flow skewed 77% to sells despite the buy-leaning transaction count.
+### P1 — PRs & issues
+- `aaronjmars/miroshark-aeon`: 0 open PRs.
+- `MiroShark/MiroShark`: 2 open PRs (#290, #291 — Dependabot version bumps), both opened ~4h ago — nowhere near the 24h stall bar.
+- No urgent-labeled issues in either repo.
 
-**Files changed:**
-- `docs/status.md` — regenerated (verdict ACCUMULATING, updated timestamp 19:09 UTC, skill table resorted, next run = token-movers 06:00 UTC 2026-08-24)
-- `memory/logs/2026-08-23.md` — appended `### heartbeat` findings entry
+### P2 — Memory
+Nothing flagged for follow-up in MEMORY.md.
+
+### P3 — Schedule coverage
+Every enabled skill has a completed run within 2x its schedule interval; `aeon-update` now has its first completed run (11:12 UTC today).
+
+### Side note (investigated, not a fleet-health finding)
+The working tree carries uncommitted diffs (deleted `AGENTS.md`, modified `secretcurl`, untracked `notify`/`notify-jsonrender`) against committed `HEAD`. Traced this: those root-level files are generated copies of `scripts/secretcurl.sh` / `scripts/notify.sh`, which today's `aeon-update` sync (PR #146, merge `f6a8f13`) updated — but the checked-in root `secretcurl` predates that sync. Verified via `gh api` that PR #146's merge commit **is** an ancestor of current `main` (no force-push, no lost merge) — this is stale generated-artifact drift, not data loss. Out of heartbeat's defined scope, so no notification, just noted for visibility.
+
+### Token pulse
+MIROSHARK $0.000004028 (**+16.9% 24h**) — verdict **CONSOLIDATING** (move driven more by price than volume: only 1.4x the 7d average, short of the 2x breakout bar). Liquidity $364.4K, the highest in 20 days.
+
+### Status page
+`docs/status.md` regenerated: 🟢 OK, updated 14:39 UTC, token pulse refreshed, skill table resorted (today's aeon-update/repo-pulse/shiplog/changelog/holdings/token-movers on top), heartbeat's own row marked ⏳ dispatched for this in-flight run, next scheduled run = fetch-tweets @ 17:00 UTC today.
+
+No notification sent — nothing rose to signal.
 
 ## Summary
-Ran the ambient heartbeat check: fleet is fully healthy (no failed/stuck skills, no stalled PRs/urgent issues, no flagged memory items), so no notification was sent per the "signal only" rule. Updated the public status page and logged findings. Next scheduled run is token-movers at 06:00 UTC tomorrow (2026-08-24).
+Ran the ambient heartbeat check: fleet is fully healthy (0 failures/stuck skills across 9 enabled skills), no stalled PRs/urgent issues, no flagged memory items, no schedule gaps. Investigated an uncommitted-diff anomaly in the working tree and confirmed it's benign generated-artifact drift, not a lost merge. Updated `docs/status.md` and appended the `### heartbeat` entry to `memory/logs/2026-08-24.md`. No notification sent (nothing needs attention). No follow-up actions required.
