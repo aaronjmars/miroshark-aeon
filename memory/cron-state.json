@@ -228,5 +228,9 @@
     "success_rate": 1,
     "last_quality_score": 4,
     "last_dispatch": "2026-08-24T08:15:05Z"
+  },
+  "aeon-update": {
+    "last_dispatch": "2026-08-24T11:00:09Z",
+    "last_status": "dispatched"
   }
 }
