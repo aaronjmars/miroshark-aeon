@@ -1,0 +1,253 @@
+{
+  "root": "main_card",
+  "state": {},
+  "elements": {
+    "main_card": {
+      "type": "Card",
+      "props": {
+        "title": "✅ aeon-update: 43 commits synced → PR #146"
+      },
+      "children": [
+        "header_meta",
+        "sync_description",
+        "separator_1",
+        "files_section",
+        "separator_2",
+        "landing_section",
+        "separator_3",
+        "conflicts_section",
+        "separator_4",
+        "baseline_note",
+        "pr_link"
+      ]
+    },
+    "header_meta": {
+      "type": "Text",
+      "props": {
+        "text": "aeon-update — 2026-08-24 ⭐",
+        "variant": "lead"
+      }
+    },
+    "sync_description": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "sync_para1",
+        "sync_para2"
+      ]
+    },
+    "sync_para1": {
+      "type": "Text",
+      "props": {
+        "text": "Synced 43 upstream commits from `aeonfun/aeon` (b1d9079..b7a909a) → PR #146. First real run of the downstream updater."
+      }
+    },
+    "sync_para2": {
+      "type": "Text",
+      "props": {
+        "text": "85 files applied clean — 25 added, 45 updated, 11 auto-merged 3-way, 4 deleted. Catalogs + AGENTS.md regenerated, validate-config green. Your local edits to notify/skill_mode/heartbeat/skill-health survived — merged, not clobbered."
+      }
+    },
+    "separator_1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "files_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "lg"
+      },
+      "children": [
+        "stat_added",
+        "stat_updated",
+        "stat_merged",
+        "stat_deleted"
+      ]
+    },
+    "stat_added": {
+      "type": "Stat",
+      "props": {
+        "label": "Added",
+        "value": "25"
+      }
+    },
+    "stat_updated": {
+      "type": "Stat",
+      "props": {
+        "label": "Updated",
+        "value": "45"
+      }
+    },
+    "stat_merged": {
+      "type": "Stat",
+      "props": {
+        "label": "Auto-merged 3-way",
+        "value": "11"
+      }
+    },
+    "stat_deleted": {
+      "type": "Stat",
+      "props": {
+        "label": "Deleted",
+        "value": "4"
+      }
+    },
+    "separator_2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "landing_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "landing_heading",
+        "landing_items"
+      ]
+    },
+    "landing_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "What's landing",
+        "level": "h3"
+      }
+    },
+    "landing_items": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "item_1",
+        "item_2",
+        "item_3",
+        "item_4"
+      ]
+    },
+    "item_1": {
+      "type": "Text",
+      "props": {
+        "text": "fx/Vercel as a 7th harness + `harnesses.json` capability manifest"
+      }
+    },
+    "item_2": {
+      "type": "Text",
+      "props": {
+        "text": "reactive-trigger + chain `when:` routing, dry-run gate before self-authored auto-merge"
+      }
+    },
+    "item_3": {
+      "type": "Text",
+      "props": {
+        "text": "structured audit log, secretcurl argv-hardening, all GH Actions SHA-pinned"
+      }
+    },
+    "item_4": {
+      "type": "Text",
+      "props": {
+        "text": "memory-flush deterministic prep"
+      }
+    },
+    "separator_3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "conflicts_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "conflicts_heading",
+        "conflicts_subtitle",
+        "conflicts_items"
+      ]
+    },
+    "conflicts_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "4 need a hand",
+        "level": "h3"
+      }
+    },
+    "conflicts_subtitle": {
+      "type": "Text",
+      "props": {
+        "text": "Workflows you customized + upstream also touched, overlapping lines:",
+        "variant": "lead"
+      }
+    },
+    "conflicts_items": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "conflict_1",
+        "conflict_2",
+        "conflict_3",
+        "conflict_4"
+      ]
+    },
+    "conflict_1": {
+      "type": "Text",
+      "props": {
+        "text": "`.github/workflows/aeon.yml` — your narrowed env vs upstream's 188-line SHA-pin/harness rewrite"
+      }
+    },
+    "conflict_2": {
+      "type": "Text",
+      "props": {
+        "text": "`ci-tests.yml` — checkout SHA-pin + ~10 new test steps"
+      }
+    },
+    "conflict_3": {
+      "type": "Text",
+      "props": {
+        "text": "`messages.yml` — keep your ALL_SECRETS allowlist, cherry-pick the pins + AI_GATEWAY/VERCEL/HOOK_MAINNET_OK"
+      }
+    },
+    "conflict_4": {
+      "type": "Text",
+      "props": {
+        "text": "`llms.txt` — your MiroShark copy left untouched vs upstream's new generic one"
+      }
+    },
+    "separator_4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "baseline_note": {
+      "type": "Text",
+      "props": {
+        "text": "Baseline advances to `b7a909a` only when you merge. Conflicts tracked in state, they'll resurface until reconciled.",
+        "variant": "muted"
+      }
+    },
+    "pr_link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #146",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/pull/146",
+        "source": "GitHub"
+      }
+    }
+  }
+}
