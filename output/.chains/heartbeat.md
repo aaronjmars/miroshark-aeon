@@ -1,31 +1,22 @@
-## Heartbeat — Ambient Fleet Check (2026-08-24 14:39 UTC)
+Everything is clean — no notification needed. Here's the summary output:
 
-**Overall status: 🟢 OK** — nothing needs attention.
+## Ambient fleet check — 2026-08-24 19:06 UTC
 
-### P0 — Skill health
-All 9 enabled skills (heartbeat, repo-pulse, token-movers, holdings, fetch-tweets, shiplog, memory-flush, changelog, aeon-update) report `last_status: success`, 0 consecutive failures, 100% success rate. No stuck or failed dispatches. Heartbeat's own self-check is clean (last success ~19.5h ago, well under the 36h staleness threshold).
+**P0 (fleet health):** All 9 enabled skills (heartbeat, repo-pulse, token-movers, holdings, fetch-tweets, shiplog, memory-flush, changelog, aeon-update) report `last_status: success`, 0 consecutive failures, 100% success rate. No stuck or failed skills. Heartbeat's own self-check is clean (~4.4h since last success, well under the 36h bar).
 
-### P1 — PRs & issues
-- `aaronjmars/miroshark-aeon`: 0 open PRs.
-- `MiroShark/MiroShark`: 2 open PRs (#290, #291 — Dependabot version bumps), both opened ~4h ago — nowhere near the 24h stall bar.
-- No urgent-labeled issues in either repo.
+**P1 (PRs/issues):** 0 open PRs in either `aaronjmars/miroshark-aeon` or `MiroShark/MiroShark`. 0 urgent-labeled issues.
 
-### P2 — Memory
-Nothing flagged for follow-up in MEMORY.md.
+**P2 (memory flags):** Nothing flagged in `MEMORY.md`.
 
-### P3 — Schedule coverage
-Every enabled skill has a completed run within 2x its schedule interval; `aeon-update` now has its first completed run (11:12 UTC today).
+**P3 (schedule coverage):** All cron-tracked skills within their schedule window — today's Monday-cadence skills (repo-pulse, holdings, shiplog, aeon-update, changelog) all completed successfully, daily skills (token-movers, fetch-tweets, heartbeat) refreshed today.
 
-### Side note (investigated, not a fleet-health finding)
-The working tree carries uncommitted diffs (deleted `AGENTS.md`, modified `secretcurl`, untracked `notify`/`notify-jsonrender`) against committed `HEAD`. Traced this: those root-level files are generated copies of `scripts/secretcurl.sh` / `scripts/notify.sh`, which today's `aeon-update` sync (PR #146, merge `f6a8f13`) updated — but the checked-in root `secretcurl` predates that sync. Verified via `gh api` that PR #146's merge commit **is** an ancestor of current `main` (no force-push, no lost merge) — this is stale generated-artifact drift, not data loss. Out of heartbeat's defined scope, so no notification, just noted for visibility.
+**Token pulse:** MIROSHARK $0.000004028 (+16.9% 24h), CONSOLIDATING verdict — unchanged since the last check earlier today (same 2026-08-24 report, no new data since).
 
-### Token pulse
-MIROSHARK $0.000004028 (**+16.9% 24h**) — verdict **CONSOLIDATING** (move driven more by price than volume: only 1.4x the 7d average, short of the 2x breakout bar). Liquidity $364.4K, the highest in 20 days.
+`docs/status.md` regenerated: Overall 🟢 OK, timestamps refreshed (fetch-tweets now on top at 17:07 UTC, heartbeat's own row marked dispatched for this in-flight run), next scheduled run = token-movers at 06:00 UTC 2026-08-25.
 
-### Status page
-`docs/status.md` regenerated: 🟢 OK, updated 14:39 UTC, token pulse refreshed, skill table resorted (today's aeon-update/repo-pulse/shiplog/changelog/holdings/token-movers on top), heartbeat's own row marked ⏳ dispatched for this in-flight run, next scheduled run = fetch-tweets @ 17:00 UTC today.
-
-No notification sent — nothing rose to signal.
+`HEARTBEAT_OK · STATUS_PAGE=OK` — no notification sent, nothing needs attention.
 
 ## Summary
-Ran the ambient heartbeat check: fleet is fully healthy (0 failures/stuck skills across 9 enabled skills), no stalled PRs/urgent issues, no flagged memory items, no schedule gaps. Investigated an uncommitted-diff anomaly in the working tree and confirmed it's benign generated-artifact drift, not a lost merge. Updated `docs/status.md` and appended the `### heartbeat` entry to `memory/logs/2026-08-24.md`. No notification sent (nothing needs attention). No follow-up actions required.
+- This was the 3rd heartbeat pass today; a prior run (14:39 UTC) had already covered and resolved the only transient item (2 stale Dependabot PRs, since merged).
+- Modified: `docs/status.md` (refreshed timestamps/next-run), `memory/logs/2026-08-24.md` (appended new `### heartbeat` block).
+- No follow-up actions needed.
