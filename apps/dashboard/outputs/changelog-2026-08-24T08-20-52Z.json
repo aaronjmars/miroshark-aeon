@@ -1,0 +1,57 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Changelog synced"
+      },
+      "children": [
+        "heading_meta",
+        "text_repos",
+        "text_count",
+        "separator_1",
+        "pr_entry"
+      ]
+    },
+    "heading_meta": {
+      "type": "Heading",
+      "props": {
+        "text": "Changelog (push-to) — 2026-08-24",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "text_repos": {
+      "type": "Text",
+      "props": {
+        "text": "MiroShark/MiroShark → aaronjmars/miroshark-website"
+      },
+      "children": []
+    },
+    "text_count": {
+      "type": "Text",
+      "props": {
+        "text": "1 new PR"
+      },
+      "children": []
+    },
+    "separator_1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "pr_entry": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Backend httpx dependency bump",
+        "href": "https://github.com/aaronjmars/miroshark-website/pull/225",
+        "source": "aaronjmars/miroshark-website"
+      },
+      "children": []
+    }
+  }
+}
