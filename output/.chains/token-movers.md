@@ -1,10 +1,8 @@
-*$MiroShark — ACCUMULATING*
+*$MiroShark — CONSOLIDATING*
 
-Price cooled -2.8% after yesterday's 44% breakout; buy/sell ratio holds 1.57 and whale buys are present, but whale $ flow skewed 77% sell-side (3 largest whale trades were all sells).
+Price +16.9% 24h to $0.000004028, but volume is only 1.4x the 7d average — short of the 2x bar that would confirm a breakout.
 
-Price $0.000003446 (-2.8% 24h) | Liq $322.2K (-3.8%) | Vol $62.6K (1.7× 7d)
-Buys/Sells 130/83 (ratio 1.57) | Whales: 15
-
-7d +61.1% | 30d +103.5%
+Price $0.000004028 (+16.9% 24h) | Liq $364.4K (+13.1%) | Vol $77.8K (1.4× 7d)
+Buys/Sells 156/100 (ratio 1.56) | Whales: 19
 
 Chart: https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209
