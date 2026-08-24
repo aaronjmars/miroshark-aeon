@@ -446,6 +446,18 @@ jobs:
         if: steps.work.outputs.mode != '' && steps.skill.outputs.name == 'vuln-scanner'
         run: bash scripts/stage-vuln-scanner.sh "${{ steps.skill.outputs.name }}"
 
+      - name: Install Foundry (deploy-uni-hook)
+        # The official action installs a cached, pinned Foundry from GitHub
+        # releases with retries. The old path (curl https://foundry.paradigm.xyz |
+        # bash, inside stage-deploy-uni-hook.sh) got rate-limited on the shared
+        # runner IPs and swallowed the failure, so a deploy run went GREEN with no
+        # toolchain and silently did nothing. With forge already on PATH here, the
+        # stage script's `command -v forge` guard skips its curl fallback entirely.
+        if: steps.work.outputs.mode != '' && steps.skill.outputs.name == 'deploy-uni-hook'
+        uses: foundry-rs/foundry-toolchain@908c540300062bd5a7e473851cdb4282204cee09 # v1
+        with:
+          version: stable
+
       - name: Stage deploy-uni-hook toolchain
         # Installs Foundry + a pre-built Uniswap v4 project (v4 libs + templates) for
         # the deploy-uni-hook skill, appends ~/.foundry/bin to the PATH file so
