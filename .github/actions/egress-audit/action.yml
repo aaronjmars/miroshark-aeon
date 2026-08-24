@@ -1,0 +1,130 @@
+name: egress-audit
+description: Start iron-proxy in warn mode and route the job's traffic through it (audit-only, fail-open)
+inputs:
+  skill:
+    description: Skill name - labels the audit log and selects eyebrowlock hosts
+    required: true
+  mode:
+    description: audit (warn, nothing blocked - default) | enforce (default-deny off-list hosts)
+    required: false
+    default: audit
+runs:
+  using: composite
+  steps:
+    # Cache the pinned binary so audit-on-every-run doesn't re-download ~15MB.
+    # Only reached when the audit step runs (the action is gated), so no cost when off.
+    - name: Cache iron-proxy binary
+      uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
+      with:
+        path: ~/.cache/iron-proxy
+        key: iron-proxy-0.49.0-${{ runner.os }}-${{ runner.arch }}
+
+    - name: Install iron-proxy (pinned release)
+      shell: bash
+      run: |
+        ver="0.49.0"
+        case "$(uname -m)" in
+          x86_64|amd64) arch=amd64 ;;
+          aarch64|arm64) arch=arm64 ;;
+          *) echo "IRON_AUDIT_UP=0" >> "$GITHUB_ENV"; echo "::warning::unsupported arch $(uname -m) - audit skipped"; exit 0 ;;
+        esac
+        CACHE="$HOME/.cache/iron-proxy"
+        BIN="$RUNNER_TEMP/iron/bin/iron-proxy"
+        mkdir -p "$CACHE" "$RUNNER_TEMP/iron/bin"
+        if [ -x "$CACHE/iron-proxy" ]; then
+          cp "$CACHE/iron-proxy" "$BIN"
+          echo "iron-proxy restored from cache"
+        else
+          url="https://github.com/paradigmxyz/iron-proxy/releases/download/v${ver}/iron-proxy_${ver}_linux_${arch}.tar.gz"
+          if ! curl -fsSL "$url" -o "$RUNNER_TEMP/iron/ip.tgz"; then
+            echo "IRON_AUDIT_UP=0" >> "$GITHUB_ENV"
+            echo "::warning::iron-proxy download failed - audit skipped, run continues"
+            exit 0
+          fi
+          tar -xzf "$RUNNER_TEMP/iron/ip.tgz" -C "$RUNNER_TEMP/iron/bin"
+          DL="$(find "$RUNNER_TEMP/iron/bin" -type f -name 'iron-proxy' | head -1)"
+          if [ -z "$DL" ]; then
+            echo "IRON_AUDIT_UP=0" >> "$GITHUB_ENV"
+            echo "::warning::iron-proxy binary not found in archive - audit skipped"
+            exit 0
+          fi
+          [ "$DL" != "$BIN" ] && cp "$DL" "$BIN"
+          cp "$BIN" "$CACHE/iron-proxy"   # populate for the cache action's post-run save
+          echo "iron-proxy downloaded + cached"
+        fi
+        chmod +x "$BIN"
+        echo "IRON_PROXY_BIN=$BIN" >> "$GITHUB_ENV"
+        "$BIN" --version || true
+
+    - name: Generate CA
+      shell: bash
+      run: |
+        [ "${IRON_AUDIT_UP:-1}" = "0" ] && exit 0
+        mkdir -p "$RUNNER_TEMP/iron/certs"
+        openssl genrsa -out "$RUNNER_TEMP/iron/certs/ca.key" 4096 2>/dev/null
+        openssl req -x509 -new -nodes \
+          -key "$RUNNER_TEMP/iron/certs/ca.key" \
+          -sha256 -days 1 \
+          -subj "/CN=aeon egress audit CA" \
+          -addext "basicConstraints=critical,CA:TRUE" \
+          -addext "keyUsage=critical,keyCertSign" \
+          -out "$RUNNER_TEMP/iron/certs/ca.crt" 2>/dev/null
+
+    - name: Write config
+      shell: bash
+      env:
+        EGRESS_MODE: ${{ inputs.mode }}
+      run: |
+        [ "${IRON_AUDIT_UP:-1}" = "0" ] && exit 0
+        node .github/scripts/iron-config.mjs "${{ inputs.skill }}" > "$RUNNER_TEMP/iron/proxy.yaml"
+        echo "--- iron-proxy config (mode: ${EGRESS_MODE}) ---"
+        cat "$RUNNER_TEMP/iron/proxy.yaml"
+
+    - name: Start proxy (fail-open)
+      shell: bash
+      run: |
+        [ "${IRON_AUDIT_UP:-1}" = "0" ] && exit 0
+        nohup "$IRON_PROXY_BIN" -config "$RUNNER_TEMP/iron/proxy.yaml" \
+          > "$RUNNER_TEMP/iron/audit.jsonl" 2>&1 &
+        PID=$!
+        up=0
+        for i in $(seq 1 20); do
+          kill -0 "$PID" 2>/dev/null || { up=dead; break; }
+          nc -z 127.0.0.1 8080 && { up=1; break; }
+          sleep 0.5
+        done
+        # The proxy can bind the tunnel and then die on a second listener, so a
+        # bare port check is a false positive: confirm it is still alive a moment later.
+        if [ "$up" = "1" ]; then sleep 1; kill -0 "$PID" 2>/dev/null || up=dead; fi
+        if [ "$up" != "1" ]; then
+          echo "IRON_AUDIT_UP=0" >> "$GITHUB_ENV"
+          echo "::warning::iron-proxy not healthy (${up}) - audit skipped, run continues"
+          echo "--- proxy output ---"; cat "$RUNNER_TEMP/iron/audit.jsonl" 2>/dev/null || true
+          exit 0
+        fi
+        echo "iron-proxy up on 127.0.0.1:8080 (warn/audit mode)"
+
+    - name: Export proxy env
+      shell: bash
+      run: |
+        if [ "${IRON_AUDIT_UP:-1}" = "0" ]; then
+          echo "audit not active - proxy env not exported, run proceeds normally"
+          exit 0
+        fi
+        CA="$RUNNER_TEMP/iron/certs/ca.crt"
+        # Sticky for all following steps (incl. the Run step, which reaches the
+        # claude process through bwrap - no --clearenv, so these propagate in).
+        # Actions-internal infra is kept OUT of the proxy so artifact upload and
+        # the runner's own comms are untouched; github.com stays IN so skill
+        # git/gh egress is audited.
+        {
+          echo "HTTP_PROXY=http://127.0.0.1:8080"
+          echo "HTTPS_PROXY=http://127.0.0.1:8080"
+          echo "NO_PROXY=localhost,127.0.0.1,::1,.actions.githubusercontent.com,.blob.core.windows.net"
+          echo "NODE_EXTRA_CA_CERTS=$CA"
+          echo "SSL_CERT_FILE=$CA"
+          echo "REQUESTS_CA_BUNDLE=$CA"
+          echo "CURL_CA_BUNDLE=$CA"
+          echo "GIT_SSL_CAINFO=$CA"
+        } >> "$GITHUB_ENV"
+        echo "proxy env exported (audit active)"
