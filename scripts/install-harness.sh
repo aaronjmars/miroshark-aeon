@@ -210,6 +210,26 @@ TOML
       echo "vibe: OpenRouter"
     fi
     ;;
+  fx)
+    # curl-installed native binary (Zig, ~10MB), no package manager. fx ships no
+    # pinned-version install path as of 0.0.5 — it's brand-new/experimental per
+    # its own README, so this tracks whatever fx.sh/setup.sh currently serves.
+    # Revisit if/when fx publishes pinned release artifacts.
+    curl -fsSL https://fx.sh/setup.sh | bash
+    [ -n "${GITHUB_PATH:-}" ] && echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+    # fx has NO OpenRouter path (confirmed: no mention anywhere in its docs —
+    # see resolve-harness.sh's fx case for the same note). Every other harness
+    # here falls back to the shared OPENROUTER_API_KEY when its own native
+    # credential is missing; fx has nothing to fall back to. So this fails
+    # closed here rather than staging a CLI that's guaranteed to fail later
+    # inside the actual agent run with a less obvious error.
+    if [ -n "${AI_GATEWAY_API_KEY:-}" ] || [ -n "${VERCEL_OIDC_TOKEN:-}" ]; then
+      echo "fx: Vercel AI Gateway / OIDC key staged via env (fx reads it directly, no config file needed)"
+    else
+      echo "::error::fx needs AI_GATEWAY_API_KEY or VERCEL_OIDC_TOKEN — it has no OpenRouter fallback, unlike every other harness here" >&2
+      exit 1
+    fi
+    ;;
   *)
     echo "::error::no install recipe for harness '$H'"; exit 1 ;;
 esac

@@ -11,16 +11,21 @@ first-class harnesses (`claude` default, `grok`), how to select one, and
 one-click X-account login. This page collects the deeper behavior for anyone
 running the `grok` harness in anger.
 
-## Additional harnesses via run-harness (`codex`, `pi`, `vibe`, `kimi`)
+## Additional harnesses via run-harness (`codex`, `pi`, `vibe`, `kimi`, `fx`)
 
-Four more harnesses are selectable in the dashboard's harness dropdown and the
+Five more harnesses are selectable in the dashboard's harness dropdown and the
 `harness:` config: **codex** (OpenAI Codex CLI), **pi** (Pi Coding Agent),
-**vibe** (Mistral Vibe) and **kimi** (Moonshot Kimi). Unlike `claude`/`grok`
+**vibe** (Mistral Vibe), **kimi** (Moonshot Kimi), and **fx** (Vercel's fx —
+[fx.sh](https://fx.sh), a minimal native Zig coding agent). Unlike `claude`/`grok`
 they don't have a bespoke branch in the workflow — they run through
 [`harness-adapter`](../harness-adapter/)'s `run-harness`, which wraps each CLI in
 the same Claude-Code-shaped `{result, usage, session_id}` contract that
 `scripts/run-grok.sh` provides, so everything downstream (scoring, token
 accounting, memory, notifications) is unchanged.
+
+**fx is the odd one out on auth** — see the table below, but the short version
+is it has no OpenRouter fallback at all, unlike the other four. Skip it unless
+you have a Vercel AI Gateway key or are already inside Vercel's own CI.
 
 Each one runs on its own provider login (see **Native auth** below); a single
 shared **`OPENROUTER_API_KEY`** is the zero-setup alternative that makes all four
@@ -53,6 +58,7 @@ login locally, store the session as a repo secret, restore it on the runner):
 | `kimi`  | **Moonshot** device login | `aeon auth --harness kimi` (or **Connect Kimi**) → `KIMI_AUTH`. Or `--key` → `MOONSHOT_API_KEY` |
 | `pi`    | provider API key | `aeon auth --harness pi --key <sk-ant-…\|sk-…>` → the matching `ANTHROPIC_API_KEY` / `OPENAI_API_KEY` (auto-detected) |
 | `vibe`  | Mistral key | `aeon auth --harness vibe --key <key>` → `MISTRAL_API_KEY` (vibe's default provider) |
+| `fx`    | Vercel AI Gateway key (or `VERCEL_OIDC_TOKEN`) | set `AI_GATEWAY_API_KEY` as a repo secret. **No `aeon auth` flow and no OpenRouter fallback** — see below. |
 
 Which one runs is decided at dispatch by **which secret is set**, native first,
 OpenRouter last (`authSecretsForHarness` / the `HARNESS_AUTH` registry in
@@ -61,6 +67,13 @@ default model** — the OpenRouter model picker only applies when the run falls
 back to `OPENROUTER_API_KEY` (an `openai/*` id would be the wrong provider
 otherwise). The workflow's *Install harness CLI* step restores/configures the
 selected provider; the CLI + dashboard flows share `lib/harness-auth-server.ts`.
+
+**`fx` breaks the "OpenRouter last" rule above** — it's the one harness with no
+OpenRouter fallback at all (confirmed: fx has no OpenRouter integration
+anywhere in its own docs). `install-harness.sh` fails closed at the *Install
+harness CLI* step with a named error if neither `AI_GATEWAY_API_KEY` nor
+`VERCEL_OIDC_TOKEN` is set, rather than staging a CLI that's guaranteed to fail
+later inside the actual run.
 
 The full deployment runbook — the added/modified workflow steps, per-harness
 install and config, runner gotchas (AppArmor, the codex pin), and the measured
@@ -105,6 +118,16 @@ kimi/vibe token estimate (#6), grok scorer fallback to `grok-4.5` (#7), and
 codex read-only under the wrapper sandbox so fetches work (#14 — its native
 `--sandbox read-only` was also blocking the network).
 
+**`fx` was added later and was not part of the 2026-07-22 sweep above.** It's
+verified locally against a real, locally-built `fx` binary (0.0.5): the
+missing-credential path, the `mcpServers` → fx's `mcp.json` shape translation,
+`FX_MODEL`/`FX_MAX_AGENT_STEPS` env resolution, and the full success/failure
+envelope paths (with a stubbed `fx` recording real argv) all pass. What it has
+**not** had is a live dispatch on GitHub Actions with a real
+`AI_GATEWAY_API_KEY` and a real model call — I don't have that credential to
+test with. Treat it as "should work, mechanically verified end-to-end short of
+a real model call" rather than "verified live" like the other six.
+
 ## Token accounting
 
 Every harness runs through `run-harness`, which normalizes usage into the
@@ -116,6 +139,12 @@ exposes differs:
   input/output/cache tokens + cost (`harness-adapter/adapters/grok.sh`) — the older
   `scripts/run-grok.sh` plain-`json` path reported 0, but the unified adapter does
   not.
+- **fx** also reports real usage, but not inline: `fx ask --json` doesn't carry
+  it, so the adapter makes a second call, `fx session <session_id> --json`, to
+  pull `input_tokens`/`output_tokens`/`cache_read_tokens`/`total_cost` once the
+  first call succeeds. If that second call fails for any reason, the run still
+  succeeds with its real output — usage just reports as `0/0/0/0` for that run
+  rather than failing the whole thing over a usage lookup.
 - **kimi and vibe** expose **no** usage field (kimi's `stream-json` and vibe's
   `--output json` carry none — verified live), so their adapters fall back to a
   transparent `char/4` **estimate** of the assembled input + result rather than a

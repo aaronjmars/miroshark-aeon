@@ -16,6 +16,8 @@
   <strong>No approval loops. No babysitting. Configure once, forget forever.</strong>
 </p>
 
+> **🤖 Using a coding agent?** Point it here: **read https://www.aeon.fun/skills/aeon.md and follow the instructions to set up your Aeon agent.**
+
 <div align="center">
 
 [![stars](https://img.shields.io/github/stars/aeonfun/aeon?style=flat-square&label=stars&color=F4EFE1&labelColor=0d0c0a&logo=github&logoColor=F4EFE1)](https://github.com/aeonfun/aeon/stargazers)
@@ -44,7 +46,7 @@ git clone https://github.com/<you>/aeon   # skip if you used `gh repo fork --clo
 cd aeon && ./aeon
 ```
 
-Open [localhost:5555](http://localhost:5555) and follow the dashboard: **Authenticate** (any of six [harnesses](../docs/harnesses.md)) → **add a channel** → **pick skills** → **Run**. That's it - Aeon runs unattended. Everything is also an `./aeon` command ([CLI](../apps/cli/README.md)) or a `/aeon` chat command ([setup skill](../docs/aeon-setup.md), installable as a [Claude Code plugin](../docs/aeon-setup.md#install)).
+Open [localhost:5555](http://localhost:5555) and follow the dashboard: **Authenticate** (any of six [harnesses](../docs/harnesses.md)) → **add a channel** → **pick skills** → **Run**. That's it - Aeon runs unattended. Everything is also an `./aeon` command ([CLI](../apps/cli/README.md)) or a `/aeon` chat command ([setup skill](../docs/aeon-setup.md), installable as a [Claude Code or Codex plugin](../docs/aeon-setup.md#install)).
 
 <details>
 <summary><strong>No admin rights / can't install <code>gh</code>?</strong></summary>
@@ -84,6 +86,14 @@ The prompt *is* the skill. You schedule it, hand it a `var`, chain it into other
 <p align="center"><a href="../docs/skill-packs.md#full-catalog-all-77-skills-by-pack"><b>Full catalog - all 77 skills by pack →</b></a></p>
 
 <p align="center"><a href="../docs/community-skill-packs.md#listed-packs"><b>Community skill packs →</b></a></p>
+
+## Support six harnesses: Claude, Grok, Codex, Pi, Vibe, Kimi
+
+<p align="center">
+  <img src="../docs/assets/harnesses-aeon.jpg" alt="Six engines, one socket - a SKILL.md flows through run-harness into any of six agent CLIs: Claude, Grok, Codex, Pi, Vibe, and Kimi. Every harness honors the same contract: result, usage, session." width="100%" />
+</p>
+
+The same `SKILL.md` runs on any of six agent CLIs - **Claude**, **Grok**, **Codex**, **Pi**, **Vibe**, **Kimi** - behind one `run-harness` contract (same result, usage, and session shape). Swap the harness; nothing else changes. How the contract works: [`docs/harnesses.md`](../docs/harnesses.md).
 
 ## Why "the most autonomous"
 
@@ -152,6 +162,8 @@ skills:
 ```
 
 Full reference - scheduling, `var`, models, [authentication](../docs/CONFIGURATION.md#authentication), [notification channels](../docs/CONFIGURATION.md#notifications), API keys, guardrails: **[Configuration](../docs/CONFIGURATION.md)**.
+
+**GitHub permissions:** the built-in `GITHUB_TOKEN` covers same-repo work; add **one classic PAT** as `GH_GLOBAL` with **`repo`** + **`workflow`** scopes to drive every cross-repo, private, disclosure, and workflow-editing skill. No `read:org` / `admin:org`. See [Cross-repo access](../docs/CONFIGURATION.md#cross-repo-access).
 
 ---
 

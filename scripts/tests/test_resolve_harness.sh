@@ -89,6 +89,12 @@ mkfixture grok
   && pass "grok: GROK_CREDENTIALS → native-oauth" || bad "grok native-oauth"
 [ "$(get AUTH_MODE "" XAI_API_KEY=xx)" = "native-key" ] \
   && pass "grok: XAI_API_KEY → native-key" || bad "grok native-key"
+mkfixture fx
+[ "$(get HARNESS)" = "fx" ] && pass "fx: reaches the allowlist" || bad "fx allowlist"
+[ "$(get AUTH_MODE "" AI_GATEWAY_API_KEY=xx)" = "native-key" ] \
+  && pass "fx: AI_GATEWAY_API_KEY → native-key" || bad "fx native-key (gateway)"
+[ "$(get AUTH_MODE "" VERCEL_OIDC_TOKEN=xx)" = "native-key" ] \
+  && pass "fx: VERCEL_OIDC_TOKEN → native-key" || bad "fx native-key (oidc)"
 
 # --- 4. MODEL_ARG per harness ----------------------------------------------
 # The whole point of MODEL_ARG: each CLI wants a different shape, and two want

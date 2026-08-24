@@ -194,8 +194,10 @@ swap does the same for any non-claude harness —
 
 ## 6. Per-harness reference
 
-One `OPENROUTER_API_KEY` covers all four. Each CLI's provider block is generic
-enough to point at OpenRouter; the *Install harness CLI* step stages the config.
+One `OPENROUTER_API_KEY` covers codex/pi/vibe/kimi. Each of those CLIs'
+provider block is generic enough to point at OpenRouter; the *Install harness
+CLI* step stages the config. **fx is the exception** — no OpenRouter path
+exists for it (see §2/§3 below), so it needs its own `AI_GATEWAY_API_KEY`.
 
 | harness | install | model default | `--model` passed | config notes |
 |---|---|---|---|---|
@@ -203,6 +205,7 @@ enough to point at OpenRouter; the *Install harness CLI* step stages the config.
 | **pi** | `npm i -g --ignore-scripts @earendil-works/pi-coding-agent` | `deepseek/deepseek-v4-flash` | `openrouter/<model>` | reads `OPENROUTER_API_KEY` from env |
 | **vibe** | `pipx install mistral-vibe` | `mistralai/mistral-medium-3-5` | none (config alias) | `~/.vibe/config.toml`: provider `api_style=openai`, `api_key_env_var` |
 | **kimi** | `npm i -g @moonshot-ai/kimi-code` | `moonshotai/kimi-k2.5` | none (config alias) | `~/.kimi-code/config.toml`: key **inline** (no env indirection), `default_model` set |
+| **fx** | `curl -fsSL https://fx.sh/setup.sh \| bash` | fx's own default (no `--model` forwarded on native auth) | env only (`FX_MODEL`) — no `--model` flag on `fx ask` | no config file; `AI_GATEWAY_API_KEY`/`VERCEL_OIDC_TOKEN` read straight from env. `install-harness.sh` fails closed if neither is set — no fallback to stage |
 
 **codex needs `≥ gpt-5-mini`.** On `gpt-5-nano` it fails *deterministically* on
 code-generation skills — the model emits a shell tool call with a duplicated

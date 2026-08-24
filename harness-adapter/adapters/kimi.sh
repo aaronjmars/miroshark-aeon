@@ -16,6 +16,25 @@
 #   * no --json-schema flag -> prompt-with-schema + validate + one retry.
 #   * MCP: kimi's mcp.json is the SAME {mcpServers:...} shape as ours; injected
 #     via a temp KIMI_CODE_HOME so nothing touches the user's config or workspace.
+#
+# rh-meta-start - capability manifest source of truth (bin/generate-harnesses-json)
+# {
+#   "id": "kimi",
+#   "label": "Kimi Code",
+#   "cli": { "install": "", "bin": "kimi", "min_version": "0.28.0" },
+#   "invoke": "kimi -p --output-format stream-json",
+#   "round_trip": true,
+#   "token_usage": "none",
+#   "cost": false,
+#   "read_only": "sandbox",
+#   "structured_output": "shim",
+#   "mcp": "native+overlay",
+#   "max_turns": "timeout",
+#   "claude_md": "native",
+#   "auth": { "native_oauth": ["KIMI_AUTH"], "native_key": ["MOONSHOT_API_KEY"], "openrouter": true },
+#   "native_control_path": "run-harness"
+# }
+# rh-meta-end
 set -uo pipefail
 . "$RH_LIB/envelope.sh"
 . "$RH_LIB/schema-retry.sh"
@@ -69,7 +88,9 @@ PROMPT="$BASE"
 run_once "$PROMPT"
 rc=$?
 if [ $rc -ne 0 ] && [ -z "$RESULT" ]; then
-  echo "kimi exited $rc: $(tail -c 300 "$RH_TMPDIR/kimi.err" | tr '\n' ' ')" >&2
+  # 300 chars silently discarded the actual error whenever it was longer
+  # than that; widened to match claude.sh's own harness-adapter precedent.
+  echo "kimi exited $rc: $(tail -c 4000 "$RH_TMPDIR/kimi.err" | tr '\n' ' ')" >&2
   exit $rc
 fi
 if [ -z "$RESULT" ]; then

@@ -23,9 +23,35 @@ chains:
 
 Each step runs as a separate workflow dispatch; outputs are saved to `output/.chains/{skill}.md` and injected into downstream steps that `consume:` them. `fail-fast` aborts on any failure, `continue` keeps going.
 
+> **Note:** a real (uncommented) chain step with multiple keys must use flow-brace form -- `- { skill: review, consume: [draft], when: "score > 3" }` -- not the bare `- skill: review, consume: [...]` shown in the commented examples. The bare form is convenient in a comment but is not valid YAML once uncommented (the second `:` trips the parser). The chain runner reads either form.
+
+### Conditional routing (`when:`)
+
+A step can run only when a condition holds for the score of the skill it consumes. Aeon already scores every run 1-5 with Haiku (`memory/skill-health/<skill>.json`); `when:` turns that number into a branch:
+
+```yaml
+chains:
+  editorial:
+    schedule: "0 9 * * *"
+    max_dispatches: 10           # optional; hard-caps total dispatches (default 10)
+    steps:
+      - skill: draft
+      - skill: review, consume: [draft]
+      - skill: polish,  consume: [review], when: "score > 3"    # good draft -> polish
+      - skill: rewrite, consume: [review], when: "score <= 3"   # weak draft -> rewrite
+```
+
+- **Operators:** `== != < > <= >=`. Equality compares as strings; ordering (`< <= > >=`) requires an integer on both sides and fails loudly otherwise (no `"10" < "9"` surprises).
+- **The score** is the consumed skill's latest quality score (the first skill in `consume:`, or the previous step's skill if the step has no `consume:`).
+- **A `when:` whose key is missing does not fire** - the step is skipped, not failed. So every routing path must either produce a score or fall through to an unconditional step; a chain where every branch is skipped is a no-op, not an error.
+- **Invalid expressions are rejected at config time** by `validate-config.js` (in CI), not at 3am.
+- **`max_dispatches:`** caps the chain's total dispatches (default 10). A chain that trips it hard-fails with the step sequence - the budget replaces chassis's `pkill`, since Aeon runs on billed Actions minutes.
+
+The expression evaluator is `scripts/chain_when.sh` (unit-tested in `scripts/tests/test_chain_when.sh`).
+
 ## Reactive triggers
 
-Skills with `schedule: "reactive"` fire on conditions, not cron. The scheduler evaluates triggers after processing cron skills:
+Skills with `schedule: "reactive"` fire on conditions, not cron. The scheduler evaluates triggers after processing cron skills, reading each source skill's state from `memory/cron-state.json`:
 
 ```yaml
 reactive:
@@ -33,6 +59,29 @@ reactive:
     trigger:
       - { on: "*", when: "consecutive_failures >= 3" }
 ```
+
+`on:` is a source skill name (or `*` for any skill); `when:` is one of three conditions, evaluated by `scripts/reactive_when.sh`:
+
+| Condition | Fires when |
+|-----------|-----------|
+| `consecutive_failures >= N` | the source skill has failed N+ times in a row |
+| `success_rate <op> X` | the source's success rate crosses `X` (a `0.0`-`1.0` float; `op` is `<` `<=` `>` `>=`); only after the source has run at least once |
+| `last_status = <value>` | the source's last run ended `<value>` (e.g. `success`), for chaining |
+
+**This is the per-skill failure edge.** Rather than waiting for the daily `heartbeat` audit to open a `health:` issue, a reactive trigger acts on the next scheduler tick after the source's state changes. A single-failure handler is one line:
+
+```yaml
+reactive:
+  notify-operator:                 # any skill you want to run on failure
+    trigger:
+      - { on: digest, when: "consecutive_failures >= 1" }
+```
+
+The handler is dispatched with **the source skill's name as its `var`** (so `skill-repair` knows *which* skill tripped it), unless the handler declares a `var` of its own, which wins. The `heartbeat` -> `health:` issue path still runs in parallel and remains the catch-all for skills that fail silently.
+
+**The source skill must be enabled.** A trigger's `on:` source is evaluated only while that skill is `enabled: true` (a disabled skill never runs, so its state never changes). Point a trigger at a skill you have turned off and it silently never fires. `on:` may be written quoted or bare (`on: "digest"` or `on: digest`).
+
+**Loop safety.** A reactive dispatch is deduped per handler for 90 minutes, so a source that stays broken can't re-fire its handler every tick, and a handler that itself fails can't spin a tight loop. (Reactive runs on billed Actions minutes and a shared rate limit, so this bound matters -- there is no `pkill` off-switch here.)
 
 ## Scheduler frequency
 
@@ -71,6 +120,18 @@ mode: write       # full access (the default): adds Write / Edit / git / gh / py
 
 `read-only` strips the repo-mutation tools from Claude Code's `--allowedTools` (`Write`, `Edit`, `Bash(git:*)`, `Bash(gh:*)`) **and** the OS sandbox write-locks the whole workspace for the run (see [Capabilities → enforcement layers](CAPABILITIES.md)), so a research-and-notify skill **physically can't** commit, push, open a PR, or write anywhere in the checkout — `memory/` and `output/` included. Don't write those directly; route persistence through your **final message** (the run's captured output) and `./notify`. After the run, outside the sandbox, the workflow persists your captured output to `output/.chains/`, appends a `memory/logs/` run entry on your behalf, and reverts any stray write that slipped through. Use it for pure read-and-notify skills; `write` (the default, a strict superset) for anything that writes code. It's the runtime half of the install-time [`capabilities:`](../docs/CAPABILITIES.md) hint.
 
+## Dry-run gate for self-authored skills
+
+`create-skill` and `self-improve` write skills that reach `main` through auto-merging PRs. Left alone, the only thing between a generated skill and production is a Haiku score computed *after* it has already run with real secrets against real repos. For the part of the system that writes its own code, that ordering is backwards.
+
+Before either skill opens its PR, it dry-runs the candidate through `scripts/dry-run.sh`:
+
+- **Synthetic secrets.** Every key the skill declares in `requires:` gets a fake but well-formed value (marked `DRYRUN`), never the real one. `ANTHROPIC_API_KEY` is the sole exception -- the run needs a live model -- and it is never written into the synthetic env (asserted, not eyeballed). The inherited channel/GitHub tokens are faked too, so a rogue push or notify can't reach a real repo or channel.
+- **Structural pass criteria:** exit 0, non-empty output, no write outside the declared `mode`, no secret used outside `requires:`. Content is **not** re-scored here -- the Haiku scorer already does that, after the fact.
+- **Gate on it.** `passed: false` blocks the PR (exit `CREATE_SKILL_DRYRUN_FAILED` / revert-and-stop); the verdict JSON goes in the PR body either way.
+
+Turn it off per repo with the variable **`SKILL_DRYRUN=0`** (default on), so a fork hitting a false positive at 3am can bypass without editing workflows. The evaluator's primitives are unit-tested in `scripts/tests/test_dry_run.sh`, including the assertion that no real secret can reach the synthetic env.
+
 ## MCP servers in skill runs
 
 Let skills **call** MCP servers (GitHub, a database, a paid API, your own) while they run in GitHub Actions. Opt-in and safe - with no `.mcp.json` at the repo root, runs are byte-identical to before.
@@ -81,11 +142,18 @@ cp docs/examples/mcp/.mcp.json.example .mcp.json   # then edit, commit, push
 
 The example ships two working servers — `github` (uses the runner's built-in `GITHUB_TOKEN`) and `sequential-thinking` (no-auth stdio). On the next run the runner loads `.mcp.json` and auto-allows every server's tools, so a skill can just say *"use the github MCP server to …"*. Reference a server's secret with `${VAR}` (never commit the value) and set it in the dashboard — the runner resolves it from the repo's secrets with zero workflow editing, and skips a server (with a warning) when its secret is missing rather than breaking the skill.
 
-Or skip the file entirely: the dashboard's **MCP** tab writes `.mcp.json` for you, lists **Featured** servers ([Base](https://mcp.base.org), [Robinhood Trading](https://agent.robinhood.com), [glim.sh](https://glim.sh), [Executor](https://executor.sh), [Finance District](https://wallet-mcp.fd.xyz), [PostHog](https://posthog.com)) for one-click install, and tells you which secret each server needs. The featured servers are OAuth-gated: **Connect** opens your browser to authorize, then keeps the tokens fresh across headless runs — including saving rotated refresh tokens, which needs a secrets-write PAT (`GH_SECRETS_PAT`). Flow, PAT setup, and limits: [`docs/mcp-oauth.md`](mcp-oauth.md). Each featured server has a matching skill (`base-mcp`, `robinhood-mcp`, `glim-mcp`, `executor-mcp`, `finance-district-mcp`, and the scheduled `posthog-errors` digest) — dispatch it with a `var` to use the server from a run.
+Or skip the file entirely: the dashboard's **MCP** tab writes `.mcp.json` for you, lists **Featured** servers ([Base](https://mcp.base.org), [Robinhood Trading](https://agent.robinhood.com), [glim.sh](https://glim.sh), [Executor](https://executor.sh), [Finance District](https://wallet-mcp.fd.xyz), [PostHog](https://posthog.com)) for one-click install, and tells you which secret each server needs. The featured servers are OAuth-gated: **Connect** opens your browser to authorize, then keeps the tokens fresh across headless runs — including saving rotated refresh tokens, which needs a secrets-write PAT (`GH_SECRETS_PAT`). Flow, PAT setup, and limits: [`docs/mcp-oauth.md`](mcp-oauth.md). Each featured server has a matching skill (`base-mcp`, `robinhood-mcp`, `glim-mcp`, `executor-mcp`, `finance-district-mcp`, and the scheduled `posthog-errors` digest) — dispatch it with a `var` to use the server from a run. Saving or connecting a server in the dashboard also splices any secret name its config references into the run workflows' allowlist automatically ([`apps/dashboard/lib/workflow-secrets.ts`](../apps/dashboard/lib/workflow-secrets.ts)), so a freshly connected server works on the very next headless run with no hand-editing of `aeon.yml`. (Editing the workflow file needs the `workflow` scope on the dashboard's GitHub token; without it the server still connects and the dashboard flags that the allowlist push did not land.)
 
 ## Cross-repo access
 
-The built-in `GITHUB_TOKEN` is scoped to this repo only. For `github-monitor`, `pr-review`, and `feature` to work on your other repos, add a `GH_GLOBAL` personal access token: github.com/settings/tokens → Fine-grained → set repo access → grant Contents, Pull requests, Issues (read/write) → add as `GH_GLOBAL` secret. Skills use it when available and fall back to `GITHUB_TOKEN` automatically.
+The built-in `GITHUB_TOKEN` is scoped to this repo only. For skills that reach other repos (`github-monitor`, `pr-review`, `feature`, `changelog` push-to, cross-repo reads) add **one classic** personal access token as the `GH_GLOBAL` secret: github.com/settings/tokens -> **Tokens (classic)** -> scopes **`repo`** + **`workflow`** -> add as `GH_GLOBAL`. Skills use it when available and fall back to `GITHUB_TOKEN` automatically, and it is auto-promoted to the run's `GITHUB_TOKEN`.
+
+One classic PAT covers the whole instance - no separate read or secrets PAT is needed:
+
+- **`repo`** - cross-repo and private-repo read/write, repository security advisories + private vulnerability reports (the disclosure/PVR skills), and writing Actions secrets back (the OAuth-MCP / Grok refresh path).
+- **`workflow`** - required only for skills that push changes under `.github/workflows/` (`aeon-update`, `spawn-instance`, `auto-workflow`); without it those pushes 403.
+
+`read:org` and `admin:org` are **not** needed - listing an org's repos (e.g. fleet KPIs) works on `repo` scope plus org membership, and nothing administers an org. If your org enforces SAML SSO, authorize the token for the org from the token page. **Classic** (not fine-grained) is recommended: the repository-advisories / PVR API is unreliable with fine-grained PATs.
 
 ## Durable state without the churn
 
@@ -94,7 +162,7 @@ Per-skill execution state (`memory/cron-state.json` — status, success rate, qu
 ## LLM Gateways
 
 <p align="center">
-  <img src="../docs/assets/providers.png" alt="Eight AI providers supported: Claude subscription, Anthropic API, OpenRouter, Bankr, UsePod, Venice, Surplus, Grok" width="640" />
+  <img src="../docs/assets/providers.jpg" alt="7 providers supported: Claude subscription, Anthropic API, OpenRouter, Bankr, UsePod, Venice, Surplus" width="640" />
 </p>
 
 Aeon can power Claude Code **eight** ways. Two are **direct** to Anthropic; the other six route through a **gateway**. Add a credential in the dashboard's Authenticate modal and it's saved as the secret below. (Separately, the [Grok Build harness](harnesses.md) runs the `grok` CLI instead of Claude Code — that's a different axis from the gateways here.)
@@ -202,6 +270,8 @@ Aeon needs **at least one** way to reach a model. Add it in the dashboard's **Au
 
 Set several and each run resolves the highest-priority one whose key is present, so you don't have to pick just one.
 
+> **Claude subscription tokens on GitHub runners.** A `CLAUDE_CODE_OAUTH_TOKEN` minted from a Claude subscription is meant for interactive/first-party use. On a hosted GitHub Actions runner it is frequently rejected at the Anthropic edge, so the run exits almost instantly with **zero** model usage even though the token was saved correctly. For a hosted instance, authenticate with an **API key** (`ANTHROPIC_API_KEY`) or an [LLM gateway](#llm-gateways) key instead; the subscription-token path is best kept for local `aeon` runs.
+
 ## Models
 
 The default model for all skills is set in `aeon.yml` (or from the dashboard header dropdown):
@@ -255,6 +325,16 @@ Set the secret → channel activates. No code changes needed.
 **Restrict who can command the agent (inbound):** Telegram is scoped to a single `TELEGRAM_CHAT_ID`. That's enough for a **1:1 DM** (there the chat ID *is* your user ID). For a **group/public chat**, also set `TELEGRAM_ALLOWED_USER_ID` to your numeric user ID (from [@userinfobot](https://t.me/userinfobot)) - otherwise any group member can command the bot, including by tapping a **Run again / Schedule weekly** button on a posted notification (Telegram delivers those taps even with group-privacy mode on). Left unset in a group, taps and messages **fail closed**. For Discord and Slack, set the optional repo variables `DISCORD_ALLOWED_AUTHOR_ID` / `SLACK_ALLOWED_USER_ID` (or same-named secrets) to the authorized sender's user ID - inbound messages from anyone else in the channel are then ignored. **Leaving those unset processes commands from any non-bot member of the channel**, so set them whenever the channel isn't private to you.
 
 Want ~1s Telegram replies instead of up-to-5-min polling? See [Telegram instant mode](../apps/webhook/README.md).
+
+## Audit log
+
+Every run writes an append-only JSON-lines record of the privileged actions that reached outside it - notify sends, `secretcurl` calls, and git pushes - and uploads it as the `audit-log-<run_id>` artifact on the run (kept 30 days). It answers "what did this run actually do" without reading the whole Actions transcript. One line per action:
+
+```json
+{"ts":"2026-08-18T14:03:11Z","run_id":"1234567890","skill":"digest","action":"notify","target":"channels=telegram delivered=true","exit":0,"secrets_used":["TELEGRAM_BOT_TOKEN"]}
+```
+
+`secrets_used` lists env-var **names** only. Secret **values** never reach the file: `scripts/audit.sh` scrubs every credential-shaped env var - in its raw, base64, and url-encoded forms - out of each record before writing, failing toward over-redaction. The log is written outside the workspace (beside the notify queue) so a read-only-sandboxed skill can still append to it, and it is always produced - a run that performs no privileged action uploads an empty file, not a missing one. Nothing to configure; it is on by default.
 
 ## API keys per skill
 
