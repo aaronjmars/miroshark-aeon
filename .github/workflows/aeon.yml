@@ -155,6 +155,24 @@ jobs:
           git config user.name "aeonframework"
           git config user.email "aeonframework@proton.me"
 
+      # Egress hardening P1: default-deny outbound to link-local + cloud metadata.
+      # No skill has a legitimate reason to reach 169.254.0.0/16. Kills the SSRF /
+      # DNS-rebinding-to-metadata class before any skill runs. REJECT (not DROP) so a
+      # stray probe fails fast. Runs job-wide, covers the Run step.
+      - name: Block link-local and metadata egress
+        if: steps.work.outputs.mode != ''
+        run: |
+          sudo iptables  -A OUTPUT -d 169.254.0.0/16 -j REJECT --reject-with icmp-port-unreachable
+          sudo ip6tables -A OUTPUT -d fd00:ec2::/64  -j REJECT || true
+          sudo ip6tables -A OUTPUT -d fd20:ce::/64   -j REJECT || true
+          if curl -s --max-time 3 -o /dev/null http://169.254.169.254/; then
+            echo "::error::cloud metadata endpoint still reachable - egress block failed"
+            exit 1
+          fi
+          echo "link-local / metadata egress blocked"
+          code=$(curl -s --max-time 10 -o /dev/null -w '%{http_code}' https://api.github.com/zen || echo 000)
+          echo "public egress check (api.github.com/zen): ${code}"
+
       - name: Setup Node.js
         if: steps.work.outputs.mode != ''
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
@@ -496,6 +514,16 @@ jobs:
             echo "hidden=$HIDE" >> "$GITHUB_OUTPUT"
             echo "::notice::single-source: $HARNESS reads $KEPT; hid $HIDE for this run"
           fi
+
+      # Egress hardening P2 (audit). OPT-IN: set repo var EGRESS_AUDIT=1 to enable.
+      # Warn mode (nothing blocked; EGRESS_MODE=enforce opts into blocking), fail-open.
+      # Env reaches the claude process inside bwrap (no --clearenv in the sandbox prefix).
+      - name: Egress audit
+        if: steps.work.outputs.mode != '' && vars.EGRESS_AUDIT == '1'
+        uses: ./.github/actions/egress-audit
+        with:
+          skill: ${{ steps.skill.outputs.name }}
+          mode: ${{ vars.EGRESS_MODE || 'audit' }}
 
       - name: Run
         id: run
@@ -943,6 +971,16 @@ jobs:
 
           echo "::notice::Token usage — input: $INPUT_TOKENS, output: $OUTPUT_TOKENS, cache_read: $CACHE_READ, cache_creation: $CACHE_CREATION, total: $TOTAL_TOKENS"
 
+      # Egress hardening P2: publish the warn-mode audit log. always() so it lands
+      # even if the run failed; the host list is the allowlist oracle P3 builds from.
+      - name: Upload egress audit log
+        if: always() && vars.EGRESS_AUDIT == '1'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: egress-${{ steps.skill.outputs.name }}-${{ github.run_id }}
+          path: ${{ runner.temp }}/iron/audit.jsonl
+          if-no-files-found: ignore
+
       # Undo "Single-source standing instructions" so the working tree matches HEAD
       # before any capture/guard/commit step runs. always(): the file must come back
       # even if Run failed or timed out. The move is a plain rename back — it touches
@@ -1365,6 +1403,21 @@ jobs:
           ASSESSMENT=$(echo "$PARSED" | jq -r '.assessment // "analysis incomplete"')
           FLAGS=$(echo "$PARSED" | jq -c '.flags // []')
 
+          # P4: fold a deterministic egress_blocked flag into the model's flags.
+          # iron-report reads this run's audit log (present only when EGRESS_AUDIT is
+          # on and enforce rejected something) and reports hosts the allowlist blocked
+          # that the skill needed - an allowlist gap for the repair loop. Intentional
+          # denies (Claude Code telemetry) are excluded, so the by-design block never fires it.
+          EGRESS_DENIED='[]'
+          if [ -f "$RUNNER_TEMP/iron/audit.jsonl" ]; then
+            EGRESS_REPORT=$(node .github/scripts/iron-report.mjs "$RUNNER_TEMP/iron/audit.jsonl" 2>/dev/null || echo '{}')
+            if [ "$(echo "$EGRESS_REPORT" | jq -r '.flag // empty')" = "egress_blocked" ]; then
+              FLAGS=$(echo "$FLAGS" | jq -c '. + ["egress_blocked"] | unique')
+              EGRESS_DENIED=$(echo "$EGRESS_REPORT" | jq -c '.hosts // []')
+              echo "::warning::egress_blocked - allowlist denied needed hosts: $(echo "$EGRESS_DENIED" | jq -c '[.[].host]')"
+            fi
+          fi
+
           # A missing or out-of-range score means the judge malformed its reply, not
           # that the skill scored zero. Treat it as unscored and skip the write, so a
           # judge error can't append a 0 to history and drag avg_score down. (`.score
@@ -1396,8 +1449,8 @@ jobs:
 
           jq -n --arg sk "$SKILL" --arg ts "$NOW_ISO" --argjson sc "$SCORE" \
             --arg as "$ASSESSMENT" --argjson fl "$FLAGS" \
-            --argjson hi "$HISTORY" --argjson avg "$AVG" \
-            '{skill: $sk, last_analyzed: $ts, quality_score: $sc, assessment: $as, flags: $fl, avg_score: $avg, history: $hi}' \
+            --argjson hi "$HISTORY" --argjson avg "$AVG" --argjson ed "$EGRESS_DENIED" \
+            '{skill: $sk, last_analyzed: $ts, quality_score: $sc, assessment: $as, flags: $fl, avg_score: $avg, history: $hi} + (if ($ed | length) > 0 then {egress_denied_hosts: $ed} else {} end)' \
             > "$HEALTH_FILE"
 
           echo "::notice::Skill quality — $SKILL: score=$SCORE, avg=$AVG — $ASSESSMENT"

@@ -16,9 +16,13 @@ scripts/health_issue.sh; this module is offline and unit-tested.
 import json
 import sys
 
-FAILURE_FLAGS = {"api_error", "empty_output", "rate_limited", "dead_citation", "stale_data"}
+FAILURE_FLAGS = {"api_error", "empty_output", "rate_limited", "dead_citation", "stale_data", "egress_blocked"}
 HIGH_FLAGS = {"api_error", "empty_output"}
-MED_FLAGS = {"dead_citation", "stale_data", "rate_limited"}
+# egress_blocked = the allowlist rejected a host the skill needed (an allowlist gap
+# for the repair loop); medium so a votable §7 Issue opens without out-ranking a
+# hard api_error. Set deterministically from the iron-proxy audit log, not by the
+# Haiku scorer - see .github/scripts/iron-report.mjs.
+MED_FLAGS = {"dead_citation", "stale_data", "rate_limited", "egress_blocked"}
 _SEV_RANK = {"high": 3, "medium": 2, "low": 1, "none": 0}
 
 
