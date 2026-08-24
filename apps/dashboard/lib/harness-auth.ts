@@ -96,6 +96,19 @@ const HARNESS_AUTH_SPECS = {
     authSecrets: ['MISTRAL_API_KEY', 'OPENROUTER_API_KEY'],
     apiKey: { secret: 'MISTRAL_API_KEY', placeholder: 'Mistral API key' },
   },
+  // fx has no OpenRouter fallback — unlike every entry above, it's not appended
+  // here. fx's only CI-viable credentials are a Vercel AI Gateway key or an
+  // OIDC token (auto-provisioned in some CI environments, not something an
+  // operator pastes — included in authSecrets for the run-gate check, but the
+  // apiKey input below targets AI_GATEWAY_API_KEY specifically). No native
+  // OAuth entry: `fx login` is a plain browser redirect, not the device-code
+  // shape `HarnessOAuth` above models for codex/kimi, and this file has no way
+  // to verify that flow without a live dashboard — left out rather than
+  // guessed at.
+  fx: {
+    authSecrets: ['AI_GATEWAY_API_KEY', 'VERCEL_OIDC_TOKEN'],
+    apiKey: { secret: 'AI_GATEWAY_API_KEY', placeholder: 'Vercel AI Gateway key' },
+  },
 } satisfies Record<string, HarnessAuthSpec>
 
 // Every caller indexes this with a harness name that came off the wire, out of

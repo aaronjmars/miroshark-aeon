@@ -1,7 +1,13 @@
 {
-  "baseline_sha": "b1d907976ee1d2939b4b545ee4aab46b9fed06a9",
+  "baseline_sha": "b7a909aa412d8e654df15417fcff0682dac39682",
   "upstream": "aeonfun/aeon",
-  "last_run": null,
-  "last_pr": null,
-  "pending_conflicts": []
+  "last_run": "2026-08-24",
+  "last_pr": "https://github.com/aaronjmars/miroshark-aeon/pull/146",
+  "applied": { "added": 25, "updated": 45, "merged": 11, "deleted": 4 },
+  "pending_conflicts": [
+    { "path": ".github/workflows/aeon.yml", "reason": "operator-customized", "upstream_commits": ["326b6ab", "5b08830", "8367e67", "e93f6ec", "b8b763a", "f581f4a", "0a4d987"] },
+    { "path": ".github/workflows/ci-tests.yml", "reason": "operator-customized", "upstream_commits": ["8367e67", "a95f09e"] },
+    { "path": ".github/workflows/messages.yml", "reason": "operator-customized", "upstream_commits": ["c139fd7", "8367e67"] },
+    { "path": "llms.txt", "reason": "fork-only-content-collision", "upstream_commits": ["d208931"] }
+  ]
 }

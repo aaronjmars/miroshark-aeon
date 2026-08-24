@@ -12,7 +12,8 @@ Worker** (`npx wrangler deploy`) after updating `src/worker.js` to pick up chang
 
 Each user deploys it into **their own** Cloudflare account. There's no shared
 relay and no credential custody — your bot token and GitHub PAT live only in your
-Worker's secrets.
+Worker's secrets. The replay guard also needs one small piece of Cloudflare
+infrastructure: a Workers KV namespace in that account.
 
 ## Deploy
 
@@ -20,15 +21,24 @@ Worker's secrets.
 
 > Forked Aeon? Change `aeonfun/aeon` in the button URL above to
 > `your-username/your-fork` so it deploys from your repo. (The button requires a
-> **public** source repo.)
+> **public** source repo.) The button is no longer deploy-and-done by itself:
+> create the required KV namespace and put its ID in your fork's
+> `apps/webhook/wrangler.toml` first.
 
 Or from a clone:
 
 ```bash
 cd apps/webhook
 npm install
+npx wrangler kv namespace create REPLAY_GUARD
+npx wrangler kv namespace create REPLAY_GUARD --preview  # for local wrangler dev
+# Paste the returned ids into [[kv_namespaces]] in wrangler.toml.
 npx wrangler deploy
 ```
+
+The KV namespace is required for replay protection on the normal `*.workers.dev`
+deployment target. Keep the production `id` and local `preview_id` separate; do
+not use a preview namespace for a deployed Worker.
 
 ## Configure
 
@@ -55,8 +65,9 @@ npx wrangler secret put GITHUB_TOKEN              # GitHub PAT (see scopes below
 | `GITHUB_REPO` | yes | `owner/repo` of your Aeon fork, e.g. `aeonfun/aeon` — not the worker repo the deploy button creates. |
 | `GITHUB_TOKEN` | yes | Fine-grained PAT scoped to your fork with **Contents: read/write** and **Actions: read/write**, or a classic token with `repo`. |
 
-To edit values later: Cloudflare dashboard → Workers & Pages → your worker →
-Settings → Variables and secrets.
+To edit secret values later: Cloudflare dashboard → Workers & Pages → your worker →
+Settings → Variables and secrets. To manage the replay namespace later, use
+Workers & Pages → KV or the `wrangler kv namespace` commands.
 
 ## Point Telegram at the Worker
 
@@ -86,10 +97,12 @@ poller calls `getWebhookInfo` first and **skips the Telegram branch when a webho
 is active**, so the two never fight. Delivery then runs entirely through this
 Worker → `repository_dispatch`.
 
-Dedupe in webhook mode is by the `update_id` carried in the dispatch payload:
-the Worker returns `200` once GitHub accepts the dispatch (so Telegram never
-redelivers) and a non-2xx only when the dispatch genuinely failed (so Telegram
-retries).
+Dedupe in webhook mode is by the `update_id` carried in the dispatch payload and
+stored in KV for five minutes. The Worker returns `200` once GitHub accepts the
+dispatch (so Telegram normally never redelivers) and a non-2xx only when the
+dispatch genuinely failed (so Telegram retries). KV has no atomic check-and-set,
+so two simultaneous redeliveries can still both dispatch; the guard is bounded
+deduplication, not an exactly-once guarantee.
 
 ## What it does
 

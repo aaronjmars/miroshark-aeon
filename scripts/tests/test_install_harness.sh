@@ -30,6 +30,15 @@ printf '%s\n' "\$@" >> "\$PKG_LOG"
 EOF
   chmod +x "$BIN/$tool"
 done
+# fx installs via curl|bash, not a package manager — fake curl so this test
+# never hits the real network, and fake bash-via-pipe is just "record and exit
+# 0" since install-harness.sh doesn't parse curl's output.
+cat > "$BIN/curl" <<EOF
+#!/usr/bin/env bash
+printf 'curl %s\n' "\$*" >> "\$PKG_LOG"
+echo "echo fake-fx-installed"
+EOF
+chmod +x "$BIN/curl"
 
 # run <harness> [env...] -> stages into a fresh $HOME; sets H_DIR and PKG_LOG
 run() {
@@ -103,6 +112,24 @@ grep -q 'alias = "or-cheap"' "$CFG" 2>/dev/null \
 run vibe AUTH_MODE=native-key
 [ ! -f "$H_DIR/.vibe/config.toml" ] \
   && pass "vibe/native-key: no config (Mistral is vibe's default)" || bad "vibe native-key wrote a config"
+
+# fx has no OpenRouter fallback (see resolve-harness.sh), so unlike every other
+# harness here there's no config-generation branch to test — just: does the
+# native-key path succeed and stage nothing, and does a missing credential fail
+# closed instead of installing a CLI that's guaranteed to fail later.
+if run fx AUTH_MODE=native-key AI_GATEWAY_API_KEY=sk-test; then
+  grep -q "curl.*fx.sh/setup.sh" "$H_DIR/pkg.log" \
+    && pass "fx/native-key: installer invoked" || bad "fx installer not invoked"
+else
+  bad "fx/native-key with AI_GATEWAY_API_KEY should succeed"
+fi
+if run fx AUTH_MODE=openrouter; then
+  bad "fx with no credential and no OpenRouter fallback should fail closed"
+else
+  grep -q "AI_GATEWAY_API_KEY or VERCEL_OIDC_TOKEN" "$H_DIR/out.txt" \
+    && pass "fx: missing credential fails closed, names both accepted vars" \
+    || bad "fx missing-credential error message"
+fi
 
 # --- 4. supply-chain pins ---------------------------------------------------
 # An unpinned `-g` install runs whatever the registry serves, in CI, with the

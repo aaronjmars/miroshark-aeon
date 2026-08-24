@@ -5,9 +5,17 @@ compatibility_date = "2025-01-01"
 # trace context). Harmless when OpenTelemetry is left disabled.
 compatibility_flags = ["nodejs_compat"]
 
-# This Worker reads its config from environment variables / secrets, not from
-# this file. The "Deploy to Cloudflare" wizard prompts for them (declared in
-# .dev.vars.example); when deploying from a clone, set them via the CLI:
+# Create these namespaces before deploying; replace the placeholder IDs below:
+#   npx wrangler kv namespace create REPLAY_GUARD
+#   npx wrangler kv namespace create REPLAY_GUARD --preview
+[[kv_namespaces]]
+binding = "REPLAY_GUARD"
+id = "REPLACE_WITH_KV_NAMESPACE_ID"
+preview_id = "REPLACE_WITH_KV_PREVIEW_NAMESPACE_ID"
+
+# Apart from the KV binding above, this Worker reads its config from environment
+# variables / secrets. The "Deploy to Cloudflare" wizard prompts for them
+# (declared in .dev.vars.example); when deploying from a clone, set them via CLI:
 #
 #   wrangler secret put TELEGRAM_BOT_TOKEN
 #   wrangler secret put TELEGRAM_CHAT_ID
