@@ -1,15 +1,11 @@
 {
   "skill": "fetch-tweets",
-  "last_analyzed": "2026-08-24T17:06:47Z",
+  "last_analyzed": "2026-08-25T17:07:04Z",
   "quality_score": 4,
-  "assessment": "Well-executed monitoring skill with clean execution (HTTP 200, memory deduplication, proper logging). Found and reported an on-message tweet about prediction markets + simulation. Serves priority #4 (track momentum honestly) but is support work, not a core shipping/proof deliverable.",
+  "assessment": "Well-executed monitoring skill: properly fetched, deduped all tweets against prior logs, correctly applied 'no signal = no notify' rule, and provided verifiable output with clear logic.",
   "flags": [],
   "avg_score": 3.73,
   "history": [
-    {
-      "date": "2026-07-22",
-      "score": 4
-    },
     {
       "date": "2026-07-23",
       "score": 4
@@ -124,6 +120,10 @@
     },
     {
       "date": "2026-08-24",
+      "score": 4
+    },
+    {
+      "date": "2026-08-25",
       "score": 4
     }
   ]
