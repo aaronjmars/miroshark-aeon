@@ -1,0 +1,445 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "aeon-update",
+        "description": "25 commits → PR #151"
+      },
+      "children": [
+        "date_text",
+        "summary_stack",
+        "sep1",
+        "canon_text",
+        "sep2",
+        "new_skills_section",
+        "sep3",
+        "framework_section",
+        "sep4",
+        "merge_status_section",
+        "sep5",
+        "notes_section",
+        "sep6",
+        "pr_link"
+      ]
+    },
+    "date_text": {
+      "type": "Text",
+      "props": {
+        "text": "2026-08-25",
+        "variant": "caption"
+      }
+    },
+    "summary_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "stat_commits",
+        "stat_files_applied",
+        "stat_files_manual"
+      ]
+    },
+    "stat_commits": {
+      "type": "Stat",
+      "props": {
+        "label": "Commits synced",
+        "value": "25"
+      }
+    },
+    "stat_files_applied": {
+      "type": "Stat",
+      "props": {
+        "label": "Files applied",
+        "value": "52"
+      }
+    },
+    "stat_files_manual": {
+      "type": "Stat",
+      "props": {
+        "label": "Need manual merge",
+        "value": "9"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {}
+    },
+    "canon_text": {
+      "type": "Text",
+      "props": {
+        "text": "Canon: b7a909a..8b8d719",
+        "variant": "caption"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {}
+    },
+    "new_skills_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "new_skills_heading",
+        "skill_rightstack",
+        "skill_article"
+      ]
+    },
+    "new_skills_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "New Skills",
+        "level": "h3"
+      }
+    },
+    "skill_rightstack": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "badge_rightstack",
+        "text_rightstack"
+      ]
+    },
+    "badge_rightstack": {
+      "type": "Badge",
+      "props": {
+        "text": "rightstack",
+        "variant": "default"
+      }
+    },
+    "text_rightstack": {
+      "type": "Text",
+      "props": {
+        "text": "Web3 stack advisor",
+        "variant": "body"
+      }
+    },
+    "skill_article": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "badge_article",
+        "text_article"
+      ]
+    },
+    "badge_article": {
+      "type": "Badge",
+      "props": {
+        "text": "skill-article",
+        "variant": "default"
+      }
+    },
+    "text_article": {
+      "type": "Text",
+      "props": {
+        "text": "Launch article for any skill",
+        "variant": "body"
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {}
+    },
+    "framework_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "framework_heading",
+        "fw_list"
+      ]
+    },
+    "framework_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Framework Updates",
+        "level": "h3"
+      }
+    },
+    "fw_list": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "fw_item1",
+        "fw_item2",
+        "fw_item3",
+        "fw_item4"
+      ]
+    },
+    "fw_item1": {
+      "type": "Text",
+      "props": {
+        "text": "Post-run notify dispatcher (tokens out of skill env)",
+        "variant": "body"
+      }
+    },
+    "fw_item2": {
+      "type": "Text",
+      "props": {
+        "text": "Egress-audit hardening",
+        "variant": "body"
+      }
+    },
+    "fw_item3": {
+      "type": "Text",
+      "props": {
+        "text": "FX harness fixes",
+        "variant": "body"
+      }
+    },
+    "fw_item4": {
+      "type": "Text",
+      "props": {
+        "text": "macOS cron portability",
+        "variant": "body"
+      }
+    },
+    "sep4": {
+      "type": "Separator",
+      "props": {}
+    },
+    "merge_status_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "merge_heading",
+        "auto_merged_stack",
+        "eslint_alert",
+        "manual_merge_stack"
+      ]
+    },
+    "merge_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Merge Status",
+        "level": "h3"
+      }
+    },
+    "auto_merged_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "auto_merged_badge",
+        "auto_merged_text"
+      ]
+    },
+    "auto_merged_badge": {
+      "type": "Badge",
+      "props": {
+        "text": "Auto-merged",
+        "variant": "secondary"
+      }
+    },
+    "auto_merged_text": {
+      "type": "Text",
+      "props": {
+        "text": "messages.yml — standing conflict resolved clean",
+        "variant": "body"
+      }
+    },
+    "eslint_alert": {
+      "type": "Alert",
+      "props": {
+        "title": "ESLint Lint Gate Held Back",
+        "message": "ci-apps.yml lint steps + apps/dashboard + apps/webhook package.json + lockfiles. Dashboard runs npm ci; lockfiles diverge, shipping would land CI-red. Merge these five together or none.",
+        "type": "warning"
+      }
+    },
+    "manual_merge_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "manual_merge_label",
+        "manual_items_grid"
+      ]
+    },
+    "manual_merge_label": {
+      "type": "Text",
+      "props": {
+        "text": "Also manual:",
+        "variant": "body"
+      }
+    },
+    "manual_items_grid": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "manual_item1",
+        "manual_item2",
+        "manual_item3",
+        "manual_item4"
+      ]
+    },
+    "manual_item1": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "badge_aeon",
+        "text_aeon"
+      ]
+    },
+    "badge_aeon": {
+      "type": "Badge",
+      "props": {
+        "text": "aeon.yml",
+        "variant": "outline"
+      }
+    },
+    "text_aeon": {
+      "type": "Text",
+      "props": {
+        "text": "workflow (your narrowed env)",
+        "variant": "body"
+      }
+    },
+    "manual_item2": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "badge_ci_tests",
+        "text_ci_tests"
+      ]
+    },
+    "badge_ci_tests": {
+      "type": "Badge",
+      "props": {
+        "text": "ci-tests.yml",
+        "variant": "outline"
+      }
+    },
+    "text_ci_tests": {
+      "type": "Text",
+      "props": {
+        "text": "workflow",
+        "variant": "body"
+      }
+    },
+    "manual_item3": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "badge_skill_packs",
+        "text_skill_packs"
+      ]
+    },
+    "badge_skill_packs": {
+      "type": "Badge",
+      "props": {
+        "text": "docs/skill-packs.md",
+        "variant": "outline"
+      }
+    },
+    "text_skill_packs": {
+      "type": "Text",
+      "props": {
+        "text": "fork pack counts",
+        "variant": "body"
+      }
+    },
+    "manual_item4": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "badge_llms",
+        "text_llms"
+      ]
+    },
+    "badge_llms": {
+      "type": "Badge",
+      "props": {
+        "text": "llms.txt",
+        "variant": "outline"
+      }
+    },
+    "text_llms": {
+      "type": "Text",
+      "props": {
+        "text": "MiroShark copy",
+        "variant": "body"
+      }
+    },
+    "sep5": {
+      "type": "Separator",
+      "props": {}
+    },
+    "notes_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "notes_rightstack",
+        "notes_baseline"
+      ]
+    },
+    "notes_rightstack": {
+      "type": "Text",
+      "props": {
+        "text": "aeon.yml config got one disabled rightstack entry upstream (optional)",
+        "variant": "caption"
+      }
+    },
+    "notes_baseline": {
+      "type": "Text",
+      "props": {
+        "text": "Baseline advances only when merged",
+        "variant": "caption"
+      }
+    },
+    "sep6": {
+      "type": "Separator",
+      "props": {}
+    },
+    "pr_link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Pull Request #151",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/pull/151",
+        "source": "GitHub"
+      }
+    }
+  }
+}

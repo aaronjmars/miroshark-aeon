@@ -1,23 +1,17 @@
-✅ aeon-update: 43 commits synced -> PR #146
+ℹ️ aeon-update: 25 commits → PR #151
 
-**aeon-update — 2026-08-24** ⭐
+**aeon-update — 2026-08-25**
 
-synced 43 upstream commits from `aeonfun/aeon` (`b1d9079..b7a909a`) → **[PR #146](https://github.com/aaronjmars/miroshark-aeon/pull/146)**. first real run of the downstream updater.
+Synced 25 upstream commits → PR #151. 52 files applied, 9 need a manual merge.
 
-**85 files applied clean** — 25 added, 45 updated, 11 auto-merged 3-way, 4 deleted. catalogs + AGENTS.md regenerated, validate-config green. your local edits to notify/skill_mode/heartbeat/skill-health survived — merged, not clobbered.
+Canon `b7a909a..8b8d719`. New skills land: `rightstack` (Web3 stack advisor), `skill-article` (launch article for any skill). Framework: post-run notify dispatcher (tokens out of skill env), egress-audit hardening, fx harness fixes, macOS cron portability. `messages.yml` — a standing conflict — auto-merged clean this time.
 
-what's landing:
-- fx/Vercel as a 7th harness + `harnesses.json` capability manifest
-- reactive-trigger + chain `when:` routing, dry-run gate before self-authored auto-merge
-- structured audit log, secretcurl argv-hardening, all GH Actions SHA-pinned
-- memory-flush deterministic prep
+Held back the whole eslint lint gate as one bundle — `ci-apps.yml` lint steps + `apps/{dashboard,webhook}` package.json + lockfiles. Dashboard runs `npm ci`; your lockfiles diverge, so shipping the gate would land it CI-red. Merge those five together or none.
 
-**4 need a hand** (workflows you customized + upstream also touched, overlapping lines):
-- `.github/workflows/aeon.yml` — your narrowed env vs upstream's 188-line SHA-pin/harness rewrite
-- `ci-tests.yml` — checkout SHA-pin + ~10 new test steps
-- `messages.yml` — keep your ALL_SECRETS allowlist, cherry-pick the pins + AI_GATEWAY/VERCEL/HOOK_MAINNET_OK
-- `llms.txt` — your MiroShark copy left untouched vs upstream's new generic one
+Also manual: `aeon.yml` workflow (your narrowed env), `ci-tests.yml`, `docs/skill-packs.md` (fork pack counts), `llms.txt` (MiroShark copy). `aeon.yml` config got one disabled `rightstack` entry upstream — optional.
 
-baseline advances to `b7a909a` only when you merge. conflicts tracked in state, they'll resurface until reconciled.
+Baseline advances only when you merge.
 
-🔗 https://github.com/aaronjmars/miroshark-aeon/pull/146
+PR: https://github.com/aaronjmars/miroshark-aeon/pull/151
+
+🔗 https://github.com/aaronjmars/miroshark-aeon/pull/151
