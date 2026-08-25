@@ -83,21 +83,31 @@ export const PI_MODELS = [
 
 // Harnesses (agent CLIs). `claude` = Claude Code (default, AI Gateway), labelled
 // "Anthropic"; `grok` = Grok Build (own X-account/API-key auth, own models),
-// "xAI". The last four run through harness-adapter's run-harness on a single
-// OPENROUTER_API_KEY. The `id`s are the on-disk harness values (aeon.yml
-// `harness:`) and never change — only the labels do.
-// `satisfies` (not an annotation) keeps each `id` a literal for the select
-// options while making a typo'd or dropped harness a compile error against the
-// Harness union in ./types.
+// "xAI". codex/pi/vibe/kimi run through harness-adapter's run-harness on a
+// single OPENROUTER_API_KEY. `fx` also runs through run-harness but has no
+// OpenRouter fallback at all — Vercel AI Gateway key or VERCEL_OIDC_TOKEN only
+// (see lib/harness-auth.ts and resolve-harness.sh's fx case). The `id`s are the
+// on-disk harness values (aeon.yml `harness:`) and never change — only the
+// labels do. `satisfies` (not an annotation) keeps each `id` a literal for the
+// select options while making a typo'd or dropped harness a compile error
+// against the Harness union in ./types.
 export const HARNESSES = [
   { id: 'claude', label: 'Anthropic' },
   { id: 'grok', label: 'xAI' },
   { id: 'codex', label: 'Codex' },
+  { id: 'fx', label: 'fx (Vercel)' },
   { id: 'pi', label: 'Pi' },
   { id: 'vibe', label: 'Vibe' },
   { id: 'kimi', label: 'Kimi' },
 ] as const satisfies readonly { id: Harness; label: string }[]
 
+// fx has no model picker: unlike codex/pi/vibe/kimi's OpenRouter path, fx's
+// only real auth mode is native-key (AI_GATEWAY_API_KEY / VERCEL_OIDC_TOKEN),
+// and resolve-harness.sh's native-auth branch deliberately never forwards
+// --model in that mode (same as codex/pi/vibe/kimi's own native-auth path) —
+// fx always runs on its own default model. So this intentionally falls
+// through to the generic MODELS default below: whatever renders there is
+// cosmetic only for fx and never actually reaches the run.
 export function modelsForHarness(harness: string) {
   if (harness === 'grok') return GROK_MODELS
   if (harness === 'codex') return CODEX_MODELS

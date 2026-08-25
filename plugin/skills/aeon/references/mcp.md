@@ -7,7 +7,7 @@ Two unrelated things share the name. Get this wrong and nothing works.
 | | |
 |---|---|
 | **`.mcp.json`** — *external MCP servers, called BY Aeon skills* | Wired via the dashboard MCP panel or `./aeon mcp add`. This is what you want when a skill needs a tool. |
-| **`bin/add-mcp`** — *Aeon itself AS an MCP server* | Builds `apps/mcp-server` and registers it with Claude Code / Desktop, so all 75 skills appear as `aeon-*` tools **in your local Claude**. Nothing to do with a skill calling out. |
+| **`bin/add-mcp`** — *Aeon itself AS an MCP server* | Builds `apps/mcp-server` and registers it with Claude Code / Desktop, so all 76 skills appear as `aeon-*` tools **in your local Claude**. Nothing to do with a skill calling out. |
 
 The rest of this doc is the first one. For the second: `bin/add-mcp`, `--desktop` for a Claude Desktop snippet, `--uninstall` to remove, `claude mcp list` to verify.
 
@@ -119,7 +119,7 @@ If a provider rotates the refresh token on each use, the old one dies immediatel
 
 Writing a secret needs a secrets-write credential, and **the default `GITHUB_TOKEN` cannot do it.** Add a fine-grained PAT with **Secrets: read/write** as **`GH_SECRETS_PAT`** (or repo-wide `GH_GLOBAL`).
 
-**All four catalog providers rotate — treat the PAT as required, not optional.**
+**Every catalog provider rotates - treat the PAT as required, not optional.**
 
 After adding the PAT, **re-connect the affected server once**. A refresh token already consumed by an earlier run can't be revived by the PAT alone.
 

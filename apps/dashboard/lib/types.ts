@@ -65,11 +65,14 @@ export type GatewayProvider = 'auto' | 'direct' | GatewaySlug
 export const GATEWAY_PROVIDERS: GatewayProvider[] = ['auto', 'direct', ...GATEWAY_SLUGS]
 
 // Which agent CLI runs skills. `claude` = Claude Code (default, uses the gateway
-// above); `grok` = Grok Build CLI (own auth, own models). The remaining four run
+// above); `grok` = Grok Build CLI (own auth, own models). codex/pi/vibe/kimi run
 // through harness-adapter's `run-harness` on one OPENROUTER_API_KEY (see
 // harness-adapter/docs/aeon-integration.md and scripts/run-grok.sh for the seam).
-export type Harness = 'claude' | 'grok' | 'codex' | 'pi' | 'vibe' | 'kimi'
-export const HARNESSES: Harness[] = ['claude', 'grok', 'codex', 'pi', 'vibe', 'kimi']
+// `fx` also runs through run-harness but has NO OpenRouter fallback (Vercel AI
+// Gateway / VERCEL_OIDC_TOKEN only) — see lib/harness-auth.ts's fx entry and
+// resolve-harness.sh's fx case.
+export type Harness = 'claude' | 'grok' | 'codex' | 'fx' | 'pi' | 'vibe' | 'kimi'
+export const HARNESSES: Harness[] = ['claude', 'grok', 'codex', 'fx', 'pi', 'vibe', 'kimi']
 
 export interface UploadFile { path: string; content: string }
 

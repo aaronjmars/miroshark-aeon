@@ -2,6 +2,7 @@
   "version": 1,
   "note": "Canonical per-skill icon glyphs. Each value is the inner SVG markup rendered inside <svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'>. Attributes use single quotes so the strings drop straight into JSX (dangerouslySetInnerHTML) and standalone .svg files without escaping. Filled marks override with fill='currentColor' stroke='none'. Edit here, then run bin/generate-skill-icons to regenerate docs/assets/skill-icons/*.svg + apps/dashboard/lib/skill-icons.data.ts. The aeon-website keeps a mirror at app/skill-icons.data.ts.",
   "icons": {
+    "skill-article": "<path d='M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h9'/><path d='M14 3v5h5'/><path d='M8 12h6M8 16h4'/><path d='M17 14l4 3-4 3v-6z'/>",
     "repo-pulse": "<path d='M3 17l6-6 4 4 7-7'/><path d='M17 8h4v4'/>",
     "holdings": "<path d='M3 6a2 2 0 0 1 2-2h11a1 1 0 0 1 1 1v2'/><path d='M3 6v12a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2H5a2 2 0 0 1-2-2z'/><circle cx='16' cy='14' r='1.4' fill='currentColor' stroke='none'/>",
     "aeon-update": "<path d='M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4'/><path d='M7 10l5 5 5-5'/><path d='M12 15V3'/>",

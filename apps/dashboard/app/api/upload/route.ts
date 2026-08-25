@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { createFile, getFileContent, updateFile, commitAndPush } from '@/lib/github'
+import { createFile, getFileContent, updateFile, commitAndPush, withFileLock } from '@/lib/github'
 import { errorResponse, syncFields } from '@/lib/http'
 import { isRecord, slugify } from '@/lib/utils'
 import { addSkillToConfig } from '@/lib/config'
@@ -180,26 +180,29 @@ export async function POST(request: Request) {
 
     let configUpdated = true
     let configError: string | undefined
-    try {
-      const config = await getFileContent('aeon.yml')
-      const updated = addSkillToConfig(config.content, skillName)
-      if (updated !== config.content) {
-        await updateFile('aeon.yml', updated, config.sha, `chore: add ${skillName} to config`)
+    // Locked so this read-modify-write of aeon.yml can't interleave with another
+    // request's own unlocked read-modify-write of the same file (see withFileLock).
+    const sync = await withFileLock('aeon.yml', async () => {
+      try {
+        const config = await getFileContent('aeon.yml')
+        const updated = addSkillToConfig(config.content, skillName)
+        if (updated !== config.content) {
+          await updateFile('aeon.yml', updated, config.sha, `chore: add ${skillName} to config`)
+        }
+      } catch (e: unknown) {
+        // The aeon.yml write is a real GitHub-API/file-IO boundary that can throw;
+        // the skill files are already on disk, so don't fail the whole upload —
+        // but surface it instead of swallowing it silently.
+        configUpdated = false
+        configError = e instanceof Error ? e.message : 'Failed to update aeon.yml'
+        console.error(`upload: failed to add ${skillName} to aeon.yml:`, e)
       }
-    } catch (e: unknown) {
-      // The aeon.yml write is a real GitHub-API/file-IO boundary that can throw;
-      // the skill files are already on disk, so don't fail the whole upload —
-      // but surface it instead of swallowing it silently.
-      configUpdated = false
-      configError = e instanceof Error ? e.message : 'Failed to update aeon.yml'
-      console.error(`upload: failed to add ${skillName} to aeon.yml:`, e)
-    }
+      return commitAndPush(['aeon.yml', `skills/${skillName}`], `feat: upload ${skillName} skill`)
+    })
 
     // Detect secrets referenced in skill content
     const allContent = files.map(f => f.content).join('\n')
     const detectedSecrets = detectSecretsFromContent(allContent)
-
-    const sync = commitAndPush(['aeon.yml', `skills/${skillName}`], `feat: upload ${skillName} skill`)
 
     return NextResponse.json({
       name: skillName,

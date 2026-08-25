@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import { errorResponse, syncResult } from '@/lib/http'
-import { getFileContent, updateFile, commitAndPush } from '@/lib/github'
+import { getFileContent, updateFile, commitAndPush, withFileLock } from '@/lib/github'
 import {
   upsertSkillInConfig,
   updateModelInConfig,
@@ -25,37 +25,38 @@ export async function GET() {
 export async function PATCH(request: Request) {
   try {
     const { name, enabled, schedule, var: skillVar, model, skillModel, harness, skillHarness, jsonrenderEnabled } = await request.json() as { name?: string; enabled?: boolean; schedule?: string; var?: string; model?: string; skillModel?: string; harness?: string; skillHarness?: string; jsonrenderEnabled?: boolean }
-    const { content, sha } = await getFileContent('aeon.yml')
-    let updated = content
 
-    if (typeof jsonrenderEnabled === 'boolean') {
-      updated = updateJsonrenderInConfig(updated, jsonrenderEnabled)
-    }
+    const sync = await withFileLock('aeon.yml', async () => {
+      const { content, sha } = await getFileContent('aeon.yml')
+      let updated = content
 
-    if (typeof model === 'string' && model) {
-      updated = updateModelInConfig(updated, model)
-    }
+      if (typeof jsonrenderEnabled === 'boolean') {
+        updated = updateJsonrenderInConfig(updated, jsonrenderEnabled)
+      }
 
-    // Top-level harness switch (claude | grok). Ignore unknown values.
-    if (typeof harness === 'string' && HARNESSES.includes(harness as Harness)) {
-      updated = updateHarnessInConfig(updated, harness as Harness)
-    }
+      if (typeof model === 'string' && model) {
+        updated = updateModelInConfig(updated, model)
+      }
 
-    if (name && (typeof enabled === 'boolean' || typeof schedule === 'string' || typeof skillVar === 'string' || typeof skillModel === 'string' || typeof skillHarness === 'string')) {
-      // upsert, not update: the skill list is built from disk, so the UI can
-      // toggle a skill that has no aeon.yml entry yet (a freshly added
-      // SKILL.md). A plain update would silently no-op on it.
-      updated = upsertSkillInConfig(updated, name, {
-        ...(typeof enabled === 'boolean' ? { enabled } : {}),
-        ...(typeof schedule === 'string' && schedule ? { schedule } : {}),
-        ...(typeof skillVar === 'string' ? { var: skillVar } : {}),
-        ...(typeof skillModel === 'string' ? { model: skillModel } : {}),
-        ...(typeof skillHarness === 'string' ? { harness: skillHarness } : {}),
-      })
-    }
+      // Top-level harness switch (claude | grok). Ignore unknown values.
+      if (typeof harness === 'string' && HARNESSES.includes(harness as Harness)) {
+        updated = updateHarnessInConfig(updated, harness as Harness)
+      }
 
-    let sync: CommitResult = { synced: true }
-    if (updated !== content) {
+      if (name && (typeof enabled === 'boolean' || typeof schedule === 'string' || typeof skillVar === 'string' || typeof skillModel === 'string' || typeof skillHarness === 'string')) {
+        // upsert, not update: the skill list is built from disk, so the UI can
+        // toggle a skill that has no aeon.yml entry yet (a freshly added
+        // SKILL.md). A plain update would silently no-op on it.
+        updated = upsertSkillInConfig(updated, name, {
+          ...(typeof enabled === 'boolean' ? { enabled } : {}),
+          ...(typeof schedule === 'string' && schedule ? { schedule } : {}),
+          ...(typeof skillVar === 'string' ? { var: skillVar } : {}),
+          ...(typeof skillModel === 'string' ? { model: skillModel } : {}),
+          ...(typeof skillHarness === 'string' ? { harness: skillHarness } : {}),
+        })
+      }
+
+      if (updated === content) return { synced: true } as CommitResult
       const msg = model
         ? `chore: set model to ${model}`
         : harness
@@ -64,8 +65,8 @@ export async function PATCH(request: Request) {
             ? `chore: ${jsonrenderEnabled ? 'enable' : 'disable'} json-render channel`
             : `chore: update ${name} config`
       await updateFile('aeon.yml', updated, sha, msg)
-      sync = commitAndPush(['aeon.yml'], msg)
-    }
+      return commitAndPush(['aeon.yml'], msg)
+    })
 
     return NextResponse.json(syncResult(sync))
   } catch (error: unknown) {
@@ -84,23 +85,26 @@ export async function DELETE(request: Request) {
 
     let configUpdated = true
     let configError: string | undefined
-    try {
-      const { content, sha } = await getFileContent('aeon.yml')
-      const updated = removeSkillFromConfig(content, name)
-      if (updated !== content) {
-        await updateFile('aeon.yml', updated, sha, `chore: remove ${name} from config`)
+    // One commit for both the removed skill dir and the aeon.yml cleanup. The
+    // aeon.yml read-modify-write is locked so it can't interleave with another
+    // request's own unlocked read-modify-write of the same file (see withFileLock).
+    const sync = await withFileLock('aeon.yml', async () => {
+      try {
+        const { content, sha } = await getFileContent('aeon.yml')
+        const updated = removeSkillFromConfig(content, name)
+        if (updated !== content) {
+          await updateFile('aeon.yml', updated, sha, `chore: remove ${name} from config`)
+        }
+      } catch (e: unknown) {
+        // The aeon.yml write is a real GitHub-API/file-IO boundary that can throw;
+        // the skill dir is already deleted, so don't fail the request - but surface
+        // it instead of swallowing it silently and reporting a clean removal.
+        configUpdated = false
+        configError = e instanceof Error ? e.message : 'Failed to update aeon.yml'
+        console.error(`skills DELETE: failed to remove ${name} from aeon.yml:`, e)
       }
-    } catch (e: unknown) {
-      // The aeon.yml write is a real GitHub-API/file-IO boundary that can throw;
-      // the skill dir is already deleted, so don't fail the request - but surface
-      // it instead of swallowing it silently and reporting a clean removal.
-      configUpdated = false
-      configError = e instanceof Error ? e.message : 'Failed to update aeon.yml'
-      console.error(`skills DELETE: failed to remove ${name} from aeon.yml:`, e)
-    }
-
-    // One commit for both the removed skill dir and the aeon.yml cleanup.
-    const sync = commitAndPush(['aeon.yml', `skills/${name}`], `chore: remove ${name} skill`)
+      return commitAndPush(['aeon.yml', `skills/${name}`], `chore: remove ${name} skill`)
+    })
 
     return NextResponse.json({ ...syncResult(sync), configUpdated, ...(configError ? { configError } : {}) })
   } catch (error: unknown) {
