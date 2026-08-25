@@ -1,13 +1,81 @@
 {
-  "baseline_sha": "b7a909aa412d8e654df15417fcff0682dac39682",
+  "baseline_sha": "8b8d719715ec9bb68fb858a1e334d23209047d82",
   "upstream": "aeonfun/aeon",
-  "last_run": "2026-08-24",
-  "last_pr": "https://github.com/aaronjmars/miroshark-aeon/pull/146",
-  "applied": { "added": 25, "updated": 45, "merged": 11, "deleted": 4 },
+  "last_run": "2026-08-25",
+  "last_pr": "https://github.com/aaronjmars/miroshark-aeon/pull/151",
+  "applied": {
+    "added": 10,
+    "updated": 36,
+    "merged": 6,
+    "deleted": 0
+  },
   "pending_conflicts": [
-    { "path": ".github/workflows/aeon.yml", "reason": "operator-customized", "upstream_commits": ["326b6ab", "5b08830", "8367e67", "e93f6ec", "b8b763a", "f581f4a", "0a4d987"] },
-    { "path": ".github/workflows/ci-tests.yml", "reason": "operator-customized", "upstream_commits": ["8367e67", "a95f09e"] },
-    { "path": ".github/workflows/messages.yml", "reason": "operator-customized", "upstream_commits": ["c139fd7", "8367e67"] },
-    { "path": "llms.txt", "reason": "fork-only-content-collision", "upstream_commits": ["d208931"] }
+    {
+      "path": ".github/workflows/aeon.yml",
+      "reason": "operator-customized (env-narrowed vs upstream harness rewrite)",
+      "upstream_commits": [
+        "90a4d34",
+        "f72f823",
+        "0b1dfde"
+      ]
+    },
+    {
+      "path": ".github/workflows/ci-tests.yml",
+      "reason": "operator-customized (carried; not changed upstream this window)",
+      "upstream_commits": [
+        "8367e67",
+        "a95f09e"
+      ]
+    },
+    {
+      "path": ".github/workflows/ci-apps.yml",
+      "reason": "eslint-lint-gate-coupled (held back with package.json/lock deps)",
+      "upstream_commits": [
+        "64790e3"
+      ]
+    },
+    {
+      "path": "apps/dashboard/package.json",
+      "reason": "eslint-lint-gate (needs eslint devDeps; dashboard uses npm ci so lockfile must move too)",
+      "upstream_commits": [
+        "64790e3"
+      ]
+    },
+    {
+      "path": "apps/dashboard/package-lock.json",
+      "reason": "eslint-lint-gate (fork lockfile diverges; regen needed)",
+      "upstream_commits": [
+        "64790e3"
+      ]
+    },
+    {
+      "path": "apps/webhook/package.json",
+      "reason": "eslint-lint-gate (needs eslint devDeps)",
+      "upstream_commits": [
+        "64790e3"
+      ]
+    },
+    {
+      "path": "apps/webhook/package-lock.json",
+      "reason": "eslint-lint-gate (fork lockfile diverges)",
+      "upstream_commits": [
+        "64790e3"
+      ]
+    },
+    {
+      "path": "docs/skill-packs.md",
+      "reason": "fork pack-count table diverges from upstream's",
+      "upstream_commits": [
+        "3a80957",
+        "86ffd45"
+      ]
+    },
+    {
+      "path": "llms.txt",
+      "reason": "fork-only MiroShark copy vs upstream generic six->seven harness edit",
+      "upstream_commits": [
+        "86ffd45"
+      ]
+    }
   ]
 }

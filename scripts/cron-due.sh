@@ -24,8 +24,8 @@
 # Exit 0 (DUE)  → prints the matched slot time (ISO 8601) to stdout.
 # Exit 1 (skip) → no output.
 #
-# Env: AEON_DATE overrides the `date` binary (set AEON_DATE=gdate to test on
-#      macOS/BSD; the workflow runner is GNU coreutils and needs no override).
+# Env: AEON_DATE overrides the `date` binary. When unset, GNU and BSD/macOS
+#      date are detected automatically.
 set -euo pipefail
 
 SCHED="${1:?schedule required (5 cron fields)}"
@@ -33,6 +33,21 @@ NOW_EPOCH="${2:?now epoch required}"
 LAST_EPOCH="${3:-0}"
 CATCHUP_HOURS="${4:-6}"
 DATE="${AEON_DATE:-date}"
+
+if "$DATE" --version >/dev/null 2>&1; then
+  DATE_FLAVOR=gnu
+else
+  DATE_FLAVOR=bsd
+fi
+
+format_epoch() {
+  local epoch="$1" format="$2"
+  if [ "$DATE_FLAVOR" = gnu ]; then
+    "$DATE" -u -d "@$epoch" "$format"
+  else
+    "$DATE" -u -r "$epoch" "$format"
+  fi
+}
 
 IFS=' ' read -r C_MIN C_HOUR C_DOM C_MONTH C_DOW <<< "$SCHED"
 # Malformed / non-time schedule (e.g. "workflow_dispatch", "reactive", empty) → never due.
@@ -82,7 +97,7 @@ HOUR_TOP=$(( NOW_EPOCH - (NOW_EPOCH % 3600) ))
 DUE_SLOT=-1
 for (( h=0; h<=CATCHUP_HOURS; h++ )); do
   BUCKET_TOP=$(( HOUR_TOP - h * 3600 ))
-  read -r B_HOUR B_DOM B_MON B_DOW <<< "$("$DATE" -u -d "@$BUCKET_TOP" +'%-H %-d %-m %w')"
+  read -r B_HOUR B_DOM B_MON B_DOW <<< "$(format_epoch "$BUCKET_TOP" +'%-H %-d %-m %w')"
   cron_match "$C_HOUR"  "$B_HOUR" || continue
   cron_match "$C_MONTH" "$B_MON"  || continue
   # Standard cron day rule: when BOTH day-of-month and day-of-week are restricted
@@ -107,7 +122,7 @@ done
 
 # Due iff we haven't dispatched since that slot's scheduled time.
 if [ "$DUE_SLOT" -ge 0 ] && [ "$LAST_EPOCH" -lt "$DUE_SLOT" ]; then
-  "$DATE" -u -d "@$DUE_SLOT" +%FT%TZ
+  format_epoch "$DUE_SLOT" +%FT%TZ
   exit 0
 fi
 exit 1

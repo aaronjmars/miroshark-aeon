@@ -18,6 +18,26 @@ export function isLocal() {
   return !process.env.GITHUB_TOKEN || !process.env.GITHUB_REPO
 }
 
+// Per-path in-process mutex. Five independent call sites (skills PATCH/DELETE,
+// upload, gateway.syncGatewayProvider, gateway.syncHarness) each do their own
+// unlocked getFileContent -> modify -> updateFile -> commitAndPush against
+// aeon.yml. Without serialization, two requests firing close together (e.g.
+// clicking the harness picker right after the model picker) can interleave:
+// both read the same starting content, and whichever writes last silently wins
+// the whole file — including carrying forward a field the losing request never
+// touched, into a commit whose message only mentions the field it meant to
+// change. Wrap every such critical section in withFileLock(path, ...) so they
+// queue instead of racing. Local-only (per-process); irrelevant in hosted mode,
+// where the Contents API's sha check already rejects a stale write.
+const fileLocks = new Map<string, Promise<unknown>>()
+
+export function withFileLock<T>(path: string, fn: () => Promise<T>): Promise<T> {
+  const prior = fileLocks.get(path) ?? Promise.resolve()
+  const run = prior.then(fn, fn)
+  fileLocks.set(path, run.catch(() => {}))
+  return run
+}
+
 /**
  * Local-mode auto-sync. After a dashboard edit writes a file to disk, stage
  * exactly those paths, commit, and push so the change lands on GitHub

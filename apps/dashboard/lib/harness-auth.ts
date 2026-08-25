@@ -82,7 +82,13 @@ const HARNESS_AUTH_SPECS = {
       cli: 'kimi',
       ttyArgs: ['login'],
       deviceArgs: ['login'], // `kimi login` is device-code by default
-      credPaths: ['.kimi-code/credentials/kimi-code.json', '.kimi-code/device_id'],
+      // The credentials/ subdirectory (not one filename): kimi scopes the
+      // credential filename by a hash of (oauthHost, baseUrl), so a fixed
+      // filename misses non-default-region logins. config.toml holds the
+      // provider/model configuration written by the interactive login flow.
+      // Keep these paths narrow: sessions/ and cache/ can push a capture of
+      // the whole ~/.kimi-code directory past GitHub's 48 KB secret limit.
+      credPaths: ['.kimi-code/credentials', '.kimi-code/config.toml'],
       secret: 'KIMI_AUTH',
       label: 'Connect Kimi',
     },

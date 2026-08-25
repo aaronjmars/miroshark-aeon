@@ -11,6 +11,33 @@ from or pin to; the template keeps serving the latest `main` to new forks.
 
 ### Added
 
+- **`./notify` moves behind a post-run delivery dispatcher (#912 Phase 2).** A
+  skill call now writes one structured JSON payload to the notify queue instead of
+  ever touching the wire; a new post-run `scripts/notify-deliver.sh` is the only
+  place a channel token is consumed, rendering per channel (Telegram HTML +
+  reply_markup, Discord embeds, Slack Block Kit, Buzz) and writing a per-send audit
+  line. The Telegram / Discord / Slack / Buzz / email channel tokens are removed
+  from every skill's run env and the `ALL_SECRETS` allowlist; `RESEND_*` (per-skill
+  `requires:` for send-email / vuln-scanner) and `GITHUB_TOKEN` / `GH_GLOBAL` stay
+  in-run. (#955)
+- **`fx` (Vercel) added as a 7th run-harness.** Vercel's native Zig coding-agent
+  CLI joins claude/grok/codex/pi/vibe/kimi behind the same `run-harness` contract,
+  verified against a locally-built binary (missing-credential path, `mcpServers` to
+  `mcp.json` translation, second-call usage reporting via `fx session`). It is the
+  one harness with no OpenRouter fallback: it needs a Vercel AI Gateway key
+  (`AI_GATEWAY_API_KEY`) or `VERCEL_OIDC_TOKEN`. See `docs/harnesses.md`. (#941)
+- **New `skill-article` skill (Basics).** Turns any skill in the instance into a
+  publish-ready launch article: proof-stat headline, one contrarian thesis,
+  mechanics, war stories mined from real `memory/logs/` run history, a mental-model
+  reframe, and the full `SKILL.md` embedded verbatim. Optional `--banner` renders a
+  16:9 title card through the Higgsfield MCP. Catalog is now 76 skills. (#945)
+- **Dashboard auto-allowlists MCP secret names into the run workflows.** A connected
+  key-based MCP server's secret is now injected into the generated workflow env, so
+  headless runs can actually see it instead of silently missing the credential.
+  (#931)
+- **Opt-in egress-audit hardening (`iron-proxy`).** A new composite action captures
+  and reports a run's outbound network calls behind an audit proxy, off by default.
+  (#947)
 - **Codex plugin parity + a repo-root `llms.txt`.** The `/aeon` operator skill now
   installs on Codex too (`plugin/.codex-plugin/plugin.json` +
   `.agents/plugins/marketplace.json`: `codex plugin marketplace add aeonfun/aeon`
@@ -230,6 +257,15 @@ from or pin to; the template keeps serving the latest `main` to new forks.
 
 ### Changed
 
+- **Harness inventory counts normalized to seven.** With fx as the 7th adapter,
+  `docs/harnesses.md`, `harness-adapter/README.md`, and the workflow comments now
+  say seven (not six / five / four) and present the harnesses evenly, and the
+  harness banner art is replaced with the seven-engine version. (#952, #950)
+- **`memory-flush` mechanical bookkeeping moved out of the LLM.** The prep work is
+  now a deterministic, watermark-tracked script (`memory_prep.py` +
+  `memory-flush-state.json`) so the model only does the judgment part. (#938)
+- **README notes the operator console installs as a Codex plugin too.** (#927)
+- **Ecosystem: added AgentOS** to `docs/ECOSYSTEM.md`. (#946)
 - **GitHub token model corrected to a single classic PAT.** `GH_GLOBAL` is now
   documented as one classic PAT with `repo` + `workflow` scopes (was fine-grained
   Contents/PRs/Issues); `GH_READ_PAT` / `GH_SECRETS_PAT` are reframed as legacy and
@@ -327,6 +363,39 @@ from or pin to; the template keeps serving the latest `main` to new forks.
 
 ### Fixed
 
+- **Post-run scorer grades the sent notify card, not the harness `.result`
+  recap.** For a notify-first skill the scorer now reads the captured chain
+  artifact (`output/.chains/<skill>.md`) - the card that was actually sent - and
+  falls back to `/tmp/skill-result.txt`, so real, verifiably-sent figures stop
+  being capped as `unverifiable_claim`. Non-notify skills are unaffected (their
+  chain file is a byte copy of the same `.result`). (#949)
+- **Local MCP server dispatches the `fx` harness.** `skill-executor.ts` omitted
+  `fx` from its `HARNESSES` tuple, so `resolveHarness()` silently rewrote any fx
+  skill (or `AEON_HARNESS=fx`) to `claude`; adding `fx` makes the local MCP server
+  honor it like the hosted workflows already do. (#953)
+- **Dashboard captures Kimi's auth config correctly.** It now grabs the full
+  `credentials/` directory plus `config.toml` when building `KIMI_AUTH`, instead of
+  a single fixed credential filename - a non-mainland `kimi.ai` login writes a
+  hash-suffixed credential file and stores its model selection in
+  `~/.kimi-code/config.toml`, so the old capture left the CLI authenticated but
+  stuck at `No model configured`. (#956)
+- **`fx` now shows up in the dashboard harness picker.** (#943)
+- **Dashboard locks `aeon.yml` read-modify-write.** Concurrent config edits no
+  longer race and clobber each other. (#944)
+- **secretcurl no longer leaks its substituted secret into curl's own argv**, where
+  another process could read it via `ps` or `/proc`. (#935)
+- **Telegram webhook dedupes redelivered updates by `update_id`** before dispatch,
+  so a slow response no longer re-dispatches the same update. (#937)
+- **Racing `state_store` / `health_issue` "ensure" calls converge** instead of
+  creating duplicate GitHub issues for the same title. (#936)
+- **Skill-runner concurrency group scoped by target too**, so dispatching the same
+  skill at two different vars no longer collides. (#934)
+- **`Bash(cd:*)` granted again in skill-mode**, restoring the documented
+  one-cd-per-call workaround for the sandbox's compound-command denial. (#933)
+- **Failed-dispatch diagnostics no longer truncated to the front of the output**, so
+  the actual error fields survive logging. (#932)
+- **Windows Connect/OAuth fix batch:** OAuth truncation, a setup-token timeout,
+  config line-folding, Foundry install, and mainnet-flag masking. (#930)
 - **Reactive `success_rate` conditions now actually fire.** The scheduler's inline
   evaluator only handled `consecutive_failures` and `last_status`; a trigger written
   as `when: "success_rate < 0.5"` matched no branch and was silently dropped.
@@ -621,6 +690,12 @@ from or pin to; the template keeps serving the latest `main` to new forks.
 
 ### Security
 
+- **Dead channel credentials dropped from the in-run skill env (#912 item 2).**
+  Six infrastructure creds with no in-run consumer - `DISCORD_BOT_TOKEN` /
+  `DISCORD_CHANNEL_ID`, `SLACK_BOT_TOKEN` / `SLACK_CHANNEL_ID`, and
+  `BEAMR_GATEWAY_URL` / `BEAMR_PAYER_KEY` (+ the `BEAMR_NETWORK` / `BEAMR_MAX_PAY_USDC`
+  vars) - are removed from every skill's run env and the `ALL_SECRETS` allowlist;
+  the `*_WEBHOOK_URL` variants notify actually delivers through are kept. (#951)
 - **Bumped `nanoid` to 3.3.18** (GHSA-2v37-7h3g-55p8) in the `remotion` skill's
   bundled project lockfile - transitive, lockfile-only. (#879)
 - **`ALL_SECRETS` built from an explicit allowlist, not `toJSON(secrets)`.**
@@ -652,6 +727,10 @@ from or pin to; the template keeps serving the latest `main` to new forks.
 
 ### Maintenance
 
+- CI/test/asset noise: HOL AI Plugin Scanner workflow added then dropped same-day
+  (#928, #929); unused `docs/assets` images removed and provider/free-aeon docs
+  images refreshed (#939, #940); state-store/health-issue test hardening (#942);
+  prior in-repo docs-sync of PRs #890-#925 (#926).
 - Dead-code sweep from a `ponytail-audit` pass: verified cuts across the CLI,
   dashboard, mcp-server tracing, and scripts, net -444 lines, no behavior change.
   (#886)

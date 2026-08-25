@@ -2302,6 +2302,127 @@
       ],
       "contentHash": "sha256-c249e7e95b081e5fce5c4e4a0379b2797c9020f55e862d37601f697f514ca421",
       "discoveredFrom": "skills/aeon-update/SKILL.md"
+    },
+    {
+      "id": "425f4da5ab8b98c5",
+      "tool": "aeon",
+      "scope": "project:.",
+      "type": "skill",
+      "name": "rightstack",
+      "source": {
+        "kind": "local",
+        "ref": "skills/rightstack"
+      },
+      "capabilities": {},
+      "files": [
+        {
+          "path": "SKILL.md",
+          "hash": "1baa17dd35f72aa101e9c37d72f47da9d5b2ea0a35664466fd8f33fa3bb76ab6"
+        },
+        {
+          "path": "run.mjs",
+          "hash": "213aeefa2b09c5953baceea9266098785612c79c2bb43667c01190d10c0c5fb3"
+        }
+      ],
+      "findings": [
+        {
+          "ruleId": "EXEC-PRIMITIVE",
+          "severity": "medium",
+          "owasp": "ASK-03",
+          "file": "run.mjs",
+          "line": 3,
+          "snippet": "import { spawnSync } from \"node:child_process\";",
+          "explanation": "uses a process-execution primitive"
+        },
+        {
+          "ruleId": "SENSITIVE-PATH-READ",
+          "severity": "high",
+          "owasp": "ASK-06",
+          "file": "run.mjs",
+          "line": 6,
+          "snippet": "const raw = (process.env.SKILL_VAR ?? \"\").trim();",
+          "explanation": "references sensitive credential or secret paths"
+        },
+        {
+          "ruleId": "SENSITIVE-PATH-READ",
+          "severity": "high",
+          "owasp": "ASK-06",
+          "file": "run.mjs",
+          "line": 10,
+          "snippet": ".flatMap((key) => process.env[key] === undefined ? [] : [[key, process.env[key]]]),",
+          "explanation": "references sensitive credential or secret paths"
+        }
+      ],
+      "contentHash": "sha256-0fb5b75bc52e9a23610c4c9615857784cab59b07d2ead5e983adcaa6b8cba53c",
+      "discoveredFrom": "skills/rightstack/SKILL.md"
+    },
+    {
+      "id": "c87437853e0ee112",
+      "tool": "aeon",
+      "scope": "project:.",
+      "type": "skill",
+      "name": "skill-article",
+      "source": {
+        "kind": "local",
+        "ref": "skills/skill-article"
+      },
+      "capabilities": {},
+      "files": [
+        {
+          "path": "SKILL.md",
+          "hash": "7826b9d27920419beae3826ae2c91593510d37900e09eced55233dfa6654ef3e"
+        }
+      ],
+      "contentHash": "sha256-2f61efcffe5f0b3ee50f9fa9677e1b4d1951cde36502ee08450e61aa127b9534",
+      "discoveredFrom": "skills/skill-article/SKILL.md"
+    },
+    {
+      "id": "ce1d06e2e9f30cb7",
+      "tool": "claude-code",
+      "scope": "project:.",
+      "type": "skill",
+      "name": "aeon",
+      "source": {
+        "kind": "local",
+        "ref": ".claude/skills/aeon"
+      },
+      "capabilities": {},
+      "files": [
+        {
+          "path": "SKILL.md",
+          "hash": "c7140e23399544394c1a6867f882a2fb1f567a41d0b8431510ca4397d773e253"
+        },
+        {
+          "path": "references/ci.md",
+          "hash": "7ef0b286439d107fdc41b5af023e485689b86179d8b3ca7bc8974e7d0c514e71"
+        },
+        {
+          "path": "references/history-mining.md",
+          "hash": "b82bd8474efd7bb8acf7b32d59da205379abde1863e63537220996103e966f31"
+        },
+        {
+          "path": "references/layout.md",
+          "hash": "1458ff527c388ffa3305db08a451f14ba72da458cf8bfacaf22ca923740819dc"
+        },
+        {
+          "path": "references/mcp.md",
+          "hash": "8e58b0fd5d298b51d8872cf4e9c8b9189cc781ba5bf36fc04684d9a9b4c66a41"
+        },
+        {
+          "path": "references/secrets.md",
+          "hash": "1da5f3c422da821d5ad9414b9099c2ece244c042b94a3846388c78f8c4cf47e5"
+        },
+        {
+          "path": "references/skill-anatomy.md",
+          "hash": "50b119ba6dfa3f33464f4a650c84ba3e50ef337773d25b2a126806fe7e652022"
+        },
+        {
+          "path": "scripts/mine-history.mjs",
+          "hash": "0edc7445542a21cb5518e813a6ae462a1d469636601a799efc1bec86b4058c5a"
+        }
+      ],
+      "contentHash": "sha256-9d7c6970687f2129b0dd7fad2a5fd55a5cfe245d58fc80de63c40008ba9f5678",
+      "discoveredFrom": ".claude/skills/aeon/SKILL.md"
     }
   ]
 }
