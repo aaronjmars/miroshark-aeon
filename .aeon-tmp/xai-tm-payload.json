@@ -1,1 +1,0 @@
-{"model":"grok-4.6","input":[{"role":"user","content":"Search X for MIROSHARK or MiroShark or 0xd7bc6a05a56655fb2052f742b012d1dfd66e1ba3 mentions in the last 24 hours with at least 10 likes. Return up to 5 notable tweets with @handle, engagement counts, and a one-line summary of the claim or vibe. Exclude obvious bots and generic shill posts."}],"tools":[{"type":"x_search"}]}

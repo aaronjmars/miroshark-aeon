@@ -69,3 +69,11 @@ skills/remotion/project/props.json
 
 # scratch dir some skills stage API payloads/responses in during a run
 output/scratch/
+
+# X/Twitter (xai) fetch scratch: grok request/response payloads. fetch-tweets and
+# token-movers stage these in /tmp (see their SKILL.md); older runs leaked copies
+# into the repo root and .aeon-tmp/. Root-anchor so they can never re-commit.
+/.aeon-tmp/
+/xai-*.json
+/.xai-*.json
+/.tmp-xai-*.json
