@@ -167,7 +167,7 @@ enable its skills from the dashboard's Packs view.
 
 ---
 
-## Full catalog (all 77 skills by pack)
+## Full catalog (all 79 skills by pack)
 
 Three packs are shown by default (**Core**, **Evolution**, **Basics**); the rest are revealed on demand.
 
