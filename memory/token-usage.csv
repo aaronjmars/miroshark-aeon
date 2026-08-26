@@ -350,3 +350,4 @@ date,skill,model,input_tokens,output_tokens,cache_read,cache_creation
 2026-08-25,heartbeat,claude-sonnet-5,2360,8385,1147262,57645
 2026-08-25,aeon-update,claude-opus-4-8,4209,85258,10243555,145221
 2026-08-25,heartbeat,claude-sonnet-5,2550,7494,1090216,65106
+2026-08-26,token-movers,claude-sonnet-5,2805,22725,3514800,70067

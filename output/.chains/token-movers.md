@@ -1,10 +1,10 @@
-ℹ️ Token Movers
+ℹ️ Token Report
 
 *$MiroShark — CONSOLIDATING*
 
-Price down 18.8% to $0.000003272 on only 0.8x average volume — a sharp pullback, but not confirmed by volume, so it lands as CONSOLIDATING rather than BREAKDOWN. Whale dollar flow tilted 58% toward selling.
+Price −12.1% 24h to $0.000002876, but volume only 0.33x the 7d average — well short of the BREAKDOWN bar. Second straight down day (after 08-25's −18.8%), yet buy/sell flipped bullish (1.27 vs yest 0.93).
 
-Price $0.000003272 (−18.8% 24h) | Liq $329.7K (−9.5%) | Vol $50.1K (0.8× 7d)
-Buys/Sells 67/72 (ratio 0.93, yest 1.56) | Whales: 12
+Price $0.000002876 (−12.1% 24h) | Liq $312.8K (−5.1%) | Vol $20.5K (0.33× 7d)
+Buys/Sells 42/33 (ratio 1.27) | Whales: 10
 
 Chart: https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209
