@@ -1,14 +1,10 @@
-No new tweets survived dedup, so no notification was sent per the skill's "notify only on signal" rule.
+ℹ️ Tweet Digest — 2026-08-26
 
-## Summary
+*Tweet Digest — 2026-08-26*
 
-Ran `fetch-tweets` with `source:account`, empty `ARG` → all-tracked-accounts branch (`memory/topics/tracked-accounts.yml` has one entry: `miroshark_`).
+*Theme: Match sims — Champions League*
+@miroshark_: football season's back — kicking off a run of match sims, starting with tomorrow's Champions League draw — [link](https://x.com/miroshark_/status/2092588692191719842)
+@miroshark_: drops the live sim share link for that Champions League draw run — [link](https://x.com/miroshark_/status/2092588697157804342)
 
-- Fetched via X.AI Grok `x_search` API (HTTP 200, `source=api`).
-- Grok returned 5 tweets total, but only 1 fell inside the actual 3-day window (Aug 24) — it padded the rest with older posts (Aug 10, Aug 18 ×2, Aug 20) to hit the requested count of 5.
-- Checked all 5 URLs against prior `fetch-tweets` log entries: **every one was already reported** in earlier runs (08-10, 08-18, 08-20, 08-24 logs) — 0 new tweets.
-- Status: `TWEET_DIGEST_OK`, no notable/new tweets → per skill rules, **no notification sent**.
-
-**Files modified:** `memory/logs/2026-08-25.md` (appended `### fetch-tweets` log entry). Scratch API payload/response files under `output/scratch/` (gitignored, untracked).
-
-No follow-up needed — this is expected quiet-day behavior, not an error.
+*Theme: CMC listing tease*
+@miroshark_: teases a possible CoinMarketCap listing, tagged "proof post" — not confirmed — [link](https://x.com/miroshark_/status/2092579374335668594)

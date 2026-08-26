@@ -1,15 +1,11 @@
 {
   "skill": "fetch-tweets",
-  "last_analyzed": "2026-08-25T17:07:04Z",
-  "quality_score": 4,
-  "assessment": "Well-executed monitoring skill: properly fetched, deduped all tweets against prior logs, correctly applied 'no signal = no notify' rule, and provided verifiable output with clear logic.",
+  "last_analyzed": "2026-08-26T17:06:20Z",
+  "quality_score": 3,
+  "assessment": "Routine tweet monitoring executed competently—fetched, deduped, themed, and logged correctly, but not strategic or high-impact for the growth agenda.",
   "flags": [],
-  "avg_score": 3.73,
+  "avg_score": 3.7,
   "history": [
-    {
-      "date": "2026-07-23",
-      "score": 4
-    },
     {
       "date": "2026-07-24",
       "score": 3
@@ -125,6 +121,10 @@
     {
       "date": "2026-08-25",
       "score": 4
+    },
+    {
+      "date": "2026-08-26",
+      "score": 3
     }
   ]
 }
