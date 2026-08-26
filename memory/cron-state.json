@@ -198,14 +198,14 @@
   },
   "fetch-tweets": {
     "last_dispatch": "2026-08-26T17:00:06Z",
-    "last_status": "dispatched",
-    "last_success": "2026-08-25T17:07:06Z",
-    "total_runs": 43,
-    "total_successes": 43,
+    "last_status": "success",
+    "last_success": "2026-08-26T17:07:09Z",
+    "total_runs": 44,
+    "total_successes": 44,
     "total_failures": 0,
     "consecutive_failures": 0,
     "success_rate": 1,
-    "last_quality_score": 4
+    "last_quality_score": 3
   },
   "changelog": {
     "last_dispatch": "2026-08-24T08:15:05Z",
