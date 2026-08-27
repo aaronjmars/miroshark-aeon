@@ -1,0 +1,159 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "$MiroShark Token Report",
+        "description": "Status: CONSOLIDATING — Price up but volume insufficient to confirm rally"
+      },
+      "children": [
+        "price_section",
+        "sep1",
+        "liquidity_volume_section",
+        "sep2",
+        "trading_section",
+        "sep3",
+        "whales_stat",
+        "sep4",
+        "chart_link"
+      ]
+    },
+    "price_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "price_stat",
+        "price_note"
+      ]
+    },
+    "price_stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Price (24h)",
+        "value": "$0.000003024",
+        "delta": "+5.1%",
+        "trend": "up"
+      }
+    },
+    "price_note": {
+      "type": "Text",
+      "props": {
+        "text": "Bounce present, but unconfirmed by volume",
+        "variant": "muted"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "liquidity_volume_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "liq_stat",
+        "vol_stat",
+        "vol_warning"
+      ]
+    },
+    "liq_stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Liquidity",
+        "value": "$316.8K",
+        "delta": "+1.3%",
+        "trend": "up"
+      }
+    },
+    "vol_stat": {
+      "type": "Stat",
+      "props": {
+        "label": "24h Volume",
+        "value": "$7.8K",
+        "delta": "0.13× 7d avg"
+      }
+    },
+    "vol_warning": {
+      "type": "Alert",
+      "props": {
+        "type": "warning",
+        "message": "Volume 0.13× 7-day average — far short of 1.0× threshold needed for RALLYING confirmation"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "trading_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "lg"
+      },
+      "children": [
+        "buys_stat",
+        "sells_stat",
+        "ratio_stat"
+      ]
+    },
+    "buys_stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Buys",
+        "value": "36"
+      }
+    },
+    "sells_stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Sells",
+        "value": "26"
+      }
+    },
+    "ratio_stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Buy/Sell Ratio",
+        "value": "1.38"
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "whales_stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Whale Addresses",
+        "value": "2"
+      }
+    },
+    "sep4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "chart_link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "View Chart on GeckoTerminal",
+        "href": "https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209",
+        "source": "GeckoTerminal"
+      }
+    }
+  }
+}
