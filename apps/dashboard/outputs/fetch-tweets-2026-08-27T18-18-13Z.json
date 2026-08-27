@@ -1,0 +1,65 @@
+{
+  "root": "card-root",
+  "state": {},
+  "elements": {
+    "card-root": {
+      "type": "Card",
+      "props": {
+        "title": "Tweet Digest — 2026-08-27"
+      },
+      "children": [
+        "stack-main"
+      ]
+    },
+    "stack-main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "theme1-heading",
+        "tweet1",
+        "separator1",
+        "theme2-heading",
+        "tweet2"
+      ]
+    },
+    "theme1-heading": {
+      "type": "Text",
+      "props": {
+        "text": "Simulation credibility claim",
+        "variant": "lead"
+      }
+    },
+    "tweet1": {
+      "type": "TweetCard",
+      "props": {
+        "author": "Miroshark",
+        "handle": "miroshark_",
+        "text": "Claims their engine predicted one of the year's biggest tech deals — no specifics given. — [link](https://x.com/miroshark_/status/2093021387765997921)"
+      }
+    },
+    "separator1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "theme2-heading": {
+      "type": "Text",
+      "props": {
+        "text": "Bundesliga season sim launch",
+        "variant": "lead"
+      }
+    },
+    "tweet2": {
+      "type": "TweetCard",
+      "props": {
+        "author": "Miroshark",
+        "handle": "miroshark_",
+        "text": "German-language post inviting Bundesliga fans to use the Miroshark tool to simulate upcoming-season matches. — [link](https://x.com/miroshark_/status/2092962853749686477)"
+      }
+    }
+  }
+}
