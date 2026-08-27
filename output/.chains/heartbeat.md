@@ -1,19 +1,18 @@
-Everything's clean — no notification needed per the ambient-check rules (nothing needs attention). Status page and log are updated.
+Everything checked out clean, so no notification is needed per the skill's rules.
 
 ## Summary
 
-Ran the heartbeat skill's **ambient check** (default `${var}`, the live 08:00-UTC-equivalent scheduled path — actually firing at 19:35 UTC today).
+Ran the **heartbeat** skill in ambient mode (default, empty `${var}` — the scheduled daily path).
 
-**Findings — all clean:**
-- **P0:** All 9 enabled skills (heartbeat, repo-pulse, token-movers, holdings, fetch-tweets, shiplog, memory-flush, changelog, aeon-update) show `success`, 0 consecutive failures, 100% success rate. No stuck/failed skills. Heartbeat's own self-check: last success ~20h ago, well under the 36h threshold.
-- **P1:** 0 open PRs, 0 open issues (urgent-labeled or otherwise) across both `aaronjmars/miroshark-aeon` and `MiroShark/MiroShark`.
-- **P2:** Nothing flagged in MEMORY.md.
-- **P3:** All enabled skills within their schedule interval — no skill is overdue.
-- **Token pulse:** Latest token-report (2026-08-26, same-day) — MIROSHARK $0.000002876, −12.1% 24h, CONSOLIDATING (second down day but volume only 0.33x the 7d avg, short of the breakdown bar); liquidity $312.8K (−5.1%); FDV $287.6K.
-- Noted but out of scope: the working tree still carries the same uncommitted generated-artifact drift as prior runs (deleted `AGENTS.md`, untracked root `notify`/`notify-jsonrender`) — unchanged, workflow-generated runtime files.
+**Findings: fleet is fully healthy, nothing needs attention.**
+- **P0 (failed/stuck skills):** clean — all 9 enabled skills (heartbeat, repo-pulse, token-movers, holdings, fetch-tweets, shiplog, memory-flush, changelog, aeon-update) show `success`, 0 consecutive failures, 100% success rate.
+- **P1 (stalled PRs/urgent issues):** clean — 0 open PRs, 0 urgent issues across both `aaronjmars/miroshark-aeon` and `MiroShark/MiroShark`.
+- **P2 (flagged memory):** clean — nothing flagged in MEMORY.md.
+- **P3 (missing scheduled skills):** clean — every skill ran within its schedule interval.
+- **Token pulse:** MIROSHARK $0.000003024 (+5.1% 24h), CONSOLIDATING, liquidity $316.8K, FDV $302.4K (fresh, today's report).
 
 **Files modified:**
-- `docs/status.md` — regenerated: Overall 🟢 OK, Updated 2026-08-26 19:35 UTC, refreshed token pulse and skill table, next run = token-movers 06:00 UTC 2026-08-27.
-- `memory/logs/2026-08-26.md` — appended `### heartbeat` entry (`mode: ambient`) with findings and `STATUS_PAGE=OK`.
+- `docs/status.md` — regenerated with current timestamp, refreshed token pulse (2026-08-27 report), updated skill table, next-run pointer (token-movers 06:00 UTC 2026-08-28). Overall status: 🟢 OK.
+- `memory/logs/2026-08-27.md` — appended `### heartbeat` entry (`mode: ambient`) documenting the clean check.
 
-No `./notify` sent — nothing needed attention, per the skill's dedup/notification rule.
+No notification sent (per skill rules, a clean run stays quiet). No follow-up actions needed.
