@@ -1,0 +1,64 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "Tweet Digest",
+        "description": "2026-08-28 • x402aff affiliate program launch"
+      },
+      "children": [
+        "text-theme",
+        "sep-1",
+        "tweet-1",
+        "tweet-2",
+        "tweet-3",
+        "tweet-4"
+      ]
+    },
+    "text-theme": {
+      "type": "Text",
+      "props": {
+        "text": "Theme: x402aff affiliate program launch",
+        "variant": "lead"
+      }
+    },
+    "sep-1": {
+      "type": "Separator",
+      "props": {}
+    },
+    "tweet-1": {
+      "type": "TweetCard",
+      "props": {
+        "author": "MiroShark",
+        "handle": "miroshark_",
+        "text": "x402aff is now live — send MiroShark's x402 endpoint to users and earn a cut of every run, paid straight to your wallet on Base — [link](https://x.com/miroshark_/status/2093054380626809029)"
+      }
+    },
+    "tweet-2": {
+      "type": "TweetCard",
+      "props": {
+        "author": "MiroShark",
+        "handle": "miroshark_",
+        "text": "Published an official guide walking through the new on-chain affiliate program — [link](https://x.com/miroshark_/status/2093234983942996144)"
+      }
+    },
+    "tweet-3": {
+      "type": "TweetCard",
+      "props": {
+        "author": "MiroShark",
+        "handle": "miroshark_",
+        "text": "Linked a companion X article explaining how x402Aff works — [link](https://x.com/miroshark_/status/2093232501787406651)"
+      }
+    },
+    "tweet-4": {
+      "type": "TweetCard",
+      "props": {
+        "author": "MiroShark",
+        "handle": "miroshark_",
+        "text": "Dropped an intro YouTube video walking through the x402aff program — [link](https://x.com/miroshark_/status/2093244521723093311)"
+      }
+    }
+  }
+}
