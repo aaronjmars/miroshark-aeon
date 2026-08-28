@@ -1,15 +1,11 @@
 {
   "skill": "token-movers",
-  "last_analyzed": "2026-08-27T07:12:50Z",
+  "last_analyzed": "2026-08-28T06:23:09Z",
   "quality_score": 4,
-  "assessment": "Substantive, well-sourced token tracking with clear verdict and honest limitations — serves strategy priority of honest momentum tracking with verifiable data and proper methodology",
+  "assessment": "High-quality momentum tracking with verified metrics, proper causal hedging, and transparent data limitations — aligns well with strategy priority #4 (track honestly). Does not overclaim sim-as-truth; cites public sources; provides specific, actionable intelligence on the north-star $MIROSHARK price metric.",
   "flags": [],
   "avg_score": 4,
   "history": [
-    {
-      "date": "2026-07-26",
-      "score": 4
-    },
     {
       "date": "2026-07-27",
       "score": 4
@@ -124,6 +120,10 @@
     },
     {
       "date": "2026-08-27",
+      "score": 4
+    },
+    {
+      "date": "2026-08-28",
       "score": 4
     }
   ]
