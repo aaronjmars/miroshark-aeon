@@ -1,0 +1,120 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "Token Report — MIROSHARK",
+        "description": "$MIROSHARK — CONSOLIDATING"
+      },
+      "children": [
+        "badge-status",
+        "text-description",
+        "sep-1",
+        "stats-stack",
+        "sep-2",
+        "link-chart"
+      ]
+    },
+    "badge-status": {
+      "type": "Badge",
+      "props": {
+        "text": "CONSOLIDATING",
+        "variant": "outline"
+      }
+    },
+    "text-description": {
+      "type": "Text",
+      "props": {
+        "text": "Price fell −22.2% on just 0.39× average volume — a low-volume pullback unwinding most of yesterday's x402aff breakout, not a volume-driven breakdown.",
+        "variant": "body"
+      }
+    },
+    "sep-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stats-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stat-price",
+        "stat-liq",
+        "stat-vol",
+        "stat-buysells",
+        "stat-ratio",
+        "stat-whales"
+      ]
+    },
+    "stat-price": {
+      "type": "Stat",
+      "props": {
+        "label": "Price (24h)",
+        "value": "$0.000003639",
+        "delta": "-22.2%",
+        "trend": "down"
+      }
+    },
+    "stat-liq": {
+      "type": "Stat",
+      "props": {
+        "label": "Liquidity",
+        "value": "$344.6K",
+        "delta": "-11.9%",
+        "trend": "down"
+      }
+    },
+    "stat-vol": {
+      "type": "Stat",
+      "props": {
+        "label": "Volume (7d avg)",
+        "value": "$32.5K",
+        "delta": "0.4× average",
+        "trend": "down"
+      }
+    },
+    "stat-buysells": {
+      "type": "Stat",
+      "props": {
+        "label": "Buy/Sell Orders",
+        "value": "45/50"
+      }
+    },
+    "stat-ratio": {
+      "type": "Stat",
+      "props": {
+        "label": "Order Ratio",
+        "value": "0.90",
+        "delta": "-30.8% (was 1.30)",
+        "trend": "down"
+      }
+    },
+    "stat-whales": {
+      "type": "Stat",
+      "props": {
+        "label": "Whale Wallets",
+        "value": "12",
+        "delta": "8 sell, 4 buy"
+      }
+    },
+    "sep-2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "link-chart": {
+      "type": "Link",
+      "props": {
+        "label": "View on GeckoTerminal",
+        "href": "https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209"
+      }
+    }
+  }
+}
