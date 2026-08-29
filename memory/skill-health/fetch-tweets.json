@@ -1,15 +1,11 @@
 {
   "skill": "fetch-tweets",
-  "last_analyzed": "2026-08-28T17:48:54Z",
+  "last_analyzed": "2026-08-29T17:07:54Z",
   "quality_score": 3,
-  "assessment": "Correctly executed tweet monitoring (HTTP 200, proper dedup, clean logging), but tracking affiliate program comms is tangential to core priorities: shipping the engine, proving sims worth trusting, and enabling new runs are the north-star drivers.",
+  "assessment": "Well-executed maintenance run with correct state management and dedup logic; properly silent on no-signal result, but strategically low-value (zero new tweets to report on monitored account).",
   "flags": [],
-  "avg_score": 3.73,
+  "avg_score": 3.7,
   "history": [
-    {
-      "date": "2026-07-26",
-      "score": 4
-    },
     {
       "date": "2026-07-27",
       "score": 3
@@ -124,6 +120,10 @@
     },
     {
       "date": "2026-08-28",
+      "score": 3
+    },
+    {
+      "date": "2026-08-29",
       "score": 3
     }
   ]

@@ -1,9 +1,9 @@
-ℹ️ Tweet Digest
+All 5 tracked-account tweets in the last 3 days were already reported in the 08-27/08-28 logs, so no notification was sent (silence on all-duplicate results, per skill spec).
 
-*Tweet Digest — 2026-08-28*
+## Summary
 
-*Theme: x402aff affiliate program launch*
-@miroshark_: x402aff is now live — send MiroShark's x402 endpoint to users and earn a cut of every run, paid straight to your wallet on Base — [link](https://x.com/miroshark_/status/2093054380626809029)
-@miroshark_: Published an official guide walking through the new on-chain affiliate program — [link](https://x.com/miroshark_/status/2093234983942996144)
-@miroshark_: Linked a companion X article explaining how x402Aff works — [link](https://x.com/miroshark_/status/2093232501787406651)
-@miroshark_: Dropped an intro YouTube video walking through the x402aff program — [link](https://x.com/miroshark_/status/2093244521723093311)
+Ran `fetch-tweets` in `account` mode with `var=account:` (empty arg → all-tracked-accounts sub-mode). Config: `memory/topics/tracked-accounts.yml` tracks one handle, `miroshark_`. Fetched via X.AI API (`grok-4.6` + `x_search`, HTTP 200) — 5 tweets returned for the last 3 days, all already deduped against the last-2-days seen-set (4 from `2026-08-28.md`, 1 from `2026-08-27.md`). No new tweets survived, so per the skill's "notify only on signal" rule, **no notification was sent**.
+
+- **Files modified:** `memory/logs/2026-08-29.md` — appended `### fetch-tweets` log entry with `status: TWEET_DIGEST_OK`, 0 new tweets.
+- **Status code:** `TWEET_DIGEST_OK` (clean, no notification).
+- **Follow-up:** none — the account has been quiet since the x402aff launch cluster (08-27/08-28); next run will pick up anything posted after 2026-08-28.
