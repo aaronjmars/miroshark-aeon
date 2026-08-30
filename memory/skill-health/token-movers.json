@@ -1,15 +1,11 @@
 {
   "skill": "token-movers",
-  "last_analyzed": "2026-08-29T06:15:43Z",
+  "last_analyzed": "2026-08-30T06:15:01Z",
   "quality_score": 4,
-  "assessment": "Substantive token momentum report with specific, verifiable data; transparent methodology; appropriate caveats on source limitations; directly serves priority #4 (track $MIROSHARK honestly).",
+  "assessment": "Substantive, well-structured token tracking with specific metrics, cross-checked sources, and honest framing—directly serves the operator's momentum-tracking priority.",
   "flags": [],
   "avg_score": 4,
   "history": [
-    {
-      "date": "2026-07-28",
-      "score": 4
-    },
     {
       "date": "2026-07-29",
       "score": 4
@@ -124,6 +120,10 @@
     },
     {
       "date": "2026-08-29",
+      "score": 4
+    },
+    {
+      "date": "2026-08-30",
       "score": 4
     }
   ]
