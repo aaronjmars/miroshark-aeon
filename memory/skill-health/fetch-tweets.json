@@ -1,15 +1,11 @@
 {
   "skill": "fetch-tweets",
-  "last_analyzed": "2026-08-29T17:07:54Z",
-  "quality_score": 3,
-  "assessment": "Well-executed maintenance run with correct state management and dedup logic; properly silent on no-signal result, but strategically low-value (zero new tweets to report on monitored account).",
+  "last_analyzed": "2026-08-30T17:08:55Z",
+  "quality_score": 4,
+  "assessment": "Well-executed data collection task with specific, verifiable details and proper framework integration; useful for momentum tracking but fundamentally operational rather than insightful.",
   "flags": [],
-  "avg_score": 3.7,
+  "avg_score": 3.73,
   "history": [
-    {
-      "date": "2026-07-27",
-      "score": 3
-    },
     {
       "date": "2026-07-28",
       "score": 3
@@ -125,6 +121,10 @@
     {
       "date": "2026-08-29",
       "score": 3
+    },
+    {
+      "date": "2026-08-30",
+      "score": 4
     }
   ]
 }

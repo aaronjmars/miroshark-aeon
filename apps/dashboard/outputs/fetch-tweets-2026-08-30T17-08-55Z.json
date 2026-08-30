@@ -1,0 +1,110 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "Tweet Digest — 2026-08-30"
+      },
+      "children": [
+        "section-1",
+        "separator-1",
+        "section-2"
+      ]
+    },
+    "section-1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading-1",
+        "tweet-1",
+        "tweet-2",
+        "tweet-3",
+        "tweet-4"
+      ]
+    },
+    "heading-1": {
+      "type": "Heading",
+      "props": {
+        "text": "x402aff launch",
+        "level": "h2"
+      },
+      "children": []
+    },
+    "tweet-1": {
+      "type": "TweetCard",
+      "props": {
+        "author": "miroshark_",
+        "handle": "@miroshark_",
+        "text": "x402aff is live — send MiroShark's x402 endpoint users, earn a cut of every run paid straight to your wallet on Base — https://x.com/miroshark_/status/2093054380626809029"
+      },
+      "children": []
+    },
+    "tweet-2": {
+      "type": "TweetCard",
+      "props": {
+        "author": "miroshark_",
+        "handle": "@miroshark_",
+        "text": "dropped the official guide to the new x402aff affiliate program — https://x.com/miroshark_/status/2093232501787406651"
+      },
+      "children": []
+    },
+    "tweet-3": {
+      "type": "TweetCard",
+      "props": {
+        "author": "miroshark_",
+        "handle": "@miroshark_",
+        "text": "posted an intro video walking through x402aff — https://x.com/miroshark_/status/2093244521723093311"
+      },
+      "children": []
+    },
+    "tweet-4": {
+      "type": "TweetCard",
+      "props": {
+        "author": "miroshark_",
+        "handle": "@miroshark_",
+        "text": "follow-up push pointing back to the onchain affiliate guide — https://x.com/miroshark_/status/2093234983942996144"
+      },
+      "children": []
+    },
+    "separator-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "section-2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading-2",
+        "tweet-5"
+      ]
+    },
+    "heading-2": {
+      "type": "Heading",
+      "props": {
+        "text": "Engine claims a real-world hit",
+        "level": "h2"
+      },
+      "children": []
+    },
+    "tweet-5": {
+      "type": "TweetCard",
+      "props": {
+        "author": "miroshark_",
+        "handle": "@miroshark_",
+        "text": "says the engine predicted one of the year's biggest tech deals — no specifics or sim details given — https://x.com/miroshark_/status/2093021387765997921"
+      },
+      "children": []
+    }
+  }
+}
