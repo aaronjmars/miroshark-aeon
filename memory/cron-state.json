@@ -211,14 +211,16 @@
   },
   "changelog": {
     "last_dispatch": "2026-08-31T08:08:57Z",
-    "last_status": "dispatched",
+    "last_status": "failed",
     "last_success": "2026-08-24T08:21:26Z",
-    "total_runs": 9,
+    "total_runs": 10,
     "total_successes": 9,
-    "total_failures": 0,
-    "consecutive_failures": 0,
-    "success_rate": 1,
-    "last_quality_score": 3
+    "total_failures": 1,
+    "consecutive_failures": 1,
+    "success_rate": 0.9,
+    "last_quality_score": 3,
+    "last_failed": "2026-08-31T08:09:39Z",
+    "last_error": "b90404\",\"total_cost_usd\":0,\"usage\":{\"input_tokens\":0,\"cache_creation_input_tokens\":0,\"cache_read_input_tokens\":0,\"output_tokens\":0,\"server_tool_use\":{\"web_search_requests\":0,\"web_fetch_requests\":0},\"s"
   },
   "holdings": {
     "last_status": "failed",
