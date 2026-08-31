@@ -77,16 +77,16 @@
   },
   "repo-pulse": {
     "last_dispatch": "2026-08-31T10:47:00Z",
-    "last_status": "dispatched",
+    "last_status": "failed",
     "last_success": "2026-08-24T10:08:13Z",
-    "total_runs": 30,
+    "total_runs": 31,
     "total_successes": 29,
-    "total_failures": 1,
-    "consecutive_failures": 1,
-    "success_rate": 0.97,
+    "total_failures": 2,
+    "consecutive_failures": 2,
+    "success_rate": 0.94,
     "last_quality_score": 4,
-    "last_failed": "2026-08-31T10:07:02Z",
-    "last_error": "f4dbc5\",\"total_cost_usd\":0,\"usage\":{\"input_tokens\":0,\"cache_creation_input_tokens\":0,\"cache_read_input_tokens\":0,\"output_tokens\":0,\"server_tool_use\":{\"web_search_requests\":0,\"web_fetch_requests\":0},\"s"
+    "last_failed": "2026-08-31T10:47:35Z",
+    "last_error": "565c89\",\"total_cost_usd\":0,\"usage\":{\"input_tokens\":0,\"cache_creation_input_tokens\":0,\"cache_read_input_tokens\":0,\"output_tokens\":0,\"server_tool_use\":{\"web_search_requests\":0,\"web_fetch_requests\":0},\"s"
   },
   "star-momentum": {
     "last_dispatch": "2026-06-25T11:03:20Z",
