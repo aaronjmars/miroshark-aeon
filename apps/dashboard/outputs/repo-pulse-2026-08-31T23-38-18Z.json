@@ -1,0 +1,318 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "Repo Pulse — 2026-08-31",
+        "description": "MiroShark/MiroShark"
+      },
+      "children": [
+        "badgeActive",
+        "statsGrid",
+        "progressTo1500",
+        "narrative",
+        "sep1",
+        "forkNote",
+        "sep2",
+        "headingNotable",
+        "notableList",
+        "sep3",
+        "headingOther",
+        "otherLinks",
+        "sep4",
+        "sourceText"
+      ]
+    },
+    "badgeActive": {
+      "type": "Badge",
+      "props": {
+        "text": "ACTIVE",
+        "variant": "default"
+      }
+    },
+    "statsGrid": {
+      "type": "Grid",
+      "props": {
+        "columns": 3,
+        "gap": "md"
+      },
+      "children": [
+        "statStars",
+        "statForks",
+        "statReleases"
+      ]
+    },
+    "statStars": {
+      "type": "Stat",
+      "props": {
+        "label": "Stars",
+        "value": "1,446",
+        "delta": "+9",
+        "trend": "up"
+      }
+    },
+    "statForks": {
+      "type": "Stat",
+      "props": {
+        "label": "Forks",
+        "value": "299",
+        "delta": "+0",
+        "trend": "neutral"
+      }
+    },
+    "statReleases": {
+      "type": "Stat",
+      "props": {
+        "label": "Releases",
+        "value": "0",
+        "delta": "+0",
+        "trend": "neutral"
+      }
+    },
+    "progressTo1500": {
+      "type": "Progress",
+      "props": {
+        "value": 1446,
+        "max": 1500,
+        "label": "Stars to 1,500 — 54 to go"
+      }
+    },
+    "narrative": {
+      "type": "Text",
+      "props": {
+        "text": "Third straight week of accelerating stars: +1 → +7 → +9. 54 to 1,500.",
+        "variant": "body"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "forkNote": {
+      "type": "Text",
+      "props": {
+        "text": "(299th fork — WorkWeonline — landed 08-24 16:08Z, after last week's snapshot but before this cutoff, so it's not in the 7d count.)",
+        "variant": "muted"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "headingNotable": {
+      "type": "Heading",
+      "props": {
+        "text": "Notable new stargazers",
+        "level": "h4"
+      }
+    },
+    "notableList": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "svectorRow",
+        "storyLuffy",
+        "pavanRow",
+        "storyLeo"
+      ]
+    },
+    "svectorRow": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "storySvector",
+        "svectorMeta"
+      ]
+    },
+    "storySvector": {
+      "type": "StoryLink",
+      "props": {
+        "title": "svector",
+        "href": "https://github.com/Svector-anu",
+        "source": "🏢 aeonfun",
+        "score": "201 repos · 38 followers"
+      }
+    },
+    "svectorMeta": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "bioSvector",
+        "linkSvectorSite",
+        "linkSvectorTwitter"
+      ]
+    },
+    "bioSvector": {
+      "type": "Text",
+      "props": {
+        "text": "\"Blockchain engineer, swe @aeonfun\"",
+        "variant": "muted"
+      }
+    },
+    "linkSvectorSite": {
+      "type": "Link",
+      "props": {
+        "label": "🌐 svector.xyz",
+        "href": "https://svector.xyz"
+      }
+    },
+    "linkSvectorTwitter": {
+      "type": "Link",
+      "props": {
+        "label": "🐦 @svector_eth",
+        "href": "https://x.com/svector_eth"
+      }
+    },
+    "storyLuffy": {
+      "type": "StoryLink",
+      "props": {
+        "title": "luffytaroZ",
+        "href": "https://github.com/luffytaroZ",
+        "score": "66 repos"
+      }
+    },
+    "pavanRow": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "storyPavan",
+        "pavanMeta"
+      ]
+    },
+    "storyPavan": {
+      "type": "StoryLink",
+      "props": {
+        "title": "P H V PAVAN KUMAR",
+        "href": "https://github.com/phvpavankumar",
+        "source": "📍 Coimbatore · 🏢 Amrita School of Engineering",
+        "score": "43 repos"
+      }
+    },
+    "pavanMeta": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "bioPavan",
+        "linkPavanLinkedin"
+      ]
+    },
+    "bioPavan": {
+      "type": "Text",
+      "props": {
+        "text": "\"AI and Machine Learning Aspirant\"",
+        "variant": "muted"
+      }
+    },
+    "linkPavanLinkedin": {
+      "type": "Link",
+      "props": {
+        "label": "🌐 linkedin.com/in/pavan-kumar-phv",
+        "href": "https://linkedin.com/in/pavan-kumar-phv"
+      }
+    },
+    "storyLeo": {
+      "type": "StoryLink",
+      "props": {
+        "title": "leo-cabibihan",
+        "href": "https://github.com/leo-cabibihan",
+        "score": "31 repos · 16 followers"
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "headingOther": {
+      "type": "Heading",
+      "props": {
+        "text": "Other new stargazers",
+        "level": "h4"
+      }
+    },
+    "otherLinks": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "linkJdiega13",
+        "linkEaglesiva",
+        "linkVcelyy",
+        "linkJcalebsmith",
+        "linkRohaMehran"
+      ]
+    },
+    "linkJdiega13": {
+      "type": "Link",
+      "props": {
+        "label": "jdiega13",
+        "href": "https://github.com/jdiega13"
+      }
+    },
+    "linkEaglesiva": {
+      "type": "Link",
+      "props": {
+        "label": "Eaglesiva",
+        "href": "https://github.com/Eaglesiva"
+      }
+    },
+    "linkVcelyy": {
+      "type": "Link",
+      "props": {
+        "label": "vcelyy",
+        "href": "https://github.com/vcelyy"
+      }
+    },
+    "linkJcalebsmith": {
+      "type": "Link",
+      "props": {
+        "label": "jcalebsmith",
+        "href": "https://github.com/jcalebsmith"
+      }
+    },
+    "linkRohaMehran": {
+      "type": "Link",
+      "props": {
+        "label": "RohaMehran",
+        "href": "https://github.com/RohaMehran"
+      }
+    },
+    "sep4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "sourceText": {
+      "type": "Text",
+      "props": {
+        "text": "Source: events",
+        "variant": "caption"
+      }
+    }
+  }
+}

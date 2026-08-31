@@ -1,17 +1,18 @@
-ℹ️ Repo Pulse
+**Repo Pulse — 2026-08-31** — [ACTIVE]
 
-*Repo Pulse — 2026-08-24* — [ACTIVE]
-MiroShark/MiroShark — stars 1437 (+7) · forks 298 (+0) · releases +0
+**MiroShark/MiroShark** — stars 1,446 (+9) · forks 299 (+0) · releases +0
+Third straight week of accelerating stars: +1 → +7 → +9. 54 to 1,500.
+(299th fork — WorkWeonline — landed 08-24 16:08Z, after last week's snapshot but before this cutoff, so it's not in the 7d count.)
 
 Notable new stargazers:
-github.com/AlkaiDynamics — Morgan Sherer · 📍 The Desert · 🏢 Alkai Morphos Dynamics (MorphIQ) · 29 repos · 153 followers
-  "Just trying to make my life and the world a better place while both battling and utilizing extreme neurodivergence."
-github.com/mladen5000 — Mladen Rasic · 42 repos · 25 followers
-  "Jack of all traders developer of none"
-github.com/emmanikea — 41 repos
-github.com/sisodias — 25 repos
+github.com/Svector-anu — svector · 🏢 aeonfun · 201 repos · 🌐 svector.xyz · 🐦 @svector_eth · 38 followers
+  "Blockchain engineer, swe @aeonfun"
+github.com/luffytaroZ — 66 repos
+github.com/phvpavankumar — P H V PAVAN KUMAR · 📍 Coimbatore · 🏢 Amrita School of Engineering · 43 repos · 🌐 linkedin.com/in/pavan-kumar-phv
+  "AI and Machine Learning Aspirant"
+github.com/leo-cabibihan — 31 repos · 16 followers
 
 Other new stargazers:
-github.com/TyAbra | github.com/mc-azdaja | github.com/tngstn | github.com/bad3uddin
+github.com/jdiega13 | github.com/Eaglesiva | github.com/vcelyy | github.com/jcalebsmith | github.com/RohaMehran
 
 Source: events
