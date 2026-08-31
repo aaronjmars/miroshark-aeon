@@ -1,10 +1,10 @@
 {
   "skill": "shiplog",
-  "last_analyzed": "2026-08-24T09:14:18Z",
-  "quality_score": 4,
-  "assessment": "Substantive, honest tracking of momentum across repos; surfaces critical core stagnation (two consecutive windows of zero shipped PRs), verifiable metrics, and actionable follow-up.",
+  "last_analyzed": "2026-08-31T23:04:40Z",
+  "quality_score": 5,
+  "assessment": "Substantive, well-sourced weekly digest with verifiable artifacts (PRs, stars, token data), honest engine-idle flagging, disclosed gaps, strategy-aligned ready-to-post content in operator voice.",
   "flags": [],
-  "avg_score": 4.13,
+  "avg_score": 4.19,
   "history": [
     {
       "date": "2026-06-15",
@@ -65,6 +65,10 @@
     {
       "date": "2026-08-24",
       "score": 4
+    },
+    {
+      "date": "2026-08-31",
+      "score": 5
     }
   ]
 }

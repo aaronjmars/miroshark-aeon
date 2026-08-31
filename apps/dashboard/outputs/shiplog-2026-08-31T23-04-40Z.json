@@ -1,0 +1,250 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "miroshark shiplog 🦈 aug 24 → 31",
+        "description": "shipped 343 PRs (326 merged) + one launch this window. the bytes:"
+      },
+      "children": [
+        "stats-top",
+        "sep-1",
+        "shipped",
+        "sep-2",
+        "traction",
+        "sep-3",
+        "footer"
+      ]
+    },
+    "stats-top": {
+      "type": "Grid",
+      "props": {
+        "columns": 2,
+        "gap": "sm"
+      },
+      "children": [
+        "stat-prs",
+        "stat-price"
+      ]
+    },
+    "stat-prs": {
+      "type": "Stat",
+      "props": {
+        "label": "PRs shipped",
+        "value": "343",
+        "delta": "326 merged",
+        "trend": "neutral"
+      }
+    },
+    "stat-price": {
+      "type": "Stat",
+      "label_": null,
+      "props": {
+        "label": "$MIROSHARK on 08-28",
+        "value": "+54.8%",
+        "delta": "3.4× avg volume",
+        "trend": "up"
+      }
+    },
+    "sep-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "shipped": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "b-x402aff",
+        "b-website",
+        "b-credit",
+        "b-infra",
+        "alert-engine",
+        "b-security"
+      ]
+    },
+    "b-x402aff": {
+      "type": "Text",
+      "props": {
+        "text": "• x402aff is live 🦈 v0.3.0 shipped (TS DynamicPayTo callback, env parity, bounded negative cache) → program launched 08-27 → $MIROSHARK +54.8% on 08-28 at 3.4× avg volume. one line makes any x402 endpoint affiliate-ready. paid straight to your wallet on base"
+      }
+    },
+    "b-website": {
+      "type": "Text",
+      "props": {
+        "text": "• miroshark-website: 25 PRs — BubbleMenu nav, Copy-for-LLM button, 2 PageSpeed rounds, AEO robots.txt, webmcp run handoff"
+      }
+    },
+    "b-credit": {
+      "type": "Text",
+      "props": {
+        "text": "• founder credit sweep: aaronjmars.com linked across 23 repos in one day, personal hub rebuilt (13 PRs — RSS, weekly star snapshots, per-article OG)"
+      }
+    },
+    "b-infra": {
+      "type": "Text",
+      "props": {
+        "text": "• agent infra had a bad day (claude sub died mid-fleet) and the fix shipped same-day: GLM gateway move, tiered model mapping, telegram reply-to-previous"
+      }
+    },
+    "alert-engine": {
+      "type": "Alert",
+      "props": {
+        "title": "engine core: quiet. 3rd straight window with 0 code PRs",
+        "message": "just dependabot + a README credit. we see it. flagging it",
+        "type": "warning"
+      }
+    },
+    "b-security": {
+      "type": "Text",
+      "props": {
+        "text": "• security: nothing landed in other people's repos this window. not every week gets a flex"
+      }
+    },
+    "sep-2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "traction": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "h-traction",
+        "stat-stars",
+        "tweet-x402aff",
+        "cap-banger",
+        "txt-premier-intro",
+        "tweet-premier",
+        "txt-boom",
+        "grid-aeon"
+      ]
+    },
+    "h-traction": {
+      "type": "Heading",
+      "props": {
+        "text": "traction:",
+        "level": "h2"
+      }
+    },
+    "stat-stars": {
+      "type": "Stat",
+      "props": {
+        "label": "MiroShark/MiroShark ⭐",
+        "value": "1,446",
+        "delta": "+9 — 54 to 1,500",
+        "trend": "up"
+      }
+    },
+    "tweet-x402aff": {
+      "type": "TweetCard",
+      "props": {
+        "author": "aaronjmars",
+        "handle": "@aaronjmars",
+        "text": "Introducing x402aff",
+        "likes": 79,
+        "retweets": 15
+      }
+    },
+    "cap-banger": {
+      "type": "Text",
+      "props": {
+        "text": "— the week's banger",
+        "variant": "muted"
+      }
+    },
+    "txt-premier-intro": {
+      "type": "Text",
+      "props": {
+        "text": "@PremierBase (32.5k) on the launch:"
+      }
+    },
+    "tweet-premier": {
+      "type": "TweetCard",
+      "props": {
+        "author": "PremierBase",
+        "handle": "@PremierBase",
+        "text": "Behind you 🫡🟦"
+      }
+    },
+    "txt-boom": {
+      "type": "Text",
+      "props": {
+        "text": "boom. we just startin' ⭐"
+      }
+    },
+    "grid-aeon": {
+      "type": "Grid",
+      "props": {
+        "columns": 3,
+        "gap": "sm"
+      },
+      "children": [
+        "stat-aeon-prs",
+        "stat-contrib",
+        "stat-eco"
+      ]
+    },
+    "stat-aeon-prs": {
+      "type": "Stat",
+      "props": {
+        "label": "PRs merged for @aeonframework",
+        "value": "1,000"
+      }
+    },
+    "stat-contrib": {
+      "type": "Stat",
+      "props": {
+        "label": "contributors",
+        "value": "60"
+      }
+    },
+    "stat-eco": {
+      "type": "Stat",
+      "props": {
+        "label": "ecosystem projects",
+        "value": "75"
+      }
+    },
+    "sep-3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "footer": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "txt-stars-shark",
+        "lnk-digest"
+      ]
+    },
+    "txt-stars-shark": {
+      "type": "Text",
+      "props": {
+        "text": "⭐🦈"
+      }
+    },
+    "lnk-digest": {
+      "type": "Link",
+      "props": {
+        "label": "full digest + thread/short variants",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/output/articles/shiplog-2026-08-31.md"
+      }
+    }
+  }
+}
