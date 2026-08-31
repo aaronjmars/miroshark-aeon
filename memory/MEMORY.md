@@ -75,7 +75,7 @@ See `memory/watched-repos.md` — `MiroShark/MiroShark` (renamed from `aaronjmar
 - Hyperstition: MiroShark PR from a Chinese-locale contributor OR Chinese-language coverage by 2026-06-15 — CROSSED; CN tweet "米罗莎要来了" May 16 qualifies; also JP coverage @m000_crypto (May 17).
 - Hyperstition: ≥3 publicly-named external integrators citing MiroShark as AI infrastructure by 2026-07-31 — **EXCEEDED, deadline passed**: 14 integrators in ECOSYSTEM.md as of 06-22 (Sparkleware, ZER0, Xerg, SyntheticsAI, Signa, RootAI, Noelclaw, Monitor, HivemindOS, Echo Oracle, Crucible Sim, Capacitr, Blue Agent, AntFleet).
 - $MIROSHARK: ATH $0.0000436 (May 18), FDV peaked $3.32M; **$0.000003413 (−6.2% 24h, −0.9% 7d, +102.4% 30d), ~−92% from ATH, liq $336K** as of 2026-08-30; verdict CONSOLIDATING. Week arc: 08-24 CONSOLIDATING (+16.9%) → 08-25/26 pulled back (−18.8%, −12.1%, 2 straight down days) → 08-27 recovered (+5.1%) → **08-28 BREAKOUT +54.8%** on the x402aff affiliate-program launch (3.44x avg volume, liq +23.5% to $391K) → 08-29 unwound most of it (−22.2%) → 08-30 settled CONSOLIDATING; net ~flat 7d despite the breakout, 30d trend still strongly up.
-- MIROSHARK team/treasury holdings: 11.28% of supply (11.28B tokens) as of 2026-08-24 (up from 11.15% on 08-18), tracked via `holdings` skill (steady incremental climb continues).
+- MIROSHARK team/treasury holdings: 11.78% of supply (11.78B tokens) as of 2026-08-31 (up from 11.28% on 08-24), tracked via `holdings` skill (5th straight accumulating snapshot, +507.7M in 7d).
 
 ## Next Priorities
 - Next star threshold: 1,500 (~63 away as of 2026-08-24; ACTIVE/surge signal, week_stars=8 > 1.5×avg4w=4.67; next repo-pulse weekly check due 2026-08-31).
