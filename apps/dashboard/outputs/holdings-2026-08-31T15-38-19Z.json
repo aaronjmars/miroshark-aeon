@@ -1,0 +1,77 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "Holdings — MiroShark 🦈",
+        "description": "ℹ️ Holdings"
+      },
+      "children": [
+        "stats-grid",
+        "sep",
+        "note"
+      ]
+    },
+    "stats-grid": {
+      "type": "Grid",
+      "props": {
+        "columns": 2,
+        "gap": "md"
+      },
+      "children": [
+        "stat-holdings",
+        "stat-supply",
+        "stat-7d",
+        "stat-30d"
+      ]
+    },
+    "stat-holdings": {
+      "type": "Stat",
+      "props": {
+        "label": "Holdings",
+        "value": "11.78B",
+        "trend": "up"
+      }
+    },
+    "stat-supply": {
+      "type": "Stat",
+      "props": {
+        "label": "% of Supply",
+        "value": "11.78%"
+      }
+    },
+    "stat-7d": {
+      "type": "Stat",
+      "props": {
+        "label": "7d Change",
+        "value": "+507.7M",
+        "delta": "+4.50%",
+        "trend": "up"
+      }
+    },
+    "stat-30d": {
+      "type": "Stat",
+      "props": {
+        "label": "30d Change",
+        "value": "+1.06B",
+        "delta": "+9.90%",
+        "trend": "up"
+      }
+    },
+    "sep": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "note": {
+      "type": "Text",
+      "props": {
+        "text": "Backfill of this morning's outage run — holdings green through the GLM pin. Fifth straight accumulating snapshot.",
+        "variant": "muted"
+      }
+    }
+  }
+}

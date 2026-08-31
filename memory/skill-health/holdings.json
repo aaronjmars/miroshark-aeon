@@ -1,8 +1,8 @@
 {
   "skill": "holdings",
-  "last_analyzed": "2026-08-24T08:17:11Z",
+  "last_analyzed": "2026-08-31T15:38:18Z",
   "quality_score": 4,
-  "assessment": "Substantive holdings report with proper sourcing, specific figures, and transparent methodology; directly supports strategy priority #4 (honest momentum tracking)",
+  "assessment": "Verifiable, internally consistent treasury snapshot (commit 4aecc55 corroborates the figures; deltas and wallet sums check out) with honest window provenance and outage-backfill context — solid momentum-tracking per priority 4, though routine rather than insightful.",
   "flags": [],
   "avg_score": 4,
   "history": [
@@ -36,6 +36,10 @@
     },
     {
       "date": "2026-08-24",
+      "score": 4
+    },
+    {
+      "date": "2026-08-31",
       "score": 4
     }
   ]

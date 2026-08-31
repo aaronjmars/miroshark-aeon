@@ -1,6 +1,8 @@
-ℹ️ Holdings
+ℹ️ Holdings — MiroShark
 
-*Holdings — MiroShark*
+*Holdings — MiroShark* 🦈
 
-11.28B · 11.28% of supply
-7d +146.04M (+1.31%) · 30d building
+11.78B · 11.78% of supply
+7d +507.7M (+4.50%) · 30d +1.06B (+9.90%)
+
+Backfill of this morning's outage run — holdings green through the GLM pin. Fifth straight accumulating snapshot.
