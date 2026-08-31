@@ -1,0 +1,252 @@
+{
+  "root": "card-heartbeat",
+  "state": {},
+  "elements": {
+    "card-heartbeat": {
+      "type": "Card",
+      "props": {
+        "title": "🚨 Heartbeat — fleet outage 2026-08-31 (recovering)",
+        "description": "Status page: 🔴 DEGRADED until the failed skills re-run green"
+      },
+      "children": [
+        "alert-outage",
+        "grid-signature",
+        "sep-1",
+        "stack-cause",
+        "sep-2",
+        "stack-table",
+        "sep-3",
+        "stack-watch",
+        "sep-4",
+        "alert-dropped",
+        "sep-5",
+        "stack-status"
+      ]
+    },
+    "alert-outage": {
+      "type": "Alert",
+      "props": {
+        "type": "error",
+        "title": "🔴 Fleet outage — recovering",
+        "message": "All five Monday weeklies plus the daily token report failed today — 6 skills, 06:00–11:47 UTC, all with the same signature: empty response, 0 tokens, 0 cost."
+      }
+    },
+    "grid-signature": {
+      "type": "Grid",
+      "props": {
+        "columns": 3,
+        "gap": "md"
+      },
+      "children": [
+        "stat-skills",
+        "stat-tokens",
+        "stat-cost"
+      ]
+    },
+    "stat-skills": {
+      "type": "Stat",
+      "props": {
+        "label": "Skills failed",
+        "value": "6",
+        "trend": "down"
+      }
+    },
+    "stat-tokens": {
+      "type": "Stat",
+      "props": {
+        "label": "Tokens per run",
+        "value": "0",
+        "trend": "down"
+      }
+    },
+    "stat-cost": {
+      "type": "Stat",
+      "props": {
+        "label": "Cost per run",
+        "value": "$0",
+        "trend": "neutral"
+      }
+    },
+    "sep-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stack-cause": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "heading-cause",
+        "text-cause",
+        "link-commit"
+      ]
+    },
+    "heading-cause": {
+      "type": "Heading",
+      "props": {
+        "text": "Root cause identified",
+        "level": "h3"
+      }
+    },
+    "text-cause": {
+      "type": "Text",
+      "props": {
+        "variant": "body",
+        "text": "The Claude subscription was exhausted. Operator's 9479fa2 (11:50 UTC) pins the harness to a GLM gateway — and this heartbeat ran through that pin successfully, so the fix is live."
+      }
+    },
+    "link-commit": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/aaronjmars/miroshark-aeon/commit/9479fa2",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/commit/9479fa2"
+      }
+    },
+    "sep-2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stack-table": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "heading-table",
+        "table-skills"
+      ]
+    },
+    "heading-table": {
+      "type": "Heading",
+      "props": {
+        "text": "Failed skills",
+        "level": "h3"
+      }
+    },
+    "table-skills": {
+      "type": "Table",
+      "props": {
+        "columns": [
+          "Skill",
+          "Last good",
+          "Consec. fails"
+        ],
+        "rows": [
+          [
+            "token-movers",
+            "08-30",
+            "3"
+          ],
+          [
+            "holdings",
+            "08-24",
+            "3"
+          ],
+          [
+            "changelog",
+            "08-24",
+            "3"
+          ],
+          [
+            "shiplog",
+            "08-24",
+            "3"
+          ],
+          [
+            "repo-pulse",
+            "08-24",
+            "3"
+          ],
+          [
+            "aeon-update",
+            "08-25",
+            "2"
+          ]
+        ]
+      }
+    },
+    "sep-3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stack-watch": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "heading-watch",
+        "text-watch"
+      ]
+    },
+    "heading-watch": {
+      "type": "Heading",
+      "props": {
+        "text": "Watch",
+        "level": "h3"
+      }
+    },
+    "text-watch": {
+      "type": "Text",
+      "props": {
+        "variant": "body",
+        "text": "The failed skills haven't recorded a post-fix success yet. Next scheduled runs — fetch-tweets 17:00 UTC today, token-movers 06:00 UTC tomorrow — will confirm recovery."
+      }
+    },
+    "sep-4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "alert-dropped": {
+      "type": "Alert",
+      "props": {
+        "type": "warning",
+        "title": "Also dropped",
+        "message": "Today's token-movers was the weekly Monday snapshot; no fresh token data since 08-30."
+      }
+    },
+    "sep-5": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stack-status": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "text-threads",
+        "badge-degraded"
+      ]
+    },
+    "text-threads": {
+      "type": "Text",
+      "props": {
+        "variant": "muted",
+        "text": "Health threads auto-filed: #153–#158 (one per skill). Status page → 🔴 DEGRADED until they re-run green."
+      }
+    },
+    "badge-degraded": {
+      "type": "Badge",
+      "props": {
+        "text": "🔴 DEGRADED",
+        "variant": "destructive"
+      }
+    }
+  }
+}
