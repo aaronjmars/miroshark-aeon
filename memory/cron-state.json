@@ -193,16 +193,16 @@
   },
   "token-movers": {
     "last_dispatch": "2026-08-31T19:46:55Z",
-    "last_status": "dispatched",
+    "last_status": "failed",
     "last_success": "2026-08-30T06:15:50Z",
-    "total_runs": 53,
+    "total_runs": 54,
     "total_successes": 49,
-    "total_failures": 4,
-    "consecutive_failures": 4,
-    "success_rate": 0.92,
+    "total_failures": 5,
+    "consecutive_failures": 5,
+    "success_rate": 0.91,
     "last_quality_score": 4,
-    "last_failed": "2026-08-31T13:40:23Z",
-    "last_error": "1a11dd\",\"total_cost_usd\":0,\"usage\":{\"input_tokens\":0,\"cache_creation_input_tokens\":0,\"cache_read_input_tokens\":0,\"output_tokens\":0,\"server_tool_use\":{\"web_search_requests\":0,\"web_fetch_requests\":0},\"s"
+    "last_failed": "2026-08-31T19:50:36Z",
+    "last_error": "ca0d3b\",\"total_cost_usd\":0,\"usage\":{\"input_tokens\":0,\"cache_creation_input_tokens\":0,\"cache_read_input_tokens\":0,\"output_tokens\":0,\"server_tool_use\":{\"web_search_requests\":0,\"web_fetch_requests\":0},\"s"
   },
   "fetch-tweets": {
     "last_dispatch": "2026-08-31T18:29:13Z",
