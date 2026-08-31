@@ -210,8 +210,8 @@
     "last_quality_score": 4
   },
   "changelog": {
-    "last_dispatch": "2026-08-24T08:15:05Z",
-    "last_status": "success",
+    "last_dispatch": "2026-08-31T08:08:57Z",
+    "last_status": "dispatched",
     "last_success": "2026-08-24T08:21:26Z",
     "total_runs": 9,
     "total_successes": 9,
@@ -221,7 +221,7 @@
     "last_quality_score": 3
   },
   "holdings": {
-    "last_status": "success",
+    "last_status": "dispatched",
     "last_success": "2026-08-24T08:17:27Z",
     "total_runs": 7,
     "total_successes": 7,
@@ -229,7 +229,7 @@
     "consecutive_failures": 0,
     "success_rate": 1,
     "last_quality_score": 4,
-    "last_dispatch": "2026-08-24T08:15:05Z"
+    "last_dispatch": "2026-08-31T08:08:57Z"
   },
   "aeon-update": {
     "last_dispatch": "2026-08-24T11:00:09Z",
