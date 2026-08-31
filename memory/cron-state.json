@@ -241,15 +241,15 @@
   },
   "aeon-update": {
     "last_dispatch": "2026-08-31T12:35:54Z",
-    "last_status": "dispatched",
+    "last_status": "failed",
     "last_success": "2026-08-25T22:58:38Z",
-    "total_runs": 4,
+    "total_runs": 5,
     "total_successes": 2,
-    "total_failures": 2,
-    "consecutive_failures": 2,
-    "success_rate": 0.5,
+    "total_failures": 3,
+    "consecutive_failures": 3,
+    "success_rate": 0.4,
     "last_quality_score": 4,
-    "last_failed": "2026-08-31T11:47:35Z",
-    "last_error": "5165ff\",\"total_cost_usd\":0,\"usage\":{\"input_tokens\":0,\"cache_creation_input_tokens\":0,\"cache_read_input_tokens\":0,\"output_tokens\":0,\"server_tool_use\":{\"web_search_requests\":0,\"web_fetch_requests\":0},\"s"
+    "last_failed": "2026-08-31T12:39:32Z",
+    "last_error": "aa177b\",\"total_cost_usd\":0,\"usage\":{\"input_tokens\":0,\"cache_creation_input_tokens\":0,\"cache_read_input_tokens\":0,\"output_tokens\":0,\"server_tool_use\":{\"web_search_requests\":0,\"web_fetch_requests\":0},\"s"
   }
 }
