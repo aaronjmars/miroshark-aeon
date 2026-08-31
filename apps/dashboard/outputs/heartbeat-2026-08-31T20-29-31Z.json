@@ -1,0 +1,170 @@
+{
+  "root": "card-root",
+  "state": {},
+  "elements": {
+    "card-root": {
+      "type": "Card",
+      "props": {
+        "title": "🚨 heartbeat: fleet still failing — GLM pin didn't hold"
+      },
+      "children": [
+        "alert-banner",
+        "sep-banner",
+        "table-failures",
+        "text-heartbeat-note",
+        "sep-failures",
+        "alert-read",
+        "sep-read",
+        "heading-collateral",
+        "text-collateral",
+        "stat-issues",
+        "text-issues-note",
+        "badge-status",
+        "sep-collateral",
+        "heading-canary",
+        "alert-canary"
+      ]
+    },
+    "alert-banner": {
+      "type": "Alert",
+      "props": {
+        "type": "error",
+        "title": "🔴 fleet still failing — the GLM pin didn't hold",
+        "message": "Recovery check from this morning's heartbeat: FAILED. The 11:50 pin bought exactly two runs — holdings 15:39, changelog 15:47 — then failures resumed with the same signature (empty response, 0 tokens, $0 cost)."
+      }
+    },
+    "sep-banner": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "table-failures": {
+      "type": "Table",
+      "props": {
+        "columns": [
+          "Skill",
+          "Last failure",
+          "Consecutive",
+          "Notes"
+        ],
+        "rows": [
+          [
+            "token-movers",
+            "19:50",
+            "5",
+            "—"
+          ],
+          [
+            "aeon-update",
+            "18:46",
+            "4",
+            "success rate 33% (chronic)"
+          ],
+          [
+            "shiplog",
+            "16:56",
+            "4",
+            "—"
+          ],
+          [
+            "repo-pulse",
+            "17:35",
+            "4",
+            "—"
+          ],
+          [
+            "fetch-tweets",
+            "18:32",
+            "3",
+            "—"
+          ]
+        ]
+      }
+    },
+    "text-heartbeat-note": {
+      "type": "Text",
+      "props": {
+        "text": "A heartbeat attempt also died at 19:50; this run is the retry.",
+        "variant": "muted"
+      }
+    },
+    "sep-failures": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "alert-read": {
+      "type": "Alert",
+      "props": {
+        "type": "warning",
+        "title": "Read",
+        "message": "The gateway returns empty responses intermittently — the pin wasn't a durable fix. Claude-sub exhaustion may have been only half the story. Worth checking the GLM key/credit, or re-pinning GATEWAY_ORDER to another provider."
+      }
+    },
+    "sep-read": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading-collateral": {
+      "type": "Heading",
+      "props": {
+        "text": "Collateral",
+        "level": "h3"
+      }
+    },
+    "text-collateral": {
+      "type": "Text",
+      "props": {
+        "text": "repo-pulse's weekly 1,500-star check and shiplog's 3rd-idle-window check didn't land today — changelog's successful run already confirmed the 3rd quiet engine window on its side.",
+        "variant": "body"
+      }
+    },
+    "stat-issues": {
+      "type": "Stat",
+      "props": {
+        "label": "open health: issues (#153–#160)",
+        "value": "8",
+        "trend": "neutral"
+      }
+    },
+    "text-issues-note": {
+      "type": "Text",
+      "props": {
+        "text": "#154/#155 are stale — those skills recovered.",
+        "variant": "muted"
+      }
+    },
+    "badge-status": {
+      "type": "Badge",
+      "props": {
+        "text": "Status page → 🔴 DEGRADED",
+        "variant": "destructive"
+      }
+    },
+    "sep-collateral": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading-canary": {
+      "type": "Heading",
+      "props": {
+        "text": "Next canary",
+        "level": "h3"
+      }
+    },
+    "alert-canary": {
+      "type": "Alert",
+      "props": {
+        "type": "info",
+        "title": "token-movers at 06:00 UTC tomorrow",
+        "message": "Fails again → the fleet is on borrowed time."
+      }
+    }
+  }
+}
