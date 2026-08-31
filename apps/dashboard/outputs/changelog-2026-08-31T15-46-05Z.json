@@ -1,0 +1,184 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "Changelog (push-to)",
+        "description": "2026-08-31"
+      },
+      "children": [
+        "repos",
+        "sep-repos",
+        "stats",
+        "sep-entry",
+        "entry-title",
+        "plain-read",
+        "bump-badges",
+        "verify-text",
+        "verify-badges",
+        "sep-quiet",
+        "quiet-alert",
+        "sep-pr",
+        "draft-pr"
+      ]
+    },
+    "repos": {
+      "type": "Text",
+      "props": {
+        "text": "aaronjmars/miroshark → aaronjmars/miroshark-website",
+        "variant": "muted"
+      }
+    },
+    "sep-repos": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stats": {
+      "type": "Grid",
+      "props": {
+        "columns": 2,
+        "gap": "md"
+      },
+      "children": [
+        "stat-prs",
+        "stat-bumps"
+      ]
+    },
+    "stat-prs": {
+      "type": "Stat",
+      "props": {
+        "label": "merged PRs",
+        "value": "5"
+      }
+    },
+    "stat-bumps": {
+      "type": "Stat",
+      "props": {
+        "label": "dependabot bumps",
+        "value": "4"
+      }
+    },
+    "sep-entry": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "entry-title": {
+      "type": "Heading",
+      "props": {
+        "text": "Founder credit + dependency upkeep",
+        "level": "h3"
+      }
+    },
+    "plain-read": {
+      "type": "Text",
+      "props": {
+        "text": "Plain read: one README footer credit linking aaronjmars.com (#292) + 4 dependabot bumps:",
+        "variant": "body"
+      }
+    },
+    "bump-badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "badge-frontend",
+        "badge-backend",
+        "badge-root"
+      ]
+    },
+    "badge-frontend": {
+      "type": "Badge",
+      "props": {
+        "text": "frontend: axios / marked / vue / vue-router / dompurify / vite",
+        "variant": "secondary"
+      }
+    },
+    "badge-backend": {
+      "type": "Badge",
+      "props": {
+        "text": "backend: mcp",
+        "variant": "secondary"
+      }
+    },
+    "badge-root": {
+      "type": "Badge",
+      "props": {
+        "text": "root: concurrently",
+        "variant": "secondary"
+      }
+    },
+    "verify-text": {
+      "type": "Text",
+      "props": {
+        "text": "Typecheck, lint, and build all verified clean in the PR.",
+        "variant": "body"
+      }
+    },
+    "verify-badges": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "badge-typecheck",
+        "badge-lint",
+        "badge-build"
+      ]
+    },
+    "badge-typecheck": {
+      "type": "Badge",
+      "props": {
+        "text": "typecheck ✓ clean"
+      }
+    },
+    "badge-lint": {
+      "type": "Badge",
+      "props": {
+        "text": "lint ✓ clean"
+      }
+    },
+    "badge-build": {
+      "type": "Badge",
+      "props": {
+        "text": "build ✓ clean"
+      }
+    },
+    "sep-quiet": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "quiet-alert": {
+      "type": "Alert",
+      "props": {
+        "type": "info",
+        "title": "3rd consecutive quiet window on engine code",
+        "message": "changelog just reports it."
+      }
+    },
+    "sep-pr": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "draft-pr": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Draft PR — miroshark-website #290",
+        "href": "https://github.com/aaronjmars/miroshark-website/pull/290",
+        "source": "GitHub"
+      }
+    }
+  }
+}
