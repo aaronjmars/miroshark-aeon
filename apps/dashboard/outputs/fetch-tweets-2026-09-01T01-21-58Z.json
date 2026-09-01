@@ -1,0 +1,91 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "ℹ️ Tweet Digest — 2026-09-01",
+        "description": "Tweet Digest — 2026-09-01"
+      },
+      "children": [
+        "theme-badge",
+        "sep-top",
+        "tweet-1-stack",
+        "sep-1",
+        "tweet-2-stack"
+      ]
+    },
+    "theme-badge": {
+      "type": "Badge",
+      "props": {
+        "text": "Theme: x402aff week recap",
+        "variant": "secondary"
+      }
+    },
+    "sep-top": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "tweet-1-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-1",
+        "link-1"
+      ]
+    },
+    "tweet-1": {
+      "type": "TweetCard",
+      "props": {
+        "author": "miroshark_",
+        "handle": "@miroshark_",
+        "text": "One-thread recap of last week's x402aff affiliate-program news, program link dropped in a follow-up reply — the launch cycle extends into week two"
+      }
+    },
+    "link-1": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/miroshark_/status/2094426725656502323"
+      }
+    },
+    "sep-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "tweet-2-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet-2",
+        "link-2"
+      ]
+    },
+    "tweet-2": {
+      "type": "TweetCard",
+      "props": {
+        "author": "miroshark_",
+        "handle": "@miroshark_",
+        "text": "Replies to x.com/Amrit_Mirch's GTA VI sim — 10 AI agents argued for 10 rounds, talked release odds down 50%→40% before Sep 30, run on Miroshark. Amrit covered the thesis 08-18; now he runs the engine"
+      }
+    },
+    "link-2": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/miroshark_/status/2094436305165840520"
+      }
+    }
+  }
+}

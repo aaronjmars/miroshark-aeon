@@ -1,15 +1,11 @@
 {
   "skill": "fetch-tweets",
-  "last_analyzed": "2026-08-30T17:08:55Z",
+  "last_analyzed": "2026-09-01T01:21:58Z",
   "quality_score": 4,
-  "assessment": "Well-executed data collection task with specific, verifiable details and proper framework integration; useful for momentum tracking but fundamentally operational rather than insightful.",
+  "assessment": "Substantive, well-structured digest with internally consistent tweet IDs/dates (snowflake timestamps match the stated window), sourced API fetch with dedup state, and the organic Amrit engine-run callout directly serves the ecosystem-growth north star; routine scope and only two reportable items keep it short of 5.",
   "flags": [],
-  "avg_score": 3.73,
+  "avg_score": 3.77,
   "history": [
-    {
-      "date": "2026-07-28",
-      "score": 3
-    },
     {
       "date": "2026-07-29",
       "score": 4
@@ -124,6 +120,10 @@
     },
     {
       "date": "2026-08-30",
+      "score": 4
+    },
+    {
+      "date": "2026-09-01",
       "score": 4
     }
   ]
