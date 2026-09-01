@@ -1,0 +1,149 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "ℹ️ MIROSHARK daily report"
+      },
+      "children": [
+        "main"
+      ]
+    },
+    "main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "headerRow",
+        "narrative",
+        "whaleAlert",
+        "sep1",
+        "statsGrid",
+        "sep2",
+        "chartLink"
+      ]
+    },
+    "headerRow": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "pairHeading",
+        "statusBadge"
+      ]
+    },
+    "pairHeading": {
+      "type": "Heading",
+      "props": {
+        "text": "MIROSHARK",
+        "level": "h2"
+      }
+    },
+    "statusBadge": {
+      "type": "Badge",
+      "props": {
+        "text": "CONSOLIDATING",
+        "variant": "outline"
+      }
+    },
+    "narrative": {
+      "type": "Text",
+      "props": {
+        "text": "Down 16% on barely half its normal volume — four red days since the x402aff pump and the move is fully round-tripped.",
+        "variant": "lead"
+      }
+    },
+    "whaleAlert": {
+      "type": "Alert",
+      "props": {
+        "title": "Whale flow",
+        "message": "5 of 6 whale-sized trades were sells, and the one ≥$1k buyer flipped and sold six hours later.",
+        "type": "warning"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "statsGrid": {
+      "type": "Grid",
+      "props": {
+        "columns": 3,
+        "gap": "md"
+      },
+      "children": [
+        "statPrice",
+        "statLiq",
+        "statVol",
+        "statBS",
+        "statWhales"
+      ]
+    },
+    "statPrice": {
+      "type": "Stat",
+      "props": {
+        "label": "Price",
+        "value": "$0.000002757",
+        "delta": "−16.1% 24h",
+        "trend": "down"
+      }
+    },
+    "statLiq": {
+      "type": "Stat",
+      "props": {
+        "label": "Liq",
+        "value": "$305.1K",
+        "delta": "−9.3% ~2d",
+        "trend": "down"
+      }
+    },
+    "statVol": {
+      "type": "Stat",
+      "props": {
+        "label": "Vol",
+        "value": "$24.2K",
+        "delta": "0.57× 7d",
+        "trend": "down"
+      }
+    },
+    "statBS": {
+      "type": "Stat",
+      "props": {
+        "label": "Buys/Sells",
+        "value": "47/30",
+        "delta": "ratio 1.57, yest 0.85",
+        "trend": "up"
+      }
+    },
+    "statWhales": {
+      "type": "Stat",
+      "props": {
+        "label": "Whales",
+        "value": "6",
+        "delta": "5 sell / 1 buy",
+        "trend": "down"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "chartLink": {
+      "type": "Link",
+      "props": {
+        "label": "Chart on GeckoTerminal",
+        "href": "https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209"
+      }
+    }
+  }
+}
