@@ -229,7 +229,7 @@ harness: claude
 # + secret ANTHROPIC_API_KEY. Example: https://api.deepseek.com/anthropic
 # Bankr docs: https://docs.bankr.bot/llm-gateway/overview
 gateway:
-  provider: glm
+  provider: claude
 
 # Output channels
 channels:
