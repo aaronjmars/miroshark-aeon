@@ -1,0 +1,120 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "✅ Fleet recovered — 08-31 outage closed",
+        "description": "heartbeat · 2026-09-01"
+      },
+      "children": [
+        "alert-outage",
+        "stat-failures",
+        "sep-1",
+        "h-residual",
+        "text-residual",
+        "progress-aeon",
+        "sep-2",
+        "h-house",
+        "alert-house",
+        "sep-3",
+        "h-status",
+        "badge-status",
+        "text-status"
+      ]
+    },
+    "alert-outage": {
+      "type": "Alert",
+      "props": {
+        "type": "success",
+        "title": "Outage over — fleet recovered",
+        "message": "The 08-31 gateway outage is closed: both watch-canaries went green today (token-movers 06:26 UTC, fetch-tweets 17:14 UTC), and every skill the outage touched has since succeeded. 0 consecutive failures fleet-wide."
+      }
+    },
+    "stat-failures": {
+      "type": "Stat",
+      "props": {
+        "label": "Consecutive failures fleet-wide",
+        "value": "0",
+        "trend": "neutral"
+      }
+    },
+    "sep-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "h-residual": {
+      "type": "Heading",
+      "props": {
+        "text": "Residual flag: aeon-update",
+        "level": "h3"
+      }
+    },
+    "text-residual": {
+      "type": "Text",
+      "props": {
+        "variant": "body",
+        "text": "aeon-update's rolling success rate is 43% (4 of 7 runs — all with the outage's zero-token signature). The chronic-failure bar keeps the status page 🔴 until its next clean weekly run (4/8 clears it); the skill itself succeeded today at 01:45 UTC and its framework-sync PR #161 merged at 14:59 UTC."
+      }
+    },
+    "progress-aeon": {
+      "type": "Progress",
+      "props": {
+        "value": 43,
+        "max": 100,
+        "label": "aeon-update rolling success rate — 43% (4 of 7 runs); 4/8 clears it"
+      }
+    },
+    "sep-2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "h-house": {
+      "type": "Heading",
+      "props": {
+        "text": "Housekeeping",
+        "level": "h3"
+      }
+    },
+    "alert-house": {
+      "type": "Alert",
+      "props": {
+        "type": "warning",
+        "title": "Health threads #153–#160 are all stale",
+        "message": "Every named skill has recovered, and skill-health is disabled, so nothing will auto-close them. Close manually or re-enable the loop."
+      }
+    },
+    "sep-3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "h-status": {
+      "type": "Heading",
+      "props": {
+        "text": "Status page",
+        "level": "h3"
+      }
+    },
+    "badge-status": {
+      "type": "Badge",
+      "props": {
+        "text": "🔴 DEGRADED",
+        "variant": "destructive"
+      }
+    },
+    "text-status": {
+      "type": "Text",
+      "props": {
+        "variant": "muted",
+        "text": "Status page regenerated → 🔴 DEGRADED (aeon-update rolling rate only; everything else green)."
+      }
+    }
+  }
+}

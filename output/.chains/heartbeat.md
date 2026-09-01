@@ -1,18 +1,9 @@
-🚨 heartbeat: fleet still failing — GLM pin didn't hold
+✅ Fleet recovered — 08-31 outage closed
 
-🔴 **fleet still failing — the GLM pin didn't hold**
+✅ **Outage over — fleet recovered.** The 08-31 gateway outage is closed: both watch-canaries went green today (token-movers 06:26 UTC, fetch-tweets 17:14 UTC), and every skill the outage touched has since succeeded. 0 consecutive failures fleet-wide.
 
-Recovery check from this morning's heartbeat: **FAILED.** The 11:50 pin bought exactly two runs — holdings 15:39, changelog 15:47 — then failures resumed with the **same signature** (empty response, 0 tokens, $0 cost):
+**Residual flag:** aeon-update's rolling success rate is 43% (4 of 7 runs — all with the outage's zero-token signature). The chronic-failure bar keeps the status page 🔴 until its next clean weekly run (4/8 clears it); the skill itself succeeded today at 01:45 UTC and its framework-sync PR #161 merged at 14:59 UTC.
 
-- **token-movers** — failed 19:50, 5 consecutive
-- **aeon-update** — failed 18:46, 4 consecutive, success rate 33% (chronic)
-- **shiplog** — failed 16:56, 4 consecutive
-- **repo-pulse** — failed 17:35, 4 consecutive
-- **fetch-tweets** — failed 18:32, 3 consecutive
-- a heartbeat attempt also died at 19:50; this run is the retry
+**Housekeeping:** health threads #153–#160 are all stale — every named skill has recovered — and `skill-health` is disabled, so nothing will auto-close them. Close manually or re-enable the loop.
 
-**Read:** the gateway returns empty responses *intermittently* — the pin wasn't a durable fix. Claude-sub exhaustion may have been only half the story. Worth checking the GLM key/credit, or re-pinning `GATEWAY_ORDER` to another provider.
-
-**Collateral:** repo-pulse's weekly 1,500-star check and shiplog's 3rd-idle-window check didn't land today — changelog's successful run already confirmed the 3rd quiet engine window on its side. 8 open `health:` issues (#153–#160; #154/#155 are stale — those skills recovered). Status page → 🔴 DEGRADED.
-
-**Next canary:** token-movers at 06:00 UTC tomorrow. Fails again → the fleet is on borrowed time.
+Status page regenerated → 🔴 DEGRADED (aeon-update rolling rate only; everything else green).
