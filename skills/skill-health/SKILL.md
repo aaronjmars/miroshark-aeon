@@ -93,14 +93,23 @@ Group non-HEALTHY skills by shared `api_host` OR shared `last_error` signature. 
 
 **Precondition guard:** only perform issue filing/resolution if `memory/issues/INDEX.md` already exists. If it is missing, the operator has not opted into the issue-tracker contract yet — log `SKILL_HEALTH_ISSUE_TRACKER_MISSING` to `memory/logs/${today}.md`, skip this entire step (and the reconciliation side of step 5), and continue with classification + notification only. Do **not** auto-create `INDEX.md`.
 
-For each CRITICAL or FLAPPING skill, check if an open issue already exists with this skill in `affected_skills` AND a matching `root_cause` signature:
+For each CRITICAL or FLAPPING skill, check if an issue with `status: open` or `status: fix-pending` already has this skill in `affected_skills` AND a matching `root_cause` signature:
 
-- **Open issue exists, same root cause** → do nothing (no new file, no notification for this skill).
-- **Open issue exists, different root cause** → append a note to the existing ISS file's body: `Update YYYY-MM-DD: new signature: <error>`. Do not file a new issue.
-- **No open issue** → file a new one (see below).
+- **Matching issue exists, same root cause** → do nothing (no new file, no notification for this skill).
+- **Matching issue exists, different root cause** → append a note to the existing ISS file's body: `Update YYYY-MM-DD: new signature: <error>`. Do not file a new issue.
+- **No matching issue** → file a new one (see below).
 
-For each skill now HEALTHY whose name appears in any open issue's `affected_skills`:
-- Remove it from that issue's `affected_skills`. If the list becomes empty, set `status: resolved`, set `resolved_at: <now ISO>`, and move the row from Open to Resolved in INDEX.md.
+**Reconcile `fix-pending` issues first.** `skill-repair` sets `status: fix-pending` with a `fix_pr` when it opens a repair PR - it cannot know whether that PR merges, so it deliberately does not claim `resolved`. This step closes that loop. For each issue with `status: fix-pending` and a non-null `fix_pr`, check the PR's real state (`gh pr view <fix_pr> --json state,mergedAt`) and reconcile:
+
+- **Merged** (`mergedAt` non-null) → the fix shipped. Set `status: resolved`, `resolved_at: <mergedAt>`, move the row from Open to Resolved in INDEX.md.
+- **Closed without merging** (`state: CLOSED`, `mergedAt: null`) → the fix did not ship. Set `status: open`, set `fix_pr: null`, and append `Update <YYYY-MM-DD>: fix PR <url> was closed unmerged; issue reopened.` to the body. The skill is still broken; leaving it `fix-pending` would hide that.
+- **Still open** → leave untouched. The repair is in flight.
+
+If `gh` is unavailable or the lookup errors, leave the issue untouched and log it - never resolve on an unverified assumption.
+
+For each skill now HEALTHY whose name appears in any `status: open` issue's `affected_skills`:
+- Skip `status: fix-pending` issues. Those wait for the reconcile step above; a lucky HEALTHY classification must not close a repair that has not merged.
+- Remove the skill from that issue's `affected_skills`. If the list becomes empty, set `status: resolved`, set `resolved_at: <now ISO>`, and move the row from Open to Resolved in INDEX.md.
 
 **Filing a new issue:**
 1. Find next ID: scan `memory/issues/ISS-*.md`, take max `NNN`, add 1. Format as zero-padded 3 digits (`ISS-042`).
@@ -109,7 +118,7 @@ For each skill now HEALTHY whose name appears in any open issue's `affected_skil
    ---
    id: ISS-NNN
    title: <skill> <concise failure>
-   status: open
+   status: open   # open | fix-pending | resolved. fix-pending = repair PR open, unmerged. Health resolves fix-pending only after merge (or reopens if closed unmerged). HEALTHY recovery still resolves status: open issues with no pending PR.
    severity: critical | high | medium | low   # critical=CRITICAL status, high=FLAPPING, medium=DEGRADED
    category: rate-limit | timeout | missing-secret | config | api-change | sandbox-limitation | unknown
    detected_by: skill-health

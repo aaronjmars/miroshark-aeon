@@ -1,9 +1,9 @@
 # harness-adapter
 
-**One Claude Code-shaped contract, seven coding-agent harnesses.**
+**One Claude Code-shaped contract, nine coding-agent harnesses.**
 
 This directory is exactly what the workflow runs: the `run-harness` dispatcher and
-the seven adapters aeon can dispatch to — **claude, grok, codex, pi, vibe, kimi, fx**.
+the nine adapters aeon can dispatch to - **claude, grok, codex, pi, vibe, kimi, fx, cursor, hermes**.
 It is self-contained, so fixes land here directly. Three further harnesses
 (`opencode`, `copilot`, `agy`) were evaluated and deliberately left out; the
 per-harness reasons are recorded in the allowlist comment in
@@ -38,7 +38,7 @@ exit    0 ok · 3 abnormal model stop with no output · 124 timeout · other = e
 An abnormal stop (grok `stopReason=Cancelled`, codex `turn.failed`, …) with no
 output **fails the run** — partial or empty results are never emitted as success.
 
-## The six harnesses
+## The nine harnesses
 
 | | claude | grok | codex | pi | vibe | kimi |
 |---|---|---|---|---|---|---|
@@ -58,6 +58,13 @@ and kimi run only through this adapter.
 end-to-end (envelope, MCP-config translation, model/step env, and the
 success/failure paths against a real fx 0.0.5 binary), but not yet
 live-dispatched on GitHub Actions, so it is absent from the tested matrix above.
+
+The two newer adapters are:
+
+| harness | headless entry point | auth | usage |
+|---|---|---|---|
+| cursor | `agent -p --trust --output-format json` | `CURSOR_API_KEY` | provider output only; zero when Cursor omits usage |
+| hermes | `hermes -z --usage-file <path>` | `HERMES_AUTH` (Nous Portal OAuth archive) or OpenRouter | usage/session from the usage file |
 
 ¹ grok reports usage **only** on `--output-format streaming-json`, whose terminal
 `{"type":"end"}` event carries usage, `total_cost_usd` and `sessionId`; the adapter
@@ -120,7 +127,7 @@ bind-mounts) kimi still reads the literal `${VAR}`s.
 **Read-only enforcement is hoisted into the dispatcher.** Only codex has a native
 kernel sandbox that actually holds; every other harness — claude, grok, pi, vibe,
 kimi, fx — runs read-only under `sandbox-exec` (macOS) or `bwrap` (Linux) with the
-workspace mounted read-only, so `--mode read-only` means the same thing on all seven:
+workspace mounted read-only, so `--mode read-only` means the same thing on all nine:
 *the repo physically cannot be mutated*, regardless of the model or its permission
 config. (vibe and kimi lean on this entirely — their `-p` modes have no
 permission-layer gate of their own.)
@@ -168,6 +175,8 @@ Only the harnesses you actually dispatch need to be installed.
 | Pi | `npm i -g --ignore-scripts @earendil-works/pi-coding-agent` | provider env keys or `/login` OAuth in the TUI |
 | Mistral Vibe | Vibe installer → `~/.local/bin/vibe` | `vibe --setup` (Mistral API key) |
 | Kimi Code | `brew install kimi-code` | `kimi login` (Moonshot) or a provider in `~/.config/kimi` |
+| Cursor CLI | `curl -fsSL https://cursor.com/install | bash` | `CURSOR_API_KEY` for headless runs |
+| Hermes Agent | `curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash` | `hermes setup --portal`; archive as `HERMES_AUTH` for CI |
 
 For aeon, these installs + auth are automated by `aeon.yml`'s *Install harness CLI*
 step and the native-auth secrets (`CODEX_AUTH`, `KIMI_AUTH`, `MISTRAL_API_KEY`,
@@ -176,7 +185,7 @@ step and the native-auth secrets (`CODEX_AUTH`, `KIMI_AUTH`, `MISTRAL_API_KEY`,
 ## Capability manifest
 
 [`harnesses.json`](harnesses.json) is the machine-readable capability manifest for
-the seven adapters - the local analog of a UHP [`GET /v1/harnesses`](https://unifiedharnessprotocol.org)
+the ten adapters - the local analog of a UHP [`GET /v1/harnesses`](https://unifiedharnessprotocol.org)
 discovery response. One queryable file answers *does this harness report token
 cost? enforce read-only natively or via the wrapper sandbox? support MCP, and
 how? what auth does it take?* - instead of that knowledge living only in the

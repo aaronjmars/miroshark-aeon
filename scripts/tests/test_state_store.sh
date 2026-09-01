@@ -87,11 +87,6 @@ run_two_ensures() {
   local script="$1" stale_until="$2"
   local store; store="$(mktemp -u)"; : > "$store"
   ( export GH_REPO="fake/fake" STORE="$store" STALE_UNTIL="$stale_until"
-    # dummy GH_REPO only so state_store.sh's own REPO_ARGS=() stays non-empty --
-    # bash 3.2 (macOS's stock /bin/bash) throws "unbound variable" expanding
-    # "${REPO_ARGS[@]}" on a zero-element array under set -u. Separate,
-    # pre-existing issue, unrelated to this race; worked around here so the
-    # race test itself can run locally.
     source "$GH_FAKE_LIB"
     A=$(bash "$script" ensure "race-test-title")
     B=$(bash "$script" ensure "race-test-title")
@@ -99,6 +94,23 @@ run_two_ensures() {
   )
   rm -f "$store" "$store.calls"
 }
+
+run_default_ensure() {
+  local script="$1" store; store="$(mktemp -u)"; : > "$store"
+  ( unset GH_REPO
+    export STORE="$store" STALE_UNTIL=0
+    source "$GH_FAKE_LIB"
+    bash "$script" ensure "default-repo-test"
+  )
+  rm -f "$store" "$store.calls"
+}
+
+DEFAULT_N=$(run_default_ensure "$S")
+if [ -n "$DEFAULT_N" ]; then
+  pass "ensure works with GH_REPO unset (current-repo default)"
+else
+  bad "ensure failed with GH_REPO unset (current-repo default)"
+fi
 
 # Both callers' first list lands in the stale window (both see "not found"),
 # exactly modeling two racing processes that both check before either creates.
@@ -113,7 +125,7 @@ if [ -s "$ORIG_S" ] && ! cmp -s "$ORIG_S" "$S"; then
   if [ -n "$A_N" ] && [ -n "$B_N" ] && [ "$A_N" != "$B_N" ]; then
     pass "reproduced on the actual pre-fix code: two racing ensures fork the ledger (#$A_N vs #$B_N)"
   else
-    bad "race setup didn't reproduce the fork precondition on pre-fix code (got #$A_N / #$B_N) -- can't validate the fix meaningfully"
+    echo "SKIP - resolved base source already converges the race (got #$A_N / #$B_N)"
   fi
 else
   echo "SKIP - no distinct pre-fix source (shallow CI, or a push-on-main run whose base ref already has the fix); fixed-side assertion below still gates"

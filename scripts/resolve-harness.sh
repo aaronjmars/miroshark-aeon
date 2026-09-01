@@ -5,7 +5,7 @@
 # an agent resolves identically. It is the companion of scripts/install-harness.sh
 # (which stages the CLI these outputs describe) and of harness-adapter/run-harness
 # (which consumes MODEL_ARG). Splitting the decision from the workflow is what lets
-# messages.yml support all seven harnesses instead of only claude/grok — a gap that
+# messages.yml support all nine harnesses instead of only claude/grok — a gap that
 # existed purely because this ~100 lines lived inside one workflow step.
 #
 # Usage:
@@ -21,7 +21,7 @@
 #                                 is treated as unset — that's the dropdown's
 #                                 placeholder value, not a harness name)
 #   HARNESS_MODEL                 vars.HARNESS_MODEL, a repo-wide model override
-#   CODEX_AUTH / KIMI_AUTH / GROK_CREDENTIALS
+#   CODEX_AUTH / KIMI_AUTH / HERMES_AUTH / GROK_CREDENTIALS
 #   OPENAI_API_KEY / MOONSHOT_API_KEY / MISTRAL_API_KEY / XAI_API_KEY
 #   ANTHROPIC_API_KEY / ANTHROPIC_OAUTH_TOKEN
 #                                 presence ONLY — never read for their value here,
@@ -29,7 +29,7 @@
 #
 # Outputs (stdout, one KEY=VALUE per line — append to $GITHUB_OUTPUT/$GITHUB_ENV,
 # or `eval` after review):
-#   HARNESS        claude | grok | codex | pi | vibe | kimi
+#   HARNESS        claude | grok | codex | pi | vibe | kimi | fx | cursor | hermes
 #   AUTH_MODE      native-oauth | native-key | openrouter
 #   HARNESS_MODEL  the model label for logs/records ("(native:…)" on native auth)
 #   MODEL_ARG      what to pass as `run-harness --model`, or empty for "the
@@ -66,7 +66,7 @@ fi
 #   agy      — its print mode runs tools outside $PWD, so it reports success
 #              having written nothing to the workspace.
 case "$HARNESS" in
-  claude|grok|codex|pi|vibe|kimi|fx) ;;
+  claude|grok|codex|pi|vibe|kimi|fx|cursor|hermes) ;;
   *) echo "::warning::unknown harness '$HARNESS' — falling back to claude" >&2
      HARNESS="claude" ;;
 esac
@@ -84,6 +84,8 @@ case "$HARNESS" in
   grok)  if [ -n "${GROK_CREDENTIALS:-}" ]; then AUTH_MODE="native-oauth"; elif [ -n "${XAI_API_KEY:-}" ]; then AUTH_MODE="native-key"; fi ;;
   codex) if [ -n "${CODEX_AUTH:-}" ]; then AUTH_MODE="native-oauth"; elif [ -n "${OPENAI_API_KEY:-}" ]; then AUTH_MODE="native-key"; fi ;;
   kimi)  if [ -n "${KIMI_AUTH:-}" ]; then AUTH_MODE="native-oauth"; elif [ -n "${MOONSHOT_API_KEY:-}" ]; then AUTH_MODE="native-key"; fi ;;
+  hermes) if [ -n "${HERMES_AUTH:-}" ]; then AUTH_MODE="native-oauth"; fi ;;
+  cursor) if [ -n "${CURSOR_API_KEY:-}" ]; then AUTH_MODE="native-key"; fi ;;
   vibe)  if [ -n "${MISTRAL_API_KEY:-}" ]; then AUTH_MODE="native-key"; fi ;;
   pi)    if [ -n "${ANTHROPIC_API_KEY:-}" ] || [ -n "${ANTHROPIC_OAUTH_TOKEN:-}" ] || [ -n "${OPENAI_API_KEY:-}" ]; then AUTH_MODE="native-key"; fi ;;
   # fx has no OpenRouter path at all (confirmed: no mention anywhere in its
@@ -136,6 +138,11 @@ case "$HARNESS" in
   vibe)  DEFAULT_HM="mistralai/mistral-medium-3-5" ;;   # vibe's default (VIBE_MODELS[0])
   pi)    DEFAULT_HM="deepseek/deepseek-v4-flash" ;;     # pi's default (PI_MODELS[0])
   kimi)  DEFAULT_HM="moonshotai/kimi-k2.5" ;;           # kimi's default (KIMI_MODELS[0])
+  # Hermes' native provider and model are restored from HERMES_AUTH/config.yaml.
+  # Passing a hardcoded model can switch the CLI to a different provider and
+  # bypass the Nous Portal subscription, so let Hermes use its configured default.
+  hermes) DEFAULT_HM="default" ;;
+  cursor) DEFAULT_HM="gpt-5.1" ;;
   *)     DEFAULT_HM="openai/gpt-5-mini" ;;              # generic fallback: only claude/grok hit it (and don't consume it)
 esac
 HM="${HARNESS_MODEL:-${REQ_MODEL:-$DEFAULT_HM}}"
@@ -154,9 +161,13 @@ if [ "$AUTH_MODE" = "openrouter" ]; then
     # --model breaks them — their staged config decides.
   esac
 else
-  # Native auth (the operator's own ChatGPT/Moonshot/provider account): let the
-  # harness pick its own default model. HM is only a label here.
-  HM="(native:$AUTH_MODE)"
+  # Codex/Kimi/Vibe native accounts choose their own account default. Cursor and
+  # Hermes Portal explicitly document model overrides, so preserve the
+  # dashboard/dispatch model for those harnesses even when their auth is native.
+  case "$HARNESS" in
+    cursor|hermes) MODEL_ARG="$HM" ;;
+    *) HM="(native:$AUTH_MODE)" ;;
+  esac
 fi
 
 echo "Harness: $HARNESS  |  auth: $AUTH_MODE  |  model: $HM  |  run-harness --model: ${MODEL_ARG:-<harness default>}" >&2

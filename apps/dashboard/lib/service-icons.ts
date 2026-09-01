@@ -31,6 +31,8 @@ const DOMAINS: Record<string, string> = {
   OPENAI_API_KEY: 'openai.com',
   KIMI_AUTH: 'kimi.com',
   MOONSHOT_API_KEY: 'moonshot.ai',
+  CURSOR_API_KEY: 'cursor.com',
+  HERMES_AUTH: 'nousresearch.com',
   MISTRAL_API_KEY: 'mistral.ai',
   ...GATEWAY_DOMAINS,
   // Channels

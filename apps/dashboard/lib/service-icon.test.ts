@@ -26,7 +26,17 @@ describe("resolveServiceMark", () => {
 
   it("routes a credential to its brand favicon", () => {
     assert.match(resolveServiceMark({ name: "CODEX_AUTH" }).src ?? "", /openai\.com/);
+    assert.match(resolveServiceMark({ name: "CURSOR_API_KEY" }).src ?? "", /cursor\.com/);
+    assert.match(resolveServiceMark({ name: "HERMES_AUTH" }).src ?? "", /nousresearch\.com/);
+    assert.match(resolveServiceMark({ name: "GLM_API_KEY" }).src ?? "", /z\.ai/);
     assert.match(resolveServiceMark({ name: "GH_SECRETS_PAT" }).src ?? "", /github\.com/);
+  });
+
+  it("keeps every new harness credential visible even before it is set", () => {
+    const core = new Map(BUILTIN_SECRETS.map(secret => [secret.name, secret.group]));
+    assert.equal(core.get("CURSOR_API_KEY"), "Core");
+    assert.equal(core.get("HERMES_AUTH"), "Core");
+    assert.equal(core.get("GLM_API_KEY"), "Core");
   });
 
   it("prefers a vendored logo over the favicon service", () => {

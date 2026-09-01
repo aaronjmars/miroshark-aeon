@@ -15,11 +15,21 @@
 #                                                        folded projection to <file> (for readers)
 set -euo pipefail
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-REPO_ARGS=(); [ -n "${GH_REPO:-}" ] && REPO_ARGS=(--repo "$GH_REPO")
+
+# Bash 3.2 (the macOS system bash) treats expansion of an empty array as an
+# unbound variable under `set -u`. Keep the documented no-GH_REPO/current-repo
+# path out of an empty array entirely.
+_gh_issue() {
+  if [ -n "${GH_REPO:-}" ]; then
+    gh issue "$@" --repo "$GH_REPO"
+  else
+    gh issue "$@"
+  fi
+}
 
 _find_all() {
   local title="${1:?title required}"
-  gh issue list "${REPO_ARGS[@]}" --state all --search "\"$title\" in:title" \
+  _gh_issue list --state all --search "\"$title\" in:title" \
     --json number,title --jq "map(select(.title==\"$title\")) | .[].number" 2>/dev/null || true
 }
 
@@ -32,13 +42,13 @@ _ensure() {
   n=$(_find_all "$title" | sort -n | head -1)
   if [ -z "$n" ]; then
     local url created_n
-    url=$(gh issue create "${REPO_ARGS[@]}" --title "$title" \
+    url=$(_gh_issue create --title "$title" \
           --body "Append-only Aeon state store (hardening §3). Machine-managed; do not edit by hand.")
     created_n=$(printf '%s' "$url" | grep -oE '[0-9]+$')
     # Close it on creation so it stays out of the open-issues view. Appends still
     # land on the closed issue; it never needs to be reopened.
     if [ -n "$created_n" ]; then
-      gh issue close "$created_n" "${REPO_ARGS[@]}" >/dev/null 2>&1 || true
+      _gh_issue close "$created_n" >/dev/null 2>&1 || true
     fi
     # Reconcile: the search above and this create are not atomic, so a concurrent
     # _ensure for the same title can create its own issue in the gap. Re-list and
@@ -54,7 +64,7 @@ _ensure() {
 
 _append() {
   local n="${1:?issue number required}"; shift
-  gh issue comment "$n" "${REPO_ARGS[@]}" --body "$*" >/dev/null
+  _gh_issue comment "$n" --body "$*" >/dev/null
 }
 
 _read() {

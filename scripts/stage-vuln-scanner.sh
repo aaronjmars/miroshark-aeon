@@ -41,6 +41,24 @@ MANIFEST=/tmp/vuln-scan/prefetch.txt
 log()    { echo "stage-vuln-scanner: $*"; }
 record() { echo "$1=$2" >> "$MANIFEST"; }   # tool=installed|fail|skipped
 
+# Keep machine-readable evidence that the agent actually invoked a scanner. The
+# post-run workflow check reads this file; model prose is not execution evidence.
+EXEC_LOG=/tmp/vuln-scan/executions.log
+: > "$EXEC_LOG"
+
+instrument() { # command name, real executable
+  local name="$1" real="$2" wrapper="$BIN/$1"
+  [ -x "$real" ] || return 0
+  mv "$real" "$BIN/.${name}.real" 2>/dev/null || return 0
+  rm -f "$wrapper"   # drop any dangling symlink so the heredoc writes a plain file into $BIN
+  cat > "$wrapper" <<EOF
+#!/usr/bin/env bash
+printf '%s %s\\n' '$name' "\$*" >> '$EXEC_LOG'
+exec '$BIN/.${name}.real' "\$@"
+EOF
+  chmod +x "$wrapper"
+}
+
 pip_install() { # package
   pip install --quiet "$1" 2>/dev/null \
     || pip3 install --quiet "$1" 2>/dev/null \
@@ -116,6 +134,13 @@ else
   log "cargo-fuzz not installed (optional — only used for repos shipping fuzz/fuzz_targets)"
   record cargo-fuzz skipped
 fi
+
+# Wrap staged binaries after installation so every actual invocation is recorded.
+instrument semgrep "$(command -v semgrep 2>/dev/null || true)"
+instrument trufflehog "$BIN/trufflehog"
+instrument osv-scanner "$BIN/osv-scanner"
+instrument slither "$(command -v slither 2>/dev/null || true)"
+instrument cargo-fuzz "$(command -v cargo-fuzz 2>/dev/null || true)"
 
 log "manifest (/tmp/vuln-scan/prefetch.txt):"
 cat "$MANIFEST"

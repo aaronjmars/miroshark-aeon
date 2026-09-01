@@ -241,6 +241,65 @@ def md_to_telegram_html(text):
     return "\n".join(out)
 
 
+_HTML_TAG = re.compile(r"(<\/?[A-Za-z][^>]*>)")
+_HTML_ENTITY = re.compile(r"&(?:amp|lt|gt|quot);|.", re.DOTALL)
+
+
+def _html_tag_name(tag):
+    m = re.match(r"</?([A-Za-z][A-Za-z0-9-]*)", tag)
+    return m.group(1) if m else None
+
+
+def _chunk_telegram_html(html, limit):
+    """Split rendered Telegram HTML without breaking tags or the size limit."""
+    # Reserve room for the [i/N] footer added by telegram(). The previous
+    # Markdown-first chunker could not account for HTML escaping/tag overhead.
+    budget = max(1, limit - 32)
+    chunks, current, stack = [], "", []
+
+    def closing():
+        return "".join(f"</{name}>" for name, _ in reversed(stack))
+
+    def reopening():
+        return "".join(tag for _, tag in stack)
+
+    def flush():
+        nonlocal current
+        if current:
+            chunks.append(current + closing())
+            current = reopening()
+
+    def add_text(text):
+        nonlocal current
+        for unit in _HTML_ENTITY.findall(text):
+            if len(current) + len(unit) + len(closing()) > budget:
+                flush()
+            current += unit
+
+    for token in _HTML_TAG.split(html):
+        if not token:
+            continue
+        if not token.startswith("<"):
+            add_text(token)
+            continue
+
+        if len(current) + len(token) + len(closing()) > budget:
+            flush()
+        current += token
+        name = _html_tag_name(token)
+        if not name or token.endswith("/>"):
+            continue
+        if token.startswith("</"):
+            if stack and stack[-1][0] == name:
+                stack.pop()
+        else:
+            stack.append((name, token))
+
+    if current:
+        chunks.append(current + closing())
+    return chunks
+
+
 # ---- per-channel payload builders -----------------------------------------
 
 def telegram(text, title, severity, limit=3900):
@@ -248,14 +307,16 @@ def telegram(text, title, severity, limit=3900):
     body = text
     if title:
         body = "**%s %s**\n\n%s" % (meta["emoji"], title, body)
-    # Chunk the Markdown first (fence-safe, tested), leaving headroom for the
-    # HTML growth (<b></b>, <a href=…>) that md_to_telegram_html adds per chunk.
-    md_chunks = chunk(body, min(limit, 3400))
-    n = len(md_chunks)
+    # Render first, then split the HTML while preserving balanced tags. The
+    # Markdown-first chunker cannot know how much escaping and tag markup will
+    # expand a chunk, so it can emit Telegram payloads over the API limit.
+    html = md_to_telegram_html(body)
+    html_chunks = _chunk_telegram_html(html, limit)
+    n = len(html_chunks)
     out = []
-    for i, c in enumerate(md_chunks):
+    for i, c in enumerate(html_chunks):
         suffix = f"\n\n[{i + 1}/{n}]" if n > 1 else ""
-        out.append(md_to_telegram_html(c) + suffix)
+        out.append(c + suffix)
     return out  # list[str] of Telegram HTML
 
 
