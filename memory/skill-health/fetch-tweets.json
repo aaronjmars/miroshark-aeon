@@ -1,15 +1,11 @@
 {
   "skill": "fetch-tweets",
-  "last_analyzed": "2026-09-01T01:21:58Z",
+  "last_analyzed": "2026-09-01T17:14:15Z",
   "quality_score": 4,
-  "assessment": "Substantive, well-structured digest with internally consistent tweet IDs/dates (snowflake timestamps match the stated window), sourced API fetch with dedup state, and the organic Amrit engine-run callout directly serves the ecosystem-growth north star; routine scope and only two reportable items keep it short of 5.",
+  "assessment": "Clean no-op handled correctly and honestly: 3/3 fetched originals deduped against the same-morning run's logs, no notification per the notify-only-on-signal rule, with specific verifiable details (tweet IDs whose snowflake timestamps decode to the claimed Aug 31 window, http=200 after a retried timeout, log entry appended) and a useful note on the dedup-window knob; only limitation is that a no-findings digest offers little insight or actionability by nature.",
   "flags": [],
   "avg_score": 3.77,
   "history": [
-    {
-      "date": "2026-07-29",
-      "score": 4
-    },
     {
       "date": "2026-07-30",
       "score": 4
@@ -120,6 +116,10 @@
     },
     {
       "date": "2026-08-30",
+      "score": 4
+    },
+    {
+      "date": "2026-09-01",
       "score": 4
     },
     {

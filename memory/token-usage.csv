@@ -374,3 +374,4 @@ date,skill,model,input_tokens,output_tokens,cache_read,cache_creation
 2026-09-01,aeon-update,claude-opus-4-8,77269,22888,3443648,0
 2026-09-01,token-movers,claude-sonnet-5,98361,24666,1282752,0
 2026-09-01,token-movers,claude-sonnet-5,103193,24751,2019328,0
+2026-09-01,fetch-tweets,claude-sonnet-5,50272,6666,829248,0
