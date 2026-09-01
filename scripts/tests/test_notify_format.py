@@ -113,6 +113,18 @@ class TestTelegramHtml(unittest.TestCase):
 
 
 class TestChannels(unittest.TestCase):
+    def test_telegram_rendered_chunks_stay_within_limit_after_html_expansion(self):
+        # A Markdown-first split can fit 3,400 source characters while the
+        # rendered anchors expand the Telegram payload past its 3,900 limit.
+        body = " ".join(
+            f"[x](https://example.com/path/{i})" for i in range(1, 301)
+        )
+        chunks = nf.telegram(body, title="T", severity="info", limit=3900)
+        self.assertGreater(len(chunks), 1)
+        for rendered in chunks:
+            self.assertLessEqual(len(rendered), 3900)
+            self.assertEqual(rendered.count("<a "), rendered.count("</a>"))
+
     def test_telegram_adds_index_suffix_when_split(self):
         chunks = nf.telegram("p\n\n" + "x" * 9000, title="", severity="info", limit=3900)
         self.assertGreater(len(chunks), 1)

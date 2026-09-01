@@ -9,8 +9,8 @@
       "124": "timeout"
     }
   },
-  "generated": "2026-08-23T07:31:39Z",
-  "count": 7,
+  "generated": "2026-08-30T18:51:46Z",
+  "count": 9,
   "harnesses": [
     {
       "id": "claude",
@@ -69,6 +69,32 @@
       "native_control_path": "run-harness"
     },
     {
+      "id": "cursor",
+      "label": "Cursor CLI",
+      "cli": {
+        "install": "curl -fsSL https://cursor.com/install | bash",
+        "bin": "agent",
+        "min_version": "latest"
+      },
+      "invoke": "agent -p --trust --output-format json",
+      "round_trip": true,
+      "token_usage": "none",
+      "cost": false,
+      "read_only": "sandbox",
+      "structured_output": "shim",
+      "mcp": "native",
+      "max_turns": "none",
+      "claude_md": "native",
+      "auth": {
+        "native_oauth": [],
+        "native_key": [
+          "CURSOR_API_KEY"
+        ],
+        "openrouter": false
+      },
+      "native_control_path": "run-harness"
+    },
+    {
       "id": "fx",
       "label": "fx",
       "cli": {
@@ -122,6 +148,32 @@
         "openrouter": true
       },
       "native_control_path": "run-grok.sh"
+    },
+    {
+      "id": "hermes",
+      "label": "Hermes (Nous Portal)",
+      "cli": {
+        "install": "curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash",
+        "bin": "hermes",
+        "min_version": "latest"
+      },
+      "invoke": "hermes --usage-file <tmp> -z prompt",
+      "round_trip": true,
+      "token_usage": "full",
+      "cost": true,
+      "read_only": "sandbox",
+      "structured_output": "shim",
+      "mcp": "native",
+      "max_turns": "native",
+      "claude_md": "native",
+      "auth": {
+        "native_oauth": [
+          "HERMES_AUTH"
+        ],
+        "native_key": [],
+        "openrouter": true
+      },
+      "native_control_path": "run-harness"
     },
     {
       "id": "kimi",

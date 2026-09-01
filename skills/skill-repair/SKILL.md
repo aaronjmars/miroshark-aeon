@@ -196,10 +196,12 @@ If risk is HIGH, also: `gh pr edit "$PR_URL" --add-label manual-review`.
 
 ## 7. Update issue tracker (`memory/issues/`)
 
-- If an open issue for this skill exists:
-  - Fix applied → set `status: resolved`, `resolved_at: ${today}`, `fix_pr: <url>`. Move row from Open → Resolved in `INDEX.md`.
+**An open PR is not a fix.** This step runs immediately after §6 opened the PR, and nothing here can know whether that PR will ever merge. Do **not** write `status: resolved` — that records a repair that has not shipped, and if the PR is later closed unmerged the issue stays permanently marked fixed while the failure is still live. `skill-health` reconciles the real outcome once the PR's fate is known (see its "Reconcile `fix-pending` issues" step).
+
+- If an issue with `status: open` or `status: fix-pending` for this skill exists:
+  - PR opened → set `status: fix-pending`, `fix_pr: <url>`, and append `## Repair Attempt — ${today}` with the dossier. **Leave the row under Open in `INDEX.md`** — it is not resolved yet.
   - No fix possible → append `## Repair Attempt — ${today}` with the dossier and reason.
-- If no issue exists but a real problem was found and fixed → create `memory/issues/ISS-{NNN}.md` with status already `resolved` (NNN = next free number from INDEX.md).
+- If no issue exists but a real problem was found and a PR was opened for it → create `memory/issues/ISS-{NNN}.md` with `status: fix-pending` and `fix_pr: <url>` (NNN = next free number from INDEX.md), filed under **Open**.
 - If systemic clustering fired in step 2 → ensure `affected_skills:` lists every skill matched by the signature.
 
 ## 8. Persist cooldown

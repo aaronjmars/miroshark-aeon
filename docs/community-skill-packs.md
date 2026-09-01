@@ -289,3 +289,6 @@ Community skill packs live in their own repos and install as one bundle. The aut
 | [aeon-skill-pack-agentlink](https://github.com/techdigger/aeon-skill-pack-agentlink) | 1 | Verified, human-backed on-chain identity on Base via AgentLink. Read-only, on-demand. |
 | [AI2Human Create Task](https://github.com/richard7463/ai2human-aeon-skill-pack) | 1 | Route a blocked human step to AI2Human: dispatch human execution, then follow the proof, verify, settle loop before USDC payout. |
 | [aeon-skill-pack-skim](https://github.com/JessieJanie/aeon-skill-pack-skim) | 1 | Pay-per-call clean web reads via Skim x402: any URL to markdown ~4x smaller than raw HTML, $0.002 USDC on Base, no API key. |
+| [CultOS Aeon Skills](https://github.com/thesmithdao/cultos-aeon-skills) | 1 | Read-only exact-commit pull-request reviews for CultOS ACP jobs. |
+| [aeon-skill-pack-farcaster](https://github.com/amritmirch/aeon-skill-pack-farcaster) | 1 | Publish to Farcaster via Neynar: drafted for review, posted behind a kill-switch, daily cap, dedup ledger, and a 1024-byte protocol check. |
+| [aeon-skill-pack-spoolis](https://github.com/jsfranklin221/aeon-skill-pack-spoolis) | 1 | Verify delivered work against acceptance criteria: signed Outcome Receipt, per-unit earned value, chain verdict. Keyless sandbox. |

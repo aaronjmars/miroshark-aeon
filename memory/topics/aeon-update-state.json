@@ -1,30 +1,50 @@
 {
-  "baseline_sha": "8b8d719715ec9bb68fb858a1e334d23209047d82",
+  "baseline_sha": "3b4c5a3ff1d9846530e02ed5e6796a4a409d2674",
   "upstream": "aeonfun/aeon",
-  "last_run": "2026-08-25",
-  "last_pr": "https://github.com/aaronjmars/miroshark-aeon/pull/151",
+  "last_run": "2026-09-01",
+  "last_pr": "https://github.com/aaronjmars/miroshark-aeon/pull/161",
   "applied": {
-    "added": 10,
-    "updated": 36,
-    "merged": 6,
+    "added": 13,
+    "updated": 75,
+    "merged": 1,
     "deleted": 0
   },
   "pending_conflicts": [
     {
-      "path": ".github/workflows/aeon.yml",
-      "reason": "operator-customized (env-narrowed vs upstream harness rewrite)",
+      "path": ".github/README.md",
+      "reason": "operator-customized (fork harness-count/copy) vs upstream seven->nine-harness + 78-skill rewrite",
       "upstream_commits": [
-        "90a4d34",
-        "f72f823",
-        "0b1dfde"
+        "935965d",
+        "bb8211f",
+        "6a03d1c",
+        "1a67ffb",
+        "a80f70f"
+      ]
+    },
+    {
+      "path": ".github/workflows/aeon.yml",
+      "reason": "operator-customized (env-narrowed) vs upstream harness/model/dispatch_id additions",
+      "upstream_commits": [
+        "8cff4d0",
+        "8cc45e4",
+        "a59b691",
+        "71fad7a",
+        "a80f70f",
+        "a10fd0f",
+        "d28801b",
+        "47d1a56"
       ]
     },
     {
       "path": ".github/workflows/ci-tests.yml",
-      "reason": "operator-customized (carried; not changed upstream this window)",
+      "reason": "operator-customized (carried fork test list) vs upstream new test steps (hermes/cursor/routing/chain-correlation/xai-retry)",
       "upstream_commits": [
-        "8367e67",
-        "a95f09e"
+        "a59b691",
+        "71fad7a",
+        "792a880",
+        "1924c4f",
+        "a10fd0f",
+        "8fcce1e"
       ]
     },
     {
@@ -32,6 +52,21 @@
       "reason": "eslint-lint-gate-coupled (held back with package.json/lock deps)",
       "upstream_commits": [
         "64790e3"
+      ]
+    },
+    {
+      "path": ".github/workflows/messages.yml",
+      "reason": "operator-customized (env-narrowed) vs upstream HERMES/CURSOR/GLM/ZAI auth env + GLM_MODEL var additions",
+      "upstream_commits": [
+        "8cc45e4",
+        "a80f70f"
+      ]
+    },
+    {
+      "path": "apps/dashboard/lib/skill-icons.data.ts",
+      "reason": "operator-customized (fork glyphs) vs upstream rightstack glyph insertion",
+      "upstream_commits": [
+        "bb8211f"
       ]
     },
     {
@@ -64,17 +99,25 @@
     },
     {
       "path": "docs/skill-packs.md",
-      "reason": "fork pack-count table diverges from upstream's",
+      "reason": "fork pack-count table (80 skills incl. fork-only) vs upstream 78-skill table + cortx-reliability row",
       "upstream_commits": [
-        "3a80957",
-        "86ffd45"
+        "6a03d1c"
       ]
     },
     {
       "path": "llms.txt",
-      "reason": "fork-only MiroShark copy vs upstream generic six->seven harness edit",
+      "reason": "fork-only MiroShark copy vs upstream seven->nine harness + GLM-gateway edits",
       "upstream_commits": [
-        "86ffd45"
+        "bb8211f",
+        "a80f70f"
+      ]
+    },
+    {
+      "path": "scripts/llm-gateway.sh",
+      "reason": "operator-customized vs upstream glm NATIVE gateway tier + tiered GLM model mapping",
+      "upstream_commits": [
+        "a80f70f",
+        "47d1a56"
       ]
     }
   ]

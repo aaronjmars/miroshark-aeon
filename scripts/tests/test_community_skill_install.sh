@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
-# Unit test for the catalog side of a community skill install:
+# Unit tests for community skill installation:
+#   bin/add-skill              — provenance lookup must use GET so GitHub's
+#                                commits endpoint returns a real object name
 #   bin/generate-packs-json   — a skills.lock skill must reach the "installed"
 #                               pack even when its SKILL.md carries no category
 #   bin/generate-skills-json  — a YAML block-scalar description must be folded,
@@ -113,6 +115,65 @@ else
 fi
 rm -rf "$d"
 
+# ── 4. add-skill records the source commit returned by GitHub ────────────────
+# `gh api` changes to POST when a field is supplied unless the method is pinned.
+# GitHub has no POST /repos/{owner}/{repo}/commits endpoint, so the old command
+# failed and every imported skill was recorded with commit_sha "unknown".
+d=$(mktemp -d)
+mkdir -p "$d/bin" "$d/scripts/lib" "$d/skills/security" "$d/fakebin" \
+  "$d/fixture/pack-main/skills/demo"
+cp "$ROOT/bin/add-skill" "$d/bin/"
+cp "$ROOT/scripts/lib/skill-install.sh" "$d/scripts/lib/"
+cat > "$d/fixture/pack-main/skills/demo/SKILL.md" <<'EOF'
+---
+name: demo
+description: Installer provenance fixture.
+---
+EOF
+tar -czf "$d/fixture/repo.tar.gz" -C "$d/fixture" pack-main
+cat > "$d/fakebin/curl" <<'EOF'
+#!/usr/bin/env bash
+set -eu
+out=""
+while [[ $# -gt 0 ]]; do
+  if [[ "$1" == "-o" ]]; then out="$2"; shift 2; else shift; fi
+done
+cp "$FIXTURE_TARBALL" "$out"
+EOF
+cat > "$d/fakebin/gh" <<'EOF'
+#!/usr/bin/env bash
+set -eu
+printf '%s\n' "$*" > "$GH_ARGS_LOG"
+case " $* " in
+  *" -X GET "*) printf '%s\n' "$GH_SHA" ;;
+  *) exit 1 ;;
+esac
+EOF
+chmod +x "$d/fakebin/curl" "$d/fakebin/gh"
+printf '%s\n' "example/pack" > "$d/skills/security/trusted-sources.txt"
+printf '%s\n' "skills:" "  # --- Fallback" > "$d/aeon.yml"
+sha="0123456789abcdef0123456789abcdef01234567"
+out=$(cd "$d" && PATH="$d/fakebin:$PATH" FIXTURE_TARBALL="$d/fixture/repo.tar.gz" \
+  GH_ARGS_LOG="$d/gh-args" GH_SHA="$sha" bin/add-skill example/pack demo 2>&1)
+rc=$?
+if [[ $rc -eq 0 ]]; then
+  pass "add-skill fixture installs successfully"
+else
+  bad "add-skill fixture installs successfully (exit $rc: $out)"
+fi
+recorded=$(jq -r '.[0].commit_sha' "$d/skills.lock" 2>/dev/null)
+if [[ "$recorded" == "$sha" ]]; then
+  pass "add-skill records the source commit sha"
+else
+  bad "add-skill records the source commit sha (got: '$recorded')"
+fi
+if grep -q -- '-X GET repos/example/pack/commits -f path=skills/demo/SKILL.md -f sha=main -f per_page=1' "$d/gh-args"; then
+  pass "add-skill queries the commits endpoint with GET and the fetched ref"
+else
+  bad "add-skill queries the commits endpoint with GET and the fetched ref (got: '$(cat "$d/gh-args")')"
+fi
+rm -rf "$d"
+
 echo ""
-[[ $fail -eq 0 ]] && echo "All community-install catalog tests passed." || echo "Some tests FAILED."
+[[ $fail -eq 0 ]] && echo "All community skill install tests passed." || echo "Some tests FAILED."
 exit $fail

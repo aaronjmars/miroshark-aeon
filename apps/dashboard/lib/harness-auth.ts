@@ -115,6 +115,21 @@ const HARNESS_AUTH_SPECS = {
     authSecrets: ['AI_GATEWAY_API_KEY', 'VERCEL_OIDC_TOKEN'],
     apiKey: { secret: 'AI_GATEWAY_API_KEY', placeholder: 'Vercel AI Gateway key' },
   },
+  cursor: {
+    authSecrets: ['CURSOR_API_KEY'],
+    apiKey: { secret: 'CURSOR_API_KEY', placeholder: 'Cursor API key' },
+  },
+  hermes: {
+    authSecrets: ['HERMES_AUTH', 'OPENROUTER_API_KEY'],
+    oauth: {
+      cli: 'hermes',
+      ttyArgs: ['auth', 'add', 'nous', '--type', 'oauth'],
+      deviceArgs: ['auth', 'add', 'nous', '--type', 'oauth'],
+      credPaths: ['.hermes/auth.json', '.hermes/config.yaml'],
+      secret: 'HERMES_AUTH',
+      label: 'Connect Nous Portal',
+    },
+  },
 } satisfies Record<string, HarnessAuthSpec>
 
 // Every caller indexes this with a harness name that came off the wire, out of
@@ -122,6 +137,15 @@ const HARNESS_AUTH_SPECS = {
 // old `Record<string, HarnessAuthSpec>` the `if (!spec)` guards at all six call
 // sites were dead code the compiler believed could never fire.
 export const HARNESS_AUTH: Record<string, HarnessAuthSpec | undefined> = HARNESS_AUTH_SPECS
+
+// Settings uses this to render Connect/Reconnect for every captured OAuth
+// credential. Derive it from the registry so adding a harness in one place
+// cannot leave its secret looking like a generic pasteable API key.
+export const OAUTH_SECRET_HARNESS: Readonly<Record<string, string>> = Object.fromEntries(
+  Object.entries(HARNESS_AUTH).flatMap(([harness, spec]) =>
+    spec?.oauth ? [[spec.oauth.secret, harness]] : [],
+  ),
+)
 
 // The URL a device-auth flow prints for the operator to approve in the browser.
 // Permissive on purpose — codex (ChatGPT) and kimi (Moonshot) print different

@@ -89,6 +89,21 @@ mkfixture grok
   && pass "grok: GROK_CREDENTIALS → native-oauth" || bad "grok native-oauth"
 [ "$(get AUTH_MODE "" XAI_API_KEY=xx)" = "native-key" ] \
   && pass "grok: XAI_API_KEY → native-key" || bad "grok native-key"
+mkfixture hermes
+[ "$(get AUTH_MODE "" HERMES_AUTH=xx)" = "native-oauth" ] \
+  && pass "hermes: HERMES_AUTH → native-oauth" || bad "hermes native-oauth"
+mkfixture cursor
+[ "$(get AUTH_MODE "" CURSOR_API_KEY=xx)" = "native-key" ] \
+  && pass "cursor: CURSOR_API_KEY → native-key" || bad "cursor native-key"
+mkfixture glm
+[ "$(get HARNESS)" = "claude" ] \
+  && pass "glm: dead harness name → claude" || bad "glm dead name (got '$(get HARNESS)')"
+mkfixture cursor
+[ "$(get MODEL_ARG "" CURSOR_API_KEY=xx)" = "gpt-5.1" ] \
+  && pass "cursor: native model override forwarded" || bad "cursor model forwarding"
+mkfixture hermes
+[ "$(get MODEL_ARG "" HERMES_AUTH=xx)" = "default" ] \
+  && pass "hermes: Portal model override forwarded" || bad "hermes model forwarding"
 mkfixture fx
 [ "$(get HARNESS)" = "fx" ] && pass "fx: reaches the allowlist" || bad "fx allowlist"
 [ "$(get AUTH_MODE "" AI_GATEWAY_API_KEY=xx)" = "native-key" ] \
