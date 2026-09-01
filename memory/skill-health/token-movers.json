@@ -1,15 +1,11 @@
 {
   "skill": "token-movers",
-  "last_analyzed": "2026-09-01T02:00:53Z",
+  "last_analyzed": "2026-09-01T06:25:14Z",
   "quality_score": 5,
-  "assessment": "Substantive, well-sourced token report whose figures are tightly internally consistent (47/30=1.57 ratio, $336K→$305K≈−9.3% liquidity, −47% off peak close, 30d math against the Aug 2 close), transparent about verdict logic, explicit caveats (liquidity Δ vs 08-30 snapshot after infra outage, daily-close fallback), clean skips with reasons (x_search 0 qualifying tweets, no treasury config), and a retry handled with a recorded http=000→200 — honest momentum tracking squarely aligned with strategy priority 4.",
+  "assessment": "Substantive, dual-sourced ($GT/$DS cross-checked to 0.3%) market report with internally consistent figures (63/31=2.03, $336K→$313.1K=−6.9%, $2.757→$2.945=+6.8%), honest calibration (volume-gated CONSOLIDATING verdict, disclosed 30d fallback and skipped sources), fresh whale prints with tx refs, clean strategy alignment to priority-4 momentum tracking with no buy/sell advice — only nits are a loose 'back to the Aug 2 close' clause vs the −10.2% 30d math and the 'true 24h baseline' wording on an 08-30 stored line.",
   "flags": [],
-  "avg_score": 4.03,
+  "avg_score": 4.07,
   "history": [
-    {
-      "date": "2026-07-30",
-      "score": 4
-    },
     {
       "date": "2026-08-04",
       "score": 5
@@ -121,6 +117,10 @@
     {
       "date": "2026-08-30",
       "score": 4
+    },
+    {
+      "date": "2026-09-01",
+      "score": 5
     },
     {
       "date": "2026-09-01",

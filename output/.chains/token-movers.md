@@ -1,10 +1,10 @@
-ℹ️ MIROSHARK daily report
+ℹ️ MIROSHARK - CONSOLIDATING (06:15 UTC refresh)
 
-*MIROSHARK — CONSOLIDATING*
+*$MIROSHARK — CONSOLIDATING*
 
-Down 16% on barely half its normal volume — four red days since the x402aff pump and the move is fully round-tripped. 5 of 6 whale-sized trades were sells, and the one ≥$1k buyer flipped and sold six hours later.
+Bounced +6.8% off the overnight low to land exactly on the pre-pump base (~$0.00000294) — 1d still −13.7% on thin flow (0.72× the 7d-average day), buys out front 2:1. Updates the 02:02 UTC pulse.
 
-Price $0.000002757 (−16.1% 24h) | Liq $305.1K (−9.3% ~2d) | Vol $24.2K (0.57× 7d)
-Buys/Sells 47/30 (ratio 1.57, yest 0.85) | Whales: 6 (5 sell / 1 buy)
+Price $0.0000029453 (−13.7% 24h) | Liq $313.1K (−6.9%) | Vol $30.7K (0.72× 7d)
+Buys/Sells 63/31 (ratio 2.03, yest 0.85) | Whales: 8 (2 buy / 6 sell) — freshest ≥$1k print a *buy* ($1.2K, 06:03 UTC)
 
 Chart: https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209
