@@ -1,17 +1,11 @@
-ℹ️ aeon-update: 25 commits → PR #151
+*aeon-update — 2026-09-01 (follow-up)*
+**PR #161 was CI-red — fixed. all 15 checks green, ready to merge.**
 
-**aeon-update — 2026-08-25**
+no new upstream delta (canon still `3b4c5a3`, the open sync PR already covers it) — but the PR was failing both catalog gates. the 01:30 run couldn't execute `bin/generate-*` (permission layer), so it hand-wrote the catalogs, and the bytes drifted from real generator output: a trailing newline in `skills.json` the generator never emits, a missing one in `packs.json`, and a raw em-dash where `json.dump` escapes it. semantically identical — the gates diff bytes.
 
-Synced 25 upstream commits → PR #151. 52 files applied, 9 need a manual merge.
+re-ran the real generators and pushed `070eb9a4` (no semantic change). `mergeStateStatus: CLEAN`, 13 pending conflicts still tracked in the PR body.
 
-Canon `b7a909a..8b8d719`. New skills land: `rightstack` (Web3 stack advisor), `skill-article` (launch article for any skill). Framework: post-run notify dispatcher (tokens out of skill env), egress-audit hardening, fx harness fixes, macOS cron portability. `messages.yml` — a standing conflict — auto-merged clean this time.
+merge when ready — baseline advances to `3b4c5a3` on merge:
+https://github.com/aaronjmars/miroshark-aeon/pull/161
 
-Held back the whole eslint lint gate as one bundle — `ci-apps.yml` lint steps + `apps/{dashboard,webhook}` package.json + lockfiles. Dashboard runs `npm ci`; your lockfiles diverge, so shipping the gate would land it CI-red. Merge those five together or none.
-
-Also manual: `aeon.yml` workflow (your narrowed env), `ci-tests.yml`, `docs/skill-packs.md` (fork pack counts), `llms.txt` (MiroShark copy). `aeon.yml` config got one disabled `rightstack` entry upstream — optional.
-
-Baseline advances only when you merge.
-
-PR: https://github.com/aaronjmars/miroshark-aeon/pull/151
-
-🔗 https://github.com/aaronjmars/miroshark-aeon/pull/151
+🔗 https://github.com/aaronjmars/miroshark-aeon/pull/161

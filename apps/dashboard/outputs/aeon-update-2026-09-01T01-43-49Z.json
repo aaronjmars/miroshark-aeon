@@ -1,0 +1,175 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "aeon-update — 2026-09-01 (follow-up)",
+        "description": "PR #161 CI fix — all checks green, ready to merge"
+      },
+      "children": [
+        "alert-fixed",
+        "sep-1",
+        "body-stack",
+        "sep-2",
+        "stats-grid",
+        "badges-stack",
+        "sep-3",
+        "text-resolution",
+        "text-merge",
+        "link-pr",
+        "sep-4",
+        "story-pr"
+      ]
+    },
+    "alert-fixed": {
+      "type": "Alert",
+      "props": {
+        "type": "success",
+        "title": "PR #161 was CI-red — fixed.",
+        "message": "all 15 checks green, ready to merge."
+      }
+    },
+    "sep-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "body-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "text-delta",
+        "text-cause"
+      ]
+    },
+    "text-delta": {
+      "type": "Text",
+      "props": {
+        "variant": "body",
+        "text": "no new upstream delta (canon still `3b4c5a3`, the open sync PR already covers it) — but the PR was failing both catalog gates."
+      }
+    },
+    "text-cause": {
+      "type": "Text",
+      "props": {
+        "variant": "body",
+        "text": "the 01:30 run couldn't execute `bin/generate-*` (permission layer), so it hand-wrote the catalogs, and the bytes drifted from real generator output: a trailing newline in `skills.json` the generator never emits, a missing one in `packs.json`, and a raw em-dash where `json.dump` escapes it. semantically identical — the gates diff bytes."
+      }
+    },
+    "sep-2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stats-grid": {
+      "type": "Grid",
+      "props": {
+        "columns": 2,
+        "gap": "md"
+      },
+      "children": [
+        "stat-checks",
+        "stat-conflicts"
+      ]
+    },
+    "stat-checks": {
+      "type": "Stat",
+      "props": {
+        "label": "checks green",
+        "value": "15",
+        "delta": "CI red → green",
+        "trend": "up"
+      }
+    },
+    "stat-conflicts": {
+      "type": "Stat",
+      "props": {
+        "label": "pending conflicts",
+        "value": "13",
+        "trend": "neutral"
+      }
+    },
+    "badges-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "badge-clean",
+        "badge-canon",
+        "badge-fix"
+      ]
+    },
+    "badge-clean": {
+      "type": "Badge",
+      "props": {
+        "text": "mergeStateStatus: CLEAN",
+        "variant": "default"
+      }
+    },
+    "badge-canon": {
+      "type": "Badge",
+      "props": {
+        "text": "canon: 3b4c5a3",
+        "variant": "secondary"
+      }
+    },
+    "badge-fix": {
+      "type": "Badge",
+      "props": {
+        "text": "fix push: 070eb9a4",
+        "variant": "outline"
+      }
+    },
+    "sep-3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "text-resolution": {
+      "type": "Text",
+      "props": {
+        "variant": "body",
+        "text": "re-ran the real generators and pushed `070eb9a4` (no semantic change). `mergeStateStatus: CLEAN`, 13 pending conflicts still tracked in the PR body."
+      }
+    },
+    "text-merge": {
+      "type": "Text",
+      "props": {
+        "variant": "lead",
+        "text": "merge when ready — baseline advances to `3b4c5a3` on merge:"
+      }
+    },
+    "link-pr": {
+      "type": "Link",
+      "props": {
+        "label": "PR #161 — aaronjmars/miroshark-aeon",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/pull/161"
+      }
+    },
+    "sep-4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "story-pr": {
+      "type": "StoryLink",
+      "props": {
+        "title": "aaronjmars/miroshark-aeon PR #161",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/pull/161",
+        "source": "GitHub",
+        "score": "15/15 checks · mergeStateStatus: CLEAN"
+      }
+    }
+  }
+}
