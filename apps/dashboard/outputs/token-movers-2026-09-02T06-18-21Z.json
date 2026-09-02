@@ -1,0 +1,115 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "$MIROSHARK — CONSOLIDATING"
+      },
+      "children": [
+        "desc-text",
+        "sep-1",
+        "stats-grid",
+        "sep-2",
+        "trades-stack",
+        "sep-3",
+        "chart-link"
+      ]
+    },
+    "desc-text": {
+      "type": "Text",
+      "props": {
+        "text": "−7.0% 24h but on just 0.20× 7d-avg volume — a thin drift, not a breakdown.",
+        "variant": "lead"
+      }
+    },
+    "sep-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stats-grid": {
+      "type": "Grid",
+      "props": {
+        "columns": 3,
+        "gap": "md"
+      },
+      "children": [
+        "stat-price",
+        "stat-liq",
+        "stat-vol"
+      ]
+    },
+    "stat-price": {
+      "type": "Stat",
+      "props": {
+        "label": "Price",
+        "value": "$0.0000027387",
+        "delta": "−7.0%",
+        "trend": "down"
+      }
+    },
+    "stat-liq": {
+      "type": "Stat",
+      "props": {
+        "label": "Liquidity",
+        "value": "$301.5K",
+        "delta": "−3.7%",
+        "trend": "down"
+      }
+    },
+    "stat-vol": {
+      "type": "Stat",
+      "props": {
+        "label": "Volume (24h)",
+        "value": "$8.5K",
+        "delta": "0.20× 7d avg",
+        "trend": "down"
+      }
+    },
+    "sep-2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "trades-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "trades-text",
+        "whales-text"
+      ]
+    },
+    "trades-text": {
+      "type": "Text",
+      "props": {
+        "text": "Buys/Sells: 36/27 (ratio 1.33)"
+      }
+    },
+    "whales-text": {
+      "type": "Text",
+      "props": {
+        "text": "Whales: 2"
+      }
+    },
+    "sep-3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "chart-link": {
+      "type": "Link",
+      "props": {
+        "label": "View on GeckoTerminal",
+        "href": "https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209"
+      }
+    }
+  }
+}

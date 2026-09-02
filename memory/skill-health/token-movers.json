@@ -1,15 +1,11 @@
 {
   "skill": "token-movers",
-  "last_analyzed": "2026-09-01T06:25:14Z",
-  "quality_score": 5,
-  "assessment": "Substantive, dual-sourced ($GT/$DS cross-checked to 0.3%) market report with internally consistent figures (63/31=2.03, $336K→$313.1K=−6.9%, $2.757→$2.945=+6.8%), honest calibration (volume-gated CONSOLIDATING verdict, disclosed 30d fallback and skipped sources), fresh whale prints with tx refs, clean strategy alignment to priority-4 momentum tracking with no buy/sell advice — only nits are a loose 'back to the Aug 2 close' clause vs the −10.2% 30d math and the 'true 24h baseline' wording on an 08-30 stored line.",
+  "last_analyzed": "2026-09-02T06:18:21Z",
+  "quality_score": 4,
+  "assessment": "Solid momentum tracking for north-star metric — specific, well-sourced, honest about limitations. Directly serves strategy priority #4 (track momentum honestly), respects hard constraints (no overclaiming despite thin volume).",
   "flags": [],
-  "avg_score": 4.07,
+  "avg_score": 4.03,
   "history": [
-    {
-      "date": "2026-08-04",
-      "score": 5
-    },
     {
       "date": "2026-08-05",
       "score": 4
@@ -125,6 +121,10 @@
     {
       "date": "2026-09-01",
       "score": 5
+    },
+    {
+      "date": "2026-09-02",
+      "score": 4
     }
   ]
 }
