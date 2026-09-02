@@ -1,0 +1,72 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Tweet Digest — 2026-09-02"
+      },
+      "children": [
+        "heading_main",
+        "theme1_label",
+        "tweet1_premiere",
+        "tweet1_matchday",
+        "separator1",
+        "theme2_label",
+        "tweet2_tiktok"
+      ]
+    },
+    "heading_main": {
+      "type": "Heading",
+      "props": {
+        "text": "Tweet Digest — 2026-09-02",
+        "level": "h2"
+      }
+    },
+    "theme1_label": {
+      "type": "Text",
+      "props": {
+        "text": "Theme: Premier League weekly sim cadence",
+        "variant": "lead"
+      }
+    },
+    "tweet1_premiere": {
+      "type": "TweetCard",
+      "props": {
+        "author": "miroshark_",
+        "handle": "miroshark_",
+        "text": "locks in a weekly Premier League matchday sim (plus occasional big-match sims), pushes the engine for your own football bets — https://x.com/miroshark_/status/2095105175148990821"
+      }
+    },
+    "tweet1_matchday": {
+      "type": "TweetCard",
+      "props": {
+        "author": "miroshark_",
+        "handle": "miroshark_",
+        "text": "Matchday #3 full report live at x402.miroshark.xyz — https://x.com/miroshark_/status/2095106514566406361"
+      }
+    },
+    "separator1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "theme2_label": {
+      "type": "Text",
+      "props": {
+        "text": "Theme: Cross-platform push",
+        "variant": "lead"
+      }
+    },
+    "tweet2_tiktok": {
+      "type": "TweetCard",
+      "props": {
+        "author": "miroshark_",
+        "handle": "miroshark_",
+        "text": "new TikTok video up, pointing followers to @tiktok_us — https://x.com/miroshark_/status/2095105293973647568"
+      }
+    }
+  }
+}
