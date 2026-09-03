@@ -1,15 +1,11 @@
 {
   "skill": "token-movers",
-  "last_analyzed": "2026-09-02T06:18:21Z",
+  "last_analyzed": "2026-09-03T06:36:58Z",
   "quality_score": 4,
-  "assessment": "Solid momentum tracking for north-star metric — specific, well-sourced, honest about limitations. Directly serves strategy priority #4 (track momentum honestly), respects hard constraints (no overclaiming despite thin volume).",
+  "assessment": "Solid report with verifiable data from multiple sources (GeckoTerminal, DexScreener, X search), well-structured analysis, and appropriately cautious interpretation—but supportive infrastructure rather than advancing core strategy priorities (shipping engine, proving sims, onboarding new users).",
   "flags": [],
   "avg_score": 4.03,
   "history": [
-    {
-      "date": "2026-08-05",
-      "score": 4
-    },
     {
       "date": "2026-08-06",
       "score": 4
@@ -124,6 +120,10 @@
     },
     {
       "date": "2026-09-02",
+      "score": 4
+    },
+    {
+      "date": "2026-09-03",
       "score": 4
     }
   ]

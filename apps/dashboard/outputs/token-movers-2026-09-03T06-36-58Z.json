@@ -1,0 +1,134 @@
+{
+  "root": "main-card",
+  "state": {},
+  "elements": {
+    "main-card": {
+      "type": "Card",
+      "props": {
+        "title": "ℹ️ Token Report",
+        "description": "$MIROSHARK — CONSOLIDATING"
+      },
+      "children": [
+        "description-text",
+        "separator-1",
+        "main-metrics",
+        "separator-2",
+        "activity-stack",
+        "separator-3",
+        "chart-link"
+      ]
+    },
+    "description-text": {
+      "type": "Text",
+      "props": {
+        "text": "Price down 9.5% on just 0.32x average volume — the drop isn't confirmed by flow.",
+        "variant": "body"
+      }
+    },
+    "separator-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "main-metrics": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "lg"
+      },
+      "children": [
+        "price-stat",
+        "liq-stat",
+        "vol-stat"
+      ]
+    },
+    "price-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Price (24h)",
+        "value": "$0.000002479",
+        "delta": "-9.5%",
+        "trend": "down"
+      }
+    },
+    "liq-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Liquidity",
+        "value": "$290.8K",
+        "delta": "-3.5%",
+        "trend": "down"
+      }
+    },
+    "vol-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Volume (7d avg)",
+        "value": "$14.0K",
+        "delta": "-68%",
+        "trend": "down"
+      }
+    },
+    "separator-2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "activity-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "buys-stat",
+        "sells-stat",
+        "ratio-stat",
+        "whales-stat"
+      ]
+    },
+    "buys-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Buys",
+        "value": "35"
+      }
+    },
+    "sells-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Sells",
+        "value": "27"
+      }
+    },
+    "ratio-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "B/S Ratio",
+        "value": "1.30"
+      }
+    },
+    "whales-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Whales",
+        "value": "6"
+      }
+    },
+    "separator-3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "chart-link": {
+      "type": "Link",
+      "props": {
+        "label": "Chart: GeckoTerminal",
+        "href": "https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209"
+      }
+    }
+  }
+}
