@@ -1,0 +1,44 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "Tweet Digest — 2026-09-03",
+        "description": "Weekly match simulations"
+      },
+      "children": [
+        "stack-content"
+      ]
+    },
+    "stack-content": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "tweet-1",
+        "link-1"
+      ]
+    },
+    "tweet-1": {
+      "type": "TweetCard",
+      "props": {
+        "author": "Miroshark",
+        "handle": "@miroshark_",
+        "text": "Ran a LaLiga Matchday #4 simulation, continuing the weekly-cadence started with Premier League matchday sims — full report linked in the follow-up reply."
+      },
+      "children": []
+    },
+    "link-1": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/miroshark_/status/2095542336210010525"
+      },
+      "children": []
+    }
+  }
+}
