@@ -269,6 +269,48 @@ TELEGRAM_BOT_TOKEN=x TELEGRAM_CHAT_ID=123 NOTIFY_DRY_RUN=1 bash "$DELIVER" "$p" 
 n=$(jq -s 'length' "$WORK/tg-payload.jsonl" 2>/dev/null)
 [ "$n" = "1" ] && pass "deliver: idempotent re-delivery sends once ($n)" || bad "deliver: idempotent re-delivery sends once (got $n)"
 
+# 21b. Telegram HTTP/API failure stays failed even when curl itself exits zero.
+reset
+SKILL_NAME=vuln-scanner AEON_MESSAGES_WF_STATE=disabled_manually \
+  bash "$NOTIFY" "Telegram failure body long enough to clear the probe filter" >/dev/null 2>&1
+p="$(payload)"
+FAKE_BIN=$(mktemp -d)
+cat > "$FAKE_BIN/curl" <<'SH'
+#!/usr/bin/env bash
+printf '%s\n%s\n' '{"ok":false,"error_code":400,"description":"Bad Request: chat not found"}' '400'
+SH
+chmod +x "$FAKE_BIN/curl"
+tg_rc=0
+AEON_AUDIT_LOG="$WORK/audit.jsonl" TELEGRAM_BOT_TOKEN=x TELEGRAM_CHAT_ID=123 \
+  PATH="$FAKE_BIN:$PATH" bash "$DELIVER" "$p" >/dev/null 2>"$WORK/tg-error.log" || tg_rc=$?
+{ grep -q 'telegram failed http=400 reason=Bad Request: chat not found' "$WORK/tg-error.log" \
+  && jq -e '.target|contains("telegram=failed")' "$WORK/audit.jsonl" >/dev/null 2>&1 \
+  && [ "$tg_rc" = "1" ]; } \
+  && pass "deliver: Telegram API failure is diagnosed and audited as failed" \
+  || bad "deliver: Telegram API failure was hidden"
+rm -rf "$FAKE_BIN"
+
+# 21c. Resend failure exposes its HTTP/API reason and cannot count as delivery.
+reset
+SKILL_NAME=vuln-scanner AEON_MESSAGES_WF_STATE=disabled_manually \
+  bash "$NOTIFY" "Email failure body long enough to clear the probe filter" >/dev/null 2>&1
+p="$(payload)"
+FAKE_BIN=$(mktemp -d)
+cat > "$FAKE_BIN/curl" <<'SH'
+#!/usr/bin/env bash
+printf '%s\n%s\n' '{"name":"validation_error","message":"The example.com domain is not verified"}' '403'
+SH
+chmod +x "$FAKE_BIN/curl"
+email_rc=0
+AEON_AUDIT_LOG="$WORK/audit.jsonl" RESEND_API_KEY=x NOTIFY_EMAIL_TO=a@b.com \
+  PATH="$FAKE_BIN:$PATH" bash "$DELIVER" "$p" >/dev/null 2>"$WORK/email-error.log" || email_rc=$?
+{ grep -q 'email failed http=403 reason=The example.com domain is not verified' "$WORK/email-error.log" \
+  && jq -e '.target|contains("email=failed")' "$WORK/audit.jsonl" >/dev/null 2>&1 \
+  && [ "$email_rc" = "1" ]; } \
+  && pass "deliver: Resend API failure is diagnosed and audited as failed" \
+  || bad "deliver: Resend API failure was hidden"
+rm -rf "$FAKE_BIN"
+
 # 22-27. reply-to-previous (default on). Isolated ledger dir so memory/ is never touched.
 TDIR=$(mktemp -d)
 
