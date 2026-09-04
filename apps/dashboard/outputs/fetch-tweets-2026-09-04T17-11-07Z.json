@@ -1,0 +1,110 @@
+{
+  "root": "card_digest",
+  "state": {},
+  "elements": {
+    "card_digest": {
+      "type": "Card",
+      "props": {
+        "title": "Tweet Digest — 2026-09-04"
+      },
+      "children": [
+        "stack_main"
+      ]
+    },
+    "stack_main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "lg"
+      },
+      "children": [
+        "section_theme1",
+        "separator_1",
+        "section_theme2"
+      ]
+    },
+    "section_theme1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading_theme1",
+        "tweet_1",
+        "tweet_2"
+      ]
+    },
+    "heading_theme1": {
+      "type": "Heading",
+      "props": {
+        "text": "Weekly match simulations",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "tweet_1": {
+      "type": "TweetCard",
+      "props": {
+        "author": "Miroshark",
+        "handle": "miroshark_",
+        "text": "premier league sims go weekly now — every matchday plus big-match sims when they can, engine's open for your own bets — https://x.com/miroshark_/status/2095105175148990821"
+      },
+      "children": []
+    },
+    "tweet_2": {
+      "type": "TweetCard",
+      "props": {
+        "author": "Miroshark",
+        "handle": "miroshark_",
+        "text": "Premier League Matchday #3 full report dropped — https://x.com/miroshark_/status/2095106514566406361"
+      },
+      "children": []
+    },
+    "separator_1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "section_theme2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading_theme2",
+        "tweet_3",
+        "tweet_4"
+      ]
+    },
+    "heading_theme2": {
+      "type": "Heading",
+      "props": {
+        "text": "Cross-platform / report drops",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "tweet_3": {
+      "type": "TweetCard",
+      "props": {
+        "author": "Miroshark",
+        "handle": "miroshark_",
+        "text": "posted a linked article/report (x.com paywalled, can't confirm content) — https://x.com/miroshark_/status/2095904616575561759"
+      },
+      "children": []
+    },
+    "tweet_4": {
+      "type": "TweetCard",
+      "props": {
+        "author": "Miroshark",
+        "handle": "miroshark_",
+        "text": "pushing miroshark clips to TikTok now — https://x.com/miroshark_/status/2095105293973647568"
+      },
+      "children": []
+    }
+  }
+}
