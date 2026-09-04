@@ -1,0 +1,316 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "aeon-update: Synced 22 Commits → PR #169"
+      },
+      "children": [
+        "header-stack",
+        "separator1",
+        "changes-section",
+        "separator2",
+        "features-section",
+        "separator3",
+        "alert-eyebrow",
+        "separator4",
+        "conflicts-section",
+        "separator5",
+        "footer-section"
+      ]
+    },
+    "header-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "status-row",
+        "commit-info",
+        "pr-link"
+      ]
+    },
+    "status-row": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "status-badge",
+        "date-text"
+      ]
+    },
+    "status-badge": {
+      "type": "Badge",
+      "props": {
+        "text": "✅ All green",
+        "variant": "default"
+      }
+    },
+    "date-text": {
+      "type": "Text",
+      "props": {
+        "text": "2026-09-04",
+        "variant": "caption"
+      }
+    },
+    "commit-info": {
+      "type": "Text",
+      "props": {
+        "text": "Synced 22 upstream commits 3b4c5a3..bf33365 — mergeable clean"
+      }
+    },
+    "pr-link": {
+      "type": "Link",
+      "props": {
+        "label": "PR #169",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/pull/169"
+      }
+    },
+    "separator1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "changes-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "changes-heading",
+        "changes-grid",
+        "total-files"
+      ]
+    },
+    "changes-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Applied Changes",
+        "level": "h3"
+      }
+    },
+    "changes-grid": {
+      "type": "Grid",
+      "props": {
+        "columns": 3,
+        "gap": "md"
+      },
+      "children": [
+        "stat-new",
+        "stat-updated",
+        "stat-merged"
+      ]
+    },
+    "stat-new": {
+      "type": "Stat",
+      "props": {
+        "label": "New Files",
+        "value": "12"
+      }
+    },
+    "stat-updated": {
+      "type": "Stat",
+      "props": {
+        "label": "Updated",
+        "value": "19"
+      }
+    },
+    "stat-merged": {
+      "type": "Stat",
+      "props": {
+        "label": "Auto-Merged",
+        "value": "3"
+      }
+    },
+    "total-files": {
+      "type": "Text",
+      "props": {
+        "text": "34 files applied clean",
+        "variant": "muted"
+      }
+    },
+    "separator2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "features-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "features-heading",
+        "features-list",
+        "feature-note"
+      ]
+    },
+    "features-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Key Features",
+        "level": "h3"
+      }
+    },
+    "features-list": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "feature1",
+        "feature2",
+        "feature3",
+        "feature4",
+        "feature5"
+      ]
+    },
+    "feature1": {
+      "type": "Text",
+      "props": {
+        "text": "• vuln-scanner PoC gate (foundry-fork verifies high/critical findings)"
+      }
+    },
+    "feature2": {
+      "type": "Text",
+      "props": {
+        "text": "• dev-loop feature→pr-review chain"
+      }
+    },
+    "feature3": {
+      "type": "Text",
+      "props": {
+        "text": "• skill-health incident-recovery"
+      }
+    },
+    "feature4": {
+      "type": "Text",
+      "props": {
+        "text": "• notify per-channel delivery"
+      }
+    },
+    "feature5": {
+      "type": "Text",
+      "props": {
+        "text": "• scheduler reads block-style model"
+      }
+    },
+    "feature-note": {
+      "type": "Text",
+      "props": {
+        "text": "aeon.yml gained a dev-loop chain upstream (surfaced, not written)",
+        "variant": "caption"
+      }
+    },
+    "separator3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "alert-eyebrow": {
+      "type": "Alert",
+      "props": {
+        "title": "Eyebrow v0.4.2 Gate Update",
+        "type": "warning",
+        "message": "Upstream bumped the eyebrow gate to v0.4.2 — its verify is now a strict content-drift / rug-pull gate. Any skill whose SKILL.md changed fails it, not just new egress hosts. First push went red; regenerated eyebrowlock.json with the sha256-verified v0.4.2 binary (scrubbed env). Verified 83 artifacts before/after, no new hosts. Now green. IMPORTANT: The skill's \"modified skills don't need a rescan\" note is stale for v0.4.2."
+      }
+    },
+    "separator4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "conflicts-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "conflicts-heading",
+        "conflicts-count",
+        "conflicts-list"
+      ]
+    },
+    "conflicts-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Outstanding Conflicts",
+        "level": "h3"
+      }
+    },
+    "conflicts-count": {
+      "type": "Text",
+      "props": {
+        "text": "12 conflicts require human attention",
+        "variant": "lead"
+      }
+    },
+    "conflicts-list": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "conflict1",
+        "conflict2",
+        "conflict3"
+      ]
+    },
+    "conflict1": {
+      "type": "Text",
+      "props": {
+        "text": "• 3 env-narrowed workflows"
+      }
+    },
+    "conflict2": {
+      "type": "Text",
+      "props": {
+        "text": "• dashboard/webhook eslint dep bundle"
+      }
+    },
+    "conflict3": {
+      "type": "Text",
+      "props": {
+        "text": "• 5 fork-only files (README, llms.txt, skill-packs, skill-icons glyphs)"
+      }
+    },
+    "separator5": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "footer-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "footer-link"
+      ]
+    },
+    "footer-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "View PR #169",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/pull/169",
+        "source": "GitHub"
+      }
+    }
+  }
+}

@@ -1,11 +1,17 @@
-*aeon-update — 2026-09-01 (follow-up)*
-**PR #161 was CI-red — fixed. all 15 checks green, ready to merge.**
+✅ aeon-update: synced 22 commits → PR #169
 
-no new upstream delta (canon still `3b4c5a3`, the open sync PR already covers it) — but the PR was failing both catalog gates. the 01:30 run couldn't execute `bin/generate-*` (permission layer), so it hand-wrote the catalogs, and the bytes drifted from real generator output: a trailing newline in `skills.json` the generator never emits, a missing one in `packs.json`, and a raw em-dash where `json.dump` escapes it. semantically identical — the gates diff bytes.
+*aeon-update — 2026-09-04* ⭐
 
-re-ran the real generators and pushed `070eb9a4` (no semantic change). `mergeStateStatus: CLEAN`, 13 pending conflicts still tracked in the PR body.
+synced 22 upstream commits `3b4c5a3..bf33365` → **PR #169**, all green, mergeable clean.
 
-merge when ready — baseline advances to `3b4c5a3` on merge:
-https://github.com/aaronjmars/miroshark-aeon/pull/161
+34 files applied clean (12 new, 19 updated, 3 auto-merged). headline: vuln-scanner PoC gate (foundry-fork verifies high/critical findings), dev-loop feature→pr-review chain, skill-health incident-recovery, notify per-channel delivery, scheduler reads block-style model:.
 
-🔗 https://github.com/aaronjmars/miroshark-aeon/pull/161
+one gotcha worth flagging: upstream bumped the eyebrow gate to **v0.4.2** — its `verify` is now a strict content-drift / rug-pull gate. any skill whose SKILL.md changed fails it, not just new egress hosts. first push went red; regenerated `eyebrowlock.json` with the sha256-verified v0.4.2 binary (scrubbed env), 83 artifacts before/after, no new hosts. green now. the skill's "modified skills don't need a rescan" note is stale for 0.4.2.
+
+12 conflicts still need a human: 3 env-narrowed workflows + the dashboard/webhook eslint dep bundle + 5 fork-only files (README, llms.txt, skill-packs, skill-icons glyphs). all tracked, resurface each run til reconciled.
+
+`aeon.yml` gained a `dev-loop` chain upstream — surfaced, not written.
+
+PR: https://github.com/aaronjmars/miroshark-aeon/pull/169
+
+🔗 https://github.com/aaronjmars/miroshark-aeon/pull/169
