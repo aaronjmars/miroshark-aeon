@@ -1,124 +1,74 @@
 {
-  "baseline_sha": "3b4c5a3ff1d9846530e02ed5e6796a4a409d2674",
+  "baseline_sha": "bf33365164c5a8b50d49a0ed64a45521dbe96771",
   "upstream": "aeonfun/aeon",
-  "last_run": "2026-09-01",
-  "last_pr": "https://github.com/aaronjmars/miroshark-aeon/pull/161",
+  "last_run": "2026-09-04",
+  "last_pr": "https://github.com/aaronjmars/miroshark-aeon/pull/169",
   "applied": {
-    "added": 13,
-    "updated": 75,
-    "merged": 1,
+    "added": 12,
+    "updated": 19,
+    "merged": 3,
     "deleted": 0
   },
   "pending_conflicts": [
     {
-      "path": ".github/README.md",
-      "reason": "operator-customized (fork harness-count/copy) vs upstream seven->nine-harness + 78-skill rewrite",
-      "upstream_commits": [
-        "935965d",
-        "bb8211f",
-        "6a03d1c",
-        "1a67ffb",
-        "a80f70f"
-      ]
-    },
-    {
       "path": ".github/workflows/aeon.yml",
-      "reason": "operator-customized (env-narrowed) vs upstream harness/model/dispatch_id additions",
-      "upstream_commits": [
-        "8cff4d0",
-        "8cc45e4",
-        "a59b691",
-        "71fad7a",
-        "a80f70f",
-        "a10fd0f",
-        "d28801b",
-        "47d1a56"
-      ]
+      "reason": "operator-customized (env-narrowed) vs upstream Foundry install/GLM_REASONING_EFFORT env/block-style model parse/dispatch-correlation/PoC-verdicts/upload-artifact v7",
+      "upstream_commits": ["8cff4d0", "8cc45e4", "a59b691", "71fad7a", "a80f70f", "a10fd0f", "d28801b", "47d1a56", "bf33365"]
     },
     {
       "path": ".github/workflows/ci-tests.yml",
-      "reason": "operator-customized (carried fork test list) vs upstream new test steps (hermes/cursor/routing/chain-correlation/xai-retry)",
-      "upstream_commits": [
-        "a59b691",
-        "71fad7a",
-        "792a880",
-        "1924c4f",
-        "a10fd0f",
-        "8fcce1e"
-      ]
+      "reason": "operator-customized (fork test list) vs upstream new test steps (fleet-scorecard/llm-gateway/skill-health-recovery/chain-invalid-dispatch/dev-loop-handoff/vuln-poc-gate)",
+      "upstream_commits": ["a59b691", "71fad7a", "792a880", "1924c4f", "a10fd0f", "8fcce1e", "c92fbfb", "66711d3"]
+    },
+    {
+      "path": ".github/workflows/messages.yml",
+      "reason": "operator-customized (env-narrowed) vs upstream GLM_REASONING_EFFORT env addition",
+      "upstream_commits": ["8cc45e4", "a80f70f", "dc1a975"]
+    },
+    {
+      "path": "apps/dashboard/package-lock.json",
+      "reason": "eslint-lint-gate (fork lockfile diverges; dashboard group 5-dep bump held with pkg/lock deps)",
+      "upstream_commits": ["64790e3", "158a4ca"]
+    },
+    {
+      "path": "apps/dashboard/package.json",
+      "reason": "eslint-lint-gate (fork diverges; dashboard group dep bump)",
+      "upstream_commits": ["64790e3", "158a4ca"]
+    },
+    {
+      "path": "apps/webhook/package-lock.json",
+      "reason": "eslint-lint-gate (fork lockfile diverges; wrangler bump)",
+      "upstream_commits": ["64790e3", "bccb67c"]
+    },
+    {
+      "path": "apps/webhook/package.json",
+      "reason": "eslint-lint-gate (fork diverges; wrangler bump)",
+      "upstream_commits": ["64790e3", "bccb67c"]
+    },
+    {
+      "path": ".github/README.md",
+      "reason": "operator-customized (fork harness-count/MiroShark copy) vs upstream nine-harness+78-skill rewrite",
+      "upstream_commits": ["935965d", "bb8211f", "6a03d1c", "1a67ffb", "a80f70f"]
     },
     {
       "path": ".github/workflows/ci-apps.yml",
       "reason": "eslint-lint-gate-coupled (held back with package.json/lock deps)",
-      "upstream_commits": [
-        "64790e3"
-      ]
-    },
-    {
-      "path": ".github/workflows/messages.yml",
-      "reason": "operator-customized (env-narrowed) vs upstream HERMES/CURSOR/GLM/ZAI auth env + GLM_MODEL var additions",
-      "upstream_commits": [
-        "8cc45e4",
-        "a80f70f"
-      ]
+      "upstream_commits": ["64790e3"]
     },
     {
       "path": "apps/dashboard/lib/skill-icons.data.ts",
       "reason": "operator-customized (fork glyphs) vs upstream rightstack glyph insertion",
-      "upstream_commits": [
-        "bb8211f"
-      ]
-    },
-    {
-      "path": "apps/dashboard/package.json",
-      "reason": "eslint-lint-gate (needs eslint devDeps; dashboard uses npm ci so lockfile must move too)",
-      "upstream_commits": [
-        "64790e3"
-      ]
-    },
-    {
-      "path": "apps/dashboard/package-lock.json",
-      "reason": "eslint-lint-gate (fork lockfile diverges; regen needed)",
-      "upstream_commits": [
-        "64790e3"
-      ]
-    },
-    {
-      "path": "apps/webhook/package.json",
-      "reason": "eslint-lint-gate (needs eslint devDeps)",
-      "upstream_commits": [
-        "64790e3"
-      ]
-    },
-    {
-      "path": "apps/webhook/package-lock.json",
-      "reason": "eslint-lint-gate (fork lockfile diverges)",
-      "upstream_commits": [
-        "64790e3"
-      ]
+      "upstream_commits": ["bb8211f"]
     },
     {
       "path": "docs/skill-packs.md",
       "reason": "fork pack-count table (80 skills incl. fork-only) vs upstream 78-skill table + cortx-reliability row",
-      "upstream_commits": [
-        "6a03d1c"
-      ]
+      "upstream_commits": ["6a03d1c"]
     },
     {
       "path": "llms.txt",
-      "reason": "fork-only MiroShark copy vs upstream seven->nine harness + GLM-gateway edits",
-      "upstream_commits": [
-        "bb8211f",
-        "a80f70f"
-      ]
-    },
-    {
-      "path": "scripts/llm-gateway.sh",
-      "reason": "operator-customized vs upstream glm NATIVE gateway tier + tiered GLM model mapping",
-      "upstream_commits": [
-        "a80f70f",
-        "47d1a56"
-      ]
+      "reason": "fork-only MiroShark copy vs upstream nine-harness + GLM-gateway edits",
+      "upstream_commits": ["bb8211f", "a80f70f"]
     }
   ]
 }

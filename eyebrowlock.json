@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "generatedAt": "2026-09-01T01:28:31.521868121Z",
-  "generator": "eyebrow/0.4.1",
+  "generatedAt": "2026-09-04T02:27:38.8792611Z",
+  "generator": "eyebrow/0.4.2",
   "artifacts": [
     {
       "id": "019b953b97c439b3",
@@ -117,7 +117,7 @@
       "files": [
         {
           "path": "SKILL.md",
-          "hash": "a48fb63798be19f958820e880efc6f1f5cf0d242d6937eb26c4c02b79bb32bd5"
+          "hash": "b17491de609e1fa3b241a55012e60f21d63eaaac6ad9251c43509f40ec635872"
         }
       ],
       "findings": [
@@ -126,7 +126,7 @@
           "severity": "critical",
           "owasp": "ASK-01",
           "file": "SKILL.md",
-          "line": 105,
+          "line": 108,
           "snippet": "network is open, but `pip install` / `curl | sh` / `tar` are **not** on the in-run",
           "explanation": "downloads and executes remote code via a pipe to a shell"
         },
@@ -135,7 +135,7 @@
           "severity": "critical",
           "owasp": "ASK-01",
           "file": "SKILL.md",
-          "line": 119,
+          "line": 122,
           "snippet": "# open, but `pip install` / `curl | sh` / `tar` are NOT allow-listed — `python3 -m pip`,",
           "explanation": "downloads and executes remote code via a pipe to a shell"
         },
@@ -144,7 +144,7 @@
           "severity": "medium",
           "owasp": "ASK-03",
           "file": "SKILL.md",
-          "line": 301,
+          "line": 304,
           "snippet": "- `exec` / `spawn` / `system` / `eval` sinks + subprocess with string interpolation (RCE)",
           "explanation": "uses a process-execution primitive"
         },
@@ -153,12 +153,12 @@
           "severity": "critical",
           "owasp": "ASK-01",
           "file": "SKILL.md",
-          "line": 872,
+          "line": 1013,
           "snippet": "1. **Install** — the binaries (`semgrep`, `trufflehog`, `osv-scanner`, `slither`) are **not pre-installed**. Stage the…",
           "explanation": "downloads and executes remote code via a pipe to a shell"
         }
       ],
-      "contentHash": "sha256-a9cdb0547fa559f53196eef12f5459c6d1f8bace3a56fa257f809e4f309cb1c5",
+      "contentHash": "sha256-a81f0757d7b3bafe3baaa0c3d2c0e735eb284a7ebc9768264bdfe4e747b4aa9a",
       "discoveredFrom": "skills/vuln-scanner/SKILL.md"
     },
     {
@@ -315,10 +315,10 @@
       "files": [
         {
           "path": "SKILL.md",
-          "hash": "e8684cee3a8d87a5c192bd2eeca38ad4b64c39714513e8ace57471ae962281da"
+          "hash": "bf3a11650596bd34818ff8df5a8e6da7c3153f2a41388c867fd4b4861472860d"
         }
       ],
-      "contentHash": "sha256-eed99c7e18a9bcaad45109a53323096bbce76cf15c32b3b2b6663465ba1329a1",
+      "contentHash": "sha256-7a3f62acc00ed607838decee306822cf7791ef3471b5df3a8d5387f940c3482b",
       "discoveredFrom": "skills/pr-review/SKILL.md"
     },
     {
@@ -397,7 +397,7 @@
         },
         {
           "path": "project/package-lock.json",
-          "hash": "a0de158bc359e26fcc320dc850358b26313d254eabb0e0100ab535c15dcc6561"
+          "hash": "c491727498df4bfb43cf230d10070fa84a339c881258b1cfb074555a3ad60685"
         },
         {
           "path": "project/package.json",
@@ -451,7 +451,7 @@
           "explanation": "contains consent-bypass or prompt-injection language"
         }
       ],
-      "contentHash": "sha256-dbaef1867bc84f9117c2e84c5bcb897f8737bc9aa5c82d89688ecf605f381c46",
+      "contentHash": "sha256-951f973d8b89f0fcf8b5ca0022e189451f3a2a68f38e59df7767f1ce8110c7f2",
       "discoveredFrom": "skills/remotion/SKILL.md"
     },
     {
@@ -556,10 +556,10 @@
       "files": [
         {
           "path": "SKILL.md",
-          "hash": "73f0cb40cba4a872a94922da03180228120fc55aa0a8e236c73af692b6159da5"
+          "hash": "e0dfe5afe92c2faf66e8cdf4419f401e97f3bec5176301b315c79119b93a8f0c"
         }
       ],
-      "contentHash": "sha256-ff7a6d0cfcbebbfa67a7a0caa0b7e7b36cc0cec310f914ea47323b7384357f27",
+      "contentHash": "sha256-7ef09690780f4d84ab503b22064dbc1900abf8c851bc5037e6408c3788077969",
       "discoveredFrom": "skills/skill-health/SKILL.md"
     },
     {
@@ -842,10 +842,10 @@
       "files": [
         {
           "path": "SKILL.md",
-          "hash": "2a02d778f165018741ce467b242334de6e8213f6c962ed33307984b0b401e8c9"
+          "hash": "b9a7d47326648ec745a35419c2e0b67521d58020fb1eef4959f58df4be09f5f3"
         }
       ],
-      "contentHash": "sha256-b5d7317728abc7bc8c4bc0ffcef5967af295cbb33cab91b2eb3617a1f7c39c00",
+      "contentHash": "sha256-3ffc12f919716a0035c0594849f176a844ba4b56ba0f71d6bf1152a2f1aaaaea",
       "discoveredFrom": "skills/feature/SKILL.md"
     },
     {
@@ -1541,7 +1541,7 @@
         },
         {
           "path": "templates/DeployHook.s.sol",
-          "hash": "c97173a47b3bf4aeddb75e901033ed2d01a6903987d47cbdff94544dbd9e2f95"
+          "hash": "e72397dbc455abde1687451dc368cd1417dd6021075ca1134932d198a3ec6785"
         },
         {
           "path": "templates/DynamicFeeHook.sol",
@@ -1553,7 +1553,7 @@
         },
         {
           "path": "templates/Hook.t.sol",
-          "hash": "f563b5261e35565939b9ad10e9ebd1eb3838cf3fd85beb3872de58a704e1656b"
+          "hash": "084c0a55167dde52d35a2cb61961558dd094d7c739018ab03ca17a23e0ec6811"
         },
         {
           "path": "templates/HookFeeHook.sol",
@@ -1654,7 +1654,7 @@
           "explanation": "references sensitive credential or secret paths"
         }
       ],
-      "contentHash": "sha256-aa6b3cb711be49025443c10a749f3a4f11a5c7468f8cc9125f09009f9033c2b6",
+      "contentHash": "sha256-f100420695859ca18a6b1ac42c0b3a39e84eb490f87b881679e3d7e1c5c3b2de",
       "discoveredFrom": "skills/deploy-uni-hook/SKILL.md"
     },
     {
@@ -2135,7 +2135,7 @@
         },
         {
           "path": "references/secrets.md",
-          "hash": "76b8105069a91632daba058cfdd7afec0e3b6ee9542b083b99b4601a73fbcd96"
+          "hash": "41aa375c84cea1b0190bd7291176651d335dc1c41e2b8067900f164d4c4df670"
         },
         {
           "path": "references/skill-anatomy.md",
@@ -2146,7 +2146,7 @@
           "hash": "0edc7445542a21cb5518e813a6ae462a1d469636601a799efc1bec86b4058c5a"
         }
       ],
-      "contentHash": "sha256-c43ac760993f8c41c7aa85b20ce6b53b948607d61d767f21d321f3b9853aa5e5",
+      "contentHash": "sha256-4e9c576b6d6c7cad1e17df815ac9519e4af1dd7a827e3b06a5314675ca1478ce",
       "discoveredFrom": ".claude/skills/aeon/SKILL.md"
     },
     {

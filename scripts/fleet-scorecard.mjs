@@ -109,6 +109,7 @@ const commafy = (x) => Math.trunc(x).toLocaleString('en-US');
 const hum = (n) => n >= 1e9 ? `${(n / 1e9).toFixed(2)}B` : n >= 1e6 ? `${(n / 1e6).toFixed(1)}M` : n >= 1e3 ? `${(n / 1e3).toFixed(1)}K` : `${Math.trunc(n)}`;
 const basename = (p) => String(p).replace(/.*\//, '');
 const baseName = (name) => String(name || '(none)').replace(/ \(.*$/, ''); // strip " (…)" suffix
+const skillName = (name) => /^skill: /.test(name || '') ? baseName(String(name).replace(/^skill: /, '')) : null;
 const num = (x) => Number(x) || 0;
 
 // ---- run-level aggregates --------------------------------------------------
@@ -123,7 +124,8 @@ for (const r of runs) {
   const s = (runStat[r.repo] ||= { tot: 0, succ: 0, skills: new Set() });
   s.tot++;
   if (r.conclusion === 'success') s.succ++;
-  if (/^skill:/.test(r.name || '')) s.skills.add(baseName(String(r.name).replace(/^skill: /, '')));
+  const skill = skillName(r.name);
+  if (skill) s.skills.add(skill);
 }
 
 // ---- token aggregates (fleet, per-repo, per-skill) -------------------------
@@ -193,7 +195,8 @@ for (const r of runs) {
   if (r.head_branch !== 'main') continue;
   const t = Date.parse(r.created_at || '');
   if (!(t >= cutoff)) continue;
-  const skill = baseName(r.name);
+  const skill = skillName(r.name);
+  if (!skill) continue;
   const key = `${r.repo}|${skill}`;
   const g = (grp[key] ||= { repo: r.repo, skill, total: 0, fail: 0 });
   g.total++;

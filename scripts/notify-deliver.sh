@@ -71,6 +71,8 @@ if [ -n "$HASH" ] && grep -qxF "$HASH" "$DELIVERED_HASHES" 2>/dev/null; then
 fi
 
 DELIVERED=false
+TG_STATUS="not-configured"
+EMAIL_STATUS="not-configured"
 
 # Per-skill Telegram reply target. Default ON. Dry-run writes a ledger only when
 # AEON_TG_THREADS_DIR is set, so existing tests do not touch memory/.
@@ -144,6 +146,7 @@ _tg_payload() {
 
 # --- Telegram - fence-safe chunks (parse_mode HTML, plaintext fallback) ------
 if [ -n "${TELEGRAM_BOT_TOKEN:-}" ] && [ -n "${TELEGRAM_CHAT_ID:-}" ]; then
+  TG_STATUS="failed"
   TG_CHUNKS_B64=$(printf '%s' "$MSG" | python3 "$FMT" telegram --title "$TITLE" --severity "$SEVERITY" || true)
   TG_CHUNKS=()
   while IFS= read -r TG_CHUNK_B64; do
@@ -179,6 +182,7 @@ if [ -n "${TELEGRAM_BOT_TOKEN:-}" ] && [ -n "${TELEGRAM_CHAT_ID:-}" ]; then
       mkdir -p "$QUEUE_DIR"
       printf '%s\n' "$TG_PAYLOAD" >> "$QUEUE_DIR/tg-payload.jsonl"
       DELIVERED=true
+      TG_STATUS="delivered"
       if [ -n "$TG_DIR" ] && [ -n "$SKILL_NAME" ]; then
         TG_MID=$(_tg_next_dry_mid)
       fi
@@ -190,6 +194,7 @@ if [ -n "${TELEGRAM_BOT_TOKEN:-}" ] && [ -n "${TELEGRAM_CHAT_ID:-}" ]; then
       TG_OK=$(printf '%s' "$TG_BODY" | jq -r '.ok // false' 2>/dev/null || echo "false")
       if [ "$TG_HTTP" = "200" ] && [ "$TG_OK" = "true" ]; then
         DELIVERED=true
+        TG_STATUS="delivered"
         TG_MID=$(printf '%s' "$TG_BODY" | jq -r '.result.message_id // empty' 2>/dev/null || true)
       else
         # Fallback without parse_mode. Strip tags + unescape so it degrades to clean
@@ -204,7 +209,11 @@ if [ -n "${TELEGRAM_BOT_TOKEN:-}" ] && [ -n "${TELEGRAM_CHAT_ID:-}" ]; then
         TG_OK=$(printf '%s' "$TG_BODY" | jq -r '.ok // false' 2>/dev/null || echo "false")
         if [ "$TG_HTTP" = "200" ] && [ "$TG_OK" = "true" ]; then
           DELIVERED=true
+          TG_STATUS="delivered"
           TG_MID=$(printf '%s' "$TG_BODY" | jq -r '.result.message_id // empty' 2>/dev/null || true)
+        else
+          TG_REASON=$(printf '%s' "$TG_BODY" | jq -r '.description // "unknown telegram api error"' 2>/dev/null || echo "invalid telegram response")
+          echo "notify-deliver: telegram failed http=${TG_HTTP:-000} reason=$TG_REASON" >&2
         fi
       fi
       sleep 0.3
@@ -259,6 +268,7 @@ fi
 
 # --- Email via Resend (operator-notify channel) -----------------------------
 if [ -n "${RESEND_API_KEY:-}" ] && [ -n "${NOTIFY_EMAIL_TO:-}" ]; then
+  EMAIL_STATUS="failed"
   FROM="${NOTIFY_EMAIL_FROM:-aeon@notifications.aeon.bot}"
   PREFIX="${NOTIFY_EMAIL_SUBJECT_PREFIX:-[Aeon]}"
   SUBJECT="$PREFIX ${TITLE:-${SKILL_NAME:-notification}}"
@@ -268,13 +278,26 @@ if [ -n "${RESEND_API_KEY:-}" ] && [ -n "${NOTIFY_EMAIL_TO:-}" ]; then
     mkdir -p "$QUEUE_DIR"
     printf '%s\n' "$SUBJECT" >> "$QUEUE_DIR/email-payload.txt"
     DELIVERED=true
+    EMAIL_STATUS="delivered"
   else
-    curl -sf -X POST "https://api.resend.com/emails" \
+    EMAIL_RESULT=$(curl -s -w "\n%{http_code}" -X POST "https://api.resend.com/emails" \
       -H "Authorization: Bearer ${RESEND_API_KEY}" \
       -H "Content-Type: application/json" \
       -d "$(jq -n --arg from "$FROM" --arg to "$NOTIFY_EMAIL_TO" --arg subject "$SUBJECT" \
             --arg html "$HTML_BODY" --arg text "$PLAIN" \
-            '{from:$from, to:[$to], subject:$subject, html:$html, text:$text}')" > /dev/null 2>&1 && DELIVERED=true || true
+            '{from:$from, to:[$to], subject:$subject, html:$html, text:$text}')" 2>/dev/null) || true
+    EMAIL_HTTP=$(echo "$EMAIL_RESULT" | tail -1)
+    EMAIL_BODY=$(echo "$EMAIL_RESULT" | sed '$d')
+    case "$EMAIL_HTTP" in
+      2??)
+        DELIVERED=true
+        EMAIL_STATUS="delivered"
+        ;;
+      *)
+        EMAIL_REASON=$(printf '%s' "$EMAIL_BODY" | jq -r '.message // .name // "unknown resend api error"' 2>/dev/null || echo "invalid resend response")
+        echo "notify-deliver: email failed http=${EMAIL_HTTP:-000} reason=$EMAIL_REASON" >&2
+        ;;
+    esac
   fi
 fi
 
@@ -300,8 +323,8 @@ if [ -n "${AEON_AUDIT_LOG:-}" ]; then
     if [ -n "${BUZZ_PRIVATE_KEY:-}" ] && [ -n "${BUZZ_CHANNEL_ID:-}" ]; then _CHANS="${_CHANS}buzz,"; _SECS="${_SECS}BUZZ_PRIVATE_KEY,"; fi
     if [ -n "${RESEND_API_KEY:-}" ] && [ -n "${NOTIFY_EMAIL_TO:-}" ]; then _CHANS="${_CHANS}email,"; _SECS="${_SECS}RESEND_API_KEY,"; fi
     if [ "$DELIVERED" = "true" ]; then _RC=0; else _RC=1; fi
-    bash "$_AUDIT" "notify" "channels=${_CHANS%,} delivered=${DELIVERED}" "$_RC" "${_SECS%,}" || true
+    bash "$_AUDIT" "notify" "channels=${_CHANS%,} delivered=${DELIVERED} telegram=${TG_STATUS} email=${EMAIL_STATUS}" "$_RC" "${_SECS%,}" || true
   fi
 fi
 
-[ "$DELIVERED" = "true" ] && exit 0 || exit 0
+[ "$DELIVERED" = "true" ] && exit 0 || exit 1
