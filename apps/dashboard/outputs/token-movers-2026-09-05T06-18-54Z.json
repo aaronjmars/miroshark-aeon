@@ -1,0 +1,123 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "Token Movers",
+        "description": "$MIROSHARK"
+      },
+      "children": [
+        "status-badge",
+        "narrative",
+        "separator",
+        "metrics-section",
+        "chart-section"
+      ]
+    },
+    "status-badge": {
+      "type": "Badge",
+      "props": {
+        "text": "CONSOLIDATING",
+        "variant": "secondary"
+      }
+    },
+    "narrative": {
+      "type": "Text",
+      "props": {
+        "text": "Price −5.4% on 0.26× 7d-avg volume — a low-conviction pullback, not a fresh breakdown.",
+        "variant": "body"
+      }
+    },
+    "separator": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "metrics-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "metrics-row1",
+        "metrics-row2"
+      ]
+    },
+    "metrics-row1": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "lg"
+      },
+      "children": [
+        "price-stat",
+        "liq-stat",
+        "vol-stat"
+      ]
+    },
+    "price-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Price (24h)",
+        "value": "$0.000002832",
+        "delta": "-5.4%",
+        "trend": "down"
+      }
+    },
+    "liq-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Liquidity",
+        "value": "$308.3K",
+        "delta": "-4.8%",
+        "trend": "down"
+      }
+    },
+    "vol-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Volume (7d)",
+        "value": "$4.3K",
+        "delta": "0.26×",
+        "trend": "down"
+      }
+    },
+    "metrics-row2": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "lg"
+      },
+      "children": [
+        "buysells-stat",
+        "whales-stat"
+      ]
+    },
+    "buysells-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Buys / Sells",
+        "value": "12 / 14",
+        "delta": "0.86 ratio"
+      }
+    },
+    "whales-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Whales",
+        "value": "1"
+      }
+    },
+    "chart-section": {
+      "type": "Link",
+      "props": {
+        "label": "Chart: GeckoTerminal",
+        "href": "https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209"
+      }
+    }
+  }
+}
