@@ -137,10 +137,10 @@
   },
   "memory-flush": {
     "last_dispatch": "2026-09-06T18:05:57Z",
-    "last_status": "dispatched",
-    "last_success": "2026-08-30T18:09:28Z",
-    "total_runs": 13,
-    "total_successes": 13,
+    "last_status": "success",
+    "last_success": "2026-09-06T18:09:13Z",
+    "total_runs": 14,
+    "total_successes": 14,
     "total_failures": 0,
     "consecutive_failures": 0,
     "success_rate": 1
