@@ -1,21 +1,17 @@
-Fleet-health check complete for 2026-09-05 (ambient run, `${var}` empty).
+Fleet is fully healthy — no notification needed. Ambient heartbeat check complete for 2026-09-06.
 
-## Findings
+**P0 (failed/stuck skills):** Clean. All 9 enabled skills (`token-movers`, `fetch-tweets`, `memory-flush`, `heartbeat`, `aeon-update`, `repo-pulse`, `shiplog`, `changelog`, `holdings`) show `last_status: success`, `consecutive_failures: 0`. `aeon-update` sits at exactly 50% success rate — not below the `<0.5` chronic-failure threshold. Heartbeat's own self-check is clean (last success ~24h ago, under the 36h bar).
 
-**Overall: 🟢 OK** — nothing needs attention.
+**P1 (stalled PRs / urgent issues):** Clean. 0 open PRs, 0 urgent-labeled issues.
 
-- **P0 (failed/stuck skills):** clean. All 9 enabled skills (`repo-pulse`, `token-movers`, `holdings`, `changelog`, `fetch-tweets`, `memory-flush`, `aeon-update`, `heartbeat`, `shiplog`) show `last_status: success`, `consecutive_failures: 0`. `aeon-update` sits at exactly 50% success (4/8) — not `< 0.5`, so it stays below the chronic-failure bar. Heartbeat's own self-check is clean (last success ~24h ago).
-- **P1 (stalled PRs / urgent issues):** clean — `gh pr list --state open` = 0, `gh issue list --state open --label urgent` = 0.
-- **P2 (flagged memory items):** clean — no new flags in `MEMORY.md`; the star-threshold and engine-idle watches aren't due for re-check until 2026-09-07.
-- **P3 (missing scheduled skills):** clean — every enabled skill has run within its expected window; none exceed 2× their schedule interval.
+**P2 (flagged memory items):** Clean. Star-threshold and engine-idle watches aren't due for re-check until 09-07.
 
-**Housekeeping note (not re-flagged):** 8 stale GitHub `health:` issues (#153–#160) from the 08-31 outage remain open/unlabeled since `skill-health` isn't on the schedule to auto-close them — already surfaced 09-01, no new action.
+**P3 (missing scheduled skills):** Clean. All 9 skills within their schedule windows — today's three (token-movers, fetch-tweets, memory-flush) already ran; the five Monday-cadence skills are all well inside their 2× interval ahead of tomorrow's batch.
 
-**Token pulse:** fresh report published today (`token-report-2026-09-05.md`) — $MIROSHARK $0.000002832 (−5.4% 24h), liquidity $308.3K, volume $4.3K (thinnest session in over a week, 0.26× 7d avg), FDV $283.2K, verdict **CONSOLIDATING**.
-
-Since the fleet is fully clean, no `./notify` was sent (per the "notify only on signal" rule).
+**Status page:** Regenerated `docs/status.md` — 🟢 OK, token pulse refreshed from today's `token-report-2026-09-06.md` ($0.000002651, −6.4% 24h, liq $301.1K, vol $4.4K, FDV $265.1K, verdict CONSOLIDATING), skill table re-sorted by last-run, next scheduled run = token-movers at 06:00 UTC 2026-09-07.
 
 ## Summary
-- Regenerated `docs/status.md` with today's data (🟢 OK, next scheduled run token-movers 06:00 UTC 2026-09-06).
-- Appended a `### heartbeat` log entry (`mode: ambient`) to `memory/logs/2026-09-05.md`.
-- No notification sent, no follow-up actions needed.
+- Ran the ambient heartbeat check (default `${var}`); all P0–P3 checks came back clean, so no `./notify` was sent (per the "notify only on signal" rule).
+- Modified `docs/status.md` (fresh Updated timestamp, refreshed token pulse, re-sorted skill health table, next-run pointer).
+- Appended a `### heartbeat` entry (`mode: ambient`) to `memory/logs/2026-09-06.md` with the findings and `STATUS_PAGE=OK`.
+- No follow-up actions needed; next heartbeat runs tomorrow at 19:00 UTC alongside the Monday batch (holdings, changelog, repo-pulse, shiplog, aeon-update).
