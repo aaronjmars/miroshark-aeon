@@ -1,1 +1,1 @@
-I've kicked off the X.AI API fetch for the `miroshark_` account digest in the background — it's on its third retry after two timeouts. I'll resume once it completes or the fallback kicks in.
+Waiting on the background X-search call for the account digest to finish; I'll pick this back up automatically when it completes or the check-in fires.
