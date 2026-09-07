@@ -5,6 +5,7 @@ ROOT=$(cd "$(dirname "$0")/../.." && pwd)
 CHECK="$ROOT/scripts/dev-loop-pr.sh"
 CONFIG="$ROOT/aeon.yml"
 RUNNER="$ROOT/.github/workflows/chain-runner.yml"
+REVIEW_SKILL="$ROOT/skills/pr-review/SKILL.md"
 TMP=$(mktemp -d)
 trap 'rm -rf "$TMP"' EXIT
 
@@ -51,6 +52,17 @@ grep -Fq 'var: "$chain_target"' "$CONFIG"
 grep -Fq 'var: "$feature_pr"' "$CONFIG"
 grep -Fq '${AEON_DISPATCH_ID:+<!-- aeon-dispatch:$AEON_DISPATCH_ID -->}' "$ROOT/skills/feature/SKILL.md"
 [ "$(grep -Fc '${AEON_DISPATCH_ID:+<!-- aeon-dispatch:$AEON_DISPATCH_ID -->}' "$ROOT/skills/feature/SKILL.md")" -eq 3 ]
+
+# A docs/lockfile/test-only early exit is still a completed review. Its GitHub
+# body must carry the same SHA-bound receipt the chain verifies; otherwise a
+# fluent "no blockers" sentence can make the child green while the chain has no
+# deterministic routing input.
+TRIVIAL_CONTRACT=$(sed -n '/For trivial-PR early-exits/,/\*\*Fallback/p' "$REVIEW_SKILL")
+if ! grep -Fq 'approve-ready receipt' <<<"$TRIVIAL_CONTRACT" ||
+   ! grep -Fq 'A trivial PR is reviewed, not skipped' <<<"$TRIVIAL_CONTRACT"; then
+  echo 'trivial review can still exit without the required receipt' >&2
+  exit 1
+fi
 
 [ "$(bash "$CHECK" validate-target external:acme/demo#7)" = 'acme/demo' ]
 TEST_GH_CALLS="$calls" TEST_GH_SCENARIO=one PATH="$TMP/bin:$PATH" bash "$CHECK" snapshot external:acme/demo > "$before"

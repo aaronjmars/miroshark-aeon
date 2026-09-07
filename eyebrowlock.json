@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-09-04T02:27:38.8792611Z",
+  "generatedAt": "2026-09-07T11:10:59.025365777Z",
   "generator": "eyebrow/0.4.2",
   "artifacts": [
     {
@@ -117,7 +117,7 @@
       "files": [
         {
           "path": "SKILL.md",
-          "hash": "b17491de609e1fa3b241a55012e60f21d63eaaac6ad9251c43509f40ec635872"
+          "hash": "1328de6f3288fa062a50af59e80ffd23e9013e1c498bbfb920b9541e413bb02d"
         }
       ],
       "findings": [
@@ -144,7 +144,7 @@
           "severity": "medium",
           "owasp": "ASK-03",
           "file": "SKILL.md",
-          "line": 304,
+          "line": 328,
           "snippet": "- `exec` / `spawn` / `system` / `eval` sinks + subprocess with string interpolation (RCE)",
           "explanation": "uses a process-execution primitive"
         },
@@ -153,12 +153,12 @@
           "severity": "critical",
           "owasp": "ASK-01",
           "file": "SKILL.md",
-          "line": 1013,
+          "line": 1057,
           "snippet": "1. **Install** — the binaries (`semgrep`, `trufflehog`, `osv-scanner`, `slither`) are **not pre-installed**. Stage the…",
           "explanation": "downloads and executes remote code via a pipe to a shell"
         }
       ],
-      "contentHash": "sha256-a81f0757d7b3bafe3baaa0c3d2c0e735eb284a7ebc9768264bdfe4e747b4aa9a",
+      "contentHash": "sha256-fd1fda98b06f22aa90c7434393c3cc605dd1c3c7527c5925dfdf5a454e24512a",
       "discoveredFrom": "skills/vuln-scanner/SKILL.md"
     },
     {
@@ -315,10 +315,10 @@
       "files": [
         {
           "path": "SKILL.md",
-          "hash": "bf3a11650596bd34818ff8df5a8e6da7c3153f2a41388c867fd4b4861472860d"
+          "hash": "2389803f54ad3c290f3c78fcaabed5c63edee60fb236d05a0cd015dbe783a6fd"
         }
       ],
-      "contentHash": "sha256-7a3f62acc00ed607838decee306822cf7791ef3471b5df3a8d5387f940c3482b",
+      "contentHash": "sha256-901b2409e4fe0848452aea1c6392e93a5250a816c9e5eed6b1eced91fcbe38ac",
       "discoveredFrom": "skills/pr-review/SKILL.md"
     },
     {
@@ -1533,7 +1533,7 @@
       "files": [
         {
           "path": "SKILL.md",
-          "hash": "605b296d976df6631c7d9d5310442a9f933794ba32188136b7e342bb635b4dfc"
+          "hash": "8e88807e17f976c18caddc876a66b010b35288508e424827501e5acfb46362d1"
         },
         {
           "path": "hook-deploy.sh",
@@ -1553,7 +1553,7 @@
         },
         {
           "path": "templates/Hook.t.sol",
-          "hash": "084c0a55167dde52d35a2cb61961558dd094d7c739018ab03ca17a23e0ec6811"
+          "hash": "fb7c84d1c76ac4cb850a3652f7404b8865d34e914db10bd124d6832773955756"
         },
         {
           "path": "templates/HookFeeHook.sol",
@@ -1595,7 +1595,7 @@
           "severity": "high",
           "owasp": "ASK-06",
           "file": "SKILL.md",
-          "line": 116,
+          "line": 118,
           "snippet": "- **Freeform mode** (anything else): write the whole hook into `$HOOKBUILD_DIR/src/Hook.sol` — replace the `// --- AEO…",
           "explanation": "references sensitive credential or secret paths"
         },
@@ -1654,7 +1654,7 @@
           "explanation": "references sensitive credential or secret paths"
         }
       ],
-      "contentHash": "sha256-f100420695859ca18a6b1ac42c0b3a39e84eb490f87b881679e3d7e1c5c3b2de",
+      "contentHash": "sha256-e749b80ea9b00de2689e829fdd5fe37e6e3e6e53c484c25b534150e648c0c4f6",
       "discoveredFrom": "skills/deploy-uni-hook/SKILL.md"
     },
     {
@@ -2191,10 +2191,10 @@
       "files": [
         {
           "path": "SKILL.md",
-          "hash": "67d4c34d7fcd2f87f70fa8462289898f05499575444f34587dabb73f307a7f4f"
+          "hash": "da2ac8b88d22076c227bee9fcd7b2ea1c7be407a866f35a8a64e316599bfd110"
         }
       ],
-      "contentHash": "sha256-fde5b3b54f16d08354f3d8df0e30f44b68180bce3470257e90405d376e032dd4",
+      "contentHash": "sha256-9666675528c0e0c8913c8fd4499eece477e9a8108e571ae16eedbb79d5138a67",
       "discoveredFrom": "skills/send-email/SKILL.md"
     },
     {
