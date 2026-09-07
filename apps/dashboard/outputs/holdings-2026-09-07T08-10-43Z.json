@@ -1,0 +1,57 @@
+{
+  "root": "card_holdings",
+  "state": {},
+  "elements": {
+    "card_holdings": {
+      "type": "Card",
+      "props": {
+        "title": "Holdings",
+        "description": "Holdings — MiroShark"
+      },
+      "children": [
+        "stack_main"
+      ]
+    },
+    "stack_main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stat_holdings",
+        "stat_7d",
+        "stat_30d"
+      ]
+    },
+    "stat_holdings": {
+      "type": "Stat",
+      "props": {
+        "label": "Holdings",
+        "value": "11.95B",
+        "delta": "11.95% of supply"
+      },
+      "children": []
+    },
+    "stat_7d": {
+      "type": "Stat",
+      "props": {
+        "label": "7d Change",
+        "value": "+161.38M",
+        "delta": "+1.37%",
+        "trend": "up"
+      },
+      "children": []
+    },
+    "stat_30d": {
+      "type": "Stat",
+      "props": {
+        "label": "30d Change",
+        "value": "+856.94M",
+        "delta": "+7.73%",
+        "trend": "up"
+      },
+      "children": []
+    }
+  }
+}
