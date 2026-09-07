@@ -1,0 +1,142 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "MIROSHARK Token Report"
+      },
+      "children": [
+        "status-badge",
+        "description-text",
+        "separator-1",
+        "top-metrics-grid",
+        "separator-2",
+        "lower-metrics-stack",
+        "separator-3",
+        "chart-link"
+      ]
+    },
+    "status-badge": {
+      "type": "Badge",
+      "props": {
+        "text": "CONSOLIDATING",
+        "variant": "outline"
+      }
+    },
+    "description-text": {
+      "type": "Text",
+      "props": {
+        "text": "Price eased 2.5% on the thinnest volume in over a week (0.29× 7d avg); sell pressure actually improved despite the dip.",
+        "variant": "body"
+      }
+    },
+    "separator-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "top-metrics-grid": {
+      "type": "Grid",
+      "props": {
+        "columns": 3,
+        "gap": "md"
+      },
+      "children": [
+        "price-stat",
+        "liq-stat",
+        "vol-stat"
+      ]
+    },
+    "price-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Price",
+        "value": "$0.000002584",
+        "delta": "−2.5%",
+        "trend": "down"
+      }
+    },
+    "liq-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Liquidity",
+        "value": "$300.5K",
+        "delta": "−0.2%",
+        "trend": "down"
+      }
+    },
+    "vol-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Volume",
+        "value": "$4.3K",
+        "delta": "0.29× 7d avg"
+      }
+    },
+    "separator-2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "lower-metrics-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "buys-stat",
+        "sells-stat",
+        "ratio-stat",
+        "whales-stat"
+      ]
+    },
+    "buys-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Buys",
+        "value": "14"
+      }
+    },
+    "sells-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Sells",
+        "value": "17"
+      }
+    },
+    "ratio-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Buy/Sell Ratio",
+        "value": "0.82",
+        "delta": "↑ from 0.48",
+        "trend": "up"
+      }
+    },
+    "whales-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Whales",
+        "value": "1"
+      }
+    },
+    "separator-3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "chart-link": {
+      "type": "Link",
+      "props": {
+        "label": "View Chart on GeckoTerminal",
+        "href": "https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209"
+      }
+    }
+  }
+}

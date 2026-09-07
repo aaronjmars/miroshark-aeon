@@ -1,15 +1,11 @@
 {
   "skill": "token-movers",
-  "last_analyzed": "2026-09-06T06:13:57Z",
+  "last_analyzed": "2026-09-07T06:17:50Z",
   "quality_score": 4,
-  "assessment": "Substantive monitoring report with specific, source-verified metrics that directly serve the strategy's 'track momentum honestly' priority; well-structured and verifiable via cited APIs.",
+  "assessment": "Substantive, well-sourced token monitoring report with transparent methodology; directly tracks north-star metrics and serves Priority 4 (track momentum honestly) with credible data, clear caveats, and appropriate attribution.",
   "flags": [],
   "avg_score": 4.03,
   "history": [
-    {
-      "date": "2026-08-09",
-      "score": 4
-    },
     {
       "date": "2026-08-10",
       "score": 4
@@ -124,6 +120,10 @@
     },
     {
       "date": "2026-09-06",
+      "score": 4
+    },
+    {
+      "date": "2026-09-07",
       "score": 4
     }
   ]
