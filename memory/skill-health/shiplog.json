@@ -1,10 +1,10 @@
 {
   "skill": "shiplog",
-  "last_analyzed": "2026-08-31T23:04:40Z",
-  "quality_score": 5,
-  "assessment": "Substantive, well-sourced weekly digest with verifiable artifacts (PRs, stars, token data), honest engine-idle flagging, disclosed gaps, strategy-aligned ready-to-post content in operator voice.",
+  "last_analyzed": "2026-09-07T09:35:09Z",
+  "quality_score": 4,
+  "assessment": "Substantive, verifiable momentum report with specific metrics (272 PRs, +2 stars, −1 forks) and key finding: public engine repo idle while private companion delivered 43 PRs of real work—flags strategic split for operator review; minor: X fetch timeout persists but didn't block output.",
   "flags": [],
-  "avg_score": 4.19,
+  "avg_score": 4.18,
   "history": [
     {
       "date": "2026-06-15",
@@ -69,6 +69,10 @@
     {
       "date": "2026-08-31",
       "score": 5
+    },
+    {
+      "date": "2026-09-07",
+      "score": 4
     }
   ]
 }

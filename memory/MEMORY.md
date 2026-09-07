@@ -33,6 +33,7 @@ See `memory/watched-repos.md` — `MiroShark/MiroShark` (renamed from `aaronjmar
 ## Recent Digests
 | Date | Type | Key Topics |
 |------|------|------------|
+| 2026-09-07 | shiplog | Public engine repo 4th straight idle window (0 engine-code PRs) but private companion repo MiroShark-x402 merged 43 real sim-engine PRs — engine work continues, just not where stars/forks read it; stars +2 (well off +9 pace), forks −1 (first decline) |
 | 2026-09-04 | tweet-digest | Weekly match-sim cadence continues (Premier League MD3, LaLiga MD4 reports); TikTok cross-platform push |
 | 2026-08-31 | tweet-digest | x402aff week recap; 2nd organic press pickup — reply to @Amrit_Mirch's GTA VI agent-argument sim (10 agents, 10 rounds, release-odds call) |
 | 2026-08-28 | tweet-digest | x402aff affiliate program launch (4 tweets: announcement, guide, article, video) — drove the same-day BREAKOUT |
@@ -74,7 +75,7 @@ See `memory/watched-repos.md` — `MiroShark/MiroShark` (renamed from `aaronjmar
 - eyebrowlock gate v0.4.2 (landed via aeon-update PR #161, 2026-09-04) fails `verify` on **any** skill content-fingerprint drift, not just a new egress host or new CRITICAL finding (v0.4.1's narrower behavior) — a modified skill now needs a lock rescan even for cosmetic changes; the older "content drift tolerated" guidance is stale.
 
 ## Active Targets
-- Hyperstition: MiroShark 1,000 stars by 2026-04-30 — MISSED Apr 30 (911), CROSSED 2026-05-03; **1,446 stars** as of 2026-08-31 (repo-pulse, events source; +9 w/w, weekly series +1→+7→+9, avg4w=4.0 → ACTIVE; 54 to 1,500; forks 299 with 299th = WorkWeonline boundary case 08-24T16:08Z; next check 2026-09-07).
+- Hyperstition: MiroShark 1,000 stars by 2026-04-30 — MISSED Apr 30 (911), CROSSED 2026-05-03; **1,448 stars** as of 2026-09-07 (shiplog; +2 this window, well below avg4w≈4.0 — pace decelerating vs the 3-week accelerating streak through 08-31; 52 to 1,500; forks 298, first decline tracked (−1 vs 299 @ 08-31); next check 2026-09-14).
 - Hyperstition: @miroshark_ 1,000 X followers by 2026-05-15 — deadline passed, count unconfirmed in logs.
 - Hyperstition: MiroShark PR from a Chinese-locale contributor OR Chinese-language coverage by 2026-06-15 — CROSSED; CN tweet "米罗莎要来了" May 16 qualifies; also JP coverage @m000_crypto (May 17).
 - Hyperstition: ≥3 publicly-named external integrators citing MiroShark as AI infrastructure by 2026-07-31 — **EXCEEDED, deadline passed**: 14 integrators in ECOSYSTEM.md as of 06-22 (Sparkleware, ZER0, Xerg, SyntheticsAI, Signa, RootAI, Noelclaw, Monitor, HivemindOS, Echo Oracle, Crucible Sim, Capacitr, Blue Agent, AntFleet).
@@ -82,5 +83,5 @@ See `memory/watched-repos.md` — `MiroShark/MiroShark` (renamed from `aaronjmar
 - MIROSHARK team/treasury holdings: 11.78% of supply (11.78B tokens) as of 2026-08-31 (up from 11.28% on 08-24), tracked via `holdings` skill (5th straight accumulating snapshot, +507.7M in 7d).
 
 ## Next Priorities
-- Next star threshold: 1,500 (~54 away as of 2026-08-31; ACTIVE/surge signal — +9 this week, 2nd straight week > 1.5×avg4w; next repo-pulse weekly check due 2026-09-07).
-- Engine dev velocity (priority-1 "ship the engine"): `MiroShark/MiroShark` shipped **0 engine-code PRs across 3 consecutive shiplog windows** (~08-11→08-31; 3rd window = 5 merged PRs, all dependabot + README founder credit #292). 3rd-idle-window watch condition met on both shiplog and changelog sides — **flagged to operator in the 08-31 shiplog notify** (queued 3b87f143).
+- Next star threshold: 1,500 (~52 away as of 2026-09-07; pace decelerating — only +2 this window vs avg4w≈4.0, breaking the prior 3-week accelerating streak; next repo-pulse weekly check due 2026-09-14).
+- Engine dev velocity (priority-1 "ship the engine"): `MiroShark/MiroShark` shipped **0 engine-code PRs across 4 consecutive shiplog windows** (~08-11→09-07; 4th window = 3 merged PRs, all dependency bumps). BUT the private companion repo `MiroShark-x402` merged 43 real engine PRs this window alone (prompt-cache revival, ReAct caps, invalid-action handling, Neo4j resilience) — the engine is being worked, it's just not landing in the public repo that the star/ecosystem north-star metrics read off of. Flagged to operator in the 09-07 shiplog notify (queued 591b3b49); worth a decision on whether to upstream more into the OSS repo.

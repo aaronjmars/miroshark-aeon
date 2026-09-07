@@ -1,20 +1,21 @@
-miroshark shiplog 🦈 aug 24 → 31
+ℹ️ Shiplog: Aug 31 → Sep 7
 
-shipped 343 PRs (326 merged) + one launch this window. the bytes:
+miroshark ⭐🦈 shiplog aug 31 → sep 7
 
-- x402aff is live 🦈 v0.3.0 shipped (TS DynamicPayTo callback, env parity, bounded negative cache) → program launched 08-27 → $MIROSHARK +54.8% on 08-28 at 3.4× avg volume. one line makes any x402 endpoint affiliate-ready. paid straight to your wallet on base
-- miroshark-website: 25 PRs — BubbleMenu nav, Copy-for-LLM button, 2 PageSpeed rounds, AEO robots.txt, webmcp run handoff
-- founder credit sweep: aaronjmars.com linked across 23 repos in one day, personal hub rebuilt (13 PRs — RSS, weekly star snapshots, per-article OG)
-- agent infra had a bad day (claude sub died mid-fleet) and the fix shipped same-day: GLM gateway move, tiered model mapping, telegram reply-to-previous
-- engine core: quiet. 3rd straight window with 0 code PRs — just dependabot + a README credit. we see it. flagging it
-- security: nothing landed in other people's repos this window. not every week gets a flex
+264 PRs merged this window, across 34 repos. the bytes:
+
+- public engine repo merged 3 PRs. all dependency bumps. 0 engine code. 4th straight week like this
+- but the actual sim work didn't stop — it just moved. 43 PRs into the private companion repo: prompt caching revived across gemini+deepseek, react iteration caps, invalid-action attribution, neo4j boot-resilience
+- x402aff merged the CDP SDK cleanup + has a PR open to get listed in x402 foundation's own docs (pending)
+- security: nvidia PR (bind-to-localhost fix) closed unmerged. no external merge to flex this window
 
 traction:
-- MiroShark/MiroShark 1,446 ⭐ (+9) — 54 to 1,500
-- "Introducing x402aff" 79❤️ / 15RT — the week's banger
-- @PremierBase (32.5k) on the launch: "Behind you 🫡🟦"
-- boom. 1000 PRs merged for @aeonframework, 60 contributors, 75 ecosystem projects. we just startin' ⭐
+- miroshark 1,448 ⭐ (+2 this window — well off last week's +9 pace)
+- forks 298 (−1, first dip we've tracked)
+- @miroshark_ kept the weekly matchday cadence going: prem + laliga sims
 
-⭐🦈
+the public repo is the one collecting stars. it's also the one going quiet. that gap is the thing to watch.
 
-full digest + thread/short variants: https://github.com/aaronjmars/miroshark-aeon/blob/main/output/articles/shiplog-2026-08-31.md
+⭐
+
+https://github.com/aaronjmars/miroshark-aeon/blob/main/output/articles/shiplog-2026-09-07.md

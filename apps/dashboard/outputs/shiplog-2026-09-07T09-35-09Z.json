@@ -1,0 +1,209 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "Shiplog: Aug 31 → Sep 7"
+      },
+      "children": [
+        "heading-main",
+        "separator-1",
+        "text-overview",
+        "item-public",
+        "item-private",
+        "item-x402",
+        "item-security",
+        "separator-2",
+        "stats-group",
+        "text-matchday",
+        "separator-3",
+        "text-insight",
+        "link-article"
+      ]
+    },
+    "heading-main": {
+      "type": "Heading",
+      "props": {
+        "text": "miroshark ⭐🦈 shiplog aug 31 → sep 7",
+        "level": "h2"
+      }
+    },
+    "separator-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "text-overview": {
+      "type": "Text",
+      "props": {
+        "text": "264 PRs merged this window, across 34 repos.",
+        "variant": "body"
+      }
+    },
+    "item-public": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "text-public-label",
+        "text-public-detail"
+      ]
+    },
+    "text-public-label": {
+      "type": "Text",
+      "props": {
+        "text": "Public engine repo",
+        "variant": "lead"
+      }
+    },
+    "text-public-detail": {
+      "type": "Text",
+      "props": {
+        "text": "3 PRs merged — all dependency bumps, 0 engine code. 4th straight week like this.",
+        "variant": "body"
+      }
+    },
+    "item-private": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "text-private-label",
+        "text-private-detail"
+      ]
+    },
+    "text-private-label": {
+      "type": "Text",
+      "props": {
+        "text": "Private companion repo",
+        "variant": "lead"
+      }
+    },
+    "text-private-detail": {
+      "type": "Text",
+      "props": {
+        "text": "43 PRs: prompt caching revived across gemini+deepseek, React iteration caps, invalid-action attribution, neo4j boot-resilience.",
+        "variant": "body"
+      }
+    },
+    "item-x402": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "text-x402-label",
+        "text-x402-detail"
+      ]
+    },
+    "text-x402-label": {
+      "type": "Text",
+      "props": {
+        "text": "x402aff",
+        "variant": "lead"
+      }
+    },
+    "text-x402-detail": {
+      "type": "Text",
+      "props": {
+        "text": "Merged CDP SDK cleanup. PR open to get listed in x402 foundation's own docs (pending).",
+        "variant": "body"
+      }
+    },
+    "item-security": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "text-security-label",
+        "text-security-detail"
+      ]
+    },
+    "text-security-label": {
+      "type": "Text",
+      "props": {
+        "text": "Security",
+        "variant": "lead"
+      }
+    },
+    "text-security-detail": {
+      "type": "Text",
+      "props": {
+        "text": "Nvidia PR (bind-to-localhost fix) closed unmerged. No external merge to flex this window.",
+        "variant": "body"
+      }
+    },
+    "separator-2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stats-group": {
+      "type": "Grid",
+      "props": {
+        "columns": 2,
+        "gap": "lg"
+      },
+      "children": [
+        "stat-stars",
+        "stat-forks"
+      ]
+    },
+    "stat-stars": {
+      "type": "Stat",
+      "props": {
+        "label": "Miroshark stars",
+        "value": "1,448",
+        "delta": "+2",
+        "trend": "up"
+      }
+    },
+    "stat-forks": {
+      "type": "Stat",
+      "props": {
+        "label": "Forks (first dip tracked)",
+        "value": "298",
+        "delta": "−1",
+        "trend": "down"
+      }
+    },
+    "text-matchday": {
+      "type": "Text",
+      "props": {
+        "text": "@miroshark_ kept the weekly matchday cadence going: Premier League + La Liga sims.",
+        "variant": "body"
+      }
+    },
+    "separator-3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "text-insight": {
+      "type": "Text",
+      "props": {
+        "text": "The public repo is the one collecting stars. It's also the one going quiet. That gap is the thing to watch.",
+        "variant": "lead"
+      }
+    },
+    "link-article": {
+      "type": "Link",
+      "props": {
+        "label": "Full shiplog article",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/output/articles/shiplog-2026-09-07.md"
+      }
+    }
+  }
+}
