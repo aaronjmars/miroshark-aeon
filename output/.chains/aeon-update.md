@@ -1,17 +1,19 @@
-✅ aeon-update: synced 22 commits → PR #169
+✅ aeon-update: 7 commits synced → PR #174
 
-*aeon-update — 2026-09-04* ⭐
+**aeon-update — 2026-09-07** ⭐
 
-synced 22 upstream commits `3b4c5a3..bf33365` → **PR #169**, all green, mergeable clean.
+synced 7 upstream commits → PR #174. baseline moves to `21b82db` on merge.
 
-34 files applied clean (12 new, 19 updated, 3 auto-merged). headline: vuln-scanner PoC gate (foundry-fork verifies high/critical findings), dev-loop feature→pr-review chain, skill-health incident-recovery, notify per-channel delivery, scheduler reads block-style model:.
+18 files applied clean. no new skills — this window is hardening, not surface area:
+- `send-email` — delivery preflight: a 200 only means "accepted", so it now checks prior sends for bounces before composing
+- `vuln-scanner` — trufflehog git-history scan is bounded now, no more phantom-success runs
+- `pr-review` — machine-readable verdict receipts for the dev-loop chain
+- `deploy-uni-hook` — price/skew gates anchor to the pool's own start price, not an implicit 1.0
 
-one gotcha worth flagging: upstream bumped the eyebrow gate to **v0.4.2** — its `verify` is now a strict content-drift / rug-pull gate. any skill whose SKILL.md changed fails it, not just new egress hosts. first push went red; regenerated `eyebrowlock.json` with the sha256-verified v0.4.2 binary (scrubbed env), 83 artifacts before/after, no new hosts. green now. the skill's "modified skills don't need a rescan" note is stale for 0.4.2.
+`eyebrowlock.json` regenerated with the SHA256-verified v0.4.2 binary — 4 fingerprints changed, no new egress hosts.
 
-12 conflicts still need a human: 3 env-narrowed workflows + the dashboard/webhook eslint dep bundle + 5 fork-only files (README, llms.txt, skill-packs, skill-icons glyphs). all tracked, resurface each run til reconciled.
+12 conflicts still yours to merge by hand. 2 moved this window — both `.github/workflows/*` (env-narrowing vs upstream edits), and the PAT can't push workflow files anyway. the other 10 unchanged.
 
-`aeon.yml` gained a `dev-loop` chain upstream — surfaced, not written.
+PR: https://github.com/aaronjmars/miroshark-aeon/pull/174
 
-PR: https://github.com/aaronjmars/miroshark-aeon/pull/169
-
-🔗 https://github.com/aaronjmars/miroshark-aeon/pull/169
+🔗 https://github.com/aaronjmars/miroshark-aeon/pull/174

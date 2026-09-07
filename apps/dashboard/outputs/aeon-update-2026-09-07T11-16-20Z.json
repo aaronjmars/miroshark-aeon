@@ -1,0 +1,307 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "aeon-update",
+        "description": "7 commits synced → PR #174"
+      },
+      "children": [
+        "stack_main"
+      ]
+    },
+    "stack_main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "header_row",
+        "sep_1",
+        "summary_section",
+        "sep_2",
+        "files_section",
+        "sep_3",
+        "skills_header",
+        "skills_stack",
+        "sep_4",
+        "config_section",
+        "sep_5",
+        "conflicts_section",
+        "sep_6",
+        "pr_link_section"
+      ]
+    },
+    "header_row": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "stat_commits",
+        "badge_date"
+      ]
+    },
+    "stat_commits": {
+      "type": "Stat",
+      "props": {
+        "label": "Commits synced",
+        "value": "7"
+      }
+    },
+    "badge_date": {
+      "type": "Badge",
+      "props": {
+        "text": "2026-09-07",
+        "variant": "secondary"
+      }
+    },
+    "sep_1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "summary_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "text_baseline",
+        "text_changes"
+      ]
+    },
+    "text_baseline": {
+      "type": "Text",
+      "props": {
+        "text": "Baseline moves to 21b82db on merge.",
+        "variant": "lead"
+      }
+    },
+    "text_changes": {
+      "type": "Text",
+      "props": {
+        "text": "18 files applied clean. No new skills — this window is hardening, not surface area."
+      }
+    },
+    "sep_2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "files_section": {
+      "type": "Stat",
+      "props": {
+        "label": "Files changed",
+        "value": "18"
+      }
+    },
+    "sep_3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "skills_header": {
+      "type": "Heading",
+      "props": {
+        "text": "Skill Updates",
+        "level": "h3"
+      }
+    },
+    "skills_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "skill_item_1",
+        "skill_item_2",
+        "skill_item_3",
+        "skill_item_4"
+      ]
+    },
+    "skill_item_1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "xs"
+      },
+      "children": [
+        "badge_skill_1",
+        "text_skill_1"
+      ]
+    },
+    "badge_skill_1": {
+      "type": "Badge",
+      "props": {
+        "text": "send-email",
+        "variant": "outline"
+      }
+    },
+    "text_skill_1": {
+      "type": "Text",
+      "props": {
+        "text": "Delivery preflight: a 200 only means \"accepted\", so it now checks prior sends for bounces before composing",
+        "variant": "body"
+      }
+    },
+    "skill_item_2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "xs"
+      },
+      "children": [
+        "badge_skill_2",
+        "text_skill_2"
+      ]
+    },
+    "badge_skill_2": {
+      "type": "Badge",
+      "props": {
+        "text": "vuln-scanner",
+        "variant": "outline"
+      }
+    },
+    "text_skill_2": {
+      "type": "Text",
+      "props": {
+        "text": "Trufflehog git-history scan is bounded now, no more phantom-success runs",
+        "variant": "body"
+      }
+    },
+    "skill_item_3": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "xs"
+      },
+      "children": [
+        "badge_skill_3",
+        "text_skill_3"
+      ]
+    },
+    "badge_skill_3": {
+      "type": "Badge",
+      "props": {
+        "text": "pr-review",
+        "variant": "outline"
+      }
+    },
+    "text_skill_3": {
+      "type": "Text",
+      "props": {
+        "text": "Machine-readable verdict receipts for the dev-loop chain",
+        "variant": "body"
+      }
+    },
+    "skill_item_4": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "xs"
+      },
+      "children": [
+        "badge_skill_4",
+        "text_skill_4"
+      ]
+    },
+    "badge_skill_4": {
+      "type": "Badge",
+      "props": {
+        "text": "deploy-uni-hook",
+        "variant": "outline"
+      }
+    },
+    "text_skill_4": {
+      "type": "Text",
+      "props": {
+        "text": "Price/skew gates anchor to the pool's own start price, not an implicit 1.0",
+        "variant": "body"
+      }
+    },
+    "sep_4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "config_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "text_config_header",
+        "text_config_detail"
+      ]
+    },
+    "text_config_header": {
+      "type": "Heading",
+      "props": {
+        "text": "Configuration",
+        "level": "h3"
+      }
+    },
+    "text_config_detail": {
+      "type": "Text",
+      "props": {
+        "text": "eyebrowlock.json regenerated with the SHA256-verified v0.4.2 binary — 4 fingerprints changed, no new egress hosts."
+      }
+    },
+    "sep_5": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "conflicts_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "stat_conflicts",
+        "text_conflicts_detail"
+      ]
+    },
+    "stat_conflicts": {
+      "type": "Stat",
+      "props": {
+        "label": "Manual merge conflicts",
+        "value": "12"
+      }
+    },
+    "text_conflicts_detail": {
+      "type": "Text",
+      "props": {
+        "text": "2 moved this window — both .github/workflows/* (env-narrowing vs upstream edits), and the PAT can't push workflow files anyway. The other 10 unchanged."
+      }
+    },
+    "sep_6": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "pr_link_section": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Review PR #174",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/pull/174",
+        "source": "GitHub"
+      }
+    }
+  }
+}
