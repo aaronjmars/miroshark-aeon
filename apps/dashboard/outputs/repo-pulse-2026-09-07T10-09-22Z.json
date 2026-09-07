@@ -1,0 +1,127 @@
+{
+  "root": "card-root",
+  "state": {},
+  "elements": {
+    "card-root": {
+      "type": "Card",
+      "props": {
+        "title": "Repo Pulse",
+        "description": "2026-09-07 — [STEADY]"
+      },
+      "children": [
+        "repo-info",
+        "stats-section",
+        "separator1",
+        "stargazers-section",
+        "separator2",
+        "source-note"
+      ]
+    },
+    "repo-info": {
+      "type": "Text",
+      "props": {
+        "text": "MiroShark/MiroShark",
+        "variant": "lead"
+      }
+    },
+    "stats-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "stat-stars",
+        "stat-forks",
+        "badge-releases"
+      ]
+    },
+    "stat-stars": {
+      "type": "Stat",
+      "props": {
+        "label": "Stars",
+        "value": "1448",
+        "delta": "+2",
+        "trend": "up"
+      }
+    },
+    "stat-forks": {
+      "type": "Stat",
+      "props": {
+        "label": "Forks",
+        "value": "298",
+        "delta": "+0",
+        "trend": "neutral"
+      }
+    },
+    "badge-releases": {
+      "type": "Badge",
+      "props": {
+        "text": "releases +0",
+        "variant": "outline"
+      }
+    },
+    "separator1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stargazers-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "stargazers-heading",
+        "stargazers-links"
+      ]
+    },
+    "stargazers-heading": {
+      "type": "Text",
+      "props": {
+        "text": "Other new stargazers:",
+        "variant": "caption"
+      }
+    },
+    "stargazers-links": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "link-lzp-demo",
+        "link-olegaoa"
+      ]
+    },
+    "link-lzp-demo": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/lzp-demo",
+        "href": "https://github.com/lzp-demo"
+      }
+    },
+    "link-olegaoa": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/Olegaoa",
+        "href": "https://github.com/Olegaoa"
+      }
+    },
+    "separator2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "source-note": {
+      "type": "Text",
+      "props": {
+        "text": "Source: events",
+        "variant": "muted"
+      }
+    }
+  }
+}
