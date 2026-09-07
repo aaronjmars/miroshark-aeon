@@ -1,0 +1,81 @@
+{
+  "root": "card_changelog",
+  "state": {},
+  "elements": {
+    "card_changelog": {
+      "type": "Card",
+      "props": {
+        "title": "Changelog (push-to)",
+        "description": "2026-09-07"
+      },
+      "children": [
+        "stack_main"
+      ]
+    },
+    "stack_main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "repo_text",
+        "separator_1",
+        "pr_info_stack",
+        "separator_2",
+        "link_section"
+      ]
+    },
+    "repo_text": {
+      "type": "Text",
+      "props": {
+        "text": "MiroShark/MiroShark → aaronjmars/miroshark-website",
+        "variant": "lead"
+      }
+    },
+    "separator_1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "pr_info_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "badge_3_prs",
+        "changelog_entry_text"
+      ]
+    },
+    "badge_3_prs": {
+      "type": "Badge",
+      "props": {
+        "text": "3 new PRs",
+        "variant": "default"
+      }
+    },
+    "changelog_entry_text": {
+      "type": "Text",
+      "props": {
+        "text": "Changelog entry: Mistune DoS security patch + dependency upkeep",
+        "variant": "body"
+      }
+    },
+    "separator_2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "link_section": {
+      "type": "Link",
+      "props": {
+        "label": "PR: aaronjmars/miroshark-website#314",
+        "href": "https://github.com/aaronjmars/miroshark-website/pull/314"
+      }
+    }
+  }
+}
