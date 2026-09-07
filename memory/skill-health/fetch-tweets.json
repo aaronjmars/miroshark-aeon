@@ -1,17 +1,11 @@
 {
   "skill": "fetch-tweets",
-  "last_analyzed": "2026-09-06T17:07:21Z",
-  "quality_score": 2,
-  "assessment": "Skill initiated a background operation but produced no deliverable output; waiting-on-process messages don't serve the strategy's need for substantive momentum tracking or usable results.",
-  "flags": [
-    "empty_output"
-  ],
-  "avg_score": 3.6,
+  "last_analyzed": "2026-09-07T17:09:32Z",
+  "quality_score": 3,
+  "assessment": "Completed correctly but routine — found 0 new tweets, deduped against prior logs, logged cleanly, correctly applied no-signal-no-notify rule; monitoring hygiene is sound but doesn't advance core strategy priorities.",
+  "flags": [],
+  "avg_score": 3.57,
   "history": [
-    {
-      "date": "2026-08-08",
-      "score": 4
-    },
     {
       "date": "2026-08-09",
       "score": 4
@@ -127,6 +121,10 @@
     {
       "date": "2026-09-06",
       "score": 2
+    },
+    {
+      "date": "2026-09-07",
+      "score": 3
     }
   ]
 }
