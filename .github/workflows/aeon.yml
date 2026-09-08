@@ -979,7 +979,17 @@ jobs:
       # even if the run failed; the host list is the allowlist oracle P3 builds from.
       - name: Upload egress audit log
         if: always() && vars.EGRESS_AUDIT == '1'
+        continue-on-error: true
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        env:
+          # This upload talks to Actions-internal artifact infra, not skill egress,
+          # so it must bypass the iron-proxy MITM. NO_PROXY did not fully exclude the
+          # FinalizeArtifact host, so the proxy returned a 403 and reddened otherwise
+          # green runs. Null the proxy for just this step and keep it non-fatal: the
+          # audit log is best-effort P2 observability and must never fail a good run.
+          HTTP_PROXY: ''
+          HTTPS_PROXY: ''
+          NO_PROXY: '*'
         with:
           name: egress-${{ steps.skill.outputs.name }}-${{ github.run_id }}
           path: ${{ runner.temp }}/iron/audit.jsonl
