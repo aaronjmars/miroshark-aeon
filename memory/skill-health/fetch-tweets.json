@@ -1,15 +1,11 @@
 {
   "skill": "fetch-tweets",
-  "last_analyzed": "2026-09-07T17:09:32Z",
-  "quality_score": 3,
-  "assessment": "Completed correctly but routine — found 0 new tweets, deduped against prior logs, logged cleanly, correctly applied no-signal-no-notify rule; monitoring hygiene is sound but doesn't advance core strategy priorities.",
+  "last_analyzed": "2026-09-08T17:12:08Z",
+  "quality_score": 4,
+  "assessment": "Clean, verifiable quiet run with proper log documentation and correct no-notification behavior; honest momentum tracking aligned with strategy priority 4.",
   "flags": [],
   "avg_score": 3.57,
   "history": [
-    {
-      "date": "2026-08-09",
-      "score": 4
-    },
     {
       "date": "2026-08-10",
       "score": 4
@@ -125,6 +121,10 @@
     {
       "date": "2026-09-07",
       "score": 3
+    },
+    {
+      "date": "2026-09-08",
+      "score": 4
     }
   ]
 }
