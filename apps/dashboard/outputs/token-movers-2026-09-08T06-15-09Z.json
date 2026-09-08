@@ -1,0 +1,47 @@
+{
+  "root": "card_root",
+  "state": {},
+  "elements": {
+    "card_root": {
+      "type": "Card",
+      "props": {
+        "title": "token-movers"
+      },
+      "children": [
+        "text_status",
+        "separator",
+        "stat_price",
+        "stat_volume"
+      ]
+    },
+    "text_status": {
+      "type": "Text",
+      "props": {
+        "text": "MIROSHARK quiet",
+        "variant": "lead"
+      }
+    },
+    "separator": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stat_price": {
+      "type": "Stat",
+      "props": {
+        "label": "Price",
+        "value": "$0.000002563",
+        "delta": "0%",
+        "trend": "neutral"
+      }
+    },
+    "stat_volume": {
+      "type": "Stat",
+      "props": {
+        "label": "Volume",
+        "value": "$3.9K"
+      }
+    }
+  }
+}
