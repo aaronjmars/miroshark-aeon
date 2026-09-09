@@ -1928,13 +1928,14 @@
       "capabilities": {
         "network": [
           "api.x.ai",
-          "x.com"
+          "x.com",
+          "api.twitterapi.io"
         ]
       },
       "files": [
         {
           "path": "SKILL.md",
-          "hash": "6dd3aa21b17bc9e525802387f8cf0544c9387ce7d118081fca2b9523360114d5"
+          "hash": "7c325a6322229a916ec3959d198c7e1398f5e42554333a0c11b5261c6488ac0b"
         }
       ],
       "contentHash": "sha256-1d5e4c22d96d144b8a7ac5b9385ab413e947998674c13f7c92802010c2e67046",
@@ -2305,13 +2306,14 @@
       "capabilities": {
         "network": [
           "api.x.ai",
-          "x.com"
+          "x.com",
+          "api.twitterapi.io"
         ]
       },
       "files": [
         {
           "path": "SKILL.md",
-          "hash": "6c7929ff6df3b4a4491ed6086dd1da018c1ed3c2729f8ea2f98ed14c914cfca7"
+          "hash": "c341d0660731920df5bc214ad6eb44beac2bb6c891eb2b4aaf289ef25e8b473b"
         }
       ],
       "contentHash": "sha256-24193d664a2402d12cf7b55a3da16355dcb326e4b459616394fbfe7ee45e598b",
