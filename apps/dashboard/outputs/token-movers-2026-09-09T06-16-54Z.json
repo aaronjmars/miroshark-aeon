@@ -1,0 +1,141 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "MIROSHARK Token Report"
+      },
+      "children": [
+        "status-badge",
+        "summary-text",
+        "sep1",
+        "metrics-section",
+        "sep2",
+        "buys-sells-section",
+        "sep3",
+        "chart-link"
+      ]
+    },
+    "status-badge": {
+      "type": "Badge",
+      "props": {
+        "text": "SLIDING",
+        "variant": "destructive"
+      }
+    },
+    "summary-text": {
+      "type": "Text",
+      "props": {
+        "text": "−3.1% on 1.3× avg volume; three whale sells ($1.4–2K each) clustered in a 20-min window (11:49–12:07 UTC) drove the move, only partly offset by a later buy cluster.",
+        "variant": "lead"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "metrics-section": {
+      "type": "Grid",
+      "props": {
+        "columns": 3,
+        "gap": "md"
+      },
+      "children": [
+        "stat-price",
+        "stat-liquidity",
+        "stat-volume"
+      ]
+    },
+    "stat-price": {
+      "type": "Stat",
+      "props": {
+        "label": "Price",
+        "value": "$0.000002483",
+        "delta": "-3.1%",
+        "trend": "down"
+      }
+    },
+    "stat-liquidity": {
+      "type": "Stat",
+      "props": {
+        "label": "Liquidity",
+        "value": "$291.5K",
+        "delta": "-3.0%",
+        "trend": "down"
+      }
+    },
+    "stat-volume": {
+      "type": "Stat",
+      "props": {
+        "label": "Volume",
+        "value": "$13.9K",
+        "delta": "1.28×",
+        "trend": "up"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "buys-sells-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "buys-sells-table",
+        "whales-stat"
+      ]
+    },
+    "buys-sells-table": {
+      "type": "Table",
+      "props": {
+        "columns": [
+          "Metric",
+          "Value"
+        ],
+        "rows": [
+          [
+            "Buys",
+            "19"
+          ],
+          [
+            "Sells",
+            "22"
+          ],
+          [
+            "Ratio",
+            "0.86 (prev 0.67)"
+          ]
+        ]
+      }
+    },
+    "whales-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Whales",
+        "value": "6"
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "chart-link": {
+      "type": "Link",
+      "props": {
+        "label": "View chart on GeckoTerminal",
+        "href": "https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209"
+      }
+    }
+  }
+}

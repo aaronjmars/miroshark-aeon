@@ -1,15 +1,11 @@
 {
   "skill": "token-movers",
-  "last_analyzed": "2026-09-08T06:15:09Z",
+  "last_analyzed": "2026-09-09T06:16:54Z",
   "quality_score": 4,
-  "assessment": "Competent market report with transparent methodology, cross-verified sources, and direct alignment with strategy priority #4 (track $MIROSHARK momentum honestly). Routine quiet-day classification is well-reasoned and properly scoped.",
+  "assessment": "Substantive price report with real source data, clear structure, transparent verification, and strategic alignment to Priority 4 (track momentum honestly).",
   "flags": [],
   "avg_score": 4.03,
   "history": [
-    {
-      "date": "2026-08-11",
-      "score": 4
-    },
     {
       "date": "2026-08-12",
       "score": 4
@@ -124,6 +120,10 @@
     },
     {
       "date": "2026-09-08",
+      "score": 4
+    },
+    {
+      "date": "2026-09-09",
       "score": 4
     }
   ]
