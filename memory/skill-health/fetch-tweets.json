@@ -1,15 +1,13 @@
 {
   "skill": "fetch-tweets",
-  "last_analyzed": "2026-09-08T17:12:08Z",
-  "quality_score": 4,
-  "assessment": "Clean, verifiable quiet run with proper log documentation and correct no-notification behavior; honest momentum tracking aligned with strategy priority 4.",
-  "flags": [],
-  "avg_score": 3.57,
+  "last_analyzed": "2026-09-09T17:07:42Z",
+  "quality_score": 1,
+  "assessment": "Incomplete output — skill produced no deliverable result, only a status message awaiting background work.",
+  "flags": [
+    "empty_output"
+  ],
+  "avg_score": 3.47,
   "history": [
-    {
-      "date": "2026-08-10",
-      "score": 4
-    },
     {
       "date": "2026-08-11",
       "score": 4
@@ -125,6 +123,10 @@
     {
       "date": "2026-09-08",
       "score": 4
+    },
+    {
+      "date": "2026-09-09",
+      "score": 1
     }
   ]
 }
