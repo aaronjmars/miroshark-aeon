@@ -125,7 +125,7 @@ echo "twitterapi operator http=$HTTP bytes=$(wc -c </tmp/tw-shiplog-operator.jso
 ```
 On `HTTP=200` with a non-empty `.data.tweets[]`, parse and mark `x_source=twitterapi`:
 ```bash
-jq -r --arg FROM "$SINCE_DATE" '.data.tweets[] | select(.createdAt >= $FROM) | [.id, .author.userName, .text, .url, .createdAt, .likeCount, .retweetCount, .replyCount, .isReply] | @tsv' /tmp/tw-shiplog-operator.json
+jq -r --arg FROM "$SINCE_DATE" '.data.tweets[] | select((try (.createdAt | strptime("%a %b %d %H:%M:%S %z %Y") | strftime("%Y-%m-%d")) catch "0000-00-00") >= $FROM) | [.id, .author.userName, .text, .url, .createdAt, .likeCount, .retweetCount, .replyCount, .isReply] | @tsv' /tmp/tw-shiplog-operator.json
 ```
 
 *Product/project accounts* (`SRC=projects`) - one advanced_search over all product handles, window inside the query via `since:`/`until:`. Build a `(from:h1 OR from:h2 ...)` clause from `$PRODUCT_HANDLES`:

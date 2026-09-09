@@ -241,7 +241,7 @@ Two sub-modes: **single handle** (decision-ready gist of one account) vs. **all 
      ```
      On `HTTP=200` with a non-empty `.data.tweets[]`, parse and mark `source=twitterapi`. Filter on `.createdAt` (drop tweets older than the window) and use `.isReply` to tag reply vs original (this endpoint has no quote flag - treat non-reply as original; if you need reliable quote detection fall back to Path B):
      ```bash
-     jq -r --arg FROM "$FROM_2D" '.data.tweets[] | select(.createdAt >= $FROM) | [.id, .author.userName, .text, .url, .createdAt, .likeCount, .retweetCount, .replyCount, .isReply] | @tsv' /tmp/tw-account.json
+     jq -r --arg FROM "$FROM_2D" '.data.tweets[] | select((try (.createdAt | strptime("%a %b %d %H:%M:%S %z %Y") | strftime("%Y-%m-%d")) catch "0000-00-00") >= $FROM) | [.id, .author.userName, .text, .url, .createdAt, .likeCount, .retweetCount, .replyCount, .isReply] | @tsv' /tmp/tw-account.json
      ```
    - **Path B - xAI Grok x_search (fallback)** (only if Path A returned non-2xx / empty / timeout, or `TWITTER_API_KEY` unset): search this account's recent tweets via Grok's `x_search`.
      ```bash
@@ -312,7 +312,7 @@ Use this to answer "what did *these specific people* post" across a watchlist.
      ```
      On `HTTP=200` with a non-empty `.data.tweets[]`, parse and mark `source=twitterapi`:
      ```bash
-     jq -r --arg FROM "$FROM_3D" '.data.tweets[] | select(.createdAt >= $FROM) | [.id, .author.userName, .text, .url, .createdAt, .likeCount, .retweetCount, .replyCount] | @tsv' /tmp/tw-acct1.json
+     jq -r --arg FROM "$FROM_3D" '.data.tweets[] | select((try (.createdAt | strptime("%a %b %d %H:%M:%S %z %Y") | strftime("%Y-%m-%d")) catch "0000-00-00") >= $FROM) | [.id, .author.userName, .text, .url, .createdAt, .likeCount, .retweetCount, .replyCount] | @tsv' /tmp/tw-acct1.json
      ```
    - **Path B - xAI Grok x_search (fallback)** (only if Path A returned non-2xx / empty / timeout, or `TWITTER_API_KEY` unset):
      ```bash
