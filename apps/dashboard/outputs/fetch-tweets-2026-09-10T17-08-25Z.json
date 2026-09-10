@@ -1,0 +1,119 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Tweet Digest",
+        "description": "2026-09-10"
+      },
+      "children": [
+        "stack_content"
+      ]
+    },
+    "stack_content": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "lg"
+      },
+      "children": [
+        "section1",
+        "sep1",
+        "section2"
+      ]
+    },
+    "section1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading1",
+        "tweet1_stack"
+      ]
+    },
+    "heading1": {
+      "type": "Heading",
+      "props": {
+        "text": "Product ships",
+        "level": "h3"
+      }
+    },
+    "tweet1_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet1",
+        "link1"
+      ]
+    },
+    "tweet1": {
+      "type": "TweetCard",
+      "props": {
+        "author": "MiroShark",
+        "handle": "miroshark_",
+        "text": "ships video generation for your own MiroShark sims 🦈"
+      }
+    },
+    "link1": {
+      "type": "Link",
+      "props": {
+        "label": "link",
+        "href": "https://x.com/miroshark_/status/2098066368880902493"
+      }
+    },
+    "sep1": {
+      "type": "Separator"
+    },
+    "section2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading2",
+        "tweet2_stack"
+      ]
+    },
+    "heading2": {
+      "type": "Heading",
+      "props": {
+        "text": "Research drop",
+        "level": "h3"
+      }
+    },
+    "tweet2_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tweet2",
+        "link2"
+      ]
+    },
+    "tweet2": {
+      "type": "TweetCard",
+      "props": {
+        "author": "MiroShark",
+        "handle": "miroshark_",
+        "text": "publishes \"The Resolver Agent\" — argues synthesis, not debate, is the unsolved step in multi-agent AI, pointing to a July 2026 survey of 141 multi-agent debate studies"
+      }
+    },
+    "link2": {
+      "type": "Link",
+      "props": {
+        "label": "link",
+        "href": "https://x.com/miroshark_/status/2097696195833368671"
+      }
+    }
+  }
+}

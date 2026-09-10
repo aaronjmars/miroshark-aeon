@@ -1,17 +1,11 @@
 {
   "skill": "fetch-tweets",
-  "last_analyzed": "2026-09-09T17:07:42Z",
-  "quality_score": 1,
-  "assessment": "Incomplete output — skill produced no deliverable result, only a status message awaiting background work.",
-  "flags": [
-    "empty_output"
-  ],
+  "last_analyzed": "2026-09-10T17:08:25Z",
+  "quality_score": 4,
+  "assessment": "Completed fetch task successfully with substantive digest, sound deduplication logic, and proper logging; well-aligned to momentum-tracking priority; lacks independent verification of tweet existence but plausible execution details.",
+  "flags": [],
   "avg_score": 3.47,
   "history": [
-    {
-      "date": "2026-08-11",
-      "score": 4
-    },
     {
       "date": "2026-08-12",
       "score": 3
@@ -127,6 +121,10 @@
     {
       "date": "2026-09-09",
       "score": 1
+    },
+    {
+      "date": "2026-09-10",
+      "score": 4
     }
   ]
 }
