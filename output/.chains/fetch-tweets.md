@@ -1,9 +1,6 @@
-ℹ️ Tweet Digest
+*Tweet Digest — 2026-09-11*
 
-*Tweet Digest — 2026-09-10*
-
-*Theme: Product ships*
-@miroshark_: ships video generation for your own MiroShark sims 🦈 — [link](https://x.com/miroshark_/status/2098066368880902493)
-
-*Theme: Research drop*
-@miroshark_: publishes "The Resolver Agent" — argues synthesis, not debate, is the unsolved step in multi-agent AI, pointing to a July 2026 survey of 141 multi-agent debate studies — [link](https://x.com/miroshark_/status/2097696195833368671)
+*Theme: Weekly football match sims*
+@miroshark_: serie a sim kicks off this week's three-league run — [link](https://x.com/miroshark_/status/2098385217891209529)
+@miroshark_: laliga matchday sim, same weekly cadence — [link](https://x.com/miroshark_/status/2098397561090421227)
+@miroshark_: premier league sim closes out the run — [link](https://x.com/miroshark_/status/2098411531381748112)

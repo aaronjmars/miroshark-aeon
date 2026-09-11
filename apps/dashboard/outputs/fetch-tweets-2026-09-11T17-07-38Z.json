@@ -1,0 +1,42 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "Tweet Digest — 2026-09-11",
+        "description": "Theme: Weekly football match sims"
+      },
+      "children": [
+        "tweet-1",
+        "tweet-2",
+        "tweet-3"
+      ]
+    },
+    "tweet-1": {
+      "type": "TweetCard",
+      "props": {
+        "author": "miroshark_",
+        "handle": "@miroshark_",
+        "text": "serie a sim kicks off this week's three-league run — [link](https://x.com/miroshark_/status/2098385217891209529)"
+      }
+    },
+    "tweet-2": {
+      "type": "TweetCard",
+      "props": {
+        "author": "miroshark_",
+        "handle": "@miroshark_",
+        "text": "laliga matchday sim, same weekly cadence — [link](https://x.com/miroshark_/status/2098397561090421227)"
+      }
+    },
+    "tweet-3": {
+      "type": "TweetCard",
+      "props": {
+        "author": "miroshark_",
+        "handle": "@miroshark_",
+        "text": "premier league sim closes out the run — [link](https://x.com/miroshark_/status/2098411531381748112)"
+      }
+    }
+  }
+}
