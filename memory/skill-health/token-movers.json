@@ -1,15 +1,11 @@
 {
   "skill": "token-movers",
-  "last_analyzed": "2026-09-11T06:16:01Z",
+  "last_analyzed": "2026-09-12T06:15:39Z",
   "quality_score": 4,
-  "assessment": "Well-structured, transparent price report tracking $MIROSHARK momentum; aligns to Priority 4 (track honestly), handles data gaps gracefully, all claims verifiable.",
+  "assessment": "Substantive monitoring report with specific, sourced metrics; transparent about source failures; clear verdict and actionable momentum data aligned to strategy priority #4",
   "flags": [],
   "avg_score": 4.03,
   "history": [
-    {
-      "date": "2026-08-14",
-      "score": 4
-    },
     {
       "date": "2026-08-15",
       "score": 4
@@ -124,6 +120,10 @@
     },
     {
       "date": "2026-09-11",
+      "score": 4
+    },
+    {
+      "date": "2026-09-12",
       "score": 4
     }
   ]

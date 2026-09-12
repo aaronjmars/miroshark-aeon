@@ -1,0 +1,155 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Token Report"
+      },
+      "children": [
+        "heading_token",
+        "text_description",
+        "sep1",
+        "heading_metrics",
+        "stack_price_metrics",
+        "heading_activity",
+        "table_activity",
+        "text_whales",
+        "sep2",
+        "link_chart"
+      ]
+    },
+    "heading_token": {
+      "type": "Heading",
+      "props": {
+        "text": "$MIROSHARK — CONSOLIDATING",
+        "level": "h2"
+      },
+      "children": []
+    },
+    "text_description": {
+      "type": "Text",
+      "props": {
+        "text": "Gave back yesterday's +6.1% bounce, sliding 3.8% on just 0.71x average volume — no breakout/breakdown or accumulation trigger clears.",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "heading_metrics": {
+      "type": "Heading",
+      "props": {
+        "text": "Market Metrics",
+        "level": "h4"
+      },
+      "children": []
+    },
+    "stack_price_metrics": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stat_price",
+        "stat_liq",
+        "stat_vol"
+      ]
+    },
+    "stat_price": {
+      "type": "Stat",
+      "props": {
+        "label": "Price (24h)",
+        "value": "$0.0000024702",
+        "delta": "−3.8%",
+        "trend": "down"
+      },
+      "children": []
+    },
+    "stat_liq": {
+      "type": "Stat",
+      "props": {
+        "label": "Liquidity",
+        "value": "$292.1K",
+        "delta": "−2.1%",
+        "trend": "down"
+      },
+      "children": []
+    },
+    "stat_vol": {
+      "type": "Stat",
+      "props": {
+        "label": "24h Volume",
+        "value": "$6.6K",
+        "delta": "0.71x 7d avg"
+      },
+      "children": []
+    },
+    "heading_activity": {
+      "type": "Heading",
+      "props": {
+        "text": "Activity & Whales",
+        "level": "h4"
+      },
+      "children": []
+    },
+    "table_activity": {
+      "type": "Table",
+      "props": {
+        "columns": [
+          "Metric",
+          "Current",
+          "Previous"
+        ],
+        "rows": [
+          [
+            "Buys",
+            "17",
+            "—"
+          ],
+          [
+            "Sells",
+            "23",
+            "—"
+          ],
+          [
+            "Buy/Sell Ratio",
+            "0.74",
+            "2.31"
+          ]
+        ]
+      },
+      "children": []
+    },
+    "text_whales": {
+      "type": "Text",
+      "props": {
+        "text": "Whales: 1 (sell $1.02K)",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "link_chart": {
+      "type": "Link",
+      "props": {
+        "label": "View full chart on GeckoTerminal",
+        "href": "https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209"
+      },
+      "children": []
+    }
+  }
+}
