@@ -1,15 +1,11 @@
 {
   "skill": "fetch-tweets",
-  "last_analyzed": "2026-09-11T17:07:38Z",
-  "quality_score": 4,
-  "assessment": "Successfully fetched and deduplicated tweets from @miroshark_, identified weekly 3-league sim cadence, aligned to priority 4 (track momentum), but lacked synthesis linking output to north-star metrics or follow-up actions.",
+  "last_analyzed": "2026-09-12T17:07:03Z",
+  "quality_score": 3,
+  "assessment": "Skill executed competently with transparent methodology, verifiable deduplication logic, and proper logging; found 1 new signal but vague and low strategic value",
   "flags": [],
-  "avg_score": 3.5,
+  "avg_score": 3.47,
   "history": [
-    {
-      "date": "2026-08-13",
-      "score": 4
-    },
     {
       "date": "2026-08-14",
       "score": 4
@@ -125,6 +121,10 @@
     {
       "date": "2026-09-11",
       "score": 4
+    },
+    {
+      "date": "2026-09-12",
+      "score": 3
     }
   ]
 }

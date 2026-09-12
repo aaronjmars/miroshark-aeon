@@ -1,0 +1,54 @@
+{
+  "root": "card-root",
+  "state": {},
+  "elements": {
+    "card-root": {
+      "type": "Card",
+      "props": {
+        "title": "Tweet Digest — 2026-09-12"
+      },
+      "children": [
+        "theme-badge",
+        "separator",
+        "tweets-stack"
+      ]
+    },
+    "theme-badge": {
+      "type": "Badge",
+      "props": {
+        "text": "x402aff adoption",
+        "variant": "secondary"
+      }
+    },
+    "separator": {
+      "type": "Separator",
+      "props": {}
+    },
+    "tweets-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "tweet-card",
+        "tweet-link"
+      ]
+    },
+    "tweet-card": {
+      "type": "TweetCard",
+      "props": {
+        "author": "MiroShark",
+        "handle": "miroshark_",
+        "text": "says projects are starting to adopt the x402aff standard — no specifics named yet"
+      }
+    },
+    "tweet-link": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/miroshark_/status/2098636629560774908"
+      }
+    }
+  }
+}
