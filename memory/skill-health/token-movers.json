@@ -1,15 +1,11 @@
 {
   "skill": "token-movers",
-  "last_analyzed": "2026-09-12T06:15:39Z",
+  "last_analyzed": "2026-09-13T06:18:36Z",
   "quality_score": 4,
-  "assessment": "Substantive monitoring report with specific, sourced metrics; transparent about source failures; clear verdict and actionable momentum data aligned to strategy priority #4",
+  "assessment": "Substantive, well-sourced token report with specific verifiable metrics (price, volume, buy/sell ratios) and nuanced analysis (low-conviction bounce despite positive price move); directly serves Priority #4 (track momentum honestly) with public traces and no unverifiable claims, but limited actionability beyond sentiment tracking.",
   "flags": [],
   "avg_score": 4.03,
   "history": [
-    {
-      "date": "2026-08-15",
-      "score": 4
-    },
     {
       "date": "2026-08-16",
       "score": 3
@@ -124,6 +120,10 @@
     },
     {
       "date": "2026-09-12",
+      "score": 4
+    },
+    {
+      "date": "2026-09-13",
       "score": 4
     }
   ]
