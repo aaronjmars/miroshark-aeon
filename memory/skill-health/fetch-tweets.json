@@ -1,15 +1,11 @@
 {
   "skill": "fetch-tweets",
-  "last_analyzed": "2026-09-12T17:07:03Z",
-  "quality_score": 3,
-  "assessment": "Skill executed competently with transparent methodology, verifiable deduplication logic, and proper logging; found 1 new signal but vague and low strategic value",
+  "last_analyzed": "2026-09-13T17:06:39Z",
+  "quality_score": 4,
+  "assessment": "Well-executed monitoring task — correctly fetched tweets, documented deduplication logic, and properly applied the no-signal rule by not notifying; substantive and verifiable but inherently low-impact (account quiet).",
   "flags": [],
   "avg_score": 3.47,
   "history": [
-    {
-      "date": "2026-08-14",
-      "score": 4
-    },
     {
       "date": "2026-08-15",
       "score": 4
@@ -125,6 +121,10 @@
     {
       "date": "2026-09-12",
       "score": 3
+    },
+    {
+      "date": "2026-09-13",
+      "score": 4
     }
   ]
 }
