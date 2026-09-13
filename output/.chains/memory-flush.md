@@ -1,15 +1,17 @@
-Memory flush complete for the 2026-08-30 → 2026-09-06 window.
+The stamp confirms `Last consolidated: 2026-09-13`. Memory flush is complete.
 
 ## Summary
 
+Ran memory-flush for the 2026-09-06→2026-09-13 window (8 daily logs; no Monday-cadence skills fired in this window, so repo-pulse/holdings/changelog/shiplog/aeon-update data stayed as-is).
+
 **Promoted to `memory/MEMORY.md`:**
-- `aeon-update` Skills Built row updated: sync now through PR #169 (`bf33365`) via PR #161 (`3b4c5a3`, both merged 09-04) — new `cortx-reliability` skill (not enabled), eyebrow lock gate → v0.4.2, pending conflicts 9→12 (verified against `aeon-update-state.json`).
-- 2 new Lessons Learned: GLM-gateway fallback on Claude-subscription exhaustion (and its own intermittent flakiness), and eyebrowlock v0.4.2's stricter drift-detection behavior.
-- $MIROSHARK Active Target refreshed to 09-06 figures with the full 08-31→09-06 price arc (outage-day drop, breakout round-trip, brief bounce, fade).
-- 2 new Recent Digests rows (09-04 weekly sim cadence, 08-31 x402aff recap + organic press pickup).
+- Active Targets: full $MIROSHARK price arc for the week — bleed 09-06→09-09 → 09-10 RALLYING +6.1% (coincided with @miroshark_'s first posts since 09-04) → fade 09-11/09-12 → sharp +10.6% reversal 09-13. Headline stats refreshed to 09-13 ($0.000002731, liq $306.1K). Flagged 2 consecutive x_search timeouts (09-11, 09-12) as a watch item.
+- Recent Digests: new row for @miroshark_'s tweet activity resuming after a 6-day silence — product/research posts, weekly 3-league match-sim series, x402aff adoption post.
 
-**Pruned:** none needed — no open improvement PRs, no stale entries found. No table overflow (Recent Digests 10 rows, Skills Built 11 rows).
+**Pruned:** nothing — 0 open PRs (both repos, incl. `improve:` search), no stale Lessons/Active Targets/Next Priorities entries.
 
-**Files modified:** `memory/MEMORY.md`, `memory/logs/2026-09-06.md` (run log appended), `memory/memory-flush-state.json` (watermark stamped to 2026-09-06).
+**No overflow:** Recent Digests now 12 rows, Skills Built 11 rows, both under the archive threshold.
 
-Follow-up: none required — repo-pulse/holdings/shiplog/changelog weeklies are due 09-07 and will feed the next flush.
+**Files touched:** `memory/MEMORY.md`, `memory/logs/2026-09-13.md` (added the flush log entry), `memory/memory-flush-state.json` (watermark stamped to 2026-09-13).
+
+**Follow-up:** none required — next Monday-cadence batch (repo-pulse, holdings, changelog, shiplog, aeon-update) is due 2026-09-14.
