@@ -26,6 +26,7 @@ metadata:
 > - `resubmit:vercel/next.js` → probe just that repo (one-off)
 > - `disclose` (alias `email`) → arm & queue eligible disclosure emails
 > - `poc-smoke` → exercise the PoC gate against a benign real Base fork (no audit or disclosure)
+> - `riva:owner/repo` → scan with the Riva research kernel (shadow/proposal only)
 
 Today is ${today}. Read `memory/MEMORY.md` and the last 30 days of `memory/logs/` before starting.
 
@@ -50,10 +51,19 @@ case "$ACTION" in
   resubmit|watchlist|pvr)   ARM="resubmit" ;;            # → Arm B
   disclose|email)           ARM="disclose" ;;            # → Arm C
   poc-smoke|verify-gate)    ARM="poc-smoke" ;;           # → Arm D
+  riva|research)            ARM="scan"; KERNEL="riva" ;; # → Arm A, Riva kernel
+  shadow|compare)           ARM="scan"; KERNEL="shadow" ;; # → Arm A, private comparison
   ""|scan)                  ARM="scan" ;;                # → Arm A (auto-select if TARGET empty)
   */*)                      ARM="scan"; TARGET="$SEL" ;; # bare owner/repo → scan that repo
   *)                        ARM="scan" ;;                # unknown → default to scan
 esac
+
+# Legacy remains the safe default while Riva is evaluated. `shadow` produces a
+# private comparison artifact; only an explicit `riva` selector or a reviewed
+# environment override selects it for a scan. Neither mode changes disclosure
+# authority or bypasses A4/A4.5.
+KERNEL="${KERNEL:-${VULN_RESEARCH_KERNEL:-legacy}}"
+case "$KERNEL" in legacy|shadow|riva) ;; *) KERNEL="legacy" ;; esac
 ```
 
 - `ARM=scan` → **Arm A — SCAN** (target = `$TARGET`, or auto-select if empty).
@@ -75,12 +85,28 @@ If `$TARGET` is set, use it. Otherwise:
 
 ```bash
 # Prefer chained output from github-trending skill
+CANDS=""
 if [ -s output/.chains/github-trending.md ]; then
-  # parse owner/repo lines; pick first that matches criteria below
-  :
-else
-  gh api "search/repositories?q=created:>$(date -u -d '14 days ago' +%Y-%m-%d)&sort=stars&order=desc&per_page=25" \
-    --jq '.items[] | select(.fork==false) | select(.stargazers_count>=50) | {full_name, language, description, security_and_analysis}'
+  # Parse owner/repo targets. Accept BOTH the markdown form [owner/repo](url) and a
+  # bare github.com/owner/repo permalink (a feeder degraded under read-only can emit
+  # the latter). A repo name with no owner is NOT a candidate. Pick the first CANDS
+  # entry that matches the criteria below.
+  CANDS=$(grep -oE '\[[^]]+/[^]]+\]\(https?://[^)]+\)|https?://github\.com/[^/ )]+/[^/ )]+' output/.chains/github-trending.md \
+    | sed -E 's#.*github\.com/##; s#\).*##; s#^\[##; s#\].*##' | grep -E '^[^/ ]+/[^/ ]+$' | sort -u)
+fi
+# If the feed was absent OR present-but-unparseable (zero owner/repo lines, e.g. a
+# header-only / prose-only notify body), do NOT stop here - that starves the scan.
+if [ -z "$CANDS" ]; then
+  # Shadow runs have no GitHub credentials by design. A bare shadow selector
+  # may consume the chained trending output above, but otherwise must fail
+  # closed and be retried as shadow:owner/repo.
+  if [ "$KERNEL" = shadow ]; then
+    echo "VULN_SCANNER_SKIPPED shadow-target-required: use shadow:owner/repo or provide github-trending chain output"
+    exit 0
+  else
+    gh api "search/repositories?q=created:>$(date -u -d '14 days ago' +%Y-%m-%d)&sort=stars&order=desc&per_page=25" \
+      --jq '.items[] | select(.fork==false) | select(.stargazers_count>=50) | {full_name, language, description, security_and_analysis}'
+  fi
 fi
 ```
 
@@ -96,7 +122,11 @@ Selection criteria:
 
 ```bash
 REPO="owner/repo"
-gh repo fork "$REPO" --clone --default-branch-only -- --depth 200 --quiet
+if [ "$KERNEL" = shadow ]; then
+  git clone --depth 200 --quiet "https://github.com/${REPO}.git"
+else
+  gh repo fork "$REPO" --clone --default-branch-only -- --depth 200 --quiet
+fi
 cd "$(basename "$REPO")"
 ```
 
@@ -140,9 +170,14 @@ fi
 
 # --- Secrets: TruffleHog (only-verified = actually authenticates) ---
 if command -v trufflehog >/dev/null 2>&1; then
+  # BOTH passes are bounded. Run these verbatim; if you invoke trufflehog (or any
+  # scanner) yourself, it still needs the `timeout 300` wrapper and must not be
+  # backgrounded with `&` — a scan still running when you write the report is a
+  # scan you did not finish, and a one-shot workflow_dispatch run cannot resume it.
   TRUFFLEHOG_RC=0
-  trufflehog filesystem . --only-verified --json \
+  timeout 300 trufflehog filesystem . --only-verified --json \
     > /tmp/vuln-scan/trufflehog.json 2>/dev/null || TRUFFLEHOG_RC=$?
+  [ "$TRUFFLEHOG_RC" = 124 ] && echo "VULN_SCANNER_TIMEOUT: trufflehog filesystem scan exceeded 300s on a very large tree — recorded as fail, not retried, not left unfinished"
   # Also scan full git history for secrets — BOUNDED. An unbounded `trufflehog git`
   # walks every commit's every tree, and a large packed history (measured: 200
   # commits / ~369MB on one real run) can eat the whole turn budget by itself,
@@ -193,7 +228,11 @@ fi
 # Record what succeeded (empty output ≠ clean, could be tool failure)
 echo "semgrep=$([ -s /tmp/vuln-scan/semgrep.json ] && echo ok || echo fail)" >  /tmp/vuln-scan/sources.txt
 # TruffleHog JSON is finding-only: an exit-0 empty stream is a clean scan.
-echo "trufflehog=$([ "${TRUFFLEHOG_RC:-1}" = 0 ] && echo ok || echo fail)" >> /tmp/vuln-scan/sources.txt
+if [ "${TRUFFLEHOG_RC:-1}" = 124 ]; then
+  echo "trufflehog=timeout"                                               >> /tmp/vuln-scan/sources.txt
+else
+  echo "trufflehog=$([ "${TRUFFLEHOG_RC:-1}" = 0 ] && echo ok || echo fail)" >> /tmp/vuln-scan/sources.txt
+fi
 # Recorded separately from the filesystem pass above: they can genuinely diverge
 # (filesystem scan clean and fast, git-history scan timed out on a large packed
 # repo, or vice versa) and collapsing both into one trufflehog= line hides
@@ -299,6 +338,32 @@ different things, and they route differently:
    same as a scanner false positive.
 
 ### A3.6. Agentic logic audit (what SAST and fuzzing both miss)
+
+For `KERNEL=riva` or `KERNEL=shadow`, load `skills/vuln-scanner/riva.md` as the
+focused research kernel. In `shadow`, produce a private comparison artifact
+and leave legacy routing authoritative. In `riva`, Riva supplies the
+threat-model, invariant, slice, and bounded exploration contract; this skill
+remains authoritative for tool execution, triage, PoC verification,
+disclosure, and persistence. Do not load disclosure or lifecycle instructions
+while doing the Riva code-exploration pass. With `KERNEL=legacy`, follow the
+existing A3.6 procedure unchanged.
+
+Before the Riva pass, build the compact target dossier from the Aeon checkout
+(the current working directory may still be the target clone):
+
+```bash
+RIVA_REPO="$PWD"
+cd "${GITHUB_WORKSPACE:-$(git rev-parse --show-toplevel)}"
+./scripts/build-vuln-context.sh --repo "$RIVA_REPO" \
+  --out /tmp/vuln-scan/riva-context.json \
+  --history "${GITHUB_WORKSPACE:-$(git rev-parse --show-toplevel)}/memory/vuln-scanned.json"
+cd "$RIVA_REPO"
+```
+
+Read only `/tmp/vuln-scan/riva-context.json` plus the selected code slice during
+the Riva exploration pass. In `KERNEL=shadow`, write Riva's private candidate
+and coverage comparison to `/tmp/vuln-scan/riva-shadow.json`; do not route it
+to PVR, email, or a public PR. The legacy candidate set remains authoritative.
 
 Semgrep matches syntactic patterns and has weak dataflow reachability on custom code; fuzzing (A3.5) only reaches what a harness already drives. Both are blind to **authorization, business-logic, and multi-step trust-boundary** bugs. That whole class is what an agentic reviewer catches - and here **you are the agentic scanner**. Do the source-to-sink reasoning the tools can't, over this repo's real entrypoints. This pass runs on every scan (unlike A3.5, which only fires when the repo ships a fuzz harness) and produces *candidates*, not verdicts - everything still goes through A4 triage (the model surfacing a finding is not evidence it is real).
 
@@ -476,6 +541,11 @@ evidence against the claim, not an obstacle to work around.
   Assign Medium only when the independently supported impact really is Medium.
 
 ### A5. Route each finding to the correct disclosure channel
+
+If `KERNEL=shadow`, do not execute A5's write actions. Record the legacy and
+Riva candidate sets, triage differences, and verification differences in the
+private shadow artifact, then continue to A6–A8 with `channel: shadow` and no
+PVR, email, issue, or public-PR side effect. Shadow mode is comparison-only.
 
 This is the core of the scan arm. Pick the channel by finding type:
 
@@ -657,15 +727,15 @@ Use `./notify`. One paragraph. Lead with the verdict.
 *Vuln Scanner — <repo>*
 <N> confirmed findings (<severity-summary>).
 Disclosed via: <PVR: advisory #123 | public PR #45 | skipped (no channel)>
-Scanners: semgrep=<ok|fail>, trufflehog=<ok|fail>, trufflehog-git=<ok|fail|timeout>, osv=<ok|fail>, fuzz=<ok|fail|skip>. PoC gate: <verified|not-required|needs-verification>.
+Scanners: semgrep=<ok|fail>, trufflehog=<ok|fail|timeout>, trufflehog-git=<ok|fail|timeout>, osv=<ok|fail>, fuzz=<ok|fail|skip>. PoC gate: <verified|not-required|needs-verification>.
 ```
 
-`trufflehog-git=timeout` must always be spelled out here, never folded into a plain `trufflehog=ok` — a clean filesystem pass and a timed-out history pass are different facts, and this is the durable line an operator actually reads. Silently dropping the git-history state here reproduces the exact masking this field exists to prevent.
+`trufflehog=timeout` and `trufflehog-git=timeout` must each always be spelled out here, never folded into a plain `ok` — a clean pass and a timed-out one are different facts, and this is the durable line an operator actually reads. Silently dropping a timed-out state reproduces the exact masking this field exists to prevent.
 
 If no findings were confirmed (choose clean or limited according to actual coverage):
 ```
 *Vuln Scanner — <repo>*
-<Clean audit | Limited audit — name incomplete passes>. <M> candidates reviewed, 0 confirmed. Scanners: semgrep=<ok|fail>, trufflehog=<ok|fail>, trufflehog-git=<ok|fail|timeout>, osv=<ok|fail|none|skipped>, fuzz=<ok|fail|skip>, agentic=<ok|skipped>.
+<Clean audit | Limited audit — name incomplete passes>. <M> candidates reviewed, 0 confirmed. Scanners: semgrep=<ok|fail>, trufflehog=<ok|fail|timeout>, trufflehog-git=<ok|fail|timeout>, osv=<ok|fail|none|skipped>, fuzz=<ok|fail|skip>, agentic=<ok|skipped>.
 ```
 
 Then log per the **Log** section below with `Mode: scan`.
@@ -1027,7 +1097,7 @@ specific bullets.
 - Candidates: N | Confirmed: M
 - Channels used: PVR (x), public PR (y), skipped (z)
 - Prior-art check: N candidates checked, 0 matches | matched #123 → skipped/commented
-- Scanner status: semgrep=ok|fail trufflehog=ok|fail trufflehog-git=ok|fail|timeout osv=ok|fail|none|skipped fuzz=ok|fail|skip agentic=ok|skip poc=verified|not-required|needs-verification
+- Scanner status: semgrep=ok|fail trufflehog=ok|fail|timeout trufflehog-git=ok|fail|timeout osv=ok|fail|none|skipped fuzz=ok|fail|skip agentic=ok|skip poc=verified|not-required|needs-verification
 - Advisory/PR links: [...]
 ```
 
