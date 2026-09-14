@@ -432,7 +432,7 @@ jobs:
             echo "CHAIN_STATUS=failed" >> "$GITHUB_ENV"
           elif [ "$CHAIN_NO_ACTION" = "true" ]; then
             echo "Chain '$CHAIN' completed without a review: feature produced no verified PR"
-            echo "CHAIN_STATUS=success" >> "$GITHUB_ENV"
+            echo "CHAIN_STATUS=no-action" >> "$GITHUB_ENV"
           else
             echo "Chain '$CHAIN' completed successfully"
             echo "CHAIN_STATUS=success" >> "$GITHUB_ENV"
@@ -454,13 +454,15 @@ jobs:
           NOW_ISO=$(date -u +%FT%TZ)
           STATUS="${CHAIN_STATUS:-failed}"
 
-          # A rejected malformed dispatch (see the target guards above) never
-          # started a real run — recording it would corrupt the chain's lifetime
-          # success-rate signal skill-health reads. The job itself still fails (this
-          # step running under `if: always()` doesn't change that); only the
-          # reliability bookkeeping is skipped.
-          if [ "$STATUS" = "invalid-dispatch" ]; then
-            echo "Chain '$CHAIN' was rejected before any skill ran (missing/invalid target) — not recording as a functional failure"
+          # Invalid dispatch never started a real run; no-action completed but
+          # produced no verified PR. Neither is functional success or failure,
+          # so exclude both from the lifetime ratio skill-health reads.
+          if [ "$STATUS" = "invalid-dispatch" ] || [ "$STATUS" = "no-action" ]; then
+            if [ "$STATUS" = "invalid-dispatch" ]; then
+              echo "Chain '$CHAIN' was rejected before any skill ran (missing/invalid target) — not recording as a functional failure"
+            else
+              echo "Chain '$CHAIN' completed with no verified PR — not recording as a functional success or failure"
+            fi
             exit 0
           fi
 
