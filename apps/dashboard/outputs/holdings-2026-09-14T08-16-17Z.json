@@ -1,0 +1,80 @@
+{
+  "root": "card_holdings",
+  "state": {},
+  "elements": {
+    "card_holdings": {
+      "type": "Card",
+      "props": {
+        "title": "Holdings",
+        "description": "Holdings — MiroShark"
+      },
+      "children": [
+        "stat_main",
+        "text_supply",
+        "separator_1",
+        "stack_changes",
+        "link_article"
+      ]
+    },
+    "stat_main": {
+      "type": "Stat",
+      "props": {
+        "value": "12.03B"
+      },
+      "children": []
+    },
+    "text_supply": {
+      "type": "Text",
+      "props": {
+        "text": "12.03% of supply"
+      },
+      "children": []
+    },
+    "separator_1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "stack_changes": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stat_7d",
+        "stat_30d"
+      ]
+    },
+    "stat_7d": {
+      "type": "Stat",
+      "props": {
+        "label": "7d",
+        "value": "+85.22M",
+        "delta": "+0.71%",
+        "trend": "up"
+      },
+      "children": []
+    },
+    "stat_30d": {
+      "type": "Stat",
+      "props": {
+        "label": "30d",
+        "value": "+900.39M",
+        "delta": "+8.09%",
+        "trend": "up"
+      },
+      "children": []
+    },
+    "link_article": {
+      "type": "Link",
+      "props": {
+        "label": "View article",
+        "href": "output/articles/holdings-2026-09-14.md"
+      },
+      "children": []
+    }
+  }
+}
