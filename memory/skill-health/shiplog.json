@@ -1,10 +1,10 @@
 {
   "skill": "shiplog",
-  "last_analyzed": "2026-09-07T09:35:09Z",
+  "last_analyzed": "2026-09-14T09:17:42Z",
   "quality_score": 4,
-  "assessment": "Substantive, verifiable momentum report with specific metrics (272 PRs, +2 stars, −1 forks) and key finding: public engine repo idle while private companion delivered 43 PRs of real work—flags strategic split for operator review; minor: X fetch timeout persists but didn't block output.",
+  "assessment": "Substantive weekly digest tracking all three north-star metrics (stars +1, forks +1, token price), honest momentum signal (flags deceleration), highlights ecosystem growth (x402aff integration), reports shipping progress (video export, Monad, 53 PRs merged) with verifiable specifics and clear structure aligned to strategy priorities.",
   "flags": [],
-  "avg_score": 4.18,
+  "avg_score": 4.17,
   "history": [
     {
       "date": "2026-06-15",
@@ -72,6 +72,10 @@
     },
     {
       "date": "2026-09-07",
+      "score": 4
+    },
+    {
+      "date": "2026-09-14",
       "score": 4
     }
   ]

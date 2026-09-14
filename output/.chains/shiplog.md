@@ -1,21 +1,25 @@
-ℹ️ Shiplog: Aug 31 → Sep 7
+ℹ️ Shiplog — Sep 7 → 14
 
-miroshark ⭐🦈 shiplog aug 31 → sep 7
+miroshark ⭐🦈 shiplog sep 7 → sep 14
 
-264 PRs merged this window, across 34 repos. the bytes:
+53 PRs merged across the engine + companions this window. the bytes:
 
-- public engine repo merged 3 PRs. all dependency bumps. 0 engine code. 4th straight week like this
-- but the actual sim work didn't stop — it just moved. 43 PRs into the private companion repo: prompt caching revived across gemini+deepseek, react iteration caps, invalid-action attribution, neo4j boot-resilience
-- x402aff merged the CDP SDK cleanup + has a PR open to get listed in x402 foundation's own docs (pending)
-- security: nvidia PR (bind-to-localhost fix) closed unmerged. no external merge to flex this window
+- you can now export a miroshark sim as a video. shipped + announced same day
+- @thecultos integrated x402aff — sims listed in their x402 catalog, payable in usdc on base via mcp. first real outside adopter of the standard
+- x402 payments: added monad as a 3rd chain
+- public engine repo: 3 PRs (2 deps + 1 real fix — a recurring threadpool locale bug, caught this time by a new external contributor, AmirF194)
+- security: nothing to flex this window — the x402 foundation docs-listing PR from last week closed unmerged
 
 traction:
-- miroshark 1,448 ⭐ (+2 this window — well off last week's +9 pace)
-- forks 298 (−1, first dip we've tracked)
-- @miroshark_ kept the weekly matchday cadence going: prem + laliga sims
+- miroshark 1,449 ⭐ (+1) — 2nd straight near-flat week, well off the ~4/week pace
+- forks 299 (+1, recovered last week's first-ever dip)
+- @miroshark_ directly asked for stars this week. fair, given the number above
+- weekly serie a / laliga / premier league sims kept running, 4th week straight
 
-the public repo is the one collecting stars. it's also the one going quiet. that gap is the thing to watch.
+the shipping isn't the problem. the stars aren't moving with it.
 
-⭐
+⭐🦈
 
-https://github.com/aaronjmars/miroshark-aeon/blob/main/output/articles/shiplog-2026-09-07.md
+Article: https://github.com/aaronjmars/miroshark-aeon/blob/main/output/articles/shiplog-2026-09-14.md
+
+🔗 https://github.com/aaronjmars/miroshark-aeon/blob/main/output/articles/shiplog-2026-09-14.md

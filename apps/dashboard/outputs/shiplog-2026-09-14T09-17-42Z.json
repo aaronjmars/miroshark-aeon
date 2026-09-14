@@ -1,0 +1,184 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Shiplog — Sep 7 → 14",
+        "description": "miroshark ⭐🦈 weekly shipping report"
+      },
+      "children": [
+        "stack_main"
+      ]
+    },
+    "stack_main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading_shipping",
+        "text_prs_merged",
+        "stack_accomplishments",
+        "separator_1",
+        "heading_traction",
+        "stack_metrics",
+        "separator_2",
+        "text_insight",
+        "link_article"
+      ]
+    },
+    "heading_shipping": {
+      "type": "Heading",
+      "props": {
+        "text": "Shipping this window",
+        "level": "h2"
+      }
+    },
+    "text_prs_merged": {
+      "type": "Text",
+      "props": {
+        "text": "53 PRs merged across the engine + companions",
+        "variant": "lead"
+      }
+    },
+    "stack_accomplishments": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "item_video_export",
+        "item_x402",
+        "item_monad",
+        "item_engine_prs",
+        "item_security"
+      ]
+    },
+    "item_video_export": {
+      "type": "Text",
+      "props": {
+        "text": "You can now export a miroshark sim as a video. Shipped + announced same day"
+      }
+    },
+    "item_x402": {
+      "type": "Text",
+      "props": {
+        "text": "@thecultos integrated x402aff — sims listed in their x402 catalog, payable in USDC on Base via MCP. First real outside adopter of the standard"
+      }
+    },
+    "item_monad": {
+      "type": "Text",
+      "props": {
+        "text": "x402 payments: added Monad as a 3rd chain"
+      }
+    },
+    "item_engine_prs": {
+      "type": "Text",
+      "props": {
+        "text": "Public engine repo: 3 PRs (2 deps + 1 real fix — a recurring threadpool locale bug, caught this time by a new external contributor, AmirF194)"
+      }
+    },
+    "item_security": {
+      "type": "Text",
+      "props": {
+        "text": "Security: x402 foundation docs-listing PR from last week closed unmerged"
+      }
+    },
+    "separator_1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading_traction": {
+      "type": "Heading",
+      "props": {
+        "text": "Traction",
+        "level": "h2"
+      }
+    },
+    "stack_metrics": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stat_stars",
+        "text_stars_context",
+        "stat_forks",
+        "text_forks_context",
+        "text_stars_direct",
+        "text_sims_running"
+      ]
+    },
+    "stat_stars": {
+      "type": "Stat",
+      "props": {
+        "label": "miroshark ⭐",
+        "value": "1,449",
+        "delta": "+1",
+        "trend": "neutral"
+      }
+    },
+    "text_stars_context": {
+      "type": "Text",
+      "props": {
+        "text": "2nd straight near-flat week, well off the ~4/week pace",
+        "variant": "caption"
+      }
+    },
+    "stat_forks": {
+      "type": "Stat",
+      "props": {
+        "label": "forks",
+        "value": "299",
+        "delta": "+1",
+        "trend": "up"
+      }
+    },
+    "text_forks_context": {
+      "type": "Text",
+      "props": {
+        "text": "Recovered last week's first-ever dip",
+        "variant": "caption"
+      }
+    },
+    "text_stars_direct": {
+      "type": "Text",
+      "props": {
+        "text": "@miroshark_ directly asked for stars this week. Fair, given the number above"
+      }
+    },
+    "text_sims_running": {
+      "type": "Text",
+      "props": {
+        "text": "Weekly serie a / laliga / premier league sims kept running, 4th week straight"
+      }
+    },
+    "separator_2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "text_insight": {
+      "type": "Text",
+      "props": {
+        "text": "The shipping isn't the problem. The stars aren't moving with it.",
+        "variant": "lead"
+      }
+    },
+    "link_article": {
+      "type": "Link",
+      "props": {
+        "label": "Full shiplog article on GitHub",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/output/articles/shiplog-2026-09-14.md"
+      }
+    }
+  }
+}
