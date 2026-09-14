@@ -1,0 +1,83 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Changelog synced",
+        "description": "Changelog (push-to) — 2026-09-14"
+      },
+      "children": [
+        "stack_content"
+      ]
+    },
+    "stack_content": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "text_repos",
+        "separator1",
+        "text_operation",
+        "text_entry",
+        "stack_pr"
+      ]
+    },
+    "text_repos": {
+      "type": "Text",
+      "props": {
+        "text": "MiroShark/MiroShark → aaronjmars/miroshark-website",
+        "variant": "body"
+      }
+    },
+    "separator1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "text_operation": {
+      "type": "Text",
+      "props": {
+        "text": "3 new PRs → changelog entry",
+        "variant": "body"
+      }
+    },
+    "text_entry": {
+      "type": "Text",
+      "props": {
+        "text": "Graph ingestion locale fix + dependency upkeep",
+        "variant": "lead"
+      }
+    },
+    "stack_pr": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "story_pr",
+        "badge_draft"
+      ]
+    },
+    "story_pr": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #336",
+        "href": "https://github.com/aaronjmars/miroshark-website/pull/336",
+        "source": "aaronjmars/miroshark-website"
+      }
+    },
+    "badge_draft": {
+      "type": "Badge",
+      "props": {
+        "text": "Draft",
+        "variant": "outline"
+      }
+    }
+  }
+}
