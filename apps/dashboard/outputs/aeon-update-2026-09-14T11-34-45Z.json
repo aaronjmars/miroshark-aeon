@@ -1,0 +1,231 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "aeon-update: PR #180",
+        "description": "Synced 25 commits from upstream"
+      },
+      "children": [
+        "date-text",
+        "sync-status",
+        "separator-1",
+        "stats-section",
+        "separator-2",
+        "applied-section",
+        "separator-3",
+        "held-section",
+        "separator-4",
+        "notes-section",
+        "pr-link"
+      ]
+    },
+    "date-text": {
+      "type": "Text",
+      "props": {
+        "text": "aeon-update — 2026-09-14",
+        "variant": "lead"
+      }
+    },
+    "sync-status": {
+      "type": "Text",
+      "props": {
+        "text": "Upstream aeonfun/aeon was 25 commits ahead (21b82db..95142d1)"
+      }
+    },
+    "separator-1": {
+      "type": "Separator"
+    },
+    "stats-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "stat-clean",
+        "stat-held"
+      ]
+    },
+    "stat-clean": {
+      "type": "Stat",
+      "props": {
+        "label": "Files clean",
+        "value": "43"
+      }
+    },
+    "stat-held": {
+      "type": "Stat",
+      "props": {
+        "label": "Files held for manual pass",
+        "value": "15"
+      }
+    },
+    "separator-2": {
+      "type": "Separator"
+    },
+    "applied-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "applied-heading",
+        "applied-items"
+      ]
+    },
+    "applied-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Applied",
+        "level": "h3"
+      }
+    },
+    "applied-items": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "applied-1",
+        "applied-2",
+        "applied-3",
+        "applied-4",
+        "applied-5",
+        "applied-6"
+      ]
+    },
+    "applied-1": {
+      "type": "Text",
+      "props": {
+        "text": "read-only sandbox now keeps memory/+output/ writable (#1042/#1051)"
+      }
+    },
+    "applied-2": {
+      "type": "Text",
+      "props": {
+        "text": "chain no-action telemetry (#1053)"
+      }
+    },
+    "applied-3": {
+      "type": "Text",
+      "props": {
+        "text": "vuln-scanner Riva kernel (#1039)"
+      }
+    },
+    "applied-4": {
+      "type": "Text",
+      "props": {
+        "text": "deploy-uni-hook mandatory 10 bps AeonFee (#1035)"
+      }
+    },
+    "applied-5": {
+      "type": "Text",
+      "props": {
+        "text": "aeon-update derives its eyebrow version from CI (#1037)"
+      }
+    },
+    "applied-6": {
+      "type": "Text",
+      "props": {
+        "text": ".claude/+plugin/ skill docs"
+      }
+    },
+    "separator-3": {
+      "type": "Separator"
+    },
+    "held-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "held-heading",
+        "held-items"
+      ]
+    },
+    "held-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Held (need manual pass)",
+        "level": "h3"
+      }
+    },
+    "held-items": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "held-1",
+        "held-2",
+        "held-3",
+        "held-4"
+      ]
+    },
+    "held-1": {
+      "type": "Text",
+      "props": {
+        "text": "README/aeon.yml/ci-tests/skill-packs real conflicts"
+      }
+    },
+    "held-2": {
+      "type": "Text",
+      "props": {
+        "text": "dashboard+webhook dep bundles (lock conflicts)"
+      }
+    },
+    "held-3": {
+      "type": "Text",
+      "props": {
+        "text": "3 new skills — compute-resell, submit-hook, and miroshark-matchday (weekly bulk football sims + video, #1056 — ours) — need an eyebrow scan to land"
+      }
+    },
+    "held-4": {
+      "type": "Text",
+      "props": {
+        "text": "competitor-monitor update adds an example egress host, held"
+      }
+    },
+    "separator-4": {
+      "type": "Separator"
+    },
+    "notes-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "note-1",
+        "note-2"
+      ]
+    },
+    "note-1": {
+      "type": "Text",
+      "props": {
+        "text": "Catalogs hand-synced (generators need approval the sync env can't give)"
+      }
+    },
+    "note-2": {
+      "type": "Text",
+      "props": {
+        "text": "Baseline advances to 95142d1 on merge"
+      }
+    },
+    "pr-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #180",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/pull/180",
+        "source": "GitHub"
+      }
+    }
+  }
+}
