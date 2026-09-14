@@ -424,3 +424,4 @@ date,skill,model,input_tokens,output_tokens,cache_read,cache_creation
 2026-09-14,shiplog,claude-sonnet-5,3677,39606,9631850,113736
 2026-09-14,repo-pulse,claude-sonnet-5,2656,16719,2268998,58597
 2026-09-14,aeon-update,claude-opus-4-8,10107,120403,14993168,183274
+2026-09-14,fetch-tweets,claude-sonnet-5,2470,11050,1820841,89921

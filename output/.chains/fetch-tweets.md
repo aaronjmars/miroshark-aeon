@@ -1,22 +1,21 @@
-## Tweet Digest — @miroshark_ (2026-09-13)
+No new tweets survived dedup, so per the skill's rule ("If no notable tweets across all accounts... no notification"), I won't send anything via `./notify`.
 
-Ran the `account` branch (all tracked accounts — `memory/topics/tracked-accounts.yml` has just `miroshark_`), source var override `account:` (empty arg → digest every tracked handle).
+## Fetch Tweets — 2026-09-14
 
-**Fetch:** twitterapi.io primary, `http=200`, 10 tweets pulled from the last 3 days.
+**Mode:** account (all tracked) — `memory/topics/tracked-accounts.yml` tracks one handle, `miroshark_`.
 
-**Triage — all 10 dropped, 0 new:**
-- 3× self-RTs of the Sep 11 weekly-sim thread (Serie A / LaLiga / Premier League) — duplicates of already-reported originals
-- 2× RTs of @aaronjmars (retweets of others — always dropped)
-- 4× already in the 2-day `SEEN_URLS` set (the Sep 11 weekly-sim originals + the Sep 12 x402aff-adoption post)
-- 1× "generate videos of your own MiroShark simulations" (Sep 10) — technically outside the 2-day lookback window, but it's the identical tweet already reported in the 09-10 fetch-tweets log, so treated as a dupe rather than re-surfaced
+**Result:** TWEET_DIGEST_OK, nothing new to report.
 
-Net: account has been quiet since the Sep 12 x402aff-adoption post — nothing new to digest today.
+Fetched 8 tweets from `@miroshark_`'s last 3 days via twitterapi.io (HTTP 200, primary path). All were accounted for:
+- 3 self-retweets of the Friday weekly-sim thread (Serie A, LaLiga, Premier League) — duplicates of their own already-counted originals
+- 1 retweet of `@aaronjmars` — dropped per "skip retweets of others"
+- 3 weekly-sim originals (posted 09-11) + 1 x402aff-adoption post (posted 09-12) — already reported in the 09-11 and 09-12 fetch-tweets runs
 
-Per skill spec ("notify only on signal"), no `./notify` was sent — logged `TWEET_DIGEST_OK` (0 new) only.
+The account has been quiet since the 09-12 x402aff post, matching what the 09-13 run also found (2nd consecutive quiet day). No notification sent, per the skill's "notify only on signal" rule.
 
 ## Summary
-- Ran `fetch-tweets` skill, `source:account` branch, all-tracked-accounts sub-mode (var `account:`)
-- Fetched @miroshark_'s last 10 tweets via twitterapi.io (http=200); all deduped out (self-RTs, RTs of others, or already-reported)
-- No notification sent (0 new signal)
-- Appended `### fetch-tweets` log entry to `memory/logs/2026-09-13.md`
-- No follow-up needed — next scheduled fetch-tweets run will re-check
+- Ran the `fetch-tweets` skill in `account` branch, all-tracked-accounts sub-mode (`var=account:`, empty arg).
+- Fetched `@miroshark_`'s recent tweets via twitterapi.io; found zero new, non-duplicate content.
+- Appended a `### fetch-tweets` log entry to `memory/logs/2026-09-14.md` documenting the quiet run (status `TWEET_DIGEST_OK`).
+- No `./notify` sent (nothing new); no memory-topic or MEMORY.md updates needed (no announcement/claim/stance-shift to record).
+- Follow-up: none — next fetch-tweets run should re-check for activity past 09-12.
