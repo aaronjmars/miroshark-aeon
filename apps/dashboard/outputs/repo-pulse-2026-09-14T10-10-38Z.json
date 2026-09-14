@@ -1,0 +1,277 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Repo Pulse"
+      },
+      "children": [
+        "text_header",
+        "sep1",
+        "heading_repo",
+        "stack_stats",
+        "sep2",
+        "heading_notable",
+        "stargazer_amir",
+        "stargazer_febrian",
+        "sep3",
+        "heading_other",
+        "text_other",
+        "sep4",
+        "heading_forks",
+        "text_forks",
+        "sep5",
+        "heading_source",
+        "text_source"
+      ]
+    },
+    "text_header": {
+      "type": "Text",
+      "props": {
+        "text": "Repo Pulse — 2026-09-14 — [STEADY]",
+        "variant": "muted"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading_repo": {
+      "type": "Heading",
+      "props": {
+        "text": "MiroShark/MiroShark",
+        "level": "h2"
+      }
+    },
+    "stack_stats": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "stat_stars",
+        "stat_forks",
+        "stat_releases"
+      ]
+    },
+    "stat_stars": {
+      "type": "Stat",
+      "props": {
+        "label": "Stars",
+        "value": "1449",
+        "delta": "+1",
+        "trend": "up"
+      }
+    },
+    "stat_forks": {
+      "type": "Stat",
+      "props": {
+        "label": "Forks",
+        "value": "299",
+        "delta": "+1",
+        "trend": "up"
+      }
+    },
+    "stat_releases": {
+      "type": "Stat",
+      "props": {
+        "label": "Releases",
+        "value": "0",
+        "delta": "+0",
+        "trend": "neutral"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading_notable": {
+      "type": "Heading",
+      "props": {
+        "text": "Notable new stargazers",
+        "level": "h3"
+      }
+    },
+    "stargazer_amir": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "link_amir",
+        "text_amir_location",
+        "text_amir_company",
+        "text_amir_website",
+        "text_amir_stats",
+        "text_amir_bio",
+        "badge_amir_roles"
+      ]
+    },
+    "link_amir": {
+      "type": "Link",
+      "props": {
+        "label": "Amir Fathi (github.com/AmirF194)",
+        "href": "https://github.com/AmirF194"
+      }
+    },
+    "text_amir_location": {
+      "type": "Text",
+      "props": {
+        "text": "📍 Edmonton",
+        "variant": "caption"
+      }
+    },
+    "text_amir_company": {
+      "type": "Text",
+      "props": {
+        "text": "🏢 FastInfer Inc.",
+        "variant": "caption"
+      }
+    },
+    "text_amir_website": {
+      "type": "Link",
+      "props": {
+        "label": "🌐 fastinfer.org",
+        "href": "https://fastinfer.org"
+      }
+    },
+    "text_amir_stats": {
+      "type": "Text",
+      "props": {
+        "text": "218 repos · 33 followers",
+        "variant": "caption"
+      }
+    },
+    "text_amir_bio": {
+      "type": "Text",
+      "props": {
+        "text": "Founder & CEO at FastInfer | We build production AI agents | CS Instructor @ MacEwan | MSc Computing Science @ UAlberta",
+        "variant": "body"
+      }
+    },
+    "badge_amir_roles": {
+      "type": "Badge",
+      "props": {
+        "text": "This week: New stargazer · New forker · PR #301 contributor (locale-threading fix)",
+        "variant": "outline"
+      }
+    },
+    "stargazer_febrian": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "link_febrian",
+        "text_febrian_location",
+        "link_febrian_linkedin",
+        "text_febrian_stats",
+        "text_febrian_bio"
+      ]
+    },
+    "link_febrian": {
+      "type": "Link",
+      "props": {
+        "label": "Febrian Dwi Putra (github.com/febritecno)",
+        "href": "https://github.com/febritecno"
+      }
+    },
+    "text_febrian_location": {
+      "type": "Text",
+      "props": {
+        "text": "📍 Bojonegoro, Indonesia",
+        "variant": "caption"
+      }
+    },
+    "link_febrian_linkedin": {
+      "type": "Link",
+      "props": {
+        "label": "🏢 linkedin.com/in/febrian-dwi-putra",
+        "href": "https://www.linkedin.com/in/febrian-dwi-putra"
+      }
+    },
+    "text_febrian_stats": {
+      "type": "Text",
+      "props": {
+        "text": "98 repos · 78 followers",
+        "variant": "caption"
+      }
+    },
+    "text_febrian_bio": {
+      "type": "Text",
+      "props": {
+        "text": "Keep calm and being a learner.",
+        "variant": "body"
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading_other": {
+      "type": "Heading",
+      "props": {
+        "text": "Other new stargazers",
+        "level": "h3"
+      }
+    },
+    "text_other": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/LUX14Zx",
+        "href": "https://github.com/LUX14Zx"
+      }
+    },
+    "sep4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading_forks": {
+      "type": "Heading",
+      "props": {
+        "text": "New forks",
+        "level": "h3"
+      }
+    },
+    "text_forks": {
+      "type": "Link",
+      "props": {
+        "label": "Amir Fathi (github.com/AmirF194)",
+        "href": "https://github.com/AmirF194"
+      }
+    },
+    "sep5": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading_source": {
+      "type": "Heading",
+      "props": {
+        "text": "Source & Notes",
+        "level": "h3"
+      }
+    },
+    "text_source": {
+      "type": "Text",
+      "props": {
+        "text": "Source: events (enriched 3 of 3 stargazers, 1 of 1 forkers; window complete, not truncated)\n\nNote: raw stargazer events = 3, net stargazers_count delta = +1 (implies 2 net unstars in the window — does not cancel the notify trigger)",
+        "variant": "caption"
+      }
+    }
+  }
+}
