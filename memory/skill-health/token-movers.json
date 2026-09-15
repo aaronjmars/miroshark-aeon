@@ -1,15 +1,11 @@
 {
   "skill": "token-movers",
-  "last_analyzed": "2026-09-14T06:19:14Z",
+  "last_analyzed": "2026-09-15T06:15:44Z",
   "quality_score": 4,
-  "assessment": "Substantive, well-structured momentum tracker aligned with Priority 4 (honest tracking); executed successfully with real data from verified sources; lacks direct links for social verification but specificity and state continuity suggest legitimate data.",
+  "assessment": "Substantive, verifiable token report aligned to Priority 4 (track momentum honestly) with concrete metrics and transparent data sourcing; utility is in momentum monitoring rather than advancing top-priority engine shipment or sim credibility proof.",
   "flags": [],
   "avg_score": 4.07,
   "history": [
-    {
-      "date": "2026-08-17",
-      "score": 4
-    },
     {
       "date": "2026-08-18",
       "score": 4
@@ -124,6 +120,10 @@
     },
     {
       "date": "2026-09-14",
+      "score": 4
+    },
+    {
+      "date": "2026-09-15",
       "score": 4
     }
   ]

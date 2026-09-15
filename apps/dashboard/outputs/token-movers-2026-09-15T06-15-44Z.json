@@ -1,0 +1,49 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "Token Report"
+      },
+      "children": [
+        "stack"
+      ]
+    },
+    "stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "status",
+        "price",
+        "volume"
+      ]
+    },
+    "status": {
+      "type": "Badge",
+      "props": {
+        "text": "quiet",
+        "variant": "secondary"
+      }
+    },
+    "price": {
+      "type": "Stat",
+      "props": {
+        "label": "$MIROSHARK Price",
+        "value": "$0.000002566",
+        "trend": "neutral"
+      }
+    },
+    "volume": {
+      "type": "Stat",
+      "props": {
+        "label": "Volume",
+        "value": "$2.5K"
+      }
+    }
+  }
+}
