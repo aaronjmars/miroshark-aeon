@@ -1,0 +1,88 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Tweet Digest — 2026-09-16"
+      },
+      "children": [
+        "stack_main"
+      ]
+    },
+    "stack_main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "badge_1",
+        "tweet_1",
+        "link_1",
+        "sep_1",
+        "badge_2",
+        "tweet_2",
+        "link_2"
+      ]
+    },
+    "badge_1": {
+      "type": "Badge",
+      "props": {
+        "text": "research drop",
+        "variant": "secondary"
+      },
+      "children": []
+    },
+    "tweet_1": {
+      "type": "TweetCard",
+      "props": {
+        "author": "miroshark_",
+        "handle": "miroshark_",
+        "text": "dropped a long-form on simulation vs backtest — backtest replays history, sim runs the model forward. positions the engine against static backtesting tools. 🦈"
+      },
+      "children": []
+    },
+    "link_1": {
+      "type": "Link",
+      "props": {
+        "label": "View on Twitter",
+        "href": "https://x.com/miroshark_/status/2100249866404343937"
+      },
+      "children": []
+    },
+    "sep_1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "badge_2": {
+      "type": "Badge",
+      "props": {
+        "text": "ecosystem adoption",
+        "variant": "secondary"
+      },
+      "children": []
+    },
+    "tweet_2": {
+      "type": "TweetCard",
+      "props": {
+        "author": "miroshark_",
+        "handle": "miroshark_",
+        "text": "publicly credits @thecultos for pioneering x402aff adoption — first named shoutout to a team actually building live on the standard, not just internal usage. 🦈"
+      },
+      "children": []
+    },
+    "link_2": {
+      "type": "Link",
+      "props": {
+        "label": "View on Twitter",
+        "href": "https://x.com/miroshark_/status/2100197924508471538"
+      },
+      "children": []
+    }
+  }
+}

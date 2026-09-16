@@ -1,4 +1,9 @@
-*Tweet Digest — 2026-09-15*
+ℹ️ Tweet Digest — 2026-09-16
 
-*Theme: x402aff ecosystem adoption*
-@miroshark_: Dropped a clip from the upcoming interview with @akathesmith (founder, @thecultos) — an open-source agentic marketplace building around our x402aff onchain affiliate standard. — [link](https://x.com/miroshark_/status/2099826946364338493)
+*Tweet Digest — 2026-09-16*
+
+*Theme: research drop*
+@miroshark_: dropped a long-form on simulation vs backtest — backtest replays history, sim runs the model forward. positions the engine against static backtesting tools. 🦈 — [link](https://x.com/miroshark_/status/2100249866404343937)
+
+*Theme: ecosystem adoption*
+@miroshark_: publicly credits @thecultos for pioneering x402aff adoption — first named shoutout to a team actually building live on the standard, not just internal usage. 🦈 — [link](https://x.com/miroshark_/status/2100197924508471538)

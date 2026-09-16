@@ -1,15 +1,11 @@
 {
   "skill": "fetch-tweets",
-  "last_analyzed": "2026-09-15T17:07:54Z",
-  "quality_score": 3,
-  "assessment": "Skill ran successfully, fetched tweets via API, performed deduplication, and tracked ecosystem signals; output is clear and well-structured but specific tweet claims cannot be independently verified",
+  "last_analyzed": "2026-09-16T17:09:09Z",
+  "quality_score": 4,
+  "assessment": "Substantive tweet digest with verified themes, proper dedup logic, aligned to strategy priorities (ecosystem adoption, sim positioning)",
   "flags": [],
   "avg_score": 3.4,
   "history": [
-    {
-      "date": "2026-08-17",
-      "score": 4
-    },
     {
       "date": "2026-08-18",
       "score": 4
@@ -125,6 +121,10 @@
     {
       "date": "2026-09-15",
       "score": 3
+    },
+    {
+      "date": "2026-09-16",
+      "score": 4
     }
   ]
 }
