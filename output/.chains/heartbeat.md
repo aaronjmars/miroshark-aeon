@@ -1,20 +1,17 @@
-Fleet is healthy — no notification needed. Here's the substance of the run:
+Fleet is fully healthy — no notification needed. Regenerated `docs/status.md` and logged the run.
 
-## Ambient heartbeat check — 2026-09-17
+## HEARTBEAT_OK · STATUS_PAGE=OK
 
-**P0 — Fleet health:** Clean. All 9 enabled skills report `last_status: success`, `consecutive_failures: 0` fleet-wide. No failed or stuck skills. `aeon-update` has the lowest success rate (60%, 6/10) but stays above the `<0.5` chronic-failure bar. Heartbeat's own self-check is clean (last success ~24h ago, well under the 36h threshold).
+**Ambient check (2026-09-18, 19:06 UTC)**
 
-**P1 — PRs & issues:** Clean. 0 open PRs, 0 urgent issues, 0 open issues overall.
-
-**P2 — Flagged memory items:** Nothing new. Star-threshold recheck is due 2026-09-21; the engine-idle-vs-private-repo note is already surfaced (unchanged since 09-07 shiplog).
-
-**P3 — Schedule coverage:** Clean. Today's daily skills (token-movers 06:09 UTC, fetch-tweets 17:04 UTC) both ran and succeeded. Last Monday's weekly batch (holdings, changelog, shiplog, repo-pulse, aeon-update) and Sunday's memory-flush are all well within their schedule intervals.
-
-**Token pulse:** $MIROSHARK at $0.000002400 (-2.8% 24h), liquidity $287.4K, volume $3.9K, FDV $0.24M — verdict **DISTRIBUTING** (sell-skewed order flow, 8 buys vs 14 sells, one whale exit), from today's `token-report-2026-09-17.md`.
-
-**Status page:** Regenerated `docs/status.md` — Overall 🟢 OK, updated 2026-09-17 19:06 UTC, next scheduled run token-movers at 06:00 UTC 2026-09-18.
+- **P0:** clean — all 9 enabled skills (`heartbeat`, `repo-pulse`, `token-movers`, `holdings`, `changelog`, `fetch-tweets`, `shiplog`, `memory-flush`, `aeon-update`) show `last_status: success`, `consecutive_failures: 0`. `aeon-update`'s 60% success rate stays above the 50% chronic-failure bar. Heartbeat's own self-check is clean (last success ~24h ago, under the 36h threshold).
+- **P1:** clean — 0 open PRs, 0 open issues, 0 urgent issues.
+- **P2:** clean — nothing new flagged in `memory/MEMORY.md`; star-threshold recheck isn't due until 2026-09-21; the engine-idle-vs-private-repo note was already surfaced in the 09-07 shiplog notify.
+- **P3:** clean — every enabled skill is within its schedule interval (dailies ran today, weekly Monday batch from 09-14 still fresh, `memory-flush` next due 09-20).
+- **Token pulse:** fresh report today (`token-report-2026-09-18.md`) — $0.000002186, -8.9% 24h, liq $276.7K, vol $15.6K, FDV $0.22M, verdict **SLIDING**.
 
 ## Summary
-- Read cron-state, aeon.yml, memory logs, issues index, gh PR/issue lists, and the latest token report — no findings, no notification sent (per skill rules: quiet fleet = quiet run).
-- Modified: `docs/status.md` (regenerated), `memory/logs/2026-09-17.md` (appended `### heartbeat` entry).
-- Follow-up: none — next check is tomorrow's scheduled heartbeat (19:00 UTC), or the star-threshold recheck due 2026-09-21.
+- Read `memory/MEMORY.md`, `memory/logs/2026-09-17.md` and `2026-09-18.md`, `memory/cron-state.json`, `memory/issues/INDEX.md`, `aeon.yml`; ran `gh pr list`/`gh issue list` checks.
+- Rewrote `docs/status.md` (overall 🟢 OK, updated timestamp, refreshed skill-health table and token-pulse row).
+- Appended a `### heartbeat` entry to `memory/logs/2026-09-18.md` (`mode: ambient`).
+- No notification sent (nothing rose above ambient noise). No follow-up actions needed.
