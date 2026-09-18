@@ -1,0 +1,55 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Tweet Digest — 2026-09-18",
+        "description": "Weekly Football Matchday sims"
+      },
+      "children": [
+        "stack_tweets"
+      ]
+    },
+    "stack_tweets": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "tweet1",
+        "tweet2",
+        "tweet3"
+      ]
+    },
+    "tweet1": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Serie A Matchday 5 sim report is out",
+        "href": "https://x.com/miroshark_/status/2100923009703804955",
+        "source": "x.com/miroshark_"
+      },
+      "children": []
+    },
+    "tweet2": {
+      "type": "StoryLink",
+      "props": {
+        "title": "LaLiga Matchday 6 sim report dropped right after",
+        "href": "https://x.com/miroshark_/status/2100922368377937950",
+        "source": "x.com/miroshark_"
+      },
+      "children": []
+    },
+    "tweet3": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Premier League Matchday 5 rounds out the trio",
+        "href": "https://x.com/miroshark_/status/2100920453317493198",
+        "source": "x.com/miroshark_"
+      },
+      "children": []
+    }
+  }
+}
