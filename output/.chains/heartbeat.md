@@ -1,17 +1,17 @@
-Fleet is fully healthy — no notification needed. Regenerated `docs/status.md` and logged the run.
+Fleet is fully healthy — no notification needed. Here's the run summary:
 
-## HEARTBEAT_OK · STATUS_PAGE=OK
+## Heartbeat — Ambient Check (2026-09-19)
 
-**Ambient check (2026-09-18, 19:06 UTC)**
+**Overall status: 🟢 OK**
 
-- **P0:** clean — all 9 enabled skills (`heartbeat`, `repo-pulse`, `token-movers`, `holdings`, `changelog`, `fetch-tweets`, `shiplog`, `memory-flush`, `aeon-update`) show `last_status: success`, `consecutive_failures: 0`. `aeon-update`'s 60% success rate stays above the 50% chronic-failure bar. Heartbeat's own self-check is clean (last success ~24h ago, under the 36h threshold).
-- **P1:** clean — 0 open PRs, 0 open issues, 0 urgent issues.
-- **P2:** clean — nothing new flagged in `memory/MEMORY.md`; star-threshold recheck isn't due until 2026-09-21; the engine-idle-vs-private-repo note was already surfaced in the 09-07 shiplog notify.
-- **P3:** clean — every enabled skill is within its schedule interval (dailies ran today, weekly Monday batch from 09-14 still fresh, `memory-flush` next due 09-20).
-- **Token pulse:** fresh report today (`token-report-2026-09-18.md`) — $0.000002186, -8.9% 24h, liq $276.7K, vol $15.6K, FDV $0.22M, verdict **SLIDING**.
+- **P0 (failed/stuck skills):** Clean. All 9 enabled skills show `last_status: success`, `consecutive_failures: 0` fleet-wide. No chronic failures (lowest success rate is `aeon-update` at 60%, above the 50% bar). Heartbeat's own self-check is clean (last success ~24h ago).
+- **P1 (stalled PRs / urgent issues):** Clean. 0 open PRs, 0 open issues, 0 urgent issues.
+- **P2 (flagged memory items):** Clean. Nothing new — star-threshold recheck isn't due until 09-21, engine-idle item already surfaced via last week's shiplog.
+- **P3 (missing scheduled skills):** Clean. Today's daily skills (token-movers, fetch-tweets) both ran and succeeded; weekly skills are all within their schedule interval.
+- **Token pulse:** Refreshed from today's `token-report-2026-09-19.md` — $MIROSHARK at $0.0000025045 (+14.6% 24h), liquidity $306.1K, volume $5.9K, FDV $0.25M, verdict **CONSOLIDATING**.
 
 ## Summary
-- Read `memory/MEMORY.md`, `memory/logs/2026-09-17.md` and `2026-09-18.md`, `memory/cron-state.json`, `memory/issues/INDEX.md`, `aeon.yml`; ran `gh pr list`/`gh issue list` checks.
-- Rewrote `docs/status.md` (overall 🟢 OK, updated timestamp, refreshed skill-health table and token-pulse row).
-- Appended a `### heartbeat` entry to `memory/logs/2026-09-18.md` (`mode: ambient`).
-- No notification sent (nothing rose above ambient noise). No follow-up actions needed.
+- Regenerated `docs/status.md` with today's fleet health and fresh token pulse data.
+- Appended a `### heartbeat` entry to `memory/logs/2026-09-19.md` documenting the clean P0–P3 checks.
+- No notification sent (nothing rose to a finding) — per the skill's dedup/notify-only-on-signal rule.
+- Follow-up: none required; next heartbeat is scheduled for tomorrow 19:00 UTC.
