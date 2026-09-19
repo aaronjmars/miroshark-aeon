@@ -1,0 +1,218 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Token Report: MIROSHARK"
+      },
+      "children": [
+        "stack_main"
+      ]
+    },
+    "stack_main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "badge_status",
+        "separator_1",
+        "grid_metrics",
+        "separator_2",
+        "stack_volume",
+        "separator_3",
+        "stack_activity",
+        "separator_4",
+        "alert_activity_note",
+        "separator_5",
+        "link_chart"
+      ]
+    },
+    "badge_status": {
+      "type": "Badge",
+      "props": {
+        "text": "CONSOLIDATING",
+        "variant": "outline"
+      }
+    },
+    "separator_1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "grid_metrics": {
+      "type": "Grid",
+      "props": {
+        "columns": 3,
+        "gap": "md"
+      },
+      "children": [
+        "stat_price",
+        "stat_liquidity",
+        "stat_volume"
+      ]
+    },
+    "stat_price": {
+      "type": "Stat",
+      "props": {
+        "label": "Price",
+        "value": "$0.0000025045",
+        "delta": "+14.6%",
+        "trend": "up"
+      }
+    },
+    "stat_liquidity": {
+      "type": "Stat",
+      "props": {
+        "label": "Liquidity",
+        "value": "$306.1K",
+        "delta": "+10.6%",
+        "trend": "up"
+      }
+    },
+    "stat_volume": {
+      "type": "Stat",
+      "props": {
+        "label": "Volume (24h)",
+        "value": "$5.9K",
+        "delta": "0.9× 7d average"
+      }
+    },
+    "separator_2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stack_volume": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "heading_volume",
+        "progress_volume",
+        "text_volume_note"
+      ]
+    },
+    "heading_volume": {
+      "type": "Heading",
+      "props": {
+        "text": "Volume Analysis",
+        "level": "h3"
+      }
+    },
+    "progress_volume": {
+      "type": "Progress",
+      "props": {
+        "value": 45,
+        "max": 100,
+        "label": "0.9× / 2.0× needed for BREAKOUT"
+      }
+    },
+    "text_volume_note": {
+      "type": "Text",
+      "props": {
+        "text": "Volume missed the 2.0× multiplier needed for breakout confirmation.",
+        "variant": "caption"
+      }
+    },
+    "separator_3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stack_activity": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading_activity",
+        "grid_activity",
+        "text_ratio"
+      ]
+    },
+    "heading_activity": {
+      "type": "Heading",
+      "props": {
+        "text": "Trading Activity",
+        "level": "h3"
+      }
+    },
+    "grid_activity": {
+      "type": "Grid",
+      "props": {
+        "columns": 3,
+        "gap": "md"
+      },
+      "children": [
+        "stat_buys",
+        "stat_sells",
+        "stat_whales"
+      ]
+    },
+    "stat_buys": {
+      "type": "Stat",
+      "props": {
+        "label": "Buys",
+        "value": "39"
+      }
+    },
+    "stat_sells": {
+      "type": "Stat",
+      "props": {
+        "label": "Sells",
+        "value": "20"
+      }
+    },
+    "stat_whales": {
+      "type": "Stat",
+      "props": {
+        "label": "Whales (>$1K)",
+        "value": "0"
+      }
+    },
+    "text_ratio": {
+      "type": "Text",
+      "props": {
+        "text": "Buy/Sell ratio: 1.95 (previous: 1.25)",
+        "variant": "body"
+      }
+    },
+    "separator_4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "alert_activity_note": {
+      "type": "Alert",
+      "props": {
+        "type": "info",
+        "message": "13 near-identical ~$2.50 buys (01:54-02:09 UTC) suggest bot activity rather than conviction. New mmETH/MiroShark pool ($2.6M reserve, since 09-14) remains untraded."
+      }
+    },
+    "separator_5": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "link_chart": {
+      "type": "StoryLink",
+      "props": {
+        "title": "View Chart on GeckoTerminal",
+        "href": "https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209",
+        "source": "GeckoTerminal"
+      }
+    }
+  }
+}
