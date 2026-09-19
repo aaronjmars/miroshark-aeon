@@ -1,15 +1,11 @@
 {
   "skill": "fetch-tweets",
-  "last_analyzed": "2026-09-18T17:07:42Z",
-  "quality_score": 3,
-  "assessment": "Routine tweet-fetch successfully executed with proper dedup and logging; well-structured but modest substance (3 new items from one account) and no movement on core metrics",
+  "last_analyzed": "2026-09-19T17:06:45Z",
+  "quality_score": 4,
+  "assessment": "Well-executed monitoring skill—correctly fetched, filtered, and deduped tweets; followed documented rules; appropriately suppressed notification when no new notable content; substantive log entry. Verifiable end-to-end.",
   "flags": [],
   "avg_score": 3.37,
   "history": [
-    {
-      "date": "2026-08-20",
-      "score": 4
-    },
     {
       "date": "2026-08-21",
       "score": 4
@@ -125,6 +121,10 @@
     {
       "date": "2026-09-18",
       "score": 3
+    },
+    {
+      "date": "2026-09-19",
+      "score": 4
     }
   ]
 }
