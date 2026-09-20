@@ -1,15 +1,11 @@
 {
   "skill": "token-movers",
-  "last_analyzed": "2026-09-19T06:14:51Z",
+  "last_analyzed": "2026-09-20T06:14:51Z",
   "quality_score": 4,
-  "assessment": "Substantive token analysis with specific verifiable metrics, clear consolidation verdict grounded in volume/price analysis, honest about data sources and bot-activity signals.",
+  "assessment": "Substantive token monitoring report with specific, sourced metrics; transparent about data gaps and recurring API timeouts; clear QUIET verdict with trend context. Directly serves Strategy Priority 4 (track momentum honestly) with verifiable sources, honest cross-checks, and actionable signal.",
   "flags": [],
   "avg_score": 4.07,
   "history": [
-    {
-      "date": "2026-08-21",
-      "score": 4
-    },
     {
       "date": "2026-08-22",
       "score": 4
@@ -124,6 +120,10 @@
     },
     {
       "date": "2026-09-19",
+      "score": 4
+    },
+    {
+      "date": "2026-09-20",
       "score": 4
     }
   ]
