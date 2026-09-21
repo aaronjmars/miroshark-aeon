@@ -1,0 +1,98 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Changelog Update",
+        "description": "2026-09-21 • MiroShark → miroshark-website"
+      },
+      "children": [
+        "stack_main"
+      ]
+    },
+    "stack_main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading_repos",
+        "text_repos",
+        "heading_entry",
+        "text_pr_count",
+        "text_entry_title",
+        "text_scope",
+        "heading_pr",
+        "badge_draft",
+        "pr_link"
+      ]
+    },
+    "heading_repos": {
+      "type": "Heading",
+      "props": {
+        "text": "Repository Sync",
+        "level": "h3"
+      }
+    },
+    "text_repos": {
+      "type": "Text",
+      "props": {
+        "text": "MiroShark/MiroShark → aaronjmars/miroshark-website",
+        "variant": "body"
+      }
+    },
+    "heading_entry": {
+      "type": "Heading",
+      "props": {
+        "text": "Changelog Entry",
+        "level": "h3"
+      }
+    },
+    "text_pr_count": {
+      "type": "Text",
+      "props": {
+        "text": "4 new PRs consolidated",
+        "variant": "muted"
+      }
+    },
+    "text_entry_title": {
+      "type": "Text",
+      "props": {
+        "text": "Backend and frontend dependency upkeep",
+        "variant": "lead"
+      }
+    },
+    "text_scope": {
+      "type": "Text",
+      "props": {
+        "text": "Dependency maintenance only, no user-facing changes",
+        "variant": "muted"
+      }
+    },
+    "heading_pr": {
+      "type": "Heading",
+      "props": {
+        "text": "Push Status",
+        "level": "h3"
+      }
+    },
+    "badge_draft": {
+      "type": "Badge",
+      "props": {
+        "text": "draft",
+        "variant": "outline"
+      }
+    },
+    "pr_link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #344: Backend and frontend dependency upkeep",
+        "href": "https://github.com/aaronjmars/miroshark-website/pull/344",
+        "source": "miroshark-website"
+      }
+    }
+  }
+}

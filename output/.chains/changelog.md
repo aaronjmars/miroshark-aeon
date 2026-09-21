@@ -1,8 +1,4 @@
-ℹ️ Changelog synced
-
-*Changelog (push-to) — 2026-09-14*
-MiroShark/MiroShark → aaronjmars/miroshark-website
-3 new PRs → changelog entry "Graph ingestion locale fix + dependency upkeep"
-PR: https://github.com/aaronjmars/miroshark-website/pull/336 (draft)
-
-🔗 https://github.com/aaronjmars/miroshark-website/pull/336
+*Changelog (push-to) - 2026-09-21*
+MiroShark/MiroShark -> aaronjmars/miroshark-website
+4 new PRs -> changelog entry "Backend and frontend dependency upkeep" (dependency maintenance only, no user-facing changes)
+PR: https://github.com/aaronjmars/miroshark-website/pull/344 (draft)

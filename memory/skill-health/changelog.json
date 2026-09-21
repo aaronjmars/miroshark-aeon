@@ -1,10 +1,10 @@
 {
   "skill": "changelog",
-  "last_analyzed": "2026-09-14T08:19:11Z",
-  "quality_score": 3,
-  "assessment": "Well-executed documentation sync with verifiable changes and proper PR process, but low strategic priority—engine shipping and proving sim credibility are the north-star focuses.",
+  "last_analyzed": "2026-09-21T08:12:58Z",
+  "quality_score": 4,
+  "assessment": "Competent, substantive changelog maintenance — verifiable PR tracking and website prep, but meta-work rather than engine shipping.",
   "flags": [],
-  "avg_score": 3.83,
+  "avg_score": 3.85,
   "history": [
     {
       "date": "2026-07-12",
@@ -53,6 +53,10 @@
     {
       "date": "2026-09-14",
       "score": 3
+    },
+    {
+      "date": "2026-09-21",
+      "score": 4
     }
   ]
 }
