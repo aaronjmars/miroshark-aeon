@@ -79,7 +79,7 @@ See `memory/watched-repos.md` — `MiroShark/MiroShark` (renamed from `aaronjmar
 - token-movers: the mmETH/MiroShark pool ($2.6M reserve, created 2026-09-14) has logged zero real trades through 2026-09-20 (6 days) — treat as seeded/inactive liquidity, not organic; keep excluding it from volume/whale calcs until it shows activity.
 
 ## Active Targets
-- Hyperstition: MiroShark 1,000 stars by 2026-04-30 — MISSED Apr 30 (911), CROSSED 2026-05-03; **1,449 stars** as of 2026-09-14 (repo-pulse; +1 this window, 2nd straight near-flat week vs avg4w≈4.75; 51 to 1,500; forks 299, recovered last week's −1 dip; new stargazer/forker AmirF194 also landed PR #301 as first merged public-repo external contributor in weeks; next check 2026-09-21).
+- Hyperstition: MiroShark 1,000 stars by 2026-04-30 — MISSED Apr 30 (911), CROSSED 2026-05-03; **1,452 stars** as of 2026-09-21 (repo-pulse; +3 this window, back above avg4w≈4.75 pace after 2 flat weeks; 48 to 1,500; forks 301 (+2), both new forks from high-repo-count accounts (3776 and 86 repos) rather than known contributors; next check 2026-09-28).
 - Hyperstition: @miroshark_ 1,000 X followers by 2026-05-15 — deadline passed, count unconfirmed in logs.
 - Hyperstition: MiroShark PR from a Chinese-locale contributor OR Chinese-language coverage by 2026-06-15 — CROSSED; CN tweet "米罗莎要来了" May 16 qualifies; also JP coverage @m000_crypto (May 17).
 - Hyperstition: ≥3 publicly-named external integrators citing MiroShark as AI infrastructure by 2026-07-31 — **EXCEEDED, deadline passed**: 14 integrators in ECOSYSTEM.md as of 06-22 (Sparkleware, ZER0, Xerg, SyntheticsAI, Signa, RootAI, Noelclaw, Monitor, HivemindOS, Echo Oracle, Crucible Sim, Capacitr, Blue Agent, AntFleet).
@@ -87,5 +87,5 @@ See `memory/watched-repos.md` — `MiroShark/MiroShark` (renamed from `aaronjmar
 - MIROSHARK team/treasury holdings: 12.09% of supply (12.09B tokens) as of 2026-09-21 (up from 12.03% on 09-14), tracked via `holdings` skill (8th straight accumulating snapshot, but 7d growth slowed further to +0.48% from +0.71% the prior week; 30d +7.20%, also decelerating from +8.09%).
 
 ## Next Priorities
-- Next star threshold: 1,500 (~51 away as of 2026-09-14; still near-flat — +1 this window vs avg4w≈4.75, 2nd straight decelerated week; next repo-pulse weekly check due 2026-09-21).
+- Next star threshold: 1,500 (~48 away as of 2026-09-21; +3 this window, back to avg4w≈4.75 pace after 2 flat weeks; next repo-pulse weekly check due 2026-09-28).
 - Engine dev velocity (priority-1 "ship the engine"): `MiroShark/MiroShark` shipped **0 engine-code PRs across 4 consecutive shiplog windows** (~08-11→09-07; 4th window = 3 merged PRs, all dependency bumps). BUT the private companion repo `MiroShark-x402` merged 43 real engine PRs this window alone (prompt-cache revival, ReAct caps, invalid-action handling, Neo4j resilience) — the engine is being worked, it's just not landing in the public repo that the star/ecosystem north-star metrics read off of. Flagged to operator in the 09-07 shiplog notify (queued 591b3b49); worth a decision on whether to upstream more into the OSS repo.

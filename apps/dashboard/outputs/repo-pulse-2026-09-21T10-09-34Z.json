@@ -1,0 +1,263 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Repo Pulse",
+        "description": "2026-09-21"
+      },
+      "children": [
+        "status_badge",
+        "separator1",
+        "repo_section",
+        "separator2",
+        "stargazers_section",
+        "separator3",
+        "forks_section",
+        "separator4",
+        "source_text"
+      ]
+    },
+    "status_badge": {
+      "type": "Badge",
+      "props": {
+        "text": "STEADY",
+        "variant": "default"
+      }
+    },
+    "separator1": {
+      "type": "Separator",
+      "props": {}
+    },
+    "repo_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "repo_link",
+        "stats_stack"
+      ]
+    },
+    "repo_link": {
+      "type": "Link",
+      "props": {
+        "label": "aaronjmars/MiroShark",
+        "href": "https://github.com/aaronjmars/MiroShark"
+      }
+    },
+    "stats_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "lg"
+      },
+      "children": [
+        "stat_stars",
+        "stat_forks",
+        "stat_releases"
+      ]
+    },
+    "stat_stars": {
+      "type": "Stat",
+      "props": {
+        "label": "stars",
+        "value": "1452",
+        "delta": "+3",
+        "trend": "up"
+      }
+    },
+    "stat_forks": {
+      "type": "Stat",
+      "props": {
+        "label": "forks",
+        "value": "301",
+        "delta": "+2",
+        "trend": "up"
+      }
+    },
+    "stat_releases": {
+      "type": "Stat",
+      "props": {
+        "label": "releases",
+        "value": "0",
+        "delta": "+0",
+        "trend": "neutral"
+      }
+    },
+    "separator2": {
+      "type": "Separator",
+      "props": {}
+    },
+    "stargazers_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stargazers_heading",
+        "stargazer_1",
+        "stargazer_2",
+        "stargazer_3"
+      ]
+    },
+    "stargazers_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Other new stargazers",
+        "level": "h3"
+      }
+    },
+    "stargazer_1": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/galvin008-collab",
+        "href": "https://github.com/galvin008-collab"
+      }
+    },
+    "stargazer_2": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/kerneldottoday",
+        "href": "https://github.com/kerneldottoday"
+      }
+    },
+    "stargazer_3": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/limitlessenergywizards-png",
+        "href": "https://github.com/limitlessenergywizards-png"
+      }
+    },
+    "separator3": {
+      "type": "Separator",
+      "props": {}
+    },
+    "forks_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "forks_heading",
+        "fork_1",
+        "fork_2"
+      ]
+    },
+    "forks_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "New forks",
+        "level": "h3"
+      }
+    },
+    "fork_1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "fork_1_link",
+        "fork_1_stats"
+      ]
+    },
+    "fork_1_link": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/SyxonQ-Dev",
+        "href": "https://github.com/SyxonQ-Dev"
+      }
+    },
+    "fork_1_stats": {
+      "type": "Text",
+      "props": {
+        "text": "3776 repos · 10 followers",
+        "variant": "caption"
+      }
+    },
+    "fork_2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "fork_2_link",
+        "fork_2_name",
+        "fork_2_bio",
+        "fork_2_repos",
+        "fork_2_contacts"
+      ]
+    },
+    "fork_2_link": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/AniruddhaAdak",
+        "href": "https://github.com/AniruddhaAdak"
+      }
+    },
+    "fork_2_name": {
+      "type": "Text",
+      "props": {
+        "text": "Aniruddha Adak",
+        "variant": "lead"
+      }
+    },
+    "fork_2_bio": {
+      "type": "Text",
+      "props": {
+        "text": "AI Software Engineer 🤖 | Code + ML = Magic 🪄",
+        "variant": "caption"
+      }
+    },
+    "fork_2_repos": {
+      "type": "Text",
+      "props": {
+        "text": "86 repos",
+        "variant": "caption"
+      }
+    },
+    "fork_2_contacts": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "fork_2_website",
+        "fork_2_twitter"
+      ]
+    },
+    "fork_2_website": {
+      "type": "Link",
+      "props": {
+        "label": "Website",
+        "href": "https://aniruddhaadak.tech"
+      }
+    },
+    "fork_2_twitter": {
+      "type": "Link",
+      "props": {
+        "label": "Twitter: @aniruddhadak",
+        "href": "https://x.com/aniruddhadak"
+      }
+    },
+    "separator4": {
+      "type": "Separator",
+      "props": {}
+    },
+    "source_text": {
+      "type": "Text",
+      "props": {
+        "text": "Source: events",
+        "variant": "muted"
+      }
+    }
+  }
+}
