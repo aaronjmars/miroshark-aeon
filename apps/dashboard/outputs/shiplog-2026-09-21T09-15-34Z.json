@@ -1,0 +1,172 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "miroshark ⭐🦈 shiplog sep 14 → sep 21"
+      },
+      "children": [
+        "intro-text",
+        "sep1",
+        "shipped-heading",
+        "bullets-stack",
+        "sep2",
+        "traction-heading",
+        "traction-stack",
+        "sep3",
+        "closing-text",
+        "sep4",
+        "links-stack"
+      ]
+    },
+    "intro-text": {
+      "type": "Text",
+      "props": {
+        "text": "54 PRs merged across the engine + companions this window. the bytes:"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {}
+    },
+    "shipped-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Shipped",
+        "level": "h3"
+      }
+    },
+    "bullets-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "bullet1",
+        "bullet2",
+        "bullet3",
+        "bullet4",
+        "bullet5"
+      ]
+    },
+    "bullet1": {
+      "type": "Text",
+      "props": {
+        "text": "shipped agent hand-off: click-to-paste skill.md button + x402 tier 1/2 agent control (cancel, callback, idempotency). same feature landed in both MiroShark-x402 and miroshark-website"
+      }
+    },
+    "bullet2": {
+      "type": "Text",
+      "props": {
+        "text": "proof it works: a stranger told @bankrbot to pay $1 and run the miroshark skill. it did, unprompted, and posted a governance preview to musebook's town hall. we found out from the RT"
+      }
+    },
+    "bullet3": {
+      "type": "Text",
+      "props": {
+        "text": "hardened report credibility: fail loud instead of shipping a half sim, dropped fabricated agent quotes via roster-validator, switched to a bench-validated cheaper model"
+      }
+    },
+    "bullet4": {
+      "type": "Text",
+      "props": {
+        "text": "public engine repo: 4 PRs, all dependabot. zero real code this window"
+      }
+    },
+    "bullet5": {
+      "type": "Text",
+      "props": {
+        "text": "security: nothing to flex yet — the bytedance DNS-rebinding PR is still open"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {}
+    },
+    "traction-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Traction",
+        "level": "h3"
+      }
+    },
+    "traction-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stat1",
+        "stat2",
+        "traction-text1",
+        "traction-text2"
+      ]
+    },
+    "stat1": {
+      "type": "Stat",
+      "props": {
+        "label": "miroshark",
+        "value": "1,452 ⭐",
+        "delta": "+3",
+        "trend": "up"
+      }
+    },
+    "stat2": {
+      "type": "Stat",
+      "props": {
+        "label": "forks",
+        "value": "301",
+        "delta": "+2",
+        "trend": "up"
+      }
+    },
+    "traction-text1": {
+      "type": "Text",
+      "props": {
+        "text": "@thecultos relationship still going — interview clip + thank-you post this week"
+      }
+    },
+    "traction-text2": {
+      "type": "Text",
+      "props": {
+        "text": "5th straight week of serie a / laliga / premier league sims"
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {}
+    },
+    "closing-text": {
+      "type": "Text",
+      "props": {
+        "text": "the agent hand-off feature and the agent actually using it landed in the same week. that's the whole pitch working."
+      }
+    },
+    "sep4": {
+      "type": "Separator",
+      "props": {}
+    },
+    "links-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "link1"
+      ]
+    },
+    "link1": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full shiplog article",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/output/articles/shiplog-2026-09-21.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}

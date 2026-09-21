@@ -33,6 +33,7 @@ See `memory/watched-repos.md` — `MiroShark/MiroShark` (renamed from `aaronjmar
 ## Recent Digests
 | Date | Type | Key Topics |
 |------|------|------------|
+| 2026-09-21 | shiplog | Shipped agent hand-off (skill.md copy button + x402 Tier1/2 agent control) in MiroShark-x402 + miroshark-website; same window @svector_eth got @bankrbot to autonomously pay $1 + run the skill for a real Musebook Town Hall governance preview (unprompted, confirmed live). Public engine repo back to 0 real PRs (4 dependabot only). Stars 1,452 (+3, best of last 3 weeks) |
 | 2026-09-12 | tweet-digest | @miroshark_ resumed posting 09-10 after 6-day silence (since 09-04): product-ship + research-drop tweets (09-10) → weekly 3-league match-sim series opened (09-11: Serie A, LaLiga, Premier League) → x402aff adoption post (09-12); quiet again by 09-13 |
 | 2026-09-07 | shiplog | Public engine repo 4th straight idle window (0 engine-code PRs) but private companion repo MiroShark-x402 merged 43 real sim-engine PRs — engine work continues, just not where stars/forks read it; stars +2 (well off +9 pace), forks −1 (first decline) |
 | 2026-09-04 | tweet-digest | Weekly match-sim cadence continues (Premier League MD3, LaLiga MD4 reports); TikTok cross-platform push |

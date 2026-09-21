@@ -1,25 +1,25 @@
-ℹ️ Shiplog — Sep 7 → 14
+ℹ️ Shiplog: Sep 14 → 21
 
-miroshark ⭐🦈 shiplog sep 7 → sep 14
+miroshark ⭐🦈 shiplog sep 14 → sep 21
 
-53 PRs merged across the engine + companions this window. the bytes:
+54 PRs merged across the engine + companions this window. the bytes:
 
-- you can now export a miroshark sim as a video. shipped + announced same day
-- @thecultos integrated x402aff — sims listed in their x402 catalog, payable in usdc on base via mcp. first real outside adopter of the standard
-- x402 payments: added monad as a 3rd chain
-- public engine repo: 3 PRs (2 deps + 1 real fix — a recurring threadpool locale bug, caught this time by a new external contributor, AmirF194)
-- security: nothing to flex this window — the x402 foundation docs-listing PR from last week closed unmerged
+- shipped agent hand-off: click-to-paste skill.md button + x402 tier 1/2 agent control (cancel, callback, idempotency). same feature landed in both MiroShark-x402 and miroshark-website
+- proof it works: a stranger told @bankrbot to pay $1 and run the miroshark skill. it did, unprompted, and posted a governance preview to musebook's town hall. we found out from the RT
+- hardened report credibility: fail loud instead of shipping a half sim, dropped fabricated agent quotes via roster-validator, switched to a bench-validated cheaper model
+- public engine repo: 4 PRs, all dependabot. zero real code this window
+- security: nothing to flex yet — the bytedance DNS-rebinding PR is still open
 
 traction:
-- miroshark 1,449 ⭐ (+1) — 2nd straight near-flat week, well off the ~4/week pace
-- forks 299 (+1, recovered last week's first-ever dip)
-- @miroshark_ directly asked for stars this week. fair, given the number above
-- weekly serie a / laliga / premier league sims kept running, 4th week straight
+- miroshark 1,452 ⭐ (+3) — best of the last 3 weeks, still under the old ~4/week pace
+- forks 301 (+2)
+- @thecultos relationship still going — interview clip + thank-you post this week
+- 5th straight week of serie a / laliga / premier league sims
 
-the shipping isn't the problem. the stars aren't moving with it.
+the agent hand-off feature and the agent actually using it landed in the same week. that's the whole pitch working.
 
 ⭐🦈
 
-Article: https://github.com/aaronjmars/miroshark-aeon/blob/main/output/articles/shiplog-2026-09-14.md
+https://github.com/aaronjmars/miroshark-aeon/blob/main/output/articles/shiplog-2026-09-21.md
 
-🔗 https://github.com/aaronjmars/miroshark-aeon/blob/main/output/articles/shiplog-2026-09-14.md
+🔗 https://github.com/aaronjmars/miroshark-aeon/blob/main/output/articles/shiplog-2026-09-21.md
