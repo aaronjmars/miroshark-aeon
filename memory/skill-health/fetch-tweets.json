@@ -1,15 +1,11 @@
 {
   "skill": "fetch-tweets",
-  "last_analyzed": "2026-09-20T17:07:19Z",
+  "last_analyzed": "2026-09-21T17:07:46Z",
   "quality_score": 3,
-  "assessment": "Task completed successfully with verifiable output, but no actionable signal to surface—a clean scan with no findings.",
+  "assessment": "Acceptable — well-executed skill with proper deduplication and logging, but limited strategic value against stated priorities (ship engine, prove sims, move north-star metrics).",
   "flags": [],
   "avg_score": 3.33,
   "history": [
-    {
-      "date": "2026-08-22",
-      "score": 3
-    },
     {
       "date": "2026-08-23",
       "score": 4
@@ -124,6 +120,10 @@
     },
     {
       "date": "2026-09-20",
+      "score": 3
+    },
+    {
+      "date": "2026-09-21",
       "score": 3
     }
   ]

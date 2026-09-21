@@ -1,0 +1,42 @@
+{
+  "root": "card_1",
+  "state": {},
+  "elements": {
+    "card_1": {
+      "type": "Card",
+      "props": {
+        "title": "Tweet Digest — 2026-09-21",
+        "description": "Theme: x402aff explainer drops"
+      },
+      "children": [
+        "stack_1"
+      ]
+    },
+    "stack_1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "tweet_1",
+        "link_1"
+      ]
+    },
+    "tweet_1": {
+      "type": "TweetCard",
+      "props": {
+        "author": "miroshark_",
+        "handle": "miroshark_",
+        "text": "dropped a YouTube explainer introducing the affiliate program — x402aff moves past the announcement tweet into onboarding content"
+      }
+    },
+    "link_1": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/miroshark_/status/2102045939745575397"
+      }
+    }
+  }
+}
