@@ -1,5 +1,3 @@
-✅ aeon-update: PR #181
-
 **aeon-update — 2026-09-21**
 Synced 19 upstream commits → PR #181.
 
@@ -10,5 +8,3 @@ Two new skills landed clean: **`sc-audit`** (deep smart-contract audit) and **`c
 **5 need a hand** (in the PR): `aeon.yml` workflow + `ci-tests.yml` (your env/test-list narrowing), `.github/README.md` (I bumped the 80→82 skill count to keep CI green; the upstream rewrite still needs merging), `docs/skill-packs.md`, and `miroshark-matchday` (upstream added a vertical 9:16 render — clean +2 to graft). 14 older conflicts still carried forward.
 
 PR: https://github.com/aaronjmars/miroshark-aeon/pull/181
-
-🔗 https://github.com/aaronjmars/miroshark-aeon/pull/181

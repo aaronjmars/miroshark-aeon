@@ -1,0 +1,298 @@
+[
+ {
+  "path": ".claude/skills/aeon/SKILL.md",
+  "status": "modified",
+  "disposition": "CLEAN-UPDATE"
+ },
+ {
+  "path": ".claude/skills/aeon/references/layout.md",
+  "status": "modified",
+  "disposition": "CLEAN-UPDATE"
+ },
+ {
+  "path": ".claude/skills/aeon/references/mcp.md",
+  "status": "modified",
+  "disposition": "CLEAN-UPDATE"
+ },
+ {
+  "path": ".claude/skills/aeon/references/skill-anatomy.md",
+  "status": "modified",
+  "disposition": "CLEAN-UPDATE"
+ },
+ {
+  "path": ".github/README.md",
+  "status": "modified",
+  "disposition": "CONFLICT",
+  "reason": "operator-customized-overlap",
+  "conflict_hunks": 1
+ },
+ {
+  "path": ".github/workflows/aeon.yml",
+  "status": "modified",
+  "disposition": "CONFLICT",
+  "reason": "operator-customized-overlap",
+  "conflict_hunks": 2
+ },
+ {
+  "path": ".github/workflows/chain-runner.yml",
+  "status": "modified",
+  "disposition": "CLEAN-UPDATE"
+ },
+ {
+  "path": ".github/workflows/ci-gate.yml",
+  "status": "added",
+  "disposition": "CLEAN-ADD"
+ },
+ {
+  "path": ".github/workflows/ci-tests.yml",
+  "status": "modified",
+  "disposition": "CONFLICT",
+  "reason": "operator-customized-overlap",
+  "conflict_hunks": 1
+ },
+ {
+  "path": "CHANGELOG.md",
+  "status": "modified",
+  "disposition": "CLEAN-UPDATE"
+ },
+ {
+  "path": "aeon.yml",
+  "status": "modified",
+  "disposition": "OPERATOR"
+ },
+ {
+  "path": "apps/dashboard/app/api/mcp-auth/callback/route.ts",
+  "status": "modified",
+  "disposition": "CLEAN-UPDATE"
+ },
+ {
+  "path": "apps/dashboard/lib/skill-icons.data.ts",
+  "status": "modified",
+  "disposition": "CLEAN-MERGE",
+  "merged_file": ".aeon-scratch/merged/apps__dashboard__lib__skill-icons.data.ts"
+ },
+ {
+  "path": "apps/mcp-server/src/skill-executor.ts",
+  "status": "modified",
+  "disposition": "CLEAN-UPDATE"
+ },
+ {
+  "path": "catalog/packs.json",
+  "status": "modified",
+  "disposition": "OPERATOR"
+ },
+ {
+  "path": "catalog/skill-icons.json",
+  "status": "modified",
+  "disposition": "OPERATOR"
+ },
+ {
+  "path": "catalog/skills.json",
+  "status": "modified",
+  "disposition": "OPERATOR"
+ },
+ {
+  "path": "docs/ECOSYSTEM.md",
+  "status": "modified",
+  "disposition": "CLEAN-UPDATE"
+ },
+ {
+  "path": "docs/assets/skill-icons/miroshark-matchday.svg",
+  "status": "added",
+  "disposition": "CLEAN-ADD"
+ },
+ {
+  "path": "docs/assets/skill-icons/sc-audit.svg",
+  "status": "added",
+  "disposition": "CLEAN-ADD"
+ },
+ {
+  "path": "docs/skill-packs.md",
+  "status": "modified",
+  "disposition": "CONFLICT",
+  "reason": "operator-customized-overlap",
+  "conflict_hunks": 3
+ },
+ {
+  "path": "eyebrowlock.json",
+  "status": "modified",
+  "disposition": "OPERATOR"
+ },
+ {
+  "path": "harness-adapter/adapters/codex.sh",
+  "status": "modified",
+  "disposition": "CLEAN-UPDATE"
+ },
+ {
+  "path": "plugin/skills/aeon/SKILL.md",
+  "status": "modified",
+  "disposition": "CLEAN-UPDATE"
+ },
+ {
+  "path": "plugin/skills/aeon/references/layout.md",
+  "status": "modified",
+  "disposition": "CLEAN-UPDATE"
+ },
+ {
+  "path": "plugin/skills/aeon/references/mcp.md",
+  "status": "modified",
+  "disposition": "CLEAN-UPDATE"
+ },
+ {
+  "path": "plugin/skills/aeon/references/skill-anatomy.md",
+  "status": "modified",
+  "disposition": "CLEAN-UPDATE"
+ },
+ {
+  "path": "scripts/dev-loop-pr.sh",
+  "status": "modified",
+  "disposition": "CLEAN-UPDATE"
+ },
+ {
+  "path": "scripts/dev-loop-proof.sh",
+  "status": "added",
+  "disposition": "CLEAN-ADD"
+ },
+ {
+  "path": "scripts/dev-loop-repair.sh",
+  "status": "added",
+  "disposition": "CLEAN-ADD"
+ },
+ {
+  "path": "scripts/dev-loop-review.sh",
+  "status": "modified",
+  "disposition": "CLEAN-UPDATE"
+ },
+ {
+  "path": "scripts/install-harness.sh",
+  "status": "modified",
+  "disposition": "CLEAN-UPDATE"
+ },
+ {
+  "path": "scripts/resolve-riva-capabilities.sh",
+  "status": "modified",
+  "disposition": "CLEAN-UPDATE"
+ },
+ {
+  "path": "scripts/run-grok.sh",
+  "status": "modified",
+  "disposition": "CLEAN-UPDATE"
+ },
+ {
+  "path": "scripts/skill_mode.sh",
+  "status": "modified",
+  "disposition": "CLEAN-UPDATE"
+ },
+ {
+  "path": "scripts/stage-sc-audit.sh",
+  "status": "added",
+  "disposition": "CLEAN-ADD"
+ },
+ {
+  "path": "scripts/telegram-route.sh",
+  "status": "modified",
+  "disposition": "CLEAN-UPDATE"
+ },
+ {
+  "path": "scripts/tests/test_chain_runner_no_action.sh",
+  "status": "modified",
+  "disposition": "CLEAN-UPDATE"
+ },
+ {
+  "path": "scripts/tests/test_dev_loop_handoff.sh",
+  "status": "modified",
+  "disposition": "CLEAN-UPDATE"
+ },
+ {
+  "path": "scripts/tests/test_dev_loop_proof.sh",
+  "status": "added",
+  "disposition": "CLEAN-ADD"
+ },
+ {
+  "path": "scripts/tests/test_dev_loop_repair.sh",
+  "status": "added",
+  "disposition": "CLEAN-ADD"
+ },
+ {
+  "path": "scripts/tests/test_dev_loop_review.sh",
+  "status": "modified",
+  "disposition": "CLEAN-UPDATE"
+ },
+ {
+  "path": "scripts/tests/test_idea_pipeline_dev_loop_offer.sh",
+  "status": "added",
+  "disposition": "CLEAN-ADD"
+ },
+ {
+  "path": "scripts/tests/test_run_grok.sh",
+  "status": "modified",
+  "disposition": "CLEAN-UPDATE"
+ },
+ {
+  "path": "scripts/tests/test_telegram_route.sh",
+  "status": "modified",
+  "disposition": "CLEAN-UPDATE"
+ },
+ {
+  "path": "skills/aeon-update/SKILL.md",
+  "status": "modified",
+  "disposition": "CLEAN-UPDATE"
+ },
+ {
+  "path": "skills/changelog/SKILL.md",
+  "status": "modified",
+  "disposition": "CLEAN-UPDATE"
+ },
+ {
+  "path": "skills/create-prove/SKILL.md",
+  "status": "added",
+  "disposition": "CLEAN-ADD"
+ },
+ {
+  "path": "skills/feature/SKILL.md",
+  "status": "modified",
+  "disposition": "CLEAN-UPDATE"
+ },
+ {
+  "path": "skills/idea-pipeline/SKILL.md",
+  "status": "modified",
+  "disposition": "CLEAN-UPDATE"
+ },
+ {
+  "path": "skills/miroshark-matchday/SKILL.md",
+  "status": "modified",
+  "disposition": "CONFLICT",
+  "reason": "operator-customized-overlap",
+  "conflict_hunks": 1
+ },
+ {
+  "path": "skills/sc-audit/SKILL.md",
+  "status": "added",
+  "disposition": "CLEAN-ADD"
+ },
+ {
+  "path": "skills/sc-audit/fixtures/README.md",
+  "status": "added",
+  "disposition": "CLEAN-ADD"
+ },
+ {
+  "path": "skills/sc-audit/fixtures/vault/foundry.toml",
+  "status": "added",
+  "disposition": "CLEAN-ADD"
+ },
+ {
+  "path": "skills/sc-audit/fixtures/vault/src/Vault.sol",
+  "status": "added",
+  "disposition": "CLEAN-ADD"
+ },
+ {
+  "path": "skills/sc-audit/references/hook-checklist.md",
+  "status": "added",
+  "disposition": "CLEAN-ADD"
+ },
+ {
+  "path": "skills/vuln-scanner/SKILL.md",
+  "status": "modified",
+  "disposition": "CLEAN-UPDATE"
+ }
+]

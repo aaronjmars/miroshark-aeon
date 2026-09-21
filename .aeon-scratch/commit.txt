@@ -1,0 +1,9 @@
+aeon-update: sync upstream 95142d1..ba01e9f
+
+19 upstream commits from aeonfun/aeon. 47 files applied cleanly
+(15 added, 31 updated, 1 3-way-merged) plus regenerated catalogs
+(skills.json, packs.json, eyebrowlock.json via eyebrow v0.4.2, AGENTS.md).
+5 files in this window need manual review; 14 conflicts carried forward.
+Baseline advanced to ba01e9f.
+
+Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>
