@@ -74,6 +74,10 @@ output/scratch/
 # token-movers stage these in /tmp (see their SKILL.md); older runs leaked copies
 # into the repo root and .aeon-tmp/. Root-anchor so they can never re-commit.
 /.aeon-tmp/
+
+# aeon-update skill working dir: draft commit/pr-body/notify text, helper scripts,
+# pinned eyebrow binaries + tarballs. Never belongs in history. Root-anchor.
+/.aeon-scratch/
 /xai-*.json
 /.xai-*.json
 /.tmp-xai-*.json
