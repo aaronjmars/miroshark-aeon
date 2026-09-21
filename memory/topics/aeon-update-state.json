@@ -1,24 +1,39 @@
 {
-  "baseline_sha": "95142d19705ca379815e7fc9493a497ee0504e8d",
+  "baseline_sha": "ba01e9f3e4495c8f761ab483000639cc8d5f5221",
   "upstream": "aeonfun/aeon",
-  "last_run": "2026-09-14",
-  "last_pr": "https://github.com/aaronjmars/miroshark-aeon/pull/180",
+  "last_run": "2026-09-21",
+  "last_pr": "https://github.com/aaronjmars/miroshark-aeon/pull/181",
   "applied": {
     "added": 15,
-    "updated": 28,
-    "merged": 0,
+    "updated": 31,
+    "merged": 1,
     "deleted": 0
   },
   "pending_conflicts": [
     {
       "path": ".github/workflows/aeon.yml",
-      "reason": "operator-customized (env-narrowed) vs upstream +89/-51 rewrite; 3-way merge conflicts (3 regions)",
-      "upstream_commits": ["487b23f", "51ccf0c", "95142d1"]
+      "reason": "operator-customized (env-narrowed) vs upstream changes; 3-way merge overlap (carried since #180)",
+      "upstream_commits": ["ba01e9f", "1d183dc", "1dbbfd9"]
     },
     {
       "path": ".github/workflows/ci-tests.yml",
-      "reason": "operator-customized (fork test list) vs upstream new test steps; 3-way merge conflicts (5 regions)",
-      "upstream_commits": ["19aafe6", "3fa3bef", "95142d1"]
+      "reason": "operator-customized (fork test list) vs upstream new dev-loop-proof test steps; 3-way merge overlap",
+      "upstream_commits": ["73f660e", "1d183dc", "094c10d"]
+    },
+    {
+      "path": ".github/README.md",
+      "reason": "operator fork (MiroShark) copy vs upstream rewrite; 3-way overlap. NOTE: surgical skill-count fix (80->82) applied this run to keep ci-readme-catalog green; the upstream README rewrite itself is still unmerged",
+      "upstream_commits": ["1d183dc", "1dbbfd9"]
+    },
+    {
+      "path": "docs/skill-packs.md",
+      "reason": "fork pack-count table vs upstream skill-table rewrite; 3-way merge overlap (3 regions)",
+      "upstream_commits": ["1d183dc", "c2624e1", "1dbbfd9", "030f646"]
+    },
+    {
+      "path": "skills/miroshark-matchday/SKILL.md",
+      "reason": "operator-customized (fork) vs upstream vertical 9:16 render-path update (#1062); 3-way merge overlap. (was needs-eyebrowlock-scan; skill is now present locally and diverges)",
+      "upstream_commits": ["2e9efdb"]
     },
     {
       "path": ".github/workflows/messages.yml",
@@ -26,64 +41,44 @@
       "upstream_commits": ["dc1a975"]
     },
     {
-      "path": ".github/README.md",
-      "reason": "operator-customized (fork MiroShark copy) vs upstream rewrite; 3-way merge conflict (1 region)",
-      "upstream_commits": ["44ddb43"]
-    },
-    {
-      "path": "docs/skill-packs.md",
-      "reason": "fork pack-count table vs upstream 78-skill table; 3-way merge conflicts (3 regions)",
-      "upstream_commits": ["3f3509c", "0154c0e", "f891ede"]
-    },
-    {
       "path": "apps/dashboard/package.json",
-      "reason": "eslint-lint-gate coupled bundle; package.json 3-way merges clean but its lock conflicts, so held together",
+      "reason": "eslint-lint-gate coupled bundle; package.json 3-way merges clean but its lock conflicts, so held together (unchanged this window)",
       "upstream_commits": ["c554e8b", "a3d402c"]
     },
     {
       "path": "apps/dashboard/package-lock.json",
-      "reason": "eslint-lint-gate coupled bundle; lockfile 3-way merge conflicts (2 regions)",
+      "reason": "eslint-lint-gate coupled bundle; lockfile 3-way merge conflicts (2 regions) (unchanged this window)",
       "upstream_commits": ["c554e8b", "a3d402c"]
     },
     {
       "path": "apps/webhook/package.json",
-      "reason": "eslint-lint-gate coupled bundle; package.json 3-way merges clean but its lock conflicts, so held together",
+      "reason": "eslint-lint-gate coupled bundle; package.json 3-way merges clean but its lock conflicts, so held together (unchanged this window)",
       "upstream_commits": ["58b2e53", "5d005b6"]
     },
     {
       "path": "apps/webhook/package-lock.json",
-      "reason": "eslint-lint-gate coupled bundle; lockfile 3-way merge conflicts (1 region)",
+      "reason": "eslint-lint-gate coupled bundle; lockfile 3-way merge conflicts (1 region) (unchanged this window)",
       "upstream_commits": ["58b2e53", "5d005b6"]
     },
     {
-      "path": "apps/dashboard/lib/skill-icons.data.ts",
-      "reason": "icon subsystem deferred - derived file regenerated from catalog/skill-icons.json (which pre-existingly lacks a cortx-reliability glyph, so bin/generate-skill-icons fails); needs operator glyph + regen",
-      "upstream_commits": ["3f3509c", "0154c0e", "19aafe6"]
-    },
-    {
       "path": "llms.txt",
-      "reason": "fork-only MiroShark copy vs upstream nine-harness/GLM edits (unchanged this window; still diverges)",
+      "reason": "fork-only MiroShark copy vs upstream nine-harness/GLM edits; still diverges (unchanged this window)",
       "upstream_commits": ["bb8211f"]
     },
     {
       "path": "skills/competitor-monitor/SKILL.md",
-      "reason": "upstream table-row-diffing update (#1043) adds example egress host vendor.com -> eyebrow capability-expansion gate would fail without a lock rescan; held with coupled scripts/competitor-monitor.mjs",
+      "reason": "upstream table-row-diffing update (#1043) adds example egress host -> eyebrow capability-expansion gate would need a lock rescan; held with coupled scripts/competitor-monitor.mjs (unchanged this window)",
       "upstream_commits": ["c28ab4c"]
     },
     {
       "path": "skills/compute-resell",
-      "reason": "needs-eyebrowlock-scan - new upstream skill (#1036); no eyebrow binary in the sync env to add its eyebrowlock.json entry, and the coverage gate hard-fails a skill with no lock entry",
+      "reason": "needs-eyebrowlock-scan - new upstream skill (#1036) not present locally; predates baseline so no longer in the compare window (carry-forward only). Operator can fetch+add then eyebrow scan",
       "upstream_commits": ["3f3509c"]
     },
     {
       "path": "skills/submit-hook",
-      "reason": "needs-eyebrowlock-scan - new upstream skill (#1040); no eyebrow binary in the sync env to add its eyebrowlock.json entry",
+      "reason": "needs-eyebrowlock-scan - new upstream skill (#1040) not present locally; predates baseline so no longer in the compare window (carry-forward only). Operator can fetch+add then eyebrow scan",
       "upstream_commits": ["0154c0e"]
-    },
-    {
-      "path": "skills/miroshark-matchday",
-      "reason": "needs-eyebrowlock-scan - new upstream skill (#1056, MiroShark-relevant); no eyebrow binary in the sync env to add its eyebrowlock.json entry",
-      "upstream_commits": ["f891ede"]
     }
   ]
 }

@@ -1,0 +1,275 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "aeon-update",
+        "description": "Synced 19 upstream commits → PR #181"
+      },
+      "children": [
+        "badge_status",
+        "separator_1",
+        "section_sync",
+        "separator_2",
+        "section_skills",
+        "separator_3",
+        "section_needs_hand",
+        "separator_4",
+        "pr_link"
+      ]
+    },
+    "badge_status": {
+      "type": "Badge",
+      "props": {
+        "text": "✅ Complete • 2026-09-21",
+        "variant": "default"
+      }
+    },
+    "separator_1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "section_sync": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading_sync",
+        "text_upstream",
+        "stack_commits",
+        "stat_files"
+      ]
+    },
+    "heading_sync": {
+      "type": "Heading",
+      "props": {
+        "text": "Upstream Sync",
+        "level": "h2"
+      }
+    },
+    "text_upstream": {
+      "type": "Text",
+      "props": {
+        "text": "Upstream aeonfun/aeon was 19 commits ahead. Baseline advances to ba01e9f on merge.",
+        "variant": "body"
+      }
+    },
+    "stack_commits": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "text_commits_range",
+        "text_regenerated"
+      ]
+    },
+    "text_commits_range": {
+      "type": "Text",
+      "props": {
+        "text": "Commits: 95142d1..ba01e9f",
+        "variant": "caption"
+      }
+    },
+    "text_regenerated": {
+      "type": "Text",
+      "props": {
+        "text": "Regenerated catalogs",
+        "variant": "caption"
+      }
+    },
+    "stat_files": {
+      "type": "Stat",
+      "props": {
+        "label": "Files Applied",
+        "value": "47",
+        "delta": "15 added, 31 updated, 1 auto-merged"
+      }
+    },
+    "separator_2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "section_skills": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading_skills",
+        "skill_sc_audit",
+        "skill_create_prove",
+        "text_rest_window"
+      ]
+    },
+    "heading_skills": {
+      "type": "Heading",
+      "props": {
+        "text": "New Skills",
+        "level": "h2"
+      }
+    },
+    "skill_sc_audit": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "badge_sc_audit",
+        "text_sc_audit"
+      ]
+    },
+    "badge_sc_audit": {
+      "type": "Badge",
+      "props": {
+        "text": "sc-audit",
+        "variant": "outline"
+      }
+    },
+    "text_sc_audit": {
+      "type": "Text",
+      "props": {
+        "text": "Deep smart-contract audit",
+        "variant": "caption"
+      }
+    },
+    "skill_create_prove": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "badge_create_prove",
+        "text_create_prove"
+      ]
+    },
+    "badge_create_prove": {
+      "type": "Badge",
+      "props": {
+        "text": "create-prove",
+        "variant": "outline"
+      }
+    },
+    "text_create_prove": {
+      "type": "Text",
+      "props": {
+        "text": "Pulled eyebrow v0.4.2 binary in-run (version CI verifies with, not v0.4.3 in action comment). Lock covers them and CI stays green.",
+        "variant": "caption"
+      }
+    },
+    "text_rest_window": {
+      "type": "Text",
+      "props": {
+        "text": "Rest of window: upstream's dev-loop hardening stack (live proof + verified repair + telegram ship route)",
+        "variant": "caption"
+      }
+    },
+    "separator_3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "section_needs_hand": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading_needs",
+        "text_needs_intro",
+        "list_needs",
+        "text_conflicts"
+      ]
+    },
+    "heading_needs": {
+      "type": "Heading",
+      "props": {
+        "text": "Needs Attention (in PR)",
+        "level": "h2"
+      }
+    },
+    "text_needs_intro": {
+      "type": "Text",
+      "props": {
+        "text": "5 items need a hand:",
+        "variant": "body"
+      }
+    },
+    "list_needs": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "item_aeon_yml",
+        "item_github_readme",
+        "item_skill_packs",
+        "item_matchday"
+      ]
+    },
+    "item_aeon_yml": {
+      "type": "Text",
+      "props": {
+        "text": "• aeon.yml workflow + ci-tests.yml (your env/test-list narrowing)",
+        "variant": "caption"
+      }
+    },
+    "item_github_readme": {
+      "type": "Text",
+      "props": {
+        "text": "• .github/README.md (bumped 80→82 skill count to keep CI green; upstream rewrite still needs merging)",
+        "variant": "caption"
+      }
+    },
+    "item_skill_packs": {
+      "type": "Text",
+      "props": {
+        "text": "• docs/skill-packs.md",
+        "variant": "caption"
+      }
+    },
+    "item_matchday": {
+      "type": "Text",
+      "props": {
+        "text": "• miroshark-matchday (upstream added vertical 9:16 render — clean +2 to graft)",
+        "variant": "caption"
+      }
+    },
+    "text_conflicts": {
+      "type": "Text",
+      "props": {
+        "text": "14 older conflicts still carried forward",
+        "variant": "muted"
+      }
+    },
+    "separator_4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "pr_link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #181: Upstream Sync",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/pull/181",
+        "source": "GitHub"
+      }
+    }
+  }
+}

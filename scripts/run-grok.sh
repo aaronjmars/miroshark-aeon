@@ -161,13 +161,14 @@ grok_oauth_refresh() {
     --data-urlencode "client_id=$cid" \
     --data-urlencode "refresh_token=$rt" 2>/dev/null)
   if [ -z "$resp" ]; then
-    log "::warning::grok oauth: refresh request to $ep failed (empty/timeout) - falling through to the on-disk token"; return 0
+    log "::warning::grok oauth: refresh request to $ep failed (empty/timeout) - falling through to the on-disk token"
+    GROK_OAUTH_DEGRADED=1; return 0
   fi
   access=$(jq -r '.access_token // empty' <<<"$resp" 2>/dev/null)
   if [ -z "$access" ]; then
     local oerr; oerr=$(jq -r '[.error,.error_description]|map(select(.!=null and .!=""))|join(": ")' <<<"$resp" 2>/dev/null)
     log "::warning::grok oauth: refresh failed${oerr:+ ($oerr)} - the stored refresh token was likely rotated/consumed by an earlier run and not saved. Re-connect the X account in the dashboard, and set a secrets-write PAT (GH_SECRETS_PAT / GH_GLOBAL) so future rotations persist. See docs/harnesses.md."
-    return 0
+    GROK_OAUTH_DEGRADED=1; return 0
   fi
   new_rt=$(jq -r '.refresh_token // empty' <<<"$resp" 2>/dev/null)
   expires_in=$(jq -r '.expires_in // 21600' <<<"$resp" 2>/dev/null)   # default 6h
@@ -180,7 +181,8 @@ grok_oauth_refresh() {
     mv "$tmp" "$auth"; chmod 600 "$auth" 2>/dev/null || true
     log "::debug::grok oauth: refreshed access token (expires $new_exp)"
   else
-    rm -f "$tmp"; log "::warning::grok oauth: could not rewrite auth.json after refresh - using the on-disk token"; return 0
+    rm -f "$tmp"; log "::warning::grok oauth: could not rewrite auth.json after refresh - using the on-disk token"
+    GROK_OAUTH_DEGRADED=1; return 0
   fi
   # Persist the rotated refresh token so the NEXT run stays valid. Needs a
   # secrets-write PAT (the default GITHUB_TOKEN cannot). LOUD on failure - an
@@ -200,7 +202,23 @@ grok_oauth_refresh() {
 }
 # Only meaningful on the CI OAuth path (a GROK_CREDENTIALS secret was restored above);
 # a local `grok login` session (no GROK_CREDENTIALS) is deliberately left untouched.
+GROK_OAUTH_DEGRADED=0
 [ -n "${GROK_CREDENTIALS:-}" ] && grok_oauth_refresh
 
-log "::debug::grok setup complete (CLI + auth staged); runs go through run-harness grok"
+# exit 0 either way (a refresh failure is not fatal here - the on-disk access token
+# may still have some life left) but "auth staged" is a lie when we just warned
+# refresh failed. that false-positive is what lets an auth problem masquerade as a
+# clean setup right before the run dies downstream on an already-expired token.
+if [ "$GROK_OAUTH_DEGRADED" = 1 ]; then
+  log "::warning::grok setup complete but auth is DEGRADED (OAuth refresh failed - see warning above); proceeding with the existing on-disk token, which may already be expired"
+  # Signal the degraded state across the process boundary. The caller
+  # (install-harness.sh) runs this script as a subprocess, so the shell flag
+  # above cannot reach it. When the caller hands us a marker path, touch it so
+  # it can print an honest "auth DEGRADED" line instead of a false "auth staged".
+  [ -n "${GROK_DEGRADED_MARKER:-}" ] && : > "$GROK_DEGRADED_MARKER"
+else
+  log "::debug::grok setup complete (CLI + auth staged); runs go through run-harness grok"
+  # Clear any stale marker so a healthy run never reports as degraded.
+  [ -n "${GROK_DEGRADED_MARKER:-}" ] && rm -f "$GROK_DEGRADED_MARKER"
+fi
 exit 0

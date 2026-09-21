@@ -64,8 +64,20 @@ case "$H" in
     # steps and exits — the actual run then goes through run-harness grok, on
     # grok's own auth. Keeping the pin + restore in one place is why this shells
     # out rather than inlining an `npm install -g @xai-official/grok`.
+    # run-grok.sh setup exits 0 even when the OAuth refresh degrades (a stale
+    # on-disk token may still have some life), so its exit code cannot tell us
+    # whether auth is healthy. Hand it a marker path instead: if it comes back
+    # touched, the refresh failed and printing "auth staged" would be a lie.
+    GROK_DEGRADED_MARKER="${RUNNER_TEMP:-${TMPDIR:-/tmp}}/grok-auth-degraded.$$"
+    export GROK_DEGRADED_MARKER
+    rm -f "$GROK_DEGRADED_MARKER"
     bash "${GITHUB_WORKSPACE:-$(pwd)}/scripts/run-grok.sh" setup
-    echo "grok: CLI + auth staged (auth: ${AUTH_MODE:-native})" ;;
+    if [ -f "$GROK_DEGRADED_MARKER" ]; then
+      rm -f "$GROK_DEGRADED_MARKER"
+      echo "grok: CLI installed, auth DEGRADED (OAuth refresh failed; using the existing on-disk token, which may be expired) (auth: ${AUTH_MODE:-native})"
+    else
+      echo "grok: CLI + auth staged (auth: ${AUTH_MODE:-native})"
+    fi ;;
   codex)
     # PINNED, like aeon pins claude-code. Unpinned, this step silently tracked
     # latest: two cells that passed on 2026-07-21 failed hours later with an

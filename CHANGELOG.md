@@ -11,6 +11,30 @@ from or pin to; the template keeps serving the latest `main` to new forks.
 
 ### Added
 
+- **New `sc-audit` skill (Dev & Code).** A deep smart-contract audit skill: point it at a
+  Solidity GitHub repo, a live on-chain address (`<chain>:0x...`, with verified-source fetch
+  plus proxy/owner/funds-at-risk context), or a bundled fixture. It models the protocol
+  invariants and trust boundaries first, runs Slither best-effort, then a bounded agentic pass
+  that hunts a path breaking each invariant, triages, adversarially verifies, proves survivors
+  with a fuzzer (Echidna/Medusa), and routes each finding through `vuln-scanner`'s shared
+  responsible-disclosure machinery. The contract arm split out of `vuln-scanner`; on-chain
+  findings are operator-gated. Catalog 81 to 82. (#1072)
+- **`dev-loop` gains one verified repair pass.** The Aeon Engineer self-test chain can now fix
+  an actionable review finding, re-verify checks, and re-review before recording, instead of
+  stopping at a human handoff. The repair dispatch is authorized only by a fresh review receipt
+  bound to the PR's exact head SHA and fails closed on any mismatch; it runs at most once and
+  never loops. (#1070)
+- **`miroshark-matchday` vertical 9:16 render path.** The local video step now also renders each
+  sim to a `<out>-9x16.mp4` short-form cut (Shorts/TikTok/Reels) after the 16:9 batch, a reflow
+  rather than a center-crop; a failed vertical render is reported and never blocks the 16:9
+  delivery or re-runs anything paid. (#1062)
+- **New `miroshark-matchday` skill (Crypto & Markets).** A Friday bulk football-matchday
+  workflow on MiroShark: it builds one scenario per major league (Premier League, Serie A,
+  La Liga) from live fixtures, pays $1 USDC per sim via x402 through the Finance District
+  agent wallet (gasless EIP-3009 on Base, hard $4/run cap, retry-once-before-settlement),
+  launches all sims in parallel, collects share links and full reports, and renders one
+  1920x1080 video per sim locally (sandboxed CI ships a ready-to-run render pointer instead
+  so the paid step never repeats). Disabled by default. (#1056)
 - **New `compute-resell` skill (Crypto & Markets).** A disabled-by-default crypto
   skill that resells free or low-cost provider compute (Bankr, AWS Bedrock, Google
   Vertex) on the [Surplus Intelligence](https://surplusintelligence.ai) market. One
@@ -29,9 +53,31 @@ from or pin to; the template keeps serving the latest `main` to new forks.
   paid delivery rate, active incidents, latency, and a clear proceed/warn/block
   recommendation. It merged in a prior window but landed below the sync watermark and
   was never documented; reconciled into the catalog and icon set here. (#954)
+- **`vuln-scanner` gains an opt-in Riva research kernel.** A focused threat-model /
+  invariant scan selectable alongside the legacy scanner, with a shadow mode that runs
+  it side by side for comparison before switching over. It merged just after the prior
+  sync window but is numbered below that watermark, so it is reconciled here. (#1039)
 
 ### Changed
 
+- **`vuln-scanner` disclosure routing hardened.** A new SECURITY.md-first intake step resolves
+  the repo's designated channel (vendor PSIRT / bug-bounty portal, then security email, then an
+  explicit GitHub PVR, including the org-level `{owner}/.github` fallback) before the finding-type
+  matrix, so a code flaw is no longer filed on a GitHub PVR queue a vendor never reads. A PVR
+  preflight now reads the HTTP status code, so a 404 (private / missing / renamed) no longer
+  misreads as enabled. (#1073)
+- **Aeon PR watermark scoped to self-test runs.** The "Built by Aeon" / "Built autonomously by
+  Aeon" PR footer is now gated on `$AEON_DISPATCH_ID`, set only when the dev-loop chain
+  dispatches a run, so real external contributions ship without AI-attribution branding. (#1069)
+- **Maintenance.** Always-on CI Gate job added for branch protection (#1065); three
+  `curl`-piped-to-shell mentions in `vuln-scanner`'s prose rephrased to clear the eyebrow RCE
+  gate with no behavior change (#1068).
+- **`competitor-monitor` gains opt-in table-row diffing for list pages.** A watch-list
+  entry ending in `[rows]` opts that page in, so its snapshot also records every table row
+  as a normalised `cell | cell` string and the diff emits `rows_added` / `rows_removed`
+  with a capped item list. Off by default; ordinary pages never churn on table layout. Lets
+  the skill watch pages whose signal IS the rows (a vendor CVE / acknowledgements table, a
+  status-page incident table). (#1043)
 - **`deploy-uni-hook` enforces the mandatory 10 bps AeonFee on every deployed hook.**
   The audited `AeonFee` base is now ported into the skill's templates, so every hook
   the live skill deploys inherits the mandatory protocol fee to `AEON_FEE_RECIPIENT`.
@@ -40,6 +86,50 @@ from or pin to; the template keeps serving the latest `main` to new forks.
 
 ### Fixed
 
+- **Reflected XSS in the dashboard MCP OAuth callback (GHSA-gh95-xx4q-qch8).** `GET
+  /api/mcp-auth/callback` interpolated attacker-controlled `error` / `error_description` query
+  params into its response HTML unescaped; `page()` now HTML-escapes title and detail for every
+  caller. Same-origin script could otherwise reach the dashboard's loopback-gated `/api/*`
+  surface (write secrets, run or install skills). (#1066)
+- **Riva shadow-mode isolation gap on the MCP dispatch path.** The shadow/compare selector that
+  forces read-only mode and strips disclosure credentials lived only in the workflow's
+  `resolve-riva-capabilities.sh`, so dispatching a shadow run through `apps/mcp-server` got full
+  write tools and every live credential. The check moves into `scripts/skill_mode.sh` as one
+  enforcement point both paths consult. (#1067)
+- **Broken partner avatars on aeon.fun/ecosystem.** Refreshed the HivemindOS X avatar (old pinned
+  URL 404'd) and removed the dead Spoon row (handle gone), so neither renders a broken logo.
+  (#1071)
+- **Read-only skills keep `memory/` and `output/` writable in the sandbox.** The read-only
+  harness sandbox mounts the tree read-only except the state dirs, so a read-only skill can
+  still persist its `memory/` and `output/` between runs. (#1042)
+- **Read-only skills now record their `### <skill>` baseline in `memory/logs/`.** The
+  read-only capability guard logged only a content-free stub, so every read-only skill
+  (narrative-tracker, github-trending, aeon-doctor, and the rest) silently lost its
+  day-to-day baseline; it now appends the real captured run output under a `### <skill>`
+  heading for next-run dedup / diff. (#1051)
+- **A read-only skill's failure now leaves a log too.** The guard and commit steps were
+  implicitly gated on `success()`, so a failed read-only run left zero trace; a
+  `!cancelled()` guard plus a dedicated failure-log commit step fix it. (#1052)
+- **Chain runner distinguishes no-action from success.** A completed dev-loop that shipped
+  nothing now emits `CHAIN_STATUS=no-action` and is excluded from reliability bookkeeping,
+  so a no-op no longer inflates dev-loop success rates. (#1053)
+- **`vuln-scanner` bounds the trufflehog filesystem scan.** The filesystem pass is now
+  wrapped in `timeout 300` (matching the git-history pass) and scanners must not be
+  backgrounded, so a large monorepo checkout no longer burns the whole turn budget and
+  falsely reports `success`. (#1054)
+- **`github-trending` keeps its feed machine-parseable for `vuln-scanner`.** A header-only
+  notify that folded picks into a prose name list left the scanner zero parseable
+  `owner/repo` targets; the slate now requires one `[owner/repo](url)` line per pick, and
+  the scanner parses bare permalinks and falls back to search on an unparseable feed. (#1055)
+- **`aeon-update` and `changelog` close the gaps that landed downstream sync PRs CI-red.**
+  `aeon-update`'s eyebrow fail-safe now also defers a clean update/merge of an existing skill
+  whose lock entry carries findings (a line-shift above a pinned finding trips
+  `failOnCapabilityExpansion`), and the `changelog` skill runs the same formatter the CI gate
+  runs. (#1061)
+- **`grok` auth no longer claims a staged credential after a failed refresh.** A failed
+  OAuth refresh was reporting success, so the next run assumed valid grok credentials and
+  failed downstream instead of re-authing. (#1060)
+- **Dependency and CI maintenance.** (#1044, #1046, #1047, #1048, #1049, #1050, #1057, #1058)
 - **`aeon-update` derives the eyebrow version from CI.** The in-run `eyebrowlock.json`
   rescan read the version from `.github/workflows/ci-skill-integrity.yml` instead of a
   hardcoded pin, so sync PRs stop landing red on the `verify` check when CI has moved

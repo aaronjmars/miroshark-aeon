@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-09-14T13:35:46.632796Z",
+  "generatedAt": "2026-09-21T11:16:16.385935626Z",
   "generator": "eyebrow/0.4.2",
   "artifacts": [
     {
@@ -117,7 +117,7 @@
       "files": [
         {
           "path": "SKILL.md",
-          "hash": "b7bb683299f312fd4864d43b53260493c29b8a4618972632d2cfe6a438a86c3c"
+          "hash": "f774d8bd3dfd7c8b508bd9c24dcb5876cad8e2653bc8d4456d8232191ccce3b4"
         },
         {
           "path": "riva.md",
@@ -126,24 +126,6 @@
       ],
       "findings": [
         {
-          "ruleId": "RCE-PIPE-EXEC",
-          "severity": "critical",
-          "owasp": "ASK-01",
-          "file": "SKILL.md",
-          "line": 138,
-          "snippet": "network is open, but `pip install` / `curl | sh` / `tar` are **not** on the in-run",
-          "explanation": "downloads and executes remote code via a pipe to a shell"
-        },
-        {
-          "ruleId": "RCE-PIPE-EXEC",
-          "severity": "critical",
-          "owasp": "ASK-01",
-          "file": "SKILL.md",
-          "line": 152,
-          "snippet": "# open, but `pip install` / `curl | sh` / `tar` are NOT allow-listed — `python3 -m pip`,",
-          "explanation": "downloads and executes remote code via a pipe to a shell"
-        },
-        {
           "ruleId": "EXEC-PRIMITIVE",
           "severity": "medium",
           "owasp": "ASK-03",
@@ -151,18 +133,9 @@
           "line": 393,
           "snippet": "- `exec` / `spawn` / `system` / `eval` sinks + subprocess with string interpolation (RCE)",
           "explanation": "uses a process-execution primitive"
-        },
-        {
-          "ruleId": "RCE-PIPE-EXEC",
-          "severity": "critical",
-          "owasp": "ASK-01",
-          "file": "SKILL.md",
-          "line": 1127,
-          "snippet": "1. **Install** — the binaries (`semgrep`, `trufflehog`, `osv-scanner`, `slither`) are **not pre-installed**. Stage the…",
-          "explanation": "downloads and executes remote code via a pipe to a shell"
         }
       ],
-      "contentHash": "sha256-30e4dd34d44cd10c648cccf99318d6dc50f14ea4f4278ea68fc1a87991b85e3d",
+      "contentHash": "sha256-d813614e795d3221f7838a01807012dfcc4a062667edee9b988178cbdea2236c",
       "discoveredFrom": "skills/vuln-scanner/SKILL.md"
     },
     {
@@ -846,10 +819,10 @@
       "files": [
         {
           "path": "SKILL.md",
-          "hash": "b9a7d47326648ec745a35419c2e0b67521d58020fb1eef4959f58df4be09f5f3"
+          "hash": "b71672ed11a7624534585a03f1b359acc13befba0d4e3d79de75002e8034b3fd"
         }
       ],
-      "contentHash": "sha256-3ffc12f919716a0035c0594849f176a844ba4b56ba0f71d6bf1152a2f1aaaaea",
+      "contentHash": "sha256-e0993ed63c3067cf8496e18eb2e2d70882ac1ee3cc37f6bbcb770fcb295cf415",
       "discoveredFrom": "skills/feature/SKILL.md"
     },
     {
@@ -992,10 +965,10 @@
       "files": [
         {
           "path": "SKILL.md",
-          "hash": "cb3cf34c2d9df22e91f4a1fd68fe05e31939093b1abce760dd20b3af00417899"
+          "hash": "2b0991c38bf51e2ef602edaf99afcb9b4ec5b0fcaa680bd1d0dd710bd0e2393f"
         }
       ],
-      "contentHash": "sha256-01a65e1053807557f7ae0cdc1d4eaadb85ae1aeab32fc8fd714db1f8b834c035",
+      "contentHash": "sha256-9560813e46d3be92b7d962ec29f0db681fcd3403bbfcf7fc3a25ba75d43f610f",
       "discoveredFrom": "skills/changelog/SKILL.md"
     },
     {
@@ -1176,10 +1149,10 @@
       "files": [
         {
           "path": "SKILL.md",
-          "hash": "c02bffb0e44c325923ac4780c5c9ade453155876654cd8b82dd32ff7251a42bd"
+          "hash": "236bbbc8088cd488212ee2dc1054f78dc2b7bf072c0c5c2065053524307af967"
         }
       ],
-      "contentHash": "sha256-009610fc6341099ee74294863ccfa9bc5ffa5290e52934444f498ad4c7b9b0b4",
+      "contentHash": "sha256-7219944b5fae9037687f6a6da069d111c9c8c5064b76ea3fc9b81d65bc3e2d3d",
       "discoveredFrom": "skills/idea-pipeline/SKILL.md"
     },
     {
@@ -1726,6 +1699,46 @@
       "discoveredFrom": "skills/reply-maker/SKILL.md"
     },
     {
+      "id": "a5d57a2363a5378d",
+      "tool": "aeon",
+      "scope": "project:.",
+      "type": "skill",
+      "name": "sc-audit",
+      "source": {
+        "kind": "local",
+        "ref": "skills/sc-audit"
+      },
+      "capabilities": {
+        "network": [
+          "registry.npmjs.org"
+        ]
+      },
+      "files": [
+        {
+          "path": "SKILL.md",
+          "hash": "c21b3df3582cfab66f5f24895318ac8dcf7b194669d3b0a1fea8b05c025f3d81"
+        },
+        {
+          "path": "fixtures/README.md",
+          "hash": "e85fcce9c2d32d778e0818ade64a467daedf29b5c9ce8e889c4b2bde759974b3"
+        },
+        {
+          "path": "fixtures/vault/foundry.toml",
+          "hash": "1cc646035ef05066e19d13738fd97494c17506339a62438d7e8da07beb9d1b78"
+        },
+        {
+          "path": "fixtures/vault/src/Vault.sol",
+          "hash": "eae6b5d9a6524c603714aa9b117ab110208ae1d55e2ab539274fa807d5ff118f"
+        },
+        {
+          "path": "references/hook-checklist.md",
+          "hash": "2300653056e64107c579d22d52f2fcfb5ecbd7f5996b8fc636747d5e6e78ba41"
+        }
+      ],
+      "contentHash": "sha256-150abc4feac75df5f6062fc6655826505fc7763dbca438665aefafe1b8a2e4e1",
+      "discoveredFrom": "skills/sc-audit/SKILL.md"
+    },
+    {
       "id": "b097177e9f39efa5",
       "tool": "aeon",
       "scope": "project:.",
@@ -1961,6 +1974,26 @@
       "discoveredFrom": "skills/install-skill/SKILL.md"
     },
     {
+      "id": "c636e1b4782ecd09",
+      "tool": "aeon",
+      "scope": "project:.",
+      "type": "skill",
+      "name": "create-prove",
+      "source": {
+        "kind": "local",
+        "ref": "skills/create-prove"
+      },
+      "capabilities": {},
+      "files": [
+        {
+          "path": "SKILL.md",
+          "hash": "c9d80641f15dd9ade5cabe1b2c20b1d53e7add146c1ad6a11a4e31005a1b8ca3"
+        }
+      ],
+      "contentHash": "sha256-3c87cd1273adbc7fa8fffb570ff9f69f00166e885c4a4f256b7c3cec9f996f58",
+      "discoveredFrom": "skills/create-prove/SKILL.md"
+    },
+    {
       "id": "c87437853e0ee112",
       "tool": "aeon",
       "scope": "project:.",
@@ -2115,7 +2148,7 @@
       "files": [
         {
           "path": "SKILL.md",
-          "hash": "a8278e1a52fca625a143139dc64e8fd2781a47c60c3c9d5f37b2079b98513b8a"
+          "hash": "bb0e9be128d2caaad48595f92db313deb6ed0b8e8d628b4ffdf19538219a8978"
         },
         {
           "path": "references/ci.md",
@@ -2127,11 +2160,11 @@
         },
         {
           "path": "references/layout.md",
-          "hash": "78f08334fb76549a7dd0575cb69cf8965b9067b81950d4cec2f00255a1e8e17d"
+          "hash": "14fbfc71f656737d5983c436bc088ee93fd1b636aac60dd5ecea8010ca6aa921"
         },
         {
           "path": "references/mcp.md",
-          "hash": "6c9356a3a22dae8a0d0013030cfb6c16a5b91b814ebb8e1715110be484cdf4f0"
+          "hash": "08583d066f0dc7683478e9c3b41af42059c1643b87e4d9a3c882fbd33ccc344b"
         },
         {
           "path": "references/secrets.md",
@@ -2139,14 +2172,14 @@
         },
         {
           "path": "references/skill-anatomy.md",
-          "hash": "5ba6ebb2439425f995f78327b30a9c2c3817e79c84ad8d5e902497716b25c86c"
+          "hash": "31571144efd025a5dbb9eea196c1435ce5e726888394738e093e5b7c0a88fcac"
         },
         {
           "path": "scripts/mine-history.mjs",
           "hash": "0edc7445542a21cb5518e813a6ae462a1d469636601a799efc1bec86b4058c5a"
         }
       ],
-      "contentHash": "sha256-7a390fb78eef4921aa7a2588d6d0ecc219aae92022d48c67f62d4fc4618eb1b8",
+      "contentHash": "sha256-8d7d90609c4bb78f72c32e99e2941f43c7d81de66b479ce30402e74db826d658",
       "discoveredFrom": ".claude/skills/aeon/SKILL.md"
     },
     {
@@ -2432,7 +2465,7 @@
       "files": [
         {
           "path": "SKILL.md",
-          "hash": "25b5cd628211b0ef263c2cda1633289535c464734f726e9696388b35d0a87e07"
+          "hash": "3f99975cadb2163512661a10eebc6b2890ac5acb1f67b8e846e4838d8b48cde5"
         }
       ],
       "findings": [
@@ -2446,7 +2479,7 @@
           "explanation": "references sensitive credential or secret paths"
         }
       ],
-      "contentHash": "sha256-d7981bbd0cfb4cbf2bbe5ce87e09e1a9396d61f1f845c26b713402c28355bbc4",
+      "contentHash": "sha256-cbc52e97f6c5391dadb47d3b61ee88090fd47ad0637fab1c1a25c82c9bd7b9ed",
       "discoveredFrom": "skills/aeon-update/SKILL.md"
     }
   ]

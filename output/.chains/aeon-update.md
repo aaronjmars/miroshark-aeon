@@ -1,15 +1,14 @@
-ℹ️ aeon-update: PR #180
+✅ aeon-update: PR #181
 
-**aeon-update — 2026-09-14** · synced 25 commits → PR
+**aeon-update — 2026-09-21**
+Synced 19 upstream commits → PR #181.
 
-Upstream `aeonfun/aeon` was 25 commits ahead (`21b82db..95142d1`). Landed **43 files clean**, **15 held** for a manual pass.
+Upstream `aeonfun/aeon` was 19 commits ahead (`95142d1..ba01e9f`). Applied **47 files clean** (15 added, 31 updated, 1 auto-merged) + regenerated catalogs. Baseline advances to `ba01e9f` on merge.
 
-**Applied:** read-only sandbox now keeps `memory/`+`output/` writable (#1042/#1051) · chain no-action telemetry (#1053) · vuln-scanner Riva kernel (#1039) · deploy-uni-hook mandatory 10 bps AeonFee (#1035) · aeon-update derives its eyebrow version from CI (#1037) · `.claude/`+`plugin/` skill docs.
+Two new skills landed clean: **`sc-audit`** (deep smart-contract audit) and **`create-prove`** — pulled the eyebrow v0.4.2 binary in-run (the version CI actually verifies with, not the v0.4.3 in the action comment), so the lock covers them and CI stays green. Rest of the window is upstream's dev-loop hardening stack (live proof + verified repair + telegram ship route).
 
-**Held (need you):** README/aeon.yml/ci-tests/skill-packs real conflicts · dashboard+webhook dep bundles (lock conflicts) · **3 new skills** — `compute-resell`, `submit-hook`, and `miroshark-matchday` (weekly bulk football sims + video, #1056 — ours) — need an `eyebrow scan` to land · `competitor-monitor` update adds an example egress host, held.
+**5 need a hand** (in the PR): `aeon.yml` workflow + `ci-tests.yml` (your env/test-list narrowing), `.github/README.md` (I bumped the 80→82 skill count to keep CI green; the upstream rewrite still needs merging), `docs/skill-packs.md`, and `miroshark-matchday` (upstream added a vertical 9:16 render — clean +2 to graft). 14 older conflicts still carried forward.
 
-Catalogs hand-synced (generators need approval the sync env can't give). Baseline advances to `95142d1` on merge.
+PR: https://github.com/aaronjmars/miroshark-aeon/pull/181
 
-PR: https://github.com/aaronjmars/miroshark-aeon/pull/180
-
-🔗 https://github.com/aaronjmars/miroshark-aeon/pull/180
+🔗 https://github.com/aaronjmars/miroshark-aeon/pull/181
