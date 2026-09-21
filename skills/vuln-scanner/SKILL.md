@@ -135,7 +135,7 @@ cd "$(basename "$REPO")"
 Raw grep produces too many false positives. Use tools with dataflow reachability and verified-secret matching.
 
 Stage the scanners **in-run** into `/tmp/bin` (see the install preamble below). The
-network is open, but `pip install` / `curl | sh` / `tar` are **not** on the in-run
+network is open, but `pip install` / a curl-piped-to-shell install / `tar` are **not** on the in-run
 capability allowlist — use the ones that are: `python3 -m pip install …` for the Python
 tools (semgrep, slither) and `curl -o … && chmod +x` for the Go binaries (osv-scanner,
 trufflehog). Put `/tmp/bin` on `PATH` and invoke
@@ -149,7 +149,7 @@ in `sources.txt` below) — never abort the whole run for one tool.
 mkdir -p /tmp/vuln-scan /tmp/bin
 export PATH="/tmp/bin:$PATH"
 # Stage the scanners IN-RUN, best-effort, using ONLY allow-listed commands (network is
-# open, but `pip install` / `curl | sh` / `tar` are NOT allow-listed — `python3 -m pip`,
+# open, but `pip install` / a curl-piped-to-shell install / `tar` are NOT allow-listed — `python3 -m pip`,
 # `curl -o`, `chmod`, `npm`/`npx`, `node` ARE). Wrap each in `|| true`; any tool that fails
 # to stage is skipped by the `command -v` guards below (records fail), never fatal:
 python3 -m pip install --quiet --disable-pip-version-check semgrep slither-analyzer 2>/dev/null || true
@@ -547,7 +547,22 @@ Riva candidate sets, triage differences, and verification differences in the
 private shadow artifact, then continue to A6–A8 with `channel: shadow` and no
 PVR, email, issue, or public-PR side effect. Shadow mode is comparison-only.
 
-This is the core of the scan arm. Pick the channel by finding type:
+This is the core of the scan arm. Channel selection has **two stages, in order**: first honor the channel the repo's own security policy designates (A5.0), and only then fall back to routing by finding type (the matrix below).
+
+#### A5.0. Read SECURITY.md FIRST - the repo's designated intake channel wins
+
+**Before choosing any channel, read the repo's own security policy and obey it.** GitHub PVR being *technically enabled* on a repo does **not** make it the right channel - many large vendors (Google, Microsoft, GitLab, ...) have PVR available org-wide but triage security reports through their own PSIRT intake. Filing a GitHub PVR there means the report lands in a queue they don't watch and **silently violates their stated process**. (Confirmed 2026-07-02: a code flaw in `google/agents-cli` was filed as GitHub PVR `GHSA-x742-5676-qjpj`, ignoring the repo's SECURITY.md, which says *"Please use https://g.co/vulnz to report security vulnerabilities."*)
+
+1. **Fetch the policy.** Look in `SECURITY.md`, `.github/SECURITY.md`, `docs/SECURITY.md`, and the README's "Security" / "Reporting a Vulnerability" section. **Also check the org-level default `{owner}/.github` repo** (`gh api /repos/{owner}/.github/contents/SECURITY.md --jq '.content|@base64d'`) - GitHub inherits that policy for **every** repo in the org that lacks its own, so a repo with no `SECURITY.md` of its own may still have a binding one. (This is exactly how `google/agents-cli` was missed: it has no repo-level file, but `google/.github/SECURITY.md` designates `g.co/vulnz`, and the run recorded "No SECURITY.md" because it never checked the org fallback.) Use `gh api` for the raw file, or WebFetch as fallback.
+2. **Find the INTAKE instruction - where to *report*, not how they coordinate.** A policy line like *"we use GitHub Security Advisories for coordination and disclosure"* describes their **downstream** process; it is **not** an instruction to report via PVR. If the same policy names a portal or email for **intake** ("report at...", "use...", "submit to..."), that intake channel is authoritative. Resolve it in this precedence:
+   - **(a) Vendor PSIRT / bug-bounty portal** - a URL to submit a report: `g.co/vulnz`, `bughunters.google.com`, `msrc.microsoft.com`, a `hackerone.com/...` or `bugcrowd.com/...` program, a vendor "report a vulnerability" form. Stage for the operator at `memory/pending-disclosures/` (a portal needs human/web submission). Do **NOT** file GitHub PVR.
+   - **(b) Dedicated security email** (`security@...`, `psirt@...`, a named contact) - **out-of-band email**: stage the auto-send-ready draft (see A5b's 403 branch) for the disclose path (Arm C).
+   - **(c) Explicit GitHub private reporting** - the policy explicitly says to *report* via "GitHub private vulnerability reporting", "open a draft security advisory", or the Security tab - use **GitHub PVR `/reports` (A5b)**. This is the **only** case where GitHub PVR is the right first choice.
+3. **No SECURITY.md and no discoverable security contact** - fall through to the finding-type matrix below.
+
+If the designated channel can't be actioned by the agent (most portals need human/web submission), **stage it for the operator at `memory/pending-disclosures/` - never substitute GitHub PVR as a "backup".** That recreates the exact wrong-channel duplicate this step exists to prevent. Stage a **portal** draft with `status: pending-operator-send`, a `portal_url:` field (the exact intake URL) and `auto_send: false` with **no** `contact_email` - so Arm C's email sender skips it and it surfaces as an operator-todo (channel `portal`) rather than mis-arming it as an email send. Do **not** also open a GitHub PVR for the same finding.
+
+Otherwise, route by finding type:
 
 | Finding type | Channel | Why |
 |---|---|---|
@@ -590,6 +605,34 @@ EOF
 ```
 
 #### A5b. Private Vulnerability Report (code flaws, verified secrets, contract bugs)
+
+**Preflight - confirm PVR is actually enabled before composing or filing.** Do **not** infer PVR status from a POST failure; read the dedicated flag first. It returns an explicit `true`/`false`, which is distinct from an auth `403`, so a degraded `GH_GLOBAL` token can't masquerade as "PVR disabled" and silently misroute a code flaw to email (the exact false-negative that historically pushed enabled-PVR repos onto the email path).
+
+```bash
+# A5b.0 - preflight PVR status. Branch on the HTTP STATUS CODE, NOT on `--jq .enabled`:
+# on a non-200 response `gh api --jq` prints the ERROR BODY (a JSON blob), NOT empty - so the
+# old `--jq '.enabled' 2>/dev/null` returned `{"message":"Not Found",...}` on a 404 (private /
+# missing / renamed repo) and the same on a 403/429 rate-limit, which a naive `=="true"` test
+# silently reads as "not enabled" and MISROUTES a code flaw. That is the "clanky PVR API"
+# false-negative. Read the status code once and set an explicit state (verified 2026-07-15:
+# public repos = 200 {"enabled":true|false}; private/missing = 404 error blob):
+PVR_RESP=$(gh api "repos/$REPO/private-vulnerability-reporting" -i 2>/dev/null)
+PVR_CODE=$(printf '%s' "$PVR_RESP" | awk 'NR==1{print $2; exit}')
+case "$PVR_CODE" in
+  200) [ "$(printf '%s' "$PVR_RESP" | tail -1 | jq -r '.enabled')" = "true" ] \
+         && PVR_STATE=enabled || PVR_STATE=disabled ;;
+  404) PVR_STATE=unavailable ;;         # repo has no PVR surface (often private) - NOT "disabled"
+  403|429) PVR_STATE=access-unknown ;;  # auth / secondary rate-limit - could not read the flag
+  *)   PVR_STATE=access-unknown ;;      # 5xx / transient
+esac
+# enabled        : compose + POST /reports (below)
+# disabled       : SKIP the POST; out-of-band fallback (A5b 403 branch) + watchlist row
+# unavailable    : out-of-band fallback (often a private repo); no auth alarm needed
+# access-unknown : do NOT assume PVR-off. Raise the auth alarm (A5b 403 branch) and retry the
+#                  probe once; never silently email/misroute on a transient error.
+```
+
+Only when `PVR_STATE` is `enabled` do you compose and POST the report:
 
 ```bash
 # Private third-party reporting uses the /reports endpoint. Do NOT use the bare
@@ -1124,7 +1167,7 @@ specific bullets.
 
 **Arm A (scan).** Getting the scanners to run under GitHub Actions takes **two** things:
 
-1. **Install** — the binaries (`semgrep`, `trufflehog`, `osv-scanner`, `slither`) are **not pre-installed**. Stage them **in-run** into `/tmp/bin` (step A3's preamble): the network is open, but `pip install` / `curl | sh` / `tar` aren't allow-listed, so use `python3 -m pip install …` (semgrep, slither) and `curl -o … && chmod +x` for the Go binaries (osv-scanner, trufflehog). Any tool that can't be staged is skipped by its `command -v` guard (`VULN_SCANNER_SKIPPED`); if **no** scanner is available, Arm A reports `SCAN_TOOLS_MISSING` and skips the scan cleanly rather than erroring the run.
+1. **Install** — the binaries (`semgrep`, `trufflehog`, `osv-scanner`, `slither`) are **not pre-installed**. Stage them **in-run** into `/tmp/bin` (step A3's preamble): the network is open, but `pip install` / a curl-piped-to-shell install / `tar` aren't allow-listed, so use `python3 -m pip install …` (semgrep, slither) and `curl -o … && chmod +x` for the Go binaries (osv-scanner, trufflehog). Any tool that can't be staged is skipped by its `command -v` guard (`VULN_SCANNER_SKIPPED`); if **no** scanner is available, Arm A reports `SCAN_TOOLS_MISSING` and skips the scan cleanly rather than erroring the run.
 2. **Execute** — non-interactive `claude -p` runs under an `--allowedTools` allowlist, so any command not on it is **denied** ("requires approval") with no human to approve. The scanner *bare names* (`semgrep`, `osv-scanner`, `trufflehog`, `slither`) must be listed in the **write tier** of `scripts/skill_mode.sh` for bare invocation to be permitted; if a name is missing it's denied and that scanner is skipped (the scan arm degrades to manual code review — a denial reads as "requires approval", **not** a network/sandbox block). This is why step A3 puts `/tmp/bin` on `PATH` and calls each tool by bare name (`semgrep …`, not `/tmp/bin/semgrep …`) — an absolute-path invocation would not match the allowlist pattern.
 
 This two-part fix resolves ISS-001 (binaries installed *and* runnable). If any scanner binary is still missing at runtime, log `VULN_SCANNER_SKIPPED: <tool> not available`, record `tool=fail` in `sources.txt`, and continue with the remaining scanners rather than aborting the whole run. An all-scanners-fail run must report **error**, not **clean**.
