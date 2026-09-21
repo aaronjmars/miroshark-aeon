@@ -1,0 +1,127 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "$MIROSHARK — CONSOLIDATING"
+      },
+      "children": [
+        "text_narrative",
+        "sep1",
+        "grid_primary_stats",
+        "sep2",
+        "grid_trading_metrics",
+        "sep3",
+        "link_chart"
+      ]
+    },
+    "text_narrative": {
+      "type": "Text",
+      "props": {
+        "text": "Price bounced +4.6% but on just 0.85x average volume — missed the RALLYING bar; order flow turned more sell-skewed.",
+        "variant": "lead"
+      },
+      "children": []
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "grid_primary_stats": {
+      "type": "Grid",
+      "props": {
+        "columns": 3,
+        "gap": "md"
+      },
+      "children": [
+        "stat_price",
+        "stat_liquidity",
+        "stat_volume"
+      ]
+    },
+    "stat_price": {
+      "type": "Stat",
+      "props": {
+        "label": "Price (24h)",
+        "value": "$0.0000025490",
+        "delta": "+4.6%",
+        "trend": "up"
+      },
+      "children": []
+    },
+    "stat_liquidity": {
+      "type": "Stat",
+      "props": {
+        "label": "Liquidity",
+        "value": "$310.1K",
+        "delta": "+4.1%",
+        "trend": "up"
+      },
+      "children": []
+    },
+    "stat_volume": {
+      "type": "Stat",
+      "props": {
+        "label": "Volume (24h)",
+        "value": "$4.5K",
+        "delta": "0.8x 7d avg"
+      },
+      "children": []
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "grid_trading_metrics": {
+      "type": "Grid",
+      "props": {
+        "columns": 2,
+        "gap": "md"
+      },
+      "children": [
+        "stat_buys_sells",
+        "stat_whales"
+      ]
+    },
+    "stat_buys_sells": {
+      "type": "Stat",
+      "props": {
+        "label": "Buys/Sells",
+        "value": "11/20 (ratio 0.55)"
+      },
+      "children": []
+    },
+    "stat_whales": {
+      "type": "Stat",
+      "props": {
+        "label": "Whales",
+        "value": "0"
+      },
+      "children": []
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "link_chart": {
+      "type": "StoryLink",
+      "props": {
+        "title": "View Price Chart",
+        "href": "https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209",
+        "source": "GeckoTerminal"
+      },
+      "children": []
+    }
+  }
+}

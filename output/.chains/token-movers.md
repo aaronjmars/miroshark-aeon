@@ -1,8 +1,8 @@
-*$MIROSHARK — QUIET*
+*$MIROSHARK — CONSOLIDATING*
 
-Volume dropped to 0.3x the 7d average with zero whale trades — the quietest session in the tracked window; price and liquidity both drifted -2.7% on thin flow.
+Price bounced +4.6% but on just 0.85x average volume — missed the RALLYING bar; order flow turned more sell-skewed.
 
-Price $0.0000024374 (-2.7% 24h) | Liq $297.9K (-2.7%) | Vol $1.7K (0.3x 7d)
-Buys/Sells 8/10 (ratio 0.80) | Whales: 0
+Price $0.0000025490 (+4.6% 24h) | Liq $310.1K (+4.1%) | Vol $4.5K (0.8× 7d)
+Buys/Sells 11/20 (ratio 0.55) | Whales: 0
 
 Chart: https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209
