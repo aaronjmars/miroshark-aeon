@@ -1,0 +1,43 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "Tweet Digest",
+        "description": "2026-09-22 • Theme: content channel expansion"
+      },
+      "children": [
+        "stack-stories"
+      ]
+    },
+    "stack-stories": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "story1",
+        "story2"
+      ]
+    },
+    "story1": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Refreshed the intro blog post with everything shipped the last few months",
+        "href": "https://x.com/miroshark_/status/2102402865482363163",
+        "source": "@miroshark_"
+      }
+    },
+    "story2": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Miroshark's now on Substack, intro post is live",
+        "href": "https://x.com/miroshark_/status/2102376945040416810",
+        "source": "@miroshark_"
+      }
+    }
+  }
+}

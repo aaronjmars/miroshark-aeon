@@ -1,4 +1,7 @@
-*Tweet Digest — 2026-09-21*
+ℹ️ Tweet Digest
 
-*Theme: x402aff explainer drops*
-@miroshark_: dropped a YouTube explainer introducing the affiliate program — x402aff moves past the announcement tweet into onboarding content — [link](https://x.com/miroshark_/status/2102045939745575397)
+*Tweet Digest — 2026-09-22*
+
+*Theme: content channel expansion*
+@miroshark_: refreshed the intro blog post with everything shipped the last few months — [link](https://x.com/miroshark_/status/2102402865482363163)
+@miroshark_: miroshark's now on Substack, intro post is live — [link](https://x.com/miroshark_/status/2102376945040416810)
