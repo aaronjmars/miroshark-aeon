@@ -1,0 +1,266 @@
+{
+  "root": "card_root",
+  "state": {},
+  "elements": {
+    "card_root": {
+      "type": "Card",
+      "props": {
+        "title": "Heartbeat: token-movers degraded"
+      },
+      "children": [
+        "alert_main",
+        "sep1",
+        "status_section",
+        "sep2",
+        "failures_section",
+        "sep3",
+        "error_details",
+        "sep4",
+        "tracking_section",
+        "sep5",
+        "timing_section",
+        "sep6",
+        "context_section",
+        "sep7",
+        "link_issue"
+      ]
+    },
+    "alert_main": {
+      "type": "Alert",
+      "props": {
+        "type": "error",
+        "title": "token-movers degraded",
+        "message": "4 consecutive failures today with zero-token empty-completion error. Last success 2026-09-21 06:19 UTC (~37h stale)."
+      }
+    },
+    "sep1": {
+      "type": "Separator"
+    },
+    "status_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "status_label",
+        "status_badge"
+      ]
+    },
+    "status_label": {
+      "type": "Text",
+      "props": {
+        "text": "Status:",
+        "variant": "lead"
+      }
+    },
+    "status_badge": {
+      "type": "Badge",
+      "props": {
+        "text": "FAILED",
+        "variant": "destructive"
+      }
+    },
+    "sep2": {
+      "type": "Separator"
+    },
+    "failures_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "failures_title",
+        "failures_stat",
+        "failure_times"
+      ]
+    },
+    "failures_title": {
+      "type": "Text",
+      "props": {
+        "text": "Consecutive failures today",
+        "variant": "lead"
+      }
+    },
+    "failures_stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Count",
+        "value": "4"
+      }
+    },
+    "failure_times": {
+      "type": "Text",
+      "props": {
+        "text": "Timestamps: 06:10 UTC, 07:00 UTC, 07:38 UTC, 13:48 UTC",
+        "variant": "body"
+      }
+    },
+    "sep3": {
+      "type": "Separator"
+    },
+    "error_details": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "error_label",
+        "error_type",
+        "incident_reference"
+      ]
+    },
+    "error_label": {
+      "type": "Text",
+      "props": {
+        "text": "Error signature",
+        "variant": "lead"
+      }
+    },
+    "error_type": {
+      "type": "Text",
+      "props": {
+        "text": "zero-token empty-completion error",
+        "variant": "body"
+      }
+    },
+    "incident_reference": {
+      "type": "Text",
+      "props": {
+        "text": "Same signature as 08-31 incident (tracked in #153)",
+        "variant": "caption"
+      }
+    },
+    "sep4": {
+      "type": "Separator"
+    },
+    "tracking_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "health_issue_text",
+        "repair_status_text"
+      ]
+    },
+    "health_issue_text": {
+      "type": "Text",
+      "props": {
+        "text": "Health issue #182 auto-filed",
+        "variant": "body"
+      }
+    },
+    "repair_status_text": {
+      "type": "Text",
+      "props": {
+        "text": "skill-repair is disabled — no auto-fix will land",
+        "variant": "caption"
+      }
+    },
+    "sep5": {
+      "type": "Separator"
+    },
+    "timing_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "timing_label",
+        "last_success_date",
+        "stale_duration"
+      ]
+    },
+    "timing_label": {
+      "type": "Text",
+      "props": {
+        "text": "Last successful run",
+        "variant": "lead"
+      }
+    },
+    "last_success_date": {
+      "type": "Text",
+      "props": {
+        "text": "2026-09-21 06:19 UTC",
+        "variant": "body"
+      }
+    },
+    "stale_duration": {
+      "type": "Text",
+      "props": {
+        "text": "Stale for ~37 hours",
+        "variant": "caption"
+      }
+    },
+    "sep6": {
+      "type": "Separator"
+    },
+    "context_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "context_label",
+        "context_metrics",
+        "other_skills"
+      ]
+    },
+    "context_label": {
+      "type": "Text",
+      "props": {
+        "text": "Additional context",
+        "variant": "lead"
+      }
+    },
+    "context_metrics": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "lg"
+      },
+      "children": [
+        "open_prs_stat",
+        "urgent_issues_stat"
+      ]
+    },
+    "open_prs_stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Open PRs",
+        "value": "0"
+      }
+    },
+    "urgent_issues_stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Urgent issues",
+        "value": "0"
+      }
+    },
+    "other_skills": {
+      "type": "Text",
+      "props": {
+        "text": "fetch-tweets ran clean at 17:04 UTC using the same harness (no other skills affected today)",
+        "variant": "body"
+      }
+    },
+    "sep7": {
+      "type": "Separator"
+    },
+    "link_issue": {
+      "type": "StoryLink",
+      "props": {
+        "title": "GitHub Issue #182",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/issues/182",
+        "source": "GitHub"
+      }
+    }
+  }
+}
