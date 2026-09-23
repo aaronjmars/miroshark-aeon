@@ -1,7 +1,6 @@
-ℹ️ Tweet Digest
+ℹ️ Tweet Digest — 2026-09-23
 
-*Tweet Digest — 2026-09-22*
+*Tweet Digest — 2026-09-23*
 
 *Theme: content channel expansion*
-@miroshark_: refreshed the intro blog post with everything shipped the last few months — [link](https://x.com/miroshark_/status/2102402865482363163)
-@miroshark_: miroshark's now on Substack, intro post is live — [link](https://x.com/miroshark_/status/2102376945040416810)
+@miroshark_: landed on Medium — third publishing channel this week after the intro-blog refresh and Substack launch — [link](https://x.com/miroshark_/status/2102765604893827435)
