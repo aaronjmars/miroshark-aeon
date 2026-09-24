@@ -1,15 +1,11 @@
 {
   "skill": "fetch-tweets",
-  "last_analyzed": "2026-09-23T17:08:22Z",
-  "quality_score": 3,
-  "assessment": "Clean execution with proper deduplication and verifiable output, but limited strategic alignment—tweet monitoring is tangential to core growth metrics (stars, ecosystem, price).",
+  "last_analyzed": "2026-09-24T17:08:15Z",
+  "quality_score": 4,
+  "assessment": "Skill executed correctly, fetched real data (HTTP 200, 5 candidates), applied rules properly (skip-retweets, notify-only-on-signal), and logged results. Clear, verifiable output explaining a legitimate no-op. Infrastructure work, not core north-star; otherwise substantive.",
   "flags": [],
   "avg_score": 3.27,
   "history": [
-    {
-      "date": "2026-08-25",
-      "score": 4
-    },
     {
       "date": "2026-08-26",
       "score": 3
@@ -125,6 +121,10 @@
     {
       "date": "2026-09-23",
       "score": 3
+    },
+    {
+      "date": "2026-09-24",
+      "score": 4
     }
   ]
 }
