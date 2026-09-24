@@ -1,24 +1,15 @@
-Ambient fleet check complete — the fleet is fully healthy today.
-
-## Heartbeat — Ambient Check (2026-09-23)
-
-**Overall status: 🟢 OK**
-
-**P0 — Skill health:** `token-movers` fully **recovered** from yesterday's 4-run zero-token blip (issue #182, opened 2026-09-22). Today's run at 06:10 UTC completed clean — `consecutive_failures: 0`, all data sources (`gt`/`ds`/`xai`) reporting `ok`, verdict CONSOLIDATING (-2.8% 24h) after yesterday's BREAKOUT. No other failed or stuck skills, no `consecutive_failures ≥ 3`, no chronic (`success_rate < 0.5`) skills, heartbeat's own self-check clean.
-
-**P1 — PRs/issues:** 0 open PRs across `aaronjmars/miroshark-aeon` and `MiroShark/MiroShark`. Only open issues are #182 (miroshark-aeon, unlabeled, no longer actionable — condition cleared, still open pending `skill-repair` which is disabled) and #240 (MiroShark/MiroShark, unlabeled, pre-existing feature request). Neither is newly urgent.
-
-**P2 — Memory flags:** Nothing new pending follow-up. The x_search/`xai` failure streak noted through 2026-09-20 has also cleared (`xai=ok` today).
-
-**P3 — Scheduled skills:** All 9 enabled skills (heartbeat, token-movers, fetch-tweets, repo-pulse, holdings, shiplog, memory-flush, aeon-update, changelog) are current — no missing dispatches, none stale beyond 2x their schedule interval.
-
-**Notification:** none sent — nothing needs operator attention today.
-
-**Public status page** (`docs/status.md`) regenerated: flipped from 🔴 DEGRADED back to 🟢 OK, token pulse restored (was showing "no recent data" due to yesterday's gap; now shows today's report), skill table refreshed, next scheduled run noted as `token-movers @ 06:00 UTC 2026-09-24`.
+Fleet is fully green — nothing needs attention today, so no notification per the skill's rules. Status page and log are updated.
 
 ## Summary
-- Read `memory/MEMORY.md`, last 2 days of `memory/logs/`, `memory/cron-state.json`, `aeon.yml`, and queried `gh pr list`/`gh issue list` across tracked repos.
-- Confirmed token-movers recovery from the 09-22 incident; no new findings requiring a notification.
-- Rewrote `docs/status.md` (🔴→🟢, refreshed skill table and token pulse).
-- Appended a `### heartbeat` (`mode: ambient`) entry to `memory/logs/2026-09-23.md`.
-- No follow-up needed; issue #182 can be closed manually or via `skill-repair` if re-enabled, but poses no immediate risk.
+
+Ran the heartbeat ambient check (empty `${var}`, the live scheduled path):
+- **P0**: No failed/stuck skills, no `consecutive_failures≥3`, no chronic failures, heartbeat self-check clean.
+- **P1**: 0 open PRs; open issues #182 (miroshark-aeon, recovered) and #240 (MiroShark/MiroShark, pre-existing) — neither urgent.
+- **P2**: Nothing new flagged in MEMORY.md; noted that the DS-vs-GT liquidity divergence (flagged 09-20) has now persisted 9 days.
+- **P3**: All 9 enabled skills current, none stale.
+
+**Files modified:**
+- `docs/status.md` — regenerated with today's timestamps, refreshed token pulse (CONSOLIDATING, -19.4% 24h), updated skill-health table, next scheduled run (token-movers @ 06:00 UTC 09-25). Overall: 🟢 OK.
+- `memory/logs/2026-09-24.md` — appended `### heartbeat` entry (`mode: ambient`) with findings and `STATUS_PAGE=OK`.
+
+No notification sent (fleet fully green, per the skill's "notify only on signal" rule). No follow-up actions needed.
