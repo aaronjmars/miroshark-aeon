@@ -1,0 +1,98 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "$MIROSHARK — CONSOLIDATING"
+      },
+      "children": [
+        "text-narrative",
+        "separator-1",
+        "stats-container",
+        "separator-2",
+        "text-buysells",
+        "separator-3",
+        "link-chart"
+      ]
+    },
+    "text-narrative": {
+      "type": "Text",
+      "props": {
+        "text": "Price +3.7% 24h off yesterday's drop, but on 0.2x the 7d-average volume — a thin bounce, not a trend.",
+        "variant": "body"
+      }
+    },
+    "separator-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stats-container": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stat-price",
+        "stat-liq",
+        "stat-vol"
+      ]
+    },
+    "stat-price": {
+      "type": "Stat",
+      "props": {
+        "label": "Price",
+        "value": "$0.000002690",
+        "delta": "+3.7%",
+        "trend": "up"
+      }
+    },
+    "stat-liq": {
+      "type": "Stat",
+      "props": {
+        "label": "Liquidity",
+        "value": "$319.6K",
+        "delta": "+1.8%",
+        "trend": "up"
+      }
+    },
+    "stat-vol": {
+      "type": "Stat",
+      "props": {
+        "label": "Volume (24h)",
+        "value": "$2.9K",
+        "delta": "0.2× 7d avg"
+      }
+    },
+    "separator-2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "text-buysells": {
+      "type": "Text",
+      "props": {
+        "text": "Buys/Sells 18/19 (ratio 0.95) | Whales: 1",
+        "variant": "body"
+      }
+    },
+    "separator-3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "link-chart": {
+      "type": "Link",
+      "props": {
+        "label": "GeckoTerminal Chart",
+        "href": "https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209"
+      }
+    }
+  }
+}

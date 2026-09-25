@@ -1,15 +1,11 @@
 {
   "skill": "token-movers",
-  "last_analyzed": "2026-09-24T06:15:36Z",
+  "last_analyzed": "2026-09-25T06:15:51Z",
   "quality_score": 4,
-  "assessment": "Substantive, well-sourced single-token report directly tracking north-star metric; deterministic verdict transparent; data quality divergence flagged appropriately.",
+  "assessment": "Well-executed token report with real data, transparent sources, and conservative positioning; aligns with strategy priority to track momentum honestly.",
   "flags": [],
   "avg_score": 4.07,
   "history": [
-    {
-      "date": "2026-08-26",
-      "score": 4
-    },
     {
       "date": "2026-08-27",
       "score": 4
@@ -124,6 +120,10 @@
     },
     {
       "date": "2026-09-24",
+      "score": 4
+    },
+    {
+      "date": "2026-09-25",
       "score": 4
     }
   ]
