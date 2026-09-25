@@ -1,15 +1,11 @@
 {
   "skill": "fetch-tweets",
-  "last_analyzed": "2026-09-24T17:08:15Z",
+  "last_analyzed": "2026-09-25T17:07:20Z",
   "quality_score": 4,
-  "assessment": "Skill executed correctly, fetched real data (HTTP 200, 5 candidates), applied rules properly (skip-retweets, notify-only-on-signal), and logged results. Clear, verifiable output explaining a legitimate no-op. Infrastructure work, not core north-star; otherwise substantive.",
+  "assessment": "Substantive execution—fetched 5 tweets via HTTP 200, correctly deduped 3 known, filtered 1 retweet, reported 1 new signal (X Spaces announcement); verifiable counts and concrete output.",
   "flags": [],
-  "avg_score": 3.27,
+  "avg_score": 3.3,
   "history": [
-    {
-      "date": "2026-08-26",
-      "score": 3
-    },
     {
       "date": "2026-08-27",
       "score": 3
@@ -124,6 +120,10 @@
     },
     {
       "date": "2026-09-24",
+      "score": 4
+    },
+    {
+      "date": "2026-09-25",
       "score": 4
     }
   ]

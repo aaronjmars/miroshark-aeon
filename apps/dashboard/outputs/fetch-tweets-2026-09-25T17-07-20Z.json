@@ -1,0 +1,53 @@
+{
+  "root": "main_card",
+  "state": {},
+  "elements": {
+    "main_card": {
+      "type": "Card",
+      "props": {
+        "title": "Tweet Digest"
+      },
+      "children": [
+        "date_text",
+        "theme_badge",
+        "separator1",
+        "tweet_card",
+        "tweet_link"
+      ]
+    },
+    "date_text": {
+      "type": "Text",
+      "props": {
+        "text": "2026-09-25",
+        "variant": "caption"
+      }
+    },
+    "theme_badge": {
+      "type": "Badge",
+      "props": {
+        "text": "x402 Spaces event"
+      }
+    },
+    "separator1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "tweet_card": {
+      "type": "TweetCard",
+      "props": {
+        "author": "miroshark_",
+        "handle": "miroshark_",
+        "text": "announces a special X Spaces next tuesday with @thecultos on x402 & x402aff"
+      }
+    },
+    "tweet_link": {
+      "type": "Link",
+      "props": {
+        "label": "link",
+        "href": "https://x.com/miroshark_/status/2103454471665988025"
+      }
+    }
+  }
+}
