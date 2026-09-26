@@ -1,15 +1,11 @@
 {
   "skill": "token-movers",
-  "last_analyzed": "2026-09-25T06:15:51Z",
+  "last_analyzed": "2026-09-26T06:17:16Z",
   "quality_score": 4,
-  "assessment": "Well-executed token report with real data, transparent sources, and conservative positioning; aligns with strategy priority to track momentum honestly.",
+  "assessment": "Substantive, well-sourced momentum report with honest caution on whale-driven move; aligns to strategy priority 4 (track honestly); verifiable data with cross-checks and flagged divergences.",
   "flags": [],
   "avg_score": 4.07,
   "history": [
-    {
-      "date": "2026-08-27",
-      "score": 4
-    },
     {
       "date": "2026-08-28",
       "score": 4
@@ -124,6 +120,10 @@
     },
     {
       "date": "2026-09-25",
+      "score": 4
+    },
+    {
+      "date": "2026-09-26",
       "score": 4
     }
   ]
