@@ -1,0 +1,104 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "$MIROSHARK — QUIET"
+      },
+      "children": [
+        "text_description",
+        "sep1",
+        "stack_stats",
+        "sep2",
+        "text_buys_sells",
+        "text_whales",
+        "sep3",
+        "link_chart"
+      ]
+    },
+    "text_description": {
+      "type": "Text",
+      "props": {
+        "text": "Volume collapsed to 0.1x the 7-day average, the thinnest session tracked — price drifted -3.3% on almost no activity."
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stack_stats": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "stat_price",
+        "stat_liq",
+        "stat_vol"
+      ]
+    },
+    "stat_price": {
+      "type": "Stat",
+      "props": {
+        "label": "Price",
+        "value": "$0.000003233",
+        "delta": "-3.3%",
+        "trend": "down"
+      }
+    },
+    "stat_liq": {
+      "type": "Stat",
+      "props": {
+        "label": "Liq",
+        "value": "$349.8K",
+        "delta": "+0.2%",
+        "trend": "up"
+      }
+    },
+    "stat_vol": {
+      "type": "Stat",
+      "props": {
+        "label": "Vol",
+        "value": "$2.0K",
+        "delta": "0.1x 7d",
+        "trend": "neutral"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "text_buys_sells": {
+      "type": "Text",
+      "props": {
+        "text": "Buys/Sells: 27/18 (ratio 1.50)"
+      }
+    },
+    "text_whales": {
+      "type": "Text",
+      "props": {
+        "text": "Whales: 0"
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "link_chart": {
+      "type": "Link",
+      "props": {
+        "label": "Chart",
+        "href": "https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209"
+      }
+    }
+  }
+}

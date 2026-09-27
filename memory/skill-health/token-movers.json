@@ -1,15 +1,11 @@
 {
   "skill": "token-movers",
-  "last_analyzed": "2026-09-26T06:17:16Z",
+  "last_analyzed": "2026-09-27T06:16:00Z",
   "quality_score": 4,
-  "assessment": "Substantive, well-sourced momentum report with honest caution on whale-driven move; aligns to strategy priority 4 (track honestly); verifiable data with cross-checks and flagged divergences.",
+  "assessment": "Substantive, well-sourced $MIROSHARK token report; directly serves Priority 4 (track momentum honestly); transparent about data sources, internal analysis is sound, no strategy violations.",
   "flags": [],
   "avg_score": 4.07,
   "history": [
-    {
-      "date": "2026-08-28",
-      "score": 4
-    },
     {
       "date": "2026-08-29",
       "score": 4
@@ -124,6 +120,10 @@
     },
     {
       "date": "2026-09-26",
+      "score": 4
+    },
+    {
+      "date": "2026-09-27",
       "score": 4
     }
   ]
