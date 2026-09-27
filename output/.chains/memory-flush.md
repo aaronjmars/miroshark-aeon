@@ -1,18 +1,18 @@
-Memory flush complete. Summary of what was done:
+Everything landed correctly. The memory-flush is complete — MEMORY.md has been updated with this week's promoted facts, the log entry is recorded, and the watermark is stamped to 2026-09-27.
 
-## Memory Flush — 2026-09-20
+## Summary
 
-**Scan window:** 2026-09-13 → 2026-09-20 (8 daily logs, no gap clamp). Log rotation archived 1 old month; 20 daily files remain.
+Ran the `memory-flush` skill over the 2026-09-20→09-27 scan window (8 daily logs, no rotation needed — 27 files, below the 45-file threshold).
 
-**Promoted:**
-- Full $MIROSHARK price arc for the week into the Active Target line: CONSOLIDATING +10.6% (09-13) → QUIET -6.1% (09-14) → QUIET +0.1% (09-15) → CONSOLIDATING -3.8% (09-16) → DISTRIBUTING -2.8% w/ whale sell (09-17) → SLIDING -8.9% on heaviest volume of the week (09-18) → CONSOLIDATING +14.6% on a bot-like buy cluster (09-19) → QUIET -2.7%, 2nd straight zero-whale session (09-20). Net -10.8% for the week. Headline stats refreshed to 09-20 ($0.000002437, liq $297.9K).
-- x_search timeout tracking reframed: now 5 of the last 7 sessions failing — escalated from "intermittent" to "toward chronic," flagged to watch 09-21.
-- Two new Lessons Learned: (1) DS-vs-GT liquidity divergence has persisted 5 straight days — keep using GT, flag if it doesn't close within a week; (2) the new mmETH/MiroShark pool has zero real trades after 6 days — treat as inactive, keep excluding from volume/whale calcs.
+**Promoted into `memory/MEMORY.md`:**
+- $MIROSHARK price arc for the week (QUIET → CONSOLIDATING → BREAKOUT → ... → QUIET), headline stats refreshed to 09-27 ($0.0000032327, liq $349.8K, net +32.6% for the week)
+- `aeon-update` Skills Built row bumped from PR #180 to PR #181 (dev-loop hardening + `sc-audit`/`create-prove` skills)
+- 2 new Lessons Learned: DS-vs-GT liquidity divergence now 12 days past the flag threshold; zero-token harness-run recurrence pattern (issue #182)
+- 1 new Recent Digests row consolidating the week's tweet activity (channel expansion + dataset-release tweet)
+- Corrected the stale "x_search escalating toward chronic" note — no timeouts since 09-21
 
-**Not promoted:** No Monday-cadence skills (repo-pulse, holdings, changelog, shiplog, aeon-update) ran this window — those Next Priorities lines are still current. `fetch-tweets` stayed quiet all week (RTs only) — no new digest row needed.
+**Pruned:** nothing — no open improvement PRs, no stale sections found.
 
-**Pruned:** None — no open PRs anywhere (`aaronjmars/miroshark-aeon`, `MiroShark/MiroShark`), no stale entries found.
+**Files modified:** `memory/MEMORY.md`, `memory/logs/2026-09-27.md` (run log appended), `memory/memory-flush-state.json` (watermark stamped via `scripts/memory_prep.py stamp`).
 
-**Files modified:** `memory/MEMORY.md` (Active Targets + Lessons Learned), `memory/logs/2026-09-20.md` (run log), `memory/memory-flush-state.json` + `Last consolidated` mirror (watermark stamped to 2026-09-20).
-
-**Follow-up:** none urgent — next memory-flush due when the weekly Monday batch (repo-pulse/holdings/etc.) has landed, and the x_search failure streak is worth a closer look if it recurs 09-21.
+No follow-up actions needed — this was a routine consolidation.
