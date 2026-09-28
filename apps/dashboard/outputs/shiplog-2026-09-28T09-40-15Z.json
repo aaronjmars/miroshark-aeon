@@ -1,0 +1,257 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "miroshark ⭐🦈 shiplog sep 21 → sep 28",
+        "description": "42 PRs merged across the engine + companions"
+      },
+      "children": [
+        "section-intro",
+        "separator-1",
+        "section-achievements",
+        "separator-2",
+        "section-traction",
+        "separator-3",
+        "section-pitch",
+        "separator-4",
+        "section-links"
+      ]
+    },
+    "section-intro": {
+      "type": "Text",
+      "props": {
+        "text": "42 PRs merged across the engine + companions this window. The bytes:",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "separator-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "section-achievements": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "achievement-1",
+        "achievement-2",
+        "achievement-3",
+        "achievement-4",
+        "achievement-5"
+      ]
+    },
+    "achievement-1": {
+      "type": "Text",
+      "props": {
+        "text": "Published the receipts: 8,201 decisions from miroshark sims, public on HuggingFace — what the agent saw, reasoned, and did, tweet to trade",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "achievement-2": {
+      "type": "Text",
+      "props": {
+        "text": "Applied to be a default Solana skill: PR open on solana-foundation/pay-skills, $1/run, x402, mergeable, waiting on a human review",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "achievement-3": {
+      "type": "Text",
+      "props": {
+        "text": "Hardened x402: spoof-resistant cancel tokens, SSRF-guarded callbacks, settle-before-run. Shipped quiet, matters a lot",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "achievement-4": {
+      "type": "Text",
+      "props": {
+        "text": "Landed on Medium + Substack this week, but the weekly match-sim streak broke — first miss after 5 straight",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "achievement-5": {
+      "type": "Text",
+      "props": {
+        "text": "Public engine repo: 2 PRs, 1 docs 1 dependabot. Still not where the real work lands",
+        "variant": "body"
+      },
+      "children": []
+    },
+    "separator-2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "section-traction": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading-traction",
+        "traction-items"
+      ]
+    },
+    "heading-traction": {
+      "type": "Heading",
+      "props": {
+        "text": "Traction",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "traction-items": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stat-miroshark",
+        "stat-forks",
+        "stat-x402aff"
+      ]
+    },
+    "stat-miroshark": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "stat-miroshark-val",
+        "note-miroshark"
+      ]
+    },
+    "stat-miroshark-val": {
+      "type": "Stat",
+      "props": {
+        "label": "miroshark stars",
+        "value": "1,457",
+        "delta": "+5",
+        "trend": "up"
+      },
+      "children": []
+    },
+    "note-miroshark": {
+      "type": "Text",
+      "props": {
+        "text": "best window in a month",
+        "variant": "caption"
+      },
+      "children": []
+    },
+    "stat-forks": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "stat-forks-val",
+        "note-forks"
+      ]
+    },
+    "stat-forks-val": {
+      "type": "Stat",
+      "props": {
+        "label": "forks",
+        "value": "300"
+      },
+      "children": []
+    },
+    "note-forks": {
+      "type": "Text",
+      "props": {
+        "text": "new baseline, delta starts next week",
+        "variant": "caption"
+      },
+      "children": []
+    },
+    "stat-x402aff": {
+      "type": "Stat",
+      "props": {
+        "label": "x402aff stars",
+        "value": "7",
+        "delta": "+1",
+        "trend": "up"
+      },
+      "children": []
+    },
+    "separator-3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "section-pitch": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "pitch-label",
+        "pitch-content"
+      ]
+    },
+    "pitch-label": {
+      "type": "Text",
+      "props": {
+        "text": "The pitch:",
+        "variant": "muted"
+      },
+      "children": []
+    },
+    "pitch-content": {
+      "type": "Text",
+      "props": {
+        "text": "\"$1 to simulate anything, audit the receipts.\" This week we shipped both halves.",
+        "variant": "lead"
+      },
+      "children": []
+    },
+    "separator-4": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "section-links": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "link-article"
+      ]
+    },
+    "link-article": {
+      "type": "StoryLink",
+      "props": {
+        "title": "shiplog-2026-09-28.md",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/output/articles/shiplog-2026-09-28.md",
+        "source": "GitHub"
+      },
+      "children": []
+    }
+  }
+}

@@ -1,25 +1,24 @@
-ℹ️ Shiplog: Sep 14 → 21
+ℹ️ Shiplog: Sep 21 → 28
 
-miroshark ⭐🦈 shiplog sep 14 → sep 21
+miroshark ⭐🦈 shiplog sep 21 → sep 28
 
-54 PRs merged across the engine + companions this window. the bytes:
+42 PRs merged across the engine + companions this window. the bytes:
 
-- shipped agent hand-off: click-to-paste skill.md button + x402 tier 1/2 agent control (cancel, callback, idempotency). same feature landed in both MiroShark-x402 and miroshark-website
-- proof it works: a stranger told @bankrbot to pay $1 and run the miroshark skill. it did, unprompted, and posted a governance preview to musebook's town hall. we found out from the RT
-- hardened report credibility: fail loud instead of shipping a half sim, dropped fabricated agent quotes via roster-validator, switched to a bench-validated cheaper model
-- public engine repo: 4 PRs, all dependabot. zero real code this window
-- security: nothing to flex yet — the bytedance DNS-rebinding PR is still open
+- published the receipts: 8,201 decisions from miroshark sims, public on huggingface — what the agent saw, reasoned, and did, tweet to trade
+- applied to be a default solana skill: PR open on solana-foundation/pay-skills, $1/run, x402, mergeable, waiting on a human review
+- hardened x402: spoof-resistant cancel tokens, SSRF-guarded callbacks, settle-before-run. shipped quiet, matters a lot
+- landed on medium + substack this week, but the weekly match-sim streak broke — first miss after 5 straight
+- public engine repo: 2 PRs, 1 docs 1 dependabot. still not where the real work lands
 
 traction:
-- miroshark 1,452 ⭐ (+3) — best of the last 3 weeks, still under the old ~4/week pace
-- forks 301 (+2)
-- @thecultos relationship still going — interview clip + thank-you post this week
-- 5th straight week of serie a / laliga / premier league sims
+- miroshark 1,457 ⭐ (+5) — best window in a month
+- forks 300 (new baseline, delta starts next week)
+- x402aff 7 ⭐ (+1)
 
-the agent hand-off feature and the agent actually using it landed in the same week. that's the whole pitch working.
+the pitch is "$1 to simulate anything, audit the receipts." this week we shipped both halves.
 
 ⭐🦈
 
-https://github.com/aaronjmars/miroshark-aeon/blob/main/output/articles/shiplog-2026-09-21.md
+Article: https://github.com/aaronjmars/miroshark-aeon/blob/main/output/articles/shiplog-2026-09-28.md
 
-🔗 https://github.com/aaronjmars/miroshark-aeon/blob/main/output/articles/shiplog-2026-09-21.md
+🔗 https://github.com/aaronjmars/miroshark-aeon/blob/main/output/articles/shiplog-2026-09-28.md
