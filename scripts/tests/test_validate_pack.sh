@@ -576,14 +576,65 @@ else
   fi
 fi
 
+# ── Test 21-23: skill schedule must be something the scheduler can fire ─────
+# write_sched_manifest <dir> <schedule-for-foo>
+write_sched_manifest() {
+  cat > "$1/skills-pack.json" <<EOF
+{
+  "name": "test-pack",
+  "version": "1.0",
+  "description": "A test pack",
+  "author": "tester",
+  "license": "MIT",
+  "skills": [
+    { "slug": "foo", "path": "skills/foo", "schedule": "$2" },
+    { "slug": "bar", "path": "skills/bar" }
+  ]
+}
+EOF
+}
+
+TMP21=$(mktemp -d)
+make_pack "$TMP21"
+write_sched_manifest "$TMP21" "30 7 * * 1-5"
+out=$(bash "$V" "$TMP21" 2>&1)
+rc=$?
+if [[ "$rc" -eq 0 ]] && ! echo "$out" | grep -q "schedule"; then
+  pass "5-field cron schedule accepted without a warning"
+else
+  bad "5-field cron schedule should pass silently (rc=$rc): $out"
+fi
+
+TMP22=$(mktemp -d)
+make_pack "$TMP22"
+write_sched_manifest "$TMP22" "daily"
+out=$(bash "$V" "$TMP22" 2>&1)
+rc=$?
+if [[ "$rc" -eq 0 ]] && echo "$out" | grep -qF "schedule 'daily' is not a 5-field cron - install will rewrite it to '0 0 * * *'"; then
+  pass "schedule alias 'daily' warns with the rewritten cron"
+else
+  bad "schedule alias 'daily' should warn and exit 0 (rc=$rc): $out"
+fi
+
+TMP23=$(mktemp -d)
+make_pack "$TMP23"
+write_sched_manifest "$TMP23" "every morning"
+out=$(bash "$V" "$TMP23" 2>&1)
+rc=$?
+if [[ "$rc" -eq 1 ]] && echo "$out" | grep -qF "schedule 'every morning' is not a 5-field cron"; then
+  pass "unrecognised schedule is an ERROR"
+else
+  bad "unrecognised schedule should exit 1 with an error (rc=$rc): $out"
+fi
+
 # ── Clean up ────────────────────────────────────────────────────────────────
-for d in "$TMP1" "$TMP2" "$TMP3" "$TMP4" "$TMP5" "$TMP6" "$TMP7" "$TMP8" "$TMP9" "$TMP10" "$TMP11" "$TMP12" "$TMP13" "$TMP14" "$TMP15" "$TMP16" "$TMP17" "$TMP18" "$TMP19" "$TMP20"; do
+for d in "$TMP1" "$TMP2" "$TMP3" "$TMP4" "$TMP5" "$TMP6" "$TMP7" "$TMP8" "$TMP9" "$TMP10" "$TMP11" "$TMP12" "$TMP13" "$TMP14" "$TMP15" "$TMP16" "$TMP17" "$TMP18" "$TMP19" "$TMP20" "$TMP21" "$TMP22" "$TMP23"; do
   rm -rf "$d"
 done
 
 if [[ "$fail" -eq 0 ]]; then
   echo ""
-  echo "All 20 validate-pack tests passed."
+  echo "All 23 validate-pack tests passed."
 else
   echo ""
   echo "SOME TESTS FAILED."

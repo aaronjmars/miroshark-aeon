@@ -1,54 +1,54 @@
 {
-  "baseline_sha": "ba01e9f3e4495c8f761ab483000639cc8d5f5221",
+  "baseline_sha": "531f575eb2beaf12d71e8d9699ce451887babdb4",
   "upstream": "aeonfun/aeon",
-  "last_run": "2026-09-21",
-  "last_pr": "https://github.com/aaronjmars/miroshark-aeon/pull/181",
+  "last_run": "2026-09-28",
+  "last_pr": "https://github.com/aaronjmars/miroshark-aeon/pull/183",
   "applied": {
-    "added": 15,
-    "updated": 31,
-    "merged": 1,
+    "added": 6,
+    "updated": 34,
+    "merged": 3,
     "deleted": 0
   },
   "pending_conflicts": [
     {
-      "path": ".github/workflows/aeon.yml",
-      "reason": "operator-customized (env-narrowed) vs upstream changes; 3-way merge overlap (carried since #180)",
-      "upstream_commits": ["ba01e9f", "1d183dc", "1dbbfd9"]
-    },
-    {
       "path": ".github/workflows/ci-tests.yml",
-      "reason": "operator-customized (fork test list) vs upstream new dev-loop-proof test steps; 3-way merge overlap",
-      "upstream_commits": ["73f660e", "1d183dc", "094c10d"]
+      "reason": "operator-customized (fork test list / env-narrow) vs upstream new hunter-gate + HivemindOS test steps; 3-way merge overlap (2 regions)",
+      "upstream_commits": ["46d1836", "f4ce15c"]
     },
     {
       "path": ".github/README.md",
-      "reason": "operator fork (MiroShark) copy vs upstream rewrite; 3-way overlap. NOTE: surgical skill-count fix (80->82) applied this run to keep ci-readme-catalog green; the upstream README rewrite itself is still unmerged",
-      "upstream_commits": ["1d183dc", "1dbbfd9"]
+      "reason": "operator fork (MiroShark) copy vs upstream stats/link refresh + OpenAI-affiliation note + skill-table adds; 3-way overlap (2 regions). Fork README is intentionally divergent — reconcile by hand",
+      "upstream_commits": ["531f575", "48f6642", "f8ff65c", "0da615e"]
     },
     {
       "path": "docs/skill-packs.md",
-      "reason": "fork pack-count table vs upstream skill-table rewrite; 3-way merge overlap (3 regions)",
-      "upstream_commits": ["1d183dc", "c2624e1", "1dbbfd9", "030f646"]
-    },
-    {
-      "path": "skills/miroshark-matchday/SKILL.md",
-      "reason": "operator-customized (fork) vs upstream vertical 9:16 render-path update (#1062); 3-way merge overlap. (was needs-eyebrowlock-scan; skill is now present locally and diverges)",
-      "upstream_commits": ["2e9efdb"]
-    },
-    {
-      "path": ".github/workflows/messages.yml",
-      "reason": "operator-customized (env-narrowed); still diverges from upstream HEAD (unchanged this window)",
-      "upstream_commits": ["dc1a975"]
+      "reason": "fork pack-count table vs upstream skill-table rewrite (arc-studio add); 3-way merge overlap (3 regions)",
+      "upstream_commits": ["f8ff65c"]
     },
     {
       "path": "apps/dashboard/package.json",
-      "reason": "eslint-lint-gate coupled bundle; package.json 3-way merges clean but its lock conflicts, so held together (unchanged this window)",
-      "upstream_commits": ["c554e8b", "a3d402c"]
+      "reason": "eslint-lint-gate coupled bundle; package.json 3-way conflicts (1 region) on eslint-config-next bump, held with its lock",
+      "upstream_commits": ["3d36d18"]
     },
     {
       "path": "apps/dashboard/package-lock.json",
-      "reason": "eslint-lint-gate coupled bundle; lockfile 3-way merge conflicts (2 regions) (unchanged this window)",
-      "upstream_commits": ["c554e8b", "a3d402c"]
+      "reason": "eslint-lint-gate coupled bundle; lockfile 3-way merge conflicts (9 regions) on eslint-config-next 16.3.5 + unrs-resolver",
+      "upstream_commits": ["3d36d18"]
+    },
+    {
+      "path": "llms.txt",
+      "reason": "fork-only MiroShark copy vs upstream OpenAI-affiliation note + 'ten'->harness-count fix; 3-way overlap (2 regions)",
+      "upstream_commits": ["48f6642", "71a9462"]
+    },
+    {
+      "path": "skills/arc-studio/SKILL.md",
+      "reason": "needs-eyebrowlock-scan + catalog/readme coupling - new upstream skill (#1082) with capability-expansion tags (onchain_writes/writes_external_host). bin/generate-* + eyebrow scan can't be committed in the sync env (script exec blocked), and the fork's catalog/skills.json + fork README would need hand-regen to stay CI-green. Held; its scripts (arc-studio-turn/state.mjs) ARE shipped so adoption is one step. Operator: fetch SKILL.md, then `eyebrow scan --path . --lockfile eyebrowlock.json` + `bin/generate-skills-json && bin/generate-packs-json` and reconcile README",
+      "upstream_commits": ["f8ff65c"]
+    },
+    {
+      "path": "skills/miroshark-matchday/SKILL.md",
+      "reason": "operator-customized (fork) vs upstream vertical 9:16 render-path update (#1062); 3-way merge overlap (unchanged this window)",
+      "upstream_commits": ["2e9efdb"]
     },
     {
       "path": "apps/webhook/package.json",
@@ -59,11 +59,6 @@
       "path": "apps/webhook/package-lock.json",
       "reason": "eslint-lint-gate coupled bundle; lockfile 3-way merge conflicts (1 region) (unchanged this window)",
       "upstream_commits": ["58b2e53", "5d005b6"]
-    },
-    {
-      "path": "llms.txt",
-      "reason": "fork-only MiroShark copy vs upstream nine-harness/GLM edits; still diverges (unchanged this window)",
-      "upstream_commits": ["bb8211f"]
     },
     {
       "path": "skills/competitor-monitor/SKILL.md",

@@ -941,14 +941,18 @@
         "kind": "local",
         "ref": "skills/hunter-22"
       },
-      "capabilities": {},
+      "capabilities": {
+        "network": [
+          "clawhunter.fun"
+        ]
+      },
       "files": [
         {
           "path": "SKILL.md",
-          "hash": "6a878c97d9d6aa91622692bd5ccb0ac8eaca830d649f378f1f9516f07c68578a"
+          "hash": "1bb52a5d6b6c2bc3ca49dc99b1771fa846a5abc70e2d1ad8a61fb5e80627ac99"
         }
       ],
-      "contentHash": "sha256-455c9de849299360e3ec1bb1f29305c240367e946c74b0c551f1f335927cfa5b",
+      "contentHash": "sha256-a0cda97321d3f57793ff9b5cc4fee6fca90d7ccb4e239046a464cae1e08e7759",
       "discoveredFrom": "skills/hunter-22/SKILL.md"
     },
     {
@@ -1377,10 +1381,10 @@
       "files": [
         {
           "path": "SKILL.md",
-          "hash": "5e5e5a92042525a0a6d31b848883a61b0310102d590499cd2fdfcf1426f6820b"
+          "hash": "606fe9225d783026992c86de771834219144fbbc953ec220ef94785456c636aa"
         }
       ],
-      "contentHash": "sha256-cf926d867b47cf47c406ff2071d54619e67b2860e3f70fb5bb39eb91bddf18c2",
+      "contentHash": "sha256-ba1b83efde596e83afd5a6db3f2f499822394203a080eb97abdd9860cf0c730d",
       "discoveredFrom": "skills/pack-submit/SKILL.md"
     },
     {
@@ -2148,11 +2152,11 @@
       "files": [
         {
           "path": "SKILL.md",
-          "hash": "bb0e9be128d2caaad48595f92db313deb6ed0b8e8d628b4ffdf19538219a8978"
+          "hash": "910706c728c9db1be257a1bc0694f3e761797ea0e09747472d2c43eeff41a3e8"
         },
         {
           "path": "references/ci.md",
-          "hash": "7ef0b286439d107fdc41b5af023e485689b86179d8b3ca7bc8974e7d0c514e71"
+          "hash": "bda15a7e4934fb3b0183167642efc65c15d075d259b62349abf7718173659a7f"
         },
         {
           "path": "references/history-mining.md",
@@ -2160,26 +2164,26 @@
         },
         {
           "path": "references/layout.md",
-          "hash": "14fbfc71f656737d5983c436bc088ee93fd1b636aac60dd5ecea8010ca6aa921"
+          "hash": "eb9e91054aa0b9a676d80e0dc2678a53828b901196cf35e1ac1adb25c84c73ff"
         },
         {
           "path": "references/mcp.md",
-          "hash": "08583d066f0dc7683478e9c3b41af42059c1643b87e4d9a3c882fbd33ccc344b"
+          "hash": "0ebec350f76548e9916512d312e91880e1a2dca2a8c84345ee80fbc2ebc80e24"
         },
         {
           "path": "references/secrets.md",
-          "hash": "41aa375c84cea1b0190bd7291176651d335dc1c41e2b8067900f164d4c4df670"
+          "hash": "c72cefa4875cc7b7650cfd6465c590f1972e5e458387312b8b4a4ff8e06d069a"
         },
         {
           "path": "references/skill-anatomy.md",
-          "hash": "31571144efd025a5dbb9eea196c1435ce5e726888394738e093e5b7c0a88fcac"
+          "hash": "2a423b78d802ef370011c91be2536c90990fbbb4b4ee64cd59f1abeb5f726833"
         },
         {
           "path": "scripts/mine-history.mjs",
           "hash": "0edc7445542a21cb5518e813a6ae462a1d469636601a799efc1bec86b4058c5a"
         }
       ],
-      "contentHash": "sha256-8d7d90609c4bb78f72c32e99e2941f43c7d81de66b479ce30402e74db826d658",
+      "contentHash": "sha256-8e4322ebdb4fc60f97fd7f1a5a2dd9bd4dce756f90b218ba718107d8cd40aefc",
       "discoveredFrom": ".claude/skills/aeon/SKILL.md"
     },
     {

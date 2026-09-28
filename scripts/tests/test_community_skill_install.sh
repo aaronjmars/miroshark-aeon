@@ -6,6 +6,8 @@
 #                               pack even when its SKILL.md carries no category
 #   bin/generate-skills-json  — a YAML block-scalar description must be folded,
 #                               not recorded as the literal ">-" marker
+#   skill_add_to_aeon_yml     - a pack schedule the scheduler cannot fire
+#                               ("daily") is rewritten to 5 cron fields
 # No network, no GitHub auth required. Builds throwaway repo roots under /tmp.
 set -uo pipefail
 cd "$(dirname "$0")/../.." || exit 1
@@ -173,6 +175,50 @@ else
   bad "add-skill queries the commits endpoint with GET and the fetched ref (got: '$(cat "$d/gh-args")')"
 fi
 rm -rf "$d"
+
+# ── 5. aeon.yml schedules are rewritten to something cron-due.sh can fire ────
+# A pack skill declaring schedule "daily" used to be written verbatim; cron-due.sh
+# needs 5 fields, so the skill silently never ran (aeonfun/aeon#1085).
+(
+  # shellcheck source=scripts/lib/skill-install.sh
+  . "$ROOT/scripts/lib/skill-install.sh"
+  d=$(mktemp -d)
+  printf '%s\n' "skills:" "  # --- Fallback" > "$d/aeon.yml"
+  log=$(
+    skill_add_to_aeon_yml "$d/aeon.yml" alias-daily false "daily"
+    skill_add_to_aeon_yml "$d/aeon.yml" alias-weekly false "@weekly"
+    skill_add_to_aeon_yml "$d/aeon.yml" real-cron false "0 12 * * *"
+    skill_add_to_aeon_yml "$d/aeon.yml" junk false "garbage"
+    skill_add_to_aeon_yml "$d/aeon.yml" manual false "workflow_dispatch"
+  )
+  rc=0
+  expect() {
+    if grep -qxF "  $1: { enabled: false, schedule: \"$2\" }" "$d/aeon.yml"; then
+      echo "ok   - $1 written with schedule \"$2\""
+    else
+      echo "FAIL - $1 should be written with schedule \"$2\" (aeon.yml: $(cat "$d/aeon.yml"))"; rc=1
+    fi
+  }
+  expect alias-daily "0 0 * * *"
+  expect alias-weekly "0 0 * * 0"
+  expect real-cron "0 12 * * *"
+  expect junk "0 12 * * *"
+  expect manual "workflow_dispatch"
+  warnings=$(grep -c 'warning: schedule' <<<"$log")
+  if [[ "$warnings" == "3" ]]; then
+    echo "ok   - one warning per rewritten schedule (daily, @weekly, garbage)"
+  else
+    echo "FAIL - expected 3 schedule warnings, got $warnings: $log"; rc=1
+  fi
+  # The rewritten "daily" must actually be due: 2026-01-01 00:05 UTC, never run.
+  if bash "$ROOT/scripts/cron-due.sh" "0 0 * * *" 1767225900 0 >/dev/null; then
+    echo "ok   - rewritten daily schedule is due for cron-due.sh"
+  else
+    echo "FAIL - rewritten daily schedule should be due for cron-due.sh"; rc=1
+  fi
+  rm -rf "$d"
+  exit $rc
+) || fail=1
 
 echo ""
 [[ $fail -eq 0 ]] && echo "All community skill install tests passed." || echo "Some tests FAILED."
