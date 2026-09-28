@@ -1,0 +1,67 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "Changelog (push-to)",
+        "description": "2026-09-28"
+      },
+      "children": [
+        "stack_content"
+      ]
+    },
+    "stack_content": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "repo_text",
+        "pr_count_text",
+        "pr_item_stack"
+      ]
+    },
+    "repo_text": {
+      "type": "Text",
+      "props": {
+        "text": "MiroShark/MiroShark → aaronjmars/miroshark-website",
+        "variant": "muted"
+      }
+    },
+    "pr_count_text": {
+      "type": "Text",
+      "props": {
+        "text": "2 new PRs"
+      }
+    },
+    "pr_item_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "pr_link",
+        "draft_badge"
+      ]
+    },
+    "pr_link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Hugging Face dataset badge and dependency bump",
+        "href": "https://github.com/aaronjmars/miroshark-website/pull/357",
+        "source": "GitHub PR #357"
+      }
+    },
+    "draft_badge": {
+      "type": "Badge",
+      "props": {
+        "text": "draft",
+        "variant": "outline"
+      }
+    }
+  }
+}
