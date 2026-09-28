@@ -12,13 +12,12 @@
 
 ## Building on Aeon
 
-These are the projects we know of that run Aeon, extend it, or integrate with the framework. The list is curated from operator self-disclosures and public mentions — it isn't exhaustive, and not every fork is listed here. For a leaderboard of active forks see [`SHOWCASE.md`](SHOWCASE.md); for installable skill collections see the [Community skill packs](../.github/README.md#community-skill-packs) section in the README.
+These are the projects we know of that run Aeon, extend it, or integrate with the framework. The list is curated from operator self-disclosures and public mentions - it isn't exhaustive, and not every fork is listed here. For a leaderboard of active forks see [`SHOWCASE.md`](SHOWCASE.md); for installable skill collections see the [Listed packs](community-skill-packs.md#listed-packs) table in the community skill packs guide.
 
 | Logo | Project | Links |
 |------|---------|-------|
 | <img src="https://pbs.twimg.com/profile_images/2083994440113455104/ZZukY_1H_400x400.jpg" width="36" height="36" alt="Aeon City logo"> | Aeon City | [@aeoncityhub](https://x.com/aeoncityhub) |
 | <img src="https://pbs.twimg.com/profile_images/2056143519824166912/W2VGsyMX_400x400.jpg" width="36" height="36" alt="aeonbook logo"> | aeonbook | [@aeonbook_](https://x.com/aeonbook_) |
-| <img src="https://pbs.twimg.com/profile_images/2070127551788527616/gL60uVZj_400x400.jpg" width="36" height="36" alt="AeThree logo"> | AeThree | [@aethree_xyz](https://x.com/aethree_xyz) · [aethree.xyz](https://www.aethree.xyz) |
 | <img src="https://pbs.twimg.com/profile_images/2002059513524789249/mzJQc1tX_400x400.png" width="36" height="36" alt="AgentLink logo"> | AgentLink | [@agentlinkhq](https://x.com/agentlinkhq) · [agentlink.id](https://agentlink.id) |
 | <img src="https://pbs.twimg.com/profile_images/2076592848452145152/9xUQBtzv_400x400.jpg" width="36" height="36" alt="AgentOS logo"> | AgentOS | [@useAgentOS](https://x.com/useAgentOS) |
 | <img src="https://pbs.twimg.com/profile_images/2021447689398030336/eY9wm4_X_400x400.png" width="36" height="36" alt="AI2Human logo"> | AI2Human | [@ai2humannetwork](https://x.com/ai2humannetwork) · [ai2human.io](https://ai2human.io) |
@@ -35,7 +34,7 @@ These are the projects we know of that run Aeon, extend it, or integrate with th
 | <img src="https://pbs.twimg.com/profile_images/2062754968852221952/QcEP9JKW_400x400.jpg" width="36" height="36" alt="Charon logo"> | Charon | [@Charon_AI](https://x.com/Charon_AI) |
 | <img src="https://pbs.twimg.com/profile_images/2027296134939684866/eTsFmewn_400x400.jpg" width="36" height="36" alt="Claw Harbor logo"> | Claw Harbor | [@ClawHarbor](https://x.com/ClawHarbor) |
 | <img src="https://pbs.twimg.com/profile_images/2045511364072873985/r7zESZco_400x400.jpg" width="36" height="36" alt="ClawBank logo"> | ClawBank | [@ClawBankHQ](https://x.com/ClawBankHQ) |
-| <img src="https://pbs.twimg.com/profile_images/2081139699016421376/fPXfweRU_400x400.jpg" width="36" height="36" alt="ClawHunter logo"> | ClawHunter | [@clawhuntersol](https://x.com/clawhuntersol) |
+| <img src="https://pbs.twimg.com/profile_images/2100360896103018496/2GQeuGJO_400x400.jpg" width="36" height="36" alt="ClawHunter logo"> | ClawHunter | [@clawhuntersol](https://x.com/clawhuntersol) |
 | <img src="https://pbs.twimg.com/profile_images/2058054817516548096/e0qPRxNW_400x400.jpg" width="36" height="36" alt="Clerk logo"> | Clerk | [@agent_clerk](https://x.com/agent_clerk) |
 | <img src="https://pbs.twimg.com/profile_images/2039705524166660096/mcVkmNR3_400x400.jpg" width="36" height="36" alt="Cobot logo"> | Cobot | [@cobotgg](https://x.com/cobotgg) |
 | <img src="https://pbs.twimg.com/profile_images/2075170344957083648/AR-5asAz_400x400.jpg" width="36" height="36" alt="CTRL logo"> | CTRL | [@CTRL_automation](https://x.com/CTRL_automation) |
@@ -107,4 +106,4 @@ Guidelines:
 - **Logo / PFP** — add a square logo in the first column via an `<img>` tag sized `width="36" height="36"` so the column stays tidy, with an `alt` like `"YourProject logo"`. Point `src` at a directly-hosted square image — your X avatar works well (open your profile picture and use its `..._400x400.jpg`/`.png` URL). Leave the cell empty (`|  |`) if you don't have one yet.
 - Provide at least an X handle or a public link. A short website link is welcome alongside the X handle.
 - Forks that are mainly running stock skills belong on [`SHOWCASE.md`](SHOWCASE.md), not here. This page is for products and agents *built with* Aeon.
-- If your project also ships an installable skill pack, list the pack under [Community skill packs](../.github/README.md#community-skill-packs) in the README as well.
+- If your project also ships an installable skill pack, list the pack in the [Listed packs](community-skill-packs.md#listed-packs) table as well.

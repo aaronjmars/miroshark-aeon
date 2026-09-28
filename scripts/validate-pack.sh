@@ -23,11 +23,13 @@
 #     - a skill path containing '..'
 #     - a declared skill whose SKILL.md is missing on disk
 #     - a capability outside the locked taxonomy (sourced from install-skill-pack)
+#     - a schedule that is neither 5 cron fields nor a known alias (would install as the default)
 #   WARNING (advisory, exit unaffected) — valid to install but worth fixing:
 #     - missing recommended manifest fields (name/version/description/author)
 #     - no LICENSE file or no manifest `license` (publishing checklist #1)
 #     - SKILL.md missing frontmatter name:/description:
 #     - category outside the documented vocabulary
+#     - a schedule alias like "daily" (install rewrites it to 5 cron fields)
 #     - default_enabled:true on a skill that looks like it writes/sends/posts
 #     - a skills/*/SKILL.md present on disk but absent from the manifest (won't install)
 #
@@ -42,6 +44,8 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 INSTALL_SCRIPT="$ROOT_DIR/bin/install-skill-pack"
 source "$ROOT_DIR/scripts/lib/capabilities.sh"
+# skill_normalize_schedule - the same schedule rewrite the installers apply.
+source "$ROOT_DIR/scripts/lib/skill-install.sh"
 
 PACK_DIR="."
 SUBPATH=""
@@ -225,6 +229,24 @@ for i in $(seq 0 $((skill_count - 1))); do
   if [[ -n "$cat" ]] && ! grep -qw "$cat" <<<"$KNOWN_CATEGORIES"; then
     warn "skill '$slug': category '$cat' is outside the documented set ($KNOWN_CATEGORIES)"
     skill_warnings=$((skill_warnings + 1))
+  fi
+
+  # Schedule - optional. The installer writes it into aeon.yml and the
+  # scheduler (scripts/cron-due.sh) only fires 5 cron fields. A known alias
+  # ("daily", "@weekly") is rewritten at install, so WARNING; anything else is
+  # silently replaced by the default, which is almost never what the author
+  # meant, so ERROR.
+  sched=$(jq -r ".skills[$i].schedule // empty" "$MANIFEST_PATH")
+  if [[ -n "$sched" ]]; then
+    sched_fallback="0 12 * * *"
+    norm_sched=$(skill_normalize_schedule "$sched" "$sched_fallback")
+    if [[ "$norm_sched" != "$sched" && "$norm_sched" == "$sched_fallback" ]]; then
+      err "skill '$slug': schedule '$sched' is not a 5-field cron (e.g. \"0 12 * * *\") - the scheduler cannot run it, so install would fall back to '$sched_fallback'"
+      skill_errors=$((skill_errors + 1))
+    elif [[ "$norm_sched" != "$sched" ]]; then
+      warn "skill '$slug': schedule '$sched' is not a 5-field cron - install will rewrite it to '$norm_sched'; declare that in the manifest instead"
+      skill_warnings=$((skill_warnings + 1))
+    fi
   fi
 
   # Capabilities — locked taxonomy. install-skill-pack rejects unknown values,

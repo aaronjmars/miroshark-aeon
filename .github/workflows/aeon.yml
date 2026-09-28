@@ -343,7 +343,7 @@ jobs:
           SECRETS=$(grep -oE '\$\{?[A-Z][A-Z0-9_]{2,}\}?' "$SKILL_FILE" 2>/dev/null | \
             sed 's/[${}]//g' | \
             grep -E '_(API_KEY|KEY|TOKEN|SECRET|WEBHOOK_URL)$' | \
-            grep -vE '^(GITHUB_TOKEN|GH_TOKEN|ANTHROPIC_API_KEY|CLAUDE_CODE_OAUTH_TOKEN|BANKR_LLM_KEY|OPENROUTER_API_KEY|USEPOD_TOKEN|VENICE_API_KEY|SURPLUS_API_KEY|TELEGRAM_|DISCORD_|SLACK_)' | \
+            grep -vE '^(GITHUB_TOKEN|GH_TOKEN|ANTHROPIC_API_KEY|CLAUDE_CODE_OAUTH_TOKEN|BANKR_LLM_KEY|OPENROUTER_API_KEY|USEPOD_TOKEN|VENICE_API_KEY|SURPLUS_API_KEY|HIVEMINDOS_CREDIT_TOKEN|TELEGRAM_|DISCORD_|SLACK_)' | \
             sort -u) || true
 
           [ -z "$SECRETS" ] && exit 0
@@ -469,6 +469,36 @@ jobs:
         if: steps.work.outputs.mode != '' && steps.skill.outputs.name == 'deploy-uni-hook'
         run: bash scripts/stage-deploy-uni-hook.sh "${{ steps.skill.outputs.name }}"
 
+      - name: Cache Arc Studio CLI
+        # Own prefix, not ~/.npm. The Claude Code cache above already owns
+        # ~/.npm and does not save again after a hit, so this package would
+        # re-download every run. The key includes the CLI pin and the Node
+        # major from Setup Node.js. Bump both together. No restore-keys: an
+        # older install is the wrong binary.
+        if: steps.work.outputs.mode != '' && steps.skill.outputs.name == 'arc-studio'
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
+        with:
+          path: ~/arc-studio-cli
+          key: arc-studio-cli-${{ runner.os }}-node22-1.1.3
+
+      - name: Install Arc Studio CLI (arc-studio)
+        # Same reason Foundry is staged above: the sandbox denies an in-run
+        # toolchain install, and a PATH export dies with that shell. A cache
+        # hit already has the prefix; a miss installs into it and the cache
+        # step saves the prefix at the end of the job. Fail if the binary
+        # does not run, so a later step cannot go green and do nothing.
+        if: steps.work.outputs.mode != '' && steps.skill.outputs.name == 'arc-studio'
+        run: |
+          PREFIX="$HOME/arc-studio-cli"
+          if [ ! -x "$PREFIX/bin/arc-studio" ] || ! "$PREFIX/bin/arc-studio" --version | grep -qx '1.1.3'; then
+            echo "arc-studio CLI cache miss, installing 1.1.3"
+            npm install -g --prefix "$PREFIX" @circle-fin/arc-studio-cli@1.1.3 --prefer-offline
+          else
+            echo "arc-studio CLI cache hit ($PREFIX)"
+          fi
+          echo "$PREFIX/bin" >> "$GITHUB_PATH"
+          "$PREFIX/bin/arc-studio" --version
+
       - name: Cache remotion toolchain
         # The remotion skill renders MP4s with a bundled Remotion project. Its
         # node_modules (incl. node_modules/.remotion, the ~90 MB chrome-headless-shell)
@@ -567,6 +597,7 @@ jobs:
           MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
           USEPOD_TOKEN: ${{ secrets.USEPOD_TOKEN }}
           VENICE_API_KEY: ${{ secrets.VENICE_API_KEY }}
+          HIVEMINDOS_CREDIT_TOKEN: ${{ secrets.HIVEMINDOS_CREDIT_TOKEN }}
           SURPLUS_API_KEY: ${{ secrets.SURPLUS_API_KEY }}
           # Optional gateway model overrides + sidecar debug (defaults live in scripts/llm-gateway.sh)
           OPENROUTER_MODEL: ${{ vars.OPENROUTER_MODEL }}
@@ -577,6 +608,10 @@ jobs:
           USEPOD_MODEL_HAIKU: ${{ vars.USEPOD_MODEL_HAIKU }}
           VENICE_MODEL: ${{ vars.VENICE_MODEL }}
           VENICE_BASE_URL: ${{ vars.VENICE_BASE_URL }}
+          HIVEMINDOS_BASE_URL: ${{ vars.HIVEMINDOS_BASE_URL }}
+          HIVEMINDOS_MODEL: ${{ vars.HIVEMINDOS_MODEL }}
+          HIVEMINDOS_REASONING: ${{ vars.HIVEMINDOS_REASONING }}
+          HIVEMINDOS_MAX_TOKENS: ${{ vars.HIVEMINDOS_MAX_TOKENS }}
           VENICE_CLEANCACHE: ${{ vars.VENICE_CLEANCACHE }}
           SURPLUS_MODEL: ${{ vars.SURPLUS_MODEL }}
           GLM_MODEL: ${{ vars.GLM_MODEL }}
@@ -1252,6 +1287,7 @@ jobs:
           MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
           USEPOD_TOKEN: ${{ secrets.USEPOD_TOKEN }}
           VENICE_API_KEY: ${{ secrets.VENICE_API_KEY }}
+          HIVEMINDOS_CREDIT_TOKEN: ${{ secrets.HIVEMINDOS_CREDIT_TOKEN }}
           SURPLUS_API_KEY: ${{ secrets.SURPLUS_API_KEY }}
           XAI_API_KEY: ${{ secrets.XAI_API_KEY }}   # grok scorer: API-key auth path
           GROK_CREDENTIALS: ${{ secrets.GROK_CREDENTIALS }}   # grok scorer: X-account OAuth (restored by run-grok.sh)
@@ -1266,6 +1302,10 @@ jobs:
           USEPOD_MODEL_HAIKU: ${{ vars.USEPOD_MODEL_HAIKU }}
           VENICE_MODEL: ${{ vars.VENICE_MODEL }}
           VENICE_BASE_URL: ${{ vars.VENICE_BASE_URL }}
+          HIVEMINDOS_BASE_URL: ${{ vars.HIVEMINDOS_BASE_URL }}
+          HIVEMINDOS_MODEL: ${{ vars.HIVEMINDOS_MODEL }}
+          HIVEMINDOS_REASONING: ${{ vars.HIVEMINDOS_REASONING }}
+          HIVEMINDOS_MAX_TOKENS: ${{ vars.HIVEMINDOS_MAX_TOKENS }}
           VENICE_CLEANCACHE: ${{ vars.VENICE_CLEANCACHE }}
           SURPLUS_MODEL: ${{ vars.SURPLUS_MODEL }}
           GLM_MODEL: ${{ vars.GLM_MODEL }}
@@ -1500,6 +1540,7 @@ jobs:
           MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
           USEPOD_TOKEN: ${{ secrets.USEPOD_TOKEN }}
           VENICE_API_KEY: ${{ secrets.VENICE_API_KEY }}
+          HIVEMINDOS_CREDIT_TOKEN: ${{ secrets.HIVEMINDOS_CREDIT_TOKEN }}
           SURPLUS_API_KEY: ${{ secrets.SURPLUS_API_KEY }}
           GLM_API_KEY: ${{ secrets.GLM_API_KEY }}
           ZAI_API_KEY: ${{ secrets.ZAI_API_KEY }}
@@ -1511,6 +1552,10 @@ jobs:
           USEPOD_MODEL_HAIKU: ${{ vars.USEPOD_MODEL_HAIKU }}
           VENICE_MODEL: ${{ vars.VENICE_MODEL }}
           VENICE_BASE_URL: ${{ vars.VENICE_BASE_URL }}
+          HIVEMINDOS_BASE_URL: ${{ vars.HIVEMINDOS_BASE_URL }}
+          HIVEMINDOS_MODEL: ${{ vars.HIVEMINDOS_MODEL }}
+          HIVEMINDOS_REASONING: ${{ vars.HIVEMINDOS_REASONING }}
+          HIVEMINDOS_MAX_TOKENS: ${{ vars.HIVEMINDOS_MAX_TOKENS }}
           VENICE_CLEANCACHE: ${{ vars.VENICE_CLEANCACHE }}
           SURPLUS_MODEL: ${{ vars.SURPLUS_MODEL }}
           GLM_MODEL: ${{ vars.GLM_MODEL }}

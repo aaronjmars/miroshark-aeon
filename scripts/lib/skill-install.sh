@@ -101,16 +101,57 @@ skill_lock_upsert() {
     "$lock_file" > "${lock_file}.tmp" && mv "${lock_file}.tmp" "$lock_file"
 }
 
+# skill_normalize_schedule <schedule> <fallback>
+#   Echo a schedule the scheduler can actually fire. scripts/cron-due.sh only
+#   matches 5 numeric cron fields (plus the "workflow_dispatch" / "reactive"
+#   values the scheduler skips on purpose), so a pack that declared "daily" used
+#   to land in aeon.yml verbatim and never run, with nothing warning about it.
+#   Common aliases (hourly, daily, weekly, monthly, yearly, with or without a
+#   leading "@") map to their standard cron meaning; anything else becomes
+#   <fallback>. A value that already works is echoed unchanged, so callers spot
+#   a rewrite by comparing input and output.
+skill_normalize_schedule() {
+  local schedule="$1" fallback="$2" alias f1 f2 f3 f4 f5 extra
+  local field_re='^[0-9*,/-]+$'
+  case "$schedule" in
+    workflow_dispatch|reactive) printf '%s\n' "$schedule"; return 0 ;;
+  esac
+  read -r f1 f2 f3 f4 f5 extra <<< "$schedule"
+  if [[ -n "$f5" && -z "$extra" \
+        && "$f1" =~ $field_re && "$f2" =~ $field_re && "$f3" =~ $field_re \
+        && "$f4" =~ $field_re && "$f5" =~ $field_re ]]; then
+    printf '%s\n' "$schedule"
+    return 0
+  fi
+  alias=$(printf '%s' "$schedule" | tr -d '[:space:]' | tr '[:upper:]' '[:lower:]')
+  case "${alias#@}" in
+    hourly)          printf '%s\n' "0 * * * *" ;;
+    daily|midnight)  printf '%s\n' "0 0 * * *" ;;
+    weekly)          printf '%s\n' "0 0 * * 0" ;;
+    monthly)         printf '%s\n' "0 0 1 * *" ;;
+    yearly|annually) printf '%s\n' "0 0 1 1 *" ;;
+    *)               printf '%s\n' "$fallback" ;;
+  esac
+}
+
 # skill_add_to_aeon_yml <aeon_yml> <slug> <enabled> <schedule>
 #   Insert "  <slug>: { enabled: <enabled>, schedule: \"<schedule>\" }" before the
 #   "# --- Fallback" marker (or before the first top-level block / at EOF when no
 #   marker exists). No-op if <slug> is already present. Echoes a status line.
+#   A schedule the scheduler cannot fire is rewritten via skill_normalize_schedule
+#   (unknown values fall back to "0 12 * * *", the installers' default) and a
+#   warning line is printed.
 skill_add_to_aeon_yml() {
-  local aeon_yml="$1" slug="$2" enabled="$3" schedule="$4" entry_line
+  local aeon_yml="$1" slug="$2" enabled="$3" schedule="$4" entry_line normalized
   [[ -f "$aeon_yml" ]] || return 0
   if grep -q "^  $slug:" "$aeon_yml" 2>/dev/null; then
     echo "    -> already in aeon.yml"
     return 0
+  fi
+  normalized=$(skill_normalize_schedule "$schedule" "0 12 * * *")
+  if [[ "$normalized" != "$schedule" ]]; then
+    echo "    warning: schedule \"$schedule\" is not a 5-field cron, so the scheduler would never run it; using \"$normalized\""
+    schedule="$normalized"
   fi
   entry_line="  $slug: { enabled: $enabled, schedule: \"$schedule\" }"
   if grep -q "^  # --- Fallback" "$aeon_yml"; then
