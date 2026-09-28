@@ -1,0 +1,308 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "ℹ️ Repo Pulse"
+      },
+      "children": [
+        "header",
+        "sep1",
+        "metrics",
+        "sep2",
+        "notable_section",
+        "sep3",
+        "other_section",
+        "sep4",
+        "forks_section"
+      ]
+    },
+    "header": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "info_date",
+        "info_status",
+        "info_source"
+      ]
+    },
+    "info_date": {
+      "type": "Text",
+      "props": {
+        "text": "2026-09-28",
+        "variant": "muted"
+      }
+    },
+    "info_status": {
+      "type": "Badge",
+      "props": {
+        "text": "ACTIVE",
+        "variant": "default"
+      }
+    },
+    "info_source": {
+      "type": "Text",
+      "props": {
+        "text": "Source: events",
+        "variant": "muted"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {}
+    },
+    "metrics": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "repo_label",
+        "metrics_row"
+      ]
+    },
+    "repo_label": {
+      "type": "Text",
+      "props": {
+        "text": "aaronjmars/MiroShark",
+        "variant": "lead"
+      }
+    },
+    "metrics_row": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "lg"
+      },
+      "children": [
+        "stars",
+        "forks",
+        "releases"
+      ]
+    },
+    "stars": {
+      "type": "Stat",
+      "props": {
+        "label": "Stars",
+        "value": "1457",
+        "delta": "+6",
+        "trend": "up"
+      }
+    },
+    "forks": {
+      "type": "Stat",
+      "props": {
+        "label": "Forks",
+        "value": "300",
+        "delta": "+1 new, net -1",
+        "trend": "neutral"
+      }
+    },
+    "releases": {
+      "type": "Stat",
+      "props": {
+        "label": "Releases",
+        "value": "0",
+        "delta": "+0",
+        "trend": "neutral"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {}
+    },
+    "notable_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "notable_heading",
+        "sg1",
+        "sg2",
+        "sg3"
+      ]
+    },
+    "notable_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Notable new stargazers",
+        "level": "h3"
+      }
+    },
+    "sg1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "sg1_name",
+        "sg1_details",
+        "sg1_role"
+      ]
+    },
+    "sg1_name": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/AAH20",
+        "href": "https://github.com/AAH20"
+      }
+    },
+    "sg1_details": {
+      "type": "Text",
+      "props": {
+        "text": "Ahmed Hassan · 528 repos · 🌐 a2zsoc.com · 23 followers",
+        "variant": "body"
+      }
+    },
+    "sg1_role": {
+      "type": "Text",
+      "props": {
+        "text": "AI Infrastructure & Multi-Cloud Architect | Platform Engineering, Networking, Kubernetes, FinOps, CISO & GRC",
+        "variant": "caption"
+      }
+    },
+    "sg2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "sg2_name",
+        "sg2_details"
+      ]
+    },
+    "sg2_name": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/chizee",
+        "href": "https://github.com/chizee"
+      }
+    },
+    "sg2_details": {
+      "type": "Text",
+      "props": {
+        "text": "468 repos",
+        "variant": "body"
+      }
+    },
+    "sg3": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "sg3_name",
+        "sg3_details"
+      ]
+    },
+    "sg3_name": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/werserk",
+        "href": "https://github.com/werserk"
+      }
+    },
+    "sg3_details": {
+      "type": "Text",
+      "props": {
+        "text": "Maxim Kirilyuk · 🏢 OrangeHack · 24 repos · 🌐 werserk.com · 25 followers",
+        "variant": "body"
+      }
+    },
+    "sep3": {
+      "type": "Separator",
+      "props": {}
+    },
+    "other_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "other_heading",
+        "other_list"
+      ]
+    },
+    "other_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "Other new stargazers",
+        "level": "h3"
+      }
+    },
+    "other_list": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "other_sg1",
+        "other_sg2",
+        "other_sg3"
+      ]
+    },
+    "other_sg1": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/rcdev-source",
+        "href": "https://github.com/rcdev-source"
+      }
+    },
+    "other_sg2": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/bizmantra",
+        "href": "https://github.com/bizmantra"
+      }
+    },
+    "other_sg3": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/MyAutomateAI",
+        "href": "https://github.com/MyAutomateAI"
+      }
+    },
+    "sep4": {
+      "type": "Separator",
+      "props": {}
+    },
+    "forks_section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "forks_heading",
+        "fork1"
+      ]
+    },
+    "forks_heading": {
+      "type": "Heading",
+      "props": {
+        "text": "New forks",
+        "level": "h3"
+      }
+    },
+    "fork1": {
+      "type": "Link",
+      "props": {
+        "label": "github.com/chizee/MiroShark",
+        "href": "https://github.com/chizee/MiroShark"
+      }
+    }
+  }
+}
