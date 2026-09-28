@@ -1,0 +1,169 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "Heartbeat"
+      },
+      "children": [
+        "main-stack"
+      ]
+    },
+    "main-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "lg"
+      },
+      "children": [
+        "watch-section",
+        "sep1",
+        "green-section"
+      ]
+    },
+    "watch-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "watch-badge",
+        "issue-stack"
+      ]
+    },
+    "watch-badge": {
+      "type": "Badge",
+      "props": {
+        "text": "🟡 WATCH — 1 item",
+        "variant": "outline"
+      }
+    },
+    "issue-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "issue-heading",
+        "cron-state-text",
+        "outcome-text",
+        "pr-story",
+        "issue-story",
+        "bug-note"
+      ]
+    },
+    "issue-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "aeon-update outcome-write appears lost",
+        "level": "h3"
+      }
+    },
+    "cron-state-text": {
+      "type": "Text",
+      "props": {
+        "text": "cron-state.json shows last_status: dispatched from 11:05 UTC (8h+ stale), but the run actually completed",
+        "variant": "body"
+      }
+    },
+    "outcome-text": {
+      "type": "Text",
+      "props": {
+        "text": "PR #183 opened 11:31 UTC and merged with 13 upstream commits (ba01e9f..531f575); skill-health scored run_failed (score 1) at 11:37 UTC",
+        "variant": "body"
+      }
+    },
+    "pr-story": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #183",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/pull/183",
+        "source": "GitHub"
+      }
+    },
+    "issue-story": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Issue #184",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/issues/184",
+        "source": "GitHub"
+      }
+    },
+    "bug-note": {
+      "type": "Text",
+      "props": {
+        "text": "Reads as a bug in the outcome-write step, not a hung run — worth a look at why the state file never got the success/failure write",
+        "variant": "muted"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "green-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "green-header",
+        "status-list"
+      ]
+    },
+    "green-header": {
+      "type": "Text",
+      "props": {
+        "text": "Everything else green",
+        "variant": "lead"
+      }
+    },
+    "status-list": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "status1",
+        "status2",
+        "status3",
+        "liquidity-note"
+      ]
+    },
+    "status1": {
+      "type": "Text",
+      "props": {
+        "text": "0 open PRs (both repos)",
+        "variant": "body"
+      }
+    },
+    "status2": {
+      "type": "Text",
+      "props": {
+        "text": "No urgent issues",
+        "variant": "body"
+      }
+    },
+    "status3": {
+      "type": "Text",
+      "props": {
+        "text": "All 9 enabled skills current",
+        "variant": "body"
+      }
+    },
+    "liquidity-note": {
+      "type": "Text",
+      "props": {
+        "text": "DS-vs-GT liquidity divergence (13 days now) still unresolved but unchanged from prior reports — not re-flagged",
+        "variant": "muted"
+      }
+    }
+  }
+}
