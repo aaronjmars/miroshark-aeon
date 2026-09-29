@@ -1,0 +1,115 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "MiroShark Token Report"
+      },
+      "children": [
+        "status_badge",
+        "narrative_text",
+        "sep1",
+        "stats_grid",
+        "sep2",
+        "chart_link"
+      ]
+    },
+    "status_badge": {
+      "type": "Badge",
+      "props": {
+        "text": "CONSOLIDATING",
+        "variant": "secondary"
+      }
+    },
+    "narrative_text": {
+      "type": "Text",
+      "props": {
+        "text": "A single $8.3K whale sell at 06:49 UTC yesterday drove the entire 24h price drop; volume stayed at 0.6x the 7-day average and order flow actually flipped buy-skewed.",
+        "variant": "body"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stats_grid": {
+      "type": "Grid",
+      "props": {
+        "columns": 3,
+        "gap": "md"
+      },
+      "children": [
+        "stat_price",
+        "stat_liq",
+        "stat_vol",
+        "stat_buys_sells",
+        "stat_ratio",
+        "stat_whales"
+      ]
+    },
+    "stat_price": {
+      "type": "Stat",
+      "props": {
+        "label": "Price",
+        "value": "$0.000002710",
+        "delta": "−11.9%",
+        "trend": "down"
+      }
+    },
+    "stat_liq": {
+      "type": "Stat",
+      "props": {
+        "label": "Liquidity",
+        "value": "$320.6K",
+        "delta": "−6.0%",
+        "trend": "down"
+      }
+    },
+    "stat_vol": {
+      "type": "Stat",
+      "props": {
+        "label": "Volume (24h)",
+        "value": "$12.7K",
+        "delta": "0.6× 7-day avg"
+      }
+    },
+    "stat_buys_sells": {
+      "type": "Stat",
+      "props": {
+        "label": "Buys/Sells",
+        "value": "18/11"
+      }
+    },
+    "stat_ratio": {
+      "type": "Stat",
+      "props": {
+        "label": "Ratio",
+        "value": "1.64"
+      }
+    },
+    "stat_whales": {
+      "type": "Stat",
+      "props": {
+        "label": "Whales",
+        "value": "2"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "chart_link": {
+      "type": "Link",
+      "props": {
+        "label": "View Chart on GeckoTerminal",
+        "href": "https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209"
+      }
+    }
+  }
+}
