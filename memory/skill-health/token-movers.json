@@ -1,15 +1,11 @@
 {
   "skill": "token-movers",
-  "last_analyzed": "2026-09-29T06:17:49Z",
-  "quality_score": 5,
-  "assessment": "Insightful, well-sourced token report that traces the 24h move to a specific whale trade, cross-validates data across sources, transparently flags unresolved discrepancies, and aligns precisely with strategy priority 4 (honest momentum tracking).",
+  "last_analyzed": "2026-09-30T06:15:56Z",
+  "quality_score": 4,
+  "assessment": "Substantive market tracking with specific verifiable metrics, proper cross-source verification (GT/DS convergence), and clear root-cause analysis; aligns directly to priority 4 (track momentum honestly) with no quality issues or unverifiable claims.",
   "flags": [],
-  "avg_score": 4.1,
+  "avg_score": 4.07,
   "history": [
-    {
-      "date": "2026-09-01",
-      "score": 5
-    },
     {
       "date": "2026-09-01",
       "score": 5
@@ -125,6 +121,10 @@
     {
       "date": "2026-09-29",
       "score": 5
+    },
+    {
+      "date": "2026-09-30",
+      "score": 4
     }
   ]
 }
