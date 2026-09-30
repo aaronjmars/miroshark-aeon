@@ -1,15 +1,11 @@
 {
   "skill": "fetch-tweets",
-  "last_analyzed": "2026-09-29T17:07:09Z",
-  "quality_score": 4,
-  "assessment": "Good execution: routine tweet fetch ran clean (HTTP 200), applied correct filtering and dedup logic, logged properly, and transparently reported nothing new. Verifiable throughout; supports 'track momentum honestly' via disciplined signal checking.",
+  "last_analyzed": "2026-09-30T17:08:00Z",
+  "quality_score": 3,
+  "assessment": "Correct execution with proper dedup and logging; no new signals to report is a valid outcome, not empty output.",
   "flags": [],
-  "avg_score": 3.37,
+  "avg_score": 3.33,
   "history": [
-    {
-      "date": "2026-09-01",
-      "score": 4
-    },
     {
       "date": "2026-09-01",
       "score": 4
@@ -125,6 +121,10 @@
     {
       "date": "2026-09-29",
       "score": 4
+    },
+    {
+      "date": "2026-09-30",
+      "score": 3
     }
   ]
 }

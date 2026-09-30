@@ -1,8 +1,9 @@
-The scratch JSON file under `output/scratch/` is gitignored so I'll leave it — no cleanup needed there.
+Good — `output/scratch/` is gitignored as expected, and `notify`/`notify-jsonrender` are the usual generated-artifact drift. Only the log file changed. Since there's nothing new to notify (all candidates deduped), no notification is sent per the skill's spec.
 
 ## Summary
 
-Ran the `fetch-tweets` skill in `account:` mode (empty ARG → all-tracked-accounts digest). Only one account is tracked (`memory/topics/tracked-accounts.yml`): `miroshark_`. Fetched its last 3 days of tweets via twitterapi.io (HTTP 200, primary path — no fallback needed). Two candidates fell in the window: a retweet of @thecultos announcing the x402 Spaces postponement (dropped per the skill's "skip retweets of others" rule) and the dataset-release tweet already reported on 2026-09-27. Nothing new survived dedup, so per the skill's rules this is a legitimate empty result — logged `TWEET_DIGEST_OK` to `memory/logs/2026-09-29.md` under `### fetch-tweets`, **no notification sent** (silence beats filler).
+Ran `fetch-tweets` with `var=account:` (empty arg → all-tracked-accounts digest mode). Config has one tracked account (`miroshark_`). Fetched its last 3 days via twitterapi.io (Path A, http=200, 2 tweets in window): one was a retweet of `@thecultos` (dropped per "skip retweets of others"), the other was the 09-27 dataset-announcement post already reported in a prior log. Zero new/notable tweets survived dedup, so per the skill's "notify only on signal" rule, **no notification was sent** — status `TWEET_DIGEST_OK` (clean, quiet run).
 
-**Files modified:** `memory/logs/2026-09-29.md` (appended fetch-tweets log entry).
-**Follow-up:** none required — this is a clean no-op run.
+**Files modified:** `memory/logs/2026-09-30.md` — appended a `### fetch-tweets` log entry.
+
+**Follow-up:** none needed; next scheduled fetch-tweets run should pick up fresh posts once `miroshark_` posts something new.
