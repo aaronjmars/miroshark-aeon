@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "base": {
+      "type": "http",
+      "url": "https://mcp.base.org",
+      "headers": {
+        "Authorization": "Bearer ${MCP_BASE_TOKEN}"
+      }
+    }
+  }
+}
