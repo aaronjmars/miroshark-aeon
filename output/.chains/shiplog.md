@@ -1,24 +1,20 @@
-ℹ️ Shiplog: Sep 21 → 28
+ℹ️ Miroshark Shiplog
 
-miroshark ⭐🦈 shiplog sep 21 → sep 28
+miroshark shiplog 🦈 sept 28 → oct 1
 
-42 PRs merged across the engine + companions this window. the bytes:
+shipped 7 real PRs across x402aff + miroshark-x402 + the engine this window. the bytes:
 
-- published the receipts: 8,201 decisions from miroshark sims, public on huggingface — what the agent saw, reasoned, and did, tweet to trade
-- applied to be a default solana skill: PR open on solana-foundation/pay-skills, $1/run, x402, mergeable, waiting on a human review
-- hardened x402: spoof-resistant cancel tokens, SSRF-guarded callbacks, settle-before-run. shipped quiet, matters a lot
-- landed on medium + substack this week, but the weekly match-sim streak broke — first miss after 5 straight
-- public engine repo: 2 PRs, 1 docs 1 dependabot. still not where the real work lands
+- got miroshark's x402 endpoint listed on @PayAINetwork — had to build a standalone signer tool since payai only catalogs its own facilitator's settlements. verified on-chain.
+- shipped x402aff 0.3.1: installable agent skill, any x402 seller wires in the affiliate kit with one command. moved to x402aff.xyz
+- website: HF dataset now linked site-wide, x402aff page redesigned, webmcp hardening fix
+- engine repo: still mostly dependency bumps. real engine work keeps landing in the private companion repo instead — 5th straight window
 
 traction:
-- miroshark 1,457 ⭐ (+5) — best window in a month
-- forks 300 (new baseline, delta starts next week)
-- x402aff 7 ⭐ (+1)
+- MiroShark/MiroShark 1,460 ⭐ (+3)
+- x402aff 7 ⭐, HF dataset re-promo this window — low engagement so far
 
-the pitch is "$1 to simulate anything, audit the receipts." this week we shipped both halves.
+🦈
 
-⭐🦈
+https://github.com/aaronjmars/miroshark-aeon/blob/main/output/articles/shiplog-2026-10-01.md
 
-Article: https://github.com/aaronjmars/miroshark-aeon/blob/main/output/articles/shiplog-2026-09-28.md
-
-🔗 https://github.com/aaronjmars/miroshark-aeon/blob/main/output/articles/shiplog-2026-09-28.md
+🔗 https://github.com/aaronjmars/miroshark-aeon/blob/main/output/articles/shiplog-2026-10-01.md

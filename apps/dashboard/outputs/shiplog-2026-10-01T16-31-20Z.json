@@ -1,0 +1,157 @@
+{
+  "root": "card_root",
+  "state": {},
+  "elements": {
+    "card_root": {
+      "type": "Card",
+      "props": {
+        "title": "🦈 Miroshark Shiplog"
+      },
+      "children": [
+        "heading_date",
+        "text_intro",
+        "stack_ships",
+        "sep1",
+        "heading_traction",
+        "stack_traction",
+        "sep2",
+        "emoji_shark",
+        "link_article"
+      ]
+    },
+    "heading_date": {
+      "type": "Heading",
+      "props": {
+        "text": "sept 28 → oct 1",
+        "level": "h2"
+      }
+    },
+    "text_intro": {
+      "type": "Text",
+      "props": {
+        "text": "shipped 7 real PRs across x402aff + miroshark-x402 + the engine this window. the bytes:",
+        "variant": "lead"
+      }
+    },
+    "stack_ships": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "ship1",
+        "ship2",
+        "ship3",
+        "ship4"
+      ]
+    },
+    "ship1": {
+      "type": "Text",
+      "props": {
+        "text": "got miroshark's x402 endpoint listed on @PayAINetwork — had to build a standalone signer tool since payai only catalogs its own facilitator's settlements. verified on-chain.",
+        "variant": "body"
+      }
+    },
+    "ship2": {
+      "type": "Text",
+      "props": {
+        "text": "shipped x402aff 0.3.1: installable agent skill, any x402 seller wires in the affiliate kit with one command. moved to x402aff.xyz",
+        "variant": "body"
+      }
+    },
+    "ship3": {
+      "type": "Text",
+      "props": {
+        "text": "website: HF dataset now linked site-wide, x402aff page redesigned, webmcp hardening fix",
+        "variant": "body"
+      }
+    },
+    "ship4": {
+      "type": "Text",
+      "props": {
+        "text": "engine repo: still mostly dependency bumps. real engine work keeps landing in the private companion repo instead — 5th straight window",
+        "variant": "body"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading_traction": {
+      "type": "Heading",
+      "props": {
+        "text": "traction",
+        "level": "h3"
+      }
+    },
+    "stack_traction": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stat1",
+        "stat2_wrapper"
+      ]
+    },
+    "stat1": {
+      "type": "Stat",
+      "props": {
+        "label": "MiroShark/MiroShark",
+        "value": "1,460",
+        "delta": "+3",
+        "trend": "up"
+      }
+    },
+    "stat2_wrapper": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "stat2",
+        "stat2_note"
+      ]
+    },
+    "stat2": {
+      "type": "Stat",
+      "props": {
+        "label": "x402aff",
+        "value": "7"
+      }
+    },
+    "stat2_note": {
+      "type": "Text",
+      "props": {
+        "text": "HF dataset re-promo this window — low engagement so far",
+        "variant": "caption"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "emoji_shark": {
+      "type": "Text",
+      "props": {
+        "text": "🦈",
+        "variant": "body"
+      }
+    },
+    "link_article": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full Shiplog Article",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/output/articles/shiplog-2026-10-01.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}
