@@ -2469,7 +2469,7 @@
       "files": [
         {
           "path": "SKILL.md",
-          "hash": "3f99975cadb2163512661a10eebc6b2890ac5acb1f67b8e846e4838d8b48cde5"
+          "hash": "a6005085ff55f89cb9655e7c505794cde63b2599fec8e9238ec317472d0e012d"
         }
       ],
       "findings": [
@@ -2483,7 +2483,7 @@
           "explanation": "references sensitive credential or secret paths"
         }
       ],
-      "contentHash": "sha256-cbc52e97f6c5391dadb47d3b61ee88090fd47ad0637fab1c1a25c82c9bd7b9ed",
+      "contentHash": "sha256-cea77ca190fdc4bdfdfdf156e2cf3db77fbb07f29a8029b4422d4c0a648f0982",
       "discoveredFrom": "skills/aeon-update/SKILL.md"
     }
   ]
