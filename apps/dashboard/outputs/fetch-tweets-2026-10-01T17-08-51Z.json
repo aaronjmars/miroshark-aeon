@@ -1,0 +1,128 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "Tweet Digest",
+        "description": "2026-10-01"
+      },
+      "children": [
+        "stack-main"
+      ]
+    },
+    "stack-main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "lg"
+      },
+      "children": [
+        "section-1",
+        "separator-1",
+        "section-2"
+      ]
+    },
+    "section-1": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading-1",
+        "tweet-1",
+        "link-1",
+        "tweet-2",
+        "link-2"
+      ]
+    },
+    "heading-1": {
+      "type": "Heading",
+      "props": {
+        "text": "Theme: x402aff launch",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "tweet-1": {
+      "type": "TweetCard",
+      "props": {
+        "author": "Miroshark",
+        "handle": "miroshark_",
+        "text": "Ships a dedicated site for the x402aff standard"
+      },
+      "children": []
+    },
+    "link-1": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/miroshark_/status/2105701200758992976"
+      },
+      "children": []
+    },
+    "tweet-2": {
+      "type": "TweetCard",
+      "props": {
+        "author": "Miroshark",
+        "handle": "miroshark_",
+        "text": "Endpoint now listed on PayAI Network"
+      },
+      "children": []
+    },
+    "link-2": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/miroshark_/status/2105700554739740927"
+      },
+      "children": []
+    },
+    "separator-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      },
+      "children": []
+    },
+    "section-2": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "heading-2",
+        "tweet-3",
+        "link-3"
+      ]
+    },
+    "heading-2": {
+      "type": "Heading",
+      "props": {
+        "text": "Theme: research dataset",
+        "level": "h3"
+      },
+      "children": []
+    },
+    "tweet-3": {
+      "type": "TweetCard",
+      "props": {
+        "author": "Miroshark",
+        "handle": "miroshark_",
+        "text": "Posts the HuggingFace drop itself — 8,201 agent decisions across 16 sims, fully synthetic, MIT and free"
+      },
+      "children": []
+    },
+    "link-3": {
+      "type": "Link",
+      "props": {
+        "label": "View tweet",
+        "href": "https://x.com/miroshark_/status/2105648418115006822"
+      },
+      "children": []
+    }
+  }
+}
