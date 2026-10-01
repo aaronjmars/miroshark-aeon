@@ -485,4 +485,4 @@ date,skill,model,input_tokens,output_tokens,cache_read,cache_creation
 2026-09-30,fetch-tweets,claude-sonnet-5,2493,6967,1295431,53051
 2026-09-30,heartbeat,claude-sonnet-5,2485,12749,1038791,65302
 2026-10-01,token-movers,claude-sonnet-5,2940,21366,4129862,79422
-2026-10-01,shiplog,claude-sonnet-5,3377,36799,6615719,92761
+2026-10-01,shiplog,claude-opus-4-8,2916,24399,2709322,94089

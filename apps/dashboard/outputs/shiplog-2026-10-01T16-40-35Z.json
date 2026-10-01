@@ -1,0 +1,152 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "MiroShark shiplog · Sep 28 to Oct 1"
+      },
+      "children": [
+        "heading-main",
+        "text-intro",
+        "stack-achievements",
+        "sep-1",
+        "heading-traction",
+        "stack-stats",
+        "text-note-forks",
+        "text-no-scouts",
+        "sep-2",
+        "story-article"
+      ]
+    },
+    "heading-main": {
+      "type": "Heading",
+      "props": {
+        "text": "miroshark shiplog ⭐🦈 sep 28 → oct 1",
+        "level": "h2"
+      }
+    },
+    "text-intro": {
+      "type": "Text",
+      "props": {
+        "text": "distribution window, not an engine one. shipped ~29 PRs. the bytes:",
+        "variant": "lead"
+      }
+    },
+    "stack-achievements": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "text-x402",
+        "text-payai",
+        "text-webmcp",
+        "text-agent-decisions",
+        "text-engine-repo"
+      ]
+    },
+    "text-x402": {
+      "type": "Text",
+      "props": {
+        "text": "x402aff is live: permisionless affiliation for any agent. full site in a day — claims dashboard, agent-ready (MCP/WebMCP + REST + OpenAPI), v0.3.1 w/ the agent skill. a product by @miroshark_ 🦈"
+      }
+    },
+    "text-payai": {
+      "type": "Text",
+      "props": {
+        "text": "the @miroshark_ x402 endpoint is now listed on @PayAINetwork — a stranger's agent can find & pay the \"simulate anything\" endpoint without ever touching our site"
+      }
+    },
+    "text-webmcp": {
+      "type": "Text",
+      "props": {
+        "text": "webmcp hardening on the site: abort-signal forwarding, throws-on-failure, client-side run panel handoff"
+      }
+    },
+    "text-agent-decisions": {
+      "type": "Text",
+      "props": {
+        "text": "8,201 agent decisions from 16 sims now public on @huggingface — trace what each agent said → what it bet, same round"
+      }
+    },
+    "text-engine-repo": {
+      "type": "Text",
+      "props": {
+        "text": "public engine repo: still docs-only (1 docs PR + 3 dependabot). real engine work is private. being honest."
+      }
+    },
+    "sep-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "heading-traction": {
+      "type": "Heading",
+      "props": {
+        "text": "Traction",
+        "level": "h3"
+      }
+    },
+    "stack-stats": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stat-stars",
+        "stat-forks"
+      ]
+    },
+    "stat-stars": {
+      "type": "Stat",
+      "props": {
+        "label": "MiroShark ⭐",
+        "value": "1,460",
+        "delta": "+3",
+        "trend": "up"
+      }
+    },
+    "stat-forks": {
+      "type": "Stat",
+      "props": {
+        "label": "Forks",
+        "value": "302",
+        "delta": "+2",
+        "trend": "up"
+      }
+    },
+    "text-note-forks": {
+      "type": "Text",
+      "props": {
+        "text": "reverses last week's dip",
+        "variant": "caption"
+      }
+    },
+    "text-no-scouts": {
+      "type": "Text",
+      "props": {
+        "text": "no scout pickups this window",
+        "variant": "muted"
+      }
+    },
+    "sep-2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "story-article": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full shiplog article",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/output/articles/shiplog-2026-10-01.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}
