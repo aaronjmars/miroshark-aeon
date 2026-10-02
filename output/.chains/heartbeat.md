@@ -1,19 +1,31 @@
-Heartbeat ambient check complete for 2026-10-01. `docs/status.md` and today's log were regenerated/updated; no notification sent (everything found was already reported within the last 48h).
+Everything checks out clean, and since every finding is a repeat of what's already been reported in the last 48h, no notification goes out today — just the log entry and status page refresh.
 
-## Findings
+## Heartbeat — Ambient fleet check (2026-10-02, 19:06 UTC)
 
-**P0 — Failed & stuck skills:** `aeon-update` is still stuck on `last_status: dispatched` from its 2026-09-28 11:05 UTC run — now 80h+ stale, unchanged since 09-29/09-30. Confirmed root cause (carried from prior days, not new): a **lost outcome-write, not a live hang** — the run actually finished and merged PR #183 (13 upstream commits, 09-28 14:03 UTC), independently scored by skill-health via issue #184. No fix has landed for the tracking pipeline itself; no new dispatch expected before the next scheduled run, Monday 2026-10-05 11:00 UTC. No other failed/stuck skills, no `consecutive_failures ≥ 3`, no chronic failures. Heartbeat's own self-check is clean.
+**Overall status: 🟡 WATCH** (unchanged from 09-28)
 
-**P1 — Stalled PRs & urgent issues:** 0 open PRs across `aaronjmars/miroshark-aeon` and `MiroShark/MiroShark`. Issues #182 (token-movers, stale since 09-22) and #184 (aeon-update, same signal as P0) remain open and unlabeled — not urgent, already reported. **New:** issue #240 (`MiroShark/MiroShark`, offline HF models) is now **closed** — dropped from the status page.
+### P0 — Failed & stuck skills
+- `aeon-update` cron-state entry is still `last_status: dispatched` from the 09-28 11:05 UTC run — now **104h+ stale**, unchanged since 09-29/09-30/10-01. Confirmed root cause (already diagnosed in prior runs): a **lost outcome-write**, not a live hang — the run actually completed and merged PR #183 (13 upstream commits, 09-28 14:03 UTC), independently scored via issue #184. No fix has landed for the tracking pipeline; no new dispatch expected before next Monday (2026-10-05 11:00 UTC).
+- No other failed/stuck skills, no `consecutive_failures ≥ 3`, no chronic failures. Heartbeat's own self-check is clean (last success ~24h ago).
 
-**P2 — Flagged memory items:** nothing new.
+### P1 — PRs & issues
+- 0 open PRs across `aaronjmars/miroshark-aeon` and `MiroShark/MiroShark`.
+- Open issues: #182 (token-movers, stale since 09-22) and #184 (aeon-update, same signal as P0) — both already reported, unlabeled, none urgent. `MiroShark/MiroShark` has 0 open issues.
 
-**P3 — Missing scheduled skills:** all 9 enabled skills (heartbeat, token-movers, fetch-tweets, repo-pulse, holdings, shiplog, memory-flush, aeon-update, changelog) current — no missing dispatches, none more than 2x their schedule interval stale.
+### P2 — Flagged memory items
+Nothing new.
 
-**Status page verdict:** 🟡 WATCH (carried over — driven solely by the unresolved `aeon-update` outcome-write issue). Token pulse refreshed to today's report: $MIROSHARK $0.000002621, +2.0% 24h, liquidity $140.0K (+1.5%, first gain since Tuesday's one-off LP drop), verdict CONSOLIDATING — a thin-volume, no-whale bounce, not a demand signal.
+### P3 — Missing scheduled skills
+All 9 enabled skills (heartbeat, token-movers, fetch-tweets, repo-pulse, holdings, shiplog, memory-flush, aeon-update, changelog) are current — no missing dispatches, none past 2x their schedule interval.
+
+### Notification
+**Not sent** — every item above (the aeon-update stuck entry, issues #182/#184) was already reported in the 09-30 and 10-01 logs, so it's deduped per the 48h rule.
+
+### Status page
+Regenerated `docs/status.md`: Overall 🟡 WATCH, token pulse refreshed to today's report (QUIET, -0.3% 24h on thin volume, $140.2K liquidity), skill table re-sorted by last-run time, next scheduled run = token-movers @ 06:00 UTC 2026-10-03.
 
 ## Summary
-- Updated `docs/status.md` (Overall 🟡 WATCH, fresh token pulse + skill table, #240 closed note).
-- Appended a `### heartbeat` entry to `memory/logs/2026-10-01.md` (mode: ambient).
-- No `./notify` sent — all findings (aeon-update stuck, issues #182/#184) already reported within the last 48h; #240 closing is informational only.
-- Follow-up still open for the operator: no automated fix yet for `aeon-update`'s outcome-write loss; next natural check is Monday 2026-10-05 11:00 UTC when it's next dispatched.
+- Ran the ambient heartbeat check; no new issues found, fleet health unchanged from the last 3 days (aeon-update's lost-outcome-write still open, no notification needed per dedup).
+- Updated `docs/status.md` with current timestamps, token pulse, and skill table.
+- Appended a `### heartbeat` entry to `memory/logs/2026-10-02.md`.
+- Follow-up: `aeon-update`'s tracking-pipeline bug (outcome-writes not persisting to cron-state.json) remains unfixed — worth a dedicated repair pass, though its next scheduled dispatch isn't until 2026-10-05.
