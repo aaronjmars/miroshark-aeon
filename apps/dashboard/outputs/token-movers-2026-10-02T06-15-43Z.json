@@ -1,0 +1,49 @@
+{
+  "root": "main_card",
+  "state": {},
+  "elements": {
+    "main_card": {
+      "type": "Card",
+      "props": {
+        "title": "MIROSHARK"
+      },
+      "children": [
+        "content_stack"
+      ]
+    },
+    "content_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "status_text",
+        "price_stat",
+        "volume_stat"
+      ]
+    },
+    "status_text": {
+      "type": "Text",
+      "props": {
+        "text": "quiet",
+        "variant": "muted"
+      }
+    },
+    "price_stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Price",
+        "value": "$0.000002614",
+        "trend": "neutral"
+      }
+    },
+    "volume_stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Volume",
+        "value": "$2.8K"
+      }
+    }
+  }
+}
