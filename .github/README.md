@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="../docs/assets/hero-animated.svg" alt="AEON — the most autonomous agent framework. 60+ skills across 7 harnesses (Claude Code, Grok, Codex, Pi, Vibe, Kimi, fx), running unattended on GitHub Actions: it ships features to your repos, privately discloses real vulnerabilities, deploys live apps, runs deep research, and writes new skills for itself. Keywords: autonomous AI agent, agent framework, GitHub Actions automation, self-improving agent, multi-agent orchestration, LLM skills, cron agent." width="100%" />
+  <img src="../docs/assets/hero-animated.svg" alt="AEON - the most autonomous agent framework. 85 skills across 9 harnesses (Claude Code, Grok, Codex, Pi, Vibe, Kimi, fx, Cursor, Hermes), running unattended on GitHub Actions: it ships features to your repos, privately discloses real vulnerabilities, deploys live apps, runs deep research, and writes new skills for itself. Keywords: autonomous AI agent, agent framework, GitHub Actions automation, self-improving agent, multi-agent orchestration, LLM skills, cron agent." width="100%" />
 </p>
 
 <p align="center">
@@ -15,6 +15,8 @@
   Give it a direction and it ships the work: features, vulnerability disclosures, live apps, deep research - and new skills for itself.<br/><br/>
   <strong>No approval loops. No babysitting. Configure once, forget forever.</strong>
 </p>
+
+> **This is a live Aeon instance**: the growth agent for [MiroShark](https://github.com/aaronjmars/MiroShark), running the MiroShark repo and $MIROSHARK in public. Want your own? **[Run now at www.aeon.fun/connect](https://www.aeon.fun/connect)**, no clone needed. The framework lives at [aeonfun/aeon](https://github.com/aeonfun/aeon); start from there, not from this repo.
 
 > **🤖 Using a coding agent?** Point it here: **read https://www.aeon.fun/skills/aeon.md and follow the instructions to set up your Aeon agent.**
 
@@ -36,24 +38,22 @@
 ## Quick start
 
 <p align="center">
-  <img src="../docs/assets/quickstart-aeon.jpg" alt="Quick start in four steps: 1 Fork - Use this template to get your own repo copy. 2 Connect - add a Telegram, Discord, or email channel. 3 Pick skills - toggle skills on and set their cron schedule. 4 Runs itself - Aeon runs unattended on GitHub Actions." width="100%" />
+  <img src="../docs/assets/quickstart-aeon.jpg" alt="Quick start in four steps: 1 Sign in - sign in with GitHub at www.aeon.fun/connect and create your aeon. 2 Connect a model - paste your Claude subscription token or another key; it is saved as an encrypted secret in your own repo. 3 Pick skills - toggle skills on and set their schedule. 4 Runs itself - Aeon runs unattended on your GitHub Actions." width="100%" />
 </p>
 
-You need **Node.js 20+**, the **[GitHub CLI](https://cli.github.com/) (`gh`)** authenticated (`gh auth login`), and **your own copy** - click **Use this template** on [the repo page](https://github.com/aeonfun/aeon) (keep it public; Actions minutes are free), or `gh repo fork aeonfun/aeon --clone`.
+Make your own agent from the framework repo, [aeonfun/aeon](https://github.com/aeonfun/aeon), not from this instance. Three ways in:
 
-```bash
-git clone https://github.com/<you>/aeon   # skip if you used `gh repo fork --clone`
-cd aeon && ./aeon
-```
+1. **Browser (recommended): [Run now at www.aeon.fun/connect](https://www.aeon.fun/connect).** Sign in with GitHub, create your aeon (a public fork or a private copy of aeonfun/aeon), install the Aeon Connect GitHub App on that one repo, connect a model, pick skills. No clone, no terminal, no Node.
+2. **Coding agent:** paste `read https://www.aeon.fun/skills/aeon.md and follow the instructions to set up your aeon agent` into Claude Code, Codex, Hermes or OpenClaw.
+3. **Terminal:** needs Node.js 20+ and the [GitHub CLI](https://cli.github.com/) (`gh auth login`).
 
-Open [localhost:5555](http://localhost:5555) and follow the dashboard: **Authenticate** (any of seven [harnesses](../docs/harnesses.md)) → **add a channel** → **pick skills** → **Run**. That's it - Aeon runs unattended. Everything is also an `./aeon` command ([CLI](../apps/cli/README.md)) or a `/aeon` chat command ([setup skill](../docs/aeon-setup.md), installable as a [Claude Code or Codex plugin](../docs/aeon-setup.md#install)).
+   ```bash
+   git clone https://github.com/aeonfun/aeon && cd aeon && ./aeon init
+   ```
 
-<details>
-<summary><strong>No admin rights / can't install <code>gh</code>?</strong></summary>
+   `./aeon init` creates your own repo from the template and connects GitHub, a model and a channel. `./aeon` opens the same dashboard locally on [localhost:5555](http://localhost:5555).
 
-Grab the `gh_*_macOS_arm64.zip` (or your platform's binary) from [github.com/cli/cli/releases](https://github.com/cli/cli/releases) and drop it on your `PATH` (e.g. `~/.local/bin`). Then `gh auth login`.
-
-</details>
+Full guide: [www.aeon.fun/docs](https://www.aeon.fun/docs).
 
 ---
 

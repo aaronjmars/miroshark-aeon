@@ -1,10 +1,11 @@
 # Aeon
 
-> Aeon is an autonomous agent framework. It runs your own skills on a schedule in GitHub Actions, keeps state in git-committed memory, and dispatches every run through one harness adapter that works across six coding-agent CLIs (Claude Code, Codex, Grok, Kimi, Pi, Vibe). Skills are Markdown with a spec-form frontmatter; a least-privilege `requires:` -> dashboard vault contract wires secrets. This repo is an Aeon instance.
+> Aeon is an autonomous agent framework. It runs your own skills on a schedule in GitHub Actions, keeps state in git-committed memory, and dispatches every run through one harness adapter that works across nine coding-agent CLIs (Claude Code, Codex, Grok, Kimi, Pi, Vibe, fx, Cursor, Hermes). GLM Coding Plan is a Claude AI Gateway provider, not a harness. Skills are Markdown with a spec-form frontmatter; a least-privilege `requires:` -> dashboard vault contract wires secrets. This repo is an Aeon instance.
 
 Repo: https://github.com/aaronjmars/miroshark-aeon
 Framework: https://github.com/aeonfun/aeon
-Site: https://aeon.fun
+Site: https://www.aeon.fun
+Get your own agent: https://www.aeon.fun/connect (sign in with GitHub, no clone needed)
 
 ## Core entry points
 
@@ -28,7 +29,7 @@ Site: https://aeon.fun
 
 ## Harnesses and integrations
 
-- [docs/harnesses.md](https://raw.githubusercontent.com/aaronjmars/miroshark-aeon/main/docs/harnesses.md): Advanced harness behavior across the six supported coding-agent CLIs.
+- [docs/harnesses.md](https://raw.githubusercontent.com/aaronjmars/miroshark-aeon/main/docs/harnesses.md): Advanced harness behavior across the nine supported coding-agent CLIs.
 - [harness-adapter/README.md](https://raw.githubusercontent.com/aaronjmars/miroshark-aeon/main/harness-adapter/README.md): The single dispatch path that translates one tool grammar to every harness.
 - [docs/mcp-oauth.md](https://raw.githubusercontent.com/aaronjmars/miroshark-aeon/main/docs/mcp-oauth.md): Durable dashboard OAuth for OAuth-gated MCP servers.
 
