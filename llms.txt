@@ -4,7 +4,8 @@
 
 Repo: https://github.com/aaronjmars/miroshark-aeon
 Framework: https://github.com/aeonfun/aeon
-Site: https://aeon.fun
+Site: https://www.aeon.fun
+Get your own agent: https://www.aeon.fun/connect (sign in with GitHub, no clone needed)
 
 ## Core entry points
 
