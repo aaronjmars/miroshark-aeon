@@ -7,7 +7,7 @@ Two unrelated things share the name. Get this wrong and nothing works.
 | | |
 |---|---|
 | **`.mcp.json`** — *external MCP servers, called BY Aeon skills* | Wired via the dashboard MCP panel or `./aeon mcp add`. This is what you want when a skill needs a tool. |
-| **`bin/add-mcp`** — *Aeon itself AS an MCP server* | Builds `apps/mcp-server` and registers it with Claude Code / Desktop, so all 84 skills appear as `aeon-*` tools **in your local Claude**. Nothing to do with a skill calling out. |
+| **`bin/add-mcp`** — *Aeon itself AS an MCP server* | Builds `apps/mcp-server` and registers it with Claude Code / Desktop, so all 85 skills appear as `aeon-*` tools **in your local Claude**. Nothing to do with a skill calling out. |
 
 The rest of this doc is the first one. For the second: `bin/add-mcp`, `--desktop` for a Claude Desktop snippet, `--uninstall` to remove, `claude mcp list` to verify.
 
@@ -93,7 +93,7 @@ If calls cost money, set a hard budget in the body (`glim-mcp`: ≤10 tool calls
 A connected server's credentials are stored as ordinary repo secrets named from its slug (`tokenVar`/`oauthVar` in `lib/mcp-catalog.ts`), so they appear in **two** places:
 
 - **MCP panel** — inline per server, next to the `${VAR}` it satisfies. Where you set or re-connect them.
-- **Settings → Access Keys → MCP** — the credential inventory. Rows are built dynamically from whatever `MCP_*_TOKEN` / `MCP_*_OAUTH` secrets exist, each carrying its server's catalog logo; the section is hidden entirely until a server is connected. Removing one here leaves the server wired in `.mcp.json` but unauthenticated.
+- **Keys → Access Keys → MCP** - the credential inventory. Rows are built dynamically from whatever `MCP_*_TOKEN` / `MCP_*_OAUTH` secrets exist, each carrying its server's catalog logo; the section is hidden entirely until a server is connected. Removing one here leaves the server wired in `.mcp.json` but unauthenticated.
 
 There is nothing to add to `BUILTIN_SECRETS` when you add a catalog server — the group is derived from `MCP_SECRET_RE` and `MCP_SECRET_OWNER`, so a new `MCP_CATALOG` entry brings its own group row, description, and logo.
 

@@ -75,7 +75,7 @@ export function parseFrontmatter(content: string): Frontmatter {
   // `requires:` declares the third-party credentials a skill needs to function.
   // A list of env-var names; a trailing `?` marks a key as optional (the skill
   // still runs without it, just degraded / rate-limited). Names reference the
-  // central credential registry surfaced in the dashboard's Settings → Access
+  // central credential registry surfaced in the dashboard's Keys → Access
   // Keys vault. Inline or block form:
   //   requires: [XAI_API_KEY, COINGECKO_API_KEY?]
   //   requires:

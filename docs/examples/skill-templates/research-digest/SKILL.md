@@ -2,7 +2,7 @@
 name: [REPLACE: SKILL_NAME]
 description: Digest of the most interesting new posts on [REPLACE: TOPIC] from RSS feeds and the open web
 metadata:
-  category: research
+  category: productivity
   var: ""
   tags:
     - research

@@ -54,6 +54,7 @@ body:
       options:
         - "GitHub Actions (scheduled / cron)"
         - "Run now (dashboard)"
+        - "Hosted (Aeon Connect, www.aeon.fun/connect)"
         - "Local (./aeon)"
         - "Other / not sure"
     validations:

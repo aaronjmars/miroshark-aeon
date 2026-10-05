@@ -22,12 +22,11 @@ cd "$WS" || exit 1
 # A fixture aeon.yml in aeon's REAL shape: repo-global keys at column 0, and a
 # skills map whose entries are inline flow-mappings on ONE line, two spaces in —
 #   dash-name: { enabled: false, schedule: "...", harness: "vibe" }
-# The per-skill greps (`^  <skill>:` then sed for harness:/model: on that line)
-# only work on that one-line form, the same constraint aeon.yml documents for
-# `chains:`. A block-style fixture passes YAML but silently resolves nothing, so
-# it would have tested the fallback path while looking like it tested overrides.
+# Block-style entries (header line, flow map on the following lines) are covered
+# separately in section 5b: the per-skill read now goes through
+# scripts/skill_entry.sh, which captures the whole entry, not just the header.
 mkfixture() {  # mkfixture [global-harness] [global-model]
-  { echo "model: ${2:-claude-sonnet-5}"
+  { echo "model: ${2:-claude-sonnet-5-5}"
     [ -n "${1:-}" ] && echo "harness: $1"
     echo "skills:"
     echo '  daily-brief: { enabled: true, schedule: "0 9 * * *" }'
@@ -95,11 +94,13 @@ mkfixture hermes
 mkfixture cursor
 [ "$(get AUTH_MODE "" CURSOR_API_KEY=xx)" = "native-key" ] \
   && pass "cursor: CURSOR_API_KEY → native-key" || bad "cursor native-key"
+[ "$(get AUTH_MODE "" OPENROUTER_API_KEY=xx)" = "none" ] \
+  && pass "cursor: no CURSOR_API_KEY → none (no OpenRouter fallback)" || bad "cursor none label (got '$(get AUTH_MODE "" OPENROUTER_API_KEY=xx)')"
 mkfixture glm
 [ "$(get HARNESS)" = "claude" ] \
   && pass "glm: dead harness name → claude" || bad "glm dead name (got '$(get HARNESS)')"
 mkfixture cursor
-[ "$(get MODEL_ARG "" CURSOR_API_KEY=xx)" = "gpt-5.1" ] \
+[ "$(get MODEL_ARG "" CURSOR_API_KEY=xx)" = "auto" ] \
   && pass "cursor: native model override forwarded" || bad "cursor model forwarding"
 mkfixture hermes
 [ "$(get MODEL_ARG "" HERMES_AUTH=xx)" = "default" ] \
@@ -116,10 +117,10 @@ mkfixture fx
 # nothing at all. Passing a raw id to vibe/kimi breaks them (they resolve an ALIAS
 # declared in the staged config), so empty is the correct answer, not a fallback.
 mkfixture codex
-[ "$(get MODEL_ARG)" = "openai/gpt-5.1-codex-mini" ] \
+[ "$(get MODEL_ARG)" = "openai/gpt-6-luna" ] \
   && pass "codex: MODEL_ARG is a bare OpenRouter id" || bad "codex MODEL_ARG"
 mkfixture pi
-[ "$(get MODEL_ARG)" = "openrouter/deepseek/deepseek-v4-flash" ] \
+[ "$(get MODEL_ARG)" = "openrouter/deepseek/deepseek-v4.1-flash" ] \
   && pass "pi: MODEL_ARG carries the openrouter/ prefix" || bad "pi MODEL_ARG (got '$(get MODEL_ARG)')"
 for h in vibe kimi; do
   mkfixture "$h"
@@ -135,17 +136,56 @@ case "$(get HARNESS_MODEL "" CODEX_AUTH=xx)" in
   "(native:native-oauth)") pass "native auth labels the model as native" ;;
   *) bad "native auth HARNESS_MODEL label" ;;
 esac
+LINE=$(CODEX_AUTH=xx bash "$R" "" 2>&1 >/dev/null | grep '^Harness:')
+case "$LINE" in
+  *"model: account default (logged after the run)"*) pass "native codex line says the account picks the model" ;;
+  *) bad "native codex line (got: $LINE)" ;;
+esac
+# An explicit OpenAI pick on a native codex login IS forwarded, as a bare id
+# (the picker controls the run; codex.sh retries on the account default if the
+# account refuses it). Applies to the config model and a dispatch model alike.
+mkfixture codex openai/gpt-6-sol
+[ "$(get MODEL_ARG "" CODEX_AUTH=xx)" = "gpt-6-sol" ] \
+  && pass "native codex: picked openai/* model forwarded as a bare id" || bad "native codex pick (got '$(get MODEL_ARG "" CODEX_AUTH=xx)')"
+[ "$(get HARNESS_MODEL "" CODEX_AUTH=xx)" = "gpt-6-sol" ] \
+  && pass "native codex: HARNESS_MODEL names the picked model" || bad "native codex HARNESS_MODEL"
+[ "$(get MODEL_ARG "" OPENAI_API_KEY=xx INPUT_MODEL=openai/gpt-6.1-sol)" = "gpt-6.1-sol" ] \
+  && pass "native codex: dispatch model beats config" || bad "native codex dispatch pick"
+mkfixture vibe openai/gpt-6-sol
+[ -z "$(get MODEL_ARG "" MISTRAL_API_KEY=xx)" ] \
+  && pass "native vibe: still no --model" || bad "native vibe must not forward"
+# A per-skill claude pin is skipped on a non-claude harness: the config's
+# codex pick applies (live: heartbeat pinned to claude-opus-5-5 on aeon-test).
+{ echo "model: openai/gpt-6-luna"; echo "harness: codex"; echo "skills:"
+  echo '  heartbeat: { enabled: true, model: "claude-opus-5-5" }'
+  echo '  pinned: { enabled: true, model: "openai/gpt-6.1-sol" }'; } > aeon.yml
+[ "$(get MODEL_ARG heartbeat CODEX_AUTH=xx)" = "gpt-6-luna" ] \
+  && pass "claude skill pin skipped: config codex pick applies" || bad "claude pin skip (got '$(get MODEL_ARG heartbeat CODEX_AUTH=xx)')"
+[ "$(get MODEL_ARG heartbeat)" = "openai/gpt-6-luna" ] \
+  && pass "claude skill pin skipped on openrouter too" || bad "claude pin skip openrouter"
+[ "$(get MODEL_ARG pinned CODEX_AUTH=xx)" = "gpt-6.1-sol" ] \
+  && pass "an openai skill pin still beats config" || bad "openai skill pin"
+[ "$(get MODEL_ARG heartbeat CODEX_AUTH=xx INPUT_MODEL=claude-opus-5-5)" = "gpt-6-luna" ] \
+  && pass "claude dispatch model skipped too" || bad "claude dispatch skip"
 
 # --- 5. model precedence ----------------------------------------------------
 # An aeon-native id is NOT an OpenRouter id: a repo that never touched the model
-# picker still reads `model: claude-sonnet-5`, and forwarding that would pin the
+# picker still reads `model: claude-sonnet-5-5`, and forwarding that would pin the
 # run to a dead id while every downstream record named it.
-mkfixture codex claude-sonnet-5
-[ "$(get MODEL_ARG)" = "openai/gpt-5.1-codex-mini" ] \
+mkfixture codex claude-sonnet-5-5
+[ "$(get MODEL_ARG)" = "openai/gpt-6-luna" ] \
   && pass "claude-* config model ignored → per-harness default" || bad "claude-* model passthrough"
 mkfixture codex grok-4.5
-[ "$(get MODEL_ARG)" = "openai/gpt-5.1-codex-mini" ] \
+[ "$(get MODEL_ARG)" = "openai/gpt-6-luna" ] \
   && pass "grok-* config model ignored → per-harness default" || bad "grok-* model passthrough"
+# `default` (the hermes dashboard pick, "Hermes' configured model") is "no
+# override" for every harness: codex must not receive --model default.
+mkfixture codex default
+[ "$(get MODEL_ARG)" = "openai/gpt-6-luna" ] \
+  && pass "default config model → per-harness default" || bad "default model passthrough (got '$(get MODEL_ARG)')"
+mkfixture hermes default
+[ "$(get HARNESS_MODEL "" HERMES_AUTH=xx)" = "default" ] \
+  && pass "hermes: default config model stays default" || bad "hermes default model"
 mkfixture codex openai/gpt-5
 [ "$(get MODEL_ARG)" = "openai/gpt-5" ] \
   && pass "OpenRouter config model is forwarded" || bad "OpenRouter model passthrough"
@@ -158,6 +198,67 @@ mkfixture codex openai/gpt-5
   && pass "per-skill model reaches HARNESS_MODEL" || bad "per-skill model (got '$(get HARNESS_MODEL odd-one)')"
 [ -z "$(get MODEL_ARG odd-one)" ] \
   && pass "per-skill model still not forwarded to vibe" || bad "vibe must not receive --model"
+
+# --- 5b. block-style entries ------------------------------------------------
+# aeon.yml's comment documents the block shape for model:; harness:/model: on a
+# continuation line used to be invisible here (header-line grep), so the skill
+# silently ran on the defaults. Also: a comment is not a value, and a chain of the
+# same name further down is not the skill's entry.
+{ echo "model: claude-sonnet-5-5"
+  echo "skills:"
+  echo '  block-one:'
+  echo '    { enabled: true, schedule: "0 9 * * *",'
+  echo '      harness: "vibe", model: "openai/gpt-5" }'
+  echo '  commented: { enabled: true, var: "fix #12" } # harness: "kimi" model: "x/y"'
+  echo '  after: { enabled: true, harness: "pi" }'
+  echo 'chains:'
+  echo '  block-one:'
+  echo '    harness: "kimi"'
+} > aeon.yml
+[ "$(get HARNESS block-one)" = "vibe" ] \
+  && pass "block entry: harness on a continuation line is honoured" || bad "block harness (got '$(get HARNESS block-one)')"
+[ "$(get HARNESS_MODEL block-one)" = "openai/gpt-5" ] \
+  && pass "block entry: model on a continuation line is honoured" || bad "block model (got '$(get HARNESS_MODEL block-one)')"
+[ "$(get HARNESS commented)" = "claude" ] \
+  && pass "a trailing comment is not read as a per-skill key" || bad "comment leaked (got '$(get HARNESS commented)')"
+[ "$(get HARNESS after)" = "pi" ] \
+  && pass "single-line entry after a block entry still resolves" || bad "single-line after block (got '$(get HARNESS after)')"
+
+# --- 5c. claude: the resolve line names the auth + model that really run ----
+# claude never runs on the OpenRouter-CLI default: its provider is picked by
+# scripts/llm-gateway.sh and its model is aeon's own id. The line used to read
+# "auth: openrouter | model: openai/gpt-5-mini" on a subscription run.
+mkfixture
+NOKEYS=(CLAUDE_CODE_OAUTH_TOKEN= ANTHROPIC_API_KEY= OPENROUTER_API_KEY=)
+# shellcheck disable=SC2069  # keep only stderr (the human line), on purpose
+line() { env "${NOKEYS[@]}" "$@" bash "$R" daily-brief 2>&1 >/dev/null; }
+[ "$(get AUTH_MODE daily-brief "${NOKEYS[@]}" CLAUDE_CODE_OAUTH_TOKEN=x)" = "native-oauth" ] \
+  && pass "claude + CLAUDE_CODE_OAUTH_TOKEN -> native-oauth" || bad "claude oauth auth (got '$(get AUTH_MODE daily-brief "${NOKEYS[@]}" CLAUDE_CODE_OAUTH_TOKEN=x)')"
+[ "$(get AUTH_MODE daily-brief "${NOKEYS[@]}" ANTHROPIC_API_KEY=x)" = "native-key" ] \
+  && pass "claude + ANTHROPIC_API_KEY only -> native-key" || bad "claude api-key auth"
+[ "$(get AUTH_MODE daily-brief "${NOKEYS[@]}" CLAUDE_CODE_OAUTH_TOKEN=x ANTHROPIC_API_KEY=x)" = "native-oauth" ] \
+  && pass "claude: subscription wins over the API key (gateway order)" || bad "claude auth order"
+[ "$(get AUTH_MODE daily-brief "${NOKEYS[@]}" OPENROUTER_API_KEY=x)" = "gateway" ] \
+  && pass "claude with neither native secret -> gateway" || bad "claude gateway auth"
+L=$(line CLAUDE_CODE_OAUTH_TOKEN=x)
+case "$L" in
+  *"Harness: claude  |  auth: native-oauth  |  gateway: claude  |  model: claude-sonnet-5-5"*) pass "claude line names the subscription and the real model" ;;
+  *) bad "claude line (got: $L)" ;;
+esac
+case "$L" in *openai/*|*"run-harness --model"*) bad "claude line still shows the OpenRouter default / MODEL_ARG" ;; *) pass "claude line drops fields that do not apply" ;; esac
+[ "$(get MODEL_ARG daily-brief CLAUDE_CODE_OAUTH_TOKEN=x)" = "" ] \
+  && pass "claude MODEL_ARG unchanged (empty)" || bad "claude MODEL_ARG changed"
+case "$(line CLAUDE_CODE_OAUTH_TOKEN=x INPUT_MODEL=claude-opus-5-5)" in
+  *"model: claude-opus-5-5"*) pass "claude line honours a dispatch model" ;; *) bad "claude dispatch model" ;; esac
+mkfixture "" claude-haiku-5
+case "$(line ANTHROPIC_API_KEY=x)" in
+  *"auth: native-key  |  gateway: anthropic  |  model: claude-haiku-5"*) pass "claude line uses aeon.yml model:" ;; *) bad "claude config model ($(line ANTHROPIC_API_KEY=x))" ;; esac
+{ echo "model: claude-sonnet-5-5"; echo "gateway:"; echo "  provider: openrouter"; echo "skills:"; } > aeon.yml
+[ "$(get AUTH_MODE "" "${NOKEYS[@]}" CLAUDE_CODE_OAUTH_TOKEN=x)" = "gateway" ] \
+  && pass "a pinned gateway.provider wins over a present subscription token" || bad "pinned gateway auth"
+{ echo "model: claude-sonnet-5-5"; echo "gateway:"; echo '  provider: "claude"'; echo "skills:"; } > aeon.yml
+[ "$(get AUTH_MODE "" "${NOKEYS[@]}")" = "native-oauth" ] \
+  && pass "gateway.provider: claude -> native-oauth" || bad "pinned claude auth"
 
 # --- 6. output contract -----------------------------------------------------
 # Callers append this straight to $GITHUB_OUTPUT, so stdout must be exactly the

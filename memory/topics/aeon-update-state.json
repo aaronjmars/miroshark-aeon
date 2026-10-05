@@ -1,79 +1,143 @@
 {
-  "baseline_sha": "531f575eb2beaf12d71e8d9699ce451887babdb4",
+  "baseline_sha": "1a7f07e1b259eb46abb472139bb3284d64beee54",
   "upstream": "aeonfun/aeon",
-  "last_run": "2026-09-28",
-  "last_pr": "https://github.com/aaronjmars/miroshark-aeon/pull/183",
+  "last_run": "2026-10-05",
+  "last_pr": "https://github.com/aaronjmars/miroshark-aeon/pull/194",
   "applied": {
-    "added": 6,
-    "updated": 34,
-    "merged": 3,
-    "deleted": 0
+    "added": 81,
+    "updated": 231,
+    "deleted": 5
   },
   "pending_conflicts": [
     {
-      "path": ".github/workflows/ci-tests.yml",
-      "reason": "operator-customized (fork test list / env-narrow) vs upstream new hunter-gate + HivemindOS test steps; 3-way merge overlap (2 regions)",
-      "upstream_commits": ["46d1836", "f4ce15c"]
-    },
-    {
       "path": ".github/README.md",
-      "reason": "operator fork (MiroShark) copy vs upstream stats/link refresh + OpenAI-affiliation note + skill-table adds; 3-way overlap (2 regions). Fork README is intentionally divergent — reconcile by hand",
-      "upstream_commits": ["531f575", "48f6642", "f8ff65c", "0da615e"]
+      "reason": "operator fork (MiroShark) copy vs upstream privacy-section + visuals/stat refresh; 3-way content overlap. Fork README is intentionally divergent (branding + stale skill-count 85) — reconcile by hand",
+      "upstream_commits": ["1a7f07e", "5030e5d"]
     },
     {
-      "path": "docs/skill-packs.md",
-      "reason": "fork pack-count table vs upstream skill-table rewrite (arc-studio add); 3-way merge overlap (3 regions)",
-      "upstream_commits": ["f8ff65c"]
+      "path": ".github/workflows/aeon.yml",
+      "reason": "operator-customized workflow (fork env-narrow / model routing) vs upstream gateway-annotation + run-context changes; 3-way content overlap",
+      "upstream_commits": ["40efa1e", "f3c5872"]
+    },
+    {
+      "path": ".github/workflows/ci-apps.yml",
+      "reason": "operator-customized vs upstream ubuntu-24.04 runner pin + harness-cli test wiring; 3-way content overlap",
+      "upstream_commits": ["b2e242a3"]
+    },
+    {
+      "path": ".github/workflows/ci-tests.yml",
+      "reason": "operator-customized (fork test list / env-narrow) vs upstream hunter-gate + new test steps; 3-way content overlap",
+      "upstream_commits": ["b2e242a3"]
+    },
+    {
+      "path": ".github/workflows/messages.yml",
+      "reason": "operator-customized vs upstream changes; 3-way content overlap",
+      "upstream_commits": ["b2e242a3"]
     },
     {
       "path": "apps/dashboard/package.json",
-      "reason": "eslint-lint-gate coupled bundle; package.json 3-way conflicts (1 region) on eslint-config-next bump, held with its lock",
-      "upstream_commits": ["3d36d18"]
+      "reason": "eslint/next/react version-bump bundle held with its lock; package.json 3-way conflict (eslint 10 + espree + next 16.3.8). Fork dashboard deps intentionally pinned older",
+      "upstream_commits": ["4b0ea879"]
     },
     {
       "path": "apps/dashboard/package-lock.json",
-      "reason": "eslint-lint-gate coupled bundle; lockfile 3-way merge conflicts (9 regions) on eslint-config-next 16.3.5 + unrs-resolver",
-      "upstream_commits": ["3d36d18"]
+      "reason": "coupled with apps/dashboard/package.json; lockfile 3-way conflicts on the eslint/next bump",
+      "upstream_commits": ["4b0ea879"]
     },
     {
-      "path": "llms.txt",
-      "reason": "fork-only MiroShark copy vs upstream OpenAI-affiliation note + 'ten'->harness-count fix; 3-way overlap (2 regions)",
-      "upstream_commits": ["48f6642", "71a9462"]
-    },
-    {
-      "path": "skills/arc-studio/SKILL.md",
-      "reason": "needs-eyebrowlock-scan + catalog/readme coupling - new upstream skill (#1082) with capability-expansion tags (onchain_writes/writes_external_host). bin/generate-* + eyebrow scan can't be committed in the sync env (script exec blocked), and the fork's catalog/skills.json + fork README would need hand-regen to stay CI-green. Held; its scripts (arc-studio-turn/state.mjs) ARE shipped so adoption is one step. Operator: fetch SKILL.md, then `eyebrow scan --path . --lockfile eyebrowlock.json` + `bin/generate-skills-json && bin/generate-packs-json` and reconcile README",
-      "upstream_commits": ["f8ff65c"]
-    },
-    {
-      "path": "skills/miroshark-matchday/SKILL.md",
-      "reason": "operator-customized (fork) vs upstream vertical 9:16 render-path update (#1062); 3-way merge overlap (unchanged this window)",
-      "upstream_commits": ["2e9efdb"]
+      "path": "apps/dashboard/eslint.config.mjs",
+      "reason": "modify/delete — fork deleted the dashboard eslint config; upstream modified it. Held (keeps fork's deletion)",
+      "upstream_commits": ["4b0ea879"]
     },
     {
       "path": "apps/webhook/package.json",
-      "reason": "eslint-lint-gate coupled bundle; package.json 3-way merges clean but its lock conflicts, so held together (unchanged this window)",
-      "upstream_commits": ["58b2e53", "5d005b6"]
+      "reason": "wrangler version-bump + test-script change held with its lock; 3-way conflict",
+      "upstream_commits": ["b756109b"]
     },
     {
       "path": "apps/webhook/package-lock.json",
-      "reason": "eslint-lint-gate coupled bundle; lockfile 3-way merge conflicts (1 region) (unchanged this window)",
-      "upstream_commits": ["58b2e53", "5d005b6"]
+      "reason": "coupled with apps/webhook/package.json; lockfile 3-way conflict",
+      "upstream_commits": ["b756109b"]
     },
     {
-      "path": "skills/competitor-monitor/SKILL.md",
-      "reason": "upstream table-row-diffing update (#1043) adds example egress host -> eyebrow capability-expansion gate would need a lock rescan; held with coupled scripts/competitor-monitor.mjs (unchanged this window)",
-      "upstream_commits": ["c28ab4c"]
+      "path": "docs/skill-packs.md",
+      "reason": "fork full-catalog pack table (curated, stale counts) vs upstream rewrite; 3-way overlap. Reconcile with the README skill-count cluster",
+      "upstream_commits": ["2eb9682d"]
     },
     {
-      "path": "skills/compute-resell",
-      "reason": "needs-eyebrowlock-scan - new upstream skill (#1036) not present locally; predates baseline so no longer in the compare window (carry-forward only). Operator can fetch+add then eyebrow scan",
+      "path": "llms.txt",
+      "reason": "fork-only MiroShark copy vs upstream refresh; 3-way overlap",
+      "upstream_commits": ["5030e5d"]
+    },
+    {
+      "path": "docs/assets/proof-aeon.jpg",
+      "reason": "binary asset — fork image vs upstream refresh; cannot 3-way merge",
+      "upstream_commits": ["5030e5d"]
+    },
+    {
+      "path": "skills/fetch-tweets/SKILL.md",
+      "reason": "operator-customized (fork) vs upstream xai/grok prose update; 3-way content overlap",
+      "upstream_commits": ["9cb0b6a9"]
+    },
+    {
+      "path": "skills/shiplog/SKILL.md",
+      "reason": "operator-customized (fork) vs upstream xai/coingecko prose update; 3-way content overlap",
+      "upstream_commits": ["9cb0b6a9"]
+    },
+    {
+      "path": "skills/feedback-builder/SKILL.md",
+      "reason": "new upstream skill. NOT adopted: adding it changes the skill count (82) and pack membership, which the fork's held README/docs skill-count tables would then mismatch. Adopt manually: fetch SKILL.md, update README/docs counts + full-catalog table, then eyebrow scan + bin/generate-skills-json/packs-json",
+      "upstream_commits": ["0da615e"]
+    },
+    {
+      "path": "skills/compute-resell/SKILL.md",
+      "reason": "modify/delete — fork previously removed compute-resell; upstream modified it. Held (respects the operator's removal). Re-adopt manually if wanted (new-skill catalog/eyebrow reconcile needed)",
       "upstream_commits": ["3f3509c"]
     },
     {
-      "path": "skills/submit-hook",
-      "reason": "needs-eyebrowlock-scan - new upstream skill (#1040) not present locally; predates baseline so no longer in the compare window (carry-forward only). Operator can fetch+add then eyebrow scan",
-      "upstream_commits": ["0154c0e"]
+      "path": "skills/compute-resell/config.example.json",
+      "reason": "coupled with skills/compute-resell/SKILL.md modify/delete",
+      "upstream_commits": ["3f3509c"]
+    },
+    {
+      "path": "scripts/validate-readme-catalog.mjs",
+      "reason": "DEFERRED (not conflicted) — upstream tightened this doc-parity validator (exact counts, more files checked). Adopting it fails CI until the fork's divergent README/docs skill counts (85/79 vs catalog 82) are reconciled. Held with ci-readme-catalog.yml + the coupled docs so the fork's current green state is preserved",
+      "upstream_commits": ["5030e5d", "2eb9682d"]
+    },
+    {
+      "path": "scripts/validate-skill-packs.mjs",
+      "reason": "DEFERRED — upstream tightened the community-pack parity validator; fork's catalog/skill-packs.json + docs/community-skill-packs.md already drift (pre-existing). Held to avoid newly surfacing it",
+      "upstream_commits": ["914dfe17"]
+    },
+    {
+      "path": ".github/workflows/ci-readme-catalog.yml",
+      "reason": "DEFERRED — coupled with the held validate-readme-catalog.mjs",
+      "upstream_commits": ["5030e5d"]
+    },
+    {
+      "path": ".github/workflows/ci-skill-packs.yml",
+      "reason": "DEFERRED — coupled with the held validate-skill-packs.mjs",
+      "upstream_commits": ["914dfe17"]
+    },
+    {
+      "path": "docs/aeon-setup.md",
+      "reason": "DEFERRED — carries upstream's skill-count (85) which mismatches the fork catalog (82) under the strict validator; held with the README skill-count cluster",
+      "upstream_commits": ["5030e5d"]
+    },
+    {
+      "path": "docs/examples/README.md",
+      "reason": "DEFERRED — carries upstream's skill-count (85); held with the README skill-count cluster",
+      "upstream_commits": ["5030e5d"]
+    },
+    {
+      "path": "docs/assets/hero-animated.svg",
+      "reason": "DEFERRED — hero alt-text carries upstream's skill-count (85); held with the README skill-count cluster",
+      "upstream_commits": ["5030e5d"]
+    },
+    {
+      "path": "docs/community-skill-packs.md",
+      "reason": "DEFERRED — upstream community-pack list vs fork's held catalog/skill-packs.json; held with validate-skill-packs.mjs",
+      "upstream_commits": ["914dfe17", "2eb9682d"]
     }
   ]
 }

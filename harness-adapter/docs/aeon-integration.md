@@ -3,6 +3,11 @@
 A deployment runbook for putting `run-harness` into [aeonfun/aeon](https://github.com/aeonfun/aeon)
 so a skill can run on **codex, pi, vibe, or kimi** instead of only claude/grok.
 
+> **Historical runbook.** This records the original four-harness wiring. aeon now
+> ships nine harnesses (claude, grok, codex, pi, vibe, kimi, fx, cursor, hermes),
+> all through `run-harness`; see [`docs/harnesses.md`](../../docs/harnesses.md)
+> for the current state. `glm` is a gateway provider, not a harness.
+
 Every change below was applied to a full aeon fork and verified on a real GitHub
 runner (6-harness × 3-scenario matrix, Tier 4). This document is how to reproduce
 it on a fresh aeon instance, and what each change is for so you can review rather
@@ -57,7 +62,7 @@ measured reason:
 | `HARNESS_MODEL` | repo variable | **optional** override; per-harness defaults are built in (§6). Leave unset unless you want to force one model for all four |
 | everything aeon already requires | — | unchanged |
 
-The runner must be Linux (`ubuntu-latest` is fine). bubblewrap + an AppArmor
+The runner must be Linux (aeon pins `ubuntu-24.04`). bubblewrap + an AppArmor
 sysctl are installed by the added step (§7).
 
 ---
@@ -201,11 +206,11 @@ exists for it (see §2/§3 below), so it needs its own `AI_GATEWAY_API_KEY`.
 
 | harness | install | model default | `--model` passed | config notes |
 |---|---|---|---|---|
-| **codex** | `npm i -g @openai/codex@0.144.6` | `openai/gpt-5-mini` | bare id | `~/.codex/config.toml`: `wire_api = "responses"` (0.144.6 removed `"chat"`), `model_reasoning_effort = "medium"` (OpenRouter 400s on reasoning-disabled) |
-| **pi** | `npm i -g --ignore-scripts @earendil-works/pi-coding-agent` | `deepseek/deepseek-v4-flash` | `openrouter/<model>` | reads `OPENROUTER_API_KEY` from env |
-| **vibe** | `pipx install mistral-vibe` | `mistralai/mistral-medium-3-5` | none (config alias) | `~/.vibe/config.toml`: provider `api_style=openai`, `api_key_env_var` |
-| **kimi** | `npm i -g @moonshot-ai/kimi-code` | `moonshotai/kimi-k2.5` | none (config alias) | `~/.kimi-code/config.toml`: key **inline** (no env indirection), `default_model` set |
-| **fx** | `curl -fsSL https://fx.sh/setup.sh \| bash` | fx's own default (no `--model` forwarded on native auth) | env only (`FX_MODEL`) — no `--model` flag on `fx ask` | no config file; `AI_GATEWAY_API_KEY`/`VERCEL_OIDC_TOKEN` read straight from env. `install-harness.sh` fails closed if neither is set — no fallback to stage |
+| **codex** | `npm i -g --ignore-scripts @openai/codex@0.159.3` | `openai/gpt-6-luna` | bare id | `~/.codex/config.toml`: `wire_api = "responses"` (0.144.6 removed `"chat"`), `model_reasoning_effort = "medium"` (OpenRouter 400s on reasoning-disabled) |
+| **pi** | `npm i -g --ignore-scripts @earendil-works/pi-coding-agent@0.99.2` | `deepseek/deepseek-v4.1-flash` | `openrouter/<model>` | reads `OPENROUTER_API_KEY` from env; with `--mcp-config` the adapter runs pi on a temp `PI_CODING_AGENT_DIR` (translated `mcp.json` + links to the real `~/.pi/agent`) |
+| **vibe** | `pipx install mistral-vibe==2.25.8` | `mistralai/mistral-medium-3-5` | none (config alias) | `~/.vibe/config.toml`: provider `api_style=openai`, `api_key_env_var` |
+| **kimi** | `npm i -g --ignore-scripts @moonshot-ai/kimi-code@2.1.1` | `moonshotai/kimi-k2.7-code` | none (config alias) | `~/.kimi-code/config.toml`: key **inline** (no env indirection), `default_model` set |
+| **fx** | pinned `releases.fx.sh/<version>/fx-<os>-<arch>.tar.gz`, sha256-checked | fx's own default (no `--model` forwarded on native auth) | env only (`FX_MODEL`) - no `--model` flag on `fx ask` | no config file; `AI_GATEWAY_API_KEY`/`VERCEL_OIDC_TOKEN` read straight from env. `install-harness.sh` fails closed if neither is set - no fallback to stage |
 
 **codex needs `≥ gpt-5-mini`.** On `gpt-5-nano` it fails *deterministically* on
 code-generation skills — the model emits a shell tool call with a duplicated
@@ -223,7 +228,7 @@ claude-code.
 
 ## 7. Runner gotchas (all handled by the added steps, listed so you know why)
 
-- **AppArmor blocks bubblewrap on Ubuntu 24.04** (including `ubuntu-latest`).
+- **AppArmor blocks bubblewrap on Ubuntu 24.04** (aeon pins `ubuntu-24.04`).
   Unprivileged user namespaces are restricted, so bwrap dies with `setting up uid
   map: Permission denied` and run-harness fails *closed* on every read-only skill
   — correct, but fatal. The install step runs

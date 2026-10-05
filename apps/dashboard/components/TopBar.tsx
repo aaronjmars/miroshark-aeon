@@ -1,5 +1,5 @@
 import type { Skill, GatewayProvider, Harness, DashboardView } from '../lib/types'
-import { PACK_BY_KEY, HARNESSES, modelsForHarness } from '../lib/constants'
+import { PACK_BY_KEY, HARNESSES, modelsForHarness, pickerOptions } from '../lib/constants'
 import { displayName } from '../lib/utils'
 
 interface TopBarProps {
@@ -10,7 +10,6 @@ interface TopBarProps {
   harness: Harness
   gateway: GatewayProvider
   hasModelKey: boolean
-  authLoading: boolean
   pulling: boolean
   syncing: boolean
   hasChanges: boolean
@@ -22,15 +21,29 @@ interface TopBarProps {
   onSync: () => void
 }
 
-export function TopBar({ skill, view, repo, model, harness, gateway, hasModelKey, authLoading, pulling, syncing, hasChanges, behind, onSetupAuth, onUpdateModel, onUpdateHarness, onPull, onSync }: TopBarProps) {
+// The bar's heading for the current screen. Shared with the phone-only
+// MobileBar, which shows it while this bar's title is hidden below `md`.
+export function viewTitle(skill: Skill | null, view: DashboardView, repo: string): string {
+  if (skill) return displayName(skill.name)
+  if (view === 'packs') return 'Packs'
+  if (view === 'secrets') return 'Keys'
+  if (view === 'strategy') return 'Strategy'
+  if (view === 'mcp') return 'MCP'
+  if (view === 'soul') return 'Soul'
+  return `${repo ? repo.split('/').pop() : 'Aeon'} HQ`
+}
+
+export function TopBar({ skill, view, repo, model, harness, gateway, hasModelKey, pulling, syncing, hasChanges, behind, onSetupAuth, onUpdateModel, onUpdateHarness, onPull, onSync }: TopBarProps) {
   const dept = skill ? (PACK_BY_KEY[skill.pack || 'lab'] || null) : null
-  const modelOptions = modelsForHarness(harness)
+  const modelOptions = pickerOptions(modelsForHarness(harness), model)
 
   return (
-    <div className="h-14 border-b border-[rgba(250,250,250,0.10)] flex items-center justify-between px-5 shrink-0 bg-aeon-bg">
-      <div className="flex items-center gap-3 min-w-0 flex-1">
+    // Phones: the title moves to the MobileBar and the controls row scrolls
+    // sideways instead of overflowing the screen.
+    <div className="h-14 border-b border-[rgba(250,250,250,0.10)] flex items-center justify-start md:justify-between px-3 md:px-5 shrink-0 bg-aeon-bg overflow-x-auto">
+      <div className="hidden md:flex items-center gap-3 min-w-0 flex-1">
         <span className="font-display text-lg uppercase tracking-wide text-aeon-fg truncate">
-          {skill ? displayName(skill.name) : view === 'packs' ? 'Packs' : view === 'secrets' ? 'Settings' : view === 'strategy' ? 'Strategy' : view === 'mcp' ? 'MCP' : view === 'soul' ? 'Soul' : `${repo ? repo.split('/').pop() : 'Aeon'} HQ`}
+          {viewTitle(skill, view, repo)}
         </span>
         {skill && dept && (
           <span
@@ -41,20 +54,20 @@ export function TopBar({ skill, view, repo, model, harness, gateway, hasModelKey
           </span>
         )}
       </div>
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 shrink-0">
         {harness === 'claude' && gateway !== 'direct' && gateway !== 'auto' && (
           <span className="text-[10px] font-mono px-2 py-0.5 bg-aeon-red/10 text-aeon-red uppercase tracking-[0.18em] border border-aeon-red/30">{gateway}</span>
         )}
         {!hasModelKey && (
-          <button onClick={onSetupAuth} disabled={authLoading} className="btn-solid-sm disabled:opacity-50">
-            {authLoading ? '…' : 'Auth'}
+          <button onClick={onSetupAuth} title="Connect a model so skills can run" className="btn-solid-sm whitespace-nowrap">
+            Connect a model
           </button>
         )}
         <select
           value={harness}
           onChange={(e) => onUpdateHarness(e.target.value)}
           title="Agent harness"
-          className="bg-aeon-panel text-primary-70 text-[11px] font-mono uppercase tracking-[0.14em] px-3 h-[32px] border border-[rgba(250,250,250,0.10)] outline-none cursor-pointer hover:border-[rgba(250,250,250,0.22)] transition-colors"
+          className="bg-aeon-panel text-primary-70 text-[10px] md:text-[11px] font-mono uppercase tracking-[0.04em] md:tracking-[0.14em] px-2 md:px-3 h-[30px] md:h-[32px] border border-[rgba(250,250,250,0.10)] outline-none cursor-pointer hover:border-[rgba(250,250,250,0.22)] transition-colors"
         >
           {HARNESSES.map((h) => (
             <option key={h.id} value={h.id} className="bg-aeon-panel text-aeon-fg">{h.label}</option>
@@ -63,20 +76,24 @@ export function TopBar({ skill, view, repo, model, harness, gateway, hasModelKey
         <select
           value={model}
           onChange={(e) => onUpdateModel(e.target.value)}
-          className="bg-aeon-panel text-primary-70 text-[11px] font-mono uppercase tracking-[0.14em] px-3 h-[32px] border border-[rgba(250,250,250,0.10)] outline-none cursor-pointer hover:border-[rgba(250,250,250,0.22)] transition-colors"
+          className="bg-aeon-panel text-primary-70 text-[10px] md:text-[11px] font-mono uppercase tracking-[0.04em] md:tracking-[0.14em] px-2 md:px-3 h-[30px] md:h-[32px] border border-[rgba(250,250,250,0.10)] outline-none cursor-pointer hover:border-[rgba(250,250,250,0.22)] transition-colors"
         >
           {modelOptions.map((m) => (
             <option key={m.id} value={m.id} className="bg-aeon-panel text-aeon-fg">{m.label}</option>
           ))}
         </select>
-        <button onClick={onPull} disabled={pulling} className="btn-quiet disabled:opacity-50">
-          {behind > 0 && <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-aeon-red animate-pulse" />}
-          {pulling ? '…' : 'Pull'}
-        </button>
-        <button onClick={onSync} disabled={syncing || !hasChanges} className="btn-quiet disabled:opacity-40">
-          {hasChanges && <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-aeon-green" />}
-          {syncing ? '…' : 'Push'}
-        </button>
+        {/* Desktop only: on phones the row keeps just the harness and model,
+            and Pull / Push move into the sidebar drawer. */}
+        <div className="hidden md:contents">
+          <button onClick={onPull} disabled={pulling} className="btn-quiet disabled:opacity-50">
+            {behind > 0 && <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-aeon-red animate-pulse" />}
+            {pulling ? '…' : 'Pull'}
+          </button>
+          <button onClick={onSync} disabled={syncing || !hasChanges} className="btn-quiet disabled:opacity-40">
+            {hasChanges && <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-aeon-green" />}
+            {syncing ? '…' : 'Push'}
+          </button>
+        </div>
         {repo && (
           <a
             href={`https://github.com/${repo}`}

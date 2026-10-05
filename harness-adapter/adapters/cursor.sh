@@ -1,7 +1,25 @@
 #!/usr/bin/env bash
 # Cursor CLI adapter: documented `agent -p` headless mode.
 # rh-meta-start
-# {"id":"cursor","label":"Cursor CLI","cli":{"install":"curl -fsSL https://cursor.com/install | bash","bin":"agent","min_version":"latest"},"invoke":"agent -p --trust --output-format json","round_trip":true,"token_usage":"none","cost":false,"read_only":"sandbox","structured_output":"shim","mcp":"native","max_turns":"none","claude_md":"native","auth":{"native_oauth":[],"native_key":["CURSOR_API_KEY"],"openrouter":false},"native_control_path":"run-harness"}
+# {
+#   "id": "cursor",
+#   "label": "Cursor CLI",
+#   "cli": { "install": "curl -fsSL https://cursor.com/install | bash", "bin": "agent", "min_version": "2026.10.01-14929f9" },
+#   "invoke": "agent -p --trust --output-format json",
+#   "round_trip": true,
+#   "token_usage": "none",
+#   "cost": false,
+#   "read_only": "sandbox",
+#   "structured_output": "shim",
+#   "mcp": "native",
+#   "max_turns": "none",
+#   "claude_md": "native",
+#   "default_model": "auto",
+#   "credentials": [
+#     { "secret": "CURSOR_API_KEY", "kind": "api_key", "auth_mode": "native-key", "label": "Cursor API key", "get_url": "https://cursor.com/dashboard", "aeon_cmd": "./aeon auth --harness cursor --key <key>" }
+#   ],
+#   "native_control_path": "run-harness"
+# }
 # rh-meta-end
 set -uo pipefail
 . "$RH_LIB/envelope.sh"
@@ -11,7 +29,7 @@ CURSOR_HOME="$RH_TMPDIR/cursor-home"; mkdir -p "$CURSOR_HOME/.cursor"; export HO
 if [ -n "${RH_MCP_CONFIG:-}" ] && [ -f "${RH_MCP_CONFIG:-}" ]; then cp "$RH_MCP_CONFIG" "$HOME/.cursor/mcp.json"; fi
 PROMPT="$(cat "$RH_PROMPT_FILE")"; PREFIX="${RH_COMPAT_RULES:-}"
 [ -n "${RH_APPEND_SYSTEM_PROMPT:-}" ] && PREFIX="${PREFIX:+$PREFIX$'\n'}${RH_APPEND_SYSTEM_PROMPT}"
-[ -n "$PREFIX" ] && PROMPT="${PREFIX}\n\n${PROMPT}"
+[ -n "$PREFIX" ] && PROMPT="${PREFIX}"$'\n\n'"${PROMPT}"
 [ -n "${RH_JSON_SCHEMA:-}" ] && PROMPT="${PROMPT}$(schema_prompt_suffix "$RH_JSON_SCHEMA")"
 ARGS=(-p --output-format json)
 [ -n "${RH_MODEL:-}" ] && [ "$RH_MODEL" != "default" ] && ARGS+=(--model "$RH_MODEL")

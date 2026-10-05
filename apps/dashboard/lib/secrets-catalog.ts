@@ -1,5 +1,5 @@
 import { execFileSync } from 'child_process'
-import { ghAvailable, ghArgsRepo, dispatchCommandsWorkflow } from './gh'
+import { ghAvailable, ghArgsRepo, ghSecretSet, dispatchCommandsWorkflow } from './gh'
 import { syncGatewayProvider } from './gateway'
 import { GATEWAY_SECRET_NAMES } from './gateway-registry'
 import { MCP_SECRET_RE, MCP_SECRET_OWNER, mcpServerLabel, oauthVar } from './mcp-catalog'
@@ -12,7 +12,7 @@ import type { Secret } from './types'
 // can't provide. Extracted from app/api/secrets/route.ts so the secrets CLI
 // command and the HTTP route share one definition.
 export const BUILTIN_SECRETS: Omit<Secret, 'isSet'>[] = [
-  { name: 'CLAUDE_CODE_OAUTH_TOKEN', group: 'Core', description: 'How Claude Code signs in - option 1 of 2. Runs Aeon on your Claude Pro/Max subscription (no per-token billing). Easiest: click AUTH above; or run claude setup-token locally and paste the token here.', either: 'auth' },
+  { name: 'CLAUDE_CODE_OAUTH_TOKEN', group: 'Core', description: 'How Claude Code signs in - option 1 of 2. Runs Aeon on your Claude Pro/Max subscription (no per-token billing). Easiest: click Connect a model above; or run claude setup-token locally and paste the token here.', either: 'auth' },
   { name: 'GROK_CREDENTIALS', group: 'Core', description: 'Grok Build (grok CLI) X-account OAuth session - base64 of your ~/.grok login, captured by "Connect X account" in AUTH. Lets the grok harness (harness: grok) run in CI on your SuperGrok / X Premium+ entitlement. Alternative: set XAI_API_KEY instead.' },
   { name: 'ANTHROPIC_API_KEY', group: 'Core', description: 'How Claude Code signs in - option 2 of 2. A pay-as-you-go Anthropic API key (sk-ant-...) billed via the Console, or any Anthropic-compatible key for a proxy. Create one at console.anthropic.com.', either: 'auth' },
   { name: 'BANKR_LLM_KEY', group: 'Core', description: 'Bankr Gateway API key (bk_...) - enable at bankr.bot/api-keys' },
@@ -25,6 +25,7 @@ export const BUILTIN_SECRETS: Omit<Secret, 'isSet'>[] = [
   { name: 'CURSOR_API_KEY', group: 'Core', description: 'Cursor API key for the Cursor CLI harness. Set it here or with `aeon auth --harness cursor --key`; the key is stored as a GitHub Actions secret and never committed. Create one in Cursor settings.' },
   { name: 'HERMES_AUTH', group: 'Core', description: 'Hermes Nous Portal login captured for CI - a base64 tar of ~/.hermes/auth.json and config.yaml. Set it with `aeon auth --harness hermes` or the dashboard "Connect Nous Portal" button, which opens the official Nous OAuth flow and stores the resulting session.' },
   { name: 'GLM_API_KEY', group: 'Core', description: 'Z.AI GLM Coding Plan API key - routes Claude Code at api.z.ai/api/anthropic (the glm gateway). Pick GLM in Authenticate, or set GLM_API_KEY (alias: ZAI_API_KEY). Pin with gateway.provider: glm or GLM_MODEL. Create one in the Z.AI Coding Plan console.' },
+  { name: 'HIVEMINDOS_CREDIT_TOKEN', group: 'Core', description: 'HivemindOS Models credit token - routes Claude Code through HivemindOS (the hivemindos gateway), billed to a credit balance instead of a provider account of your own. Pick HivemindOS in Connect, or set it here. Optional repo variables: HIVEMINDOS_MODEL (default inclusionai/ling-3.0-flash), HIVEMINDOS_BASE_URL, HIVEMINDOS_MAX_TOKENS. Get one at hivemindos.liamvisionary.com' },
   { name: 'OPENAI_API_KEY', group: 'Core', description: 'OpenAI API key (sk-...) - API-key auth for the codex harness (alternative to the ChatGPT login) and a provider pi can use. Create at platform.openai.com/api-keys' },
   { name: 'MOONSHOT_API_KEY', group: 'Core', description: 'Moonshot API key - API-key auth for the kimi harness (alternative to the device login). From platform.moonshot.ai' },
   { name: 'MISTRAL_API_KEY', group: 'Core', description: "Mistral API key - native auth for the vibe harness (its default provider). vibe's own `vibe` sign-in stores its credential in the OS keychain (not a portable file, like Claude Code), so it can't be captured for CI - set the key here instead. Create at console.mistral.ai" },
@@ -141,10 +142,16 @@ function mcpSlugStem(name: string): string {
 // the Telegram command menu the moment the bot token lands. Caller must
 // pre-validate `name` against VALID_SECRET_NAME. Throws on a gh failure.
 export async function setSecret(name: string, value: string): Promise<void> {
-  execFileSync('gh', ['secret', 'set', name, ...ghArgsRepo(), '-b', value], {
-    stdio: 'pipe',
-    cwd: process.cwd(),
-  })
+  // The value goes over stdin (ghSecretSet), never argv: an argv value is
+  // visible to `ps` and is echoed back in execFileSync's "Command failed: ..."
+  // message, which the route returns to the browser. Scrub it from the error
+  // anyway in case gh ever echoes its input on stderr.
+  try {
+    ghSecretSet(name, value)
+  } catch (error: unknown) {
+    const msg = error instanceof Error ? error.message : String(error)
+    throw new Error(value ? msg.split(value).join('***') : msg)
+  }
   if (GATEWAY_SECRET_NAMES.includes(name)) await syncGatewayProvider()
   if (name === 'TELEGRAM_BOT_TOKEN') {
     try { dispatchCommandsWorkflow() } catch { /* non-fatal — token is still saved */ }

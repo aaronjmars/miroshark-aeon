@@ -25,7 +25,7 @@ Aeon is one of many ways to build agentic systems. Here's where it sits next to 
 | **Self-healing** | Yes — `skill-health` + `skill-repair` auto-patch failing skills | No | No | No |
 | **Quality scoring** | Every run scored 1–5 by a model | No | No | No |
 | **Reactive triggers** | Yes — `schedule: "reactive"` fires on conditions | No | Message triggers | Message triggers |
-| **Setup floor** | `git clone` + secrets | Install the CLI | Install + pick a provider | Install + pick a provider |
+| **Setup floor** | Sign in with GitHub at [www.aeon.fun/connect](https://www.aeon.fun/connect) + connect a model (or `git clone` + `./aeon init`) | Install the CLI | Install + pick a provider | Install + pick a provider |
 | **Hosting cost** | Free on public repos (Actions minutes) | Your machine | Your machine | Your machine |
 | **External integration** | MCP server | MCP | MCP / tools | Tools / connectors |
 

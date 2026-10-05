@@ -2,7 +2,7 @@
 name: [REPLACE: SKILL_NAME]
 description: Summary of the [REPLACE: CHANNEL_PLATFORM] channel [REPLACE: CHANNEL_NAME] — top [REPLACE: TOP_N_THREADS] threads + open questions
 metadata:
-  category: social
+  category: productivity
   var: ""
   tags:
     - social

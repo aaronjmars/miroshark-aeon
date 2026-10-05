@@ -91,7 +91,7 @@ The response contains the event `id`, `title`, and a `markets` array. Each marke
 **b) Get 24h price history for each open market:**
 ```bash
 # YES token is index 0 of clobTokenIds
-TOKEN_ID=$(echo "$CLOB_TOKEN_IDS" | python3 -c "import json,sys; print(json.loads(sys.stdin.read())[0])")
+TOKEN_ID=$(echo "$CLOB_TOKEN_IDS" | jq -r '.[0]')   # jq, not python3: python3 is not in the read-only tool allowlist
 curl -s "https://clob.polymarket.com/prices-history?market=$TOKEN_ID&interval=1d&fidelity=60"
 ```
 
@@ -322,7 +322,7 @@ If the combined report exceeds the budget, trim in this order: (1) drop Kalshi's
 
 # Log
 
-Append to `memory/logs/${today}.md` under a single `### monitor-polymarket` heading, with a bullet group for **each platform that ran**:
+This skill is `read-only`, so the workflow's read-only guard writes its `### monitor-polymarket` log entry from your captured output; a self-written entry would be a duplicate. Don't append to `memory/logs/` yourself - put this record in your **final output**, with a bullet group for **each platform that ran**:
 
 ```
 ### monitor-polymarket
@@ -352,4 +352,4 @@ If a market moved dramatically — Polymarket >5pp, or Kalshi >10pp on a non-thi
 
 ## Network note
 
-Both branches only fetch **public** APIs (`mode: read-only`), so there are no secret-bearing calls. `curl` works — there is no network sandbox; use **WebFetch** as a fallback for a flaky public GET (per-platform endpoint lists are in the Polymarket Network note P5 and the Kalshi Network note K9). Never write to the repo beyond `memory/logs/` (and an optional `memory/MEMORY.md` note); produce all output via `./notify` and `memory/`.
+Both branches only fetch **public** APIs (`mode: read-only`), so there are no secret-bearing calls. `curl` works - there is no network sandbox; use **WebFetch** as a fallback for a flaky public GET (per-platform endpoint lists are in the Polymarket Network note P5 and the Kalshi Network note K9). Never write to the repo beyond an optional `memory/MEMORY.md` note (the workflow writes `memory/logs/` for you); produce all output via `./notify` and your final output.

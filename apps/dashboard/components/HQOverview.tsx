@@ -5,6 +5,7 @@ import { packGroups } from '../lib/constants'
 import { timeAgo, runStatusColor, runStatusGlyph } from '../lib/utils'
 import { Scramble, Flip, VelocityMarquee } from './ui/Animated'
 import { Section } from './ui/Section'
+import { RunDiagnosisToggle } from './RunDiagnosis'
 
 interface HQOverviewProps {
   skills: Skill[]
@@ -14,9 +15,13 @@ interface HQOverviewProps {
   categoryFilter: string | null
   onCategoryClick: (key: string) => void
   onOpenPacks: () => void
+  // Setup checklist card, rendered above everything until setup is complete.
+  checklist?: React.ReactNode
+  // A failed run's "Connect" (its credential was the problem).
+  onConnect?: (harness?: string) => void
 }
 
-export function HQOverview({ skills, runs, enabledCount, workingCount, categoryFilter, onCategoryClick, onOpenPacks }: HQOverviewProps) {
+export function HQOverview({ skills, runs, enabledCount, workingCount, categoryFilter, onCategoryClick, onOpenPacks, checklist, onConnect }: HQOverviewProps) {
   const onMove = (e: React.MouseEvent<HTMLUListElement>) => {
     const card = (e.target as HTMLElement).closest('li')
     if (!card) return
@@ -38,9 +43,10 @@ export function HQOverview({ skills, runs, enabledCount, workingCount, categoryF
 
   return (
     <div className="max-w-5xl mx-auto pb-16 space-y-10">
+      {checklist}
       <section className="relative overflow-hidden border border-[rgba(250,250,250,0.10)] bg-aeon-panel">
         <div className="dither" aria-hidden="true" />
-        <div className="relative z-10 px-8 pt-10 pb-8">
+        <div className="relative z-10 px-5 md:px-8 pt-10 pb-8">
           <h1 className="font-display uppercase leading-[0.92] tracking-tight text-aeon-fg"
               style={{ fontSize: 'clamp(48px, 8vw, 110px)' }}>
             <Scramble text="AEON" />{' '}
@@ -122,19 +128,20 @@ export function HQOverview({ skills, runs, enabledCount, workingCount, categoryF
       <Section label="Recent activity">
         <div className="border border-[rgba(250,250,250,0.10)] divide-y divide-[rgba(250,250,250,0.08)]">
           {runs.slice(0, 8).map(run => (
-            <div
-              key={run.id}
-              className="w-full flex items-center gap-4 px-5 py-3 text-left group"
-            >
-              <span className={`text-sm w-4 shrink-0 ${runStatusColor(run)}`}>{runStatusGlyph(run)}</span>
-              <span className="text-xs text-primary-70 truncate flex-1 font-mono">{run.workflow}</span>
-              <span className="text-[10px] text-primary-35 font-mono tabular-nums uppercase tracking-[0.14em]">{timeAgo(run.created_at)}</span>
+            <div key={run.id} className="px-5 py-3 group">
+              <div className="w-full flex items-center gap-4 text-left">
+                <span className={`text-sm w-4 shrink-0 ${runStatusColor(run)}`}>{runStatusGlyph(run)}</span>
+                <span className="text-xs text-primary-70 truncate flex-1 font-mono">{run.workflow}</span>
+                <span className="text-[10px] text-primary-35 font-mono tabular-nums uppercase tracking-[0.14em]">{timeAgo(run.created_at)}</span>
+              </div>
+              {/* Failed runs only: "Why?" reads the log on demand. */}
+              <RunDiagnosisToggle run={run} onConnect={onConnect} className="mt-1 pl-8" />
             </div>
           ))}
           {!runs.length && (
             <div className="px-6 py-12 text-center">
               <p className="font-display uppercase text-aeon-fg text-xl tracking-wide">Nothing yet</p>
-              <p className="text-[11px] text-primary-40 font-mono mt-2 uppercase tracking-[0.18em]">The fleet is waiting for its first run</p>
+              <p className="text-[11px] text-primary-40 font-mono mt-2 uppercase tracking-[0.18em]">Open any skill and press Run, or use Run one in the setup list</p>
             </div>
           )}
         </div>

@@ -2,7 +2,7 @@
 name: [REPLACE: SKILL_NAME]
 description: Mention/keyword sweep on social platforms for [REPLACE: KEYWORDS] — trends, sentiment, top posts
 metadata:
-  category: social
+  category: productivity
   var: ""
   tags:
     - social

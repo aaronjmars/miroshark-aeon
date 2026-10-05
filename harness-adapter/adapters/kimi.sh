@@ -4,10 +4,12 @@
 # kimi quirks this adapter absorbs:
 #   * `kimi -p <text> --output-format stream-json` emits a JSONL stream of
 #     {role,content} messages + a trailing {role:"meta"} resume hint -> .result
-#     is the last assistant message's content.
+#     is the last assistant message's content. (2.x adds a leading
+#     {role:"meta",type:"system.version"} line; meta lines are never read as text.)
 #   * stream-json exposes no token usage -> counts normalize to 0.
-#   * model is an alias resolved from config.toml providers; default here is a
-#     small OpenRouter model (or-nano). --model / -m passes through.
+#   * model is an alias resolved from config.toml providers; install-harness.sh
+#     stages `or-cheap` (the OpenRouter model aeon resolved) or `kimi-native`
+#     (Moonshot key / OAuth) as default_model. --model / -m passes through.
 #   * NO native FS sandbox and read-only is SANDBOX-ONLY (its -p mode executes
 #     tools with no permission-layer gate) -> read-only relies entirely on the
 #     dispatcher's wrapper OS sandbox.
@@ -21,7 +23,7 @@
 # {
 #   "id": "kimi",
 #   "label": "Kimi Code",
-#   "cli": { "install": "", "bin": "kimi", "min_version": "0.28.0" },
+#   "cli": { "install": "npm i -g --ignore-scripts @moonshot-ai/kimi-code@2.1.1", "bin": "kimi", "min_version": "2.1.1" },
 #   "invoke": "kimi -p --output-format stream-json",
 #   "round_trip": true,
 #   "token_usage": "none",
@@ -31,7 +33,12 @@
 #   "mcp": "native+overlay",
 #   "max_turns": "timeout",
 #   "claude_md": "native",
-#   "auth": { "native_oauth": ["KIMI_AUTH"], "native_key": ["MOONSHOT_API_KEY"], "openrouter": true },
+#   "default_model": "moonshotai/kimi-k2.7-code",
+#   "credentials": [
+#     { "secret": "KIMI_AUTH", "kind": "oauth_capture", "auth_mode": "native-oauth", "label": "Kimi (Moonshot) login", "get_url": "https://www.kimi.com", "login_cmd": "kimi login", "aeon_cmd": "./aeon auth --harness kimi", "cred_paths": [".kimi-code/credentials", ".kimi-code/config.toml"], "refresh": "re-run ./aeon auth --harness kimi if a run reports a login error" },
+#     { "secret": "MOONSHOT_API_KEY", "kind": "api_key", "auth_mode": "native-key", "label": "Moonshot API key", "prefix": "sk-", "get_url": "https://platform.moonshot.ai/console/api-keys", "aeon_cmd": "./aeon auth --harness kimi --key <sk-...>" },
+#     { "secret": "OPENROUTER_API_KEY", "kind": "api_key", "auth_mode": "openrouter", "label": "OpenRouter key (one key covers most harnesses)", "prefix": "sk-or-", "get_url": "https://openrouter.ai/settings/keys", "aeon_cmd": "./aeon secrets set OPENROUTER_API_KEY --stdin" }
+#   ],
 #   "native_control_path": "run-harness"
 # }
 # rh-meta-end
@@ -40,6 +47,10 @@ set -uo pipefail
 . "$RH_LIB/schema-retry.sh"
 
 command -v kimi >/dev/null 2>&1 || { echo "kimi CLI not found" >&2; exit 1; }
+
+# kimi checks a CDN for a newer build at startup and can self-install it; keep the
+# pinned version (scripts/install-harness.sh) for the whole run.
+export KIMI_CODE_NO_AUTO_UPDATE=1
 
 ARGS=(--output-format stream-json)
 [ -n "${RH_MODEL:-}" ] && [ "${RH_MODEL}" != "default" ] && ARGS+=(--model "$RH_MODEL")
@@ -59,6 +70,10 @@ if [ -n "${RH_MCP_CONFIG:-}" ] && [ -f "${RH_MCP_CONFIG:-}" ]; then
   KH="$RH_TMPDIR/kimi-home"; mkdir -p "$KH"
   SRC="${KIMI_CODE_HOME:-$HOME/.kimi-code}"
   [ -d "$SRC" ] && find "$SRC" -maxdepth 1 -type f -exec cp {} "$KH/" \; 2>/dev/null
+  # The OAuth login (KIMI_AUTH) lives in credentials/, which the top-level copy
+  # above skips: native-oauth + MCP then failed "no credential configured".
+  # Linked, not copied, so a token refresh writes back to the real home.
+  [ -d "$SRC/credentials" ] && ln -s "$SRC/credentials" "$KH/credentials"
   cp "$RH_MCP_CONFIG" "$KH/mcp.json"
   export KIMI_CODE_HOME="$KH"
 fi

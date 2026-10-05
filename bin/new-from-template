@@ -16,6 +16,11 @@ TEMPLATES_DIR="$ROOT/docs/examples/skill-templates"
 SKILLS_DIR="$ROOT/skills"
 AEON_YML="$ROOT/aeon.yml"
 
+# Valid `category:` values. A skill's category IS its pack (docs/skill-packs.md).
+# Must match VALID in scripts/check-skill-categories.sh, which fails CI if the
+# two lists drift.
+VALID_CATEGORIES="core evolution basics dev crypto productivity"
+
 usage() {
   cat <<'EOF'
 Usage: bin/new-from-template <template> <skill-name> [--var KEY=VALUE]...
@@ -31,8 +36,8 @@ Options:
   --tokens           Print the replacement tokens used by <template> and exit
   --var KEY=VALUE    Provide a value for [REPLACE: KEY]. Repeatable.
   --category KEY     Pack the skill belongs to (sets the SKILL.md `category:`).
-                     One of: research dev crypto onchain-security social
-                     productivity meta. Defaults to the template's own category.
+                     One of: core evolution basics dev crypto productivity.
+                     Defaults to the template's own category.
   --help, -h         Show this help
 
 Examples:
@@ -176,14 +181,10 @@ while [[ $# -gt 0 ]]; do
         exit 1
       fi
       CATEGORY="$2"
-      case "$CATEGORY" in
-        research|dev|crypto|onchain-security|social|productivity|meta) ;;
-        *)
-          echo "Invalid --category '$CATEGORY'. One of: research dev crypto onchain-security social productivity meta." >&2
-          echo "(core and fleet are curated in packs.config.json, not set here.)" >&2
-          exit 1
-          ;;
-      esac
+      if [[ ! "$CATEGORY" =~ ^[a-z]+$ ]] || [[ " $VALID_CATEGORIES " != *" $CATEGORY "* ]]; then
+        echo "Invalid --category '$CATEGORY'. One of: $VALID_CATEGORIES." >&2
+        exit 1
+      fi
       shift 2
       ;;
     --var)

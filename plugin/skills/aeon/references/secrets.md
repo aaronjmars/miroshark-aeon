@@ -36,7 +36,7 @@ The first two are the direct-to-Anthropic options; the rest are gateways. Settin
 
 | Secret | Where to get it |
 |---|---|
-| `CLAUDE_CODE_OAUTH_TOKEN` | Run `claude setup-token` locally → paste the `sk-ant-oat01-…` (valid 1 year). Or click AUTH in the dashboard. Runs on your Pro/Max subscription, no per-token billing |
+| `CLAUDE_CODE_OAUTH_TOKEN` | Run `claude setup-token` locally → paste the `sk-ant-oat01-…` (valid 1 year). Or press **Connect a model** in the dashboard (Aeon Connect at https://www.aeon.fun/connect, or the local `./aeon`). Runs on your Pro/Max subscription, no per-token billing |
 | `ANTHROPIC_API_KEY` | console.anthropic.com — pay-as-you-go `sk-ant-…`. Also accepts any Anthropic-compatible key for a proxy |
 | `OPENROUTER_API_KEY` | openrouter.ai/keys — `sk-or-…` |
 | `BANKR_LLM_KEY` | bankr.bot/api-keys — `bk_…`, discounted Opus |
@@ -45,7 +45,7 @@ The first two are the direct-to-Anthropic options; the rest are gateways. Settin
 | `SURPLUS_API_KEY` | surplusintelligence.ai — `inf_…`, settles USDC on Base. Fund the wallet and `approve()` once before first use |
 | `HIVEMINDOS_CREDIT_TOKEN` | HivemindOS Models - a credit token billed to a balance, not a provider account. Routed through a local translator sidecar. Not in the dashboard modal yet; set it with `gh secret set` |
 | `XAI_API_KEY` | console.x.ai — `xai-…`. Triple duty: X/tweet skills, the Grok gateway, and API-key auth for the grok harness |
-| `GROK_CREDENTIALS` | Dashboard → AUTH → **Connect X account**. Base64 of your `~/.grok` session; runs the grok harness on a SuperGrok / X Premium+ entitlement. No CLI path for this one |
+| `GROK_CREDENTIALS` | Dashboard → **Connect a model** → **Connect X account**. Base64 of your `~/.grok` session; runs the grok harness on a SuperGrok / X Premium+ entitlement. No CLI path for this one |
 
 ## 2. Notification channels — need at least one
 
@@ -91,10 +91,11 @@ Each is opt-in. Unset means the skills that want it skip or degrade.
 | `BASE_RPC_URL` | Base on-chain skills | docs.base.org/chain/node-providers — a public RPC is used by default |
 | `BANKR_API_KEY` | `distribute-tokens` (real on-chain sends) | bankr.bot/api-keys — Wallet API, not the LLM key |
 | `VERCEL_TOKEN` | `deploy-prototype` | vercel.com/account/settings/tokens |
+| `FEEDBACK_TOKEN` | `feedback-builder` (bearer token for a private `/feedback` endpoint) | issued by the service you point it at - leave unset for public endpoints |
 | `REPLICATE_API_TOKEN` | `article --visual` hero images | replicate.com/account/api-tokens |
 | `ADMANAGE_API_KEY` | `schedule-ads` | admanage.ai/api-docs |
 | `RESEND_API_KEY` | `send-email`, `vuln-scanner` disclosures | resend.com |
-| `YDC_API_KEY` | `you-web-search` (required for it) | api.you.com — optional `YOUCOM_FRESHNESS` / `YOUCOM_LIVECRAWL` variables tune freshness + full-page crawl |
+| `YDC_API_KEY` | `you-web-search` (optional — runs keyless without it, 100 searches/day per IP; the key unlocks higher limits + livecrawl) | you.com/platform — optional `YOUCOM_FRESHNESS` / `YOUCOM_LIVECRAWL` variables tune freshness + full-page crawl |
 | `TASKMARKET_API_KEY` | `taskmarket-delegate` — only `create`/`submit`; `browse` works without | tasks.taskmarket.dev — optional `TASKMARKET_WORKER_ADDRESS` tags submissions |
 
 ## 5. Observability — optional
@@ -114,8 +115,8 @@ Set with `gh variable set NAME "value"`.
 |---|---|
 | `ANTHROPIC_BASE_URL` | Point `ANTHROPIC_API_KEY` at any Anthropic-compatible endpoint, e.g. `https://api.deepseek.com/anthropic` |
 | `GATEWAY_ORDER` | Space-separated provider names — override the failover priority |
-| `GROK_MODEL` | Model for the Grok gateway path |
-| `GLM_MODEL` | Model for the GLM (Z.AI) gateway path (default `glm-5.2`) |
+| `GROK_MODEL` | Model for the Grok gateway path (default `grok-4.7`) |
+| `GLM_MODEL` | Model for the GLM (Z.AI) gateway path (default `glm-5.3`, `glm-5.3-flash` for the haiku tier) |
 | `GLM_REASONING_EFFORT` | GLM gateway reasoning depth: `low` / `high` / `max` (default `high`) |
 | `STATE_BACKEND` | `file` (default) · `dual` · `issues` — where run state lives |
 | `HEALTH_ISSUES` | `0` disables the votable per-skill health Issues |

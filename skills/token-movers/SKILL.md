@@ -233,13 +233,14 @@ fetch_with_backoff "https://api.geckoterminal.com/api/v2/networks/trending_pools
   && GLOBAL_OK=1 || GLOBAL_OK=0
 sleep 1
 
-# Per-network trending + volume leaders
+# Per-network trending + volume leaders (per-source status, no eval: ${N} comes from var)
+NET_STATUS=""
 for N in $NETWORKS; do
   fetch_with_backoff "https://api.geckoterminal.com/api/v2/networks/${N}/trending_pools?page=1" "$TMPDIR/${N}-trend.json" \
-    && eval "${N}_TREND_OK=1" || eval "${N}_TREND_OK=0"
+    && NET_STATUS="$NET_STATUS ${N}-trend=ok" || NET_STATUS="$NET_STATUS ${N}-trend=fail"
   sleep 1
   fetch_with_backoff "https://api.geckoterminal.com/api/v2/networks/${N}/pools?page=1&sort=h24_volume_usd_desc" "$TMPDIR/${N}-vol.json" \
-    && eval "${N}_VOL_OK=1" || eval "${N}_VOL_OK=0"
+    && NET_STATUS="$NET_STATUS ${N}-vol=ok" || NET_STATUS="$NET_STATUS ${N}-vol=fail"
   sleep 1
 done
 
@@ -588,7 +589,7 @@ Save to `output/articles/token-report-${today}.md`:
 If `XAI_API_KEY` is set:
 
 ```bash
-jq -n '{model:"grok-4.6", input:[{role:"user",content:"Search X for TOKEN_SYMBOL or CONTRACT_ADDRESS mentions in the last 24 hours with at least 10 likes. Return up to 5 notable tweets with @handle, engagement counts, and a one-line summary of the claim or vibe. Exclude obvious bots and generic shill posts."}], tools:[{type:"x_search"}]}' > /tmp/xai-tm-payload.json
+jq -n '{model:"grok-4.7", input:[{role:"user",content:"Search X for TOKEN_SYMBOL or CONTRACT_ADDRESS mentions in the last 24 hours with at least 10 likes. Return up to 5 notable tweets with @handle, engagement counts, and a one-line summary of the claim or vibe. Exclude obvious bots and generic shill posts."}], tools:[{type:"x_search"}]}' > /tmp/xai-tm-payload.json
 ./secretcurl -s -X POST "https://api.x.ai/v1/responses" \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer {XAI_API_KEY}" \

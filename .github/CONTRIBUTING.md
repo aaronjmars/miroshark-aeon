@@ -14,9 +14,10 @@ Most contributions fall into one of three buckets, each with its own checklist b
 
 ## Before you start
 
-- **Fork or use the template.** This repo is a public template — click **Use this
-  template** (or `gh repo fork aeonfun/aeon --clone`). Run your own instance as
-  a fork; open PRs back here for changes that benefit everyone.
+- **Fork to contribute.** PRs come from a fork (`gh repo fork aeonfun/aeon --clone`).
+  Just want to run an agent? Use [Aeon Connect](https://www.aeon.fun/connect)
+  (browser) or `./aeon init` (terminal) instead; open PRs back here for changes
+  that benefit everyone.
 - **Branch from `main`.** Never push to `main`. Use a descriptive branch name
   (`feat/…`, `fix/…`, `docs/…`).
 - **One change per PR.** A focused 20-line fix lands faster than a 500-line bundle.
@@ -47,6 +48,10 @@ for the dashboard app itself is documented in
 ```bash
 bin/new-from-template <template> <skill-name> --category <pack>
 ```
+
+`<pack>` is one of the six categories: `core`, `evolution`, `basics`, `dev`,
+`crypto`, `productivity` (see [`docs/skill-packs.md`](../docs/skill-packs.md)).
+Leave it off to keep the template's own default.
 
 Every `SKILL.md` opens with YAML frontmatter — the full contract is in
 [`docs/examples/skill-templates/TEMPLATE.md`](../docs/examples/skill-templates/TEMPLATE.md). Essentials:
@@ -101,10 +106,12 @@ per run by a [claude-code-router](https://github.com/musistudio/claude-code-rout
 sidecar, like Venice/Surplus).
 
 1. **`apps/dashboard/lib/gateway-registry.ts`** — add `slug: { label, secretName, prefixes, domain }` (empty `prefixes: []` = dropdown-only, no auto-detect). This is the **single source of truth**: it auto-flows to the `GatewayProvider` union (`lib/types.ts`), `CLAUDE_AUTH_SECRETS` (`lib/constants.ts`), the secrets route's gateway-key detection, the auth key-prefix detection (`lib/auth-provider.ts`), and the service-icon domain.
-2. **`apps/dashboard/components/AuthModal.tsx`** — add the slug to `PROVIDER_OPTIONS` (this dropdown list is **not** registry-derived).
+2. **Connect modal** - nothing to edit. Its provider dropdown and key-prefix detection (`apps/dashboard/lib/connect-detect.ts`) read `harness-adapter/gateways.json`, so the gateway shows up once step 6 regenerates it.
 3. **`apps/dashboard/lib/secrets-catalog.ts`** — add a `BUILTIN_SECRETS` row (description only) so the secret shows in Settings (and in `aeon secrets ls`).
 4. **`scripts/llm-gateway.sh`** — add an `aeon_present()` case, add the slug to the auto-resolver's default `GATEWAY_ORDER`, and add a `case` branch (a **native** provider exports `ANTHROPIC_BASE_URL` + the auth token; a **sidecar** provider calls `start_ccr_sidecar <slug> <openai-url> <key> <model>`).
 5. **`.github/workflows/aeon.yml`** — pass the new secret (and any `*_MODEL` override **variables**) into the run's `env:` (also `messages.yml`), so the resolver can see it.
+
+6. **`harness-adapter/adapters/claude.sh`** - add an entry to the `gw-meta` block in the same position as in `GATEWAY_ORDER` (label, secrets, prefixes, transport, base URL, where to get a key), then run `harness-adapter/bin/generate-harnesses-json` and commit the regenerated `harness-adapter/gateways.json`. `aeon init` and `bin/onboard` read it, and `scripts/tests/test_credential_manifest.sh` (ci-tests) fails if it disagrees with steps 1, 4 or 5.
 
 Then add a row to the gateway table in [`docs/CONFIGURATION.md`](../docs/CONFIGURATION.md#llm-gateways). To
 verify the full loop: paste a key in the dashboard (prefix should auto-detect, or

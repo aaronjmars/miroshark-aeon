@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import type { Skill, Run, Secret, SkillKeyRef, SkillMcpRef, McpServers } from '../lib/types'
-import { modelsForHarness, keyProvidedByHarness, CATEGORIES } from '../lib/constants'
+import { modelsForHarness, pickerOptions, keyProvidedByHarness, CATEGORIES } from '../lib/constants'
 import { SkillGlyph, hasSkillGlyph } from './ui/SkillGlyph'
 import { MCP_BY_SLUG } from '../lib/mcp-catalog'
 import { displayName, getSkillStatus, cronLabel, statusDot, inputCls, runStatusColor, runStatusGlyph } from '../lib/utils'
@@ -42,7 +42,7 @@ function Section({ label, action, children }: { label: string; action?: React.Re
 }
 
 // A single declared credential. The key name and the right-hand action both
-// jump to Settings → Access Keys, scrolled to this key with its input open —
+// jump to Keys → Access Keys, scrolled to this key with its input open -
 // so the operator can paste the value in one click.
 function KeyRow({ kref, secret, harness, onGoTo }: { kref: SkillKeyRef; secret?: Secret; harness: string; onGoTo: (name: string) => void }) {
   const isSet = !!secret?.isSet
@@ -65,7 +65,7 @@ function KeyRow({ kref, secret, harness, onGoTo }: { kref: SkillKeyRef; secret?:
         <div className="min-w-0">
           <div className="flex items-center gap-2 flex-wrap">
             <span className={`w-2 h-2 rounded-full shrink-0 ${dot}`} />
-            <button onClick={() => onGoTo(kref.key)} title="Open in Settings to set this key" className="font-mono text-xs text-aeon-fg hover:text-aeon-red underline decoration-dotted underline-offset-2 transition-colors">{kref.key}</button>
+            <button onClick={() => onGoTo(kref.key)} title="Open in Keys to set this key" className="font-mono text-xs text-aeon-fg hover:text-aeon-red underline decoration-dotted underline-offset-2 transition-colors">{kref.key}</button>
             <span className={`text-[9px] font-mono uppercase tracking-[0.18em] ${tierColor}`}>{tierLabel}</span>
             <span className="text-[9px] font-mono uppercase tracking-[0.18em] text-primary-35">{statusText}</span>
           </div>
@@ -141,7 +141,7 @@ export function SkillDetail({ skill, runs, model, harness, secrets, mcpServers, 
   const statusTextCls = st.color === 'green' ? 'text-aeon-green' : st.color === 'orange' ? 'text-aeon-amber' : st.color === 'red' ? 'text-aeon-red-alert' : 'text-primary-50'
 
   // Join the skill's declared `requires` against the central credential registry
-  // (the same list shown in Settings → Access Keys) for descriptions + set state.
+  // (the same list shown in Keys → Access Keys) for descriptions + set state.
   const secretByName = new Map(secrets.map(s => [s.name, s]))
   const requires = skill.requires ?? []
   const requiredKeys = requires.filter(r => !r.optional)
@@ -171,7 +171,7 @@ export function SkillDetail({ skill, runs, model, harness, secrets, mcpServers, 
     <div className="max-w-5xl mx-auto pb-16 space-y-10">
       <section className="relative overflow-hidden border border-[rgba(250,250,250,0.10)] bg-aeon-panel">
         <div className="dither" aria-hidden="true" />
-        <div className="relative z-10 px-8 pt-10 pb-8">
+        <div className="relative z-10 px-5 md:px-8 pt-10 pb-8">
           <div className="flex items-center gap-4 mb-4 flex-wrap">
             <span className="inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.18em]">
               <span className={statusDot(st.color)} />
@@ -276,7 +276,7 @@ export function SkillDetail({ skill, runs, model, harness, secrets, mcpServers, 
                 {missingRequired.map((r, i) => (
                   <span key={r.key}>
                     {i > 0 && ', '}
-                    <button onClick={() => onGoToSecret(r.key)} title="Open in Settings to set this key" className="text-aeon-red-alert underline decoration-dotted underline-offset-2 hover:text-aeon-fg transition-colors">{r.key}</button>
+                    <button onClick={() => onGoToSecret(r.key)} title="Open in Keys to set this key" className="text-aeon-red-alert underline decoration-dotted underline-offset-2 hover:text-aeon-fg transition-colors">{r.key}</button>
                   </span>
                 ))}
               </p>
@@ -368,8 +368,8 @@ export function SkillDetail({ skill, runs, model, harness, secrets, mcpServers, 
           </button>
         ) : (
           <button onClick={() => { setEditingVar(true); setVarDraft('') }} className="group w-full flex items-center gap-3 border border-dashed border-[rgba(250,250,250,0.16)] px-4 py-4 hover:border-aeon-red/40 transition-colors cursor-target">
-            <span className="text-sm text-primary-40 font-mono uppercase tracking-[0.18em] group-hover:text-primary-70 transition-colors">No custom settings</span>
-            <span className="btn-mini-go ml-auto">+ Set var</span>
+            <span className="text-sm text-left text-primary-40 font-mono uppercase tracking-[0.18em] group-hover:text-primary-70 transition-colors">No custom settings</span>
+            <span className="btn-mini-go ml-auto shrink-0 whitespace-nowrap"><span className="md:hidden">+ Set</span><span className="hidden md:inline">+ Set var</span></span>
           </button>
         )}
       </Section>
@@ -381,7 +381,7 @@ export function SkillDetail({ skill, runs, model, harness, secrets, mcpServers, 
           className="bg-aeon-panel text-aeon-fg text-sm px-4 py-3 border border-[rgba(250,250,250,0.10)] outline-none font-mono w-full max-w-md cursor-pointer hover:border-[rgba(250,250,250,0.22)] focus:border-aeon-red transition-colors"
         >
           <option value="">Default ({modelOptions.find(m => m.id === model)?.label ?? model})</option>
-          {modelOptions.map(m => <option key={m.id} value={m.id}>{m.label}</option>)}
+          {pickerOptions(modelOptions, skill.model).map(m => <option key={m.id} value={m.id}>{m.label}</option>)}
         </select>
       </Section>
 

@@ -2,6 +2,8 @@
 
 The local web UI for running Aeon — enable skills, browse community packs, set schedules, manage secrets, pick the agent harness and per-skill model, and watch skill output in real time. It's the first screen you see after `./aeon`, and the one that turns "edit `aeon.yml` and `skills.json` by hand" into point-and-click.
 
+> **Don't want to run it locally?** [Aeon Connect](https://www.aeon.fun/connect) is the hosted, multi-tenant version of this same UI: sign in with GitHub and it creates your instance, connects a model, and lets you pick skills from the browser, through a GitHub App instead of your `gh` login.
+
 ## What it is
 
 A [Next.js](https://nextjs.org) app that runs on your machine and drives your Aeon fork through the GitHub CLI. Its `/api/*` routes shell out to `gh` for everything that touches your repo — reading and writing secrets, dispatching workflow runs, and committing config changes — so there's no separate backend and no credential custody: the dashboard holds nothing your `gh` login doesn't already grant.
@@ -23,7 +25,7 @@ Or run this app directly:
 ```bash
 cd apps/dashboard
 npm install
-npm run dev              # next dev on :3000 (./aeon runs it on :5555)
+npm run dev              # next dev on 127.0.0.1:3000 (./aeon runs it on :5555)
 npm run build            # next build (production)
 npm run test             # node --test over lib/**/*.test.{ts,mjs}
 ```
@@ -43,19 +45,21 @@ The left sidebar switches between the workspaces; the **Team** roster below the 
 | **HQ** | Mission-control overview — team size, how many skills are on duty vs. working, pack breakdown, and the most recent runs. Click a run to inspect its output. |
 | **Packs** | Enable or disable whole [skill packs](../../docs/skill-packs.md). By default only the small **Core** pack is visible; switching a pack on reveals its skills across the UI. Community packs install one-click from here (a security-scanned, auto-merging PR). |
 | **Strategy** | Edit `STRATEGY.md` — the north-star goal, priorities, audience, and constraints that ride along with every run. |
-| **Soul** | Manage the optional `soul/` voice files (identity, writing style, examples) so notifications and articles sound like you. |
+| **Soul** | Manage the optional `soul/` voice files (identity, writing style, examples) so notifications and articles sound like you. After a `strategy-builder` or `soul-builder` run succeeds, the Strategy and Soul editors pull and reload on their own. |
 | **MCP** | Browse featured MCP servers and write `.mcp.json` for one-click install; shows which secret each server needs. |
-| **Settings** | Add and manage credentials (Anthropic / gateway keys, per-skill API keys, notification channel tokens) as GitHub secrets. Skills flag inline when a required key is missing. |
+| **Keys** | Add and manage credentials (Anthropic / gateway keys, per-skill API keys, notification channel tokens) as GitHub secrets. Skills flag inline when a required key is missing. |
+
+On a phone (below 768px) the sidebar and the Feed / Runs / Analytics panel become slide-in drawers opened from a top bar, and Pull / Push move into the sidebar drawer.
 
 Selecting a skill from the roster opens its detail panel: description, schedule, the API keys and MCP servers it needs, a `var` input, a **model picker** (its options track the active harness), and **Run now**.
 
 ### Harness selector
 
-The **top bar** carries a harness dropdown that sets which agent CLI runs your skills — one of six: **Claude Code** (default), **Grok**, **Codex**, **Pi**, **Vibe**, or **Kimi**. It writes `harness:` in `aeon.yml` (global, with an optional per-skill override), and the skill detail panel's model picker swaps to the selected harness's model ids. The **Authenticate** modal wires the credentials each one needs: **Connect X account** for Grok, **Connect ChatGPT** for Codex, **Connect Kimi** for Moonshot, or a single shared `OPENROUTER_API_KEY` that unlocks Codex/Pi/Vibe/Kimi at once. See [Harnesses](../../docs/harnesses.md) for the full matrix.
+The **top bar** carries a harness dropdown that sets which agent CLI runs your skills (Claude Code by default; see [Harnesses](../../docs/harnesses.md) for all of them). It writes `harness:` in `aeon.yml` (global, with an optional per-skill override), and the skill detail panel's model picker swaps to the selected harness's model ids. The **Auth** button opens the **Connect** modal for the selected harness: step 1 shows the exact command to run on your computer (for example `claude setup-token`, or `codex login` plus a one-liner that copies the saved login), step 2 is one paste box that says what it detected ("Claude subscription token -> CLAUDE_CODE_OAUTH_TOKEN") before saving. Other ways: one-click OpenRouter for any harness that takes `OPENROUTER_API_KEY`, and, when the dashboard runs on your machine, **Do it for me** (runs the login here) and **Found on this machine** (existing CLI logins and model keys in the environment, by name only). After saving, the next run uses the credential; there is no separate test run. When a skill run fails or times out, **Why?** under it in HQ's Recent activity (or opening the run in the Runs panel) reads its log and says why in plain words (for example "The provider rejected the credential") with the next step, and a **Connect** button when the credential is the problem. HQ shows a **Setup** checklist (repo, Actions, model connected, notifications, first run) until everything is done, and Settings can link your Telegram chat with a `t.me` link instead of copying a chat id.
 
 ## Configuration
 
-Credentials are managed in-app (**Settings** → Add Credential) and stored as GitHub repo secrets, not in a local file — so `.env` is optional. The variables the app itself reads:
+Credentials are managed in-app (**Keys** → Add Credential) and stored as GitHub repo secrets, not in a local file - so `.env` is optional. The variables the app itself reads:
 
 | Variable | Required | Purpose |
 |----------|----------|---------|
@@ -81,7 +85,7 @@ The gate also rejects state-changing requests whose `Origin` isn't allowlisted. 
 - **Frontend:** Next.js App Router (`app/`) with React client components in `components/`. State is the repo itself — the UI reads `catalog/skills.json`, `catalog/packs.json`, `aeon.yml`, and `STRATEGY.md`, and writes back through the API.
 - **API:** route handlers under `app/api/*` are the only place the dashboard touches your repo. They shell out to `gh` (`lib/gh.ts`) for secrets, workflow dispatch, and content reads, and run behind the loopback gate (`proxy.ts`).
 - **Skill output feed:** skill runs drop json-render specs into `outputs/`; the feed renders them as cards with a small built-in spec renderer (`components/SpecNode.tsx`). `./notify-jsonrender` (a post-run workflow step) produces those specs.
-- **Deploy:** the repo auto-deploys `apps/dashboard/` to Vercel on push to `main` — no manual step. Most operators run it locally with `./aeon`; the hosted build is the same app.
+- **Deploy:** the repo auto-deploys `apps/dashboard/` to Vercel on push to `main` — no manual step. Run it locally with `./aeon`; for a hosted, sign-in-with-GitHub version of the same UI, use [Aeon Connect](https://www.aeon.fun/connect).
 
 ## Sandbox / deployment note
 

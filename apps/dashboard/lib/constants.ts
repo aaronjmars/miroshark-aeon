@@ -5,87 +5,109 @@ import type { Harness } from './types'
 // First entry is the default: it's the top of the model picker AND the fallback the
 // harness-switch snap uses (modelsForHarness(...)[0] in app/page.tsx). Keep it in
 // sync with the config default in lib/config.ts and aeon.yml `model:`.
+// Just the current three. A repo or per-skill pin that still names an older id
+// (claude-sonnet-5, claude-opus-4-8) keeps a visible entry via pickerOptions.
 export const MODELS = [
-  { id: 'claude-sonnet-5', label: 'Sonnet 5' },
-  { id: 'claude-opus-4-8', label: 'Opus 4.8' },
+  { id: 'claude-sonnet-5-5', label: 'Sonnet 5.5' },
+  { id: 'claude-opus-5-5', label: 'Opus 5.5' },
   { id: 'claude-haiku-4-5-20251001', label: 'Haiku 4.5' },
 ]
 
-// Models offered when the Grok (`grok`) harness is selected — only grok-4.5, the
-// one model the X-account (GROK_CREDENTIALS) login exposes to the grok CLI's
-// --model flag. grok-4.5 is grok's current default: the flagship reasoning model
-// that powers Grok Build, multi-agent-capable (the grok adapter passes --no-subagents
-// in CI).
-// Everything else xAI documents — grok-composer-2.5-fast, grok-build, grok-build-0.1,
-// grok-4.3 — is an api.x.ai model *string*, NOT a valid CLI --model value on the
-// X-account OAuth login: the grok CLI rejects each with "unknown model id" (verified
-// live 2026-07-22). They're reachable only via XAI_API_KEY on the gateway path (set
+// Models offered when the Grok (`grok`) harness is selected: the ids the
+// X-account (GROK_CREDENTIALS) login exposes to the grok CLI's --model flag.
+// `grok models` on grok CLI 1.0.46 (verified 2026-10-01) lists grok-4.7 (its
+// default: the flagship reasoning model that powers Grok Build, multi-agent-capable;
+// the grok adapter passes --no-subagents in CI), grok-4.6 and grok-4.5. Only
+// grok-4.7 and grok-4.6 are offered; grok-4.5 stays a workflow_dispatch choice
+// so an existing pin still dispatches and renders via RETIRED_MODEL_LABELS.
+// Older api.x.ai ids (grok-composer-2.5-fast, grok-build, grok-build-0.1,
+// grok-4.3) are model *strings*, NOT valid CLI --model values on the X-account
+// OAuth login: the grok CLI rejects each with "unknown model id" (verified live
+// 2026-07-22). They're reachable only via XAI_API_KEY on the gateway path (set
 // the GROK_MODEL repo var), so listing any here would be a dead click.
 // First entry is the default (modelsForHarness(...)[0] on harness switch). Keep this
 // list in sync with the workflow_dispatch `model` choice options in
 // .github/workflows/aeon.yml — a mismatch 422s at dispatch time.
 export const GROK_MODELS = [
-  { id: 'grok-4.5', label: 'Grok 4.5' },
+  { id: 'grok-4.7', label: 'Grok 4.7' },
+  { id: 'grok-4.6', label: 'Grok 4.6' },
 ]
 
 // kimi gets its own list: it bakes the selected id into a generic OpenRouter
 // provider config (`[providers.openrouter] type=openai`), so it drives ANY
-// OpenRouter model — and kimi IS Moonshot, so it runs Moonshot's own Kimi family
-// through OpenRouter (the way vibe runs Mistral and pi runs DeepSeek). K2.5 is the
-// default (fast, solid), K3 is the strongest (higher quality but ~2× slower), and
-// K2.7-code is the code-tuned variant. All three measured working end-to-end
-// 2026-07-23 on a real runner (k2.5 4/5, k3 5/5, k2.7-code 4/5; slates cross-checked
-// real). First entry is the default (modelsForHarness('kimi')[0] on harness switch)
+// OpenRouter model, and kimi IS Moonshot, so it runs Moonshot's own Kimi family
+// through OpenRouter (the way vibe runs Mistral and pi runs DeepSeek). Only the
+// latest two are offered: K2.7-code is the default (code-tuned, same price as
+// K2.6) and K3 is the strongest (higher quality, ~2× slower and pricier). Both
+// measured working end-to-end 2026-07-23 on a real runner (k3 5/5, k2.7-code 4/5).
+// K2.6 and K2.5 are no longer offered but stay workflow_dispatch choices, so an
+// existing pin still dispatches and renders via RETIRED_MODEL_LABELS. First
+// entry is the default (modelsForHarness('kimi')[0] on harness switch)
 // — matched by aeon.yml's DEFAULT_HM. Any id here must also appear in the
 // workflow_dispatch `model` choice, or a dashboard dispatch of it 422s.
 export const KIMI_MODELS = [
-  { id: 'moonshotai/kimi-k2.5', label: 'Kimi K2.5' },
-  { id: 'moonshotai/kimi-k3', label: 'Kimi K3' },
   { id: 'moonshotai/kimi-k2.7-code', label: 'Kimi K2.7 Code' },
+  { id: 'moonshotai/kimi-k3', label: 'Kimi K3' },
 ]
 
 // codex needs its own list. It fails DETERMINISTICALLY on gpt-5-nano (it emits a
 // shell tool call with a duplicated `cmd` field, its strict parser rejects it,
 // and with no --max-turns it spins to the run guard), so nano is never offered.
-// The default (first entry, matched by aeon.yml's DEFAULT_HM) is the codex-tuned
-// gpt-5.1-codex-mini, verified live 2026-07-22. gpt-5-mini is the prior default
-// and stays as a universally-safe fallback; the rest are the fuller codex line
-// (gpt-5.3-codex) and the general gpt-5.6 family (luna, terra), all via OpenRouter.
+// The default (first entry, matched by aeon.yml's DEFAULT_HM) is gpt-6-luna,
+// newer and cheaper than the prior default gpt-5.1-codex-mini ($0.10/$0.50 vs
+// $0.25/$2 per 1M on OpenRouter). gpt-6.1-sol is the quality option.
+// The older ids (gpt-6-sol, gpt-5.1-codex-mini, gpt-5-mini, gpt-5.3-codex, the
+// gpt-5.6 family) are no longer offered here but stay workflow_dispatch choices,
+// so an existing pin still dispatches and renders via RETIRED_MODEL_LABELS.
 export const CODEX_MODELS = [
-  { id: 'openai/gpt-5.1-codex-mini', label: 'GPT-5.1 Codex Mini' },
-  { id: 'openai/gpt-5-mini', label: 'GPT-5 Mini' },
-  { id: 'openai/gpt-5.3-codex', label: 'GPT-5.3 Codex' },
-  { id: 'openai/gpt-5.6-luna', label: 'GPT-5.6 Luna' },
-  { id: 'openai/gpt-5.6-terra', label: 'GPT-5.6 Terra' },
+  { id: 'openai/gpt-6-luna', label: 'GPT-6 Luna' },
+  { id: 'openai/gpt-6.1-sol', label: 'GPT-6.1 Sol' },
 ]
 
 // vibe gets its own list: its generic ProviderConfig drives ANY OpenRouter model,
 // not just openai/*, so it defaults to Mistral Medium 3.5 (vibe's native family, run
-// here through OpenRouter) and also offers DeepSeek V4 Flash. Both measured working
-// end-to-end 2026-07-22 (mistral-medium-3-5 4/5, deepseek-v4-flash 3/5 on a real
-// runner). First entry is the default (modelsForHarness('vibe')[0]) — and the runtime
+// here through OpenRouter, still Mistral's newest) and also offers DeepSeek V4.1
+// Flash. First entry is the default (modelsForHarness('vibe')[0]) and the runtime
 // default is set to match in aeon.yml's DEFAULT_HM. Any id here must also appear in
 // the workflow_dispatch `model` choice, or a dashboard dispatch 422s.
 export const VIBE_MODELS = [
   { id: 'mistralai/mistral-medium-3-5', label: 'Mistral Medium 3.5' },
-  { id: 'deepseek/deepseek-v4-flash', label: 'DeepSeek V4 Flash' },
+  { id: 'deepseek/deepseek-v4.1-flash', label: 'DeepSeek V4.1 Flash' },
 ]
 
 // pi gets its own list: it drives any OpenRouter model via litellm routing
-// (`openrouter/<slug>`), so it runs the DeepSeek V4 pair — Flash (default, cheap/
-// fast) and Pro (stronger). First entry is the default (modelsForHarness('pi')[0]),
-// matched by aeon.yml's DEFAULT_HM. Any id here must also appear in the
-// workflow_dispatch `model` choice, or a dashboard dispatch 422s.
+// (`openrouter/<slug>`), so it runs the two models DeepSeek's own API serves today:
+// V4.1 Flash (default, cheap/fast) and V4 Pro (stronger; there is no V4.1 Pro).
+// V4 Flash is no longer offered but stays a workflow_dispatch choice, so an
+// existing pin still dispatches and renders via RETIRED_MODEL_LABELS. First entry
+// is the default (modelsForHarness('pi')[0]), matched by aeon.yml's DEFAULT_HM.
+// Any id here must also appear in the workflow_dispatch `model` choice, or a
+// dashboard dispatch 422s.
 export const PI_MODELS = [
-  { id: 'deepseek/deepseek-v4-flash', label: 'DeepSeek V4 Flash' },
+  { id: 'deepseek/deepseek-v4.1-flash', label: 'DeepSeek V4.1 Flash' },
   { id: 'deepseek/deepseek-v4-pro', label: 'DeepSeek V4 Pro' },
 ]
 
-export const CURSOR_MODELS = [{ id: 'gpt-5.1', label: 'GPT-5.1' }]
+// cursor runs Cursor's own model ids (not OpenRouter ids). `auto` is Cursor's
+// router (it appears in `cursor-agent --list-models`), so it is the default; the
+// old `gpt-5.1` default is not a Cursor CLI id and is no longer offered here (it
+// stays a workflow_dispatch choice so existing configs still dispatch).
+export const CURSOR_MODELS = [{ id: 'auto', label: 'Auto' }]
+
+// hermes defaults to `default`: the model and provider Hermes restores from
+// HERMES_AUTH / its config.yaml (the Nous Portal subscription). resolve-harness.sh
+// treats `default` as "no override" and the hermes adapter omits --model for it,
+// whereas a concrete id here would be written into aeon.yml on harness switch
+// (modelsForHarness(...)[0]) and forwarded as --model, which can move Hermes to
+// a different provider and bypass the Portal subscription. The rest are opt-in
+// overrides; older overrides (claude-sonnet-4.6, gpt-6-sol, gpt-5.4,
+// gemini-2.5-pro) stay workflow_dispatch choices and render via
+// RETIRED_MODEL_LABELS. Every id must also appear in aeon.yml's workflow_dispatch
+// `model` choice (scripts/tests/test_dashboard_model_choices.sh enforces it).
 export const HERMES_MODELS = [
-  { id: 'anthropic/claude-sonnet-4.6', label: 'Claude Sonnet 4.6' },
-  { id: 'openai/gpt-5.4', label: 'GPT-5.4' },
-  { id: 'google/gemini-2.5-pro', label: 'Gemini 2.5 Pro' },
+  { id: 'default', label: 'Hermes default' },
+  { id: 'anthropic/claude-sonnet-5.5', label: 'Claude Sonnet 5.5' },
+  { id: 'openai/gpt-6.1-sol', label: 'GPT-6.1 Sol' },
 ]
 
 // Harnesses (agent CLIs). `claude` = Claude Code (default, AI Gateway), labelled
@@ -100,15 +122,35 @@ export const HERMES_MODELS = [
 // against the Harness union in ./types.
 export const HARNESSES = [
   { id: 'claude', label: 'Claude' },
-  { id: 'grok', label: 'Grok' },
   { id: 'codex', label: 'Codex' },
+  { id: 'grok', label: 'Grok' },
+  { id: 'kimi', label: 'Kimi' },
   { id: 'fx', label: 'fx' },
   { id: 'pi', label: 'Pi' },
   { id: 'vibe', label: 'Mistral' },
-  { id: 'kimi', label: 'Kimi' },
   { id: 'cursor', label: 'Cursor' },
   { id: 'hermes', label: 'Hermes' },
 ] as const satisfies readonly { id: Harness; label: string }[]
+
+// Labels for ids no longer offered in any picker but still valid dispatch
+// choices, so a pinned older model renders by name instead of raw id.
+const RETIRED_MODEL_LABELS: Record<string, string> = {
+  'claude-sonnet-5': 'Sonnet 5',
+  'claude-opus-4-8': 'Opus 4.8',
+  'openai/gpt-5.1-codex-mini': 'GPT-5.1 Codex Mini',
+  'openai/gpt-5-mini': 'GPT-5 Mini',
+  'openai/gpt-5.3-codex': 'GPT-5.3 Codex',
+  'openai/gpt-5.6-luna': 'GPT-5.6 Luna',
+  'openai/gpt-5.6-terra': 'GPT-5.6 Terra',
+  'openai/gpt-6-sol': 'GPT-6 Sol',
+  'deepseek/deepseek-v4-flash': 'DeepSeek V4 Flash',
+  'anthropic/claude-sonnet-4.6': 'Claude Sonnet 4.6',
+  'openai/gpt-5.4': 'GPT-5.4',
+  'google/gemini-2.5-pro': 'Gemini 2.5 Pro',
+  'grok-4.5': 'Grok 4.5',
+  'moonshotai/kimi-k2.6': 'Kimi K2.6',
+  'moonshotai/kimi-k2.5': 'Kimi K2.5',
+}
 
 // fx has no model picker: unlike codex/pi/vibe/kimi's OpenRouter path, fx's
 // only real auth mode is native-key (AI_GATEWAY_API_KEY / VERCEL_OIDC_TOKEN),
@@ -117,6 +159,17 @@ export const HARNESSES = [
 // fx always runs on its own default model. So this intentionally falls
 // through to the generic MODELS default below: whatever renders there is
 // cosmetic only for fx and never actually reaches the run.
+// The options a model <select> renders. A controlled <select> whose value is
+// not among its options silently shows the first one, so a configured model
+// that is not offered (an older pin) is appended, marked as configured.
+export function pickerOptions(list: readonly { id: string; label: string }[], current?: string | null) {
+  if (!current || list.some((m) => m.id === current)) return list
+  const known = [MODELS, GROK_MODELS, CODEX_MODELS, VIBE_MODELS, PI_MODELS, KIMI_MODELS, CURSOR_MODELS, HERMES_MODELS]
+    .flat().find((m) => m.id === current)
+  const label = known?.label ?? RETIRED_MODEL_LABELS[current] ?? current
+  return [...list, { id: current, label: `${label} (configured)` }]
+}
+
 export function modelsForHarness(harness: string) {
   if (harness === 'grok') return GROK_MODELS
   if (harness === 'codex') return CODEX_MODELS
@@ -137,7 +190,7 @@ export const CLAUDE_AUTH_SECRETS = ['CLAUDE_CODE_OAUTH_TOKEN', 'ANTHROPIC_API_KE
 
 // Auth secrets that specifically authenticate the GROK harness (X-account OAuth
 // session or an xAI key). A Claude token does NOT authenticate grok, and vice
-// versa — so the top-bar "Auth" CTA and the run-gate must key off the set for the
+// versa - so the top-bar "Connect a model" CTA and the run-gate must key off the set for the
 // SELECTED harness (see authSecretsForHarness), never the union below.
 export const GROK_AUTH_SECRETS = ['GROK_CREDENTIALS', 'XAI_API_KEY']
 
