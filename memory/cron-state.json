@@ -244,7 +244,7 @@
     "last_error": "879446\",\"total_cost_usd\":0,\"usage\":{\"input_tokens\":0,\"cache_creation_input_tokens\":0,\"cache_read_input_tokens\":0,\"output_tokens\":0,\"server_tool_use\":{\"web_search_requests\":0,\"web_fetch_requests\":0},\"s"
   },
   "aeon-update": {
-    "last_dispatch": "2026-09-28T11:05:32Z",
+    "last_dispatch": "2026-10-05T11:05:50Z",
     "last_status": "dispatched",
     "last_success": "2026-09-21T11:26:30Z",
     "total_runs": 11,
