@@ -1,0 +1,134 @@
+{
+  "root": "card-changelog",
+  "state": {},
+  "elements": {
+    "card-changelog": {
+      "type": "Card",
+      "props": {
+        "title": "Changelog"
+      },
+      "children": [
+        "meta-row",
+        "separator-1",
+        "flow",
+        "separator-2",
+        "summary",
+        "entry-text",
+        "separator-3",
+        "pr-details"
+      ]
+    },
+    "meta-row": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "badge-push-to",
+        "date-text"
+      ]
+    },
+    "badge-push-to": {
+      "type": "Badge",
+      "props": {
+        "text": "push-to",
+        "variant": "secondary"
+      }
+    },
+    "date-text": {
+      "type": "Text",
+      "props": {
+        "text": "2026-10-05",
+        "variant": "caption"
+      }
+    },
+    "separator-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "flow": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "md"
+      },
+      "children": [
+        "source",
+        "arrow",
+        "target"
+      ]
+    },
+    "source": {
+      "type": "Text",
+      "props": {
+        "text": "MiroShark/MiroShark"
+      }
+    },
+    "arrow": {
+      "type": "Text",
+      "props": {
+        "text": "→",
+        "variant": "muted"
+      }
+    },
+    "target": {
+      "type": "Text",
+      "props": {
+        "text": "aaronjmars/miroshark-website"
+      }
+    },
+    "separator-2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "summary": {
+      "type": "Text",
+      "props": {
+        "text": "4 new PRs → changelog entry",
+        "variant": "lead"
+      }
+    },
+    "entry-text": {
+      "type": "Text",
+      "props": {
+        "text": "x402aff ecosystem listing and dependency bumps"
+      }
+    },
+    "separator-3": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "pr-details": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "pr-link",
+        "draft-badge"
+      ]
+    },
+    "pr-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #369 - aaronjmars/miroshark-website",
+        "href": "https://github.com/aaronjmars/miroshark-website/pull/369"
+      }
+    },
+    "draft-badge": {
+      "type": "Badge",
+      "props": {
+        "text": "draft",
+        "variant": "outline"
+      }
+    }
+  }
+}
