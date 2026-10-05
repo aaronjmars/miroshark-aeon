@@ -1,18 +1,19 @@
 ℹ️ Repo Pulse
 
-*Repo Pulse — 2026-09-28* — [ACTIVE]
-[MiroShark/MiroShark] — stars 1457 (+6) · forks 300 (+1 new, net -1) · releases +0
+*Repo Pulse — 2026-10-05* — [STEADY]
+MiroShark/MiroShark — stars 1457 (+0) · forks 302 (+2) · releases +0
 
 Notable new stargazers:
-github.com/AAH20 — Ahmed Hassan · 528 repos · 🌐 a2zsoc.com · 23 followers
-  "AI Infrastructure & Multi-Cloud Architect | Platform Engineering, Networking, Kubernetes, FinOps, CISO & GRC"
-github.com/chizee — 468 repos
-github.com/werserk — Maxim Kirilyuk · 🏢 OrangeHack · 24 repos · 🌐 werserk.com · 25 followers
+github.com/edwardssg69-max — Edward Ed. · 135 repos
+github.com/xingxiang — 129 repos
+github.com/itscloud0 — Ilia Sorokin · 📍 Tempe, AZ · 43 repos · 🌐 https://manualmode.dev
+  "Building developer tools for reliable AI-assisted software work"
 
 Other new stargazers:
-github.com/rcdev-source | github.com/bizmantra | github.com/MyAutomateAI
+github.com/edmeaoff
 
 New forks:
-github.com/chizee/MiroShark — 468 repos
+github.com/edwardssg69-max — Edward Ed. · 135 repos
+github.com/xingxiang — 129 repos
 
 Source: events
