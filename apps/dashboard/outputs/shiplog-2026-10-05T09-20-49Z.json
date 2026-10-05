@@ -1,0 +1,93 @@
+{
+  "root": "card_root",
+  "state": {},
+  "elements": {
+    "card_root": {
+      "type": "Card",
+      "props": {
+        "title": "Miroshark Shiplog — Oct 1→5"
+      },
+      "children": [
+        "text_intro",
+        "stack_bullets",
+        "sep1",
+        "stat_metric",
+        "sep2",
+        "link_full"
+      ]
+    },
+    "text_intro": {
+      "type": "Text",
+      "props": {
+        "text": "🦈 Quietest window yet. The bytes:",
+        "variant": "lead"
+      }
+    },
+    "stack_bullets": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "bullet_1",
+        "bullet_2",
+        "bullet_3",
+        "bullet_4"
+      ]
+    },
+    "bullet_1": {
+      "type": "Text",
+      "props": {
+        "text": "• Zero commits to the public engine repo, zero to x402aff, zero to the private companion repo. Nothing moved anywhere in the product this week"
+      }
+    },
+    "bullet_2": {
+      "type": "Text",
+      "props": {
+        "text": "• miroshark-website got 2 small fixes: an analytics CSP fix + posthog funnel tracking. That's it."
+      }
+    },
+    "bullet_3": {
+      "type": "Text",
+      "props": {
+        "text": "• The vertical-video TikTok post was a repromo of a feature that shipped 2 weeks ago, not new"
+      }
+    },
+    "bullet_4": {
+      "type": "Text",
+      "props": {
+        "text": "• 1,457 ⭐ (-3) — first star decline logged. Not claiming causation, just not hiding it either."
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stat_metric": {
+      "type": "Stat",
+      "props": {
+        "label": "GitHub Stars",
+        "value": "1,457",
+        "delta": "-3",
+        "trend": "down"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "link_full": {
+      "type": "StoryLink",
+      "props": {
+        "title": "Full Shiplog Article",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/output/articles/shiplog-2026-10-05.md",
+        "source": "GitHub"
+      }
+    }
+  }
+}

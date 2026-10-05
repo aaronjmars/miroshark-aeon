@@ -1,36 +1,14 @@
-ℹ️ Miroshark Shiplog
+ℹ️ Miroshark Shiplog — Oct 1→5
 
-miroshark shiplog 🦈 sept 28 → oct 1
+miroshark shiplog 🦈 oct 1 → oct 5
 
-shipped 7 real PRs across x402aff + miroshark-x402 + the engine this window. the bytes:
+quietest window yet. the bytes:
 
-- got miroshark's x402 endpoint listed on @PayAINetwork — had to build a standalone signer tool since payai only catalogs its own facilitator's settlements. verified on-chain.
-- shipped x402aff 0.3.1: installable agent skill, any x402 seller wires in the affiliate kit with one command. moved to x402aff.xyz
-- website: HF dataset now linked site-wide, x402aff page redesigned, webmcp hardening fix
-- engine repo: still mostly dependency bumps. real engine work keeps landing in the private companion repo instead — 5th straight window
-
-traction:
-- MiroShark/MiroShark 1,460 ⭐ (+3)
-- x402aff 7 ⭐, HF dataset re-promo this window — low engagement so far
+- zero commits to the public engine repo, zero to x402aff, zero to the private companion repo. nothing moved anywhere in the product this week
+- miroshark-website got 2 small fixes: an analytics CSP fix + posthog funnel tracking. that's it
+- the vertical-video tiktok post was a repromo of a feature that shipped 2 weeks ago, not new
+- 1,457 ⭐ (-3) — first star decline we've logged. not claiming causation, just not hiding it either
 
 🦈
-ℹ️ MiroShark shiplog · Sep 28 to Oct 1
 
-miroshark shiplog ⭐🦈 sep 28 → oct 1
-
-distribution window, not an engine one. shipped ~29 PRs. the bytes:
-
-- x402aff is live: permisionless affiliation for any agent. full site in a day — claims dashboard, agent-ready (MCP/WebMCP + REST + OpenAPI), v0.3.1 w/ the agent skill. a product by @miroshark_ 🦈
-- the @miroshark_ x402 endpoint is now listed on @PayAINetwork — a stranger's agent can find & pay the "simulate anything" endpoint without ever touching our site
-- webmcp hardening on the site: abort-signal forwarding, throws-on-failure, client-side run panel handoff
-- 8,201 agent decisions from 16 sims now public on @huggingface — trace what each agent said → what it bet, same round
-- public engine repo: still docs-only (1 docs PR + 3 dependabot). real engine work is private. being honest.
-
-traction:
-- MiroShark 1,460 ⭐ (+3) · forks 302 (+2, reverses last week's dip)
-- no scout pickups this window
-
-https://github.com/aaronjmars/miroshark-aeon/blob/main/output/articles/shiplog-2026-10-01.md
-
-🔗 https://github.com/aaronjmars/miroshark-aeon/blob/main/output/articles/shiplog-2026-10-01.md
-https://github.com/aaronjmars/miroshark-aeon/blob/main/output/articles/shiplog-2026-10-01.md
+https://github.com/aaronjmars/miroshark-aeon/blob/main/output/articles/shiplog-2026-10-05.md
