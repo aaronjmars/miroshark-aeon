@@ -1,0 +1,172 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "aeon-update: PR #194",
+        "description": "Synced 71 upstream commits"
+      },
+      "children": [
+        "text-date",
+        "stat-commits",
+        "text-commit-range",
+        "text-files-summary",
+        "text-ci-status",
+        "separator-1",
+        "heading-highlights",
+        "stack-highlights",
+        "separator-2",
+        "heading-held",
+        "stack-held",
+        "separator-3",
+        "story-pr"
+      ]
+    },
+    "text-date": {
+      "type": "Text",
+      "props": {
+        "text": "2026-10-05",
+        "variant": "caption"
+      }
+    },
+    "stat-commits": {
+      "type": "Stat",
+      "props": {
+        "label": "Upstream Commits",
+        "value": "71"
+      }
+    },
+    "text-commit-range": {
+      "type": "Text",
+      "props": {
+        "text": "Commit range: 531f575..1a7f07e"
+      }
+    },
+    "text-files-summary": {
+      "type": "Text",
+      "props": {
+        "text": "312 files applied cleanly (81 new, 231 updated, 5 removed)"
+      }
+    },
+    "text-ci-status": {
+      "type": "Text",
+      "props": {
+        "text": "All CI gates pass locally — eyebrow verify v0.5.6, 0 critical"
+      }
+    },
+    "separator-1": {
+      "type": "Separator"
+    },
+    "heading-highlights": {
+      "type": "Heading",
+      "props": {
+        "text": "Highlights",
+        "level": "h3"
+      }
+    },
+    "stack-highlights": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "text-highlight-1",
+        "text-highlight-2",
+        "text-highlight-3",
+        "text-highlight-4",
+        "text-highlight-5"
+      ]
+    },
+    "text-highlight-1": {
+      "type": "Text",
+      "props": {
+        "text": "Dashboard Aeon Connect onboarding"
+      }
+    },
+    "text-highlight-2": {
+      "type": "Text",
+      "props": {
+        "text": "aeon init + credential manifest"
+      }
+    },
+    "text-highlight-3": {
+      "type": "Text",
+      "props": {
+        "text": "~52 skill refreshes"
+      }
+    },
+    "text-highlight-4": {
+      "type": "Text",
+      "props": {
+        "text": "New harness-gateway failover + run-context scripts"
+      }
+    },
+    "text-highlight-5": {
+      "type": "Text",
+      "props": {
+        "text": "Catalogs, AGENTS.md, harnesses.json regenerated from synced tree"
+      }
+    },
+    "separator-2": {
+      "type": "Separator"
+    },
+    "heading-held": {
+      "type": "Heading",
+      "props": {
+        "text": "26 Paths Held for Reconciliation",
+        "level": "h3"
+      }
+    },
+    "stack-held": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "text-held-1",
+        "text-held-2",
+        "text-held-3",
+        "text-held-4"
+      ]
+    },
+    "text-held-1": {
+      "type": "Text",
+      "props": {
+        "text": "README skill-count validators: docs say 85/79 while catalog is 82 — reconcile by hand"
+      }
+    },
+    "text-held-2": {
+      "type": "Text",
+      "props": {
+        "text": "fetch-tweets / shiplog edits"
+      }
+    },
+    "text-held-3": {
+      "type": "Text",
+      "props": {
+        "text": "Dashboard/webhook dependency bumps"
+      }
+    },
+    "text-held-4": {
+      "type": "Text",
+      "props": {
+        "text": "New skills: feedback-builder, compute-resell"
+      }
+    },
+    "separator-3": {
+      "type": "Separator"
+    },
+    "story-pr": {
+      "type": "StoryLink",
+      "props": {
+        "title": "PR #194",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/pull/194",
+        "source": "GitHub"
+      }
+    }
+  }
+}

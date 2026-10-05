@@ -40,16 +40,18 @@ rather stay anonymous.
 
 ## Supported versions
 
-Aeon ships as a public template that you fork. Security fixes land on the `main`
+Aeon ships as a public template: your instance is a fork or a copy of it. Security fixes land on the `main`
 branch of [`aeonfun/aeon`](https://github.com/aeonfun/aeon) only.
 
 | Version | Supported |
 |---------|-----------|
 | `main` (latest) | ✅ Yes |
-| Your fork, behind `main` | ⚠️ Pull `upstream/main` to receive fixes |
+| Your instance, behind `main` | ⚠️ Pull `upstream/main` to receive fixes |
 | Older tags / releases | ❌ No |
 
-Forks are self-maintained. To stay current:
+Instances are self-maintained. To stay current, run the `aeon-update` skill (it
+opens a PR that merges `aeonfun/aeon` into your instance, fork or copy), or merge
+by hand:
 
 ```bash
 git remote add upstream https://github.com/aeonfun/aeon.git
@@ -83,10 +85,16 @@ injection — see the `## Security` section of [`CLAUDE.md`](../CLAUDE.md).
 - Skills are instructed to **never exfiltrate** environment variables, secrets,
   or file contents to an external URL.
 - The default `GITHUB_TOKEN` is scoped to the running repo only. Cross-repo
-  skills use an optional fine-grained `GH_GLOBAL` token whose scope **you**
-  choose — grant it the least access those skills need.
-- Run your live instance as a **private fork** so `memory/`, `output/`, and any
-  operator data stay private.
+  skills use an optional `GH_GLOBAL` token (a classic PAT with `repo` +
+  `workflow`, see [Cross-repo access](../docs/CONFIGURATION.md#cross-repo-access));
+  leave it unset if you don't run those skills.
+- Instances set up with [Aeon Connect](https://www.aeon.fun/connect) are driven
+  through the Aeon Connect GitHub App, installed on that one repo only. Keys you
+  connect are encrypted straight into the repo's Actions secrets; Aeon Connect
+  does not store them.
+- A public instance's `memory/`, `output/`, and run logs are public. To keep
+  them private, make the instance a **private repo** (a copy of the template:
+  GitHub does not allow private forks of a public repo).
 
 ### Sandbox
 

@@ -6,6 +6,8 @@ import type { RunLogs } from '../lib/runs'
 import { timeAgo, runStatusColor, runStatusGlyph } from '../lib/utils'
 import { SpecNode } from './SpecNode'
 import { PanelError } from './PanelError'
+import { RunDiagnosis } from './RunDiagnosis'
+import { useNarrow } from '../lib/use-narrow'
 
 // The Activity and Runs tabs render the same row; only their empty-state copy differs.
 function RunRow({ run, onView }: { run: Run; onView: (run: Run) => void }) {
@@ -26,11 +28,16 @@ interface RightPanelProps {
   feedError: boolean
   analyticsData: AnalyticsData | null
   analyticsError: boolean
+  // Phones: the panel is a slide-in drawer opened from the dashboard's MobileBar.
+  drawerOpen?: boolean
+  onCloseDrawer?: () => void
   onRefresh: () => void
   onFetchAnalytics: () => void
+  // A failed run's "Connect" (its credential was the problem).
+  onConnect?: (harness?: string) => void
 }
 
-export function RightPanel({ runs, outputs, feedLoading, feedError, analyticsData, analyticsError, onRefresh, onFetchAnalytics }: RightPanelProps) {
+export function RightPanel({ runs, outputs, feedLoading, feedError, analyticsData, analyticsError, drawerOpen, onCloseDrawer, onRefresh, onFetchAnalytics, onConnect }: RightPanelProps) {
   const [rightTab, setRightTab] = useState<'feed' | 'runs' | 'analytics'>('feed')
   const [selectedRun, setSelectedRun] = useState<Run | null>(null)
   const [runLogs, setRunLogs] = useState('')
@@ -38,6 +45,7 @@ export function RightPanel({ runs, outputs, feedLoading, feedError, analyticsDat
   const [logsLoading, setLogsLoading] = useState(false)
   const [showFullLogs, setShowFullLogs] = useState(false)
   const [collapsed, setCollapsed] = useState(false)
+  const narrow = useNarrow()
 
   // Restore the collapsed state on mount (set in an effect, not the initializer,
   // to avoid an SSR/client hydration mismatch).
@@ -55,8 +63,9 @@ export function RightPanel({ runs, outputs, feedLoading, feedError, analyticsDat
     try { const r = await fetch(`/api/runs/${run.id}/logs`); if (r.ok) { const d = await r.json() as RunLogs; setRunSummary(d.summary || ''); setRunLogs(d.logs || '') } } catch { setRunLogs('Failed') } finally { setLogsLoading(false) }
   }
 
-  // Collapsed: a thin rail with an expand control and a vertical label.
-  if (collapsed) {
+  // Collapsed: a thin rail with an expand control and a vertical label. Not on
+  // phones, where the panel is a drawer instead.
+  if (collapsed && !narrow) {
     return (
       <div className="w-9 border-l border-[rgba(250,250,250,0.10)] flex flex-col items-center shrink-0 bg-aeon-panel">
         <button
@@ -78,7 +87,12 @@ export function RightPanel({ runs, outputs, feedLoading, feedError, analyticsDat
   }
 
   return (
-    <div className="w-[288px] border-l border-[rgba(250,250,250,0.10)] flex flex-col shrink-0 bg-aeon-panel">
+    <div
+      inert={narrow && !drawerOpen}
+      className={`border-l border-[rgba(250,250,250,0.10)] flex flex-col shrink-0 bg-aeon-panel ${narrow
+        ? `fixed inset-y-0 right-0 z-[35] w-[320px] max-w-[88vw] transition-transform duration-300 ${drawerOpen ? 'translate-x-0' : 'translate-x-full'}`
+        : 'w-[288px]'}`}
+    >
       <div className="h-12 border-b border-[rgba(250,250,250,0.10)] flex items-center px-3 gap-1 shrink-0">
         {(['feed', 'runs', 'analytics'] as const).map(tab => (
           <button key={tab} onClick={() => { setRightTab(tab); if (tab === 'analytics') onFetchAnalytics() }}
@@ -86,9 +100,9 @@ export function RightPanel({ runs, outputs, feedLoading, feedError, analyticsDat
         ))}
         <button onClick={onRefresh} title="Refresh" aria-label="Refresh" className="text-sm leading-none text-primary-35 hover:text-aeon-red transition-colors ml-auto">&#8635;</button>
         <button
-          onClick={() => toggleCollapsed(true)}
-          title="Collapse panel"
-          aria-label="Collapse panel"
+          onClick={() => (narrow ? onCloseDrawer?.() : toggleCollapsed(true))}
+          title={narrow ? 'Close' : 'Collapse panel'}
+          aria-label={narrow ? 'Close panel' : 'Collapse panel'}
           className="text-sm leading-none text-primary-35 hover:text-aeon-fg transition-colors ml-2 px-0.5"
         >&#8250;</button>
       </div>
@@ -128,6 +142,7 @@ export function RightPanel({ runs, outputs, feedLoading, feedError, analyticsDat
                 <a href={selectedRun.url} target="_blank" rel="noopener noreferrer" className="text-[11px] text-primary-40 font-mono border border-[rgba(250,250,250,0.10)] px-2 py-0.5 hover:border-aeon-red hover:text-aeon-red transition-colors">GitHub</a>
               </div>
               <div className="flex-1 overflow-y-auto p-3">
+                <RunDiagnosis run={selectedRun} onConnect={onConnect} className="mb-3 pb-3 border-b border-[rgba(250,250,250,0.10)]" />
                 {logsLoading ? <div className="flex justify-center py-8"><div className="w-2 h-2 rounded-full bg-aeon-red animate-pulse" /></div> : (
                   <div className="space-y-3">
                     {runSummary ? (

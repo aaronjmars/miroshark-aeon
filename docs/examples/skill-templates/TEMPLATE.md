@@ -28,6 +28,8 @@ That copies `templates/crypto-tracker/SKILL.md` → `skills/my-token-watcher/SKI
 
 If you don't pass `--var` flags, the script copies the file verbatim and prints the list of tokens that still need replacement before the skill will run cleanly.
 
+Add `--category <pack>` to choose which pack the skill joins. Valid categories are the six packs: `core`, `evolution`, `basics`, `dev`, `crypto`, `productivity` (see [`docs/skill-packs.md`](../../skill-packs.md)). Without it the skill keeps the template's default: `crypto-tracker` → `crypto`, `code-reviewer` and `deploy-watcher` → `dev`, `research-digest`, `social-monitor` and `community-manager` → `productivity`.
+
 ```bash
 bin/new-from-template --list                    # print available templates
 bin/new-from-template crypto-tracker --tokens   # print the tokens a template uses
@@ -42,6 +44,7 @@ Every template is a single directory under `templates/` containing one `SKILL.md
 name: [REPLACE: SKILL_NAME]
 description: One-line description of what this skill does
 metadata:
+  category: dev
   var: ""
   tags:
     - some-tag
@@ -61,7 +64,7 @@ If a skill calls a third-party API, declare the credentials it reads in the
 `requires:` frontmatter list. This is the single source of truth the dashboard
 reads to show **which skill needs which API key** (a per-skill "API keys"
 section, an inline "key missing" flag in the roster, and a reverse "used by"
-index under each key in Settings → Access Keys).
+index under each key in Keys → Access Keys).
 
 ```yaml
 requires:
@@ -100,7 +103,7 @@ Replacement tokens use the form `[REPLACE: KEY]`. Keys are uppercase snake-case 
 ## Adding a new template
 
 1. Make a new directory under `templates/`.
-2. Drop a `SKILL.md` inside, with `[REPLACE: KEY]` tokens for the operator-specific parts.
+2. Drop a `SKILL.md` inside, with `[REPLACE: KEY]` tokens for the operator-specific parts and a `metadata.category` from the six valid ones (`core`, `evolution`, `basics`, `dev`, `crypto`, `productivity`); `ci-skill-category` checks templates too.
 3. Add a row to the table at the top of this file.
 
 That's it — `bin/new-from-template --list` discovers templates by scanning for `SKILL.md` files under `templates/`, so no registry update is required.

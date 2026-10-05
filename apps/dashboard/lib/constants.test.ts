@@ -9,7 +9,7 @@
 import { describe, it } from "node:test";
 import { strict as assert } from "node:assert";
 
-import { packGroups, FIRST_PARTY_KEYS, keyProvidedByHarness } from "./constants";
+import { packGroups, FIRST_PARTY_KEYS, keyProvidedByHarness, MODELS, CODEX_MODELS, HARNESSES, pickerOptions } from "./constants";
 
 const sk = (name: string, pack: string, packName = "") => ({ pack, packName });
 
@@ -68,5 +68,41 @@ describe("keyProvidedByHarness", () => {
 
   it("is safe for an unknown harness", () => {
     assert.equal(keyProvidedByHarness("XAI_API_KEY", "whatever"), false);
+  });
+});
+
+describe("MODELS", () => {
+  it("offers exactly the current three Claude models", () => {
+    assert.deepEqual(MODELS.map(m => m.id), ["claude-sonnet-5-5", "claude-opus-5-5", "claude-haiku-4-5-20251001"]);
+  });
+});
+
+describe("pickerOptions", () => {
+  it("keeps the list when the configured model is offered", () => {
+    assert.deepEqual(pickerOptions(MODELS, "claude-opus-5-5"), MODELS);
+    assert.deepEqual(pickerOptions(MODELS, ""), MODELS);
+  });
+  it("keeps an older configured model visible, marked as configured", () => {
+    const opts = pickerOptions(MODELS, "claude-sonnet-5");
+    assert.equal(opts.length, 4);
+    assert.deepEqual(opts[3], { id: "claude-sonnet-5", label: "Sonnet 5 (configured)" });
+  });
+  it("labels an unknown id with the raw id", () => {
+    assert.equal(pickerOptions(MODELS, "x/custom").at(-1)?.label, "x/custom (configured)");
+  });
+});
+
+describe("CODEX_MODELS", () => {
+  it("offers only GPT-6 Luna and GPT-6.1 Sol", () => {
+    assert.deepEqual(CODEX_MODELS.map(m => m.id), ["openai/gpt-6-luna", "openai/gpt-6.1-sol"]);
+  });
+  it("names an older codex pin that left the list", () => {
+    assert.equal(pickerOptions(CODEX_MODELS, "openai/gpt-5.1-codex-mini").at(-1)?.label, "GPT-5.1 Codex Mini (configured)");
+  });
+});
+
+describe("HARNESSES", () => {
+  it("lists Claude, Codex, Grok, Kimi first", () => {
+    assert.deepEqual(HARNESSES.slice(0, 4).map(h => h.id), ["claude", "codex", "grok", "kimi"]);
   });
 });

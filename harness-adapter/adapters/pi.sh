@@ -11,8 +11,19 @@
 #     --exclude-tools write,edit; the dispatcher's wrapper OS sandbox is the real
 #     guard. pi has read/bash/edit/write and NO web tool, so bash is its only
 #     route to the network — never allow-list it away on read-only runs.
-#   * MCP is deliberately unsupported -> warn and skip (pi's answer: wrap MCP
-#     servers as CLI tools with READMEs, or add an extension).
+#   * MCP: built-in since 0.99 (stdio + streamable HTTP), read from mcp.json in
+#     pi's agent dir. The run's config is translated (lib/mcp-translate.sh
+#     mcp_to_pi_json) into a temp PI_CODING_AGENT_DIR whose other entries link
+#     to the real ~/.pi/agent, so auth/models/settings still apply and nothing
+#     touches the user's mcp.json or the workspace. Entries pi rejects (sse,
+#     other types, bad names) are warned about and skipped. Tools are declared
+#     directly (`exposure: "direct"`) so the model sees mcp__<server>__<tool>,
+#     with `-` in the server name turned into `_` (pi's tool naming).
+#   * MCP startup: pi connects servers in the background and the first model
+#     request waits ONLY for servers with direct tools, capped at a hard-coded
+#     10s (dist/extensions/mcp/index.js:39, :869-895; no setting or flag). A
+#     direct server that connects within 10s is declared on turn 1, verified in
+#     CI with a 2s-slow server; a slower one misses turn 1 and joins later turns.
 #   * reads AGENTS.md or CLAUDE.md natively (global -> parents -> cwd); Claude's
 #     @imports are NOT expanded (dispatcher pre-expands when needed).
 #   * no structured-output flag -> prompt-with-schema + validate + one retry.
@@ -21,17 +32,23 @@
 # {
 #   "id": "pi",
 #   "label": "Pi",
-#   "cli": { "install": "npm i -g --ignore-scripts @earendil-works/pi-coding-agent", "bin": "pi", "min_version": "0.80.9" },
+#   "cli": { "install": "npm i -g --ignore-scripts @earendil-works/pi-coding-agent@0.99.2", "bin": "pi", "min_version": "0.99.2" },
 #   "invoke": "pi -p --mode json",
 #   "round_trip": true,
 #   "token_usage": "full",
 #   "cost": true,
 #   "read_only": "sandbox",
 #   "structured_output": "shim",
-#   "mcp": "unsupported",
+#   "mcp": "native",
 #   "max_turns": "timeout",
 #   "claude_md": "native",
-#   "auth": { "native_oauth": [], "native_key": ["ANTHROPIC_API_KEY", "OPENAI_API_KEY"], "openrouter": true },
+#   "default_model": "deepseek/deepseek-v4.1-flash",
+#   "credentials": [
+#     { "secret": "ANTHROPIC_API_KEY", "kind": "api_key", "auth_mode": "native-key", "label": "Anthropic API key", "prefix": "sk-ant-api", "get_url": "https://console.anthropic.com/settings/keys", "aeon_cmd": "./aeon auth --harness pi --key <sk-ant-api...>" },
+#     { "secret": "ANTHROPIC_OAUTH_TOKEN", "kind": "oauth_token", "auth_mode": "native-key", "label": "Claude subscription token", "prefix": "sk-ant-oat", "get_url": "https://claude.ai", "login_cmd": "claude setup-token", "aeon_cmd": "./aeon auth --harness pi --key <sk-ant-oat...>", "expires": "about 1 year (claude setup-token mints a long-lived token)" },
+#     { "secret": "OPENAI_API_KEY", "kind": "api_key", "auth_mode": "native-key", "label": "OpenAI API key", "prefix": "sk-", "get_url": "https://platform.openai.com/api-keys", "aeon_cmd": "./aeon auth --harness pi --key <sk-...>" },
+#     { "secret": "OPENROUTER_API_KEY", "kind": "api_key", "auth_mode": "openrouter", "label": "OpenRouter key (one key covers most harnesses)", "prefix": "sk-or-", "get_url": "https://openrouter.ai/settings/keys", "aeon_cmd": "./aeon secrets set OPENROUTER_API_KEY --stdin" }
+#   ],
 #   "native_control_path": "run-harness"
 # }
 # rh-meta-end
@@ -39,6 +56,7 @@ set -uo pipefail
 . "$RH_LIB/envelope.sh"
 . "$RH_LIB/tools-grammar.sh"
 . "$RH_LIB/schema-retry.sh"
+. "$RH_LIB/mcp-translate.sh"
 
 command -v pi >/dev/null 2>&1 || {
   echo "pi CLI not found (npm i -g --ignore-scripts @earendil-works/pi-coding-agent)" >&2; exit 1; }
@@ -69,20 +87,50 @@ if [ -n "${RH_APPEND_SYSTEM_PROMPT:-}" ]; then
 fi
 [ -n "$SYS" ] && ARGS+=(--append-system-prompt "$SYS")
 
+# MCP: pi reads mcp.json from its agent dir (PI_CODING_AGENT_DIR, default
+# ~/.pi/agent; dist/config.js:435-455). Stage a temp agent dir holding the
+# translated config and a symlink to every other entry of the real one: auth.json
+# writes (OAuth refresh, writeFileSync) follow the link back, models.json and
+# settings.json still apply, and the user's own mcp.json is neither read nor
+# touched. Read-only keeps MCP tools, as on the other harnesses; the wrapper OS
+# sandbox is the guard.
 if [ -n "${RH_MCP_CONFIG:-}" ] && [ -f "${RH_MCP_CONFIG:-}" ]; then
-  SRVS=$(jq -r '.mcpServers // {} | keys | join(", ")' "$RH_MCP_CONFIG")
-  [ -n "$SRVS" ] && echo "warning: pi does not support MCP by design — skipping server(s): $SRVS" >&2
+  PA="$RH_TMPDIR/pi-agent"; mkdir -p "$PA"
+  SRC="${PI_CODING_AGENT_DIR:-$HOME/.pi/agent}"
+  SRC="${SRC/#\~/$HOME}"   # pi expands a leading ~ in it too
+  if [ -d "$SRC" ]; then
+    for f in "$SRC"/* "$SRC"/.[!.]*; do
+      [ -e "$f" ] || [ -L "$f" ] || continue
+      [ "${f##*/}" = mcp.json ] && continue
+      ln -s "$f" "$PA/${f##*/}"
+    done
+  fi
+  if SKIPPED=$(mcp_to_pi_json "$RH_MCP_CONFIG" "$PA/mcp.json"); then
+    while IFS= read -r line; do
+      [ -n "$line" ] && echo "warning: pi MCP: skipping server $line" >&2
+    done <<<"$SKIPPED"
+    export PI_CODING_AGENT_DIR="$PA"
+  else
+    echo "warning: pi MCP: could not translate $RH_MCP_CONFIG; running without MCP" >&2
+  fi
 fi
 
 [ -n "${RH_MAX_TURNS:-}" ] && \
   echo "notice: pi has no --max-turns; the dispatcher wall-clock timeout is the guard" >&2
+
+pi_cost_fmt() {
+  # pi_cost_fmt NUMBER -> fixed-point decimal with trailing zeros trimmed
+  awk -v c="$1" 'BEGIN { s = sprintf("%.10f", c); sub(/0+$/, "", s); sub(/\.$/, "", s); print s }'
+}
 
 run_once() {
   # run_once PROMPT -> sets TEXT/TIN/TOUT/TCR/TCC/COST/SID; returns pi's rc
   local prompt="$1"
   local events="$RH_TMPDIR/pi-events.jsonl"
   local clean="$RH_TMPDIR/pi-events.clean.jsonl"
-  pi -p "${ARGS[@]}" "$prompt" > "$events"
+  # stdin </dev/null: pi blocks until the timeout while stdin is an open pipe.
+  # `--` ends option parsing (0.99+), so a prompt that starts with "-" is text.
+  pi -p "${ARGS[@]}" -- "$prompt" < /dev/null > "$events"
   local rc=$?
   jq -cR 'fromjson? // empty' "$events" > "$clean"
   TEXT=$(jq -rs '
@@ -93,16 +141,29 @@ run_once() {
               elif type == "array" then (map(.text // "") | join(""))
               else tostring end)]
     | last // ""' "$clean")
+  # Usage is per LLM call: pi puts it on EVERY assistant message_end (one per
+  # turn of the agent loop), so the run's total is the SUM over all of them.
+  # Taking only the last one reported a single turn's tokens and cost for a
+  # multi-turn run. Field names stay probed defensively (pi's own camelCase
+  # first, then snake/alt spellings), and a non-numeric value counts as 0.
   local usage
   usage=$(jq -cs '
+    def num: if type == "number" then . elif type == "string" then (tonumber? // 0) else 0 end;
     [.[] | select(.type == "message_end") | (.message // {})
-         | select((.role // "") == "assistant") | (.usage // {})]
-    | last // {}' "$clean")
-  TIN=$(jq -r '.input // .input_tokens // .inputTokens // 0' <<<"$usage")
-  TOUT=$(jq -r '.output // .output_tokens // .outputTokens // 0' <<<"$usage")
-  TCR=$(jq -r '.cacheRead // .cache_read // 0' <<<"$usage")
-  TCC=$(jq -r '.cacheWrite // .cache_write // 0' <<<"$usage")
-  COST=$(jq -r '.cost.total // empty' <<<"$usage")
+         | select((.role // "") == "assistant") | (.usage // {}) | objects]
+    | {input:  (map((.input // .input_tokens // .inputTokens // 0) | num) | add // 0),
+       output: (map((.output // .output_tokens // .outputTokens // 0) | num) | add // 0),
+       cacheRead:  (map((.cacheRead // .cache_read // 0) | num) | add // 0),
+       cacheWrite: (map((.cacheWrite // .cache_write // 0) | num) | add // 0),
+       cost: ([.[] | (.cost? | objects | .total) | numbers] | if length > 0 then add else null end)}' "$clean")
+  TIN=$(jq -r '.input | floor' <<<"$usage")
+  TOUT=$(jq -r '.output | floor' <<<"$usage")
+  TCR=$(jq -r '.cacheRead | floor' <<<"$usage")
+  TCC=$(jq -r '.cacheWrite | floor' <<<"$usage")
+  # Fixed-point, not jq's number printing: jq 1.7 can print a sum like 0.000012
+  # as 1.2e-05, which emit_envelope's decimal check drops as "no cost".
+  COST=$(jq -r '.cost // empty' <<<"$usage")
+  [ -n "$COST" ] && COST=$(pi_cost_fmt "$COST")
   SID=$(jq -rs '[.[] | select(.type == "session") | (.id // empty)] | first // ""' "$clean")
   DONE=$(jq -s '[.[] | select(.type == "agent_end")] | length' "$clean")
   return $rc
@@ -127,7 +188,13 @@ if [ -n "${RH_JSON_SCHEMA:-}" ]; then
   TEXT="$(schema_extract_json "$TEXT")"
   if ! schema_validate "$RH_JSON_SCHEMA" "$TEXT"; then
     echo "structured output failed validation — retrying once" >&2
+    # The retry is a second billed pi run: add its usage to the first one's.
+    P_TIN=$TIN P_TOUT=$TOUT P_TCR=$TCR P_TCC=$TCC P_COST=$COST
     run_once "${PROMPT}$(schema_retry_suffix)" || true
+    TIN=$((P_TIN + TIN)) TOUT=$((P_TOUT + TOUT)) TCR=$((P_TCR + TCR)) TCC=$((P_TCC + TCC))
+    if [ -n "$P_COST" ] || [ -n "$COST" ]; then
+      COST=$(pi_cost_fmt "$(awk -v a="${P_COST:-0}" -v b="${COST:-0}" 'BEGIN { printf "%.10f", a + b }')")
+    fi
     TEXT="$(schema_extract_json "$TEXT")"
     if ! schema_validate "$RH_JSON_SCHEMA" "$TEXT"; then
       echo "structured output still invalid after retry" >&2

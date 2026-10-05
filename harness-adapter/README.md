@@ -11,11 +11,12 @@ per-harness reasons are recorded in the allowlist comment in
 
 `run-harness` wraps each CLI behind one headless interface — Claude Code's: prompt
 on stdin, flags mirroring `claude -p`, one JSON envelope on stdout. Swap the first
-argument, keep everything else. `.github/workflows/aeon.yml` invokes it in the same
-slot as `scripts/run-grok.sh`, so everything downstream (scoring, token accounting,
-memory, notifications) is unchanged. The pattern generalizes
-[aeonfun/aeon](https://github.com/aeonfun/aeon)'s `run-grok.sh`, which proved it for
-one harness.
+argument, keep everything else. `.github/workflows/aeon.yml` runs **every** skill
+through it, whichever harness is configured (claude is wrapped in the multi-provider
+gateway cascade; `scripts/run-grok.sh` is now setup-only), so everything downstream
+(scoring, token accounting, memory, notifications) is unchanged. The pattern
+generalizes [aeonfun/aeon](https://github.com/aeonfun/aeon)'s original `run-grok.sh`,
+which proved it for one harness.
 
 ```sh
 echo "Summarize the TODOs in this repo" | ./run-harness codex --mode read-only
@@ -30,7 +31,8 @@ stdin   the prompt
 stdout  { "result": "<text>",
           "usage": { "input_tokens": N, "output_tokens": N,
                      "cache_read_input_tokens": N, "cache_creation_input_tokens": N },
-          "session_id": "<optional>", "total_cost_usd": <optional> }
+          "session_id": "<optional>", "total_cost_usd": <optional>,
+          "model": "<optional: the model the harness says it ran (codex today)>" }
 stderr  diagnostics only
 exit    0 ok · 3 abnormal model stop with no output · 124 timeout · other = error
 ```
@@ -46,13 +48,18 @@ output **fails the run** — partial or empty results are never emitted as succe
 | Token usage | ✅ + cost | ✅ + cost¹ | ✅ | ✅ + cost | 0² | 0² |
 | Read-only enforcement | ✅ sandbox | ✅ sandbox³ | ✅ native | ✅ sandbox | ✅ sandbox⁴ | ✅ sandbox⁴ |
 | Structured output | native | native | native | shim⁵ | shim⁵ | shim⁵ |
-| MCP tool call (live) | ✅ | ✅ needs `--trust`⁷ | ✅⁶ | n/a — warn+skip | ✅ | ✅ needs overlay⁸ |
+| MCP tool call (live) | ✅ | ✅ needs `--trust`⁷ | ✅⁶ | ✅ CI (fake model)⁹ | ✅ | ✅ needs overlay⁸ |
 | Native provider auth | Claude Pro/Max OAuth | X account · `XAI_API_KEY` | ChatGPT OAuth · `OPENAI_API_KEY` | provider env key | Mistral key | Moonshot OAuth · key |
 
-All six round-trip the contract on real CLIs (claude ≥2.1, grok 0.2.101,
-codex-cli 0.144.6, pi 0.80.9, vibe 2.20.0, kimi 0.28.0). aeon reaches claude and
-grok through its own native paths (the AI gateway / `run-grok.sh`); codex, pi, vibe
-and kimi run only through this adapter.
+The six in this table round-trip the contract on real CLIs (claude ≥2.1, grok 0.2.101,
+codex-cli 0.144.6, pi 0.80.9, vibe 2.20.0, kimi 0.28.0; live runs on real models). The
+current pins (claude 2.1.287, grok 1.0.46, codex-cli 0.159.3, pi 0.99.2, vibe 2.25.8,
+kimi 2.1.1) are checked on every change by `.github/workflows/ci-harness-cli.yml`:
+each CLI is installed at its pin, its `--help` must still list every flag its
+adapter passes, and a prompt goes through `run-harness` against a local fake model
+server (no real model call). aeon runs all nine through
+this adapter; claude's call is additionally wrapped in the AI-gateway failover
+cascade.
 
 **fx** is the seventh adapter (`adapters/fx.sh`) - verified mechanically
 end-to-end (envelope, MCP-config translation, model/step env, and the
@@ -95,6 +102,20 @@ silently never started and no `mcp__<srv>__*` tool exists.
 expanded secret. `lib/sandbox.sh` overlays the expanded copy onto the workspace
 file inside the bwrap sandbox. Linux-only: on macOS (`sandbox-exec`, no
 bind-mounts) kimi still reads the literal `${VAR}`s.
+⁹ pi 0.99 ships built-in MCP (stdio + streamable HTTP) read from `mcp.json` in its
+agent dir. The adapter writes the translated config into a temp
+`PI_CODING_AGENT_DIR` whose other entries link to the real `~/.pi/agent`, and
+declares every server's tools directly (`"exposure": "direct"`): pi's default
+`codemode` exposure hides MCP tools behind a script tool, and the first model
+request waits only for servers with direct tools. That wait is capped at a
+hard-coded 10s in pi (`dist/extensions/mcp/index.js`, `DEFAULT_STARTUP_WAIT_MS`),
+so a direct server that needs longer misses turn 1 and joins later turns. `sse`
+entries, other types and names outside `[A-Za-z0-9_-]` are warned about and
+skipped. `env`/`headers` values are escaped so pi does not expand `$VAR` or run a
+leading `!` a second time. Tool names turn `-` into `_` (`mcp__my_srv__tool`).
+`--approve` trusts a workspace `.pi/mcp.json`, whose entries win over the staged
+ones by name. Proven in CI against a fake model and a fake stdio server (fast,
+2s-slow, plus a skipped `sse` entry); not yet on a live model.
 
 ## Flags
 
@@ -115,11 +136,11 @@ bind-mounts) kimi still reads the literal `${VAR}`s.
 
 | Layer | claude | grok | codex | pi | vibe | kimi |
 |---|---|---|---|---|---|---|
-| Invoke | `claude -p -` | `grok -p --output-format streaming-json` | `codex exec --json -` | `pi -p --mode json` | `vibe -p --output json` | `kimi -p --output-format stream-json` |
+| Invoke | `claude -p -` | `grok -p --output-format streaming-json` | `codex exec --json -` | `pi -p --mode json` | `vibe -p --trust --output json` | `kimi -p --output-format stream-json` |
 | Result | envelope passthrough | `type=="text"` chunks (never `thought`) | last `agent_message` | last assistant `message_end` | last assistant `content` (never `reasoning_content`) | last assistant `content` |
 | Usage | native + cost | streaming `end` event → cost | sum of `turn.completed.usage` | per-message usage + cost | none → 0 | none → 0 |
 | Read-only | `--allowedTools` + wrapper sandbox | `bypassPermissions` + wrapper sandbox | `--sandbox read-only` (native) | `--tools` subset + wrapper sandbox | wrapper sandbox only | wrapper sandbox only |
-| MCP | `--mcp-config` | native `.mcp.json` + `MCPTool(...)` allows + `--trust`⁷ | `-c mcp_servers.*` (TOML inline tables⁶) | unsupported by design → warn+skip | `config.toml [[mcp_servers]]` in temp `VIBE_HOME` | `{mcpServers}` in temp `KIMI_CODE_HOME` + sandbox overlay⁸ |
+| MCP | `--mcp-config` | native `.mcp.json` + `MCPTool(...)` allows + `--trust`⁷ | `-c mcp_servers.*` (TOML inline tables⁶) | `{mcpServers}` + `exposure: direct` in temp `PI_CODING_AGENT_DIR`⁹ | `config.toml [[mcp_servers]]` in temp `VIBE_HOME` | `{mcpServers}` in temp `KIMI_CODE_HOME` + sandbox overlay⁸ |
 | CLAUDE.md | native + `@imports` | native (no imports) | via `project_doc_fallback_filenames` | native | native | native |
 
 ### Design notes
@@ -152,13 +173,13 @@ carrying just the delta in `AGENTS.md`, which every other harness reads.
 - **Read-only really holds**: codex answered *"this workspace is read-only"*; pi
   lost write/edit/bash to `--tools` subsetting; vibe/kimi are held by the wrapper
   sandbox — no stray files, on any harness.
-- **Every harness but pi calls live MCP tools** (2026-07-27 sweep, glim.sh over
-  streamable HTTP). Three of them needed a dispatcher fix first, and each failed
+- **Every harness then in the sweep but pi called live MCP tools** (2026-07-27
+  sweep, glim.sh over streamable HTTP; pi gained built-in MCP in 0.99, see ⁹). Three of them needed a dispatcher fix first, and each failed
   *silently* — the agent just reported the server "not connected" and quietly fell
   back to raw HTTP, which reads as a working run: codex crashed on config load
   (footnote ⁶), grok never started the server in an untrusted checkout (⁷), and
   kimi sent unexpanded `${VAR}` placeholders (⁸). vibe worked untouched; pi
-  warns-and-skips by design. **Verify MCP by what the tool returned, not by whether
+  had no MCP at the time. **Verify MCP by what the tool returned, not by whether
   the run went green.**
 - **Pi's minimalism is measurable**: the same one-line prompt consumed ~2.4k input
   tokens on pi vs ~12k on codex — its sub-1k system prompt holds up.
@@ -169,12 +190,12 @@ Only the harnesses you actually dispatch need to be installed.
 
 | Harness | Install | Auth |
 |---|---|---|
-| Claude Code | `npm i -g @anthropic-ai/claude-code` | `claude login` (Pro/Max or API key) |
-| Grok Build | `npm i -g @xai-official/grok@0.2.101` | `grok login` (SuperGrok / X Premium+) or `XAI_API_KEY` |
-| Codex CLI | `brew install codex` or `npm i -g @openai/codex@0.144.6` | `codex login` (any ChatGPT plan) or `OPENAI_API_KEY` |
-| Pi | `npm i -g --ignore-scripts @earendil-works/pi-coding-agent` | provider env keys or `/login` OAuth in the TUI |
-| Mistral Vibe | Vibe installer → `~/.local/bin/vibe` | `vibe --setup` (Mistral API key) |
-| Kimi Code | `brew install kimi-code` | `kimi login` (Moonshot) or a provider in `~/.config/kimi` |
+| Claude Code | `npm i -g @anthropic-ai/claude-code@2.1.287` | `claude login` (Pro/Max or API key) |
+| Grok Build | `npm i -g @xai-official/grok@1.0.46` | `grok login` (SuperGrok / X Premium+) or `XAI_API_KEY` |
+| Codex CLI | `brew install codex` or `npm i -g @openai/codex@0.159.3` | `codex login` (any ChatGPT plan) or `OPENAI_API_KEY` |
+| Pi | `npm i -g --ignore-scripts @earendil-works/pi-coding-agent@0.99.2` | provider env keys or `/login` OAuth in the TUI |
+| Mistral Vibe | `pipx install mistral-vibe==2.25.8` (or the Vibe installer → `~/.local/bin/vibe`) | `vibe --setup` (Mistral API key) |
+| Kimi Code | `npm i -g --ignore-scripts @moonshot-ai/kimi-code@2.1.1` (or `brew install kimi-code`) | `kimi login` (Moonshot) or a provider in `~/.kimi-code/config.toml` |
 | Cursor CLI | `curl -fsSL https://cursor.com/install | bash` | `CURSOR_API_KEY` for headless runs |
 | Hermes Agent | `curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash` | `hermes setup --portal`; archive as `HERMES_AUTH` for CI |
 
@@ -202,9 +223,38 @@ jq '.harnesses[] | select(.mcp != "unsupported") | .id' harnesses.json
 
 `.github/workflows/ci-harnesses-json.yml` fails any PR whose committed manifest
 does not match a fresh regen, so it cannot drift from the adapters it describes.
-The manifest covers harness *capabilities* only; the resolver's default-model
-policy stays in `scripts/resolve-harness.sh`, so a model-pin edit never
-staleness-fails this gate.
+
+Each harness also lists its **credentials**: every secret that can authenticate
+it, most preferred first, in exactly the order `scripts/resolve-harness.sh`
+picks them. Per entry:
+
+| key | meaning |
+|-----|---------|
+| `secret` | repo secret name |
+| `kind` | `oauth_capture` (a CLI login whose files are tar+base64'd into the secret), `oauth_token` (a token a CLI mints, e.g. `claude setup-token`), `api_key`, `oidc` |
+| `auth_mode` | the `AUTH_MODE` resolve-harness.sh reports when this credential is the one in use (`native-oauth` / `native-key` / `openrouter`) |
+| `label` | human name |
+| `prefix` | key prefix, when the provider has one (optional) |
+| `get_url` | where to get it |
+| `login_cmd` | the provider CLI's own login command (optional) |
+| `aeon_cmd` | the local command that obtains and stores it (optional) |
+| `cred_paths` | `$HOME`-relative files captured, for `oauth_capture` |
+| `expires` / `refresh` | lifetime and how to renew (optional notes) |
+| `aux_secrets` | extra secrets the credential needs to stay alive (grok: `GH_SECRETS_PAT` or `GH_GLOBAL` to persist the rotated refresh token) |
+
+The older `auth` summary (`native_oauth` / `native_key` / `openrouter`) is
+derived from that list by the generator. `default_model` mirrors resolve-harness.sh's
+`DEFAULT_HM` (`default` = the harness's own configured model). The claude harness
+points at [`gateways.json`](gateways.json), generated from the `gw-meta` block in
+`adapters/claude.sh`: every provider `scripts/llm-gateway.sh` can route Claude Code
+through, in its default `GATEWAY_ORDER`, with secret(s), key prefixes, base URL,
+transport (`native` / `anthropic-compatible` / `sidecar`) and where to get a key.
+
+resolve-harness.sh and llm-gateway.sh stay the runtime source; the manifests are a
+read-only mirror for `aeon init`, `bin/onboard` and the dashboard.
+`scripts/tests/test_credential_manifest.sh` (ci-tests) fails the moment they
+drift from those scripts, the install pins, the aeon.yml `env:` blocks, or the
+dashboard's `harness-auth.ts` / `gateway-registry.ts`.
 
 ## Layout
 
@@ -213,6 +263,7 @@ run-harness            dispatcher: args → RH_* env → sandbox/timeout → ada
 adapters/<h>.sh        one per harness: invoke, translate, normalize (claude grok codex pi vibe kimi fx)
 harnesses.json         generated capability manifest (UHP GET /v1/harnesses analog)
 bin/generate-harnesses-json  aggregate adapters' rh-meta blocks → harnesses.json
+gateways.json          generated claude gateway cascade (gw-meta block in adapters/claude.sh)
 lib/envelope.sh        emit/validate the contract envelope
 lib/tools-grammar.sh   --allowedTools → per-harness permissions
 lib/mcp-translate.sh   .mcp.json → codex -c flags / vibe TOML / kimi home; ${VAR} expansion

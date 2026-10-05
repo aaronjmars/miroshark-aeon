@@ -23,17 +23,20 @@
 #   HARNESS_MODEL                 vars.HARNESS_MODEL, a repo-wide model override
 #   CODEX_AUTH / KIMI_AUTH / HERMES_AUTH / GROK_CREDENTIALS
 #   OPENAI_API_KEY / MOONSHOT_API_KEY / MISTRAL_API_KEY / XAI_API_KEY
-#   ANTHROPIC_API_KEY / ANTHROPIC_OAUTH_TOKEN
+#   ANTHROPIC_API_KEY / ANTHROPIC_OAUTH_TOKEN / CLAUDE_CODE_OAUTH_TOKEN
 #                                 presence ONLY — never read for their value here,
 #                                 never echoed. They pick AUTH_MODE.
 #
 # Outputs (stdout, one KEY=VALUE per line — append to $GITHUB_OUTPUT/$GITHUB_ENV,
 # or `eval` after review):
 #   HARNESS        claude | grok | codex | pi | vibe | kimi | fx | cursor | hermes
-#   AUTH_MODE      native-oauth | native-key | openrouter
+#   AUTH_MODE      native-oauth | native-key | openrouter | gateway (claude only:
+#                  a key from aeon.yml's gateway: block, see below) | none
+#                  (cursor with no CURSOR_API_KEY: it has no fallback)
 #   HARNESS_MODEL  the model label for logs/records ("(native:…)" on native auth)
 #   MODEL_ARG      what to pass as `run-harness --model`, or empty for "the
-#                  harness's own staged config decides"
+#                  harness's own staged config decides" (always empty on claude:
+#                  aeon.yml passes claude its own model id)
 #
 # Reads ./aeon.yml from the current directory. Prints diagnostics to stderr.
 set -euo pipefail
@@ -45,8 +48,13 @@ SKILL_NAME="${1:-}"
 # kills the caller with NO message, leaving a red step and nothing to go on. An
 # empty result already means "not configured", which the defaults below handle.
 CONFIG_HARNESS=$(grep -E '^harness:' aeon.yml | sed 's/^harness: *//' | tr -d ' ' || true)
-SKILL_HARNESS=""
-[ -n "$SKILL_NAME" ] && SKILL_HARNESS=$(grep "^  ${SKILL_NAME}:" aeon.yml | sed -n 's/.*harness: *"\([^"]*\)".*/\1/p' || true)
+# Per-skill keys come from the WHOLE entry (single-line or block shape), via the
+# same reader aeon.yml uses for model:. A header-line grep missed a block entry's
+# harness:/model: on a later line, so the skill silently ran on the defaults.
+HERE_RH="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+SKILL_ENTRY=""
+[ -n "$SKILL_NAME" ] && SKILL_ENTRY=$(bash "$HERE_RH/skill_entry.sh" "$SKILL_NAME" || true)
+SKILL_HARNESS=$(printf '%s\n' "$SKILL_ENTRY" | sed -n 's/.*harness: *"\([^"]*\)".*/\1/p' | head -1)
 
 if [ -n "${INPUT_HARNESS:-}" ] && [ "$INPUT_HARNESS" != "(config default)" ]; then
   HARNESS="$INPUT_HARNESS"
@@ -85,7 +93,10 @@ case "$HARNESS" in
   codex) if [ -n "${CODEX_AUTH:-}" ]; then AUTH_MODE="native-oauth"; elif [ -n "${OPENAI_API_KEY:-}" ]; then AUTH_MODE="native-key"; fi ;;
   kimi)  if [ -n "${KIMI_AUTH:-}" ]; then AUTH_MODE="native-oauth"; elif [ -n "${MOONSHOT_API_KEY:-}" ]; then AUTH_MODE="native-key"; fi ;;
   hermes) if [ -n "${HERMES_AUTH:-}" ]; then AUTH_MODE="native-oauth"; fi ;;
-  cursor) if [ -n "${CURSOR_API_KEY:-}" ]; then AUTH_MODE="native-key"; fi ;;
+  # cursor has no OpenRouter path either (install-harness.sh fails closed without
+  # CURSOR_API_KEY), so with no key it is labelled `none` rather than a fallback
+  # that does not exist. Label only: the run still stops at the install step.
+  cursor) if [ -n "${CURSOR_API_KEY:-}" ]; then AUTH_MODE="native-key"; else AUTH_MODE="none"; fi ;;
   vibe)  if [ -n "${MISTRAL_API_KEY:-}" ]; then AUTH_MODE="native-key"; fi ;;
   pi)    if [ -n "${ANTHROPIC_API_KEY:-}" ] || [ -n "${ANTHROPIC_OAUTH_TOKEN:-}" ] || [ -n "${OPENAI_API_KEY:-}" ]; then AUTH_MODE="native-key"; fi ;;
   # fx has no OpenRouter path at all (confirmed: no mention anywhere in its
@@ -97,6 +108,27 @@ case "$HARNESS" in
   # MissingCredentials error, not a silent/confusing one) rather than actually
   # running on a shared key like the other six do.
   fx)    if [ -n "${AI_GATEWAY_API_KEY:-}" ] || [ -n "${VERCEL_OIDC_TOKEN:-}" ]; then AUTH_MODE="native-key"; fi ;;
+  # claude never takes the OpenRouter-CLI path above: its run starts on whatever
+  # scripts/llm-gateway.sh picks (aeon.yml's Run step, messages.yml's reply). Mirror
+  # that pick from the same inputs so the log line names the auth that really runs.
+  # A pinned gateway.provider wins; `auto` takes the first present secret in the
+  # gateway's default order: the Claude subscription, then the Anthropic API key,
+  # then a gateway key. Label only; this changes nothing about the run.
+  claude)
+    GW_PROVIDER=$(grep -A1 '^gateway:' aeon.yml | grep 'provider:' | sed 's/.*provider:[[:space:]]*//' | sed "s/[\"' ]//g" || true)
+    GW_PROVIDER="${GW_PROVIDER:-auto}"
+    if [ "$GW_PROVIDER" = "auto" ]; then
+      if [ -n "${CLAUDE_CODE_OAUTH_TOKEN:-}" ]; then
+        GW_PROVIDER="claude"
+      elif [ -n "${ANTHROPIC_API_KEY:-}" ]; then
+        GW_PROVIDER="anthropic"
+      fi
+    fi
+    case "$GW_PROVIDER" in
+      claude)           AUTH_MODE="native-oauth" ;;
+      anthropic|direct) AUTH_MODE="native-key" ;;
+      *)                AUTH_MODE="gateway" ;;
+    esac ;;
 esac
 
 # The harness model (HM), in priority order:
@@ -108,7 +140,7 @@ esac
 #   3. a per-harness cheap default.
 # aeon-native ids (claude-*/grok-*) mean nothing to an OpenRouter CLI, so they're
 # treated as "unset" and fall through to the default — a repo that never touched
-# the model picker (still `model: claude-sonnet-5`) still gets a working default
+# the model picker (still `model: claude-sonnet-5-5`) still gets a working default
 # instead of a dead id.
 # Each harness defaults to its own native family (the dashboard's per-harness
 # list, modelsForHarness[0]). The generic `*)` fallback is gpt-5-mini — a
@@ -117,32 +149,39 @@ esac
 # `cmd` field, codex's strict parser rejects it, and codex, which has no
 # --max-turns, spins to the 900s guard); the same skill passes on gpt-5-mini.
 CONFIG_MODEL=$(grep -E '^model:' aeon.yml | sed 's/^model: *//' | tr -d ' ' || true)
-SKILL_MODEL=""
-[ -n "$SKILL_NAME" ] && SKILL_MODEL=$(grep "^  ${SKILL_NAME}:" aeon.yml | sed -n 's/.*model: *"\([^"]*\)".*/\1/p' || true)
+SKILL_MODEL=$(printf '%s\n' "$SKILL_ENTRY" | sed -n 's/.*model: *"\([^"]*\)".*/\1/p' | head -1)
 
-if [ -n "${INPUT_MODEL:-}" ] && [ "$INPUT_MODEL" != "(config default)" ]; then
-  REQ_MODEL="$INPUT_MODEL"
-elif [ -n "$SKILL_MODEL" ]; then
-  REQ_MODEL="$SKILL_MODEL"
-else
-  REQ_MODEL="${CONFIG_MODEL:-}"
-fi
-case "$REQ_MODEL" in claude-*|grok-*|"") REQ_MODEL="" ;; esac   # aeon-native / unset → not an OpenRouter id
+# First usable pick wins: dispatch input, then the skill's own model, then the
+# config model. A claude-*/grok-* id is aeon-native (a per-skill opus pin, or the
+# untouched config default) and means nothing to these harnesses, so it is
+# SKIPPED and the next level applies: a heartbeat pinned to claude-opus-5-5 on a
+# codex instance runs the dashboard's codex pick, not the account default.
+# `default` is the hermes dashboard pick ("use Hermes' configured model"); for
+# every harness it means "no override", so it stops the chain and falls through
+# to DEFAULT_HM.
+REQ_MODEL=""
+for cand in "${INPUT_MODEL:-}" "$SKILL_MODEL" "${CONFIG_MODEL:-}"; do
+  case "$cand" in
+    ""|"(config default)"|claude-*|grok-*) continue ;;
+    default) break ;;
+    *) REQ_MODEL="$cand"; break ;;
+  esac
+done
 
 # NOTE: changing any per-harness DEFAULT_HM below also requires updating the
 # expected values in scripts/tests/test_resolve_harness.sh (a stale codex pin
 # there broke CI once; fixed in #896). If the same model-pin pass edits skill
 # bodies, run `eyebrow scan` and commit the refreshed eyebrowlock.json too.
 case "$HARNESS" in
-  codex) DEFAULT_HM="openai/gpt-5.1-codex-mini" ;;
+  codex) DEFAULT_HM="openai/gpt-6-luna" ;;              # codex's default (CODEX_MODELS[0])
   vibe)  DEFAULT_HM="mistralai/mistral-medium-3-5" ;;   # vibe's default (VIBE_MODELS[0])
-  pi)    DEFAULT_HM="deepseek/deepseek-v4-flash" ;;     # pi's default (PI_MODELS[0])
-  kimi)  DEFAULT_HM="moonshotai/kimi-k2.5" ;;           # kimi's default (KIMI_MODELS[0])
+  pi)    DEFAULT_HM="deepseek/deepseek-v4.1-flash" ;;   # pi's default (PI_MODELS[0])
+  kimi)  DEFAULT_HM="moonshotai/kimi-k2.7-code" ;;      # kimi's default (KIMI_MODELS[0])
   # Hermes' native provider and model are restored from HERMES_AUTH/config.yaml.
   # Passing a hardcoded model can switch the CLI to a different provider and
   # bypass the Nous Portal subscription, so let Hermes use its configured default.
   hermes) DEFAULT_HM="default" ;;
-  cursor) DEFAULT_HM="gpt-5.1" ;;
+  cursor) DEFAULT_HM="auto" ;;                         # Cursor's router (CURSOR_MODELS[0])
   *)     DEFAULT_HM="openai/gpt-5-mini" ;;              # generic fallback: only claude/grok hit it (and don't consume it)
 esac
 HM="${HARNESS_MODEL:-${REQ_MODEL:-$DEFAULT_HM}}"
@@ -161,16 +200,47 @@ if [ "$AUTH_MODE" = "openrouter" ]; then
     # --model breaks them — their staged config decides.
   esac
 else
-  # Codex/Kimi/Vibe native accounts choose their own account default. Cursor and
+  # Kimi/Vibe native accounts choose their own account default. Cursor and
   # Hermes Portal explicitly document model overrides, so preserve the
   # dashboard/dispatch model for those harnesses even when their auth is native.
+  # Codex on a ChatGPT login or OpenAI key takes an explicitly picked OpenAI
+  # model as its bare id (openai/gpt-6-luna -> gpt-6-luna); with no pick it keeps
+  # the account default. If the account refuses the id, adapters/codex.sh
+  # retries once on the account default and warns.
   case "$HARNESS" in
     cursor|hermes) MODEL_ARG="$HM" ;;
+    codex)
+      PICK="${HARNESS_MODEL:-$REQ_MODEL}"
+      case "$PICK" in
+        openai/*|gpt-*) MODEL_ARG="${PICK#openai/}"; HM="$MODEL_ARG" ;;
+        *) HM="(native:$AUTH_MODE)" ;;
+      esac ;;
     *) HM="(native:$AUTH_MODE)" ;;
   esac
 fi
 
-echo "Harness: $HARNESS  |  auth: $AUTH_MODE  |  model: $HM  |  run-harness --model: ${MODEL_ARG:-<harness default>}" >&2
+# claude runs aeon's own model id (INPUT_MODEL > per-skill > aeon.yml model: >
+# claude-sonnet-5-5, the same precedence as aeon.yml's Run step), not the
+# OpenRouter default above, and it is not driven by MODEL_ARG. Say so.
+if [ "$HARNESS" = "claude" ]; then
+  if [ -n "${INPUT_MODEL:-}" ] && [ "$INPUT_MODEL" != "(config default)" ]; then
+    HM="$INPUT_MODEL"
+  else
+    HM="${SKILL_MODEL:-${CONFIG_MODEL:-claude-sonnet-5-5}}"
+  fi
+  echo "Harness: $HARNESS  |  auth: $AUTH_MODE  |  gateway: $GW_PROVIDER  |  model: $HM" >&2
+else
+  # On a native account the provider picks the model, so there is nothing to
+  # show yet. HARNESS_MODEL keeps the "(native:…)" label for records; only this
+  # line says it plainly. codex reports the model it ran after the run.
+  HM_SHOWN="$HM"
+  case "$HM" in
+    "(native:"*)
+      HM_SHOWN="account default"
+      [ "$HARNESS" = codex ] && HM_SHOWN="account default (logged after the run)" ;;
+  esac
+  echo "Harness: $HARNESS  |  auth: $AUTH_MODE  |  model: $HM_SHOWN  |  run-harness --model: ${MODEL_ARG:-<harness default>}" >&2
+fi
 printf 'HARNESS=%s\n'       "$HARNESS"
 printf 'AUTH_MODE=%s\n'     "$AUTH_MODE"
 printf 'HARNESS_MODEL=%s\n' "$HM"

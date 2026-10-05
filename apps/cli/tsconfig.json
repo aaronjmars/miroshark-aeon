@@ -17,5 +17,6 @@
       "yaml/*": ["./node_modules/yaml/*"]
     }
   },
-  "include": ["src/**/*.ts", "../dashboard/lib/**/*.ts"]
+  "include": ["src/**/*.ts", "../dashboard/lib/**/*.ts"],
+  "exclude": ["../dashboard/lib/onboarding-checklist.test.ts"]
 }

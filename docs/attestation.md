@@ -29,7 +29,7 @@ or tampered with after the fact?"* — not *"is the output any good?"*
 
 ## Prerequisites
 
-- **A GitHub-hosted runner** — Aeon already uses `ubuntu-latest`. ✔
+- **A GitHub-hosted runner** — Aeon already uses `ubuntu-24.04`. ✔
 - **Attestation availability for your repo:**
   - **Public repo** → works out of the box on every plan.
   - **Private repo** → the attestation store requires a plan that includes
@@ -201,7 +201,7 @@ To read the richer metadata, verify the manifest and inspect its bytes:
 ```bash
 gh attestation verify output/.attest/<skill>-<run_id>.json --repo <owner>/<repo>
 cat output/.attest/<skill>-<run_id>.json
-# { "skill": "...", "model": "claude-opus-4-8", "mode": "read-only",
+# { "skill": "...", "model": "claude-opus-5-5", "mode": "read-only",
 #   "trigger": "schedule", "commit": "<sha>", "run_id": "<id>",
 #   "output": { "path": "output/.attest/<skill>-<run_id>.md", "sha256": "<digest>" } }
 ```

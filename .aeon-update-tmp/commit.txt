@@ -1,0 +1,10 @@
+aeon-update: sync upstream 531f575..1a7f07e
+
+71 upstream commits from aeonfun/aeon (2026-09-24 to 2026-10-04).
+312 files applied cleanly (81 added, 231 updated, 5 deleted); catalogs,
+AGENTS.md, harnesses.json and eyebrowlock.json regenerated from the synced
+tree. 26 paths held for manual review (operator config, fork-divergent docs,
+the skill-count validator cluster, 2 content conflicts, new skills).
+Baseline advanced to 1a7f07e.
+
+Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="124" height="40" viewBox="0 0 124 40" role="img" aria-label="Run now">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F4EFE1"/>
+      <stop offset="1" stop-color="#E4DCC8"/>
+    </linearGradient>
+    <style>@keyframes nudge{0%,100%{transform:translateX(0)}50%{transform:translateX(2px)}}.pl{transform-box:fill-box;transform-origin:center;animation:nudge 1.6s ease-in-out infinite}</style>
+  </defs>
+  <rect x="0.5" y="0.5" width="123" height="39" rx="19.5" fill="url(#g)" stroke="#F4EFE1"/>
+  <g class="pl">
+    <circle cx="25" cy="20" r="8.5" fill="none" stroke="#0d0c0a" stroke-width="1.5"/>
+    <path d="M22.5 15.8v8.4l6.6-4.2z" fill="#0d0c0a"/>
+  </g>
+  <text x="42" y="25.5" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="15" font-weight="700" fill="#0d0c0a">Run now</text>
+</svg>

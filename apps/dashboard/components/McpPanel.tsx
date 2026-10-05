@@ -4,26 +4,12 @@ import { useState, useEffect } from 'react'
 import { Scramble } from './ui/Animated'
 import { inputCls } from '../lib/utils'
 import { MCP_CATALOG, tokenVar } from '../lib/mcp-catalog'
-import type { Secret, McpServer, McpServers, McpAuthResponse, Harness } from '../lib/types'
+import type { Secret, McpServer, McpServers, McpAuthResponse } from '../lib/types'
 
 // One-click starters - public HTTP MCP servers that install with no token.
 const FEATURED = MCP_CATALOG
 
-// Pi rejects MCP as a design decision — its adapter warns and skips every server
-// (`pi does not support MCP by design`), so a server wired here would silently
-// no-op at run time. The controls are disabled and the operator is told to switch
-// harness. Keep in sync with harness-adapter/adapters/pi.sh.
-//
-// This gate used to target CODEX, on the belief that `codex exec` auto-denied
-// every tool call (openai/codex#24135). Re-measured live 2026-07-27 on codex-cli
-// 0.144.6: codex calls MCP tools fine, and the real fault was ours — the adapter
-// emitted `headers`/`env` as JSON objects where codex wants TOML inline tables,
-// which crashed config load before the model started. Fixed in
-// harness-adapter/lib/mcp-translate.sh; codex is a supported MCP harness now.
-const MCP_DISABLED_MSG = "Pi does not support MCP - it rejects MCP servers by design, so any server configured here is skipped at run time. Switch the harness to claude, grok, codex, kimi or vibe to use MCP."
-
 interface McpPanelProps {
-  harness: Harness
   servers: McpServers
   loading: boolean
   saving: boolean
@@ -58,11 +44,7 @@ function transportOf(server: McpServer): string {
   return typeof server.command === 'string' ? 'stdio' : 'http'
 }
 
-export function McpPanel({ harness, servers, loading, saving, secrets, busy, onSave, onSetSecret, onDeleteSecret, onGoToSecret }: McpPanelProps) {
-  // Pi skips MCP entirely (see MCP_DISABLED_MSG): grey out every MCP action so a
-  // run isn't configured to use tools it will silently skip.
-  const mcpDisabled = harness === 'pi'
-
+export function McpPanel({ servers, loading, saving, secrets, busy, onSave, onSetSecret, onDeleteSecret, onGoToSecret }: McpPanelProps) {
   const [draft, setDraft] = useState<McpServers>(servers)
   useEffect(() => { setDraft(servers) }, [servers])
 
@@ -190,7 +172,7 @@ export function McpPanel({ harness, servers, loading, saving, secrets, busy, onS
     <div className="max-w-5xl mx-auto pb-16 space-y-8">
       <section className="relative overflow-hidden border border-[rgba(250,250,250,0.10)] bg-aeon-panel">
         <div className="dither" aria-hidden="true" />
-        <div className="relative z-10 px-8 pt-10 pb-8">
+        <div className="relative z-10 px-5 md:px-8 pt-10 pb-8">
           <h1 className="font-display uppercase leading-[0.92] tracking-tight text-aeon-fg"
               style={{ fontSize: 'clamp(40px, 6.5vw, 88px)' }}>
             <Scramble text="MCP" />{' '}
@@ -202,15 +184,6 @@ export function McpPanel({ harness, servers, loading, saving, secrets, busy, onS
           </p>
         </div>
       </section>
-
-      {mcpDisabled && (
-        <div className="border border-aeon-red/40 bg-aeon-panel px-[var(--space-md)] py-[var(--space-sm)]">
-          <p className="text-[10px] font-mono uppercase tracking-[0.14em] text-aeon-red mb-1.5">⚠ MCP is unavailable on the Pi harness</p>
-          <p className="text-[11px] text-primary-40 leading-relaxed">
-            {MCP_DISABLED_MSG} You can still view your servers below, but the actions are disabled until you switch harness in the top bar.
-          </p>
-        </div>
-      )}
 
       <section className="border-t border-[rgba(250,250,250,0.10)] pt-6">
         <div className="flex items-center gap-3 mb-4">
@@ -232,7 +205,7 @@ export function McpPanel({ harness, servers, loading, saving, secrets, busy, onS
                 {installed ? (
                   <span className="text-[10px] font-mono uppercase tracking-[0.14em] text-aeon-green shrink-0">✓ installed</span>
                 ) : (
-                  <button onClick={() => installFeatured(f)} disabled={saving || oauthBusy === f.slug || mcpDisabled} className="btn-mini-go shrink-0" title={mcpDisabled ? MCP_DISABLED_MSG : f.oauth ? 'Opens your browser to authorize, then stores the tokens' : undefined}>
+                  <button onClick={() => installFeatured(f)} disabled={saving || oauthBusy === f.slug} className="btn-mini-go shrink-0" title={f.oauth ? 'Opens your browser to authorize, then stores the tokens' : undefined}>
                     {oauthBusy === f.slug ? 'Connecting…' : f.oauth ? 'Connect' : 'Install'}
                   </button>
                 )}
@@ -251,8 +224,8 @@ export function McpPanel({ harness, servers, loading, saving, secrets, busy, onS
             <p className="text-[10px] font-mono uppercase tracking-[0.14em] text-aeon-red mb-1.5">⚠ OAuth MCP servers won&apos;t keep working without a secrets PAT</p>
             <p className="text-[11px] text-primary-40 leading-relaxed">
               Providers rotate their refresh token on every run, and the runner needs a secrets-write credential to save each rotation — without it a Connected server works once, then its auth breaks. To set it up: create a fine-grained PAT at <a href="https://github.com/settings/personal-access-tokens" target="_blank" rel="noopener noreferrer" className="text-primary-70 underline decoration-dotted underline-offset-2 hover:text-aeon-fg transition-colors">github.com/settings/personal-access-tokens</a>, add this repo under <span className="text-primary-70">Repository access</span>, grant <span className="text-primary-70">Secrets: Read and write</span>, and save it as{' '}
-              <button onClick={() => onGoToSecret('GH_SECRETS_PAT')} title="Open in Settings to set this key" className="text-aeon-red-alert underline decoration-dotted underline-offset-2 hover:text-aeon-fg transition-colors">GH_SECRETS_PAT</button>
-              {' '}in Settings. Already Connected a server? Re-connect it once after adding the PAT.
+              <button onClick={() => onGoToSecret('GH_SECRETS_PAT')} title="Open in Keys to set this key" className="text-aeon-red-alert underline decoration-dotted underline-offset-2 hover:text-aeon-fg transition-colors">GH_SECRETS_PAT</button>
+              {' '}in Keys. Already Connected a server? Re-connect it once after adding the PAT.
             </p>
           </div>
         )}
@@ -297,7 +270,7 @@ export function McpPanel({ harness, servers, loading, saving, secrets, busy, onS
                                   ) : (
                                     <>
                                       <input type="password" value={secretDraft[r] ?? ''} onChange={e => setSecretDraft(d => ({ ...d, [r]: e.target.value }))} onKeyDown={e => e.key === 'Enter' && saveRowSecret(r)} placeholder="paste bearer token - saved to GitHub & wired in" className="flex-1 min-w-0 bg-aeon-bg border border-[rgba(250,250,250,0.10)] px-2 py-1 text-[11px] font-mono text-primary-100 outline-none focus:border-aeon-red transition-colors cursor-target" />
-                                      <button onClick={() => saveRowSecret(r)} disabled={!(secretDraft[r] ?? '').trim() || mcpDisabled} title={mcpDisabled ? MCP_DISABLED_MSG : undefined} className="btn-mini-go shrink-0">Set</button>
+                                      <button onClick={() => saveRowSecret(r)} disabled={!(secretDraft[r] ?? '').trim()} className="btn-mini-go shrink-0">Set</button>
                                     </>
                                   )}
                                 </div>
@@ -348,7 +321,7 @@ export function McpPanel({ harness, servers, loading, saving, secrets, busy, onS
                   </div>
                 </div>
               ) : (
-                <button onClick={() => setAdding(true)} disabled={mcpDisabled} title={mcpDisabled ? MCP_DISABLED_MSG : undefined} className="w-full text-sm font-mono uppercase tracking-[0.14em] text-primary-60 border border-dashed border-[rgba(250,250,250,0.16)] py-3.5 hover:text-aeon-red hover:border-aeon-red/40 transition-colors disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:text-primary-60 disabled:hover:border-[rgba(250,250,250,0.16)]">+ Add server</button>
+                <button onClick={() => setAdding(true)} className="w-full text-sm font-mono uppercase tracking-[0.14em] text-primary-60 border border-dashed border-[rgba(250,250,250,0.16)] py-3.5 hover:text-aeon-red hover:border-aeon-red/40 transition-colors disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:text-primary-60 disabled:hover:border-[rgba(250,250,250,0.16)]">+ Add server</button>
               )}
             </div>
 
@@ -362,7 +335,7 @@ export function McpPanel({ harness, servers, loading, saving, secrets, busy, onS
             <div className="flex items-center justify-end mt-4">
               <div className="flex items-center gap-2">
                 {dirty && <button onClick={() => setDraft(servers)} className="btn-mini">Revert</button>}
-                <button onClick={() => onSave(draft)} disabled={!dirty || saving || mcpDisabled} title={mcpDisabled ? MCP_DISABLED_MSG : undefined} className="btn-mini-go">
+                <button onClick={() => onSave(draft)} disabled={!dirty || saving} className="btn-mini-go">
                   {saving ? 'Saving…' : 'Save'}
                 </button>
               </div>

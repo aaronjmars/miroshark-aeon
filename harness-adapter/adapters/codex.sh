@@ -4,9 +4,11 @@
 # Codex quirks this adapter absorbs:
 #   * `codex exec --json` emits a JSONL EVENT STREAM, not a final result object
 #     -> result comes from --output-last-message (belt) or the last
-#        item.completed agent_message (braces); usage is SUMMED over every
-#        turn.completed event (field names: input_tokens, cached_input_tokens,
-#        output_tokens). No dollar-cost field exists.
+#        item.completed agent_message (braces); usage comes from turn.completed
+#        (field names: input_tokens, cached_input_tokens, output_tokens), with
+#        input_tokens normalized to exclude cache reads. No dollar-cost field exists.
+#   * the stream never names the model (thread.started carries only thread_id)
+#     -> read it from the session's rollout file (turn_context.payload.model).
 #   * approval-needed actions are silently auto-denied headlessly (deny-and-
 #     continue, like Claude) -> approval_policy=never, sandbox picked by mode.
 #   * workspace-write blocks network by default -> we enable it (skills fetch).
@@ -18,7 +20,7 @@
 # {
 #   "id": "codex",
 #   "label": "OpenAI Codex CLI",
-#   "cli": { "install": "npm i -g @openai/codex", "bin": "codex", "min_version": "0.144.6" },
+#   "cli": { "install": "npm i -g --ignore-scripts @openai/codex@0.159.3", "bin": "codex", "min_version": "0.159.3" },
 #   "invoke": "codex exec --json -",
 #   "round_trip": true,
 #   "token_usage": "full",
@@ -28,7 +30,12 @@
 #   "mcp": "native+inline-toml",
 #   "max_turns": "timeout",
 #   "claude_md": "fallback",
-#   "auth": { "native_oauth": ["CODEX_AUTH"], "native_key": ["OPENAI_API_KEY"], "openrouter": true },
+#   "default_model": "openai/gpt-6-luna",
+#   "credentials": [
+#     { "secret": "CODEX_AUTH", "kind": "oauth_capture", "auth_mode": "native-oauth", "label": "ChatGPT login (Plus/Pro)", "get_url": "https://chatgpt.com", "login_cmd": "codex login", "aeon_cmd": "./aeon auth --harness codex", "cred_paths": [".codex/auth.json"], "expires": "codex refreshes at run start but a rotated token is not saved back, so the capture eventually expires", "refresh": "re-run ./aeon auth --harness codex (or use an OpenAI key)" },
+#     { "secret": "OPENAI_API_KEY", "kind": "api_key", "auth_mode": "native-key", "label": "OpenAI API key", "prefix": "sk-", "get_url": "https://platform.openai.com/api-keys", "aeon_cmd": "./aeon auth --harness codex --key <sk-...>" },
+#     { "secret": "OPENROUTER_API_KEY", "kind": "api_key", "auth_mode": "openrouter", "label": "OpenRouter key (one key covers most harnesses)", "prefix": "sk-or-", "get_url": "https://openrouter.ai/settings/keys", "aeon_cmd": "./aeon secrets set OPENROUTER_API_KEY --stdin" }
+#   ],
 #   "native_control_path": "run-harness"
 # }
 # rh-meta-end
@@ -39,12 +46,22 @@ set -uo pipefail
 command -v codex >/dev/null 2>&1 || {
   echo "codex CLI not found (npm i -g @openai/codex)" >&2; exit 1; }
 
-ARGS=(exec --json --skip-git-repo-check --ephemeral)
+# --disable unbounded_connection_retries: codex 0.148+ retries an unreachable
+# provider FOREVER ("Reconnecting... waiting for network", 5-60s backoff), so a
+# gateway outage burned the whole dispatcher timeout. With the feature off it
+# fails after 5 retries with turn.failed and a non-zero exit.
+# No --ephemeral: the session's rollout file is the only place codex records the
+# model it actually ran (see "model" below). It lands under $CODEX_HOME/sessions,
+# the way claude -p keeps its transcript under ~/.claude; on a runner both go
+# away with the job's home dir.
+ARGS=(exec --json --skip-git-repo-check --disable unbounded_connection_retries)
 
-# model: only pass ids codex can serve; a claude-*/grok-* leftover -> codex default
+# model: only pass ids codex can serve; a claude-*/grok-* leftover -> codex default.
+# Kept apart from ARGS so a refused model can be dropped for one retry (below).
+MODEL_ARGS=()
 case "${RH_MODEL:-}" in
   "" | default | claude-* | grok-*) ;;
-  *) ARGS+=(--model "$RH_MODEL") ;;
+  *) MODEL_ARGS=(--model "$RH_MODEL") ;;
 esac
 
 # Sandbox. codex is the only harness with a native kernel sandbox, but its
@@ -125,8 +142,22 @@ ${PROMPT}"
 ${PROMPT}"
 
 EVENTS="$RH_TMPDIR/codex-events.jsonl"
-printf '%s' "$PROMPT" | codex "${ARGS[@]}" ${MCP_ARGS[@]+"${MCP_ARGS[@]}"} - > "$EVENTS"
+run_codex() {
+  printf '%s' "$PROMPT" | codex "${ARGS[@]}" ${MODEL_ARGS[@]+"${MODEL_ARGS[@]}"} ${MCP_ARGS[@]+"${MCP_ARGS[@]}"} - > "$EVENTS"
+}
+run_codex
 rc=$?
+# A model the account cannot serve fails the turn before any work happens
+# (ChatGPT login: "The 'gpt-5.6' model is not supported when using Codex with a
+# ChatGPT account."; API key: "does not exist or you do not have access").
+# Retry once on the account default instead of failing the run.
+if [ $rc -ne 0 ] && [ ${#MODEL_ARGS[@]} -gt 0 ] \
+  && grep -qE "model is not supported|does not exist or you do not have access|model_not_found" "$EVENTS" 2>/dev/null; then
+  echo "::warning::codex refused model ${RH_MODEL//[^A-Za-z0-9._:\/@+-]/_}; retried on the account default" >&2
+  MODEL_ARGS=()
+  run_codex
+  rc=$?
+fi
 if [ $rc -ne 0 ]; then
   # 300 chars silently discarded the actual error whenever it was longer
   # than that; widened to match claude.sh's own harness-adapter precedent.
@@ -154,13 +185,45 @@ if [ "${FAILED:-0}" -gt 0 ] && [ -z "$RESULT" ]; then
 fi
 [ "${FAILED:-0}" -gt 0 ] && echo "warning: codex reported $FAILED failed-turn/error event(s) — retaining output" >&2
 
-# usage: sum across turns; map cached_input_tokens -> cache_read (codex has no
-# cache_creation concept and no cost field)
-read -r TIN TOUT TCR <<<"$(jq -rs '
-  [.[] | select(.type == "turn.completed") | (.usage // {})] |
-  [ ([.[].input_tokens // 0] | add // 0),
-    ([.[].output_tokens // 0] | add // 0),
-    ([.[].cached_input_tokens // 0] | add // 0) ] | @tsv' "$CLEAN")"
+# usage: map cached_input_tokens -> cache_read and cache_write_input_tokens ->
+# cache_creation (codex has no cost field).
+#   * turn.completed carries the THREAD's running total, not a per-turn delta
+#     (codex-rs exec/src/event_processor_with_jsonl_output.rs usage_from_last_total
+#     reads `usage.total`), and exec ends after its one turn. So take the last
+#     event; summing would double-count if a build ever emitted two.
+#   * codex's input_tokens is the Responses API figure, which INCLUDES the cached
+#     tokens (codex-rs protocol/src/protocol.rs TokenUsage::non_cached_input is
+#     `input_tokens - cached_input_tokens`). The contract follows Claude, whose
+#     input_tokens excludes cache reads, so subtract them here. Without this a
+#     heartbeat run recorded input 142972 next to cache_read 109312, counting the
+#     cached 109k twice in token-usage.csv.
+read -r TIN TOUT TCR TCW <<<"$(jq -rs '
+  ([.[] | select(.type == "turn.completed") | (.usage // {})] | last // {}) as $u
+  | ($u.input_tokens // 0) as $in | ($u.cached_input_tokens // 0) as $cr
+  | [ ([$in - $cr, 0] | max), ($u.output_tokens // 0), $cr,
+      ($u.cache_write_input_tokens // 0) ] | @tsv' "$CLEAN")"
 SID=$(jq -rs '[.[] | select(.type == "thread.started") | (.thread_id // empty)] | first // ""' "$CLEAN")
 
-emit_envelope "$RESULT" "${TIN:-0}" "${TOUT:-0}" "${TCR:-0}" 0 "" "$SID"
+# model: `codex exec --json` never names it (ThreadStartedEvent is only
+# thread_id; codex-rs exec/src/exec_events.rs), and on a native ChatGPT login no
+# --model is passed, so aeon used to record "codex-default". codex persists each
+# turn's TurnContextItem, whose `model` field is the model it ran
+# (codex-rs protocol/src/protocol.rs TurnContextItem), as a
+# {"type":"turn_context","payload":{...}} line in
+# $CODEX_HOME/sessions/YYYY/MM/DD/rollout-<ts>-<thread_id>.jsonl. Take the FIRST
+# one (written before the agent acts) and keep only a model-id charset: the file
+# sits in rw ~/.codex during the run, and this value ends up in workflow outputs.
+MODEL_USED=""
+if [ -n "$SID" ]; then
+  ROLLOUT=$(find "${CODEX_HOME:-$HOME/.codex}/sessions" -type f -name "rollout-*${SID}*.jsonl" 2>/dev/null | head -1)
+  if [ -n "$ROLLOUT" ]; then
+    MODEL_USED=$(jq -rR 'fromjson? | select(.type == "turn_context") | .payload.model // empty' "$ROLLOUT" 2>/dev/null | head -1)
+    case "$MODEL_USED" in
+      *[!A-Za-z0-9._:/@+-]*) MODEL_USED="" ;;
+    esac
+    [ "${#MODEL_USED}" -le 100 ] || MODEL_USED=""
+  fi
+fi
+[ -z "$MODEL_USED" ] && echo "notice: codex model not found in the session rollout; not reported" >&2
+
+emit_envelope "$RESULT" "${TIN:-0}" "${TOUT:-0}" "${TCR:-0}" "${TCW:-0}" "" "$SID" "$MODEL_USED"

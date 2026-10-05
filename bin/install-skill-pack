@@ -35,7 +35,7 @@ set -euo pipefail
 #         "slug": "skill-name",
 #         "path": "skills/skill-name",                         (defaults to skills/<slug>)
 #         "description": "What the skill does",                (optional, falls back to SKILL.md frontmatter)
-#         "category": "research|dev|crypto|social|productivity", (optional)
+#         "category": "core|evolution|basics|dev|crypto|productivity", (optional)
 #         "schedule": "0 12 * * *",                            (optional, default 0 12 * * *)
 #         "default_enabled": false,                             (optional, default false)
 #         "secrets_required": ["VENICE_API_KEY"],               (optional — env vars the skill cannot run without)
@@ -97,7 +97,7 @@ Install a curated community skill pack from a GitHub repository, or browse the
 community registry.
 
 Arguments:
-  <github-repo>          owner/repo (e.g. AntFleet/aeon-skills)
+  <github-repo>          owner/repo (e.g. clawhunter/clawhunter-skills)
                          Omit with --list to browse the community registry.
   [skill-names...]       Optional — limit install to specific slugs from the pack
 
@@ -124,10 +124,10 @@ Community registry:
 
 Examples:
   bin/install-skill-pack --list
-  bin/install-skill-pack AntFleet/aeon-skills --list
-  bin/install-skill-pack AntFleet/aeon-skills
-  bin/install-skill-pack liquidpadbot/aeon-skill-pack-liquidpad liquidpad-burn-monitor liquidpad-token-alert
-  bin/install-skill-pack mnemedb/aeon-skill-pack-mneme --dry-run
+  bin/install-skill-pack clawhunter/clawhunter-skills --list
+  bin/install-skill-pack clawhunter/clawhunter-skills
+  bin/install-skill-pack clawhunter/clawhunter-skills clawhunter-bounties
+  bin/install-skill-pack richard7463/aeon-skill-pack-claim-audit --dry-run
 EOF
   exit 0
 }
@@ -698,7 +698,7 @@ update_skills_json() {
     --arg slug "$slug" \
     --arg name "$slug" \
     --arg description "$desc" \
-    --arg category "${category:-research}" \
+    --arg category "${category:-other}" \
     --arg sha "$sha7" \
     --arg updated "$today" \
     --arg install "$install_cmd" \

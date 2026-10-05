@@ -16,6 +16,12 @@ name: ci-readme-catalog
 # overlap: this owns the first-party summary/full-catalog tables, that one owns
 # the "## Community Packs" table.
 #
+# It also checks every whole-catalog "N skills" count (and "N+ skills", which
+# always fails) plus the "all-N-skills-by-pack" link anchor in the README and
+# the docs that repeat the total (docs/skill-packs.md, docs/aeon-setup.md,
+# docs/examples/README.md, docs/assets/hero-animated.svg), and runs the table
+# checks over docs/skill-packs.md, where the full catalog table now lives.
+#
 # Run locally: node scripts/validate-readme-catalog.mjs
 
 on:
@@ -25,6 +31,10 @@ on:
       - 'catalog/packs.json'
       - 'catalog/skills.json'
       - 'scripts/validate-readme-catalog.mjs'
+      - 'docs/skill-packs.md'
+      - 'docs/aeon-setup.md'
+      - 'docs/examples/README.md'
+      - 'docs/assets/hero-animated.svg'
       - '.github/workflows/ci-readme-catalog.yml'
   push:
     branches: [main]
@@ -33,6 +43,10 @@ on:
       - 'catalog/packs.json'
       - 'catalog/skills.json'
       - 'scripts/validate-readme-catalog.mjs'
+      - 'docs/skill-packs.md'
+      - 'docs/aeon-setup.md'
+      - 'docs/examples/README.md'
+      - 'docs/assets/hero-animated.svg'
   workflow_dispatch:
 
 permissions:
@@ -46,7 +60,7 @@ concurrency:
 
 jobs:
   check:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       - name: Validate the README skill tables against the first-party catalog

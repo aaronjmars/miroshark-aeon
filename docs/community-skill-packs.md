@@ -19,14 +19,10 @@ bin/install-skill-pack --list
 
 Prints every pack declared in `catalog/skill-packs.json` — repo, skill count, trust badge, one-line description. Trusted-source packs are marked with `*` (security scan skipped, format check still runs). The script reads the local `catalog/skill-packs.json` when present and falls back to fetching the file from `https://raw.githubusercontent.com/aeonfun/aeon/main/catalog/skill-packs.json` when it isn't.
 
-Trusted AntFleet packs currently expose both `pr-review-antfleet` for
-installed repos with channel drawdown and `pr-review-antfleet-x402` for
-public repos with x402 pay-per-call USDC.
-
 ## One-command install
 
 ```bash
-bin/install-skill-pack AntFleet/aeon-skills
+bin/install-skill-pack clawhunter/clawhunter-skills
 ```
 
 That single command:
@@ -61,7 +57,7 @@ The manifest lives at the pack root (or under `--path <subdir>` if the pack is n
       "slug": "skill-name",
       "path": "skills/skill-name",
       "description": "What this skill does",
-      "category": "research",
+      "category": "basics",
       "schedule": "0 12 * * *",
       "default_enabled": false,
       "secrets_required": ["VENICE_API_KEY"],
@@ -86,7 +82,7 @@ The manifest lives at the pack root (or under `--path <subdir>` if the pack is n
 | `skills[].slug` | string | **required** | Aeon skill slug. Must match `[A-Za-z0-9_-]+`. Used as the directory name under `skills/`. |
 | `skills[].path` | string | optional | Path to the skill's **directory** inside the pack repo (relative). Defaults to `skills/<slug>`. May not contain `..`. A path ending in `/SKILL.md` is accepted and its parent directory used, but write the directory. |
 | `skills[].description` | string | optional | Falls back to the SKILL.md frontmatter `description:`. |
-| `skills[].category` | string | optional | One of `research`, `dev`, `crypto`, `social`, `productivity`. Defaults to `research` in `skills.json`. |
+| `skills[].category` | string | optional | One of `core`, `evolution`, `basics`, `dev`, `crypto`, `productivity` (the vocabulary `scripts/check-skill-categories.sh` enforces). Defaults to `other` (the catch-all) in `skills.json`. |
 | `skills[].schedule` | string | optional | Cron string written into `aeon.yml`. Default `0 12 * * *`. Must be 5 cron fields, `workflow_dispatch`, or `reactive`: the installer rewrites `hourly`/`daily`/`weekly`/`monthly`/`yearly` (and `@daily` style) to their standard cron and anything else to the default, with a warning, and `validate-pack.sh` flags both. |
 | `skills[].default_enabled` | boolean | optional | If `true`, the skill is added to `aeon.yml` with `enabled: true`. Default `false` (operator opts in explicitly). |
 | `skills[].secrets_required` | string[] | optional | Env vars the skill **cannot run without** (e.g. API keys). `install-skill-pack` warns loudly when any are unset before the first scheduled run, but does **not** gate the install — an operator may install dry-run or wire the secret afterward. |
@@ -101,7 +97,7 @@ The manifest lives at the pack root (or under `--path <subdir>` if the pack is n
 
 ### Fallback when no manifest exists
 
-If the pack repo has no `skills-pack.json`, `install-skill-pack` falls back to scanning `skills/*/SKILL.md` and installs each discovered skill with the defaults above (`schedule = "0 12 * * *"`, `default_enabled = false`, `category = "research"`). This means existing repos that follow the `skills/<name>/SKILL.md` convention work out of the box — adding a manifest is an optional upgrade that lets the pack maintainer name and version the bundle.
+If the pack repo has no `skills-pack.json`, `install-skill-pack` falls back to scanning `skills/*/SKILL.md` and installs each discovered skill with the defaults above (`schedule = "0 12 * * *"`, `default_enabled = false`, `category = "other"`). This means existing repos that follow the `skills/<name>/SKILL.md` convention work out of the box — adding a manifest is an optional upgrade that lets the pack maintainer name and version the bundle.
 
 ---
 
@@ -133,13 +129,13 @@ With this manifest:
     {
       "slug": "arxiv-watcher",
       "description": "arXiv digest filtered by interest profile",
-      "category": "research",
+      "category": "basics",
       "schedule": "0 8 * * *"
     },
     {
       "slug": "citation-graph",
       "description": "Walks BFS over citations from a seed paper",
-      "category": "research",
+      "category": "basics",
       "schedule": "0 9 * * 1"
     }
   ]
@@ -205,7 +201,7 @@ The operator is always the trust boundary. The install script does not auto-trus
       "author": "github-handle-or-name",
       "license": "MIT",
       "homepage": "https://...",
-      "category": "research|dev|crypto|social|productivity",
+      "category": "dev",
       "trust_level": "trusted|community",
       "skills": ["slug-1", "slug-2"],
       "secrets_required": ["VENICE_API_KEY"],
@@ -225,7 +221,7 @@ The operator is always the trust boundary. The install script does not auto-trus
 | `author` | string | recommended | Maintainer handle or org. |
 | `license` | string | optional | SPDX identifier. |
 | `homepage` | string | optional | Project page or docs link. |
-| `category` | string | optional | Same vocabulary as per-skill category. |
+| `category` | string | optional | Free-form discovery tag for the pack (e.g. `dev`, `crypto`, `research`); not validated. Per-skill categories are what group skills into packs. |
 | `trust_level` | string | optional | `trusted` (also requires the source in `skills/security/trusted-sources.txt`) or `community`. Default `community`. Listing here is a discovery hint — the actual scan-bypass behaviour is decided by the trusted-sources file. |
 | `skills[]` | array | **required** | Slugs the pack ships. Mirror the pack's own `skills-pack.json`. |
 | `secrets_required` | string[] | optional | Aggregated list of env vars the pack's skills declare as required. Drives the `bin/install-skill-pack --list --no-secrets` filter, which hides any pack with a non-empty `secrets_required`. Keep this in sync with the union of `skills[].secrets_required` in the pack's own `skills-pack.json`. |
@@ -278,19 +274,12 @@ Community skill packs live in their own repos and install as one bundle. The aut
 
 | Pack | Skills | Description |
 |------|--------|-------------|
-| [aeon-skills](https://github.com/AntFleet/aeon-skills) | 2 | Two-model-consensus PR review (Opus 4.7 + GPT-5), x402 pay-per-call for public repos. |
-| [aeon-skill-pack-liquidpad](https://github.com/liquidpadbot/aeon-skill-pack-liquidpad) | 4 | Track LiquidPad on Base: burn alerts, launches, digest, fee accrual. |
-| [aeon-skill-pack-mythosforge](https://github.com/ryjin111/aeon-skill-pack-mythosforge) | 5 | Read-only MythosForge monitoring: ops/jury/payout health and proof-of-creation integrity on Base. |
-| [signa](https://github.com/codexvritra/signa) (`--path aeon-skills`) | 20 | Wallet-signed cross-platform agent messaging, encrypted rooms, and x402 bounded-spend mandates. |
-| [Atrium Skills](https://github.com/Atrium-Hermes/aeon-atrium-skills) | 3 | Publish, rent, and earn from agent skills on Atrium, the onchain skill marketplace on Base. |
-| [aeon-skill-pack-mneme](https://github.com/mnemedb/aeon-skill-pack-mneme) | 8 | Persistent memory layer: vector recall, entity graph, and Base chain streams. One key, zero infra. |
 | [clawhunter-skills](https://github.com/clawhunter/clawhunter-skills) | 2 | Aggregates and AI-triages crypto bounties across venues; paid research/create tools settle via x402. |
-| [Polymarket Trader by Simmer](https://github.com/SpartanLabsXyz/aeon-skill-pack-polymarket/tree/main/aeon-skill-pack) (`--path aeon-skill-pack`) | 3 | Signal, discovery, and real order-placing on Polymarket (simulate-by-default, live opt-in). |
 | [Charon for AEON](https://github.com/CharonAI-code/charon/tree/main/skills/aeon) (`--path skills/aeon`) | 2 | Repo-local policy enforcement for AEON runs, with natural-language policy management. |
-| [aeon-skill-pack-agentlink](https://github.com/techdigger/aeon-skill-pack-agentlink) | 1 | Verified, human-backed on-chain identity on Base via AgentLink. Read-only, on-demand. |
 | [AI2Human Create Task](https://github.com/richard7463/ai2human-aeon-skill-pack) | 1 | Route a blocked human step to AI2Human: dispatch human execution, then follow the proof, verify, settle loop before USDC payout. |
 | [aeon-skill-pack-skim](https://github.com/JessieJanie/aeon-skill-pack-skim) | 1 | Pay-per-call clean web reads via Skim x402: any URL to markdown ~4x smaller than raw HTML, $0.002 USDC on Base, no API key. |
 | [CultOS Aeon Skills](https://github.com/thesmithdao/cultos-aeon-skills) | 1 | Read-only exact-commit pull-request reviews for CultOS ACP jobs. |
 | [aeon-skill-pack-farcaster](https://github.com/amritmirch/aeon-skill-pack-farcaster) | 1 | Publish to Farcaster via Neynar: drafted for review, posted behind a kill-switch, daily cap, dedup ledger, and a 1024-byte protocol check. |
 | [aeon-skill-pack-spoolis](https://github.com/jsfranklin221/aeon-skill-pack-spoolis) | 1 | Verify delivered work against acceptance criteria: signed Outcome Receipt, per-unit earned value, chain verdict. Keyless sandbox. |
 | [aeon-skill-pack-claim-audit](https://github.com/richard7463/aeon-skill-pack-claim-audit) | 1 | Check whether what your instance reported is true: re-verify every claim at its source, grade E0-E4. |
+| [Messaging Pack](https://github.com/Svector-anu/aeon-messaging-pack) | 1 | Keep product copy plain and clear: weekly rewrites against a messaging playbook, adoption tracking, and one lesson a week from the best sites. Read-only. |

@@ -1,6 +1,6 @@
 ---
 name: aeon
-description: Set up and run an Aeon agent instance — get started from scratch, pick which skills to turn on or install more from packs, reschedule or change what runs, edit what an existing skill does, fix a skill that isn't firing, set the STRATEGY.md north star and soul/ voice, turn a Claude Code chat into a scheduled Aeon skill, and mine past Claude Code conversations for recurring work worth automating as a skill. Use when the user mentions Aeon, aeon.yml, an Aeon skill / instance / routine / pack, asks to schedule, enable, edit, or debug an agent that runs on a cron, or asks what of their repeated/manual work Aeon could take over.
+description: Set up and run an Aeon agent instance — get started from scratch, pick which skills to turn on or install more from packs, reschedule or change what runs, edit what an existing skill does, fix a skill that isn't firing, set the STRATEGY.md north star and soul/ voice, turn a coding-agent chat into a scheduled Aeon skill, and mine past coding-agent conversations for recurring work worth automating as a skill. Use when the user mentions Aeon, aeon.yml, an Aeon skill / instance / routine / pack, asks to schedule, enable, edit, or debug an agent that runs on a cron, or asks what of their repeated/manual work Aeon could take over.
 ---
 
 # Aeon
@@ -18,11 +18,11 @@ Pick the mode they're asking for:
 | **5 · Edit a skill** | Change what an existing skill does |
 | **6 · What to turn on** | Pick skills, browse packs, install more |
 | **7 · Strategy & voice** | `STRATEGY.md` and `soul/` — the north star and the tone |
-| **8 · Mine history → skill** | "What of my repeated work could Aeon do for me?" — surface it from past Claude Code chats |
+| **8 · Mine history → skill** | "What of my repeated work could Aeon do for me?" — surface it from past coding-agent chats |
 
 ## Preflight (every mode)
 
-1. Find the repo: current dir → `gh repo set-default` → ask. Clone it if it isn't local.
+1. Find the repo: current dir → `gh repo set-default` → ask. Clone it if it isn't local (an instance made with Aeon Connect lives at `github.com/<owner>/<repo>` like any other; no instance yet means Mode 1).
 2. **Confirm `gh` points at THEIR instance, before any command that writes.**
 
    ```bash
@@ -50,47 +50,36 @@ Anything it prints is on disk but unconfigured. **Orientation — what's install
 
 Goal: one real notification in their phone, fast. Do not configure a schedule first.
 
-1. **Get a repo. Ask public or private before you run anything** — it changes the command, and switching later means moving the repo.
+> **Fastest start, no terminal: Aeon Connect.** If the user has no terminal, no Node or `gh`, or just wants the quickest path, send them to https://www.aeon.fun/connect. In the browser they sign in with GitHub, create their aeon (a public fork or a private copy), install the Aeon Connect GitHub App on that one repo, connect a model, and pick skills. Nothing else to do: the agent then runs on their own GitHub Actions. Use the terminal path below only if they want a local clone.
 
-   **Public** (recommend this): Actions minutes are free, and upstream skill updates arrive with one command.
+1. **Run `./aeon init`.** Ask public or private first (public: Actions minutes are free; private: `--private`, minutes bill against the account quota, 2,000/mo on Free). Then, from a clone of the template:
 
    ```bash
-   gh repo fork aeonfun/aeon --clone && cd aeon
-   gh repo set-default <owner>/aeon        # REQUIRED — see below
+   git clone https://github.com/aeonfun/aeon && cd aeon
+   ./aeon init                 # add --private, --name <repo>, --harness <h> as needed
    ```
 
-   **Private**: a fork of a public repo is always public, so a private instance is a mirror, not a fork.
+   It is idempotent and prints a check or a fix per step: signs in to GitHub with the `workflow` scope, creates `<owner>/<name>` from the template (a template copy starts with Actions on; Aeon Connect forks public instances and turns Actions on itself), points this folder at it (`aeonfun/aeon` stays as the `upstream` remote), runs `gh repo set-default`, enables Actions and lets them open PRs (the default token permission is left as is), offers to store the gh token as `GH_GLOBAL` (only if it has `repo` + `workflow`), connects a model from the credential manifest, and links Telegram with a `/start` deep link. Re-run it any time; `bin/onboard` is the read-only check. `--dry-run` shows every step without changing anything.
+
+   **If they set things up by hand, pin the default repo before any other command.** With an `upstream` remote and no default pinned, **`gh` prefers `upstream` over `origin`**, so secrets and runs silently land on `aeonfun/aeon`. Fix and verify:
 
    ```bash
-   gh repo create <name> --private
-   git clone --bare https://github.com/aeonfun/aeon.git
-   git -C aeon.git push --mirror https://github.com/<owner>/<name>.git
-   rm -rf aeon.git && git clone https://github.com/<owner>/<name>.git && cd <name>
-   git remote add upstream https://github.com/aeonfun/aeon.git
-   gh repo set-default <owner>/<name>      # REQUIRED — see below
-   ```
-
-   Say both costs out loud before they pick private: Actions minutes bill against the account quota (2,000/mo on Free — scheduled skills burn it), and updates come from `git fetch upstream && git merge upstream/main` instead of `gh repo sync`.
-
-   **Pin the default repo before any other command — both paths.** Both end up with an `upstream` remote (`gh repo fork --clone` adds one for you), and with no default pinned **`gh` prefers `upstream` over `origin`**. Everything in Aeon routes through `gh -R $(gh repo view …)`, so an unpinned checkout silently writes secrets to and dispatches runs against `aeonfun/aeon` instead of their instance — with no error, because the commands genuinely succeed on the wrong repo. Verify:
-
-   ```bash
+   gh repo set-default <owner>/<repo>
    gh repo view --json nameWithOwner -q .nameWithOwner   # must print THEIR repo
    ```
 
-   Everything after this step is identical either way.
-2. **Auth a model.** At least one is required. Fastest is `./aeon auth --oauth` (Claude Pro/Max, opens a browser), or `./aeon auth --key <key>`, which detects the provider **from the key prefix** — `sk-ant-oat` (OAuth), `sk-or-` (OpenRouter), `bk_` (Bankr), `inf_` (Surplus), `xai-` (Grok); anything else lands in `ANTHROPIC_API_KEY`.
+2. **Auth a model** (if `init` skipped it). At least one is required. The choices per harness, in the order the workflow uses them, are in `harness-adapter/harnesses.json` (`credentials`) and the table in `docs/harnesses.md`. Fastest is `./aeon auth --harness claude-code` (Claude Pro/Max, opens a browser), or `./aeon auth --key <key>`, which detects the provider **from the key prefix**: `sk-ant-oat` (OAuth), `sk-or-` (OpenRouter), `bk_` (Bankr), `inf_` (Surplus), `xai-` (Grok); anything else lands in `ANTHROPIC_API_KEY`.
 
-   **UsePod and Venice keys have no prefix** and are undetectable, so a bare `--key` files them as a plain Anthropic key and the run fails later with a confusing auth error. They must be named:
+   **UsePod, Venice, GLM and HivemindOS keys have no prefix** and are undetectable, so a bare `--key` files them as a plain Anthropic key and the run fails later with a confusing auth error. They must be named:
 
    ```bash
-   ./aeon auth --key <token> --provider usepod    # same for venice
+   ./aeon auth --key <token> --provider usepod    # same for venice, glm, hivemindos
    ```
 
-   `--dry-run` prints the resolved `method=… → secret …` without calling `gh` or `claude` — worth running whenever the provider is in doubt.
+   `--dry-run` prints the resolved `method=... -> secret ...` without calling `gh` or `claude`; run it whenever the provider is in doubt.
 
    **Don't assume they have a Claude subscription:** ten providers work, including OpenRouter, Grok, GLM, and crypto-settled gateways. See "Providers and harnesses".
-3. **Wire one channel.** Telegram is the fastest: create a bot with @BotFather, then `./aeon secrets set TELEGRAM_BOT_TOKEN --stdin` and `TELEGRAM_CHAT_ID`. Skip Discord/Slack/email for now — one channel is enough to prove it works.
+3. **Wire one channel** (if `init` skipped it). Telegram is the fastest: `./aeon init` asks for the @BotFather token and links the chat for them; by hand it is `./aeon secrets set TELEGRAM_BOT_TOKEN --stdin` and `TELEGRAM_CHAT_ID`. Skip Discord/Slack/email for now; one channel is enough to prove it works.
 4. **Run one skill now.** Pick it with Mode 6 — ask what they want handled, propose one — then `./aeon skills run <name>`. Wait for it, then `./aeon runs logs <id>`. They should get a Telegram message.
 5. **Only then, schedule it.** `./aeon skills enable <name>` and set a time (see Mode 2).
 
@@ -123,13 +112,13 @@ Rules:
 - Confirm back the **next 3 fire times in their timezone** after any change.
 - `--dry-run` first on anything ambiguous, show the diff, then apply.
 - Changes need a push to take effect. The CLI does it; confirm it landed.
-- **Then check the value came out quoted** — one grep, every time:
+- **Then check the entry came out right** - one grep, every time:
 
   ```bash
   grep '^  <skill>:' aeon.yml
   ```
 
-  The scheduler only reads `schedule: "…"` **with double quotes**. The CLI writes a *new* key unquoted, so an entry that had no `schedule:` yet comes back as `schedule: 0 12 * * *` and the skill is skipped forever. Details below.
+  The CLI writes `schedule`, `var`, `model` and `harness` double-quoted, and the scheduler reads `aeon.yml` with yq, so a quoted or a bare `schedule:` both fire. Quotes still matter on a hand-written per-skill `model:`/`harness:` override (see Harness below). Details in Mode 3, check 5.
 
 Skills with `schedule: workflow_dispatch` are on-demand only — they never fire on cron. `reactive` ones fire on conditions, not time.
 
@@ -143,18 +132,17 @@ Skills with `schedule: workflow_dispatch` are on-demand only — they never fire
 2. **Duplicate key?** `node scripts/validate-config.js`. A repeated skill name in `aeon.yml` silently shadows the first one. Common after hand-edits.
 3. **Is it even cron?** `workflow_dispatch` and `reactive` never fire on a schedule.
 4. **Are Actions disabled?** `gh api repos/{owner}/{repo}/actions/permissions`. GitHub auto-disables scheduled workflows after 60 days of repo inactivity — this silently kills forks and nothing in Aeon surfaces it. Re-enable in repo Settings.
-5. **Is the schedule quoted?** `grep '^  <skill>:' aeon.yml` — the value must be `schedule: "0 12 * * *"`, **with double quotes**.
+5. **Is the schedule valid cron?** `grep '^  <skill>:' aeon.yml`. The scheduler reads `aeon.yml` with yq (`scripts/parse-aeon-config.sh`), so quotes are optional:
 
    ```
    schedule: "0 12 * * *"   ✅ fires
-   schedule: 0 12 * * *     ❌ never fires, no error anywhere
+   schedule: 0 12 * * *     ✅ fires
+   schedule: "0 12 * *"     ❌ never fires (wrong field count)
    ```
 
-   `scheduler.yml` matches schedules with the bash regex `schedule: *"([^"]+)"`. An unquoted value doesn't match, `$SCHED` is empty, and the match loop hits `[ -z "$SCHED" ] && continue` — skipped silently, every tick, forever.
+   `scripts/cron-due.sh` treats a wrong field count, `*/0` or an out-of-range value as "not due" and only warns on stderr, so the skill is skipped every tick. `node scripts/validate-config.js` checks the schedule format, so run it after any hand edit. Invalid YAML anywhere in `aeon.yml` fails the whole scheduler tick with an `::error::`, so nothing runs at all.
 
-   How it gets that way: the CLI edits `aeon.yml` through a YAML document model that preserves an *existing* quoted node but writes a **newly added** key in plain style. So `./aeon skills schedule <name> "0 12 * * *"` is safe on an entry that already had a quoted `schedule:`, and quietly breaks one that didn't. Same for a first-time `--var`.
-
-   **Nothing else detects this.** The file is valid YAML, `validate-config.js` reports CLEAN, and `./aeon skills ls --enabled` lists the skill with its schedule — because they all parse YAML properly and only the scheduler uses a regex. Fix by adding the quotes by hand.
+   **Older instances:** a `scheduler.yml` from before the yq parser (no `scripts/parse-aeon-config.sh` in the repo) matches schedules with the bash regex `schedule: *"([^"]+)"`, so there an unquoted value is skipped silently, every tick, forever, and nothing else detects it. Pull upstream, or add the quotes by hand.
 6. **Did it run and fail?** `./aeon runs ls` then `./aeon runs logs <id>`. A failed skill retries after a 30-minute cooldown.
 
 Three more, if the above are clean:
@@ -189,7 +177,7 @@ Note: GitHub only delivers ~10% of `*/5` cron ticks, so the scheduler catches up
 
 ## Mode 4 — Turn this chat into a skill
 
-They just did something in Claude Code and want it to happen on a schedule.
+They just did something in this chat and want it to happen on a schedule.
 
 1. **Write the skill file.** `skills/<name>/SKILL.md` — frontmatter, then the prompt. Derive it from what actually happened in the session:
    - the prompt body = what they asked for, plus the steps that worked
@@ -205,27 +193,28 @@ They just did something in Claude Code and want it to happen on a schedule.
 
 3. **Check it can actually run there.** No local filesystem, no logged-in tools. If the session read their home directory or used a local MCP server, say so plainly — that part won't work unattended unless it's wired as a repo secret / `.mcp.json`. Wiring an MCP server for unattended use (dashboard Connect, OAuth refresh, the rotating-token PAT): `references/mcp.md`.
 
-4. **Add the `aeon.yml` entry yourself.** A new skill on disk has no entry, and `./aeon skills enable|schedule` **will not create one** — they only flip entries that already exist, and report `no change — already in that state`, which is false. Add it by hand, disabled, before the fallback `heartbeat:` line:
+4. **Give it an `aeon.yml` entry.** A new skill on disk has no entry. `./aeon skills enable|schedule <name>` **upserts**: if the entry is missing they create it (inline, quoted `schedule:` defaulting to `"0 12 * * *"`, inserted before the fallback `heartbeat:` line) and then apply the change. To land it present but **disabled**, add it by hand instead, before the `heartbeat:` line:
 
    ```yaml
      my-skill: { enabled: false, schedule: "0 12 * * *" }
    ```
 
-   **Include the quoted `schedule:` even though it's disabled — the quotes are load-bearing.** Writing a bare `{ enabled: false }` and letting `./aeon skills schedule` add the key later produces an *unquoted* value the scheduler cannot read, and the skill never fires (Mode 3, check 5). Seeding a quoted node here means every later CLI edit preserves the quotes.
+   **Include the quoted `schedule:` even though it's disabled.** It matches every other entry, and an older instance whose scheduler still uses the bash regex only reads quoted values (Mode 3, check 5). The CLI writes the values it adds double-quoted, so later edits stay consistent.
 
-   Match the inline `{ … }` form the other 61 entries use, on one line. `aeon.yml:367` reads per-skill `model:`/`harness:` overrides with a single-line grep, so an entry split across lines takes the global default instead.
+   Match the inline `{ … }` form every other entry uses, on one line. Per-skill `model:`/`harness:` overrides are read through `scripts/skill_entry.sh`, which also follows an entry split across lines, but the value must be double-quoted (see Harness below).
 
-   This is the one sanctioned exception to "never hand-edit the YAML". Validate after: `node scripts/validate-config.js` — but note it only checks structure, and will not catch an unquoted value.
+   This is the one sanctioned exception to "never hand-edit the YAML". Validate after: `node scripts/validate-config.js`. It checks structure and schedule format, but not whether a `model:`/`harness:` override is quoted.
 
-5. **Regenerate BOTH catalogs, then ship it as a PR.** A new skill trips three CI gates. Run them locally — **nothing blocks a merge on red**, `main` is unprotected and has no rulesets, so an unrun gate just fails after the fact:
+5. **Regenerate BOTH catalogs, add the eyebrow entry, then ship it as a PR.** A new skill trips four CI gates, and **a red gate blocks the merge**: `main` requires the `gate` check, which `ci-gate` fails whenever any other check on the PR is red. Run them locally first. Commit `SKILL.md` on its own before regenerating (the catalog's `sha`/`updated` are git-derived):
 
    ```bash
    bash scripts/check-skill-categories.sh   # category is one of the six
    bin/generate-skills-json                 # catalog/skills.json
-   bin/generate-packs-json                  # catalog/packs.json — NOT optional
+   bin/generate-packs-json                  # catalog/packs.json - NOT optional
+   eyebrow scan --path . --lockfile /tmp/fresh.json   # splice only this skill's entry into eyebrowlock.json
    ```
 
-   `generate-packs-json` is the one everyone forgets: `catalog/skills.json` is itself a trigger path for `ci-packs-json`, so committing the skills catalog without the pack catalog goes red on a workflow you never touched. Commit both files.
+   `generate-packs-json` is the one everyone forgets: `catalog/skills.json` is itself a trigger path for `ci-packs-json`, so committing the skills catalog without the pack catalog goes red on a workflow you never touched. Commit both files. `ci-skill-integrity` also hard-fails any skill with no `eyebrowlock.json` entry; use the eyebrow version pinned in `.github/workflows/ci-skill-integrity.yml` and commit only the new skill's artifact, not a whole-file rescan.
 
    Full gate list, triggers, and the `ci-tests` / `ci-apps` commands: `references/ci.md`.
 
@@ -251,7 +240,7 @@ metadata:
 Today is ${today}. <the prompt — plain instructions, including judgment calls>
 
 ## Steps
-1. <the procedure - 52 of 84 skills carry this section>
+1. <the procedure - 52 of 85 skills carry this section>
 
 ## Network note
 <curl / WebFetch / `./secretcurl` / `gh api` — how this skill fetches>
@@ -271,7 +260,7 @@ Four things that bite when authoring — full detail in `references/skill-anatom
 - **`${today}` / `${var}` are not templated.** Nothing rewrites `SKILL.md`; the workflow puts the date and var in the surrounding prompt and the model resolves them in context. Inventing `${my_thing}` yields a literal `${my_thing}`.
 - **Never put a secret on a command line.** Use `./secretcurl` with a `{ENV_NAME}` placeholder in braces — Claude Code's permission analyzer blocks `$SECRET` expansions at run time.
 
-Schedules do **not** go in `SKILL.md` — they live in `aeon.yml`. 10 upstream skills carry a `schedule:` or `cron:` frontmatter line anyway; **nothing reads it** (`scheduler.yml` parses `aeon.yml` only). Don't copy that pattern, and don't trust one you find — check `aeon.yml`.
+Schedules do **not** go in `SKILL.md`; they live in `aeon.yml`. Upstream skills no longer carry a `schedule:` or `cron:` frontmatter line. If you find one (in a fork or a third-party skill), it is inert: **nothing reads it** (`scheduler.yml` parses `aeon.yml` only). Don't add one, and don't trust one you find - check `aeon.yml`.
 
 ---
 
@@ -311,9 +300,9 @@ Three at a time, not twelve. Every enabled skill is a recurring notification, an
 ./aeon packs ls                  # the six first-party packs
 ```
 
-`ls` footers with `84 skills · 1 enabled` — read it to them before proposing anything. First run installs the CLI runtime (tsx + yaml, ~12MB); the npm noise is one-time and expected. Grep-only equivalents: `references/layout.md`.
+`ls` footers with `85 skills · 1 enabled` — read it to them before proposing anything. First run installs the CLI runtime (tsx + yaml, ~12MB); the npm noise is one-time and expected. Grep-only equivalents: `references/layout.md`.
 
-Packs are a visibility filter, not a runtime switch — revealing one runs nothing. Core (12), Evolution (9) and Basics (18) show by default; Dev (15), Crypto (19) and Productivity (11) are on demand.
+Packs are a visibility filter, not a runtime switch — revealing one runs nothing. Core (12), Evolution (9) and Basics (18) show by default; Dev (16), Crypto (19) and Productivity (11) are on demand.
 
 Reasonable starting sets:
 
@@ -373,7 +362,7 @@ By default Aeon has no personality. `soul/SOUL.md` (identity, worldview, opinion
 
 ## Mode 8 — Mine history for skills to automate
 
-"What am I doing by hand over and over that Aeon could just do?" Mode 4 turns *this* chat into a skill; Mode 8 mines *past* chats to find which chat is worth turning into one. It reads the operator's local Claude Code transcripts (`~/.claude/projects/*/*.jsonl`), so it only works on their own machine — never inside an Aeon run.
+"What am I doing by hand over and over that Aeon could just do?" Mode 4 turns *this* chat into a skill; Mode 8 mines *past* chats to find which chat is worth turning into one. It reads the operator's local coding-agent transcripts (`~/.claude/projects` or `~/.codex/sessions`), so it only works on their own machine — never inside an Aeon run.
 
 1. **Scan.** Run the miner from the instance repo root:
 
@@ -437,16 +426,16 @@ It runs as a **cascade**, not a single choice: the highest-priority key goes fir
 
 ### Harness — which CLI runs the skill
 
-`claude` (default) or `grok`. The Grok harness runs the `grok` CLI instead of Claude Code and **bypasses the gateway entirely** — it has its own auth.
+Nine harnesses: `claude` (default), `grok`, `codex`, `pi`, `vibe`, `kimi`, `fx`, `cursor`, `hermes`. All run through the same `harness-adapter/run-harness` contract; only `claude` goes through the gateway above, every other harness uses its own auth (`glm` is a gateway provider, not a harness). `codex`/`pi`/`vibe`/`kimi`/`hermes` can all run on one shared `OPENROUTER_API_KEY`; `fx` needs `AI_GATEWAY_API_KEY`, `cursor` needs `CURSOR_API_KEY`. Native logins: `./aeon auth --harness <name>` (see `./aeon auth --help`), and `docs/harnesses.md` for models and verification status. The rest of this section covers `grok`, the one with the most knobs. The Grok harness runs the `grok` CLI instead of Claude Code and **bypasses the gateway entirely**.
 
-- **Set it:** `./aeon config set harness grok` globally, or `harness: "grok"` on a single skill's `aeon.yml` entry — **quoted, on the entry's one inline line**. Per-skill `model:` and `harness:` are read by a single-line grep that requires double quotes (`aeon.yml:367`, `:380`), so an unquoted or line-split override is silently ignored and the skill keeps running the global default — no error, and the log's `model=` line looks normal. After setting either by CLI, re-read the entry and add the quotes if they're missing.
+- **Set it:** `./aeon config set harness grok` globally, or `harness: "grok"` on a single skill's `aeon.yml` entry - **quoted**. Per-skill `model:` and `harness:` are read through `scripts/skill_entry.sh` with a match that requires double quotes, so an unquoted override is silently ignored and the skill keeps running the global default - no error, and the log's `model=` line looks normal. The CLI writes both quoted; after a hand edit, re-read the entry and add the quotes if they're missing.
 - **Auth:** `XAI_API_KEY`, or an X account (SuperGrok / X Premium+) via the dashboard's **Connect X account**, which stores `GROK_CREDENTIALS`. There is no CLI flag for the X OAuth flow — send them to `./aeon` (the dashboard) for that one.
-- **Models:** `grok-4.5` (default, reasoning) or `grok-composer-2.5-fast` (cheap).
+- **Models:** `grok-4.7` (default, reasoning) or `grok-4.6`, the ids the dashboard offers for the harness (an older `grok-4.5` pin still dispatches). Older api.x.ai ids such as `grok-composer-2.5-fast` are not harness models (the grok CLI rejects them on an X-account login); they work only on the `grok` gateway path (`XAI_API_KEY` plus the `GROK_MODEL` repo variable).
 - **No free tier.**
 
 Tell them up front:
-- Grok runs report **0 tokens** — its JSON carries no token counts, so cost tracking reads blank. Not a bug.
+- `vibe` and `kimi` runs report **0 tokens** (their CLIs expose no token counts), so cost tracking reads blank for them. Not a bug. Grok reports real usage and cost.
 - The X OAuth session expires. If unattended runs start failing on auth, reconnect.
-- `mode: read-only` still applies (maps to `--sandbox read-only`), and MCP works.
+- `mode: read-only` still applies (the wrapper OS sandbox write-locks the workspace on every harness), and MCP works.
 
-Per-skill grok knobs, in `SKILL.md` frontmatter (ignored on the Claude harness): `max_turns` (default 60), `best_of_n`, `verify`, and `effort` (`low|medium|high|xhigh|max` — reasoning models only; `grok-composer-2.5-fast` rejects it).
+Per-skill grok knobs, in `SKILL.md` frontmatter (ignored on the Claude harness): `max_turns` (default 60) and `effort` (`low|medium|high|xhigh|max`, reasoning models only; non-reasoning models reject it).

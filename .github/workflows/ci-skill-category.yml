@@ -5,17 +5,27 @@ name: ci-skill-category
 # (docs/skill-packs.md). A missing or typo'd category would silently dump the
 # skill into the Lab catch-all instead of its intended pack, so this gate fails
 # the PR instead. Same shape as ci-skills-json / ci-packs-json.
+#
+# It also checks the templates under docs/examples/skill-templates/ (their
+# category is the default bin/new-from-template stamps) and that
+# bin/new-from-template's --category list matches the valid set.
 
 on:
   pull_request:
     paths:
       - 'skills/**'
       - 'scripts/check-skill-categories.sh'
+      - 'docs/examples/skill-templates/**'
+      - 'bin/new-from-template'
+      - '.github/workflows/ci-skill-category.yml'
   push:
     branches: [main]
     paths:
       - 'skills/**'
       - 'scripts/check-skill-categories.sh'
+      - 'docs/examples/skill-templates/**'
+      - 'bin/new-from-template'
+      - '.github/workflows/ci-skill-category.yml'
   workflow_dispatch:
 
 permissions:
@@ -29,7 +39,7 @@ concurrency:
 
 jobs:
   check:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       - name: Every SKILL.md declares a valid category

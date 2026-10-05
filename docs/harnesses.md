@@ -8,8 +8,10 @@ description: Deep reference for Aeon's harness axis (the nine agent CLIs behind 
 The **harness** is the coding-agent CLI that runs your skills. The README's
 [harnesses](../.github/README.md#support-nine-harnesses-claude-grok-codex-pi-vibe-kimi-fx-cursor-hermes)
 section covers the basics - nine agent CLIs behind one `run-harness` contract,
-with `claude` as the default and `grok` as the other bespoke path. This page collects the deeper behavior for anyone
-running the `grok` harness in anger.
+with `claude` as the default. Every harness, `claude` and `grok` included, runs
+through the same adapter; `glm` is not a harness but a gateway provider (see
+[LLM Gateways](CONFIGURATION.md#llm-gateways)). This page collects the deeper
+behavior for anyone running a non-default harness (especially `grok`) in anger.
 
 ## Additional harnesses via run-harness (`codex`, `pi`, `vibe`, `kimi`, `fx`, `cursor`, `hermes`)
 
@@ -17,12 +19,11 @@ Seven more harnesses are selectable in the dashboard's harness dropdown and the
 `harness:` config: **codex** (OpenAI Codex CLI), **pi** (Pi Coding Agent),
 **vibe** (Mistral Vibe), **kimi** (Moonshot Kimi), **fx** (Vercel's fx -
 [fx.sh](https://fx.sh), a minimal native Zig coding agent), **cursor** (Cursor
-CLI), and **hermes** (Nous Research Hermes Agent). Unlike `claude`/`grok`
-they don't have a bespoke branch in the workflow — they run through
-[`harness-adapter`](../harness-adapter/)'s `run-harness`, which wraps each CLI in
-the same Claude-Code-shaped `{result, usage, session_id}` contract that
-`scripts/run-grok.sh` provides, so everything downstream (scoring, token
-accounting, memory, notifications) is unchanged.
+CLI), and **hermes** (Nous Research Hermes Agent). Like `claude` and `grok`,
+they run through [`harness-adapter`](../harness-adapter/)'s `run-harness`, which
+wraps each CLI in the same Claude-Code-shaped `{result, usage, session_id}`
+contract, so everything downstream (scoring, token accounting, memory,
+notifications) is unchanged.
 
 **fx** differs on auth — see the table below: it has no OpenRouter fallback, so
 it runs on a Vercel AI Gateway key (or `VERCEL_OIDC_TOKEN` inside Vercel's own
@@ -30,19 +31,22 @@ CI) rather than the shared `OPENROUTER_API_KEY`.
 
 Each one runs on its own provider login (see **Native auth** below); a single
 shared **`OPENROUTER_API_KEY`** is the zero-setup alternative for codex, pi,
-vibe, and kimi at once. Their model picker offers OpenRouter ids rather than the
+vibe, kimi and hermes at once (and, as a gateway, for claude). Their model picker offers OpenRouter ids rather than the
 `claude-*`/`grok-*` ids, and the model you pick is what actually runs. Each of
 these harnesses carries its own curated list (`CODEX_MODELS` /
 `VIBE_MODELS` / `PI_MODELS` / `KIMI_MODELS`): **codex**
-defaults to `openai/gpt-5-mini` (it fails on `gpt-5-nano`) and also offers the
-codex-tuned line (`gpt-5.1-codex-mini`, `gpt-5.3-codex`) and the general
-`gpt-5.6` family (`luna`, `terra`); **vibe**'s generic `ProviderConfig` drives any
+defaults to `openai/gpt-6-luna` (newer and cheaper than the prior default) and also
+offers `gpt-6.1-sol` for quality (older pins like `gpt-6-sol`,
+`gpt-5.1-codex-mini`, `gpt-5-mini`, `gpt-5.3-codex`, and the `gpt-5.6` family
+still dispatch); it fails on `gpt-5-nano`; **vibe**'s generic `ProviderConfig` drives any
 OpenRouter model, so it defaults to `mistralai/mistral-medium-3-5` and offers
-`deepseek/deepseek-v4-flash`; **pi** (litellm `openrouter/<slug>` routing) runs the
-DeepSeek V4 pair — `deepseek-v4-flash` (default) and `deepseek-v4-pro`; **kimi** is
-Moonshot, so it runs Moonshot's own Kimi family through OpenRouter —
-`moonshotai/kimi-k2.5` (default), `kimi-k3` (strongest, ~2× slower), and
-`kimi-k2.7-code`. The scorer
+`deepseek/deepseek-v4.1-flash`; **pi** (litellm `openrouter/<slug>` routing) runs the
+two models DeepSeek's own API serves: `deepseek-v4.1-flash` (default) and
+`deepseek-v4-pro` (older `deepseek-v4-flash` pins still dispatch); **hermes** runs
+its configured `default`, or `anthropic/claude-sonnet-5.5` / `openai/gpt-6.1-sol` as
+overrides; **kimi** is Moonshot, so it runs Moonshot's own Kimi family
+through OpenRouter: `moonshotai/kimi-k2.7-code` (default, code-tuned) and `kimi-k3`
+(strongest, ~2× slower; older `kimi-k2.6` and `kimi-k2.5` pins still dispatch). The scorer
 routes through the same harness the skill
 ran on, so a repo with **no** Claude credentials still gets every run scored.
 
@@ -59,17 +63,48 @@ login locally, store the session as a repo secret, restore it on the runner):
 | `kimi`  | **Moonshot** device login | `aeon auth --harness kimi` (or **Connect Kimi**) → `KIMI_AUTH`. Or `--key` → `MOONSHOT_API_KEY` |
 | `pi`    | provider API key | `aeon auth --harness pi --key <sk-ant-…\|sk-…>` → the matching `ANTHROPIC_API_KEY` / `OPENAI_API_KEY` (auto-detected) |
 | `vibe`  | Mistral key | `aeon auth --harness vibe --key <key>` → `MISTRAL_API_KEY` (vibe's default provider) |
-| `fx`    | Vercel AI Gateway key (or `VERCEL_OIDC_TOKEN`) | set `AI_GATEWAY_API_KEY` as a repo secret. **No `aeon auth` flow and no OpenRouter fallback** — see below. |
-| `cursor` | Cursor API key | set `CURSOR_API_KEY` as a repo secret; headless entry point is `agent -p --trust` because every CI run starts with a fresh home. `--force` remains write-mode only. |
+| `fx`    | Vercel AI Gateway key (or `VERCEL_OIDC_TOKEN`) | `aeon auth --harness fx --key <key>` -> `AI_GATEWAY_API_KEY`. **No login flow and no OpenRouter fallback** - see below. |
+| `cursor` | Cursor API key | `aeon auth --harness cursor --key <key>` -> `CURSOR_API_KEY`; headless entry point is `agent -p --trust` because every CI run starts with a fresh home. `--force` remains write-mode only. |
 | `hermes` | Nous Portal OAuth | `aeon auth --harness hermes` → `HERMES_AUTH`; the adapter restores `~/.hermes/auth.json`. |
 
 Which one runs is decided at dispatch by **which secret is set**, native first,
 OpenRouter last (`authSecretsForHarness` / the `HARNESS_AUTH` registry in
-`apps/dashboard/lib/harness-auth.ts`). On native auth the harness uses its **own
-default model** — the OpenRouter model picker only applies when the run falls
-back to `OPENROUTER_API_KEY` (an `openai/*` id would be the wrong provider
-otherwise). The workflow's *Install harness CLI* step restores/configures the
+`apps/dashboard/lib/harness-auth.ts`). On native auth pi, vibe and kimi use their **own
+default model**, and the OpenRouter model picker applies only when the run falls
+back to `OPENROUTER_API_KEY`. cursor and hermes keep the picked model (both
+document model overrides). **codex** follows the pick too: on `CODEX_AUTH` or
+`OPENAI_API_KEY` an explicit OpenAI pick (config `model:`, per-skill, dispatch
+input or `vars.HARNESS_MODEL`) is forwarded as its bare id (`openai/gpt-6-luna`
+becomes `--model gpt-6-luna`); with no pick it keeps the account default. A
+ChatGPT plan does not serve every id, so when codex refuses the model the adapter
+retries once on the account default and warns
+`codex refused model <id>; retried on the account default`. The run records the
+model that actually ran, read from codex's session rollout. The workflow's *Install harness CLI* step restores/configures the
 selected provider; the CLI + dashboard flows share `lib/harness-auth-server.ts`.
+
+### Credentials at a glance
+
+Generated from the credential manifest ([`harness-adapter/harnesses.json`](../harness-adapter/harnesses.json),
+`credentials` + `default_model`), which CI holds to `scripts/resolve-harness.sh`. Each harness
+uses the **first** secret in its list that is set; set any one. **Connect a model** in [Aeon Connect](https://www.aeon.fun/connect)
+or the local dashboard, and `./aeon init`, walk you through the same list; `bin/onboard` checks it.
+
+| harness | precedence (first set wins) | default model |
+|---------|-----------------------------|---------------|
+| `claude` | 1. `CLAUDE_CODE_OAUTH_TOKEN` - Claude subscription (Pro/Max) (login token; [get](https://claude.ai), `./aeon auth --harness claude-code`)<br>2. `ANTHROPIC_API_KEY` - Anthropic API key (pay as you go) (API key; [get](https://console.anthropic.com/settings/keys), `./aeon auth --key <sk-ant-api...>`)<br>then any [gateway key](CONFIGURATION.md#llm-gateways) (openrouter, bankr, usepod, venice, surplus, grok, glm, hivemindos) | `claude-sonnet-5-5` |
+| `codex` | 1. `CODEX_AUTH` - ChatGPT login (Plus/Pro) (login capture; [get](https://chatgpt.com), `./aeon auth --harness codex`)<br>2. `OPENAI_API_KEY` - OpenAI API key (API key; [get](https://platform.openai.com/api-keys), `./aeon auth --harness codex --key <sk-...>`)<br>3. `OPENROUTER_API_KEY` - OpenRouter key (one key covers most harnesses) (API key; [get](https://openrouter.ai/settings/keys), `./aeon secrets set OPENROUTER_API_KEY --stdin`) | `openai/gpt-6-luna` |
+| `cursor` | 1. `CURSOR_API_KEY` - Cursor API key (API key; [get](https://cursor.com/dashboard), `./aeon auth --harness cursor --key <key>`) | `auto` |
+| `fx` | 1. `AI_GATEWAY_API_KEY` - Vercel AI Gateway key (API key; [get](https://vercel.com/docs/ai-gateway), `./aeon auth --harness fx --key <key>`)<br>2. `VERCEL_OIDC_TOKEN` - Vercel OIDC token (OIDC token; [get](https://vercel.com/docs/oidc), `vercel env pull`) | the harness's own default |
+| `grok` | 1. `GROK_CREDENTIALS` - X account login (grok login) (login capture; [get](https://x.ai/grok), `./aeon auth --harness grok`)<br>2. `XAI_API_KEY` - xAI API key (API key; [get](https://console.x.ai), `./aeon auth --harness grok --key <xai-...>`) | `grok-4.7` |
+| `hermes` | 1. `HERMES_AUTH` - Nous Portal login (login capture; [get](https://portal.nousresearch.com), `./aeon auth --harness hermes`)<br>2. `OPENROUTER_API_KEY` - OpenRouter key (one key covers most harnesses) (API key; [get](https://openrouter.ai/settings/keys), `./aeon secrets set OPENROUTER_API_KEY --stdin`) | the harness's own default |
+| `kimi` | 1. `KIMI_AUTH` - Kimi (Moonshot) login (login capture; [get](https://www.kimi.com), `./aeon auth --harness kimi`)<br>2. `MOONSHOT_API_KEY` - Moonshot API key (API key; [get](https://platform.moonshot.ai/console/api-keys), `./aeon auth --harness kimi --key <sk-...>`)<br>3. `OPENROUTER_API_KEY` - OpenRouter key (one key covers most harnesses) (API key; [get](https://openrouter.ai/settings/keys), `./aeon secrets set OPENROUTER_API_KEY --stdin`) | `moonshotai/kimi-k2.7-code` |
+| `pi` | 1. `ANTHROPIC_API_KEY` - Anthropic API key (API key; [get](https://console.anthropic.com/settings/keys), `./aeon auth --harness pi --key <sk-ant-api...>`)<br>2. `ANTHROPIC_OAUTH_TOKEN` - Claude subscription token (login token; [get](https://claude.ai), `./aeon auth --harness pi --key <sk-ant-oat...>`)<br>3. `OPENAI_API_KEY` - OpenAI API key (API key; [get](https://platform.openai.com/api-keys), `./aeon auth --harness pi --key <sk-...>`)<br>4. `OPENROUTER_API_KEY` - OpenRouter key (one key covers most harnesses) (API key; [get](https://openrouter.ai/settings/keys), `./aeon secrets set OPENROUTER_API_KEY --stdin`) | `deepseek/deepseek-v4.1-flash` |
+| `vibe` | 1. `MISTRAL_API_KEY` - Mistral API key (API key; [get](https://console.mistral.ai/api-keys), `./aeon auth --harness vibe --key <key>`)<br>2. `OPENROUTER_API_KEY` - OpenRouter key (one key covers most harnesses) (API key; [get](https://openrouter.ai/settings/keys), `./aeon secrets set OPENROUTER_API_KEY --stdin`) | `mistralai/mistral-medium-3-5` |
+
+Notes: `GROK_CREDENTIALS` needs `GH_GLOBAL` (or the optional `GH_SECRETS_PAT`) to save its
+rotating refresh token after each run (see Token accounting below). `cursor` and `fx` have no
+OpenRouter fallback; with no key `cursor` reports `AUTH_MODE=none` and stops at install.
+
 
 **`fx` breaks the "OpenRouter last" rule above** — it's the one harness with no
 OpenRouter fallback at all (confirmed: fx has no OpenRouter integration
@@ -85,7 +120,7 @@ reasons `opencode`/`copilot`/`agy` are excluded — is
 
 ## Verification status
 
-All six harnesses were verified end-to-end through `run-harness` on **2026-07-22**
+The original six harnesses (`claude`, `grok`, `codex`, `pi`, `vibe`, `kimi`) were verified end-to-end through `run-harness` on **2026-07-22**
 — each dispatched live on GitHub Actions, exercising auth, read-only enforcement,
 token accounting, and the post-run health scorer:
 
@@ -108,7 +143,8 @@ Notes from the sweep:
   so a stale or quota-dead native secret keeps failing even when a working fallback
   is present. Delete the native secret to fall through. Deleting `CODEX_AUTH` is also
   how you pin a cheap model: the OpenRouter path forwards `-f model=openai/gpt-5-*`,
-  while native auth uses the harness's own (pricier) default.
+  while native auth uses the harness's own (pricier) default. (Since #1144 codex
+  also honours an explicit pick on native auth, so this no longer applies to codex.)
 - **The scorer grades stdout, not `./notify`.** A run that routes its deliverable
   into a channel and leaves a thin final message is under-graded even though the
   work was real (observed on codex/`gpt-5-mini`, which narrated pessimistically in
@@ -162,8 +198,10 @@ has been revoked"), so a *static* capture self-destructs ~6h after Connect. To f
 that, `scripts/run-grok.sh` (§2b) refreshes the access token from the refresh token
 before each run and **persists the rotated `auth.json` back to the `GROK_CREDENTIALS`
 secret**. Persisting a secret needs a secrets-write credential - the default
-`GITHUB_TOKEN` cannot - so set a fine-grained PAT with **Secrets: read/write** as
-`GH_SECRETS_PAT` (or `GH_GLOBAL`). Without the PAT, grok
+`GITHUB_TOKEN` cannot - so set `GH_GLOBAL` (the instance's classic PAT with `repo` +
+`workflow`, see [Cross-repo access](CONFIGURATION.md#cross-repo-access); `./aeon init`
+sets it from your gh login). `GH_SECRETS_PAT` is optional and tried first, for
+keeping secrets-write on its own token. Without either, grok
 warns loudly and auth breaks one run after the first post-expiry refresh. **After
 adding the PAT, re-connect the X account once** to seed a valid refresh token (a token
 already consumed by a prior run can't be revived by the PAT alone). Concurrent grok
@@ -199,12 +237,16 @@ Grok Build has no free tier — it needs a SuperGrok / X Premium+ subscription
 
 ## Standing instructions
 
-Grok loads `CLAUDE.md` natively (it reads Claude Code's memory files), so the
-operating manual is **not** duplicated. `AGENTS.md` is generated by
-`scripts/gen-agents-md.js` and carries only `STRATEGY.md` — the one thing
-`CLAUDE.md` delivers via the Claude-only `@STRATEGY.md` import, which grok doesn't
-expand. That trims ~2.5k tokens of duplicate context per grok run vs. mirroring
-the whole manual.
+`AGENTS.md` is generated by `scripts/gen-agents-md.js` as a full,
+self-contained mirror of `CLAUDE.md` with every `@import` (e.g. `@STRATEGY.md`)
+expanded inline, because the non-claude harnesses load instruction files
+verbatim and don't expand Claude Code imports. Each run loads exactly one of the
+two: `claude` reads `CLAUDE.md`, every other harness (grok included) reads
+`AGENTS.md`. Grok natively discovers both files, so the workflow's
+"Single-source standing instructions" step hides `CLAUDE.md` for the run and
+the manual is never double-loaded. Regenerate with
+`node scripts/gen-agents-md.js` after editing `CLAUDE.md` or `STRATEGY.md`
+(`--check` verifies it in CI).
 
 ## MCP on grok — and the `--trust` gate
 
@@ -253,9 +295,16 @@ the harness is already executing as the agent's workspace.
 **Other harnesses.** MCP is not grok-only: `claude`, `codex`, `vibe` and `kimi`
 all call live MCP tools too (codex and kimi needed their own dispatcher fixes —
 see the [harness-adapter README](../harness-adapter/README.md#the-nine-harnesses)).
-`pi` is the one harness that cannot: it rejects MCP by design, so its adapter
-warns and skips every configured server, and the dashboard's MCP panel disables
-itself when `pi` is the selected harness.
+`pi` joined them with its built-in MCP support (0.99+): the adapter translates
+`.mcp.json` into pi's `mcp.json` inside a temp `PI_CODING_AGENT_DIR` (the user's
+own `~/.pi/agent/mcp.json` is never read or written) and declares each server's
+tools directly as `mcp__<server>__<tool>`, with `-` in the server name turned into
+`_`. pi waits for those servers before the first model request, but only up to a
+hard-coded 10s; a server slower than that misses the first turn. pi rejects the
+legacy `sse` transport, so `sse` entries are skipped with a warning (as are other
+types and server names outside letters, digits, `_` and `-`); the run itself goes
+on. See footnote 9 in the
+[harness-adapter README](../harness-adapter/README.md#the-nine-harnesses).
 
 ## Newer grok knobs (opt-in per skill)
 
@@ -264,17 +313,17 @@ harness:
 
 ```yaml
 max_turns: 120     # agentic-turn cap (default 60; a runaway/cost guard) → --max-turns
-best_of_n: 3       # run the task 3 ways in parallel, keep the best      → --best-of-n
-verify: true       # append a self-verification loop before finishing    → --check
 effort: high       # low|medium|high|xhigh|max → --effort  (reasoning models only)
 ```
 
 `effort`/`reasoning_effort` map to the API's `reasoningEffort`, honoured by
-`grok-4.5` — a reasoning model, and the only model the X-account login exposes to
-the CLI (see [Verification status](#verification-status); other xAI model ids are
-api.x.ai strings the CLI rejects as "unknown model id"). `best_of_n`/`verify` build
-on grok's subagents (so the harness drops `--no-subagents` for those runs);
-`verify` can't combine with structured output.
+`grok-4.7` (the default) and `grok-4.6` (an older `grok-4.5` pin still works): the
+reasoning models the X-account login exposes to the CLI (see [Verification status](#verification-status);
+older xAI model ids are api.x.ai strings the CLI rejects as "unknown model id").
+
+`best_of_n` and `verify` used to map to `--best-of-n` / `--check`. grok 1.x
+removed both flags (1.0.46 rejects them as "unexpected argument"), so the adapter
+now ignores those two keys with a notice and always runs with `--no-subagents`.
 
 These knobs are read by `harness-adapter/adapters/grok.sh`, ported from
 `run-grok.sh` §3c.

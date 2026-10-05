@@ -38,6 +38,45 @@ export function withFileLock<T>(path: string, fn: () => Promise<T>): Promise<T> 
   return run
 }
 
+// Is this git remote URL the shared Aeon template (aeonfun/aeon, or the
+// aaronjmars/aeon redirect) rather than an operator's instance?
+export function isTemplateRemote(url: string): boolean {
+  return /github\.com[:/]+(aeonfun|aaronjmars)\/aeon(\.git)?\/?$/i.test(url.trim())
+}
+
+type Git = (...args: string[]) => string
+
+// Where a local push may go: `origin` by name, never to whatever the branch
+// happens to track (a half-converted clone of the template can still track
+// aeonfun/aeon), and never to the template itself. Returns the reason to
+// refuse, or null when origin is the operator's instance. Shared by
+// commitAndPush and `aeon sync` (lib/sync.ts).
+export function originRefusal(git: Git): string | null {
+  let origin = ''
+  try { origin = git('remote', 'get-url', 'origin') } catch { /* no origin */ }
+  if (!origin) return 'no origin remote - run ./aeon init'
+  if (isTemplateRemote(origin)) return `origin is the Aeon template (${origin}), not your instance - run ./aeon init`
+  return null
+}
+
+// Push the current branch to origin explicitly. If that is rejected (most
+// likely behind origin, e.g. an Actions bot commit), rebase onto origin's copy
+// of the branch and retry once; a conflicting rebase is aborted and rethrown.
+export function pushHeadToOrigin(git: Git): void {
+  const branch = git('rev-parse', '--abbrev-ref', 'HEAD')
+  try {
+    git('push', 'origin', `HEAD:${branch}`)
+  } catch {
+    try {
+      git('pull', '--rebase', '--autostash', 'origin', branch)
+      git('push', 'origin', `HEAD:${branch}`)
+    } catch (e) {
+      try { git('rebase', '--abort') } catch { /* not mid-rebase */ }
+      throw e
+    }
+  }
+}
+
 /**
  * Local-mode auto-sync. After a dashboard edit writes a file to disk, stage
  * exactly those paths, commit, and push so the change lands on GitHub
@@ -54,23 +93,19 @@ export function commitAndPush(paths: string[], message: string): CommitResult {
     execFileSync('git', args, { stdio: 'pipe', cwd: REPO_ROOT }).toString().trim()
   const errMsg = (e: unknown) => (e instanceof Error ? e.message : String(e)).slice(0, 200)
   try {
+    // Push to `origin` by name, never to the template (the operator's edit
+    // stays on disk, reported as not synced). See originRefusal.
+    const refusal = originRefusal(git)
+    if (refusal) return { synced: false, reason: refusal }
     git('add', '--', ...paths) // stages content changes AND deletions under these paths
     let staged = true
     try { git('diff', '--cached', '--quiet', '--', ...paths); staged = false } catch { staged = true }
     if (!staged) return { synced: true } // nothing changed in these paths
     git('commit', '-m', message, '--', ...paths)
     try {
-      git('push')
-    } catch {
-      // Most likely behind origin/main (e.g. an Actions bot commit). Rebase onto
-      // the remote and retry once; abort cleanly if it conflicts.
-      try {
-        git('pull', '--rebase', '--autostash')
-        git('push')
-      } catch (e) {
-        try { git('rebase', '--abort') } catch { /* not mid-rebase */ }
-        return { synced: false, reason: errMsg(e) }
-      }
+      pushHeadToOrigin(git)
+    } catch (e) {
+      return { synced: false, reason: errMsg(e) }
     }
     return { synced: true }
   } catch (e) {

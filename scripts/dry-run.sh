@@ -166,8 +166,10 @@ cmd_run() {
   if [ -n "$model" ] && ! [[ "$model" =~ ^[a-zA-Z0-9][a-zA-Z0-9._/-]*$ ]]; then
     reject 'invalid model id'; return 1
   fi
+  # codex takes OpenRouter-style openai/* ids (its production default and every
+  # dashboard CODEX_MODELS entry) as well as bare gpt-* ids, so both pass here.
   case "$harness:$model" in
-    codex:claude-*|codex:grok-*|codex:openai/*|claude:gpt-*|claude:openai/*)
+    codex:claude-*|codex:grok-*|claude:gpt-*|claude:openai/*)
       reject 'model does not match harness; use a native model id'; return 1 ;;
   esac
   local seconds="${DRYRUN_TIMEOUT:-300}" timer
@@ -229,6 +231,10 @@ cmd_run() {
     sandbox_prefix "$work" >/dev/null || { reject 'read-only OS sandbox unavailable'; return 1; }
   fi
   local args=("$harness" --mode "$mode" --allowed-tools "$tools" --timeout "$seconds")
+  # Same standing notes aeon.yml appends for the tier.
+  local notes
+  notes="$(bash "$ROOT/scripts/skill_mode.sh" run-notes "$mode")" || { reject 'run-notes resolution failed'; return 1; }
+  [ -n "$notes" ] && args+=(--append-system-prompt "$notes")
   [ -n "$model" ] && [ "$model" != default ] && args+=(--model "$model")
   echo "dry-run: harness=$harness model=${model:-default} mode=$mode timeout=${seconds}s" >&2
   (

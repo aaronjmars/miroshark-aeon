@@ -13,10 +13,16 @@ import { soulCommand } from './commands/soul.ts'
 import { packsCommand } from './commands/packs.ts'
 import { mcpCommand } from './commands/mcp.ts'
 import { telegramCommand } from './commands/telegram.ts'
+import { initCommand } from './commands/init.ts'
 
 const USAGE = `${c.bold('aeon')} — command-line control of this Aeon repo
 
 Usage: aeon <command> [subcommand] [options]
+
+Setup:
+  init                Create your instance + connect GitHub, a model and Telegram
+                      (interactive, safe to re-run; see \`aeon init --help\`)
+                      No terminal? Set up in the browser: https://www.aeon.fun/connect
 
 Read:
   skills ls|<name>    Skill roster + per-skill detail
@@ -31,7 +37,7 @@ Read:
 Write:
   skills enable|disable|schedule|set|rm|run <name>
   secrets set|rm <NAME>          config set model|harness|gateway <v>
-  auth --oauth|--github|--key <k>  sync [--status]
+  auth --harness <h>|--github|--key <k>  sync [--status]
   strategy set|build             soul build
   packs install <owner/repo>     mcp add|rm            telegram register
 
@@ -55,6 +61,7 @@ const COMMANDS: Partial<Record<string, (argv: string[]) => void | Promise<void>>
   packs: packsCommand,
   mcp: mcpCommand,
   telegram: telegramCommand,
+  init: initCommand,
 }
 
 async function main() {

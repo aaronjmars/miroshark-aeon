@@ -21,6 +21,7 @@
 #   scripts/skill_mode.sh mode <skill-name>     -> prints read-only | write
 #   scripts/skill_mode.sh allowed-tools <mode>  -> prints the --allowedTools string
 #   scripts/skill_mode.sh grok-run-env <skill>  -> prints `export GROK_*=…` lines
+#   scripts/skill_mode.sh run-notes <mode>      -> prints standing notes for the tier
 set -euo pipefail
 
 # Tools every tier gets: read, search, notify, and read-only/local shell helpers.
@@ -52,9 +53,14 @@ BASE_TOOLS="$BASE_TOOLS,Bash(mkdir:*),Bash(ls:*),Bash(cat:*),Bash(chmod:*)"
 BASE_TOOLS="$BASE_TOOLS,Bash(cd:*)"
 BASE_TOOLS="$BASE_TOOLS,Bash(date:*),Bash(echo:*),Bash(node:*),Bash(npm:*),Bash(npx:*)"
 BASE_TOOLS="$BASE_TOOLS,Bash(head:*),Bash(tail:*),Bash(wc:*),Bash(sort:*),Bash(grep:*)"
-# The run-audit wrapper. Five skills (skill-health, heartbeat, cost-report,
-# retrospective, self-review) document ./scripts/skill-runs as a primary data
-# source, but no tier granted it, so every documented call was denied. That was
+# base64 is a pure stdin-to-stdout filter like head/tail. Six write-tier skills
+# (strategy-builder, article, fork-fleet, fleet-control, pr-review, aeon-update)
+# read GitHub file contents via `gh api ... --jq .content | base64 -d`; without
+# this grant the whole pipe is denied (live: strategy-builder on aeon-test lost
+# the README and drafted from a partial read).
+BASE_TOOLS="$BASE_TOOLS,Bash(base64:*)"
+# The run-audit wrapper. skill-health documents ./scripts/skill-runs as a primary
+# data source (so did several since-retired skills), but no tier granted it, so every documented call was denied. That was
 # the trigger for ISS-001 on aeon-compute: skill-health, unable to reach its own
 # data source, burned turns working around the denial and hit the 30m GH Actions
 # job timeout on two consecutive runs. Safe in the base tier: the script only
@@ -96,6 +102,13 @@ WRITE_TOOLS="$WRITE_TOOLS,Bash(cargo:*)"
 # High/Critical code findings must pass this key-scrubbing, evidence-producing
 # runner before vuln-scanner may claim the severity or route a disclosure.
 WRITE_TOOLS="$WRITE_TOOLS,Bash(./scripts/vuln-poc-gate.sh:*)"
+# feature asks GitHub whether an open PR already covers its work, and whether a
+# "Closes #N" names a real open issue, before it opens or reports a PR. Read-only
+# gh calls with validated arguments; the decision is the script's, not the model's.
+WRITE_TOOLS="$WRITE_TOOLS,Bash(./scripts/feature-open-pr.sh:*)"
+# pr-review asks GitHub whether it already reviewed a PR at its head commit, with
+# the same receipt count the dev-loop gate uses, before posting another review.
+WRITE_TOOLS="$WRITE_TOOLS,Bash(./scripts/dev-loop-review.sh:*)"
 # Foundry bare-names + the key-safe runner for deploy-uni-hook. Foundry is staged by
 # scripts/stage-deploy-uni-hook.sh (the sandbox denies in-run installs); the skill then
 # builds/simulates/broadcasts by bare name. `./hook-deploy.sh` hides the deployer key
@@ -144,6 +157,37 @@ is_shadow_selector() {
 # Write tier = base tools + the repo-mutation tools.
 write_tools() { echo "$BASE_TOOLS,$WRITE_TOOLS"; }
 
+# --- Standing notes for a read-only run --------------------------------------
+# Several read-only skills (aeon-doctor, github-trending's long slate, and every
+# skill whose SKILL.md says `./notify -f <file>`) tell the model to write the
+# notify body to a scratch file first. On the claude harness that cannot work:
+# this tier has no Write tool and Claude Code refuses shell redirection into a
+# file, so the model ends the run with "No pending notifications" while the run
+# stays green (live-observed on github-trending, claude-code 2.1.287). The fix
+# keeps the tier exactly as narrow as it is: ./notify reads its body from stdin
+# (`-f -`), and a quoted heredoc into ./notify is a single Bash(./notify:*) call,
+# which the allowlist above already permits. This note tells the model so up
+# front, because the skills themselves still say "scratch file". aeon.yml (and
+# scripts/dry-run.sh) pass it as --append-system-prompt on read-only runs.
+read_only_run_notes() {
+  cat <<'NOTES'
+This run is read-only. Do not create a scratch file just to hold a ./notify body, even when the skill says to write one and send it with `-f <file>`: pass the body on stdin instead, in ONE Bash call with a quoted heredoc, other ./notify flags first:
+./notify --title "Title" -f - <<'NOTIFY_EOF'
+message body
+NOTIFY_EOF
+NOTES
+}
+
+# Write tier: Claude Code refuses shell redirection into a file (`>>` a log line,
+# `cat > f <<EOF`) even though Bash(cat:*)/Bash(echo:*) are granted, so a model
+# that appends memory/logs through the shell burns a denied call and retries with
+# Write (live-observed on heartbeat, claude-code 2.1.287). Say so up front.
+write_run_notes() {
+  cat <<'NOTES'
+Write files only with Write/Edit: Write for a new file or a full rewrite, Edit to append or change (Read the file first). Never write files from Bash: `cat > f`, `cat >> f`, `echo ... >> f`, `printf ... > f`, `tee f` and heredocs redirected into a file are always refused in this run and waste a turn. This holds even where a skill's own example shows a shell redirect: make the same write with Write/Edit instead. Pipes between commands are fine.
+NOTES
+}
+
 # --- Why there is no grok permission mapping here ---------------------------
 # There used to be a `grok-args` subcommand that emitted grok's own permission
 # grammar (`--allow 'Bash(git *)'` rules plus `--sandbox read-only`) as this
@@ -158,7 +202,7 @@ write_tools() { echo "$BASE_TOOLS,$WRITE_TOOLS"; }
 #   * grok's own `--sandbox read-only` is silently ignored on grok 0.2.101 (writes
 #     still land) and nest-conflicts with the wrapper sandbox.
 #
-# So read-only on grok — as on all seven harnesses — is enforced by the dispatcher's
+# So read-only on grok - as on all nine harnesses - is enforced by the dispatcher's
 # OS sandbox (harness-adapter/lib/sandbox.sh: bwrap / sandbox-exec write-locks the
 # workspace) plus the workflow's post-run revert. Nothing about that is expressible
 # in this file, which is why the mapping is gone instead of rewritten.
@@ -171,8 +215,8 @@ write_tools() { echo "$BASE_TOOLS,$WRITE_TOOLS"; }
 #   effort: high            # low|medium|high|xhigh|max  -> --effort
 #   reasoning_effort: high  # same set                   -> --reasoning-effort
 #   max_turns: 60           # agentic-turn cap           -> --max-turns
-#   best_of_n: 3            # run N ways, keep the best   -> --best-of-n
-#   verify: true            # append a self-check loop    -> --check
+#   best_of_n: 3            # was --best-of-n; grok 1.x removed it (adapter ignores, with a notice)
+#   verify: true            # was --check; grok 1.x removed it (adapter ignores, with a notice)
 #
 # Output is `export GROK_X=...` lines for exactly the fields present, so unset
 # fields fall through to the adapter's defaults. aeon.yml's grok branch evals this.
@@ -211,7 +255,12 @@ case "${1:-}" in
       *)                            write_tools ;;
     esac ;;
   grok-run-env)  grok_run_env "${2:?skill name required}" ;;
+  run-notes)
+    case "${2:-write}" in
+      read-only|readonly|read_only) read_only_run_notes ;;
+      *)                            write_run_notes ;;
+    esac ;;
   is-shadow)
     if is_shadow_selector "${2:?skill name required}" "${3:-}"; then echo true; else echo false; fi ;;
-  *) echo "usage: skill_mode.sh {mode <skill> [var]|allowed-tools <mode>|grok-run-env <skill>|is-shadow <skill> [var]}" >&2; exit 2 ;;
+  *) echo "usage: skill_mode.sh {mode <skill> [var]|allowed-tools <mode>|grok-run-env <skill>|run-notes <mode>|is-shadow <skill> [var]}" >&2; exit 2 ;;
 esac

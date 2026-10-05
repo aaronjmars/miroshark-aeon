@@ -12,13 +12,13 @@ The **Aeon Developer Kit (ADK)** is for developers building **on top of** Aeon -
 2. **Driving skills** - discover, run, schedule, and credential skills over the GitHub API.
 3. **Linking your product** - ship your own skills so every Aeon instance can talk to your service.
 
-The patterns here come from a production hosted multi-tenant dashboard built exactly this way - treat them as the reference implementation throughout.
+The patterns here come from a production hosted multi-tenant dashboard built exactly this way: [Aeon Connect](https://www.aeon.fun/connect), where anyone can sign in with GitHub, create an instance, and drive it from the browser - treat it as the reference implementation throughout.
 
 ---
 
 ## 1. The mental model: GitHub *is* the API
 
-An Aeon instance is nothing but a GitHub repo (a copy of this template) plus GitHub Actions. There is no Aeon server, no Aeon database, no Aeon API to call. Everything you'd want to integrate with is a file or a GitHub API surface:
+An Aeon instance is nothing but a GitHub repo (a fork or a copy of this template) plus GitHub Actions. There is no Aeon server, no Aeon database, no Aeon API to call. Everything you'd want to integrate with is a file or a GitHub API surface:
 
 | You want to… | It lives at… | GitHub API |
 |---|---|---|
@@ -188,7 +188,7 @@ Everything on-demand goes through one workflow - `aeon.yml` accepts `workflow_di
 |---|---|
 | `skill` | required; must match `^[a-zA-Z0-9_-]+$` and a directory under `skills/` |
 | `var` | the skill's input for this run |
-| `model` | override, e.g. `claude-opus-4-8` - must be one of the workflow's `choice` options or GitHub rejects with **422** |
+| `model` | override, e.g. `claude-opus-5-5` - must be one of the workflow's `choice` options or GitHub rejects with **422** |
 | `harness` | `claude` (default) or `grok` - see [Harnesses](harnesses.md) |
 
 ```ts

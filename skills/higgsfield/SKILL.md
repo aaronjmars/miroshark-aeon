@@ -61,7 +61,7 @@ Gather the finished asset URL(s) and the model actually used. If the job failed 
 
 ### 4. Notify
 
-This skill is on-demand — a completed run always notifies. Deliver via `./notify -f` (ordinary Markdown), **exactly one `./notify` call per run** (each call overwrites `apps/dashboard/outputs/.pending-higgsfield.md`, the chain artifact `consume:` steps and the feed read — a second ping would clobber the result):
+This skill is on-demand — a completed run always notifies. Deliver via `./notify -f` (ordinary Markdown), **exactly one `./notify` call per run** (each call overwrites `$AEON_PENDING_DIR/.pending-higgsfield.md`, the chain artifact `consume:` steps and the feed read — a second ping would clobber the result):
 
 - **Success:** the mode + model used, the prompt (trimmed), and each output asset as a clickable URL. Include the credit/cost figure if the server returned one, and the job id. Severity `success`.
 - **Failure / refusal / no-credits:** exactly what happened (auth stale, no credits, content rejected, timeout) and the one action the operator can take. Severity `warn`.
@@ -70,7 +70,7 @@ Note assets may be time-limited signed URLs — say so and suggest the operator 
 
 ### 5. Log
 
-Append to `memory/logs/${today}.md`:
+This skill is `read-only`, so the workflow's read-only guard writes its `### higgsfield` log entry from your captured output; a self-written entry would be a duplicate. Don't append to `memory/logs/` yourself - put this record in your **final output**:
 
 ```
 ### higgsfield

@@ -17,13 +17,13 @@ chains:
     schedule: "0 7 * * *"
     on_error: fail-fast       # or: continue
     steps:
-      - parallel: [token-movers, github-trending]   # run concurrently
-      - skill: digest, consume: [token-movers, github-trending]   # runs after; outputs injected
+      - { parallel: [token-movers, github-trending] }   # run concurrently
+      - { skill: digest, consume: [token-movers, github-trending] }   # runs after; outputs injected
 ```
 
 Each step runs as a separate workflow dispatch; outputs are saved to `output/.chains/{skill}.md` and injected into downstream steps that `consume:` them. `fail-fast` aborts on any failure, `continue` keeps going.
 
-> **Note:** a real (uncommented) chain step with multiple keys must use flow-brace form -- `- { skill: review, consume: [draft], when: "score > 3" }` -- not the bare `- skill: review, consume: [...]` shown in the commented examples. The bare form is convenient in a comment but is not valid YAML once uncommented (the second `:` trips the parser). The chain runner reads either form.
+> **Note:** write every multi-key chain step in flow-brace form on one line - `- { skill: review, consume: [draft], when: "score > 3" }` - as in the examples here and in `aeon.yml`. The bare `- skill: review, consume: [...]` form is not valid YAML (the second `:` trips the parser, including the dashboard's), so keep it out of comments too, where it gets copied and uncommented.
 
 ### Conditional routing (`when:`)
 
@@ -35,10 +35,10 @@ chains:
     schedule: "0 9 * * *"
     max_dispatches: 10           # optional; hard-caps total dispatches (default 10)
     steps:
-      - skill: draft
-      - skill: review, consume: [draft]
-      - skill: polish,  consume: [review], when: "score > 3"    # good draft -> polish
-      - skill: rewrite, consume: [review], when: "score <= 3"   # weak draft -> rewrite
+      - { skill: draft }
+      - { skill: review, consume: [draft] }
+      - { skill: polish,  consume: [review], when: "score > 3" }    # good draft -> polish
+      - { skill: rewrite, consume: [review], when: "score <= 3" }   # weak draft -> rewrite
 ```
 
 - **Operators:** `== != < > <= >=`. Equality compares as strings; ordering (`< <= > >=`) requires an integer on both sides and fails loudly otherwise (no `"10" < "9"` surprises).
@@ -81,6 +81,8 @@ The handler is dispatched with **the source skill's name as its `var`** (so `ski
 
 **The source skill must be enabled.** A trigger's `on:` source is evaluated only while that skill is `enabled: true` (a disabled skill never runs, so its state never changes). Point a trigger at a skill you have turned off and it silently never fires. `on:` may be written quoted or bare (`on: "digest"` or `on: digest`).
 
+**The handler must be enabled too.** A handler whose own `skills:` entry says `enabled: false` (the shipped default for `skill-repair`) is never dispatched, so uncommenting its `reactive:` block is not enough: also set `enabled: true` on its skill entry. A handler with no `skills:` entry at all is treated as enabled. A wildcard (`on: "*"`) handler never triggers on its own state, and it rotates across failing sources: a source it was dispatched for in the last 24h is passed over in favor of the next one, so one stuck skill cannot monopolize it.
+
 **Loop safety.** A reactive dispatch is deduped per handler for 90 minutes, so a source that stays broken can't re-fire its handler every tick, and a handler that itself fails can't spin a tight loop. (Reactive runs on billed Actions minutes and a shared rate limit, so this bound matters -- there is no `pkill` off-switch here.)
 
 ## Scheduler frequency
@@ -98,14 +100,16 @@ Claude only installs and runs when a skill actually matches - non-matching ticks
 
 ## Circuit breaker (outage protection)
 
-The scheduler trips a per-skill circuit breaker once a skill logs **3 consecutive failures** (`consecutive_failures` in `memory/cron-state.json`). While tripped it stops dispatching that skill every tick - so a dead upstream API or a revoked key can't burn a run every `*/5` for hours - and instead lets **one probe run through every 6 hours** (half-open). A probe that succeeds resets the counter and the skill resumes its normal schedule automatically; a probe that fails re-arms the 6h cooldown. It is auto-recovering, not a kill switch, so an outage self-heals with no operator action. `skill-health` already reports CRITICAL at the same threshold, so a tripped breaker is visible.
+The scheduler trips a per-skill circuit breaker once a skill logs **3 consecutive failures** (`consecutive_failures` in `memory/cron-state.json`). While tripped it stops dispatching that skill every tick - so a dead upstream API or a revoked key can't burn a run every `*/5` for hours - and instead lets **one probe run through every 6 hours** (half-open), but never more often than the skill's own schedule: a probe also waits for the skill's next scheduled slot, so a weekly skill in an outage is probed weekly, not 4 times a day. A probe that succeeds resets the counter and the skill resumes its normal schedule automatically; a probe that fails re-arms the cooldown. It is auto-recovering, not a kill switch, so an outage self-heals with no operator action. `skill-health` already reports CRITICAL at the same threshold, so a tripped breaker is visible.
 
 Tune with repo variables (both optional):
 
 ```
 BREAKER_THRESHOLD      failures in a row before tripping (default 3; 0 disables)
-BREAKER_COOLDOWN_MIN   minutes between half-open probes while tripped (default 360)
+BREAKER_COOLDOWN_MIN   minimum minutes between half-open probes while tripped (default 360)
 ```
+
+Before the breaker trips, a failed run gets **quick retries** 30 minutes apart, until the skill has failed `BREAKER_THRESHOLD` times in a row (3 with the breaker off), so 2 retries for the slot that failed by default. After that the skill only runs on its own schedule. Skills with `schedule: "workflow_dispatch"` or `"reactive"` are never retried or probed by the scheduler.
 
 The decision logic lives in `scripts/breaker.sh` (unit-tested in `scripts/tests/test_breaker.sh`); the scheduler calls it, no inline copy. To hard-disable a skill instead, set `enabled: false` in `aeon.yml`.
 
@@ -118,7 +122,7 @@ mode: read-only   # may read the repo, fetch the web, and ./notify — but canno
 mode: write       # full access (the default): adds Write / Edit / git / gh / python3
 ```
 
-`read-only` strips the repo-mutation tools from Claude Code's `--allowedTools` (`Write`, `Edit`, `Bash(git:*)`, `Bash(gh:*)`) **and** the OS sandbox write-locks the whole workspace for the run (see [Capabilities → enforcement layers](CAPABILITIES.md)), so a research-and-notify skill **physically can't** commit, push, open a PR, or write anywhere in the checkout — `memory/` and `output/` included. Don't write those directly; route persistence through your **final message** (the run's captured output) and `./notify`. After the run, outside the sandbox, the workflow persists your captured output to `output/.chains/`, appends a `memory/logs/` run entry on your behalf, and reverts any stray write that slipped through. Use it for pure read-and-notify skills; `write` (the default, a strict superset) for anything that writes code. It's the runtime half of the install-time [`capabilities:`](../docs/CAPABILITIES.md) hint.
+`read-only` strips the repo-mutation tools from Claude Code's `--allowedTools` (`Write`, `Edit`, `Bash(git:*)`, `Bash(gh:*)`, python) **and** the OS sandbox write-locks the workspace for the run (see [Capabilities → enforcement layers](CAPABILITIES.md)), so a research-and-notify skill **physically can't** commit, push, open a PR, or change code or config. The two state dirs are the exception: `memory/` and `output/` stay writable (via a shell redirection or `node`) so a read-only skill can keep its own state and artifacts (since #1042). Route the run's result through your **final message** (the run's captured output) and `./notify`. After the run the workflow persists your captured output to `output/.chains/`, **appends the `### <skill>` entry to `memory/logs/` on your behalf** (so read-only skills should not self-log, or the entry appears twice), and reverts any stray write outside `memory/` and `output/`. Use it for pure read-and-notify skills; `write` (the default, a strict superset) for anything that writes code. It's the runtime half of the install-time [`capabilities:`](../docs/CAPABILITIES.md) hint.
 
 ## Dry-run gate for self-authored skills
 
@@ -126,7 +130,7 @@ mode: write       # full access (the default): adds Write / Edit / git / gh / py
 
 Before either skill opens its PR, it dry-runs the candidate through `scripts/dry-run.sh`:
 
-- **Synthetic secrets.** Every key the skill declares in `requires:` gets a fake but well-formed value (marked `DRYRUN`), never the real one. `ANTHROPIC_API_KEY` is the sole exception -- the run needs a live model -- and it is never written into the synthetic env (asserted, not eyeballed). The inherited channel/GitHub tokens are faked too, so a rogue push or notify can't reach a real repo or channel.
+- **Synthetic secrets.** Every key the skill declares in `requires:` gets a fake but well-formed value (marked `DRYRUN`), never the real one. The model credentials are the only exceptions - `ANTHROPIC_API_KEY`, `ANTHROPIC_OAUTH_TOKEN`, `CLAUDE_CODE_OAUTH_TOKEN`, `OPENAI_API_KEY`, `CODEX_AUTH` - because the run needs a live model, and they are never written into the synthetic env (asserted, not eyeballed). The inherited channel/GitHub tokens are faked too, so a rogue push or notify can't reach a real repo or channel.
 - **Structural pass criteria:** exit 0, non-empty output, no write outside the declared `mode`, no secret used outside `requires:`. Content is **not** re-scored here -- the Haiku scorer already does that, after the fact.
 - **Gate on it.** `passed: false` blocks the PR (exit `CREATE_SKILL_DRYRUN_FAILED` / revert-and-stop); the verdict JSON goes in the PR body either way.
 
@@ -142,7 +146,7 @@ cp docs/examples/mcp/.mcp.json.example .mcp.json   # then edit, commit, push
 
 The example ships two working servers — `github` (uses the runner's built-in `GITHUB_TOKEN`) and `sequential-thinking` (no-auth stdio). On the next run the runner loads `.mcp.json` and auto-allows every server's tools, so a skill can just say *"use the github MCP server to …"*. Reference a server's secret with `${VAR}` (never commit the value) and set it in the dashboard — the runner resolves it from the repo's secrets with zero workflow editing, and skips a server (with a warning) when its secret is missing rather than breaking the skill.
 
-Or skip the file entirely: the dashboard's **MCP** tab writes `.mcp.json` for you, lists **Featured** servers ([Base](https://mcp.base.org), [Robinhood Trading](https://agent.robinhood.com), [glim.sh](https://glim.sh), [Executor](https://executor.sh), [Finance District](https://wallet-mcp.fd.xyz), [PostHog](https://posthog.com)) for one-click install, and tells you which secret each server needs. The featured servers are OAuth-gated: **Connect** opens your browser to authorize, then keeps the tokens fresh across headless runs — including saving rotated refresh tokens, which needs a secrets-write PAT (`GH_SECRETS_PAT`). Flow, PAT setup, and limits: [`docs/mcp-oauth.md`](mcp-oauth.md). Each featured server has a matching skill (`base-mcp`, `robinhood-mcp`, `glim-mcp`, `executor-mcp`, `finance-district-mcp`, and the scheduled `posthog-errors` digest) — dispatch it with a `var` to use the server from a run. Saving or connecting a server in the dashboard also splices any secret name its config references into the run workflows' allowlist automatically ([`apps/dashboard/lib/workflow-secrets.ts`](../apps/dashboard/lib/workflow-secrets.ts)), so a freshly connected server works on the very next headless run with no hand-editing of `aeon.yml`. (Editing the workflow file needs the `workflow` scope on the dashboard's GitHub token; without it the server still connects and the dashboard flags that the allowlist push did not land.)
+Or skip the file entirely: the dashboard's **MCP** tab writes `.mcp.json` for you, lists **Featured** servers ([Base](https://mcp.base.org), [Robinhood Trading](https://agent.robinhood.com), [glim.sh](https://glim.sh), [Executor](https://executor.sh), [Finance District](https://wallet-mcp.fd.xyz), [PostHog](https://posthog.com)) for one-click install, and tells you which secret each server needs. The featured servers are OAuth-gated: **Connect** opens your browser to authorize, then keeps the tokens fresh across headless runs - including saving rotated refresh tokens, which needs a secrets-write token (`GH_GLOBAL`, or the optional `GH_SECRETS_PAT`). Flow, PAT setup, and limits: [`docs/mcp-oauth.md`](mcp-oauth.md). Each featured server has a matching skill (`base-mcp`, `robinhood-mcp`, `glim-mcp`, `executor-mcp`, `finance-district-mcp`, and the scheduled `posthog-errors` digest) - dispatch it with a `var` to use the server from a run. Saving or connecting a server in the dashboard also splices any secret name its config references into the run workflows' allowlist automatically ([`apps/dashboard/lib/workflow-secrets.ts`](../apps/dashboard/lib/workflow-secrets.ts)), so a freshly connected server works on the very next headless run with no hand-editing of `aeon.yml`. (Editing the workflow file needs the `workflow` scope on the dashboard's GitHub token; without it the server still connects and the dashboard flags that the allowlist push did not land.)
 
 ## Cross-repo access
 
@@ -152,6 +156,10 @@ One classic PAT covers the whole instance - no separate read or secrets PAT is n
 
 - **`repo`** - cross-repo and private-repo read/write, repository security advisories + private vulnerability reports (the disclosure/PVR skills), and writing Actions secrets back (the OAuth-MCP / Grok refresh path).
 - **`workflow`** - required only for skills that push changes under `.github/workflows/` (`aeon-update`, `spawn-instance`, `auto-workflow`); without it those pushes 403.
+
+Instances set up with [Aeon Connect](https://www.aeon.fun/connect) don't need it to get started: the dashboard reaches the repo through the Aeon Connect GitHub App and runs use `GITHUB_TOKEN`. Add `GH_GLOBAL` there (Settings) only when you turn on a cross-repo skill. From the terminal, the quickest way to set it: `./aeon init` (or `./aeon auth --github`) copies your `gh` login token into `GH_GLOBAL`, after checking it carries `repo` + `workflow` (`gh auth refresh -h github.com -s repo,workflow` adds them). A gh login token works like a classic PAT, but GitHub revokes it after a year without use, or when more than 10 tokens exist for the same user, app and scopes (each `gh auth login` mints one). That is fine to get started; for an instance that should run for months, create a **dedicated classic PAT** (`repo` + `workflow`) and set it with `./aeon secrets set GH_GLOBAL --stdin`.
+
+**`GH_SECRETS_PAT` is optional.** The two paths that write rotated logins back as secrets (MCP OAuth refresh, grok's X login) try `GH_SECRETS_PAT` first and fall back to `GH_GLOBAL`. Set it only to keep that secrets-write power on a separate token (a fine-grained PAT with **Secrets: read/write** on this repo).
 
 `read:org` and `admin:org` are **not** needed - listing an org's repos (e.g. fleet KPIs) works on `repo` scope plus org membership, and nothing administers an org. If your org enforces SAML SSO, authorize the token for the org from the token page. **Classic** (not fine-grained) is recommended: the repository-advisories / PVR API is unreliable with fine-grained PATs.
 
@@ -165,7 +173,7 @@ Per-skill execution state (`memory/cron-state.json` — status, success rate, qu
   <img src="../docs/assets/providers.jpg" alt="9 ways to power Claude Code: Claude subscription, Anthropic API, OpenRouter, Bankr, UsePod, Venice, Surplus, Grok, GLM" width="640" />
 </p>
 
-Aeon can power Claude Code **ten** ways. Two are **direct** to Anthropic; the other eight route through a **gateway**. Add a credential in the dashboard's Authenticate modal and it's saved as the secret below (HivemindOS is not in the modal yet - set `HIVEMINDOS_CREDIT_TOKEN` as a repo secret directly). (Separately, the [Grok Build harness](harnesses.md) runs the `grok` CLI instead of Claude Code - that's a different axis from the gateways here.)
+Aeon can power Claude Code **ten** ways. Two are **direct** to Anthropic; the other eight route through a **gateway**. Press **Connect a model** in the dashboard to add a credential; it's saved as the secret below (HivemindOS is not in the modal yet - set `HIVEMINDOS_CREDIT_TOKEN` as a repo secret directly). (Separately, the [Grok Build harness](harnesses.md) runs the `grok` CLI instead of Claude Code - that's a different axis from the gateways here.)
 
 **Routing is automatic.** `aeon.yml` ships `gateway: { provider: auto }`, and each run resolves the live provider from *whichever secrets are set*, in priority order - so adding or removing a key changes routing with no re-config:
 
@@ -189,9 +197,9 @@ Override the order with the repo variable **`GATEWAY_ORDER`** (space-separated n
 | <img src="https://icons.duckduckgo.com/ip3/usepod.ai.ico" width="16" valign="middle"> [UsePod](https://usepod.ai) | `USEPOD_TOKEN` | Solana marketplace; token is embedded in the base URL, keep it secret |
 | <img src="https://icons.duckduckgo.com/ip3/venice.ai.ico" width="16" valign="middle"> [Venice](https://venice.ai) | `VENICE_API_KEY` | Privacy-first; OpenAI-compatible, bridged via a per-run [claude-code-router](https://github.com/musistudio/claude-code-router) sidecar. Point it at any Venice-compatible endpoint with the `VENICE_BASE_URL` repo variable |
 | <img src="https://icons.duckduckgo.com/ip3/surplusintelligence.ai.ico" width="16" valign="middle"> [Surplus](https://surplusintelligence.ai) | `SURPLUS_API_KEY` | Routed via The Bridge; settles in USDC on Base - fund the wallet + `approve()` once before use |
-| <img src="https://icons.duckduckgo.com/ip3/x.ai.ico" width="16" valign="middle"> [Grok (xAI)](https://x.ai/api) | `XAI_API_KEY` | Anthropic-native passthrough to `api.x.ai`; the `xai-…` key is auto-detected. Set the model with the `GROK_MODEL` repo variable. Same key also powers the [grok harness](harnesses.md) |
-| <img src="https://icons.duckduckgo.com/ip3/z.ai.ico" width="16" valign="middle"> [GLM (Z.AI)](https://z.ai) | `GLM_API_KEY` | Anthropic-native passthrough to `api.z.ai/api/anthropic`. No key prefix - pick GLM in Authenticate. Alias `ZAI_API_KEY`. Set the model with `GLM_MODEL` (default `glm-5.2`). Pin reasoning depth with `GLM_REASONING_EFFORT` (`low` / `high` / `max`, default `high`). Pin with `gateway.provider: glm`. `harness: glm` is a dead name. |
-| <img src="https://icons.duckduckgo.com/ip3/hivemindos.liamvisionary.com.ico" width="16" valign="middle"> [HivemindOS Models](https://hivemindos.liamvisionary.com) | `HIVEMINDOS_CREDIT_TOKEN` | Billed to a **credit balance** instead of a provider account of your own, so an engine can be handed to someone who holds no provider keys. OpenAI-compatible, bridged via the claude-code-router sidecar plus `scripts/ccr-hivemindos.js` (per-request `Idempotency-Key`, JSON answer replayed as SSE). Set the model with `HIVEMINDOS_MODEL` (default `inclusionai/ling-3.0-flash`; native `claude-*`/`grok-*` ids fall back to it), point at another deployment with `HIVEMINDOS_BASE_URL`, cap each call with `HIVEMINDOS_MAX_TOKENS` (default 4096, `0` disables; an empty variable means the default), and `HIVEMINDOS_REASONING=keep` on a model that honours reasoning-off. Pin with `gateway.provider: hivemindos`; under `auto` the token alone resolves, last in the cascade. Not in the dashboard Authenticate modal yet - set the secret directly. |
+| <img src="https://icons.duckduckgo.com/ip3/x.ai.ico" width="16" valign="middle"> [Grok (xAI)](https://x.ai/api) | `XAI_API_KEY` | Anthropic-native passthrough to `api.x.ai`; the `xai-…` key is auto-detected. Set the model with the `GROK_MODEL` repo variable (default `grok-4.7`). Same key also powers the [grok harness](harnesses.md) |
+| <img src="https://icons.duckduckgo.com/ip3/z.ai.ico" width="16" valign="middle"> [GLM (Z.AI)](https://z.ai) | `GLM_API_KEY` | Anthropic-native passthrough to `api.z.ai/api/anthropic`. No key prefix - pick GLM in the Connect modal. Alias `ZAI_API_KEY`. Set the model with `GLM_MODEL` (default `glm-5.3`, `glm-5.3-flash` for the haiku tier; per-tier `GLM_MODEL_OPUS` / `GLM_MODEL_SONNET` / `GLM_MODEL_HAIKU`). Pin reasoning depth with `GLM_REASONING_EFFORT` (`low` / `high` / `max`, default `high`). Pin with `gateway.provider: glm`. `harness: glm` is a dead name. |
+| <img src="https://icons.duckduckgo.com/ip3/hivemindos.liamvisionary.com.ico" width="16" valign="middle"> [HivemindOS Models](https://hivemindos.liamvisionary.com) | `HIVEMINDOS_CREDIT_TOKEN` | Billed to a **credit balance** instead of a provider account of your own, so an engine can be handed to someone who holds no provider keys. OpenAI-compatible, bridged via the claude-code-router sidecar plus `scripts/ccr-hivemindos.js` (per-request `Idempotency-Key`, sent non-streamed; the router replays the JSON answer as SSE). Set the model with `HIVEMINDOS_MODEL` (default `inclusionai/ling-3.0-flash`; native `claude-*`/`grok-*` ids fall back to it), point at another deployment with `HIVEMINDOS_BASE_URL`, cap each call with `HIVEMINDOS_MAX_TOKENS` (default 4096, `0` disables; an empty variable means the default), and `HIVEMINDOS_REASONING=keep` on a model that honours reasoning-off. Pin with `gateway.provider: hivemindos`; under `auto` the token alone resolves, last in the cascade. Not in the dashboard Connect modal yet - set the secret directly. |
 
 #### Adding a gateway
 
@@ -237,7 +245,14 @@ The gate also rejects state-changing requests whose `Origin` isn't allowlisted, 
 
 ## Two-repo strategy
 
-This repo is a public template. Run your own instance as a **private fork** so memory, articles, and API keys stay private:
+This repo is a public template; your instance is your own repo next to it. Pick its visibility for what it holds:
+
+- **Public** (free Actions minutes; memory, articles, and run logs are public). [Aeon Connect](https://www.aeon.fun/connect) makes it a real fork of `aeonfun/aeon` and turns Actions on for you. By hand, use the template, or fork and enable workflows in the fork's Actions tab (forks start with Actions off).
+- **Private** (memory, articles, and logs stay private; runs use your own Actions minutes). GitHub does not allow a private fork of a public repo, so this is a copy: Aeon Connect generates it from the template, `./aeon init --private` does the same, or click **Use this template** and pick Private.
+
+API keys stay private either way: they are encrypted repo secrets, never files.
+
+To pull framework updates, run the `aeon-update` skill (it opens a PR that merges upstream into your instance and works for forks and copies alike), or merge by hand:
 
 ```bash
 git remote add upstream https://github.com/aeonfun/aeon.git
@@ -245,7 +260,7 @@ git fetch upstream
 git merge upstream/main --no-edit
 ```
 
-Your `memory/`, `output/`, and personal config won't conflict - they're in files that don't exist in the template.
+The template ships a few starter files under `memory/` (e.g. `MEMORY.md`, `watched-repos.md`, `products.md`), `output/`, `soul/`, `STRATEGY.md`, and `aeon.yml`, so a merge can conflict where you edited one of those; keep your side (`git checkout --ours <path>`). Files you created that the template doesn't have (your logs, topics, articles) never conflict.
 
 ## GitHub Actions cost
 
@@ -264,7 +279,7 @@ Private repos: Free plan = 2,000 min/mo, Pro/Team = 3,000 + $0.008/min overage. 
 
 ## Authentication
 
-Aeon needs **at least one** way to reach a model. Add it in the dashboard's **Authenticate** modal, or from the terminal with `aeon auth`:
+Aeon needs **at least one** way to reach a model. Add it with **Connect a model** in the dashboard (in [Aeon Connect](https://www.aeon.fun/connect) or the local `./aeon` dashboard), or from the terminal with `aeon auth`:
 
 - **A Claude subscription** - one-click OAuth, or `claude setup-token` on the CLI (prints an `sk-ant-oat01-…` token, valid 1 year).
 - **An API key** - Anthropic, Anthropic-compatible, or an [LLM gateway](#llm-gateways) key (Bankr, OpenRouter, Surplus, Venice, UsePod). Paste it and the provider is auto-detected from its prefix.
@@ -272,17 +287,17 @@ Aeon needs **at least one** way to reach a model. Add it in the dashboard's **Au
 
 Set several and each run resolves the highest-priority one whose key is present, so you don't have to pick just one.
 
-> **Claude subscription tokens on GitHub runners.** A `CLAUDE_CODE_OAUTH_TOKEN` minted from a Claude subscription is meant for interactive/first-party use. On a hosted GitHub Actions runner it is frequently rejected at the Anthropic edge, so the run exits almost instantly with **zero** model usage even though the token was saved correctly. For a hosted instance, authenticate with an **API key** (`ANTHROPIC_API_KEY`) or an [LLM gateway](#llm-gateways) key instead; the subscription-token path is best kept for local `aeon` runs.
+> **Claude subscription tokens on GitHub runners.** A `CLAUDE_CODE_OAUTH_TOKEN` from `claude setup-token` normally works on a hosted GitHub Actions runner, but in some cases it can be rejected there: the run then exits almost instantly with **zero** model usage even though the token was saved correctly. After connecting, check the first run: its log ends with a `Token usage` line. If it shows zero usage, remove `CLAUDE_CODE_OAUTH_TOKEN` and use an **API key** (`ANTHROPIC_API_KEY`) or an [OpenRouter or other gateway](#llm-gateways) key instead.
 
 ## Models
 
 The default model for all skills is set in `aeon.yml` (or from the dashboard header dropdown):
 
 ```yaml
-model: claude-sonnet-5
+model: claude-sonnet-5-5
 ```
 
-Options: `claude-sonnet-5` (default), `claude-opus-4-8`, `claude-haiku-4-5-20251001`. Per-run overrides are available via workflow dispatch, and individual skills can override to optimize cost:
+Options: `claude-sonnet-5-5` (default), `claude-opus-5-5`, `claude-haiku-4-5-20251001` (the older `claude-sonnet-5` and `claude-opus-4-8` are still accepted). Per-run overrides are available via workflow dispatch, and individual skills can override to optimize cost:
 
 ```yaml
 skills:
@@ -319,10 +334,10 @@ Set the secret → channel activates. No code changes needed.
 **Set up each channel:**
 
 - **Telegram** - create a bot with **[@BotFather](https://t.me/BotFather)**, then copy its token + your chat ID. Saving the token in the dashboard **auto-registers** the slash-command menu (`/skillname` dispatches instantly, no LLM); a **Re-register commands** button re-syncs it after you toggle skills. Every notification carries **Run again / Schedule weekly** buttons, deep links, and stateless follow-up questions. Outbound sends reply to that skill's previous Telegram message by default ([reply-to-previous](telegram-commands.md#6-reply-to-previous-outbound)); set repo variable `TELEGRAM_REPLY_TO_PREVIOUS=0` to turn that off. [Full guide →](telegram-commands.md)
-- **Discord** - *outbound:* a channel webhook URL. *Inbound:* a bot token + channel ID, with the `channels:history` scope. ([discord.com/developers](https://discord.com/developers/applications))
+- **Discord** - *outbound:* a channel webhook URL. *Inbound:* a bot token + channel ID. Turn on the bot's **Message Content** privileged intent (Developer Portal -> Bot), and give it **View Channel**, **Read Message History**, and **Add Reactions** in that channel. ([discord.com/developers](https://discord.com/developers/applications))
 - **Slack** - *outbound:* an Incoming Webhook URL. *Inbound:* a bot token + channel ID, with the `channels:history` + `reactions:write` scopes. ([api.slack.com/apps](https://api.slack.com/apps))
 - **Email** - [resend.com/api-keys](https://resend.com/api-keys) → Create API Key → set it as `RESEND_API_KEY`, and `NOTIFY_EMAIL_TO` to your inbox. Optional: `NOTIFY_EMAIL_FROM` (default `aeon@notifications.aeon.bot` - **must be a sender/domain verified in Resend**) and `NOTIFY_EMAIL_SUBJECT_PREFIX` (default `[Aeon]`). Same key as security disclosures, so one Resend key powers all outbound email.
-- **Buzz** - [Buzz](https://buzz.xyz) is Block's open, self-hostable workspace where humans and agents are first-class members ([github.com/block/buzz](https://github.com/block/buzz)). *Outbound:* set `BUZZ_PRIVATE_KEY` (the agent's `nsec` keypair), `BUZZ_CHANNEL_ID` (target channel UUID from `buzz channels list`), and `BUZZ_RELAY_URL` (your relay; defaults to `http://localhost:3000`). Aeon posts Markdown as itself via the [`buzz` CLI](https://github.com/block/buzz/tree/main/crates/buzz-cli), which signs (NIP-98) and publishes each message over the relay. The CLI must be staged in the run (no prebuilt binary yet - `cargo install --path crates/buzz-cli`); the channel skips silently until it is. Inbound (agent-as-participant) is a later phase.
+- **Buzz** - [Buzz](https://buzz.xyz) is Block's open, self-hostable workspace where humans and agents are first-class members ([github.com/block/buzz](https://github.com/block/buzz)). *Outbound:* set `BUZZ_PRIVATE_KEY` (the agent's `nsec` keypair), `BUZZ_CHANNEL_ID` (target channel UUID from `buzz channels list`), and `BUZZ_RELAY_URL` (your relay; defaults to `http://localhost:3000`). Aeon posts Markdown as itself via the [`buzz` CLI](https://github.com/block/buzz/tree/main/crates/buzz-cli), which signs (NIP-98) and publishes each message over the relay. The workflow stages the CLI automatically whenever `BUZZ_PRIVATE_KEY` is set (`scripts/install-buzz-cli.sh`): by default it builds from source with `cargo` (slow; pin the ref with the `BUZZ_CLI_REF` repo variable), or set the `BUZZ_CLI_URL` repo variable to a prebuilt binary to skip the build. The channel skips silently while the CLI is missing. Inbound (agent-as-participant) is a later phase.
 
 **Restrict who can command the agent (inbound):** Telegram is scoped to a single `TELEGRAM_CHAT_ID`. That's enough for a **1:1 DM** (there the chat ID *is* your user ID). For a **group/public chat**, also set `TELEGRAM_ALLOWED_USER_ID` to your numeric user ID (from [@userinfobot](https://t.me/userinfobot)) - otherwise any group member can command the bot, including by tapping a **Run again / Schedule weekly** button on a posted notification (Telegram delivers those taps even with group-privacy mode on). Left unset in a group, taps and messages **fail closed**. For Discord and Slack, set the optional repo variables `DISCORD_ALLOWED_AUTHOR_ID` / `SLACK_ALLOWED_USER_ID` (or same-named secrets) to the authorized sender's user ID - inbound messages from anyone else in the channel are then ignored. **Leaving those unset processes commands from any non-bot member of the channel**, so set them whenever the channel isn't private to you.
 
@@ -346,4 +361,4 @@ Skills that call third-party APIs declare their credentials in a `requires:` fro
 requires: [XAI_API_KEY, COINGECKO_API_KEY?]   # bare = required · `?` = works better with
 ```
 
-The dashboard surfaces this as an **API keys** panel on each skill (set/unset status, inline "Set" button), a ⚠ flag when an enabled skill is missing a required key, and a **"used by"** index under each key in Settings → Access Keys. Skills can likewise declare MCP servers with an `mcp:` list (`mcp: [base]`) - same two tiers, shown as a per-skill **MCP servers** panel with install state. Convention details: [`examples/skill-templates/TEMPLATE.md`](examples/skill-templates/TEMPLATE.md#declaring-api-keys-requires).
+The dashboard surfaces this as an **API keys** panel on each skill (set/unset status, inline "Set" button), a ⚠ flag when an enabled skill is missing a required key, and a **"used by"** index under each key in Keys → Access Keys. Skills can likewise declare MCP servers with an `mcp:` list (`mcp: [base]`) - same two tiers, shown as a per-skill **MCP servers** panel with install state. Convention details: [`examples/skill-templates/TEMPLATE.md`](examples/skill-templates/TEMPLATE.md#declaring-api-keys-requires).
