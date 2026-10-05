@@ -1,0 +1,110 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "$MIROSHARK — RALLYING"
+      },
+      "children": [
+        "content-stack"
+      ]
+    },
+    "content-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "narrative",
+        "sep1",
+        "metrics-grid",
+        "sep2",
+        "chart-link"
+      ]
+    },
+    "narrative": {
+      "type": "Text",
+      "props": {
+        "text": "Price up 7.5% to $0.000002578 on 2.0x average volume, driven by two concentrated whale buys ($1.98K, $1.42K) — the first whale activity since 10-01.",
+        "variant": "body"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "metrics-grid": {
+      "type": "Grid",
+      "props": {
+        "columns": 3,
+        "gap": "md"
+      },
+      "children": [
+        "price-stat",
+        "liq-stat",
+        "vol-stat",
+        "ratio-stat",
+        "whales-stat"
+      ]
+    },
+    "price-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Price",
+        "value": "$0.000002578",
+        "delta": "+7.5%",
+        "trend": "up"
+      }
+    },
+    "liq-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Liquidity",
+        "value": "$140.0K",
+        "delta": "+0.5%",
+        "trend": "up"
+      }
+    },
+    "vol-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Volume",
+        "value": "$11.6K",
+        "delta": "2.0x"
+      }
+    },
+    "ratio-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Buys/Sells",
+        "value": "26/37 (0.70)"
+      }
+    },
+    "whales-stat": {
+      "type": "Stat",
+      "props": {
+        "label": "Whales",
+        "value": "2"
+      }
+    },
+    "sep2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "chart-link": {
+      "type": "StoryLink",
+      "props": {
+        "title": "GeckoTerminal Chart",
+        "href": "https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209",
+        "source": "GeckoTerminal"
+      }
+    }
+  }
+}
