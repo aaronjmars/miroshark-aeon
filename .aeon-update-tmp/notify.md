@@ -1,5 +1,3 @@
-✅ aeon-update: PR #194
-
 **aeon-update — 2026-10-05**
 Synced 71 upstream commits → PR #194.
 
@@ -10,5 +8,3 @@ Highlights: dashboard Aeon Connect onboarding, `aeon init` + credential manifest
 26 paths held for you — the big one: upstream tightened the README skill-count validators, but this fork's docs say 85/79 while the catalog is 82. Reconcile the counts by hand, then adopt. Also held: `fetch-tweets`/`shiplog` edits, dashboard/webhook dep bumps, and new skills `feedback-builder`/`compute-resell`.
 
 PR: https://github.com/aaronjmars/miroshark-aeon/pull/194
-
-🔗 https://github.com/aaronjmars/miroshark-aeon/pull/194
