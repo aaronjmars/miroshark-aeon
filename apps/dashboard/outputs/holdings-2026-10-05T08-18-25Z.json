@@ -1,0 +1,70 @@
+{
+  "root": "card",
+  "state": {},
+  "elements": {
+    "card": {
+      "type": "Card",
+      "props": {
+        "title": "Holdings"
+      },
+      "children": [
+        "stack"
+      ]
+    },
+    "stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stat-main",
+        "sep",
+        "stats-period"
+      ]
+    },
+    "stat-main": {
+      "type": "Stat",
+      "props": {
+        "value": "12.25B",
+        "label": "Current Holdings",
+        "delta": "12.25% of supply"
+      }
+    },
+    "sep": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "stats-period": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "lg"
+      },
+      "children": [
+        "stat-7d",
+        "stat-30d"
+      ]
+    },
+    "stat-7d": {
+      "type": "Stat",
+      "props": {
+        "label": "7-day change",
+        "value": "+38.92M",
+        "delta": "+0.32%",
+        "trend": "up"
+      }
+    },
+    "stat-30d": {
+      "type": "Stat",
+      "props": {
+        "label": "30-day change",
+        "value": "+300.04M",
+        "delta": "+2.51%",
+        "trend": "up"
+      }
+    }
+  }
+}
