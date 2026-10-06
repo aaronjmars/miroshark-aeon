@@ -1,0 +1,318 @@
+{
+  "root": "main-card",
+  "state": {},
+  "elements": {
+    "main-card": {
+      "type": "Card",
+      "props": {
+        "title": "🚨 Heartbeat: fleet degraded",
+        "description": "Critical monitoring alert: multiple skills showing zero-token signatures and consecutive failures"
+      },
+      "children": [
+        "status-alert",
+        "sep-1",
+        "failed-section",
+        "sep-2",
+        "watch-section",
+        "sep-3",
+        "clear-section",
+        "sep-4",
+        "status-update"
+      ]
+    },
+    "status-alert": {
+      "type": "Alert",
+      "props": {
+        "type": "error",
+        "title": "Fleet Status: Degraded",
+        "message": "Multiple critical skills experiencing zero-token signature failures"
+      }
+    },
+    "sep-1": {
+      "type": "Separator",
+      "props": {}
+    },
+    "failed-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "failed-heading",
+        "failed-token-movers",
+        "failed-fetch-tweets"
+      ]
+    },
+    "failed-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "🔴 Failed",
+        "level": "h2"
+      }
+    },
+    "failed-token-movers": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "tm-name",
+        "tm-status",
+        "tm-details"
+      ]
+    },
+    "tm-name": {
+      "type": "Text",
+      "props": {
+        "text": "token-movers",
+        "variant": "lead"
+      }
+    },
+    "tm-status": {
+      "type": "Badge",
+      "props": {
+        "text": "3 consecutive failures",
+        "variant": "destructive"
+      }
+    },
+    "tm-details": {
+      "type": "Text",
+      "props": {
+        "text": "Last failed 2026-10-06 07:35 UTC (last success 2026-10-05 06:43 UTC). Zero-token \"completed\" harness signature (total_cost_usd: 0, all usage fields zero)."
+      }
+    },
+    "failed-fetch-tweets": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "ft-name",
+        "ft-status",
+        "ft-details"
+      ]
+    },
+    "ft-name": {
+      "type": "Text",
+      "props": {
+        "text": "fetch-tweets",
+        "variant": "lead"
+      }
+    },
+    "ft-status": {
+      "type": "Badge",
+      "props": {
+        "text": "4 consecutive failures",
+        "variant": "destructive"
+      }
+    },
+    "ft-details": {
+      "type": "Text",
+      "props": {
+        "text": "Last failed 2026-10-06 17:05 UTC (last success 2026-10-04 18:05 UTC, now past 2× its daily schedule interval). Same zero-token signature."
+      }
+    },
+    "sep-2": {
+      "type": "Separator",
+      "props": {}
+    },
+    "watch-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "watch-heading",
+        "watch-heartbeat",
+        "watch-root-cause"
+      ]
+    },
+    "watch-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "🟡 Watch",
+        "level": "h2"
+      }
+    },
+    "watch-heartbeat": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "hb-name",
+        "hb-status",
+        "hb-details"
+      ]
+    },
+    "hb-name": {
+      "type": "Text",
+      "props": {
+        "text": "heartbeat self-check",
+        "variant": "lead"
+      }
+    },
+    "hb-status": {
+      "type": "Badge",
+      "props": {
+        "text": "Stale (47h+)",
+        "variant": "secondary"
+      }
+    },
+    "hb-details": {
+      "type": "Text",
+      "props": {
+        "text": "Last success 2026-10-04 19:24 UTC; 2 consecutive failures recorded 2026-10-05, same zero-token signature, before this run completed cleanly."
+      }
+    },
+    "watch-root-cause": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "root-cause-title",
+        "root-cause-text",
+        "issue-links-grid"
+      ]
+    },
+    "root-cause-title": {
+      "type": "Heading",
+      "props": {
+        "text": "Shared root cause suspected",
+        "level": "h3"
+      }
+    },
+    "root-cause-text": {
+      "type": "Text",
+      "props": {
+        "text": "Identical zero-token signature across all three skills matches the 2026-08-31 / 2026-09-22 Claude-subscription-exhaustion pattern (then tracked as #182) — now recurring after ~2 weeks quiet. Skill-health has already filed/updated votable threads:"
+      }
+    },
+    "issue-links-grid": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "sm"
+      },
+      "children": [
+        "issue-link-182",
+        "issue-link-195",
+        "issue-link-196"
+      ]
+    },
+    "issue-link-182": {
+      "type": "StoryLink",
+      "props": {
+        "title": "#182",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/issues/182",
+        "source": "token-movers"
+      }
+    },
+    "issue-link-195": {
+      "type": "StoryLink",
+      "props": {
+        "title": "#195",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/issues/195",
+        "source": "fetch-tweets"
+      }
+    },
+    "issue-link-196": {
+      "type": "StoryLink",
+      "props": {
+        "title": "#196",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/issues/196",
+        "source": "heartbeat"
+      }
+    },
+    "sep-3": {
+      "type": "Separator",
+      "props": {}
+    },
+    "clear-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "clear-heading",
+        "clear-stats-stack",
+        "clear-other-skills"
+      ]
+    },
+    "clear-heading": {
+      "type": "Heading",
+      "props": {
+        "text": "✅ Clear",
+        "level": "h2"
+      }
+    },
+    "clear-stats-stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "horizontal",
+        "gap": "lg"
+      },
+      "children": [
+        "stat-prs",
+        "stat-dispatches"
+      ]
+    },
+    "stat-prs": {
+      "type": "Stat",
+      "props": {
+        "label": "Open PRs / urgent issues (aaronjmars/miroshark-aeon + MiroShark/MiroShark)",
+        "value": "0"
+      }
+    },
+    "stat-dispatches": {
+      "type": "Stat",
+      "props": {
+        "label": "Missing dispatches",
+        "value": "0"
+      }
+    },
+    "clear-other-skills": {
+      "type": "Text",
+      "props": {
+        "text": "All other 6 enabled skills (repo-pulse, holdings, changelog, shiplog, memory-flush, aeon-update) current and green."
+      }
+    },
+    "sep-4": {
+      "type": "Separator",
+      "props": {}
+    },
+    "status-update": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "status-badge",
+        "status-page-link"
+      ]
+    },
+    "status-badge": {
+      "type": "Badge",
+      "props": {
+        "text": "Status: 🔴 DEGRADED",
+        "variant": "destructive"
+      }
+    },
+    "status-page-link": {
+      "type": "Link",
+      "props": {
+        "label": "docs/status.md updated",
+        "href": "https://github.com/aaronjmars/miroshark-aeon/blob/main/docs/status.md"
+      }
+    }
+  }
+}

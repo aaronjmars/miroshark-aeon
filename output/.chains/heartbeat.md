@@ -1,15 +1,15 @@
-Heartbeat ambient check complete. No notification sent — the only flag (aeon-update's stuck cron-state entry, confirmed lost outcome-write not a live hang) was already reported in the last 48h and nothing new surfaced.
+🚨 Heartbeat: fleet degraded
 
-## Summary
+🔴 FAILED:
+- **token-movers** — 3 consecutive failures, last failed 2026-10-06 07:35 UTC (last success 2026-10-05 06:43 UTC). Zero-token "completed" harness signature (`total_cost_usd: 0`, all usage fields zero).
+- **fetch-tweets** — 4 consecutive failures, last failed 2026-10-06 17:05 UTC (last success 2026-10-04 18:05 UTC, now past 2× its daily schedule interval). Same zero-token signature.
 
-**P0 — Failed & stuck skills:** `aeon-update` cron-state entry still shows `last_status: dispatched` from the 09-28 11:05 UTC run — now 150h+ stale, unchanged since 09-29. Confirmed root cause (verified again): a lost outcome-write, not a hang — PR #183 merged 09-28 14:03 UTC and issue #184 scored it. Next dispatch is due tomorrow (2026-10-05 11:00 UTC). No other failed/stuck/degraded/chronic-failure skills; heartbeat's own self-check is clean.
+🟡 WATCH:
+- **heartbeat self-check** — last success 2026-10-04 19:24 UTC (47h+ stale); 2 consecutive failures recorded 2026-10-05, same zero-token signature, before this run completed cleanly.
+- Shared root cause suspected: identical zero-token signature across all three skills matches the 2026-08-31 / 2026-09-22 Claude-subscription-exhaustion pattern (then tracked as #182) — now recurring after ~2 weeks quiet. Skill-health has already filed/updated votable threads: [#182](https://github.com/aaronjmars/miroshark-aeon/issues/182) (token-movers), [#195](https://github.com/aaronjmars/miroshark-aeon/issues/195) (fetch-tweets), [#196](https://github.com/aaronjmars/miroshark-aeon/issues/196) (heartbeat). No fix landed yet.
 
-**P1 — PRs/issues:** 0 open PRs on `aaronjmars/miroshark-aeon` or `MiroShark/MiroShark`. Issues #182 (token-movers, recovered) and #184 (aeon-update, same signal as P0) remain open, unlabeled, none urgent.
+✅ Clear: 0 open PRs / urgent issues across `aaronjmars/miroshark-aeon` and `MiroShark/MiroShark`; no missing dispatches; all other 6 enabled skills (repo-pulse, holdings, changelog, shiplog, memory-flush, aeon-update) current and green.
 
-**P2 — Memory:** no new flagged items.
+Status page → 🔴 DEGRADED (docs/status.md updated).
 
-**P3 — Scheduled skills:** all 9 enabled skills (heartbeat, token-movers, fetch-tweets, repo-pulse, holdings, shiplog, memory-flush, aeon-update, changelog) current — no missing dispatches.
-
-**Status page:** regenerated `docs/status.md` — Overall 🟡 WATCH (carried from the unresolved aeon-update outcome-write flag), token pulse updated to today's report (QUIET, -3.5% 24h, 0.45× 7d-avg volume, 0 whale trades), next scheduled run token-movers @ 06:00 UTC 2026-10-05.
-
-**Files modified:** `docs/status.md`, `memory/logs/2026-10-04.md` (appended `### heartbeat` entry). No notification sent (dedup — everything already reported in the 10-02/10-03 logs). No follow-up needed beyond watching for `aeon-update`'s Monday dispatch to confirm whether the next run clears the stuck entry.
+🔗 https://github.com/aaronjmars/miroshark-aeon/issues/195
