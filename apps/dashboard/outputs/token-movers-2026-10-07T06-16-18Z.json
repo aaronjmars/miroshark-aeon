@@ -1,0 +1,96 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "$MIROSHARK — QUIET",
+        "description": "Volume thinned to 0.44× the 7-day average with zero trades clearing the $1K whale bar — largest print was a $812 buy."
+      },
+      "children": [
+        "stack_main"
+      ]
+    },
+    "stack_main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "grid_stats",
+        "sep1",
+        "link_chart"
+      ]
+    },
+    "grid_stats": {
+      "type": "Grid",
+      "props": {
+        "columns": 2,
+        "gap": "md"
+      },
+      "children": [
+        "stat_price",
+        "stat_liq",
+        "stat_vol",
+        "stat_buys_sells",
+        "stat_whales"
+      ]
+    },
+    "stat_price": {
+      "type": "Stat",
+      "props": {
+        "label": "Price (24h)",
+        "value": "$0.000002726",
+        "delta": "+5.7%",
+        "trend": "up"
+      }
+    },
+    "stat_liq": {
+      "type": "Stat",
+      "props": {
+        "label": "Liquidity",
+        "value": "$132.1K",
+        "delta": "−5.6%",
+        "trend": "down"
+      }
+    },
+    "stat_vol": {
+      "type": "Stat",
+      "props": {
+        "label": "Volume (24h)",
+        "value": "$3.1K",
+        "delta": "0.44× 7d avg"
+      }
+    },
+    "stat_buys_sells": {
+      "type": "Stat",
+      "props": {
+        "label": "Buys/Sells",
+        "value": "2.33",
+        "delta": "21/9"
+      }
+    },
+    "stat_whales": {
+      "type": "Stat",
+      "props": {
+        "label": "Whales (>$1K)",
+        "value": "0"
+      }
+    },
+    "sep1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "link_chart": {
+      "type": "Link",
+      "props": {
+        "label": "View Full Chart on GeckoTerminal",
+        "href": "https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209"
+      }
+    }
+  }
+}
