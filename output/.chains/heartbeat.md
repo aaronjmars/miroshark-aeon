@@ -1,15 +1,16 @@
-🚨 Heartbeat: fleet degraded
+No notification needed per the skill's rules — this is a clean, no-change run; `./notify` stays silent.
 
-🔴 FAILED:
-- **token-movers** — 3 consecutive failures, last failed 2026-10-06 07:35 UTC (last success 2026-10-05 06:43 UTC). Zero-token "completed" harness signature (`total_cost_usd: 0`, all usage fields zero).
-- **fetch-tweets** — 4 consecutive failures, last failed 2026-10-06 17:05 UTC (last success 2026-10-04 18:05 UTC, now past 2× its daily schedule interval). Same zero-token signature.
+## Summary
 
-🟡 WATCH:
-- **heartbeat self-check** — last success 2026-10-04 19:24 UTC (47h+ stale); 2 consecutive failures recorded 2026-10-05, same zero-token signature, before this run completed cleanly.
-- Shared root cause suspected: identical zero-token signature across all three skills matches the 2026-08-31 / 2026-09-22 Claude-subscription-exhaustion pattern (then tracked as #182) — now recurring after ~2 weeks quiet. Skill-health has already filed/updated votable threads: [#182](https://github.com/aaronjmars/miroshark-aeon/issues/182) (token-movers), [#195](https://github.com/aaronjmars/miroshark-aeon/issues/195) (fetch-tweets), [#196](https://github.com/aaronjmars/miroshark-aeon/issues/196) (heartbeat). No fix landed yet.
+Ran the heartbeat skill's **ambient check** (default `${var}`, the live scheduled path):
 
-✅ Clear: 0 open PRs / urgent issues across `aaronjmars/miroshark-aeon` and `MiroShark/MiroShark`; no missing dispatches; all other 6 enabled skills (repo-pulse, holdings, changelog, shiplog, memory-flush, aeon-update) current and green.
+- **P0:** The zero-token harness incident flagged yesterday (10-06) — `token-movers`, `fetch-tweets`, and `heartbeat` itself — has **fully recovered**: all three succeeded cleanly on their next scheduled run, 0 consecutive failures across the fleet, no stuck/dispatched entries.
+- **P1:** 0 open PRs, no urgent-labeled issues. 4 open unlabeled `health:` threads (#182/#184/#195/#196) persist on GitHub only because `skill-repair` is disabled — a known, already-documented condition, not new.
+- **P2/P3:** No new flagged memory items, no missing dispatches — all 9 enabled skills are within their schedule window.
+- **Verdict:** 🟢 OK (fully recovered, nothing needs attention).
 
-Status page → 🔴 DEGRADED (docs/status.md updated).
+Files changed:
+- `docs/status.md` — regenerated: Overall flipped 🔴 DEGRADED → 🟢 OK, skill table refreshed (all ✅ success, 0 consecutive failures), Token Pulse now pulls today's fresh `token-report-2026-10-07.md` (QUIET verdict) instead of the stale-data placeholder.
+- `memory/logs/2026-10-07.md` — appended `### heartbeat` entry (`mode: ambient`) logging the recovery and `HEARTBEAT_OK · STATUS_PAGE=OK`.
 
-🔗 https://github.com/aaronjmars/miroshark-aeon/issues/195
+No follow-up action needed; next heartbeat runs tomorrow 19:00 UTC.
