@@ -1,0 +1,34 @@
+{
+  "root": "card-root",
+  "state": {},
+  "elements": {
+    "card-root": {
+      "type": "Card",
+      "props": {
+        "title": "Tweet Digest",
+        "description": "2026-10-07 — Dataset & Research"
+      },
+      "children": [
+        "stack-main"
+      ]
+    },
+    "stack-main": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "tweet-1"
+      ]
+    },
+    "tweet-1": {
+      "type": "TweetCard",
+      "props": {
+        "author": "MiroShark",
+        "handle": "miroshark_",
+        "text": "points back to the HuggingFace sim dataset (8,201 agent decisions, 16 sims) for anyone who missed it — https://x.com/miroshark_/status/2107035634548261165"
+      }
+    }
+  }
+}
