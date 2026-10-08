@@ -1,0 +1,82 @@
+{
+  "root": "card_main",
+  "state": {},
+  "elements": {
+    "card_main": {
+      "type": "Card",
+      "props": {
+        "title": "ℹ️ Tweet Digest"
+      },
+      "children": [
+        "meta_stack",
+        "separator_1",
+        "tweets_stack"
+      ]
+    },
+    "meta_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "sm"
+      },
+      "children": [
+        "date_text",
+        "theme_text"
+      ]
+    },
+    "date_text": {
+      "type": "Text",
+      "props": {
+        "text": "Tweet Digest — 2026-10-08",
+        "variant": "caption"
+      }
+    },
+    "theme_text": {
+      "type": "Text",
+      "props": {
+        "text": "Theme: Pandemic Sim — Russia Plague Rumours",
+        "variant": "body"
+      }
+    },
+    "separator_1": {
+      "type": "Separator",
+      "props": {}
+    },
+    "tweets_stack": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "story_1",
+        "story_2",
+        "story_3"
+      ]
+    },
+    "story_1": {
+      "type": "StoryLink",
+      "props": {
+        "title": "teases a new sim — 'simulating the next pandemic?'",
+        "href": "https://x.com/miroshark_/status/2108217355666862161",
+        "source": "x.com/miroshark_"
+      }
+    },
+    "story_2": {
+      "type": "StoryLink",
+      "props": {
+        "title": "runs the sim on Russia plague-rumours, full report in the replies",
+        "href": "https://x.com/miroshark_/status/2108209762836041852",
+        "source": "x.com/miroshark_"
+      }
+    },
+    "story_3": {
+      "type": "StoryLink",
+      "props": {
+        "title": "confirms it's live",
+        "href": "https://x.com/miroshark_/status/2108198297726746647",
+        "source": "x.com/miroshark_"
+      }
+    }
+  }
+}
