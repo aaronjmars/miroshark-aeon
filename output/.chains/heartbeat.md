@@ -1,16 +1,22 @@
-No notification needed per the skill's rules — this is a clean, no-change run; `./notify` stays silent.
+Fleet health is clean — nothing warrants a notification. Here's the run's output:
+
+## Heartbeat — Ambient fleet check (2026-10-08 19:09 UTC)
+
+**P0 — Failed & stuck skills:** none. All 9 enabled skills (`heartbeat`, `token-movers`, `fetch-tweets`, `repo-pulse`, `holdings`, `changelog`, `shiplog`, `memory-flush`, `aeon-update`) show `last_status: success`, 0 consecutive failures, no stuck/dispatched entries. Lowest success rate is `aeon-update` at 67% (above the 50% chronic-failure bar). Heartbeat's own last success was 2026-10-07T19:13Z — well under the 36h self-check threshold.
+
+**P1 — Stalled PRs & urgent issues:** 0 open PRs across `aaronjmars/miroshark-aeon` and `MiroShark/MiroShark`. No issues labeled `urgent`. 4 open unlabeled health threads (#182, #184, #195, #196) remain — already known, staying open only because `skill-repair` is disabled in this fork, not a new signal.
+
+**P2 — Flagged memory items:** no new flags beyond the standing Next Priorities bullets (engine-dev-velocity gap on the public repo, `products.md` config gap for `x402aff-website`) — both already reported in prior runs.
+
+**P3 — Missing scheduled skills:** none; all 9 enabled skills have run within their schedule window.
+
+**Verdict:** `HEARTBEAT_OK · STATUS_PAGE=OK`. No notification sent — nothing needs attention.
+
+### Status page (`docs/status.md`)
+Regenerated: **Overall 🟢 OK**, updated 2026-10-08 19:09 UTC, 0 open issues, next scheduled run `token-movers` @ 06:00 UTC 2026-10-09. Token pulse pulled from today's `token-report-2026-10-08.md`: MIROSHARK $0.000002516, −7.7% 24h, liquidity $135.3K, volume $5.4K, FDV $251.6K, verdict **CONSOLIDATING**.
 
 ## Summary
-
-Ran the heartbeat skill's **ambient check** (default `${var}`, the live scheduled path):
-
-- **P0:** The zero-token harness incident flagged yesterday (10-06) — `token-movers`, `fetch-tweets`, and `heartbeat` itself — has **fully recovered**: all three succeeded cleanly on their next scheduled run, 0 consecutive failures across the fleet, no stuck/dispatched entries.
-- **P1:** 0 open PRs, no urgent-labeled issues. 4 open unlabeled `health:` threads (#182/#184/#195/#196) persist on GitHub only because `skill-repair` is disabled — a known, already-documented condition, not new.
-- **P2/P3:** No new flagged memory items, no missing dispatches — all 9 enabled skills are within their schedule window.
-- **Verdict:** 🟢 OK (fully recovered, nothing needs attention).
-
-Files changed:
-- `docs/status.md` — regenerated: Overall flipped 🔴 DEGRADED → 🟢 OK, skill table refreshed (all ✅ success, 0 consecutive failures), Token Pulse now pulls today's fresh `token-report-2026-10-07.md` (QUIET verdict) instead of the stale-data placeholder.
-- `memory/logs/2026-10-07.md` — appended `### heartbeat` entry (`mode: ambient`) logging the recovery and `HEARTBEAT_OK · STATUS_PAGE=OK`.
-
-No follow-up action needed; next heartbeat runs tomorrow 19:00 UTC.
+- Checked `memory/cron-state.json`, `gh pr list`/`gh issue list` (both repos), `memory/issues/INDEX.md`, and `aeon.yml` — fleet fully healthy, no new findings vs. yesterday's log.
+- Rewrote `docs/status.md` with today's timestamps, success rates, and token-pulse row.
+- Appended a `### heartbeat` entry to `memory/logs/2026-10-08.md`.
+- No notification sent (nothing needs attention). No follow-up actions needed.
