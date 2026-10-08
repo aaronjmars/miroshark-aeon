@@ -1,0 +1,114 @@
+{
+  "root": "card-main",
+  "state": {},
+  "elements": {
+    "card-main": {
+      "type": "Card",
+      "props": {
+        "title": "Token Report"
+      },
+      "children": [
+        "heading-1",
+        "badge-1",
+        "text-insight",
+        "separator-1",
+        "metrics-section",
+        "separator-2",
+        "chart-link"
+      ]
+    },
+    "heading-1": {
+      "type": "Heading",
+      "props": {
+        "text": "ℹ️ Token Report",
+        "level": "h2"
+      }
+    },
+    "badge-1": {
+      "type": "Badge",
+      "props": {
+        "text": "$MIROSHARK — CONSOLIDATING",
+        "variant": "destructive"
+      }
+    },
+    "text-insight": {
+      "type": "Text",
+      "props": {
+        "text": "Price slipped 7.7% but volume ran only 0.88× the 7d average — not the ≥2.0× confirmation a clean breakdown needs.",
+        "variant": "lead"
+      }
+    },
+    "separator-1": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "metrics-section": {
+      "type": "Stack",
+      "props": {
+        "direction": "vertical",
+        "gap": "md"
+      },
+      "children": [
+        "stat-price",
+        "stat-liq",
+        "text-vol",
+        "text-buys-sells",
+        "text-whales"
+      ]
+    },
+    "stat-price": {
+      "type": "Stat",
+      "props": {
+        "label": "Price",
+        "value": "$0.000002516",
+        "delta": "−7.7%",
+        "trend": "down"
+      }
+    },
+    "stat-liq": {
+      "type": "Stat",
+      "props": {
+        "label": "Liquidity",
+        "value": "$135.3K",
+        "delta": "+2.4%",
+        "trend": "up"
+      }
+    },
+    "text-vol": {
+      "type": "Text",
+      "props": {
+        "text": "Volume: $5.4K (0.88× 7d average)",
+        "variant": "body"
+      }
+    },
+    "text-buys-sells": {
+      "type": "Text",
+      "props": {
+        "text": "Buys/Sells: 14/13 (ratio 1.08)",
+        "variant": "body"
+      }
+    },
+    "text-whales": {
+      "type": "Text",
+      "props": {
+        "text": "Whales: 1",
+        "variant": "body"
+      }
+    },
+    "separator-2": {
+      "type": "Separator",
+      "props": {
+        "orientation": "horizontal"
+      }
+    },
+    "chart-link": {
+      "type": "Link",
+      "props": {
+        "label": "View on GeckoTerminal",
+        "href": "https://www.geckoterminal.com/base/pools/0x83a29b6619907f80e5a47d40f53d4af239a69980f22a08b10f43d357a9f06209"
+      }
+    }
+  }
+}
