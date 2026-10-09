@@ -1,15 +1,11 @@
 {
   "skill": "token-movers",
-  "last_analyzed": "2026-10-08T06:18:04Z",
+  "last_analyzed": "2026-10-09T06:16:16Z",
   "quality_score": 4,
-  "assessment": "Substantive, well-sourced metrics report directly serving Strategy Priority 4 (track momentum honestly, surface moves early). Clear methodology, transparent source indicators, properly classified threshold-based verdict. No unverifiable claims.",
+  "assessment": "Substantive token report with transparent methodology and verifiable structure; tracks momentum honestly per strategy. Well-sourced and actionable verdict (consolidation, no breakdown), but routine monitoring with no direct north-star metric moves.",
   "flags": [],
   "avg_score": 4.03,
   "history": [
-    {
-      "date": "2026-09-08",
-      "score": 4
-    },
     {
       "date": "2026-09-09",
       "score": 4
@@ -124,6 +120,10 @@
     },
     {
       "date": "2026-10-08",
+      "score": 4
+    },
+    {
+      "date": "2026-10-09",
       "score": 4
     }
   ]
