@@ -1,22 +1,14 @@
-Fleet health is clean — nothing warrants a notification. Here's the run's output:
+Fleet health check complete — nothing needs attention, so per the skill's rules no notification was sent.
 
-## Heartbeat — Ambient fleet check (2026-10-08 19:09 UTC)
+## Ambient fleet-health check — 2026-10-09
 
-**P0 — Failed & stuck skills:** none. All 9 enabled skills (`heartbeat`, `token-movers`, `fetch-tweets`, `repo-pulse`, `holdings`, `changelog`, `shiplog`, `memory-flush`, `aeon-update`) show `last_status: success`, 0 consecutive failures, no stuck/dispatched entries. Lowest success rate is `aeon-update` at 67% (above the 50% chronic-failure bar). Heartbeat's own last success was 2026-10-07T19:13Z — well under the 36h self-check threshold.
+- **P0 (failures/stuck):** All 9 enabled skills (`repo-pulse`, `token-movers`, `holdings`, `changelog`, `fetch-tweets`, `shiplog`, `memory-flush`, `aeon-update`, `heartbeat`) show `last_status: success`. No stuck/dispatched entries, no `consecutive_failures >= 3`, no `success_rate < 0.5` (lowest is `aeon-update` at 67%). Heartbeat's own self-check: last success 2026-10-08, well inside the 36h bar.
+- **P1 (PRs/issues):** 0 open PRs on `aaronjmars/miroshark-aeon` or `MiroShark/MiroShark`. No issues labeled urgent — the 4 open `health:` threads (#182 token-movers, #184 aeon-update, #195 fetch-tweets, #196 heartbeat) are pre-existing and stay open only because `skill-repair` is disabled in this fork; not new.
+- **P2 (flagged memory items):** No new items beyond the standing Next Priorities bullets (engine-dev-velocity gap, `products.md` config gap) — already reported in prior runs.
+- **P3 (missing dispatches):** None — every enabled skill has a recent run within its schedule window.
+- **Status page:** Regenerated `docs/status.md` — Overall 🟢 OK, token pulse pulled from today's `token-report-2026-10-09.md` (price $0.000002261, -10.1% 24h, verdict CONSOLIDATING), next scheduled run is `token-movers` at 06:00 UTC 2026-10-10.
 
-**P1 — Stalled PRs & urgent issues:** 0 open PRs across `aaronjmars/miroshark-aeon` and `MiroShark/MiroShark`. No issues labeled `urgent`. 4 open unlabeled health threads (#182, #184, #195, #196) remain — already known, staying open only because `skill-repair` is disabled in this fork, not a new signal.
-
-**P2 — Flagged memory items:** no new flags beyond the standing Next Priorities bullets (engine-dev-velocity gap on the public repo, `products.md` config gap for `x402aff-website`) — both already reported in prior runs.
-
-**P3 — Missing scheduled skills:** none; all 9 enabled skills have run within their schedule window.
-
-**Verdict:** `HEARTBEAT_OK · STATUS_PAGE=OK`. No notification sent — nothing needs attention.
-
-### Status page (`docs/status.md`)
-Regenerated: **Overall 🟢 OK**, updated 2026-10-08 19:09 UTC, 0 open issues, next scheduled run `token-movers` @ 06:00 UTC 2026-10-09. Token pulse pulled from today's `token-report-2026-10-08.md`: MIROSHARK $0.000002516, −7.7% 24h, liquidity $135.3K, volume $5.4K, FDV $251.6K, verdict **CONSOLIDATING**.
+HEARTBEAT_OK · STATUS_PAGE=OK
 
 ## Summary
-- Checked `memory/cron-state.json`, `gh pr list`/`gh issue list` (both repos), `memory/issues/INDEX.md`, and `aeon.yml` — fleet fully healthy, no new findings vs. yesterday's log.
-- Rewrote `docs/status.md` with today's timestamps, success rates, and token-pulse row.
-- Appended a `### heartbeat` entry to `memory/logs/2026-10-08.md`.
-- No notification sent (nothing needs attention). No follow-up actions needed.
+Ran the ambient heartbeat check — clean fleet, nothing actionable. Updated `docs/status.md` with current skill-health table and today's token pulse, and appended a `### heartbeat` log entry to `memory/logs/2026-10-09.md`. No notification sent (nothing needs attention). No follow-up required.
